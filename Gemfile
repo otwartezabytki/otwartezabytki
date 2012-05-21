@@ -23,6 +23,7 @@ end
 gem 'jquery-rails'
 gem 'haml-rails'
 gem 'foreman'
+gem 'geocoder'
 
 group :development do
   gem 'rspec-rails',  '~> 2.0'

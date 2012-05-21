@@ -11,6 +11,49 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 0) do
+ActiveRecord::Schema.define(:version => 20120521102522) do
+
+  create_table "communes", :force => true do |t|
+    t.integer  "district_id"
+    t.string   "name"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "districts", :force => true do |t|
+    t.integer  "voivodship_id"
+    t.string   "name"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  create_table "places", :force => true do |t|
+    t.integer  "commune_id"
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "relics", :force => true do |t|
+    t.integer  "place_id"
+    t.text     "identification"
+    t.string   "group"
+    t.integer  "number"
+    t.string   "materail"
+    t.string   "dating_of_obj"
+    t.string   "street"
+    t.string   "register_number"
+    t.string   "national_number"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  create_table "voivodeships", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
 end
