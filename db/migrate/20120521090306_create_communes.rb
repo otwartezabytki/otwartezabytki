@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateCommunes < ActiveRecord::Migration
   def change
     create_table :communes do |t|
