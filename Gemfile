@@ -25,6 +25,8 @@ gem 'haml-rails'
 gem 'foreman'
 gem 'geocoder'
 
+gem 'pry-rails'
+
 group :development do
   gem 'rspec-rails',  '~> 2.0'
   gem 'factory_girl_rails'
@@ -32,6 +34,7 @@ group :development do
   gem 'guard'
   gem 'guard-rspec'
   gem 'guard-spork'
+  gem 'guard-bundler'
 end
 
 group :test do
