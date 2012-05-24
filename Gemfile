@@ -22,8 +22,12 @@ end
 
 gem 'jquery-rails'
 gem 'haml-rails'
+gem 'coffee-filter'
+
 gem 'foreman'
 gem 'geocoder'
+gem 'simple_form', '~> 2.0'
+gem 'twitter-bootstrap-rails'
 
 gem 'pry-rails'
 
