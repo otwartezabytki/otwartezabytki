@@ -1,0 +1,193 @@
+pl:
+  helpers:
+    select:
+      prompt: "Wybierz"
+    submit:
+      create: 'Stwórz %{model}'
+      update: 'Zaktualizuj %{model}'
+      submit: 'Zapisz %{model}'
+
+  errors:
+    format: "%{attribute} %{message}"
+
+    messages: &errors_messages
+      inclusion: "nie ma na liście."
+      exclusion: "jest zarezerwowany."
+      invalid: "jest nieprawidłowy."
+      confirmation: "nie pokrywa się z potwierdzeniem."
+      accepted: "musi zostać zaakceptowane."
+      empty: "nie może być puste."
+      blank: "nie może być puste."
+      too_long: "jest za długie (maks. %{count} znaków)."
+      too_short: "jest za krótkie (min. %{count} znaków)."
+      wrong_length: "ma złą długość (powinno być %{count} znaków)."
+      not_a_number: "nie jest liczbą."
+      not_an_integer: "musi być liczbą całkowitą."
+      greater_than: "musi być większe niż %{count}."
+      greater_than_or_equal_to: "musi być większe lub równe %{count}."
+      equal_to: "musi być równe %{count}."
+      less_than: "musi być mniejsze niż %{count}."
+      less_than_or_equal_to: "musi być mniejsze lub równe %{count}."
+      odd: "musi być nieparzyste."
+      even: "musi być parzyste."
+
+  number:
+    format:
+      separator: ","
+      delimiter: " "
+      precision: 2
+    currency:
+      format:
+        format: "%n %u"
+        unit: "zł"
+    percentage:
+      format:
+        delimiter: ""
+    precision:
+      format:
+        delimiter: ""
+    human:
+      format:
+        delimiter: ""
+        precision: 1
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            one:   "bajt"
+            other: "bajty"
+          kb: "KB"
+          mb: "MB"
+          gb: "GB"
+          tb: "TB"
+
+  date:
+    formats:
+      default: "%d.%m.%Y"
+      short: "%d %b"
+      long: "%d %B %Y"
+      verbose: "%A, %d %B %Y"
+
+    day_names: [Niedziela, Poniedziałek, Wtorek, Środa, Czwartek, Piątek, Sobota]
+    abbr_day_names: [nie, pon, wto, śro, czw, pia, sob]
+
+    month_names: [~, Styczeń, Luty, Marzec, Kwiecień, Maj, Czerwiec, Lipiec, Sierpień, Wrzesień, Październik, Listopad, Grudzień]
+    abbr_month_names: [~, sty, lut, mar, kwi, maj, cze, lip, sie, wrz, paź, lis, gru]
+    order:
+      - :year
+      - :month
+      - :day
+  time:
+    formats:
+      default: "%a, %d %b %Y, %H:%M:%S %z"
+      short: "%d %b, %H:%M"
+      very_short: "%H:%M"
+      long: "%d %B %Y, %H:%M"
+      date: "%Y-%m-%d"
+      tdate: "%Y-%m-%d %H:%M"
+    am: "przed południem"
+    pm: "po południu"
+
+  datetime:
+    distance_in_words:
+      half_a_minute: "pół minuty"
+      less_than_x_seconds:
+        one:   "mniej niż sekundę"
+        few:   "mniej niż %{count} sekundy"
+        many:  "mniej niż %{count} sekund"
+        other: "mniej niż %{count} sekund"
+      x_seconds:
+        one:   "sekundę"
+        few:   "%{count} sekundy"
+        many:  "%{count} sekund"
+        other: "%{count} sekund"
+      less_than_x_minutes:
+        one:   "mniej niż minutę"
+        few:   "mniej niż %{count} minuty"
+        many:  "mniej niż %{count} minut"
+        other: "mniej niż %{count} minut"
+      x_minutes:
+        one:   "minutę"
+        few:   "%{count} minuty"
+        many:  "%{count} minut"
+        other: "%{count} minut"
+      about_x_hours:
+        one:   "około godziny"
+        few:   "około %{count} godzin"
+        many:  "około %{count} godzin"
+        other: "około %{count} godzin"
+      x_days:
+        one:   "1 dzień"
+        few:   "%{count} dni"
+        many:  "%{count} dni"
+        other: "%{count} dni"
+      about_x_months:
+        one:   "około miesiąca"
+        few:   "około %{count} miesięcy"
+        many:  "około %{count} miesięcy"
+        other: "około %{count} miesięcy"
+      x_months:
+        one:   "1 miesiąc"
+        few:   "%{count} miesiące"
+        many:  "%{count} miesięcy"
+        other: "%{count} miesięcy"
+      almost_x_years:
+        one:   "prawie rok"
+        few:   "prawie %{count} lat"
+        many:  "prawie %{count} lat"
+        other: "prawie %{count} lat"
+      about_x_years:
+        one:   "około roku"
+        few:   "około %{count} lat"
+        many:  "około %{count} lat"
+        other: "około %{count} lat"
+      over_x_years:
+        one:   "ponad rok"
+        few:   "ponad %{count} lata"
+        many:  "ponad %{count} lat"
+        other: "ponad %{count} lat"
+
+  support:
+    array:
+      sentence_connector: "i"
+      two_words_connector: " oraz "
+      skip_last_comma: true
+      words_connector: ", "
+      last_word_connector: " i "
+
+  views:
+    pagination:
+      first: "Pierwsza"
+      last: "Ostatnia"
+      previous: "Poprzednia"
+      next: "Następna"
+      truncate: "..."
+
+  activerecord:
+    errors:
+      template:
+        header:
+          one:    "1 błąd uniemożliwił zapisanie %{model}"
+          other:  "%{count} błędów uniemożliwiło zapisanie %{model}"
+        body: "Wystąpiły problemy z następującymi polami:"
+
+      messages:
+        taken: "jest zajęte"
+        record_invalid: "Błąd walidacji: %{errors}"
+        <<: *errors_messages
+
+      full_messages:
+        format: "%{attribute} %{message}"
+
+    attributes:
+      relic:
+        place_id: "Miejsce"
+        identification: "Określenie obiektu"
+        group: "Określenie zesołu"
+        number: "Liczba obiektów"
+        materail: "Materaił"
+        dating_of_obj: "Datowanie obiektów"
+        street: "Ulica"
+        register_number: "Aktualny numer rejestru"
+        national_number: "NID"
+
