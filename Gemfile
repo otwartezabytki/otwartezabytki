@@ -28,6 +28,8 @@ gem 'foreman'
 gem 'geocoder'
 gem 'simple_form', '~> 2.0'
 gem 'twitter-bootstrap-rails'
+gem 'decent_exposure'
+gem 'kaminari'
 
 gem 'pry-rails'
 
@@ -38,7 +40,6 @@ group :development do
   gem 'guard'
   gem 'guard-rspec'
   gem 'guard-spork'
-  gem 'guard-bundler'
 end
 
 group :test do
