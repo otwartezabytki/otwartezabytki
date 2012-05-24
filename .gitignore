@@ -16,4 +16,3 @@ rerun.txt
 pickle-email-*.html
 config/database.yml
 .DS_Store
-vendor/csvs/all_relics.csv
