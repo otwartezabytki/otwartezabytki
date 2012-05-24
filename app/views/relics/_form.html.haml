@@ -1,0 +1,16 @@
+= simple_form_for relic, :html => { :class => 'form-horizontal' } do |f|
+  = f.association :place
+  = f.input :identification
+  = f.input :group
+  = f.input :number
+  = f.input :materail
+  = f.input :dating_of_obj
+  = f.input :street
+  = f.input :register_number
+  = f.input :national_number
+  = f.input :latitude
+  = f.input :longitude
+  -# = f.input :internal_id
+  .form-actions
+    = f.button :submit, :class => 'btn-primary'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), relics_path, :class => 'btn'
