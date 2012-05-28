@@ -2,9 +2,10 @@
 require 'csv'
 module Import
   class Relic
+    Fields = [ :identification, :group, :number, :materail, :dating_of_obj, :register_number, :street ]
+    RowSize = 11
+
     class << self
-      Fields = [ :identification, :group, :number, :materail, :dating_of_obj, :register_number, :street ]
-      RowSize = 11
 
       def logger
         @logger ||= Logger.new("#{Rails.root}/log/#{Rails.env}_relics_import.log")
@@ -19,6 +20,11 @@ module Import
         attributes = Hash[Fields.zip(row.slice(4, RowSize-1))]
         attributes[:internal_id] = (Digest::SHA1.new << row.join).to_s
         attributes
+      end
+
+      def prepare_source row
+        fields = [:voivodship, :commune, :district, :place] + Fields
+        Hash[fields.zip(row)]
       end
 
       def parse(file_path = nil)
@@ -37,19 +43,20 @@ module Import
             row = row.map {|e| e.to_s.strip }
             place = find_place(row)
 
-            attributes = prepare_attributes(row)
-            attributes[:place_id] = place.id
+            attributes = prepare_attributes(row).merge(
+              :source   => prepare_source(row),
+              :place_id => place.id
+            )
 
-            relic = if attributes[:register_number]
-              ::Relic.find_by_register_number(attributes[:register_number])
-            end
+            relic = ::Relic.find_by_internal_id(attributes[:internal_id])
 
-            if relic.present? or !::Relic.find_by_internal_id(attributes[:internal_id])
-              relic ||= place.relics.new
+            if relic.blank?
+              relic = place.relics.new
               relic.attributes = attributes
-              new_relic = relic.new_record?
+              # new_relic = relic.new_record?
               if relic.save
-                new_relic ? stats[:created] += 1 : stats[:updated] += 1
+                # new_relic ? stats[:created] += 1 : stats[:updated] += 1
+                stats[:created] += 1
               else
                 stats[:failed] += 1
                 logger.info "failed: #{relic.attributes.inpsect} | errors: #{relic.errors.full_messages.inspect}\n"

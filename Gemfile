@@ -30,6 +30,7 @@ gem 'simple_form', '~> 2.0'
 gem 'twitter-bootstrap-rails'
 gem 'decent_exposure'
 gem 'kaminari'
+gem 'ancestry'
 
 gem 'pry-rails'
 

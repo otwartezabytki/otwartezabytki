@@ -4,6 +4,7 @@ class Voivodeship < ActiveRecord::Base
   has_many :districts, :dependent => :destroy
   has_many :communes, :through => :districts
   has_many :places, :through => :communes
+  has_many :relics, :through => :places
 
   validates :name, :presence => true
 end
