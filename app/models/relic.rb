@@ -8,4 +8,42 @@ class Relic < ActiveRecord::Base
   has_ancestry
   serialize :source
 
+  def next
+    last_id = self.class.last.try(:id)
+    next_id = self.id + 1
+    while next_id <= last_id
+      obj = self.class.find_by_id(next_id)
+      return obj if obj
+      next_id += 1
+    end
+    nil
+  end
+
+  def prev
+    first_id = self.class.first.try(:id)
+    prev_id = self.id - 1
+    while prev_id >= first_id
+      obj = self.class.find_by_id(prev_id)
+      return obj if obj
+      prev_id - 1
+    end
+    nil
+  end
+
+  def find_children
+    nrelic = self.next
+
+    if nrelic.group.blank? and nrelic.next.try(:group).present?
+      nrelic.parent = self
+      nrelic.save
+      nrelic = nrelic.next
+    end
+
+    while nrelic.number.to_s =~ /1/ and nrelic.group.present?
+      nrelic.parent = self
+      nrelic.save
+      nrelic = nrelic.next
+    end
+  end
+
 end

@@ -7,6 +7,13 @@ module Import
 
     class << self
 
+      def structurize_relics
+        ::Relic.find_each(:conditions => {:number => 0}) do |parent_relic|
+          logger.info "searching children (#{parent_relic.id})"
+          parent_relic.find_children
+        end
+      end
+
       def logger
         @logger ||= Logger.new("#{Rails.root}/log/#{Rails.env}_relics_import.log")
       end
