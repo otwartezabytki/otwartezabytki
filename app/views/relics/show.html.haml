@@ -1,57 +1,60 @@
-- model_class = relic.class
-.page-header
-  %h1=t '.title', :default => model_class.model_name.human
+.row-fluid
+  .span6
+    - model_class = relic.class
+    .page-header
+      %h1=t '.title', :default => model_class.model_name.human
 
-%p
-  %strong= model_class.human_attribute_name(:place_id) + ':'
-  %br
-  = relic.place_id
-%p
-  %strong= model_class.human_attribute_name(:identification) + ':'
-  %br
-  = relic.identification
-%p
-  %strong= model_class.human_attribute_name(:group) + ':'
-  %br
-  = relic.group
-%p
-  %strong= model_class.human_attribute_name(:number) + ':'
-  %br
-  = relic.number
-%p
-  %strong= model_class.human_attribute_name(:materail) + ':'
-  %br
-  = relic.materail
-%p
-  %strong= model_class.human_attribute_name(:dating_of_obj) + ':'
-  %br
-  = relic.dating_of_obj
-%p
-  %strong= model_class.human_attribute_name(:street) + ':'
-  %br
-  = relic.street
-%p
-  %strong= model_class.human_attribute_name(:register_number) + ':'
-  %br
-  = relic.register_number
-%p
-  %strong= model_class.human_attribute_name(:national_number) + ':'
-  %br
-  = relic.national_number
-%p
-  %strong= model_class.human_attribute_name(:latitude) + ':'
-  %br
-  = relic.latitude
-%p
-  %strong= model_class.human_attribute_name(:longitude) + ':'
-  %br
-  = relic.longitude
-%p
-  %strong= model_class.human_attribute_name(:internal_id) + ':'
-  %br
-  = relic.internal_id
+    %p
+      %strong= model_class.human_attribute_name(:place_id) + ':'
+      %br
+      = relic.place.full_name
+    %p
+      %strong= model_class.human_attribute_name(:identification) + ':'
+      %br
+      = relic.identification
+    %p
+      %strong= model_class.human_attribute_name(:group) + ':'
+      %br
+      = relic.group
+    %p
+      %strong= model_class.human_attribute_name(:number) + ':'
+      %br
+      = relic.children.count
+
+    %p
+      %strong= model_class.human_attribute_name(:dating_of_obj) + ':'
+      %br
+      = relic.dating_of_obj
+    %p
+      %strong= model_class.human_attribute_name(:street) + ':'
+      %br
+      = relic.street
+    %p
+      %strong= model_class.human_attribute_name(:register_number) + ':'
+      %br
+      = relic.register_number
+    %p
+      %strong= model_class.human_attribute_name(:national_number) + ':'
+      %br
+      = relic.national_number
+    %p
+      %strong= model_class.human_attribute_name(:latitude) + ':'
+      %br
+      = relic.latitude
+    %p
+      %strong= model_class.human_attribute_name(:longitude) + ':'
+      %br
+      = relic.longitude
+  .span6
+    .page-header
+      %h1 Children
+    %ul
+      - relic.children.each do |child|
+        %li
+          = child.full_identification
+
 
 .form-actions
   = link_to t('.back', :default => t("helpers.links.back")), relics_path, :class => 'btn'
   = link_to t('.edit', :default => t("helpers.links.edit")), edit_relic_path(relic), :class => 'btn'
-  = link_to t('.destroy', :default => t("helpers.links.destroy")), relic_path(relic), :method => "delete", :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')), :class => 'btn btn-danger'
+  -# = link_to t('.destroy', :default => t("helpers.links.destroy")), relic_path(relic), :method => "delete", :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')), :class => 'btn btn-danger'

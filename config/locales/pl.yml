@@ -183,7 +183,7 @@ pl:
       relic:
         place_id: "Miejsce"
         identification: "Określenie obiektu"
-        group: "Określenie zesołu"
+        group: "Określenie zespołu"
         number: "Liczba obiektów"
         materail: "Materaił"
         dating_of_obj: "Datowanie obiektów"

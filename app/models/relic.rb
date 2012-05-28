@@ -8,6 +8,12 @@ class Relic < ActiveRecord::Base
   has_ancestry
   serialize :source
 
+  default_scope :order => "relics.id ASC"
+
+  def full_identification
+    "#{identification} (#{register_number}) datowanie: #{dating_of_obj}; ulica: #{street}"
+  end
+
   def next
     last_id = self.class.last.try(:id)
     next_id = self.id + 1
