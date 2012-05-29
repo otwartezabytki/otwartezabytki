@@ -31,6 +31,7 @@ gem 'twitter-bootstrap-rails'
 gem 'decent_exposure'
 gem 'kaminari'
 gem 'ancestry'
+gem 'tire'
 
 gem 'pry-rails'
 

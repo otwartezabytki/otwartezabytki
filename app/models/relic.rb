@@ -10,6 +10,47 @@ class Relic < ActiveRecord::Base
 
   default_scope :order => "relics.id ASC"
 
+  include Tire::Model::Search
+  include Tire::Model::Callbacks
+
+  mapping do
+    indexes :id, :index => :not_analyzed
+    indexes :identification
+    indexes :group
+    indexes :voivodeship_id, :as => lambda {|r| r.place.commune.district.voivodeship_id }
+    indexes :district_id, :as => lambda {|r| r.place.commune.district_id }
+    indexes :commune_id, :as => lambda {|r| r.place.commune_id }
+    indexes :place_id
+  end
+
+  class << self
+    def search(params)
+      tire.search(load: true, page: params[:page]) do
+        query { string params[:query] } if params[:query].present?
+        filter :term, :voivodeship_id => params[:voivodeship_id]  if params[:voivodeship_id].present?
+        filter :term, :district_id => params[:district_id]  if params[:district_id].present?
+        filter :term, :commune_id => params[:commune_id]  if params[:commune_id].present?
+
+        sort { by :id, 'asc' }
+
+
+        facet "voivodeships" do
+          terms :voivodeship_id
+        end
+        facet "districts" do
+          terms :district_id
+        end
+        facet "communes" do
+          terms :commune_id
+        end
+        facet "places" do
+          terms :place_id
+        end
+      end
+    end
+  end
+
+
   def full_identification
     "#{identification} (#{register_number}) datowanie: #{dating_of_obj}; ulica: #{street}"
   end

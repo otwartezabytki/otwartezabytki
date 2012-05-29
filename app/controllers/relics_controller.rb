@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class RelicsController < ApplicationController
-  expose(:relics) { Relic.roots.order('id ASC').page(params[:page]) }
+  expose(:relics) { Relic.search(params) }
   expose(:relic)
 
   def update
