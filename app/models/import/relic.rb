@@ -30,7 +30,7 @@ module Import
       end
 
       def prepare_source row
-        fields = [:voivodship, :commune, :district, :place] + Fields
+        fields = [:voivodeship, :commune, :district, :place] + Fields
         Hash[fields.zip(row)]
       end
 
