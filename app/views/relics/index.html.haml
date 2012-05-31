@@ -56,7 +56,6 @@ Total: #{relics.total}
     %h3 Facets
     %ul.nav.nav-list
       - location = params[:location].to_s.split('/')
-      = location.to_yaml
       - relics.facets['voivodeships']['terms'].each do |t|
         - selected = location[0] == t['term']
         - voivodeship = Voivodeship.find(t['term'])
@@ -67,6 +66,7 @@ Total: #{relics.total}
               - relics.facets['districts']['terms'].each do |t|
                 - selected = location[1] == t['term']
                 - district = District.find(t['term'])
+                - next if voivodeship.id != district.voivodeship_id
                 %li
                   = link_to "#{district.name} (#{t['count']})", relics_path(:query => params[:query], :location => "#{voivodeship.id}/#{t['term']}"), :class => "#{'selected' if selected}"
                   - if selected
@@ -74,6 +74,7 @@ Total: #{relics.total}
                       - relics.facets['communes']['terms'].each do |t|
                         - selected = location[2] == t['term']
                         - commune = Commune.find(t['term'])
+                        - next if district.id != commune.district_id
                         %li
                           = link_to "#{commune.name} (#{t['count']})", relics_path(:query => params[:query], :location => "#{voivodeship.id}/#{district.id}/#{t['term']}"), :class => "#{'selected' if selected}"
                           - if selected
@@ -81,5 +82,6 @@ Total: #{relics.total}
                               - relics.facets['places']['terms'].each do |t|
                                 - selected = location[3] == t['term']
                                 - place = Place.find(t['term'])
+                                - next if commune.id != place.commune_id
                                 %li
                                   = link_to "#{place.name} (#{t['count']})", relics_path(:query => params[:query], :location => "#{voivodeship.id}/#{district.id}/#{commune.id}/#{t['term']}"), :class => "#{'selected' if selected}"

@@ -23,6 +23,8 @@ class Relic < ActiveRecord::Base
     indexes :place_id, :index => :not_analyzed
   end
 
+  Tire.configure { logger 'log/elasticsearch.log' }
+
   class << self
     def search(params)
       tire.search(load: true, page: params[:page]) do
@@ -30,17 +32,17 @@ class Relic < ActiveRecord::Base
         query do
           boolean do
             must { string (params[:query].present? ? params[:query] : '*'), default_operator: "AND" }
-            must { term :voivodeship_id,  location[0] } if location.size > 0
-            must { term :district_id,     location[1] } if location.size > 1
-            must { term :commune_id,      location[2] } if location.size > 2
           end
         end
+        filter :term, :voivodeship_id => location[0]  if location.size > 0
+        filter :term, :district_id    => location[1]  if location.size > 1
+        filter :term, :commune_id     => location[2]  if location.size > 2
+        filter :term, :place_id       => location[3]  if location.size > 3
 
-        filter :term, :place_id => location[3] if location.size > 3
-
-        facet "voivodeships", :global => true do
+        facet "voivodeships" do
           terms :voivodeship_id, size: 16
         end
+
         facet "districts" do
           terms :district_id, size: 10_000
         end
