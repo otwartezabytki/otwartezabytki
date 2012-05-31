@@ -17,42 +17,62 @@ class Relic < ActiveRecord::Base
     indexes :id, :index => :not_analyzed
     indexes :identification
     indexes :group
-    indexes :voivodeship_id, :as => lambda {|r| r.place.commune.district.voivodeship_id }
-    indexes :district_id, :as => lambda {|r| r.place.commune.district_id }
-    indexes :commune_id, :as => lambda {|r| r.place.commune_id }
-    indexes :place_id
+    indexes :voivodeship_id, :index => :not_analyzed
+    indexes :district_id, :index => :not_analyzed
+    indexes :commune_id, :index => :not_analyzed
+    indexes :place_id, :index => :not_analyzed
   end
 
   class << self
     def search(params)
       tire.search(load: true, page: params[:page]) do
-        query { string params[:query] } if params[:query].present?
-        filter :term, :voivodeship_id => params[:voivodeship_id]  if params[:voivodeship_id].present?
-        filter :term, :district_id => params[:district_id]  if params[:district_id].present?
-        filter :term, :commune_id => params[:commune_id]  if params[:commune_id].present?
+        location = params[:location].to_s.split('/')
+        query do
+          boolean do
+            must { string (params[:query].present? ? params[:query] : '*'), default_operator: "AND" }
+            must { term :voivodeship_id,  location[0] } if location.size > 0
+            must { term :district_id,     location[1] } if location.size > 1
+            must { term :commune_id,      location[2] } if location.size > 2
+          end
+        end
 
-        sort { by :id, 'asc' }
+        filter :term, :place_id => location[3] if location.size > 3
 
-
-        facet "voivodeships" do
-          terms :voivodeship_id
+        facet "voivodeships", :global => true do
+          terms :voivodeship_id, size: 16
         end
         facet "districts" do
-          terms :district_id
+          terms :district_id, size: 10_000
         end
+
         facet "communes" do
-          terms :commune_id
+          terms :commune_id, size: 10_000
         end
         facet "places" do
-          terms :place_id
+          terms :place_id, size: 10_000
         end
+
+        sort { by :id, 'asc' }
       end
     end
+  end
+
+  def to_indexed_json
+    ids = [:voivodeship_id, :district_id, :commune_id, :place_id].zip(get_parent_ids)
+    {
+      id: id,
+      identification: identification,
+      group: group
+    }.merge(Hash[ids]).to_json
   end
 
 
   def full_identification
     "#{identification} (#{register_number}) datowanie: #{dating_of_obj}; ulica: #{street}"
+  end
+
+  def get_parent_ids
+    [place.commune.district.voivodeship_id, place.commune.district_id, place.commune_id, place_id]
   end
 
   def next

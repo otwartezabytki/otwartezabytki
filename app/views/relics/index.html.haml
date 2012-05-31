@@ -55,25 +55,31 @@ Total: #{relics.total}
   .well.sidebar-nav
     %h3 Facets
     %ul.nav.nav-list
+      - location = params[:location].to_s.split('/')
+      = location.to_yaml
       - relics.facets['voivodeships']['terms'].each do |t|
+        - selected = location[0] == t['term']
         - voivodeship = Voivodeship.find(t['term'])
         %li
-          = link_to "#{voivodeship.name} (#{t['count']})", relics_path(:query => params[:query], :voivodeship_id => t['term'])
-          %ul
-            - relics.facets['districts']['terms'].each do |t|
-              - district = District.find(t['term'])
-              -# - next if district.voivodeship_id != voivodeship.id
-              %li
-                = link_to "#{district.name} (#{t['count']})", relics_path(:query => params[:query], :district_id => t['term'])
-          -#       %ul
-          -#         - relics.facets['communes']['terms'].each do |t|
-          -#           - commune = Commune.find(t['term'])
-          -#           - next if commune.district_id != district.id
-          -#           %li
-          -#             = link_to "#{commune.name} (#{t['count']})", relics_path(:query => params[:query], :commune_id => t['term'])
-          -#             %ul
-          -#               - relics.facets['places']['terms'].each do |t|
-          -#                 - place = Place.find(t['term'])
-          -#                 - next if place.commune_id != commune.id
-          -#                 %li
-          -#                   = link_to "#{place.name} (#{t['count']})", relics_path(:query => params[:query], :place_id => t['term'])
+          = link_to "#{voivodeship.name} (#{t['count']})", relics_path(:query => params[:query], :location => t['term']), :class => "#{'selected' if selected}"
+          - if selected
+            %ul
+              - relics.facets['districts']['terms'].each do |t|
+                - selected = location[1] == t['term']
+                - district = District.find(t['term'])
+                %li
+                  = link_to "#{district.name} (#{t['count']})", relics_path(:query => params[:query], :location => "#{voivodeship.id}/#{t['term']}"), :class => "#{'selected' if selected}"
+                  - if selected
+                    %ul
+                      - relics.facets['communes']['terms'].each do |t|
+                        - selected = location[2] == t['term']
+                        - commune = Commune.find(t['term'])
+                        %li
+                          = link_to "#{commune.name} (#{t['count']})", relics_path(:query => params[:query], :location => "#{voivodeship.id}/#{district.id}/#{t['term']}"), :class => "#{'selected' if selected}"
+                          - if selected
+                            %ul
+                              - relics.facets['places']['terms'].each do |t|
+                                - selected = location[3] == t['term']
+                                - place = Place.find(t['term'])
+                                %li
+                                  = link_to "#{place.name} (#{t['count']})", relics_path(:query => params[:query], :location => "#{voivodeship.id}/#{district.id}/#{commune.id}/#{t['term']}"), :class => "#{'selected' if selected}"
