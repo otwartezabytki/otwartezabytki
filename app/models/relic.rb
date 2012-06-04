@@ -37,27 +37,37 @@ class Relic < ActiveRecord::Base
             must { string (params[:query].present? ? params[:query] : '*'), default_operator: "AND" }
           end
         end
-
-        filter :term, :voivodeship_id => location[0]  if location.size > 0
-        filter :term, :district_id    => location[1]  if location.size > 1
-        filter :term, :commune_id     => location[2]  if location.size > 2
-        filter :term, :place_id       => location[3]  if location.size > 3
+        # hack to use missing-filter
+        # http://www.elasticsearch.org/guide/reference/query-dsl/missing-filter.html
+        query_value = self.instance_variable_get("@query").instance_variable_get("@value")
+        query_value[:bool][:must] << { constant_score: { filter: { missing: { field: "ancestry" } } } }
 
         facet "voivodeships" do
           terms :voivodeship_id, size: 16
         end
 
-        facet "districts", facet_filter: { term: { voivodeship_id: location[0] } } do
-          terms :district_id, size: 10_000
-        end if location.size > 0
+        if location.size > 0
+          filter :term, voivodeship_id: location[0]
+          facet "districts", facet_filter: { term: { voivodeship_id: location[0] } } do
+            terms :district_id, size: 10_000
+          end
+        end
 
-        facet "communes", facet_filter: { term: { district_id: location[1] } } do
-          terms :commune_id, size: 10_000
-        end if location.size > 1
+        if location.size > 1
+          filter :term, district_id: location[1]
+          facet "communes", facet_filter: { term: { district_id: location[1] } } do
+            terms :commune_id, size: 10_000
+          end
+        end
 
-        facet "places", facet_filter: { term: { commune_id: location[2] } } do
-          terms :place_id, size: 10_000
-        end if location.size > 2
+        if location.size > 2
+          filter :term, commune_id: location[2]
+          facet "places", facet_filter: { term: { commune_id: location[2] } } do
+            terms :place_id, size: 10_000
+          end
+        end
+
+        filter :term, place_id: location[3] if location.size > 3
 
         sort { by :id, 'asc' }
       end
