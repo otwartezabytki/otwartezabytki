@@ -17,10 +17,13 @@ class Relic < ActiveRecord::Base
     indexes :id, :index => :not_analyzed
     indexes :identification
     indexes :group
-    indexes :voivodeship_id, :index => :not_analyzed
-    indexes :district_id, :index => :not_analyzed
-    indexes :commune_id, :index => :not_analyzed
-    indexes :place_id, :index => :not_analyzed
+    with_options :index => :not_analyzed do |m|
+      m.indexes :voivodeship_id
+      m.indexes :district_id
+      m.indexes :commune_id
+      m.indexes :place_id
+      m.indexes :ancestry
+    end
   end
 
   Tire.configure { logger 'log/elasticsearch.log' }
@@ -34,6 +37,7 @@ class Relic < ActiveRecord::Base
             must { string (params[:query].present? ? params[:query] : '*'), default_operator: "AND" }
           end
         end
+
         filter :term, :voivodeship_id => location[0]  if location.size > 0
         filter :term, :district_id    => location[1]  if location.size > 1
         filter :term, :commune_id     => location[2]  if location.size > 2
@@ -43,16 +47,17 @@ class Relic < ActiveRecord::Base
           terms :voivodeship_id, size: 16
         end
 
-        facet "districts" do
+        facet "districts", facet_filter: { term: { voivodeship_id: location[0] } } do
           terms :district_id, size: 10_000
-        end
+        end if location.size > 0
 
-        facet "communes" do
+        facet "communes", facet_filter: { term: { district_id: location[1] } } do
           terms :commune_id, size: 10_000
-        end
-        facet "places" do
+        end if location.size > 1
+
+        facet "places", facet_filter: { term: { commune_id: location[2] } } do
           terms :place_id, size: 10_000
-        end
+        end if location.size > 2
 
         sort { by :id, 'asc' }
       end
@@ -64,7 +69,8 @@ class Relic < ActiveRecord::Base
     {
       id: id,
       identification: identification,
-      group: group
+      group: group,
+      ancestry: ancestry
     }.merge(Hash[ids]).to_json
   end
 
