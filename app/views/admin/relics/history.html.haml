@@ -1,0 +1,30 @@
+%table
+  %thead
+    %tr
+      %th{ width: 160 }= t("admin.misc.created_at")
+      %th{ width: 160 }= t("admin.misc.author")
+      %th= t("admin.misc.modifications")
+      %th{ width: 50 }
+  %tbody
+    - prev = nil
+    - @versions.reverse.each do |version|
+      %tr
+        %td= l(version.created_at, :format => :long, :default => l(version.created_at, :format => :long, :locale => :en))
+        %td= version.whodunnit ? link_to(User.find(version.whodunnit).email, admin_user_path(version.whodunnit)) : t("admin.misc.anonymous")
+        %td.green
+          %div{ :style => 'font-family: Monospace' }
+            - if version.changeset
+              ~ version.changeset.delete_if{ |k, v| k.match(/source/)}.map{ |i, e| "<strong>#{t("activerecord.attributes.relic.#{i}")}</strong>: \"#{e.last}\""}.join("<br />").html_safe
+            - else
+              unavailable
+        - if prev
+          %td= link_to t("admin.misc.show"), admin_relic_path(@relic.id, :version => prev.id), :class => 'btn'
+        - else
+          %td= link_to t("admin.misc.show"), admin_relic_path(@relic.id), :class => 'btn'
+      - prev = version
+    - if @versions.first
+      %tr
+        %td= l(@versions.first.reify.created_at, :format => :long, :default => l(@versions.first.reify.created_at, :format => :long, :locale => :en))
+        %td
+        %td
+        %td= link_to t("admin.misc.show"), admin_relic_path(@relic.id, :version => @versions.first.id), :class => 'btn'

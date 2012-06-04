@@ -7,7 +7,6 @@ gem 'rails', '3.2.3'
 
 gem 'pg'
 
-
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -18,6 +17,7 @@ group :assets do
   # gem 'therubyracer'
 
   gem 'uglifier', '>= 1.0.3'
+  gem 'chosen-rails'
 end
 
 gem 'jquery-rails'
@@ -35,6 +35,15 @@ gem 'tire'
 
 gem 'pry-rails'
 
+# versioning
+gem 'paper_trail', '~> 2'
+
+# admin panel
+gem 'activeadmin'
+gem "meta_search",    '>= 1.1.0.pre'
+gem 'devise'
+gem 'cancan'
+
 group :development do
   gem 'rspec-rails',  '~> 2.0'
   gem 'factory_girl_rails'
@@ -42,6 +51,7 @@ group :development do
   gem 'guard'
   gem 'guard-rspec'
   gem 'guard-spork'
+  gem 'sextant'
 end
 
 group :test do

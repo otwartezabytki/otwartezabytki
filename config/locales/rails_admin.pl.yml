@@ -1,0 +1,140 @@
+pl:
+  home:
+    name: Strona główna
+  views:
+    pagination:
+      previous: "&laquo; Poprzednie"
+      next: "Następne &raquo;"
+      truncate: "…"
+  admin:
+    misc:
+      search: "Szukaj"
+      filter: "Filtruj"
+      refresh: "Odśwież"
+      show_all: "Pokaż wszystkie"
+      add_filter: "Dodaj filtr..."
+      bulk_menu_title: "Wybrane pozycje..."
+      remove: "Usuń"
+      add_new: "Dodaj"
+      chosen: "Wybrano %{name}"
+      chose_all: "Wybierz wszystkie"
+      clear_all: "Wyczyść wszystko"
+      up: "Góra"
+      down: "Dół"
+      navigation: "Nawigacja"
+      log_out: "Wyloguj"
+      ago: "temu"
+      created_at: Wersja z
+      author: Autor
+      anonymous: anonimowy
+      modifications: Modyfikacje
+      preview: Podgląd
+      original: Oryginał
+      show: Zobacz
+    flash:
+      successful: "%{name} pomyślnie %{action}"
+      error: "%{name} nie powiodło się %{action}"
+      noaction: "Żadne akcje nie zostały przeprowadzone"
+      model_not_found: "Model '%{model}' nie został znaleziony"
+      object_not_found: "%{model} z ID '%{id}' nie został znaleziony"
+    table_headers:
+      model_name: "Nazwa"
+      last_used: "Ostatnio"
+      records: "Rekordów"
+      username: "Użytkownik"
+      changes: "Zmiany"
+      created_at: "Data/Czas"
+      item: "Pozycja"
+      message: "Wiadomość"
+    actions:
+      dashboard:
+        title: "Strona administracyjna"
+        menu: "Kokpit"
+        breadcrumb: "Kokpit"
+      index:
+        title: "Wyświetl %{model_label_plural}"
+        menu: "Wyświetl"
+        breadcrumb: "%{model_label_plural}"
+      show:
+        title: "Szczegóły dla %{model_label} '%{object_label}'"
+        menu: "Pokaż"
+        breadcrumb: "%{object_label}"
+      show_in_app:
+        menu: "Pokaż na żywo"
+      new:
+        title: "Dodaj %{model_label}"
+        menu: "Dodaj"
+        breadcrumb: "Dodaj"
+        link: "Dodaj %{model_label}"
+        done: "utworzono"
+      edit:
+        title: "Edytuj %{model_label} '%{object_label}'"
+        menu: "Edytuj"
+        breadcrumb: "Edytuj"
+        link: "Edytuj ten %{model_label}"
+        done: "zaktualizowano"
+      delete:
+        title: "Usuń %{model_label} '%{object_label}'"
+        menu: "Usuń"
+        breadcrumb: "Usuń"
+        link: "Usuń '%{object_label}'"
+        done: "usunięto"
+      bulk_delete:
+        title: "Usuń %{model_label_plural}"
+        menu: "Usuń wiele"
+        breadcrumb: "Usuń wiele"
+        bulk_link: "Usunięto zaznaczone %{model_label_plural}"
+      export:
+        title: "Eksportuj %{model_label}"
+        menu: "Eksportuj"
+        breadcrumb: "Eksportuj"
+        link: "Eksportuj %{model_label_plural}"
+        bulk_link: "Esportuj zaznaczone %{model_label_plural}"
+        done: "wyeksportowano"
+      history_index:
+        title: "Historia dla %{model_label_plural}"
+        menu: "Historia"
+        breadcrumb: "Historia"
+      history_show:
+        title: "Historia dla %{model_label} '%{object_label}'"
+        menu: "Historia"
+        breadcrumb: "Historia"
+      versions:
+        title: "Historia dla %{model_label} '%{object_label}'"
+        menu: "Historia"
+        breadcrumb: "Historia"
+    form:
+      cancel: "Anuluj"
+      basic_info: "Podstawowe informacje"
+      required: "Wymagane"
+      optional: "Opcjonalne"
+      one_char: "litera"
+      char_length_up_to: "długość do"
+      char_length_of: "długość"
+      save: "Zapisz"
+      save_and_add_another: "Zapisz i dodaj kolejne"
+      save_and_edit: "Zapisz i edytuj"
+      all_of_the_following_related_items_will_be_deleted: "? Następujące powiązane pozycje mogą zostać usunięte lub osierocone:"
+      are_you_sure_you_want_to_delete_the_object: "Jesteś pewien że chcesz usunąć ten %{model_name}"
+      confirmation: "Tak, jestem pewien"
+      delete_confirmation: "Usuń potwierdzenie"
+      bulk_delete: "Następujące obiekty zostaną usunięte, co może usunąć lub osierocić ich powiązane relacje:"
+    export:      
+      confirmation: "Eksportuj do %{name}"
+      select: "Zaznacz pola do eksportu"
+      fields_from: "Pola z %{name}"
+      fields_from_associated: "Pola z asocjacji %{name}"
+      display: "Wyświetl %{name}: %{type}"
+      options_for: "Opcje dla %{name}"
+      empty_value_for_associated_objects: "<puste>"
+      click_to_reverse_selection: 'Kliknij by odwrócić zaznaczenie'
+      csv:
+        header_for_root_methods: "%{name}" # 'model' is available
+        header_for_association_methods: "%{name} [%{association}]"
+        encoding_to: "Koduj do"
+        encoding_to_help: "Wybierz docelowe kodowanie. Zostaw puste by skorzystać by zostawić aktualne kodowanie nietknięte: (%{name})"
+        skip_header: "Brak nagłówka"
+        skip_header_help: "Nie dodawaj nagłówka (brak opisu pól)"
+        default_col_sep: ","
+        col_sep: "Separator kolumny"
+        col_sep_help: "Zostw puste dla domyślnej wartości ('%{value}')" # value is default_col_sep

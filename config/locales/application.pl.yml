@@ -1,0 +1,8 @@
+pl:
+  messages:
+    are_you_sure: "Czy jesteś pewien?"
+  notices:
+    relic_reverted: "Zabytek został przywrócony do poprzedniej wersji"
+  buttons:
+    show_history: "Pokaż historię"
+    revert_this_version: "Przywróć tę wersję"
