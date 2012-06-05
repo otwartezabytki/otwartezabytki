@@ -31,7 +31,7 @@ class Relic < ActiveRecord::Base
   class << self
     def search(params)
       tire.search(load: true, page: params[:page]) do
-        location = params[:location].to_s.split('/')
+        location = params[:location].to_s.split('-')
         query do
           boolean do
             must { string (params[:query].present? ? params[:query] : '*'), default_operator: "AND" }
