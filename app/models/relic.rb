@@ -1,14 +1,21 @@
 # -*- encoding : utf-8 -*-
 class Relic < ActiveRecord::Base
   attr_accessible :dating_of_obj, :group, :id, :identification, :materail, :national_number, :number, :place_id, :register_number, :street, :internal_id, :source
+
   belongs_to :place
+
+  # for caching purposes
+  belongs_to :commune
+  belongs_to :district
+  belongs_to :voivodeship
 
   validates :place_id, :presence => true
 
   has_ancestry
   serialize :source
 
-  default_scope :order => "relics.id ASC"
+  # versioning
+  has_paper_trail :class_name => 'RelicVersion'
 
   include Tire::Model::Search
   include Tire::Model::Callbacks
@@ -131,4 +138,22 @@ class Relic < ActiveRecord::Base
     end
   end
 
+  def place_id=(value)
+    self[:place_id] = value
+    self[:commune_id] = self.place.commune.id
+    self[:district_id] = self.place.commune.district.id
+    self[:voivodeship_id] = self.place.commune.district.voivodeship.id
+  end
+
+  def commune_id
+    self[:commune_id] || self.place.commune.id
+  end
+
+  def district_id
+    self[:district_id] || self.place.commune.id
+  end
+
+  def voivodeship_id
+    self[:voivodeship_id] || self.place.commune.district.voivodeship.id
+  end
 end
