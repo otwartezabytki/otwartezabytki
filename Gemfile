@@ -45,13 +45,16 @@ gem 'devise'
 gem 'cancan'
 
 group :development do
+  gem 'sextant'  
+end
+
+group :development, :test do
   gem 'rspec-rails',  '~> 2.0'
   gem 'factory_girl_rails'
   gem 'spork-rails'
   gem 'guard'
   gem 'guard-rspec'
   gem 'guard-spork'
-  gem 'sextant'
 end
 
 group :test do
@@ -60,4 +63,5 @@ group :test do
   gem 'growl'
   gem 'rb-fsevent'
   gem 'database_cleaner'
+  gem 'shoulda', '~> 3.0'
 end

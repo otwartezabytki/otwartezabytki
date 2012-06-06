@@ -3,8 +3,7 @@
 
 FactoryGirl.define do
   factory :district do
-    id 1
-    voivodship_id 1
-    name "MyString"
+    voivodeship
+    name "jeleniogórski"
   end
 end

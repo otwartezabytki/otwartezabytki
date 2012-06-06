@@ -3,8 +3,7 @@
 
 FactoryGirl.define do
   factory :commune do
-    id 1
-    district_id 1
-    name "MyString"
+    district
+    name "Stara Kamienica"
   end
 end

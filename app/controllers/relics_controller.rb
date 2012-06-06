@@ -12,6 +12,8 @@ class RelicsController < ApplicationController
     end
   end
 
+  protected
+
   def navigators
     navigators = {}
     ['voivodeships', 'communes', 'districts', 'places'].each do |name|

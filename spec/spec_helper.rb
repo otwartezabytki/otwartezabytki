@@ -4,6 +4,9 @@ require 'spork'
 require 'database_cleaner'
 require 'factory_girl'
 
+require 'spec_helper/elastic_search'
+require 'spec_helper/decent_exposure'
+
 Spork.prefork do
   ENV["RAILS_ENV"] ||= 'test'
   require File.expand_path("../../config/environment", __FILE__)
@@ -18,6 +21,14 @@ Spork.prefork do
 
     # Needed for Spork
     ActiveSupport::Dependencies.clear
+
+    # Factory girl
+    config.include FactoryGirl::Syntax::Methods
+
+    # Clear search index for each test
+    config.before(:each) do
+      refresh_relics_index
+    end
   end
   DatabaseCleaner.strategy = :truncation
 end
@@ -25,8 +36,6 @@ end
 Spork.each_run do
   DatabaseCleaner.clean
   FactoryGirl.reload
-  load "#{Rails.root}/config/routes.rb"
-  Dir["#{Rails.root}/app/**/*.rb"].each { |f| load f }
   I18n.backend.reload!
 end
 

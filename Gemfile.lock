@@ -219,6 +219,11 @@ GEM
     sextant (0.1.1)
       activesupport (>= 3.2)
       rails (>= 3.2)
+    shoulda (3.0.1)
+      shoulda-context (~> 1.0.0)
+      shoulda-matchers (~> 1.0.0)
+    shoulda-context (1.0.0)
+    shoulda-matchers (1.0.0)
     simple_form (2.0.2)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
@@ -292,6 +297,7 @@ DEPENDENCIES
   rspec-rails (~> 2.0)
   sass-rails (~> 3.2.3)
   sextant
+  shoulda (~> 3.0)
   simple_form (~> 2.0)
   spork-rails
   tire

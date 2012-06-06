@@ -3,8 +3,7 @@
 
 FactoryGirl.define do
   factory :place do
-    id 1
-    commune_id 1
-    name "MyString"
+    commune
+    name "Antoniów"
   end
 end

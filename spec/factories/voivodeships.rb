@@ -3,7 +3,6 @@
 
 FactoryGirl.define do
   factory :voivodeship do
-    id 1
-    name "MyString"
+    name "dolnośląskie"
   end
 end

@@ -21,3 +21,17 @@
  ```bash:
   rake environment tire:import CLASS='Relic' FORCE=true
  ```
+
+### testing
+
+ We're using spork for faster tests.
+
+ - ```bundle exec guard```
+ - hit enter to rerun all tests
+
+ For running single specs just type:
+
+```bash
+bundle exec rspec spec/controllers/relics_controller_spec.rb
+```
+

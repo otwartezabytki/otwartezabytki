@@ -20,6 +20,9 @@ class Relic < ActiveRecord::Base
   include Tire::Model::Search
   include Tire::Model::Callbacks
 
+  # create different index for testing
+  index_name("#{Rails.env}-relics")
+
   mapping do
     indexes :id, :index => :not_analyzed
     indexes :identification
@@ -140,9 +143,11 @@ class Relic < ActiveRecord::Base
 
   def place_id=(value)
     self[:place_id] = value
-    self[:commune_id] = self.place.commune.id
-    self[:district_id] = self.place.commune.district.id
-    self[:voivodeship_id] = self.place.commune.district.voivodeship.id
+    if self.place
+      self.commune_id = self.place.commune.id
+      self.district_id = self.place.commune.district.id
+      self.voivodeship_id = self.place.commune.district.voivodeship.id
+    end
   end
 
   def commune_id
