@@ -1,11 +1,12 @@
 # -*- encoding : utf-8 -*-
 require 'rubygems'
+
 require 'spork'
+require 'spork/ext/ruby-debug'
+
 require 'database_cleaner'
 require 'factory_girl'
-
-require 'spec_helper/elastic_search'
-require 'spec_helper/decent_exposure'
+require 'capybara/rspec'
 
 Spork.prefork do
   ENV["RAILS_ENV"] ||= 'test'
@@ -37,6 +38,12 @@ Spork.each_run do
   DatabaseCleaner.clean
   FactoryGirl.reload
   I18n.backend.reload!
+  Otwartezabytki::Application.reload_routes!
+
+  # http://railsgotchas.wordpress.com/2012/01/31/activeadmin-spork-and-the-infamous-undefined-local-variable-or-method-view_factory/
+  ActionView::Template.register_template_handler :arb, lambda { |template|
+    "self.class.send :include, Arbre::Builder; @_helpers = self; self.extend ActiveAdmin::ViewHelpers; @__current_dom_element__ = Arbre::Context.new(assigns, self); begin; #{template.source}; end; current_dom_context"
+  }
 end
 
 def sample_path file

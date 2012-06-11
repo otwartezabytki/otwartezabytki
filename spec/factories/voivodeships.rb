@@ -3,6 +3,20 @@
 
 FactoryGirl.define do
   factory :voivodeship do
-    name "dolnośląskie"
+
+    name "voivodeship"
+
+    factory :voivodeship_dolnoslaskie do
+      name "dolnośląskie"
+    end
+
+    factory :voivodeship_mazowieckie do
+      name "mazowieckie"
+    end
+
+    factory :voivodeship_podlaskie do
+      name "podlaskie"
+    end
+
   end
 end

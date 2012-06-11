@@ -29,7 +29,7 @@ ActiveAdmin.register Relic do
       f.input :group
     end
 
-    f.buttons
+    f.actions
   end
 
   member_action :history do

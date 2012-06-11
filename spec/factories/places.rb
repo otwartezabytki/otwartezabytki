@@ -3,7 +3,24 @@
 
 FactoryGirl.define do
   factory :place do
+
     commune
-    name "Antoniów"
+    name "place"
+
+    factory :place_bardo do
+      name "Bardo"
+      commune :factory => :commune_bardo
+    end
+
+    factory :place_leszno do
+      name "Leszno"
+      commune :factory => :commune_leszno
+    end
+
+    factory :place_magdalenowo do
+      name "Magdalenowo"
+      commune :factory => :commune_suwalki
+    end
+
   end
 end

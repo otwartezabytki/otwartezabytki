@@ -11,5 +11,9 @@ FactoryGirl.define do
     dating_of_obj "1 poł. XVII"
     street "ul. Grabicka 3"
     register_number "267/60 z 7.03.1960; 26/76/A z 16.02.1978"
+
+    trait :in_bardo do
+      place :factory => :place_bardo
+    end
   end
 end

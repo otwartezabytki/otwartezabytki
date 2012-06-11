@@ -55,10 +55,11 @@ group :development, :test do
   gem 'guard'
   gem 'guard-rspec'
   gem 'guard-spork'
+  gem 'debugger'
+  gem 'ruby-debug-ide'
 end
 
 group :test do
-  gem 'rspec'
   gem 'capybara'
   gem 'growl'
   gem 'rb-fsevent'
