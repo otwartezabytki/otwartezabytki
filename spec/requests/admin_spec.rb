@@ -30,6 +30,21 @@ describe "Admin panel" do
     end    
   end
 
+  describe "User registration" do
+    it 'should create new user' do
+      @users_count = User.count
+
+      visit new_user_registration_path
+
+      fill_in 'user_email', :with => 'account@example.com'
+      fill_in 'user_password', :with => 'password'
+
+      click_button 'commit'
+
+      User.count.should eq @users_count + 1
+    end
+  end
+
   context "as logged in admin user" do
 
     before :all do

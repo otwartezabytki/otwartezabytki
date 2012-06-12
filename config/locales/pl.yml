@@ -190,4 +190,29 @@ pl:
         street: "Ulica"
         register_number: "Aktualny numer rejestru"
         national_number: "NID"
+      user:
+        email: E-mail
+        role: Rola
+        created_at: Założenie konta
+        updated_at: Zaktualizowanie danych
 
+
+    models:
+      relic:
+        one: Zabytek
+        other: Zabytki
+      user:
+        one: Użytkownik
+        other: Użytkownicy
+      place:
+        one: Miejscowość
+        other: Miejscowości
+      commune:
+        one: Gmina
+        other: Gminy
+      district:
+        one: Powiat
+        other: Powiaty
+      voivodeship:
+        one: Województwo
+        other: Województwa

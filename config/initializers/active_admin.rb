@@ -84,7 +84,7 @@ ActiveAdmin.setup do |config|
   # link. For example :get, :delete, :put, etc..
   #
   # Default:
-  # config.logout_link_method = :get
+  config.logout_link_method = :delete
 
 
   # == Admin Comments
@@ -126,4 +126,19 @@ ActiveAdmin.setup do |config|
   #
   # To load a javascript file:
   #   config.register_javascript 'my_javascript.js'
+
+  module ActiveAdmin
+    class BaseController
+      def role_given?
+        current_user.role == 'admin'
+      end
+
+      def as_role
+        { as: current_user.role.downcase.to_sym }
+      end
+    end
+  end
+
 end
+
+
