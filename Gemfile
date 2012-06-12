@@ -44,9 +44,14 @@ gem "meta_search",    '>= 1.1.0.pre'
 gem 'devise'
 gem 'cancan'
 
-group :development do
-  gem 'sextant'  
-end
+gem 'multi_json', '~> 1.0.3'
+gem 'json', '~> 1.5.4'
+
+# import data from sqlite
+gem 'data_mapper', '~> 1.2'
+gem 'dm-mysql-adapter'
+gem 'dm-chunked_query'
+gem 'dm-sqlite-adapter'
 
 group :development, :test do
   gem 'rspec-rails',  '~> 2.0'
@@ -57,6 +62,7 @@ group :development, :test do
   gem 'guard-spork'
   gem 'debugger'
   gem 'ruby-debug-ide'
+  gem 'sextant'
 end
 
 group :test do
