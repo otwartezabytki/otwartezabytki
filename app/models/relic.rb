@@ -42,9 +42,10 @@ class Relic < ActiveRecord::Base
     def search(params)
       tire.search(load: true, page: params[:page]) do
         location = params[:location].to_s.split('-')
+        q1 = params[:q1].present? ? params[:q1] : '*'
         query do
           boolean do
-            must { string (params[:query].present? ? params[:query] : '*'), default_operator: "AND" }
+            must { string q1, default_operator: "AND" }
           end
         end
         # hack to use missing-filter
@@ -90,7 +91,8 @@ class Relic < ActiveRecord::Base
       id: id,
       identification: identification,
       group: group,
-      ancestry: ancestry
+      ancestry: ancestry,
+      place_full_name: place.full_name
     }.merge(Hash[ids]).to_json
   end
 
@@ -100,7 +102,7 @@ class Relic < ActiveRecord::Base
   end
 
   def get_parent_ids
-    [place.commune.district.voivodeship_id, place.commune.district_id, place.commune_id, place_id]
+    [voivodeship_id, district_id, commune_id, place_id]
   end
 
   def next

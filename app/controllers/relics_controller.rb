@@ -2,7 +2,7 @@
 class RelicsController < ApplicationController
   expose(:relics) { Relic.search(params) }
   expose(:relic)
-  helper_method :navigators
+  helper_method :navigators, :search_params
 
   def update
     if relic.update_attributes(params[:relic])
@@ -29,6 +29,10 @@ class RelicsController < ApplicationController
       navigators[name] = objs.sort_by { |k| k.name.parameterize }
     end if relics and relics.facets
     navigators
+  end
+
+  def search_params
+    params.slice(:q1)
   end
 
 end
