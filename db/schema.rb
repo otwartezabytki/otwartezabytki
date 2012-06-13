@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120604130835) do
+ActiveRecord::Schema.define(:version => 20120612145834) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -51,6 +51,8 @@ ActiveRecord::Schema.define(:version => 20120604130835) do
     t.string   "name"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "nr"
+    t.integer  "kind"
   end
 
   create_table "districts", :force => true do |t|
@@ -58,6 +60,7 @@ ActiveRecord::Schema.define(:version => 20120604130835) do
     t.string   "name"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.string   "nr"
   end
 
   create_table "places", :force => true do |t|
@@ -65,6 +68,7 @@ ActiveRecord::Schema.define(:version => 20120604130835) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "sym"
   end
 
   create_table "relics", :force => true do |t|
@@ -126,6 +130,7 @@ ActiveRecord::Schema.define(:version => 20120604130835) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "nr"
   end
 
 end

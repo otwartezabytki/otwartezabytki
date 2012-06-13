@@ -49,9 +49,9 @@ gem 'json', '~> 1.5.4'
 
 # import data from sqlite
 gem 'data_mapper', '~> 1.2'
-gem 'dm-mysql-adapter'
 gem 'dm-chunked_query'
 gem 'dm-sqlite-adapter'
+gem 'unicode'
 
 group :development, :test do
   gem 'rspec-rails',  '~> 2.0'

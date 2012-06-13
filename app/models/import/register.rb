@@ -23,5 +23,14 @@ module Import
     property :voi_nr, String
     property :par_type, String
     property :street, String
+
+    def clean_data
+      CleadData.first(:nid_id => nid_id)
+    end
+
+    def clean_location
+      CleadLocation.first(:nid_id => nid_id)
+    end
+
   end
 end
