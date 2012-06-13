@@ -1,7 +1,6 @@
 # -*- encoding : utf-8 -*-
 class Relic < ActiveRecord::Base
-  attr_accessible :id, :nid_id, :identification, :kind, :street, :register_number, :register_date,
-    :dating_of_obj, :date_norm, :date_start, :date_end, :source_type, :place, :gorup, :ancestry, :internal_id
+  attr_protected :id, :created_at, :update_at
 
   belongs_to :place
 
