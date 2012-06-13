@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Relic < ActiveRecord::Base
-  attr_accessible :dating_of_obj, :group, :id, :identification, :materail, :national_number, :number, :place_id, :register_number, :street, :internal_id, :source
-
+  attr_accessible :identification, :kind, :street, :register_number, :register_date,
+    :dating_of_obj, :date_norm, :date_start, :date_end, :source_type, :place, :gorup, :ancestry
   belongs_to :place
 
   # for caching purposes
@@ -9,7 +9,7 @@ class Relic < ActiveRecord::Base
   belongs_to :district
   belongs_to :voivodeship
 
-  validates :place_id, :presence => true
+  # validates :place_id, :presence => true
 
   has_ancestry
   serialize :source
@@ -92,7 +92,7 @@ class Relic < ActiveRecord::Base
       identification: identification,
       group: group,
       ancestry: ancestry,
-      place_full_name: place.full_name
+      # place_full_name: place.full_name
     }.merge(Hash[ids]).to_json
   end
 
@@ -153,14 +153,17 @@ class Relic < ActiveRecord::Base
   end
 
   def commune_id
+    return nil unless self.place_id
     self[:commune_id] || self.place.commune.id
   end
 
   def district_id
+    return nil unless self.place_id
     self[:district_id] || self.place.commune.id
   end
 
   def voivodeship_id
+    return nil unless self.place_id
     self[:voivodeship_id] || self.place.commune.district.voivodeship.id
   end
 end

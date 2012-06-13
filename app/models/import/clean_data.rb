@@ -7,7 +7,7 @@ module Import
     include DataMapper::Resource
     storage_names[:default] = 'clean_data'
 
-    property :nid_id,           Integer
+    property :nid_id,           Integer, :key => true
     property :akt_nr_rej,       String
     property :wojewodztwo,      String
     property :powiat,           String

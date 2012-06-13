@@ -7,7 +7,7 @@ module Import
     include DataMapper::Resource
     storage_names[:default] = 'clean_locations'
 
-    property :nid_id, Integer
+    property :nid_id, Integer, :key => true
     property :voi, String
     property :pov, String
     property :par, String

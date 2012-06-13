@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120612145834) do
+ActiveRecord::Schema.define(:version => 20120613110711) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -80,7 +80,7 @@ ActiveRecord::Schema.define(:version => 20120612145834) do
     t.string   "dating_of_obj"
     t.string   "street"
     t.string   "register_number"
-    t.string   "national_number"
+    t.string   "nid_id"
     t.float    "latitude"
     t.float    "longitude"
     t.datetime "created_at",      :null => false
@@ -91,6 +91,12 @@ ActiveRecord::Schema.define(:version => 20120612145834) do
     t.integer  "commune_id"
     t.integer  "district_id"
     t.integer  "voivodeship_id"
+    t.date     "register_date"
+    t.string   "date_norm"
+    t.string   "date_start"
+    t.string   "date_end"
+    t.string   "kind"
+    t.string   "source_type"
   end
 
   add_index "relics", ["ancestry"], :name => "index_relics_on_ancestry"
