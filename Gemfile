@@ -48,7 +48,7 @@ group :development, :test do
   # for defining tests
   gem 'cucumber-rails', :require => false
   gem 'rspec-rails',  '~> 2.0'
-  gem 'shoulda', '~> 3.0'
+  gem 'shoulda', '~> 3.0', :require => false
   gem 'factory_girl_rails'
   gem 'database_cleaner'
   gem 'capybara'

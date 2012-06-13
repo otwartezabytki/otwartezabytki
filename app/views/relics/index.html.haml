@@ -2,10 +2,10 @@
 .page-header
   %h1=t '.title', :default => model_class.model_name.human.pluralize
 
-Total: #{relics.total}
-= simple_form_for relics_path, :html => { :class => 'well form-search' },:method => :get do |f|
-  = f.input :q1, :label => false, :input_html => {:name => 'q1', :value => params[:q1], :class => "search-query"}, :placeholder => "Wrocław, dworek"
-  = f.button :submit, 'Szukaj'
+Total: #{Relic.count}
+-# = simple_form_for relics_path, :html => { :class => 'well form-search' },:method => :get do |f|
+-#   = f.input :q1, :label => false, :input_html => {:name => 'q1', :value => params[:q1], :class => "search-query"}, :placeholder => "Wrocław, dworek"
+-#   = f.button :submit, 'Szukaj'
 
 = paginate relics
 
@@ -30,9 +30,9 @@ Total: #{relics.total}
     - relics.each do |relic|
       %tr
         -# %td= link_to relic.id, relic_path(relic)
-        %td= relic.place.full_name
+        %td= relic.place.try(:full_name)
         %td
-          = "(G)" if relic.number.zero?
+          -# = "(G)" if relic.number.zero?
           = link_to relic.identification, relic_path(relic)
         %td= relic.group
         -# %td= relic.number
@@ -51,30 +51,30 @@ Total: #{relics.total}
 -# = link_to t('.new', :default => t("helpers.links.new")), new_relic_path, :class => 'btn btn-primary'
 = paginate relics
 
-- content_for :sidebar do
-  .well.sidebar-nav
-    %h3 Facets
-    %ul.nav.nav-list
-      - location = params[:location].to_s.split('-')
-      - navigators['voivodeships'].each do |obj|
-        - selected = location[0] == obj.id.to_s
-        %li
-          = link_to "#{obj.name} (#{obj.count})", relics_path(search_params.merge(:location => obj.id)), :class => "#{'selected' if selected}"
-          - if selected
-            %ul
-              - navigators['districts'].each do |obj|
-                - selected = location[1] == obj.id.to_s
-                %li
-                  = link_to "#{obj.name} (#{obj.count})", relics_path(search_params.merge(:location => (location.first(1) << obj.id).join('-'))), :class => "#{'selected' if selected}"
-                  - if selected
-                    %ul
-                      - navigators['communes'].each do |obj|
-                        - selected = location[2] == obj.id.to_s
-                        %li
-                          = link_to "#{obj.name} (#{obj.count})", relics_path(search_params.merge(:location => (location.first(2) << obj.id).join('-'))), :class => "#{'selected' if selected}"
-                          - if selected
-                            %ul
-                              - navigators['places'].each do |obj|
-                                - selected = location[3] == obj.id.to_s
-                                %li
-                                  = link_to "#{obj.name} (#{obj.count})", relics_path(search_params(location => (location.first(3) << obj.id).join('-'))), :class => "#{'selected' if selected}"
+-# - content_for :sidebar do
+-#   .well.sidebar-nav
+-#     %h3 Facets
+-#     %ul.nav.nav-list
+-#       - location = params[:location].to_s.split('-')
+-#       - navigators['voivodeships'].each do |obj|
+-#         - selected = location[0] == obj.id.to_s
+-#         %li
+-#           = link_to "#{obj.name} (#{obj.count})", relics_path(search_params.merge(:location => obj.id)), :class => "#{'selected' if selected}"
+-#           - if selected
+-#             %ul
+-#               - navigators['districts'].each do |obj|
+-#                 - selected = location[1] == obj.id.to_s
+-#                 %li
+-#                   = link_to "#{obj.name} (#{obj.count})", relics_path(search_params.merge(:location => (location.first(1) << obj.id).join('-'))), :class => "#{'selected' if selected}"
+-#                   - if selected
+-#                     %ul
+-#                       - navigators['communes'].each do |obj|
+-#                         - selected = location[2] == obj.id.to_s
+-#                         %li
+-#                           = link_to "#{obj.name} (#{obj.count})", relics_path(search_params.merge(:location => (location.first(2) << obj.id).join('-'))), :class => "#{'selected' if selected}"
+-#                           - if selected
+-#                             %ul
+-#                               - navigators['places'].each do |obj|
+-#                                 - selected = location[3] == obj.id.to_s
+-#                                 %li
+-#                                   = link_to "#{obj.name} (#{obj.count})", relics_path(search_params(location => (location.first(3) << obj.id).join('-'))), :class => "#{'selected' if selected}"

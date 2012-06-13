@@ -18,24 +18,24 @@ class Relic < ActiveRecord::Base
   # versioning
   has_paper_trail :class_name => 'RelicVersion', :on => [:update, :destroy]
 
-  include Tire::Model::Search
-  include Tire::Model::Callbacks
+  # include Tire::Model::Search
+  # include Tire::Model::Callbacks
 
-  # create different index for testing
-  index_name("#{Rails.env}-relics")
+  # # create different index for testing
+  # index_name("#{Rails.env}-relics")
 
-  mapping do
-    indexes :id, :index => :not_analyzed
-    indexes :identification
-    indexes :group
-    with_options :index => :not_analyzed do |m|
-      m.indexes :voivodeship_id
-      m.indexes :district_id
-      m.indexes :commune_id
-      m.indexes :place_id
-      m.indexes :ancestry
-    end
-  end
+  # mapping do
+  #   indexes :id, :index => :not_analyzed
+  #   indexes :identification
+  #   indexes :group
+  #   with_options :index => :not_analyzed do |m|
+  #     m.indexes :voivodeship_id
+  #     m.indexes :district_id
+  #     m.indexes :commune_id
+  #     m.indexes :place_id
+  #     m.indexes :ancestry
+  #   end
+  # end
 
   Tire.configure { logger 'log/elasticsearch.log' }
 

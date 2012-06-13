@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class RelicsController < ApplicationController
-  expose(:relics) { Relic.search(params) }
+  expose(:relics) { Relic.page(params[:page]) }
   expose(:relic)
   helper_method :navigators, :search_params
 
