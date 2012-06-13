@@ -29,7 +29,7 @@ module Import
 
       def import_districts
         Terc.all(:conditions => {:pow.not => nil, :gmi => nil}).batch(1000) do |t|
-          v = Voivodeship.find_by_nr!(t.woj)
+          v = ::Voivodeship.find_by_nr!(t.woj)
           conds = {:nr => t.pow, :name => Unicode.capitalize(t.nazwa)}
           v.districts.where(conds).first || v.districts.create(conds)
         end
@@ -37,7 +37,7 @@ module Import
 
       def import_communes
         Terc.all(:conditions => {:pow.not => nil, :gmi.not => nil}).batch(1000) do |t|
-          d = District.joins(:voivodeship).where('voivodeships.nr' => t.woj, 'districts.nr' => t.pow).first
+          d = ::District.joins(:voivodeship).where('voivodeships.nr' => t.woj, 'districts.nr' => t.pow).first
           conds = {:nr => t.gmi, :name => Unicode.capitalize(t.nazwa), :kind => t.rodz.to_i}
           d.communes.where(conds).first || d.communes.create(conds)
         end

@@ -29,10 +29,10 @@ module Import
     class << self
       def import_all!
         Register.all.batch(1000) do |t|
-          next if Relic.find_by_nid_id(t.nid_id.to_s)
-          place = Place.find_by_sym(t.clean_location.try(:cit_t))
+          next if ::Relic.find_by_nid_id(t.nid_id.to_s)
+          place = ::Place.find_by_sym(t.clean_location.try(:cit_t))
 
-          Relic.create(
+          ::Relic.create(
             :identification   => t.name,
             :kind             => t.type,
             :street           => t.street,

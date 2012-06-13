@@ -19,7 +19,7 @@ module Import
     class << self
       def import_all!
         Simc.all.batch(1000) do |t|
-          c = Commune.joins(:district => :voivodeship).where(
+          c = ::Commune.joins(:district => :voivodeship).where(
             'voivodeships.nr' => t.woj, 'districts.nr' => t.pow, 'communes.nr' => t.gmi, 'communes.kind' => t.rodz_gmi
           ).first
           conds = {:name => Unicode.capitalize(t.nazwa), :sym => t.sym}
