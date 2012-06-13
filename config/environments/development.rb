@@ -35,4 +35,10 @@ Otwartezabytki::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  require 'ruby-debug'
+  Debugger.wait_connection = true
+  Debugger.start_remote
+  Debugger.settings[:autoeval] = true
+  puts "=> Debugger enabled"
 end

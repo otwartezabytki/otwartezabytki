@@ -2,6 +2,7 @@
 
 FactoryGirl.define do
   factory :user do
+    role "user"
     sequence(:email) {|n| "user#{n}@example.com" }
 
     trait :admin do

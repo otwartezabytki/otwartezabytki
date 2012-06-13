@@ -16,7 +16,7 @@ class Ability
       can :update, Relic
       can :revert, Relic
     else
-
+      can :create, User
     end
 
     # See the wiki for details: https://github.com/ryanb/cancan/wiki/Defining-Abilities

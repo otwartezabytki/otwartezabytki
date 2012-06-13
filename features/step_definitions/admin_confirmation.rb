@@ -7,7 +7,8 @@ Given /^he is not yet confirmed as administrator$/ do
 end
 
 When /^I navigate to edit page of "(.*?)" user$/ do |email|
-  find('#users a').click
+  page.should have_selector("a[href='#{admin_users_path}']")
+  visit admin_users_path
   within('#q_search') do
     fill_in 'q_email', :with => email
     find('[name="commit"]').click

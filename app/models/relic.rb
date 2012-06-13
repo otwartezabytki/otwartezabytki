@@ -17,7 +17,7 @@ class Relic < ActiveRecord::Base
   serialize :source
 
   # versioning
-  has_paper_trail :class_name => 'RelicVersion'
+  has_paper_trail :class_name => 'RelicVersion', :on => [:update, :destroy]
 
   include Tire::Model::Search
   include Tire::Model::Callbacks
