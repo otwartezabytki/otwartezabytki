@@ -35,6 +35,7 @@ module Import
           ::Relic.create(
             :identification   => t.name,
             :kind             => t.type,
+            :nid_id           => t.nid_id,
             :street           => t.street,
             :register_number  => t.number,
             :register_date    => t.date_reg,
