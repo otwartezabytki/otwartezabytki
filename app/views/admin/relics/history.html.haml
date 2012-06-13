@@ -22,9 +22,9 @@
         - else
           %td= link_to t("admin.misc.show"), admin_relic_path(@relic.id), :class => 'btn'
       - prev = version
-    - if @versions.first
+    - if @versions.first.present?
       %tr
-        %td= l(@versions.first.reify.created_at, :format => :long, :default => l(@versions.first.reify.created_at, :format => :long, :locale => :en))
+        %td= l(@versions.first.reify.created_at, :format => :long, :default => l(@versions.first.reify.created_at, :format => :long))
         %td
         %td
         %td= link_to t("admin.misc.show"), admin_relic_path(@relic.id, :version => @versions.first.id), :class => 'btn'

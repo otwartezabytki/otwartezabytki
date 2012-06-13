@@ -1,7 +1,8 @@
 # -*- encoding : utf-8 -*-
 class Relic < ActiveRecord::Base
-  attr_accessible :identification, :kind, :street, :register_number, :register_date,
-    :dating_of_obj, :date_norm, :date_start, :date_end, :source_type, :place, :gorup, :ancestry
+  attr_accessible :id, :nid_id, :identification, :kind, :street, :register_number, :register_date,
+    :dating_of_obj, :date_norm, :date_start, :date_end, :source_type, :place, :gorup, :ancestry, :internal_id
+
   belongs_to :place
 
   # for caching purposes
@@ -15,7 +16,7 @@ class Relic < ActiveRecord::Base
   serialize :source
 
   # versioning
-  has_paper_trail :class_name => 'RelicVersion'
+  has_paper_trail :class_name => 'RelicVersion', :on => [:update, :destroy]
 
   include Tire::Model::Search
   include Tire::Model::Callbacks

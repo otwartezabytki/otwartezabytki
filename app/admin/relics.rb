@@ -9,12 +9,11 @@ ActiveAdmin.register Relic do
   filter :commune
 
   index do
-    column :id
+    column :register_number
     column :voivodeship
     column :district
     column :commune
     column :identification
-    column :group
     column do |relic|
       if relic.versions.count > 0
         link_to "History", history_admin_relic_path(relic)
@@ -24,12 +23,14 @@ ActiveAdmin.register Relic do
   end
 
   form do |f|
-    f.inputs "Details" do
+    f.inputs do
+      f.input :register_number
       f.input :identification
       f.input :group
+
+      f.buttons
     end
 
-    f.actions
   end
 
   member_action :history do
