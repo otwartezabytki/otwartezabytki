@@ -35,6 +35,15 @@ gem 'meta_search',    '>= 1.1.0.pre'
 gem 'devise'
 gem 'cancan'
 
+gem 'multi_json', '~> 1.0.3'
+gem 'json', '~> 1.5.4'
+
+# import data from sqlite
+gem 'data_mapper', '~> 1.2'
+gem 'dm-mysql-adapter'
+gem 'dm-chunked_query'
+gem 'dm-sqlite-adapter'
+
 group :development, :test do
   # for defining tests
   gem 'cucumber-rails', :require => false

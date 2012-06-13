@@ -39,7 +39,8 @@ describe "Admin panel" do
       fill_in 'user_email', :with => 'account@example.com'
       fill_in 'user_password', :with => 'password'
 
-      click_button 'commit'
+      puts body
+      find("[name='commit']").click
 
       User.count.should eq @users_count + 1
     end

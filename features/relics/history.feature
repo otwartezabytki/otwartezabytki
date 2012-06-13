@@ -1,4 +1,3 @@
-@work
 Feature: Revision history
   As an admin user
   I want to see the relics revision history

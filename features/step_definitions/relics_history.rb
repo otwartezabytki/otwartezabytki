@@ -24,7 +24,7 @@ Given /^I'm previewing previous version of the Relic$/ do
   visit admin_relic_path(@relic.id, :version => @relic.versions.first.id)
 end
 
-When /^I click on the "(.*?) link" / do |name|
+When /^I click on the "(.*?)" link$/ do |name|
   click_link(name)
 end
 
