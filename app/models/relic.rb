@@ -17,30 +17,31 @@ class Relic < ActiveRecord::Base
   # versioning
   has_paper_trail :class_name => 'RelicVersion', :on => [:update, :destroy]
 
-  # include Tire::Model::Search
-  # include Tire::Model::Callbacks
+  include Tire::Model::Search
+  include Tire::Model::Callbacks
 
-  # # create different index for testing
-  # index_name("#{Rails.env}-relics")
+  # create different index for testing
+  index_name("#{Rails.env}-relics")
 
-  # mapping do
-  #   indexes :id, :index => :not_analyzed
-  #   indexes :identification
-  #   indexes :group
-  #   with_options :index => :not_analyzed do |m|
-  #     m.indexes :voivodeship_id
-  #     m.indexes :district_id
-  #     m.indexes :commune_id
-  #     m.indexes :place_id
-  #     m.indexes :ancestry
-  #   end
-  # end
+  mapping do
+    indexes :id, :index => :not_analyzed
+    indexes :identification
+    indexes :street
+    indexes :register_number
+    with_options :index => :not_analyzed do |m|
+      m.indexes :voivodeship_id
+      m.indexes :district_id
+      m.indexes :commune_id
+      m.indexes :place_id
+      m.indexes :ancestry
+    end
+  end
 
   Tire.configure { logger 'log/elasticsearch.log' }
 
   class << self
     def search(params)
-      tire.search(load: true, page: params[:page]) do
+      tire.search(load: true, page: params[:page], per_page: 100) do
         location = params[:location].to_s.split('-')
         q1 = params[:q1].present? ? params[:q1] : '*'
         query do
@@ -48,10 +49,10 @@ class Relic < ActiveRecord::Base
             must { string q1, default_operator: "AND" }
           end
         end
-        # hack to use missing-filter
-        # http://www.elasticsearch.org/guide/reference/query-dsl/missing-filter.html
-        query_value = self.instance_variable_get("@query").instance_variable_get("@value")
-        query_value[:bool][:must] << { constant_score: { filter: { missing: { field: "ancestry" } } } }
+        # # hack to use missing-filter
+        # # http://www.elasticsearch.org/guide/reference/query-dsl/missing-filter.html
+        # query_value = self.instance_variable_get("@query").instance_variable_get("@value")
+        # query_value[:bool][:must] << { constant_score: { filter: { missing: { field: "ancestry" } } } }
 
         facet "voivodeships" do
           terms :voivodeship_id, size: 16
@@ -90,9 +91,10 @@ class Relic < ActiveRecord::Base
     {
       id: id,
       identification: identification,
-      group: group,
+      street: street,
+      register_number: register_number,
       ancestry: ancestry,
-      # place_full_name: place.full_name
+      place_full_name: place.full_name
     }.merge(Hash[ids]).to_json
   end
 
