@@ -23,6 +23,21 @@ namespace :import do
         end
       end
     end
-
   end
+
+  task :clean_data => :environment do
+    Import::CleanData.all.batch(1000) do |l|
+      r = Relic.where(:approved => false).find_by_nid_id(l.nid_id.to_s)
+      next unless r
+      puts "Importing: #{l.nid_id}: #{l.okr_ob}"
+      attrs = {
+        :identification   => l.okr_ob,
+        :street           => l.ulica.strip,
+        :dating_of_obj    => l.datowanie_ob,
+        :approved         => true
+      }
+      r.update_attributes attrs.merge(Hash[[:latitude, :longitude].zip(l.geo_norm)])
+    end
+  end
+
 end
