@@ -15,7 +15,7 @@ Total: #{Relic.count}
       -# %th= model_class.human_attribute_name(:id)
       %th= model_class.human_attribute_name(:place_id)
       %th= model_class.human_attribute_name(:identification)
-      %th= model_class.human_attribute_name(:group)
+      %th= model_class.human_attribute_name(:kind)
       -# %th= model_class.human_attribute_name(:number)
       -# %th= model_class.human_attribute_name(:materail)
       %th= model_class.human_attribute_name(:dating_of_obj)
@@ -34,7 +34,7 @@ Total: #{Relic.count}
         %td
           -# = "(G)" if relic.number.zero?
           = link_to relic.identification, relic_path(relic)
-        %td= relic.group
+        %td= relic.kind
         -# %td= relic.number
         -# %td= relic.materail
         %td= relic.dating_of_obj

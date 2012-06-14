@@ -43,7 +43,6 @@ module Import
             :date_norm        => t.date_norm,
             :date_start       => t.date_start,
             :date_end         => t.date_end,
-            :source_type      => 'nid',
             :place            => place
           )
         end
