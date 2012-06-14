@@ -84,6 +84,35 @@ class Relic < ActiveRecord::Base
         sort { by :id, 'asc' }
       end
     end
+
+    def quick_search q
+      tire.search(load: true, per_page: 20) do
+        query do
+          boolean do
+            must { string q, default_operator: "AND" }
+          end
+        end
+        # # hack to use missing-filter
+        # # http://www.elasticsearch.org/guide/reference/query-dsl/missing-filter.html
+        # query_value = self.instance_variable_get("@query").instance_variable_get("@value")
+        # query_value[:bool][:must] << { constant_score: { filter: { missing: { field: "ancestry" } } } }
+
+        facet "voivodeships" do
+          terms :voivodeship_id, size: 3
+        end
+        facet "districts" do
+          terms :district_id, size: 3
+        end
+        facet "communes" do
+          terms :commune_id, size: 3
+        end
+        facet "places" do
+          terms :place_id, size: 3
+        end
+        sort { by :id, 'asc' }
+      end
+    end
+
   end
 
   def to_indexed_json
