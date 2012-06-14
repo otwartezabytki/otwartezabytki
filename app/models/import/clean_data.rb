@@ -37,5 +37,19 @@ module Import
     property :__ulica__,        String
     property :mongo_id,         String
 
+    def geo_norm
+      if geo1.match(/°/) and geo1.match(/′″/)
+        lat, lng = geo1.split(', ')
+        lat = geo_to_decimal( *lat.split(/[°′]/).map(&:to_f) )
+        lng = geo_to_decimal( *lng.split(/[°′]/).map(&:to_f) )
+      else
+        lat, lng = geo1.split(', ').map &:to_f
+      end
+      [lat, lng]
+    end
+
+    def geo_to_decimal st, min, sec
+      st + ((min + (sec / 60)) / 60)
+    end
   end
 end
