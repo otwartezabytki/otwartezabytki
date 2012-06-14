@@ -11,7 +11,7 @@
 
 ### db dump command
 ```bash:
-  pg_dump -c db_name | gzip > db/dump/$(date +"%m_%d_%Y").sql.gz
+  pg_dump -h localhost -cOWU user_name db_name | gzip > db/dump/$(date +"%m_%d_%Y").sql.gz
 ```
 
 ### elastic search
