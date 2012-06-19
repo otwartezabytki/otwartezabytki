@@ -23,27 +23,40 @@ class Relic < ActiveRecord::Base
   # create different index for testing
   index_name("#{Rails.env}-relics")
 
+  settings :number_of_shards => 1,
+           :number_of_replicas => 1,
+           :analysis => {
+             :analyzer => {
+               :default => {
+                 "type" => "polish",
+                 "stopwords" => File.open("#{Rails.root}/vendor/stopwords.txt").readlines.join.gsub(/\s*/, '').split(',')
+               }
+             }
+           }
+
   mapping do
-    indexes :id, :index => :not_analyzed
-    indexes :identification
-    indexes :street
-    indexes :register_number
-    with_options :index => :not_analyzed do |m|
-      m.indexes :voivodeship_id
-      m.indexes :district_id
-      m.indexes :commune_id
-      m.indexes :place_id
-      m.indexes :ancestry
+    with_options :index => 'analyzed', :type => 'string' do |a|
+      a.indexes :identification
+      a.indexes :streets
+      a.indexes :register_number
+    end
+    with_options :index => :not_analyzed do |na|
+      na.indexes :id
+      na.indexes :voivodeship_id
+      na.indexes :district_id
+      na.indexes :commune_id
+      na.indexes :place_id
+      na.indexes :ancestry
     end
   end
-
   Tire.configure { logger 'log/elasticsearch.log' }
 
   class << self
     def search(params)
       tire.search(load: true, page: params[:page], per_page: 100) do
         location = params[:location].to_s.split('-')
-        q1 = params[:q1].present? ? params[:q1] : '*'
+
+        q1 = (params[:q1].present? ? params[:q1] : '*')
         query do
           boolean do
             must { string q1, default_operator: "AND" }
@@ -87,9 +100,10 @@ class Relic < ActiveRecord::Base
 
     def quick_search q
       tire.search(load: true, per_page: 20) do
+        q1 = (q.present? ? q : '*')
         query do
           boolean do
-            must { string q, default_operator: "AND" }
+            must { string q1, default_operator: "AND" }
           end
         end
         # # hack to use missing-filter

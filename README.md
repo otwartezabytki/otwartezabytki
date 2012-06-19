@@ -16,6 +16,7 @@
 
 ### elastic search
  - install according to this: https://github.com/karmi/tire#installation
+ - install Stempel (Polish) Analysis for ElasticSearch from: https://github.com/elasticsearch/elasticsearch-analysis-stempel
  - index the data:
 
  ```bash:
