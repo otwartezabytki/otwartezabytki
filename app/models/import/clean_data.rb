@@ -7,7 +7,7 @@ module Import
     include DataMapper::Resource
     storage_names[:default] = 'clean_data'
 
-    property :nid_id,           Integer
+    property :nid_id,           Integer, :key => true
     property :akt_nr_rej,       String
     property :wojewodztwo,      String
     property :powiat,           String
@@ -37,26 +37,19 @@ module Import
     property :__ulica__,        String
     property :mongo_id,         String
 
-  end
+    def geo_norm
+      if geo1.match(/°/) and geo1.match(/′″/)
+        lat, lng = geo1.split(', ')
+        lat = geo_to_decimal( *lat.split(/[°′]/).map(&:to_f) )
+        lng = geo_to_decimal( *lng.split(/[°′]/).map(&:to_f) )
+      else
+        lat, lng = geo1.split(', ').map &:to_f
+      end
+      [lat, lng]
+    end
 
-  # clean_locations --> zmatchowane za pomocą kolumny nid_id
-  # zabytki z rejestru z aktualnym podziałem
-  # administracyjnym wg GUS
-  class CleanLocation
-    include DataMapper::Resource
-    storage_names[:default] = 'clean_locations'
-
-    property :nid_id, Integer
-    property :voi, String
-    property :pov, String
-    property :par, String
-    property :cit, String
-
-    property :voi_t, String
-    property :pov_t, String
-    property :par_t, String
-    property :cit_t, String
-    property :teryt, String
-
+    def geo_to_decimal st, min, sec
+      st + ((min + (sec / 60)) / 60)
+    end
   end
 end

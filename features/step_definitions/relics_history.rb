@@ -1,6 +1,8 @@
 # encoding: utf-8
 
 Given /^there is one relic in database$/ do
+  refresh_relics_index
+  Relic.count.should eq 0
   @relic = FactoryGirl.create :relic
   Relic.count.should eq 1
 end

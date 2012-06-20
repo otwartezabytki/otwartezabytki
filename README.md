@@ -11,15 +11,16 @@
 
 ### db dump command
 ```bash:
-  pg_dump -c db_name | gzip > db/dump/$(date +"%m_%d_%Y").sql.gz
+  pg_dump -h localhost -cOWU user_name db_name | gzip > db/dump/$(date +"%m_%d_%Y").sql.gz
 ```
 
 ### elastic search
  - install according to this: https://github.com/karmi/tire#installation
+ - install Stempel (Polish) Analysis for ElasticSearch from: https://github.com/elasticsearch/elasticsearch-analysis-stempel
  - index the data:
 
  ```bash:
-  rake environment tire:import CLASS='Relic' FORCE=true
+  bundle exec rake relic:reindex
  ```
 
 ### testing

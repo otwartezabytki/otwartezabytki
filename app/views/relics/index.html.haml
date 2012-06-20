@@ -2,10 +2,31 @@
 .page-header
   %h1=t '.title', :default => model_class.model_name.human.pluralize
 
-Total: #{relics.total}
+Total: #{relics.total_count}
 = simple_form_for relics_path, :html => { :class => 'well form-search' },:method => :get do |f|
-  = f.input :q1, :label => false, :input_html => {:name => 'q1', :value => params[:q1], :class => "search-query"}, :placeholder => "Wrocław, dworek"
+  = f.input :q1, :label => false, :input_html => {:name => 'q1', :value => params[:q1], :class => "search-query"}, :placeholder => "dworek"
   = f.button :submit, 'Szukaj'
+- if params[:q1]
+  %h3 Suggester
+  - navigators = parse_navigators(Relic.quick_search(params[:q1]).facets, :count)
+  %ul.nav.nav-list
+    - navigators['voivodeships'].each do |obj|
+      %li
+        = link_to "#{params[:q1]} #{obj.name} (#{obj.count})", relics_path(search_params.merge(:location => obj.id))
+    %hr
+    - navigators['districts'].each do |obj|
+      %li
+        = link_to "#{params[:q1]} #{obj.name} (#{obj.count})", relics_path(search_params.merge(:location => [obj.voivodeship_id, obj.id].join('-')))
+    %hr
+    - navigators['communes'].each do |obj|
+      %li
+        = link_to "#{params[:q1]} #{obj.name} (#{obj.count})", relics_path(search_params.merge(:location => [obj.district.voivodeship_id, obj.district_id, obj.id].join('-')))
+
+    %hr
+    - navigators['places'].each do |obj|
+      %li
+        = link_to "#{params[:q1]} #{obj.name} (#{obj.count})", relics_path(search_params.merge(:location => [obj.commune.district.voivodeship_id, obj.commune.district_id, obj.commune_id, obj.id].join('-')))
+  %hr
 
 = paginate relics
 
@@ -15,7 +36,7 @@ Total: #{relics.total}
       -# %th= model_class.human_attribute_name(:id)
       %th= model_class.human_attribute_name(:place_id)
       %th= model_class.human_attribute_name(:identification)
-      %th= model_class.human_attribute_name(:group)
+      %th= model_class.human_attribute_name(:kind)
       -# %th= model_class.human_attribute_name(:number)
       -# %th= model_class.human_attribute_name(:materail)
       %th= model_class.human_attribute_name(:dating_of_obj)
@@ -32,9 +53,13 @@ Total: #{relics.total}
         -# %td= link_to relic.id, relic_path(relic)
         %td= relic.place_full_name
         %td
-          = "(G)" if relic.number.zero?
+          = "(G)" if relic.has_children?
           = link_to relic.identification, relic_path(relic)
-        %td= relic.group
+          - if relic.has_children?
+            %br
+            %strong w skład wchodzi:
+            = relic.descendants.map(&:identification).join(', ')
+        %td= relic.kind
         -# %td= relic.number
         -# %td= relic.materail
         %td= relic.dating_of_obj
@@ -52,6 +77,7 @@ Total: #{relics.total}
 = paginate relics
 
 - content_for :sidebar do
+  - navigators = parse_navigators(relics.facets)
   .well.sidebar-nav
     %h3 Facets
     %ul.nav.nav-list
@@ -77,4 +103,4 @@ Total: #{relics.total}
                               - navigators['places'].each do |obj|
                                 - selected = location[3] == obj.id.to_s
                                 %li
-                                  = link_to "#{obj.name} (#{obj.count})", relics_path(search_params(location => (location.first(3) << obj.id).join('-'))), :class => "#{'selected' if selected}"
+                                  = link_to "#{obj.name} (#{obj.count})", relics_path(search_params.merge(:location => (location.first(3) << obj.id).join('-'))), :class => "#{'selected' if selected}"

@@ -8,6 +8,8 @@ module Relic::PlaceCaching
     belongs_to :voivodeship
 
     before_save :cache_location_fields, :if => :place_id_changed?
+
+    attr_protected :commune, :district, :voivodeship
   end
 
   def place=(value)

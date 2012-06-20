@@ -33,6 +33,8 @@ ActiveRecord::Schema.define(:version => 20120615155647) do
     t.string   "name"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "nr"
+    t.integer  "kind"
   end
 
   create_table "districts", :force => true do |t|
@@ -40,13 +42,16 @@ ActiveRecord::Schema.define(:version => 20120615155647) do
     t.string   "name"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.string   "nr"
   end
 
   create_table "places", :force => true do |t|
     t.integer  "commune_id"
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.string   "sym"
+    t.boolean  "from_teryt", :default => true
   end
 
   create_table "relics", :force => true do |t|
@@ -58,11 +63,11 @@ ActiveRecord::Schema.define(:version => 20120615155647) do
     t.string   "dating_of_obj"
     t.string   "street"
     t.string   "register_number"
-    t.string   "national_number"
+    t.string   "nid_id"
     t.float    "latitude"
     t.float    "longitude"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
     t.string   "internal_id"
     t.string   "ancestry"
     t.text     "source"
@@ -70,6 +75,12 @@ ActiveRecord::Schema.define(:version => 20120615155647) do
     t.integer  "district_id"
     t.integer  "voivodeship_id"
     t.string   "tags"
+    t.date     "register_date"
+    t.string   "date_norm"
+    t.string   "date_start"
+    t.string   "date_end"
+    t.string   "kind"
+    t.boolean  "approved",        :default => false
   end
 
   add_index "relics", ["ancestry"], :name => "index_relics_on_ancestry"
@@ -78,21 +89,26 @@ ActiveRecord::Schema.define(:version => 20120615155647) do
     t.integer  "relic_id"
     t.integer  "user_id"
     t.integer  "place_id"
-    t.string   "place_id_action"
+    t.string   "place_id_action",       :default => "skip"
     t.text     "identification"
-    t.string   "identification_action"
+    t.string   "identification_action", :default => "skip"
     t.string   "street"
-    t.string   "street_action"
+    t.string   "street_action",         :default => "skip"
     t.string   "dating_of_obj"
-    t.string   "dating_of_obj_action"
+    t.string   "dating_of_obj_action",  :default => "skip"
     t.float    "latitude"
     t.float    "longitude"
-    t.string   "coordinates_action"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
+    t.string   "coordinates_action",    :default => "skip"
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
     t.string   "tags"
     t.string   "tags_action"
   end
+
+  add_index "suggestions", ["coordinates_action"], :name => "index_suggestions_on_coordinates_action"
+  add_index "suggestions", ["dating_of_obj_action"], :name => "index_suggestions_on_dating_of_obj_action"
+  add_index "suggestions", ["identification_action"], :name => "index_suggestions_on_identification_action"
+  add_index "suggestions", ["place_id_action"], :name => "index_suggestions_on_place_id_action"
 
   create_table "tags", :force => true do |t|
     t.string   "name"
@@ -135,6 +151,7 @@ ActiveRecord::Schema.define(:version => 20120615155647) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "nr"
   end
 
 end
