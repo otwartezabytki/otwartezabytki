@@ -13,13 +13,9 @@
       %br
       = relic.identification
     %p
-      %strong= model_class.human_attribute_name(:group) + ':'
+      %strong= model_class.human_attribute_name(:kind) + ':'
       %br
-      = relic.group
-    %p
-      %strong= model_class.human_attribute_name(:number) + ':'
-      %br
-      = relic.children.count
+      = relic.kind
 
     %p
       %strong= model_class.human_attribute_name(:dating_of_obj) + ':'
@@ -34,10 +30,6 @@
       %br
       = relic.register_number
     %p
-      %strong= model_class.human_attribute_name(:national_number) + ':'
-      %br
-      = relic.national_number
-    %p
       %strong= model_class.human_attribute_name(:latitude) + ':'
       %br
       = relic.latitude
@@ -47,9 +39,9 @@
       = relic.longitude
   .span6
     .page-header
-      %h1 Children
+      %h1 Descendants
     %ul
-      - relic.children.each do |child|
+      - relic.descendants.each do |child|
         %li
           = child.full_identification
 
