@@ -53,8 +53,12 @@ Total: #{relics.total_count}
         -# %td= link_to relic.id, relic_path(relic)
         %td= relic.place.try(:full_name)
         %td
-          -# = "(G)" if relic.number.zero?
+          = "(G)" if relic.has_children?
           = link_to relic.identification, relic_path(relic)
+          - if relic.has_children?
+            %br
+            %strong w skład wchodzi:
+            = relic.descendants.map(&:identification).join(', ')
         %td= relic.kind
         -# %td= relic.number
         -# %td= relic.materail

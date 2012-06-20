@@ -18,7 +18,12 @@ class Relic < ActiveRecord::Base
   has_paper_trail :class_name => 'RelicVersion', :on => [:update, :destroy]
 
   include Tire::Model::Search
-  include Tire::Model::Callbacks
+
+  # custom tire callback
+  after_save do
+    # always update root document
+    root.tire.update_index
+  end
 
   # create different index for testing
   index_name("#{Rails.env}-relics")
@@ -52,6 +57,13 @@ class Relic < ActiveRecord::Base
   Tire.configure { logger 'log/elasticsearch.log' }
 
   class << self
+
+    def reindex objs
+      index.delete
+      index.create :mappings => tire.mapping_to_hash, :settings => tire.settings
+      index.import objs
+    end
+
     def search(params)
       tire.search(load: true, page: params[:page], per_page: 100) do
         location = params[:location].to_s.split('-')
@@ -136,9 +148,18 @@ class Relic < ActiveRecord::Base
       identification: identification,
       street: street,
       register_number: register_number,
-      ancestry: ancestry,
-      place_full_name: place.full_name
+      place_full_name: place.full_name,
+      descendants: self.descendants.map(&:to_descendant_json)
     }.merge(Hash[ids]).to_json
+  end
+
+  def to_descendant_json
+    {
+      id: id,
+      identification: identification,
+      street: street,
+      register_number: register_number
+    }
   end
 
 
@@ -211,4 +232,5 @@ class Relic < ActiveRecord::Base
     return nil unless self.place_id
     self[:voivodeship_id] || self.place.commune.district.voivodeship.id
   end
+
 end
