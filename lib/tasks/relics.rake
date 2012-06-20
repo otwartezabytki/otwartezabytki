@@ -20,4 +20,16 @@ SQL
     ActiveRecord::Base.connection.execute(sql)
     puts "success"
   end
+
+  task :reindex => :environment do
+    print "Indexing: "
+    Relic.index.delete
+    Relic.index.create :mappings => Relic.tire.mapping_to_hash, :settings => Relic.tire.settings
+    Relic.roots.find_in_batches do |objs|
+      print "."
+      Relic.index.import objs
+    end
+    puts "\nDone"
+  end
+
 end

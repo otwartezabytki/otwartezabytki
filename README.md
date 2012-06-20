@@ -20,7 +20,7 @@
  - index the data:
 
  ```bash:
-  rake environment tire:import CLASS='Relic' FORCE=true
+  bundle exec rake relic:reindex
  ```
 
 ### testing
