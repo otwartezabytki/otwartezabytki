@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
 
   validates :role, :inclusion => { :in => ["admin", "user"] }
 
+  has_many :suggestions
+
   def admin?
     role == 'admin'
   end

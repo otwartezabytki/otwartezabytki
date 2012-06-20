@@ -6,8 +6,4 @@ class Place < ActiveRecord::Base
 
   validates :name, :presence => true
 
-  def full_name
-    [commune.district.voivodeship.name, commune.district.name, commune.name, name].join(', ')
-  end
-
 end

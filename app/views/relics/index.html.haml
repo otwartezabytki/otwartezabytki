@@ -30,7 +30,7 @@ Total: #{relics.total}
     - relics.each do |relic|
       %tr
         -# %td= link_to relic.id, relic_path(relic)
-        %td= relic.place.full_name
+        %td= relic.place_full_name
         %td
           = "(G)" if relic.number.zero?
           = link_to relic.identification, relic_path(relic)
@@ -45,7 +45,7 @@ Total: #{relics.total}
         -# %td= relic.longitude
         -# %td=l relic.created_at
         %td
-          = link_to t('.edit', :default => t("helpers.links.edit")), edit_relic_path(relic), :class => 'btn btn-mini'
+          = link_to "Popraw", review_relic_path(relic), :class => 'btn btn-mini'
           -# = link_to t('.destroy', :default => t("helpers.links.destroy")), relic_path(relic), :method => :delete, :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')), :class => 'btn btn-mini btn-danger'
 
 -# = link_to t('.new', :default => t("helpers.links.new")), new_relic_path, :class => 'btn btn-primary'
