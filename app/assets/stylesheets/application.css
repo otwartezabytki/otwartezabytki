@@ -10,6 +10,8 @@
  *
  *= require_self
  *= require bootstrap_and_overrides
+ *= require jquery.ui.all
+ *
 */
 
 ul.nav li a.selected { font-weight: bold; }

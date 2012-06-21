@@ -110,9 +110,9 @@ class Relic < ActiveRecord::Base
       end
     end
 
-    def quick_search q
+    def suggester q
       tire.search(load: true, per_page: 20) do
-        q1 = (q.present? ? q : '*')
+        q1 = q.to_s.gsub(/\W/, '') << '*'
         query do
           boolean do
             must { string q1, default_operator: "AND" }
