@@ -32,10 +32,17 @@ class Relic < ActiveRecord::Base
   settings :number_of_shards => 1,
            :number_of_replicas => 1,
            :analysis => {
+             :filter => {
+              :pl_stop => {
+                "type" =>'stop',
+                "stopwords" => File.open("#{Rails.root}/vendor/stopwords.txt").readlines.join.gsub(/\s*/, '').split(',')
+              }
+             },
              :analyzer => {
                :default => {
-                 "type" => "polish",
-                 "stopwords" => File.open("#{Rails.root}/vendor/stopwords.txt").readlines.join.gsub(/\s*/, '').split(',')
+                 "type" => "custom",
+                 "tokenizer" => "standard",
+                 "filter" => "pl_stop, standard, lowercase, polish_stem, asciifolding"
                }
              }
            }
