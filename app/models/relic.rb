@@ -50,7 +50,7 @@ class Relic < ActiveRecord::Base
   mapping do
     with_options :index => 'analyzed', :type => 'string' do |a|
       a.indexes :identification
-      a.indexes :streets
+      a.indexes :street
       a.indexes :register_number
     end
     with_options :index => :not_analyzed do |na|
