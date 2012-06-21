@@ -19,14 +19,8 @@
             %span.icon-bar
             %span.icon-bar
           %a.brand(href=root_path) Otwartezabytki
-          .container.nav-collapse
-            %ul.nav
-              %li= link_to "Link 1", "/path1"
-              %li= link_to "Link 2", "/path2"
-              %li= link_to "Link 3", "/path3"
 
     .container
-
       .content
         .row
           .span9
@@ -34,11 +28,7 @@
           .span3
             = yield(:sidebar)
 
-      %footer
-        %p &copy; Company 2012
-    /
-      Javascripts
-      \==================================================
     / Placed at the end of the document so the pages load faster
-    = javascript_include_tag "application"
-
+    != javascript_include_tag "application"
+    != javascript_include_tag "http://maps.googleapis.com/maps/api/js?key=AIzaSyCIvKKcWv1L2FrfLe5rNpnsah5OXm6gJMA&sensor=false".html_safe
+    != javascript_include_tag "gmaps"

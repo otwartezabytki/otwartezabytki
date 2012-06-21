@@ -2,6 +2,7 @@
 class RelicsController < ApplicationController
   expose(:relics) { Relic.search(params) }
   expose(:relic)
+
   helper_method :parse_navigators, :search_params
 
   def update

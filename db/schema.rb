@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120614143230) do
+ActiveRecord::Schema.define(:version => 20120615155647) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(:version => 20120614143230) do
     t.integer  "commune_id"
     t.integer  "district_id"
     t.integer  "voivodeship_id"
+    t.string   "tags"
     t.date     "register_date"
     t.string   "date_norm"
     t.string   "date_start"
@@ -83,6 +84,37 @@ ActiveRecord::Schema.define(:version => 20120614143230) do
   end
 
   add_index "relics", ["ancestry"], :name => "index_relics_on_ancestry"
+
+  create_table "suggestions", :force => true do |t|
+    t.integer  "relic_id"
+    t.integer  "user_id"
+    t.integer  "place_id"
+    t.string   "place_id_action",       :default => "skip"
+    t.text     "identification"
+    t.string   "identification_action", :default => "skip"
+    t.string   "street"
+    t.string   "street_action",         :default => "skip"
+    t.string   "dating_of_obj"
+    t.string   "dating_of_obj_action",  :default => "skip"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "coordinates_action",    :default => "skip"
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
+    t.string   "tags"
+    t.string   "tags_action"
+  end
+
+  add_index "suggestions", ["coordinates_action"], :name => "index_suggestions_on_coordinates_action"
+  add_index "suggestions", ["dating_of_obj_action"], :name => "index_suggestions_on_dating_of_obj_action"
+  add_index "suggestions", ["identification_action"], :name => "index_suggestions_on_identification_action"
+  add_index "suggestions", ["place_id_action"], :name => "index_suggestions_on_place_id_action"
+
+  create_table "tags", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",     :null => false

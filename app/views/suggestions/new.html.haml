@@ -1,0 +1,165 @@
+= semantic_form_for @suggestion, :url => submit_review_relic_path,
+  :html => { :data => { :commune => @suggestion.relic.commune.name,
+                        :district => @suggestion.relic.district.name,
+                        :voivodeship => @suggestion.relic.voivodeship.name } } do |f|
+  %section.wizard_steps
+
+    %article.step.step-name.step-view.step-current
+      .values.values-edit.values-view
+        = f.input :identification, :as => :string, :label => "Nazwa zabytku", :input_html => { :disabled => true }
+        = f.input :identification_action, :as => :hidden
+      .actions.actions-view
+        %h3 Czy nazwa jest poprawna?
+        %button.edit Chcę poprawić nazwę
+        %button.confirm Nazwa jest poprawna
+        %button.skip Nie wiem, pomiń
+      .actions.actions-edit
+        %h3 Czy nazwa jest poprawna?
+        %button.submit Zatwierdź
+        %button.cancel Anuluj
+      .actions.actions-done
+        %button.back Cofnij
+
+    %article.step.step-place.step-view
+      .values.values-view
+        = f.input :place_name, :as => :string, :label => "Miejscowość",
+          :input_html => { :name => "place_name_viewer", :id => "place_name_viewer", :disabled => true }
+      .values.values-edit
+        = f.input :place_id, :as => :hidden
+        = f.input :place_id_action, :as => :hidden
+        = f.input :place_name, :as => :select, :input_html => { :name => "place_name" },
+          :collection => @suggestion.relic.commune.places, :selected => @suggestion.place.id, :label => "Miejscowość",
+          :include_blank => false
+      .actions.actions-view
+        %h3 Czy miejscowość jest poprawna?
+        %button.edit Chcę poprawić miejscowość
+        %button.confirm Nazwa jest poprawna
+        %button.skip Nie wiem, pomiń
+      .actions.actions-edit
+        %h3 Czy miejscowość jest poprawna?
+        %button.submit Zatwierdź
+        %button.cancel Anuluj
+      .actions.actions-done
+        %button.back Cofnij
+
+    %article.step.step-street.step-view
+      .values.values-edit.values-view
+        = f.input :street, :as => :string, :label => "Adres", :placeholder => "Brak danych", :input_html => { :disabled => true }
+        = f.input :street_action, :as => :hidden
+      .actions.actions-view
+        - if @suggestion.street.present?
+          %h3 Czy adres zabytku jest poprawny?
+          %button.edit Chcę poprawić adres
+          %button.confirm Adres jest poprawny
+          %button.skip Nie wiem, pomiń
+        - else
+          %h3 Czy znasz adres pod jakim leży zabytek?
+          %button.edit Tak, chcę uzupełnić adres
+          %button.skip Nie wiem, pomiń
+      .actions.actions-edit
+        - if @suggestion.street.present?
+          %h3 Czy adres jest poprawny?
+          %button.submit Zatwierdź
+          %button.cancel Anuluj
+        - else
+          %h3 Czy znasz adres pod jakim leży zabytek?
+          %button.submit Zatwierdź
+          %button.cancel Anuluj
+      .actions.actions-done
+        %button.back Cofnij
+
+    %article.step.step-date.step-view
+      .values.values-edit.values-view
+        = f.input :dating_of_obj, :as => :string, :label => "Z kiedy?", :placeholder => "Brak danych", :input_html => { :disabled => true }
+        = f.input :dating_of_obj_action, :as => :hidden
+      - if @suggestion.dating_of_obj.present?
+        .actions.actions-view
+          %h3 Czy data jest poprawna?
+          %button.edit Chcę poprawić datę
+          %button.confirm Data jest poprawna
+          %button.skip Nie wiem, pomiń
+      - else
+        .actions.actions-view
+          %h3 Czy znasz datę powstania zabytku?
+          %button.edit Tak, chcę poprawić datę
+          %button.skip Nie wiem, pomiń
+      .actions.actions-edit
+        - if @suggestion.dating_of_obj.present?
+          %h3 Czy znasz ulicę na jakiej leży zabytek?
+          %button.submit Zatwierdź
+          %button.cancel Anuluj
+        - else
+          %h3 Czy znasz datę powstania zabytku?
+          %button.submit Zatwierdź
+          %button.cancel Anuluj
+      .actions.actions-done
+        %button.back Cofnij
+
+    %article.step.step-tags.step-view(id="gps_autoscroll")
+      .values.values-view
+        = f.input :tags, :as => :string, :label => "Kategorie",
+          :input_html => { :name => "tags_viewer", :id => "tags_viewer", :value => (@suggestion.tags || []).join(', '), :disabled => true },
+          :placeholder => "Brak danych"
+      .values.values-edit
+        = f.input :tags, :as => :select,
+          :collection => Tag.select(:name).order(:name).all.map(&:name), :label => "Kategorie",
+          :input_html => { :multiple => true, :data => { :placeholder => "Kliknij i wybierz pasujące kategorie" } }
+        = link_to 'Dodaj własną', '#', :class => 'btn', :id => 'add_category'
+        = f.input :tags_action, :as => :hidden
+      .actions.actions-view
+        - if @suggestion.tags.present? && @suggestion.tags.size > 0
+          %h3 Czy zabytek ma poprawne kategorie?
+          %button.edit Chciałbym poprawić lub dodać kategorie
+          %button.confirm Kategorie są poprawne
+          %button.skip Nie wiem, pomiń
+        - else
+          %h3 Czy chcesz skategoryzować zabytek?
+          %button.edit Chciałbym dodać kategorie do zabytku
+          %button.skip Nie wiem, pomiń
+      .actions.actions-edit
+        - if @suggestion.tags.present? && @suggestion.tags.size > 0
+          %h3 Czy zabytek ma poprawne kategorie?
+          %button.submit Zatwierdź
+          %button.cancel Anuluj
+        - else
+          %h3 Czy chcesz skategoryzować zabytek?
+          %button.submit Zatwierdź
+          %button.cancel Anuluj
+      .actions.actions-done
+        %button.back Cofnij
+
+    %article.step.step-gps.step-view(data-autoscroll="gps_autoscroll")
+      .values.values-edit.values-view
+        %label Położenie GPS
+        .gps-helper
+          %h3 Zlokalizuj zespół zabytków na mapie
+        #map_canvas{ style: "height: 500px; width: 900px" }
+
+      .actions.actions-view
+        .marker-helper
+          %h4 Przeciągnij znacznik na mapę:
+          .marker-holder
+            = image_tag 'marker.png', :id => 'marker'
+        .buttons
+          %button.skip.btn Pomiń
+
+      .actions.actions-edit
+        .buttons
+          %button.submit.btn Zatwierdź
+          %button.cancel.btn Anuluj
+
+        = f.input :latitude, :as => :string, :label => false, :placeholder => "szerokość", :input_html => { :maxlength => 9 }
+        = f.input :longitude, :as => :string, :label => false, :placeholder => "długość", :input_html => { :maxlength => 9 }
+        = f.input :coordinates_action, :as => :hidden
+
+      .actions.actions-done
+        .buttons
+          %button.btn.back Cofnij
+
+    %article.step.step-submit.step-view(data-autoscroll="submit_autoscroll" id="submit_autoscroll")
+      .actions.actions-view
+        %h2 Jeśli wszystkie pola są poprawione, potwierdź wysłanie formularza
+        = f.submit "Wyślij formularz"
+= semantic_form_for Tag.new, :html => { :title => "Dodaj nową kategorię" }, :remote => true do |f|
+  = f.input :name, :label => "Podaj nazwę nowej kategorii:"
+  = f.submit "Potwierdź"

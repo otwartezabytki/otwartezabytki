@@ -96,13 +96,13 @@ GEM
       dm-validations (~> 1.2.0)
     data_objects (0.10.8)
       addressable (~> 2.1)
-    database_cleaner (0.7.2)
+    database_cleaner (0.8.0)
     decent_exposure (1.0.2)
-    devise (2.1.0)
+    devise (2.1.2)
       bcrypt-ruby (~> 3.0)
-      orm_adapter (~> 0.0.7)
+      orm_adapter (~> 0.1)
       railties (~> 3.1)
-      warden (~> 1.1.1)
+      warden (~> 1.2.1)
     diff-lcs (1.1.3)
     dm-aggregates (1.2.0)
       dm-core (~> 1.2.0)
@@ -146,7 +146,7 @@ GEM
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
-    factory_girl (3.4.0)
+    factory_girl (3.4.2)
       activesupport (>= 3.0.0)
     factory_girl_rails (3.4.0)
       factory_girl (~> 3.4.0)
@@ -161,6 +161,9 @@ GEM
       thor (>= 0.13.6)
     formtastic (2.1.1)
       actionpack (~> 3.0)
+    formtastic-bootstrap (1.1.1)
+      formtastic
+      rails (~> 3.1)
     geocoder (1.1.2)
     gherkin (2.11.0)
       json (>= 1.4.6)
@@ -171,13 +174,13 @@ GEM
       oauth (>= 0.3.6)
       oauth2 (>= 0.5.0)
     growl (1.0.3)
-    guard (1.1.1)
+    guard (1.2.1)
       listen (>= 0.4.2)
       thor (>= 0.14.6)
-    guard-rspec (1.0.1)
+    guard-rspec (1.1.0)
       guard (>= 1.1)
-    guard-spork (1.0.0)
-      guard (>= 1.0.0)
+    guard-spork (1.1.0)
+      guard (>= 1.1)
       spork (>= 0.8.4)
     haml (3.1.6)
     haml-rails (0.3.4)
@@ -190,11 +193,12 @@ GEM
       activesupport
     hashr (0.0.21)
     hike (1.2.1)
+    httpauth (0.1)
     i18n (0.6.0)
     inherited_resources (1.3.1)
       has_scope (~> 0.5.0)
       responders (~> 0.6)
-    journey (1.0.3)
+    journey (1.0.4)
     jquery-rails (2.0.2)
       railties (>= 3.2.0, < 5.0)
       thor (~> 0.14)
@@ -208,6 +212,7 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
       railties (>= 3.0.0)
+    kgio (2.7.4)
     less (2.2.1)
       commonjs (~> 0.2.6)
     less-rails (2.2.3)
@@ -218,7 +223,7 @@ GEM
       addressable
     linecache19 (0.5.12)
       ruby_core_source (>= 0.1.4)
-    listen (0.4.4)
+    listen (0.4.6)
       rb-fchange (~> 0.0.5)
       rb-fsevent (~> 0.9.1)
       rb-inotify (~> 0.8.8)
@@ -233,15 +238,17 @@ GEM
       activesupport (~> 3.1)
       polyamorous (~> 0.5.0)
     method_source (0.7.1)
-    mime-types (1.18)
+    mime-types (1.19)
     multi_json (1.0.4)
     multipart-post (1.1.5)
     nokogiri (1.5.4)
-    oauth (0.4.5)
-    oauth2 (0.5.2)
-      faraday (~> 0.7)
+    oauth (0.4.6)
+    oauth2 (0.7.1)
+      faraday (~> 0.8)
+      httpauth (~> 0.1)
       multi_json (~> 1.0)
-    orm_adapter (0.0.7)
+      rack (~> 1.4)
+    orm_adapter (0.3.0)
     paper_trail (2.6.3)
       activerecord (~> 3.0)
       railties (~> 3.0)
@@ -278,6 +285,7 @@ GEM
       rake (>= 0.8.7)
       rdoc (~> 3.4)
       thor (~> 0.14.6)
+    raindrops (0.10.0)
     rake (0.9.2.2)
     rb-fchange (0.0.5)
       ffi
@@ -286,7 +294,7 @@ GEM
       ffi (>= 0.5.0)
     rdoc (3.12)
       json (~> 1.4)
-    remote_table (2.0.1)
+    remote_table (2.0.2)
       activesupport (>= 2.3.4)
       fastercsv (>= 1.5.0)
       fixed_width-multibyte (>= 0.2.3)
@@ -298,6 +306,9 @@ GEM
       railties (~> 3.1)
     rest-client (1.6.7)
       mime-types (>= 1.16)
+    rocket_tag (0.4.0)
+      activerecord (>= 3.2.0)
+      squeel (~> 1.0.0)
     roo (1.10.1)
       choice (>= 0.1.4)
       google-spreadsheet-ruby (>= 0.1.5)
@@ -329,15 +340,14 @@ GEM
     ruby-ole (1.2.11.3)
     ruby_core_source (0.1.5)
       archive-tar-minitar (>= 0.5.2)
-    rubyzip (0.9.8)
+    rubyzip (0.9.9)
     sass (3.1.19)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
-    selenium-webdriver (2.22.2)
+    selenium-webdriver (2.24.0)
       childprocess (>= 0.2.5)
-      ffi (~> 1.0)
       libwebsocket (~> 0.1.3)
       multi_json (~> 1.0)
       rubyzip
@@ -364,7 +374,13 @@ GEM
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
     spruz (0.2.13)
+    squeel (1.0.6)
+      activerecord (~> 3.0)
+      activesupport (~> 3.0)
+      polyamorous (~> 0.5.0)
     stringex (1.3.3)
+    sugar-rails (1.2.5.1)
+      railties (>= 3.0.0)
     therubyracer (0.10.1)
       libv8 (~> 3.3.10)
     thor (0.14.6)
@@ -390,10 +406,14 @@ GEM
       execjs (>= 0.3.0)
       multi_json (>= 1.0.2)
     unicode (0.4.2)
+    unicorn (4.3.1)
+      kgio (~> 2.6)
+      rack
+      raindrops (~> 0.7)
     unix_utils (0.0.13)
       posix-spawn
     uuidtools (2.1.2)
-    warden (1.1.1)
+    warden (1.2.1)
       rack (>= 1.0)
     xpath (0.1.4)
       nokogiri (~> 1.3)
@@ -418,6 +438,8 @@ DEPENDENCIES
   dm-sqlite-adapter
   factory_girl_rails
   foreman
+  formtastic
+  formtastic-bootstrap
   geocoder
   growl
   guard
@@ -436,6 +458,7 @@ DEPENDENCIES
   rails (= 3.2.3)
   rb-fsevent
   remote_table
+  rocket_tag
   rspec-rails (~> 2.0)
   ruby-debug19
   sass-rails (~> 3.2.3)
@@ -443,7 +466,9 @@ DEPENDENCIES
   shoulda (~> 3.0)
   simple_form (~> 2.0)
   spork-rails
+  sugar-rails
   tire
   twitter-bootstrap-rails
   uglifier (>= 1.0.3)
   unicode
+  unicorn

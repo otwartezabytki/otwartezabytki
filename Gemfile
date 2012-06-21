@@ -17,6 +17,7 @@ end
 gem 'jquery-rails'
 gem 'haml-rails'
 gem 'coffee-filter'
+gem 'sugar-rails'
 
 gem 'foreman'
 gem 'geocoder'
@@ -26,6 +27,9 @@ gem 'decent_exposure'
 gem 'kaminari'
 gem 'ancestry'
 gem 'tire'
+gem 'rocket_tag'
+gem 'formtastic'
+gem 'formtastic-bootstrap'
 
 # versioning
 gem 'paper_trail', '~> 2'
@@ -50,7 +54,7 @@ group :development, :test do
   # for defining tests
   gem 'cucumber-rails', :require => false
   gem 'rspec-rails',  '~> 2.0'
-  gem 'shoulda', '~> 3.0', :require => false
+  gem 'shoulda', '~> 3.0'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
   gem 'capybara'
@@ -69,4 +73,9 @@ group :development, :test do
 
   # for routes in /rails/routes
   gem 'sextant'
+end
+
+local_gemfile = File.dirname(__FILE__) + "/Gemfile.local.rb"
+if File.file?(local_gemfile)
+  self.instance_eval(Bundler.read_file(local_gemfile))
 end

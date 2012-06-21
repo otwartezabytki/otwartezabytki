@@ -1,18 +1,19 @@
 # -*- encoding : utf-8 -*-
 class Relic < ActiveRecord::Base
-  attr_protected :id, :created_at, :update_at
+
+  attr_accessible :dating_of_obj, :group, :id, :identification, :materail, :national_number, :number, :place_id, :register_number, :street, :internal_id, :source, :categories
+  attr_accessible :dating_of_obj, :group, :id, :identification, :materail, :national_number, :number, :place_id, :register_number, :street, :internal_id, :source, :categories, :as => :admin
 
   belongs_to :place
+  validates :place_id, :presence => true
+  include PlaceCaching
 
-  # for caching purposes
-  belongs_to :commune
-  belongs_to :district
-  belongs_to :voivodeship
-
-  # validates :place_id, :presence => true
+  attr_protected :id, :created_at, :update_at
 
   has_ancestry
   serialize :source
+
+  serialize :tags, Array
 
   # versioning
   has_paper_trail :class_name => 'RelicVersion', :on => [:update, :destroy]
@@ -148,7 +149,7 @@ class Relic < ActiveRecord::Base
       identification: identification,
       street: street,
       register_number: register_number,
-      place_full_name: place.full_name,
+      place_full_name: place_full_name,
       descendants: self.descendants.map(&:to_descendant_json)
     }.merge(Hash[ids]).to_json
   end
@@ -209,28 +210,8 @@ class Relic < ActiveRecord::Base
     end
   end
 
-  def place_id=(value)
-    self[:place_id] = value
-    if self.place
-      self.commune_id = self.place.commune.id
-      self.district_id = self.place.commune.district.id
-      self.voivodeship_id = self.place.commune.district.voivodeship.id
-    end
-  end
-
-  def commune_id
-    return nil unless self.place_id
-    self[:commune_id] || self.place.commune.id
-  end
-
-  def district_id
-    return nil unless self.place_id
-    self[:district_id] || self.place.commune.id
-  end
-
-  def voivodeship_id
-    return nil unless self.place_id
-    self[:voivodeship_id] || self.place.commune.district.voivodeship.id
+  def place_full_name
+    [voivodeship.name, district.name, commune.name, place.name].join(', ')
   end
 
 end

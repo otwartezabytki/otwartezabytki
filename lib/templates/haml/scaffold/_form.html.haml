@@ -1,10 +1,8 @@
-= simple_form_for(@<%= singular_table_name %>) do |f|
-  = f.error_notification
-
-  .form-inputs
+= semantic_form_for @<%= singular_name %> do |f|
+  = f.inputs do
   <%- attributes.each do |attribute| -%>
-    = f.<%= attribute.reference? ? :association : :input %> :<%= attribute.name %>
+    = f.input :<%= attribute.name %>
   <%- end -%>
 
-  .form-actions
-    = f.button :submit
+  = f.actions do
+    = f.action :submit, :as => :input
