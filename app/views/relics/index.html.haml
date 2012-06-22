@@ -6,27 +6,6 @@ Total: #{relics.total_count}
 = simple_form_for relics_path, :html => { :class => 'well form-search' },:method => :get do |f|
   = f.input :q1, :label => false, :input_html => {:name => 'q1', :value => params[:q1], :class => "search-query"}, :placeholder => "dworek"
   = f.button :submit, 'Szukaj'
-- if params[:q1]
-  %h3 Suggester
-  - navigators = parse_navigators(Relic.quick_search(params[:q1]).facets, :count)
-  %ul.nav.nav-list
-    - navigators['voivodeships'].each do |obj|
-      %li
-        = link_to "#{params[:q1]} #{obj.name} (#{obj.count})", relics_path(search_params.merge(:location => obj.id))
-    %hr
-    - navigators['districts'].each do |obj|
-      %li
-        = link_to "#{params[:q1]} #{obj.name} (#{obj.count})", relics_path(search_params.merge(:location => [obj.voivodeship_id, obj.id].join('-')))
-    %hr
-    - navigators['communes'].each do |obj|
-      %li
-        = link_to "#{params[:q1]} #{obj.name} (#{obj.count})", relics_path(search_params.merge(:location => [obj.district.voivodeship_id, obj.district_id, obj.id].join('-')))
-
-    %hr
-    - navigators['places'].each do |obj|
-      %li
-        = link_to "#{params[:q1]} #{obj.name} (#{obj.count})", relics_path(search_params.merge(:location => [obj.commune.district.voivodeship_id, obj.commune.district_id, obj.commune_id, obj.id].join('-')))
-  %hr
 
 = paginate relics
 

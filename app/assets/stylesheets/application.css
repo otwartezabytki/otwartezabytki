@@ -12,10 +12,7 @@
  *= require bootstrap_and_overrides
  *= require formtastic-bootstrap
  *= require chosen
- *= require jquery.ui.core
- *= require jquery.ui.theme
- *= require jquery.ui.button
- *= require jquery.ui.dialog
+ *= require jquery.ui.all
 */
 
 ul.nav li a.selected { font-weight: bold; width: 400px; }

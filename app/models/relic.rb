@@ -31,21 +31,34 @@ class Relic < ActiveRecord::Base
   # create different index for testing
   index_name("#{Rails.env}-relics")
 
-  settings :number_of_shards => 1,
-           :number_of_replicas => 1,
-           :analysis => {
-             :analyzer => {
-               :default => {
-                 "type" => "polish",
-                 "stopwords" => File.open("#{Rails.root}/vendor/stopwords.txt").readlines.join.gsub(/\s*/, '').split(',')
-               }
-             }
-           }
+  settings :number_of_shards => 1, :number_of_replicas => 1,
+    :analysis => {
+      :filter => {
+        :pl_stop => {
+          :type           => "stop",
+          :ignore_case    => true,
+          :stopwords_path => "#{Rails.root}/config/elasticsearch/stopwords.txt"
+        },
+        :pl_synonym => {
+          :type           => "synonym",
+          :ignore_case    => true,
+          :expand         => false,
+          :synonyms_path  => "#{Rails.root}/config/elasticsearch/synonyms.txt"
+        }
+      },
+      :analyzer => {
+        :default => {
+          :type      => "custom",
+          :tokenizer => "standard",
+          :filter    => "standard, pl_stop, pl_synonym, morfologik_stem, lowercase, asciifolding, unique"
+        }
+      }
+    }
 
   mapping do
-    with_options :index => 'analyzed', :type => 'string' do |a|
+    with_options :index => :analyzed do |a|
       a.indexes :identification
-      a.indexes :streets
+      a.indexes :street
       a.indexes :register_number
     end
     with_options :index => :not_analyzed do |na|
@@ -68,13 +81,13 @@ class Relic < ActiveRecord::Base
     end
 
     def search(params)
-      tire.search(load: true, page: params[:page], per_page: 100) do
+      tire.search(:load => true, :page => params[:page], :per_page => 100) do
         location = params[:location].to_s.split('-')
 
         q1 = (params[:q1].present? ? params[:q1] : '*')
         query do
           boolean do
-            must { string q1, default_operator: "AND" }
+            must { string q1, :default_operator => "AND" }
           end
         end
         # # hack to use missing-filter
@@ -83,42 +96,42 @@ class Relic < ActiveRecord::Base
         # query_value[:bool][:must] << { constant_score: { filter: { missing: { field: "ancestry" } } } }
 
         facet "voivodeships" do
-          terms :voivodeship_id, size: 16
+          terms :voivodeship_id, :size => 16
         end
 
         if location.size > 0
-          filter :term, voivodeship_id: location[0]
-          facet "districts", facet_filter: { term: { voivodeship_id: location[0] } } do
-            terms :district_id, size: 10_000
+          filter :term, :voivodeship_id => location[0]
+          facet "districts", :facet_filter => { :term => { :voivodeship_id => location[0] } } do
+            terms :district_id, :size => 10_000
           end
         end
 
         if location.size > 1
-          filter :term, district_id: location[1]
-          facet "communes", facet_filter: { term: { district_id: location[1] } } do
-            terms :commune_id, size: 10_000
+          filter :term, :district_id => location[1]
+          facet "communes", :facet_filter => { :term => { :district_id => location[1] } } do
+            terms :commune_id, :size => 10_000
           end
         end
 
         if location.size > 2
-          filter :term, commune_id: location[2]
-          facet "places", facet_filter: { term: { commune_id: location[2] } } do
-            terms :place_id, size: 10_000
+          filter :term, :commune_id => location[2]
+          facet "places", :facet_filter => { :term => { :commune_id => location[2] } } do
+            terms :place_id, :size => 10_000
           end
         end
 
-        filter :term, place_id: location[3] if location.size > 3
+        filter :term, :place_id => location[3] if location.size > 3
 
         sort { by :id, 'asc' }
       end
     end
 
-    def quick_search q
-      tire.search(load: true, per_page: 20) do
+    def suggester q
+      tire.search(:load => true, :per_page => 20) do
         q1 = (q.present? ? q : '*')
         query do
           boolean do
-            must { string q1, default_operator: "AND" }
+            must { string q1, :default_operator => "AND" }
           end
         end
         # # hack to use missing-filter
@@ -127,16 +140,16 @@ class Relic < ActiveRecord::Base
         # query_value[:bool][:must] << { constant_score: { filter: { missing: { field: "ancestry" } } } }
 
         facet "voivodeships" do
-          terms :voivodeship_id, size: 3
+          terms :voivodeship_id, :size => 3
         end
         facet "districts" do
-          terms :district_id, size: 3
+          terms :district_id, :size => 3
         end
         facet "communes" do
-          terms :commune_id, size: 3
+          terms :commune_id, :size => 3
         end
         facet "places" do
-          terms :place_id, size: 3
+          terms :place_id, :size => 3
         end
         sort { by :id, 'asc' }
       end
@@ -147,21 +160,21 @@ class Relic < ActiveRecord::Base
   def to_indexed_json
     ids = [:voivodeship_id, :district_id, :commune_id, :place_id].zip(get_parent_ids)
     {
-      id: id,
-      identification: identification,
-      street: street,
-      register_number: register_number,
-      place_full_name: place_full_name,
-      descendants: self.descendants.map(&:to_descendant_json)
+      :id               => id,
+      :identification   => identification,
+      :street           => street,
+      :register_number  => register_number,
+      :place_full_name  => place_full_name,
+      :descendants      => self.descendants.map(&:to_descendant_hash)
     }.merge(Hash[ids]).to_json
   end
 
-  def to_descendant_json
+  def to_descendant_hash
     {
-      id: id,
-      identification: identification,
-      street: street,
-      register_number: register_number
+      :id               => id,
+      :identification   => identification,
+      :street           => street,
+      :register_number  => register_number
     }
   end
 
