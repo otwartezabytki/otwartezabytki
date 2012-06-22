@@ -30,6 +30,7 @@ gem 'tire'
 gem 'rocket_tag'
 gem 'formtastic'
 gem 'formtastic-bootstrap'
+gem 'airbrake'
 
 # versioning
 gem 'paper_trail', '~> 2'
