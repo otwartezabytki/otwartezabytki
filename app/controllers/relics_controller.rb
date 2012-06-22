@@ -14,42 +14,49 @@ class RelicsController < ApplicationController
   end
 
   def suggester
-    query = params[:q1]
+    query = params[:q1].to_s.strip
     render :json => [] and return unless query.present?
-    navigators = parse_navigators(Relic.suggester(query).facets, :count)
+    results = Relic.suggester(query)
+    navigators = parse_navigators(results.facets, :count)
     navigators_json = []
+
+    navigators_json << {
+      :label => (results.total_count.zero? ? "Brak wyników dla: #{query}" : "#{query}, cała Polska (#{results.total_count})"),
+      :value => query,
+      :path  => relics_path(search_params)
+    }
 
     navigators['voivodeships'].each do |obj|
       navigators_json << {
-        :label => "woj. #{obj.name} (#{obj.count})",
+        :label => "#{query}, woj. #{obj.name} (#{obj.count})",
         :value => query,
-        :path =>  relics_path(search_params.merge(:location => obj.id))
-      }
-    end if navigators['voivodeships'].size > 1
-
-    navigators['districts'].each do |obj|
-      navigators_json << {
-        :label => "pow. #{obj.name} (#{obj.count})",
-        :value => query,
-        :path =>  relics_path(search_params.merge(:location => [obj.voivodeship_id, obj.id].join('-')))
+        :path  => relics_path(search_params.merge(:location => obj.id))
       }
     end if navigators['districts'].size > 1
 
-    navigators['communes'].each do |obj|
+    navigators['districts'].each do |obj|
       navigators_json << {
-        :label => "gm. #{obj.name} (#{obj.count})",
+        :label => "#{query}, pow. #{obj.name}, woj. #{obj.voivodeship.name} (#{obj.count})",
         :value => query,
-        :path =>  relics_path(search_params.merge(:location => [obj.district.voivodeship_id, obj.district_id, obj.id].join('-')))
+        :path  => relics_path(search_params.merge(:location => [obj.voivodeship_id, obj.id].join('-')))
       }
     end if navigators['communes'].size > 1
 
-    navigators['places'].each do |obj|
+    navigators['communes'].each do |obj|
       navigators_json << {
-        :label => "#{obj.name} (#{obj.count})",
+        :label => "#{query}, gm. #{obj.name}, pow. #{obj.district.name}, woj. #{obj.district.voivodeship.name} (#{obj.count})",
         :value => query,
-        :path =>  relics_path(search_params.merge(:location => [obj.commune.district.voivodeship_id, obj.commune.district_id, obj.commune_id, obj.id].join('-')))
+        :path  => relics_path(search_params.merge(:location => [obj.district.voivodeship_id, obj.district_id, obj.id].join('-')))
       }
     end if navigators['places'].size > 1
+
+    navigators['places'].each do |obj|
+      navigators_json << {
+        :label => "#{query}, #{obj.name}, gm. #{obj.commune.name}, pow. #{obj.commune.district.name}, woj. #{obj.commune.district.voivodeship.name} (#{obj.count})",
+        :value => query,
+        :path  => relics_path(search_params.merge(:location => [obj.commune.district.voivodeship_id, obj.commune.district_id, obj.commune_id, obj.id].join('-')))
+      }
+    end
 
     render :json => navigators_json
   end
