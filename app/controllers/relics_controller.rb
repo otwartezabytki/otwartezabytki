@@ -21,33 +21,33 @@ class RelicsController < ApplicationController
 
     navigators['voivodeships'].each do |obj|
       navigators_json << {
-        label: "woj. #{obj.name} (#{obj.count})",
-        value: query,
-        path:  relics_path(search_params.merge(:location => obj.id))
+        :label => "woj. #{obj.name} (#{obj.count})",
+        :value => query,
+        :path =>  relics_path(search_params.merge(:location => obj.id))
       }
     end if navigators['voivodeships'].size > 1
 
     navigators['districts'].each do |obj|
       navigators_json << {
-        label: "pow. #{obj.name} (#{obj.count})",
-        value: query,
-        path:  relics_path(search_params.merge(:location => [obj.voivodeship_id, obj.id].join('-')))
+        :label => "pow. #{obj.name} (#{obj.count})",
+        :value => query,
+        :path =>  relics_path(search_params.merge(:location => [obj.voivodeship_id, obj.id].join('-')))
       }
     end if navigators['districts'].size > 1
 
     navigators['communes'].each do |obj|
       navigators_json << {
-        label: "gm. #{obj.name} (#{obj.count})",
-        value: query,
-        path:  relics_path(search_params.merge(:location => [obj.district.voivodeship_id, obj.district_id, obj.id].join('-')))
+        :label => "gm. #{obj.name} (#{obj.count})",
+        :value => query,
+        :path =>  relics_path(search_params.merge(:location => [obj.district.voivodeship_id, obj.district_id, obj.id].join('-')))
       }
     end if navigators['communes'].size > 1
 
     navigators['places'].each do |obj|
       navigators_json << {
-        label: "#{obj.name} (#{obj.count})",
-        value: query,
-        path:  relics_path(search_params.merge(:location => [obj.commune.district.voivodeship_id, obj.commune.district_id, obj.commune_id, obj.id].join('-')))
+        :label => "#{obj.name} (#{obj.count})",
+        :value => query,
+        :path =>  relics_path(search_params.merge(:location => [obj.commune.district.voivodeship_id, obj.commune.district_id, obj.commune_id, obj.id].join('-')))
       }
     end if navigators['places'].size > 1
 
