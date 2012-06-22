@@ -1,17 +1,37 @@
 # -*- encoding : utf-8 -*-
 class RelicsController < ApplicationController
   expose(:relics) { Relic.search(params) }
+  expose(:suggestion) { Suggestion.new(:relic_id => params[:id]) }
   expose(:relic)
 
   helper_method :parse_navigators, :search_params
 
-  def update
-    if relic.update_attributes(params[:relic])
-      redirect_to relic, :notice => "Zabytek został zaktualizowany"
-    else
-      render :edit
+  before_filter :current_user!, :only => :create
+
+  def edit
+    if current_user && current_user.suggestions.where(:relic_id => params[:id]).count > 0
+      redirect_to thank_you_relic_path, :notice => "Już poprawiłeś ten zabytek, dziękujemy!" and return
+    end
+
+    if relic.suggestions.count >= 3
+      redirect_to thank_you_relic_path, :notice => "Ten zabytek został już przejrzany. Zapraszamy za miesiąc." and return
     end
   end
+
+  def update
+
+    suggestion.user_id = current_user.id
+
+    if suggestion.update_attributes(params[:suggestion])
+      redirect_to thank_you_relic_path
+    else
+      flash[:error] = suggestion.errors.full_messages
+      render :edit
+    end
+
+  end
+
+  def thank_you; end
 
   def suggester
     query = params[:q1].to_s.strip

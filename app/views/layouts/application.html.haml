@@ -18,10 +18,16 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          %a.brand(href=root_path) Otwartezabytki
-
+          %a.brand(href=root_path) Otwarte Zabytki
+          %ul.nav
+            %li
+              %a(href="#") user id = #{current_user.id rescue "not logged"}
     .container
       .content
+        - if flash[:notice]
+          .alert.alert-info= flash[:notice]
+        - if flash[:error]
+          .alert.alert-error= flash[:error]
         .row
           .span9
             = yield

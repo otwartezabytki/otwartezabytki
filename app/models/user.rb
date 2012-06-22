@@ -21,4 +21,8 @@ class User < ActiveRecord::Base
     admin? && super
   end
 
+  def email_required?
+    admin? && super
+  end
+
 end

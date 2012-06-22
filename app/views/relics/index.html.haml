@@ -49,7 +49,7 @@ Total: #{relics.total_count}
         -# %td= relic.longitude
         -# %td=l relic.created_at
         %td
-          = link_to "Popraw", review_relic_path(relic), :class => 'btn btn-mini'
+          = link_to "Popraw", edit_relic_path(relic), :class => 'btn btn-mini'
           -# = link_to t('.destroy', :default => t("helpers.links.destroy")), relic_path(relic), :method => :delete, :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')), :class => 'btn btn-mini btn-danger'
 
 -# = link_to t('.new', :default => t("helpers.links.new")), new_relic_path, :class => 'btn btn-primary'

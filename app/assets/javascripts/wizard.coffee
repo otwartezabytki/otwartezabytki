@@ -98,11 +98,11 @@ $.fn.specialize
     edit: ->
       this.addClass('step-current')
       this.removeClass('step-view step-edited').addClass('step-edit')
-      $('#suggestion_place_name').focus()
+      $('#suggestion_place_id').focus()
       this
 
     submit: ->
-      this.find('#place_name_viewer').val(this.find('#suggestion_place_name option:selected').text())
+      this.find('#place_name_viewer').val(this.find('#suggestion_place_id option:selected').text())
       this.removeClass('step-edit').addClass('step-view')
       this.markAs('edit')
       this.done()
@@ -113,8 +113,8 @@ $.fn.specialize
 
     cancel: ->
       this.input().restoreHistory().save()
-      this.find('#suggestion_place_name').val(this.input().val())
-      this.find('#place_name_viewer').val(this.find('#suggestion_place_name option:selected').text())
+      this.find('#suggestion_place_id').val(this.input().val())
+      this.find('#place_name_viewer').val(this.find('#suggestion_place_id option:selected').text())
       this.view()
       this
 
@@ -177,13 +177,13 @@ $.fn.specialize
   'input, select':
 
     edit: ->
-      this.prop('disabled', false)
+      this.prop('readonly', false)
       this.prop('placeholder', '')
       this.focus().val(this.val())
       this
 
     save: ->
-      this.prop('disabled', true)
+      this.prop('readonly', true)
       this.prop('placeholder', 'Brak danych')
       this.blur()
       this
@@ -234,9 +234,9 @@ jQuery ->
   # turn on chosen inputs
   $('#suggestion_tags').chosen({ no_results_text: "Brak pasujących kategorii" });
 
-  # register actions for wizard buttons
+  # register actions for wizard
   ['edit', 'submit', 'cancel', 'confirm', 'skip', 'back'].forEach (action) ->
-    $('.step-name, .step-place, .step-street, .step-date, .step-tags, .step-gps').on 'click', '.actions button.' + action, ->
+    $('.steps').on 'click', ".action-#{action} a" , ->
       $(this).parents('.step:first')[action]()
       return false # prevent the form submission
 
@@ -292,7 +292,7 @@ jQuery ->
     autoOpen: false
     modal: true
 
-  $('#new_tag').ajaxSuccess ->
+  $('#new_tag').submit ->
     tag_name = $('#tag_name').val()
     $('#suggestion_tags').append("<option name='#{tag_name}'>#{tag_name}</option>")
     $('#suggestion_tags').val(($('#suggestion_tags').val() || []).concat([tag_name]).filter((e) -> e != ""))

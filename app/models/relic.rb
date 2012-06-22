@@ -1,10 +1,12 @@
 # -*- encoding : utf-8 -*-
 class Relic < ActiveRecord::Base
+  has_many :suggestions
+  belongs_to :place
 
   attr_accessible :dating_of_obj, :group, :id, :identification, :materail, :national_number, :number, :place_id, :register_number, :street, :internal_id, :source, :categories
   attr_accessible :dating_of_obj, :group, :id, :identification, :materail, :national_number, :number, :place_id, :register_number, :street, :internal_id, :source, :categories, :as => :admin
 
-  belongs_to :place
+
   validates :place_id, :presence => true
   include PlaceCaching
 
