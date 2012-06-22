@@ -96,7 +96,7 @@ class Relic < ActiveRecord::Base
         # query_value[:bool][:must] << { constant_score: { filter: { missing: { field: "ancestry" } } } }
 
         facet "voivodeships" do
-          terms :voivodeship_id, :size => 16
+          terms :voivodeship_id, :size => 16, :all_terms => true
         end
 
         if location.size > 0
@@ -226,7 +226,7 @@ class Relic < ActiveRecord::Base
   end
 
   def place_full_name
-    [voivodeship.name, district.name, commune.name, place.name].join(', ')
+    ["woj. #{voivodeship.name}", "pow. #{district.name}", "gm. #{commune.name}", place.name].join(', ')
   end
 
 end
