@@ -5,11 +5,9 @@ Otwartezabytki::Application.routes.draw do
 
   devise_for :users, :path_names => { :sign_in => 'login', :sign_out => 'logout' }
 
-  resources :relics, :only => [:index, :show, :edit, :update] do
+  resources :relics, :only => [:edit, :update, :index, :show, :edit, :update], :path_names => { :edit => 'review' } do
     member do
-      get :review, :to => "suggestions#new"
-      post :submit_review, :to => "suggestions#create"
-      get :thank_you, :to => "suggestions#thank_you"
+      get :thank_you
     end
   end
 

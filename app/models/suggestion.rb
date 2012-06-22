@@ -5,7 +5,7 @@ class Suggestion < ActiveRecord::Base
 
   attr_accessible :relic_id, :place_id, :place_id_action, :identification, :identification_action,
                   :street, :street_action, :dating_of_obj, :dating_of_obj_action, :latitude, :longitude,
-                  :coordinates_action, :tags, :tags_action
+                  :coordinates_action, :tags, :tags_action, :place
 
   validates :place_id_action, :identification_action, :street_action,
             :dating_of_obj_action, :coordinates_action, :inclusion => { :in => ['edit', 'skip', 'confirm'] }
@@ -16,9 +16,12 @@ class Suggestion < ActiveRecord::Base
     self.relic.place.name
   end
 
-  after_initialize do
-    if self.relic.present?
-      self.place = self.relic.place
+
+  def relic_id=(value)
+    self[:relic_id] = value
+
+    if self.relic_id_changed?
+      self.place_id = self.relic.place_id
       self.identification = self.relic.identification
       self.street = self.relic.street
       self.dating_of_obj = self.relic.dating_of_obj
