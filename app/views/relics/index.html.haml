@@ -63,23 +63,31 @@ Total: #{relics.total_count}
       - location = params[:location].to_s.split('-')
       - navigators['voivodeships'].each do |obj|
         - selected = location[0] == obj.id.to_s
+        - label = "#{obj.name} (#{obj.count})"
         %li
-          = link_to "#{obj.name} (#{obj.count})", relics_path(search_params.merge(:location => obj.id)), :class => "#{'selected' if selected}"
+          = link_to_unless selected, label, relics_path(search_params.merge(:location => obj.id)) do
+            .selected= label
           - if selected
             %ul
               - navigators['districts'].each do |obj|
                 - selected = location[1] == obj.id.to_s
+                - label = "#{obj.name} (#{obj.count})"
                 %li
-                  = link_to "#{obj.name} (#{obj.count})", relics_path(search_params.merge(:location => (location.first(1) << obj.id).join('-'))), :class => "#{'selected' if selected}"
+                  = link_to_unless selected, label, relics_path(search_params.merge(:location => (location.first(1) << obj.id).join('-'))) do
+                    .selected= label
                   - if selected
                     %ul
                       - navigators['communes'].each do |obj|
                         - selected = location[2] == obj.id.to_s
+                        - label = "#{obj.name} (#{obj.count})"
                         %li
-                          = link_to "#{obj.name} (#{obj.count})", relics_path(search_params.merge(:location => (location.first(2) << obj.id).join('-'))), :class => "#{'selected' if selected}"
+                          = link_to_unless selected, label, relics_path(search_params.merge(:location => (location.first(2) << obj.id).join('-'))) do
+                            .selected= label
                           - if selected
                             %ul
                               - navigators['places'].each do |obj|
                                 - selected = location[3] == obj.id.to_s
+                                - label = "#{obj.name} (#{obj.count})"
                                 %li
-                                  = link_to "#{obj.name} (#{obj.count})", relics_path(search_params.merge(:location => (location.first(3) << obj.id).join('-'))), :class => "#{'selected' if selected}"
+                                  = link_to_unless selected, label, relics_path(search_params.merge(:location => (location.first(3) << obj.id).join('-'))) do
+                                    .selected= label
