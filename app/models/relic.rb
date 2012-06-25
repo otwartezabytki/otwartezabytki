@@ -96,7 +96,7 @@ class Relic < ActiveRecord::Base
         # query_value[:bool][:must] << { constant_score: { filter: { missing: { field: "ancestry" } } } }
 
         facet "voivodeships" do
-          terms :voivodeship_id, :size => 16, :all_terms => true
+          terms :voivodeship_id, :size => 16
         end
 
         if location.size > 0
