@@ -76,3 +76,7 @@ footer { clear: both; display: block; }
 
 
 .subrelics { clear: both; }
+
+span.highlight {
+    background-color: yellow;
+}

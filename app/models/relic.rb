@@ -48,7 +48,7 @@ class Relic < ActiveRecord::Base
         :default => {
           :type      => "custom",
           :tokenizer => "standard",
-          :filter    => "standard, pl_stop, pl_synonym, morfologik_stem, lowercase, asciifolding, unique"
+          :filter    => "standard, lowercase, pl_synonym, pl_stop, morfologik_stem, lowercase, asciifolding, unique"
         }
       }
     }
@@ -69,6 +69,16 @@ class Relic < ActiveRecord::Base
     end
   end
   Tire.configure { logger 'log/elasticsearch.log' }
+
+  Tire::Results::Collection.class_eval do
+    def highlighted_tags
+      return @highlighted_tags if defined? @highlighted_tags
+      @highlighted_tags = @response['hits']['hits'].inject([]) do |m, h|
+        m << h['highlight'].values.join.scan(/<em>(.*?)<\/em>/) if h['highlight']
+        m
+      end.flatten.uniq.sort_by{ |w| -w.size }
+    end
+  end
 
   class << self
 
@@ -92,6 +102,14 @@ class Relic < ActiveRecord::Base
         # # http://www.elasticsearch.org/guide/reference/query-dsl/missing-filter.html
         # query_value = self.instance_variable_get("@query").instance_variable_get("@value")
         # query_value[:bool][:must] << { constant_score: { filter: { missing: { field: "ancestry" } } } }
+
+        highlight "identification" => {},
+          "street" => {},
+          "register_number" => {},
+          "place_full_name" => {},
+          "descendants.identification" => {},
+          "descendants.street" => {},
+          "descendants.register_number" => {}
 
         facet "voivodeships" do
           terms :voivodeship_id, :size => 16
@@ -224,7 +242,7 @@ class Relic < ActiveRecord::Base
   end
 
   def place_full_name
-    [voivodeship.name, district.name, commune.name, place.name].join(', ')
+    ["woj. #{voivodeship.name}", "pow. #{district.name}", "gm. #{commune.name}", place.name].join(', ')
   end
 
   def self.next_for(user)

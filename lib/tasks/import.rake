@@ -40,4 +40,24 @@ namespace :import do
     end
   end
 
+  task :geocode => :environment do
+    Relic.roots.find_each do |r|
+      logger = Logger.new("#{Rails.root}/log/#{Rails.env}_geocode_import.log")
+      begin
+        logger.info "relic: #{r.id}"
+        geo1 = Geocoder.search(r.place_full_name).first
+        geo2 = nil
+        if r.street.present?
+          geo2 = Geocoder.search(r.place_full_name + ", #{r.street}").first
+        end
+        geo = (geo2 || geo1)
+        next unless geo
+        r.update_attributes :latitude => geo.latitude, :longitude => geo.longitude
+        logger.info "geo: #{geo.latitude}, #{geo.longitude}"
+      rescue => ex
+        logger.info "error: #{ex.message}"
+      end
+    end
+  end
+
 end

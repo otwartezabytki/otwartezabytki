@@ -14,12 +14,14 @@
 #= require twitter/bootstrap
 #= require bootstrap
 #= require wizard
+#= require_tree ./vendor
 
 @marker_image_path = "<%= image_path('arrow.png') %>"
 @geocoder_search_path = "/geocoder/search"
 
 
 jQuery ->
+  # autocomplete
   $input = $('input.search-query')
   if $input.length > 0
     $input.autocomplete(
@@ -35,3 +37,9 @@ jQuery ->
       .data("item.autocomplete", item)
       .append("<a>" + item.label + "</a>")
       .appendTo(ul)
+
+  # highlight
+  $highlightArea = $('table.search-results')
+  if $highlightArea.length > 0 and gon.highlightedTags
+    for tag in gon.highlightedTags
+      $highlightArea.highlight(tag)

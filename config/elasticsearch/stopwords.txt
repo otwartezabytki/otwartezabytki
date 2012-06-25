@@ -4,8 +4,7 @@ pow
 powiat
 gm
 gmina
-ul
-ulica
+st
 a
 aby
 ach

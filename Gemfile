@@ -50,6 +50,7 @@ gem 'data_mapper', '~> 1.2'
 gem 'dm-chunked_query'
 gem 'dm-sqlite-adapter'
 gem 'unicode'
+gem 'gon'
 
 group :development, :test do
   # for defining tests
