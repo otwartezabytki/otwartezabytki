@@ -78,7 +78,7 @@ class Relic < ActiveRecord::Base
       @highlighted_tags = @response['hits']['hits'].inject([]) do |m, h|
         m << h['highlight'].values.join.scan(/<em>(.*?)<\/em>/) if h['highlight']
         m
-      end.flatten.uniq
+      end.flatten.uniq.sort_by{ |w| -w.size }
     end
   end
 
