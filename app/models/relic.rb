@@ -50,7 +50,7 @@ class Relic < ActiveRecord::Base
         :default => {
           :type      => "custom",
           :tokenizer => "standard",
-          :filter    => "standard, pl_stop, pl_synonym, morfologik_stem, lowercase, asciifolding, unique"
+          :filter    => "standard, lowercase, pl_synonym, pl_stop, morfologik_stem, lowercase, asciifolding, unique"
         }
       }
     }
