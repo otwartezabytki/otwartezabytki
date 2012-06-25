@@ -41,14 +41,14 @@ class RelicsController < ApplicationController
     navigators_json = []
 
     navigators_json << {
-      :label => (results.total_count.zero? ? "Brak wyników dla: #{query}" : "#{query}, cała Polska (#{results.total_count})"),
+      :label => "cała Polska (#{results.total_count})",
       :value => query,
       :path  => relics_path(search_params)
-    }
+    } unless results.total_count.zero?
 
     navigators['voivodeships'].each do |obj|
       navigators_json << {
-        :label => "#{query}, woj. #{obj.name} (#{obj.count})",
+        :label => "<strong>#{query}</strong> - woj. #{obj.name} (#{obj.count})",
         :value => query,
         :path  => relics_path(search_params.merge(:location => obj.id))
       }
@@ -56,7 +56,7 @@ class RelicsController < ApplicationController
 
     navigators['districts'].each do |obj|
       navigators_json << {
-        :label => "#{query}, pow. #{obj.name}, woj. #{obj.voivodeship.name} (#{obj.count})",
+        :label => "<strong>#{query}</strong> - pow. #{obj.name}, woj. #{obj.voivodeship.name} (#{obj.count})",
         :value => query,
         :path  => relics_path(search_params.merge(:location => [obj.voivodeship_id, obj.id].join('-')))
       }
@@ -64,7 +64,7 @@ class RelicsController < ApplicationController
 
     navigators['communes'].each do |obj|
       navigators_json << {
-        :label => "#{query}, gm. #{obj.name}, pow. #{obj.district.name}, woj. #{obj.district.voivodeship.name} (#{obj.count})",
+        :label => "<strong>#{query}</strong> - gm. #{obj.name}, pow. #{obj.district.name}, woj. #{obj.district.voivodeship.name} (#{obj.count})",
         :value => query,
         :path  => relics_path(search_params.merge(:location => [obj.district.voivodeship_id, obj.district_id, obj.id].join('-')))
       }
@@ -72,7 +72,7 @@ class RelicsController < ApplicationController
 
     navigators['places'].each do |obj|
       navigators_json << {
-        :label => "#{query}, #{obj.name}, gm. #{obj.commune.name}, pow. #{obj.commune.district.name}, woj. #{obj.commune.district.voivodeship.name} (#{obj.count})",
+        :label => "<strong>#{query}</strong> - #{obj.name}, gm. #{obj.commune.name}, pow. #{obj.commune.district.name}, woj. #{obj.commune.district.voivodeship.name} (#{obj.count})",
         :value => query,
         :path  => relics_path(search_params.merge(:location => [obj.commune.district.voivodeship_id, obj.commune.district_id, obj.commune_id, obj.id].join('-')))
       }
