@@ -6,16 +6,18 @@ class RelicsController < ApplicationController
 
   helper_method :parse_navigators, :search_params
 
-  before_filter :current_user!, :only => :create
+  before_filter :current_user!, :only => [:create, :update, :suggest_next, :thank_you]
 
   def edit
     if current_user && current_user.suggestions.where(:relic_id => params[:id]).count > 0
-      redirect_to thank_you_relic_path, :notice => "Już poprawiłeś ten zabytek, dziękujemy!" and return
+      redirect_to thank_you_relics_path, :notice => "Już poprawiłeś ten zabytek, dziękujemy!" and return
     end
 
     if relic.suggestions.count >= 3
-      redirect_to thank_you_relic_path, :notice => "Ten zabytek został już przejrzany. Zapraszamy za miesiąc." and return
+      redirect_to thank_you_relics_path, :notice => "Ten zabytek został już przejrzany. Zapraszamy za miesiąc." and return
     end
+
+    suggestion.fill_subrelics
   end
 
   def update
@@ -23,15 +25,20 @@ class RelicsController < ApplicationController
     suggestion.user_id = current_user.id
 
     if suggestion.update_attributes(params[:suggestion])
-      redirect_to thank_you_relic_path
+      redirect_to thank_you_relics_path
     else
       flash[:error] = suggestion.errors.full_messages
-      render :edit
+      render "edit"
     end
 
   end
 
-  def thank_you; end
+  def thank_you
+    if current_user && current_user.suggestions.count >= 3 && current_user.email.blank?
+      @request_email = true
+    end
+  end
+
 
   def suggester
     query = params[:q1].to_s.strip

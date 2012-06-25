@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120621133637) do
+ActiveRecord::Schema.define(:version => 20120625110658) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -74,13 +74,13 @@ ActiveRecord::Schema.define(:version => 20120621133637) do
     t.integer  "commune_id"
     t.integer  "district_id"
     t.integer  "voivodeship_id"
+    t.string   "tags"
     t.date     "register_date"
     t.string   "date_norm"
     t.string   "date_start"
     t.string   "date_end"
     t.string   "kind"
     t.boolean  "approved",        :default => false
-    t.string   "tags"
   end
 
   add_index "relics", ["ancestry"], :name => "index_relics_on_ancestry"
@@ -103,8 +103,10 @@ ActiveRecord::Schema.define(:version => 20120621133637) do
     t.datetime "updated_at",                                :null => false
     t.string   "tags"
     t.string   "tags_action"
+    t.integer  "ancestry"
   end
 
+  add_index "suggestions", ["ancestry"], :name => "index_suggestions_on_ancestry"
   add_index "suggestions", ["coordinates_action"], :name => "index_suggestions_on_coordinates_action"
   add_index "suggestions", ["dating_of_obj_action"], :name => "index_suggestions_on_dating_of_obj_action"
   add_index "suggestions", ["identification_action"], :name => "index_suggestions_on_identification_action"
@@ -130,6 +132,7 @@ ActiveRecord::Schema.define(:version => 20120621133637) do
     t.datetime "created_at",                                 :null => false
     t.datetime "updated_at",                                 :null => false
     t.string   "role",                   :default => "user"
+    t.string   "username"
   end
 
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true

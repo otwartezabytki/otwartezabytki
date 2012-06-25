@@ -37,26 +37,20 @@ describe RelicsController do
 
   describe "PUT update" do
     describe "with valid params" do
-      it "updates the requested relic" do
+      it "creates new suggestion instead of modyfying relic" do
         relic = create :relic
-        # Assuming there are no other relics in the database, this
-        # specifies that the Relic created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        Relic.any_instance.should_receive(:update_attributes).with({'identification' => 'New Identification'})
-        put :update, { :id => relic.to_param, :relic => { :identification => 'New Identification'} }, valid_session
+        old_identification = relic.identification
+        Suggestion.count.should eq 0
+        put :update, { :id => relic.to_param, :suggestion => { :identification => 'New Identification' } }, valid_session
+        Suggestion.count.should eq 1
+        relic.reload.identification.should eq old_identification
+        exposed(:suggestion).should eq(Suggestion.first)
       end
 
-      it "assigns the requested relic as @relic" do
+      it "redirects to the thank you page" do
         relic = create :relic
-        put :update, { :id => relic.to_param, :relic => { :identification => 'New Identification'} }, valid_session
-        exposed(:relic).should eq(relic)
-      end
-
-      it "redirects to the relic" do
-        relic = create :relic
-        put :update, { :id => relic.to_param, :relic => { :identification => 'New Identification'} }, valid_session
-        response.should redirect_to(relic)
+        put :update, { :id => relic.to_param, :suggestion => { :identification => 'New Identification'} }, valid_session
+        response.should redirect_to(thank_you_relics_path)
       end
     end
 
@@ -64,16 +58,16 @@ describe RelicsController do
       it "assigns the relic as @relic" do
         relic = create :relic
         # Trigger the behavior that occurs when invalid params are submitted
-        Relic.any_instance.stub(:save).and_return(false)
-        put :update, {:id => relic.to_param, :relic => { :place_id => 666 }}, valid_session
+        Suggestion.any_instance.stub(:save).and_return(false)
+        put :update, {:id => relic.to_param, :suggestion => { :place_id => 666 }}, valid_session
         exposed(:relic).should eq(relic)
       end
 
       it "re-renders the 'edit' template" do
         relic = create :relic
         # Trigger the behavior that occurs when invalid params are submitted
-        Relic.any_instance.stub(:save).and_return(false)
-        put :update, {:id => relic.to_param, :relic => { :place_id => 666 }}, valid_session
+        Suggestion.any_instance.stub(:save).and_return(false)
+        put :update, {:id => relic.to_param, :suggestion => { :place_id => 666 }}, valid_session
         response.should render_template("edit")
       end
     end

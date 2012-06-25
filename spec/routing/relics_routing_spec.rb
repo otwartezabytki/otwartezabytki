@@ -13,7 +13,7 @@ describe RelicsController do
     end
 
     it "routes to #edit" do
-      get("/relics/1/edit").should route_to("relics#edit", :id => "1")
+      get("/relics/1/review").should route_to("relics#edit", :id => "1")
     end
 
     it "routes to #update" do

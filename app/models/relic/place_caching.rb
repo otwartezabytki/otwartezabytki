@@ -9,7 +9,7 @@ module Relic::PlaceCaching
 
     before_save :cache_location_fields, :if => :place_id_changed?
 
-    attr_protected :commune, :district, :voivodeship
+    attr_protected :commune, :district, :voivodeship, :commune_id, :district_id, :voivodeship_id
   end
 
   def place=(value)

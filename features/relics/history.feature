@@ -4,7 +4,7 @@ Feature: Revision history
 
 Background:
   Given I'm logged in as administrator
-    And there is one relic in database
+    And there is at least one relic in database
     And identification of that relic have been modified
 
 Scenario: Seeing link to history of relic

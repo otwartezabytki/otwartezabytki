@@ -165,6 +165,7 @@ pl:
 
   activerecord:
     errors:
+
       template:
         header:
           one:    "1 błąd uniemożliwił zapisanie %{model}"
@@ -179,23 +180,35 @@ pl:
       full_messages:
         format: "%{attribute} %{message}"
 
+      models:
+        user:
+          attributes:
+            email:
+              taken: należy do innego użytkownika
+              blank: jest wymagany
+            username:
+              taken: została zajęta przez innego użytkownika
+              blank: jest wymagana
+              too_short: jest za krótka (minimum 3 znaki)
+              too_long: jest za długa (maksimum 30 znaków)
+
     attributes:
       relic:
         place_id: "Miejsce"
         identification: "Określenie obiektu"
         group: "Określenie zespołu"
         number: "Liczba obiektów"
-        materail: "Materaił"
+        materail: "Materiał"
         dating_of_obj: "Datowanie obiektów"
         street: "Ulica"
         register_number: "Aktualny numer rejestru"
         national_number: "NID"
       user:
         email: E-mail
+        username: Nazwa użytkownika
         role: Rola
         created_at: Założenie konta
         updated_at: Zaktualizowanie danych
-
 
     models:
       relic:

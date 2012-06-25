@@ -129,6 +129,92 @@
       .actions.actions-done
         .action.action-back= link_to "Cofnij"
 
+    - if suggestion.suggestions.size > 0
+
+      %section.subrelics
+
+        %h3 W skład zespołu wchodzą:
+
+        = f.semantic_fields_for :suggestions do |f2|
+
+          %article.subrelic
+
+            %article.step.step-name.step-view
+              .values.values-edit.values-view
+                = f2.input :identification, :as => :string, :label => "Nazwa zabytku", :input_html => { :readonly => true }
+                = f2.input :identification_action, :as => :hidden
+              .actions.actions-view
+                %h3 Czy nazwa jest poprawna?
+                .action.action-edit= link_to "Chcę poprawić nazwę"
+                .action.action-confirm= link_to "Nazwa jest poprawna"
+                .action.action-skip= link_to "Nie wiem, pomiń"
+              .actions.actions-edit
+                %h3 Czy nazwa jest poprawna?
+                .action.action-submit= link_to "Zatwierdź"
+                .action.action-cancel= link_to "Anuluj"
+              .actions.actions-done
+                .action.action-back= link_to "Cofnij"
+
+            %article.step.step-date.step-view
+              .values.values-edit.values-view
+                = f2.input :dating_of_obj, :as => :string, :label => "Z kiedy?", :placeholder => "Brak danych", :input_html => { :readonly => true }
+                = f2.input :dating_of_obj_action, :as => :hidden
+              - if suggestion.dating_of_obj.present?
+                .actions.actions-view
+                  %h3 Czy data jest poprawna?
+                  .action.action-edit= link_to "Chcę poprawić datę"
+                  .action.action-confirm= link_to "Data jest poprawna"
+                  .action.action-skip= link_to "Nie wiem, pomiń"
+              - else
+                .actions.actions-view
+                  %h3 Czy znasz datę powstania zabytku?
+                  .action.action-edit= link_to "Tak, chcę poprawić datę"
+                  .action.action-skip= link_to "Nie wiem, pomiń"
+              .actions.actions-edit
+                - if suggestion.dating_of_obj.present?
+                  %h3 Czy znasz ulicę na jakiej leży zabytek?
+                  .action.action-submit= link_to "Zatwierdź"
+                  .action.action-cancel= link_to "Anuluj"
+                - else
+                  %h3 Czy znasz datę powstania zabytku?
+                  .action.action-submit= link_to "Zatwierdź"
+                  .action.action-cancel= link_to "Anuluj"
+              .actions.actions-done
+                .action.action-back= link_to "Cofnij"
+
+            %article.step.step-tags.step-view
+              .values.values-view
+                = f2.input :tags, :as => :string, :label => "Kategorie",
+                  :input_html => { :name => "tags_viewer", :id => "tags_viewer", :value => (suggestion.tags || []).join(', '), :readonly => true },
+                  :placeholder => "Brak danych"
+              .values.values-edit
+                = f2.input :tags, :as => :select,
+                  :collection => Tag.select(:name).order(:name).all.map(&:name), :label => "Kategorie",
+                  :input_html => { :multiple => true, :data => { :placeholder => "Kliknij i wybierz pasujące kategorie" } }
+                = link_to 'Dodaj własną', '#', :class => 'btn', :id => 'add_category'
+                = f2.input :tags_action, :as => :hidden
+              .actions.actions-view
+                - if suggestion.tags.present? && suggestion.tags.size > 0
+                  %h3 Czy zabytek ma poprawne kategorie?
+                  .action.action-edit= link_to "Chciałbym poprawić lub dodać kategorie"
+                  .action.action-confirm= link_to "Kategorie są poprawne"
+                  .action.action-skip= link_to "Nie wiem, pomiń"
+                - else
+                  %h3 Czy chcesz skategoryzować zabytek?
+                  .action.action-edit= link_to "Chciałbym dodać kategorie do zabytku"
+                  .action.action-skip= link_to "Nie wiem, pomiń"
+              .actions.actions-edit
+                - if suggestion.tags.present? && suggestion.tags.size > 0
+                  %h3 Czy zabytek ma poprawne kategorie?
+                  .action.action-submit= link_to "Zatwierdź"
+                  .action.action-cancel= link_to "Anuluj"
+                - else
+                  %h3 Czy chcesz skategoryzować zabytek?
+                  .action.action-submit= link_to "Zatwierdź"
+                  .action.action-cancel= link_to "Anuluj"
+              .actions.actions-done
+                .action.action-back= link_to "Cofnij"
+
     %article.step.step-gps.step-view(data-autoscroll="gps_autoscroll")
       .values.values-edit.values-view
         %label Położenie GPS

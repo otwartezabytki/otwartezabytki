@@ -1,0 +1,8 @@
+<h2>Rejestracja do Otwartych Zabytków</h2>
+
+<%= semantic_form_for(current_user, :url => user_registration_path, :html => { :method => :put }) do |f| %>
+  <%= f.semantic_errors %>
+  <%= f.input :email, :required => true, :autofocus => true %>
+  <%= f.input :username, :required => true %>
+  <%= f.submit "Zarejestruj się" %>
+<% end %>

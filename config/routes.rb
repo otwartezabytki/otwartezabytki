@@ -3,13 +3,15 @@ Otwartezabytki::Application.routes.draw do
 
   ActiveAdmin.routes(self)
 
-  devise_for :users, :path_names => { :sign_in => 'login', :sign_out => 'logout' }
+  devise_for :users, :path_names => {
+    :sign_in => 'login', :sign_out => 'logout',
+  }, :controllers => {
+    :registrations => "users/registrations"
+  }, :locale => :pl
 
   resources :relics, :only => [:edit, :update, :index, :show, :edit, :update], :path_names => { :edit => 'review' } do
     collection do
       get :suggester
-    end
-    member do
       get :thank_you
     end
   end

@@ -15,6 +15,18 @@ class GeocoderController < ApplicationController
       street.present? ? query + ", #{street}" : query
     end
 
+    results = fetch_reqults(query)
+    results = fetch_reqults("#{voivodeship}, #{district}, #{commune}, #{city}") if results.size == 0
+    results = fetch_reqults("#{voivodeship}, #{district}, #{commune}") if results.size == 0
+    results = fetch_reqults("#{voivodeship}, #{district}") if results.size == 0
+    results = fetch_reqults("#{city}") if results.size == 0
+
+    render :json => results
+  end
+
+  private
+
+  def fetch_reqults(query)
     result = []
     Geocoder.search(query).each do |e|
       result.push({
@@ -23,6 +35,6 @@ class GeocoderController < ApplicationController
       })
     end
 
-    render :json => result
+    result
   end
 end

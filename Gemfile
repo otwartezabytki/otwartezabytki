@@ -74,6 +74,7 @@ group :development, :test do
 
   # for routes in /rails/routes
   gem 'sextant'
+  gem 'mailcatcher'
 end
 
 local_gemfile = File.dirname(__FILE__) + "/Gemfile.local.rb"

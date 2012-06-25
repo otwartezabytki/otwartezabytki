@@ -3,18 +3,16 @@ class Relic < ActiveRecord::Base
   has_many :suggestions
   belongs_to :place
 
+  attr_protected :id, :created_at, :update_at
   attr_accessible :dating_of_obj, :group, :id, :identification, :materail, :national_number, :number, :place_id, :register_number, :street, :internal_id, :source, :categories
   attr_accessible :dating_of_obj, :group, :id, :identification, :materail, :national_number, :number, :place_id, :register_number, :street, :internal_id, :source, :categories, :as => :admin
 
-
-  validates :place_id, :presence => true
   include PlaceCaching
-
-  attr_protected :id, :created_at, :update_at
+  include Validations
 
   has_ancestry
-  serialize :source
 
+  serialize :source
   serialize :tags, Array
 
   # versioning
@@ -227,6 +225,12 @@ class Relic < ActiveRecord::Base
 
   def place_full_name
     [voivodeship.name, district.name, commune.name, place.name].join(', ')
+  end
+
+  def self.next_for(user)
+    # TODO
+    offset = rand(Relic.count)
+    Relic.first(:offset => offset)
   end
 
 end

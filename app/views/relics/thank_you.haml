@@ -1,3 +1,11 @@
 %h1 Dziękujemy!
 
-= link_to "Przejdź do następnego zabytku", "#"
+= link_to "Przejdź do następnego zabytku", next_relic_url_for(current_user)
+
+- if @request_email
+  = semantic_form_for current_user, :url => user_registration_path do |f|
+    %h2 Świetnie Ci idzie!
+    = f.input :email, :placeholder => "Adres e-mail", :label => false
+    = f.input :username, :placeholder => "Nazwa użytkownika", :label => false
+    = f.submit "Zarejestruj"
+    = link_to "Później", next_relic_url_for(current_user)
