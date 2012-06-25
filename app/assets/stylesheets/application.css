@@ -73,3 +73,8 @@ footer { clear: both; display: block; }
 
 .step-submit { margin: 50px auto; }
 .step-submit .actions { width: 100%; float: none; text-align: center; }
+
+span.highlight {
+    background-color: yellow;
+}
+

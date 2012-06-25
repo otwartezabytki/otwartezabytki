@@ -170,6 +170,9 @@ GEM
     geocoder (1.1.2)
     gherkin (2.11.0)
       json (>= 1.4.6)
+    gon (3.0.2)
+      actionpack (>= 2.3.0)
+      json
     google-spreadsheet-ruby (0.3.0)
       google_drive (>= 0.3.0)
     google_drive (0.3.0)
@@ -445,6 +448,7 @@ DEPENDENCIES
   formtastic
   formtastic-bootstrap
   geocoder
+  gon
   growl
   guard
   guard-rspec

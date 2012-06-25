@@ -8,6 +8,10 @@ class RelicsController < ApplicationController
 
   before_filter :current_user!, :only => :create
 
+  def index
+    gon.highlighted_tags = relics.highlighted_tags
+  end
+
   def edit
     if current_user && current_user.suggestions.where(:relic_id => params[:id]).count > 0
       redirect_to thank_you_relic_path, :notice => "Już poprawiłeś ten zabytek, dziękujemy!" and return
