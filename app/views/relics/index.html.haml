@@ -32,9 +32,9 @@ Total: #{relics.total_count}
         -# %td= link_to relic.id, relic_path(relic)
         %td= relic.place_full_name
         %td
-          = "(G)" if relic.has_children?
+          = "(G)" if relic.descendants.present?
           = link_to relic.identification, relic_path(relic)
-          - if relic.has_children?
+          - if relic.descendants.present?
             %br
             %strong w skład wchodzi:
             = relic.descendants.map(&:identification).join(', ')
