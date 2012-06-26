@@ -132,28 +132,7 @@ $.fn.specialize
   # place step have select field instead of text
   '.step-tags':
 
-    input: -> this.find("#suggestion_tags")
-
-    edit: ->
-      this.addClass('step-current')
-      this.removeClass('step-view step-edited').addClass('step-edit')
-      $('#suggestion_tags_chzn').mousedown()
-      this
-
-    submit: ->
-      this.find('#tags_viewer').val((this.input().val() || []).join(', '))
-      this.removeClass('step-edit').addClass('step-view')
-      this.markAs('edit')
-      this.done()
-      this
-
-    cancel: ->
-      this.removeClass('step-edit').addClass('step-view')
-      this.input().restoreHistory()
-      this.find('#tags_viewer').val((this.input().val() || []).join(', '))
-      this.view()
-
-      this
+    input: -> this.find("input[type='checkbox']")
 
   '.step-gps':
 
@@ -189,13 +168,41 @@ $.fn.specialize
       this
 
     saveHistory: ->
-      this.data('history', this.val())
+      this.each ->
+        $(this).data('history', $(this).val())
       this
 
     restoreHistory: ->
-      if this.data('history') != undefined
-        this.val(this.data('history')).trigger('liszt:updated')
+      this.each ->
+        if $(this).data('history') != undefined
+          $(this).val($(this).data('history'))
       this
+
+  'input[type="checkbox"]':
+
+    edit: ->
+      this.prop('disabled', false)
+      this
+
+    save: ->
+      this.prop('disabled', true)
+      this
+
+    saveHistory: ->
+      this.each ->
+        $(this).data('history', $(this).prop('checked'))
+
+      this
+
+    restoreHistory: ->
+      this.each ->
+        $(this).prop('checked', $(this).data('history'))
+
+      this
+
+  '#suggestion_latitude, #suggestion_longitude':
+    edit: ->
+    save: ->
 
   '#map_canvas':
 
@@ -222,17 +229,38 @@ $.fn.specialize
       else
         geocode_location(zoom_map)
 
+    set_marker: (lat, lng) ->
+      map.removeMarkers()
+
+      marker = map.addMarker
+        lat: lat
+        lng: lng
+        draggable: true
+        dragend: (e) ->
+          new_lat = marker.getPosition().lat().round(6)
+          new_lng = marker.getPosition().lng().round(6)
+          $('#suggestion_latitude').val(new_lat)
+          $('#suggestion_longitude').val(new_lng)
+          $('#map_canvas').zoom_at(new_lat, new_lng)
+
+        $('#suggestion_latitude').val(lat.round(6))
+        $('#suggestion_longitude').val(lng.round(6))
+
+      $('#map_canvas').zoom_at(lat, lng)
 
 jQuery ->
 
   # prevent form submission until end of the wizard
-  $('form.relic').submit (e) -> e.preventDefault() unless $(this).data('complete') is true
+  $('form.suggestion').submit (e) ->
+    $('.step-submit').addClass('step-done')
+    if $('.step:not(.step-done)').length > 0
+      $('.step:not(.step-done):first').view()
+      false
+    else
+      $('.steps input[disabled]').prop("disabled", false)
 
   # turn of autocompletion for all inputs
   $('.step input[type="text"]').attr('autocomplete', 'off')
-
-  # turn on chosen inputs
-  $('#suggestion_tags').chosen({ no_results_text: "Brak pasujących kategorii" });
 
   # register actions for wizard
   ['edit', 'submit', 'cancel', 'confirm', 'skip', 'back'].forEach (action) ->
@@ -256,25 +284,13 @@ jQuery ->
       container_width =  $(this).parents('.step').find('.actions-view').width()
 
       if y_offset < $(this).height() - container_height || x_offset < $(this).width() - container_width
-
         lng = map.map.getBounds().getSouthWest().lng()
         lat = map.map.getBounds().getNorthEast().lat()
         width = map.map.getBounds().getNorthEast().lng() - map.map.getBounds().getSouthWest().lng()
         height = map.map.getBounds().getSouthWest().lat() - map.map.getBounds().getNorthEast().lat()
-
-
         marker_lat = lat + height * y_offset / $(this).height()
         marker_lng = lng + width * x_offset / $(this).width()
-        marker = map.addMarker
-          lat: marker_lat
-          lng: marker_lng
-          draggable: true
-          dragend: (e) ->
-            $('#suggestion_latitude').val(marker.getPosition().lat().round(6))
-            $('#suggestion_longitude').val(marker.getPosition().lng().round(6))
-
-        $('#suggestion_latitude').val(marker_lat.round(6))
-        $('#suggestion_longitude').val(marker_lng.round(6))
+        $('#map_canvas').set_marker(marker_lat, marker_lng)
 
         $(this).parents('.step').edit()
 
@@ -285,24 +301,4 @@ jQuery ->
       latitude = $('#suggestion_latitude').val().toNumber()
       longitude = $('#suggestion_longitude').val().toNumber()
       if !isNaN(latitude) & !isNaN(longitude)
-        $('#map_canvas').zoom_at(latitude, longitude)
-
-  # new category remote form
-  $('#new_tag').dialog
-    autoOpen: false
-    modal: true
-
-  $('#new_tag').submit ->
-    tag_name = $('#tag_name').val()
-    $('#suggestion_tags').append("<option name='#{tag_name}'>#{tag_name}</option>")
-    $('#suggestion_tags').val(($('#suggestion_tags').val() || []).concat([tag_name]).filter((e) -> e != ""))
-    $('#suggestion_tags').trigger('liszt:updated')
-    $('#new_tag').dialog("close")
-
-  $('#new_tag').ajaxError (event, response) ->
-    alert(jQuery.parseJSON(response.responseText).error_message)
-
-  $('#add_category').click ->
-    $("#new_tag").dialog("open")
-    return false
-
+        $('#map_canvas').set_marker(latitude, longitude)

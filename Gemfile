@@ -51,6 +51,7 @@ gem 'dm-chunked_query'
 gem 'dm-sqlite-adapter'
 gem 'unicode'
 gem 'gon'
+gem 'high_voltage'
 
 group :development, :test do
   # for defining tests

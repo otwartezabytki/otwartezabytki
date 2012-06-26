@@ -22,6 +22,8 @@
             %a(href=root_path) Otwarte Zabytki
           %nav#userNav
             %ul
+              %li
+                %a(href="#") user id = #{current_user.id rescue "not logged"}
               %li.login
                 %a{:href => ''} Zaloguj
               %li.register 
@@ -32,13 +34,15 @@
           %nav
             %ul
               %li
-                %a{:href => '', :class => 'about'} O projekcie
+                = link_to "Zabytki", relics_path
               %li
-                %a{:href => '', :class => 'help'} Pomoc
+                = link_to "O projekcie", page_pl_path('o-projekcie'), :class => 'about'
               %li
-                %a{:href => '', :class => 'contact'} Kontakt
+                = link_to "Kontakt", page_pl_path('kontakt'), :class => 'contact'
               %li
-                %a{:href => '', :class => 'download'} Pobierz dane
+                = link_to "Pobierz dane", page_pl_path('pobierz-dane'), :class => 'download'
+              %li
+                = link_to "Pomoc", page_pl_path('pomoc'), :class => 'help'
           = simple_form_for relics_path, :html => { :class => 'well form-search' },:method => :get do |f|
             = f.input :q1, :label => false, :input_html => {:name => 'q1', :value => params[:q1], :class => "search-query"}, :placeholder => "dworek"
             = f.button :submit, 'Szukaj »'
@@ -56,7 +60,7 @@
               = yield(:sidebar)
             .span9
               = yield 
-          
+
 
     / Placed at the end of the document so the pages load faster
     != include_gon(:camel_case => true)

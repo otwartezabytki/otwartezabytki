@@ -1,6 +1,29 @@
 # encoding: utf-8
-class Tag < ActiveRecord::Base
-  attr_accessible :name
+class Tag
+  DATA = {
+    'park' => [],
+    'cmentarz' => [],
+    'kamienica' => [],
+    'budynek' => [],
+    'kaplica' => [],
+    'ewangelicki' => [],
+    'ogrodzenie' => [],
+    'willa' => [],
+    'dzwonnica' => [],
+    'oficyna' => [],
+    'gospodarczy' => [],
+    'spichrz' => [],
+    'mieszkalny' => [],
+    'plebania' => [],
+    'stajnia' => [],
+    'obora' => [],
+    'kapliczka' => [],
+    'cerkiew' => [],
+    'wojenny' => [],
+    'brama' => []
+  }
 
-  validates :name, :uniqueness => { :message => "Nazwa kategorii jest już zajęta." }
+  def self.all
+    DATA.keys
+  end
 end

@@ -80,3 +80,15 @@ footer { clear: both; display: block; }
 span.highlight {
     background-color: yellow;
 }
+
+.step .check_boxes ul {
+    margin: 0;
+    padding: 5px;
+}
+
+.step .check_boxes li {
+    display: block;
+    width: 100px;
+    float: left;
+    list-style-type: none;
+}

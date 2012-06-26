@@ -20,5 +20,10 @@ Otwartezabytki::Application.routes.draw do
 
   get 'geocoder/search'
 
-  root :to => "relics#index"
+  match "/strony/o-projekcie"     => 'pages#show', :id => 'about'
+  match "/strony/kontakt"         => 'pages#show', :id => 'contact'
+  match "/strony/pobierz-dane"    => 'pages#show', :id => 'download'
+  match "/strony/pomoc"           => 'pages#show', :id => 'help'
+
+  root :to => 'high_voltage/pages#show', :id => 'home'
 end

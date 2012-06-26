@@ -39,6 +39,7 @@ class Suggestion < ActiveRecord::Base
       self.dating_of_obj = self.relic.dating_of_obj
       self.latitude = self.relic.latitude
       self.longitude = self.relic.longitude
+      self.tags = self.relic.tags
     end
 
   end
