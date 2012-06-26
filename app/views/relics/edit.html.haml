@@ -26,7 +26,7 @@
           :input_html => { :name => "place_name_viewer", :id => "place_name_viewer", :readonly => true }
       .values.values-edit
         = f.input :place_id, :as => :select,
-          :collection => suggestion.relic.commune.places, :selected => suggestion.place.id, :label => "Miejscowość",
+          :collection => f.object.relic.commune.places, :selected => f.object.place.id, :label => "Miejscowość",
           :include_blank => false
 
         = f.input :place_id_action, :as => :hidden
@@ -48,7 +48,7 @@
         = f.input :street, :as => :string, :label => "Adres", :placeholder => "Brak danych", :input_html => { :readonly => true }
         = f.input :street_action, :as => :hidden
       .actions.actions-view
-        - if suggestion.street.present?
+        - if f.object.street.present?
           %h3 Czy adres zabytku jest poprawny?
           .action.action-edit= link_to "Chcę poprawić adres"
           .action.action-confirm= link_to "Adres jest poprawny"
@@ -58,7 +58,7 @@
           .action.action-edit= link_to "Tak, chcę uzupełnić adres"
           .action.action-skip= link_to "Nie wiem, pomiń"
       .actions.actions-edit
-        - if suggestion.street.present?
+        - if f.object.street.present?
           %h3 Czy adres jest poprawny?
           .action.action-submit= link_to "Zatwierdź"
           .action.action-cancel= link_to "Anuluj"
@@ -73,7 +73,7 @@
       .values.values-edit.values-view
         = f.input :dating_of_obj, :as => :string, :label => "Z kiedy?", :placeholder => "Brak danych", :input_html => { :readonly => true }
         = f.input :dating_of_obj_action, :as => :hidden
-      - if suggestion.dating_of_obj.present?
+      - if f.object.dating_of_obj.present?
         .actions.actions-view
           %h3 Czy data jest poprawna?
           .action.action-edit= link_to "Chcę poprawić datę"
@@ -85,7 +85,7 @@
           .action.action-edit= link_to "Tak, chcę poprawić datę"
           .action.action-skip= link_to "Nie wiem, pomiń"
       .actions.actions-edit
-        - if suggestion.dating_of_obj.present?
+        - if f.object.dating_of_obj.present?
           %h3 Czy znasz ulicę na jakiej leży zabytek?
           .action.action-submit= link_to "Zatwierdź"
           .action.action-cancel= link_to "Anuluj"
@@ -97,18 +97,12 @@
         .action.action-back= link_to "Cofnij"
 
     %article.step.step-tags.step-view(id="gps_autoscroll")
-      .values.values-view
-        = f.input :tags, :as => :string, :label => "Kategorie",
-          :input_html => { :name => "tags_viewer", :id => "tags_viewer", :value => (suggestion.tags || []).join(', '), :readonly => true },
-          :placeholder => "Brak danych"
-      .values.values-edit
-        = f.input :tags, :as => :select,
-          :collection => Tag.select(:name).order(:name).all.map(&:name), :label => "Kategorie",
-          :input_html => { :multiple => true, :data => { :placeholder => "Kliknij i wybierz pasujące kategorie" } }
-        = link_to 'Dodaj własną', '#', :class => 'btn', :id => 'add_category'
-        = f.input :tags_action, :as => :hidden
+      .values.values-view.values-edit
+        = f.input :tags, :as => :check_boxes,
+          :collection => Tag.all, :label => "Kategorie",
+          :input_html => { :multiple => true }, :disabled => Tag.all, :default => Tag.all
       .actions.actions-view
-        - if suggestion.tags.present? && suggestion.tags.size > 0
+        - if f.object.tags.present? && f.object.tags.size > 0
           %h3 Czy zabytek ma poprawne kategorie?
           .action.action-edit= link_to "Chciałbym poprawić lub dodać kategorie"
           .action.action-confirm= link_to "Kategorie są poprawne"
@@ -118,7 +112,7 @@
           .action.action-edit= link_to "Chciałbym dodać kategorie do zabytku"
           .action.action-skip= link_to "Nie wiem, pomiń"
       .actions.actions-edit
-        - if suggestion.tags.present? && suggestion.tags.size > 0
+        - if f.object.tags.present? && f.object.tags.size > 0
           %h3 Czy zabytek ma poprawne kategorie?
           .action.action-submit= link_to "Zatwierdź"
           .action.action-cancel= link_to "Anuluj"
@@ -129,7 +123,7 @@
       .actions.actions-done
         .action.action-back= link_to "Cofnij"
 
-    - if suggestion.suggestions.size > 0
+    - if f.object.suggestions.size > 0
 
       %section.subrelics
 
@@ -159,7 +153,7 @@
               .values.values-edit.values-view
                 = f2.input :dating_of_obj, :as => :string, :label => "Z kiedy?", :placeholder => "Brak danych", :input_html => { :readonly => true }
                 = f2.input :dating_of_obj_action, :as => :hidden
-              - if suggestion.dating_of_obj.present?
+              - if f2.object.dating_of_obj.present?
                 .actions.actions-view
                   %h3 Czy data jest poprawna?
                   .action.action-edit= link_to "Chcę poprawić datę"
@@ -171,7 +165,7 @@
                   .action.action-edit= link_to "Tak, chcę poprawić datę"
                   .action.action-skip= link_to "Nie wiem, pomiń"
               .actions.actions-edit
-                - if suggestion.dating_of_obj.present?
+                - if f2.object.dating_of_obj.present?
                   %h3 Czy znasz ulicę na jakiej leży zabytek?
                   .action.action-submit= link_to "Zatwierdź"
                   .action.action-cancel= link_to "Anuluj"
@@ -183,18 +177,12 @@
                 .action.action-back= link_to "Cofnij"
 
             %article.step.step-tags.step-view
-              .values.values-view
-                = f2.input :tags, :as => :string, :label => "Kategorie",
-                  :input_html => { :name => "tags_viewer", :id => "tags_viewer", :value => (suggestion.tags || []).join(', '), :readonly => true },
-                  :placeholder => "Brak danych"
-              .values.values-edit
-                = f2.input :tags, :as => :select,
-                  :collection => Tag.select(:name).order(:name).all.map(&:name), :label => "Kategorie",
-                  :input_html => { :multiple => true, :data => { :placeholder => "Kliknij i wybierz pasujące kategorie" } }
-                = link_to 'Dodaj własną', '#', :class => 'btn', :id => 'add_category'
-                = f2.input :tags_action, :as => :hidden
+              .values.values-view.values-edit
+                = f2.input :tags, :as => :check_boxes,
+                  :collection => Tag.all, :label => "Kategorie",
+                  :input_html => { :multiple => true }, :disabled => Tag.all
               .actions.actions-view
-                - if suggestion.tags.present? && suggestion.tags.size > 0
+                - if f2.object.tags.present? && f2.object.tags.size > 0
                   %h3 Czy zabytek ma poprawne kategorie?
                   .action.action-edit= link_to "Chciałbym poprawić lub dodać kategorie"
                   .action.action-confirm= link_to "Kategorie są poprawne"
@@ -204,7 +192,7 @@
                   .action.action-edit= link_to "Chciałbym dodać kategorie do zabytku"
                   .action.action-skip= link_to "Nie wiem, pomiń"
               .actions.actions-edit
-                - if suggestion.tags.present? && suggestion.tags.size > 0
+                - if f2.object.tags.present? && f2.object.tags.size > 0
                   %h3 Czy zabytek ma poprawne kategorie?
                   .action.action-submit= link_to "Zatwierdź"
                   .action.action-cancel= link_to "Anuluj"
@@ -247,6 +235,3 @@
       .actions.actions-view
         %h2 Jeśli wszystkie pola są poprawione, potwierdź wysłanie formularza
         = f.submit "Wyślij formularz"
-= semantic_form_for Tag.new, :html => { :title => "Dodaj nową kategorię" } do |f|
-  = f.input :name, :label => "Podaj nazwę nowej kategorii:"
-  = f.submit "Potwierdź"

@@ -132,28 +132,7 @@ $.fn.specialize
   # place step have select field instead of text
   '.step-tags':
 
-    input: -> this.find("#suggestion_tags")
-
-    edit: ->
-      this.addClass('step-current')
-      this.removeClass('step-view step-edited').addClass('step-edit')
-      $('#suggestion_tags_chzn').mousedown()
-      this
-
-    submit: ->
-      this.find('#tags_viewer').val((this.input().val() || []).join(', '))
-      this.removeClass('step-edit').addClass('step-view')
-      this.markAs('edit')
-      this.done()
-      this
-
-    cancel: ->
-      this.removeClass('step-edit').addClass('step-view')
-      this.input().restoreHistory()
-      this.find('#tags_viewer').val((this.input().val() || []).join(', '))
-      this.view()
-
-      this
+    input: -> this.find("input[type='checkbox']")
 
   '.step-gps':
 
@@ -189,12 +168,36 @@ $.fn.specialize
       this
 
     saveHistory: ->
-      this.data('history', this.val())
+      this.each ->
+        $(this).data('history', $(this).val())
       this
 
     restoreHistory: ->
-      if this.data('history') != undefined
-        this.val(this.data('history')).trigger('liszt:updated')
+      this.each ->
+        if $(this).data('history') != undefined
+          $(this).val($(this).data('history'))
+      this
+
+  'input[type="checkbox"]':
+
+    edit: ->
+      this.prop('disabled', false)
+      this
+
+    save: ->
+      this.prop('disabled', true)
+      this
+
+    saveHistory: ->
+      this.each ->
+        $(this).data('history', $(this).prop('checked'))
+
+      this
+
+    restoreHistory: ->
+      this.each ->
+        $(this).prop('checked', $(this).data('history'))
+
       this
 
   '#map_canvas':
@@ -226,13 +229,16 @@ $.fn.specialize
 jQuery ->
 
   # prevent form submission until end of the wizard
-  $('form.relic').submit (e) -> e.preventDefault() unless $(this).data('complete') is true
+  $('form.suggestion').submit (e) ->
+    $('.step-submit').addClass('step-done')
+    if $('.step:not(.step-done)').length > 0
+      $('.step:not(.step-done):first').view()
+      false
+    else
+      $('.steps input[disabled]').prop("disabled", false)
 
   # turn of autocompletion for all inputs
   $('.step input[type="text"]').attr('autocomplete', 'off')
-
-  # turn on chosen inputs
-  $('#suggestion_tags').chosen({ no_results_text: "Brak pasujących kategorii" });
 
   # register actions for wizard
   ['edit', 'submit', 'cancel', 'confirm', 'skip', 'back'].forEach (action) ->
@@ -286,23 +292,3 @@ jQuery ->
       longitude = $('#suggestion_longitude').val().toNumber()
       if !isNaN(latitude) & !isNaN(longitude)
         $('#map_canvas').zoom_at(latitude, longitude)
-
-  # new category remote form
-  $('#new_tag').dialog
-    autoOpen: false
-    modal: true
-
-  $('#new_tag').submit ->
-    tag_name = $('#tag_name').val()
-    $('#suggestion_tags').append("<option name='#{tag_name}'>#{tag_name}</option>")
-    $('#suggestion_tags').val(($('#suggestion_tags').val() || []).concat([tag_name]).filter((e) -> e != ""))
-    $('#suggestion_tags').trigger('liszt:updated')
-    $('#new_tag').dialog("close")
-
-  $('#new_tag').ajaxError (event, response) ->
-    alert(jQuery.parseJSON(response.responseText).error_message)
-
-  $('#add_category').click ->
-    $("#new_tag").dialog("open")
-    return false
-
