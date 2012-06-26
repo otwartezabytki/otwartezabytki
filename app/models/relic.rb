@@ -29,7 +29,7 @@ class Relic < ActiveRecord::Base
   # create different index for testing
   index_name("#{Rails.env}-relics")
 
-  settings :number_of_shards => 1, :number_of_replicas => 1,
+  settings :number_of_shards => 5, :number_of_replicas => 1,
     :analysis => {
       :filter => {
         :pl_stop => {
@@ -89,7 +89,7 @@ class Relic < ActiveRecord::Base
     end
 
     def search(params)
-      tire.search(:load => true, :page => params[:page], :per_page => 100) do
+      tire.search(:load => false, :page => params[:page], :per_page => 100) do
         location = params[:location].to_s.split('-')
 
         q1 = (params[:q1].present? ? params[:q1] : '*')
@@ -143,7 +143,7 @@ class Relic < ActiveRecord::Base
     end
 
     def suggester q
-      tire.search(:load => true, :per_page => 20) do
+      tire.search(:load => false, :per_page => 20) do
         q1 = (q.present? ? q : '*')
         query do
           boolean do
@@ -181,6 +181,8 @@ class Relic < ActiveRecord::Base
       :street           => street,
       :register_number  => register_number,
       :place_full_name  => place_full_name,
+      :kind             => kind,
+      :dating_of_obj    => dating_of_obj,
       :descendants      => self.descendants.map(&:to_descendant_hash)
     }.merge(Hash[ids]).to_json
   end
