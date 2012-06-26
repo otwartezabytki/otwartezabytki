@@ -9,10 +9,10 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require bootstrap_and_overrides
- *= require formtastic-bootstrap
+ *= require reset 
  *= require chosen
  *= require jquery.ui.all
+ *= require layout
 */
 
 ul.nav li a.selected { font-weight: bold; width: 400px; }

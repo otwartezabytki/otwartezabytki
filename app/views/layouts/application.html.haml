@@ -9,30 +9,54 @@
     /[if lt IE 9]
       = javascript_include_tag "http://html5shim.googlecode.com/svn/trunk/html5.js"
     = stylesheet_link_tag "application", :media => "all"
-
+    %link{:href => "http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,600,300&subset=latin,latin-ext", :rel => "stylesheet", :type => "text/css"}/
   %body
-    .navbar.navbar-fixed-top
-      .navbar-inner
+    .page
+      %header#header
         .container
           %a.btn.btn-navbar(data-target=".nav-collapse" data-toggle="collapse")
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          %a.brand(href=root_path) Otwarte Zabytki
-          %ul.nav
-            %li
-              %a(href="#") user id = #{current_user.id rescue "not logged"}
-    .container
-      .content
-        - if flash[:notice]
-          .alert.alert-info= flash[:notice]
-        - if flash[:error]
-          .alert.alert-error= flash[:error]
-        .row
-          .span9
-            = yield
-          .span3
-            = yield(:sidebar)
+          %h1
+            %a(href=root_path) Otwarte Zabytki
+          %nav#userNav
+            %ul
+              %li.login
+                %a{:href => ''} Zaloguj
+              %li.register 
+                %a{:href => ''} Zarejestruj
+          %a{:href => 'http://centrumcyfrowe.pl/', :target => '_blank', :class => 'cc_logo'}
+      %section#menu
+        .container
+          %nav
+            %ul
+              %li
+                %a{:href => '', :class => 'about'} O projekcie
+              %li
+                %a{:href => '', :class => 'help'} Pomoc
+              %li
+                %a{:href => '', :class => 'contact'} Kontakt
+              %li
+                %a{:href => '', :class => 'download'} Pobierz dane
+          = simple_form_for relics_path, :html => { :class => 'well form-search' },:method => :get do |f|
+            = f.input :q1, :label => false, :input_html => {:name => 'q1', :value => params[:q1], :class => "search-query"}, :placeholder => "dworek"
+            = f.button :submit, 'Szukaj »'
+          .text
+            %span.plus
+            %span.minus
+      %section#main
+        .container
+          - if flash[:notice]
+            .alert.alert-info= flash[:notice]
+          - if flash[:error]
+            .alert.alert-error= flash[:error]
+          .row
+            .span3
+              = yield(:sidebar)
+            .span9
+              = yield 
+          
 
     / Placed at the end of the document so the pages load faster
     != include_gon(:camel_case => true)
