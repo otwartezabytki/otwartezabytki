@@ -22,6 +22,16 @@
           %ul.nav
             %li
               %a(href="#") user id = #{current_user.id rescue "not logged"}
+            %li
+              = link_to "Zabytki", relics_path
+            %li
+              = link_to "O projekcie", page_pl_path('o-projekcie')
+            %li
+              = link_to "Kontakt", page_pl_path('kontakt')
+            %li
+              = link_to "Pobierz dane", page_pl_path('pobierz-dane')
+            %li
+              = link_to "Pomoc", page_pl_path('pomoc')
     .container
       .content
         - if flash[:notice]
