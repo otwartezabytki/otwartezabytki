@@ -200,6 +200,10 @@ $.fn.specialize
 
       this
 
+  '#suggestion_latitude, #suggestion_longitude':
+    edit: ->
+    save: ->
+
   '#map_canvas':
 
     zoom_at: (lat, lng) ->
@@ -225,6 +229,24 @@ $.fn.specialize
       else
         geocode_location(zoom_map)
 
+    set_marker: (lat, lng) ->
+      map.removeMarkers()
+
+      marker = map.addMarker
+        lat: lat
+        lng: lng
+        draggable: true
+        dragend: (e) ->
+          new_lat = marker.getPosition().lat().round(6)
+          new_lng = marker.getPosition().lng().round(6)
+          $('#suggestion_latitude').val(new_lat)
+          $('#suggestion_longitude').val(new_lng)
+          $('#map_canvas').zoom_at(new_lat, new_lng)
+
+        $('#suggestion_latitude').val(lat.round(6))
+        $('#suggestion_longitude').val(lng.round(6))
+
+      $('#map_canvas').zoom_at(lat, lng)
 
 jQuery ->
 
@@ -262,25 +284,13 @@ jQuery ->
       container_width =  $(this).parents('.step').find('.actions-view').width()
 
       if y_offset < $(this).height() - container_height || x_offset < $(this).width() - container_width
-
         lng = map.map.getBounds().getSouthWest().lng()
         lat = map.map.getBounds().getNorthEast().lat()
         width = map.map.getBounds().getNorthEast().lng() - map.map.getBounds().getSouthWest().lng()
         height = map.map.getBounds().getSouthWest().lat() - map.map.getBounds().getNorthEast().lat()
-
-
         marker_lat = lat + height * y_offset / $(this).height()
         marker_lng = lng + width * x_offset / $(this).width()
-        marker = map.addMarker
-          lat: marker_lat
-          lng: marker_lng
-          draggable: true
-          dragend: (e) ->
-            $('#suggestion_latitude').val(marker.getPosition().lat().round(6))
-            $('#suggestion_longitude').val(marker.getPosition().lng().round(6))
-
-        $('#suggestion_latitude').val(marker_lat.round(6))
-        $('#suggestion_longitude').val(marker_lng.round(6))
+        $('#map_canvas').set_marker(marker_lat, marker_lng)
 
         $(this).parents('.step').edit()
 
@@ -291,4 +301,4 @@ jQuery ->
       latitude = $('#suggestion_latitude').val().toNumber()
       longitude = $('#suggestion_longitude').val().toNumber()
       if !isNaN(latitude) & !isNaN(longitude)
-        $('#map_canvas').zoom_at(latitude, longitude)
+        $('#map_canvas').set_marker(latitude, longitude)
