@@ -75,6 +75,7 @@ $.fn.specialize
       this.restoreHistory()
       this.input().save()
       this.view()
+      this.saveLocalHistory()
       this
 
     done: ->
@@ -121,6 +122,7 @@ $.fn.specialize
       this.action().restoreLocalHistory()
       this.input().restoreLocalHistory()
       this.attr('class', this.data('class'))
+      this.removeClass('step-current')
 
     restoreLocalState: ->
       this.input().restoreLocalState()
@@ -154,6 +156,7 @@ $.fn.specialize
       this.find('#suggestion_place_id').val(this.input().val())
       this.find('#place_name_viewer').val(this.find('#suggestion_place_id option:selected').text())
       this.view()
+      this.saveLocalHistory()
       this
 
   '.step-street':
