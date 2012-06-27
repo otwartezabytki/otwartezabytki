@@ -7,10 +7,10 @@
   - corrected_arry = []
   - if relics.first.corrected?
     %div.relic-header
-      %h2.changed Zabytki poprawione
+      %h2.changed Zabytki poprawione (#{relics.correct_count})
   - else
     %div.relic-header
-      %h2 Zabytki niepoprawione
+      %h2 Zabytki niepoprawione (#{relics.incorrect_count})
       %div.breadcrumb
         %p Gdzie:
         %ul
@@ -30,7 +30,7 @@
       - corrected_arry << relic.corrected?
       - if corrected_arry.size > 1 and !corrected_arry[i-1] and corrected_arry[i]
         %div.relic-header
-          %h2.changed Zabytki poprawione
+          %h2.changed Zabytki poprawione (#{relics.correct_count})
 
       -# relic details
       .relic
