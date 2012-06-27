@@ -6,7 +6,7 @@ class RelicsController < ApplicationController
 
   helper_method :parse_navigators, :search_params
 
-  before_filter :current_user!, :only => [:create, :update, :suggest_next, :thank_you]
+  before_filter :current_user!, :only => [:edit, :create, :update, :suggest_next, :thank_you]
 
   def index
     gon.highlighted_tags = relics.highlighted_tags

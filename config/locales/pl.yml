@@ -204,7 +204,8 @@ pl:
         register_number: "Aktualny numer rejestru"
         national_number: "NID"
       user:
-        email: E-mail
+        email: Adres e-mail
+        password: Hasło
         username: Nazwa użytkownika
         role: Rola
         created_at: Założenie konta

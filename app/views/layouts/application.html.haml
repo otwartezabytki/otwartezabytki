@@ -22,12 +22,16 @@
             %a(href=root_path) Otwarte Zabytki
           %nav#userNav
             %ul
-              %li
-                %a(href="#") user id = #{current_user.id rescue "not logged"}
-              %li.login
-                %a{:href => ''} Zaloguj
-              %li.register 
-                %a{:href => ''} Zarejestruj
+              - if Rails.env.development?
+                %li= "uid = #{current_user.id rescue 0}, suggestions = #{current_user.suggestions.count rescue 0}"
+              - if current_user && current_user.registered?
+                %li Witaj, #{ current_user.username || current_user.email }
+                %li.login= link_to 'Wyloguj się', destroy_user_session_path, :method => :delete
+              - else
+                %li.login
+                  %a{:href => new_user_session_path} Zaloguj
+                %li.register
+                  %a{:href => new_user_registration_path} Zarejestruj
           %a{:href => 'http://centrumcyfrowe.pl/', :target => '_blank', :class => 'cc_logo'}
       %section#menu
         .container

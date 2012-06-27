@@ -1,40 +1,49 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :confirmable,
-  # :lockable, :timeoutable and :omniauthable
+  has_many :suggestions
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :username
-  attr_accessible :email, :role, :as => :admin
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :username, :registration
+  attr_accessible :email, :password, :password_confirmation, :role, :as => :admin
 
   validates :role, :inclusion => { :in => ["admin", "user"] }
-  validates :username,
-    :uniqueness => true, :presence => true, :format => /[\w\.]/, :length => { :maximum => 30, :minimum => 3 },
-    :if => lambda { |c| c.suggestions.count >= 3 }
-
-  has_many :suggestions
-
-  before_save do
-    if email_changed? && !admin?
-      generated_password = [0..9, 'a'..'z', 'A'..'Z'].map(&:to_a).reduce(:+).sample(8).join
-      self.password = generated_password
-      self.password_confirmation = generated_password
-      UserMailer.welcome_email(self, self.password).deliver
-    end
-  end
 
   def admin?
     role == 'admin'
   end
 
+  # Set this to true to enable additional validations and password generation
+  attr_accessor :registration
+  def registration?; registration.present? end
+  def registered?; email.present? end
+
+  # We require e-mail only on registration as nil-user exist
+  def email_required?
+    registration?
+  end
+
+  # Other logic on user registration
+  with_options :if => :registration? do |model|
+
+    model.validates :username,
+      :uniqueness => true, :presence => true, :format => /[\w\.]/, 
+      :length => { :maximum => 30, :minimum => 3 }
+
+    model.before_save do
+      generated_password = [0..9, 'a'..'z', 'A'..'Z'].map(&:to_a).reduce(:+).sample(8).join
+      self.password = generated_password
+      self.password_confirmation = generated_password
+      UserMailer.welcome_email(self, self.password).deliver
+    end
+
+  end
+
+  # We don't require password because it is sent on e-mail
   def password_required?
     false
   end
 
-  def email_required?
-    admin? || self.suggestions.count >= 3
-  end
 
 end
