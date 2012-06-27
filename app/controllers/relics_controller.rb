@@ -4,7 +4,7 @@ class RelicsController < ApplicationController
   expose(:suggestion) { Suggestion.new(:relic_id => params[:id]) }
   expose(:relic)
 
-  helper_method :parse_navigators, :search_params
+  helper_method :parse_navigators, :search_params, :location_breadcrumbs
 
   before_filter :current_user!, :only => [:edit, :create, :update, :suggest_next, :thank_you]
 
@@ -94,25 +94,39 @@ class RelicsController < ApplicationController
 
   protected
 
-  def parse_navigators(facets, order = :name)
-    navigators = {}
-    ['voivodeships', 'communes', 'districts', 'places'].each do |name|
-      next unless facets[name]
-      ids = facets[name]['terms'].map { |k| k['term']}
-      klass = name.classify.constantize
-      objs = klass.where(:id => ids).order('id ASC')
-      sorted_counts = facets[name]['terms'].sort_by { |k| k['term'].to_i }.map { |k| k['count'] }
-      objs.each_with_index do |o, i|
-        o.class_eval "attr_accessor :count"
-        o.count = sorted_counts[i]
-      end
-      navigators[name] = (order == :count ?  objs.sort_by { |k| -k.count } : objs.sort_by { |k| k.name.parameterize })
-    end if relics and facets
-    navigators
-  end
+    def parse_navigators(facets, order = :name)
+      navigators = {}
+      ['voivodeships', 'districts', 'communes', 'places'].each do |name|
+        next unless facets[name]
+        ids = facets[name]['terms'].map { |k| k['term']}
+        klass = name.classify.constantize
+        objs = klass.where(:id => ids).order('id ASC')
+        sorted_counts = facets[name]['terms'].sort_by { |k| k['term'].to_i }.map { |k| k['count'] }
+        objs.each_with_index do |o, i|
+          o.class_eval "attr_accessor :count"
+          o.count = sorted_counts[i]
+        end
+        navigators[name] = (order == :count ?  objs.sort_by { |k| -k.count } : objs.sort_by { |k| k.name.parameterize })
+      end if relics and facets
+      navigators
+    end
 
-  def search_params
-    params.slice(:q1)
-  end
+    def search_params
+      params.slice(:q1)
+    end
+
+    def location_breadcrumbs
+      return @location_breadcrumbs if defined? @location_breadcrumbs
+      @location_breadcrumbs = [ {:path => relics_path(search_params), :label => 'Cała Polska'} ]
+      klasses = [Voivodeship, District, Commune, Place]
+      location_arry = params[:location].to_s.split('-')
+
+      location_arry.each_with_index do |id,i|
+        l = klasses[i].find(id)
+        @location_breadcrumbs << {:path => relics_path(search_params.merge(:location =>location_arry.first(i+1).join('-'))), :label => l.name }
+      end if location_arry.present?
+      @location_breadcrumbs
+    end
+
 
 end

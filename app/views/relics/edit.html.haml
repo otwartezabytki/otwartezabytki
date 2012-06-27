@@ -51,15 +51,25 @@
 
         .actions.actions-view
           %h3 Czy miejscowość jest poprawna?
+          .action.action-confirm= link_to "Nazwa jest poprawna" 
           .action.action-edit= link_to "Chcę poprawić miejscowość"
-          .action.action-confirm= link_to "Nazwa jest poprawna"
           .action.action-skip= link_to "Nie wiem, pomiń"
         .actions.actions-edit
           %h3 Czy miejscowość jest poprawna?
-          .action.action-submit= link_to "Zatwierdź"
-          .action.action-cancel= link_to "Anuluj"
+          .action.action-confirm= link_to "Nazwa jest poprawna" 
+          .action.action-edit= link_to "Chcę poprawić miejscowość"
+          .action.action-skip= link_to "Nie wiem, pomiń"
+          .action.action-submit= link_to "Zapisz"
+          .action.action-cancel= link_to "cofnij zmianę"
         .actions.actions-done
-          .action.action-back= link_to "Cofnij"
+          %h3 Wybierz jedną z opcji:
+          .action.action-confirm= link_to "Nazwa jest poprawna" 
+          .action.action-edit= link_to "Chcę poprawić miejscowość"
+          .action.action-skip= link_to "Nie wiem, pomiń"
+          .action.action-back
+            (zrobiłeś błąd?
+            = link_to "cofnij"
+            )
 
       %article.step.step-street.step-view
         %span.ico
@@ -69,8 +79,8 @@
         .actions.actions-view
           - if f.object.street.present?
             %h3 Czy adres zabytku jest poprawny?
+            .action.action-confirm= link_to "Adres jest poprawny" 
             .action.action-edit= link_to "Chcę poprawić adres"
-            .action.action-confirm= link_to "Adres jest poprawny"
             .action.action-skip= link_to "Nie wiem, pomiń"
           - else
             %h3 Czy znasz adres pod jakim leży zabytek?
@@ -79,14 +89,24 @@
         .actions.actions-edit
           - if f.object.street.present?
             %h3 Czy adres jest poprawny?
-            .action.action-submit= link_to "Zatwierdź"
-            .action.action-cancel= link_to "Anuluj"
+            .action.action-confirm= link_to "Adres jest poprawny" 
+            .action.action-edit= link_to "Chcę poprawić adres"
+            .action.action-skip= link_to "Nie wiem, pomiń"
+            .action.action-submit= link_to "Zapisz"
+            .action.action-cancel= link_to "cofnij zmianę"
           - else
             %h3 Czy znasz adres pod jakim leży zabytek?
-            .action.action-submit= link_to "Zatwierdź"
-            .action.action-cancel= link_to "Anuluj"
+            .action.action-submit= link_to "Zapisz"
+            .action.action-cancel= link_to "cofnij zmianę"
         .actions.actions-done
-          .action.action-back= link_to "Cofnij"
+          %h3 Czy adres zabytku jest poprawny?
+          .action.action-confirm= link_to "Adres jest poprawny" 
+          .action.action-edit= link_to "Chcę poprawić adres"
+          .action.action-skip= link_to "Nie wiem, pomiń"
+          .action.action-back
+            (zrobiłeś błąd?
+            = link_to "cofnij"
+            )
 
       %article.step.step-date.step-view
         %span.ico
@@ -96,8 +116,8 @@
         - if f.object.dating_of_obj.present?
           .actions.actions-view
             %h3 Czy data jest poprawna?
+            .action.action-confirm= link_to "Data jest poprawna" 
             .action.action-edit= link_to "Chcę poprawić datę"
-            .action.action-confirm= link_to "Data jest poprawna"
             .action.action-skip= link_to "Nie wiem, pomiń"
         - else
           .actions.actions-view
@@ -106,15 +126,27 @@
             .action.action-skip= link_to "Nie wiem, pomiń"
         .actions.actions-edit
           - if f.object.dating_of_obj.present?
-            %h3 Czy znasz ulicę na jakiej leży zabytek?
-            .action.action-submit= link_to "Zatwierdź"
-            .action.action-cancel= link_to "Anuluj"
+            %h3 Czy znasz datę powstania zabytku?
+            .action.action-confirm= link_to "Data jest poprawna" 
+            .action.action-edit= link_to "Chcę poprawić datę"
+            .action.action-skip= link_to "Nie wiem, pomiń"
+            .action.action-submit= link_to "Zapisz"
+            .action.action-cancel= link_to "cofnij zmiany"
           - else
             %h3 Czy znasz datę powstania zabytku?
-            .action.action-submit= link_to "Zatwierdź"
-            .action.action-cancel= link_to "Anuluj"
+            .action.action-confirm= link_to "Data jest poprawna" 
+            .action.action-edit= link_to "Chcę poprawić datę"
+            .action.action-skip= link_to "Nie wiem, pomiń"
+            .action.action-submit= link_to "Zapisz"
+            .action.action-cancel= link_to "cofnij zmiany"
         .actions.actions-done
-          .action.action-back= link_to "Cofnij"
+          .action.action-confirm= link_to "Data jest poprawna" 
+          .action.action-edit= link_to "Chcę poprawić datę"
+          .action.action-skip= link_to "Nie wiem, pomiń"
+          .action.action-back
+            (zrobiłeś błąd?
+            = link_to "cofnij"
+            )  
 
       %article.step.step-tags.step-view(id="gps_autoscroll")
         %span.ico
