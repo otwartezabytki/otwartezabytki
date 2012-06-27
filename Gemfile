@@ -67,7 +67,6 @@ group :test do
   # for defining tests
   gem 'cucumber-rails', :require => false
   gem 'rspec-rails',  '~> 2.0'
-  gem 'shoulda', '~> 3.0'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
   gem 'capybara'
@@ -79,6 +78,10 @@ group :test do
   gem 'guard-spork'
   gem 'growl'
   gem 'rb-fsevent'
+end
+
+group :test do
+  gem 'shoulda', '~> 3.0'
 end
 
 local_gemfile = File.dirname(__FILE__) + "/Gemfile.local.rb"

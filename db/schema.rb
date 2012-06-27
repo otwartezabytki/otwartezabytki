@@ -81,6 +81,8 @@ ActiveRecord::Schema.define(:version => 20120626182047) do
     t.string   "kind"
     t.boolean  "approved",        :default => false
     t.string   "tags"
+    t.integer  "skip_count",      :default => 0
+    t.integer  "edit_count",      :default => 0
   end
 
   add_index "relics", ["ancestry"], :name => "index_relics_on_ancestry"
@@ -104,6 +106,7 @@ ActiveRecord::Schema.define(:version => 20120626182047) do
     t.string   "tags"
     t.string   "tags_action"
     t.integer  "ancestry"
+    t.boolean  "skipped",               :default => false
   end
 
   add_index "suggestions", ["ancestry"], :name => "index_suggestions_on_ancestry"

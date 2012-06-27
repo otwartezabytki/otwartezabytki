@@ -1,111 +1,55 @@
-- model_class = Relic.new.class
-.page-header
-  %h1=t '.title', :default => model_class.model_name.human.pluralize
-  %span.arrow
-// Total: #{relics.total_count}
+#relics
+  - model_class = Relic.new.class
+  .page-header
+    %h1 Zabytki (#{relics.total_count})
+    %span.arrow
 
-%div.relic-header
-  %h2 Zabytki niepoprawione (6)
-  %div.breadcrumb
-    %p Gdzie:
-    %ul
-      %li
-        %a{:href => ''} Cała Polska
-        %span &#187;
-      %li
-        %a{:href => ''} mazowieckie
-        %span &#187;
-      %li
-        %a{:href => ''} pow. Warszawa
-  
+  - corrected_arry = []
+  - if relics.first.corrected?
+    %div.relic-header
+      %h2.changed Zabytki poprawione
+  - else
+    %div.relic-header
+      %h2 Zabytki niepoprawione
+      %div.breadcrumb
+        %p Gdzie:
+        %ul
+          %li
+            %a{:href => ''} Cała Polska
+            %span &#187;
+          %li
+            %a{:href => ''} mazowieckie
+            %span &#187;
+          %li
+            %a{:href => ''} pow. Warszawa
 
-.search-results
-  - relics.each do |relic|
-    .relic
-      -# %td= link_to relic.id, relic_path(relic)
-      .name
-        -# = "(G)" if relic.has_children?
-        = link_to relic.identification, relic_path(relic)
-      .pathway= relic.place_full_name 
-      -# %td= relic.kind
-      -# %td= relic.number
-      -# %td= relic.materail
-      -# %td= relic.dating_of_obj
-      
-      -# %td= relic.register_number
-      -# %td= relic.national_number
-      -# %td= relic.latitude
-      -# %td= relic.longitude
-      -# %td=l relic.created_at
-      .street= relic.street 
-      .include
-        - if relic.has_children?
-          %span
-          = relic.descendants.map(&:identification).join(', ')
-      .change
-        = link_to "Popraw »", edit_relic_path(relic), :class => 'btn btn-mini'
-        -# = link_to t('.destroy', :default => t("helpers.links.destroy")), relic_path(relic), :method => :delete, :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')), :class => 'btn btn-mini btn-danger'
+  .search-results
+    - relics.each_with_index do |relic, i|
 
--# = link_to t('.new', :default => t("helpers.links.new")), new_relic_path, :class => 'btn btn-primary' 
+      -# display header for corrected relics
+      - corrected_arry << relic.corrected?
+      - if corrected_arry.size > 1 and !corrected_arry[i-1] and corrected_arry[i]
+        %div.relic-header
+          %h2.changed Zabytki poprawione
 
-// statycznie zabytki poprawione
-%div.relic-header
-  %h2.changed Zabytki poprawione (2)
-.search-results
-  .relic
-    .name
-      %a{:href => ''} dom
-    .pathway woj. Dolnośląskie, pow. Jelenia góra, gm. Jelenia góra, Jelenia góra
-    .street ul. Barlickiego 2
-    .include
-    .modified
-  .relic
-    .name
-      %a{:href => ''} dom
-    .pathway woj. Dolnośląskie, pow. Jelenia góra, gm. Jelenia góra, Jelenia góra
-    .street ul. Barlickiego 2
-    .include
-    .modified  
-  
-= paginate relics
+      -# relic details
+      .relic
+        .name
+          = link_to relic.identification, relic_path(relic)
+        .pathway= relic.place_full_name
+        .street= relic.street
+        .include
+          - if relic.has_children?
+            %span
+            = relic.descendants.map(&:identification).join(', ')
+        - if relic.corrected?
+          .modified
+        - else
+          .change
+            = link_to "Popraw »", edit_relic_path(relic), :class => 'btn btn-mini'
 
-- content_for :sidebar do
-  - navigators = parse_navigators(relics.facets)
-  .well.sidebar-nav
-    %h3 Lokalizacja
-    %ul.nav.nav-list
-      - location = params[:location].to_s.split('-')
-      - navigators['voivodeships'].each do |obj|
-        - selected = location[0] == obj.id.to_s
-        - label = "#{obj.name} <span>#{obj.count}</span>".html_safe
-        %li
-          = link_to_unless selected, label, relics_path(search_params.merge(:location => obj.id)) do
-            .selected
-              %p= label
-          - if selected
-            %ul
-              - navigators['districts'].each do |obj|
-                - selected = location[1] == obj.id.to_s
-                - label = "#{obj.name} <span>#{obj.count}</span>".html_safe 
-                %li
-                  = link_to_unless selected, label, relics_path(search_params.merge(:location => (location.first(1) << obj.id).join('-'))) do
-                    .selected
-                      %p= label
-                  - if selected
-                    %ul
-                      - navigators['communes'].each do |obj|
-                        - selected = location[2] == obj.id.to_s
-                        - label = "#{obj.name} <span>#{obj.count}</span>".html_safe 
-                        %li
-                          = link_to_unless selected, label, relics_path(search_params.merge(:location => (location.first(2) << obj.id).join('-'))) do
-                            .selected
-                              %p= label
-                          - if selected
-                            %ul
-                              - navigators['places'].each do |obj|
-                                - selected = location[3] == obj.id.to_s
-                                - label = "#{obj.name} <span>#{obj.count}</span>".html_safe 
-                                %li
-                                  = link_to_unless selected, label, relics_path(search_params.merge(:location => (location.first(3) << obj.id).join('-'))) do
-                                    .selected
-                                      %p= label
+  = paginate relics
+
+  - content_for :sidebar do
+    = render 'localization_facets'
+
