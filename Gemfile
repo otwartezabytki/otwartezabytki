@@ -54,6 +54,16 @@ gem 'gon'
 gem 'high_voltage'
 
 group :development, :test do
+  # for debugging
+  gem 'ruby-debug19'
+  gem 'pry-rails'
+
+  # for routes in /rails/routes
+  gem 'sextant'
+  gem 'mailcatcher'
+end
+
+group :test do
   # for defining tests
   gem 'cucumber-rails', :require => false
   gem 'rspec-rails',  '~> 2.0'
@@ -69,14 +79,6 @@ group :development, :test do
   gem 'guard-spork'
   gem 'growl'
   gem 'rb-fsevent'
-
-  # for debugging
-  gem 'ruby-debug19'
-  gem 'pry-rails'
-
-  # for routes in /rails/routes
-  gem 'sextant'
-  gem 'mailcatcher'
 end
 
 local_gemfile = File.dirname(__FILE__) + "/Gemfile.local.rb"
