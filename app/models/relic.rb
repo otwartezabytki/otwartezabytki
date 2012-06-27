@@ -21,10 +21,7 @@ class Relic < ActiveRecord::Base
   include Tire::Model::Search
 
   # custom tire callback
-  after_save do
-    # always update root document
-    root.tire.update_index
-  end
+  after_save :update_relic_index
 
   # create different index for testing
   index_name("#{Rails.env}-relics")
@@ -76,7 +73,14 @@ class Relic < ActiveRecord::Base
       @highlighted_tags = @response['hits']['hits'].inject([]) do |m, h|
         m << h['highlight'].values.join.scan(/<em>(.*?)<\/em>/) if h['highlight']
         m
-      end.flatten.uniq.sort_by{ |w| -w.size }
+      end.flatten.uniq.select{|w| w.size > 1}.sort_by{|w| -w.size}
+    end
+  end
+
+  Tire::Results::Item.class_eval do
+    def corrected?
+      return @is_corrected if defined? @is_corrected
+      @is_corrected = self[:edit_count] > 2
     end
   end
 
@@ -89,7 +93,7 @@ class Relic < ActiveRecord::Base
     end
 
     def search(params)
-      tire.search(:load => false, :page => params[:page], :per_page => 100) do
+      tire.search(:load => false, :page => params[:page], :per_page => 10) do
         location = params[:location].to_s.split('-')
 
         q1 = (params[:q1].present? ? params[:q1] : '*')
@@ -138,22 +142,26 @@ class Relic < ActiveRecord::Base
 
         filter :term, :place_id => location[3] if location.size > 3
 
-        sort { by :id, 'asc' }
+        sort do
+          by '_script', {
+              'script' => "f0 = doc['edit_count'].value * f1 - doc['skip_count'].value; if( doc['edit_count'].value > 2 ) { f2 + f0; } else { f0; }",
+              'type' => 'number',
+              'params' => { 'f1' => 1000, 'f2' => -100_000_000 },
+              'order' => 'desc'
+            }
+          by '_score', 'desc'
+        end
       end
     end
 
     def suggester q
-      tire.search(:load => false, :per_page => 20) do
+      tire.search(:load => false, :per_page => 1) do
         q1 = (q.present? ? q : '*')
         query do
           boolean do
             must { string q1, :default_operator => "AND" }
           end
         end
-        # # hack to use missing-filter
-        # # http://www.elasticsearch.org/guide/reference/query-dsl/missing-filter.html
-        # query_value = self.instance_variable_get("@query").instance_variable_get("@value")
-        # query_value[:bool][:must] << { constant_score: { filter: { missing: { field: "ancestry" } } } }
 
         facet "voivodeships" do
           terms :voivodeship_id, :size => 3
@@ -167,7 +175,6 @@ class Relic < ActiveRecord::Base
         facet "places" do
           terms :place_id, :size => 3
         end
-        sort { by :id, 'asc' }
       end
     end
 
@@ -183,7 +190,9 @@ class Relic < ActiveRecord::Base
       :place_full_name  => place_full_name,
       :kind             => kind,
       :dating_of_obj    => dating_of_obj,
-      :descendants      => self.descendants.map(&:to_descendant_hash)
+      :descendants      => self.descendants.map(&:to_descendant_hash),
+      :edit_count       => edit_count,
+      :skip_count       => skip_count
     }.merge(Hash[ids]).to_json
   end
 
@@ -251,6 +260,11 @@ class Relic < ActiveRecord::Base
     # TODO
     offset = rand(Relic.count)
     Relic.first(:offset => offset)
+  end
+
+  def update_relic_index
+    # always update root document
+    root.tire.update_index
   end
 
 end

@@ -32,4 +32,12 @@ SQL
     puts "\nDone"
   end
 
+  task :fix_counters => :environment do
+    Suggestion.find_each do |s|
+      s.update_attribute :skipped, s.is_skipped?
+    end
+    Relic.update_all(:skip_count => 0, :edit_count => 0)
+    Suggestion.where(:ancestry => nil).find_each { |s| s.update_relic_skip_cache }
+  end
+
 end

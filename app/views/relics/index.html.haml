@@ -27,11 +27,27 @@ Total: #{relics.total_count}
       -# %th= model_class.human_attribute_name(:created_at)
       %th=t '.actions', :default => t("helpers.actions")
   %tbody
-    - relics.each do |relic|
+    - corrected_arry = []
+    - if relics.first.corrected?
+      %tr
+        %td{:colspan => 7}
+          %strong Zabytki poprawione
+    - else
+      %tr
+        %td{:colspan => 7}
+          %strong Zabytki niepoprawione
+
+    - relics.each_with_index do |relic, i|
+      - corrected_arry << relic.corrected?
+      - if corrected_arry.size > 1 and !corrected_arry[i-1] and corrected_arry[i]
+        %tr
+          %td{:colspan => 7}
+            %strong Zabytki poprawione
       %tr
         -# %td= link_to relic.id, relic_path(relic)
         %td= relic.place_full_name
         %td
+          = "Poprawiony" if relic.corrected?
           = "(G)" if relic.descendants.present?
           = link_to relic.identification, relic_path(relic)
           - if relic.descendants.present?
