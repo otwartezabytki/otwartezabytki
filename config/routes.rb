@@ -6,8 +6,10 @@ Otwartezabytki::Application.routes.draw do
   devise_for :users, :path_names => {
     :sign_in => 'login', :sign_out => 'logout',
   }, :controllers => {
-    :registrations => "users/registrations"
-  }, :locale => :pl
+    :registrations => "users/registrations",
+    :sessions => "users/sessions",
+    :passwords => "users/passwords"
+  }
 
   resources :relics, :only => [:edit, :update, :index, :show, :edit, :update], :path_names => { :edit => 'review' } do
     collection do

@@ -1,4 +1,4 @@
-<h2>Change your password</h2>
+<h2>Zmień hasło</h2>
 
 <%= simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
   <%= f.error_notification %>
@@ -7,13 +7,11 @@
   <%= f.full_error :reset_password_token %>
 
   <div class="form-inputs">
-    <%= f.input :password, :label => "New password", :required => true %>
-    <%= f.input :password_confirmation, :label => "Confirm your new password", :required => true %>
+    <%= f.input :password, :label => "Nowe hasło", :required => true %>
+    <%= f.input :password_confirmation, :label => "Powtórz nowe hasło", :required => true %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, "Change my password" %>
+    <%= f.button :submit, "Zmień hasło" %>
   </div>
 <% end %>
-
-<%= render "devise/shared/links" %>
