@@ -414,6 +414,14 @@ body{
 		background: #eee;
 		padding: 25px;
 		margin-bottom: 1px;
+		.ico{
+			width: 58px;
+			height: 13px;
+			position: absolute;
+			background: asset-data-url('icon-waiting-big.png') no-repeat;
+			right: 25px;
+			bottom: 17px;
+		}
 		input[readonly]{
 			background: none;
 			border: 0;
@@ -505,60 +513,71 @@ body{
 				background: asset-data-url('wizard-checkbox-empty.png') no-repeat;
 				line-height: 20px;
 				padding-bottom: 5px;
+			} 
+		}
+	
+		.action-back{
+			padding-left: 34px;
+			font-size: 13px;
+			color: #5f6062;
+			a{
+				color: #1e5d7d;
 			}
-			&.selected a{
-			  background: asset-data-url('wizard-checkbox-select.png') no-repeat;	
-			}  
 		}
-	}
-	.action-back{
-		padding-left: 34px;
-		font-size: 13px;
-		color: #5f6062;
-		a{
-			color: #1e5d7d;
+		&.step-current{
+			border: 3px solid #47697a;
+			background: #e8eff2;
+			padding: 60px 25px;
+			.ico{
+				background: asset-data-url('icon-modify-big.png') no-repeat;
+				position: absolute;
+				width: 68px;
+				height: 50px;
+				bottom: 55px;
+				right: 20px;
+			}
 		}
-	}
-	.step-current{
-		border: 3px solid #47697a;
-		background: #e8eff2;
-		padding: 60px 25px;
-		.ico{
-			background: asset-data-url('icon-modify-big.png') no-repeat;
-			position: absolute;
-			width: 68px;
-			height: 50px;
-			bottom: 55px;
-			right: 20px;
-		}
-	}
-	.step-done{
-		background: #fff;
-		.ico{
-			background: asset-data-url('icon-success-big.png') no-repeat;
-			position: absolute;
-			width: 68px;
-			height: 50px;
-			bottom: 9px;
-			right: 20px;
-		}
-		.actions{ 
-			.action-edit a, .action-skip a{
-				color: #313132;
-				text-decoration: none;
-				font-size: 14px;
-				padding-left: 35px;
-				margin-right: 25px;
-				background: asset-data-url('wizard-checkbox-empty.png') no-repeat;
-				line-height: 20px;
-				padding-bottom: 5px;
+		&.step-skipped{
+			.action-skip a{
+				background: asset-data-url('wizard-checkbox-done.png') no-repeat; 
+			}
+			.action-edit a, .action-confirm a{
 				opacity: .3;
 			}
-			.selected a{
-			  background: asset-data-url('wizard-checkbox-done.png') no-repeat;	
-				font-weight: 700;
-				opacity: 1;
+		}
+		&.step-edit{
+			.action-edit a{
+				background: asset-data-url('wizard-checkbox-select.png') no-repeat; 
 			}
-		}  
-	}
+		}
+		&.step-confirmed, &.step-edited{
+			background: #fff;
+			.ico{
+				background: asset-data-url('icon-success-big.png') no-repeat;
+				position: absolute;
+				width: 68px;
+				height: 50px;
+				bottom: 9px;
+				right: 20px;
+			}
+			.actions{ 
+				.action-edit a, .action-skip a{
+					color: #313132;
+					text-decoration: none;
+					font-size: 14px;
+					padding-left: 35px;
+					margin-right: 25px;
+					background: asset-data-url('wizard-checkbox-empty.png') no-repeat;
+					line-height: 20px;
+					padding-bottom: 5px;
+					opacity: .3;
+				}
+				.action-confirm a{
+				  background: asset-data-url('wizard-checkbox-done.png') no-repeat;	
+					font-weight: 700;
+					opacity: 1;
+				}
+			}  
+		}
+	} 
 }
