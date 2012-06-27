@@ -25,16 +25,17 @@ $.fn.specialize
     input: -> this.find("input[type='text']")
     action: -> this.find("#" + this.input().attr('id') + '_action')
 
-    view: ->
-      this.removeClass('step-skipped step-confirmed step-done')
-
-      # when clicking back button
-      if (this.hasClass('step-edited') || this.hasClass('step-edit')) && !this.hasClass('step-current')
-        $('.step').removeClass('step-current')
-        return this.edit()
-
+    switchViewClass: (klass) ->
+      this.saveLocalHistory()
+      this.removeClass('step-done step-skipped step-confirmed step-edited step-view step-edit')
+      this.addClass(klass)
+      $('.step').removeClass('step-current')
       this.addClass('step-current')
-      this.removeClass('step-edit').addClass('step-view')
+      this.action().val('skip')
+
+    view: ->
+      this.switchViewClass('step-view')
+
       this.find('button.edit').focus()
 
       if this.data('autoscroll')?
@@ -43,8 +44,7 @@ $.fn.specialize
       this
 
     edit: ->
-      this.addClass('step-current')
-      this.removeClass('step-view step-edited').addClass('step-edit')
+      this.switchViewClass('step-edit')
       this.input().edit()
 
       if this.data('autoscroll')?
@@ -53,25 +53,29 @@ $.fn.specialize
       this
 
     submit: ->
-      this.removeClass('step-edit').addClass('step-view')
+      this.switchViewClass('step-view step-done step-edited')
+      this.action().val('edit')
       this.input().save()
-      this.markAs('edit')
       this.done()
       this
 
-    cancel: ->
-      this.input().restoreHistory().save()
-      this.view()
-      this
-
     confirm: ->
-      this.markAs('confirm')
+      this.switchViewClass('step-view step-done step-confirmed')
+      this.action().val('confirm')
       this.done()
       this
 
     skip: ->
-      this.markAs('skip')
+      this.switchViewClass('step-view step-done step-skipped')
+      this.action().val('skip')
       this.done()
+      this
+
+    cancel: ->
+      this.restoreHistory()
+      this.input().save()
+      this.view()
+      this.saveLocalHistory()
       this
 
     done: ->
@@ -80,15 +84,51 @@ $.fn.specialize
       this
 
     back: ->
-      this.view()
+      if $('.step-current').input().hasChanged()
+        alert('Najpierw musisz skończyć edytować bieżące pole.')
+      else
+        if $('.step-current').hasClass('step-edit')
+          $('.step-current').cancel()
+
+        current_step = $('.step-current')
+
+        if this.hasClass('step-edited') && !this.hasClass('step-current')
+          this.edit()
+        else
+          this.view()
+
+        current_step.restoreLocalHistory()
+
       this
 
-    markAs: (action) ->
+    saveHistory: ->
+      this.input().saveHistory()
+      this.action().saveHistory()
+      this
 
-      this.removeClass('step-confirmed step-skipped step-edited')
-          .addClass('step-' + (if action == 'skip' then 'skipp' else action) + 'ed')
+    restoreHistory: ->
+      this.input().restoreHistory()
+      this.action().restoreHistory()
+      this
 
-      this.action().val(action);
+    saveLocalHistory: ->
+      console.log('save')
+      this.data('class', this.attr('class'))
+      this.input().saveLocalHistory()
+      this.action().saveLocalHistory()
+
+    restoreLocalHistory: ->
+      console.log(this.data('class'))
+      this.action().restoreLocalHistory()
+      this.input().restoreLocalHistory()
+      this.attr('class', this.data('class'))
+      this.removeClass('step-current')
+
+    restoreLocalState: ->
+      this.input().restoreLocalState()
+
+    hasChanged: ->
+      this.input().hasChanged()
 
   # place step have select field instead of text
   '.step-place':
@@ -96,15 +136,14 @@ $.fn.specialize
     input: -> $("#suggestion_place_id")
 
     edit: ->
-      this.addClass('step-current')
-      this.removeClass('step-view step-edited').addClass('step-edit')
+      this.switchViewClass('step-edit')
       $('#suggestion_place_id').focus()
       this
 
     submit: ->
       this.find('#place_name_viewer').val(this.find('#suggestion_place_id option:selected').text())
-      this.removeClass('step-edit').addClass('step-view')
-      this.markAs('edit')
+      this.switchViewClass('step-view step-done step-edited')
+      this.action().val('edit')
       this.done()
       geocode_location ->
         $('#map_canvas').auto_zoom()
@@ -112,18 +151,20 @@ $.fn.specialize
       this
 
     cancel: ->
-      this.input().restoreHistory().save()
+      this.restoreHistory()
+      this.input().save()
       this.find('#suggestion_place_id').val(this.input().val())
       this.find('#place_name_viewer').val(this.find('#suggestion_place_id option:selected').text())
       this.view()
+      this.saveLocalHistory()
       this
 
   '.step-street':
 
     submit: ->
-      this.removeClass('step-edit').addClass('step-view')
+      this.switchViewClass('step-view step-done step-edited')
+      this.action().val('edit')
       this.input().save()
-      this.markAs('edit')
       this.done()
       geocode_location ->
         $('#map_canvas').auto_zoom()
@@ -140,13 +181,11 @@ $.fn.specialize
     action: -> $('#suggestion_coordinates_action')
 
     edit: ->
-      this.addClass('step-current')
-      this.removeClass('step-view step-edited').addClass('step-edit')
+      this.switchViewClass('step-edit')
       this
 
     cancel: ->
-      this.removeClass('step-edit').addClass('step-view')
-      $('#suggestion_latitude, #suggestion_longitude').restoreHistory()
+      this.restoreHistory()
       map.removeMarkers()
       this.view()
 
@@ -178,6 +217,22 @@ $.fn.specialize
           $(this).val($(this).data('history'))
       this
 
+    saveLocalHistory: ->
+      this.each ->
+        $(this).data('local_history', $(this).val())
+      this
+
+    restoreLocalHistory: ->
+      this.each ->
+        $(this).val($(this).data('local_history'))
+      this
+
+    hasChanged: ->
+      this.toArray().some (e) ->
+        console.log($(e).data('local_history'))
+        $(e).data('local_history') != $(e).val()
+
+
   'input[type="checkbox"]':
 
     edit: ->
@@ -199,6 +254,21 @@ $.fn.specialize
         $(this).prop('checked', $(this).data('history'))
 
       this
+
+    saveLocalHistory: ->
+      this.each ->
+        $(this).data('local_history', $(this).prop('checked'))
+
+      this
+
+    restoreLocalHistory: ->
+      this.each ->
+        $(this).prop('checked', $(this).data('local_history'))
+      this
+
+    hasChanged: ->
+      this.toArray().some (e) ->
+        $(e).data('local_history') !=  $(e).prop('checked')
 
   '#suggestion_latitude, #suggestion_longitude':
     edit: ->
@@ -263,15 +333,18 @@ jQuery ->
   $('.step input[type="text"]').attr('autocomplete', 'off')
 
   # register actions for wizard
-  ['edit', 'submit', 'cancel', 'confirm', 'skip', 'back'].forEach (action) ->
+  ['edit', 'cancel', 'submit', 'confirm', 'skip', 'back'].forEach (action) ->
     $('.steps').on 'click', ".action-#{action} a" , ->
-      $(this).parents('.step:first')[action]()
+      step_div = $(this).parents('.step:first')
+      step_div[action]() if step_div.hasClass('step-current')
       return false # prevent the form submission
+
+  $('.steps').on 'click', '.action-back a', ->
+    $(this).parents('.step:first').back()
 
   $('.step:first').view()
 
-  $('.step').each ->
-    $(this).input().saveHistory()
+  $('.step').each -> $(this).saveHistory()
 
   $('#marker').draggable(revert: true)
 

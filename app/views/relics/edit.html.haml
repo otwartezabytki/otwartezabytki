@@ -2,7 +2,7 @@
   .page-header
     %h1 
       3. Popraw zabytek
-      %span woj. dolnośląskie,   pow. Wrocław,  gmina Wrocław 
+      %span= wizard_full_place(suggestion.relic)
     %span.arrow
   = semantic_form_for suggestion, :url => relic_path, :method => :put,
     :html => { :data => { :commune => suggestion.relic.commune.name,
