@@ -581,3 +581,20 @@ body{
 		}
 	} 
 }
+.steps{
+	.step{
+		.column{
+			width: 45%;
+			display: inline-block;
+			vertical-align: top;
+			font-size: 13px;
+			margin-top: 10px;
+			input{
+				width: auto;
+				margin: 0 3px 5px 0;
+				padding: 0;
+				height: auto;
+			}
+		}
+	}
+}

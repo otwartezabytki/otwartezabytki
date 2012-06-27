@@ -151,9 +151,74 @@
       %article.step.step-tags.step-view(id="gps_autoscroll")
         %span.ico
         .values.values-view.values-edit
-          = f.input :tags, :as => :check_boxes,
-            :collection => Tag.all, :label => "Kategorie",
-            :input_html => { :multiple => true }, :disabled => Tag.all, :default => Tag.all
+          -#= f2.input :tags, :as => :check_boxes,
+            -#:collection => Tag.all, :label => "Kategorie",
+            -#:input_html => { :multiple => true }, :disabled => Tag.all
+          %h3 Kategorie
+          .column
+            %ul
+              %li
+                %input{:type => 'checkbox'}    
+                mieszkalny  
+              %li
+                %input{:type => 'checkbox'}    
+                gospodarczy
+              %li
+                %input{:type => 'checkbox'}    
+                sakralny
+              %li
+                %input{:type => 'checkbox'}    
+                militarny
+              %li
+                %input{:type => 'checkbox'}    
+                przemysłowy
+              %li
+                %input{:type => 'checkbox'}    
+                kultury
+              %li
+                %input{:type => 'checkbox'}    
+                edukacyjny
+              %li
+                %input{:type => 'checkbox'}    
+                użyteczności publicznej
+              %li
+                %input{:type => 'checkbox'}    
+                dworski
+              %li
+                %input{:type => 'checkbox'}    
+                cmentarny
+              %li
+                %input{:type => 'checkbox'}    
+                przyrodniczy
+          .column
+            %ul
+              %li
+                %input{:type => 'checkbox'}    
+                miejski 
+              %li
+                %input{:type => 'checkbox'}    
+                katolicki
+              %li
+                %input{:type => 'checkbox'}    
+                prawosławny
+              %li
+                %input{:type => 'checkbox'}    
+                protestancki
+              %li
+                %input{:type => 'checkbox'}    
+                żydowski
+              %li
+                %input{:type => 'checkbox'}    
+                muzułmański
+              %li
+                %input{:type => 'checkbox'}    
+                łemkowski
+              %li
+                %input{:type => 'checkbox'}    
+                unicki
+              %li
+                %input{:type => 'checkbox'}    
+                inny           
         .actions.actions-view
           - if f.object.tags.present? && f.object.tags.size > 0
             %h3 Czy zabytek ma poprawne kategorie?
@@ -231,9 +296,73 @@
 
               %article.step.step-tags.step-view
                 .values.values-view.values-edit
-                  = f2.input :tags, :as => :check_boxes,
-                    :collection => Tag.all, :label => "Kategorie",
-                    :input_html => { :multiple => true }, :disabled => Tag.all
+                  -#= f2.input :tags, :as => :check_boxes,
+                    -#:collection => Tag.all, :label => "Kategorie",
+                    -#:input_html => { :multiple => true }, :disabled => Tag.all
+                  .column
+                    %ul
+                      %li
+                        %input{:type => 'checkbox'}    
+                        mieszkalny  
+                      %li
+                        %input{:type => 'checkbox'}    
+                        gospodarczy
+                      %li
+                        %input{:type => 'checkbox'}    
+                        sakralny
+                      %li
+                        %input{:type => 'checkbox'}    
+                        militarny
+                      %li
+                        %input{:type => 'checkbox'}    
+                        przemysłowy
+                      %li
+                        %input{:type => 'checkbox'}    
+                        kultury
+                      %li
+                        %input{:type => 'checkbox'}    
+                        edukacyjny
+                      %li
+                        %input{:type => 'checkbox'}    
+                        użyteczności publicznej
+                      %li
+                        %input{:type => 'checkbox'}    
+                        dworski
+                      %li
+                        %input{:type => 'checkbox'}    
+                        cmentarny
+                      %li
+                        %input{:type => 'checkbox'}    
+                        przyrodniczy
+                  .column
+                    %ul
+                      %li
+                        %input{:type => 'checkbox'}    
+                        miejski 
+                      %li
+                        %input{:type => 'checkbox'}    
+                        katolicki
+                      %li
+                        %input{:type => 'checkbox'}    
+                        prawosławny
+                      %li
+                        %input{:type => 'checkbox'}    
+                        protestancki
+                      %li
+                        %input{:type => 'checkbox'}    
+                        żydowski
+                      %li
+                        %input{:type => 'checkbox'}    
+                        muzułmański
+                      %li
+                        %input{:type => 'checkbox'}    
+                        łemkowski
+                      %li
+                        %input{:type => 'checkbox'}    
+                        unicki
+                      %li
+                        %input{:type => 'checkbox'}    
+                        inny
                 .actions.actions-view
                   - if f2.object.tags.present? && f2.object.tags.size > 0
                     %h3 Czy zabytek ma poprawne kategorie?
