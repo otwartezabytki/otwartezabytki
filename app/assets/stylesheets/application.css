@@ -18,10 +18,10 @@
 ul.nav li a.selected { font-weight: bold; width: 400px; }
 footer { clear: both; display: block; }
 
-.step { width: 900px; clear: both; position: relative; }
+.step { clear: both; position: relative; }
 
-.step .values {  float: left; width: 400px; display: none; position: relative; }
-.step .actions { float: right; width: 500px; display: none; position: relative; }
+.step .values {display: none; position: relative; }
+.step .actions {display: none; position: relative; }
 
 .step-current.step-view .actions-view { display: block !important; }
 .step-current.step-edit .actions-edit { display: block !important; }

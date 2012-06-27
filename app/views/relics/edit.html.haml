@@ -1,237 +1,259 @@
-= semantic_form_for suggestion, :url => relic_path, :method => :put,
-  :html => { :data => { :commune => suggestion.relic.commune.name,
-                        :district => suggestion.relic.district.name,
-                        :voivodeship => suggestion.relic.voivodeship.name } } do |f|
-  %section.steps
+#relic-edit
+  .page-header
+    %h1 
+      3. Popraw zabytek
+      %span woj. dolnośląskie,   pow. Wrocław,  gmina Wrocław 
+    %span.arrow
+  = semantic_form_for suggestion, :url => relic_path, :method => :put,
+    :html => { :data => { :commune => suggestion.relic.commune.name,
+                          :district => suggestion.relic.district.name,
+                          :voivodeship => suggestion.relic.voivodeship.name } } do |f|
+    %section.steps
 
-    %article.step.step-name.step-view.step-current
-      .values.values-edit.values-view
-        = f.input :identification, :as => :string, :label => "Nazwa zabytku", :input_html => { :readonly => true }
-        = f.input :identification_action, :as => :hidden
-      .actions.actions-view
-        %h3 Czy nazwa jest poprawna?
-        .action.action-edit= link_to "Chcę poprawić nazwę"
-        .action.action-confirm= link_to "Nazwa jest poprawna"
-        .action.action-skip= link_to "Nie wiem, pomiń"
-      .actions.actions-edit
-        %h3 Czy nazwa jest poprawna?
-        .action.action-submit= link_to "Zatwierdź"
-        .action.action-cancel= link_to "Anuluj"
-      .actions.actions-done
-        .action.action-back= link_to "Cofnij"
+      %article.step.step-name.step-view.step-current
+        %span.ico
+        .values.values-edit.values-view
+          = f.input :identification, :as => :string, :label => "Czy ta nazwa zabytku jest poprawna?", :input_html => { :readonly => true }
+          = f.input :identification_action, :as => :hidden
+        .actions.actions-view
+          %h3 Wybierz jedną z opcji:
+          .action.action-confirm= link_to "Tak, jest poprawna" 
+          .action.action-edit= link_to "Nie, chcę poprawić nazwę"
+          .action.action-skip= link_to "Nie wiem, wolę pominąć to pytanie"
+        .actions.actions-edit
+          %h3 Wybierz jedną z opcji: 
+          .action.action-confirm= link_to "Tak, jest poprawna" 
+          .action.action-edit.selected= link_to "Nie, chcę poprawić nazwę"
+          .action.action-skip= link_to "Nie wiem, wolę pominąć to pytanie"
+          .action.action-submit= link_to "Zapisz"
+          .action.action-cancel= link_to "cofnij zmianę"
+        .actions.actions-done
+          %h3 Wybierz jedną z opcji:
+          .action.action-confirm.selected= link_to "Tak, jest poprawna" 
+          .action.action-edit= link_to "Nie, chcę poprawić nazwę"
+          .action.action-skip= link_to "Nie wiem, wolę pominąć to pytanie"
+          .action.action-back
+            (zrobiłeś błąd?
+            = link_to "cofnij"
+            )
 
-    %article.step.step-place.step-view
-      .values.values-view
-        = f.input :place_name, :as => :string, :label => "Miejscowość",
-          :input_html => { :name => "place_name_viewer", :id => "place_name_viewer", :readonly => true }
-      .values.values-edit
-        = f.input :place_id, :as => :select,
-          :collection => f.object.relic.commune.places, :selected => f.object.place.id, :label => "Miejscowość",
-          :include_blank => false
+      %article.step.step-place.step-view
+        %span.ico
+        .values.values-view
+          = f.input :place_name, :as => :string, :label => "Miejscowość",
+            :input_html => { :name => "place_name_viewer", :id => "place_name_viewer", :readonly => true }
+        .values.values-edit
+          = f.input :place_id, :as => :select,
+            :collection => f.object.relic.commune.places, :selected => f.object.place.id, :label => "Miejscowość",
+            :include_blank => false
 
-        = f.input :place_id_action, :as => :hidden
+          = f.input :place_id_action, :as => :hidden
 
-      .actions.actions-view
-        %h3 Czy miejscowość jest poprawna?
-        .action.action-edit= link_to "Chcę poprawić miejscowość"
-        .action.action-confirm= link_to "Nazwa jest poprawna"
-        .action.action-skip= link_to "Nie wiem, pomiń"
-      .actions.actions-edit
-        %h3 Czy miejscowość jest poprawna?
-        .action.action-submit= link_to "Zatwierdź"
-        .action.action-cancel= link_to "Anuluj"
-      .actions.actions-done
-        .action.action-back= link_to "Cofnij"
-
-    %article.step.step-street.step-view
-      .values.values-edit.values-view
-        = f.input :street, :as => :string, :label => "Adres", :placeholder => "Brak danych", :input_html => { :readonly => true }
-        = f.input :street_action, :as => :hidden
-      .actions.actions-view
-        - if f.object.street.present?
-          %h3 Czy adres zabytku jest poprawny?
-          .action.action-edit= link_to "Chcę poprawić adres"
-          .action.action-confirm= link_to "Adres jest poprawny"
+        .actions.actions-view
+          %h3 Czy miejscowość jest poprawna?
+          .action.action-edit= link_to "Chcę poprawić miejscowość"
+          .action.action-confirm= link_to "Nazwa jest poprawna"
           .action.action-skip= link_to "Nie wiem, pomiń"
-        - else
-          %h3 Czy znasz adres pod jakim leży zabytek?
-          .action.action-edit= link_to "Tak, chcę uzupełnić adres"
-          .action.action-skip= link_to "Nie wiem, pomiń"
-      .actions.actions-edit
-        - if f.object.street.present?
-          %h3 Czy adres jest poprawny?
+        .actions.actions-edit
+          %h3 Czy miejscowość jest poprawna?
           .action.action-submit= link_to "Zatwierdź"
           .action.action-cancel= link_to "Anuluj"
-        - else
-          %h3 Czy znasz adres pod jakim leży zabytek?
-          .action.action-submit= link_to "Zatwierdź"
-          .action.action-cancel= link_to "Anuluj"
-      .actions.actions-done
-        .action.action-back= link_to "Cofnij"
+        .actions.actions-done
+          .action.action-back= link_to "Cofnij"
 
-    %article.step.step-date.step-view
-      .values.values-edit.values-view
-        = f.input :dating_of_obj, :as => :string, :label => "Z kiedy?", :placeholder => "Brak danych", :input_html => { :readonly => true }
-        = f.input :dating_of_obj_action, :as => :hidden
-      - if f.object.dating_of_obj.present?
+      %article.step.step-street.step-view
+        %span.ico
+        .values.values-edit.values-view
+          = f.input :street, :as => :string, :label => "Adres", :placeholder => "Brak danych", :input_html => { :readonly => true }
+          = f.input :street_action, :as => :hidden
         .actions.actions-view
-          %h3 Czy data jest poprawna?
-          .action.action-edit= link_to "Chcę poprawić datę"
-          .action.action-confirm= link_to "Data jest poprawna"
-          .action.action-skip= link_to "Nie wiem, pomiń"
-      - else
-        .actions.actions-view
-          %h3 Czy znasz datę powstania zabytku?
-          .action.action-edit= link_to "Tak, chcę poprawić datę"
-          .action.action-skip= link_to "Nie wiem, pomiń"
-      .actions.actions-edit
+          - if f.object.street.present?
+            %h3 Czy adres zabytku jest poprawny?
+            .action.action-edit= link_to "Chcę poprawić adres"
+            .action.action-confirm= link_to "Adres jest poprawny"
+            .action.action-skip= link_to "Nie wiem, pomiń"
+          - else
+            %h3 Czy znasz adres pod jakim leży zabytek?
+            .action.action-edit= link_to "Tak, chcę uzupełnić adres"
+            .action.action-skip= link_to "Nie wiem, pomiń"
+        .actions.actions-edit
+          - if f.object.street.present?
+            %h3 Czy adres jest poprawny?
+            .action.action-submit= link_to "Zatwierdź"
+            .action.action-cancel= link_to "Anuluj"
+          - else
+            %h3 Czy znasz adres pod jakim leży zabytek?
+            .action.action-submit= link_to "Zatwierdź"
+            .action.action-cancel= link_to "Anuluj"
+        .actions.actions-done
+          .action.action-back= link_to "Cofnij"
+
+      %article.step.step-date.step-view
+        %span.ico
+        .values.values-edit.values-view
+          = f.input :dating_of_obj, :as => :string, :label => "Z kiedy?", :placeholder => "Brak danych", :input_html => { :readonly => true }
+          = f.input :dating_of_obj_action, :as => :hidden
         - if f.object.dating_of_obj.present?
-          %h3 Czy znasz ulicę na jakiej leży zabytek?
-          .action.action-submit= link_to "Zatwierdź"
-          .action.action-cancel= link_to "Anuluj"
+          .actions.actions-view
+            %h3 Czy data jest poprawna?
+            .action.action-edit= link_to "Chcę poprawić datę"
+            .action.action-confirm= link_to "Data jest poprawna"
+            .action.action-skip= link_to "Nie wiem, pomiń"
         - else
-          %h3 Czy znasz datę powstania zabytku?
-          .action.action-submit= link_to "Zatwierdź"
-          .action.action-cancel= link_to "Anuluj"
-      .actions.actions-done
-        .action.action-back= link_to "Cofnij"
+          .actions.actions-view
+            %h3 Czy znasz datę powstania zabytku?
+            .action.action-edit= link_to "Tak, chcę poprawić datę"
+            .action.action-skip= link_to "Nie wiem, pomiń"
+        .actions.actions-edit
+          - if f.object.dating_of_obj.present?
+            %h3 Czy znasz ulicę na jakiej leży zabytek?
+            .action.action-submit= link_to "Zatwierdź"
+            .action.action-cancel= link_to "Anuluj"
+          - else
+            %h3 Czy znasz datę powstania zabytku?
+            .action.action-submit= link_to "Zatwierdź"
+            .action.action-cancel= link_to "Anuluj"
+        .actions.actions-done
+          .action.action-back= link_to "Cofnij"
 
-    %article.step.step-tags.step-view(id="gps_autoscroll")
-      .values.values-view.values-edit
-        = f.input :tags, :as => :check_boxes,
-          :collection => Tag.all, :label => "Kategorie",
-          :input_html => { :multiple => true }, :disabled => Tag.all, :default => Tag.all
-      .actions.actions-view
-        - if f.object.tags.present? && f.object.tags.size > 0
-          %h3 Czy zabytek ma poprawne kategorie?
-          .action.action-edit= link_to "Chciałbym poprawić lub dodać kategorie"
-          .action.action-confirm= link_to "Kategorie są poprawne"
-          .action.action-skip= link_to "Nie wiem, pomiń"
-        - else
-          %h3 Czy chcesz skategoryzować zabytek?
-          .action.action-edit= link_to "Chciałbym dodać kategorie do zabytku"
-          .action.action-skip= link_to "Nie wiem, pomiń"
-      .actions.actions-edit
-        - if f.object.tags.present? && f.object.tags.size > 0
-          %h3 Czy zabytek ma poprawne kategorie?
-          .action.action-submit= link_to "Zatwierdź"
-          .action.action-cancel= link_to "Anuluj"
-        - else
-          %h3 Czy chcesz skategoryzować zabytek?
-          .action.action-submit= link_to "Zatwierdź"
-          .action.action-cancel= link_to "Anuluj"
-      .actions.actions-done
-        .action.action-back= link_to "Cofnij"
+      %article.step.step-tags.step-view(id="gps_autoscroll")
+        %span.ico
+        .values.values-view.values-edit
+          = f.input :tags, :as => :check_boxes,
+            :collection => Tag.all, :label => "Kategorie",
+            :input_html => { :multiple => true }, :disabled => Tag.all, :default => Tag.all
+        .actions.actions-view
+          - if f.object.tags.present? && f.object.tags.size > 0
+            %h3 Czy zabytek ma poprawne kategorie?
+            .action.action-edit= link_to "Chciałbym poprawić lub dodać kategorie"
+            .action.action-confirm= link_to "Kategorie są poprawne"
+            .action.action-skip= link_to "Nie wiem, pomiń"
+          - else
+            %h3 Czy chcesz skategoryzować zabytek?
+            .action.action-edit= link_to "Chciałbym dodać kategorie do zabytku"
+            .action.action-skip= link_to "Nie wiem, pomiń"
+        .actions.actions-edit
+          - if f.object.tags.present? && f.object.tags.size > 0
+            %h3 Czy zabytek ma poprawne kategorie?
+            .action.action-submit= link_to "Zatwierdź"
+            .action.action-cancel= link_to "Anuluj"
+          - else
+            %h3 Czy chcesz skategoryzować zabytek?
+            .action.action-submit= link_to "Zatwierdź"
+            .action.action-cancel= link_to "Anuluj"
+        .actions.actions-done
+          .action.action-back= link_to "Cofnij"
 
-    - if f.object.suggestions.size > 0
+      - if f.object.suggestions.size > 0
 
-      %section.subrelics
+        %section.subrelics
 
-        %h3 W skład zespołu wchodzą:
+          %h3 W skład zespołu wchodzą:
 
-        = f.semantic_fields_for :suggestions do |f2|
+          = f.semantic_fields_for :suggestions do |f2|
 
-          %article.subrelic
+            %article.subrelic
 
-            %article.step.step-name.step-view
-              .values.values-edit.values-view
-                = f2.input :identification, :as => :string, :label => "Nazwa zabytku", :input_html => { :readonly => true }
-                = f2.input :identification_action, :as => :hidden
-              .actions.actions-view
-                %h3 Czy nazwa jest poprawna?
-                .action.action-edit= link_to "Chcę poprawić nazwę"
-                .action.action-confirm= link_to "Nazwa jest poprawna"
-                .action.action-skip= link_to "Nie wiem, pomiń"
-              .actions.actions-edit
-                %h3 Czy nazwa jest poprawna?
-                .action.action-submit= link_to "Zatwierdź"
-                .action.action-cancel= link_to "Anuluj"
-              .actions.actions-done
-                .action.action-back= link_to "Cofnij"
-
-            %article.step.step-date.step-view
-              .values.values-edit.values-view
-                = f2.input :dating_of_obj, :as => :string, :label => "Z kiedy?", :placeholder => "Brak danych", :input_html => { :readonly => true }
-                = f2.input :dating_of_obj_action, :as => :hidden
-              - if f2.object.dating_of_obj.present?
+              %article.step.step-name.step-view
+                .values.values-edit.values-view
+                  = f2.input :identification, :as => :string, :label => "Nazwa zabytku", :input_html => { :readonly => true }
+                  = f2.input :identification_action, :as => :hidden
                 .actions.actions-view
-                  %h3 Czy data jest poprawna?
-                  .action.action-edit= link_to "Chcę poprawić datę"
-                  .action.action-confirm= link_to "Data jest poprawna"
+                  %h3 Czy nazwa jest poprawna?
+                  .action.action-edit= link_to "Chcę poprawić nazwę"
+                  .action.action-confirm= link_to "Nazwa jest poprawna"
                   .action.action-skip= link_to "Nie wiem, pomiń"
-              - else
-                .actions.actions-view
-                  %h3 Czy znasz datę powstania zabytku?
-                  .action.action-edit= link_to "Tak, chcę poprawić datę"
-                  .action.action-skip= link_to "Nie wiem, pomiń"
-              .actions.actions-edit
+                .actions.actions-edit
+                  %h3 Czy nazwa jest poprawna?
+                  .action.action-submit= link_to "Zatwierdź"
+                  .action.action-cancel= link_to "Anuluj"
+                .actions.actions-done
+                  .action.action-back= link_to "Cofnij"
+
+              %article.step.step-date.step-view
+                .values.values-edit.values-view
+                  = f2.input :dating_of_obj, :as => :string, :label => "Z kiedy?", :placeholder => "Brak danych", :input_html => { :readonly => true }
+                  = f2.input :dating_of_obj_action, :as => :hidden
                 - if f2.object.dating_of_obj.present?
-                  %h3 Czy znasz ulicę na jakiej leży zabytek?
-                  .action.action-submit= link_to "Zatwierdź"
-                  .action.action-cancel= link_to "Anuluj"
+                  .actions.actions-view
+                    %h3 Czy data jest poprawna?
+                    .action.action-edit= link_to "Chcę poprawić datę"
+                    .action.action-confirm= link_to "Data jest poprawna"
+                    .action.action-skip= link_to "Nie wiem, pomiń"
                 - else
-                  %h3 Czy znasz datę powstania zabytku?
-                  .action.action-submit= link_to "Zatwierdź"
-                  .action.action-cancel= link_to "Anuluj"
-              .actions.actions-done
-                .action.action-back= link_to "Cofnij"
+                  .actions.actions-view
+                    %h3 Czy znasz datę powstania zabytku?
+                    .action.action-edit= link_to "Tak, chcę poprawić datę"
+                    .action.action-skip= link_to "Nie wiem, pomiń"
+                .actions.actions-edit
+                  - if f2.object.dating_of_obj.present?
+                    %h3 Czy znasz ulicę na jakiej leży zabytek?
+                    .action.action-submit= link_to "Zatwierdź"
+                    .action.action-cancel= link_to "Anuluj"
+                  - else
+                    %h3 Czy znasz datę powstania zabytku?
+                    .action.action-submit= link_to "Zatwierdź"
+                    .action.action-cancel= link_to "Anuluj"
+                .actions.actions-done
+                  .action.action-back= link_to "Cofnij"
 
-            %article.step.step-tags.step-view
-              .values.values-view.values-edit
-                = f2.input :tags, :as => :check_boxes,
-                  :collection => Tag.all, :label => "Kategorie",
-                  :input_html => { :multiple => true }, :disabled => Tag.all
-              .actions.actions-view
-                - if f2.object.tags.present? && f2.object.tags.size > 0
-                  %h3 Czy zabytek ma poprawne kategorie?
-                  .action.action-edit= link_to "Chciałbym poprawić lub dodać kategorie"
-                  .action.action-confirm= link_to "Kategorie są poprawne"
-                  .action.action-skip= link_to "Nie wiem, pomiń"
-                - else
-                  %h3 Czy chcesz skategoryzować zabytek?
-                  .action.action-edit= link_to "Chciałbym dodać kategorie do zabytku"
-                  .action.action-skip= link_to "Nie wiem, pomiń"
-              .actions.actions-edit
-                - if f2.object.tags.present? && f2.object.tags.size > 0
-                  %h3 Czy zabytek ma poprawne kategorie?
-                  .action.action-submit= link_to "Zatwierdź"
-                  .action.action-cancel= link_to "Anuluj"
-                - else
-                  %h3 Czy chcesz skategoryzować zabytek?
-                  .action.action-submit= link_to "Zatwierdź"
-                  .action.action-cancel= link_to "Anuluj"
-              .actions.actions-done
-                .action.action-back= link_to "Cofnij"
+              %article.step.step-tags.step-view
+                .values.values-view.values-edit
+                  = f2.input :tags, :as => :check_boxes,
+                    :collection => Tag.all, :label => "Kategorie",
+                    :input_html => { :multiple => true }, :disabled => Tag.all
+                .actions.actions-view
+                  - if f2.object.tags.present? && f2.object.tags.size > 0
+                    %h3 Czy zabytek ma poprawne kategorie?
+                    .action.action-edit= link_to "Chciałbym poprawić lub dodać kategorie"
+                    .action.action-confirm= link_to "Kategorie są poprawne"
+                    .action.action-skip= link_to "Nie wiem, pomiń"
+                  - else
+                    %h3 Czy chcesz skategoryzować zabytek?
+                    .action.action-edit= link_to "Chciałbym dodać kategorie do zabytku"
+                    .action.action-skip= link_to "Nie wiem, pomiń"
+                .actions.actions-edit
+                  - if f2.object.tags.present? && f2.object.tags.size > 0
+                    %h3 Czy zabytek ma poprawne kategorie?
+                    .action.action-submit= link_to "Zatwierdź"
+                    .action.action-cancel= link_to "Anuluj"
+                  - else
+                    %h3 Czy chcesz skategoryzować zabytek?
+                    .action.action-submit= link_to "Zatwierdź"
+                    .action.action-cancel= link_to "Anuluj"
+                .actions.actions-done
+                  .action.action-back= link_to "Cofnij"
 
-    %article.step.step-gps.step-view(data-autoscroll="gps_autoscroll")
-      .values.values-edit.values-view
-        %label Położenie GPS
-        .gps-helper
-          %h3 Zlokalizuj zespół zabytków na mapie
-        #map_canvas{ style: "height: 500px; width: 900px" }
+      %article.step.step-gps.step-view(data-autoscroll="gps_autoscroll")
+        %span.ico
+        .values.values-edit.values-view
+          %label Położenie GPS
+          .gps-helper
+            %h3 Zlokalizuj zespół zabytków na mapie
+          #map_canvas{ style: "height: 500px; width: 900px" }
 
-      .actions.actions-view
-        .marker-helper
-          %h4 Przeciągnij znacznik na mapę:
-          .marker-holder
-            = image_tag 'marker.png', :id => 'marker'
-        .buttons
-          .action.action-skip.btn= link_to "Pomiń"
+        .actions.actions-view
+          .marker-helper
+            %h4 Przeciągnij znacznik na mapę:
+            .marker-holder
+              = image_tag 'marker.png', :id => 'marker'
+          .buttons
+            .action.action-skip.btn= link_to "Pomiń"
 
-      .actions.actions-edit
-        .buttons
-          .action.action-submit.btn= link_to "Zatwierdź"
-          .action.action-cancel.btn= link_to "Anuluj"
+        .actions.actions-edit
+          .buttons
+            .action.action-submit.btn= link_to "Zatwierdź"
+            .action.action-cancel.btn= link_to "Anuluj"
 
-        = f.input :latitude, :as => :string, :label => false, :placeholder => "szerokość", :input_html => { :maxlength => 9 }
-        = f.input :longitude, :as => :string, :label => false, :placeholder => "długość", :input_html => { :maxlength => 9 }
-        = f.input :coordinates_action, :as => :hidden
+          = f.input :latitude, :as => :string, :label => false, :placeholder => "szerokość", :input_html => { :maxlength => 9 }
+          = f.input :longitude, :as => :string, :label => false, :placeholder => "długość", :input_html => { :maxlength => 9 }
+          = f.input :coordinates_action, :as => :hidden
 
-      .actions.actions-done
-        .buttons
-          .action.action-back.btn= link_to "Cofnij"
+        .actions.actions-done
+          .buttons
+            .action.action-back.btn= link_to "Cofnij"
 
-    %article.step.step-submit.step-view(data-autoscroll="submit_autoscroll" id="submit_autoscroll")
-      .actions.actions-view
-        %h2 Jeśli wszystkie pola są poprawione, potwierdź wysłanie formularza
-        = f.submit "Wyślij formularz"
+      %article.step.step-submit.step-view(data-autoscroll="submit_autoscroll" id="submit_autoscroll")
+        .actions.actions-view
+          %h2 Jeśli wszystkie pola są poprawione, potwierdź wysłanie formularza
+          = f.submit "Wyślij formularz"
