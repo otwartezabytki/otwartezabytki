@@ -43,7 +43,7 @@ module Import
       end
 
       def import_ancestry
-        Multiarch.all(:conditions => {:id.gt => 634029, :typ_rekordu.not => 'ZE'}).batch(1000) do |m|
+        Multiarch.all(:conditions => {:typ_rekordu.not => 'ZE'}).batch(1000) do |m|
           logger.info "Importing: #{m.id}"
           if m.parent
             m.relic.update_attributes :parent => m.parent.relic

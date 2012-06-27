@@ -75,6 +75,16 @@ class Relic < ActiveRecord::Base
         m
       end.flatten.uniq.select{|w| w.size > 1}.sort_by{|w| -w.size}
     end
+
+    def correct_count
+      return @correct_count if defined? @correct_count
+      @correct_count = self.facets['corrected']['terms'].select {|a| a['term'] == 1}.first['count']
+    end
+
+    def incorrect_count
+      return @incorrect_count if defined? @incorrect_count
+      @incorrect_count = self.facets['corrected']['terms'].select {|a| a['term'] == 0}.first['count']
+    end
   end
 
   Tire::Results::Item.class_eval do
@@ -138,6 +148,10 @@ class Relic < ActiveRecord::Base
           facet "places", :facet_filter => { :term => { :commune_id => location[2] } } do
             terms :place_id, :size => 10_000
           end
+        end
+
+        facet "corrected" do
+          terms :edit_count, :script => "term > 2 ? 1 : 0"
         end
 
         filter :term, :place_id => location[3] if location.size > 3

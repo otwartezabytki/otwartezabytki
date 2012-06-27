@@ -5,23 +5,20 @@
     %span.arrow
 
   - corrected_arry = []
-  - if relics.first.corrected?
+  - if relics.first.try(:corrected?)
     %div.relic-header
-      %h2.changed Zabytki poprawione
+      %h2.changed Zabytki poprawione (#{relics.correct_count})
   - else
     %div.relic-header
-      %h2 Zabytki niepoprawione
+      %h2 Zabytki niepoprawione (#{relics.incorrect_count})
       %div.breadcrumb
         %p Gdzie:
         %ul
-          %li
-            %a{:href => ''} Cała Polska
-            %span &#187;
-          %li
-            %a{:href => ''} mazowieckie
-            %span &#187;
-          %li
-            %a{:href => ''} pow. Warszawa
+          - location_breadcrumbs.each_with_index do |l, i|
+            %li
+              = link_to l[:label], l[:path]
+              - if i < location_breadcrumbs.size - 1
+                %span &#187;
 
   .search-results
     - relics.each_with_index do |relic, i|
@@ -30,7 +27,7 @@
       - corrected_arry << relic.corrected?
       - if corrected_arry.size > 1 and !corrected_arry[i-1] and corrected_arry[i]
         %div.relic-header
-          %h2.changed Zabytki poprawione
+          %h2.changed Zabytki poprawione (#{relics.correct_count})
 
       -# relic details
       .relic

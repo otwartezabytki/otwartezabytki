@@ -42,7 +42,7 @@ class Suggestion < ActiveRecord::Base
       Relic.increment_counter(:edit_count, relic_id)
     end
     # explicit update relic index
-    relic.update_relic_index
+    relic.reload.update_relic_index
     true
   end
 
