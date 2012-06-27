@@ -26,7 +26,7 @@
                 %a(href="#") user id = #{current_user.id rescue "not logged"}
               %li.login
                 %a{:href => ''} Zaloguj
-              %li.register 
+              %li.register
                 %a{:href => ''} Zarejestruj
           %a{:href => 'http://centrumcyfrowe.pl/', :target => '_blank', :class => 'cc_logo'}
       %section#menu
@@ -59,7 +59,7 @@
             .span3
               = yield(:sidebar)
             .span9
-              = yield 
+              = yield
 
 
     / Placed at the end of the document so the pages load faster

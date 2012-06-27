@@ -17,11 +17,45 @@ class Suggestion < ActiveRecord::Base
   validates :place_id_action, :identification_action, :street_action,
             :dating_of_obj_action, :coordinates_action, :inclusion => { :in => ['edit', 'skip', 'confirm'] }
 
-  serialize :tags, Array
-
-  def before_create
+  before_create do
+    self.skipped = is_skipped?
     if self.suggestion.present? && self.user_id.blank?
       self.user_id = self.suggestion.user_id
+    end
+  end
+  after_create  :update_relic_skip_cache
+
+  serialize :tags, Array
+
+  class << self
+    def action_columns
+      return @action_columns if defined? @action_columns
+      @action_columns = self.column_names.inject([]){ |m, a| m << a if a.match(/_action/); m }
+    end
+  end
+
+  def update_relic_skip_cache
+    return false if ancestry.present?
+    if self.skipped
+      Relic.increment_counter(:skip_count, relic_id)
+    else
+      Relic.increment_counter(:edit_count, relic_id)
+    end
+    # explicit update relic index
+    relic.update_relic_index
+    true
+  end
+
+  def descendants
+    self.class.where(:ancestry => id)
+  end
+
+  def is_skipped?
+    return @is_skipped if defined? @is_skipped
+    @is_skipped = if ancestry.blank?
+      self.class.action_columns.all? {|c| send(c) == 'skip'} and descendants.map(&:is_skipped?).all?
+    else
+      self.class.action_columns.all? {|c| send(c) == 'skip'}
     end
   end
 
