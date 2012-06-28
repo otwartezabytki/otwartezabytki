@@ -66,5 +66,8 @@ module Otwartezabytki
       g.javascripts           false
     end
 
+    # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
+    config.assets.precompile += %w( gmaps.js active_admin.js ) unless Rails.env.development?
+
   end
 end

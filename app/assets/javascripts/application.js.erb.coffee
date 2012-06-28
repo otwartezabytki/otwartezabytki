@@ -12,7 +12,6 @@
 
 #= require chosen-jquery
 #= require twitter/bootstrap
-#= require bootstrap
 #= require wizard
 #= require_tree ./vendor
 
@@ -43,3 +42,24 @@ jQuery ->
   if $highlightArea.length > 0 and gon.highlightedTags
     for tag in gon.highlightedTags
       $highlightArea.highlight(tag)
+
+  # font resize
+  $("span.plus").click ->
+    currentFontSize = $("html").css("font-size")
+    currentFontSizeNum = parseFloat(currentFontSize, 10)
+    newFontSize = currentFontSizeNum * 1.2
+    $("html").css "font-size", newFontSize
+    false
+
+  $("span.minus").click ->
+    currentFontSize = $("html").css("font-size")
+    currentFontSizeNum = parseFloat(currentFontSize, 10)
+    newFontSize = currentFontSizeNum * 0.8
+    $("html").css "font-size", newFontSize
+    false                          
+
+  # bootstrap
+  $("a[rel=popover]").popover()
+  $(".tooltip").tooltip()
+  $("a[rel=tooltip]").tooltip()
+

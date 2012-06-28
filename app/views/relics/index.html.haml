@@ -12,14 +12,15 @@
   - else
     %div.relic-header
       %h2 Zabytki do sprawdzenia (#{relics.incorrect_count})
-      %div.breadcrumb
-        %p Gdzie:
-        %ul
-          - location_breadcrumbs.each_with_index do |l, i|
-            %li
-              = link_to l[:label], l[:path]
-              - if i < location_breadcrumbs.size - 1
-                %span &#187;
+      - if location_breadcrumbs.present?
+        %div.breadcrumb
+          %p Gdzie:
+          %ul
+            - location_breadcrumbs.each_with_index do |l, i|
+              %li
+                = link_to l[:label], l[:path]
+                - if i < location_breadcrumbs.size - 1
+                  %span &#187;
 
   .search-results
     - relics.each_with_index do |relic, i|
@@ -44,7 +45,7 @@
           .modified
         - else
           .change
-            = link_to "Edytuj »", edit_relic_path(relic), :class => 'btn btn-mini'
+            = link_to "Sprawdź »", edit_relic_path(relic), :class => 'btn btn-mini'
 
   = paginate relics
 
