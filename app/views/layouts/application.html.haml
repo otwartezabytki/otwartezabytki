@@ -26,27 +26,26 @@
                 %li= "uid = #{current_user.id rescue 0}, suggestions = #{current_user.suggestions.count rescue 0}"
               - if current_user && current_user.registered?
                 %li Witaj, #{ current_user.username || current_user.email }
-                %li.login= link_to 'Wyloguj się', destroy_user_session_path, :method => :delete
+                %li= link_to 'Wyloguj się', destroy_user_session_path, :method => :delete, :class => 'login'
               - else
-                %li.login
-                  %a{:href => new_user_session_path} Zaloguj
-                %li.register
-                  %a{:href => new_user_registration_path} Zarejestruj
+                %li
+                  %a{:href => new_user_session_path, :class => 'login'} Zaloguj
+                %li
+                  %a{:href => new_user_registration_path, :class => 'register'} Zarejestruj
           %a{:href => 'http://centrumcyfrowe.pl/', :target => '_blank', :class => 'cc_logo'}
       %section#menu
         .container
           %nav
             %ul
               %li
-                = link_to "Zabytki", relics_path
-              %li
                 = link_to "O projekcie", page_pl_path('o-projekcie'), :class => 'about'
+              %li
+                = link_to "Pomoc", page_pl_path('pomoc'), :class => 'help'
               %li
                 = link_to "Kontakt", page_pl_path('kontakt'), :class => 'contact'
               %li
                 = link_to "Pobierz dane", page_pl_path('pobierz-dane'), :class => 'download'
-              %li
-                = link_to "Pomoc", page_pl_path('pomoc'), :class => 'help'
+
           = simple_form_for Relic.new, :url => relics_path, :html => { :class => 'well form-search'},:method => :get do |f|
             = f.input :q1, :label => false, :input_html => {:name => 'q1', :value => params[:q1], :class => "search-query"}, :placeholder => "dworek"
             = f.button :submit, 'Szukaj »', :name => nil
