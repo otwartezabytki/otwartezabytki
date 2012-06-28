@@ -12,7 +12,6 @@
 
 #= require chosen-jquery
 #= require twitter/bootstrap
-#= require bootstrap
 #= require wizard
 #= require_tree ./vendor
 
@@ -43,3 +42,8 @@ jQuery ->
   if $highlightArea.length > 0 and gon.highlightedTags
     for tag in gon.highlightedTags
       $highlightArea.highlight(tag)
+
+  # bootstrap
+  $("a[rel=popover]").popover()
+  $(".tooltip").tooltip()
+  $("a[rel=tooltip]").tooltip()
