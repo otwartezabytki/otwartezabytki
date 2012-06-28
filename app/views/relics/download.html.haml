@@ -103,6 +103,24 @@
   Powyższe pola mogą zmieniać w czasie numer swojej kolumny w eksportowanym pliku CSV. Odczytując dane należy polegać
   nie na numerze, tylko na nazwie kolumny (jest to zawsze jedna z wymienionych niżej.
 
+%h3#actions Akcje użytkowników na polach formularza
+
+%p To pole może obecenie przyjmować jedną z czterech wartości, w zależności od akcji na polu o podobnej nazwie:
+
+%dl
+  %dt revision
+  %dd wersja oryginalna pola, nie poddana zmianom użytkowników
+
+  %dt edit
+  %dd użytkownik zmienił wartość tego pola podczas poprawiania zabytku
+
+  %dt confirm
+  %dd użytkownik potwierdził prawdziwość tego pola, wartość pola nie została zmieniona
+
+  %dt skip
+  %dd użytkownik pominął potwierdzenie lub edycję tego pola, wartość pola nie została zmieniona
+
+
 %h3 Baza do pobrania
 
 %ul
