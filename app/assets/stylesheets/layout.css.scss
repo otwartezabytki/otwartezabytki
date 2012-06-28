@@ -1,8 +1,21 @@
+$blue: #044d71;
+$blue-hover: #006699;
+$dark-grey: #313132; 
+
 body{
 	background: #f5f5f5;
 	font-family: 'Open Sans', sans-serif;
 	font-size: 13px;
 	color: #313132;
+}
+
+a{
+	color: $blue;
+	text-decoration: none;
+	&:hover{
+		color: $blue-hover;
+		text-decoration: underline;
+	}
 }
 
 .container{
@@ -31,20 +44,29 @@ body{
 		li{
       list-style-type: none;
 			float: left;
-			margin-left: 30px;
-			padding-left: 20px;
-      &.login{
-        background: asset-data-url('icon-login.png') 0 2px no-repeat;
-      }
-      &.register{
-        background: asset-data-url('icon-register.png') 0 2px no-repeat;
-      }
+			margin-left: 30px;			
 			a{
 			  color: #313132;
 			  text-shadow: 0 1px 0 #fff;
 				text-decoration: none;
 				font-weight: 600;
-				line-height: 13px;  
+				line-height: 13px;
+				padding-left: 20px;
+				&:hover{
+					color: $blue-hover;
+				}  
+				&.login{
+	        background: asset-data-url('icon-login.png') 0 4px no-repeat;
+					&:hover{
+		        background: asset-data-url('icon-login-hover.png') 0 4px no-repeat;
+		      }
+	      }
+	      &.register{
+	        background: asset-data-url('icon-register.png') 0 4px no-repeat;
+					&:hover{
+		        background: asset-data-url('icon-register-hover.png') 0 4px no-repeat;
+		      }
+	      }  
 			}
 		}
 	}
@@ -75,20 +97,35 @@ body{
 				text-decoration: none;
 				margin-right: 30px;
 				padding-left: 20px;
+				display: block;
+				&:hover{
+					color: $blue-hover;
+				}
 				&.about{
 					padding-left: 29px;
-					background: asset-data-url('icon-menu-about.png') 4px -1px no-repeat;
+					background: asset-data-url('icon-menu-about.png') 4px 18px no-repeat;
 					margin-right: 42px;
+					&:hover{
+						background: asset-data-url('icon-menu-about-hover.png') 4px 18px no-repeat;
+					}
 				}
 				&.help{
-					background: asset-data-url('icon-menu-help.png') 0 3px no-repeat;
-					margin-right: 0;
+					background: asset-data-url('icon-menu-help.png') 0 23px no-repeat;
+					&:hover{
+						background: asset-data-url('icon-menu-help-hover.png') 0 23px no-repeat;
+					}
 				}
 				&.contact{
-					background: asset-data-url('icon-menu-contact.png') 0 4px no-repeat;
+					background: asset-data-url('icon-menu-contact.png') 0 24px no-repeat;
+					&:hover{
+						background: asset-data-url('icon-menu-contact-hover.png') 0 24px no-repeat;
+					}
 				}
 				&.download{
-					background: asset-data-url('icon-menu-download.png') 0 3px no-repeat;
+					background: asset-data-url('icon-menu-download.png') 0 23px no-repeat;
+					&:hover{
+						background: asset-data-url('icon-menu-download-hover.png') 0 23px no-repeat;
+					}
 				}
 			}
 		}
@@ -165,6 +202,16 @@ body{
 			border-radius: 2px;
 			padding: 5px 16px 4px 19px;
 			cursor: pointer;
+			&:hover{
+				background: #437994; /* Old browsers */
+				background: -moz-linear-gradient(top, #437994 0%, #2b607b 100%); /* FF3.6+ */
+				background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#437994), color-stop(100%,#2b607b)); /* Chrome,Safari4+ */
+				background: -webkit-linear-gradient(top, #437994 0%,#2b607b 100%); /* Chrome10+,Safari5.1+ */
+				background: -o-linear-gradient(top, #437994 0%,#2b607b 100%); /* Opera 11.10+ */
+				background: -ms-linear-gradient(top, #437994 0%,#2b607b 100%); /* IE10+ */
+				background: linear-gradient(to bottom, #437994 0%,#2b607b 100%); /* W3C */
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#437994', endColorstr='#2b607b',GradientType=0 ); /* IE6-9 */
+			}
 		}
 	}
 }
@@ -211,7 +258,6 @@ body{
 			}
 		}
 		a{
-			text-decoration: none;
 			color: #004b6c;
 			background: asset-data-url('sidebar-bullet.png') 12px 50% no-repeat;
 			display: block;
@@ -310,6 +356,7 @@ body{
 				margin-left: 7px;
 				a{
 					color: #024c6b;
+					text-decoration: underline;
 				}
 				span{
 					color: #313132;
@@ -329,12 +376,8 @@ body{
 	.name{
 		font-size: 16px;
 		font-weight: 600;
-		color: #044d71;
+		color: $blue;
 		padding-bottom: 6px;
-		a{
-			color: #044d71;
-			text-decoration: none;
-		}
 	}
 	.change{
 		background: #4b6d7e; /* Old browsers */
@@ -360,6 +403,16 @@ body{
 		position: absolute;
 		right: 30px;
 		top: 20px;
+		&:hover{
+			background: #437994; /* Old browsers */
+			background: -moz-linear-gradient(top, #437994 0%, #2b607b 100%); /* FF3.6+ */
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#437994), color-stop(100%,#2b607b)); /* Chrome,Safari4+ */
+			background: -webkit-linear-gradient(top, #437994 0%,#2b607b 100%); /* Chrome10+,Safari5.1+ */
+			background: -o-linear-gradient(top, #437994 0%,#2b607b 100%); /* Opera 11.10+ */
+			background: -ms-linear-gradient(top, #437994 0%,#2b607b 100%); /* IE10+ */
+			background: linear-gradient(to bottom, #437994 0%,#2b607b 100%); /* W3C */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#437994', endColorstr='#2b607b',GradientType=0 ); /* IE6-9 */
+		}
 		a{
 			background: asset-data-url('ico-success.png') no-repeat;
 			color: #fff;
@@ -376,7 +429,7 @@ body{
 		background: asset-data-url('relic-modified-big.png') no-repeat;
 	}
 	.include{
-		color: #044d71;
+		color: $blue;
 		font-weight: 600;
 		margin-top: 6px;
 		padding-left: 5px;
@@ -384,7 +437,7 @@ body{
 			float: left;
 			width: 5px;
 			height: 17px;
-			background: #044d71;
+			background: $blue;
 			margin-right: 10px;
 		}
 	}
@@ -399,7 +452,6 @@ body{
 			a{
 				font-size: 14px;
 				padding: 5px;
-				color: #044d71;
 			}
 		}
 	}
@@ -426,7 +478,7 @@ body{
 			background: none;
 			border: 0;
 			box-shadow: none;
-			color: #044d71;
+			color: $blue;
 			display: block;
 			width: 100%;
 			font-weight: 600;
@@ -489,6 +541,16 @@ body{
 			position: absolute;
 			top: -48px;
 			left: 373px;
+			&:hover{
+				background: #437994; /* Old browsers */
+				background: -moz-linear-gradient(top, #437994 0%, #2b607b 100%); /* FF3.6+ */
+				background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#437994), color-stop(100%,#2b607b)); /* Chrome,Safari4+ */
+				background: -webkit-linear-gradient(top, #437994 0%,#2b607b 100%); /* Chrome10+,Safari5.1+ */
+				background: -o-linear-gradient(top, #437994 0%,#2b607b 100%); /* Opera 11.10+ */
+				background: -ms-linear-gradient(top, #437994 0%,#2b607b 100%); /* IE10+ */
+				background: linear-gradient(to bottom, #437994 0%,#2b607b 100%); /* W3C */
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#437994', endColorstr='#2b607b',GradientType=0 ); /* IE6-9 */
+			}
 		}
 		.action-cancel a{
 			font-size: 13px;
@@ -528,6 +590,11 @@ body{
 			border: 3px solid #47697a;
 			background: #e8eff2;
 			padding: 60px 25px;
+			-webkit-transition: all 1s ease;
+			-moz-transition: all 1s ease;
+			-o-transition: all 1s ease;
+			-ms-transition: all 1s ease;
+			transition: all 1s ease;
 			.ico{
 				background: asset-data-url('icon-modify-big.png') no-repeat;
 				position: absolute;
@@ -537,21 +604,18 @@ body{
 				right: 20px;
 			}
 		}
-		&.step-skipped{
-			.action-skip a{
-				background: asset-data-url('wizard-checkbox-done.png') no-repeat; 
-			}
-			.action-edit a, .action-confirm a{
-				opacity: .3;
-			}
-		}
 		&.step-edit{
 			.action-edit a{
 				background: asset-data-url('wizard-checkbox-select.png') no-repeat; 
 			}
 		}
-		&.step-confirmed, &.step-edited{
+		&.step-confirmed, &.step-edited, &.step-skipped{
 			background: #fff;
+			-webkit-transition: all 1s ease;
+			-moz-transition: all 1s ease;
+			-o-transition: all 1s ease;
+			-ms-transition: all 1s ease;
+			transition: all 1s ease;
 			.ico{
 				background: asset-data-url('icon-success-big.png') no-repeat;
 				position: absolute;
@@ -559,7 +623,14 @@ body{
 				height: 50px;
 				bottom: 9px;
 				right: 20px;
-			}
+				-webkit-transition: all 1s ease;
+				-moz-transition: all 1s ease;
+				-o-transition: all 1s ease;
+				-ms-transition: all 1s ease;
+				transition: all 1s ease;
+			}  
+		}
+		&.step-confirmed{
 			.actions{ 
 				.action-edit a, .action-skip a{
 					color: #313132;
@@ -577,7 +648,15 @@ body{
 					font-weight: 700;
 					opacity: 1;
 				}
-			}  
+			}
+		}
+		&.step-skipped{
+			.action-skip a{
+				background: asset-data-url('wizard-checkbox-done.png') no-repeat; 
+			}
+			.action-edit a, .action-confirm a{
+				opacity: .3;
+			}
 		}
 	} 
 }
