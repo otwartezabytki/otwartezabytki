@@ -12,7 +12,6 @@
 
 #= require chosen-jquery
 #= require twitter/bootstrap
-#= require bootstrap
 #= require wizard
 #= require_tree ./vendor
 
@@ -58,3 +57,9 @@ jQuery ->
     newFontSize = currentFontSizeNum * 0.8
     $("html").css "font-size", newFontSize
     false                          
+
+  # bootstrap
+  $("a[rel=popover]").popover()
+  $(".tooltip").tooltip()
+  $("a[rel=tooltip]").tooltip()
+

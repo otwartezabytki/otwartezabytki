@@ -151,9 +151,10 @@
       %article.step.step-tags.step-view(id="gps_autoscroll")
         %span.ico
         .values.values-view.values-edit
-          -#= f2.input :tags, :as => :check_boxes,
+          -#= f.input :tags, :as => :check_boxes,
             -#:collection => Tag.all, :label => "Kategorie",
-            -#:input_html => { :multiple => true }, :disabled => Tag.all
+            -#:input_html => { :multiple => true }, :disabled => Tag.all, :default => Tag.all
+          -#= f.input :tags_action, :as => :hidden
           %h3 Kategorie
           .column
             %ul
@@ -249,6 +250,8 @@
 
           = f.semantic_fields_for :suggestions do |f2|
 
+            = f2.hidden_field :relic_id, :value => f2.object.relic.id
+
             %article.subrelic
 
               %article.step.step-name.step-view
@@ -299,6 +302,7 @@
                   -#= f2.input :tags, :as => :check_boxes,
                     -#:collection => Tag.all, :label => "Kategorie",
                     -#:input_html => { :multiple => true }, :disabled => Tag.all
+                  -#= f2.input :tags_action, :as => :hidden
                   .column
                     %ul
                       %li

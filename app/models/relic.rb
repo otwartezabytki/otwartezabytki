@@ -78,12 +78,12 @@ class Relic < ActiveRecord::Base
 
     def correct_count
       return @correct_count if defined? @correct_count
-      @correct_count = self.facets['corrected']['terms'].select {|a| a['term'] == 1}.first['count']
+      @correct_count = self.facets['corrected']['terms'].select {|a| a['term'] == 1}.first['count'] rescue 0
     end
 
     def incorrect_count
       return @incorrect_count if defined? @incorrect_count
-      @incorrect_count = self.facets['corrected']['terms'].select {|a| a['term'] == 0}.first['count']
+      @incorrect_count = self.facets['corrected']['terms'].select {|a| a['term'] == 0}.first['count'] rescue 0
     end
   end
 
