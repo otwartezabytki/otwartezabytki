@@ -4,7 +4,8 @@ class Suggestion < ActiveRecord::Base
   belongs_to :place
 
   belongs_to :suggestion, :foreign_key => :ancestry
-  has_many :suggestions, :dependent => :destroy, :foreign_key => :ancestry
+
+  has_many :suggestions, :dependent => :destroy, :foreign_key => :ancestry, :before_add => :propagate_subrelic_data
 
   accepts_nested_attributes_for :suggestions, :allow_destroy => false
 
@@ -14,25 +15,19 @@ class Suggestion < ActiveRecord::Base
 
   attr_protected :id, :created_at, :updated_at
 
-  validates :place_id_action, :identification_action, :street_action,
-            :dating_of_obj_action, :coordinates_action, :inclusion => { :in => ['edit', 'skip', 'confirm'] }
+  validates :place_id_action, :identification_action, :street_action, :dating_of_obj_action,
+            :tags_action, :coordinates_action, :inclusion => { :in => ['edit', 'skip', 'confirm'] }
 
-  before_create do
+  scope :roots, where(:ancestry => nil)
+
+  before_save do
     self.skipped = is_skipped?
-    if self.suggestion.present? && self.user_id.blank?
-      self.user_id = self.suggestion.user_id
-    end
+    true
   end
+
   after_create  :update_relic_skip_cache
 
   serialize :tags, Array
-
-  class << self
-    def action_columns
-      return @action_columns if defined? @action_columns
-      @action_columns = self.column_names.inject([]){ |m, a| m << a if a.match(/_action/); m }
-    end
-  end
 
   def update_relic_skip_cache
     return false if ancestry.present?
@@ -53,9 +48,9 @@ class Suggestion < ActiveRecord::Base
   def is_skipped?
     return @is_skipped if defined? @is_skipped
     @is_skipped = if ancestry.blank?
-      self.class.action_columns.all? {|c| send(c) == 'skip'} and descendants.map(&:is_skipped?).all?
+      self.class.relic_action_columns.all? {|c| send(c) == 'skip'} and descendants.map(&:is_skipped?).all?
     else
-      self.class.action_columns.all? {|c| send(c) == 'skip'}
+      self.class.subrelic_action_columns.all? {|c| send(c) == 'skip'}
     end
   end
 
@@ -94,5 +89,30 @@ class Suggestion < ActiveRecord::Base
         self.suggestions << Suggestion.new(:relic_id => subrelic_id)
       end
     end
+  end
+
+  def self.relic_action_columns
+    [
+      "place_id_action",
+      "identification_action",
+      "street_action",
+      "dating_of_obj_action",
+      "coordinates_action",
+      "tags_action"
+    ]
+  end
+
+  def self.subrelic_action_columns
+    [
+      "identification_action",
+      "dating_of_obj_action",
+      "tags_action"
+    ]
+  end
+
+  private
+
+  def propagate_subrelic_data(subrelic)
+    subrelic.user_id = self.user_id
   end
 end

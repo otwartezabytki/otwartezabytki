@@ -154,6 +154,7 @@
           = f.input :tags, :as => :check_boxes,
             :collection => Tag.all, :label => "Kategorie",
             :input_html => { :multiple => true }, :disabled => Tag.all, :default => Tag.all
+          = f.input :tags_action, :as => :hidden
         .actions.actions-view
           - if f.object.tags.present? && f.object.tags.size > 0
             %h3 Czy zabytek ma poprawne kategorie?
@@ -183,6 +184,8 @@
           %h3 W skład zespołu wchodzą:
 
           = f.semantic_fields_for :suggestions do |f2|
+
+            = f2.hidden_field :relic_id, :value => f2.object.relic.id
 
             %article.subrelic
 
@@ -234,6 +237,7 @@
                   = f2.input :tags, :as => :check_boxes,
                     :collection => Tag.all, :label => "Kategorie",
                     :input_html => { :multiple => true }, :disabled => Tag.all
+                  = f2.input :tags_action, :as => :hidden
                 .actions.actions-view
                   - if f2.object.tags.present? && f2.object.tags.size > 0
                     %h3 Czy zabytek ma poprawne kategorie?

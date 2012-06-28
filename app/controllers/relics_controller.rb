@@ -117,7 +117,7 @@ class RelicsController < ApplicationController
 
     def location_breadcrumbs
       return @location_breadcrumbs if defined? @location_breadcrumbs
-      @location_breadcrumbs = [ {:path => relics_path(search_params), :label => 'Cała Polska'} ]
+      @location_breadcrumbs = [ ]
       klasses = [Voivodeship, District, Commune, Place]
       location_arry = params[:location].to_s.split('-')
 
