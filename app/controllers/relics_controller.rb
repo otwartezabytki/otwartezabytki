@@ -92,6 +92,16 @@ class RelicsController < ApplicationController
     render :json => navigators_json
   end
 
+  def download
+    file_path = Rails.root.join('public', 'system', 'relics_history.csv')
+
+    if File.exists?(file_path)
+      @export_url = '/system/relics_history.csv'
+      @export_date = File.atime(file_path)
+      @export_size = (File.size(file_path) / 1024.0 / 1024.0).round(2)
+    end
+  end
+
   protected
 
     def parse_navigators(facets, order = :name)

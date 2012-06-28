@@ -36,3 +36,18 @@
 bundle exec rspec spec/controllers/relics_controller_spec.rb
 ```
 
+## relics export
+
+First you need to create initial dump of relics:
+
+```bash
+bundle exec rake relic:export_init[public/system/relics_history.csv]
+```
+
+Then, you can incrementially export users' suggestions by executing following command periodically:
+
+```bash
+bundle exec rake relic:export[public/system/relics_history.csv]
+```
+
+Cron jobs auto-setup is also available, just run ```bundle exec whenever --update-crontab```

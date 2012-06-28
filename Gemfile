@@ -53,6 +53,9 @@ gem 'unicode'
 gem 'gon'
 gem 'high_voltage'
 
+# background jobs
+gem 'whenever', :require => false
+
 group :development, :test do
   # for debugging
   gem 'ruby-debug19'
