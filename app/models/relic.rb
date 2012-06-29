@@ -54,7 +54,6 @@ class Relic < ActiveRecord::Base
     with_options :index => :analyzed do |a|
       a.indexes :identification
       a.indexes :street
-      a.indexes :register_number
     end
     with_options :index => :not_analyzed do |na|
       na.indexes :id
@@ -200,7 +199,7 @@ class Relic < ActiveRecord::Base
       :id               => id,
       :identification   => identification,
       :street           => street,
-      :register_number  => register_number,
+      # :register_number  => register_number,
       :place_full_name  => place_full_name,
       :kind             => kind,
       :dating_of_obj    => dating_of_obj,
@@ -215,7 +214,7 @@ class Relic < ActiveRecord::Base
       :id               => id,
       :identification   => identification,
       :street           => street,
-      :register_number  => register_number
+      # :register_number  => register_number
     }
   end
 

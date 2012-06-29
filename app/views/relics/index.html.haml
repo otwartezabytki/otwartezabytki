@@ -38,7 +38,7 @@
         .pathway= relic.place_full_name
         .street= relic.street
         .include
-          - if relic.has_children?
+          - if relic.descendants.present?
             %span
             = relic.descendants.map(&:identification).join(', ')
         - if relic.corrected?
