@@ -35,7 +35,6 @@ class User < ActiveRecord::Base
       generated_password = [0..9, 'a'..'z', 'A'..'Z'].map(&:to_a).reduce(:+).sample(8).join
       self.password = generated_password
       self.password_confirmation = generated_password
-      UserMailer.welcome_email(self, self.password).deliver
     end
 
   end
