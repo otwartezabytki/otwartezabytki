@@ -8,7 +8,12 @@ class RelicsController < ApplicationController
 
   before_filter :current_user!, :only => [:edit, :create, :update, :suggest_next, :thank_you]
 
+  def show
+    redirect_to edit_relic_path(params[:id]) and return
+  end
+
   def index
+    SearchTerm.store(params[:q1])
     gon.highlighted_tags = relics.highlighted_tags
   end
 
@@ -92,6 +97,16 @@ class RelicsController < ApplicationController
     render :json => navigators_json
   end
 
+  def download
+    file_path = Rails.root.join('public', 'system', 'relics_history.csv')
+
+    if File.exists?(file_path)
+      @export_url = '/system/relics_history.csv'
+      @export_date = File.atime(file_path)
+      @export_size = (File.size(file_path) / 1024.0 / 1024.0).round(2)
+    end
+  end
+
   protected
 
     def parse_navigators(facets, order = :name)
@@ -117,7 +132,7 @@ class RelicsController < ApplicationController
 
     def location_breadcrumbs
       return @location_breadcrumbs if defined? @location_breadcrumbs
-      @location_breadcrumbs = [ ]
+      @location_breadcrumbs = [ {:path => relics_path(search_params), :label => 'Cała Polska'} ]
       klasses = [Voivodeship, District, Commune, Place]
       location_arry = params[:location].to_s.split('-')
 

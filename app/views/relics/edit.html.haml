@@ -2,7 +2,7 @@
   .page-header
     %h1 
       3. Popraw zabytek
-      %span= wizard_full_place(suggestion.relic)
+      %span= suggestion.relic.place_full_name(false)
   = semantic_form_for suggestion, :url => relic_path, :method => :put,
     :html => { :data => { :commune => suggestion.relic.commune.name,
                           :district => suggestion.relic.district.name,
@@ -151,97 +151,25 @@
       %article.step.step-tags.step-view(id="gps_autoscroll")
         %span.ico
         .values.values-view.values-edit
-          -#= f.input :tags, :as => :check_boxes,
-            -#:collection => Tag.all, :label => "Kategorie",
-            -#:input_html => { :multiple => true }, :disabled => Tag.all, :default => Tag.all
-          -#= f.input :tags_action, :as => :hidden
-          %h3 Kategorie
+          %h3 Dopasuj kategorie do zabytku
+          = f.input :tags_action, :as => :hidden
           .column
-            %ul
-              %li
-                %input{:type => 'checkbox'}    
-                mieszkalny  
-              %li
-                %input{:type => 'checkbox'}    
-                gospodarczy
-              %li
-                %input{:type => 'checkbox'}    
-                sakralny
-              %li
-                %input{:type => 'checkbox'}    
-                militarny
-              %li
-                %input{:type => 'checkbox'}    
-                przemysłowy
-              %li
-                %input{:type => 'checkbox'}    
-                kultury
-              %li
-                %input{:type => 'checkbox'}    
-                edukacyjny
-              %li
-                %input{:type => 'checkbox'}    
-                użyteczności publicznej
-              %li
-                %input{:type => 'checkbox'}    
-                dworski
-              %li
-                %input{:type => 'checkbox'}    
-                cmentarny
-              %li
-                %input{:type => 'checkbox'}    
-                przyrodniczy
+            = f.input :tags, :as => :check_boxes,
+              :collection => Tag.first_column, :label => "",
+              :input_html => { :multiple => true }
           .column
-            %ul
-              %li
-                %input{:type => 'checkbox'}    
-                miejski 
-              %li
-                %input{:type => 'checkbox'}    
-                katolicki
-              %li
-                %input{:type => 'checkbox'}    
-                prawosławny
-              %li
-                %input{:type => 'checkbox'}    
-                protestancki
-              %li
-                %input{:type => 'checkbox'}    
-                żydowski
-              %li
-                %input{:type => 'checkbox'}    
-                muzułmański
-              %li
-                %input{:type => 'checkbox'}    
-                łemkowski
-              %li
-                %input{:type => 'checkbox'}    
-                unicki
-              %li
-                %input{:type => 'checkbox'}    
-                inny           
-        .actions.actions-view
-          - if f.object.tags.present? && f.object.tags.size > 0
-            %h3 Czy zabytek ma poprawne kategorie?
-            .action.action-edit= link_to "Chciałbym poprawić lub dodać kategorie"
-            .action.action-confirm= link_to "Kategorie są poprawne"
-            .action.action-skip= link_to "Nie wiem, pomiń"
-          - else
-            %h3 Czy chcesz skategoryzować zabytek?
-            .action.action-edit= link_to "Chciałbym dodać kategorie do zabytku"
-            .action.action-skip= link_to "Nie wiem, pomiń"
+            = f.input :tags, :as => :check_boxes,
+              :collection => Tag.second_column, :label => "",
+              :input_html => { :multiple => true }
+          .column
+            = f.input :tags, :as => :check_boxes,
+              :collection => Tag.third_column, :label => "",
+              :input_html => { :multiple => true }
         .actions.actions-edit
-          - if f.object.tags.present? && f.object.tags.size > 0
-            %h3 Czy zabytek ma poprawne kategorie?
-            .action.action-submit= link_to "Zatwierdź"
-            .action.action-cancel= link_to "Anuluj"
-          - else
-            %h3 Czy chcesz skategoryzować zabytek?
-            .action.action-submit= link_to "Zatwierdź"
-            .action.action-cancel= link_to "Anuluj"
+          .action.action-submit= link_to "Zatwierdź"
+          .action.action-skip= link_to "Pomiń"
         .actions.actions-done
           .action.action-back= link_to "Cofnij"
-
       - if f.object.suggestions.size > 0
 
         %section.subrelics
@@ -283,7 +211,7 @@
                 - else
                   .actions.actions-view
                     %h3 Czy znasz datę powstania zabytku?
-                    .action.action-edit= link_to "Tak, chcę poprawić datę"
+                    .action.action-edit= link_to "Tak, chcę podać datę"
                     .action.action-skip= link_to "Nie wiem, pomiń"
                 .actions.actions-edit
                   - if f2.object.dating_of_obj.present?
@@ -299,93 +227,23 @@
 
               %article.step.step-tags.step-view
                 .values.values-view.values-edit
-                  -#= f2.input :tags, :as => :check_boxes,
-                    -#:collection => Tag.all, :label => "Kategorie",
-                    -#:input_html => { :multiple => true }, :disabled => Tag.all
-                  -#= f2.input :tags_action, :as => :hidden
+                  %h3 Dopasuj kategorie do zabytku
+                  = f2.input :tags_action, :as => :hidden
                   .column
-                    %ul
-                      %li
-                        %input{:type => 'checkbox'}    
-                        mieszkalny  
-                      %li
-                        %input{:type => 'checkbox'}    
-                        gospodarczy
-                      %li
-                        %input{:type => 'checkbox'}    
-                        sakralny
-                      %li
-                        %input{:type => 'checkbox'}    
-                        militarny
-                      %li
-                        %input{:type => 'checkbox'}    
-                        przemysłowy
-                      %li
-                        %input{:type => 'checkbox'}    
-                        kultury
-                      %li
-                        %input{:type => 'checkbox'}    
-                        edukacyjny
-                      %li
-                        %input{:type => 'checkbox'}    
-                        użyteczności publicznej
-                      %li
-                        %input{:type => 'checkbox'}    
-                        dworski
-                      %li
-                        %input{:type => 'checkbox'}    
-                        cmentarny
-                      %li
-                        %input{:type => 'checkbox'}    
-                        przyrodniczy
+                    = f2.input :tags, :as => :check_boxes,
+                      :collection => Tag.first_column, :label => "",
+                      :input_html => { :multiple => true }
                   .column
-                    %ul
-                      %li
-                        %input{:type => 'checkbox'}    
-                        miejski 
-                      %li
-                        %input{:type => 'checkbox'}    
-                        katolicki
-                      %li
-                        %input{:type => 'checkbox'}    
-                        prawosławny
-                      %li
-                        %input{:type => 'checkbox'}    
-                        protestancki
-                      %li
-                        %input{:type => 'checkbox'}    
-                        żydowski
-                      %li
-                        %input{:type => 'checkbox'}    
-                        muzułmański
-                      %li
-                        %input{:type => 'checkbox'}    
-                        łemkowski
-                      %li
-                        %input{:type => 'checkbox'}    
-                        unicki
-                      %li
-                        %input{:type => 'checkbox'}    
-                        inny
-                .actions.actions-view
-                  - if f2.object.tags.present? && f2.object.tags.size > 0
-                    %h3 Czy zabytek ma poprawne kategorie?
-                    .action.action-edit= link_to "Chciałbym poprawić lub dodać kategorie"
-                    .action.action-confirm= link_to "Kategorie są poprawne"
-                    .action.action-skip= link_to "Nie wiem, pomiń"
-                  - else
-                    %h3 Czy chcesz skategoryzować zabytek?
-                    .action.action-edit= link_to "Chciałbym dodać kategorie do zabytku"
-                    .action.action-skip= link_to "Nie wiem, pomiń"
+                    = f2.input :tags, :as => :check_boxes,
+                      :collection => Tag.second_column, :label => "",
+                      :input_html => { :multiple => true }
+                  .column
+                    = f2.input :tags, :as => :check_boxes,
+                      :collection => Tag.third_column, :label => "",
+                      :input_html => { :multiple => true }
                 .actions.actions-edit
-                  - if f2.object.tags.present? && f2.object.tags.size > 0
-                    %h3 Czy zabytek ma poprawne kategorie?
-                    .action.action-submit= link_to "Zatwierdź"
-                    .action.action-cancel= link_to "Anuluj"
-                  - else
-                    %h3 Czy chcesz skategoryzować zabytek?
-                    .action.action-submit= link_to "Zatwierdź"
-                    .action.action-cancel= link_to "Anuluj"
+                  .action.action-submit= link_to "Zatwierdź"
+                  .action.action-skip= link_to "Pomiń"
                 .actions.actions-done
                   .action.action-back= link_to "Cofnij"
 

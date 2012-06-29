@@ -12,14 +12,15 @@
   - else
     %div.relic-header
       %h2 Zabytki do sprawdzenia (#{relics.incorrect_count})
-      %div.breadcrumb
-        %p Gdzie:
-        %ul
-          - location_breadcrumbs.each_with_index do |l, i|
-            %li
-              = link_to l[:label], l[:path]
-              - if i < location_breadcrumbs.size - 1
-                %span &#187;
+      - if location_breadcrumbs.present?
+        %div.breadcrumb
+          %p Gdzie:
+          %ul
+            - location_breadcrumbs.each_with_index do |l, i|
+              %li
+                = link_to l[:label], l[:path]
+                - if i < location_breadcrumbs.size - 1
+                  %span &#187;
 
   .search-results
     - relics.each_with_index do |relic, i|
@@ -33,11 +34,11 @@
       -# relic details
       .relic
         .name
-          = link_to relic.identification, relic_path(relic)
+          = link_to relic.identification, edit_relic_path(relic)
         .pathway= relic.place_full_name
         .street= relic.street
         .include
-          - if relic.has_children?
+          - if relic.descendants.present?
             %span
             = relic.descendants.map(&:identification).join(', ')
         - if relic.corrected?

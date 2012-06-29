@@ -73,6 +73,10 @@ class Suggestion < ActiveRecord::Base
 
   end
 
+  def tags=(value)
+    self[:tags] = value.select(&:present?)
+  end
+
   def latitude
     self[:latitude].present? ? self[:latitude].round(6) : nil
   end

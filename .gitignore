@@ -17,3 +17,4 @@ pickle-email-*.html
 config/database.yml
 .DS_Store
 Gemfile.local
+vendor/relics_cleanup.db.zip

@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.3'
+gem 'rails', '~> 3.2.3'
 
 gem 'pg'
 
@@ -52,6 +52,9 @@ gem 'dm-sqlite-adapter'
 gem 'unicode'
 gem 'gon'
 gem 'high_voltage'
+
+# background jobs
+gem 'whenever', :require => false
 
 group :development, :test do
   # for debugging

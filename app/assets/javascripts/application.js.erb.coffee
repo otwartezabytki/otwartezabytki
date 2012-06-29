@@ -58,7 +58,7 @@ jQuery ->
     currentFontSizeNum = parseFloat(currentFontSize, 10)
     newFontSize = currentFontSizeNum * 0.8
     $("html").css "font-size", newFontSize
-    false                          
+    false
 
   # bootstrap
   $("a[rel=popover]").popover()

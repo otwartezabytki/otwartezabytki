@@ -1,0 +1,135 @@
+%h2 Baza danych zabytków
+
+%p
+  Tu możesz pobrać bazę zabytków oraz zmian wprowadzonych przez korzystających z
+  = link_to 'Otwartych Zabytków', 'http://otwartezabytki.pl'
+
+%h3 Instrukcje
+
+%p Wszystkie dane o zmianach w danych zabytków zostały umieszczone w pliku CSV z następującymi polami:
+
+%dl
+
+  %dt export_id
+  %dd ID pojedynczego rekordu w eksportowanym pliku. Możesz mieć pewność, że nie zmieni się w czasie.
+
+  %dt suggested_at
+  %dd Oznacza kiedy aplikacja zarejestrowała sugestię w zmianach danych zabytku. Zwykle jest to moment wysłania formularza poprawiającego.
+
+  %dt relic_id
+  %dd ID zabytku w wewnętrznej bazie Otwartych Zabytków
+
+  %dt nid_id
+  %dd ID zabytku w bazie danych Narodowego Instytutu Dziedzictwa
+
+  %dt register_number
+  %dd Numer zabytku w rejestrze zabytków Narodowego Instytutu Dziedzictwa
+
+  %dt nid_kind
+  %dd Typ zabytku figurujący w bazie danych Narodowego Instytutu Dziedzictwa
+
+  %dt relic_ancestry
+  %dd W przypadku gdy zabytek należy do zespołu zabytków, to pole będzie wskazywało na zabytki do których należy. Format: relic_id_rodzica[/relic_id_dziadka[/relic_id_pradziadka[/...]]]
+
+  %dt identification
+  %dd Pełna nazwa zabytku
+
+  %dt identification_action
+  %dd
+    Zobacz
+    %a{ :href => "#actions" } akcje użytkowników na polach formularza
+
+  %dt voivodeship
+  %dd Nazwa województwa, w której znajduje się zabytek
+
+  %dt district
+  %dd Nazwa powiatu, w którym znajduje się zabytek
+
+  %dt commune
+  %dd Nazwa gminy, w której znajduje się zabytek
+
+  %dt place
+  %dd Nazwa miasta lub wioski, w której znajduje się zabytek
+
+  %dt place_id
+  %dd ID miasta lub wioski z bazy Otwartych Zabytków, w której znajduje się zabytek
+
+  %dt place_id_action
+  %dd
+    Akcja związana z polem place_id (i pośrednio z polami place, commune, district i voivodeship). Zobacz
+    %a{ :href => "#actions" } akcje użytkowników na polach formularza
+
+  %dt street
+  %dd Ulica na jakiej znajduje się zabytek
+
+  %dt street_action
+  %dd
+    Akcja związana z polem street. Zobacz
+    %a{ :href => "#actions" } akcje użytkowników na polach formularza
+
+  %dt dating
+  %dd Rok lub okres, w którym powstał zabytek
+
+  %dt dating_action
+  %dd
+    Akcja związana z polem dating. Zobacz
+    %a{ :href => "#actions" } akcje użytkowników na polach formularza
+
+  %dt latitude
+  %dd
+    Szerokość geograficzna na jakiej znajduje się zabytek.
+    W przypadku zespołu zabytków powinna to być wypadkowa szerokości geograficznych na jakich znajdują się podzabytki.
+
+  %dt longitude
+  %dd
+    Długość geograficzna na jakiej znajduje się zabytek.
+    W przypadku zespołu zabytków powinna to być wypadkowa szerokości geograficznych na jakich znajdują się podzabytki.
+
+  %dt coordinates_action
+  %dd
+    Akcja związana z polem coordinates. Zobacz
+    %a{ :href => "#actions" } akcje użytkowników na polach formularza
+
+  %dt categories
+  %dd Kategorie z jakimi został związany zabytek
+
+  %dt categories_action
+  %dd
+    Akcja związana z polem categories.
+    %a{ :href => "#actions" } akcje użytkowników na polach formularza
+
+%p
+  %strong Uwaga!
+  Powyższe pola mogą zmieniać w czasie numer swojej kolumny w eksportowanym pliku CSV. Odczytując dane należy polegać
+  nie na numerze, tylko na nazwie kolumny (jest to zawsze jedna z wymienionych niżej.
+
+%h3#actions Akcje użytkowników na polach formularza
+
+%p To pole może obecenie przyjmować jedną z czterech wartości, w zależności od akcji na polu o podobnej nazwie:
+
+%dl
+  %dt revision
+  %dd wersja oryginalna pola, nie poddana zmianom użytkowników
+
+  %dt edit
+  %dd użytkownik zmienił wartość tego pola podczas poprawiania zabytku
+
+  %dt confirm
+  %dd użytkownik potwierdził prawdziwość tego pola, wartość pola nie została zmieniona
+
+  %dt skip
+  %dd użytkownik pominął potwierdzenie lub edycję tego pola, wartość pola nie została zmieniona
+
+
+%h3 Baza do pobrania
+
+%ul
+  %li format: csv
+  %li ostatnia aktualizacja: #{@export_date}
+  %li wielkość pliku: #{@export_size} MB
+  %li
+    %strong plik do pobrania:
+    - if @export_url
+      = link_to 'relics_history.csv', @export_url
+    - else
+      obecnie nie dostępny

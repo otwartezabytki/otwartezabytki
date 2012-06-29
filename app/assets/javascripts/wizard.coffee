@@ -35,11 +35,7 @@ $.fn.specialize
 
     view: ->
       this.switchViewClass('step-view')
-
       this.find('button.edit').focus()
-
-      if this.data('autoscroll')?
-        document.location.hash = this.data('autoscroll')
 
       this
 
@@ -178,6 +174,18 @@ $.fn.specialize
 
     input: -> this.find("input[type='checkbox']")
 
+    view: ->
+      this.edit()
+      this
+
+    skip: ->
+      this.cancel()
+      this.switchViewClass('step-view step-done step-skipped')
+      this.action().val('skip')
+      this.done()
+      this
+
+
   '.step-gps':
 
     input: -> $('#suggestion_latitude, #suggestion_longitude')
@@ -185,13 +193,6 @@ $.fn.specialize
 
     edit: ->
       this.switchViewClass('step-edit')
-      this
-
-    cancel: ->
-      this.restoreHistory()
-      map.removeMarkers()
-      this.view()
-
       this
 
 
@@ -337,6 +338,9 @@ jQuery ->
   # turn of autocompletion for all inputs
   $('.step input[type="text"]').attr('autocomplete', 'off')
 
+  # disable all checkbox for now
+  $('.step-tags input[type="checkbox"]').prop('disabled', true)
+
   # register actions for wizard
   ['edit', 'cancel', 'submit', 'confirm', 'skip', 'back'].forEach (action) ->
     $('.steps').on 'click', ".action-#{action} a" , ->
@@ -346,8 +350,6 @@ jQuery ->
 
   $('.steps').on 'click', '.action-back a', ->
     $(this).parents('.step:first').back()
-
-  $('.step:first').view()
 
   $('.step').each -> $(this).saveHistory()
 
