@@ -3,8 +3,23 @@
   %head
     %meta( content="text/html; charset=utf-8" http-equiv="Content Type" )
   %body
-    %h1 Witaj #{ @user.username }
+    %h1 Witaj #{ @user.username },
+
+    %p Otrzymałeś tę wiadomość, ponieważ zarejestrowałeś na ten e-mail konto w serwise #{ link_to 'otwartezabytki.pl', 'http://otwartezabytki.pl' }.
+
+    %p Dziękujemy za rejestracje i zapraszamy do udziału w Cyfrowym Czynie Społecznym.
+
+    %p Poniżej znajdziesz wygenerowane hasło, którego możesz użyć do logowania się na Otwarte Zabytki i śledzenia postępu:
+
+    %p Twoje hasło: #{ @password }
+
+    %p Jeśli chcesz zmienić swoje hasło wejdź tutaj: #{ link_to '[link]', new_user_password_path}
+
+    %p (Jeżeli nie zakładałeś konta - napisz na adres kontakt@otwartezabytki.pl, a usuniemy Twój adres e-mail z naszej bazy.)
+
     %p
-      Dziękujemy za rejestrację w Otwartych Zabytkach
-    %p
-      Twoje hasło do serwisu to: #{ @password }
+      \--
+      %br
+      Pozdrawiamy
+      %br
+      Zespół Otwartych Zabytków
