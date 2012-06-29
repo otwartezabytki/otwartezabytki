@@ -13,6 +13,7 @@ class RelicsController < ApplicationController
   end
 
   def index
+    SearchTerm.store(params[:q1])
     gon.highlighted_tags = relics.highlighted_tags
   end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120628083033) do
+ActiveRecord::Schema.define(:version => 20120629120353) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -87,6 +87,13 @@ ActiveRecord::Schema.define(:version => 20120628083033) do
 
   add_index "relics", ["ancestry"], :name => "index_relics_on_ancestry"
 
+  create_table "search_terms", :force => true do |t|
+    t.string   "keyword"
+    t.integer  "count",      :default => 1
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
   create_table "suggestions", :force => true do |t|
     t.integer  "relic_id"
     t.integer  "user_id"
@@ -114,6 +121,12 @@ ActiveRecord::Schema.define(:version => 20120628083033) do
   add_index "suggestions", ["dating_of_obj_action"], :name => "index_suggestions_on_dating_of_obj_action"
   add_index "suggestions", ["identification_action"], :name => "index_suggestions_on_identification_action"
   add_index "suggestions", ["place_id_action"], :name => "index_suggestions_on_place_id_action"
+
+  create_table "tags", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",     :null => false
