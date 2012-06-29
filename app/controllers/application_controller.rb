@@ -4,10 +4,15 @@ class ApplicationController < ActionController::Base
   helper_method :page_pl_path
 
   def current_user!
+
     unless user_signed_in?
       user = User.create!
       warden.set_user user
       sign_in user, :bypass => true
+
+      unless request.referer && request.referer.match(/otwartezabytki/)
+        redirect_to root_path
+      end
     end
 
     current_user

@@ -8,6 +8,10 @@ class RelicsController < ApplicationController
 
   before_filter :current_user!, :only => [:edit, :create, :update, :suggest_next, :thank_you]
 
+  def show
+    redirect_to edit_relic_path(params[:id]) and return
+  end
+
   def index
     gon.highlighted_tags = relics.highlighted_tags
   end
