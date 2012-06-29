@@ -37,14 +37,16 @@ footer { clear: both; display: block; }
 .step-skipped input[type="text"] { color: #dddddd; }
 .step-confirmed input[type="text"] { color: green; }
 
-.step-gps .values { width: 900px; }
+.step-gps .values { width: 900px;}
 .step-gps .actions, .step-gps .values { float: none; }
 .step-gps .actions {
     position: absolute;
-    right: 0px;
-    width: 230px;
-    bottom: 18px;
-    margin: 10px;
+		right: 19px;
+		width: 170px;
+		top: 92px;
+		margin: 0;
+		height: 420px;
+		background: #fff;
 }
 
 .step-gps.step-view .marker-helper {
@@ -54,15 +56,14 @@ footer { clear: both; display: block; }
 
 .step-gps.step-view .marker-helper .marker-holder {
     display: block;
-    margin: 5px 0 5px 90px;
 }
 
 .step-gps .buttons {
     margin: 10px 0;
     float: right;
 }
-
-#marker { cursor: pointer; }
+#map_canvas{border: 10px solid #fff;}
+#marker { cursor: pointer; margin: 40px 0 0 47px;}
 
 #suggestion_latitude, #suggestion_longitude {  width: 100px; }
 #suggestion_latitude_input { float: left; width: 110px; position: relative; }
@@ -88,7 +89,7 @@ span.highlight {
 
 .step .check_boxes li {
     display: block;
-    width: 100px;
+    width: 100%;
     float: left;
     list-style-type: none;
 }

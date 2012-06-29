@@ -11,6 +11,11 @@
 
       %article.step.step-name.step-view.step-current
         %span.ico
+        .help-content
+          .help Pomoc
+          .help-extended
+            %span.close Zamknij pomoc
+            %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in tortor odio, non pretium augue. Ut sit amet diam sed dolor cursus iaculis. Nulla ut mauris sem. Praesent in gravida felis.
         .values.values-edit.values-view
           = f.input :identification, :as => :string, :label => "Czy ta nazwa zabytku jest poprawna?", :input_html => { :readonly => true }
           = f.input :identification_action, :as => :hidden
@@ -38,6 +43,11 @@
 
       %article.step.step-place.step-view
         %span.ico
+        .help-content
+          .help Pomoc
+          .help-extended
+            %span.close Zamknij pomoc
+            %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in tortor odio, non pretium augue. Ut sit amet diam sed dolor cursus iaculis. Nulla ut mauris sem. Praesent in gravida felis.
         .values.values-view
           = f.input :place_name, :as => :string, :label => "Czy nazwa miejscowości jest poprawna?",
             :input_html => { :name => "place_name_viewer", :id => "place_name_viewer", :readonly => true }
@@ -69,8 +79,12 @@
             (zrobiłeś błąd?
             = link_to "cofnij"
             )
-
       %article.step.step-street.step-view
+        .help-content
+          .help Pomoc
+          .help-extended
+            %span.close Zamknij pomoc
+            %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in tortor odio, non pretium augue. Ut sit amet diam sed dolor cursus iaculis. Nulla ut mauris sem. Praesent in gravida felis.
         %span.ico
         .values.values-edit.values-view
           = f.input :street, :as => :string, :label => "Czy adres jest poprawny? (np. al. Jerozolimskie, wyspa Kępa Mieszczańska, rondo Falbanka)", :placeholder => "Brak danych", :input_html => { :readonly => true }
@@ -108,6 +122,11 @@
             )
 
       %article.step.step-date.step-view
+        .help-content
+          .help Pomoc
+          .help-extended
+            %span.close Zamknij pomoc
+            %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in tortor odio, non pretium augue. Ut sit amet diam sed dolor cursus iaculis. Nulla ut mauris sem. Praesent in gravida felis.
         %span.ico
         .values.values-edit.values-view
           = f.input :dating_of_obj, :as => :string, :label => "Czy data powstania obiektu jest poprawna? (np. 1929, XIX w., 2 poł. XIV w.)", :placeholder => "Brak danych", :input_html => { :readonly => true }
@@ -149,6 +168,11 @@
             )  
 
       %article.step.step-tags.step-view(id="gps_autoscroll")
+        .help-content
+          .help Pomoc
+          .help-extended
+            %span.close Zamknij pomoc
+            %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in tortor odio, non pretium augue. Ut sit amet diam sed dolor cursus iaculis. Nulla ut mauris sem. Praesent in gravida felis.
         %span.ico
         .values.values-view.values-edit
           %h3 Dopasuj kategorie do zabytku
@@ -166,10 +190,15 @@
               :collection => Tag.third_column, :label => "",
               :input_html => { :multiple => true }
         .actions.actions-edit
-          .action.action-submit= link_to "Zatwierdź"
-          .action.action-skip= link_to "Pomiń"
+          .action.action-submit= link_to "Potwierdzam"
+          .action.action-skip= link_to "Nie jestem pewien, pomiń"
         .actions.actions-done
-          .action.action-back= link_to "Cofnij"
+          .action.action-submit= link_to "Potwierdzam"
+          .action.action-skip= link_to "Nie jestem pewien, pomiń"
+          .action.action-back
+            (zrobiłeś błąd?
+            = link_to "cofnij"
+            )
       - if f.object.suggestions.size > 0
 
         %section.subrelics
@@ -253,7 +282,7 @@
           %label Położenie GPS
           .gps-helper
             %h3 Zlokalizuj zespół zabytków na mapie
-          #map_canvas{ style: "height: 500px; width: 900px" }
+          #map_canvas{ style: "height: 400px; width: 720px" }
 
         .actions.actions-view
           .marker-helper

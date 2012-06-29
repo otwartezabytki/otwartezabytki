@@ -519,6 +519,64 @@ a{
 			font-weight: 400;
 			font-size: 16px;
 		}
+		&.step-tags{
+			&.step-edited{
+				.actions.actions-done .action-back{
+					padding-left: 0;
+				}
+			}
+			&.step-skipped{
+				.actions.actions-done .action-back{
+					padding-left: 156px;
+				}
+			}
+			.action-submit{
+				float: left;
+				a{
+					color: #fff;
+					text-shadow: 0 -1px 0 rgba(0,0,0,0.5);
+					text-decoration: none;
+					font-size: 14px;
+					padding: 8px 20px;
+					margin-right: 25px;
+					font-weight: 600;
+					background: rgb(120,145,159); /* Old browsers */
+					background: -moz-linear-gradient(top, rgba(120,145,159,1) 0%, rgba(95,121,135,1) 100%); /* FF3.6+ */
+					background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(120,145,159,1)), color-stop(100%,rgba(95,121,135,1))); /* Chrome,Safari4+ */
+					background: -webkit-linear-gradient(top, rgba(120,145,159,1) 0%,rgba(95,121,135,1) 100%); /* Chrome10+,Safari5.1+ */
+					background: -o-linear-gradient(top, rgba(120,145,159,1) 0%,rgba(95,121,135,1) 100%); /* Opera 11.10+ */
+					background: -ms-linear-gradient(top, rgba(120,145,159,1) 0%,rgba(95,121,135,1) 100%); /* IE10+ */
+					background: linear-gradient(to bottom, rgba(120,145,159,1) 0%,rgba(95,121,135,1) 100%); /* W3C */
+					filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#78919f', endColorstr='#5f7987',GradientType=0 ); /* IE6-9 */
+					box-shadow: 0 2px 3px 0 rgba(0,0,0,0.2), inset 0 -1px 2px 0 rgba(0,0,0,0.3);
+					border-radius: 2px;
+					-webkit-border-radius: 2px;
+					position: static;
+					float: none;
+					text-transform: none;
+					&:hover{
+						background: rgb(67,125,155); /* Old browsers */
+						background: -moz-linear-gradient(top, rgba(67,125,155,1) 0%, rgba(37,94,124,1) 100%); /* FF3.6+ */
+						background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(67,125,155,1)), color-stop(100%,rgba(37,94,124,1))); /* Chrome,Safari4+ */
+						background: -webkit-linear-gradient(top, rgba(67,125,155,1) 0%,rgba(37,94,124,1) 100%); /* Chrome10+,Safari5.1+ */
+						background: -o-linear-gradient(top, rgba(67,125,155,1) 0%,rgba(37,94,124,1) 100%); /* Opera 11.10+ */
+						background: -ms-linear-gradient(top, rgba(67,125,155,1) 0%,rgba(37,94,124,1) 100%); /* IE10+ */
+						background: linear-gradient(to bottom, rgba(67,125,155,1) 0%,rgba(37,94,124,1) 100%); /* W3C */
+						filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#437d9b', endColorstr='#255e7c',GradientType=0 ); /* IE6-9 */
+					}
+					&:active{
+						background: rgb(36,94,124); /* Old browsers */
+						background: -moz-linear-gradient(top, rgba(36,94,124,1) 0%, rgba(67,125,154,1) 100%); /* FF3.6+ */
+						background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(36,94,124,1)), color-stop(100%,rgba(67,125,154,1))); /* Chrome,Safari4+ */
+						background: -webkit-linear-gradient(top, rgba(36,94,124,1) 0%,rgba(67,125,154,1) 100%); /* Chrome10+,Safari5.1+ */
+						background: -o-linear-gradient(top, rgba(36,94,124,1) 0%,rgba(67,125,154,1) 100%); /* Opera 11.10+ */
+						background: -ms-linear-gradient(top, rgba(36,94,124,1) 0%,rgba(67,125,154,1) 100%); /* IE10+ */
+						background: linear-gradient(to bottom, rgba(36,94,124,1) 0%,rgba(67,125,154,1) 100%); /* W3C */
+						filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#245e7c', endColorstr='#437d9a',GradientType=0 ); /* IE6-9 */
+					}
+				}    
+			}
+		}
 		.action-submit a{
 			float: right;
 			margin: 3px 3px 0 0;
@@ -661,7 +719,7 @@ a{
 				position: absolute;
 				width: 68px;
 				height: 50px;
-				bottom: 9px;
+				bottom: 29px;
 				right: 20px;
 				-webkit-transition: all 1 ease;
 				-moz-transition: all 1 ease;
@@ -772,8 +830,23 @@ a{
 }
 .steps{
 	.step{
+		.help-content{
+			.help{
+				float: right;
+				width: 100%;
+			}
+			.help-extended{
+				display: none;
+				.close{
+					float: right;
+				}
+				p{
+					margin-top: 10px;
+				}
+			}
+		}
 		.column{
-			width: 45%;
+			width: 33%;
 			display: inline-block;
 			vertical-align: top;
 			font-size: 13px;
@@ -934,5 +1007,20 @@ a{
 			text-shadow: 0 -1px 1px rgba(0,0,0,0.4);
 			font-size: 13px;
 		}
+	}
+}
+
+.marker-helper{
+	h4{
+		text-align: center;
+		font-size: 14px;
+		font-weight: 700;
+		line-height: 30px;
+	}
+	.marker-holder{
+		background: asset-data-url('marker-helper.png') center center no-repeat;
+		margin: 20px auto;
+		width: 118px;
+		height: 118px;
 	}
 }
