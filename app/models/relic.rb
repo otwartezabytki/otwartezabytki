@@ -227,8 +227,24 @@ class Relic < ActiveRecord::Base
     [voivodeship_id, district_id, commune_id, place_id]
   end
 
-  def place_full_name
-    ["woj. #{voivodeship.name}", "pow. #{district.name}", "gm. #{commune.name}", place.name].join(', ')
+  def place_full_name(include_place = true)
+    if self.has_children?
+      descendants_locations = self.descendants.map{ |d|  { :district => d.district_id, :commune => d.commune_id, :place => d.place_id } }
+
+      same_district = descendants_locations.map{ |l| l[:district] }.uniq.size == 1
+      same_commune = descendants_locations.map{ |l| l[:commune] }.uniq.size == 1
+      same_place = descendants_locations.map{ |l| l[:place] }.uniq.size == 1
+
+      location =  ["woj. #{voivodeship.name}"]
+      location += ["pow. #{district.name}"] if same_district
+      location += ["gm. #{commune.name}"] if same_commune
+      location += [place.name] if same_place && include_place
+
+      location.join(', ')
+    else
+      ["woj. #{voivodeship.name}", "pow. #{district.name}", "gm. #{commune.name}", place.name].join(', ')
+    end
+
   end
 
   def self.next_for(user)

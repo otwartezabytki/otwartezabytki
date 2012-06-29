@@ -27,7 +27,7 @@ SQL
     print "Indexing: "
     Relic.index.delete
     Relic.index.create :mappings => Relic.tire.mapping_to_hash, :settings => Relic.tire.settings
-    Relic.roots.find_in_batches do |objs|
+    Relic.roots.includes(:place, :commune, :district, :voivodeship, :suggestions).find_in_batches do |objs|
       print "."
       Relic.index.import objs
     end
