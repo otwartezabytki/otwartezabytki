@@ -31,7 +31,7 @@ $.fn.specialize
       this.addClass(klass)
       $('.step').removeClass('step-current')
       this.addClass('step-current')
-      this.action().val('skip')
+      this.action().val('skip')        
 
     view: ->
       this.switchViewClass('step-view')
@@ -79,8 +79,11 @@ $.fn.specialize
       this
 
     done: ->
-      this.addClass('step-done').removeClass('step-current')
-      $('.step:not(.step-done):first').view()
+      this.addClass('step-done').removeClass("step-current")     
+      next_step = $('.step:not(.step-done):first')
+      next_step.view()
+      setHeight = $(".step-current").offset().top - (($(window).height()/2) - ($(".step-current").height()/2))
+      $('html,body').animate({scrollTop: setHeight})                     
       this
 
     back: ->
@@ -275,6 +278,8 @@ $.fn.specialize
     save: ->
 
   '#map_canvas':
+
+    map: -> map
 
     zoom_at: (lat, lng) ->
       if map?

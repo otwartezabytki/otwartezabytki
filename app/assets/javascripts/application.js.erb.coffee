@@ -9,6 +9,8 @@
 #= require jquery.ui.button
 #= require jquery.ui.dialog
 #= require jquery.ui.autocomplete
+#= require jquery.ui.tabs 
+#= require jquery.transition.min
 
 #= require chosen-jquery
 #= require twitter/bootstrap
@@ -62,4 +64,6 @@ jQuery ->
   $("a[rel=popover]").popover()
   $(".tooltip").tooltip()
   $("a[rel=tooltip]").tooltip()
-
+  
+  #tabs
+  $("#tabs").tabs()

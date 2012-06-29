@@ -1,1 +1,45 @@
-%h2 Home page
+.top
+  .container
+    .more
+      %h2 Zadbajmy o polskie zabytki!
+      %p 
+        Weź udział w społecznościowym uzupełnianiu bazy wiedzy i pomóż nam stworzyć serwis o zabytkach.
+        %strong To naprawdę proste.
+      %a.button Dowiedz się więcej &#187;
+    #tabs
+      %ul
+        %li
+          %a{:href => '#tabs-1'} 1
+        %li
+          %a{:href => '#tabs-2'} 2
+        %li
+          %a{:href => '#tabs-3'} 3
+      #tabs-1
+        %iframe{ :src => "http://player.vimeo.com/video/15069551", :width => "400", :height => "225", :frameborder => "0"}
+      #tabs-2
+        %iframe{ :src => "http://player.vimeo.com/video/15069551", :width => "400", :height => "225", :frameborder => "0"}
+      #tabs-3
+        %iframe{ :src => "http://player.vimeo.com/video/15069551", :width => "400", :height => "225", :frameborder => "0"}
+
+    .step1
+      %h3
+        Krok 1.
+        %span Zacznij od wyszukania zabytku:
+      %p 
+        np.
+        %em cmentarz, dworek w Podkarpackim, Pałac na Wodzie, Małkinia
+      = simple_form_for Relic.new, :url => relics_path, :html => { :class => 'well form-search'},:method => :get do |f|
+        = f.input :q1, :label => false, :input_html => {:name => 'q1', :value => params[:q1], :class => "search-query"}, :placeholder => "dworek"
+        = f.button :submit, 'Szukaj »', :name => nil
+      %p.examples
+        Skorzystaj z przykładów:
+        %a{:href => ''} dworek Wrocław(54)
+        ,
+        %a{:href => ''} zespół zabytków Polesie(23)
+        ,
+        %a{:href => ''} cmentarz(452)
+.content_wrapper
+  .container
+    %h3 Jak wygląda nasza baza zabytków?
+    .status_bar
+      

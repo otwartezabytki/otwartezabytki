@@ -10,7 +10,7 @@
       = javascript_include_tag "http://html5shim.googlecode.com/svn/trunk/html5.js"
     = stylesheet_link_tag "application", :media => "all"
     %link{:href => "http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,600,300&subset=latin,latin-ext", :rel => "stylesheet", :type => "text/css"}/
-  %body
+  %body{ :class => controller_name + " " + action_name + (params[:id] ? " resource_#{params[:id]}" : "") }
     .page
       %header#header
         .container
