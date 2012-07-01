@@ -118,5 +118,6 @@ class Suggestion < ActiveRecord::Base
 
   def propagate_subrelic_data(subrelic)
     subrelic.user_id = self.user_id
+    subrelic.ip_address = self.ip_address
   end
 end

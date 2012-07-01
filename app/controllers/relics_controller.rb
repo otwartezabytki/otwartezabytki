@@ -30,8 +30,8 @@ class RelicsController < ApplicationController
   end
 
   def update
-
     suggestion.user_id = current_user.id
+    suggestion.ip_address = request.remote_ip
 
     if suggestion.update_attributes(params[:suggestion])
       redirect_to thank_you_relics_path
