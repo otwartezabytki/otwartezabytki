@@ -95,3 +95,7 @@ span.highlight {
 }
 
 #recaptcha_area { margin: 0 auto; }
+
+.ui-menu-item strong {
+    font-weight: bold;
+}
