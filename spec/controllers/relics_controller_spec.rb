@@ -15,7 +15,8 @@ describe RelicsController do
       relic = create :relic
       refresh_relics_index
       get :index, {}, valid_session
-      exposed(:relics).results.should eq [relic]
+      exposed(:relics).results.size.should eq 1
+      exposed(:relics).results.map(&:id).should eq [relic.id.to_s]
     end
   end
 

@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
       sign_in user, :bypass => true
 
       unless request.referer && request.referer.match(/otwartezabytki/)
-        redirect_to root_path
+        redirect_to root_path unless Rails.env.test?
       end
     end
 
