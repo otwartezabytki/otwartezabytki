@@ -79,7 +79,10 @@ $.fn.specialize
       next_step = $('.step:not(.step-done):first')
       next_step.view()
       setHeight = $(".step-current").offset().top - (($(window).height()/2) - ($(".step-current").height()/2))
-      $('html,body').animate({scrollTop: setHeight})                     
+      $('html,body').animate({scrollTop: setHeight})
+      $('.help-extended').hide()
+      $('.help-content .help').show()
+      $(".help-content").removeClass("active")                     
       this
 
     back: ->
@@ -382,3 +385,13 @@ jQuery ->
       longitude = $('#suggestion_longitude').val().toNumber()
       if !isNaN(latitude) & !isNaN(longitude)
         $('#map_canvas').set_marker(latitude, longitude)
+  
+  $(".step-current .help-content .help").click ->
+    $(this).parent().addClass("active")
+    $(this).hide()
+    $(".step-current .help-content .help-extended").show()
+    
+  $(".step-current .help-content .help-extended .close").click ->
+    $(this).parents(".help-content").removeClass("active")
+    $(this).parent().hide()
+    $(".step-current .help-content .help").show()
