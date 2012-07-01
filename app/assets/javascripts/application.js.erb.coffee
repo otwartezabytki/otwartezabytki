@@ -11,6 +11,7 @@
 #= require jquery.ui.autocomplete
 #= require jquery.ui.tabs 
 #= require jquery.transition.min
+#= require jquery.effects.all
 #= require_tree ./vendor
 
 #= require chosen-jquery

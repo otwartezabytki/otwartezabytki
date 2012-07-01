@@ -167,7 +167,7 @@
             = link_to "cofnij"
             )  
 
-      %article.step.step-tags.step-view(id="gps_autoscroll")
+      %article.step.step-tags.step-view
         .help-content
           .help Pomoc
           .help-extended
@@ -276,7 +276,7 @@
                 .actions.actions-done
                   .action.action-back= link_to "Cofnij"
 
-      %article.step.step-gps.step-view(data-autoscroll="gps_autoscroll")
+      %article.step.step-gps.step-view
         %span.ico
         .values.values-edit.values-view
           %label Położenie GPS
@@ -305,8 +305,8 @@
           .buttons
             .action.action-back.btn= link_to "Cofnij"
 
-      %article.step.step-submit.step-view(data-autoscroll="submit_autoscroll" id="submit_autoscroll")
-        .actions.actions-view
+      %article.step.step-submit.step-view
+        .actions.actions-view.actions-edit{ :style => "display: block;" }
           %h2 Jeśli wszystkie pola są poprawione, potwierdź wysłanie formularza
           - if need_captcha
             %h3 Jednak przedtem, w celu weryfikacji czy jesteś człowiekiem, prosimy o przepisanie następujących słów:

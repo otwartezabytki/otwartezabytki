@@ -21,7 +21,7 @@ footer { clear: both; display: block; }
 .step { clear: both; position: relative; }
 
 .step .values {display: none; position: relative; }
-.step .actions {display: none; position: relative; }
+.step .actions {display: none; position: relative;  }
 
 .step-current.step-view .actions-view { display: block !important; }
 .step-current.step-edit .actions-edit { display: block !important; }
@@ -98,4 +98,9 @@ span.highlight {
 
 .ui-menu-item strong {
     font-weight: bold;
+}
+
+footer {
+    clear: both;
+    margin-bottom: 100px;
 }
