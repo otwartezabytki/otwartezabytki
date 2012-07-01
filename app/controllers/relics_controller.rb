@@ -125,7 +125,11 @@ class RelicsController < ApplicationController
         next unless facets[name]
         ids = facets[name]['terms'].map { |k| k['term']}
         klass = name.classify.constantize
-        objs = klass.where(:id => ids).order('id ASC')
+        objs = ids.sort.map do |id|
+          Rails.cache.fetch("#{name.classify.downcase}_#{id}", :expires_in => 1.day) do
+            klass.find(id)
+          end
+        end
         sorted_counts = facets[name]['terms'].sort_by { |k| k['term'].to_i }.map { |k| k['count'] }
         objs.each_with_index do |o, i|
           o.class_eval "attr_accessor :count"
