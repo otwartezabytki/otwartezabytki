@@ -56,6 +56,9 @@ gem 'high_voltage'
 # background jobs
 gem 'whenever', :require => false
 
+# bot secrity
+gem "recaptcha", :require => "recaptcha/rails"
+
 group :development, :test do
   # for debugging
   gem 'ruby-debug19'

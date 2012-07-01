@@ -308,4 +308,7 @@
       %article.step.step-submit.step-view(data-autoscroll="submit_autoscroll" id="submit_autoscroll")
         .actions.actions-view
           %h2 Jeśli wszystkie pola są poprawione, potwierdź wysłanie formularza
+          - if need_captcha
+            %h3 Jednak przedtem, w celu weryfikacji czy jesteś człowiekiem, prosimy o przepisanie następujących słów:
+            = recaptcha_tags
           = f.submit "Wyślij formularz"

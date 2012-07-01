@@ -1,0 +1,16 @@
+#relic-edit
+  .page-header
+    %h1 
+      3. Popraw zabytek
+      %span= suggestion.relic.place_full_name(false)
+  = semantic_form_for suggestion, :url => relic_path, :method => :put,
+    :html => { :data => { :commune => suggestion.relic.commune.name,
+                          :district => suggestion.relic.district.name,
+                          :voivodeship => suggestion.relic.voivodeship.name } } do |f|
+    = f.hidden_field :serialized_attr, :value => f.object.serialized_attr
+    %section.steps
+      %article.step.step-submit.step-edit.step-done
+        .actions.actions-edit{ :style => "display: block;" }
+          %h2 Popełniłeś błąd podczas przepisywania słów z obrazka. Spróbuj ponownie:
+          = recaptcha_tags
+          = f.submit "Wyślij formularz"

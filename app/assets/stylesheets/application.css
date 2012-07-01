@@ -93,3 +93,5 @@ span.highlight {
     float: left;
     list-style-type: none;
 }
+
+#recaptcha_area { margin: 0 auto; }
