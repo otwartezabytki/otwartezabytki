@@ -4,7 +4,7 @@ class RelicsController < ApplicationController
   expose(:suggestion) { Suggestion.new(:relic_id => params[:id]) }
   expose(:relic)
 
-  helper_method :parse_navigators, :search_params, :location_breadcrumbs
+  helper_method :parse_navigators, :search_params, :location_breadcrumbs, :need_captcha
 
   before_filter :current_user!, :only => [:edit, :create, :update, :suggest_next, :thank_you]
 
@@ -30,10 +30,20 @@ class RelicsController < ApplicationController
   end
 
   def update
+    suggestion.attributes = params[:suggestion]
     suggestion.user_id = current_user.id
     suggestion.ip_address = request.remote_ip
 
-    if suggestion.update_attributes(params[:suggestion])
+    if need_captcha
+      if verify_recaptcha(:model => suggestion, :timeout => 30)
+        Rails.cache.delete("need_captcha_#{request.remote_ip}")
+      else
+        render "edit_captcha" and return
+      end
+    end
+
+
+    if suggestion.save
       redirect_to thank_you_relics_path
     else
       flash[:error] = suggestion.errors.full_messages
@@ -143,5 +153,21 @@ class RelicsController < ApplicationController
       @location_breadcrumbs
     end
 
+  private
+
+    def need_captcha
+      if Rails.cache.read("need_captcha_#{request.remote_ip}")
+        Rails.logger.info("Require captcha because of cache value for #{request.remote_ip}")
+        return true
+      end
+      suggestion_count = Suggestion.roots.not_skipped.where(:ip_address => request.remote_ip).where('created_at >= ?', 1.minute.ago).count
+      puts "Suggestion count: #{suggestion_count}"
+      if suggestion_count > 60
+        Rails.cache.write("need_captcha_#{request.remote_ip}", 1)
+        true
+      else
+        false
+      end
+    end
 
 end

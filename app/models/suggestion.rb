@@ -11,7 +11,7 @@ class Suggestion < ActiveRecord::Base
 
   attr_accessible :relic_id, :place_id, :place_id_action, :identification, :identification_action,
                   :street, :street_action, :dating_of_obj, :dating_of_obj_action, :latitude, :longitude,
-                  :coordinates_action, :tags, :tags_action, :place, :suggestions_attributes
+                  :coordinates_action, :tags, :tags_action, :place, :suggestions_attributes, :serialized_attr
 
   attr_protected :id, :created_at, :updated_at
 
@@ -19,6 +19,7 @@ class Suggestion < ActiveRecord::Base
             :tags_action, :coordinates_action, :inclusion => { :in => ['edit', 'skip', 'confirm'] }
 
   scope :roots, where(:ancestry => nil)
+  scope :not_skipped, where(:skipped => false)
 
   before_save do
     self.skipped = is_skipped?
@@ -37,7 +38,7 @@ class Suggestion < ActiveRecord::Base
       Relic.increment_counter(:edit_count, relic_id)
     end
     # explicit update relic index
-    relic.reload.update_relic_index
+    self.relic.reload.update_relic_index
     true
   end
 
@@ -75,6 +76,22 @@ class Suggestion < ActiveRecord::Base
 
   def tags=(value)
     self[:tags] = value.select(&:present?)
+  end
+
+  def serialized_attr=(value)
+    self.update_attributes(ActiveSupport::JSON.decode(value))
+  end
+
+  def serialized_attr
+    if self.suggestions.size > 0
+      ActiveSupport::JSON.encode({ :suggestions_attributes => self.suggestions.map(&:accessible_attributes_hash) }.merge(self.accessible_attributes_hash))
+    else
+      ActiveSupport::JSON.encode(self.accessible_attributes_hash)
+    end
+  end
+
+  def accessible_attributes_hash
+    self.attributes.delete_if {|key, value| !self.class.accessible_attributes.include?(key) }
   end
 
   def latitude
