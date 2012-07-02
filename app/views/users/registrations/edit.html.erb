@@ -1,5 +1,10 @@
-<h2>Rejestracja do Otwartych Zabytków</h2>
-
+<div class="login_title_register">Rejestracja do Otwartych Zabytków</div>
+<div class="right_txt_box"><div class="ask_account">Czy konto jest mi potrzebne?</div>
+Możesz uzupełniać bazę anonimowo albo założyć konto i śledzić własne postępy.
+<div class="ask_account">Masz już konto?</div>
+<a href="#">Zaloguj się.</a></div>
+<div class="form_box">
+  <div class="login_intro_txt">Zarejestruj sitę i śledź własne postępy</div>
 <%= semantic_form_for(current_user, :url => user_registration_path, :html => { :method => :put }) do |f| %>
   <%= f.semantic_errors %>
   <%= f.hidden_field :registration, :value => true %>
@@ -7,3 +12,4 @@
   <%= f.input :username, :required => true %>
   <%= f.submit "Zarejestruj się" %>
 <% end %>
+</div>

@@ -13,6 +13,8 @@
  *= require chosen
  *= require jquery.ui.all
  *= require layout
+ *= require user
+ *= require static
 */
 
 ul.nav li a.selected { font-weight: bold; width: 400px; }
