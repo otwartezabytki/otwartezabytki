@@ -11,6 +11,16 @@ body{
 	color: #313132;
 }
 
+body.big {
+  zoom: 110%;
+  -moz-transform: scale(1.1)
+}
+
+body.bigger {
+  zoom: 120%;
+  -moz-transform: scale(1.2)
+}
+
 a{
 	color: $blue;
 	text-decoration: none;
