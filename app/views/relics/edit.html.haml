@@ -119,14 +119,18 @@
             .action.action-confirm= link_to "Tak, jest poprawny" 
             .action.action-edit= link_to "Nie, chcę go poprawić"
             .action.action-skip= link_to "Nie wiem, pomiń"
+            .action.action-back
+              (zrobiłeś błąd?
+              = link_to "cofnij"
+              )
           - else
             %h3 Czy znasz adres zabytku? (np. al. Jerozolimskie, wyspa Kępa Mieszańska, rondo Falbanka) 
             .action.action-edit= link_to "Tak, chcę uzupełnić adres"
             .action.action-skip= link_to "Nie wiem, pomiń"
-          .action.action-back
-            (zrobiłeś błąd?
-            = link_to "cofnij"
-            )
+            .action.action-back.action-back-short
+              (zrobiłeś błąd?
+              = link_to "cofnij"
+              )
 
       %article.step.step-date.step-simple.step-view
         .help-content
@@ -170,15 +174,17 @@
             .action.action-edit= link_to "Nie, chcę ją poprawić"
             .action.action-skip= link_to "Nie wiem, pomiń"
             .action.action-back
+              (zrobiłeś błąd?
+              = link_to "cofnij"
+              )
           - else
             %h3 Czy znasz datę powstania zabytku? (np. 1929, XIX w., 2 poł. XIV w.)
             .action.action-edit= link_to "Tak, chcę poprawić datę"
             .action.action-skip= link_to "Nie wiem, pomiń"
-
-          .action-back
-            (zrobiłeś błąd?
-            = link_to "cofnij"
-            )
+            .action.action-back.action-back-short
+              (zrobiłeś błąd?
+              = link_to "cofnij"
+              )
 
       %article.step.step-tags.step-view
         .help-content
@@ -212,7 +218,7 @@
           %h3 Potwierdź lub wycofaj swój wybór:
           .action.action-submit= link_to "Potwierdzam"
           .action.action-skip= link_to "Nie jestem pewien, pomiń"
-          .action.action-back
+          .action.action-back.action-back-short
             (zrobiłeś błąd?
             = link_to "cofnij"
             )
@@ -290,16 +296,18 @@
                     .action.action-confirm= link_to "Tak, jest poprawna"
                     .action.action-edit= link_to "Nie, chcę ją poprawić"
                     .action.action-skip= link_to "Nie wiem, pomiń"
-                    .action.action-back
+                    .action-back
+                      (zrobiłeś błąd?
+                      = link_to "cofnij"
+                      )
                   - else
                     %h3 Czy znasz datę powstania zabytku? (np. 1929, XIX w., 2 poł. XIV w.)
                     .action.action-edit= link_to "Tak, chcę poprawić datę"
                     .action.action-skip= link_to "Nie wiem, pomiń"
-
-                  .action-back
-                    (zrobiłeś błąd?
-                    = link_to "cofnij"
-                    )
+                    .action-back.action-back-short
+                      (zrobiłeś błąd?
+                      = link_to "cofnij"
+                      )
 
               %article.step.step-tags.step-view
                 .values.values-view.values-edit
@@ -326,7 +334,7 @@
                   %h3 Potwierdź lub wycofaj swój wybór:
                   .action.action-submit= link_to "Potwierdzam"
                   .action.action-skip= link_to "Nie jestem pewien, pomiń"
-                  .action.action-back
+                  .action.action-back.action-back-short
                     (zrobiłeś błąd?
                     = link_to "cofnij"
                     )
