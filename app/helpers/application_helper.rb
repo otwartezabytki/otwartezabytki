@@ -42,4 +42,31 @@ module ApplicationHelper
 		[Relic.count] + [1,2,3].map {|i| Relic.where(["edit_count >= ?", i]).count }
 	end
 
+	def random_search_suggestions
+		types = SuggestedType.order("RANDOM()").map {|e| e.name }
+		places = Relic.select("place_id, COUNT(id) as cnt").group(:place_id).having("COUNT(id) > 5").order("RANDOM()").limit(4).includes(:place).map {|r| r.place.name }
+		suggestions = []
+
+		first = types.shift
+		count = Relic.search(:q1 => first).total_count
+		suggestions[0] = link_to "#{first} (#{count})", relics_path(:q1 => first)
+
+		first = places.shift
+		count = Relic.search(:q1 => first).total_count
+		suggestions[2] = link_to "#{first} (#{count})", relics_path(:q1 => first)
+
+		types.each do |type|
+			places.each do |place|
+				q = type + " " + place
+				count = Relic.search(:q1 => q).total_count
+				if count > 0
+					suggestions[1] = link_to "#{q} (#{count})", relics_path(:q1 => q)
+					break
+				end
+			end
+		end
+
+		suggestions.join(", ").html_safe
+	end
+
 end
