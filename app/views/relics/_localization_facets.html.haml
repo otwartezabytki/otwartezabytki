@@ -1,39 +1,23 @@
 - navigators = parse_navigators(relics.facets)
 .well.sidebar-nav
   %h3 Lokalizacja
+  %ul.nav.nav-list.all
+    %li
+      = link_to "Cała Polska <span>#{relics.facets['overall']['total']}</span>".html_safe, relics_path(search_params)
   %ul.nav.nav-list
     - location = params[:location].to_s.split('-')
     - navigators['voivodeships'].each do |obj|
-      - selected = location[0] == obj.id.to_s
-      - label = "#{obj.name} <span>#{obj.count}</span>".html_safe
       %li
-        = link_to_unless selected, label, relics_path(search_params.merge(:location => obj.id)) do
-          .selected
-            %p= label
-        - if selected
+        = link_to_facet obj, location, 0 do
           %ul
             - navigators['districts'].each do |obj|
-              - selected = location[1] == obj.id.to_s
-              - label = "#{obj.name} <span>#{obj.count}</span>".html_safe
               %li
-                = link_to_unless selected, label, relics_path(search_params.merge(:location => (location.first(1) << obj.id).join('-'))) do
-                  .selected
-                    %p= label
-                - if selected
+                = link_to_facet obj, location, 1 do
                   %ul
                     - navigators['communes'].each do |obj|
-                      - selected = location[2] == obj.id.to_s
-                      - label = "#{obj.name} <span>#{obj.count}</span>".html_safe
                       %li
-                        = link_to_unless selected, label, relics_path(search_params.merge(:location => (location.first(2) << obj.id).join('-'))) do
-                          .selected
-                            %p= label
-                        - if selected
+                        = link_to_facet obj, location, 2 do
                           %ul
                             - navigators['places'].each do |obj|
-                              - selected = location[3] == obj.id.to_s
-                              - label = "#{obj.name} <span>#{obj.count}</span>".html_safe
                               %li
-                                = link_to_unless selected, label, relics_path(search_params.merge(:location => (location.first(3) << obj.id).join('-'))) do
-                                  .selected
-                                    %p= label
+                                = link_to_facet obj, location, 3

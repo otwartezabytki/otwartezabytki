@@ -14,6 +14,10 @@ Otwartezabytki::Application.routes.draw do
   resources :relics, :only => [:edit, :update, :index, :show, :edit, :update], :path_names => { :edit => 'review' } do
     collection do
       get :suggester
+    end
+
+    member do
+      get :corrected
       get :thank_you
     end
   end

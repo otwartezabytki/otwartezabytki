@@ -19,3 +19,6 @@ config/database.yml
 Gemfile.local
 vendor/relics_cleanup.db.zip
 config/newrelic.yml
+config/settings.local.yml
+config/settings/*.local.yml
+config/environments/*.local.yml

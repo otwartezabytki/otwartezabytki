@@ -151,13 +151,23 @@ class Relic < ActiveRecord::Base
           end
         end
 
-        facet "corrected" do
+        filter :term, :place_id => location[3] if location.size > 3
+
+        facet "overall" do
+          terms :id, :script => 1, :global => true, :all_terms => true
+        end
+
+        corrected_faset_filter = {}
+        term_params = Hash[
+          [:voivodeship_id, :district_id, :commune_id, :place_id].zip(location)
+        ].inject({}) { |mem, (k, v)| mem[k] = v if v; mem }
+        corrected_faset_filter = { :facet_filter => { :term => term_params } } if term_params.present?
+
+        facet "corrected", corrected_faset_filter do
           terms :edit_count, :script => "(corrected_relic_ids.contains(doc['id'].value.toString()) || doc['edit_count'].value > 2) ? 1 : 0", :all_terms => true, :params => {
             'corrected_relic_ids' => corrected_relic_ids
           }
         end
-
-        filter :term, :place_id => location[3] if location.size > 3
 
         sort do
           by '_script', {
@@ -205,6 +215,12 @@ class Relic < ActiveRecord::Base
     def next_for(user, search_params)
       params = (search_params || {}).merge(:limit => 1, :corrected_relic_ids => user.corrected_relic_ids)
       self.search(params).first || self.first(:offset => rand(self.count))
+    end
+
+    def next_few_for(user, search_params, count)
+      params = (search_params || {}).merge(:limit => count, :corrected_relic_ids => user.corrected_relic_ids)
+      res = self.search(params).take(count)
+      res.empty? ? self.where(:offset => rand(self.count)).limit(count) : res
     end
 
   end
@@ -266,6 +282,14 @@ class Relic < ActiveRecord::Base
   def update_relic_index
     # always update root document
     root.tire.update_index
+  end
+
+  def corrected_by?(user)
+    user.suggestions.where(:relic_id => self.id).count > 0
+  end
+
+  def corrected?
+    suggestions.count >= 3
   end
 
 end
