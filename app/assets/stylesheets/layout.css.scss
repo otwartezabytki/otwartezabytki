@@ -792,6 +792,9 @@ a{
 					width:720px;
 				}
 			}  
+			&.step-skipped{
+				padding-bottom: 100px;
+			}
 		}         
 		&.step-gps .actions{
 			padding: 0;
@@ -805,9 +808,10 @@ a{
 				.action-skip a{
 					margin-right: 0;
 				}
-			}
-			&.actions-edit .buttons{
-				position: absolute;
+			}                      
+			&.actions-edit .buttons, &.actions-done .buttons{
+				position: absolute;      
+				width: 700px;
 				left: -740px;
 				bottom: -90px;
 				.action a{
@@ -853,6 +857,12 @@ a{
 						background: linear-gradient(to bottom, rgba(36,94,124,1) 0%,rgba(67,125,154,1) 100%); /* W3C */
 						filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#245e7c', endColorstr='#437d9a',GradientType=0 ); /* IE6-9 */
 					}
+				}
+			}     
+			&.actions-done{
+				background: transparent;
+				.buttons{
+					bottom: 50px;
 				}
 			}  
 		}

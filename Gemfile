@@ -53,12 +53,13 @@ gem 'dm-sqlite-adapter'
 gem 'unicode'
 gem 'gon'
 gem 'high_voltage'
+gem 'newrelic_rpm'
 
 # background jobs
 gem 'whenever', :require => false
 
 # bot secrity
-gem "recaptcha", :require => "recaptcha/rails"
+gem 'recaptcha', :require => 'recaptcha/rails'
 
 group :development, :test do
   # for debugging

@@ -274,11 +274,6 @@
                     = f2.input :tags, :as => :check_boxes,
                       :collection => Tag.third_column, :label => "",
                       :input_html => { :multiple => true }
-                .actions.actions-edit
-                  .action.action-submit= link_to "Zatwierdź"
-                  .action.action-skip= link_to "Pomiń"
-                .actions.actions-done
-                  .action.action-back= link_to "Cofnij"
 
       %article.step.step-gps.step-view
         .help-content
@@ -302,25 +297,25 @@
             %p Nie możesz znaleźć?  
             .action.action-skip.btn= link_to "Pomiń"
 
-        .actions.actions-edit
+        .actions.actions-edit.actions-navbar
           .marker-helper
             %h4 Przeciągnij znacznik na mapę:
-            .marker-holder
-          .buttons
-            %h3 Czy udało Ci się zaznaczyć właściwą lokalizację?
-            .action.action-submit.btn= link_to "Tak, potwierdzam"
-            .action.action-cancel.btn= link_to "Nie, pomiń"
-          
-            
+            .marker-holder     
           = f.input :longitude, :as => :string, :label => "długość geograficzna", :placeholder => "długość", :input_html => { :maxlength => 9 }   
           = f.input :latitude, :as => :string, :label => "szerokość geograficzna", :placeholder => "szerokość", :input_html => { :maxlength => 9 }
-          = f.input :coordinates_action, :as => :hidden
+          = f.input :coordinates_action, :as => :hidden   
+            
+        .action.actions-edit
+          .buttons
+            %h3 Czy udało Ci się zaznaczyć właściwą lokalizację?
+            .action.action-submit.btn= link_to "Potwierdzam"
+            .action.action-skip.btn= link_to "Pomiń"
 
         .actions.actions-done
           .buttons
             %h3 Czy udało Ci się zaznaczyć właściwą lokalizację?
             .action.action-submit.btn= link_to "Tak, potwierdzam"
-            .action.action-cancel.btn= link_to "Nie, pomiń"
+            .action.action-skip.btn= link_to "Nie, pomiń"
             .action.action-back.btn= link_to "Cofnij"
 
       %article.step.step-submit.step-view
