@@ -330,6 +330,8 @@ $.fn.specialize
 
 jQuery ->
 
+  return unless $('body').hasClass('relics') && $('body').hasClass('edit')
+
   # prevent form submission until end of the wizard
   $('form.suggestion').submit (e) ->
     $('.step-submit').addClass('step-done')
