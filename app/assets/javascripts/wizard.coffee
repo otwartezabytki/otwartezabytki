@@ -359,12 +359,14 @@ $.fn.specialize
 
 jQuery ->
 
+  bypass_submit = false
+
   return unless $('body').hasClass('relics') && $('body').hasClass('edit')
 
   # prevent form submission until end of the wizard
   $('form.suggestion').submit (e) ->
     $('.step-submit').addClass('step-done')
-    if $('.step:not(.step-done)').length > 0
+    if !bypass_submit && $('.step:not(.step-done)').length > 0
       $('.step:not(.step-done):first').view()
       false
     else
@@ -481,3 +483,9 @@ jQuery ->
     stroke = if (_ref = e.which) != null then _ref else e.keyCode
     console.log(stroke)
     add_suggestion_callback(e) if stroke == 13
+
+
+  $('#go_to_next').click ->
+    bypass_submit = true
+    $('#new_suggestion').submit()
+    return false
