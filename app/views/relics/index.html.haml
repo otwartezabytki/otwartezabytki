@@ -20,11 +20,12 @@
           %div.breadcrumb
             %p Gdzie:
             %ul
-              - location_breadcrumbs.each_with_index do |l, i|
+              - c = location_breadcrumbs.size
+              - location_breadcrumbs.take(c-1).each do |l|
                 %li
                   = link_to l[:label], l[:path]
-                  - if i < location_breadcrumbs.size - 1
-                    %span &#187;
+                  %span &#187;
+              %li= location_breadcrumbs.last[:label]
 
     - if relics.empty?
       .search-no-results
