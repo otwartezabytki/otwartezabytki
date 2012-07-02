@@ -126,7 +126,7 @@ class RelicsController < ApplicationController
       navigators = {}
       ['voivodeships', 'districts', 'communes', 'places'].each do |name|
         next unless facets[name]
-        ids = facets[name]['terms'].map { |k| k['term']}
+        ids = facets[name]['terms'].map { |k| k['term'].to_i }
         klass = name.classify.constantize
         objs = ids.sort.map do |id|
           Rails.cache.fetch("#{name.classify.downcase}_#{id}", :expires_in => 1.day) do
@@ -154,7 +154,9 @@ class RelicsController < ApplicationController
       location_arry = params[:location].to_s.split('-')
 
       location_arry.each_with_index do |id,i|
-        l = klasses[i].find(id)
+        l = Rails.cache.fetch("#{klasses[i].to_s.downcase}_#{id}", :expires_in => 1.day) do
+          klasses[i].find(id)
+        end
         @location_breadcrumbs << {:path => relics_path(search_params.merge(:location =>location_arry.first(i+1).join('-'))), :label => l.name }
       end if location_arry.present?
       @location_breadcrumbs
