@@ -399,4 +399,6 @@ jQuery ->
   $(".step-current .help-content .help-extended .close").click ->
     $(this).parents(".help-content").removeClass("active")
     $(this).parent().hide()
-    $(".step-current .help-content .help").show()
+    $(".step-current .help-content .help").show()       
+    
+  #$('.step-gps').view()

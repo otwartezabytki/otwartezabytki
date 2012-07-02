@@ -12,59 +12,60 @@
     %link{:href => "http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,600,300&subset=latin,latin-ext", :rel => "stylesheet", :type => "text/css"}/
   %body{ :class => controller_name + " " + action_name + (params[:id] ? " resource_#{params[:id]}" : "") }
     .page
-      %header#header
-        .container
-          %a.btn.btn-navbar(data-target=".nav-collapse" data-toggle="collapse")
-            %span.icon-bar
-            %span.icon-bar
-            %span.icon-bar
-          %h1
-            %a(href=root_path) Otwarte Zabytki
-          %nav#userNav
-            %ul
-              - if Rails.env.development?
-                %li= "uid = #{current_user.id rescue 0}, suggestions = #{current_user.suggestions.count rescue 0}"
-              - if current_user && current_user.registered? && current_user.errors.size == 0
-                %li Witaj, #{ current_user.username || current_user.email }
-                %li= link_to 'Wyloguj się', destroy_user_session_path, :method => :delete, :class => 'login'
-              - else
+      #root
+        %header#header
+          .container
+            %a.btn.btn-navbar(data-target=".nav-collapse" data-toggle="collapse")
+              %span.icon-bar
+              %span.icon-bar
+              %span.icon-bar
+            %h1
+              %a(href=root_path) Otwarte Zabytki
+            %nav#userNav
+              %ul
+                - if Rails.env.development?
+                  %li= "uid = #{current_user.id rescue 0}, suggestions = #{current_user.suggestions.count rescue 0}"
+                - if current_user && current_user.registered? && current_user.errors.size == 0
+                  %li Witaj, #{ current_user.username || current_user.email }
+                  %li= link_to 'Wyloguj się', destroy_user_session_path, :method => :delete, :class => 'login'
+                - else
+                  %li
+                    %a{:href => new_user_session_path, :class => 'login'} Zaloguj
+                  %li
+                    %a{:href => new_user_registration_path, :class => 'register'} Zarejestruj
+            %a{:href => 'http://centrumcyfrowe.pl/', :target => '_blank', :class => 'cc_logo'}
+        %section#menu
+          .container
+            %nav
+              %ul
                 %li
-                  %a{:href => new_user_session_path, :class => 'login'} Zaloguj
+                  = link_to "O projekcie", page_pl_path('o-projekcie'), :class => 'about'
                 %li
-                  %a{:href => new_user_registration_path, :class => 'register'} Zarejestruj
-          %a{:href => 'http://centrumcyfrowe.pl/', :target => '_blank', :class => 'cc_logo'}
-      %section#menu
-        .container
-          %nav
-            %ul
-              %li
-                = link_to "O projekcie", page_pl_path('o-projekcie'), :class => 'about'
-              %li
-                = link_to "Pomoc", page_pl_path('pomoc'), :class => 'help'
-              %li
-                = link_to "Kontakt", page_pl_path('kontakt'), :class => 'contact'
-              %li
-                = link_to "Pobierz dane", page_pl_path('pobierz-dane'), :class => 'download'
+                  = link_to "Pomoc", page_pl_path('pomoc'), :class => 'help'
+                %li
+                  = link_to "Kontakt", page_pl_path('kontakt'), :class => 'contact'
+                %li
+                  = link_to "Pobierz dane", page_pl_path('pobierz-dane'), :class => 'download'
 
-          = simple_form_for Relic.new, :url => relics_path, :html => { :class => 'well form-search'},:method => :get do |f|
-            = f.input :q1, :label => false, :input_html => {:name => 'q1', :value => params[:q1], :class => "search-query"}, :placeholder => "dworek"
-            = f.button :submit, 'Szukaj »', :name => nil
-          .text
-            %span.plus
-            %span.minus
-      %section#main
-        .container
-          - if flash[:notice]
-            .alert.alert-info= flash[:notice]
-          - if flash[:error]
-            .alert.alert-error= flash[:error]
-          .row
-            .span3
-              = yield(:sidebar)
-            .span9
-              = yield
-
-      %footer &nbsp;
+            = simple_form_for Relic.new, :url => relics_path, :html => { :class => 'well form-search'},:method => :get do |f|
+              = f.input :q1, :label => false, :input_html => {:name => 'q1', :value => params[:q1], :class => "search-query"}, :placeholder => "dworek"
+              = f.button :submit, 'Szukaj »', :name => nil
+            .text
+              %span.plus
+              %span.minus
+        %section#main
+          .container
+            - if flash[:notice]
+              .alert.alert-info= flash[:notice]
+            - if flash[:error]
+              .alert.alert-error= flash[:error]
+            .row
+              .span3
+                = yield(:sidebar)
+              .span9
+                = yield
+        #root-footer
+      %footer#footer= render 'shared/footer'
     / Placed at the end of the document so the pages load faster
     != include_gon(:camel_case => true)
     != javascript_include_tag "application"

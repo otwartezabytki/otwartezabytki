@@ -1,3 +1,5 @@
+@import "compass/layout";
+
 $blue: #044d71;
 $blue-hover: #006699;
 $dark-grey: #313132; 
@@ -22,6 +24,9 @@ a{
 	margin: 0 auto;
 	width: 960px;	
 }
+
+/* footer sticker */
+@include sticky-footer(14px, "#root", "#root-footer", "#footer");
 
 #header{
 	height: 118px;
@@ -490,11 +495,18 @@ a{
 			background: asset-data-url('icon-waiting-big.png') no-repeat;
 			right: 25px;
 			bottom: 17px;
-            -webkit-transition: none;
-            -moz-transition: none;
-            -o-transition: none;
-            -ms-transition: none;
-            transition: none;
+      -webkit-transition: none;
+      -moz-transition: none;
+      -o-transition: none;
+      -ms-transition: none;
+      transition: none;
+		}       
+		.values * {
+		   -webkit-transition: none;
+      -moz-transition: none;
+      -o-transition: none;
+      -ms-transition: none;
+      transition: none; 
 		}
 		input[readonly]{
 			background: none;
@@ -751,12 +763,25 @@ a{
 				}
 			}
 		}
-		&.step-gps.step-current{
-			padding-bottom: 120px;
-		}
+    &.step-gps {  
+			#map_canvas{
+			 	width: 475px;
+				height: 260px;
+				opacity: 0.3;
+	  		margin-top: 12px;
+			}   
+			&.step-current{
+				padding-bottom: 120px;
+				#map_canvas{ 
+					opacity: 1;
+					height: 400px;
+					width:720px;
+				}
+			}  
+		}         
 		&.step-gps .actions{
 			padding: 0;
-			top: 63px;
+			top: 50px;
 			.buttons{
 				text-align: center;
 				margin: 120px auto 10px;
@@ -1066,7 +1091,7 @@ a{
 							margin-left: 0;
 							margin-bottom: 15px;
 							.search-query{
-								width: 470px;
+								width: 465px;
 								font-size: 16px;
 								padding: 11px 7px 11px 40px;
 							}
