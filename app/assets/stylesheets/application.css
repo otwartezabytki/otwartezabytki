@@ -37,28 +37,6 @@ footer { clear: both; display: block; }
 .step-skipped input[type="text"] { color: #dddddd; }
 .step-confirmed input[type="text"] { color: green; }
 
-.step-gps .values { width: 900px;}
-.step-gps .actions, .step-gps .values { float: none; }
-
-.step-gps .actions {
-    position: absolute;
-		right: 19px;
-		width: 170px;
-		top: 92px;
-		margin: 0;
-		height: 420px;
-		background: #fff;
-} 
-
-.step-gps.step-view .marker-helper {
-    background-color: white;
-    padding: 10px;
-}
-
-.step-gps.step-view .marker-helper .marker-holder {
-    display: block;
-}
-
 #map_canvas{border: 10px solid #fff;}
 #marker { cursor: pointer; margin: 40px 0 0 47px;}
 

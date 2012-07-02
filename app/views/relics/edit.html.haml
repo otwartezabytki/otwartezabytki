@@ -351,35 +351,33 @@
           .gps-helper
           #map_canvas
 
-        .actions.actions-view
+        .actions.actions-edit.actions-view.actions-navbar
           .marker-helper
             %h4 Przeciągnij znacznik na mapę:
             .marker-holder
               = image_tag 'marker.png', :id => 'marker'
-          .buttons
-            %p Nie możesz znaleźć?  
-            .action.action-skip.btn= link_to "Pomiń"
-
-        .actions.actions-edit.actions-navbar
-          .marker-helper
-            %h4 Przeciągnij znacznik na mapę:
-            .marker-holder     
-          = f.input :longitude, :as => :string, :label => "długość geograficzna", :placeholder => "długość", :input_html => { :maxlength => 9 }   
+          = f.input :longitude, :as => :string, :label => "długość geograficzna", :placeholder => "długość", :input_html => { :maxlength => 9 }
           = f.input :latitude, :as => :string, :label => "szerokość geograficzna", :placeholder => "szerokość", :input_html => { :maxlength => 9 }
-          = f.input :coordinates_action, :as => :hidden   
-            
-        .action.actions-edit
-          .buttons
-            %h3 Czy udało Ci się zaznaczyć właściwą lokalizację?
-            .action.action-submit.btn= link_to "Potwierdzam"
-            .action.action-skip.btn= link_to "Pomiń"
+          = f.input :coordinates_action, :as => :hidden
+
+        .actions.actions-view
+          %h3 Czy udało Ci się zaznaczyć właściwą lokalizację?
+          .action.action-submit.btn= link_to "Potwierdzam, zaznaczyłem dobrą lokację"
+          .action.action-skip.btn= link_to "Nie potrafię znaleźć lokacji, pomiń"
+
+        .actions.actions-edit
+          %h3 Czy udało Ci się zaznaczyć właściwą lokalizację?
+          .action.action-submit.btn= link_to "Potwierdzam, zaznaczyłem dobrą lokację"
+          .action.action-skip.btn= link_to "Nie potrafię znaleźć lokacji, pomiń"
 
         .actions.actions-done
-          .buttons
-            %h3 Czy udało Ci się zaznaczyć właściwą lokalizację?
-            .action.action-submit.btn= link_to "Tak, potwierdzam"
-            .action.action-skip.btn= link_to "Nie, pomiń"
-            .action.action-back.btn= link_to "Cofnij"
+          %h3 Czy udało Ci się zaznaczyć właściwą lokalizację?
+          .action.action-submit.btn= link_to "Potwierdzam, zaznaczyłem dobrą lokację"
+          .action.action-skip.btn= link_to "Nie potrafię znaleźć lokacji, pomiń"
+          .action.action-back.action-back-short
+            (zrobiłeś błąd?
+            = link_to "cofnij"
+            )
 
       %article.step.step-submit.step-view
         .actions.actions-view.actions-edit
