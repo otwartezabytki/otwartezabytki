@@ -1,9 +1,14 @@
 %div.page
-%h1 Dziękujemy!
-%h2= thank_you_note
+  .opening
+    %h2 Dzięki!
+    #heart ♥
+    %h3= thank_you_note
 
-Zabytek pozostaje na liście "do sprawdzenia" dopóki nie sprawdzą go trzy osoby.
-
+  .thankyou_notes
+    %p.info
+      Zabytek pozostaje na liście „do sprawdzenia” dopóki nie sprawdzą go trzy osoby.
+    %a#share
+      Pokaż znajomym, że bierzesz udział w akcji!
 
 - if @request_email
   %h4 Możesz uzupełnić bazę anonimowo albo założyć własne konto i śledzieć własne postępy
@@ -28,4 +33,4 @@ lub
 
 - q1 = session[:search_params] && session[:search_params][:q1]
 = link_to relics_path(:q1 => q1) do
-  Wróć do wyników "#{q1}" &raquo;
+  Wróć do wyników „#{q1}” &raquo;
