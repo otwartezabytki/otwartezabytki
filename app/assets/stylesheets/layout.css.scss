@@ -257,7 +257,7 @@ a{
 	box-shadow: 0 0 3px 0 rgba(0,0,0,0.2);
 }
 
-#relics{
+.span9 #relics{
 	width: 720px;
 }
 
@@ -1395,5 +1395,25 @@ a{
 		padding: 30px 30px 30px 60px;
 		background: #fff asset-data-url('subrelics.png') 30px 31px no-repeat;
 		margin-bottom: 1px;
+	}
+}
+
+.search-no-results {
+	background: image-url('no-results-bg.png') no-repeat top left;
+	height: 300px;
+	padding-top: 80px;
+	border-bottom: 1px solid #ccc;
+	p {
+		font-size: 20px;
+		line-height: 30px;
+		padding: 20px;
+		text-align: center;
+
+		strong {
+			font-weight: bold;
+		}
+		a span {
+			font-size: 16px;
+		}
 	}
 }

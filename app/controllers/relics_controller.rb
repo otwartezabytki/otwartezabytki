@@ -18,6 +18,13 @@ class RelicsController < ApplicationController
     SearchTerm.store(params[:q1])
     session[:search_params] = params.slice(:q1, :location)
     gon.highlighted_tags = relics.highlighted_tags
+
+    idx = relics.results.index {|r| r.corrected?(current_user) }
+    if idx
+      @pending, @corrected = relics.take(idx), relics.drop(idx)
+    else
+      @pending, @corrected = relics, []
+    end
   end
 
   def edit
