@@ -1,1 +1,32 @@
-this is footer
+.about
+        %p Otwarte Zabytki to projekt prowadzony przez Centrum Cyfrowe Projekt: Polska.
+        %p Centrum Cyfrowe Projekt Polska, 03-808 Warszawa, ula. Mińska 25, bud. 74
+        %p Projekt finansowany ze środków Ministra Kultury i Dziedzictwa Narodowego w ramach konkursu Patriotyzm Jutra, ze środków finansowych otrzymanych od Ministerstwa Spraw Zagranicznych w ramach konkursu na realizację zadania "Współpraca z Polonią i Polakami za granicą oraz ze środków CEE Trust.
+
+.facebook-share
+        :plain
+                <iframe src="//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fotwartezabytki&amp;width=270&amp;height=62&amp;colorscheme=light&amp;show_faces=false&amp;border_color&amp;stream=false&amp;header=false" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:270px; height:62px;" allowTransparency="true"></iframe>
+.partners
+
+        .partner-big
+                %h2 Partner
+                .partner-bg
+                        = link_to image_tag( 'partner-nid.png'), 'http://www.nid.pl'
+
+        .partner-small
+                %h2 Patroni medialni
+                .partner-bg
+                        = link_to image_tag( 'partner-ngo.png'), 'http://www.ngo.pl'
+
+        .partner-small
+                %h2 Partner merytoryczny
+                .partner-bg
+                        = link_to image_tag( 'partner-tit.png'), 'http://www.e.org.pl'
+        .partner-small.last
+                %h2 Grantodawcy
+                .partner-bg
+                        = link_to image_tag( 'partner-mhp.png')
+.footer-bottom
+        %p Treści zamieszczone w serwisie udostępniamy na licencji Creative Commons Uznanie autorstwa - Na tych samych warunkach 3.0 Polska
+        %a{ :class => "footer-logo", :href => "http://www.monterail.com"} MonteRail
+
