@@ -86,6 +86,19 @@ class Suggestion < ActiveRecord::Base
     end
   end
 
+  def place_id=(value)
+    if value.to_i != 0
+      self[:place_id] = value
+    else
+      place = Place.find_or_create_by_name(value) do |p|
+        p.commune = self.relic.commune
+        p.from_teryt = false
+      end
+
+      self[:place_id] = place.id
+    end
+  end
+
   def accessible_attributes_hash
     self.attributes.delete_if {|key, value| !self.class.accessible_attributes.include?(key) }
   end
