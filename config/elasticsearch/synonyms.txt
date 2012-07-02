@@ -29,15 +29,12 @@
 # is equivalent to
 # foo => foo bar, baz
 
-
-w => województwo
-p => powiat
-g => gmina
+gm => gmina
 ul => ulica
 al => aleja
 pl => plac
 św => święty
-pw => pod wezwaniem
+p.w, pw => pod wezwaniem
 wezw => wezwaniem
 zesp => zespół
 fil => filjalny
