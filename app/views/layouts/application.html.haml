@@ -67,7 +67,7 @@
             .row
               = yield
         #root-footer
-      %footer#footer= render 'shared/footer'
+      %footer#footer.container= render 'shared/footer'
     / Placed at the end of the document so the pages load faster
     != include_gon(:camel_case => true)
     != javascript_include_tag "application"
