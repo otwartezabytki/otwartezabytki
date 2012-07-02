@@ -151,7 +151,13 @@ class Relic < ActiveRecord::Base
           end
         end
 
-        facet "corrected" do
+        corrected_faset_filter = {}
+        term_params = Hash[
+          [:voivodeship_id, :district_id, :commune_id, :place_id].zip(location)
+        ].inject({}) { |mem, (k, v)| mem[k] = v if v; mem }
+        corrected_faset_filter = { :facet_filter => { :term => term_params } } if term_params.present?
+
+        facet "corrected", corrected_faset_filter do
           terms :edit_count, :script => "(corrected_relic_ids.contains(doc['id'].value.toString()) || doc['edit_count'].value > 2) ? 1 : 0", :all_terms => true, :params => {
             'corrected_relic_ids' => corrected_relic_ids
           }

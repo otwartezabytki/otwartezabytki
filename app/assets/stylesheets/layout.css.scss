@@ -487,6 +487,10 @@ a{
 				font-size: 14px;
 				padding: 5px;
 			}
+			&.active a {
+				background-color: rgb(95,96,98);
+				color: rgb(255,255,255);
+			}
 		}
 	}
 }
@@ -966,6 +970,9 @@ a{
           .action-back{
             padding-left: 200px;
           }
+          .action-back-short {
+            padding-left: 0px;
+          }
           &.actions-done{
               .action-edit a{
                 background: rgb(28,45,54); /* Old browsers */
@@ -1058,6 +1065,15 @@ a{
 			.action-back{
 				padding-left: 412px;
 			}
+            .action-back-short {
+                padding-left: 243px;
+            }
+
+            &.step-date {
+              .action-back-short {
+                padding-left: 233px;
+              }
+            }
 		}
 		#suggestion_latitude_input, #suggestion_longitude_input{
 			label{
