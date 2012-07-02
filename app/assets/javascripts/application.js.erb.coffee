@@ -19,7 +19,7 @@
 #= require wizard
 
 
-@marker_image_path = "<%= image_path('arrow.png') %>"
+@marker_image_path = "<%= image_path('wizard-gps-circle-with-info.png') %>"
 @geocoder_search_path = "/geocoder/search"
 
 

@@ -291,7 +291,7 @@
         .values.values-edit.values-view
           %label Położenie GPS
           .gps-helper
-          #map_canvas{ style: "height: 400px; width: 720px" }
+          #map_canvas
 
         .actions.actions-view
           .marker-helper
@@ -318,10 +318,13 @@
 
         .actions.actions-done
           .buttons
+            %h3 Czy udało Ci się zaznaczyć właściwą lokalizację?
+            .action.action-submit.btn= link_to "Tak, potwierdzam"
+            .action.action-cancel.btn= link_to "Nie, pomiń"
             .action.action-back.btn= link_to "Cofnij"
 
       %article.step.step-submit.step-view
-        .actions.actions-view.actions-edit{ :style => "display: block;" }
+        .actions.actions-view.actions-edit
           %h2 Jeśli wszystkie pola są poprawione, potwierdź wysłanie formularza
           - if need_captcha
             %h3 Jednak przedtem, w celu weryfikacji czy jesteś człowiekiem, prosimy o przepisanie następujących słów:
