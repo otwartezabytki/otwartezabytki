@@ -532,7 +532,7 @@ a{
             -ms-transition: none;
             transition: none;
 		}
-		.values *, .actions-navbar * {
+        .help-content, &.step-gps .values *, .actions-navbar * {
 		  -webkit-transition: none;
           -moz-transition: none;
           -o-transition: none;
@@ -589,6 +589,7 @@ a{
 				font-size: 13px;
 				text-transform: uppercase;
                 margin-bottom: 20px;
+                clear: both;
 			}
 			p{
 				font-size: 16px;
@@ -894,27 +895,31 @@ a{
           }
         }
         &.step-gps {
+            min-height: 300px;
+
 			#map_canvas{
               width: 475px;
               height: 260px;
               opacity: 0.3;
 	  		  margin-top: 12px;
 			}
+
             .marker-helper {
               background-color: white;
               padding: 10px;
             }
 
-            .marker-helper .marker-holder {
-              display: block;
+            &.step-edit #marker {
+              display: none;
             }
+
 			&.step-current{
 
               padding-bottom: 120px;
               #map_canvas{
                   opacity: 1;
                   height: 400px;
-                  width:720px;
+                  width:712px;
               }
 
               &.step-view .action-submit a{
@@ -942,41 +947,39 @@ a{
 			}
 			&.step-skipped{
 				padding-bottom: 100px;
+                .action-back {
+                  padding-left: 346px !important;
+                }
 			}
-
+            &.step-edited {
+              .action-back {
+                padding-left: 0px !important;
+              }
+            }
             .values {
               margin-bottom: 14px;
-            }
-		}
-		&.step-gps .actions{
-			padding: 0;
-            &.actions-navbar {
-              position: absolute;
-              right: 19px;
-              width: 170px;
-              margin: 0;
-              height: 420px;
-              background: #fff;
-              top: 50px;
+              float: left;
             }
 
-			.buttons{
-				text-align: center;
-				margin: 120px auto 10px;
-				p{
-					margin: 20px 0;
-				}
-				.action-skip a{
-					margin-right: 0;
-				}
-			}
+            .actions {
+              clear: right;
+              padding: 0;
 
-			&.actions-done{
-				background: transparent;
-				.buttons{
-					bottom: 50px;
-				}
-			}
+              &.actions-navbar {
+                float: right;
+                width: 172px;
+                margin: 0;
+                margin-top: 7px;
+                height: 420px;
+                background: #fff;
+              }
+
+              &.actions-done{
+                background: transparent;
+              }
+            }
+
+
 		}
 
 		&.step-edit{

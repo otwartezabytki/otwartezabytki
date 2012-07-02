@@ -30,6 +30,7 @@ $.fn.specialize
       this.removeClass('step-done step-skipped step-confirmed step-edited step-view step-edit')
       this.addClass(klass)
       $(".help-content").removeClass('active')
+      $('.step').removeClass('step-current')
       this.addClass('step-current')
       this.action().val('skip')        
 
@@ -195,9 +196,37 @@ $.fn.specialize
     input: -> $('#suggestion_latitude, #suggestion_longitude')
     action: -> $('#suggestion_coordinates_action')
 
+    view: ->
+      this.switchViewClass('step-view')
+      setTimeout ->
+        google.maps.event.trigger(map.map, 'resize')
+      , 1000
+
+      this
+
     edit: ->
       this.switchViewClass('step-edit')
+      setTimeout ->
+        google.maps.event.trigger(map.map, 'resize')
+      , 1000
       this
+
+    cancel: ->
+      map.removeMarkers()
+      this.restoreHistory()
+      this.input().save()
+      this.view()
+      this.saveLocalHistory()
+      this
+
+    skip: ->
+      this.cancel()
+      this.switchViewClass('step-view step-done step-skipped')
+      this.action().val('skip')
+      this.done()
+      this
+
+
 
 
   'input, select':
@@ -371,13 +400,27 @@ jQuery ->
       return false # prevent the form submission
 
   ['submit', 'skip'].forEach (action) ->
-    $('.step-tags, .step-gps').on 'click', ".action-#{action} a" , ->
+    $('.step-tags').on 'click', ".action-#{action} a" , ->
       step_div = $(this).parents('.step:first')
 
       if step_div.hasClass('step-current')
         step_div[action]()
 
       return false # prevent the form submission
+
+  $('.step-gps').on 'click', ".action-submit a" , ->
+    step_div = $(this).parents('.step:first')
+    if step_div.hasClass('step-current') && step_div.hasClass('step-edit')
+      step_div.submit()
+
+    return false # prevent the form submission
+
+  $('.step-gps').on 'click', ".action-skip a" , ->
+    step_div = $(this).parents('.step:first')
+    if step_div.hasClass('step-current')
+      $(this).parents('.step:first').skip()
+
+    return false # prevent the form submission
 
 
   $('.step').each -> $(this).saveHistory()
@@ -389,19 +432,15 @@ jQuery ->
 
       x_offset = (ui.offset.left - $(this).offset().left + 10)
       y_offset = (ui.offset.top - $(this).offset().top + 35)
-      container_height = $(this).parents('.step').find('.actions-view').height()
-      container_width =  $(this).parents('.step').find('.actions-view').width()
 
-      if y_offset < $(this).height() - container_height || x_offset < $(this).width() - container_width
-        lng = map.map.getBounds().getSouthWest().lng()
-        lat = map.map.getBounds().getNorthEast().lat()
-        width = map.map.getBounds().getNorthEast().lng() - map.map.getBounds().getSouthWest().lng()
-        height = map.map.getBounds().getSouthWest().lat() - map.map.getBounds().getNorthEast().lat()
-        marker_lat = lat + height * y_offset / $(this).height()
-        marker_lng = lng + width * x_offset / $(this).width()
-        $('#map_canvas').set_marker(marker_lat, marker_lng)
-
-        $(this).parents('.step').edit()
+      lng = map.map.getBounds().getSouthWest().lng()
+      lat = map.map.getBounds().getNorthEast().lat()
+      width = map.map.getBounds().getNorthEast().lng() - map.map.getBounds().getSouthWest().lng()
+      height = map.map.getBounds().getSouthWest().lat() - map.map.getBounds().getNorthEast().lat()
+      marker_lat = lat + height * y_offset / $(this).height()
+      marker_lng = lng + width * x_offset / $(this).width()
+      $('#map_canvas').set_marker(marker_lat, marker_lng)
+      $(this).parents('.step').edit()
 
   $('#map_canvas').auto_zoom()
 
@@ -442,3 +481,5 @@ jQuery ->
     stroke = if (_ref = e.which) != null then _ref else e.keyCode
     console.log(stroke)
     add_suggestion_callback(e) if stroke == 13
+
+  $('.step-gps').view()
