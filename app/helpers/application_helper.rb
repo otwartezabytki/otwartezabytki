@@ -69,4 +69,27 @@ module ApplicationHelper
 		suggestions.join(", ").html_safe
 	end
 
+	def link_to_facet obj, location, deep, &block
+		selected 	= location[deep] == obj.id.to_s
+    label 		= "#{obj.name} <span>#{obj.count}</span>".html_safe
+    link 			= link_to label, relics_path(search_params.merge(:location => (location.first(deep) << obj.id).join('-')))
+    output = []
+		if selected
+			output << content_tag(:div, :class => 'selected') do
+				if location.size == (deep + 1)
+        	content_tag(:p, label)
+      	else
+       		link
+       	end
+      end
+    else
+    	output <<  link
+    end
+    if selected and block_given?
+    	output.join.html_safe + capture(&block)
+    else
+    	output.join.html_safe
+    end
+	end
+
 end
