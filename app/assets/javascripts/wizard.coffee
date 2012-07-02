@@ -481,5 +481,3 @@ jQuery ->
     stroke = if (_ref = e.which) != null then _ref else e.keyCode
     console.log(stroke)
     add_suggestion_callback(e) if stroke == 13
-
-  $('.step-gps').view()
