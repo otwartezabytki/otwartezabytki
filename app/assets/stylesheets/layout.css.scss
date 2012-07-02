@@ -101,7 +101,7 @@ a{
 		height: 40px;
 		background: asset-data-url('cc_logo.png') no-repeat;
 		clear: right;
-		margin-top: 50px;
+		margin-top: 55px;
 	}
 }
 
@@ -791,6 +791,7 @@ a{
 			.help-content{
 				&.active{
 					padding: 0;
+          margin: -25px -25px 0 -25px;
 				}
 				.help-extended{
 					padding: 25px;
@@ -1310,12 +1311,12 @@ a{
 	.help{
 		float: right;
 		font-size: 12px;
-		color: #B6B6B6;
+		color: #006699;
 		font-weight: 600;
 		position: relative;
 		top: -13px;
 		padding-left: 26px;
-		background: asset-data-url('wizard-icon-help.png') no-repeat;
+		background: asset-data-url('wizard-icon-help-selected.png') no-repeat;
 		line-height: 18px;
 	}
 	.help-extended{
@@ -1357,7 +1358,7 @@ a{
 			font-size: 13px;
 			color: #0c4e6e;
 			line-height: 18px;
-			padding-right: 50px;
+			padding-right: 130px;
 			margin: 0;
 		}
 	}
