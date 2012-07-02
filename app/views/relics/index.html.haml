@@ -2,11 +2,10 @@
   - model_class = Relic.new.class
   .page-header
     %h1 2. Wybierz zabytek:
-    -# %h1 Zabytki (#{relics.total_count})
     %span.arrow
 
   - corrected_arry = []
-  - if relics.first.try(:corrected?)
+  - if relics.first.try(:corrected?, current_user)
     %div.relic-header
       %h2.changed Zabytki sprawdzone (#{relics.correct_count})
   - else
@@ -26,7 +25,7 @@
     - relics.each_with_index do |relic, i|
 
       -# display header for corrected relics
-      - corrected_arry << relic.corrected?
+      - corrected_arry << relic.corrected?(current_user)
       - if corrected_arry.size > 1 and !corrected_arry[i-1] and corrected_arry[i]
         %div.relic-header
           %h2.changed Zabytki poprawione (#{relics.correct_count})
@@ -41,7 +40,7 @@
           - if relic.descendants.present?
             %span
             = relic.descendants.map(&:identification).join(', ')
-        - if relic.corrected?
+        - if relic.corrected?(current_user)
           .modified
         - else
           .change

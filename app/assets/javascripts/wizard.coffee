@@ -215,7 +215,7 @@ $.fn.specialize
     save: ->
       this.prop('readonly', true)
       this.prop('placeholder', 'Brak danych')
-      this.blur()
+      this.blur().trigger('liszt:updated')
       this
 
     saveHistory: ->
@@ -399,6 +399,26 @@ jQuery ->
   $(".step-current .help-content .help-extended .close").click ->
     $(this).parents(".help-content").removeClass("active")
     $(this).parent().hide()
-    $(".step-current .help-content .help").show()       
-    
-  #$('.step-gps').view()
+
+  suggeston_place = $('#suggestion_place_id').css(width: 300)[0]
+  suggeston_choosen = new Chosen(suggeston_place, no_results_text: '<a href="#" class="add_place_button">Dodaj</a>')
+  add_suggestion_callback = (e) ->
+    new_name = $('#suggestion_place_id_input .chzn-search input').val()
+    if $('#suggestion_place_id_input .no-results').length > 0 && new_name.length > 0 && confirm('Czy na pewno chcesz dodać nową miejscowość w tej gminie?')
+      $('#suggestion_place_id option[data-type="optional"]').remove()
+      $('#suggestion_place_id').append($("<option data-type='optional' value='#{new_name}'>#{new_name}</option>"))
+      $('#suggestion_place_id').val("#{new_name}")
+      $('#suggestion_place_id').trigger('liszt:updated')
+
+    suggeston_choosen.close_field(e)
+    false
+
+  $('#suggestion_place_id_input').on('click', '.add_place_button', add_suggestion_callback)
+  $('#suggestion_place_id_input').on 'keyup', ' .chzn-search input', (e) ->
+    stroke = if (_ref = e.which) != null then _ref else e.keyCode
+    console.log(stroke)
+    add_suggestion_callback(e) if stroke == 13
+
+
+
+

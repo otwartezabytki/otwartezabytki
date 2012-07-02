@@ -39,6 +39,7 @@ footer { clear: both; display: block; }
 
 .step-gps .values { width: 900px;}
 .step-gps .actions, .step-gps .values { float: none; }
+
 .step-gps .actions {
     position: absolute;
 		right: 19px;
@@ -47,7 +48,7 @@ footer { clear: both; display: block; }
 		margin: 0;
 		height: 420px;
 		background: #fff;
-}
+} 
 
 .step-gps.step-view .marker-helper {
     background-color: white;
