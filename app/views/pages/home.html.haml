@@ -29,20 +29,17 @@
         np.
         %em cmentarz, dworek w Podkarpackim, Pałac na Wodzie, Małkinia
       = simple_form_for Relic.new, :url => relics_path, :html => { :class => 'well form-search'},:method => :get do |f|
-        = f.input :q1, :label => false, :input_html => {:name => 'q1', :value => params[:q1], :class => "search-query"}, :placeholder => "dworek"
+        = f.input :q1, :label => false, :input_html => {:name => 'q1', :value => params[:q1], :class => "search-query"}, :placeholder => "wpisz, czego szukasz"
         = f.button :submit, 'Szukaj »', :name => nil
       %p.examples
         Skorzystaj z przykładów:
-        %a{:href => ''} dworek Wrocław(54)
-        ,
-        %a{:href => ''} zespół zabytków Polesie(23)
-        ,
-        %a{:href => ''} cmentarz(452)
+        - cache("home_search_suggestions", :expires_in => 5.minutes) do
+          = random_search_suggestions
 .content_wrapper
   .container
     %h3 Jak wygląda nasza baza zabytków?
     .status_bar
-      - cache("home_relics_statistics") do
+      - cache("home_relics_statistics", :expires_in => 5.minutes) do
         - stats = relics_statistics
 
         - p3 = [5, stats[3] * 100 / stats[0]].max
@@ -55,7 +52,7 @@
         %div{:style => "width: #{p3}%"}= stats[3]
 
 .stats
-  - cache("home_users_statistics") do
+  - cache("home_users_statistics", :expires_in => 5.minutes) do
     - stats = users_statistics
 
 

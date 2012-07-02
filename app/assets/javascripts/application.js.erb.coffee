@@ -14,7 +14,6 @@
 #= require jquery.effects.all
 #= require_tree ./vendor
 
-#= require chosen-jquery
 #= require twitter/bootstrap
 #= require wizard
 

@@ -6,4 +6,6 @@ class Place < ActiveRecord::Base
 
   validates :name, :presence => true
 
+  scope :not_custom, where(:custom => false)
+
 end

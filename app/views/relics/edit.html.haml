@@ -15,7 +15,7 @@
           .help Pomoc
           .help-extended
             %span.close Zamknij pomoc
-            %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in tortor odio, non pretium augue. Ut sit amet diam sed dolor cursus iaculis. Nulla ut mauris sem. Praesent in gravida felis.
+            %p Podana nazwa pochodzi z rejestru zabytków - czy jest poprawna? Wybierz jedną z opcji. Jeśli nie wiesz i nie możesz znaleźć informacji w Internecie bądź przewodniku, pomiń pytanie.
         .values.values-edit.values-view
           = f.input :identification, :as => :string, :label => "Nazwa", :input_html => { :readonly => true }
           = f.input :identification_action, :as => :hidden
@@ -47,13 +47,13 @@
           .help Pomoc
           .help-extended
             %span.close Zamknij pomoc
-            %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in tortor odio, non pretium augue. Ut sit amet diam sed dolor cursus iaculis. Nulla ut mauris sem. Praesent in gravida felis.
+            %p Podana miejscowość pochodzi z rejestru zabytków - czy jest poprawna? Wybierz jedną z opcji. Jeśli nie wiesz i nie możesz znaleźć informacji w Internecie bądź przewodniku, pomiń pytanie.
         .values.values-view
           = f.input :place_name, :as => :string, :label => "Miejscowość",
             :input_html => { :name => "place_name_viewer", :id => "place_name_viewer", :readonly => true }
         .values.values-edit
           = f.input :place_id, :as => :select,
-            :collection => f.object.relic.commune.places, :selected => f.object.place.id, :label => "Miejscowość",
+            :collection => f.object.relic.commune.places.not_custom, :selected => f.object.place.id, :label => "Miejscowość",
             :include_blank => false
 
           = f.input :place_id_action, :as => :hidden
@@ -84,7 +84,7 @@
           .help Pomoc
           .help-extended
             %span.close Zamknij pomoc
-            %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in tortor odio, non pretium augue. Ut sit amet diam sed dolor cursus iaculis. Nulla ut mauris sem. Praesent in gravida felis.
+            %p Podany adres pochodzi z rejestru zabytków - czy jest poprawny? Wybierz jedną z opcji. Jeśli nie wiesz i nie możesz znaleźć informacji w przewodniku, pomiń pytanie.
         %span.ico
         .values.values-edit.values-view
           = f.input :street, :as => :string, :label => "Adres", :placeholder => "Brak danych", :input_html => { :readonly => true }
@@ -96,7 +96,7 @@
             .action.action-edit= link_to "Nie, chcę go poprawić"
             .action.action-skip= link_to "Nie wiem, pomiń"
           - else
-            %h3 Czy adres jest poprawny? (np. al. Jerozolimskie, wyspa Kępa Mieszczańska, rondo Falbanka) 
+            %h3 Czy znasz adres zabytku? (np. al. Jerozolimskie, wyspa Kępa Mieszańska, rondo Falbanka) 
             .action.action-edit= link_to "Tak, chcę uzupełnić adres"
             .action.action-skip= link_to "Nie wiem, pomiń"
         .actions.actions-edit
@@ -108,14 +108,21 @@
             .action.action-submit= link_to "Zapisz"
             .action.action-cancel= link_to "cofnij zmianę"
           - else
-            %h3 Czy znasz adres pod jakim leży zabytek?
+            %h3 Czy znasz adres zabytku? (np. al. Jerozolimskie, wyspa Kępa Mieszańska, rondo Falbanka) 
             .action.action-submit= link_to "Zapisz"
             .action.action-cancel= link_to "cofnij zmianę"
         .actions.actions-done
-          %h3 Czy adres zabytku jest poprawny? (np. Marszałkowska 25, rondo Falbanka) 
-          .action.action-confirm= link_to "Tak, jest poprawny" 
-          .action.action-edit= link_to "Nie, chcę go poprawić"
-          .action.action-skip= link_to "Nie wiem, pomiń"
+          - if f.object.street.present?
+            %h3 Czy adres zabytku jest poprawny? (np. Marszałkowska 25, rondo Falbanka) 
+            .action.action-confirm= link_to "Tak, jest poprawny" 
+            .action.action-edit= link_to "Nie, chcę go poprawić"
+            .action.action-skip= link_to "Nie wiem, pomiń"
+            .action.action-submit= link_to "Zapisz"
+            .action.action-cancel= link_to "cofnij zmianę"
+          - else
+            %h3 Czy znasz adres zabytku? (np. al. Jerozolimskie, wyspa Kępa Mieszańska, rondo Falbanka) 
+            .action.action-submit= link_to "Zapisz"
+            .action.action-cancel= link_to "cofnij zmianę"
           .action.action-back
             (zrobiłeś błąd?
             = link_to "cofnij"
@@ -126,7 +133,7 @@
           .help Pomoc
           .help-extended
             %span.close Zamknij pomoc
-            %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in tortor odio, non pretium augue. Ut sit amet diam sed dolor cursus iaculis. Nulla ut mauris sem. Praesent in gravida felis.
+            %p Podana data pochodzi z rejestru zabytków - czy jest poprawna? Wybierz jedną z opcji. Jeśli nie wiesz i nie możesz znaleźć informacji w przewodniku, pomiń pytanie.
         %span.ico
         .values.values-edit.values-view
           = f.input :dating_of_obj, :as => :string, :label => "Data powstania", :placeholder => "Brak danych", :input_html => { :readonly => true }
@@ -139,7 +146,7 @@
             .action.action-skip= link_to "Nie wiem, pomiń"
         - else
           .actions.actions-view
-            %h3 Czy data powstania obiektu jest poprawna? (np. 1929, XIX w., 2 poł. XIV w.)
+            %h3 Czy znasz datę powstania zabytku? (np. 1929, XIX w., 2 poł. XIV w.)
             .action.action-edit= link_to "Tak, chcę poprawić datę"
             .action.action-skip= link_to "Nie wiem, pomiń"
         .actions.actions-edit
@@ -151,28 +158,36 @@
             .action.action-submit= link_to "Zapisz"
             .action.action-cancel= link_to "cofnij zmiany"
           - else
-            %h3 Czy data powstania obiektu jest poprawna? (np. 1929, XIX w., 2 poł. XIV w.) 
+            %h3 Czy znasz datę powstania zabytku? (np. 1929, XIX w., 2 poł. XIV w.) 
             .action.action-confirm= link_to "Tak, jest poprawna" 
             .action.action-edit= link_to "Nie, chcę ją poprawić"
             .action.action-skip= link_to "Nie wiem, pomiń"
             .action.action-submit= link_to "Zapisz"
             .action.action-cancel= link_to "cofnij zmiany"
         .actions.actions-done
-          %h3 Czy data powstania obiektu jest poprawna? (np. 1929, XIX w., 2 poł. XIV w.) 
-          .action.action-confirm= link_to "Tak, jest poprawna" 
-          .action.action-edit= link_to "Nie, chcę ją poprawić"
-          .action.action-skip= link_to "Nie wiem, pomiń"
-          .action.action-back
-            (zrobiłeś błąd?
-            = link_to "cofnij"
-            )  
+          - if f.object.dating_of_obj.present?
+            %h3 Czy data powstania obiektu jest poprawna? (np. 1929, XIX w., 2 poł. XIV w.) 
+            .action.action-confirm= link_to "Tak, jest poprawna" 
+            .action.action-edit= link_to "Nie, chcę ją poprawić"
+            .action.action-skip= link_to "Nie wiem, pomiń"
+            .action.action-back
+          - else
+            %h3 Czy znasz datę powstania zabytku? (np. 1929, XIX w., 2 poł. XIV w.) 
+            .action.action-confirm= link_to "Tak, jest poprawna" 
+            .action.action-edit= link_to "Nie, chcę ją poprawić"
+            .action.action-skip= link_to "Nie wiem, pomiń"
+            .action.action-submit= link_to "Zapisz"
+          .action.action-cancel= link_to "cofnij zmiany"
+          (zrobiłeś błąd?
+          = link_to "cofnij"
+          )  
 
       %article.step.step-tags.step-view
         .help-content
           .help Pomoc
           .help-extended
             %span.close Zamknij pomoc
-            %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in tortor odio, non pretium augue. Ut sit amet diam sed dolor cursus iaculis. Nulla ut mauris sem. Praesent in gravida felis.
+            %p Wybierz wszystkie opcje, które pasują do tego zabytku.
         %span.ico
         .values.values-view.values-edit
           %h3 Pasujące określenia

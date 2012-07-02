@@ -15,6 +15,12 @@ class Ability
       can :history, Relic
       can :update, Relic
       can :revert, Relic
+
+      can :manage, SuggestedType
+      can :history, SuggestedType
+      can :update, SuggestedType
+      can :revert, SuggestedType
+
     else
       can :create, User
     end
