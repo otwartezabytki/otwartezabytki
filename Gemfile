@@ -55,6 +55,7 @@ gem 'gon'
 gem 'high_voltage'
 gem 'newrelic_rpm'
 gem 'rails_config'
+gem 'dalli'
 
 # background jobs
 gem 'whenever', :require => false
