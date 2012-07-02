@@ -53,7 +53,7 @@
             :input_html => { :name => "place_name_viewer", :id => "place_name_viewer", :readonly => true }
         .values.values-edit
           = f.input :place_id, :as => :select,
-            :collection => f.object.relic.commune.places, :selected => f.object.place.id, :label => "Miejscowość",
+            :collection => f.object.relic.commune.places.not_custom, :selected => f.object.place.id, :label => "Miejscowość",
             :include_blank => false
 
           = f.input :place_id_action, :as => :hidden
