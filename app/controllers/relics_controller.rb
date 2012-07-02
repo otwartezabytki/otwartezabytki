@@ -1,7 +1,16 @@
 # -*- encoding : utf-8 -*-
 class RelicsController < ApplicationController
   expose(:relics) do
-    Relic.search(params.merge(:corrected_relic_ids => current_user.try(:corrected_relic_ids)))
+    p1 = params.merge(:corrected_relic_ids => current_user.try(:corrected_relic_ids))
+    if params[:corrected_relic_ids].blank?
+      p2 = p1.slice(:q1, :page, :location)
+      cache_key = p2.values.join(' ').parameterize
+      Rails.cache.fetch(cache_key, :expires_in => 15.minutes) do
+        Relic.search(p2)
+      end
+    else
+      Relic.search(p1)
+    end
   end
   expose(:suggestion) { Suggestion.new(:relic_id => params[:id]) }
   expose(:relic)
