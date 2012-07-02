@@ -75,14 +75,19 @@ $.fn.specialize
       this
 
     done: ->
-      this.addClass('step-done').removeClass("step-current")     
-      next_step = $('.step:not(.step-done):first')
-      next_step.view()
-      setHeight = $(".step-current").offset().top - (($(window).height()/2) - ($(".step-current").height()/2))
-      $('html,body').animate({scrollTop: setHeight})
+      this.addClass('step-done').removeClass("step-current")
       $('.help-extended').hide()
       $('.help-content .help').show()
-      $(".help-content").removeClass("active")                     
+      $(".help-content").removeClass("active")
+
+      next_step = $('.step:not(.step-done):first')
+      setHeight = next_step.offset().top - (($(window).height() / 2) - (next_step.height() / 2)) + 100
+
+      setTimeout ->
+        $('html,body').animate scrollTop: setHeight, ->
+          next_step.view()
+      , 1000
+
       this
 
     back: ->

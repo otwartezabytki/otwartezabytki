@@ -42,14 +42,10 @@ class Suggestion < ActiveRecord::Base
     true
   end
 
-  def descendants
-    self.class.where(:ancestry => id)
-  end
-
   def is_skipped?
     return @is_skipped if defined? @is_skipped
     @is_skipped = if ancestry.blank?
-      self.class.relic_action_columns.all? {|c| send(c) == 'skip'} and descendants.map(&:is_skipped?).all?
+      self.class.relic_action_columns.all? {|c| send(c) == 'skip'} and self.suggestions.map(&:is_skipped?).all?
     else
       self.class.subrelic_action_columns.all? {|c| send(c) == 'skip'}
     end
@@ -106,8 +102,8 @@ class Suggestion < ActiveRecord::Base
     # only one level of suggestions
     if self.suggestion.nil?
       self.suggestions.destroy_all
-      self.relic.descendant_ids.each do |subrelic_id|
-        self.suggestions << Suggestion.new(:relic_id => subrelic_id)
+      self.relic.descendants.each do |subrelic|
+        self.suggestions << Suggestion.new(:relic => subrelic)
       end
     end
   end

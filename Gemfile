@@ -66,7 +66,6 @@ group :development, :test do
 
   # for routes in /rails/routes
   gem 'sextant'
-  gem 'mailcatcher'
 end
 
 group :test do
@@ -84,13 +83,6 @@ group :test do
   gem 'guard-spork'
   gem 'growl'
   gem 'rb-fsevent'
-end
 
-group :test do
   gem 'shoulda', '~> 3.0'
-end
-
-local_gemfile = File.dirname(__FILE__) + "/Gemfile.local.rb"
-if File.file?(local_gemfile)
-  self.instance_eval(Bundler.read_file(local_gemfile))
 end

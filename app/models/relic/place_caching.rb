@@ -47,16 +47,50 @@ module Relic::PlaceCaching
 
   def commune
     cache_location_fields unless self[:commune_id]
-    super
+
+    if self[:commune_id]
+      Rails.cache.fetch("commune_#{self[:commune_id]}", :expires_in => 1.day) do
+        super
+      end
+    else
+      nil
+    end
   end
 
   def district
     cache_location_fields unless self[:district_id]
-    super
+
+    if self[:district_id]
+      Rails.cache.fetch("district_#{self[:district_id]}", :expires_in => 1.day) do
+        super
+      end
+    else
+      nil
+    end
   end
 
   def voivodeship
     cache_location_fields unless self[:voivodeship_id]
-    super
+
+    if self[:voivodeship_id]
+      Rails.cache.fetch("voivodeship_#{self[:voivodeship_id]}", :expires_in => 1.day) do
+        super
+      end
+    else
+      nil
+    end
+
+  end
+
+  def place
+
+    if self[:place_id]
+      Rails.cache.fetch("place_#{self[:place_id]}", :expires_in => 1.day) do
+        super
+      end
+    else
+      nil
+    end
+
   end
 end
