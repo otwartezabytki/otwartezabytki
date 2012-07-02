@@ -1,0 +1,17 @@
+%div.page
+
+= relic.identification
+= relic.place_full_name
+
+
+Mamy już komplet informacji na temat tego zabytku.
+Jeśli w nazwie jest błąd - nie przejmuj się, zostanie zweryfikowana przez ekspertów.
+
+
+Pomóż nam uzupełnić informacje o innych zabytkach:
+
+%ul
+- @next_relics.each do |next_relic|
+  %li
+    = link_to edit_relic_url(next_relic) do
+      = next_relic.identification 
