@@ -58,16 +58,10 @@ footer { clear: both; display: block; }
     display: block;
 }
 
-.step-gps .buttons {
-    margin: 10px 0;
-    float: right;
-}
 #map_canvas{border: 10px solid #fff;}
 #marker { cursor: pointer; margin: 40px 0 0 47px;}
 
-#suggestion_latitude, #suggestion_longitude {  width: 100px; }
-#suggestion_latitude_input { float: left; width: 110px; position: relative; }
-#suggestion_longitude_input { float: right; width: 110px; position: relative; }
+#suggestion_latitude_input, #suggestion_longitude_input  { float: left; width: 170px; }
 
 #new_tag input[type="text"] { width: 95%; }
 #new_tag input[name="commit"] { float: right; }

@@ -74,13 +74,13 @@ ActiveRecord::Schema.define(:version => 20120701115123) do
     t.integer  "commune_id"
     t.integer  "district_id"
     t.integer  "voivodeship_id"
-    t.string   "tags"
     t.date     "register_date"
     t.string   "date_norm"
     t.string   "date_start"
     t.string   "date_end"
     t.string   "kind"
     t.boolean  "approved",        :default => false
+    t.string   "tags"
     t.integer  "skip_count",      :default => 0
     t.integer  "edit_count",      :default => 0
   end

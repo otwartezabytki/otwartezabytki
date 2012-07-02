@@ -20,19 +20,19 @@
           = f.input :identification, :as => :string, :label => "Nazwa", :input_html => { :readonly => true }
           = f.input :identification_action, :as => :hidden
         .actions.actions-view
-          %h3 Wybierz jedną z opcji:
+          %h3 Czy nazwa zabytku jest poprawna? (Jeśli nie wiesz, prosimy, poszukaj odpowiedzi.)
           .action.action-confirm= link_to "Tak, jest poprawna" 
           .action.action-edit= link_to "Nie, chcę ją poprawić"
           .action.action-skip= link_to "Nie wiem, pomiń"
         .actions.actions-edit
-          %h3 Wybierz jedną z opcji: 
+          %h3 Czy nazwa zabytku jest poprawna? (Jeśli nie wiesz, prosimy, poszukaj odpowiedzi.) 
           .action.action-confirm= link_to "Tak, jest poprawna" 
           .action.action-edit= link_to "Nie, chcę ją poprawić"
           .action.action-skip= link_to "Nie wiem, pomiń"
           .action.action-submit= link_to "Zapisz"
           .action.action-cancel= link_to "cofnij zmianę"
         .actions.actions-done
-          %h3 Wybierz jedną z opcji:
+          %h3 Czy nazwa zabytku jest poprawna? (Jeśli nie wiesz, prosimy, poszukaj odpowiedzi.)
           .action.action-confirm= link_to "Tak, jest poprawna" 
           .action.action-edit= link_to "Nie, chcę ją poprawić"
           .action.action-skip= link_to "Nie wiem, pomiń"
@@ -49,7 +49,7 @@
             %span.close Zamknij pomoc
             %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in tortor odio, non pretium augue. Ut sit amet diam sed dolor cursus iaculis. Nulla ut mauris sem. Praesent in gravida felis.
         .values.values-view
-          = f.input :place_name, :as => :string, :label => "Czy nazwa miejscowości jest poprawna?",
+          = f.input :place_name, :as => :string, :label => "Miejscowość",
             :input_html => { :name => "place_name_viewer", :id => "place_name_viewer", :readonly => true }
         .values.values-edit
           = f.input :place_id, :as => :select,
@@ -59,19 +59,19 @@
           = f.input :place_id_action, :as => :hidden
 
         .actions.actions-view
-          %h3 Wybierz jedną z opcji: 
+          %h3 Czy nazwa miejscowości jest poprawna? 
           .action.action-confirm= link_to "Tak, jest poprawna" 
           .action.action-edit= link_to "Nie, chcę ją poprawić"
           .action.action-skip= link_to "Nie wiem, pomiń"
         .actions.actions-edit
-          %h3 Wybierz jedną z opcji: 
+          %h3 Czy nazwa miejscowości jest poprawna? 
           .action.action-confirm= link_to "Tak, jest poprawna" 
           .action.action-edit= link_to "Nie, chcę ją poprawić"
           .action.action-skip= link_to "Nie wiem, pomiń"
           .action.action-submit= link_to "Zapisz"
           .action.action-cancel= link_to "cofnij zmianę"
         .actions.actions-done
-          %h3 Wybierz jedną z opcji:
+          %h3 Czy nazwa miejscowości jest poprawna?
           .action.action-confirm= link_to "Tak, jest poprawna" 
           .action.action-edit= link_to "Nie, chcę ją poprawić"
           .action.action-skip= link_to "Nie wiem, pomiń"
@@ -87,11 +87,11 @@
             %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in tortor odio, non pretium augue. Ut sit amet diam sed dolor cursus iaculis. Nulla ut mauris sem. Praesent in gravida felis.
         %span.ico
         .values.values-edit.values-view
-          = f.input :street, :as => :string, :label => "Czy adres jest poprawny? (np. al. Jerozolimskie, wyspa Kępa Mieszczańska, rondo Falbanka)", :placeholder => "Brak danych", :input_html => { :readonly => true }
+          = f.input :street, :as => :string, :label => "Adres", :placeholder => "Brak danych", :input_html => { :readonly => true }
           = f.input :street_action, :as => :hidden
         .actions.actions-view
           - if f.object.street.present?
-            %h3 Wybierz jedną z opcji: 
+            %h3 Czy adres zabytku jest poprawny? (np. Marszałkowska 25, rondo Falbanka) 
             .action.action-confirm= link_to "Tak, jest poprawny" 
             .action.action-edit= link_to "Nie, chcę go poprawić"
             .action.action-skip= link_to "Nie wiem, pomiń"
@@ -101,7 +101,7 @@
             .action.action-skip= link_to "Nie wiem, pomiń"
         .actions.actions-edit
           - if f.object.street.present?
-            %h3 Wybierz jedną z opcji: 
+            %h3 Czy adres zabytku jest poprawny? (np. Marszałkowska 25, rondo Falbanka) 
             .action.action-confirm= link_to "Tak, jest poprawny" 
             .action.action-edit= link_to "Nie, chcę go poprawić"
             .action.action-skip= link_to "Nie wiem, pomiń"
@@ -112,7 +112,7 @@
             .action.action-submit= link_to "Zapisz"
             .action.action-cancel= link_to "cofnij zmianę"
         .actions.actions-done
-          %h3 Wybierz jedną z opcji: 
+          %h3 Czy adres zabytku jest poprawny? (np. Marszałkowska 25, rondo Falbanka) 
           .action.action-confirm= link_to "Tak, jest poprawny" 
           .action.action-edit= link_to "Nie, chcę go poprawić"
           .action.action-skip= link_to "Nie wiem, pomiń"
@@ -133,7 +133,7 @@
           = f.input :dating_of_obj_action, :as => :hidden
         - if f.object.dating_of_obj.present?
           .actions.actions-view 
-            %h3 Wybierz jedną z opcji: 
+            %h3 Czy data powstania obiektu jest poprawna? (np. 1929, XIX w., 2 poł. XIV w.) 
             .action.action-confirm= link_to "Tak, jest poprawna" 
             .action.action-edit= link_to "Nie, chcę ją poprawić"
             .action.action-skip= link_to "Nie wiem, pomiń"
@@ -144,21 +144,21 @@
             .action.action-skip= link_to "Nie wiem, pomiń"
         .actions.actions-edit
           - if f.object.dating_of_obj.present?
-            %h3 Wybierz jedną z opcji: 
+            %h3 Czy data powstania obiektu jest poprawna? (np. 1929, XIX w., 2 poł. XIV w.)
             .action.action-confirm= link_to "Tak, jest poprawna" 
             .action.action-edit= link_to "Nie, chcę ją poprawić"
             .action.action-skip= link_to "Nie wiem, pomiń"
             .action.action-submit= link_to "Zapisz"
             .action.action-cancel= link_to "cofnij zmiany"
           - else
-            %h3 Wybierz jedną z opcji: 
+            %h3 Czy data powstania obiektu jest poprawna? (np. 1929, XIX w., 2 poł. XIV w.) 
             .action.action-confirm= link_to "Tak, jest poprawna" 
             .action.action-edit= link_to "Nie, chcę ją poprawić"
             .action.action-skip= link_to "Nie wiem, pomiń"
             .action.action-submit= link_to "Zapisz"
             .action.action-cancel= link_to "cofnij zmiany"
         .actions.actions-done
-          %h3 Wybierz jedną z opcji: 
+          %h3 Czy data powstania obiektu jest poprawna? (np. 1929, XIX w., 2 poł. XIV w.) 
           .action.action-confirm= link_to "Tak, jest poprawna" 
           .action.action-edit= link_to "Nie, chcę ją poprawić"
           .action.action-skip= link_to "Nie wiem, pomiń"
@@ -175,7 +175,9 @@
             %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in tortor odio, non pretium augue. Ut sit amet diam sed dolor cursus iaculis. Nulla ut mauris sem. Praesent in gravida felis.
         %span.ico
         .values.values-view.values-edit
-          %h3 Dopasuj kategorie do zabytku
+          %h3 Pasujące określenia
+          .actions.actions-edit
+            %p Możesz wybrać jedną lub kilka odpowiedzi. Wybierz wszystkie, które uważasz za pasujące:
           = f.input :tags_action, :as => :hidden
           .column
             = f.input :tags, :as => :check_boxes,
@@ -190,11 +192,13 @@
               :collection => Tag.third_column, :label => "",
               :input_html => { :multiple => true }
         .actions.actions-edit
+          %h3 Potwierdź lub pomiń swój wybór:
           .action.action-submit= link_to "Potwierdzam"
           .action.action-skip= link_to "Nie jestem pewien, pomiń"
         .actions.actions-done
-          .action.action-submit= link_to "Potwierdzam"
-          .action.action-skip= link_to "Nie jestem pewien, pomiń"
+          %h3 Potwierdź lub wycofaj swój wybór:
+          .action.action-submit= link_to "Akceptuję"
+          .action.action-skip= link_to "Nie wiem, pomiń"
           .action.action-back
             (zrobiłeś błąd?
             = link_to "cofnij"
@@ -277,11 +281,16 @@
                   .action.action-back= link_to "Cofnij"
 
       %article.step.step-gps.step-view(data-autoscroll="gps_autoscroll")
+        .help-content
+          .help Pomoc
+          .help-extended
+            %span.close Zamknij pomoc
+            %p Znajdź zabytek na mapie i przeciągnij znacznik na jego miejsce.
+            .map
         %span.ico
         .values.values-edit.values-view
           %label Położenie GPS
           .gps-helper
-            %h3 Zlokalizuj zespół zabytków na mapie
           #map_canvas{ style: "height: 400px; width: 720px" }
 
         .actions.actions-view
@@ -290,15 +299,21 @@
             .marker-holder
               = image_tag 'marker.png', :id => 'marker'
           .buttons
+            %p Nie możesz znaleźć?  
             .action.action-skip.btn= link_to "Pomiń"
 
         .actions.actions-edit
+          .marker-helper
+            %h4 Przeciągnij znacznik na mapę:
+            .marker-holder
           .buttons
-            .action.action-submit.btn= link_to "Zatwierdź"
-            .action.action-cancel.btn= link_to "Anuluj"
-
-          = f.input :latitude, :as => :string, :label => false, :placeholder => "szerokość", :input_html => { :maxlength => 9 }
-          = f.input :longitude, :as => :string, :label => false, :placeholder => "długość", :input_html => { :maxlength => 9 }
+            %h3 Czy udało Ci się zaznaczyć właściwą lokalizację?
+            .action.action-submit.btn= link_to "Tak, potwierdzam"
+            .action.action-cancel.btn= link_to "Nie, pomiń"
+          
+            
+          = f.input :longitude, :as => :string, :label => "długość geograficzna", :placeholder => "długość", :input_html => { :maxlength => 9 }   
+          = f.input :latitude, :as => :string, :label => "szerokość geograficzna", :placeholder => "szerokość", :input_html => { :maxlength => 9 }
           = f.input :coordinates_action, :as => :hidden
 
         .actions.actions-done
