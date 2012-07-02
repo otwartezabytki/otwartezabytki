@@ -1,0 +1,16 @@
+.search-results
+  - collection.each do |relic|
+    .relic
+      .name
+        = link_to relic.identification, edit_relic_path(relic)
+      .pathway= relic.place_full_name
+      .street= relic.street
+      .include
+        - if relic.descendants.present?
+          %span
+          = relic.descendants.map(&:identification).join(', ')
+      - if relic.corrected?(current_user)
+        .modified
+      - else
+        .change
+          = link_to "Sprawdź »", edit_relic_path(relic), :class => 'btn btn-mini'

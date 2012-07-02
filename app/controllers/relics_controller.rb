@@ -18,6 +18,13 @@ class RelicsController < ApplicationController
     SearchTerm.store(params[:q1])
     session[:search_params] = params.slice(:q1, :location)
     gon.highlighted_tags = relics.highlighted_tags
+
+    idx = relics.results.index {|r| r.corrected?(current_user) }
+    if idx
+      @pending, @corrected = relics.take(idx), relics.drop(idx)
+    else
+      @pending, @corrected = relics, []
+    end
   end
 
   def edit
@@ -91,7 +98,7 @@ class RelicsController < ApplicationController
 
     navigators['districts'].each do |obj|
       navigators_json << {
-        :label => "<strong>#{query}</strong> - pow. #{obj.name}, woj. #{obj.voivodeship.name} (#{obj.count})",
+        :label => "<strong>#{query}</strong> - woj. #{obj.voivodeship.name}, pow. #{obj.name} (#{obj.count})",
         :value => query,
         :path  => relics_path(search_params.merge(:location => [obj.voivodeship_id, obj.id].join('-')))
       }
@@ -99,7 +106,7 @@ class RelicsController < ApplicationController
 
     navigators['communes'].each do |obj|
       navigators_json << {
-        :label => "<strong>#{query}</strong> - gm. #{obj.name}, pow. #{obj.district.name}, woj. #{obj.district.voivodeship.name} (#{obj.count})",
+        :label => "<strong>#{query}</strong> - woj. #{obj.district.voivodeship.name}, pow. #{obj.district.name}, gm. #{obj.name} (#{obj.count})",
         :value => query,
         :path  => relics_path(search_params.merge(:location => [obj.district.voivodeship_id, obj.district_id, obj.id].join('-')))
       }
@@ -107,7 +114,7 @@ class RelicsController < ApplicationController
 
     navigators['places'].each do |obj|
       navigators_json << {
-        :label => "<strong>#{query}</strong> - #{obj.name}, gm. #{obj.commune.name}, pow. #{obj.commune.district.name}, woj. #{obj.commune.district.voivodeship.name} (#{obj.count})",
+        :label => "<strong>#{query}</strong> - #{obj.name}, woj. #{obj.commune.district.voivodeship.name}, pow. #{obj.commune.district.name}, gm. #{obj.commune.name} (#{obj.count})",
         :value => query,
         :path  => relics_path(search_params.merge(:location => [obj.commune.district.voivodeship_id, obj.commune.district_id, obj.commune_id, obj.id].join('-')))
       }

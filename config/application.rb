@@ -65,9 +65,10 @@ module Otwartezabytki
       g.stylesheets           false
       g.javascripts           false
     end
-
-    # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-    config.assets.precompile += %w( gmaps.js active_admin.js ) unless Rails.env.development?
-
+    unless ['test', 'development'].include?(Rails.env)
+      # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
+      config.assets.precompile += %w( gmaps.js active_admin.js )
+      config.cache_store = :dalli_store, { :namespace => "otwartezabytki-#{Rails.env}", :expires_in => 1.day, :compress => true }
+    end
   end
 end

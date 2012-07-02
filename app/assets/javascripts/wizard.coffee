@@ -29,7 +29,7 @@ $.fn.specialize
       this.saveLocalHistory()
       this.removeClass('step-done step-skipped step-confirmed step-edited step-view step-edit')
       this.addClass(klass)
-      $('.step').removeClass('step-current')
+      $(".help-content").removeClass('active')
       this.addClass('step-current')
       this.action().val('skip')        
 
@@ -75,6 +75,7 @@ $.fn.specialize
       this
 
     done: ->
+      $('.step').removeClass('step-current')
       this.addClass('step-done').removeClass("step-current")
       next_step = $('.step:not(.step-done):first')
       setHeight = next_step.offset().top - (($(window).height() / 2) - (next_step.height() / 2)) + 100
@@ -329,6 +330,8 @@ $.fn.specialize
 
 jQuery ->
 
+  return unless $('body').hasClass('relics') && $('body').hasClass('edit')
+
   # prevent form submission until end of the wizard
   $('form.suggestion').submit (e) ->
     $('.step-submit').addClass('step-done')
@@ -368,7 +371,7 @@ jQuery ->
       return false # prevent the form submission
 
   ['submit', 'skip'].forEach (action) ->
-    $('.step-tags').on 'click', ".action-#{action} a" , ->
+    $('.step-tags, .step-gps').on 'click', ".action-#{action} a" , ->
       step_div = $(this).parents('.step:first')
 
       if step_div.hasClass('step-current')
@@ -439,5 +442,3 @@ jQuery ->
     stroke = if (_ref = e.which) != null then _ref else e.keyCode
     console.log(stroke)
     add_suggestion_callback(e) if stroke == 13
-
-  #$('.step-gps').view()

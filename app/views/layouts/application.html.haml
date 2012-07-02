@@ -27,11 +27,17 @@
                 /  %li= "uid = #{current_user.id rescue 0}, suggestions = #{current_user.suggestions.count rescue 0}"
                 - if current_user && current_user.registered? && current_user.errors.size == 0
                   %li Witaj, #{ current_user.username || current_user.email }
-                  /TYMON PLS DOPISZ KOD RABIEGO DO WYKRYWANIA
-                  /%li Sprawdziłeś zabytków:
-                  %li Nie sprawdziłeś żadnego zabytku, do roboty!
+                  - if (c = (current_user.suggestions.count rescue 0)) > 0
+                    %li Sprawdziłeś zabytków: #{c}
+                  - else
+                    %li Nie sprawdziłeś żadnego zabytku, do roboty!
+
                   %li= link_to 'Wyloguj się', destroy_user_session_path, :method => :delete, :class => 'logout'
                 - else
+                  - if (c = (current_user.suggestions.count rescue 0)) > 0
+                    %li Sprawdziłeś zabytków: #{c}
+                  - else
+                    %li Nie sprawdziłeś żadnego zabytku, do roboty!
                   %li
                     %a{:href => new_user_session_path, :class => 'login'} Zaloguj
                   %li
@@ -58,10 +64,6 @@
               %span.minus
         %section#main
           .container
-            - if flash[:notice]
-              .alert.alert-info= flash[:notice]
-            - if flash[:error]
-              .alert.alert-error= flash[:error]
             .row
               = yield
         #root-footer
@@ -69,5 +71,15 @@
     / Placed at the end of the document so the pages load faster
     != include_gon(:camel_case => true)
     != javascript_include_tag "application"
-    != javascript_include_tag "http://maps.googleapis.com/maps/api/js?key=AIzaSyCIvKKcWv1L2FrfLe5rNpnsah5OXm6gJMA&sensor=false".html_safe
+    != javascript_include_tag "http://maps.googleapis.com/maps/api/js?key=AIzaSyAXlMDzvgp5OmKomylA1vjcWub2EmYaz1A&sensor=false".html_safe
     != javascript_include_tag "gmaps"
+    :javascript
+      - if Rails.env.production?
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', '#{Settings.ga_key}']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl'; : 'http://www';) + '.http://google-analytics.com/ga.js';;
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();

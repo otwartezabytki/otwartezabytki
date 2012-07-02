@@ -1,3 +1,4 @@
+#= require browser-update
 #= require jquery
 #= require jquery_ujs
 #= require jquery.ui.core
