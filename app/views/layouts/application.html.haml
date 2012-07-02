@@ -73,8 +73,8 @@
     != javascript_include_tag "application"
     != javascript_include_tag "http://maps.googleapis.com/maps/api/js?key=AIzaSyAXlMDzvgp5OmKomylA1vjcWub2EmYaz1A&sensor=false".html_safe
     != javascript_include_tag "gmaps"
-    :javascript
-      - if Rails.env.production?
+    - if Rails.env.production?
+      :javascript
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', '#{Settings.ga_key}']);
         _gaq.push(['_trackPageview']);
