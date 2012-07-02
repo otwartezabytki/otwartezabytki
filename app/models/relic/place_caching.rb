@@ -49,7 +49,7 @@ module Relic::PlaceCaching
     cache_location_fields unless self[:commune_id]
 
     if self[:commune_id]
-      require_dependency "Commune"
+      require "#{Rails.root}/app/models/commune.rb"
       Rails.cache.fetch("commune_#{self[:commune_id]}", :expires_in => 1.day) do
         super
       end
@@ -62,7 +62,7 @@ module Relic::PlaceCaching
     cache_location_fields unless self[:district_id]
 
     if self[:district_id]
-      require_dependency "District"
+      require "#{Rails.root}/app/models/district.rb"
       Rails.cache.fetch("district_#{self[:district_id]}", :expires_in => 1.day) do
         super
       end
@@ -75,7 +75,7 @@ module Relic::PlaceCaching
     cache_location_fields unless self[:voivodeship_id]
 
     if self[:voivodeship_id]
-      require_dependency "Voivodeship"
+      require "#{Rails.root}/app/models/voivodeship.rb"
       Rails.cache.fetch("voivodeship_#{self[:voivodeship_id]}", :expires_in => 1.day) do
         super
       end
@@ -88,7 +88,7 @@ module Relic::PlaceCaching
   def place
 
     if self[:place_id]
-      require_dependency "Place"
+      require "#{Rails.root}/app/models/place.rb"
       Rails.cache.fetch("place_#{self[:place_id]}", :expires_in => 1.day) do
         super
       end
