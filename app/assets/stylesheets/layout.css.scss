@@ -35,6 +35,7 @@ a{
 .container{
 	margin: 0 auto;
 	width: 960px;
+  position: relative;
 }
 
 /* footer sticker */
@@ -56,8 +57,9 @@ a{
 		}
 	}
 	nav{
-		float: right;
-		margin-top: 17px;
+    position: absolute;
+    top: 17px;
+    right: 2px;
 		li{
       list-style-type: none;
 			float: left;
@@ -99,7 +101,7 @@ a{
 		height: 40px;
 		background: asset-data-url('cc_logo.png') no-repeat;
 		clear: right;
-		margin-top: 25px;
+		margin-top: 50px;
 	}
 }
 
