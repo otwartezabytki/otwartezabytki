@@ -7,4 +7,9 @@ class Voivodeship < ActiveRecord::Base
   has_many :relics, :through => :places
 
   validates :name, :presence => true
+
+  def name
+    self[:name].downcase
+  end
+
 end
