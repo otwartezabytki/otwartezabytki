@@ -596,7 +596,7 @@ a{
 			}
 
             li.choice {
-              span { font-size: 14px; }
+              span { font-size: 14px; cursor: pointer; }
               input:checked + span {
                 font-weight: bold;
               }
@@ -826,11 +826,12 @@ a{
 		}
 
 		.action-back{
-			font-size: 14px;
-			color: #5f6062;
-			margin-top: 15px;
+			margin-top: 20px;
+      font-size: 16px;
+      text-transform: uppercase;
 			a{
 				color: #1e5d7d;
+        font-weight: bold;
 			}
 		}
 		&.step-submit.step-current{
@@ -999,6 +1000,10 @@ a{
 				right: 20px;
         bottom: 50px;
 			}
+      .help {
+        color: #aaa;
+        background-image: url('wizard-icon-help.png');
+      }
 		}
 
 		&.step-simple.step-edited, &.step-simple.step-edit {
