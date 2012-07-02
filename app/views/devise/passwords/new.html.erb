@@ -1,5 +1,9 @@
-<h2>Zapomniałeś hasła?</h2>
-
+<div class="login_title_forgot"><h2>Nie masz hasła?</h2></div>
+<div class="form_box_forgot">
+<div class="ask_account">Co zrobić jeśli nie mam hasła?</div>
+<div class="txt_forgot">Hasło zostało wysłane do Ciebie maile w momencie
+rejestracji. Jeśli nie możesz go znaleźć, wyślemy
+je ponownie.</div>
 <%= simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
   <%= f.error_notification %>
 
@@ -11,3 +15,4 @@
     <%= f.button :submit, "Wyślij link do resetowania hasła" %>
   </div>
 <% end %>
+</div>
