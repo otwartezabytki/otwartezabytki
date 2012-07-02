@@ -1523,14 +1523,18 @@ a{
       width: 530px;
       height: 30px;
       line-height: 30px;
-      margin: auto;
+      margin: 30px auto;
+      font-size: 13px;
     }
     #share {
+      display: block;
       background: url('icon-facebook.png') 0 50% no-repeat;
-      width: 520px;
+      width: 375px;
       height: 30px;
       line-height: 30px;
       margin: auto;
+      font-size: 15px;
+      font-weight: 600;
     }
   }
 }
