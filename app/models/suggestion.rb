@@ -70,6 +70,11 @@ class Suggestion < ActiveRecord::Base
 
   end
 
+  def relic=(value)
+    super
+    self.relic_id = self[:relic_id]
+  end
+
   def tags=(value)
     self[:tags] = value.select(&:present?)
   end
