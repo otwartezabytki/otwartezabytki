@@ -76,18 +76,13 @@ $.fn.specialize
 
     done: ->
       this.addClass('step-done').removeClass("step-current")
-      $('.help-extended').hide()
-      $('.help-content .help').show()
-      $(".help-content").removeClass("active")
-
       next_step = $('.step:not(.step-done):first')
       setHeight = next_step.offset().top - (($(window).height() / 2) - (next_step.height() / 2)) + 100
 
       setTimeout ->
-        $('html,body').animate scrollTop: setHeight, ->
+        $('html,body').animate scrollTop: setHeight, 400, ->
           next_step.view()
-      , 1000
-
+      , 300
       this
 
     back: ->
@@ -304,7 +299,7 @@ $.fn.specialize
           map.addMarker
             lat: lat
             lng: lng
-            icon: new google.maps.MarkerImage(marker_image_path, null, null, new google.maps.Point(62, 33))
+            icon: new google.maps.MarkerImage(marker_image_path, null, null, new google.maps.Point(112, 11))
 
       latitude = $('#suggestion_latitude').val().toNumber()
       longitude = $('#suggestion_longitude').val().toNumber()
@@ -349,15 +344,38 @@ jQuery ->
   # disable all checkbox for now
   $('.step-tags input[type="checkbox"]').prop('disabled', true)
 
+  $('.step').on 'click', '.action-back a', ->
+    $(this).parents('.step:first').back()
+    return false
+
   # register actions for wizard
-  ['edit', 'cancel', 'submit', 'confirm', 'skip', 'back'].forEach (action) ->
-    $('.steps').on 'click', ".action-#{action} a" , ->
+  ['edit', 'skip', 'confirm'].forEach (action) ->
+    $('.step-simple').on 'click', ".action-#{action} a" , ->
       step_div = $(this).parents('.step:first')
-      step_div[action]() if step_div.hasClass('step-current')
+
+      if !step_div.hasClass('step-edit') && step_div.hasClass('step-current')
+        step_div[action]()
+
       return false # prevent the form submission
 
-  $('.steps').on 'click', '.action-back a', ->
-    $(this).parents('.step:first').back()
+  ['submit', 'cancel'].forEach (action) ->
+    $('.step-simple').on 'click', ".action-#{action} a" , ->
+      step_div = $(this).parents('.step:first')
+
+      if step_div.hasClass('step-current')
+        step_div[action]()
+
+      return false # prevent the form submission
+
+  ['submit', 'skip'].forEach (action) ->
+    $('.step-tags').on 'click', ".action-#{action} a" , ->
+      step_div = $(this).parents('.step:first')
+
+      if step_div.hasClass('step-current')
+        step_div[action]()
+
+      return false # prevent the form submission
+
 
   $('.step').each -> $(this).saveHistory()
 
@@ -391,14 +409,17 @@ jQuery ->
       if !isNaN(latitude) & !isNaN(longitude)
         $('#map_canvas').set_marker(latitude, longitude)
   
-  $(".step-current .help-content .help").click ->
-    $(this).parent().addClass("active")
-    $(this).hide()
-    $(".step-current .help-content .help-extended").show()
-    
-  $(".step-current .help-content .help-extended .close").click ->
-    $(this).parents(".help-content").removeClass("active")
-    $(this).parent().hide()
+  $(".steps").on "click", ".help-content .help", ->
+    if $(this).parents('.step').hasClass('step-current')
+      $(this).parents(".help-content").addClass('active')
+
+    false
+
+  $(".steps").on "click", ".help-extended .close", ->
+    if $(this).parents('.step').hasClass('step-current')
+      $(this).parents(".help-content").removeClass('active')
+
+    false
 
   suggeston_place = $('#suggestion_place_id').css(width: 300)[0]
   suggeston_choosen = new Chosen(suggeston_place, no_results_text: '<a href="#" class="add_place_button">Dodaj</a>')
@@ -419,6 +440,4 @@ jQuery ->
     console.log(stroke)
     add_suggestion_callback(e) if stroke == 13
 
-
-
-
+  #$('.step-gps').view()

@@ -207,6 +207,12 @@ class Relic < ActiveRecord::Base
       self.search(params).first || self.first(:offset => rand(self.count))
     end
 
+    def next_few_for(user, search_params, count)
+      params = (search_params || {}).merge(:limit => count, :corrected_relic_ids => user.corrected_relic_ids)
+      res = self.search(params).take(count)
+      res.empty? ? self.where(:offset => rand(self.count)).limit(count) : res
+    end
+
   end
 
   def to_indexed_json
@@ -266,6 +272,14 @@ class Relic < ActiveRecord::Base
   def update_relic_index
     # always update root document
     root.tire.update_index
+  end
+
+  def corrected_by?(user)
+    user.suggestions.where(:relic_id => self.id).count > 0
+  end
+
+  def corrected?
+    suggestions.count >= 3
   end
 
 end

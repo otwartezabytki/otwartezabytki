@@ -22,11 +22,11 @@ class RelicsController < ApplicationController
 
   def edit
     if current_user && current_user.suggestions.where(:relic_id => params[:id]).count > 0
-      redirect_to thank_you_relics_path, :notice => "Już poprawiłeś ten zabytek, dziękujemy!" and return
+      redirect_to thank_you_relic_path(params[:id]), :notice => "Już poprawiłeś ten zabytek, dziękujemy!" and return
     end
 
     if relic.suggestions.count >= 3
-      redirect_to thank_you_relics_path, :notice => "Ten zabytek został już przejrzany. Zapraszamy za miesiąc." and return
+      redirect_to corrected_relic_path(params[:id]), :notice => "Ten zabytek został już przejrzany. Zapraszamy za miesiąc." and return
     end
 
     suggestion.fill_subrelics
@@ -47,7 +47,7 @@ class RelicsController < ApplicationController
 
 
     if suggestion.save
-      redirect_to thank_you_relics_path
+      redirect_to thank_you_relic_path(suggestion.relic.id)
     else
       flash[:error] = suggestion.errors.full_messages
       render "edit"
@@ -59,6 +59,12 @@ class RelicsController < ApplicationController
     if current_user && current_user.suggestions.count >= 3 && current_user.email.blank?
       @request_email = true
     end
+
+    @next_relic = Relic.next_for(current_user, session[:search_params])
+  end
+
+  def corrected
+    @next_relics = Relic.next_few_for(current_user, search_params[:search_params], 3)
   end
 
 
@@ -126,7 +132,7 @@ class RelicsController < ApplicationController
       navigators = {}
       ['voivodeships', 'districts', 'communes', 'places'].each do |name|
         next unless facets[name]
-        ids = facets[name]['terms'].map { |k| k['term']}
+        ids = facets[name]['terms'].map { |k| k['term'].to_i }
         klass = name.classify.constantize
         objs = ids.sort.map do |id|
           Rails.cache.fetch("#{name.classify.downcase}_#{id}", :expires_in => 1.day) do
@@ -154,7 +160,9 @@ class RelicsController < ApplicationController
       location_arry = params[:location].to_s.split('-')
 
       location_arry.each_with_index do |id,i|
-        l = klasses[i].find(id)
+        l = Rails.cache.fetch("#{klasses[i].to_s.downcase}_#{id}", :expires_in => 1.day) do
+          klasses[i].find(id)
+        end
         @location_breadcrumbs << {:path => relics_path(search_params.merge(:location =>location_arry.first(i+1).join('-'))), :label => l.name }
       end if location_arry.present?
       @location_breadcrumbs
