@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
   with_options :if => :registration? do |model|
 
     model.validates :username,
-      :uniqueness => true, :presence => true, :format => /[\w\.]/, 
+      :uniqueness => true, :presence => true, :format => /[\w\.]/,
       :length => { :maximum => 30, :minimum => 3 }
 
     model.before_save do
@@ -44,5 +44,9 @@ class User < ActiveRecord::Base
     false
   end
 
+  def corrected_relic_ids
+    return @corrected_relic_ids if defined? @corrected_relic_ids
+    @corrected_relic_ids = suggestions.joins(:relic).where("relics.edit_count < 3").group(:relic_id).pluck(:relic_id)
+  end
 
 end

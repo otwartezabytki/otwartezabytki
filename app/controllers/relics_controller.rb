@@ -1,6 +1,8 @@
 # -*- encoding : utf-8 -*-
 class RelicsController < ApplicationController
-  expose(:relics) { Relic.search(params) }
+  expose(:relics) do
+    Relic.search(params.merge(:corrected_relic_ids => current_user.try(:corrected_relic_ids)))
+  end
   expose(:suggestion) { Suggestion.new(:relic_id => params[:id]) }
   expose(:relic)
 
@@ -14,6 +16,7 @@ class RelicsController < ApplicationController
 
   def index
     SearchTerm.store(params[:q1])
+    session[:search_params] = params.slice(:q1, :location)
     gon.highlighted_tags = relics.highlighted_tags
   end
 

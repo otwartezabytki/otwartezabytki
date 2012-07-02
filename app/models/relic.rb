@@ -87,9 +87,10 @@ class Relic < ActiveRecord::Base
   end
 
   Tire::Results::Item.class_eval do
-    def corrected?
-      return @is_corrected if defined? @is_corrected
-      @is_corrected = self[:edit_count] > 2
+    def corrected?(user = nil)
+      @is_corrected ||= {}
+      return @is_corrected[user.try(:id)] if @is_corrected[user.try(:id)]
+      @is_corrected[user.try(:id)] = (!!user and user.corrected_relic_ids.include?(self[:id].to_i)) or self[:edit_count] > 2
     end
   end
 
@@ -104,6 +105,7 @@ class Relic < ActiveRecord::Base
     def search(params)
       tire.search(:load => false, :page => params[:page], :per_page => 10) do
         location = params[:location].to_s.split('-')
+        corrected_relic_ids = (params[:corrected_relic_ids] || []).map(&:to_s)
 
         q1 = (params[:q1].present? ? params[:q1] : '*')
         query do
@@ -150,16 +152,25 @@ class Relic < ActiveRecord::Base
         end
 
         facet "corrected" do
-          terms :edit_count, :script => "term > 2 ? 1 : 0"
+          terms :edit_count, :script => %Q(
+            (#{corrected_relic_ids.to_json}.indexOf(doc['id'].value.toString()) > -1 || doc['edit_count'].value > 2) ? 1 : 0
+          ).squish, :all_terms => true
         end
 
         filter :term, :place_id => location[3] if location.size > 3
 
         sort do
           by '_script', {
-              'script' => "f0 = doc['edit_count'].value * f1 - doc['skip_count'].value; if( doc['edit_count'].value > 2 ) { f2 + f0; } else { f0; }",
+              'script' => %q(
+                f0 = doc['edit_count'].value * f1 - doc['skip_count'].value;
+                if( corrected_relic_ids.indexOf(doc['id'].value.toString()) > -1 || doc['edit_count'].value > 2 ) { f2 + f0; } else { f0; }
+              ).squish,
               'type' => 'number',
-              'params' => { 'f1' => 1000, 'f2' => -100_000_000 },
+              'params' => {
+                'f1' => 1000,
+                'f2' => -100_000_000,
+                'corrected_relic_ids' => corrected_relic_ids
+              },
               'order' => 'desc'
             }
           by '_score', 'desc'
@@ -189,6 +200,11 @@ class Relic < ActiveRecord::Base
           terms :place_id, :size => 3
         end
       end
+    end
+
+    def next_for(user, search_params)
+      params = (search_params || {}).merge(:limit => 1, :corrected_relic_ids => user.corrected_relic_ids)
+      self.search(params).first || self.first(:offset => rand(self.count))
     end
 
   end
@@ -245,12 +261,6 @@ class Relic < ActiveRecord::Base
       ["woj. #{voivodeship.name}", "pow. #{district.name}", "gm. #{commune.name}", place.name].join(', ')
     end
 
-  end
-
-  def self.next_for(user)
-    # TODO
-    offset = rand(Relic.count)
-    Relic.first(:offset => offset)
   end
 
   def update_relic_index
