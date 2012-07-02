@@ -1,12 +1,13 @@
 # otwarte zabytki
 
 ### application init
- - brew search elasticsearch postgresql
+ - brew update
+ - brew install elasticsearch postgresql
  - cp config/database.yml.example config/database.yml
  - create database and database users for dev and testing
  - bundle install
- - bundle exec rake db:migrate
  - gunzip -c db/dump/%m_%d_%Y.sql.gz | script/rails db
+ - bundle exec rake db:migrate
  - script/rails s
 
 ### db dump command
@@ -14,7 +15,7 @@
   pg_dump -h localhost -cxOWU user_name db_name | gzip > db/dump/$(date +"%m_%d_%Y").sql.gz
 ```
 
-### elastic search
+### elasticsearch
  - install according to this: https://github.com/karmi/tire#installation
  - install Morfologik (Polish) Analysis for ElasticSearch from: https://github.com/chytreg/elasticsearch-analysis-morfologik
  - index the data:
