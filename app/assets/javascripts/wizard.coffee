@@ -371,7 +371,7 @@ jQuery ->
       return false # prevent the form submission
 
   ['submit', 'skip'].forEach (action) ->
-    $('.step-tags').on 'click', ".action-#{action} a" , ->
+    $('.step-tags, .step-gps').on 'click', ".action-#{action} a" , ->
       step_div = $(this).parents('.step:first')
 
       if step_div.hasClass('step-current')
@@ -442,5 +442,3 @@ jQuery ->
     stroke = if (_ref = e.which) != null then _ref else e.keyCode
     console.log(stroke)
     add_suggestion_callback(e) if stroke == 13
-
-  $('.step-gps').view()
