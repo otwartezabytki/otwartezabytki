@@ -2,7 +2,7 @@
 class RelicsController < ApplicationController
   expose(:relics) do
     p1 = params.merge(:corrected_relic_ids => current_user.try(:corrected_relic_ids))
-    if params[:corrected_relic_ids].blank?
+    if p1[:corrected_relic_ids].blank?
       p2 = p1.slice(:q1, :page, :location)
       cache_key = p2.values.join(' ').parameterize
       Rails.cache.fetch(cache_key, :expires_in => 15.minutes) do
@@ -37,6 +37,7 @@ class RelicsController < ApplicationController
   end
 
   def edit
+
     if current_user && current_user.suggestions.where(:relic_id => params[:id]).count > 0
       redirect_to thank_you_relic_path(params[:id]), :notice => "Już poprawiłeś ten zabytek, dziękujemy!" and return
     end
