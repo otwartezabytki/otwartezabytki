@@ -13,12 +13,14 @@ body{
 
 body.big {
   zoom: 110%;
-  -moz-transform: scale(1.1)
+  -moz-transform: scale(1.1);
+  -moz-transform-origin: 50% 0;
 }
 
 body.bigger {
   zoom: 120%;
-  -moz-transform: scale(1.2)
+  -moz-transform: scale(1.2);
+  -moz-transform-origin: 50% 0;
 }
 
 a{
@@ -221,6 +223,7 @@ a{
 			height: 15px;
 			background: asset-data-url('icon-text-plus.png') no-repeat;
 			margin-top: 23px;
+      cursor: pointer;
 		}
 		.minus{
 			float: left;
@@ -228,8 +231,12 @@ a{
 			height: 12px;
 			background: asset-data-url('icon-text-minus.png') no-repeat;
 			margin: 24px 0 0 15px;
+      cursor: pointer;
 		}
-		.disabled {opacity: 0.5}
+		.disabled {
+      opacity: 0.5;
+      cursor: default;
+    }
 	}
 }
 
