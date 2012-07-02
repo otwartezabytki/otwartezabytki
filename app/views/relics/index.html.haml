@@ -1,18 +1,25 @@
-- unless relics.empty?
-  .span3
-    = render 'localization_facets'
+.span3
+  = render 'localization_facets'
   
-%div{:class => relics.empty? ? "span12" : "span3"}
+%div{:class => relics.empty? ? "span9" : "span9"}
   #relics
     - model_class = Relic.new.class
     .page-header
       %h1 2. Wybierz zabytek:
       %span.arrow
 
-    - corrected_arry = []
-    - if relics.first.try(:corrected?, current_user)
-      %div.relic-header
-        %h2.changed Zabytki sprawdzone (#{relics.correct_count})
+    - if @pending.empty?
+      .search-no-results
+        %p
+          Nie ma do sprawdzenia żadnych zabytków
+          %br
+          pasujących do słowa
+          %strong „#{params[:q1]}”
+
+        %p
+          Możesz natomiast przejrzeć listę innych zabytków, które wymagają sprawdzenia:
+          %br
+          = random_search_suggestions
     - else
       %div.relic-header
         %h2 Zabytki do sprawdzenia (#{relics.incorrect_count})
@@ -20,47 +27,21 @@
           %div.breadcrumb
             %p Gdzie:
             %ul
-              - location_breadcrumbs.each_with_index do |l, i|
+              - c = location_breadcrumbs.size
+              - location_breadcrumbs.take(c-1).each do |l|
                 %li
                   = link_to l[:label], l[:path]
-                  - if i < location_breadcrumbs.size - 1
-                    %span &#187;
+                  %span &#187;
+              %li= location_breadcrumbs.last[:label]      
+              
+      = render :partial => "relics", :locals => {:collection => @pending }
 
-    - if relics.empty?
-      .search-no-results
-        %p
-          Nie ma do sprawdzenie żadnych zabytków poasujących do słowa
-          %strong "#{params[:q1]}"
-      
-        %p
-          Możesz natomiast przejrzeć listę innych zabytków, które wymagają sprawdzenia:
-          = random_search_suggestions
-    
-    - else
-      .search-results
-        - relics.each_with_index do |relic, i|
+    - unless @corrected.empty?
+      %div.relic-header
+        %h2.changed Zabytki sprawdzone (#{relics.correct_count})
 
-          -# display header for corrected relics
-          - corrected_arry << relic.corrected?(current_user)
-          - if corrected_arry.size > 1 and !corrected_arry[i-1] and corrected_arry[i]
-            %div.relic-header
-              %h2.changed Zabytki poprawione (#{relics.correct_count})
+      = render :partial => "relics", :locals => {:collection => @corrected }
 
-          -# relic details
-          .relic
-            .name
-              = link_to relic.identification, edit_relic_path(relic)
-            .pathway= relic.place_full_name
-            .street= relic.street
-            .include
-              - if relic.descendants.present?
-                %span
-                = relic.descendants.map(&:identification).join(', ')
-            - if relic.corrected?(current_user)
-              .modified
-            - else
-              .change
-                = link_to "Sprawdź »", edit_relic_path(relic), :class => 'btn btn-mini'
 
       = paginate relics
 

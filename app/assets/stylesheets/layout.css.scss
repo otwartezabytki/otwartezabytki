@@ -35,6 +35,7 @@ a{
 .container{
 	margin: 0 auto;
 	width: 960px;
+  position: relative;
 }
 
 /* footer sticker */
@@ -56,8 +57,9 @@ a{
 		}
 	}
 	nav{
-		float: right;
-		margin-top: 17px;
+    position: absolute;
+    top: 17px;
+    right: 2px;
 		li{
       list-style-type: none;
 			float: left;
@@ -99,7 +101,7 @@ a{
 		height: 40px;
 		background: asset-data-url('cc_logo.png') no-repeat;
 		clear: right;
-		margin-top: 25px;
+		margin-top: 55px;
 	}
 }
 
@@ -255,7 +257,7 @@ a{
 	box-shadow: 0 0 3px 0 rgba(0,0,0,0.2);
 }
 
-#relics{
+.span9 #relics{
 	width: 720px;
 }
 
@@ -484,6 +486,10 @@ a{
 			a{
 				font-size: 14px;
 				padding: 5px;
+			}
+			&.active a {
+				background-color: rgb(95,96,98);
+				color: rgb(255,255,255);
 			}
 		}
 	}
@@ -858,12 +864,13 @@ a{
 				width: 68px;
 				height: 50px;
 				right: 20px;
-                bottom: 17px;
+        bottom: 30px;
 			}
 
 			.help-content{
 				&.active{
 					padding: 0;
+          margin: -25px -25px 0 -25px;
 				}
 				.help-extended{
 					padding: 25px;
@@ -990,7 +997,7 @@ a{
 				width: 68px;
 				height: 50px;
 				right: 20px;
-                bottom: 17px;
+        bottom: 50px;
 			}
 		}
 
@@ -1391,13 +1398,16 @@ a{
 	.help{
 		float: right;
 		font-size: 12px;
-		color: #B6B6B6;
+		color: #4B6D7E;
 		font-weight: 600;
 		position: relative;
 		top: -13px;
 		padding-left: 26px;
-		background: asset-data-url('wizard-icon-help.png') no-repeat;
+		background: asset-data-url('wizard-icon-help-selected.png') no-repeat;
 		line-height: 18px;
+    &:hover {
+      color: #006699;
+    }
 	}
 	.help-extended{
 		display: none;
@@ -1436,9 +1446,9 @@ a{
 		}
 		p{
 			font-size: 13px;
-			color: #0c4e6e;
-			line-height: 18px;
-			padding-right: 50px;
+			color: #08374d;
+			line-height: 20px;
+			padding-right: 140px;
 			margin: 0;
 		}
 	}
@@ -1451,5 +1461,25 @@ a{
 		padding: 30px 30px 30px 60px;
 		background: #fff asset-data-url('subrelics.png') 30px 31px no-repeat;
 		margin-bottom: 1px;
+	}
+}
+
+.search-no-results {
+	background: image-url('no-results-bg.png') no-repeat top left;
+	height: 300px;
+	padding-top: 80px;
+	border-bottom: 1px solid #ccc;
+	p {
+		font-size: 20px;
+		line-height: 30px;
+		padding: 20px;
+		text-align: center;
+
+		strong {
+			font-weight: bold;
+		}
+		a span {
+			font-size: 16px;
+		}
 	}
 }

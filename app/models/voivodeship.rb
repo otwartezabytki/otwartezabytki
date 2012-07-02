@@ -9,7 +9,7 @@ class Voivodeship < ActiveRecord::Base
   validates :name, :presence => true
 
   def name
-    self[:name].downcase
+    Unicode.downcase(self[:name])
   end
 
 end

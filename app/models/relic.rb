@@ -151,6 +151,12 @@ class Relic < ActiveRecord::Base
           end
         end
 
+        filter :term, :place_id => location[3] if location.size > 3
+
+        facet "overall" do
+          terms :id, :script => 1, :global => true, :all_terms => true
+        end
+
         corrected_faset_filter = {}
         term_params = Hash[
           [:voivodeship_id, :district_id, :commune_id, :place_id].zip(location)
@@ -162,8 +168,6 @@ class Relic < ActiveRecord::Base
             'corrected_relic_ids' => corrected_relic_ids
           }
         end
-
-        filter :term, :place_id => location[3] if location.size > 3
 
         sort do
           by '_script', {

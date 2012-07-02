@@ -15,7 +15,7 @@
           .help Pomoc
           .help-extended
             %span.close Zamknij pomoc
-            %p Podana nazwa pochodzi z rejestru zabytków - czy jest poprawna? Wybierz jedną z opcji. Jeśli nie wiesz i nie możesz znaleźć informacji w Internecie bądź przewodniku, pomiń pytanie.
+            %p Sprawdź, czy nazwa zabytku jest poprawna (np. jeśli zaczyna się od małej litery, popraw ją na wielką). Jeśli chcesz ją poprawić, kliknij „Nie, chcę ją poprawić”. Pojawi się pole, w którym można poprawić nazwę. Następnie naciśnij „Zapisz”, aby zachować poprawioną nazwę. Jeśli jest poprawna, kliknij „Tak, jest poprawna”. Jeśli nie wiesz, czy nazwa jest poprawna, spróbuj znaleźć informacje na stronach internetowych lub w książkach. Jeśli Ci się nie uda, kliknij „Nie wiem, pomiń”, a automatycznie przejdziesz do kolejnego punktu. W przypadku popełnienia błędu kliknij „Cofnij” i edytuj ponownie.
         .values.values-edit.values-view
           = f.input :identification, :as => :string, :label => "Nazwa", :input_html => { :readonly => true }
           = f.input :identification_action, :as => :hidden
@@ -47,7 +47,7 @@
           .help Pomoc
           .help-extended
             %span.close Zamknij pomoc
-            %p Podana miejscowość pochodzi z rejestru zabytków - czy jest poprawna? Wybierz jedną z opcji. Jeśli nie wiesz i nie możesz znaleźć informacji w Internecie bądź przewodniku, pomiń pytanie.
+            %p Sprawdź, czy nazwa miejscowości jest poprawna. Jeśli jest poprawna, kliknij „Tak, jest poprawna”. Jeśli chcesz ją poprawić, kliknij „Nie, chcę ją poprawić”. Pokaże się pole, w którym można poprawić nazwę. (Gdy zaczniesz wpisywać nazwę, system podpowie możliwości. Możesz wybrać jedną z podpowiedzi lub dokończyć wpisywanie samodzielnie). Następnie naciśnij „Zapiszł, aby zachować poprawioną nazwę. Jeśli nie wiesz, czy nazwa miejscowości jest poprawna, spróbuj znaleźć informacje na stronach internetowych lub w książkach. Jeśli Ci się nie uda, kliknij „Nie wiem, pomiń”, a automatycznie przejdziesz do kolejnego punktu.
         .values.values-view
           = f.input :place_name, :as => :string, :label => "Miejscowość",
             :input_html => { :name => "place_name_viewer", :id => "place_name_viewer", :readonly => true }
@@ -84,7 +84,10 @@
           .help Pomoc
           .help-extended
             %span.close Zamknij pomoc
-            %p Podany adres pochodzi z rejestru zabytków - czy jest poprawny? Wybierz jedną z opcji. Jeśli nie wiesz i nie możesz znaleźć informacji w przewodniku, pomiń pytanie.
+            - if f.object.street.present?
+              %p Sprawdź, czy adres jest poprawny. Jeśli jest poprawny, kliknij „Tak, jest poprawny”. Jeśli chcesz go poprawić, kliknij „Nie, chcę go poprawić”. Pokaże się pole, w którym można poprawić adres. (Gdy zaczniesz wpisywać nazwę ulicy, system podpowie możliwości. Możesz wybrać jedną z podpowiedzi lub dokończyć wpisywanie samodzielnie). Następnie naciśnij „Zapisz”, aby zachować poprawiony adres. Jeśli nie wiesz, czy adres jest poprawny, spróbuj znaleźć informacje na stronach internetowych lub w książkach. Jeśli Ci się nie uda, kliknij „Nie wiem, pomiń”, a automatycznie przejdziesz do kolejnego punktu.
+            - else
+              Spróbuj znaleźć adres zabytku (np. na stronach internetowych lub w książkach). Jeśli Ci się nie uda, kliknij „Nie wiem, pomiń”, a automatycznie przejdziesz do kolejnego punktu.
         %span.ico
         .values.values-edit.values-view
           = f.input :street, :as => :string, :label => "Adres", :placeholder => "Brak danych", :input_html => { :readonly => true }
@@ -137,7 +140,10 @@
           .help Pomoc
           .help-extended
             %span.close Zamknij pomoc
-            %p Podana data pochodzi z rejestru zabytków - czy jest poprawna? Wybierz jedną z opcji. Jeśli nie wiesz i nie możesz znaleźć informacji w przewodniku, pomiń pytanie.
+            - if f.object.street.present?
+              %p Sprawdź, czy data jest poprawna. Jeśli jest jest poprawna, kliknij „Tak, jest poprawna”. Jeśli chcesz ją poprawić, kliknij „Nie, chcę ją poprawić”. Pokaże się pole, w którym można poprawić datę. Następnie naciśnij „Zapisz”, aby zachować poprawioną datę. Jeśli nie wiesz, czy data jest poprawna, spróbuj znaleźć informacje na stronach internetowych lub w książkach. Jeśli Ci się nie uda, kliknij „Nie wiem, pomiń”, a automatycznie przejdziesz do kolejnego punktu.
+            - else
+              Spróbuj znaleźć datę powstania zabytku (np. na stronach internetowych lub w książkach). Jeśli Ci się nie uda, kliknij „Nie wiem, pomiń”, a automatycznie przejdziesz do kolejnego punktu.
         %span.ico
         .values.values-edit.values-view
           = f.input :dating_of_obj, :as => :string, :label => "Data powstania", :placeholder => "Brak danych", :input_html => { :readonly => true }
@@ -191,7 +197,7 @@
           .help Pomoc
           .help-extended
             %span.close Zamknij pomoc
-            %p Wybierz wszystkie opcje, które pasują do tego zabytku.
+            %p Wybierz określenia (klikając poszczególne słowa), które pasują do sprawdzanego zabytku. Zaznacz wszystkie, które uważasz za pasujące. Jeśli uważasz, że na liście brakuje pasującego określenia, wybierz opcję „inny”. Gdy skończysz, wciśnij „potwierdzam”. Jeśli chcesz pominąć ten punkt, wciśnij „Nie wiem, pomiń”.
         %span.ico
         .values.values-view.values-edit
           %h3 Pasujące określenia
@@ -343,7 +349,7 @@
           .help Pomoc
           .help-extended
             %span.close Zamknij pomoc
-            %p Znajdź zabytek na mapie i przeciągnij znacznik na jego miejsce.
+            %p Znajdź zabytek na mapie. Widok możesz przybliżać i oddalać przy użyciu przycisków „+” i „-”, które znajdziesz w lewym górnym rogu mapy. Gdy znajdziesz na mapie miejsce, w którym położony jest sprawdzany zabytek, przeciągnij tam czerwony znacznik z pola po prawej stronie. Gdy skończysz, wciśnij „Tak, potwierdzam”. Jeśli chcesz przerwać lub pominąć ten krok, wciśnij „Nie, pomiń” lub „Pomiń”.
             .map
         %span.ico
         .values.values-edit.values-view
