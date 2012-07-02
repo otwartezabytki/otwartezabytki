@@ -468,18 +468,18 @@ a{
 	background: #e8eef1;
 	.step {
 
-        -webkit-transition: all 0.8s ease;
-        -moz-transition: all 0.8s ease;
-        -o-transition: all 0.8s ease;
-        -ms-transition: all 0.8s ease;
-        transition: all 0.8s ease;
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        -ms-transition: all 0.5s ease;
+        transition: all 0.5s ease;
 
         * {
-          -webkit-transition: all 0.8s ease;
-          -moz-transition: all 0.8s ease;
-          -o-transition: all 0.8s ease;
-          -ms-transition: all 0.8s ease;
-          transition: all 0.8s ease;
+          -webkit-transition: all 0.5s ease;
+          -moz-transition: all 0.5s ease;
+          -o-transition: all 0.5s ease;
+          -ms-transition: all 0.5s ease;
+          transition: all 0.5s ease;
         }
 
         border-radius: 3px;
@@ -562,6 +562,14 @@ a{
 				font-size: 16px;
 				padding: 10px 0;
 			}
+
+            li.choice {
+              span { font-size: 14px; }
+              input:checked + span {
+                font-weight: bold;
+              }
+            }
+
 			&.step-edited{
 				.actions.actions-done .action-back{
 					padding-left: 0;
@@ -866,6 +874,7 @@ a{
 				}
 			}  
 		}
+
 		&.step-edit{
 			.action-edit a{
 				background: rgb(28,45,54); /* Old browsers */
@@ -888,7 +897,47 @@ a{
                 bottom: 17px;
 			}
 		}
-		&.step-edited{
+
+		&.step-simple.step-edited, &.step-simple.step-edit {
+          .action-confirm a, .action-skip a{
+            color: #fff;
+            text-shadow: 0 -1px 0 rgba(0,0,0,0.5);
+            text-decoration: none;
+            font-size: 14px;
+            padding: 8px 20px;
+            margin-right: 25px;
+            font-weight: 600;
+            background: rgb(120,145,159); /* Old browsers */
+            background: -moz-linear-gradient(top, rgba(120,145,159,1) 0%, rgba(95,121,135,1) 100%); /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(120,145,159,1)), color-stop(100%,rgba(95,121,135,1))); /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top, rgba(120,145,159,1) 0%,rgba(95,121,135,1) 100%); /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(top, rgba(120,145,159,1) 0%,rgba(95,121,135,1) 100%); /* Opera 11.10+ */
+            background: -ms-linear-gradient(top, rgba(120,145,159,1) 0%,rgba(95,121,135,1) 100%); /* IE10+ */
+            background: linear-gradient(to bottom, rgba(120,145,159,1) 0%,rgba(95,121,135,1) 100%); /* W3C */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#78919f', endColorstr='#5f7987',GradientType=0 ); /* IE6-9 */
+            box-shadow: 0 2px 3px 0 rgba(0,0,0,0.2), inset 0 -1px 2px 0 rgba(0,0,0,0.3);
+            border-radius: 2px;
+            -webkit-border-radius: 2px;
+            opacity: .3;
+          }
+          .action-edit a {
+            background: rgb(28,45,54); /* Old browsers */
+            background: -moz-linear-gradient(top, rgba(28,45,54,1) 0%, rgba(78,95,104,1) 100%); /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(28,45,54,1)), color-stop(100%,rgba(78,95,104,1))); /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top, rgba(28,45,54,1) 0%,rgba(78,95,104,1) 100%); /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(top, rgba(28,45,54,1) 0%,rgba(78,95,104,1) 100%); /* Opera 11.10+ */
+            background: -ms-linear-gradient(top, rgba(28,45,54,1) 0%,rgba(78,95,104,1) 100%); /* IE10+ */
+            background: linear-gradient(to bottom, rgba(28,45,54,1) 0%,rgba(78,95,104,1) 100%); /* W3C */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1c2d36', endColorstr='#4e5f68',GradientType=0 ); /* IE6-9 */
+            font-weight: 700;
+            opacity: 1;
+          }
+        }
+
+        &.step-edited {
+          .action-back{
+            padding-left: 200px;
+          }
           &.actions-done{
               .action-edit a{
                 background: rgb(28,45,54); /* Old browsers */
@@ -1035,7 +1084,7 @@ a{
 .steps{
 	.step{
 		.column{
-			width: 30%;
+
 			display: inline-block;
 			vertical-align: top;
 			font-size: 13px;
@@ -1051,6 +1100,18 @@ a{
 				font-size: 16px;
 			}
 		}
+
+        .column-first {
+          width: 240px;
+        }
+
+        .column-second {
+          width: 300px;
+        }
+
+        .column-third {
+          width: 200px;
+        }
 	}
 }
 
@@ -1236,6 +1297,14 @@ a{
 			float: right;
 		}
 	}
+
+    &.active .help-extended {
+      display: block;
+    }
+
+    &.active .help {
+      display: none;
+    }
 }
 
 .step-current .help-content{
