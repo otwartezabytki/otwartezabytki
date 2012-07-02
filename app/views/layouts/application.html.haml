@@ -27,7 +27,7 @@
                   %li= "uid = #{current_user.id rescue 0}, suggestions = #{current_user.suggestions.count rescue 0}"
                 - if current_user && current_user.registered? && current_user.errors.size == 0
                   %li Witaj, #{ current_user.username || current_user.email }
-                  %li= link_to 'Wyloguj się', destroy_user_session_path, :method => :delete, :class => 'login'
+                  %li= link_to 'Wyloguj się', destroy_user_session_path, :method => :delete, :class => 'logout'
                 - else
                   %li
                     %a{:href => new_user_session_path, :class => 'login'} Zaloguj
