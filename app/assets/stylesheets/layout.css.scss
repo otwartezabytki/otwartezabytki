@@ -312,6 +312,7 @@ a{
 			selected: #fff;
 			span{
 				color: #fff;
+				background: none;
 			}
 			p{
 				background: asset-data-url('sidebar-bullet-selected.png') 12px 50% no-repeat;
@@ -323,6 +324,12 @@ a{
 			li{
 				margin: 1px 0;
 			}
+		}
+	}
+	.all {
+		a {
+			padding: 7px 0 7px 0px;
+			background: none;
 		}
 	}
 }

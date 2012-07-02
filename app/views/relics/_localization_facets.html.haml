@@ -1,7 +1,9 @@
 - navigators = parse_navigators(relics.facets)
 .well.sidebar-nav
   %h3 Lokalizacja
-  = link_to "Cała Polska <span>#{relics.facets['overall']['total']}</span>".html_safe, relics_path(search_params)
+  %ul.nav.nav-list.all
+    %li
+      = link_to "Cała Polska <span>#{relics.facets['overall']['total']}</span>".html_safe, relics_path(search_params)
   %ul.nav.nav-list
     - location = params[:location].to_s.split('-')
     - navigators['voivodeships'].each do |obj|
