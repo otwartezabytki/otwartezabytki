@@ -152,9 +152,12 @@ class Relic < ActiveRecord::Base
         end
 
         facet "corrected" do
-          terms :edit_count, :script => %Q(
+          puts %Q(
             (#{corrected_relic_ids.to_json}.indexOf(doc['id'].value.toString()) > -1 || doc['edit_count'].value > 2) ? 1 : 0
-          ).squish, :all_terms => true
+          )
+          terms :edit_count, :script => %Q(
+            (['#{corrected_relic_ids.join("','")}'].indexOf(doc['id'].value.toString()) > -1 || doc['edit_count'].value > 2) ? 1 : 0
+          ), :all_terms => true
         end
 
         filter :term, :place_id => location[3] if location.size > 3
