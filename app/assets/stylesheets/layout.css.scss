@@ -22,7 +22,7 @@ body.bigger {
   -moz-transform: scale(1.2);
   -moz-transform-origin: 50% 0;
 }
-
+.last{ margin-right:0 !important; }
 a{
 	color: $blue;
 	text-decoration: none;
@@ -31,7 +31,8 @@ a{
 		text-decoration: underline;
 	}
 }
-
+p{ font-size: 11px;
+  line-height: 16px;}
 .container{
 	margin: 0 auto;
 	width: 960px;
@@ -1483,4 +1484,84 @@ a{
 			font-size: 16px;
 		}
 	}
+}
+
+#footer {
+  color: #878787;
+  font-size: 11px;
+  .about {
+    float: left;
+    margin-right: 18px;
+    width: 580px;
+    p {
+
+    }
+  }
+
+  .partners {
+    border-bottom: 1px solid #DCDCDC;
+    border-top: 1px solid #DCDCDC;
+    float: left;
+    margin: 10px 0;
+    padding: 30px 0;
+    width: 960px;
+
+    h2{
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .partner-bg{
+
+      background: none repeat scroll 0 0 #FCFCFC;
+      box-shadow: 0 0 3px #CCCCCC;
+      -moz-box-shadow: 0 0 3px #CCCCCC;
+      -webkit-box-shadow: 0 0 3px #CCCCCC;
+      padding: 10px 0;
+    }
+
+    .partner-big{
+      text-align: center;
+      text-transform: capitalize;
+      width: 405px;
+      float: left;
+      margin-right: 18px;
+      height: 106px;
+    }
+
+    .partner-small{
+
+      width: 167px;
+      text-align: center;
+      text-transform: capitalize;
+      float: left;
+      margin-right: 18px;}
+  }
+  .facebook-share {
+    background: none repeat scroll 0 0 #FFFFFF;
+    float: right;
+    height: 72px;
+    margin-bottom: 10px;
+    padding: 5px 20px 0;
+    width: 312px;
+    box-shadow: 0 0 3px #CCCCCC;
+    -moz-box-shadow: 0 0 3px #CCCCCC;
+    -webkit-box-shadow: 0 0 3px #CCCCCC;
+  }
+  .footer-bottom {
+    float: left;
+    padding-top: 10px;
+    width: 960px;
+    p { width: 360px; float: left;
+    }
+    .footer-logo {
+      background: url("/assets/footer-logo.png") no-repeat scroll 0 0 transparent;
+      display: block;
+      float: right;
+      height: 22px;
+      text-indent: -9999px;
+      width: 200px;
+
+    }
+  }
+
 }
