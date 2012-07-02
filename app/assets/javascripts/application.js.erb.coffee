@@ -12,6 +12,7 @@
 #= require jquery.ui.tabs 
 #= require jquery.transition.min
 #= require jquery.effects.all
+#= require jquery.cookie
 #= require_tree ./vendor
 
 #= require twitter/bootstrap
@@ -42,19 +43,32 @@ jQuery ->
       $highlightArea.highlight(tag)
 
   # font resize
+  toggleFontResizeButtons = () ->
+    $("span.plus, span.minus").removeClass("disabled")
+    $("span.minus").addClass("disabled") unless $.cookie("font-size")
+    $("span.plus").addClass("disabled") if $.cookie("font-size") == "bigger"
+
   $("span.plus").click ->
-    currentFontSize = $("html").css("font-size")
-    currentFontSizeNum = parseFloat(currentFontSize, 10)
-    newFontSize = currentFontSizeNum * 1.2
-    $("html").css "font-size", newFontSize
+    size = if $.cookie("font-size") == null then "big" else "bigger"
+    $.cookie("font-size", size)
+    $("body")
+      .removeClass("big")
+      .removeClass("bigger")
+      .addClass(size)
+    toggleFontResizeButtons()
     false
 
   $("span.minus").click ->
-    currentFontSize = $("html").css("font-size")
-    currentFontSizeNum = parseFloat(currentFontSize, 10)
-    newFontSize = currentFontSizeNum * 0.8
-    $("html").css "font-size", newFontSize
+    size = if $.cookie("font-size") == "bigger" then "big" else null
+    $.cookie("font-size", size)
+    $("body")
+      .removeClass("big")
+      .removeClass("bigger")
+      .addClass(size)
+    toggleFontResizeButtons()
     false
+
+  toggleFontResizeButtons()
 
   # bootstrap
   $("a[rel=popover]").popover()
