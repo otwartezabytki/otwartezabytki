@@ -78,6 +78,12 @@ a{
 		        background: asset-data-url('icon-login-hover.png') 0 4px no-repeat;
 		      }
 	      }
+				&.logout{
+	        background: asset-data-url('icon-logout.png') 0 4px no-repeat;
+					&:hover{
+		        background: asset-data-url('icon-logout-hover.png') 0 4px no-repeat;
+		      }
+	      }
 	      &.register{
 	        background: asset-data-url('icon-register.png') 0 4px no-repeat;
 					&:hover{
