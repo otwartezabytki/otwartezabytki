@@ -48,10 +48,11 @@ ActiveRecord::Schema.define(:version => 20120702151628) do
   create_table "places", :force => true do |t|
     t.integer  "commune_id"
     t.string   "name"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
     t.string   "sym"
     t.boolean  "from_teryt", :default => true
+    t.boolean  "custom",     :default => false
   end
 
   create_table "relics", :force => true do |t|

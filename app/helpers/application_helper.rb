@@ -2,7 +2,7 @@
 module ApplicationHelper
 
   def next_relic_url_for(user)
-    edit_relic_path(Relic.next_for(user).id)
+    edit_relic_path(Relic.next_for(user, session[:search_params]))
   end
 
 	def users_statistics

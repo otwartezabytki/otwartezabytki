@@ -48,7 +48,7 @@
                   = link_to "Pobierz dane", page_pl_path('pobierz-dane'), :class => 'download'
 
             = simple_form_for Relic.new, :url => relics_path, :html => { :class => 'well form-search'},:method => :get do |f|
-              = f.input :q1, :label => false, :input_html => {:name => 'q1', :value => params[:q1], :class => "search-query"}, :placeholder => "dworek"
+              = f.input :q1, :label => false, :input_html => {:name => 'q1', :value => params[:q1], :class => "search-query"}, :placeholder => "wpisz, czego szukasz"
               = f.button :submit, 'Szukaj »', :name => nil
             .text
               %span.plus

@@ -29,7 +29,7 @@
         np.
         %em cmentarz, dworek w Podkarpackim, Pałac na Wodzie, Małkinia
       = simple_form_for Relic.new, :url => relics_path, :html => { :class => 'well form-search'},:method => :get do |f|
-        = f.input :q1, :label => false, :input_html => {:name => 'q1', :value => params[:q1], :class => "search-query"}, :placeholder => "dworek"
+        = f.input :q1, :label => false, :input_html => {:name => 'q1', :value => params[:q1], :class => "search-query"}, :placeholder => "wpisz, czego szukasz"
         = f.button :submit, 'Szukaj »', :name => nil
       %p.examples
         Skorzystaj z przykładów:
