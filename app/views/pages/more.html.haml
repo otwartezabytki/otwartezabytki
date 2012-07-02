@@ -1,7 +1,27 @@
-%h2 Dowiedz się więcej
-
-
-Zacznij od razu. Wyszukaj zabytek, na przykład: 
-%br
-- cache("static_more_search_suggestions", :expires_in => 5.minutes) do
-  = random_search_suggestions
+.content_more
+  %h1 Cyfrowy Czyn Społeczny
+  %h2 Akcja uzupełniania danych pochodzących z rejestru zabytków
+  %p.bold 3-24 lipca 2012
+  .txt_content
+    %p.italic Organizator: Centrum Cyfrowe: Projekt Polska
+    %p.normal Zapraszamy do akcji tworzenia społecznościowej, otwartej bazy wiedzy o zabytkach.
+    %p.bold_2 To naprawdę proste. Wystarczy poświęcić parę chwil i dać się poprowadzić:
+    %ol
+      %li wybrać dowolny zabytek spośród 65 tys. obiektów z bazy
+      %li znaleźć (np. w Sieci) brakujące informacje o nim (może to być nazwa, adres lub data powstania)
+      %li wpisać znalezione informacje w tabelkę
+      %li wybrać z listy określenia, które naszym zdaniem pasują do danego zabytku
+      %li oznaczyć obiekt na mapie (przeciągnąć znacznik w odpowiednie miejsce)
+      %li zatwierdzić.
+    %p.normal Sprawdzanie poprawności wprowadzanych informacji w ramach Otwartych Zabytków również odbywa się społecznościowo. Zanim dany zabytek zostanie zatwierdzony i zniknie z puli „do sprawdzenia”, musi zostać przejrzany niezależnie przez trzech uczestników akcji.
+    %p.normal Wydaje się, że 65 tysięcy zabytków to bardzo dużo, ale urok Cyfrowego Czyny Społecznego polega na tym, że wystarczy, że każdy zajmie się jednym lub paroma obiektami i baza może stać się kompletna przed końcem lipca :)
+    %p.normal Nasza crowdsourcingowa akcja potrwa trzy tygodnie. Na połowę sierpnia zaplanowaliśmy uruchomienie otwartego, dostępnego dla wszystkich serwisu o zabytkach i kompletne dane są nam potrzebne do jego uruchomienia.
+    %p.normal Chcemy stworzyć w Sieci godne miejsce dla polskich zabytków i podzielić się wiedzą o nich z innymi. Treści, które znajdą się w serwisie będą dostępne na licencji Creative Commons Uznanie autorstwa, co oznacza, że będzie można z nich korzystać bez ograniczeń, swobodnie wykorzystywać, kopiować, rozpowszechniać i modyfikować.
+    %p.normal Zapraszamy do akcji!
+.box_bottom
+  .txt_info_bottom
+  %h2 Zacznij od razu. Wyszukaj zabytek, na przykład:
+  %br
+    .links_bottom
+      - cache("static_more_search_suggestions", :expires_in => 5.minutes) do
+        = random_search_suggestions

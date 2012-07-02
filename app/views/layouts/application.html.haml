@@ -71,5 +71,15 @@
     / Placed at the end of the document so the pages load faster
     != include_gon(:camel_case => true)
     != javascript_include_tag "application"
-    != javascript_include_tag "http://maps.googleapis.com/maps/api/js?key=AIzaSyCIvKKcWv1L2FrfLe5rNpnsah5OXm6gJMA&sensor=false".html_safe
+    != javascript_include_tag "http://maps.googleapis.com/maps/api/js?key=AIzaSyAXlMDzvgp5OmKomylA1vjcWub2EmYaz1A&sensor=false".html_safe
     != javascript_include_tag "gmaps"
+    - if Rails.env.production?
+      :javascript
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', '#{Settings.ga_key}']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl'; : 'http://www';) + '.http://google-analytics.com/ga.js';;
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
