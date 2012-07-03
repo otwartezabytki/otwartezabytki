@@ -14,6 +14,10 @@
       = javascript_include_tag "http://html5shim.googlecode.com/svn/trunk/html5.js"
     = stylesheet_link_tag "application", :media => "all"
     %link{:href => "http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,600,300&subset=latin,latin-ext", :rel => "stylesheet", :type => "text/css"}/
+    :plain
+      <meta property="og:title" content="Otwarte Zabytki" />
+      <meta property="og:description" content="Uzupełnij z nami bazę zabytków i pomóż stworzyć serwis. Skorzystaj z własnej wiedzy. Poszukaj informacji w książach lub w internecie. To naprawdę proste." />
+      <meta property="og:image" content="/assets/face-share-logo.png" />
   %body{ :class => cookies["font-size"].to_s + " " + controller_name + " " + action_name + (params[:id] ? " resource_#{params[:id]}" : "") }
     .page
       #root
@@ -33,9 +37,6 @@
                   %li Witaj, #{ current_user.username || current_user.email }
                   - if (c = (current_user.suggestions.count rescue 0)) > 0
                     %li Liczba Twoich zabytków: #{c}
-                  - else
-                    %li Nie sprawdziłeś żadnego zabytku, do roboty!
-
                   %li= link_to 'Wyloguj się', destroy_user_session_path, :method => :delete, :class => 'logout'
                 - else
                   - if (c = (current_user.suggestions.count rescue 0)) > 0
