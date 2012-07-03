@@ -978,7 +978,7 @@ a{
                   width:712px;
               }
 
-              &.step-view .action-submit a{
+              &.step-view .action-submit a, #mark_location {
                 color: #fff;
                 text-shadow: 0 -1px 0 rgba(0,0,0,0.5);
                 text-decoration: none;
@@ -1000,6 +1000,21 @@ a{
                 opacity: .3;
               }
 
+              #mark_location {
+                margin: 10px;
+              }
+
+              #suggestion_longitude_input, #suggestion_latitude_input {
+                margin: 5px;
+              }
+
+              #suggestion_latitude_input {
+                margin-bottom: 0px
+              }
+
+              #suggestion_longitude_input {
+                margin-bottom: 0px
+              }
 			}
 			&.step-skipped{
 				padding-bottom: 100px;
