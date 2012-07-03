@@ -1347,6 +1347,9 @@ body.loaded .overlay {
 							text-shadow: 0 -1px 0 rgba(0,0,0,0.3);
 							color: #f5f5f5;
 							line-height: 30px;
+              strong {
+                font-weight: 600;
+              }
 						}
             #more-button {
               float: right;
@@ -1362,8 +1365,13 @@ body.loaded .overlay {
                 @include rounded(3px);
                 @include gradient(#f9f9f9, #ccc);
                 box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2);
+                -webkit-transition:all .2s ease-in;  
+                -moz-transition:all .2s ease-in;  
+                -o-transition:all .2s ease-in;  
+                transition:all .2s ease-in;  
                 &:hover{
                   text-decoration: none;
+                  box-shadow: 0 2px 20px 0 rgba(255,255,255,0.3);
                 }
               }
             }
@@ -1400,16 +1408,16 @@ body.loaded .overlay {
                     border: 3px solid #617d8d;
                     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2);
                     opacity: .5;
-                    -webkit-transition:opacity .2s ease-in;  
-                    -moz-transition:opacity .2s ease-in;  
-                    -o-transition:opacity .2s ease-in;  
-                    transition:opacity .2s ease-in;  
+                    -webkit-transition:all .2s ease-in;  
+                    -moz-transition:all .2s ease-in;  
+                    -o-transition:all .2s ease-in;  
+                    transition:all .2s ease-in;  
 									}
                   &.ui-tabs-selected {
                     padding: 0;
-                    margin-left: 10px;
                     a {
                       opacity: 1;
+                      margin-left: 10px;
                     }
                   }
                   &.ui-state-hover {
