@@ -12,9 +12,9 @@ geocode_location = (callback) ->
 
   jQuery.get geocoder_search_path, {voivodeship, district, commune, city, street}, (result) ->
     if result.length > 0
-      $('#suggestion_latitude').val(result[0].latitude.round(6))
-      $('#suggestion_longitude').val(result[0].longitude.round(6))
-      callback(result[0].latitude.round(6), result[0].longitude.round(6)) if callback?
+      $('#suggestion_latitude').val(result[0].latitude.round(7))
+      $('#suggestion_longitude').val(result[0].longitude.round(7))
+      callback(result[0].latitude.round(7), result[0].longitude.round(7)) if callback?
     else
       callback() if callback?
 
@@ -220,6 +220,7 @@ $.fn.specialize
 
     cancel: ->
       map.removeMarkers()
+      $('#map_canvas').auto_zoom();
       this.restoreHistory()
       this.input().save()
       this.view()
@@ -353,14 +354,14 @@ $.fn.specialize
         lng: lng
         draggable: true
         dragend: (e) ->
-          new_lat = marker.getPosition().lat().round(6)
-          new_lng = marker.getPosition().lng().round(6)
+          new_lat = marker.getPosition().lat().round(7)
+          new_lng = marker.getPosition().lng().round(7)
           $('#suggestion_latitude').val(new_lat)
           $('#suggestion_longitude').val(new_lng)
           $('#map_canvas').zoom_at(new_lat, new_lng)
 
-        $('#suggestion_latitude').val(lat.round(6))
-        $('#suggestion_longitude').val(lng.round(6))
+        $('#suggestion_latitude').val(lat.round(7))
+        $('#suggestion_longitude').val(lng.round(7))
 
       $('#map_canvas').zoom_at(lat, lng)
 
@@ -454,10 +455,11 @@ jQuery ->
   $('#map_canvas').auto_zoom()
 
   $('#suggestion_latitude, #suggestion_longitude').keyup ->
-    if $('#suggestion_latitude').val().length == 9 && $('#suggestion_longitude').val().length == 9
+    if $('#suggestion_latitude').val().length >= 10 && $('#suggestion_longitude').val().length >= 10
       latitude = $('#suggestion_latitude').val().toNumber()
       longitude = $('#suggestion_longitude').val().toNumber()
       if !isNaN(latitude) & !isNaN(longitude)
+        $('.step-gps').edit()
         $('#map_canvas').set_marker(latitude, longitude)
   
   $(".steps").on "click", ".help-content .help", ->
