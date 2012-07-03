@@ -10,7 +10,7 @@
       Pokaż znajomym, że bierzesz udział w akcji!
 
 #thankyou_actions{:class => (@request_email ? 'withregister' : '')}
-  - if true #@request_email
+  - if @request_email
     #thankyou_register
       %h4 Możesz uzupełnić bazę anonimowo albo założyć własne konto i śledzieć własne postępy
       %p Nazwy najbardziej zaangażowanych użytkowników udostępnimy też na stronie głównej w rankingu.
@@ -26,13 +26,13 @@
         %span
           Przejdź do następnego zabytku:
         %strong
-          = @next_relic.identification 
-        
-    #thankyou_results
-      %span
-        lub
-      - q1 = session[:search_params] && session[:search_params][:q1]
-      = link_to relics_path(:q1 => q1) do
-        Wróć do wyników „<strong>#{q1}</strong>” &raquo;
+          = @next_relic.identification
 
-#fb-root
+    - q1 = session[:search_params] && session[:search_params][:q1]
+    - if q1.present?
+      #thankyou_results
+        %span
+          lub
+
+        = link_to relics_path(:q1 => q1) do
+          Wróć do wyników „<strong>#{q1}</strong>” &raquo;
