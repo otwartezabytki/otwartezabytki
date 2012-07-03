@@ -46,6 +46,7 @@ class RelicsController < ApplicationController
   end
 
   def edit
+
     if current_user && current_user.suggestions.where(:relic_id => params[:id]).count > 0
       redirect_to thank_you_relic_path(params[:id]), :notice => "Już poprawiłeś ten zabytek, dziękujemy!" and return
     end
@@ -58,9 +59,10 @@ class RelicsController < ApplicationController
   end
 
   def update
-    suggestion.attributes = params[:suggestion]
+
     suggestion.user_id = current_user.id
     suggestion.ip_address = request.remote_ip
+    suggestion.attributes = params[:suggestion]
 
     if need_captcha
       if verify_recaptcha(:model => suggestion, :timeout => 30)
@@ -72,7 +74,11 @@ class RelicsController < ApplicationController
 
 
     if suggestion.save
-      redirect_to thank_you_relic_path(suggestion.relic.id)
+      if suggestion.is_skipped?
+        redirect_to Relic.next_for(current_user, session[:search_params])
+      else
+        redirect_to thank_you_relic_path(suggestion.relic.id)
+      end
     else
       flash[:error] = suggestion.errors.full_messages
       render "edit"
