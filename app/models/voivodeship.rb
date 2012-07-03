@@ -7,9 +7,4 @@ class Voivodeship < ActiveRecord::Base
   has_many :relics, :through => :places
 
   validates :name, :presence => true
-
-  def name
-    Unicode.downcase(self[:name])
-  end
-
 end
