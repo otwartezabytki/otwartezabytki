@@ -702,7 +702,7 @@ a{
 			}
 
             &.step-edited {
-              .action-submit a {
+              .action-skip a {
                 color: #fff;
                 text-shadow: 0 -1px 0 rgba(0,0,0,0.5);
                 text-decoration: none;
@@ -723,7 +723,7 @@ a{
                 -webkit-border-radius: 2px;
                 opacity: .3;
               }
-              .action-edit a {
+              .action-submit a {
                 background: rgb(28,45,54); /* Old browsers */
                 background: -moz-linear-gradient(top, rgba(28,45,54,1) 0%, rgba(78,95,104,1) 100%); /* FF3.6+ */
                 background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(28,45,54,1)), color-stop(100%,rgba(78,95,104,1))); /* Chrome,Safari4+ */
@@ -926,6 +926,17 @@ a{
         &.step-gps {
             min-height: 300px;
 
+            .map-overlay {
+              position: absolute;
+              top: 0;
+              left: 0;
+              bottom: 0;
+              right: 0;
+              background-color: white;
+              opacity: 0;
+              z-index: 10000;
+            }
+
 			#map_canvas{
               width: 475px;
               height: 260px;
@@ -945,6 +956,8 @@ a{
 			&.step-current{
 
               padding-bottom: 120px;
+
+              .map-overlay { display: none !important; }
               #map_canvas{
                   opacity: 1;
                   height: 400px;
@@ -1702,6 +1715,7 @@ body.loaded .overlay {
 }
 
 #footer {
+  padding-top: 20px;
   color: #878787;
   font-size: 11px;
   .about {
@@ -1778,8 +1792,8 @@ body.loaded .overlay {
   .footer-bottom {
     float: left;
     padding-top: 10px;
+    padding-bottom: 30px;
     width: 960px;
-    margin-bottom: 30px;
     p { width: 360px; float: left;
     }
     a{

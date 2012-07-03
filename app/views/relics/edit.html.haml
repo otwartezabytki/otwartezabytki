@@ -357,6 +357,7 @@
             .map
         %span.ico
         .values.values-edit.values-view
+          .map-overlay
           %label Położenie GPS
           .gps-helper
           #map_canvas
@@ -366,8 +367,8 @@
             %h4 Przeciągnij znacznik na mapę:
             .marker-holder
               = image_tag 'marker.png', :id => 'marker'
-          = f.input :longitude, :as => :string, :label => "długość geograficzna", :placeholder => "długość", :input_html => { :maxlength => 9 }
-          = f.input :latitude, :as => :string, :label => "szerokość geograficzna", :placeholder => "szerokość", :input_html => { :maxlength => 9 }
+          = f.input :longitude, :as => :string, :label => "długość geograficzna", :placeholder => "długość", :input_html => { :maxlength => 10 }
+          = f.input :latitude, :as => :string, :label => "szerokość geograficzna", :placeholder => "szerokość", :input_html => { :maxlength => 10 }
           = f.input :coordinates_action, :as => :hidden
 
         .actions.actions-view
