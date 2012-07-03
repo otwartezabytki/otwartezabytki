@@ -367,8 +367,8 @@
             %h4 Przeciągnij znacznik na mapę:
             .marker-holder
               = image_tag 'marker.png', :id => 'marker'
-          = f.input :latitude, :as => :string, :label => "szerokość geograficzna", :placeholder => "szerokość", :input_html => { :maxlength => 10 }
-          = f.input :longitude, :as => :string, :label => "długość geograficzna", :placeholder => "długość", :input_html => { :maxlength => 10 }
+          = f.input :latitude, :as => :string, :label => "szerokość geograficzna", :placeholder => "szerokość", :input_html => { :maxlength => 10, :readonly => "readonly" }
+          = f.input :longitude, :as => :string, :label => "długość geograficzna", :placeholder => "długość", :input_html => { :maxlength => 10, :readonly => "readonly" }
           = f.input :coordinates_action, :as => :hidden
 
         .actions.actions-view
@@ -415,7 +415,7 @@
     transition: all 0.5s ease;
   }
 
-  .step .ico, .step .help-content, .step-gps .values *, .step-place .values *, .step .actions-navbar *, .step-gps, .step-gps *, .step-submit *, .step-submit {
+  .step .ico, .step .help-content, .step .values *, .step-place .values *, .step .actions-navbar *, .step-gps, .step-gps *, .step-submit *, .step-submit {
     -webkit-transition: none !important;
     -moz-transition: none !important;
     -o-transition: none !important;
