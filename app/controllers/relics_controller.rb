@@ -47,7 +47,7 @@ class RelicsController < ApplicationController
 
   def edit
 
-    if current_user && current_user.suggestions.where(:relic_id => params[:id]).count > 0
+    if current_user && current_user.suggestions.roots.where(:relic_id => params[:id], :skipped => false).count > 0
       redirect_to thank_you_relic_path(params[:id]), :notice => "Już poprawiłeś ten zabytek, dziękujemy!" and return
     end
 

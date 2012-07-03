@@ -47,7 +47,7 @@ class User < ActiveRecord::Base
 
   def corrected_relic_ids
     return @corrected_relic_ids if defined? @corrected_relic_ids
-    @corrected_relic_ids = suggestions.joins(:relic).where("relics.edit_count < 3").group(:relic_id).pluck(:relic_id)
+    @corrected_relic_ids = suggestions.joins(:relic).where("relics.edit_count < 3 and skipped = false").group(:relic_id).pluck(:relic_id)
   end
   
   class << self
