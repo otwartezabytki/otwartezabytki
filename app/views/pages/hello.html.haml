@@ -1,8 +1,14 @@
-Witaj, 
-= current_user.username
+.hello
+  .about_top
+    Witaj!
 
-Wysłaliśmy Ci hasło na podany przez Ciebie adres e-mail.
-Będzie Ci potrzebne do zalogowanie się przy ponownej wyzycie
 
-= link_to root_path, :class => "btn" do
-  Przejdź do wyszukiwania zabytków &raquo;
+  .box
+    %h3 Witaj, <strong>#{current_user.username}</strong>
+
+    %p
+      Wysłaliśmy Ci hasło na podany przez Ciebie adres e-mail.
+      Będzie Ci potrzebne do zalogowania się przy ponownej wizycie.
+
+    = link_to root_path, :class => "btn" do
+      Przejdź do wyszukiwania zabytków &raquo;
