@@ -403,18 +403,19 @@ $.fn.specialize
 
 jQuery ->
 
-  bypass_submit = false
+  window.bypass_submit = false
 
   return unless $('body').hasClass('relics') && $('body').hasClass('edit')
 
   # prevent form submission until end of the wizard
   $('form.suggestion').submit (e) ->
     $('.step-submit').addClass('step-done')
-    if !bypass_submit && $('.step:not(.step-done)').length > 0
+    if !window.bypass_submit && $('.step:not(.step-done)').length > 0
       $('.step:not(.step-done):first').view()
       false
     else
       $('.steps input[disabled]').prop("disabled", false)
+      window.bypass_submit = true
 
   # turn of autocompletion for all inputs
   $('.step input[type="text"]').attr('autocomplete', 'off')
@@ -558,11 +559,18 @@ jQuery ->
     add_suggestion_callback(e) if stroke == 13
 
   $('#go_to_next').click ->
-    bypass_submit = true
+    window.bypass_submit = true
     $('#new_suggestion').submit()
     return false
+
 
 
 # for animations
 $(window).load ->
   $('body').addClass('loaded')
+
+  window.onbeforeunload = ->
+    return null if window.bypass_submit
+    if $('.step-edited').length > 0 || $('.step-confirmed').length > 0 || $('.step-edit').length > 0
+      return 'Jeśli wyjdziesz z tej strony, wprowadzone zmiany będą stracone.'
+
