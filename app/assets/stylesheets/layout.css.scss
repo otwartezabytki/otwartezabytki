@@ -1331,6 +1331,8 @@ body.loaded .overlay {
 					.more{
 						float: left;
 						width: 480px;
+            background: url("home-arrow.png") no-repeat 135px 200px;
+            min-height: 285px;
 						h2{
 							margin: 40px 0 20px;
 							font-size: 26px;
@@ -1348,7 +1350,7 @@ body.loaded .overlay {
 						}
             #more-button {
               float: right;
-              margin: 15px 0;
+              margin: 15px 40px;
               a {
                 color: #044d71;
                 display: block;
@@ -1366,6 +1368,12 @@ body.loaded .overlay {
               }
             }
 					}
+          #video {
+            float: left;
+            border: 3px solid #678d9e;
+            margin-top: 30px;
+                box-shadow: 0 2px 20px 0 rgba(0,0,0,0.3);
+          }
 					#tabs{
 						margin-left: 480px;
 						&.ui-tabs{
@@ -1393,7 +1401,7 @@ body.loaded .overlay {
 						}
 					}
 					.step1{
-						margin: 30px;
+						margin: 20px 30px 30px;
 						background: asset-data-url('form-search-bg.png') no-repeat;
 						padding: 35px 135px;
 						display: inline-block;
