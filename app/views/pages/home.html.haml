@@ -5,7 +5,7 @@
       %p 
         Uzupełnij z nami bazę zabytków i&nbsp;pomóż stworzyć serwis.
         %br
-        Skorzystaj z własnej wiedzy. Poszukaj informacji w&nbsp;książach lub&nbsp;w&nbsp;internecie.
+        Skorzystaj z własnej wiedzy. Poszukaj informacji w&nbsp;książkach lub&nbsp;w&nbsp;internecie.
         %strong To naprawdę proste.
       #more-button
         = link_to page_pl_path('dowiedz-sie-wiecej') do
@@ -31,7 +31,7 @@
         %span Zacznij od wyszukania zabytku:
       %p 
         np.
-        %em cmentarz, dworek w Podkarpackim, Pałac na Wodzie, Małkinia
+        %em cmentarz, dworek w Podkarpackiem, Pałac na Wodzie, Małkinia
       = simple_form_for Relic.new, :url => relics_path, :html => { :class => 'well form-search'},:method => :get do |f|
         = f.input :q1, :label => false, :input_html => {:name => 'q1', :value => params[:q1], :class => "search-query", :autofocus => true}
         = f.button :submit, 'Szukaj »', :name => nil
@@ -55,10 +55,10 @@
             .desc zabytki w naszej bazie
           %div.lvl.p1{:style => "width: #{p1}%"}
             .num= stats[1]
-            .desc w sumie przejżanych<br/>już zabytków
+            .desc w sumie przejrzanych<br/>już zabytków
           %div.lvl.p2{:style => "width: #{p2}%"}
             .num= stats[2]
-            .desc zabytków przejżały<br/>dwie osoby
+            .desc zabytków przejrzały<br/>dwie osoby
           %div.lvl.p3{:style => "width: #{p3}%"}
             .num= stats[3]
             .desc zabytków czeka na<br/>weryfikację NID
