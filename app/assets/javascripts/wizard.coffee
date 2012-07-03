@@ -532,7 +532,6 @@ jQuery ->
     $('#new_suggestion').submit()
     return false
 
-  $('.step-gps').view()
 
 # for animations
 $(window).load ->
