@@ -6,9 +6,4 @@ class District < ActiveRecord::Base
   has_many :places, :through => :communes
 
   validates :name, :presence => true
-
-  def name
-    self[:name].downcase
-  end
-
 end
