@@ -100,6 +100,7 @@ if document.body.className.match(/thank_you/)
         link: "http://#{document.location.hostname}"
         name: "Otwarte Zabytki"
         caption: "społecznościowa akcja tworzenia bazy zabytków. Dołącz!"
+        picture: "http://#{document.location.hostname}<%= image_path('logo-facebook.jpg') %>"
         display: "popup"
 
       FB.ui obj
