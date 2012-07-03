@@ -1571,11 +1571,22 @@ a{
       font-weight: 600;
     }
   }
-  .thankyou_dorelics {
+  #thankyou_dorelics {
     text-align: center;
   }
   #thankyou_actions {
-    margin: 22px 0;
+    margin: 0 0 44px;
+  }
+  #thankyou_actions.withregister {
+    #thankyou_register,
+    #thankyou_dorelics {
+      float: left;
+      width: 375px;
+    }
+  }
+  #thankyou_dorelics,
+  #thankyou_register {
+    padding: 50px;
   }
   #thankyou_next {
     text-align: left;
@@ -1612,7 +1623,7 @@ a{
   }
   #thankyou_results span {
     display: block;
-    margin: 10px 0;
+    margin: 15px 0;
   }
   #thankyou_results strong {
     font-weight: 600;
@@ -1724,3 +1735,16 @@ a{
     }
   }
 }
+
+
+/* clearfix */
+
+#thankyou_actions:after,
+.clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; font-size: 0; }
+
+
+/* outline */
+
+*:focus { outline: none; }
+*::-moz-focus-inner { border: none; }
+
