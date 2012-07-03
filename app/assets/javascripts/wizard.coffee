@@ -465,7 +465,8 @@ jQuery ->
   $('#marker').draggable
     revert: true
     start: ->
-      $('#map_canvas').circle_marker $('#suggestion_latitude').val(), $('#suggestion_longitude').val()
+      if $('#suggestion_street').val().length > 0
+        $('#map_canvas').circle_marker $('#suggestion_latitude').data('history'), $('#suggestion_longitude').data('history')
 
 
   $('#map_canvas').droppable
@@ -486,12 +487,15 @@ jQuery ->
   $('#map_canvas').auto_zoom()
 
   $('#suggestion_latitude, #suggestion_longitude').keyup ->
-    if $('#suggestion_latitude').val().length >= 10 && $('#suggestion_longitude').val().length >= 10
+    if $('#suggestion_latitude').val().length >= 5 && $('#suggestion_longitude').val().length >= 5
       latitude = $('#suggestion_latitude').val().toNumber()
-      longitude = $('#suggestion_latitude').val().toNumber()
+      longitude = $('#suggestion_longitude').val().toNumber()
       if !isNaN(latitude) & !isNaN(longitude)
-        $('.step-gps').edit()
-        $('#map_canvas').set_marker(latitude, longitude)
+        if $('.step-gps').hasClass('step-edit')
+          $('.step-gps').cancel()
+        $('#suggestion_latitude').val(latitude)
+        $('#suggestion_longitude').val(longitude)
+        $('#map_canvas').zoom_at(latitude, longitude)
   
   $(".steps").on "click", ".help-content .help", ->
     if $(this).parents('.step').hasClass('step-current')
