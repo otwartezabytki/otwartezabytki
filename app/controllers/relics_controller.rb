@@ -64,7 +64,11 @@ class RelicsController < ApplicationController
 
 
     if suggestion.save
-      redirect_to thank_you_relic_path(suggestion.relic.id)
+      if suggestion.is_skipped?
+        redirect_to Relic.next_for(current_user, session[:search_params])
+      else
+        redirect_to thank_you_relic_path(suggestion.relic.id)
+      end
     else
       flash[:error] = suggestion.errors.full_messages
       render "edit"

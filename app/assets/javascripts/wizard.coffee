@@ -50,6 +50,10 @@ $.fn.specialize
       this
 
     submit: ->
+      if this.hasClass('step-simple') && this.input().val() == ""
+        alert("Nie możesz pozostawić pustego pola.")
+        return false
+
       this.switchViewClass('step-view step-done step-edited')
       this.action().val('edit')
       this.input().save()
@@ -166,6 +170,9 @@ $.fn.specialize
   '.step-street':
 
     submit: ->
+      if this.hasClass('step-simple') && this.input().val() == ""
+        alert("Nie możesz pozostawić pustego pola.")
+        return false
       this.switchViewClass('step-view step-done step-edited')
       this.action().val('edit')
       this.input().save()
