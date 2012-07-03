@@ -1794,7 +1794,7 @@ body.loaded .overlay {
     padding-top: 10px;
     padding-bottom: 30px;
     width: 960px;
-    p { width: 360px; float: left;
+    p { width: 405px; float: left;
     }
     a{
       color: #878787;
@@ -1812,13 +1812,11 @@ body.loaded .overlay {
     }
     .footer-links {
       float: left;
-      margin-left: 32px;
+      margin-left: 20px;
       margin-top: 2px;
 
       a{
-          display: inline-block;
           margin-right: 15px;
-          margin-left: 48px;
       }
     }
   }
