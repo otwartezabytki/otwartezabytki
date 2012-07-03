@@ -1636,6 +1636,7 @@ a{
       a{
         width: 171px;
         text-align: center;
+
       }
     }
 
@@ -1654,7 +1655,9 @@ a{
       text-align: center;
       text-transform: capitalize;
       float: left;
-      margin-right: 18px;}
+      margin-right: 18px;
+
+    a{ display:none; left: 0;}}
   }
   .facebook-share {
     background: none repeat scroll 0 0 #FFFFFF;
