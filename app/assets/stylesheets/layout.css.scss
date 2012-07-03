@@ -1400,12 +1400,21 @@ body.loaded .overlay {
                     border: 3px solid #617d8d;
                     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2);
                     opacity: .5;
+                    -webkit-transition:opacity .2s ease-in;  
+                    -moz-transition:opacity .2s ease-in;  
+                    -o-transition:opacity .2s ease-in;  
+                    transition:opacity .2s ease-in;  
 									}
                   &.ui-tabs-selected {
                     padding: 0;
                     margin-left: 10px;
                     a {
                       opacity: 1;
+                    }
+                  }
+                  &.ui-state-hover {
+                    a {
+                      opacity: .8;
                     }
                   }
 								}
@@ -1526,12 +1535,12 @@ body.loaded .overlay {
       display: none;
       float: right;
       font-size: 12px;
-      color: #B6B6B6;
+      color: #4a6b7d;
       font-weight: 600;
       position: relative;
       top: -13px;
       padding-left: 26px;
-      background: asset-data-url('wizard-icon-help.png') no-repeat;
+      background: asset-data-url('wizard-icon-help-selected.png') no-repeat;
       line-height: 18px;
 	}
 	.help-extended{
