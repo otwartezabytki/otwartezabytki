@@ -212,13 +212,13 @@ class Relic < ActiveRecord::Base
       end
     end
 
-    def next_for(user, search_params)
-      params = (search_params || {}).merge(:limit => 1, :corrected_relic_ids => user.corrected_relic_ids)
+    def next_for(user, search_params, include_skipped = false)
+      params = (search_params || {}).merge(:limit => 1, :corrected_relic_ids => user.corrected_relic_ids(include_skipped))
       self.search(params).first || self.first(:offset => rand(self.count))
     end
 
-    def next_few_for(user, search_params, count)
-      params = (search_params || {}).merge(:limit => count, :corrected_relic_ids => user.corrected_relic_ids)
+    def next_few_for(user, search_params, count, include_skipped = false)
+      params = (search_params || {}).merge(:limit => count, :corrected_relic_ids => user.corrected_relic_ids(include_skipped))
       res = self.search(params).take(count)
       res.empty? ? self.where(:offset => rand(self.count)).limit(count) : res
     end

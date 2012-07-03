@@ -45,9 +45,13 @@ class User < ActiveRecord::Base
     force_password_required
   end
 
-  def corrected_relic_ids
+  def corrected_relic_ids(include_skipped = false)
     return @corrected_relic_ids if defined? @corrected_relic_ids
-    @corrected_relic_ids = suggestions.joins(:relic).where("relics.edit_count < 3 and skipped = false").group(:relic_id).pluck(:relic_id)
+    if include_skipped
+      @corrected_relic_ids = suggestions.joins(:relic).where("relics.edit_count < 3").group(:relic_id).pluck(:relic_id)
+    else
+      @corrected_relic_ids = suggestions.joins(:relic).where("relics.edit_count < 3 and skipped = false").group(:relic_id).pluck(:relic_id)
+    end
   end
   
   class << self

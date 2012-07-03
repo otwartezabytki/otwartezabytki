@@ -75,7 +75,7 @@ class RelicsController < ApplicationController
 
     if suggestion.save
       if suggestion.is_skipped?
-        redirect_to Relic.next_for(current_user, session[:search_params])
+        redirect_to Relic.next_for(current_user, session[:search_params], true)
       else
         redirect_to thank_you_relic_path(suggestion.relic.id)
       end
@@ -91,11 +91,11 @@ class RelicsController < ApplicationController
       @request_email = true
     end
 
-    @next_relic = Relic.next_for(current_user, session[:search_params])
+    @next_relic = Relic.next_for(current_user, session[:search_params], true)
   end
 
   def corrected
-    @next_relics = Relic.next_few_for(current_user, search_params[:search_params], 3)
+    @next_relics = Relic.next_few_for(current_user, search_params[:search_params], 3, true)
   end
 
 
