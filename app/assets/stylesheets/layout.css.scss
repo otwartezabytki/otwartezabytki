@@ -25,12 +25,22 @@ $dark-grey: #313132;
 	}
 }
 
-
 @mixin rounded($radius: 2px) {
   -webkit-border-radius: $radius;
   border-radius: $radius;
 }
 
+
+@mixin gradient($start, $end) {
+  background-color: $start; /* Old browsers */
+  background-image: -moz-linear-gradient(top,  $start 0%, $end 100%); /* FF3.6+ */
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$start), color-stop(100%,#436576)); /* Chrome,Safari4+ */
+  background-image: -webkit-linear-gradient(top,  $start 0%, $end 100%); /* Chrome10+,Safari5.1+ */
+  background-image: -o-linear-gradient(top,  $start 0%, $end 100%); /* Opera 11.10+ */
+  background-image: -ms-linear-gradient(top,  $start 0%, $end 100%); /* IE10+ */
+  background-image: linear-gradient(to bottom,  $start 0%, $end 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$start', endColorstr='$end',GradientType=0 ); /* IE6-9 */
+}
 
 body{
 	background: #f5f5f5;
