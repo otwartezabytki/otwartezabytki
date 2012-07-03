@@ -44,7 +44,7 @@ module ApplicationHelper
 
   def random_search_suggestions
     types = SuggestedType.order("RANDOM()").map {|e| e.name }
-    places = Relic.select("place_id, COUNT(id) as cnt").group(:place_id).having("COUNT(id) > 5").order("RANDOM()").limit(4).includes(:place).map {|r| r.place.name }
+    places = Relic.roots.select("place_id, COUNT(id) as cnt").group(:place_id).having("COUNT(id) > 5").order("RANDOM()").limit(5).includes(:place).map {|r| r.place.name }
     suggestions = []
 
     first = types.shift

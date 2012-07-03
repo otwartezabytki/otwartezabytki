@@ -10,11 +10,12 @@
       Pokaż znajomym, że bierzesz udział w akcji!
 
 #thankyou_actions{:class => (@request_email ? 'withregister' : '')}
-  - if @request_email
+  - if true #@request_email
     #thankyou_register
       %h4 Możesz uzupełnić bazę anonimowo albo założyć własne konto i śledzieć własne postępy
       %p Nazwy najbardziej zaangażowanych użytkowników udostępnimy też na stronie głównej w rankingu.
       = semantic_form_for current_user, :url => user_registration_path do |f|
+        = f.hidden_field :registration, :value => true
         = f.input :email, :label => true
         = f.input :username, :label => true
         = f.submit "Zarejestruj się"
