@@ -455,6 +455,8 @@ jQuery ->
     if step_div.hasClass('step-current')
       $(this).parents('.step:first').skip()
 
+    return false
+
 
   $('.step-gps').on 'click', ".action-submit a" , ->
     step_div = $(this).parents('.step:first')
@@ -470,7 +472,7 @@ jQuery ->
 
     return false # prevent the form submission
 
-  $('.step-simple').on 'keyup', 'input[type="text"]', ->
+  $('.step-simple').on 'keyup', 'input[type="text"]', (e) ->
     stroke = if (_ref = e.which) != null then _ref else e.keyCode
     $(this).parents('.step:first').submit() if stroke == 13
 
@@ -482,7 +484,7 @@ jQuery ->
       step.view() if step.hasClass('step-edit')
 
     tags = step.find('input[type="checkbox"]:checked').toArray().map (e) ->
-      $(e).val()
+      $(e).parents('label:first').find('span').text()
 
     if tags.length > 0
       step.find('.tag-names:first').val(tags.join(', '))
