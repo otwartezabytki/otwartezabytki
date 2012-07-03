@@ -50,9 +50,10 @@ class RelicsController < ApplicationController
   end
 
   def update
-    suggestion.attributes = params[:suggestion]
+
     suggestion.user_id = current_user.id
     suggestion.ip_address = request.remote_ip
+    suggestion.attributes = params[:suggestion]
 
     if need_captcha
       if verify_recaptcha(:model => suggestion, :timeout => 30)
