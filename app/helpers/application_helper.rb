@@ -35,7 +35,7 @@ module ApplicationHelper
       range[4] = range[3] * 100 / all
     end
 
-    [ranges.pop, ranges.first] # use .shift so .last will not be the same in case of just one non-zero range
+    [ranges.pop, ranges.first].reverse
   end
 
   def relics_statistics
