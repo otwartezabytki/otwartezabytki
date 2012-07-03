@@ -81,7 +81,7 @@ jQuery ->
   # jquery footer cycle
   jQuery(".partner-slider-1, .partner-slider-2, .partner-slider-3").cycle({
     fx: 'fade',
-    speed:    1000,
+    speed:    0,
     timeout:  4000
   })
 
