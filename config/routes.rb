@@ -34,6 +34,7 @@ Otwartezabytki::Application.routes.draw do
   match "/strony/dowiedz-sie-wiecej" => 'pages#show', :id => 'more'
   match "/strony/regulamin" => 'pages#show', :id => 'terms'
   match "/strony/prywatnosc" => 'pages#show', :id => 'privacy'
+  match "/facebook/share_close" => 'pages#show', :id => 'share_close'
   match "/hello"                  => 'pages#hello', :id => 'hello', :as => :hello
 
   root :to => 'high_voltage/pages#show', :id => 'home'

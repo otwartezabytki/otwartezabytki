@@ -4,6 +4,10 @@
     %meta(charset="utf-8")
     %meta(name="viewport" content="width=device-width, initial-scale=1.0")
     %title= content_for?(:title) ? yield(:title) : "Otwarte Zabytki"
+    %link(rel="shortcut icon" href="/favicon.gif")
+    %meta(property="og:title" content="Otwarte Zabytki")
+    %meta(property="og:description" content="Społecznościowa akcja tworzenia bazy zabytków. Dołącz!")
+    %meta(property="og:image" content="#{root_url[0..-2]}#{image_path('logo-facebook.jpg')}")
     = csrf_meta_tags
     / Le HTML5 shim, for IE6-8 support of HTML elements
     /[if lt IE 9]
