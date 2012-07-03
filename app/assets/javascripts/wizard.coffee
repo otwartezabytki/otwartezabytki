@@ -455,6 +455,8 @@ jQuery ->
     if step_div.hasClass('step-current')
       $(this).parents('.step:first').skip()
 
+    return false
+
 
   $('.step-gps').on 'click', ".action-submit a" , ->
     step_div = $(this).parents('.step:first')
