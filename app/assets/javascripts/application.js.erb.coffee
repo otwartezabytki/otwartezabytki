@@ -18,6 +18,7 @@
 
 
 @marker_image_path = "<%= image_path('wizard-gps-circle-with-info.png') %>"
+@small_marker_image_path = "<%= image_path('wizard-gps-circle.png') %>"
 @geocoder_search_path = "/geocoder/search"
 
 
