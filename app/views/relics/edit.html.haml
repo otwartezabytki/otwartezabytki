@@ -89,9 +89,9 @@
           .help-extended
             %span.close Zamknij pomoc
             - if f.object.street.present?
-              %p Sprawdź, czy adres jest poprawny. Jeśli jest poprawny, kliknij „Tak, jest poprawny”. Jeśli chcesz go poprawić, kliknij „Nie, chcę go poprawić”. Pokaże się pole, w którym można poprawić adres. (Gdy zaczniesz wpisywać nazwę ulicy, system podpowie możliwości. Możesz wybrać jedną z podpowiedzi lub dokończyć wpisywanie samodzielnie). Następnie naciśnij „Zapisz”, aby zachować poprawiony adres. Jeśli nie wiesz, czy adres jest poprawny, spróbuj znaleźć informacje na stronach internetowych lub w książkach. Jeśli Ci się nie uda, kliknij „Nie wiem, pomiń”, a automatycznie przejdziesz do kolejnego punktu.
+              %p Sprawdź, czy adres jest poprawny. Jeśli jest poprawny, kliknij „Tak,  jest poprawny”. Jeśli chcesz go poprawić, kliknij „Nie, chcę go  poprawić”. Pokaże się pole, w którym można poprawić adres. (Gdy  zaczniesz wpisywać nazwę ulicy, system podpowie możliwości. Możesz  wybrać jedną z podpowiedzi lub dokończyć wpisywanie samodzielnie).  Następnie naciśnij „Zapisz”, aby zachować poprawiony adres. Jeśli nie  wiesz, czy adres jest poprawny, spróbuj znaleźć informacje na stronach  internetowych lub w książkach. Jeśli   znajdziesz informację, że zabytek występuje w obrębie kilku ulic (np. Park Dreszera w Warszawie w obrębie ulic Ursynowskiej, Puławskiej,   Odyńca i Krasickiego), wpisz wszystkie. Jeśli Ci się nie uda, kliknij „Nie wiem,  pomiń”, a automatycznie przejdziesz do kolejnego punktu.
             - else
-              Spróbuj znaleźć adres zabytku (np. na stronach internetowych lub w książkach). Jeśli Ci się nie uda, kliknij „Nie wiem, pomiń”, a automatycznie przejdziesz do kolejnego punktu.
+              Spróbuj znaleźć adres zabytku (np. na stronach internetowych lub w  książkach). Jeśli znajdziesz informację, że zabytek występuje w obrębie kilku ulic (np. Park Dreszera w Warszawie w obrębie ulic Ursynowskiej, Puławskiej, Odyńca i Krasickiego), wpisz wszystkie. Jeśli Ci się nie uda, kliknij „Nie wiem, pomiń”, a  automatycznie przejdziesz do kolejnego punktu.
         %span.ico
         .values.values-edit.values-view
           = f.input :street, :as => :string, :label => "Adres", :placeholder => "Brak adresu", :input_html => { :readonly => true }
