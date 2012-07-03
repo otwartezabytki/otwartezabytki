@@ -10,7 +10,7 @@
       Pokaż znajomym, że bierzesz udział w akcji!
 
 #thankyou_actions{:class => (@request_email ? 'withregister' : '')}
-  - if true #@request_email
+  - if @request_email
     #thankyou_register
       %h4 Możesz uzupełnić bazę anonimowo albo założyć własne konto i śledzieć własne postępy
       %p Nazwy najbardziej zaangażowanych użytkowników udostępnimy też na stronie głównej w rankingu.
