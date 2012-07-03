@@ -1,31 +1,37 @@
-%div.page1
-%h1 Dziękujemy!
-%h2= thank_you_note
+.opening
+  .thankyou_love
+    %h2 Dzięki!
+    #heart ♥
+    %h3= thank_you_note
+  .thankyou_notes
+    %p.info
+      Zabytek pozostaje na liście „do sprawdzenia” dopóki nie sprawdzą go trzy osoby.
+    %a#share
+      Pokaż znajomym, że bierzesz udział w akcji!
 
-Zabytek pozostaje na liście "do sprawdzenia" dopóki nie sprawdzą go trzy osoby.
+.thankyou_actions
+  - if @request_email
+    .thankyou_register
+      %h4 Możesz uzupełnić bazę anonimowo albo założyć własne konto i śledzieć własne postępy
+      %p Nazwy najbardziej zaangażowanych użytkowników udostępnimy też na stronie głównej w rankingu.
+      = semantic_form_for current_user, :url => user_registration_path do |f|
+        = f.input :email, :placeholder => "Adres e-mail", :label => false
+        = f.input :username, :placeholder => "Nazwa użytkownika", :label => false
+        = f.submit "Zarejestruj"
+        = link_to "Później", edit_relic_url(@next_relic)
+      
+  = link_to edit_relic_url(@next_relic), :id => "thankyou_next" do
+    %span
+      Przejdź do następnego zabytku:
+    %strong
+      = @next_relic.identification 
+      
+  %br
 
+  lub
 
-- if @request_email
-  %h4 Możesz uzupełnić bazę anonimowo albo założyć własne konto i śledzieć własne postępy
-  %p Nazwy najbardziej zaangażowanych użytkowników udostępnimy też na stronie głównej w rankingu.
-  = semantic_form_for current_user, :url => user_registration_path do |f|
-    = f.input :email, :placeholder => "Adres e-mail", :label => false
-    = f.input :username, :placeholder => "Nazwa użytkownika", :label => false
-    = f.submit "Zarejestruj"
-    = link_to "Później", edit_relic_url(@next_relic)
-    
-    
-%br
-= link_to edit_relic_url(@next_relic) do
-  Przejdź do następnego zabytku:
-  = @next_relic.identification 
-  
-%br
+  %br
 
-lub
-
-%br
-
-- q1 = session[:search_params] && session[:search_params][:q1]
-= link_to relics_path(:q1 => q1) do
-  Wróć do wyników "#{q1}" &raquo;
+  - q1 = session[:search_params] && session[:search_params][:q1]
+  = link_to relics_path(:q1 => q1) do
+    Wróć do wyników „#{q1}” &raquo;
