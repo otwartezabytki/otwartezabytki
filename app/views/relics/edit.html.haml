@@ -1,7 +1,7 @@
 #relic-edit
   .page-header
     %h1 
-      3. Popraw zabytek
+      3. Sprawdź zabytek
       %span= suggestion.relic.place_full_name(false)
 
     %h2= link_to "przejdź do następnego »", '#', :id => "go_to_next"
@@ -98,7 +98,7 @@
           = f.input :street_action, :as => :hidden
         .actions.actions-view
           - if f.object.street.present?
-            %h3 Czy adres zabytku jest poprawny? (np. Marszałkowska 25, rondo Falbanka) 
+            %h3 Czy adres zabytku jest poprawny? (np. ul. Marszałkowska 25, rondo Falbanka) 
             .action.action-confirm= link_to "Tak, jest poprawny" 
             .action.action-edit= link_to "Nie, chcę go poprawić"
             .action.action-skip= link_to "Nie wiem, pomiń"
@@ -108,7 +108,7 @@
             .action.action-skip= link_to "Nie wiem, pomiń"
         .actions.actions-edit
           - if f.object.street.present?
-            %h3 Czy adres zabytku jest poprawny? (np. Marszałkowska 25, rondo Falbanka) 
+            %h3 Czy adres zabytku jest poprawny? (np. ul. Marszałkowska 25, rondo Falbanka) 
             .action.action-confirm= link_to "Tak, jest poprawny" 
             .action.action-edit= link_to "Nie, chcę go poprawić"
             .action.action-skip= link_to "Nie wiem, pomiń"
@@ -122,7 +122,7 @@
             .action.action-cancel= link_to "Cofnij zmianę"
         .actions.actions-done
           - if f.object.street.present?
-            %h3 Czy adres zabytku jest poprawny? (np. Marszałkowska 25, rondo Falbanka) 
+            %h3 Czy adres zabytku jest poprawny? (np. ul. Marszałkowska 25, rondo Falbanka) 
             .action.action-confirm= link_to "Tak, jest poprawny" 
             .action.action-edit= link_to "Nie, chcę go poprawić"
             .action.action-skip= link_to "Nie wiem, pomiń"
@@ -154,18 +154,18 @@
           = f.input :dating_of_obj_action, :as => :hidden
         - if f.object.dating_of_obj.present?
           .actions.actions-view 
-            %h3 Czy data powstania obiektu jest poprawna? (np. 1929, XIX w., 2 poł. XIV w.) 
+            %h3 Czy data powstania zabytku jest poprawna? (np. 1929, XIX w., 2 poł. XIV w.) 
             .action.action-confirm= link_to "Tak, jest poprawna" 
             .action.action-edit= link_to "Nie, chcę ją poprawić"
             .action.action-skip= link_to "Nie wiem, pomiń"
         - else
           .actions.actions-view
             %h3 Czy znasz datę powstania zabytku? (np. 1929, XIX w., 2 poł. XIV w.)
-            .action.action-edit= link_to "Tak, chcę poprawić datę"
+            .action.action-edit= link_to "Tak, chcę uzupełnić datę"
             .action.action-skip= link_to "Nie wiem, pomiń"
         .actions.actions-edit
           - if f.object.dating_of_obj.present?
-            %h3 Czy data powstania obiektu jest poprawna? (np. 1929, XIX w., 2 poł. XIV w.)
+            %h3 Czy data powstania zabytku jest poprawna? (np. 1929, XIX w., 2 poł. XIV w.)
             .action.action-confirm= link_to "Tak, jest poprawna" 
             .action.action-edit= link_to "Nie, chcę ją poprawić"
             .action.action-skip= link_to "Nie wiem, pomiń"
@@ -173,13 +173,13 @@
             .action.action-cancel= link_to "Cofnij zmiany"
           - else
             %h3 Czy znasz datę powstania zabytku? (np. 1929, XIX w., 2 poł. XIV w.) 
-            .action.action-edit= link_to "Tak, chcę poprawić datę"
+            .action.action-edit= link_to "Tak, chcę uzupełnić datę"
             .action.action-skip= link_to "Nie wiem, pomiń"
             .action.action-submit= link_to "Zapisz"
             .action.action-cancel= link_to "Cofnij zmiany"
         .actions.actions-done
           - if f.object.dating_of_obj.present?
-            %h3 Czy data powstania obiektu jest poprawna? (np. 1929, XIX w., 2 poł. XIV w.) 
+            %h3 Czy data powstania zabytku jest poprawna? (np. 1929, XIX w., 2 poł. XIV w.) 
             .action.action-confirm= link_to "Tak, jest poprawna" 
             .action.action-edit= link_to "Nie, chcę ją poprawić"
             .action.action-skip= link_to "Nie wiem, pomiń"
@@ -189,7 +189,7 @@
               )
           - else
             %h3 Czy znasz datę powstania zabytku? (np. 1929, XIX w., 2 poł. XIV w.)
-            .action.action-edit= link_to "Tak, chcę poprawić datę"
+            .action.action-edit= link_to "Tak, chcę uzupełnić datę"
             .action.action-skip= link_to "Nie wiem, pomiń"
             .action.action-back.action-back-short
               (Zrobiłeś błąd?
@@ -221,13 +221,13 @@
               :collection => Tag.third_column, :label => "",
               :input_html => { :multiple => true }
         .actions.actions-edit
-          %h3 Potwierdź lub pomiń swój wybór:
+          %h3 Potwierdź lub pomiń:
           .action.action-submit= link_to "Potwierdzam"
-          .action.action-skip= link_to "Nie jestem pewien, pomiń"
+          .action.action-skip= link_to "Nie wiem, pomiń"
         .actions.actions-done
-          %h3 Potwierdź lub wycofaj swój wybór:
+          %h3 Potwierdź lub wycofaj:
           .action.action-submit= link_to "Potwierdzam"
-          .action.action-skip= link_to "Nie jestem pewien, pomiń"
+          .action.action-skip= link_to "Nie wiem, pomiń"
           .action.action-back.action-back-short
             (Zrobiłeś błąd?
             = link_to "Cofnij"
@@ -277,7 +277,7 @@
 
                 - if f2.object.dating_of_obj.present?
                   .actions.actions-view
-                    %h3 Czy data powstania obiektu jest poprawna? (np. 1929, XIX w., 2 poł. XIV w.)
+                    %h3 Czy data powstania zabytku jest poprawna? (np. 1929, XIX w., 2 poł. XIV w.)
                     .action.action-confirm= link_to "Tak, jest poprawna"
                     .action.action-edit= link_to "Nie, chcę ją poprawić"
                     .action.action-skip= link_to "Nie wiem, pomiń"
@@ -288,7 +288,7 @@
                     .action.action-skip= link_to "Nie wiem, pomiń"
                 .actions.actions-edit
                   - if f2.object.dating_of_obj.present?
-                    %h3 Czy data powstania obiektu jest poprawna? (np. 1929, XIX w., 2 poł. XIV w.)
+                    %h3 Czy data powstania zabytku jest poprawna? (np. 1929, XIX w., 2 poł. XIV w.)
                     .action.action-confirm= link_to "Tak, jest poprawna"
                     .action.action-edit= link_to "Nie, chcę ją poprawić"
                     .action.action-skip= link_to "Nie wiem, pomiń"
@@ -302,7 +302,7 @@
                     .action.action-cancel= link_to "Cofnij zmiany"
                 .actions.actions-done
                   - if f2.object.dating_of_obj.present?
-                    %h3 Czy data powstania obiektu jest poprawna? (np. 1929, XIX w., 2 poł. XIV w.)
+                    %h3 Czy data powstania zabytku jest poprawna? (np. 1929, XIX w., 2 poł. XIV w.)
                     .action.action-confirm= link_to "Tak, jest poprawna"
                     .action.action-edit= link_to "Nie, chcę ją poprawić"
                     .action.action-skip= link_to "Nie wiem, pomiń"
@@ -337,13 +337,13 @@
                       :input_html => { :multiple => true }
 
                 .actions.actions-edit
-                  %h3 Potwierdź lub pomiń swój wybór:
+                  %h3 Potwierdź lub pomiń:
                   .action.action-submit= link_to "Potwierdzam"
-                  .action.action-skip= link_to "Nie jestem pewien, pomiń"
+                  .action.action-skip= link_to "Nie wiem, pomiń"
                 .actions.actions-done
-                  %h3 Potwierdź lub wycofaj swój wybór:
+                  %h3 Potwierdź lub wycofaj:
                   .action.action-submit= link_to "Potwierdzam"
-                  .action.action-skip= link_to "Nie jestem pewien, pomiń"
+                  .action.action-skip= link_to "Nie wiem, pomiń"
                   .action.action-back.action-back-short
                     (Zrobiłeś błąd?
                     = link_to "Cofnij"

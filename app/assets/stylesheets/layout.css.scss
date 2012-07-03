@@ -1400,16 +1400,16 @@ body.loaded .overlay {
                     border: 3px solid #617d8d;
                     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2);
                     opacity: .5;
-                    -webkit-transition:opacity .2s ease-in;  
-                    -moz-transition:opacity .2s ease-in;  
-                    -o-transition:opacity .2s ease-in;  
-                    transition:opacity .2s ease-in;  
+                    -webkit-transition:all .2s ease-in;  
+                    -moz-transition:all .2s ease-in;  
+                    -o-transition:all .2s ease-in;  
+                    transition:all .2s ease-in;  
 									}
                   &.ui-tabs-selected {
                     padding: 0;
-                    margin-left: 10px;
                     a {
                       opacity: 1;
+                      margin-left: 10px;
                     }
                   }
                   &.ui-state-hover {
