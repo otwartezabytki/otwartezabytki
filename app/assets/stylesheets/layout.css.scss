@@ -1369,10 +1369,10 @@ body.loaded .overlay {
             }
 					}
           #video {
-            float: left;
             border: 3px solid #678d9e;
-            margin-top: 30px;
-                box-shadow: 0 2px 20px 0 rgba(0,0,0,0.3);
+            box-shadow: 0 2px 20px 0 rgba(0,0,0,0.3);
+            position: absolute;
+            right: 85px;
           }
 					#tabs{
 						margin-left: 480px;
@@ -1383,13 +1383,31 @@ body.loaded .overlay {
 								border: 0;
 							}
 							.ui-tabs-nav{
+                margin-top: 35px;
 								float: right;
 								li{
 									float: none;
+                  margin-bottom: 5px;
+                  border: 0;
+                  background: none;
 									a{
+                    text-indent: -9999px;
 										float: none;
+                    display: block;
 										padding: 0;
+                    width: 105px;
+                    height: 60px;
+                    border: 3px solid #617d8d;
+                    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2);
+                    opacity: .5;
 									}
+                  &.ui-tabs-selected {
+                    padding: 0;
+                    margin-left: 10px;
+                    a {
+                      opacity: 1;
+                    }
+                  }
 								}
 							}
 							.ui-tabs-panel{
