@@ -3,24 +3,29 @@
     .more
       %h2 Zadbajmy o polskie zabytki!
       %p 
-        Weź udział w społecznościowym uzupełnianiu bazy wiedzy i pomóż nam stworzyć serwis o zabytkach.
+        Uzupełnij z nami bazę zabytków i&nbsp;pomóż stworzyć serwis.
+        %br
+        Skorzystaj z własnej wiedzy. Poszukaj informacji w&nbsp;książach lub&nbsp;w&nbsp;internecie.
         %strong To naprawdę proste.
-      = link_to page_pl_path('dowiedz-sie-wiecej'), :class => 'button' do
-        Dowiedz się więcej &#187;
+      #more-button
+        = link_to page_pl_path('dowiedz-sie-wiecej') do
+          Dowiedz się więcej &#187;
     #tabs
       %ul
         %li
-          %a{:href => '#tabs-1'} 1
+          %a{:href => '#tabs-1', :style => "background-image: url('http://b.vimeocdn.com/ts/313/259/313259872_100.jpg')"} 1
         %li
-          %a{:href => '#tabs-2'} 2
+          %a{:href => '#tabs-2', :style => "background-image: url('http://b.vimeocdn.com/ts/313/031/313031213_100.jpg')"} 2
         %li
-          %a{:href => '#tabs-3'} 3
+          %a{:href => '#tabs-3', :style => "background-image: url('http://b.vimeocdn.com/ts/311/908/311908285_100.jpg')"} 3
       #tabs-1
-        -#%iframe{ :src => "http://player.vimeo.com/video/15069551", :width => "400", :height => "225", :frameborder => "0"}
+        -#%iframe{ :src => "http://player.vimeo.com/video/45066441", :width => "400", :height => "225", :frameborder => "0"}
       #tabs-2
-        -#%iframe{ :src => "http://player.vimeo.com/video/15069551", :width => "400", :height => "225", :frameborder => "0"}
+        -#%iframe{ :src => "http://player.vimeo.com/video/45035633", :width => "400", :height => "225", :frameborder => "0"}
       #tabs-3
-        -#%iframe{ :src => "http://player.vimeo.com/video/15069551", :width => "400", :height => "225", :frameborder => "0"}
+        -#%iframe{ :src => "http://player.vimeo.com/video/44879498", :width => "400", :height => "225", :frameborder => "0"}
+    #video
+      <iframe src="http://player.vimeo.com/video/45066441?color=678d9e" color="678d9e" width="390" height="219" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
 
     .step1
       %h3
@@ -36,41 +41,59 @@
         Skorzystaj z przykładów:
         - cache("home_search_suggestions", :expires_in => 5.minutes) do
           = random_search_suggestions
-.content_wrapper
-  .container
-    %h3 Jak wygląda nasza baza zabytków?
-    .status_bar
-      - cache("home_relics_statistics", :expires_in => 5.minutes) do
-        - stats = relics_statistics
+.progress-bar
+  %h3.pb Jak wygląda nasza baza zabytków?
+  .bar
+    - cache("home_relics_statistics", :expires_in => 5.minutes) do
+      - stats = relics_statistics
 
-        - p3 = [5, stats[3] * 100 / stats[0]].max
-        - p2 = [10, stats[2] * 100 / stats[0]].max
-        - p1 = [15, stats[1] * 100 / stats[0]].max
+      - p3 = [15, stats[3] * 100 / stats[0]].max
+      - p2 = [30, stats[2] * 100 / stats[0]].max
+      - p1 = [45, stats[1] * 100 / stats[0]].max
 
-        %div{:style => "width: 100%"}= stats[0]
-        %div{:style => "width: #{p1}%"}= stats[1]
-        %div{:style => "width: #{p2}%"}= stats[2]
-        %div{:style => "width: #{p3}%"}= stats[3]
+      %div.lvl.p0{:style => "width: 100%"}
+        .num= stats[0]
+        .desc zabytki w naszej bazie
+      %div.lvl.p1{:style => "width: #{p1}%"}
+        .num= stats[1]
+        .desc w sumie przejżanych<br/>już zabytków
+      %div.lvl.p2{:style => "width: #{p2}%"}
+        .num= stats[2]
+        .desc zabytków przejżały<br/>dwie osoby
+      %div.lvl.p3{:style => "width: #{p3}%"}
+        .num= stats[3]
+        .desc zabytków czeka na<br/>weryfikację NID
 
-.stats
+.user-stats
   - cache("home_users_statistics", :expires_in => 5.minutes) do
     - stats = users_statistics
+    
+    .nums
+      .left
+        %h3 Aktywnych użytkowników
+      
+        .active= stats[0]
+        .numbers
+          .numbers-row
+            %span= stats[1]
+            zarejestrowanych
+          .numbers-row 
+            %span.a= stats[2]
+            anonimowych *
+        
+      - min, max = users_activity_statistics
 
-
-    Aktywnych użytkowników
-    = stats[0]
-    %br
-
-    #{stats[1]} zarejestrowanych
-    %br
-    #{stats[2]} anonimowych*
-
-    %br
-
-    - min, max = users_activity_statistics
-
-    - if max # just in case
-      #{max[4]}% z nich sprawdza zabytki #{max[2]} między #{max[0]}.00 a #{max[1]}.00
-
-    - if min # just in case
-      #{min[4]}% a tylko tyle #{min[2]} między #{min[0]}.00 a #{min[1]}.00
+      .right
+        - if max # just in case
+          .numbers-row
+            %strong #{max[4]}%
+            %div z nich sprawdza zabytki #{max[2]} między <span>#{max[0]}<sup>00</sup></span> a <span>#{max[1]}<sup>00</sup></span>
+      
+        - if min
+          .numbers-row
+            %strong.a #{min[4]}%
+            %div a tylko tyle #{min[2]} między <span>#{min[0]}<sup>00</sup></span> a <span>#{min[1]}<sup>00</sup></span>
+    
+    .info
+      * - lorem ipsum dolor sit amet
+          

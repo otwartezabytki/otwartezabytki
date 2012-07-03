@@ -12,9 +12,9 @@ geocode_location = (callback) ->
 
   jQuery.get geocoder_search_path, {voivodeship, district, commune, city, street}, (result) ->
     if result.length > 0
-      $('#suggestion_latitude').val(result[0].latitude.round(6))
-      $('#suggestion_longitude').val(result[0].longitude.round(6))
-      callback(result[0].latitude.round(6), result[0].longitude.round(6)) if callback?
+      $('#suggestion_latitude').val(result[0].latitude.round(7))
+      $('#suggestion_longitude').val(result[0].longitude.round(7))
+      callback(result[0].latitude.round(7), result[0].longitude.round(7)) if callback?
     else
       callback() if callback?
 
@@ -126,7 +126,6 @@ $.fn.specialize
       this.action().saveLocalHistory()
 
     restoreLocalHistory: ->
-      console.log(this.data('class'))
       this.action().restoreLocalHistory()
       this.input().restoreLocalHistory()
       this.attr('class', this.data('class'))
@@ -205,17 +204,13 @@ $.fn.specialize
 
     view: ->
       this.switchViewClass('step-view')
-      setTimeout ->
-        google.maps.event.trigger(map.map, 'resize')
-      , 1000
+      $('#map_canvas').resizeNicely()
 
       this
 
     edit: ->
       this.switchViewClass('step-edit')
-      setTimeout ->
-        google.maps.event.trigger(map.map, 'resize')
-      , 1000
+      $('#map_canvas').resizeNicely()
       this
 
     cancel: ->
@@ -224,6 +219,9 @@ $.fn.specialize
       this.input().save()
       this.view()
       this.saveLocalHistory()
+      setTimeout ->
+        $('#map_canvas').auto_zoom();
+      , 1000
       this
 
     skip: ->
@@ -233,7 +231,18 @@ $.fn.specialize
       this.done()
       this
 
+    done: ->
+      $('.step').removeClass('step-current')
+      this.addClass('step-done').removeClass("step-current")
+      next_step = $('.step:not(.step-done):first')
+      setHeight = next_step.offset().top - (($(window).height() / 2) - (next_step.height() / 2)) + 100
 
+      setTimeout ->
+        $('html,body').animate scrollTop: setHeight, 400, ->
+          next_step.view()
+          $('#map_canvas').resizeNicely()
+      , 300
+      this
 
 
   'input, select':
@@ -331,12 +340,8 @@ $.fn.specialize
     auto_zoom: ->
       zoom_map = (lat, lng) =>
         $(this).zoom_at(lat, lng)
-        if $('#suggestion_street').val().length > 0
-          map.removeMarkers()
-          map.addMarker
-            lat: lat
-            lng: lng
-            icon: new google.maps.MarkerImage(marker_image_path, null, null, new google.maps.Point(112, 11))
+        $(this).tooltip_marker(lat, lng) if $('#suggestion_street').val().length > 0
+
 
       latitude = $('#suggestion_latitude').val().toNumber()
       longitude = $('#suggestion_longitude').val().toNumber()
@@ -344,6 +349,20 @@ $.fn.specialize
         zoom_map(latitude, longitude)
       else
         geocode_location(zoom_map)
+
+    tooltip_marker: (lat, lng) ->
+      map.removeMarkers()
+      map.addMarker
+        lat: lat
+        lng: lng
+        icon: new google.maps.MarkerImage(marker_image_path, null, null, new google.maps.Point(112, 11))
+
+    circle_marker: (lat, lng) ->
+      map.removeMarkers()
+      map.addMarker
+        lat: lat
+        lng: lng
+        icon: new google.maps.MarkerImage(small_marker_image_path, null, null, new google.maps.Point(8, 8))
 
     set_marker: (lat, lng) ->
       map.removeMarkers()
@@ -353,16 +372,25 @@ $.fn.specialize
         lng: lng
         draggable: true
         dragend: (e) ->
-          new_lat = marker.getPosition().lat().round(6)
-          new_lng = marker.getPosition().lng().round(6)
+          new_lat = marker.getPosition().lat().round(7)
+          new_lng = marker.getPosition().lng().round(7)
           $('#suggestion_latitude').val(new_lat)
           $('#suggestion_longitude').val(new_lng)
           $('#map_canvas').zoom_at(new_lat, new_lng)
 
-        $('#suggestion_latitude').val(lat.round(6))
-        $('#suggestion_longitude').val(lng.round(6))
+        $('#suggestion_latitude').val(lat.round(7))
+        $('#suggestion_longitude').val(lng.round(7))
 
       $('#map_canvas').zoom_at(lat, lng)
+
+    resizeNicely: ->
+      setTimeout ->
+        google.maps.event.trigger(map.map, 'resize')
+        setTimeout ->
+          $('#map_canvas').zoom_at($('#suggestion_latitude').val(), $('#suggestion_longitude').val())
+        , 500
+      , 500
+      this
 
 jQuery ->
 
@@ -434,13 +462,17 @@ jQuery ->
 
   $('.step').each -> $(this).saveHistory()
 
-  $('#marker').draggable(revert: true)
+  $('#marker').draggable
+    revert: true
+    start: ->
+      $('#map_canvas').circle_marker $('#suggestion_latitude').val(), $('#suggestion_longitude').val()
+
 
   $('#map_canvas').droppable
     drop: (event, ui) ->
 
-      x_offset = (ui.offset.left - $(this).offset().left + 10)
-      y_offset = (ui.offset.top - $(this).offset().top + 35)
+      x_offset = (ui.offset.left - $(this).offset().left + 39)
+      y_offset = (ui.offset.top - $(this).offset().top + 55)
 
       lng = map.map.getBounds().getSouthWest().lng()
       lat = map.map.getBounds().getNorthEast().lat()
@@ -454,10 +486,11 @@ jQuery ->
   $('#map_canvas').auto_zoom()
 
   $('#suggestion_latitude, #suggestion_longitude').keyup ->
-    if $('#suggestion_latitude').val().length == 9 && $('#suggestion_longitude').val().length == 9
+    if $('#suggestion_latitude').val().length >= 10 && $('#suggestion_longitude').val().length >= 10
       latitude = $('#suggestion_latitude').val().toNumber()
-      longitude = $('#suggestion_longitude').val().toNumber()
+      longitude = $('#suggestion_latitude').val().toNumber()
       if !isNaN(latitude) & !isNaN(longitude)
+        $('.step-gps').edit()
         $('#map_canvas').set_marker(latitude, longitude)
   
   $(".steps").on "click", ".help-content .help", ->
@@ -488,11 +521,14 @@ jQuery ->
   $('#suggestion_place_id_input').on('click', '.add_place_button', add_suggestion_callback)
   $('#suggestion_place_id_input').on 'keyup', ' .chzn-search input', (e) ->
     stroke = if (_ref = e.which) != null then _ref else e.keyCode
-    console.log(stroke)
     add_suggestion_callback(e) if stroke == 13
-
 
   $('#go_to_next').click ->
     bypass_submit = true
     $('#new_suggestion').submit()
     return false
+
+
+# for animations
+$(window).load ->
+  $('body').addClass('loaded')

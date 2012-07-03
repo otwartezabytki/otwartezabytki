@@ -1,49 +1,50 @@
 .about
-        %p Otwarte Zabytki to projekt prowadzony przez Centrum Cyfrowe Projekt: Polska.
-        %p Centrum Cyfrowe Projekt Polska, 03-808 Warszawa, ula. Mińska 25, bud. 74
-        %p Projekt finansowany ze środków Ministra Kultury i Dziedzictwa Narodowego w ramach konkursu Patriotyzm Jutra, ze środków finansowych otrzymanych od Ministerstwa Spraw Zagranicznych w ramach konkursu na realizację zadania "Współpraca z Polonią i Polakami za granicą oraz ze środków CEE Trust.
+  %p Otwarte Zabytki to projekt prowadzony przez Centrum Cyfrowe Projekt: Polska.
+  %p Centrum Cyfrowe Projekt Polska, 03-808 Warszawa, ula. Mińska 25, bud. 74
+  %p Projekt finansowany ze środków Ministra Kultury i Dziedzictwa Narodowego w ramach konkursu Patriotyzm Jutra, ze środków finansowych otrzymanych od Ministerstwa Spraw Zagranicznych w ramach konkursu na realizację zadania "Współpraca z Polonią i Polakami za granicą oraz ze środków CEE Trust.
 
 .facebook-share
-        :plain
-                <iframe src="//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fotwartezabytki&amp;width=270&amp;height=62&amp;colorscheme=light&amp;show_faces=false&amp;border_color&amp;stream=false&amp;header=false" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:270px; height:62px;" allowTransparency="true"></iframe>
+  :plain
+    <iframe src="//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fotwartezabytki&amp;width=270&amp;height=62&amp;colorscheme=light&amp;show_faces=false&amp;border_color&amp;stream=false&amp;header=false" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:270px; height:62px;" allowTransparency="true"></iframe>
 .partners
-        .partner-big
-                %h2 Patron
-                .partner-bg
-                        = link_to image_tag( 'partner-nid.png'), 'http://www.nid.pl'
+  .partner-big
+    %h2 Patron
+    .partner-bg
+      = link_to image_tag( 'partner-nid.png'), 'http://www.nid.pl'
 
-        .partner-small
-                %h2 Patroni medialni
-                .partner-bg
-                        .partner-slider-1
-                                = link_to image_tag( 'partner-ngo.png'), 'http://www.ngo.pl'
-                                = link_to image_tag( 'partner-histmag.png'), 'http://www.histmag.pl'
-                                = link_to image_tag( 'partner-gw.png'), 'http://www.wyborcza.pl'
-        .partner-small
-                %h2 Partner merytoryczny
-                .partner-bg
-                        .partner-slider-2
-                                = link_to image_tag( 'partner-tit.png'), 'http://www.e.org.pl'
-                                = link_to image_tag( 'partner-frsi.png'), 'http://www.frsi.org.pl/'
-                                = link_to image_tag( 'partner-pttk.png'), 'http://www.karta.org.pl/'
-                                = link_to image_tag( 'partner-ppolska.png'), 'http://projektpolska.pl/'
-                                = link_to image_tag( 'partner-orange.png'), 'http://www.orange.pl/_fundacja_orange.phtml'
-        .partner-small.last
-                %h2 Grantodawcy
-                .partner-bg
-                        .partner-slider-3
-                                = link_to image_tag( 'partner-mhp.png'), 'http://www.muzhp.pl'
-                                = link_to image_tag( 'partner-pj.png'), ' http://www.muzhp.pl/konkursy/patriotyzm-jutra.html'
-                                = link_to image_tag( 'partner-msz.png'), 'http://www.msz.gov.pl'
-                                = link_to image_tag( 'partner-cee.png'), 'http://www.ceetrust.org'
+  .partner-small
+    %h2 Patroni medialni
+    .partner-bg
+      .partner-slider-1
+        = link_to image_tag( 'partner-ngo.png'), 'http://www.ngo.pl'
+        = link_to image_tag( 'partner-histmag.png'), 'http://www.histmag.pl'
+        = link_to image_tag( 'partner-gw.png'), 'http://www.wyborcza.pl'
+  .partner-small
+    %h2 Partner merytoryczny
+    .partner-bg
+      .partner-slider-2
+        = link_to image_tag( 'partner-tit.png'), 'http://www.e.org.pl'
+        = link_to image_tag( 'partner-frsi.png'), 'http://www.frsi.org.pl/'
+        = link_to image_tag( 'partner-pttk.png'), 'http://www.karta.org.pl/'
+        = link_to image_tag( 'partner-ppolska.png'), 'http://projektpolska.pl/'
+        = link_to image_tag( 'partner-orange.png'), 'http://www.orange.pl/_fundacja_orange.phtml'
+  .partner-small.last
+    %h2 Grantodawcy
+    .partner-bg
+      .partner-slider-3
+        = link_to image_tag( 'partner-mhp.png'), 'http://www.muzhp.pl'
+        = link_to image_tag( 'partner-pj.png'), ' http://www.muzhp.pl/konkursy/patriotyzm-jutra.html'
+        = link_to image_tag( 'partner-msz.png'), 'http://www.msz.gov.pl'
+        = link_to image_tag( 'partner-cee.png'), 'http://www.ceetrust.org'
 .footer-bottom
-        .footer-copyright
-                <p>Treści zamieszczone w serwisie udostępniamy na licencji </br>
-                <a href="http://creativecommons.org/licenses/by/3.0/pl/">Creative Commons Uznanie autorstwa 3.0 Polska </a> </p>
-        .footer-links
-                %a{ :class => "footer-regulamin", :href => "/regulamin"} Regulamin
-                %a{ :class => "footer-prywatnosc", :href => "/prywatnosc"} Prywatność
+  .footer-copyright
+    %p
+      Treści zamieszczone w serwisie udostępniamy na licencji </br>
+      = link_to "Creative Commons Uznanie autorstwa 3.0 Polska", "http://creativecommons.org/licenses/by/3.0/pl"
+  .footer-links
+    %a{ :class => "footer-regulamin", :href => "/strony/regulamin"} Regulamin
+    %a{ :class => "footer-prywatnosc", :href => "/strony/prywatnosc"} Prywatność
 
 
-        %a{ :class => "footer-logo", :href => "http://www.monterail.com"} MonteRail
+  %a{ :class => "footer-logo", :href => "http://www.monterail.com", :title => "Aplikacje internetowe w Ruby on Rails"} Monterail
 

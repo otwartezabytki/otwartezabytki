@@ -10,10 +10,7 @@
 #= require jquery.ui.button
 #= require jquery.ui.dialog
 #= require jquery.ui.autocomplete
-#= require jquery.ui.tabs 
-#= require jquery.transition.min
-#= require jquery.effects.all
-#= require jquery.cookie
+#= require jquery.ui.tabs
 #= require_tree ./vendor
 
 #= require twitter/bootstrap
@@ -21,6 +18,7 @@
 
 
 @marker_image_path = "<%= image_path('wizard-gps-circle-with-info.png') %>"
+@small_marker_image_path = "<%= image_path('wizard-gps-circle.png') %>"
 @geocoder_search_path = "/geocoder/search"
 
 
@@ -76,6 +74,13 @@ jQuery ->
   $("a[rel=popover]").popover()
   $(".tooltip").tooltip()
   $("a[rel=tooltip]").tooltip()
-  
+
   #tabs
   $("#tabs").tabs()
+
+  # jquery footer cycle
+  jQuery(".partner-slider-1, .partner-slider-2, .partner-slider-3").cycle({
+    fx: 'fade',
+    speed:    1000,
+    timeout:  4000
+  })
