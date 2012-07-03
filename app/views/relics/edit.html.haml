@@ -203,9 +203,13 @@
             %span.close Zamknij pomoc
             %p Wybierz określenia (klikając poszczególne słowa), które pasują do sprawdzanego zabytku. Zaznacz wszystkie, które uważasz za pasujące. Jeśli uważasz, że na liście brakuje pasującego określenia, wybierz opcję „inny”. Gdy skończysz, wciśnij „potwierdzam”. Jeśli chcesz pominąć ten punkt, wciśnij „Nie wiem, pomiń”.
         %span.ico
-        .values.values-view.values-edit
+
+        .values.values-not-current
+          = f.input :tag_names, :as => :string, :label => "Pasujące określenia",
+            :input_html => { :name => "tag-names", :class => "tag-names", :readonly => true }
+        .values.values-view.values-edit.values-current
           %h3 Pasujące określenia
-          .actions.actions-edit
+          .actions.actions-edit.actions-view
             %p Możesz wybrać jedną lub kilka odpowiedzi. Wybierz wszystkie, które uważasz za pasujące:
           = f.input :tags_action, :as => :hidden
           .column.column-first
@@ -220,6 +224,10 @@
             = f.input :tags, :as => :check_boxes,
               :collection => Tag.third_column, :label => "",
               :input_html => { :multiple => true }
+        .actions.actions-view
+          %h3 Potwierdź lub pomiń:
+          .action.action-submit= link_to "Potwierdzam"
+          .action.action-skip= link_to "Nie wiem, pomiń"
         .actions.actions-edit
           %h3 Potwierdź lub pomiń:
           .action.action-submit= link_to "Potwierdzam"
@@ -320,7 +328,10 @@
                       )
 
               %article.step.step-tags.step-view
-                .values.values-view.values-edit
+                .values.values-not-current
+                  = f2.input :tag_names, :as => :string, :label => "Pasujące określenia",
+                    :input_html => { :name => "tag-names", :class => "tag-names", :readonly => true }
+                .values.values-view.values-edit.values-current
                   %h3 Pasujące określenia
                   = f2.input :tags_action, :as => :hidden
                   .column.column-first
@@ -335,6 +346,11 @@
                     = f2.input :tags, :as => :check_boxes,
                       :collection => Tag.third_column, :label => "",
                       :input_html => { :multiple => true }
+
+                .actions.actions-view
+                  %h3 Potwierdź lub pomiń:
+                  .action.action-submit= link_to "Potwierdzam"
+                  .action.action-skip= link_to "Nie wiem, pomiń"
 
                 .actions.actions-edit
                   %h3 Potwierdź lub pomiń:

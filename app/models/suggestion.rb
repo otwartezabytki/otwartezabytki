@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Suggestion < ActiveRecord::Base
   belongs_to :user
   belongs_to :relic
@@ -53,6 +54,14 @@ class Suggestion < ActiveRecord::Base
 
   def place_name
     self.relic.place.name
+  end
+
+  def tag_names
+    if self.tags.size > 0
+      self.tags.join(', ')
+    else
+      "nie wybrano żadnych określeń"
+    end
   end
 
   def relic_id=(value)
