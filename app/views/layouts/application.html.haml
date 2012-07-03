@@ -35,7 +35,7 @@
                   %li= link_to 'Wyloguj się', destroy_user_session_path, :method => :delete, :class => 'logout'
                 - else
                   - if (c = (current_user.suggestions.count rescue 0)) > 0
-                    %li Sprawdziłeś zabytków: #{c}
+                    %li Liczba Twoich zabytków: #{c}
                   - else
                     %li Nie sprawdziłeś żadnego zabytku, do roboty!
                   %li
