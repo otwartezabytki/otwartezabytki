@@ -470,7 +470,7 @@ jQuery ->
 
     return false # prevent the form submission
 
-  $('.step-simple').on 'keyup', 'input[type="text"]', ->
+  $('.step-simple').on 'keyup', 'input[type="text"]', (e) ->
     stroke = if (_ref = e.which) != null then _ref else e.keyCode
     $(this).parents('.step:first').submit() if stroke == 13
 
