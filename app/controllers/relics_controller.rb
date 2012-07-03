@@ -51,7 +51,7 @@ class RelicsController < ApplicationController
       redirect_to thank_you_relic_path(params[:id]), :notice => "Już poprawiłeś ten zabytek, dziękujemy!" and return
     end
 
-    if relic.suggestions.count >= 3
+    if relic.suggestions.not_skipped.count >= 3
       redirect_to corrected_relic_path(params[:id]), :notice => "Ten zabytek został już przejrzany. Zapraszamy za miesiąc." and return
     end
 
