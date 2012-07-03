@@ -9,7 +9,7 @@
     %a#share
       Pokaż znajomym, że bierzesz udział w akcji!
 
-.thankyou_actions
+#thankyou_actions
   - if @request_email
     .thankyou_register
       %h4 Możesz uzupełnić bazę anonimowo albo założyć własne konto i śledzieć własne postępy
@@ -20,18 +20,17 @@
         = f.submit "Zarejestruj"
         = link_to "Później", edit_relic_url(@next_relic)
       
-  = link_to edit_relic_url(@next_relic), :id => "thankyou_next" do
-    %span
-      Przejdź do następnego zabytku:
-    %strong
-      = @next_relic.identification 
-      
-  %br
-
-  lub
-
-  %br
-
-  - q1 = session[:search_params] && session[:search_params][:q1]
-  = link_to relics_path(:q1 => q1) do
-    Wróć do wyników „#{q1}” &raquo;
+  .thankyou_dorelics
+    = link_to edit_relic_url(@next_relic), :id => "thankyou_next" do
+      %div
+        %span
+          Przejdź do następnego zabytku:
+        %strong
+          = @next_relic.identification 
+        
+    #thankyou_results
+      %span
+        lub
+      - q1 = session[:search_params] && session[:search_params][:q1]
+      = link_to relics_path(:q1 => q1) do
+        Wróć do wyników „<strong>#{q1}</strong>” &raquo;

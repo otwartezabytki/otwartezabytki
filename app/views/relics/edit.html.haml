@@ -40,8 +40,8 @@
           .action.action-edit= link_to "Nie, chcę ją poprawić"
           .action.action-skip= link_to "Nie wiem, pomiń"
           .action.action-back
-            (zrobiłeś błąd?
-            = link_to "cofnij"
+            (Zrobiłeś błąd?
+            = link_to "Cofnij"
             )
 
       %article.step.step-place.step-simple.step-view
@@ -93,7 +93,7 @@
               Spróbuj znaleźć adres zabytku (np. na stronach internetowych lub w książkach). Jeśli Ci się nie uda, kliknij „Nie wiem, pomiń”, a automatycznie przejdziesz do kolejnego punktu.
         %span.ico
         .values.values-edit.values-view
-          = f.input :street, :as => :string, :label => "Adres", :placeholder => "Brak danych", :input_html => { :readonly => true }
+          = f.input :street, :as => :string, :label => "Adres", :placeholder => "Brak adresu", :input_html => { :readonly => true }
           = f.input :street_action, :as => :hidden
         .actions.actions-view
           - if f.object.street.present?
@@ -149,7 +149,7 @@
               Spróbuj znaleźć datę powstania zabytku (np. na stronach internetowych lub w książkach). Jeśli Ci się nie uda, kliknij „Nie wiem, pomiń”, a automatycznie przejdziesz do kolejnego punktu.
         %span.ico
         .values.values-edit.values-view
-          = f.input :dating_of_obj, :as => :string, :label => "Data powstania", :placeholder => "Brak danych", :input_html => { :readonly => true }
+          = f.input :dating_of_obj, :as => :string, :label => "Data powstania", :placeholder => "Brak daty powstania", :input_html => { :readonly => true }
           = f.input :dating_of_obj_action, :as => :hidden
         - if f.object.dating_of_obj.present?
           .actions.actions-view 
@@ -271,7 +271,7 @@
 
               %article.step.step-date.step-simple.step-view
                 .values.values-edit.values-view
-                  = f2.input :dating_of_obj, :as => :string, :label => "Z kiedy?", :placeholder => "Brak danych", :input_html => { :readonly => true }
+                  = f2.input :dating_of_obj, :as => :string, :label => "Z kiedy?", :placeholder => "Brak daty powstania", :input_html => { :readonly => true }
                   = f2.input :dating_of_obj_action, :as => :hidden
 
                 - if f2.object.dating_of_obj.present?
