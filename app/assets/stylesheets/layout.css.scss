@@ -2145,3 +2145,62 @@ body.loaded .overlay {
 		padding-top: 25px;
 	}
 }
+
+.progress-bar {
+	width: 958px;
+	margin: auto;
+	color: #313132;
+	
+	h3 {
+		font-size: 22px;
+		text-align: center;
+	}
+	
+	.bar {
+		position: relative;
+		height: 90px;
+		margin-bottom: 75px;
+		margin-top: 35px;
+	}
+	
+	.bar .lvl {
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 90px;
+		
+		.num {
+			height: 47px;
+			line-height: 47px;
+			padding-right: 8px;
+			text-align: right;
+			color: #fff;
+			font-size: 16px;
+			font-weight: bold;
+			-webkit-border-radius: 10px 0 0 10px;
+			border-radius: 10px 0 0 10px;
+		}
+		
+		.desc {
+			padding-top: 12px;
+			text-align: right;
+			font-size: 11px;
+			border-right: 1px solid #dcdcdc;
+			float: right;
+			padding-right: 8px;
+		}
+		
+	}	
+	
+	.bar .p0 .desc { border: none }
+	.bar .p0 .num {
+		-webkit-border-radius: 10px;
+		border-radius: 10px;
+	}
+
+	
+	.p0 .num { background-image: image-url('bar-p0.png'); }
+	.p1 .num { background-image: image-url('bar-p1.png'); }
+	.p2 .num { background-image: image-url('bar-p2.png'); }
+	.p3 .num { background-image: image-url('bar-p3.png'); }
+}
