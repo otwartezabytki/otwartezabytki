@@ -1,7 +1,8 @@
 <div class="login_title"><h2>Zaloguj się <%= resource.id %></h2></div>
 <div class="right_txt_box"><div class="ask_account">Nie masz konta?<br /></div>
 Każdy uczestnik może się zarejestrować i śledzić własne postępy.<br />
-<a href="#">Zarejestruj się tutaj</a><br />
+<%= link_to "Zarejestruj się tutaj", new_user_registration_path %>
+<br />
 <div class="ask_account">Czy konto jest mi potrzebne?</div>
 Możesz uzupełniać bazę anonimowo albo założyć konto i śledzić własne postępy.</div>
 <div class="form_box">
@@ -22,6 +23,6 @@ Możesz uzupełniać bazę anonimowo albo założyć konto i śledzić własne p
 
 
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
-  <div class="link_form"><%= link_to "Nie otrzymałeś lub nie pamiętasz hasła", new_password_path(resource_name) %><br />
+  <div class="link_form"><%= link_to "Nie otrzymałeś lub nie pamiętasz hasła?", new_password_path(resource_name) %><br />
 <% end -%>
 </div>

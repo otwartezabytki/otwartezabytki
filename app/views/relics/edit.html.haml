@@ -3,6 +3,9 @@
     %h1 
       3. Popraw zabytek
       %span= suggestion.relic.place_full_name(false)
+
+    %h2= link_to "przejdź do następnego »", '#', :id => "go_to_next"
+
   = semantic_form_for suggestion, :url => relic_path, :method => :put,
     :html => { :data => { :commune => suggestion.relic.commune.name,
                           :district => suggestion.relic.district.name,
