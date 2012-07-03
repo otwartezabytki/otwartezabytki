@@ -32,6 +32,11 @@ footer { clear: both; display: block; }
 .step-view .values-view { display: block; }
 .step-edit .values-edit { display: block; }
 
+.step .values-not-current { display: block; }
+.step .values-current { display: none; }
+.step-current .values-current { display: block !important; }
+.step-current .values-not-current { display: none !important; }
+
 .step input[type='text'] { border-color: white; background-color: white; cursor: default; box-shadow: 0 0; font-size: 20px; }
 .step-edit input[type='text'] { border-color: #ddd; border-width: 1px; }
 

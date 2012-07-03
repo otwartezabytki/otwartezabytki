@@ -186,11 +186,12 @@ $.fn.specialize
     input: -> this.find("input[type='checkbox']")
 
     view: ->
-      this.edit()
+      this.switchViewClass('step-view')
       this
 
     skip: ->
       this.cancel()
+      this.find('.tag-names:first').val("nie wybrano żadnych określeń")
       this.switchViewClass('step-view step-done step-skipped')
       this.action().val('skip')
       this.done()
@@ -289,11 +290,9 @@ $.fn.specialize
   'input[type="checkbox"]':
 
     edit: ->
-      this.prop('disabled', false)
       this
 
     save: ->
-      this.prop('disabled', true)
       this
 
     saveHistory: ->
@@ -404,24 +403,22 @@ $.fn.specialize
 
 jQuery ->
 
-  bypass_submit = false
+  window.bypass_submit = false
 
   return unless $('body').hasClass('relics') && $('body').hasClass('edit')
 
   # prevent form submission until end of the wizard
   $('form.suggestion').submit (e) ->
     $('.step-submit').addClass('step-done')
-    if !bypass_submit && $('.step:not(.step-done)').length > 0
+    if !window.bypass_submit && $('.step:not(.step-done)').length > 0
       $('.step:not(.step-done):first').view()
       false
     else
       $('.steps input[disabled]').prop("disabled", false)
+      window.bypass_submit = true
 
   # turn of autocompletion for all inputs
   $('.step input[type="text"]').attr('autocomplete', 'off')
-
-  # disable all checkbox for now
-  $('.step-tags input[type="checkbox"]').prop('disabled', true)
 
   $('.step').on 'click', '.action-back a', ->
     $(this).parents('.step:first').back()
@@ -446,14 +443,18 @@ jQuery ->
 
       return false # prevent the form submission
 
-  ['submit', 'skip'].forEach (action) ->
-    $('.step-tags').on 'click', ".action-#{action} a" , ->
-      step_div = $(this).parents('.step:first')
+  $('.step-tags').on 'click', ".action-submit a" , ->
+    step_div = $(this).parents('.step:first')
+    if step_div.hasClass('step-current') && step_div.hasClass('step-edit')
+      step_div.submit()
 
-      if step_div.hasClass('step-current')
-        step_div[action]()
+    return false # prevent the form submission
 
-      return false # prevent the form submission
+  $('.step-tags').on 'click', ".action-skip a" , ->
+    step_div = $(this).parents('.step:first')
+    if step_div.hasClass('step-current')
+      $(this).parents('.step:first').skip()
+
 
   $('.step-gps').on 'click', ".action-submit a" , ->
     step_div = $(this).parents('.step:first')
@@ -472,6 +473,21 @@ jQuery ->
   $('.step-simple').on 'keyup', 'input[type="text"]', ->
     stroke = if (_ref = e.which) != null then _ref else e.keyCode
     $(this).parents('.step:first').submit() if stroke == 13
+
+  $('.step-tags input[type="checkbox"]').change ->
+    step = $(this).parents('.step')
+    if step.find('input[type="checkbox"]:checked').length > 0
+      step.edit() if step.hasClass('step-view')
+    else
+      step.view() if step.hasClass('step-edit')
+
+    tags = step.find('input[type="checkbox"]:checked').toArray().map (e) ->
+      $(e).val()
+
+    if tags.length > 0
+      step.find('.tag-names:first').val(tags.join(', '))
+    else
+      step.find('.tag-names:first').val("nie wybrano żadnych określeń")
 
 
   $('.step').each -> $(this).saveHistory()
@@ -543,11 +559,18 @@ jQuery ->
     add_suggestion_callback(e) if stroke == 13
 
   $('#go_to_next').click ->
-    bypass_submit = true
+    window.bypass_submit = true
     $('#new_suggestion').submit()
     return false
+
 
 
 # for animations
 $(window).load ->
   $('body').addClass('loaded')
+
+  window.onbeforeunload = ->
+    return null if window.bypass_submit
+    if $('.step-edited').length > 0 || $('.step-confirmed').length > 0 || $('.step-edit').length > 0
+      return 'Jeśli wyjdziesz z tej strony, wprowadzone zmiany będą stracone.'
+
