@@ -118,6 +118,12 @@
 	    border-radius:4px;
 	    margin:5px 5px 0 0;
 	  }
+	  .error input
+	   {
+	     border-color: rgb(213, 24, 24);
+	   }
+		span.help-inline { color: rgb(213, 24, 24); font-size: 12px}
+	
 	
   }
   .right_txt_box
@@ -140,7 +146,7 @@
     background-image: image-url('at_icon.png');
   }
 
-  #user_password
+  #user_password, #user_password_confirmation
   {
     background-image:image-url('key_icon.png');
   }
@@ -220,17 +226,22 @@
     padding: 5px 16px 4px 19px;
     cursor: pointer;
   }
-  .alert.alert-error
+  .alert
   {
     width:auto;
     height:auto;
     margin:0 0 15px 0;
     padding:4px 4px 4px 4px;
     border-radius:4px;
-    border:1px solid #d51818;
-    color:#d51818;
+    border:1px solid #d5d5d5;
+    color:#888;
     text-align:center;
   }
+.alert-error {
+	border:1px solid #d51818;
+  color:#d51818;
+	
+}
   .link_form
   {
     float:right;
