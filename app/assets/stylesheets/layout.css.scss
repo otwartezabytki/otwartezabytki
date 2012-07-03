@@ -2026,3 +2026,95 @@ body.loaded .overlay {
 	font-weight: bold;
 	margin-top: 20px;
 }
+
+
+
+
+
+.user-stats {
+	color: #4e4e4e;
+	width: 958px;
+	height: 193px;
+	border: 1px solid rgb(220, 220, 220);
+	background: #fff;
+	margin: auto;
+	padding: 45px 0 0 0;
+	
+	.nums { overflow: hidden;}
+	
+	.left {
+		float: left;
+		width: 400px;
+		padding-left: 78px;
+		h3 {
+			color: #b4b4b4;
+			font-size: 30px;
+			text-align: center;
+		}
+		.active {
+			font-size: 66px;
+			color: #06405d;
+			float: left;
+			width: 165px;
+			text-align: right;
+			font-weight: bold;
+			padding-right: 20px;
+		}
+		
+		.numbers {
+			padding-top: 5px;
+			float: left;
+			span {
+				font-size: 28px;
+				color: #7c99a8;
+				font-weight: bold;
+				width: 80px;
+				display: inline-block;
+				text-align: right;
+			}
+			
+			span.a { color: #37667d }
+		}
+	}
+	
+	.right {
+		width: 478px;
+		float: right;
+		.numbers-row {
+			overflow: hidden;
+			margin-bottom: 23px;
+			strong {
+				display: block;
+				float: left;
+				width: 134px;
+				font-size: 40px;
+				font-weight: bold;
+				color: #1b5572;
+				text-align: right;
+			}
+			
+			strong.a { color: #88a6b4; }
+			
+			div {
+				float: left;
+				width: 180px;
+				margin-left: 17px;
+				font-size: 13px;
+				
+				span {
+					font-size: 18px;
+					font-weight: bold;
+				}
+				
+				sup { vertical-align: super; font-size: 13px }
+			}
+		}
+	}
+	.info {
+		text-align: right;
+		font-size: 11px;
+		clear: both;
+		padding-right: 50px;
+		padding-top: 25px;
+	}
+}

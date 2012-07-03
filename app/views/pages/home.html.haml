@@ -57,25 +57,36 @@
         %div{:style => "width: #{p2}%"}= stats[2]
         %div{:style => "width: #{p3}%"}= stats[3]
 
-.stats
+.user-stats
   - cache("home_users_statistics", :expires_in => 5.minutes) do
     - stats = users_statistics
+    
+    .nums
+      .left
+        %h3 Aktywnych użytkowników
+      
+        .active= stats[0]
+        .numbers
+          .numbers-row
+            %span= stats[1]
+            zarejestrowanych
+          .numbers-row 
+            %span.a= stats[2]
+            anonimowych *
+        
+      - min, max = users_activity_statistics
 
-
-    Aktywnych użytkowników
-    = stats[0]
-    %br
-
-    #{stats[1]} zarejestrowanych
-    %br
-    #{stats[2]} anonimowych*
-
-    %br
-
-    - min, max = users_activity_statistics
-
-    - if max # just in case
-      #{max[4]}% z nich sprawdza zabytki #{max[2]} między #{max[0]}.00 a #{max[1]}.00
-
-    - if min # just in case
-      #{min[4]}% a tylko tyle #{min[2]} między #{min[0]}.00 a #{min[1]}.00
+      .right
+        - if max # just in case
+          .numbers-row
+            %strong #{max[4]}%
+            %div z nich sprawdza zabytki #{max[2]} między <span>#{max[0]}<sup>00</sup></span> a <span>#{max[1]}<sup>00</sup></span>
+      
+        - if min
+          .numbers-row
+            %strong.a #{min[4]}%
+            %div a tylko tyle #{min[2]} między <span>#{min[0]}<sup>00</sup></span> a <span>#{min[1]}<sup>00</sup></span>
+    
+    .info
+      * - lorem ipsum dolor sit amet
+          
