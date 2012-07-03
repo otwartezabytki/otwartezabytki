@@ -28,14 +28,14 @@
                 - if current_user && current_user.registered? && current_user.errors.size == 0
                   %li Witaj, #{ current_user.username || current_user.email }
                   - if (c = (current_user.suggestions.count rescue 0)) > 0
-                    %li Sprawdziłeś zabytków: #{c}
+                    %li Liczba Twoich zabytków: #{c}
                   - else
                     %li Nie sprawdziłeś żadnego zabytku, do roboty!
 
                   %li= link_to 'Wyloguj się', destroy_user_session_path, :method => :delete, :class => 'logout'
                 - else
                   - if (c = (current_user.suggestions.count rescue 0)) > 0
-                    %li Sprawdziłeś zabytków: #{c}
+                    %li Liczba Twoich zabytków: #{c}
                   - else
                     %li Nie sprawdziłeś żadnego zabytku, do roboty!
                   %li
