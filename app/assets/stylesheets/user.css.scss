@@ -130,10 +130,7 @@ body.sessions, body.registrations, body.passwords {
       filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4b6d7e', endColorstr='#436576',GradientType=0 );
     }
   }
-  .email,
-  .string {
-    margin-bottom: 13px;
-  }
+
   .form_box_forgot
   {
     float:right;
@@ -145,6 +142,47 @@ body.sessions, body.registrations, body.passwords {
     margin:0 300px 0 0;
 
     input[type="text"], input[type="email"], input[type="password"]
+    {
+      background-position:10px;
+      background-repeat: no-repeat;
+      width:270px;
+      height:auto;
+      padding:8px 0 8px 35px;
+      border:1px solid #646464;
+      border-radius:4px;
+      margin:5px 5px 0 0;
+    }
+
+    input[type="submit"]
+    {
+      float: left;
+      margin: 16px 3px 0 0;
+      background: #4B6D7E;
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4B6D7E), color-stop(100%, #436576));
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4b6d7e', endColorstr='#436576',GradientType=0 );
+      color: white;
+      border: 0;
+      font-size: 12px;
+      font-weight: 400;
+      text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
+      text-transform: uppercase;
+      -webkit-border-radius: 2px;
+      border-radius: 2px;
+      padding: 5px 16px 4px 19px;
+      cursor: pointer;
+    }
+    input[type="submit"]:hover
+    {
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #437893), color-stop(100%, #2c617c));
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4b6d7e', endColorstr='#436576',GradientType=0 );
+    }
+    input[type="submit"]:active
+    {
+      background: #FFF;
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #2b607b), color-stop(100%, #437893));
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4b6d7e', endColorstr='#436576',GradientType=0 );
+    }
+
   .alert
     {
       background-position:10px;
@@ -156,18 +194,14 @@ body.sessions, body.registrations, body.passwords {
       border-radius:4px;
       margin:5px 5px 0 0;
       border:1px solid #d5d5d5;
-      color:#888;
-      text-align:center;
     }
     .alert-error {
       border:1px solid #d51818;
       color:#d51818;
 
     }
-    .link_form
-    {
-      float:right;
-      margin-top:-50px;
+    .link_form {
+      margin: 12px 0;
     }
 
   }
@@ -188,15 +222,18 @@ body.sessions, body.registrations, body.passwords {
   #user_email
   {
     background-image: image-url('at_icon.png');
+    background-repeat: no-repeat;
   }
 
   #user_password
   {
     background-image:image-url('key_icon.png');
+    background-repeat: no-repeat;
   }
   #user_username
   {
     background-image:image-url('user_icon.png');
+    background-repeat: no-repeat;
   }
 
   .ask_account
@@ -224,10 +261,8 @@ body.sessions, body.registrations, body.passwords {
     color:#d51818;
     text-align:center;
   }
-  .link_form
-  {
-    float:right;
-    margin-top:-50px;
+  .link_form {
+    margin: 12px 0;
   }
 
   .login_intro_txt
