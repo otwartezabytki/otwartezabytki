@@ -2,7 +2,7 @@
   .container
     .more
       %h2 Zadbajmy o polskie zabytki!
-      %p 
+      %p
         Uzupełnij z nami bazę zabytków i&nbsp;pomóż stworzyć serwis.
         %br
         Skorzystaj z własnej wiedzy. Poszukaj informacji w&nbsp;książkach lub&nbsp;w&nbsp;internecie.
@@ -29,7 +29,7 @@
       %h3
         Krok 1.
         %span Zacznij od wyszukania zabytku:
-      %p 
+      %p
         np.
         %em cmentarz, dworek w Podkarpackiem, Pałac na Wodzie, Małkinia
       = simple_form_for Relic.new, :url => relics_path, :html => { :class => 'well form-search'},:method => :get do |f|
@@ -66,20 +66,20 @@
 .user-stats
   - cache("home_users_statistics", :expires_in => 5.minutes) do
     - stats = users_statistics
-    
+
     .nums
       .left
         %h3 Aktywnych użytkowników
-      
+
         .active= stats[0]
         .numbers
           .numbers-row
             %span= stats[1]
             zarejestrowanych
-          .numbers-row 
+          .numbers-row
             %span.a= stats[2]
             anonimowych *
-        
+
       - min, max = users_activity_statistics
 
       .right
@@ -87,12 +87,12 @@
           .numbers-row
             %strong #{max[4]}%
             %div z nich sprawdza zabytki #{max[2]} między <span>#{max[0]}<sup>00</sup></span> a <span>#{max[1]}<sup>00</sup></span>
-      
+
         - if min
           .numbers-row
             %strong.a #{min[4]}%
             %div a tylko tyle #{min[2]} między <span>#{min[0]}<sup>00</sup></span> a <span>#{min[1]}<sup>00</sup></span>
-    
+
     .info
       * - Brak obowiązkowej rejestracji uniemożliwia nam dokładne zliczenie anonimowych uczestników czynu społecznego.
-          
+

@@ -23,23 +23,23 @@ module ApplicationHelper
     ranges.each do |range|
       a,b = range[0], range[1]-1
       b += 24 if b < 0 # 0 - 1 = -1 => -1 + 24 = 23
-      range[3] = Suggestion.where(["date_part('hour', suggestions.created_at) BETWEEN ? AND ?", a, b-1]).count
+      range[3] = Suggestion.roots.where(["date_part('hour', suggestions.created_at) BETWEEN ? AND ?", a, b-1]).count
     end
 
     ranges.reject! {|e| e[3] == 0 }
     ranges.sort_by! {|e| e[3] }
 
-    all = Suggestion.count
+    all = Suggestion.roots.count
 
     ranges.each do |range|
       range[4] = range[3] * 100 / all
     end
 
-    [ranges.shift, ranges.last] # use .shift so .last will not be the same in case of just one non-zero range
+    [ranges.pop, ranges.first] # use .shift so .last will not be the same in case of just one non-zero range
   end
 
   def relics_statistics
-    [Relic.count] + [1,2,3].map {|i| Relic.where(["edit_count >= ?", i]).count }
+    [Relic.roots.count] + [1,2,3].map {|i| Relic.roots.where(["edit_count >= ?", i]).count }
   end
 
   def random_search_suggestions
