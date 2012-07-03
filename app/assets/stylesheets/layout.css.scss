@@ -539,21 +539,6 @@ a{
 .steps{
 	background: #e8eef1;
 	.step {
-
-        -webkit-transition: all 0.5s ease;
-        -moz-transition: all 0.5s ease;
-        -o-transition: all 0.5s ease;
-        -ms-transition: all 0.5s ease;
-        transition: all 0.5s ease;
-
-        * {
-          -webkit-transition: all 0.5s ease;
-          -moz-transition: all 0.5s ease;
-          -o-transition: all 0.5s ease;
-          -ms-transition: all 0.5s ease;
-          transition: all 0.5s ease;
-        }
-
         border-radius: 3px;
 		-webkit-border-radius: 3px;
 		border: 3px solid #fff;
@@ -567,19 +552,8 @@ a{
 			background: asset-data-url('icon-waiting-big.png') no-repeat;
 			right: 25px;
 			bottom: 17px;
-            -webkit-transition: none;
-            -moz-transition: none;
-            -o-transition: none;
-            -ms-transition: none;
-            transition: none;
 		}
-        .help-content, &.step-gps .values *, .actions-navbar * {
-		  -webkit-transition: none;
-          -moz-transition: none;
-          -o-transition: none;
-          -ms-transition: none;
-          transition: none;
-		}
+
 		input[readonly]{
 			background: none;
 			border: 0;
