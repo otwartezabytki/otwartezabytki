@@ -10,6 +10,7 @@
     :html => { :data => { :commune => suggestion.relic.commune.name,
                           :district => suggestion.relic.district.name,
                           :voivodeship => suggestion.relic.voivodeship.name } } do |f|
+    .overlay
     %section.steps
 
       %article.step.step-name.step-simple.step-view.step-current
@@ -33,7 +34,7 @@
           .action.action-edit= link_to "Nie, chcę ją poprawić"
           .action.action-skip= link_to "Nie wiem, pomiń"
           .action.action-submit= link_to "Zapisz"
-          .action.action-cancel= link_to "cofnij zmianę"
+          .action.action-cancel= link_to "Cofnij zmianę"
         .actions.actions-done
           %h3 Czy nazwa zabytku jest poprawna? (Jeśli nie wiesz, prosimy, poszukaj odpowiedzi.)
           .action.action-confirm= link_to "Tak, jest poprawna" 
@@ -72,15 +73,15 @@
           .action.action-edit= link_to "Nie, chcę ją poprawić"
           .action.action-skip= link_to "Nie wiem, pomiń"
           .action.action-submit= link_to "Zapisz"
-          .action.action-cancel= link_to "cofnij zmianę"
+          .action.action-cancel= link_to "Cofnij zmianę"
         .actions.actions-done
           %h3 Czy nazwa miejscowości jest poprawna?
           .action.action-confirm= link_to "Tak, jest poprawna" 
           .action.action-edit= link_to "Nie, chcę ją poprawić"
           .action.action-skip= link_to "Nie wiem, pomiń"
           .action.action-back
-            (zrobiłeś błąd?
-            = link_to "cofnij"
+            (Zrobiłeś błąd?
+            = link_to "Cofnij"
             )
       %article.step.step-street.step-simple.step-view
         .help-content
@@ -112,13 +113,13 @@
             .action.action-edit= link_to "Nie, chcę go poprawić"
             .action.action-skip= link_to "Nie wiem, pomiń"
             .action.action-submit= link_to "Zapisz"
-            .action.action-cancel= link_to "cofnij zmianę"
+            .action.action-cancel= link_to "Cofnij zmianę"
           - else
             %h3 Czy znasz adres zabytku? (np. al. Jerozolimskie, wyspa Kępa Mieszańska, rondo Falbanka)
             .action.action-edit= link_to "Tak, chcę uzupełnić adres"
             .action.action-skip= link_to "Nie wiem, pomiń"
             .action.action-submit= link_to "Zapisz"
-            .action.action-cancel= link_to "cofnij zmianę"
+            .action.action-cancel= link_to "Cofnij zmianę"
         .actions.actions-done
           - if f.object.street.present?
             %h3 Czy adres zabytku jest poprawny? (np. Marszałkowska 25, rondo Falbanka) 
@@ -126,16 +127,16 @@
             .action.action-edit= link_to "Nie, chcę go poprawić"
             .action.action-skip= link_to "Nie wiem, pomiń"
             .action.action-back
-              (zrobiłeś błąd?
-              = link_to "cofnij"
+              (Zrobiłeś błąd?
+              = link_to "Cofnij"
               )
           - else
             %h3 Czy znasz adres zabytku? (np. al. Jerozolimskie, wyspa Kępa Mieszańska, rondo Falbanka) 
             .action.action-edit= link_to "Tak, chcę uzupełnić adres"
             .action.action-skip= link_to "Nie wiem, pomiń"
             .action.action-back.action-back-short
-              (zrobiłeś błąd?
-              = link_to "cofnij"
+              (Zrobiłeś błąd?
+              = link_to "Cofnij"
               )
 
       %article.step.step-date.step-simple.step-view
@@ -169,13 +170,13 @@
             .action.action-edit= link_to "Nie, chcę ją poprawić"
             .action.action-skip= link_to "Nie wiem, pomiń"
             .action.action-submit= link_to "Zapisz"
-            .action.action-cancel= link_to "cofnij zmiany"
+            .action.action-cancel= link_to "Cofnij zmiany"
           - else
             %h3 Czy znasz datę powstania zabytku? (np. 1929, XIX w., 2 poł. XIV w.) 
             .action.action-edit= link_to "Tak, chcę poprawić datę"
             .action.action-skip= link_to "Nie wiem, pomiń"
             .action.action-submit= link_to "Zapisz"
-            .action.action-cancel= link_to "cofnij zmiany"
+            .action.action-cancel= link_to "Cofnij zmiany"
         .actions.actions-done
           - if f.object.dating_of_obj.present?
             %h3 Czy data powstania obiektu jest poprawna? (np. 1929, XIX w., 2 poł. XIV w.) 
@@ -183,16 +184,16 @@
             .action.action-edit= link_to "Nie, chcę ją poprawić"
             .action.action-skip= link_to "Nie wiem, pomiń"
             .action.action-back
-              (zrobiłeś błąd?
-              = link_to "cofnij"
+              (Zrobiłeś błąd?
+              = link_to "Cofnij"
               )
           - else
             %h3 Czy znasz datę powstania zabytku? (np. 1929, XIX w., 2 poł. XIV w.)
             .action.action-edit= link_to "Tak, chcę poprawić datę"
             .action.action-skip= link_to "Nie wiem, pomiń"
             .action.action-back.action-back-short
-              (zrobiłeś błąd?
-              = link_to "cofnij"
+              (Zrobiłeś błąd?
+              = link_to "Cofnij"
               )
 
       %article.step.step-tags.step-view
@@ -228,8 +229,8 @@
           .action.action-submit= link_to "Potwierdzam"
           .action.action-skip= link_to "Nie jestem pewien, pomiń"
           .action.action-back.action-back-short
-            (zrobiłeś błąd?
-            = link_to "cofnij"
+            (Zrobiłeś błąd?
+            = link_to "Cofnij"
             )
       - if f.object.suggestions.size > 0
 
@@ -258,15 +259,15 @@
                   .action.action-edit= link_to "Nie, chcę ją poprawić"
                   .action.action-skip= link_to "Nie wiem, pomiń"
                   .action.action-submit= link_to "Zapisz"
-                  .action.action-cancel= link_to "cofnij zmianę"
+                  .action.action-cancel= link_to "Cofnij zmianę"
                 .actions.actions-done
                   %h3 Czy nazwa zabytku jest poprawna? (Jeśli nie wiesz, prosimy, poszukaj odpowiedzi.)
                   .action.action-confirm= link_to "Tak, jest poprawna"
                   .action.action-edit= link_to "Nie, chcę ją poprawić"
                   .action.action-skip= link_to "Nie wiem, pomiń"
                   .action.action-back
-                    (zrobiłeś błąd?
-                    = link_to "cofnij"
+                    (Zrobiłeś błąd?
+                    = link_to "Cofnij"
                     )
 
               %article.step.step-date.step-simple.step-view
@@ -292,13 +293,13 @@
                     .action.action-edit= link_to "Nie, chcę ją poprawić"
                     .action.action-skip= link_to "Nie wiem, pomiń"
                     .action.action-submit= link_to "Zapisz"
-                    .action.action-cancel= link_to "cofnij zmiany"
+                    .action.action-cancel= link_to "Cofnij zmiany"
                   - else
                     %h3 Czy znasz datę powstania zabytku? (np. 1929, XIX w., 2 poł. XIV w.)
                     .action.action-edit= link_to "Tak, chcę poprawić datę"
                     .action.action-skip= link_to "Nie wiem, pomiń"
                     .action.action-submit= link_to "Zapisz"
-                    .action.action-cancel= link_to "cofnij zmiany"
+                    .action.action-cancel= link_to "Cofnij zmiany"
                 .actions.actions-done
                   - if f2.object.dating_of_obj.present?
                     %h3 Czy data powstania obiektu jest poprawna? (np. 1929, XIX w., 2 poł. XIV w.)
@@ -306,16 +307,16 @@
                     .action.action-edit= link_to "Nie, chcę ją poprawić"
                     .action.action-skip= link_to "Nie wiem, pomiń"
                     .action-back
-                      (zrobiłeś błąd?
-                      = link_to "cofnij"
+                      (Zrobiłeś błąd?
+                      = link_to "Cofnij"
                       )
                   - else
                     %h3 Czy znasz datę powstania zabytku? (np. 1929, XIX w., 2 poł. XIV w.)
                     .action.action-edit= link_to "Tak, chcę poprawić datę"
                     .action.action-skip= link_to "Nie wiem, pomiń"
                     .action-back.action-back-short
-                      (zrobiłeś błąd?
-                      = link_to "cofnij"
+                      (Zrobiłeś błąd?
+                      = link_to "Cofnij"
                       )
 
               %article.step.step-tags.step-view
@@ -344,8 +345,8 @@
                   .action.action-submit= link_to "Potwierdzam"
                   .action.action-skip= link_to "Nie jestem pewien, pomiń"
                   .action.action-back.action-back-short
-                    (zrobiłeś błąd?
-                    = link_to "cofnij"
+                    (Zrobiłeś błąd?
+                    = link_to "Cofnij"
                     )
       %article.step.step-gps.step-view
         .help-content
@@ -356,6 +357,7 @@
             .map
         %span.ico
         .values.values-edit.values-view
+          .map-overlay
           %label Położenie GPS
           .gps-helper
           #map_canvas
@@ -365,8 +367,8 @@
             %h4 Przeciągnij znacznik na mapę:
             .marker-holder
               = image_tag 'marker.png', :id => 'marker'
-          = f.input :longitude, :as => :string, :label => "długość geograficzna", :placeholder => "długość", :input_html => { :maxlength => 9 }
-          = f.input :latitude, :as => :string, :label => "szerokość geograficzna", :placeholder => "szerokość", :input_html => { :maxlength => 9 }
+          = f.input :longitude, :as => :string, :label => "długość geograficzna", :placeholder => "długość", :input_html => { :maxlength => 10 }
+          = f.input :latitude, :as => :string, :label => "szerokość geograficzna", :placeholder => "szerokość", :input_html => { :maxlength => 10 }
           = f.input :coordinates_action, :as => :hidden
 
         .actions.actions-view
@@ -384,8 +386,8 @@
           .action.action-submit.btn= link_to "Potwierdzam, zaznaczyłem dobrą lokację"
           .action.action-skip.btn= link_to "Nie potrafię znaleźć lokacji, pomiń"
           .action.action-back.action-back-short
-            (zrobiłeś błąd?
-            = link_to "cofnij"
+            (Zrobiłeś błąd?
+            = link_to "Cofnij"
             )
 
       %article.step.step-submit.step-view
@@ -405,7 +407,7 @@
     transition: all 0.5s ease;
   }
 
-  .step  * {
+  body.loaded .step  * {
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;

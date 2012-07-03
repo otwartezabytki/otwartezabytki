@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :username, :registration
   attr_accessible :email, :password, :password_confirmation, :role, :as => :admin
+  attr_accessor :force_password_required
 
   validates :role, :inclusion => { :in => ["admin", "user"] }
 
@@ -41,12 +42,27 @@ class User < ActiveRecord::Base
 
   # We don't require password because it is sent on e-mail
   def password_required?
-    false
+    force_password_required
   end
 
   def corrected_relic_ids
     return @corrected_relic_ids if defined? @corrected_relic_ids
     @corrected_relic_ids = suggestions.joins(:relic).where("relics.edit_count < 3").group(:relic_id).pluck(:relic_id)
+  end
+  
+  class << self
+    def reset_password_by_token(attributes={})
+      recoverable = find_or_initialize_with_error_by(:reset_password_token, attributes[:reset_password_token])
+      if recoverable.persisted?
+        if recoverable.reset_password_period_valid?
+          recoverable.force_password_required = true
+          recoverable.reset_password!(attributes[:password], attributes[:password_confirmation])
+        else
+          recoverable.errors.add(:reset_password_token, :expired)
+        end
+      end
+      recoverable
+    end
   end
 
 end

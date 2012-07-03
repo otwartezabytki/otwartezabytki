@@ -9,18 +9,17 @@
     %a#share
       Pokaż znajomym, że bierzesz udział w akcji!
 
-#thankyou_actions
+#thankyou_actions{:class => (@request_email ? 'withregister' : '')}
   - if @request_email
-    .thankyou_register
+    #thankyou_register
       %h4 Możesz uzupełnić bazę anonimowo albo założyć własne konto i śledzieć własne postępy
       %p Nazwy najbardziej zaangażowanych użytkowników udostępnimy też na stronie głównej w rankingu.
       = semantic_form_for current_user, :url => user_registration_path do |f|
-        = f.input :email, :placeholder => "Adres e-mail", :label => false
-        = f.input :username, :placeholder => "Nazwa użytkownika", :label => false
-        = f.submit "Zarejestruj"
-        = link_to "Później", edit_relic_url(@next_relic)
+        = f.input :email, :label => true
+        = f.input :username, :label => true
+        = f.submit "Zarejestruj się"
       
-  .thankyou_dorelics
+  #thankyou_dorelics
     = link_to edit_relic_url(@next_relic), :id => "thankyou_next" do
       %div
         %span

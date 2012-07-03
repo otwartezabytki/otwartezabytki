@@ -32,6 +32,8 @@ Otwartezabytki::Application.routes.draw do
   match "/strony/kontakt"         => 'pages#show', :id => 'contact'
   match "/strony/pomoc"           => 'pages#show', :id => 'help'
   match "/strony/dowiedz-sie-wiecej" => 'pages#show', :id => 'more'
+  match "/strony/regulamin" => 'pages#show', :id => 'terms'
+  match "/strony/prywatnosc" => 'pages#show', :id => 'privacy'
   match "/hello"                  => 'pages#hello', :id => 'hello', :as => :hello
 
   root :to => 'high_voltage/pages#show', :id => 'home'
