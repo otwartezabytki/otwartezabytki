@@ -7,26 +7,43 @@
         :plain
                 <iframe src="//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fotwartezabytki&amp;width=270&amp;height=62&amp;colorscheme=light&amp;show_faces=false&amp;border_color&amp;stream=false&amp;header=false" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:270px; height:62px;" allowTransparency="true"></iframe>
 .partners
-
         .partner-big
-                %h2 Partner
+                %h2 Patron
                 .partner-bg
                         = link_to image_tag( 'partner-nid.png'), 'http://www.nid.pl'
 
         .partner-small
                 %h2 Patroni medialni
                 .partner-bg
-                        = link_to image_tag( 'partner-ngo.png'), 'http://www.ngo.pl'
-
+                        .partner-slider-1
+                                = link_to image_tag( 'partner-ngo.png'), 'http://www.ngo.pl'
+                                = link_to image_tag( 'partner-histmag.png'), 'http://www.histmag.pl'
+                                = link_to image_tag( 'partner-gw.png'), 'http://www.wyborcza.pl'
         .partner-small
                 %h2 Partner merytoryczny
                 .partner-bg
-                        = link_to image_tag( 'partner-tit.png'), 'http://www.e.org.pl'
+                        .partner-slider-2
+                                = link_to image_tag( 'partner-tit.png'), 'http://www.e.org.pl'
+                                = link_to image_tag( 'partner-frsi.png'), 'http://www.ngo.pl'
+                                = link_to image_tag( 'partner-pttk.png'), 'http://www.ngo.pl'
+                                = link_to image_tag( 'partner-ppolska.png'), 'http://www.ngo.pl'
+                                = link_to image_tag( 'partner-orange.png'), 'http://www.ngo.pl'
         .partner-small.last
                 %h2 Grantodawcy
                 .partner-bg
-                        = link_to image_tag( 'partner-mhp.png')
+                        .partner-slider-3
+                                = link_to image_tag( 'partner-mhp.png')
+                                = link_to image_tag( 'partner-pj.png')
+                                = link_to image_tag( 'partner-msz.png')
+                                = link_to image_tag( 'partner-cee.png')
 .footer-bottom
-        %p Treści zamieszczone w serwisie udostępniamy na licencji Creative Commons Uznanie autorstwa - Na tych samych warunkach 3.0 Polska
+        .footer-copyright
+                <p>Treści zamieszczone w serwisie udostępniamy na licencji </br>
+                <a href="http://creativecommons.org/licenses/by/3.0/pl/">Creative Commons Uznanie autorstwa 3.0 Polska </a> </p>
+        .footer-links
+                %a{ :class => "footer-regulamin", :href => "/regulamin"} Regulamin
+                %a{ :class => "footer-prywatnosc", :href => "/prywatnosc"} Prywatność
+
+
         %a{ :class => "footer-logo", :href => "http://www.monterail.com"} MonteRail
 

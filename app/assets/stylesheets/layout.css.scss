@@ -1645,11 +1645,20 @@ a{
     }
     .partner-bg{
 
-      background: none repeat scroll 0 0 #FCFCFC;
+
+        background: none repeat scroll 0 0 #FFFFFF;
+        height: 90px;
+        padding: 10px 0;
+
+
       box-shadow: 0 0 3px #CCCCCC;
       -moz-box-shadow: 0 0 3px #CCCCCC;
       -webkit-box-shadow: 0 0 3px #CCCCCC;
       padding: 10px 0;
+      a{
+        width: 171px;
+        text-align: center;
+      }
     }
 
     .partner-big{
@@ -1680,11 +1689,17 @@ a{
     -moz-box-shadow: 0 0 3px #CCCCCC;
     -webkit-box-shadow: 0 0 3px #CCCCCC;
   }
+
   .footer-bottom {
     float: left;
     padding-top: 10px;
     width: 960px;
+    margin-bottom: 30px;
     p { width: 360px; float: left;
+    }
+    a{
+      color: #878787;
+      text-decoration: underline;
     }
     .footer-logo {
       background: url("/assets/footer-logo.png") no-repeat scroll 0 0 transparent;
@@ -1693,7 +1708,19 @@ a{
       height: 22px;
       text-indent: -9999px;
       width: 200px;
+      margin-top: 2px;
 
+    }
+    .footer-links {
+      float: left;
+      margin-left: 32px;
+      margin-top: 2px;
+
+      a{
+          display: inline-block;
+          margin-right: 15px;
+          margin-left: 48px;
+      }
     }
   }
 }
