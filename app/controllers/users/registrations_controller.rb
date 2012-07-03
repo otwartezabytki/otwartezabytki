@@ -30,7 +30,7 @@ class Users::RegistrationsController < ApplicationController
   protected
 
   def after_update_path_for(resource)
-    Relic.next_for(resource, session[:search_params])
+    hello_path
   end
 
 end

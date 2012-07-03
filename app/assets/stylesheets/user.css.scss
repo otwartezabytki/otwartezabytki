@@ -73,6 +73,29 @@
     background:#FFFFFF;
     border:1px solid #e9e9e9;
     padding:30px 40px 35px 40px;
+
+		input[type="text"], input[type="email"], input[type="password"]
+		{
+	    background-position:10px;
+			background-repeat: no-repeat;
+	    width:270px;
+	    height:auto;
+	    padding:8px 0 8px 35px;
+	    border:1px solid #646464;
+	    border-radius:4px;
+	    margin:5px 5px 0 0;
+	  }
+	
+	  input.error, #user_email.error
+	   {
+	     border-color: rgb(213, 24, 24);
+	   }
+	
+		span.help-inline { color: rgb(213, 24, 24); font-size: 12px}
+	
+	.clearfix {
+		height: 70px;
+	}
   }
   .form_box_forgot
   {
@@ -83,6 +106,19 @@
     border:1px solid #e9e9e9;
     padding:30px 40px 35px 40px;
     margin:0 300px 0 0;
+
+		input[type="text"], input[type="email"], input[type="password"]
+		{
+	    background-position:10px;
+			background-repeat: no-repeat;
+	    width:270px;
+	    height:auto;
+	    padding:8px 0 8px 35px;
+	    border:1px solid #646464;
+	    border-radius:4px;
+	    margin:5px 5px 0 0;
+	  }
+	
   }
   .right_txt_box
   {
@@ -101,36 +137,16 @@
   }
   #user_email
   {
-    background: image-url('at_icon.png') no-repeat;
-    background-position:10px;
-    width:270px;
-    height:auto;
-    padding:8px 0 8px 35px;
-    margin:5px 0 22px 0;
-    border:1px solid #646464;
-    border-radius:4px;
+    background-image: image-url('at_icon.png');
   }
+
   #user_password
   {
-    background:image-url('key_icon.png') no-repeat;
-    background-position:10px;
-    width:270px;
-    height:auto;
-    padding:8px 0 8px 35px;
-    border:1px solid #646464;
-    border-radius:4px;
-    margin:5px 5px 22px 0;
+    background-image:image-url('key_icon.png');
   }
   #user_username
   {
-    background:image-url('user_icon.png') no-repeat;
-    background-position:10px;
-    width:270px;
-    height:auto;
-    padding:8px 0 8px 35px;
-    border:1px solid #646464;
-    border-radius:4px;
-    margin:5px 5px 22px 0;
+    background-image:image-url('user_icon.png');
   }
 
   .ask_account
@@ -220,10 +236,7 @@
     float:right;
     margin-top:-50px;
   }
-  input.error
-   {
-     background-color:red;
-   }
+
    .login_intro_txt
    {
     font-family:'Open Sans', sans-serif;
@@ -239,3 +252,8 @@
     line-height:18px;
     margin:0 0 15px 0;
   }
+
+#user_username_input label span {
+	font-size: 11px;
+	color: #aaa;
+}

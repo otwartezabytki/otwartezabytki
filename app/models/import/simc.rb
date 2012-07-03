@@ -26,6 +26,11 @@ module Import
           c.places.where(conds).first || c.places.create(conds)
         end
       end
+      def fix_names
+        Simc.all(:fields => [:nazwa], :unique => true).batch(1000) do |t|
+          Place.update_all(["name = ?", t.nazwa], ["LOWER(name) = LOWER(?)", t.nazwa])
+        end
+      end
     end
 
   end
