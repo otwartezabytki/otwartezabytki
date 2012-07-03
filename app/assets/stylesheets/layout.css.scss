@@ -1621,6 +1621,7 @@ body.loaded .overlay {
 }
 
 #footer {
+  padding-top: 20px;
   color: #878787;
   font-size: 11px;
   .about {
@@ -1697,8 +1698,8 @@ body.loaded .overlay {
   .footer-bottom {
     float: left;
     padding-top: 10px;
+    padding-bottom: 30px;
     width: 960px;
-    margin-bottom: 30px;
     p { width: 360px; float: left;
     }
     a{
