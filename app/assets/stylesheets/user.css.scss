@@ -70,7 +70,7 @@ body.sessions, body.registrations, body.passwords {
       float:right;
       width:220px;
       height:127px;
-      padding:73px 0 0 40px;
+      padding:53px 0 0 40px;
       line-height:18px;
     }
     .login_title_register
@@ -129,9 +129,10 @@ body.sessions, body.registrations, body.passwords {
       background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #2b607b), color-stop(100%, #437893));
       filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4b6d7e', endColorstr='#436576',GradientType=0 );
     }
-    .clearfix {
-      height: 70px;
-    }
+  }
+  .email,
+  .string {
+    margin-bottom: 13px;
   }
   .form_box_forgot
   {
@@ -175,7 +176,7 @@ body.sessions, body.registrations, body.passwords {
     float:right;
     width:220px;
     height:127px;
-    padding:73px 0 0 40px;
+    padding:53px 0 0 40px;
     line-height:18px;
   }
   .login_title_register
