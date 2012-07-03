@@ -1207,6 +1207,22 @@ a{
         }
     }
 }
+
+.overlay {
+  opacity: 0.5;
+  background-color: white;
+  z-index: 10000;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+body.loaded .overlay {
+  display: none !important;
+}
+
 .steps{
 	.step{
 		.column{
