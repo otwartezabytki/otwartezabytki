@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
       warden.set_user user
       sign_in user, :bypass => true
 
-      unless request.referer && request.referer.match(/otwartezabytki/)
+      unless request.referer && (request.referer.match(/otwartezabytki/) || request.referer.match(/centrumcyfrowe/))
         redirect_to root_path unless Rails.env.test?
       end
     end
