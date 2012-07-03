@@ -41,8 +41,6 @@
                 - else
                   - if (c = (current_user.suggestions.roots.not_skipped.count rescue 0)) > 0
                     %li Liczba Twoich zabytków: #{c}
-                  - else
-                    %li Nie sprawdziłeś żadnego zabytku, do roboty!
                   %li
                     %a{:href => new_user_session_path, :class => 'login'} Zaloguj
                   %li

@@ -132,7 +132,7 @@ padding:45px 0 0 0;
       font-size:22px;
       color:#313132;
       line-height:27px;
-      margin:0 0 45px 0;
+      margin: 22px 0 36px 0;
     }
     p.top_medium
     {
@@ -197,6 +197,9 @@ padding:45px 0 0 0;
       font-weight:800;
     }
 }
+.top_help{
+  background-image: image-url('help_icon.png');
+}
 .about_top_help
 {
   width:880px;
@@ -205,7 +208,7 @@ padding:45px 0 0 0;
   font-size:28px;
   border:1px solid #436576;
   color:#FFFFFF;
-  padding:80px 0 0 138px;
+  padding:25px 0 0 138px;
   margin:0 0 73px 0;
   background: image-url('help_icon.png') no-repeat;
   background-position:30px;
@@ -234,4 +237,7 @@ padding:45px 0 0 0;
         line-height:21px;
         margin:0 0 24px 0;
       }
+}
+.contact_top{
+  background-image: image-url('icon-contact.png');
 }
