@@ -1,20 +1,24 @@
-%div.page
+.opening
+  .relic_info
+    %h2
+      = relic.identification
+    %h3
+      = relic.place_full_name
 
-= relic.identification
-= relic.place_full_name
+    = link_to edit_relic_url(@next_relics.first), :id => "next" do
+      Przejdź do następnego &raquo;
 
-= link_to edit_relic_url(@next_relics.first) do
-  Przejdź do następnego &raquo;
+.corrected_info
+  %p.complete
+    Mamy już komplet informacji na temat tego zabytku.
+  %p
+    Jeśli w nazwie jest błąd - nie przejmuj się, zostanie zweryfikowana przez ekspertów.
 
+.suggestions
+  %h4 Pomóż nam uzupełnić informacje o innych zabytkach:
 
-Mamy już komplet informacji na temat tego zabytku.
-Jeśli w nazwie jest błąd - nie przejmuj się, zostanie zweryfikowana przez ekspertów.
-
-
-Pomóż nam uzupełnić informacje o innych zabytkach:
-
-%ul
-- @next_relics.each do |next_relic|
-  %li
-    = link_to edit_relic_url(next_relic) do
-      = next_relic.identification 
+  %ul
+    - @next_relics.each do |next_relic|
+      %li
+        = link_to edit_relic_url(next_relic) do
+          = next_relic.identification 
