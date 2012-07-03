@@ -484,7 +484,7 @@ jQuery ->
       step.view() if step.hasClass('step-edit')
 
     tags = step.find('input[type="checkbox"]:checked').toArray().map (e) ->
-      $(e).text()
+      $(e).parents('label:first').find('span').text()
 
     if tags.length > 0
       step.find('.tag-names:first').val(tags.join(', '))
