@@ -1,10 +1,28 @@
 # -*- encoding : utf-8 -*-
 class RelicsController < ApplicationController
   expose(:relics) do
-    Relic.search(params.merge(:corrected_relic_ids => current_user.try(:corrected_relic_ids)))
+    p1 = params.merge(:corrected_relic_ids => current_user.try(:corrected_relic_ids))
+    if p1[:corrected_relic_ids].blank?
+      p2 = p1.slice(:q1, :page, :location)
+      cache_key = p2.values.join(' ').parameterize
+      cache_key = "blank-search-query" if cache_key.blank?
+      Rails.cache.fetch(cache_key, :expires_in => 15.minutes) do
+        Relic.search(p2)
+      end
+    else
+      Relic.search(p1)
+    end
   end
   expose(:suggestion) { Suggestion.new(:relic_id => params[:id]) }
-  expose(:relic)
+  expose(:relic) do
+    if id = params[:relic_id] || params[:id]
+      Relic.find(id).tap do |r|
+        r.attributes = params[:relic] unless request.get?
+      end
+    else
+      Relic.new(params[:relic])
+    end
+  end
 
   helper_method :parse_navigators, :search_params, :location_breadcrumbs, :need_captcha
 
@@ -28,6 +46,7 @@ class RelicsController < ApplicationController
   end
 
   def edit
+
     if current_user && current_user.suggestions.where(:relic_id => params[:id]).count > 0
       redirect_to thank_you_relic_path(params[:id]), :notice => "Już poprawiłeś ten zabytek, dziękujemy!" and return
     end
@@ -40,9 +59,10 @@ class RelicsController < ApplicationController
   end
 
   def update
-    suggestion.attributes = params[:suggestion]
+
     suggestion.user_id = current_user.id
     suggestion.ip_address = request.remote_ip
+    suggestion.attributes = params[:suggestion]
 
     if need_captcha
       if verify_recaptcha(:model => suggestion, :timeout => 30)
@@ -54,7 +74,11 @@ class RelicsController < ApplicationController
 
 
     if suggestion.save
-      redirect_to thank_you_relic_path(suggestion.relic.id)
+      if suggestion.is_skipped?
+        redirect_to Relic.next_for(current_user, session[:search_params])
+      else
+        redirect_to thank_you_relic_path(suggestion.relic.id)
+      end
     else
       flash[:error] = suggestion.errors.full_messages
       render "edit"

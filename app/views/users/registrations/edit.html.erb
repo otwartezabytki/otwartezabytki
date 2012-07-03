@@ -2,14 +2,20 @@
 <div class="right_txt_box"><div class="ask_account">Czy konto jest mi potrzebne?</div>
 Możesz uzupełniać bazę anonimowo albo założyć konto i śledzić własne postępy.
 <div class="ask_account">Masz już konto?</div>
-<a href="#">Zaloguj się.</a></div>
+<%= link_to "Zaloguj się.", new_user_session_path %>
+</div>
 <div class="form_box">
   <div class="login_intro_txt">Zarejestruj sitę i śledź własne postępy</div>
 <%= semantic_form_for(current_user, :url => user_registration_path, :html => { :method => :put }) do |f| %>
   <%= f.semantic_errors %>
   <%= f.hidden_field :registration, :value => true %>
-  <%= f.input :email, :required => true, :autofocus => true %>
-  <%= f.input :username, :required => true %>
+  <%= f.input :email, :required => false, :autofocus => true %>
+  
+  
+  
+  <%= f.input :username, :required => false, :label => "Nazwa użytkownika <span>3-30 znaków, litery, cyfry lub kropka</span>".html_safe %>
+  
+  
   <%= f.submit "Zarejestruj się" %>
 <% end %>
 </div>

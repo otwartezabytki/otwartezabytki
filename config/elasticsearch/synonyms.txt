@@ -46,3 +46,5 @@ kat => katolicki
 nmp => Najświętszej Marii Panny
 cment => cmentarz, cmentarny
 bud => budynek
+kon => koniec
+poł, pol => połowa
