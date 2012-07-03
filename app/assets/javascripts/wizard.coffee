@@ -487,7 +487,8 @@ jQuery ->
   $('#map_canvas').auto_zoom()
 
   $('#suggestion_latitude, #suggestion_longitude').keyup ->
-    if $('#suggestion_latitude').val().length >= 5 && $('#suggestion_longitude').val().length >= 5
+    return false # disable temporalely
+    if $('#suggestion_latitude').val().length > 0 && $('#suggestion_longitude').val().length > 0
       latitude = $('#suggestion_latitude').val().toNumber()
       longitude = $('#suggestion_longitude').val().toNumber()
       if !isNaN(latitude) & !isNaN(longitude)
