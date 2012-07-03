@@ -33,35 +33,35 @@
         np.
         %em cmentarz, dworek w Podkarpackim, Pałac na Wodzie, Małkinia
       = simple_form_for Relic.new, :url => relics_path, :html => { :class => 'well form-search'},:method => :get do |f|
-        = f.input :q1, :label => false, :input_html => {:name => 'q1', :value => params[:q1], :class => "search-query", :autofocus => true}, :placeholder => "wpisz, czego szukasz"
+        = f.input :q1, :label => false, :input_html => {:name => 'q1', :value => params[:q1], :class => "search-query", :autofocus => true}
         = f.button :submit, 'Szukaj »', :name => nil
       %p.examples
         Skorzystaj z przykładów:
         - cache("home_search_suggestions", :expires_in => 5.minutes) do
           = random_search_suggestions
-- if false
   .progress-bar
     %h3.pb Jak wygląda nasza baza zabytków?
-    .bar
-      - cache("home_relics_statistics", :expires_in => 5.minutes) do
-        - stats = relics_statistics
+    - if false
+      .bar
+        - cache("home_relics_statistics", :expires_in => 5.minutes) do
+          - stats = relics_statistics
 
-        - p3 = [15, stats[3] * 100 / stats[0]].max
-        - p2 = [30, stats[2] * 100 / stats[0]].max
-        - p1 = [45, stats[1] * 100 / stats[0]].max
+          - p3 = [15, stats[3] * 100 / stats[0]].max
+          - p2 = [30, stats[2] * 100 / stats[0]].max
+          - p1 = [45, stats[1] * 100 / stats[0]].max
 
-        %div.lvl.p0{:style => "width: 100%"}
-          .num= stats[0]
-          .desc zabytki w naszej bazie
-        %div.lvl.p1{:style => "width: #{p1}%"}
-          .num= stats[1]
-          .desc w sumie przejżanych<br/>już zabytków
-        %div.lvl.p2{:style => "width: #{p2}%"}
-          .num= stats[2]
-          .desc zabytków przejżały<br/>dwie osoby
-        %div.lvl.p3{:style => "width: #{p3}%"}
-          .num= stats[3]
-          .desc zabytków czeka na<br/>weryfikację NID
+          %div.lvl.p0{:style => "width: 100%"}
+            .num= stats[0]
+            .desc zabytki w naszej bazie
+          %div.lvl.p1{:style => "width: #{p1}%"}
+            .num= stats[1]
+            .desc w sumie przejżanych<br/>już zabytków
+          %div.lvl.p2{:style => "width: #{p2}%"}
+            .num= stats[2]
+            .desc zabytków przejżały<br/>dwie osoby
+          %div.lvl.p3{:style => "width: #{p3}%"}
+            .num= stats[3]
+            .desc zabytków czeka na<br/>weryfikację NID
 
 .user-stats
   - cache("home_users_statistics", :expires_in => 5.minutes) do
