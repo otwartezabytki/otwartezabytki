@@ -1,111 +1,74 @@
+.login_title
+{
+  width:880px;
+  height:50px;
+  font-weight:400;
+  font-size:28px;
+  color:#FFFFFF;
+  padding:25px 0 0 80px;
+  margin:0 0 73px 0;
+  background: image-url('lock_icon.png') no-repeat;
+  background-position:30px;
+  background-color: #546f7d; /* Old browsers */
+  background-color: -moz-linear-gradient(top,  #546f7d 0%, #436576 100%); /* FF3.6+ */
+  background-color: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#546f7d), color-stop(100%,#436576)); /* Chrome,Safari4+ */
+  background-color: -webkit-linear-gradient(top,  #546f7d 0%,#436576 100%); /* Chrome10+,Safari5.1+ */
+  background-color: -o-linear-gradient(top,  #546f7d 0%,#436576 100%); /* Opera 11.10+ */
+  background-color: -ms-linear-gradient(top,  #546f7d 0%,#436576 100%); /* IE10+ */
+  background-color: linear-gradient(to bottom,  #546f7d 0%,#436576 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#546f7d', endColorstr='#436576',GradientType=0 ); /* IE6-9 */
 
-  .login_title
-  {
-    width:880px;
-    height:50px;
-    font-family:'Open Sans', sans-serif;
-    font-weight:bold;
-    font-size:28px;
-    color:#FFFFFF;
-    padding:25px 0 0 80px;
-    margin:0 0 73px 0;
-    background: image-url('lock_icon.png') no-repeat;
-    background-position:30px;
-    background-color: #546f7d; /* Old browsers */
-    background-color: -moz-linear-gradient(top,  #546f7d 0%, #436576 100%); /* FF3.6+ */
-    background-color: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#546f7d), color-stop(100%,#436576)); /* Chrome,Safari4+ */
-    background-color: -webkit-linear-gradient(top,  #546f7d 0%,#436576 100%); /* Chrome10+,Safari5.1+ */
-    background-color: -o-linear-gradient(top,  #546f7d 0%,#436576 100%); /* Opera 11.10+ */
-    background-color: -ms-linear-gradient(top,  #546f7d 0%,#436576 100%); /* IE10+ */
-    background-color: linear-gradient(to bottom,  #546f7d 0%,#436576 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#546f7d', endColorstr='#436576',GradientType=0 ); /* IE6-9 */
-  
-  }
-  .login_title_register
-  {
-    width:880px;
-    height:50px;
-    font-family:'Open Sans', sans-serif;
-    font-weight:bold;
-    font-size:28px;
-    color:#FFFFFF;
-    padding:25px 0 0 80px;
-    margin:0 0 73px 0;
-    background: image-url('user_icon_big.png') no-repeat;
-    background-position:30px;
-    background-color: #546f7d; /* Old browsers */
-    background-color: -moz-linear-gradient(top,  #546f7d 0%, #436576 100%); /* FF3.6+ */
-    background-color: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#546f7d), color-stop(100%,#436576)); /* Chrome,Safari4+ */
-    background-color: -webkit-linear-gradient(top,  #546f7d 0%,#436576 100%); /* Chrome10+,Safari5.1+ */
-    background-color: -o-linear-gradient(top,  #546f7d 0%,#436576 100%); /* Opera 11.10+ */
-    background-color: -ms-linear-gradient(top,  #546f7d 0%,#436576 100%); /* IE10+ */
-    background-color: linear-gradient(to bottom,  #546f7d 0%,#436576 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#546f7d', endColorstr='#436576',GradientType=0 ); /* IE6-9 */
-  
-  }
-  .login_title_forgot
-   {
-     width:880px;
-     height:50px;
-     font-family:'Open Sans', sans-serif;
-     font-weight:bold;
-     font-size:28px;
-     color:#FFFFFF;
-     padding:25px 0 0 80px;
-     margin:0 0 73px 0;
-     background: image-url('key_big_icon.png') no-repeat;
-     background-position:30px;
-     background-color: #546f7d; /* Old browsers */
-     background-color: -moz-linear-gradient(top,  #546f7d 0%, #436576 100%); /* FF3.6+ */
-     background-color: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#546f7d), color-stop(100%,#436576)); /* Chrome,Safari4+ */
-     background-color: -webkit-linear-gradient(top,  #546f7d 0%,#436576 100%); /* Chrome10+,Safari5.1+ */
-     background-color: -o-linear-gradient(top,  #546f7d 0%,#436576 100%); /* Opera 11.10+ */
-     background-color: -ms-linear-gradient(top,  #546f7d 0%,#436576 100%); /* IE10+ */
-     background-color: linear-gradient(to bottom,  #546f7d 0%,#436576 100%); /* W3C */
-     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#546f7d', endColorstr='#436576',GradientType=0 ); /* IE6-9 */
+}
+.login_title_register
+{
+  width:880px;
+  height:50px;
+  font-weight:400;
+  font-size:28px;
+  color:#FFFFFF;
+  padding:25px 0 0 80px;
+  margin:0 0 73px 0;
+  background: image-url('user_icon_big.png') no-repeat;
+  background-position:30px;
+  background-color: #546f7d; /* Old browsers */
+  background-color: -moz-linear-gradient(top,  #546f7d 0%, #436576 100%); /* FF3.6+ */
+  background-color: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#546f7d), color-stop(100%,#436576)); /* Chrome,Safari4+ */
+  background-color: -webkit-linear-gradient(top,  #546f7d 0%,#436576 100%); /* Chrome10+,Safari5.1+ */
+  background-color: -o-linear-gradient(top,  #546f7d 0%,#436576 100%); /* Opera 11.10+ */
+  background-color: -ms-linear-gradient(top,  #546f7d 0%,#436576 100%); /* IE10+ */
+  background-color: linear-gradient(to bottom,  #546f7d 0%,#436576 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#546f7d', endColorstr='#436576',GradientType=0 ); /* IE6-9 */
 
-   }
-  .form_box
-  {
-    float:right;
-    width:307px;
-    height:270px;
-    background:#FFFFFF;
-    border:1px solid #e9e9e9;
-    padding:30px 40px 35px 40px;
+}
+.login_title_forgot
+ {
+   width:880px;
+   height:50px;
+   font-weight:bold;
+   font-size:28px;
+   color:#FFFFFF;
+   padding:25px 0 0 80px;
+   margin:0 0 73px 0;
+   background: image-url('key_big_icon.png') no-repeat;
+   background-position:30px;
+   background-color: #546f7d; /* Old browsers */
+   background-color: -moz-linear-gradient(top,  #546f7d 0%, #436576 100%); /* FF3.6+ */
+   background-color: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#546f7d), color-stop(100%,#436576)); /* Chrome,Safari4+ */
+   background-color: -webkit-linear-gradient(top,  #546f7d 0%,#436576 100%); /* Chrome10+,Safari5.1+ */
+   background-color: -o-linear-gradient(top,  #546f7d 0%,#436576 100%); /* Opera 11.10+ */
+   background-color: -ms-linear-gradient(top,  #546f7d 0%,#436576 100%); /* IE10+ */
+   background-color: linear-gradient(to bottom,  #546f7d 0%,#436576 100%); /* W3C */
+   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#546f7d', endColorstr='#436576',GradientType=0 ); /* IE6-9 */
 
-		input[type="text"], input[type="email"], input[type="password"]
-		{
-	    background-position:10px;
-			background-repeat: no-repeat;
-	    width:270px;
-	    height:auto;
-	    padding:8px 0 8px 35px;
-	    border:1px solid #646464;
-	    border-radius:4px;
-	    margin:5px 5px 0 0;
-	  }
-	
-	  input.error, #user_email.error
-	   {
-	     border-color: rgb(213, 24, 24);
-	   }
-	
-		span.help-inline { color: rgb(213, 24, 24); font-size: 12px}
-	
-	.clearfix {
-		height: 70px;
-	}
-  }
-  .form_box_forgot
-  {
-    float:right;
-    width:307px;
-    height:270px;
-    background:#FFFFFF;
-    border:1px solid #e9e9e9;
-    padding:30px 40px 35px 40px;
-    margin:0 300px 0 0;
+ }
+.form_box
+{
+  float:right;
+  width:307px;
+  height:270px;
+  background:#FFFFFF;
+  border:1px solid #e9e9e9;
+  padding:30px 40px 35px 40px;
 
 		input[type="text"], input[type="email"], input[type="password"]
 		{
@@ -125,7 +88,6 @@
 		span.help-inline { color: rgb(213, 24, 24); font-size: 12px}
 	
 	
-  }
   .right_txt_box
   {
     float:right;
@@ -136,16 +98,22 @@
   }
   .login_title_register
   {
-    font-family:'Open Sans', sans-serif;
-    font-size:28px;
-    color:#FFFFFF;
-    margin:0 0 35px 0;
-  }
-  #user_email
-  {
-    background-image: image-url('at_icon.png');
+    background-position:10px;
+    background-repeat: no-repeat;
+    width:270px;
+    height:auto;
+    padding:8px 0 8px 35px;
+    border:1px solid #646464;
+    border-radius:4px;
+    margin:5px 5px 0 0;
   }
 
+  input.error, #user_email.error
+   {
+     border-color: rgb(213, 24, 24);
+   }
+
+  span.help-inline { color: rgb(213, 24, 24); font-size: 12px}
   #user_password, #user_password_confirmation
   {
     background-image:image-url('key_icon.png');
@@ -155,32 +123,17 @@
     background-image:image-url('user_icon.png');
   }
 
-  .ask_account
-  {
-    font-family: 'Open Sans', sans-serif;
-    font-size:15px;
-    color:#313132;
-    margin:10px 0 12px 0;
-  }
-  .form_links
-  {
-    float:right;
-    line-height:18px;
-    text-align:right;
-    margin:-75px 0 0 0;
-  }
   input[type="submit"]
   {
     float: left;
-    margin: 13px 3px 0 0;
+    margin: 16px 3px 0 0;
     background: #4B6D7E;
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4B6D7E), color-stop(100%, #436576));
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4b6d7e', endColorstr='#436576',GradientType=0 );
     color: white;
     border: 0;
     font-size: 12px;
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 600;
+    font-weight: 400;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
     text-transform: uppercase;
     -webkit-border-radius: 2px;
@@ -190,49 +143,40 @@
   }
   input[type="submit"]:hover
   {
-    float: left;
-    margin: 13px 3px 0 0;
-    background: #FFF;
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #437893), color-stop(100%, #2c617c));
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4b6d7e', endColorstr='#436576',GradientType=0 );
-    color: white;
-    border: 0;
-    font-size: 12px;
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 600;
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
-    text-transform: uppercase;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-    padding: 5px 16px 4px 19px;
-    cursor: pointer;
   }
   input[type="submit"]:active
   {
-    float: left;
-    margin: 13px 3px 0 0;
     background: #FFF;
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #2b607b), color-stop(100%, #437893));
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4b6d7e', endColorstr='#436576',GradientType=0 );
-    color: white;
-    border: 0;
-    font-size: 12px;
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 600;
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
-    text-transform: uppercase;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-    padding: 5px 16px 4px 19px;
-    cursor: pointer;
   }
+  .clearfix {
+    height: 70px;
+  }
+}
+.form_box_forgot
+{
+  float:right;
+  width:307px;
+  height:270px;
+  background:#FFFFFF;
+  border:1px solid #e9e9e9;
+  padding:30px 40px 35px 40px;
+  margin:0 300px 0 0;
+
+  input[type="text"], input[type="email"], input[type="password"]
   .alert
   {
-    width:auto;
+    background-position:10px;
+    background-repeat: no-repeat;
+    width:270px;
     height:auto;
-    margin:0 0 15px 0;
-    padding:4px 4px 4px 4px;
+    padding:8px 0 8px 35px;
+    border:1px solid #646464;
     border-radius:4px;
+    margin:5px 5px 0 0;
     border:1px solid #d5d5d5;
     color:#888;
     text-align:center;
@@ -248,23 +192,81 @@
     margin-top:-50px;
   }
 
-   .login_intro_txt
-   {
-    font-family:'Open Sans', sans-serif;
-    color:#FFFFFF;
-    font-size:18px;
-    color:#4e4e4e;
-    margin:0 0 25px 0;
-  }
-  .txt_forgot
-  {
-    font-family:'Open Sans', sans-serif;
-    font-size:12px;
-    line-height:18px;
-    margin:0 0 15px 0;
-  }
+}
+.right_txt_box
+{
+  float:right;
+  width:220px;
+  height:127px;
+  padding:73px 0 0 40px;
+  line-height:18px;
+}
+.login_title_register
+{
+  font-size:28px;
+  color:#FFFFFF;
+  margin:0 0 35px 0;
+}
+#user_email
+{
+  background-image: image-url('at_icon.png');
+}
+
+#user_password
+{
+  background-image:image-url('key_icon.png');
+}
+#user_username
+{
+  background-image:image-url('user_icon.png');
+}
+
+.ask_account
+{
+  font-family: 'Open Sans', sans-serif;
+  font-size:15px;
+  color:#313132;
+  margin:10px 0 12px 0;
+}
+.form_links
+{
+  float:right;
+  line-height:18px;
+  text-align:right;
+  margin:-75px 0 0 0;
+}
+.alert.alert-error
+{
+  width:auto;
+  height:auto;
+  margin:0 0 15px 0;
+  padding:4px 4px 4px 4px;
+  border-radius:4px;
+  border:1px solid #d51818;
+  color:#d51818;
+  text-align:center;
+}
+.link_form
+{
+  float:right;
+  margin-top:-50px;
+}
+
+ .login_intro_txt
+ {
+  color:#FFFFFF;
+  font-size:18px;
+  color:#4e4e4e;
+  margin:0 0 25px 0;
+}
+.txt_forgot
+{
+  font-size:12px;
+  line-height:18px;
+  margin:0 0 15px 0;
+}
 
 #user_username_input label span {
-	font-size: 11px;
-	color: #aaa;
+font-size: 11px;
+color: #aaa;
 }
