@@ -21,16 +21,28 @@ module Import
         nil
       end
 
+      def fix_names
+        Terc.all(:conditions => {:nazdod => 'województwo'}).batch(1000) do |t|
+          Voivodeship.update_all(["name = ?", t.nazwa], ["LOWER(name) = LOWER(?)", t.nazwa])
+        end
+        Terc.all(:conditions => {:pow.not => nil, :gmi => nil}).batch(1000) do |t|
+          District.update_all(["name = ?", t.nazwa], ["LOWER(name) = LOWER(?) AND nr = ?", t.nazwa, t.pow])
+        end
+        Terc.all(:conditions => {:pow.not => nil, :gmi.not => nil}).batch(1000) do |t|
+          Commune.update_all(["name = ?", t.nazwa], ["LOWER(name) = LOWER(?) AND nr = ?", t.nazwa, t.gmi])
+        end
+      end
+
       def import_voivodeships
-         Terc.all(:conditions => {:nazdod => 'województwo'}).batch(1000) do |t|
-          Voivodeship.find_or_create_by_nr_and_name(t.woj, Unicode.capitalize(t.nazwa))
+        Terc.all(:conditions => {:nazdod => 'województwo'}).batch(1000) do |t|
+          Voivodeship.find_or_create_by_nr_and_name(t.woj, t.nazwa)
         end
       end
 
       def import_districts
         Terc.all(:conditions => {:pow.not => nil, :gmi => nil}).batch(1000) do |t|
           v = ::Voivodeship.find_by_nr!(t.woj)
-          conds = {:nr => t.pow, :name => Unicode.capitalize(t.nazwa)}
+          conds = {:nr => t.pow, :name => t.nazwa}
           v.districts.where(conds).first || v.districts.create(conds)
         end
       end
@@ -38,7 +50,7 @@ module Import
       def import_communes
         Terc.all(:conditions => {:pow.not => nil, :gmi.not => nil}).batch(1000) do |t|
           d = ::District.joins(:voivodeship).where('voivodeships.nr' => t.woj, 'districts.nr' => t.pow).first
-          conds = {:nr => t.gmi, :name => Unicode.capitalize(t.nazwa), :kind => t.rodz.to_i}
+          conds = {:nr => t.gmi, :name => t.nazwa, :kind => t.rodz.to_i}
           d.communes.where(conds).first || d.communes.create(conds)
         end
       end

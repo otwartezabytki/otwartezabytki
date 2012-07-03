@@ -870,7 +870,6 @@ a{
 		.action-back{
 			margin-top: 20px;
       font-size: 16px;
-      text-transform: uppercase;
 			a{
 				color: #1e5d7d;
         font-weight: bold;
@@ -1550,19 +1549,21 @@ a{
     }
   }
   .thankyou_notes {
-    text-align: center;
+    padding-bottom: 28px;
     p.info {
       background: url('icon-info.png') 0 50% no-repeat;
-      width: 530px;
+      width: 455px;
       height: 30px;
       line-height: 30px;
-      margin: 30px auto;
-      font-size: 13px;
+      margin: 20px auto;
+      padding-left: 23px;
+      font-size: 12px;
     }
     #share {
       display: block;
       background: url('icon-facebook.png') 0 50% no-repeat;
-      width: 375px;
+      width: 320px;
+      padding-left: 32px;
       height: 30px;
       line-height: 30px;
       margin: auto;
@@ -1570,30 +1571,51 @@ a{
       font-weight: 600;
     }
   }
+  .thankyou_dorelics {
+    text-align: center;
+  }
+  #thankyou_actions {
+    margin: 22px 0;
+  }
   #thankyou_next {
+    text-align: left;
     display: block;
-		margin: 3px 3px 0 0;
+		margin: 3px auto 10px;;
 		color: #fff;
 		border: 0;
 		font-size: 12px;
-		text-shadow: 0 -1px 0 rgba(0,0,0,0.5);
+    text-shadow: 0.5px 1px 2px rgba(0, 0, 0, 0.2);
 		-webkit-border-radius: 2px;
 		border-radius: 2px;
-		padding: 10px 26px 10px 15px;
+		padding: 10px 10px 10px 15px;
 		cursor: pointer;
     @include backgroundnavy;
-    width: 200px;
+    width: 350px;
+    div {
+      background: url('icon-forward.png') 100% 50% no-repeat;
+    }
     span {
       color: #c3d9e4;
       font-size: 13px;
+      display: block;
+      margin-bottom: 5px;
     }
     strong {
       font-size: 14px;
       font-weight: 400;
+      display: block;
+      padding-right: 40px;
     }
     &:hover{
       text-decoration: none;
     }
+  }
+  #thankyou_results span {
+    display: block;
+    margin: 10px 0;
+  }
+  #thankyou_results strong {
+    font-weight: 600;
   }
 }
 

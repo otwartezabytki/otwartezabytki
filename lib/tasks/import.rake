@@ -60,4 +60,9 @@ namespace :import do
     end
   end
 
+  task :teryt_fix_names => :environment do
+    Import::Simc.fix_names
+    Import::Terc.fix_names
+  end
+
 end
