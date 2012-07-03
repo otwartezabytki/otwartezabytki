@@ -10,6 +10,7 @@
   {
     font-style:italic;
     margin:0 0 25px 0;
+		span { font-style: normal; }
   }
   p.normal
   {
@@ -86,7 +87,7 @@ padding:45px 0 0 0;
     font-size:20px;
     color:#044d71;
     text-align:center;
-    text-decoration:underline;
+    a { text-decoration:underline; }
     span
     {
       font-size:16px;

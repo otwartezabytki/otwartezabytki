@@ -244,7 +244,7 @@ a{
 				&.about{
 					padding-left: 29px;
 					background: asset-data-url('icon-menu-about.png') 4px 18px no-repeat;
-					margin-right: 42px;
+					margin-right: 32px;
 					&:hover{
 						background: asset-data-url('icon-menu-about-hover.png') 4px 18px no-repeat;
 					}
@@ -1346,7 +1346,7 @@ body.loaded .overlay {
 					.more{
 						float: left;
 						width: 480px;
-            background: url("home-arrow.png") no-repeat 135px 200px;
+            background: url("home-arrow.png") no-repeat 115px 188px;
             min-height: 285px;
 						h2{
 							margin: 40px 0 20px;
@@ -1392,10 +1392,11 @@ body.loaded .overlay {
             }
 					}
           .video {
-            border: 3px solid #678d9e;
             box-shadow: 0 2px 20px 0 rgba(0,0,0,0.3);
             position: absolute;
             right: 85px;
+            top: 30px;
+            padding: 0;
           }
 					#tabs{
 						margin-left: 480px;
@@ -1451,7 +1452,7 @@ body.loaded .overlay {
 						}
 					}
 					.step1{
-						margin: 20px 30px 30px;
+						margin: 0 30px 30px;
 						background: asset-data-url('form-search-bg.png') no-repeat;
 						padding: 35px 135px;
 						display: inline-block;
@@ -1900,7 +1901,8 @@ body.loaded .overlay {
     margin-right: 18px;
     width: 580px;
     p {
-
+      margin-bottom: 8px;
+      line-height: 14px;
     }
   }
 
@@ -1957,9 +1959,9 @@ body.loaded .overlay {
   .facebook-share {
     background: none repeat scroll 0 0 #FFFFFF;
     float: right;
-    height: 72px;
+    height: 80px;
     margin-bottom: 10px;
-    padding: 5px 20px 0;
+    padding: 12px 20px 0;
     width: 312px;
     box-shadow: 0 0 3px #CCCCCC;
     -moz-box-shadow: 0 0 3px #CCCCCC;
@@ -1969,9 +1971,12 @@ body.loaded .overlay {
   .footer-bottom {
     float: left;
     padding-top: 10px;
-    padding-bottom: 30px;
+    padding-bottom: 90px;
     width: 960px;
-    p { width: 405px; float: left;
+    p {
+      width: 405px;
+      float: left;
+      line-height: 1.4em;
     }
     a{
       color: #878787;
@@ -2171,7 +2176,7 @@ body.loaded .overlay {
 
 .progress-bar {
 	width: 958px;
-	margin: auto;
+	margin: 60px auto 0;
 	color: #313132;
 	
 	h3 {
