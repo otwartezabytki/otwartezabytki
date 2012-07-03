@@ -491,8 +491,14 @@ jQuery ->
     console.log(stroke)
     add_suggestion_callback(e) if stroke == 13
 
-
   $('#go_to_next').click ->
     bypass_submit = true
     $('#new_suggestion').submit()
     return false
+
+  $('.step-gps').view()
+
+
+# for animations
+$(window).load ->
+  $('body').addClass('loaded')

@@ -2,7 +2,7 @@
 {
   width:880px;
   height:50px;
-  font-weight:600;
+  font-weight:400;
   font-size:28px;
   color:#FFFFFF;
   padding:25px 0 0 80px;
@@ -23,7 +23,7 @@
 {
   width:880px;
   height:50px;
-  font-weight:bold;
+  font-weight:400;
   font-size:28px;
   color:#FFFFFF;
   padding:25px 0 0 80px;
@@ -70,7 +70,33 @@
   border:1px solid #e9e9e9;
   padding:30px 40px 35px 40px;
 
-  input[type="text"], input[type="email"], input[type="password"]
+		input[type="text"], input[type="email"], input[type="password"]
+		{
+	    background-position:10px;
+			background-repeat: no-repeat;
+	    width:270px;
+	    height:auto;
+	    padding:8px 0 8px 35px;
+	    border:1px solid #646464;
+	    border-radius:4px;
+	    margin:5px 5px 0 0;
+	  }
+	  .error input
+	   {
+	     border-color: rgb(213, 24, 24);
+	   }
+		span.help-inline { color: rgb(213, 24, 24); font-size: 12px}
+	
+	
+  .right_txt_box
+  {
+    float:right;
+    width:220px;
+    height:127px;
+    padding:73px 0 0 40px;
+    line-height:18px;
+  }
+  .login_title_register
   {
     background-position:10px;
     background-repeat: no-repeat;
@@ -88,6 +114,14 @@
    }
 
   span.help-inline { color: rgb(213, 24, 24); font-size: 12px}
+  #user_password, #user_password_confirmation
+  {
+    background-image:image-url('key_icon.png');
+  }
+  #user_username
+  {
+    background-image:image-url('user_icon.png');
+  }
 
   input[type="submit"]
   {
@@ -133,6 +167,7 @@
   margin:0 300px 0 0;
 
   input[type="text"], input[type="email"], input[type="password"]
+  .alert
   {
     background-position:10px;
     background-repeat: no-repeat;
@@ -142,6 +177,19 @@
     border:1px solid #646464;
     border-radius:4px;
     margin:5px 5px 0 0;
+    border:1px solid #d5d5d5;
+    color:#888;
+    text-align:center;
+  }
+.alert-error {
+	border:1px solid #d51818;
+  color:#d51818;
+	
+}
+  .link_form
+  {
+    float:right;
+    margin-top:-50px;
   }
 
 }
@@ -155,7 +203,6 @@
 }
 .login_title_register
 {
-  font-family:'Open Sans', sans-serif;
   font-size:28px;
   color:#FFFFFF;
   margin:0 0 35px 0;

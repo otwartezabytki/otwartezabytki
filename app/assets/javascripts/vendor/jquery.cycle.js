@@ -230,12 +230,3 @@
     };
 
 })(jQuery);
-
-$(document).ready( function(){
-    jQuery(".partner-slider-1, .partner-slider-2, .partner-slider-3").cycle({
-        fx: 'fade',
-        speed:    300,
-        timeout:  2000 });
-
-
-});
