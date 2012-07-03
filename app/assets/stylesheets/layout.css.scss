@@ -244,7 +244,7 @@ a{
 				&.about{
 					padding-left: 29px;
 					background: asset-data-url('icon-menu-about.png') 4px 18px no-repeat;
-					margin-right: 42px;
+					margin-right: 32px;
 					&:hover{
 						background: asset-data-url('icon-menu-about-hover.png') 4px 18px no-repeat;
 					}
@@ -1377,10 +1377,11 @@ body.loaded .overlay {
             }
 					}
           .video {
-            border: 3px solid #678d9e;
             box-shadow: 0 2px 20px 0 rgba(0,0,0,0.3);
             position: absolute;
             right: 85px;
+            top: 30px;
+            padding: 0;
           }
 					#tabs{
 						margin-left: 480px;
@@ -1943,9 +1944,9 @@ body.loaded .overlay {
   .facebook-share {
     background: none repeat scroll 0 0 #FFFFFF;
     float: right;
-    height: 72px;
+    height: 80px;
     margin-bottom: 10px;
-    padding: 5px 20px 0;
+    padding: 12px 20px 0;
     width: 312px;
     box-shadow: 0 0 3px #CCCCCC;
     -moz-box-shadow: 0 0 3px #CCCCCC;
@@ -1960,7 +1961,7 @@ body.loaded .overlay {
     p {
       width: 405px;
       float: left;
-      line-height: 14px;
+      line-height: 1.4em;
     }
     a{
       color: #878787;
@@ -2159,9 +2160,8 @@ body.loaded .overlay {
 }
 
 .progress-bar {
-  margin-top: 60px;
 	width: 958px;
-	margin: auto;
+	margin: 60px auto 0;
 	color: #313132;
 	
 	h3 {
