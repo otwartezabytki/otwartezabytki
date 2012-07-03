@@ -1331,7 +1331,7 @@ body.loaded .overlay {
 					.more{
 						float: left;
 						width: 480px;
-            background: url("home-arrow.png") no-repeat 135px 200px;
+            background: url("home-arrow.png") no-repeat 115px 188px;
             min-height: 285px;
 						h2{
 							margin: 40px 0 20px;
@@ -1436,7 +1436,7 @@ body.loaded .overlay {
 						}
 					}
 					.step1{
-						margin: 20px 30px 30px;
+						margin: 0 30px 30px;
 						background: asset-data-url('form-search-bg.png') no-repeat;
 						padding: 35px 135px;
 						display: inline-block;
@@ -1885,7 +1885,8 @@ body.loaded .overlay {
     margin-right: 18px;
     width: 580px;
     p {
-
+      margin-bottom: 8px;
+      line-height: 14px;
     }
   }
 
@@ -1954,9 +1955,12 @@ body.loaded .overlay {
   .footer-bottom {
     float: left;
     padding-top: 10px;
-    padding-bottom: 30px;
+    padding-bottom: 90px;
     width: 960px;
-    p { width: 405px; float: left;
+    p {
+      width: 405px;
+      float: left;
+      line-height: 14px;
     }
     a{
       color: #878787;
@@ -2155,6 +2159,7 @@ body.loaded .overlay {
 }
 
 .progress-bar {
+  margin-top: 60px;
 	width: 958px;
 	margin: auto;
 	color: #313132;
