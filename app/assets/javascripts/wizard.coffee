@@ -335,7 +335,14 @@ $.fn.specialize
       if map?
         map.setCenter(lat, lng)
       else
-        map = new GMaps(div: '#map_canvas', width: 900, height: 500, zoom: 14, lat: lat, lng: lng, mapTypeId: google.maps.MapTypeId.HYBRID)
+        map = new GMaps
+          div: '#map_canvas'
+          width: 900
+          height: 500
+          zoom: 14
+          lat: lat
+          lng: lng
+          mapTypeId: google.maps.MapTypeId.HYBRID
 
     auto_zoom: ->
       zoom_map = (lat, lng) =>
@@ -351,11 +358,14 @@ $.fn.specialize
         geocode_location(zoom_map)
 
     tooltip_marker: (lat, lng) ->
+      that = this
       map.removeMarkers()
-      map.addMarker
+      marker = map.addMarker
         lat: lat
         lng: lng
         icon: new google.maps.MarkerImage(marker_image_path, null, null, new google.maps.Point(112, 11))
+        mouseover: ->
+          that.circle_marker(lat, lng)
 
     circle_marker: (lat, lng) ->
       map.removeMarkers()
