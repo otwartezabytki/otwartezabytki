@@ -65,4 +65,39 @@ namespace :import do
     Import::Terc.fix_names
   end
 
+  task :fix_missing_places => :environment do
+    Import::CleanLocation.all(:cit_t  => 'NOVALUE').batch(1000) do |location|
+      relic = relic = Relic.find_by_nid_id(location.nid_id.to_s)
+      next if relic.blank? or relic.place.from_teryt == false
+      c = Commune.joins(:district => :voivodeship).where(['communes.nr = ? AND districts.nr = ? AND voivodeships.nr = ?', location.par_t, location.pov_t, location.voi_t]).first
+      if c
+        p = c.places.where(:name => location.cit).first
+        if p
+          puts "Found: #{location.cit} in commune: #{c.name}"
+        else
+          puts "Creating: #{location.cit} in commune: #{c.name}"
+          p = c.places.create :name => location.cit, :from_teryt => false
+        end
+        relic.update_attributes :place => p
+      end
+    end
+  end
+
+  task :fix_warsaw_districts => :environment do
+    Import::CleanLocation.all(:cit  => 'Warszawa').batch(1000) do |location|
+      relic = Relic.find_by_nid_id(location.nid_id.to_s)
+      next unless relic
+      c = Commune.joins(:district => :voivodeship).where(['LOWER(communes.name) = LOWER(?) AND districts.nr = ? AND voivodeships.nr = ?', location.par, location.pov_t, location.voi_t]).first
+      if c
+        puts "Commune: #{c.name}"
+        p = c.places.where(:name => location.cit).first
+        if p
+          puts "Found: #{location.cit} in commune: #{c.name}"
+        else
+          puts "Creating: #{location.cit} in commune: #{c.name}"
+          p = c.places.create :name => location.cit, :from_teryt => false
+        end
+      end
+    end
+  end
 end
