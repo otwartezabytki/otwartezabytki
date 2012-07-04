@@ -97,6 +97,7 @@ namespace :import do
           puts "Creating: #{location.cit} in commune: #{c.name}"
           p = c.places.create :name => location.cit, :from_teryt => false
         end
+        relic.update_attributes :place => p
       end
     end
   end
