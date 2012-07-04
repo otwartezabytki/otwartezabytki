@@ -19,7 +19,7 @@
           .help Pomoc
           .help-extended
             %span.close Zamknij pomoc
-            %p Sprawdź, czy nazwa zabytku jest poprawna (np. jeśli zaczyna się od małej litery, popraw ją na wielką). Jeśli chcesz ją poprawić, kliknij „Nie, chcę ją poprawić”. Pojawi się pole, w którym można poprawić nazwę. Następnie naciśnij „Zapisz”, aby zachować poprawioną nazwę. Jeśli jest poprawna, kliknij „Tak, jest poprawna”. Jeśli nie wiesz, czy nazwa jest poprawna, spróbuj znaleźć informacje na stronach internetowych lub w książkach. Jeśli Ci się nie uda, kliknij „Nie wiem, pomiń”, a automatycznie przejdziesz do kolejnego punktu. W przypadku popełnienia błędu kliknij „Cofnij” i edytuj ponownie.
+            %p Sprawdź, czy nazwa zabytku jest poprawna (np. jeśli zaczyna się od małej litery, popraw ją na wielką). Jeśli chcesz ją poprawić, kliknij „Nie, chcę ją poprawić”. Pojawi się pole, w którym można poprawić nazwę. Następnie naciśnij „Zapisz”, aby zachować poprawioną nazwę. Jeśli jest poprawna, kliknij „Tak, jest poprawna”. Jeśli nie wiesz, czy nazwa jest poprawna, spróbuj znaleźć informacje na stronach internetowych lub w książkach. Jeśli Ci się nie uda, kliknij „Nie wiem, pomiń”, a automatycznie przejdziesz do kolejnego punktu. W przypadku popełnienia błędu kliknij „Edytuj ponownie” i edytuj ponownie.
         .values.values-edit.values-view
           = f.input :identification, :as => :string, :label => "Nazwa", :input_html => { :readonly => true }
           = f.input :identification_action, :as => :hidden
@@ -42,7 +42,7 @@
           .action.action-skip= link_to "Nie wiem, pomiń", "#"
           .action.action-back
             (Zrobiłeś błąd?
-            = link_to "Cofnij", "#"
+            = link_to "Edytuj ponownie", "#"
             )
 
       %article.step.step-place.step-simple.step-view
@@ -81,7 +81,7 @@
           .action.action-skip= link_to "Nie wiem, pomiń", "#"
           .action.action-back
             (Zrobiłeś błąd?
-            = link_to "Cofnij", "#"
+            = link_to "Edytuj ponownie", "#"
             )
       %article.step.step-street.step-simple.step-view
         .help-content
@@ -128,7 +128,7 @@
             .action.action-skip= link_to "Nie wiem, pomiń", "#"
             .action.action-back
               (Zrobiłeś błąd?
-              = link_to "Cofnij", "#"
+              = link_to "Edytuj ponownie", "#"
               )
           - else
             %h3 Czy znasz adres zabytku? (np. al. Jerozolimskie, wyspa Kępa Mieszańska, rondo Falbanka) 
@@ -136,7 +136,7 @@
             .action.action-skip= link_to "Nie wiem, pomiń", "#"
             .action.action-back.action-back-short
               (Zrobiłeś błąd?
-              = link_to "Cofnij", "#"
+              = link_to "Edytuj ponownie", "#"
               )
 
       %article.step.step-date.step-simple.step-view
@@ -170,13 +170,13 @@
             .action.action-edit= link_to "Nie, chcę ją poprawić", "#"
             .action.action-skip= link_to "Nie wiem, pomiń", "#"
             .action.action-submit= link_to "Zapisz", "#"
-            .action.action-cancel= link_to "Cofnij zmiany", "#"
+            .action.action-cancel= link_to "Edytuj ponownie zmiany", "#"
           - else
             %h3 Czy znasz datę powstania zabytku? (np. 1929, XIX w., 2 poł. XIV w.) 
             .action.action-edit= link_to "Tak, chcę uzupełnić datę", "#"
             .action.action-skip= link_to "Nie wiem, pomiń", "#"
             .action.action-submit= link_to "Zapisz", "#"
-            .action.action-cancel= link_to "Cofnij zmiany", "#"
+            .action.action-cancel= link_to "Edytuj ponownie zmiany", "#"
         .actions.actions-done
           - if f.object.dating_of_obj.present?
             %h3 Czy data powstania zabytku jest poprawna? (np. 1929, XIX w., 2 poł. XIV w.) 
@@ -185,7 +185,7 @@
             .action.action-skip= link_to "Nie wiem, pomiń", "#"
             .action.action-back
               (Zrobiłeś błąd?
-              = link_to "Cofnij", "#"
+              = link_to "Edytuj ponownie", "#"
               )
           - else
             %h3 Czy znasz datę powstania zabytku? (np. 1929, XIX w., 2 poł. XIV w.)
@@ -193,7 +193,7 @@
             .action.action-skip= link_to "Nie wiem, pomiń", "#"
             .action.action-back.action-back-short
               (Zrobiłeś błąd?
-              = link_to "Cofnij", "#"
+              = link_to "Edytuj ponownie", "#"
               )
 
       %article.step.step-tags.step-view
@@ -238,7 +238,7 @@
           .action.action-skip= link_to "Nie wiem, pomiń", "#"
           .action.action-back.action-back-short
             (Zrobiłeś błąd?
-            = link_to "Cofnij", "#"
+            = link_to "Edytuj ponownie", "#"
             )
       - if f.object.suggestions.size > 0
 
@@ -275,7 +275,7 @@
                   .action.action-skip= link_to "Nie wiem, pomiń", "#"
                   .action.action-back
                     (Zrobiłeś błąd?
-                    = link_to "Cofnij", "#"
+                    = link_to "Edytuj ponownie", "#"
                     )
 
               %article.step.step-date.step-simple.step-view
@@ -301,13 +301,13 @@
                     .action.action-edit= link_to "Nie, chcę ją poprawić", "#"
                     .action.action-skip= link_to "Nie wiem, pomiń", "#"
                     .action.action-submit= link_to "Zapisz", "#"
-                    .action.action-cancel= link_to "Cofnij zmiany", "#"
+                    .action.action-cancel= link_to "Edytuj ponownie zmiany", "#"
                   - else
                     %h3 Czy znasz datę powstania zabytku? (np. 1929, XIX w., 2 poł. XIV w.)
                     .action.action-edit= link_to "Tak, chcę poprawić datę", "#"
                     .action.action-skip= link_to "Nie wiem, pomiń", "#"
                     .action.action-submit= link_to "Zapisz", "#"
-                    .action.action-cancel= link_to "Cofnij zmiany", "#"
+                    .action.action-cancel= link_to "Edytuj ponownie zmiany", "#"
                 .actions.actions-done
                   - if f2.object.dating_of_obj.present?
                     %h3 Czy data powstania zabytku jest poprawna? (np. 1929, XIX w., 2 poł. XIV w.)
@@ -316,7 +316,7 @@
                     .action.action-skip= link_to "Nie wiem, pomiń", "#"
                     .action-back
                       (Zrobiłeś błąd?
-                      = link_to "Cofnij", "#"
+                      = link_to "Edytuj ponownie", "#"
                       )
                   - else
                     %h3 Czy znasz datę powstania zabytku? (np. 1929, XIX w., 2 poł. XIV w.)
@@ -324,7 +324,7 @@
                     .action.action-skip= link_to "Nie wiem, pomiń", "#"
                     .action-back.action-back-short
                       (Zrobiłeś błąd?
-                      = link_to "Cofnij", "#"
+                      = link_to "Edytuj ponownie", "#"
                       )
 
               %article.step.step-tags.step-view
@@ -362,7 +362,7 @@
                   .action.action-skip= link_to "Nie wiem, pomiń", "#"
                   .action.action-back.action-back-short
                     (Zrobiłeś błąd?
-                    = link_to "Cofnij", "#"
+                    = link_to "Edytuj ponownie", "#"
                     )
       %article.step.step-gps.step-view
         .help-content
@@ -403,7 +403,7 @@
           .action.action-skip.btn= link_to "Nie potrafię znaleźć lokacji, pomiń", "#"
           .action.action-back.action-back-short
             (Zrobiłeś błąd?
-            = link_to "Cofnij", "#"
+            = link_to "Edytuj ponownie", "#"
             )
 
       %article.step.step-submit.step-view
