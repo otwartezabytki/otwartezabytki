@@ -12,6 +12,7 @@
  *= require reset
  *= require chosen
  *= require jquery.ui.all
+ *= require_tree ./vendor
  *= require layout
  *= require user
  *= require static

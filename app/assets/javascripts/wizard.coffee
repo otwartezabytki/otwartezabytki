@@ -565,6 +565,11 @@ jQuery ->
     return false
 
 
+  # type class of step in browser hash to debug
+  if window.location.hash.match(/step/)
+    $(".#{window.location.hash.slice(1)}:first").view()
+
+  $('a.colorbox').colorbox()
 
 # for animations
 $(window).load ->
