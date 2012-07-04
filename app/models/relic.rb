@@ -118,10 +118,10 @@ class Relic < ActiveRecord::Base
         query do
           boolean do
             must { string q1, :default_operator => "AND", :fields => [
-              "identification",
+              "identification^5",
               "street",
               "place_full_name",
-              "descendants.identification",
+              "descendants.identification^2",
               "descendants.street"
               ]
             }
