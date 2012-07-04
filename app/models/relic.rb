@@ -74,7 +74,7 @@ class Relic < ActiveRecord::Base
       @highlighted_tags = @response['hits']['hits'].inject([]) do |m, h|
         m << h['highlight'].values.join.scan(/<em>(.*?)<\/em>/) if h['highlight']
         m
-      end.flatten.uniq.select{|w| w.size > 1}.sort_by{|w| -w.size}
+      end.flatten.uniq.select{|w| w.size > 1}.sort_by{|w| -w.size}.map{ |t| Unicode.downcase(t) }
     end
 
     def correct_count
@@ -104,14 +104,17 @@ class Relic < ActiveRecord::Base
       index.import objs
     end
 
+    def analyze_query q
+      analyzed = Relic.index.analyze q
+      analyzed ? analyzed['tokens'].inject("") { |s, t| s << " #{t['token']}*"; s } : '*'
+    end
+
     def search(params)
       tire.search(:load => false, :page => params[:page], :per_page => 10) do
         location = params[:location].to_s.split('-')
         corrected_relic_ids = (params[:corrected_relic_ids] || []).map(&:to_s)
 
-        analyzed = Relic.index.analyze(params[:q1])
-        q1 = analyzed ? analyzed['tokens'].inject("") { |s, t| s << " #{t['token']}*"; s } : '*'
-
+        q1 = Relic.analyze_query params[:q1]
         query do
           boolean do
             must { string q1, :default_operator => "AND", :fields => [
@@ -199,11 +202,18 @@ class Relic < ActiveRecord::Base
 
     def suggester q
       tire.search(:load => false, :per_page => 1) do
-        q1 = (q.present? ? q : '*')
         query do
           boolean do
-            must { string q1, :default_operator => "AND" }
+            must { string Relic.analyze_query(q),:default_operator => "AND" }
           end
+        end
+
+        if q != '*'
+          highlight "identification" => {},
+            "street" => {},
+            "place_full_name" => {},
+            "descendants.identification" => {},
+            "descendants.street" => {}
         end
 
         facet "voivodeships" do
