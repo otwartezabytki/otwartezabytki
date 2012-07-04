@@ -1,5 +1,6 @@
 #= require sugar
 #= require jquery-specializer
+#= require gmaps
 
 map = undefined
 
@@ -120,7 +121,6 @@ $.fn.specialize
       this
 
     saveLocalHistory: ->
-      console.log('save')
       this.data('class', this.attr('class'))
       this.input().saveLocalHistory()
       this.action().saveLocalHistory()
@@ -283,7 +283,6 @@ $.fn.specialize
 
     hasChanged: ->
       this.toArray().some (e) ->
-        console.log($(e).data('local_history'))
         $(e).data('local_history') != $(e).val()
 
 
