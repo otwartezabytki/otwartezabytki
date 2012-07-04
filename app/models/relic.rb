@@ -109,7 +109,9 @@ class Relic < ActiveRecord::Base
         location = params[:location].to_s.split('-')
         corrected_relic_ids = (params[:corrected_relic_ids] || []).map(&:to_s)
 
-        q1 = (params[:q1].present? ? params[:q1] : '*')
+        analyzed = Relic.index.analyze(params[:q1])
+        q1 = analyzed ? analyzed['tokens'].inject("") { |s, t| s << " #{t['token']}*"; s } : '*'
+
         query do
           boolean do
             must { string q1, :default_operator => "AND", :fields => [
@@ -118,8 +120,7 @@ class Relic < ActiveRecord::Base
               "place_full_name",
               "descendants.identification",
               "descendants.street"
-              ],
-              :phrase_slop => 2
+              ]
             }
           end
         end
