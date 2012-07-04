@@ -9,7 +9,7 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require reset 
+ *= require reset
  *= require chosen
  *= require jquery.ui.all
  *= require layout
@@ -58,8 +58,11 @@ footer { clear: both; display: block; }
 
 .subrelics { clear: both; }
 
-span.highlight {
-    background-color: yellow;
+div.highlight {
+  display: inline;
+  background-color: #E2E9ED;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
 }
 
 .step .check_boxes ul {
