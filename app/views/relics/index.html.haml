@@ -1,6 +1,6 @@
 .span3
   = render 'localization_facets'
-  
+
 %div{:class => relics.empty? ? "span9" : "span9"}
   #relics
     - model_class = Relic.new.class
@@ -15,7 +15,6 @@
           %br
           pasujących do słowa
           %strong „#{params[:q1]}”
-
         %p
           Możesz natomiast przejrzeć listę innych zabytków, które wymagają sprawdzenia:
           %br
@@ -32,8 +31,8 @@
                 %li
                   = link_to l[:label], l[:path]
                   %span &#187;
-              %li= location_breadcrumbs.last[:label]      
-              
+              %li= location_breadcrumbs.last[:label]
+
       = render :partial => "relics", :locals => {:collection => @pending }
 
     - unless @corrected.empty?
@@ -41,7 +40,6 @@
         %h2.changed Zabytki sprawdzone (#{relics.correct_count})
 
       = render :partial => "relics", :locals => {:collection => @corrected }
-
 
     = paginate relics
 

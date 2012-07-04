@@ -37,7 +37,7 @@ jQuery ->
     )
 
   # highlight
-  $highlightArea = $('table.search-results')
+  $highlightArea = $('div.search-results .relic')
   if $highlightArea.length > 0 and gon.highlightedTags
     for tag in gon.highlightedTags
       $highlightArea.highlight(tag)
