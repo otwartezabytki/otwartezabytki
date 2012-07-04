@@ -32,7 +32,7 @@ module ApplicationHelper
     all = Suggestion.roots.count
 
     ranges.each do |range|
-      range[4] = range[3] * 100 / all
+      range[4] = (range[3].to_f * 100 / all).ceil
     end
 
     [ranges.pop, ranges.first].reverse
