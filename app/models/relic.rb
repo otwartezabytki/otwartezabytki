@@ -120,10 +120,8 @@ class Relic < ActiveRecord::Base
             must { string q1, :default_operator => "AND", :fields => [
               "identification^5",
               "street",
-              "place_full_name",
-              "descendants.identification^2",
-              "descendants.street"
-              ]
+              "place_full_name^2",
+              "descendants.identification^3"              ]
             }
           end
         end
