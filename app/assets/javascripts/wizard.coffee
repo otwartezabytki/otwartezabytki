@@ -559,6 +559,18 @@ jQuery ->
     stroke = if (_ref = e.which) != null then _ref else e.keyCode
     add_suggestion_callback(e) if stroke == 13
 
+  $('#go_to_next').click ->
+    window.bypass_submit = true
+    $('#new_suggestion').submit()
+    return false
+
+
+  # type class of step in browser hash to debug
+  if window.location.hash.match(/step/)
+    $(".#{window.location.hash.slice(1)}:first").view()
+
+  $('a.colorbox').colorbox()
+
 # for animations
 $(window).load ->
   $('body').addClass('loaded')

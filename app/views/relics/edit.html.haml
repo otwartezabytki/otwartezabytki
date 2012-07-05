@@ -369,8 +369,12 @@
           .help Pomoc
           .help-extended
             %span.close Zamknij pomoc
-            %p Znajdź zabytek na mapie. Widok możesz przybliżać i oddalać przy użyciu przycisków „+” i „-”, które znajdziesz w lewym górnym rogu mapy. Gdy znajdziesz na mapie miejsce, w którym położony jest sprawdzany zabytek, przeciągnij tam czerwony znacznik z pola po prawej stronie. Gdy skończysz, wciśnij „Tak, potwierdzam”. Jeśli chcesz przerwać lub pominąć ten krok, wciśnij „Nie, pomiń” lub „Pomiń”.
-            .map
+            - if suggestion.suggestions.size == 0
+              %p Znajdź zabytek na mapie. Widok możesz przybliżać i oddalać przy użyciu przycisków „+” i „-”, które znajdziesz w lewym górnym rogu mapy. Gdy znajdziesz na mapie miejsce, w którym położony jest sprawdzany zabytek, przeciągnij tam czerwony znacznik z pola po prawej stronie. Gdy skończysz, wciśnij „Tak, potwierdzam”. Jeśli chcesz przerwać lub pominąć ten krok, wciśnij „Nie, pomiń” lub „Pomiń”.
+            - else
+              %p Znajdź zespół zabytków na mapie. Widok możesz przybliżać i oddalać przy użyciu przycisków „+” i „-”, które znajdziesz w lewym górnym rogu mapy. Gdy znajdziesz na mapie miejsce, w którym położony jest sprawdzany zabytek, przeciągnij tam czerwony znacznik z pola po prawej stronie. Gdy skończysz, wciśnij „Tak, potwierdzam”. Jeśli chcesz przerwać lub pominąć ten krok, wciśnij „Nie, pomiń” lub „Pomiń”.
+              .map= link_to image_tag("logo-facebook.jpg"), image_path("help-screen-10.png"), :class => "colorbox"
+              .map= link_to image_tag("logo-facebook.jpg"), image_path("help-screen-10.png"), :class => "colorbox"
         %span.ico
         .values.values-edit.values-view
           .map-overlay
