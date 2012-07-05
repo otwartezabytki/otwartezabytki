@@ -184,6 +184,7 @@ $.fn.specialize
   '.step-tags':
 
     input: -> this.find("input[type='checkbox']")
+    action: -> this.find('#suggestion_tags_action')
 
     view: ->
       this.switchViewClass('step-view')
