@@ -18,7 +18,7 @@
         = f.input :email, :label => true
         = f.input :username, :label => true
         = f.submit "Zarejestruj się"
-      
+
   #thankyou_dorelics
     = link_to edit_relic_url(@next_relic), :id => "thankyou_next" do
       %div
@@ -27,7 +27,7 @@
         %strong
           = @next_relic.identification
 
-    - q1 = session[:search_params] && session[:search_params][:q1]
+    - q1 = session[:search_params].try(:[], :q1)
     - if q1.present?
       #thankyou_results
         %span

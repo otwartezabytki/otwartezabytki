@@ -8,7 +8,7 @@
       %h1 2. Wybierz zabytek:
       %span.arrow
 
-    - if @pending.empty?
+    - if relics.incorrect_count.zero?
       .search-no-results
         %p
           Nie ma do sprawdzenia żadnych zabytków
@@ -35,7 +35,7 @@
 
       = render :partial => "relics", :locals => {:collection => @pending }
 
-    - unless @corrected.empty?
+    - if @corrected.present?
       %div.relic-header
         %h2.changed Zabytki sprawdzone (#{relics.correct_count})
 

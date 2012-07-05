@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :suggestions
+  has_many :seen_relics
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
@@ -53,7 +54,20 @@ class User < ActiveRecord::Base
       @corrected_relic_ids = suggestions.joins(:relic).where("relics.edit_count < 3 and skipped = false").group(:relic_id).pluck(:relic_id)
     end
   end
-  
+  cattr_accessor :seen_relic_order
+
+  def mark_relic_as_seen(relic_id)
+    sr = self.seen_relics.find_or_create_by_relic_id relic_id
+    sr.touch
+    if seen_relic_ids.first == relic_id
+      self.class.seen_relic_order == 'asc' ? self.class.seen_relic_order = 'desc' : self.class.seen_relic_order = 'asc'
+    end
+  end
+
+  def seen_relic_ids
+    self.seen_relics.order("updated_at #{self.class.seen_relic_order}").pluck(:relic_id)
+  end
+
   class << self
     def reset_password_by_token(attributes={})
       recoverable = find_or_initialize_with_error_by(:reset_password_token, attributes[:reset_password_token])

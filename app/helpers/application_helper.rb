@@ -1,10 +1,6 @@
 # -*- encoding : utf-8 -*-
 module ApplicationHelper
 
-  def next_relic_url_for(user)
-    edit_relic_path(Relic.next_for(user, session[:search_params]))
-  end
-
   def users_statistics
     all = User.count
     registered = User.where("username IS NOT NULL").count
