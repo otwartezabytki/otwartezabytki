@@ -8,78 +8,13 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require_self
- *= require reset
- *= require chosen
+ *= require application/reset
+ *
  *= require jquery.ui.all
- *= require_tree ./vendor
- *= require layout
- *= require user
- *= require static
+ *= require chosen
+ *=
+ *= require application/layout
+ *= require application/static
+ *= require application/user
+ *= require application/wizard
 */
-
-ul.nav li a.selected { font-weight: bold; width: 400px; }
-footer { clear: both; display: block; }
-
-.step { clear: both; position: relative; }
-
-.step .values {display: none; position: relative; }
-.step .actions {display: none; position: relative;  }
-
-.step-current.step-view .actions-view { display: block !important; }
-.step-current.step-edit .actions-edit { display: block !important; }
-.step-done .actions-done { display: block !important; }
-
-.step-view .values-view { display: block; }
-.step-edit .values-edit { display: block; }
-
-.step .values-not-current { display: block; }
-.step .values-current { display: none; }
-.step-current .values-current { display: block !important; }
-.step-current .values-not-current { display: none !important; }
-
-.step input[type='text'] { border-color: white; background-color: white; cursor: default; box-shadow: 0 0; font-size: 20px; }
-.step-edit input[type='text'] { border-color: #ddd; border-width: 1px; }
-
-.step-edited input[type="text"] { color: #ff4500; }
-.step-skipped input[type="text"] { color: #dddddd; }
-.step-confirmed input[type="text"] { color: green; }
-
-#map_canvas{border: 10px solid #fff;}
-#marker { cursor: pointer; margin: 40px 0 0 47px;}
-
-#suggestion_latitude_input, #suggestion_longitude_input  { float: left; width: 170px; }
-
-#new_tag input[type="text"] { width: 95%; }
-#new_tag input[name="commit"] { float: right; }
-
-.step-submit { margin: 50px auto; }
-.step-submit .actions { width: 100%; float: none; text-align: center; }
-
-
-.subrelics { clear: both; }
-
-div.highlight {
-  display: inline;
-  background-color: #E2E9ED;
-  -webkit-border-radius: 2px;
-  border-radius: 2px;
-}
-
-.step .check_boxes ul {
-    margin: 0;
-    padding: 5px;
-}
-
-.step .check_boxes li {
-    display: block;
-    width: 100%;
-    float: left;
-    list-style-type: none;
-}
-
-#recaptcha_area { margin: 0 auto; }
-
-.ui-menu-item strong {
-    font-weight: bold;
-}

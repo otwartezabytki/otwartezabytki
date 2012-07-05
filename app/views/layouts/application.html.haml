@@ -14,7 +14,7 @@
       = javascript_include_tag "http://html5shim.googlecode.com/svn/trunk/html5.js"
     = stylesheet_link_tag "application", :media => "all"
     /[if lt IE 9]
-      = stylesheet_link_tag "ie8", :media => "all"
+      = stylesheet_link_tag "application/ie8", :media => "all"
     %link{:href => "http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,600,300&subset=latin,latin-ext", :rel => "stylesheet", :type => "text/css"}/
     :plain
       <meta property="og:title" content="Otwarte Zabytki" />
@@ -56,13 +56,13 @@
             %nav
               %ul
                 %li
-                  = link_to "O projekcie", page_pl_path('o-projekcie'), :class => 'about'
+                  = link_to "O projekcie", page_pl_path('o-projekcie'), :class => "about #{current_page?(:controller => '/pages', :action => 'show', :id => 'about') ? "current" : ""}"
                 %li
-                  = link_to "Pomoc", page_pl_path('pomoc'), :class => 'help'
+                  = link_to "Pomoc", page_pl_path('pomoc'), :class => "help #{current_page?(:controller => '/pages', :action => 'show', :id => 'help') ? "current" : ""}"
                 %li
-                  = link_to "Kontakt", page_pl_path('kontakt'), :class => 'contact'
+                  = link_to "Kontakt", page_pl_path('kontakt'), :class => "contact  #{current_page?(:controller => '/pages', :action => 'show', :id => 'contact') ? "current" : ""}"
                 %li
-                  = link_to "Pobierz dane", page_pl_path('pobierz-dane'), :class => 'download'
+                  = link_to "Pobierz dane", page_pl_path('pobierz-dane'), :class => "download #{current_page?(:controller => '/pages', :action => 'show', :id => 'contact') ? "current" : ""}"
 
             = simple_form_for Relic.new, :url => relics_path, :html => { :class => 'well form-search'},:method => :get do |f|
               = f.input :q1, :label => false, :input_html => {:name => 'q1', :value => params[:q1], :class => "search-query"}, :placeholder => "wpisz, czego szukasz"

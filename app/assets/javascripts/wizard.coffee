@@ -33,7 +33,7 @@ $.fn.specialize
       $(".help-content").removeClass('active')
       $('.step').removeClass('step-current')
       this.addClass('step-current')
-      this.action().val('skip')        
+      this.action().val('skip')
 
     view: ->
       this.switchViewClass('step-view')
@@ -528,7 +528,7 @@ jQuery ->
         $('#suggestion_latitude').val(latitude)
         $('#suggestion_longitude').val(longitude)
         $('#map_canvas').zoom_at(latitude, longitude)
-  
+
   $(".steps").on "click", ".help-content .help", ->
     if $(this).parents('.step').hasClass('step-current')
       $(this).parents(".help-content").addClass('active')

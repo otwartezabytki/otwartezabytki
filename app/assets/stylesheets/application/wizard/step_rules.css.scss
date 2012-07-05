@@ -1,0 +1,26 @@
+//
+// general ules for steps in wizard
+//
+
+// hide steps content and action buttons by default
+.step .values, .step .actions { display: none; }
+
+// show corrent content for view and edit steps
+.step-view .values-view { display: block !important; }
+.step-edit .values-edit { display: block !important; }
+
+// and show corrent action buttons for them
+// action buttons are only visible when steps are active
+.step-current.step-view .actions-view { display: block !important; }
+.step-current.step-edit .actions-edit { display: block !important; }
+
+// display done actions for done steps (back button for example)
+.step-done .actions-done { display: block !important; }
+
+// some steps change content depending if they are active (current)
+// for example tags step show list of checkbox when active
+// but when non-active it displays only readonly checkbox
+.step .values-current { display: none !important; }
+.step-current .values-current { display: block !important; }
+.step .values-not-current { display: block !important; }
+.step-current .values-not-current { display: none !important; }

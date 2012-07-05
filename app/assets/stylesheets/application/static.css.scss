@@ -1,0 +1,280 @@
+.content_more {
+  width: 680px;
+  height: auto;
+  padding: 35px 140px 35px 140px;
+  border: 1px solid #d2d2d2;
+  background-color: #FFFFFF;
+  line-height: 35px;
+
+  p.italic {
+    font-style: italic;
+    margin: 0 0 25px 0;
+    span {
+      font-style: normal;
+    }
+  }
+  p.normal {
+    font-style: normal;
+    margin: 0 0 25px 0;
+  }
+  p.bold {
+    font-weight: bold;
+    font-size: 20px;
+    margin: 0 0 25px 0;
+  }
+  p.bold_2 {
+    font-weight: bold;
+    font-size: 16px;
+    margin: 0 0 25px 0;
+  }
+  li {
+    font-weight: normal;
+    font-size: 16px;
+    margin: 0 0 3px 0;
+  }
+  ol {
+    list-style-type: decimal;
+    font-weight: normal;
+    font-size: 16px;
+    padding: 0 0 0 55px;
+    margin: 0 0 25px 0;
+  }
+  h1 {
+    font-family: 'Open Sans', sans-serif;
+    color: #313132;
+    font-size: 38px;
+    padding: 0 0 20px 0;
+  }
+  h2 {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+    color: #313132;
+    line-height: 30px;
+  }
+  .txt_content {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    color: #313132;
+    line-height: 30px;
+  }
+}
+
+.box_bottom {
+  background-color: #e8eff2;
+  width: 960px;
+  height: 95px;
+  border: 1px solid #d2d2d2;
+  padding: 45px 0 0 0;
+
+  h2 {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+    color: #313132;
+    line-height: 30px;
+    text-align: center;
+  }
+  .links_bottom {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+    color: #044d71;
+    text-align: center;
+    a {
+      text-decoration: underline;
+    }
+    span {
+      font-size: 16px;
+      font-weight: normal;
+    }
+  }
+
+}
+
+.about_top {
+  width: 880px;
+  height: 50px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: bold;
+  font-size: 28px;
+  border: 1px solid #436576;
+  color: #FFFFFF;
+  padding: 25px 0 0 80px;
+  margin: 0 0 73px 0;
+  background: image-url('curch.png') no-repeat;
+  background-position: 30px;
+  background-color: #546f7d; /* Old browsers */
+  background-color: -moz-linear-gradient(top, #546f7d 0%, #436576 100%); /* FF3.6+ */
+  background-color: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #546f7d), color-stop(100%, #436576)); /* Chrome,Safari4+ */
+  background-color: -webkit-linear-gradient(top, #546f7d 0%, #436576 100%); /* Chrome10+,Safari5.1+ */
+  background-color: -o-linear-gradient(top, #546f7d 0%, #436576 100%); /* Opera 11.10+ */
+  background-color: -ms-linear-gradient(top, #546f7d 0%, #436576 100%); /* IE10+ */
+  background-color: linear-gradient(to bottom, #546f7d 0%, #436576 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#546f7d', endColorstr = '#436576', GradientType = 0); /* IE6-9 */
+}
+
+.content_more_about {
+  width: 680px;
+  height: auto;
+  padding: 14px 140px 35px 140px;
+  margin: -74px 0 0 0;
+  border: 1px solid #d2d2d2;
+  background-color: #FFFFFF;
+  line-height: 35px;
+
+  p.top_big {
+    font-size: 22px;
+    color: #313132;
+    line-height: 27px;
+    margin: 22px 0 36px 0;
+  }
+  p.top_medium {
+    font-size: 18px;
+    color: #313132;
+    margin: 0 0 30px 0;
+  }
+  p.small {
+    font-size: 14px;
+    color: #313132;
+    line-height: 21px;
+    margin: 0 0 24px 0;
+  }
+  p.quotation {
+    font-size: 14px;
+    color: #313132;
+    line-height: 21px;
+    padding: 0 0 0 25px;
+    margin: 0 0 65px 0;
+    border-left: 6px solid #737373;
+  }
+  p.big_other {
+    font-size: 22px;
+    color: #313132;
+    font-weight: normal;
+    margin: 0 0 34px 0;
+  }
+  h4 {
+    font-weight: 300;
+    color: #313132;
+    font-size: 17px;
+    margin: 0 0 16px 0;
+  }
+  h5 {
+    font-weight: 300;
+    color: #456678;
+    font-size: 15px;
+    margin: 0 0 33px 0;
+  }
+  ol {
+    font-size: 14px;
+    color: #313132;
+    margin: 0 0 34px 0;
+    padding: 0 0 0 50px;
+    line-height: 21px;
+  }
+  li {
+    font-size: 14px;
+    color: #313132;
+    line-height: 24px;
+    list-style: circle;
+  }
+  strong {
+    font-weight: 800;
+  }
+  .download {
+    margin: 16px auto;
+    width: 230px;
+    display: block;
+    line-height: 25px;
+    text-align: center;
+    text-decoration: none;
+    background: #4b6d7e; /* Old browsers */
+    background: -moz-linear-gradient(top, #4b6d7e 0%, #436576 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4b6d7e), color-stop(100%, #436576)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #4b6d7e 0%, #436576 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #4b6d7e 0%, #436576 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #4b6d7e 0%, #436576 100%); /* IE10+ */
+    background: linear-gradient(top, #4b6d7e 0%, #436576 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#4b6d7e', endColorstr = '#436576', GradientType = 0); /* IE6-9 */
+    color: #fff;
+    border: 0;
+    font-size: 16px;
+    font-weight: normal;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
+    text-transform: uppercase;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    padding: 5px 19px 4px 19px;
+    cursor: pointer;
+    text-decoration: none;
+    &:hover {
+      text-decoration: none;
+      background: #437994; /* Old browsers */
+      background: -moz-linear-gradient(top, #437994 0%, #2b607b 100%); /* FF3.6+ */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #437994), color-stop(100%, #2b607b)); /* Chrome,Safari4+ */
+      background: -webkit-linear-gradient(top, #437994 0%, #2b607b 100%); /* Chrome10+,Safari5.1+ */
+      background: -o-linear-gradient(top, #437994 0%, #2b607b 100%); /* Opera 11.10+ */
+      background: -ms-linear-gradient(top, #437994 0%, #2b607b 100%); /* IE10+ */
+      background: linear-gradient(to bottom, #437994 0%, #2b607b 100%); /* W3C */
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#437994', endColorstr = '#2b607b', GradientType = 0); /* IE6-9 */
+    }
+    &:active {
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #2b607b), color-stop(100%, #437893));
+      background: -moz-linear-gradient(top, #2b607b 0%, #437893 100%); /* FF3.6+ */
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#4b6d7e', endColorstr = '#436576', GradientType = 0);
+      background: -webkit-linear-gradient(top, #2b607b 0%, #437893 100%); /* Chrome10+,Safari5.1+ */
+      background: -o-linear-gradient(top, #2b607b 0%, #437893 100%); /* Opera 11.10+ */
+      background: -ms-linear-gradient(top, #2b607b 0%, #437893 100%); /* IE10+ */
+      background: linear-gradient(to bottom, #2b607b 0%, #437893 100%); /* W3C */
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#2b607b', endColorstr = '#437893', GradientType = 0); /* IE6-9 */
+    }
+  }
+}
+
+.top_help {
+  background-image: image-url('help_icon.png');
+}
+
+.about_top_help {
+  width: 880px;
+  height: 50px;
+  font-weight: 4000;
+  font-size: 28px;
+  border: 1px solid #436576;
+  color: #FFFFFF;
+  padding: 25px 0 0 138px;
+  margin: 0 0 73px 0;
+  background: image-url('help_icon.png') no-repeat;
+  background-position: 30px;
+  background-color: #546f7d; /* Old browsers */
+  background-color: -moz-linear-gradient(top, #546f7d 0%, #436576 100%); /* FF3.6+ */
+  background-color: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #546f7d), color-stop(100%, #436576)); /* Chrome,Safari4+ */
+  background-color: -webkit-linear-gradient(top, #546f7d 0%, #436576 100%); /* Chrome10+,Safari5.1+ */
+  background-color: -o-linear-gradient(top, #546f7d 0%, #436576 100%); /* Opera 11.10+ */
+  background-color: -ms-linear-gradient(top, #546f7d 0%, #436576 100%); /* IE10+ */
+  background-color: linear-gradient(to bottom, #546f7d 0%, #436576 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#546f7d', endColorstr = '#436576', GradientType = 0); /* IE6-9 */
+}
+
+.content_more_help {
+  width: 680px;
+  height: auto;
+  padding: 14px 140px 35px 140px;
+  margin: -74px 0 0 0;
+  border: 1px solid #d2d2d2;
+  background-color: #FFFFFF;
+  line-height: 35px;
+
+  p.small {
+    font-size: 14px;
+    color: #313132;
+    line-height: 21px;
+    margin: 0 0 24px 0;
+  }
+}
+
+.contact_top {
+  background-image: image-url('icon-contact.png');
+}
+
+.download_top {
+  background-image: image-url('icon-download.png');
+}

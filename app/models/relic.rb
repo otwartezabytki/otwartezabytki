@@ -57,11 +57,13 @@ class Relic < ActiveRecord::Base
     end
     with_options :index => :not_analyzed do |na|
       na.indexes :id
+      na.indexes :kind
+      na.indexes :edit_count, :type => "integer"
+      na.indexes :skip_count, :type => "integer"
       na.indexes :voivodeship_id
       na.indexes :district_id
       na.indexes :commune_id
       na.indexes :place_id
-      na.indexes :ancestry
     end
   end
   Tire.configure { logger 'log/elasticsearch.log' }
@@ -72,7 +74,7 @@ class Relic < ActiveRecord::Base
       @highlighted_tags = @response['hits']['hits'].inject([]) do |m, h|
         m << h['highlight'].values.join.scan(/<em>(.*?)<\/em>/) if h['highlight']
         m
-      end.flatten.uniq.select{|w| w.size > 1}.sort_by{|w| -w.size}
+      end.flatten.uniq.select{|w| w.size > 1}.sort_by{|w| -w.size}.map{ |t| Unicode.downcase(t) }
     end
 
     def correct_count
@@ -102,30 +104,39 @@ class Relic < ActiveRecord::Base
       index.import objs
     end
 
+    def analyze_query q
+      analyzed = Relic.index.analyze q
+      analyzed ? analyzed['tokens'].inject("") { |s, t| s << " #{t['token']}*"; s } : '*'
+    end
+
     def search(params)
       tire.search(:load => false, :page => params[:page], :per_page => 10) do
         location = params[:location].to_s.split('-')
         corrected_relic_ids = (params[:corrected_relic_ids] || []).map(&:to_s)
+        seen_relic_ids =(params[:seen_relic_ids]||[]).map(&:to_s)
 
-        q1 = (params[:q1].present? ? params[:q1] : '*')
+        q1 = Relic.analyze_query params[:q1]
         query do
           boolean do
-            must { string q1, :default_operator => "AND" }
+            must { string q1, :default_operator => "AND", :fields => [
+              "identification^5",
+              "street",
+              "place_full_name^2",
+              "descendants.identification^3"              ]
+            }
           end
         end
         # # hack to use missing-filter
         # # http://www.elasticsearch.org/guide/reference/query-dsl/missing-filter.html
         # query_value = self.instance_variable_get("@query").instance_variable_get("@value")
         # query_value[:bool][:must] << { constant_score: { filter: { missing: { field: "ancestry" } } } }
-
-        highlight "identification" => {},
-          "street" => {},
-          "register_number" => {},
-          "place_full_name" => {},
-          "descendants.identification" => {},
-          "descendants.street" => {},
-          "descendants.register_number" => {}
-
+        if q1 != '*'
+          highlight "identification" => {},
+            "street" => {},
+            "place_full_name" => {},
+            "descendants.identification" => {},
+            "descendants.street" => {}
+        end
         facet "voivodeships" do
           terms :voivodeship_id, :size => 16
         end
@@ -168,18 +179,19 @@ class Relic < ActiveRecord::Base
             'corrected_relic_ids' => corrected_relic_ids
           }
         end
-
         sort do
           by '_script', {
               'script' => %q(
-                f0 = doc['edit_count'].value * f1 - doc['skip_count'].value;
-                if( corrected_relic_ids.indexOf(doc['id'].value.toString()) > -1 || doc['edit_count'].value > 2 ) { f2 + f0; } else { f0; }
+                i = -seen_relic_ids.indexOf(doc['id'].value.toString());
+                f0 = (i * 100) + (doc['edit_count'].value * f1) - doc['skip_count'].value;
+                if( corrected_relic_ids.contains(doc['id'].value.toString()) || doc['edit_count'].value > 2 ) { f2 + f0; } else { f0; }
               ).squish,
               'type' => 'number',
               'params' => {
-                'f1' => 1000,
+                'f1' => 100,
                 'f2' => -100_000_000,
-                'corrected_relic_ids' => corrected_relic_ids
+                'corrected_relic_ids' => corrected_relic_ids,
+                'seen_relic_ids' => seen_relic_ids
               },
               'order' => 'desc'
             }
@@ -190,11 +202,17 @@ class Relic < ActiveRecord::Base
 
     def suggester q
       tire.search(:load => false, :per_page => 1) do
-        q1 = (q.present? ? q : '*')
         query do
           boolean do
-            must { string q1, :default_operator => "AND" }
+            must { string Relic.analyze_query(q),:default_operator => "AND" }
           end
+        end
+        if q != '*'
+          highlight "identification" => {},
+            "street" => {},
+            "place_full_name" => {},
+            "descendants.identification" => {},
+            "descendants.street" => {}
         end
 
         facet "voivodeships" do
@@ -212,13 +230,13 @@ class Relic < ActiveRecord::Base
       end
     end
 
-    def next_for(user, search_params, include_skipped = false)
-      params = (search_params || {}).merge(:limit => 1, :corrected_relic_ids => user.corrected_relic_ids(include_skipped))
+    def next_for(user, search_params)
+      params = (search_params || {}).merge(:per_page => 1, :seen_relic_ids => user.seen_relic_ids, :corrected_relic_ids => user.corrected_relic_ids)
       self.search(params).first || self.first(:offset => rand(self.count))
     end
 
-    def next_few_for(user, search_params, count, include_skipped = false)
-      params = (search_params || {}).merge(:limit => count, :corrected_relic_ids => user.corrected_relic_ids(include_skipped))
+    def next_few_for(user, search_params, count)
+      params = (search_params || {}).merge(:per_page => count, :corrected_relic_ids => user.corrected_relic_ids)
       res = self.search(params).take(count)
       res.empty? ? self.where(:offset => rand(self.count)).limit(count) : res
     end
@@ -231,13 +249,11 @@ class Relic < ActiveRecord::Base
       :id               => id,
       :identification   => identification,
       :street           => street,
-      # :register_number  => register_number,
       :place_full_name  => place_full_name,
       :kind             => kind,
-      :dating_of_obj    => dating_of_obj,
       :descendants      => self.descendants.map(&:to_descendant_hash),
-      :edit_count       => edit_count,
-      :skip_count       => skip_count
+      :edit_count       => self.edit_count,
+      :skip_count       => self.skip_count
     }.merge(Hash[ids]).to_json
   end
 
@@ -246,7 +262,6 @@ class Relic < ActiveRecord::Base
       :id               => id,
       :identification   => identification,
       :street           => street,
-      # :register_number  => register_number
     }
   end
 

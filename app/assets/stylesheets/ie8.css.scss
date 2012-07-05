@@ -5,6 +5,35 @@
     height: auto !important;
     padding: 8px 0 8px 4px !important;
   }
+  article.step-skipped{
+    .actions{
+      .action-confirm a, .action-edit a{
+        filter: alpha(opacity=30);
+        display: inline-block;
+        color: #fff;
+      }
+    }
+  }
+  article.step-confirmed{
+    .actions{
+      .action-skip a, .action-edit a{
+        filter: alpha(opacity=30);
+        display: inline-block;
+        color: #fff;
+      }
+    }
+  }
+  article.step-edited{
+    .actions{
+      .action{
+        filter: alpha(opacity=30);
+      }
+      .action-edit, .action-back{
+        filter: alpha(opacity=100);
+        display: inline-block;
+      }
+    }
+  }
 }
 
 #more-button a {

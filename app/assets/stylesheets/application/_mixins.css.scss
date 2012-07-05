@@ -1,0 +1,17 @@
+@import "compass/layout";
+@import "compass/css3";
+
+$blue: #044d71;
+$blue-hover: #006699;
+$dark-grey: #313132;
+
+@mixin backgroundnavy {
+  @include filter-gradient(#4b6d7e, #436576);
+  background: #4b6d7e; /* Old browsers */
+  @include background(linear-gradient(#4b6d7e, #436576));
+  &:hover {
+    @include filter-gradient(#437994, #2b607b);
+    background: #437994; /* Old browsers */
+    @include background(linear-gradient(#437994, #2b607b));
+  }
+}

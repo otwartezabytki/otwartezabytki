@@ -1,0 +1,36 @@
+.step-submit {
+  margin: 50px auto;
+  border: 0;
+  background: #fff;
+  margin: 0;
+  padding: 25px 0;
+
+  .actions {
+    width: 100%;
+    float: none;
+    text-align: center;
+  }
+
+  #recaptcha_area {
+    margin: 0 auto;
+  }
+
+  .actions-view {
+    text-align: center;
+    h2 {
+      font-size: 20px;
+      margin: 45px 0;
+      font-weight: 400;
+    }
+    input {
+      text-indent: -9999px;
+      border: 0;
+      width: 421px;
+      height: 60px;
+      background: asset-data-url('wizard-confirm.png') no-repeat;
+      cursor: pointer;
+    }
+  }
+}
+
+
