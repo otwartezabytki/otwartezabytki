@@ -72,12 +72,11 @@ class RelicsController < ApplicationController
       end
     end
 
-
     if suggestion.save
       if suggestion.is_skipped?
-        redirect_to Relic.next_for(current_user, session[:search_params], true)
+        redirect_to [:gonext, suggestion.relic]
       else
-        redirect_to thank_you_relic_path(suggestion.relic.id)
+        redirect_to [:thank_you, suggestion.relic]
       end
     else
       flash[:error] = suggestion.errors.full_messages
@@ -86,12 +85,17 @@ class RelicsController < ApplicationController
 
   end
 
+  def gonext
+    current_user.mark_relic_as_seen(params[:id])
+    redirect_to [:edit, Relic.next_for(current_user, session[:search_params])]
+  end
+
   def thank_you
     if current_user && current_user.suggestions.count >= 3 && current_user.email.blank?
       @request_email = true
     end
 
-    @next_relic = Relic.next_for(current_user, session[:search_params], true)
+    @next_relic = Relic.next_for(current_user, session[:search_params])
   end
 
   def corrected

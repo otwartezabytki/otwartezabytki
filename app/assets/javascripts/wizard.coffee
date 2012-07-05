@@ -33,7 +33,7 @@ $.fn.specialize
       $(".help-content").removeClass('active')
       $('.step').removeClass('step-current')
       this.addClass('step-current')
-      this.action().val('skip')        
+      this.action().val('skip')
 
     view: ->
       this.switchViewClass('step-view')
@@ -528,7 +528,7 @@ jQuery ->
         $('#suggestion_latitude').val(latitude)
         $('#suggestion_longitude').val(longitude)
         $('#map_canvas').zoom_at(latitude, longitude)
-  
+
   $(".steps").on "click", ".help-content .help", ->
     if $(this).parents('.step').hasClass('step-current')
       $(this).parents(".help-content").addClass('active')
@@ -558,13 +558,6 @@ jQuery ->
   $('#suggestion_place_id_input').on 'keyup', ' .chzn-search input', (e) ->
     stroke = if (_ref = e.which) != null then _ref else e.keyCode
     add_suggestion_callback(e) if stroke == 13
-
-  $('#go_to_next').click ->
-    window.bypass_submit = true
-    $('#new_suggestion').submit()
-    return false
-
-
 
 # for animations
 $(window).load ->

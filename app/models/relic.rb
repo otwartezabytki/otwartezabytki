@@ -113,6 +113,7 @@ class Relic < ActiveRecord::Base
       tire.search(:load => false, :page => params[:page], :per_page => 10) do
         location = params[:location].to_s.split('-')
         corrected_relic_ids = (params[:corrected_relic_ids] || []).map(&:to_s)
+        seen_relic_ids =(params[:seen_relic_ids]||[]).map(&:to_s)
 
         q1 = Relic.analyze_query params[:q1]
         query do
@@ -178,18 +179,19 @@ class Relic < ActiveRecord::Base
             'corrected_relic_ids' => corrected_relic_ids
           }
         end
-
         sort do
           by '_script', {
               'script' => %q(
-                f0 = doc['edit_count'].value * f1 - doc['skip_count'].value;
+                i = -seen_relic_ids.indexOf(doc['id'].value.toString());
+                f0 = (i * 100) + (doc['edit_count'].value * f1) - doc['skip_count'].value;
                 if( corrected_relic_ids.contains(doc['id'].value.toString()) || doc['edit_count'].value > 2 ) { f2 + f0; } else { f0; }
               ).squish,
               'type' => 'number',
               'params' => {
-                'f1' => 1000,
+                'f1' => 100,
                 'f2' => -100_000_000,
-                'corrected_relic_ids' => corrected_relic_ids
+                'corrected_relic_ids' => corrected_relic_ids,
+                'seen_relic_ids' => seen_relic_ids
               },
               'order' => 'desc'
             }
@@ -205,7 +207,6 @@ class Relic < ActiveRecord::Base
             must { string Relic.analyze_query(q),:default_operator => "AND" }
           end
         end
-
         if q != '*'
           highlight "identification" => {},
             "street" => {},
@@ -229,13 +230,13 @@ class Relic < ActiveRecord::Base
       end
     end
 
-    def next_for(user, search_params, include_skipped = false)
-      params = (search_params || {}).merge(:limit => 1, :corrected_relic_ids => user.corrected_relic_ids(include_skipped))
+    def next_for(user, search_params)
+      params = (search_params || {}).merge(:per_page => 1, :seen_relic_ids => user.seen_relic_ids, :corrected_relic_ids => user.corrected_relic_ids)
       self.search(params).first || self.first(:offset => rand(self.count))
     end
 
-    def next_few_for(user, search_params, count, include_skipped = false)
-      params = (search_params || {}).merge(:limit => count, :corrected_relic_ids => user.corrected_relic_ids(include_skipped))
+    def next_few_for(user, search_params, count)
+      params = (search_params || {}).merge(:per_page => count, :corrected_relic_ids => user.corrected_relic_ids)
       res = self.search(params).take(count)
       res.empty? ? self.where(:offset => rand(self.count)).limit(count) : res
     end

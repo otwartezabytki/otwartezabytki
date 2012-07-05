@@ -19,6 +19,7 @@ Otwartezabytki::Application.routes.draw do
     member do
       get :corrected
       get :thank_you
+      get :gonext
     end
   end
 
