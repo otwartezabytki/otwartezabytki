@@ -99,7 +99,7 @@ class RelicsController < ApplicationController
   end
 
   def corrected
-    @next_relics = Relic.next_few_for(current_user, search_params[:search_params], 3, true)
+    @next_relics = Relic.next_few_for(current_user, search_params[:search_params], 3)
   end
 
 
