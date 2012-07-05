@@ -1,0 +1,43 @@
+.step-tags {
+  .check_boxes ul {
+    margin: 0;
+    padding: 5px;
+  }
+
+  .check_boxes li {
+    display: block;
+    width: 100%;
+    float: left;
+    list-style-type: none;
+  }
+
+  .column {
+
+    display: inline-block;
+    vertical-align: top;
+    font-size: 13px;
+    margin-top: 10px;
+    input {
+      width: auto;
+      margin: 0 3px 5px 0;
+      padding: 0;
+      height: auto;
+    }
+    label {
+      text-transform: none;
+      font-size: 16px;
+    }
+  }
+
+  .column-first {
+    width: 240px;
+  }
+
+  .column-second {
+    width: 300px;
+  }
+
+  .column-third {
+    width: 200px;
+  }
+}
