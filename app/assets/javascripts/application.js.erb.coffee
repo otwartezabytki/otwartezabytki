@@ -19,6 +19,21 @@
 @small_marker_image_path = "<%= image_path('wizard-gps-circle.png') %>"
 @geocoder_search_path = "/geocoder/search"
 
+default_spinner_opts =
+  lines: 13
+  length: 7
+  width: 4
+  radius: 10
+  rotate: 0
+  color: '#000'
+  speed: 1
+  trail: 60
+  shadow: false
+  hwaccel: false
+  className: 'spinner'
+  zIndex: 2e9
+  top: 88
+  left: 180
 
 jQuery ->
   # autocomplete
@@ -74,7 +89,19 @@ jQuery ->
   $("a[rel=tooltip]").tooltip()
 
   #tabs
-  $("#tabs").tabs()
+  show_tab = (panel) ->
+    unless $(panel).find('iframe').length
+      spinner = new Spinner(default_spinner_opts).spin(panel)
+      $(panel).append($(panel).find('script').html())
+      $(panel).find('iframe').load ->
+        $(this).css(opacity: 1)
+        spinner.stop()
+
+  $("#tabs").tabs
+    select: (event, ui) -> show_tab(ui.panel)
+
+  $(window).load ->
+    show_tab($('#tabs-1')[0])
 
   # jquery footer cycle
   jQuery(".partner-slider-1, .partner-slider-2, .partner-slider-3").cycle({
