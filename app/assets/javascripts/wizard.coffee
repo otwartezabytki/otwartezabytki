@@ -569,7 +569,7 @@ jQuery ->
   if window.location.hash.match(/step/)
     $(".#{window.location.hash.slice(1)}:first").view()
 
-  $('a.colorbox').colorbox()
+  $('a.colorbox').colorbox({rel: "gal"})
 
 # for animations
 $(window).load ->
