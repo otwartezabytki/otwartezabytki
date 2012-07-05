@@ -19,7 +19,13 @@
           .help Pomoc
           .help-extended
             %span.close Zamknij pomoc
-            %p Sprawdź, czy nazwa zabytku jest poprawna (np. jeśli zaczyna się od małej litery, popraw ją na wielką). Jeśli chcesz ją poprawić, kliknij „Zmień”. Pojawi się pole, w którym można poprawić nazwę. Następnie naciśnij „Zapisz”, aby zachować poprawioną nazwę. Jeśli jest poprawna, kliknij „Powierdź”. Jeśli nie wiesz, czy nazwa jest poprawna, spróbuj znaleźć informacje na stronach internetowych lub w książkach. Jeśli Ci się nie uda, kliknij „Nie wiem”, a automatycznie przejdziesz do kolejnego punktu. W przypadku popełnienia błędu kliknij „Edytuj ponownie” i edytuj ponownie.
+            %p
+              Sprawdź, czy nazwa zabytku jest poprawna (np. jeśli zaczyna się od małej litery, popraw ją na wielką).
+              Jeśli chcesz ją poprawić, kliknij „Zmień”. Pojawi się pole, w którym można poprawić nazwę.
+              Następnie naciśnij „Zapisz”, aby zachować poprawioną nazwę. Jeśli jest poprawna, kliknij „Powierdź”.
+              Jeśli nie wiesz, czy nazwa jest poprawna, spróbuj znaleźć informacje na stronach internetowych lub w książkach.
+              Jeśli Ci się nie uda, kliknij „Nie wiem”, a automatycznie przejdziesz do kolejnego punktu.
+              W przypadku popełnienia błędu kliknij „Edytuj ponownie” i edytuj ponownie.
         .values.values-edit.values-view
           = f.input :identification, :as => :string, :label => "Nazwa", :input_html => { :readonly => true }
           = f.input :identification_action, :as => :hidden
@@ -51,7 +57,13 @@
           .help Pomoc
           .help-extended
             %span.close Zamknij pomoc
-            %p Sprawdź, czy nazwa miejscowości jest poprawna. Jeśli jest poprawna, kliknij „Powierdź”. Jeśli chcesz ją poprawić, kliknij „Zmień”. Pokaże się pole, w którym można poprawić nazwę. (Gdy zaczniesz wpisywać nazwę, system podpowie możliwości. Możesz wybrać jedną z podpowiedzi lub dokończyć wpisywanie samodzielnie). Następnie naciśnij „Zapiszł, aby zachować poprawioną nazwę. Jeśli nie wiesz, czy nazwa miejscowości jest poprawna, spróbuj znaleźć informacje na stronach internetowych lub w książkach. Jeśli Ci się nie uda, kliknij „Nie wiem”, a automatycznie przejdziesz do kolejnego punktu.
+            %p 
+              Sprawdź, czy nazwa miejscowości jest poprawna. Jeśli jest poprawna, kliknij „Powierdź”. 
+              Jeśli chcesz ją poprawić, kliknij „Zmień”. Pokaże się pole, w którym można poprawić nazwę. 
+              (Gdy zaczniesz wpisywać nazwę, system podpowie możliwości. Możesz wybrać jedną z podpowiedzi 
+              lub dokończyć wpisywanie samodzielnie). Następnie naciśnij „Zapisz”, aby zachować poprawioną nazwę.
+              Jeśli nie wiesz, czy nazwa miejscowości jest poprawna, spróbuj znaleźć informacje na stronach internetowych lub w książkach.
+              Jeśli Ci się nie uda, kliknij „Nie wiem”, a automatycznie przejdziesz do kolejnego punktu.
         .values.values-view
           = f.input :place_name, :as => :string, :label => "Miejscowość",
             :input_html => { :name => "place_name_viewer", :id => "place_name_viewer", :readonly => true }
@@ -89,9 +101,22 @@
           .help-extended
             %span.close Zamknij pomoc
             - if f.object.street.present?
-              %p Sprawdź, czy adres jest poprawny. Jeśli jest poprawny, kliknij „Potwierdź”. Jeśli chcesz go poprawić, kliknij „Zmień”. Pokaże się pole, w którym można poprawić adres. (Gdy  zaczniesz wpisywać nazwę ulicy, system podpowie możliwości. Możesz  wybrać jedną z podpowiedzi lub dokończyć wpisywanie samodzielnie).  Następnie naciśnij „Zapisz”, aby zachować poprawiony adres. Jeśli nie  wiesz, czy adres jest poprawny, spróbuj znaleźć informacje na stronach  internetowych lub w książkach. Jeśli   znajdziesz informację, że zabytek występuje w obrębie kilku ulic (np. Park Dreszera w Warszawie w obrębie ulic Ursynowskiej, Puławskiej,   Odyńca i Krasickiego), wpisz wszystkie. Jeśli Ci się nie uda, kliknij „Nie wiem,  pomiń”, a automatycznie przejdziesz do kolejnego punktu.
+              %p
+                Sprawdź, czy adres jest poprawny. Jeśli jest poprawny, kliknij „Potwierdź”.
+                Jeśli chcesz go poprawić, kliknij „Zmień”. Pokaże się pole, w którym można poprawić adres.
+                (Gdy  zaczniesz wpisywać nazwę ulicy, system podpowie możliwości.
+                Możesz  wybrać jedną z podpowiedzi lub dokończyć wpisywanie samodzielnie).
+                Następnie naciśnij „Zapisz”, aby zachować poprawiony adres.
+                Jeśli nie  wiesz, czy adres jest poprawny, spróbuj znaleźć informacje na stronach  internetowych lub w książkach.
+                Jeśli   znajdziesz informację, że zabytek występuje w obrębie kilku ulic
+                (np. Park Dreszera w Warszawie w obrębie ulic Ursynowskiej, Puławskiej,   Odyńca i Krasickiego), wpisz wszystkie.
+                Jeśli Ci się nie uda, kliknij „Nie wiem,  pomiń”, a automatycznie przejdziesz do kolejnego punktu.
             - else
-              Spróbuj znaleźć adres zabytku (np. na stronach internetowych lub w  książkach). Jeśli znajdziesz informację, że zabytek występuje w obrębie kilku ulic (np. Park Dreszera w Warszawie w obrębie ulic Ursynowskiej, Puławskiej, Odyńca i Krasickiego), wpisz wszystkie. Jeśli Ci się nie uda, kliknij „Nie wiem”, a  automatycznie przejdziesz do kolejnego punktu.
+              %p
+                Spróbuj znaleźć adres zabytku (np. na stronach internetowych lub w  książkach).
+                Jeśli znajdziesz informację, że zabytek występuje w obrębie kilku ulic
+                (np. Park Dreszera w Warszawie w obrębie ulic Ursynowskiej, Puławskiej, Odyńca i Krasickiego), wpisz wszystkie.
+                Jeśli Ci się nie uda, kliknij „Nie wiem”, a  automatycznie przejdziesz do kolejnego punktu.
         %span.ico
         .values.values-edit.values-view
           = f.input :street, :as => :string, :label => "Adres", :placeholder => "Brak adresu", :input_html => { :readonly => true }
@@ -145,9 +170,16 @@
           .help-extended
             %span.close Zamknij pomoc
             - if f.object.street.present?
-              %p Sprawdź, czy data jest poprawna. Jeśli jest jest poprawna, kliknij „Powierdź”. Jeśli chcesz ją poprawić, kliknij „Zmień”. Pokaże się pole, w którym można poprawić datę. Następnie naciśnij „Zapisz”, aby zachować poprawioną datę. Jeśli nie wiesz, czy data jest poprawna, spróbuj znaleźć informacje na stronach internetowych lub w książkach. Jeśli Ci się nie uda, kliknij „Nie wiem”, a automatycznie przejdziesz do kolejnego punktu.
+              %p
+                Sprawdź, czy data jest poprawna. Jeśli jest jest poprawna, kliknij „Powierdź”.
+                Jeśli chcesz ją poprawić, kliknij „Zmień”. Pokaże się pole, w którym można poprawić datę.
+                Następnie naciśnij „Zapisz”, aby zachować poprawioną datę. Jeśli nie wiesz, czy data jest poprawna,
+                spróbuj znaleźć informacje na stronach internetowych lub w książkach. Jeśli Ci się nie uda, kliknij
+                „Nie wiem”, a automatycznie przejdziesz do kolejnego punktu.
             - else
-              Spróbuj znaleźć datę powstania zabytku (np. na stronach internetowych lub w książkach). Jeśli Ci się nie uda, kliknij „Nie wiem”, a automatycznie przejdziesz do kolejnego punktu.
+              %p
+                Spróbuj znaleźć datę powstania zabytku (np. na stronach internetowych lub w książkach).
+                Jeśli Ci się nie uda, kliknij „Nie wiem”, a automatycznie przejdziesz do kolejnego punktu.
         %span.ico
         .values.values-edit.values-view
           = f.input :dating_of_obj, :as => :string, :label => "Data powstania", :placeholder => "Brak daty powstania", :input_html => { :readonly => true }
@@ -201,7 +233,10 @@
           .help Pomoc
           .help-extended
             %span.close Zamknij pomoc
-            %p Wybierz określenia (klikając poszczególne słowa), które pasują do sprawdzanego zabytku. Zaznacz wszystkie, które uważasz za pasujące. Jeśli uważasz, że na liście brakuje pasującego określenia, wybierz opcję „inny”. Gdy skończysz, wciśnij „Potwierdź”. Jeśli chcesz pominąć ten punkt, wciśnij „Pomiń”.
+            %p
+              Wybierz określenia (klikając poszczególne słowa), które pasują do sprawdzanego zabytku.
+              Zaznacz wszystkie, które uważasz za pasujące. Jeśli uważasz, że na liście brakuje pasującego określenia,
+              wybierz opcję „inny”. Gdy skończysz, wciśnij „Potwierdź”. Jeśli chcesz pominąć ten punkt, wciśnij „Pomiń”.
         %span.ico
 
         .values.values-not-current
@@ -253,6 +288,17 @@
             %article.subrelic
 
               %article.step.step-name.step-simple.step-view
+                .help-content
+                  .help Pomoc
+                  .help-extended
+                    %span.close Zamknij pomoc
+                    %p
+                      Sprawdź, czy nazwa zabytku jest poprawna (np. jeśli zaczyna się od małej litery, popraw ją na wielką).
+                      Jeśli chcesz ją poprawić, kliknij „Zmień”. Pojawi się pole, w którym można poprawić nazwę.
+                      Następnie naciśnij „Zapisz”, aby zachować poprawioną nazwę. Jeśli jest poprawna, kliknij „Powierdź”.
+                      Jeśli nie wiesz, czy nazwa jest poprawna, spróbuj znaleźć informacje na stronach internetowych lub w książkach.
+                      Jeśli Ci się nie uda, kliknij „Nie wiem”, a automatycznie przejdziesz do kolejnego punktu.
+                      W przypadku popełnienia błędu kliknij „Edytuj ponownie” i edytuj ponownie.
                 .values.values-edit.values-view
                   = f2.input :identification, :as => :string, :label => "Nazwa zabytku", :input_html => { :readonly => true }
                   = f2.input :identification_action, :as => :hidden
@@ -279,6 +325,21 @@
                     )
 
               %article.step.step-date.step-simple.step-view
+                .help-content
+                  .help Pomoc
+                  .help-extended
+                    %span.close Zamknij pomoc
+                    - if f.object.street.present?
+                      %p
+                        Sprawdź, czy data jest poprawna. Jeśli jest jest poprawna, kliknij „Powierdź”.
+                        Jeśli chcesz ją poprawić, kliknij „Zmień”. Pokaże się pole, w którym można poprawić datę.
+                        Następnie naciśnij „Zapisz”, aby zachować poprawioną datę. Jeśli nie wiesz, czy data jest poprawna,
+                        spróbuj znaleźć informacje na stronach internetowych lub w książkach. Jeśli Ci się nie uda, kliknij
+                        „Nie wiem”, a automatycznie przejdziesz do kolejnego punktu.
+                    - else
+                      %p
+                        Spróbuj znaleźć datę powstania zabytku (np. na stronach internetowych lub w książkach).
+                        Jeśli Ci się nie uda, kliknij „Nie wiem”, a automatycznie przejdziesz do kolejnego punktu.
                 .values.values-edit.values-view
                   = f2.input :dating_of_obj, :as => :string, :label => "Z kiedy?", :placeholder => "Brak daty powstania", :input_html => { :readonly => true }
                   = f2.input :dating_of_obj_action, :as => :hidden
@@ -328,6 +389,16 @@
                       )
 
               %article.step.step-tags.step-view
+
+                .help-content
+                  .help Pomoc
+                  .help-extended
+                    %span.close Zamknij pomoc
+                    %p
+                      Wybierz określenia (klikając poszczególne słowa), które pasują do sprawdzanego zabytku.
+                      Zaznacz wszystkie, które uważasz za pasujące. Jeśli uważasz, że na liście brakuje pasującego określenia,
+                      wybierz opcję „inny”. Gdy skończysz, wciśnij „Potwierdź”. Jeśli chcesz pominąć ten punkt, wciśnij „Pomiń”.
+
                 .values.values-not-current
                   = f2.input :tag_names, :as => :string, :label => "Pasujące określenia",
                     :input_html => { :name => "tag-names", :class => "tag-names", :readonly => true }
