@@ -25,6 +25,49 @@ body.relics.edit {
     }
   }
 
+  .step-current .help-content {
+    &.active {
+      padding: 0;
+      margin: -25px -25px 0 -25px;
+      .help {
+        display: none;
+      }
+      .help-extended {
+        display: block;
+      }
+    }
+    .help {
+      display: block;
+      cursor: pointer;
+      z-index: 1000;
+    }
+    .help-extended {
+      padding: 25px;
+      margin-bottom: 20px;
+      background: #f4f7f9;
+      border-bottom: 1px dashed #47697a;
+      .close {
+        float: right;
+        font-size: 12px;
+        color: #0c4e6e;
+        font-weight: 600;
+        padding-left: 26px;
+        background: asset-data-url('wizard-icon-help-selected.png') no-repeat;
+        line-height: 18px;
+        cursor: pointer;
+        position: relative;
+        z-index: 1000;
+      }
+      p {
+        font-size: 13px;
+        color: #08374d;
+        line-height: 20px;
+        padding-right: 140px;
+        margin: 0;
+      }
+    }
+  }
+
   .subrelics {
     clear: both;
   }
@@ -41,48 +84,7 @@ body.relics.edit {
 
 }
 
-.step-current .help-content {
-  &.active {
-    padding: 0;
-    margin: -25px -25px 0 -25px;
-    .help {
-      display: none;
-    }
-    .help-extended {
-      display: block;
-    }
-  }
-  .help {
-    display: block;
-    cursor: pointer;
-    z-index: 1000;
-  }
-  .help-extended {
-    padding: 25px;
-    margin-bottom: 20px;
-    background: #f4f7f9;
-    border-bottom: 1px dashed #47697a;
-    .close {
-      float: right;
-      font-size: 12px;
-      color: #0c4e6e;
-      font-weight: 600;
-      padding-left: 26px;
-      background: asset-data-url('wizard-icon-help-selected.png') no-repeat;
-      line-height: 18px;
-      cursor: pointer;
-      position: relative;
-      z-index: 1000;
-    }
-    p {
-      font-size: 13px;
-      color: #08374d;
-      line-height: 20px;
-      padding-right: 140px;
-      margin: 0;
-    }
-  }
-}
+
 
 .steps {
   background: #e8eef1;
@@ -183,7 +185,17 @@ body.relics.edit {
     }
   }
 
-  .action-edit, .action-confirm, .action-skip {
+  .action-skip {
+    display: inline-block;
+    a {
+      color: #567785;
+      font-size: 14px;
+      padding: 8px 20px;
+      margin-right: 25px;
+    }
+  }
+
+  .action-edit, .action-confirm, &.step-skipped .action-skip {
     display: inline-block;
     a {
       color: #fff;
@@ -280,7 +292,7 @@ body.relics.edit {
 
 .step-edited {
   .action-back {
-    padding-left: 200px;
+    padding-left: 127px;
   }
   .action-back-short {
     padding-left: 0px;
@@ -377,15 +389,15 @@ body.relics.edit {
     opacity: .3;
   }
   .action-back {
-    padding-left: 412px;
+    padding-left: 236px;
   }
   .action-back-short {
-    padding-left: 243px;
+    padding-left: 169px;
   }
 
   &.step-date {
     .action-back-short {
-      padding-left: 233px;
+      padding-left: 162px;
     }
   }
 }
