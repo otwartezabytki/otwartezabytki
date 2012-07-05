@@ -618,21 +618,19 @@ a{
 .steps{
 	background: #e8eef1;
 	.step {
-
         border-radius: 3px;
 		-webkit-border-radius: 3px;
 		border: 3px solid #fff;
 		background: #eee;
 		padding: 25px 25px 40px 25px;
 		margin-bottom: 1px;
-
 		.ico{
-          width: 58px;
-          height: 13px;
-          position: absolute;
-          background: asset-data-url('icon-waiting-big.png') no-repeat;
-          right: 25px;
-          bottom: 17px;
+			width: 58px;
+			height: 13px;
+			position: absolute;
+			background: asset-data-url('icon-waiting-big.png') no-repeat;
+			right: 25px;
+			bottom: 17px;
 		}
 
 		input[type="text"] {
@@ -659,7 +657,7 @@ a{
 			}
 		}
 
-        input[readonly]{
+        input[type="text"][readonly] {
           background: none;
           border: 0;
           box-shadow: none;
@@ -670,8 +668,7 @@ a{
           filter: none;
           padding-left: 0;
         }
-
-        &.step-gps input[readonly]{
+        &.step-gps input[type="text"][readonly] {
           color: #1e5d7d;
           font-size: 14px;
           border: 1px solid #346d8a;
@@ -1446,7 +1443,7 @@ body.loaded .overlay {
                 text-shadow: 0 -1px 1px rgb(255,255,255);
                 font-size: 17px;
                 @include rounded(3px);
-                @include gradient(#f9f9f9, #ccc);
+                @include background(linear-gradient(#f9f9f9, #cccccc));
                 box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2);
                 -webkit-transition:all .2s ease-in;  
                 -moz-transition:all .2s ease-in;  
@@ -1830,18 +1827,16 @@ body.loaded .overlay {
     h4 {
       font-size: 15px;
     }
-
-    input[type="text"], input[type="email"], input[type="password"] {
-      background-position:10px;
-      background-repeat: no-repeat;
-      width:310px;
-      height:auto;
-      padding:8px 0 8px 35px;
-      border:1px solid #646464;
-      @include rounded;
-      margin:5px 5px 0 0;
-    }
-
+		input[type="text"], input[type="email"], input[type="password"] {
+	    background-position:10px;
+			background-repeat: no-repeat;
+	    width:310px;
+	    height:auto;
+	    padding:8px 0 8px 35px;
+	    border:1px solid #646464;
+	    @include rounded;
+	    margin:5px 5px 0 0;
+	  }
     input[type="submit"] {
       float: left;
       margin: 16px 3px 0 0;
@@ -1859,31 +1854,22 @@ body.loaded .overlay {
       padding: 5px 16px 4px 19px;
       cursor: pointer;
     }
-
     input[type="submit"]:hover {
       background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #437893), color-stop(100%, #2c617c));
       filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4b6d7e', endColorstr='#436576',GradientType=0 );
     }
-
     input[type="submit"]:active {
       background: #FFF;
       background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #2b607b), color-stop(100%, #437893));
       filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4b6d7e', endColorstr='#436576',GradientType=0 );
     }
-
     .email {
       margin-bottom: 13px;
     }
-
-    input.error, #user_email.error {
-     border-color: rgb(213, 24, 24);
-    }
-
-    span.help-inline {
-      color: rgb(213, 24, 24);
-      font-size: 12px;
-    }
-
+	  input.error, #user_email.error {
+	     border-color: rgb(213, 24, 24);
+	   }
+		span.help-inline { color: rgb(213, 24, 24); font-size: 12px}
     p {
       margin: 12px 0;
     }

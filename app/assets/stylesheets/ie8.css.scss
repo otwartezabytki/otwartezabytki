@@ -1,6 +1,13 @@
+@import "compass/layout";
+
 .steps {
   input[type="text"] {
     height: auto !important;
     padding: 8px 0 8px 4px !important;
   }
 }
+
+#more-button a {
+  @include filter-gradient(#f9f9f9, #cccccc);
+}
+
