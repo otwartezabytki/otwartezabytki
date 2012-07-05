@@ -1094,7 +1094,7 @@ a{
                 float: right;
                 width: 172px;
                 margin: 0;
-                margin-top: 7px;
+                margin-top: 25px;
                 height: 420px;
                 background: #fff;
               }
@@ -1620,14 +1620,16 @@ body.loaded .overlay {
 }
 
 .help-content{
+	position: relative;
 	.help{
       display: none;
       float: right;
       font-size: 12px;
       color: #4a6b7d;
       font-weight: 600;
-      position: relative;
-      top: -13px;
+      position: absolute;
+      right: 0px;
+      top: 0px;
       padding-left: 26px;
       background: asset-data-url('wizard-icon-help-selected.png') no-repeat;
       line-height: 18px;
