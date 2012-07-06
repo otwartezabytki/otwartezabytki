@@ -572,6 +572,25 @@ jQuery ->
 
   $('a.colorbox').colorbox()
 
+  wizard_spinner_opts =
+    lines: 13
+    length: 30
+    width: 20
+    radius: 100
+    rotate: 0
+    color: '#aaa'
+    speed: 0.2
+    trail: 74
+    shadow: true
+    hwaccel: false
+    className: 'spinner'
+    zIndex: 2e9
+    top: 100
+    left: 'auto'
+
+
+  spinner = new Spinner(wizard_spinner_opts).spin($('.overlay')[0])
+
 # for animations
 $(window).load ->
   $('body').addClass('loaded')

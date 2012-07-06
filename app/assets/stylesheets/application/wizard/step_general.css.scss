@@ -1,110 +1,5 @@
 @import "../mixins";
 
-body.relics.edit {
-
-  .help-content {
-    position: relative;
-    .help {
-      display: none;
-      float: right;
-      font-size: 12px;
-      color: #4a6b7d;
-      font-weight: 600;
-      position: absolute;
-      right: 0px;
-      top: 0px;
-      padding-left: 26px;
-      background: asset-data-url('wizard-icon-help-selected.png') no-repeat;
-      line-height: 18px;
-    }
-    .help-extended {
-      display: none;
-      .close {
-        float: right;
-      }
-    }
-  }
-
-  .step-current .help-content {
-    &.active {
-      padding: 0;
-      margin: -25px -25px 0 -25px;
-      .help {
-        display: none;
-      }
-      .help-extended {
-        display: block;
-      }
-    }
-    .help {
-      display: block;
-      cursor: pointer;
-      z-index: 1000;
-    }
-    .help-extended {
-      padding: 25px;
-      margin-bottom: 20px;
-      background: #f4f7f9;
-      border-bottom: 1px dashed #47697a;
-      .close {
-        float: right;
-        font-size: 12px;
-        color: #0c4e6e;
-        font-weight: 600;
-        padding-left: 26px;
-        background: asset-data-url('wizard-icon-help-selected.png') no-repeat;
-        line-height: 18px;
-        cursor: pointer;
-        position: relative;
-        z-index: 1000;
-      }
-      p {
-        font-size: 13px;
-        color: #08374d;
-        line-height: 20px;
-        padding-right: 140px;
-        margin: 0;
-      }
-    }
-  }
-
-  .subrelics {
-    clear: both;
-  }
-
-  .subrelics {
-    > h3 {
-      font-size: 20px;
-      color: #5f6062;
-      padding: 30px 30px 30px 60px;
-      background: #fff asset-data-url('subrelics.png') 30px 31px no-repeat;
-      margin-bottom: 1px;
-    }
-  }
-
-}
-
-
-
-.steps {
-  background: #e8eef1;
-
-  .actions, .values {
-    p, span, div, h1, h2, h3, h4 {
-      -webkit-touch-callout: none;
-      -webkit-user-select: none;
-      -khtml-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
-  }
-}
-
-.steps, .values, .actions, .step {
-  position: relative;
-}
-
 .step {
   clear: both;
   @include border-radius(3px);
@@ -169,6 +64,72 @@ body.relics.edit {
   h3 {
     font-weight: 400;
     font-size: 16px;
+  }
+
+  .help-content {
+    position: relative;
+    .help {
+      display: none;
+      float: right;
+      font-size: 12px;
+      color: #4a6b7d;
+      font-weight: 600;
+      position: absolute;
+      right: 0px;
+      top: 0px;
+      padding-left: 26px;
+      background: asset-data-url('wizard-icon-help-selected.png') no-repeat;
+      line-height: 18px;
+    }
+    .help-extended {
+      display: none;
+      .close {
+        float: right;
+      }
+    }
+  }
+
+  &.step-current .help-content {
+    &.active {
+      padding: 0;
+      margin: -25px -25px 0 -25px;
+      .help {
+        display: none;
+      }
+      .help-extended {
+        display: block;
+      }
+    }
+    .help {
+      display: block;
+      cursor: pointer;
+      z-index: 1000;
+    }
+    .help-extended {
+      padding: 25px;
+      margin-bottom: 20px;
+      background: #f4f7f9;
+      border-bottom: 1px dashed #47697a;
+      .close {
+        float: right;
+        font-size: 12px;
+        color: #0c4e6e;
+        font-weight: 600;
+        padding-left: 26px;
+        background: asset-data-url('wizard-icon-help-selected.png') no-repeat;
+        line-height: 18px;
+        cursor: pointer;
+        position: relative;
+        z-index: 1000;
+      }
+      p {
+        font-size: 13px;
+        color: #08374d;
+        line-height: 20px;
+        padding-right: 140px;
+        margin: 0;
+      }
+    }
   }
 
   .action-cancel a {
@@ -400,19 +361,4 @@ body.relics.edit {
       padding-left: 162px;
     }
   }
-}
-
-.overlay {
-  opacity: 0.5;
-  background-color: white;
-  z-index: 10000;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-}
-
-body.loaded .overlay {
-  display: none !important;
 }

@@ -1,4 +1,5 @@
 /*
+ *= require_self
  *= require ./wizard/step_rules
  *= require ./wizard/step_general
  *= require ./wizard/step_simple
@@ -8,3 +9,55 @@
  *= require ./wizard/step_gps
  *= require ./wizard/step_submit
 */
+
+body.relics.edit {
+
+  .overlay {
+    opacity: 0.5;
+    background-color: white;
+    z-index: 10000;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+
+  &.loaded .overlay {
+    display: none !important;
+  }
+
+  .steps {
+    background: #e8eef1;
+
+    .actions, .values {
+      p, span, div, h1, h2, h3, h4 {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+    }
+  }
+
+  .steps, .values, .actions, .step {
+    position: relative;
+  }
+
+  .subrelics {
+    clear: both;
+  }
+
+  .subrelics {
+    > h3 {
+      font-size: 20px;
+      color: #5f6062;
+      padding: 30px 30px 30px 60px;
+      background: #fff asset-data-url('subrelics.png') 30px 31px no-repeat;
+      margin-bottom: 1px;
+    }
+  }
+
+}
