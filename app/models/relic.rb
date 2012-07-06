@@ -166,7 +166,7 @@ class Relic < ActiveRecord::Base
         filter :terms, :place_id => location[3] if location.size > 3
 
         facet "overall" do
-          terms :id, :script => 1, :global => true, :all_terms => true
+          terms :id, :script => 1, :global => true
         end
 
         corrected_faset_filter = {}
