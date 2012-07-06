@@ -11,7 +11,7 @@ class Users::PasswordsController < Devise::PasswordsController
       set_flash_message(:notice, flash_message) if is_navigational_format?
       warden.set_user resource
       sign_in(resource_name, resource, :bypass => true)
-      respond_with resource, :location => after_sign_in_path_for(resource)
+      respond_with resource, :location => hello_path(:notification => "password")
     else
       respond_with resource
     end

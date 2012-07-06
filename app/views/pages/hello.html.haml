@@ -7,8 +7,11 @@
     %h3 Witaj, <strong>#{current_user.username}</strong>
 
     %p
-      Wysłaliśmy Ci hasło na podany przez Ciebie adres e-mail.
-      Będzie Ci potrzebne do zalogowania się przy ponownej wizycie.
+      - if params[:notification] == 'password'
+        Hasło do Twojego konta zostało zmienione.
+      - else
+        Wysłaliśmy Ci hasło na podany przez Ciebie adres e-mail.
+        Będzie Ci potrzebne do zalogowania się przy ponownej wizycie.
 
     - if session[:search_params].present?
       = link_to edit_relic_path(Relic.next_for(current_user, session[:search_params])), :class => "btn" do
