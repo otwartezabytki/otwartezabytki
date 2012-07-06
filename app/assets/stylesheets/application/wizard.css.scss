@@ -21,6 +21,7 @@ body.relics.edit {
     right: 0;
     top: 0;
     bottom: 0;
+    overflow: hidden;
   }
 
   &.loaded .overlay {
