@@ -489,30 +489,31 @@
             = recaptcha_tags
           = f.submit "Wyślij formularz"
 
-:css
-  body.loaded .step {
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    -ms-transition: all 0.5s ease;
-    transition: all 0.5s ease;
-  }
+%script(type="text/css" id="after_load_css")
+  :css
+    body.loaded .step {
+      -webkit-transition: all 0.5s ease;
+      -moz-transition: all 0.5s ease;
+      -o-transition: all 0.5s ease;
+      -ms-transition: all 0.5s ease;
+      transition: all 0.5s ease;
+    }
 
-  body.loaded .step  * {
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    -ms-transition: all 0.5s ease;
-    transition: all 0.5s ease;
-  }
+    body.loaded .step  * {
+      -webkit-transition: all 0.5s ease;
+      -moz-transition: all 0.5s ease;
+      -o-transition: all 0.5s ease;
+      -ms-transition: all 0.5s ease;
+      transition: all 0.5s ease;
+    }
 
-  .step .ico, .step .help-content, .step .values *, .step-place .values *, .step .actions-navbar *, .step-gps, .step-gps *, .step-submit *, .step-submit {
-    -webkit-transition: none !important;
-    -moz-transition: none !important;
-    -o-transition: none !important;
-    -ms-transition: none !important;
-    transition: none !important;
-  }
+    .step .ico, .step .help-content, .step .values *, .step-place .values *, .step .actions-navbar *, .step-gps, .step-gps *, .step-submit *, .step-submit {
+      -webkit-transition: none !important;
+      -moz-transition: none !important;
+      -o-transition: none !important;
+      -ms-transition: none !important;
+      transition: none !important;
+    }
 
 - content_for :footer_javascripts do
   != javascript_include_tag "http://maps.googleapis.com/maps/api/js?key=AIzaSyAXlMDzvgp5OmKomylA1vjcWub2EmYaz1A&sensor=false".html_safe

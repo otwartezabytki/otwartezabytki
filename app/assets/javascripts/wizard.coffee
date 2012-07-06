@@ -581,3 +581,4 @@ $(window).load ->
     if $('.step-edited').length > 0 || $('.step-confirmed').length > 0 || $('.step-edit').length > 0
       return 'Jeśli wyjdziesz z tej strony, wprowadzone zmiany będą stracone.'
 
+  $('head').append($($('#after_load_css').html()))
