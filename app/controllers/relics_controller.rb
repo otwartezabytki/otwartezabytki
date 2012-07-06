@@ -167,17 +167,18 @@ class RelicsController < ApplicationController
       navigators = {}
       ['voivodeships', 'districts', 'communes', 'places'].each do |name|
         next unless facets[name]
-        ids = facets[name]['terms'].map { |k| k['term'].to_i }
+        ids = facets[name]['terms'].map { |k| k['term'] }
         klass = name.classify.constantize
-        objs = ids.sort.map do |id|
+        objs = ids.map do |id|
           Rails.cache.fetch("#{name.classify.downcase}_#{id}", :expires_in => 1.day) do
-            klass.find(id)
+            klass.find(id.split(':').first)
           end
         end
-        sorted_counts = facets[name]['terms'].sort_by { |k| k['term'].to_i }.map { |k| k['count'] }
+        sorted_counts = facets[name]['terms'].map { |k| k['count'] }
         objs.each_with_index do |o, i|
-          o.class_eval "attr_accessor :count"
+          o.class_eval "attr_accessor :count, :virtual_id"
           o.count = sorted_counts[i]
+          o.virtual_id = ids[i]
         end
         navigators[name] = (order == :count ?  objs.sort_by { |k| -k.count } : objs.sort_by { |k| k.name.parameterize })
       end if relics and facets
@@ -196,7 +197,7 @@ class RelicsController < ApplicationController
 
       location_arry.each_with_index do |id,i|
         l = Rails.cache.fetch("#{klasses[i].to_s.downcase}_#{id}", :expires_in => 1.day) do
-          klasses[i].find(id)
+          klasses[i].find(id.split(':').first)
         end
         @location_breadcrumbs << {:path => relics_path(search_params.merge(:location =>location_arry.first(i+1).join('-'))), :label => l.name }
       end if location_arry.present?

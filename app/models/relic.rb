@@ -63,6 +63,7 @@ class Relic < ActiveRecord::Base
       na.indexes :voivodeship_id
       na.indexes :district_id
       na.indexes :commune_id
+      na.indexes :virtual_commune_id
       na.indexes :place_id
     end
   end
@@ -111,7 +112,7 @@ class Relic < ActiveRecord::Base
 
     def search(params)
       tire.search(:load => false, :page => params[:page], :per_page => 10) do
-        location = params[:location].to_s.split('-')
+        location = params[:location].to_s.split('-').map {|l| l.split(':') }
         corrected_relic_ids = (params[:corrected_relic_ids] || []).map(&:to_s)
         seen_relic_ids =(params[:seen_relic_ids]||[]).map(&:to_s)
 
@@ -142,27 +143,27 @@ class Relic < ActiveRecord::Base
         end
 
         if location.size > 0
-          filter :term, :voivodeship_id => location[0]
-          facet "districts", :facet_filter => { :term => { :voivodeship_id => location[0] } } do
+          filter :terms, :voivodeship_id => location[0]
+          facet "districts", :facet_filter => { :terms => { :voivodeship_id => location[0] } } do
             terms :district_id, :size => 10_000
           end
         end
 
         if location.size > 1
-          filter :term, :district_id => location[1]
-          facet "communes", :facet_filter => { :term => { :district_id => location[1] } } do
-            terms :commune_id, :size => 10_000
+          filter :terms, :district_id => location[1]
+          facet "communes", :facet_filter => { :terms => { :district_id => location[1] } } do
+            terms :virtual_commune_id, :size => 10_000
           end
         end
 
         if location.size > 2
-          filter :term, :commune_id => location[2]
-          facet "places", :facet_filter => { :term => { :commune_id => location[2] } } do
+          filter :terms, :commune_id => location[2]
+          facet "places", :facet_filter => { :terms => { :commune_id => location[2]} } do
             terms :place_id, :size => 10_000
           end
         end
 
-        filter :term, :place_id => location[3] if location.size > 3
+        filter :terms, :place_id => location[3] if location.size > 3
 
         facet "overall" do
           terms :id, :script => 1, :global => true, :all_terms => true
@@ -171,8 +172,8 @@ class Relic < ActiveRecord::Base
         corrected_faset_filter = {}
         term_params = Hash[
           [:voivodeship_id, :district_id, :commune_id, :place_id].zip(location)
-        ].inject({}) { |mem, (k, v)| mem[k] = v if v; mem }
-        corrected_faset_filter = { :facet_filter => { :term => term_params } } if term_params.present?
+        ].inject({}) { |mem, (k, v)| mem[k] = v.split(':') if v; mem }
+        corrected_faset_filter = { :facet_filter => { :terms => term_params } } if term_params.present?
 
         facet "corrected", corrected_faset_filter do
           terms :edit_count, :script => "(corrected_relic_ids.contains(doc['id'].value.toString()) || doc['edit_count'].value > 2) ? 1 : 0", :all_terms => true, :params => {
@@ -253,7 +254,8 @@ class Relic < ActiveRecord::Base
       :kind             => kind,
       :descendants      => self.descendants.map(&:to_descendant_hash),
       :edit_count       => self.edit_count,
-      :skip_count       => self.skip_count
+      :skip_count       => self.skip_count,
+      :virtual_commune_id => self.place.virtual_commune_id
     }.merge(Hash[ids]).to_json
   end
 
