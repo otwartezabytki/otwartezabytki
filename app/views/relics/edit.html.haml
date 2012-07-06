@@ -202,13 +202,13 @@
             .action.action-edit= link_to "Zmień", "#"
             .action.action-skip= link_to "Nie wiem", "#"
             .action.action-submit= link_to "Zapisz", "#"
-            .action.action-cancel= link_to "Edytuj ponownie zmiany", "#"
+            .action.action-cancel= link_to "Cofnij zmiany", "#"
           - else
             %h3 Czy znasz datę powstania zabytku? (np. 1929, XIX w., 2 poł. XIV w.)
             .action.action-edit= link_to "Uzupełnij datę", "#"
             .action.action-skip= link_to "Nie znam", "#"
             .action.action-submit= link_to "Zapisz", "#"
-            .action.action-cancel= link_to "Edytuj ponownie zmiany", "#"
+            .action.action-cancel= link_to "Cofnij zmiany", "#"
         .actions.actions-done
           - if f.object.dating_of_obj.present?
             %h3 Czy data powstania zabytku jest poprawna? (np. 1929, XIX w., 2 poł. XIV w.)
@@ -362,13 +362,13 @@
                     .action.action-edit= link_to "Zmień", "#"
                     .action.action-skip= link_to "Nie wiem", "#"
                     .action.action-submit= link_to "Zapisz", "#"
-                    .action.action-cancel= link_to "Edytuj ponownie zmiany", "#"
+                    .action.action-cancel= link_to "Cofnij zmiany", "#"
                   - else
                     %h3 Czy znasz datę powstania zabytku? (np. 1929, XIX w., 2 poł. XIV w.)
                     .action.action-edit= link_to "Uzupełnij datę", "#"
                     .action.action-skip= link_to "Nie znam", "#"
                     .action.action-submit= link_to "Zapisz", "#"
-                    .action.action-cancel= link_to "Edytuj ponownie zmiany", "#"
+                    .action.action-cancel= link_to "Cofnij zmiany", "#"
                 .actions.actions-done
                   - if f2.object.dating_of_obj.present?
                     %h3 Czy data powstania zabytku jest poprawna? (np. 1929, XIX w., 2 poł. XIV w.)
