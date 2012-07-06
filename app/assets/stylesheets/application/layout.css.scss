@@ -240,33 +240,49 @@ a {
         margin-right: 30px;
         padding-left: 20px;
         display: block;
-        &:hover, &.current {
+        &:hover {
           color: $blue-hover;
+        }
+        &.current{
+          color: $dark-blue;
+          font-style: italic;
         }
         &.about {
           padding-left: 29px;
           background: asset-data-url('icon-menu-about.png') 4px 18px no-repeat;
           margin-right: 32px;
-          &:hover, &.current {
+          &:hover{
             background: asset-data-url('icon-menu-about-hover.png') 4px 18px no-repeat;
+          }
+          &.current {
+            background: asset-data-url('icon-menu-about-current.png') 4px 18px no-repeat;
           }
         }
         &.help {
           background: asset-data-url('icon-menu-help.png') 0 23px no-repeat;
-          &:hover, &.current {
+          &:hover {
             background: asset-data-url('icon-menu-help-hover.png') 0 23px no-repeat;
+          }
+          &.current {
+            background: asset-data-url('icon-menu-help-current.png') 0 23px no-repeat;
           }
         }
         &.contact {
           background: asset-data-url('icon-menu-contact.png') 0 24px no-repeat;
-          &:hover, &.current {
+          &:hover{
             background: asset-data-url('icon-menu-contact-hover.png') 0 24px no-repeat;
+          }
+          &.current {
+            background: asset-data-url('icon-menu-contact-current.png') 0 24px no-repeat;
           }
         }
         &.download {
           background: asset-data-url('icon-menu-download.png') 0 23px no-repeat;
-          &:hover, &.current {
+          &:hover{
             background: asset-data-url('icon-menu-download-hover.png') 0 23px no-repeat;
+          }
+          &.current {
+            background: asset-data-url('icon-menu-download-current.png') 0 23px no-repeat;
           }
         }
       }
