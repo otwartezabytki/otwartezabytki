@@ -97,8 +97,14 @@ jQuery ->
         $(this).css(opacity: 1)
         spinner.stop()
 
+  stop_videos = ->
+    $('#tabs iframe').each ->
+      $f(this).api('pause')
+
   $("#tabs").tabs
-    select: (event, ui) -> show_tab(ui.panel)
+    select: (event, ui) ->
+      do stop_videos
+      show_tab(ui.panel)
 
   $(window).load ->
     show_tab($('#tabs-1')[0])
