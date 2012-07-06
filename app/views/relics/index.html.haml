@@ -19,7 +19,7 @@
           Możesz natomiast przejrzeć listę innych zabytków, które wymagają sprawdzenia:
           %br
           = random_search_suggestions
-    - else
+    - elsif @pending.present?
       %div.relic-header
         %h2 Zabytki do sprawdzenia (#{relics.incorrect_count})
         - if location_breadcrumbs.present?
