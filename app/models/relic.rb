@@ -60,11 +60,7 @@ class Relic < ActiveRecord::Base
       na.indexes :kind
       na.indexes :edit_count, :type => "integer"
       na.indexes :skip_count, :type => "integer"
-      na.indexes :voivodeship_id
-      na.indexes :district_id
-      na.indexes :commune_id
       na.indexes :virtual_commune_id
-      na.indexes :place_id
     end
   end
   Tire.configure { logger 'log/elasticsearch.log' }
@@ -139,31 +135,31 @@ class Relic < ActiveRecord::Base
             "descendants.street" => {}
         end
         facet "voivodeships" do
-          terms :voivodeship_id, :size => 16
+          terms "voivodeship.name", :script => "_source.voivodeship.name + '_' + _source.voivodeship.id", :size => 16, :order => 'term'
         end
 
         if location.size > 0
-          filter :terms, :voivodeship_id => location[0]
-          facet "districts", :facet_filter => { :terms => { :voivodeship_id => location[0] } } do
-            terms :district_id, :size => 10_000
+          filter :terms, 'voivodeship.id' => location[0]
+          facet "districts", :facet_filter => { :terms => { 'voivodeship.id' => location[0] } } do
+            terms "district.name", :script => "_source.district.name + '_' + _source.district.id", :size => 10_000, :order => 'term'
           end
         end
 
         if location.size > 1
-          filter :terms, :district_id => location[1]
-          facet "communes", :facet_filter => { :terms => { :district_id => location[1] } } do
-            terms :virtual_commune_id, :size => 10_000
+          filter :terms, 'district.id' => location[1]
+          facet "communes", :facet_filter => { :terms => { 'district.id' => location[1] } } do
+            terms "commune.name", :script => "_source.commune.name + '_' + _source.virtual_commune_id", :size => 10_000, :order => 'term'
           end
         end
 
         if location.size > 2
-          filter :terms, :commune_id => location[2]
-          facet "places", :facet_filter => { :terms => { :commune_id => location[2]} } do
-            terms :place_id, :size => 10_000
+          filter :terms, 'commune.id' => location[2]
+          facet "places", :facet_filter => { :terms => { 'commune.id' => location[2]} } do
+             terms "place.name", :script => "_source.place.name + '_' + _source.place.id", :size => 10_000, :order => 'term'
           end
         end
 
-        filter :terms, :place_id => location[3] if location.size > 3
+        filter :terms, 'place.id' => location[3] if location.size > 3
 
         facet "overall" do
           terms :id, :script => 1, :global => true
@@ -171,8 +167,8 @@ class Relic < ActiveRecord::Base
 
         corrected_faset_filter = {}
         term_params = Hash[
-          [:voivodeship_id, :district_id, :commune_id, :place_id].zip(location)
-        ].inject({}) { |mem, (k, v)| mem[k] = v.split(':') if v; mem }
+          ['voivodeship.id', 'district.id', 'commune.id', 'place.id'].zip(location)
+        ].inject({}) { |mem, (k, v)| mem[k] = v if v; mem }
         corrected_faset_filter = { :facet_filter => { :terms => term_params } } if term_params.present?
 
         facet "corrected", corrected_faset_filter do
@@ -245,7 +241,6 @@ class Relic < ActiveRecord::Base
   end
 
   def to_indexed_json
-    ids = [:voivodeship_id, :district_id, :commune_id, :place_id].zip(get_parent_ids)
     {
       :id               => id,
       :identification   => identification,
@@ -255,8 +250,12 @@ class Relic < ActiveRecord::Base
       :descendants      => self.descendants.map(&:to_descendant_hash),
       :edit_count       => self.edit_count,
       :skip_count       => self.skip_count,
-      :virtual_commune_id => self.place.virtual_commune_id
-    }.merge(Hash[ids]).to_json
+      :voivodeship      => { :id => self.voivodeship_id,            :name => self.voivodeship.name },
+      :district         => { :id => self.district_id,               :name => self.district.name },
+      :commune          => { :id => self.commune_id,                :name => self.commune.name },
+      :virtual_commune_id => self.place.virtual_commune_id,
+      :place            => { :id => self.place_id,                  :name => self.place.name },
+    }.to_json
   end
 
   def to_descendant_hash

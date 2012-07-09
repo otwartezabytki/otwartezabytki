@@ -1,4 +1,3 @@
-- navigators = parse_navigators(relics.facets)
 .well.sidebar-nav
   %h3 Lokalizacja
   %ul.nav.nav-list.all
@@ -6,18 +5,18 @@
       = link_to "Cała Polska <span>#{relics.facets['overall']['total']}</span>".html_safe, relics_path(search_params)
   %ul.nav.nav-list
     - location = params[:location].to_s.split('-')
-    - navigators['voivodeships'].each do |obj|
+    - relics.facets['voivodeships']['terms'].sort_by{|t| Unicode.downcase(t['term'])}.each do |obj|
       %li
         = link_to_facet obj, location, 0 do
           %ul
-            - navigators['districts'].each do |obj|
+            - relics.facets['districts']['terms'].sort_by{|t| Unicode.downcase(t['term'])}.each do |obj|
               %li
                 = link_to_facet obj, location, 1 do
                   %ul
-                    - navigators['communes'].each do |obj|
+                    - relics.facets['communes']['terms'].sort_by{|t| Unicode.downcase(t['term'])}.each do |obj|
                       %li
                         = link_to_facet obj, location, 2 do
                           %ul
-                            - navigators['places'].each do |obj|
+                            - relics.facets['places']['terms'].sort_by{|t| Unicode.downcase(t['term'])}.each do |obj|
                               %li
                                 = link_to_facet obj, location, 3
