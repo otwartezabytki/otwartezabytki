@@ -16,6 +16,10 @@
           pasujących do słowa
           %strong „#{params[:q1]}”
         %p
+          Chesz dodać zabytek, którego nie możesz znaleźć?
+          %br
+          Będzie to możliwe za miesiąć, w pełnej wersji serwisu.
+        %p
           Możesz natomiast przejrzeć listę innych zabytków, które wymagają sprawdzenia:
           %br
           = random_search_suggestions
@@ -43,4 +47,9 @@
 
     = paginate relics
 
+    - unless relics.incorrect_count.zero?
+      %p#adding-note
+        Chesz dodać zabytek, którego nie możesz znaleźć?
+        %br
+        Będzie to możliwe za miesiąć, w pełnej wersji serwisu.
 
