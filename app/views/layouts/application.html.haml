@@ -32,20 +32,16 @@
             %h1
               %a(href=root_path) Otwarte Zabytki
             %section.disclaimer
-              Udostępniamy narzędzie do tworzenia bazy w wersji beta, w której mogą zdarzać się błędy. Z góry dziękujemy za cierpliwość. Wszelkie uwagi przesyłajcie na 
+              Udostępniamy narzędzie do tworzenia bazy w wersji beta, w której mogą zdarzać się błędy. Z góry dziękujemy za cierpliwość. Wszelkie uwagi przesyłajcie na
               = mail_to "kontakt@otwartezabytki.pl", "kontakt@otwartezabytki.pl"
             %nav#userNav
               %ul
-                /- if Rails.env.development?
-                /  %li= "uid = #{current_user.id rescue 0}, suggestions = #{current_user.suggestions.count rescue 0}"
                 - if current_user && current_user.registered? && current_user.errors.size == 0
                   %li Witaj, #{ current_user.username || current_user.email }
-                  - if (c = (current_user.suggestions.roots.not_skipped.count rescue 0)) > 0
-                    %li Liczba Twoich zabytków: #{c}
+                  %li Liczba Twoich zabytków: #{current_user.earn_points}
                   %li= link_to 'Wyloguj się', destroy_user_session_path, :method => :delete, :class => 'logout'
                 - else
-                  - if (c = (current_user.suggestions.roots.not_skipped.count rescue 0)) > 0
-                    %li Liczba Twoich zabytków: #{c}
+                  %li Liczba Twoich zabytków: #{current_user.try(:earn_points) || 0}
                   %li
                     %a{:href => new_user_session_path, :class => 'login'} Zaloguj
                   %li

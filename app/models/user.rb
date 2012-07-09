@@ -64,6 +64,11 @@ class User < ActiveRecord::Base
     self.seen_relics.order("updated_at #{self.class.seen_relic_order}").pluck(:relic_id)
   end
 
+  def earn_points
+    return @earn_points if defined? @earn_points
+    @earn_points = self.suggestions.not_skipped.count
+  end
+
   class << self
     def reset_password_by_token(attributes={})
       recoverable = find_or_initialize_with_error_by(:reset_password_token, attributes[:reset_password_token])
