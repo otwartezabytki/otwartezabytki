@@ -110,7 +110,7 @@ class Relic < ActiveRecord::Base
       analyzed['tokens'].group_by{|i| i['position']}.inject([]) do |s1, (k, v)|
         s1 << v.inject([]) {|s2, t| s2 << "#{t['token']}*"; s2}.join(' OR ')
         s1
-      end.join(' AND ')
+      end.join(' ')
     end
 
     def search(params)
