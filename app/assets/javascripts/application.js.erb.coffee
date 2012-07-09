@@ -102,6 +102,8 @@ jQuery ->
       $f(this).api('pause')
 
   $("#tabs").tabs
+    create: (enevt, ui) ->
+      $('#tabs img').css('display', 'block')
     select: (event, ui) ->
       do stop_videos
       show_tab(ui.panel)
