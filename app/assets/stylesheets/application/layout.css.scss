@@ -585,9 +585,10 @@ a {
       display: inline-block;
       a {
         font-size: 14px;
-        padding: 1px 7px;
+        padding: 1px 3px;
       }
       &.active a {
+        padding: 1px 7px;
         background-color: rgb(95, 96, 98);
         color: rgb(255, 255, 255);
       }
