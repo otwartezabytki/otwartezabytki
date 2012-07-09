@@ -61,6 +61,12 @@ class Relic < ActiveRecord::Base
       na.indexes :edit_count, :type => "integer"
       na.indexes :skip_count, :type => "integer"
       na.indexes :virtual_commune_id
+
+      # backward compatibility
+      na.indexes :voivodeship_id
+      na.indexes :district_id
+      na.indexes :commune_id
+      na.indexes :place_id
     end
   end
   Tire.configure { logger 'log/elasticsearch.log' }
@@ -245,6 +251,8 @@ class Relic < ActiveRecord::Base
   end
 
   def to_indexed_json
+    # backward compatibility
+    ids = [:voivodeship_id, :district_id, :commune_id, :place_id].zip(get_parent_ids)
     {
       :id               => id,
       :identification   => identification,
@@ -259,7 +267,7 @@ class Relic < ActiveRecord::Base
       :commune          => { :id => self.commune_id,                :name => self.commune.name },
       :virtual_commune_id => self.place.virtual_commune_id,
       :place            => { :id => self.place_id,                  :name => self.place.name },
-    }.to_json
+    }.merge(Hash[ids]).to_json
   end
 
   def to_descendant_hash
