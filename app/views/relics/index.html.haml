@@ -47,8 +47,9 @@
 
     = paginate relics
 
-    %p#adding-note
-      Chesz dodać zabytek, którego nie możesz znaleźć?
-      %br
-      Będzie to możliwe za miesiąć, w pełnej wersji serwisu.
+    - unless relics.incorrect_count.zero?
+      %p#adding-note
+        Chesz dodać zabytek, którego nie możesz znaleźć?
+        %br
+        Będzie to możliwe za miesiąć, w pełnej wersji serwisu.
 
