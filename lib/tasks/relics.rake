@@ -88,7 +88,7 @@ sql = <<SQL
     r.latitude as latitude,
     r.longitude as longitude,
     'revision' as coordinates_action,
-    regexp_replace(trim(E'\n ' from regexp_replace(substring(r.tags from 10), E'[^A-Za-zżółćęśąźńŻÓŁĆĘŚĄ\\s\\n]', '', 'g')), E'\\n\\s*', ',', 'g') as categories,
+    regexp_replace(trim(E'\n ' from regexp_replace(substring(r.tags from 7), E'[^A-Za-zżółćęśąźńŻÓŁĆĘŚĄ\\s\\n_]', '', 'g')), E'\\n\\s*', ',', 'g') as categories,
     'revision' as categories_action
   from
     relics as r,
@@ -106,7 +106,7 @@ SQL
 
     ntuples = results.ntuples
     processed_items = 0
-    CSV.open(args.export_csv, "wb") do |csv|
+    CSV.open(args.export_csv, "wb", :force_quotes => true) do |csv|
       csv << results[0].keys
 
       results.each_entry do |entry|
@@ -144,7 +144,7 @@ sql = <<SQL
     s.latitude as latitude,
     s.longitude as longitude,
     s.coordinates_action as coordinates_action,
-    regexp_replace(trim(E'\n ' from regexp_replace(substring(s.tags from 10), E'[^A-Za-zżółćęśąźńŻÓŁĆĘŚĄ\\s\\n]', '', 'g')), E'\\n\\s*', ',', 'g') as categories,
+    regexp_replace(trim(E'\n ' from regexp_replace(substring(s.tags from 7), E'[^A-Za-zżółćęśąźńŻÓŁĆĘŚĄ\\s\\n_]', '', 'g')), E'\\n\\s*', ',', 'g') as categories,
     s.tags_action as categories_action
   from
     suggestions as s,
@@ -162,7 +162,7 @@ SQL
 
     abort "You need to run :export_init task first and create export file." unless File.exist?(args.export_csv)
 
-    last_name, last_id = `tail -n 1 #{args.export_csv}`.split(',').first.split('_')
+    last_name, last_id = `tail -n 1 #{args.export_csv}`.split(',').first.match(/(\w+)_(\d+)/).captures
 
     if last_name == 'sug'
       puts "Limiting query to ids greather than #{last_id}"
@@ -182,7 +182,7 @@ SQL
     puts "Processing #{ntuples} tuples"
 
     processed_items = 0
-    CSV.open(args.export_csv, "ab") do |csv|
+    CSV.open(args.export_csv, "ab", :force_quotes => true) do |csv|
       results.each_entry do |entry|
         csv << entry.values
         processed_items += 1

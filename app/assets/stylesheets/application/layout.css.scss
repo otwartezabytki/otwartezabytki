@@ -5,7 +5,7 @@ body {
   font-family: 'Open Sans', sans-serif;
   font-size: 13px;
   color: #313132;
-  overflow-x: hidden;
+
 }
 
 body.big {
@@ -585,9 +585,10 @@ a {
       display: inline-block;
       a {
         font-size: 14px;
-        padding: 1px 7px;
+        padding: 1px 3px;
       }
       &.active a {
+        padding: 1px 7px;
         background-color: rgb(95, 96, 98);
         color: rgb(255, 255, 255);
       }
@@ -720,6 +721,7 @@ a {
                   opacity: 0;
                   position: absolute;
                   top: 0;
+                  right: 0;
                 }
               }
             }

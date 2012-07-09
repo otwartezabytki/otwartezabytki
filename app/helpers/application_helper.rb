@@ -2,8 +2,8 @@
 module ApplicationHelper
 
   def users_statistics
-    all = Suggestion.select('distinct user_id').count
-    registered = Suggestion.select('distinct user_id').joins(:user).where("users.username IS NOT NULL").count
+    all = User.count
+    registered = User.where("username IS NOT NULL").count
     [all, registered, all-registered]
   end
 

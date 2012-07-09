@@ -21,6 +21,7 @@ body.relics.edit {
     right: 0;
     top: 0;
     bottom: 0;
+    overflow: hidden;
   }
 
   &.loaded .overlay {
@@ -29,16 +30,13 @@ body.relics.edit {
 
   .steps {
     background: #e8eef1;
-
-    .actions, .values {
-      p, span, div, h1, h2, h3, h4 {
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        -khtml-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
+    .actions *, .help-content, h1, h2, h3, h4, .column * {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
     }
   }
 
