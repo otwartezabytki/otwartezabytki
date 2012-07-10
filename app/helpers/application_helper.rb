@@ -2,9 +2,12 @@
 module ApplicationHelper
 
   def users_statistics
-    all = User.count
-    registered = User.where("username IS NOT NULL").count
-    [all, registered, all-registered]
+    registered = Suggestion.select('distinct user_id').joins(:user).where("users.username IS NOT NULL").count
+    non_registered = 2717 + Suggestion.select('distinct user_id').joins(:user).where("suggestions.created_at > ? AND users.username IS NULL", Time.local(2012, 7, 10, 16, 0)).count
+
+    all = registered + non_registered
+
+    [all, registered, non_registered]
   end
 
   def users_activity_statistics
@@ -68,10 +71,9 @@ module ApplicationHelper
   end
 
 	def link_to_facet obj, location, deep, &block
-    name, id  = obj['term'].split('_')
-		selected 	= location[deep] == id
-    label 		= "#{name} <span>#{obj['count']}</span>".html_safe
-    link 			= link_to label, relics_path(search_params.merge(:location => (location.first(deep) << id).join('-')))
+		selected 	= location[deep] == obj.id.to_s
+    label 		= "#{obj.name} <span>#{obj.count}</span>".html_safe
+    link 			= link_to label, relics_path(search_params.merge(:location => (location.first(deep) << obj.id).join('-')))
     output = []
 		if selected
 			output << content_tag(:div, :class => 'selected') do
