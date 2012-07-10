@@ -246,15 +246,24 @@ a {
         &.current{
           color: $dark-blue;
         }
-        &.about {
+        &.home {
           padding-left: 29px;
-          background: asset-data-url('icon-menu-about.png') 4px 18px no-repeat;
+          background: asset-data-url('icon-menu-home.png') 4px 18px no-repeat;
           margin-right: 32px;
           &:hover{
-            background: asset-data-url('icon-menu-about-hover.png') 4px 18px no-repeat;
+            background: asset-data-url('icon-menu-home-hover.png') 4px 18px no-repeat;
           }
           &.current {
-            background: asset-data-url('icon-menu-about-current.png') 4px 18px no-repeat;
+            background: asset-data-url('icon-menu-home-current.png') 4px 18px no-repeat;
+          }
+        }
+        &.about {
+          background: asset-data-url('icon-menu-about.png') 0 23px no-repeat;
+          &:hover {
+            background: asset-data-url('icon-menu-about-hover.png') 0 23px no-repeat;
+          }
+          &.current {
+            background: asset-data-url('icon-menu-about-current.png') 0 23px no-repeat;
           }
         }
         &.help {

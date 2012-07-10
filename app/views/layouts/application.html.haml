@@ -52,6 +52,8 @@
             %nav
               %ul
                 %li
+                  = link_to "Strona główna", root_path, :class => "home #{current_page?(root_path) ? "current" : ""}"
+                %li
                   = link_to "O projekcie", page_pl_path('o-projekcie'), :class => "about #{current_page?(about_path) ? "current" : ""}"
                 %li
                   = link_to "Pomoc", page_pl_path('pomoc'), :class => "help #{current_page?(strony_pomoc_path) ? "current" : ""}"
