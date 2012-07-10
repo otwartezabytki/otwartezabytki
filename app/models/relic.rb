@@ -60,6 +60,9 @@ class Relic < ActiveRecord::Base
       na.indexes :kind
       na.indexes :edit_count, :type => "integer"
       na.indexes :skip_count, :type => "integer"
+      na.indexes :virtual_commune_id
+
+      # backward compatibility
       na.indexes :voivodeship_id
       na.indexes :district_id
       na.indexes :commune_id
@@ -115,7 +118,7 @@ class Relic < ActiveRecord::Base
 
     def search(params)
       tire.search(:load => false, :page => params[:page], :per_page => 10) do
-        location = params[:location].to_s.split('-')
+        location = params[:location].to_s.split('-').map {|l| l.split(':') }
         corrected_relic_ids = (params[:corrected_relic_ids] || []).map(&:to_s)
         seen_relic_ids =(params[:seen_relic_ids]||[]).map(&:to_s)
 
@@ -142,41 +145,41 @@ class Relic < ActiveRecord::Base
             "descendants.street" => {}
         end
         facet "voivodeships" do
-          terms :voivodeship_id, :size => 16
+          terms "voivodeship.name", :script => "_source.voivodeship.name + '_' + _source.voivodeship.id", :size => 16, :order => 'term'
         end
 
         if location.size > 0
-          filter :term, :voivodeship_id => location[0]
-          facet "districts", :facet_filter => { :term => { :voivodeship_id => location[0] } } do
-            terms :district_id, :size => 10_000
+          filter :terms, 'voivodeship.id' => location[0]
+          facet "districts", :facet_filter => { :terms => { 'voivodeship.id' => location[0] } } do
+            terms "district.name", :script => "_source.district.name + '_' + _source.district.id", :size => 10_000, :order => 'term'
           end
         end
 
         if location.size > 1
-          filter :term, :district_id => location[1]
-          facet "communes", :facet_filter => { :term => { :district_id => location[1] } } do
-            terms :commune_id, :size => 10_000
+          filter :terms, 'district.id' => location[1]
+          facet "communes", :facet_filter => { :terms => { 'district.id' => location[1] } } do
+            terms "commune.name", :script => "_source.commune.name + '_' + _source.virtual_commune_id", :size => 10_000, :order => 'term'
           end
         end
 
         if location.size > 2
-          filter :term, :commune_id => location[2]
-          facet "places", :facet_filter => { :term => { :commune_id => location[2] } } do
-            terms :place_id, :size => 10_000
+          filter :terms, 'commune.id' => location[2]
+          facet "places", :facet_filter => { :terms => { 'commune.id' => location[2]} } do
+             terms "place.name", :script => "_source.place.name + '_' + _source.place.id", :size => 10_000, :order => 'term'
           end
         end
 
-        filter :term, :place_id => location[3] if location.size > 3
+        filter :terms, 'place.id' => location[3] if location.size > 3
 
         facet "overall" do
-          terms :id, :script => 1, :global => true, :all_terms => true
+          terms :id, :script => 1, :global => true
         end
 
         corrected_faset_filter = {}
         term_params = Hash[
-          [:voivodeship_id, :district_id, :commune_id, :place_id].zip(location)
+          ['voivodeship.id', 'district.id', 'commune.id', 'place.id'].zip(location)
         ].inject({}) { |mem, (k, v)| mem[k] = v if v; mem }
-        corrected_faset_filter = { :facet_filter => { :term => term_params } } if term_params.present?
+        corrected_faset_filter = { :facet_filter => { :terms => term_params } } if term_params.present?
 
         facet "corrected", corrected_faset_filter do
           terms :edit_count, :script => "(corrected_relic_ids.contains(doc['id'].value.toString()) || doc['edit_count'].value > 2) ? 1 : 0", :all_terms => true, :params => {
@@ -248,6 +251,7 @@ class Relic < ActiveRecord::Base
   end
 
   def to_indexed_json
+    # backward compatibility
     ids = [:voivodeship_id, :district_id, :commune_id, :place_id].zip(get_parent_ids)
     {
       :id               => id,
@@ -257,7 +261,12 @@ class Relic < ActiveRecord::Base
       :kind             => kind,
       :descendants      => self.descendants.map(&:to_descendant_hash),
       :edit_count       => self.edit_count,
-      :skip_count       => self.skip_count
+      :skip_count       => self.skip_count,
+      :voivodeship      => { :id => self.voivodeship_id,            :name => self.voivodeship.name },
+      :district         => { :id => self.district_id,               :name => self.district.name },
+      :commune          => { :id => self.commune_id,                :name => self.commune.name },
+      :virtual_commune_id => self.place.virtual_commune_id,
+      :place            => { :id => self.place_id,                  :name => self.place.name },
     }.merge(Hash[ids]).to_json
   end
 

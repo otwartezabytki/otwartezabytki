@@ -68,9 +68,10 @@ module ApplicationHelper
   end
 
 	def link_to_facet obj, location, deep, &block
-		selected 	= location[deep] == obj.id.to_s
-    label 		= "#{obj.name} <span>#{obj.count}</span>".html_safe
-    link 			= link_to label, relics_path(search_params.merge(:location => (location.first(deep) << obj.id).join('-')))
+    name, id  = obj['term'].split('_')
+		selected 	= location[deep] == id
+    label 		= "#{name} <span>#{obj['count']}</span>".html_safe
+    link 			= link_to label, relics_path(search_params.merge(:location => (location.first(deep) << id).join('-')))
     output = []
 		if selected
 			output << content_tag(:div, :class => 'selected') do

@@ -8,4 +8,8 @@ class Place < ActiveRecord::Base
 
   scope :not_custom, where(:custom => false)
 
+  def virtual_commune_id
+    self[:virtual_commune_id] || self[:commune_id]
+  end
+
 end
