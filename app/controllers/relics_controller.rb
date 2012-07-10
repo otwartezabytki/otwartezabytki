@@ -26,7 +26,7 @@ class RelicsController < ApplicationController
 
   helper_method :parse_navigators, :search_params, :location_breadcrumbs, :need_captcha
 
-  before_filter :current_user!, :only => [:edit, :create, :update, :suggest_next, :thank_you]
+  before_filter :current_user!, :only => [:edit, :create, :update, :gonext, :thank_you]
 
   def show
     redirect_to edit_relic_path(params[:id]) and return
