@@ -2,12 +2,15 @@
 module ApplicationHelper
 
   def users_statistics
-    registered = Suggestion.select('distinct user_id').joins(:user).where("users.username IS NOT NULL").count
-    non_registered = 2717 + Suggestion.select('distinct user_id').joins(:user).where("suggestions.created_at > ? AND users.username IS NULL", Time.local(2012, 7, 10, 16, 0)).count
+    # registered users are those with username
+    registered = User.where('username IS NOT NULL').count
 
-    all = registered + non_registered
+    # count only users if less of 200 of them are registered from the same ip
+    non_registered = User.group(:last_sign_in_ip).select('count(id) as ids')
+    .having('count(id) < 200').where('username IS NULL')
+    .map(&:ids).map(&:to_i).sum
 
-    [all, registered, non_registered]
+    [registered + non_registered, registered, non_registered]
   end
 
   def users_activity_statistics
