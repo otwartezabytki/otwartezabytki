@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: "kontakt@otwartezabytki.pl"
+  default from: Settings.oz.email_sender
 
   def welcome_email(user, password, reset_password_token)
     @user = user
