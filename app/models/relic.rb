@@ -109,7 +109,7 @@ class Relic < ActiveRecord::Base
 
     def analyze_query q
       analyzed = Relic.index.analyze q
-      return '*' unless analyzed
+      return '*' if !analyzed or (analyzed and analyzed['tokens'].blank?)
       analyzed['tokens'].group_by{|i| i['position']}.inject([]) do |s1, (k, v)|
         s1 << v.inject([]) {|s2, t| s2 << "#{t['token']}*"; s2}.join(' OR ')
         s1
