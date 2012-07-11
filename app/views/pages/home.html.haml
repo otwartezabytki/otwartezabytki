@@ -10,27 +10,27 @@
       #more-button
         = link_to page_pl_path('dowiedz-sie-wiecej') do
           Dowiedz się więcej &#187;
-    / #tabs
-    /   %ul
-    /     %li
-    /       %a{:href => '#tabs-1', :style => "background-image: url('http://b.vimeocdn.com/ts/313/259/313259873_100.jpg')"}
-    /     %li
-    /       %a{:href => '#tabs-2', :style => "background-image: url('http://b.vimeocdn.com/ts/313/031/313031214_100.jpg')"}
-    /     %li
-    /       %a{:href => '#tabs-3', :style => "background-image: url('http://b.vimeocdn.com/ts/311/908/311908286_100.jpg')"}
-    / 
-    /   #tabs-1.video
-    /     = image_tag 'video-preview-1.jpg'
-    /     %script(type="text/html")
-    /       <iframe id="tabs-1_video" src="http://player.vimeo.com/video/45066441?color=8cc1d1&api=1&player_id=tabs-1_video" color="8cc1d1" width="390" height="219" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-    /   #tabs-2.video
-    /     = image_tag 'video-preview-2.jpg', :style => "display:none;"
-    /     %script(type="text/html")
-    /       <iframe id="tabs-2_video" src="http://player.vimeo.com/video/45035633?color=8cc1d1&api=1&player_id=tabs-2_video" color="8cc1d1" width="390" height="219" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-    /   #tabs-3.video
-    /     = image_tag 'video-preview-3.jpg', :style => "display:none;"
-    /     %script(type="text/html")
-    /       <iframe id="tabs-3_video" src="http://player.vimeo.com/video/44879498?color=8cc1d1&api=1&player_id=tabs-3_video" color="8cc1d1" width="390" height="219" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+    #tabs
+      %ul
+        %li
+          %a{:href => '#tabs-1', :style => "background-image: url('http://b.vimeocdn.com/ts/313/259/313259873_100.jpg')"}
+        %li
+          %a{:href => '#tabs-2', :style => "background-image: url('http://b.vimeocdn.com/ts/313/031/313031214_100.jpg')"}
+        %li
+          %a{:href => '#tabs-3', :style => "background-image: url('http://b.vimeocdn.com/ts/311/908/311908286_100.jpg')"}
+    
+      #tabs-1.video
+        = image_tag 'video-preview-1.jpg'
+        %script(type="text/html")
+          <iframe id="tabs-1_video" src="http://player.vimeo.com/video/45066441?color=8cc1d1&api=1&player_id=tabs-1_video" color="8cc1d1" width="390" height="219" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+      #tabs-2.video
+        = image_tag 'video-preview-2.jpg', :style => "display:none;"
+        %script(type="text/html")
+          <iframe id="tabs-2_video" src="http://player.vimeo.com/video/45035633?color=8cc1d1&api=1&player_id=tabs-2_video" color="8cc1d1" width="390" height="219" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+      #tabs-3.video
+        = image_tag 'video-preview-3.jpg', :style => "display:none;"
+        %script(type="text/html")
+          <iframe id="tabs-3_video" src="http://player.vimeo.com/video/44879498?color=8cc1d1&api=1&player_id=tabs-3_video" color="8cc1d1" width="390" height="219" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
 
     .step1
       %h3
@@ -68,16 +68,21 @@
           .numbers
             .numbers-row
               %span= stats[3]
-              zabytków sprawdziły 3 osoby
+              = relics_pl(stats[3])
+              sprawdziły 3 osoby
             .numbers-row
               %span.a= stats[2]
-              zabytków sprawdziły dwie osoby
-        %h3 zabytków
+              = relics_pl(stats[2])
+              sprawdziły dwie osoby
+        %h3= relics_pl(stats[1])
       .left.r
-        %h3 Pozostało do końca
+        - l = stats[0]-stats[3]
+        %h3
+          = pluralize(l, :zero => "Pozostało", :one => "Pozostał", :few => "Pozostały", :other => "Pozostało")
+          do końca
         .wrap
-          .active= stats[0]-stats[3]
-        %h3 zabytków
+          .active= l
+        %h3= relics_pl(l)
         
     .progress-bar
       .bg

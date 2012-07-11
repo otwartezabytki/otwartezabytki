@@ -97,4 +97,12 @@ module ApplicationHelper
     end
   end
 
+  def pluralize(n, dict = {})
+    dict[n == 0 ? :zero : (n==1 ? :one : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? :few : :other)]
+  end
+
+  def relics_pl(n)
+    pluralize(n, {:zero => "zabytków", :one => "zabytek", :few => "zabytki", :other => "zabytków"})
+  end
+
 end
