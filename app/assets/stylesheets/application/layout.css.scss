@@ -1344,20 +1344,20 @@ p#adding-note {
   .left {
     float: left;
     width: 400px;
-    padding-left: 78px;
     h3 {
       color: #b4b4b4;
       font-size: 30px;
-      text-align: center;
+			padding-left: 30px;
     }
     .active {
       font-size: 66px;
       color: #06405d;
       float: left;
-      width: 165px;
+      width: 155px;
       text-align: right;
       font-weight: bold;
       padding-right: 20px;
+			padding-left: 30px;
     }
 
     .numbers {
@@ -1425,73 +1425,54 @@ p#adding-note {
   }
 }
 
-.progress-bar {
-  width: 958px;
-  margin: 60px auto 0;
-  color: #313132;
+.progress {
+	padding-top: 25px;
+	height: 275px;
+	h2 {
+		text-align: center;
+		font-size: 16px;
+		padding-bottom: 25px;
+	}
+	
+	.left { 
+		width: 500px; 
+		.numbers {
+			span { color: #285b26; }
+			span.a { color: #378733; }
+		}
+	}
+	.wrap { overflow: hidden; }
+	.g {
+		.active { color: #4db848; }
+	}
+	
 
-  h3 {
-    font-size: 22px;
-    text-align: center;
-    margin-bottom: 22px;
-  }
-
-  .bar {
-    position: relative;
-    height: 90px;
-    margin-bottom: 75px;
-    margin-top: 35px;
-  }
-
-  .bar .lvl {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 90px;
-
-    .num {
-      height: 47px;
-      line-height: 47px;
-      padding-right: 8px;
-      text-align: right;
-      color: #fff;
-      font-size: 16px;
-      font-weight: bold;
-      -webkit-border-radius: 10px 0 0 10px;
-      border-radius: 10px 0 0 10px;
-    }
-
-    .desc {
-      padding-top: 12px;
-      text-align: right;
-      font-size: 11px;
-      border-right: 1px solid #dcdcdc;
-      float: right;
-      padding-right: 8px;
-    }
-
-  }
-
-  .bar .p0 .desc {
-    border: none
-  }
-  .bar .p0 .num {
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-  }
-
-  .p0 .num {
-    background-image: image-url('bar-p0.png');
-  }
-  .p1 .num {
-    background-image: image-url('bar-p1.png');
-  }
-  .p2 .num {
-    background-image: image-url('bar-p2.png');
-  }
-  .p3 .num {
-    background-image: image-url('bar-p3.png');
-  }
+	.r {
+		width: 430px;
+		text-align: right;
+		.active {
+			float: none;
+			width: auto;
+			padding-right: 0;
+			text-align: right;
+		}
+	}
+	
+	.progress-bar {
+		height: 25px;
+		padding: 11px 30px;
+		
+		.bg { height: 25px; background: image-url('progress-bar-bg.png') top left repeat; }
+		.color { height: 25px;  background: image-url('progress-bar-color.png') top left repeat; }
+	}
+	
+	.info {
+		padding-top: 5px;
+		font-size: 18px;
+		text-align: center;
+		color: #9c9c9c;
+		strong { font-weight: bold; }
+	}
 }
 
 div.highlight {
