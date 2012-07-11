@@ -10,27 +10,27 @@
       #more-button
         = link_to page_pl_path('dowiedz-sie-wiecej') do
           Dowiedz się więcej &#187;
-    #tabs
-      %ul
-        %li
-          %a{:href => '#tabs-1', :style => "background-image: url('http://b.vimeocdn.com/ts/313/259/313259873_100.jpg')"}
-        %li
-          %a{:href => '#tabs-2', :style => "background-image: url('http://b.vimeocdn.com/ts/313/031/313031214_100.jpg')"}
-        %li
-          %a{:href => '#tabs-3', :style => "background-image: url('http://b.vimeocdn.com/ts/311/908/311908286_100.jpg')"}
-
-      #tabs-1.video
-        = image_tag 'video-preview-1.jpg'
-        %script(type="text/html")
-          <iframe id="tabs-1_video" src="http://player.vimeo.com/video/45066441?color=8cc1d1&api=1&player_id=tabs-1_video" color="8cc1d1" width="390" height="219" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-      #tabs-2.video
-        = image_tag 'video-preview-2.jpg', :style => "display:none;"
-        %script(type="text/html")
-          <iframe id="tabs-2_video" src="http://player.vimeo.com/video/45035633?color=8cc1d1&api=1&player_id=tabs-2_video" color="8cc1d1" width="390" height="219" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-      #tabs-3.video
-        = image_tag 'video-preview-3.jpg', :style => "display:none;"
-        %script(type="text/html")
-          <iframe id="tabs-3_video" src="http://player.vimeo.com/video/44879498?color=8cc1d1&api=1&player_id=tabs-3_video" color="8cc1d1" width="390" height="219" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+    / #tabs
+    /   %ul
+    /     %li
+    /       %a{:href => '#tabs-1', :style => "background-image: url('http://b.vimeocdn.com/ts/313/259/313259873_100.jpg')"}
+    /     %li
+    /       %a{:href => '#tabs-2', :style => "background-image: url('http://b.vimeocdn.com/ts/313/031/313031214_100.jpg')"}
+    /     %li
+    /       %a{:href => '#tabs-3', :style => "background-image: url('http://b.vimeocdn.com/ts/311/908/311908286_100.jpg')"}
+    / 
+    /   #tabs-1.video
+    /     = image_tag 'video-preview-1.jpg'
+    /     %script(type="text/html")
+    /       <iframe id="tabs-1_video" src="http://player.vimeo.com/video/45066441?color=8cc1d1&api=1&player_id=tabs-1_video" color="8cc1d1" width="390" height="219" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+    /   #tabs-2.video
+    /     = image_tag 'video-preview-2.jpg', :style => "display:none;"
+    /     %script(type="text/html")
+    /       <iframe id="tabs-2_video" src="http://player.vimeo.com/video/45035633?color=8cc1d1&api=1&player_id=tabs-2_video" color="8cc1d1" width="390" height="219" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+    /   #tabs-3.video
+    /     = image_tag 'video-preview-3.jpg', :style => "display:none;"
+    /     %script(type="text/html")
+    /       <iframe id="tabs-3_video" src="http://player.vimeo.com/video/44879498?color=8cc1d1&api=1&player_id=tabs-3_video" color="8cc1d1" width="390" height="219" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
 
     .step1
       %h3
@@ -48,30 +48,45 @@
         Skorzystaj z przykładów:
         - cache("home_search_suggestions", :expires_in => 5.minutes) do
           = random_search_suggestions
-- if false
-  .progress-bar
-    %h3.pb Jak wygląda nasza baza zabytków?
-    .bar
-      - cache("home_relics_statistics", :expires_in => 5.minutes) do
-        - stats = relics_statistics
+.user-stats.progress
+  - cache("home_relics_statistics", :expires_in => 5.minutes) do
+    - stats = relics_statistics
 
-        - p3 = [15, stats[3] * 100 / stats[0]].max
-        - p2 = [30, stats[2] * 100 / stats[0]].max
-        - p1 = [45, stats[1] * 100 / stats[0]].max
+    %h2 JAK WYGLĄDA NASZA BAZA ZABYTKÓW?
+  
+    .nums
+      .left.g
+        %h3 Sprawdziliśmy
+        
+        - # stats[0] - wszystkie
+        - # stats[1] - przez >= 1 osobne
+        - # stats[2] - przez >= 2 osoby
+        - # stats[3] - przez >= 3 osoby
 
-        %div.lvl.p0{:style => "width: 100%"}
-          .num= stats[0]
-          .desc zabytki w naszej bazie
-        %div.lvl.p1{:style => "width: #{p1}%"}
-          .num= stats[1]
-          .desc w sumie przejżanych<br/>już zabytków
-        %div.lvl.p2{:style => "width: #{p2}%"}
-          .num= stats[2]
-          .desc zabytków przejżały<br/>dwie osoby
-        %div.lvl.p3{:style => "width: #{p3}%"}
-          .num= stats[3]
-          .desc zabytków czeka na<br/>weryfikację NID
-
+        .wrap
+          .active= stats[1]
+          .numbers
+            .numbers-row
+              %span= stats[3]
+              zabytków sprawdziły 3 osoby
+            .numbers-row
+              %span.a= stats[2]
+              zabytków sprawdziły dwie osoby
+        %h3 zabytków
+      .left.r
+        %h3 Pozostało do końca
+        .wrap
+          .active= stats[0]-stats[3]
+        %h3 zabytków
+        
+    .progress-bar
+      .bg
+        .color{:style => "width: #{stats[3]*100/stats[0]}%"}
+        
+    .info
+      %strong= stats[0]
+      %br
+      wszystkich zabytków w bazie
 
 .user-stats
   - cache("home_users_statistics", :expires_in => 5.minutes) do
