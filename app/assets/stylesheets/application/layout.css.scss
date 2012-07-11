@@ -597,6 +597,7 @@ a {
       }
       &.active a {
         padding: 1px 7px;
+
         background-color: rgb(95, 96, 98);
         color: rgb(255, 255, 255);
       }
@@ -1329,6 +1330,7 @@ p#adding-note {
 }
 
 .user-stats {
+  font-weight: 100;
   color: #4e4e4e;
   width: 958px;
   height: 193px;
@@ -1336,6 +1338,7 @@ p#adding-note {
   background: #fff;
   margin: 28px auto;
   padding: 45px 0 0 0;
+  font-size: 14px;
 
   .nums {
     overflow: hidden;
@@ -1400,9 +1403,9 @@ p#adding-note {
 
       div {
         float: left;
-        width: 180px;
+        width: 190px;
         margin-left: 17px;
-        font-size: 13px;
+        font-size: 14px;
 
         span {
           font-size: 18px;
@@ -1418,7 +1421,7 @@ p#adding-note {
   }
   .info {
     text-align: right;
-    font-size: 11px;
+    font-size: 14px;
     clear: both;
     padding-right: 50px;
     padding-top: 25px;
@@ -1428,11 +1431,13 @@ p#adding-note {
 .progress {
 	padding-top: 25px;
 	height: 275px;
+  font-weight: 100;
+  font-size: 14px;
 	h2 {
 		text-align: center;
 		font-size: 16px;
 		padding-bottom: 25px;
-		letter-space: 2px;
+		letter-spacing: 1.5px;
 	}
 	
 	.left { 
@@ -1469,10 +1474,13 @@ p#adding-note {
 	
 	.info {
 		padding-top: 5px;
-		font-size: 18px;
 		text-align: center;
 		color: #9c9c9c;
-		strong { font-weight: bold; }
+    font-size: 14px;
+		strong {
+      font-weight: bold;
+      font-size: 18px;
+    }
 	}
 }
 
