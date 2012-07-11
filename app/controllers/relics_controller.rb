@@ -107,7 +107,7 @@ class RelicsController < ApplicationController
     query = params[:q1].to_s.strip
     render :json => [] and return unless query.present?
 
-    cached_json = Rails.cache.fetch(query.parameterize, :expires_in => 1.day) do
+    cached_json = Rails.cache.fetch("suggester-#{query.parameterize}", :expires_in => 1.day) do
       results = Relic.suggester(query)
       navigators_json = []
       navigators_json << {
