@@ -1,5 +1,5 @@
 @import "mixins";
-
+$experimental-support-for-svg: true;
 body {
   background: #f5f5f5;
   font-family: 'Open Sans', sans-serif;
@@ -232,12 +232,12 @@ a {
       float: left;
       a {
         color: #313132;
-        font-weight: 600;
-        font-size: 15px;
+        font-weight: normal;
+        font-size: 14px;
         line-height: 60px;
         text-shadow: 0 1px 0 #fff;
         text-decoration: none;
-        margin-right: 30px;
+        margin-right: 20px;
         padding-left: 20px;
         display: block;
         &:hover {
@@ -246,15 +246,23 @@ a {
         &.current{
           color: $dark-blue;
         }
-        &.about {
-          padding-left: 29px;
-          background: asset-data-url('icon-menu-about.png') 4px 18px no-repeat;
-          margin-right: 32px;
+        &.home {
+          padding-left: 24px;
+          background: asset-data-url('icon-menu-home.png') 4px 18px no-repeat;
           &:hover{
-            background: asset-data-url('icon-menu-about-hover.png') 4px 18px no-repeat;
+            background: asset-data-url('icon-menu-home-hover.png') 4px 18px no-repeat;
           }
           &.current {
-            background: asset-data-url('icon-menu-about-current.png') 4px 18px no-repeat;
+            background: asset-data-url('icon-menu-home-current.png') 4px 18px no-repeat;
+          }
+        }
+        &.about {
+          background: asset-data-url('icon-menu-about.png') 0 23px no-repeat;
+          &:hover {
+            background: asset-data-url('icon-menu-about-hover.png') 0 23px no-repeat;
+          }
+          &.current {
+            background: asset-data-url('icon-menu-about-current.png') 0 23px no-repeat;
           }
         }
         &.help {
