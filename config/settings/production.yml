@@ -1,2 +1,3 @@
-ga_key: 'Your Google Analitics key'
-gm_key: AIzaSyAXlMDzvgp5OmKomylA1vjcWub2EmYaz1A
+oz:
+  ga_key: UA-32863912-1
+  host: otwartezabytki.pl

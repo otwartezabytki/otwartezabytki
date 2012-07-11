@@ -42,7 +42,6 @@ jQuery ->
     $input.autocomplete(
       html: true,
       minLength: 2,
-      delay: 1000
       source: (request, callback) ->
         $.getJSON "/relics/suggester", q1: request.term, callback
       select: (event, ui) ->

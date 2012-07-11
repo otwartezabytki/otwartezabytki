@@ -89,6 +89,20 @@ class Relic < ActiveRecord::Base
       return @incorrect_count if defined? @incorrect_count
       @incorrect_count = self.facets['corrected']['terms'].select {|a| a['term'] == 0}.first['count'] rescue 0
     end
+
+    def terms name, unicode_order = false, load = false
+      (self.facets[name].try(:[], 'terms') || []).tap do |terms|
+        terms.sort_by!{ |t| Unicode.downcase(t['term']) } if unicode_order
+        terms.map! do |t|
+          id = t['term'].split('_').last
+          klass = name.classify.constantize
+          t['obj'] = Rails.cache.fetch("#{name.classify.downcase}_#{id}", :expires_in => 1.day) do
+            klass.find(id.split(':').first)
+          end
+          t
+        end if load
+      end
+    end
   end
 
   Tire::Results::Item.class_eval do
@@ -109,7 +123,7 @@ class Relic < ActiveRecord::Base
 
     def analyze_query q
       analyzed = Relic.index.analyze q
-      return '*' unless analyzed
+      return '*' if !analyzed or (analyzed and analyzed['tokens'].blank?)
       analyzed['tokens'].group_by{|i| i['position']}.inject([]) do |s1, (k, v)|
         s1 << v.inject([]) {|s2, t| s2 << "#{t['token']}*"; s2}.join(' OR ')
         s1
@@ -214,6 +228,7 @@ class Relic < ActiveRecord::Base
             must { string Relic.analyze_query(q),:default_operator => "AND" }
           end
         end
+
         if q != '*'
           highlight "identification" => {},
             "street" => {},
@@ -223,16 +238,16 @@ class Relic < ActiveRecord::Base
         end
 
         facet "voivodeships" do
-          terms :voivodeship_id, :size => 3
+          terms "voivodeship.name", :script => "_source.voivodeship.name + '_' + _source.voivodeship.id", :size => 3
         end
         facet "districts" do
-          terms :district_id, :size => 3
+          terms "district.name", :script => "_source.district.name + '_' + _source.district.id", :size => 3
         end
         facet "communes" do
-          terms :commune_id, :size => 3
+          terms "commune.name", :script => "_source.commune.name + '_' + _source.virtual_commune_id", :size => 3
         end
         facet "places" do
-          terms :place_id, :size => 3
+           terms "place.name", :script => "_source.place.name + '_' + _source.place.id", :size => 3
         end
       end
     end

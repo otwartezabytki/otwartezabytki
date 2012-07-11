@@ -70,5 +70,7 @@ module Otwartezabytki
       config.assets.precompile += %w( active_admin.js wizard.js ie8.css )
       config.cache_store = :dalli_store, { :namespace => "otwartezabytki-#{Rails.env}", :expires_in => 1.day, :compress => true }
     end
+
+    config.action_mailer.default_url_options = { :host => Settings.oz.host }
   end
 end
