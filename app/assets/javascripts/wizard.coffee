@@ -87,7 +87,7 @@ $.fn.specialize
       setHeight = next_step.offset().top - (($(window).height() / 2) - (next_step.height() / 2)) + 100
 
       setTimeout ->
-        $('html,body').animate scrollTop: setHeight, 400, ->
+        $('body').animate scrollTop: setHeight, 400, ->
           next_step.view()
       , 300
       this
@@ -207,12 +207,16 @@ $.fn.specialize
     view: ->
       this.switchViewClass('step-view')
       $('#map_canvas').resizeNicely()
+      if $('section.subrelics').length && not jQuery.cookie('gps-instructions')
+        this.find('.help').click()
+        jQuery.cookie('gps-instructions', true)
 
       this
 
     edit: ->
       this.switchViewClass('step-edit')
       $('#map_canvas').resizeNicely()
+
       this
 
     cancel: ->

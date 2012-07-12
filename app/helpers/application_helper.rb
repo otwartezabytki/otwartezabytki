@@ -25,7 +25,7 @@ module ApplicationHelper
     ranges.each do |range|
       a,b = range[0], range[1]-1
       b += 24 if b < 0 # 0 - 1 = -1 => -1 + 24 = 23
-      range[3] = Suggestion.roots.where(["date_part('hour', suggestions.created_at) BETWEEN ? AND ?", a, b-1]).count
+      range[3] = Suggestion.roots.where(["date_part('hour', suggestions.created_at AT TIME ZONE 'GMT') BETWEEN ? AND ?", a, b-1]).count
     end
 
     ranges.reject! {|e| e[3] == 0 }
