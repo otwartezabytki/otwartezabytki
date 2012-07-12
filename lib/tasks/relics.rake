@@ -67,7 +67,7 @@ SQL
 sql = <<SQL
   select
     'rel_' || r.id as export_id,
-    timestamp '2012-06-01' as suggested_at,
+    timestamp with time zone '2012-06-01 00:00:00+02' at time zone 'CETDST' as suggested_at,
     r.id as relic_id,
     r.nid_id as nid_id,
     r.kind as nid_kind,
@@ -123,7 +123,7 @@ SQL
 sql = <<SQL
   select
     'sug_' || s.id as export_id,
-    s.created_at as suggested_at,
+    date_trunc('seconds', s.created_at AT TIME ZONE 'GMT') AT TIME ZONE 'CETDST' as suggested_at,
     r.id as relic_id,
     r.nid_id as nid_id,
     r.kind as nid_kind,
