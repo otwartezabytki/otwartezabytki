@@ -41,7 +41,7 @@ module ApplicationHelper
   end
 
   def relics_statistics
-    [Relic.roots.count] + [1,2,3].map {|i| Relic.roots.where(["edit_count >= ?", i]).count }
+    [Relic.count] + [1,2,3].map {|i| Relic.where(["edit_count >= ?", i]).count }
   end
 
   def random_search_suggestions
