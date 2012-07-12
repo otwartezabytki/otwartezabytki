@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120706131541) do
+ActiveRecord::Schema.define(:version => 20120712130709) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -165,6 +165,7 @@ ActiveRecord::Schema.define(:version => 20120706131541) do
     t.datetime "updated_at",                                 :null => false
     t.string   "role",                   :default => "user"
     t.string   "username"
+    t.string   "seen_relic_order",       :default => "asc"
   end
 
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true

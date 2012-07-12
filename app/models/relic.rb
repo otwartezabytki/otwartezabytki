@@ -257,6 +257,10 @@ class Relic < ActiveRecord::Base
       self.search(params).first || self.first(:offset => rand(self.count))
     end
 
+    def next_random_in(conditions)
+      self.where(conditions).first(:offset => rand(self.where(conditions).count))
+    end
+
     def next_few_for(user, search_params, count)
       params = (search_params || {}).merge(:per_page => count, :corrected_relic_ids => user.corrected_relic_ids)
       res = self.search(params).take(count)
