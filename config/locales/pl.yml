@@ -239,9 +239,9 @@ pl:
       many:   zabytków
       other:  zabytków
     left_to_the_end:
-      zero:   "Pozostało %{count} do końca"
-      one:    "Pozostał %{count} do końca"
-      few:    "Pozostały %{count} do końca"
-      many:   "Pozostało %{count} do końca"
-      other:  "Pozostało %{count} do końca"
+      zero:   "Pozostało do końca"
+      one:    "Pozostał do końca"
+      few:    "Pozostały do końca"
+      many:   "Pozostało do końca"
+      other:  "Pozostało do końca"
 
