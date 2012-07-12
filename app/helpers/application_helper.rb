@@ -41,7 +41,10 @@ module ApplicationHelper
   end
 
   def relics_statistics
-    [Relic.roots.count] + [1,2,3].map {|i| Relic.roots.where(["edit_count >= ?", i]).count }
+    [Relic.count] + [1,2,3].map do |i|
+      sql = Suggestion.select("relic_id").group(:relic_id).having(["COUNT(relic_id) >= ?", i]).to_sql
+      Suggestion.from("(#{sql}) AS stats").count
+    end
   end
 
   def random_search_suggestions
