@@ -50,7 +50,6 @@ Otwartezabytki::Application.configure do
   # config.action_mailer.raise_delivery_errors = false
   config.action_mailer.delivery_method = :sendmail
   config.action_mailer.sendmail_settings = {:arguments => '-i'}
-  config.action_mailer.default_url_options = { :host => "otwartezabytki.pl" }
 
   # Enable threaded mode
   # config.threadsafe!

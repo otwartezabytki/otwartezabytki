@@ -5,18 +5,18 @@
       = link_to "Cała Polska <span>#{relics.facets['overall']['total']}</span>".html_safe, relics_path(search_params)
   %ul.nav.nav-list
     - location = params[:location].to_s.split('-')
-    - relics.facets['voivodeships']['terms'].sort_by{|t| Unicode.downcase(t['term'])}.each do |obj|
+    - relics.terms('voivodeships', true).each do |obj|
       %li
         = link_to_facet obj, location, 0 do
           %ul
-            - relics.facets['districts']['terms'].sort_by{|t| Unicode.downcase(t['term'])}.each do |obj|
+            - relics.terms('districts', true).each do |obj|
               %li
                 = link_to_facet obj, location, 1 do
                   %ul
-                    - relics.facets['communes']['terms'].sort_by{|t| Unicode.downcase(t['term'])}.each do |obj|
+                    - relics.terms('communes', true).each do |obj|
                       %li
                         = link_to_facet obj, location, 2 do
                           %ul
-                            - relics.facets['places']['terms'].sort_by{|t| Unicode.downcase(t['term'])}.each do |obj|
+                            - relics.terms('places', true).each do |obj|
                               %li
                                 = link_to_facet obj, location, 3

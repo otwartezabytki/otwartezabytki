@@ -54,7 +54,7 @@ gem 'unicode'
 gem 'gon'
 gem 'high_voltage'
 gem 'newrelic_rpm'
-gem 'rails_config'
+gem 'rails_config', '0.2.5'
 gem 'dalli'
 
 # background jobs

@@ -1,5 +1,5 @@
 @import "mixins";
-
+$experimental-support-for-svg: true;
 body {
   background: #f5f5f5;
   font-family: 'Open Sans', sans-serif;
@@ -232,12 +232,12 @@ a {
       float: left;
       a {
         color: #313132;
-        font-weight: 600;
-        font-size: 15px;
+        font-weight: normal;
+        font-size: 14px;
         line-height: 60px;
         text-shadow: 0 1px 0 #fff;
         text-decoration: none;
-        margin-right: 30px;
+        margin-right: 20px;
         padding-left: 20px;
         display: block;
         &:hover {
@@ -246,15 +246,23 @@ a {
         &.current{
           color: $dark-blue;
         }
-        &.about {
-          padding-left: 29px;
-          background: asset-data-url('icon-menu-about.png') 4px 18px no-repeat;
-          margin-right: 32px;
+        &.home {
+          padding-left: 24px;
+          background: asset-data-url('icon-menu-home.png') 4px 18px no-repeat;
           &:hover{
-            background: asset-data-url('icon-menu-about-hover.png') 4px 18px no-repeat;
+            background: asset-data-url('icon-menu-home-hover.png') 4px 18px no-repeat;
           }
           &.current {
-            background: asset-data-url('icon-menu-about-current.png') 4px 18px no-repeat;
+            background: asset-data-url('icon-menu-home-current.png') 4px 18px no-repeat;
+          }
+        }
+        &.about {
+          background: asset-data-url('icon-menu-about.png') 0 23px no-repeat;
+          &:hover {
+            background: asset-data-url('icon-menu-about-hover.png') 0 23px no-repeat;
+          }
+          &.current {
+            background: asset-data-url('icon-menu-about-current.png') 0 23px no-repeat;
           }
         }
         &.help {
@@ -589,6 +597,7 @@ a {
       }
       &.active a {
         padding: 1px 7px;
+
         background-color: rgb(95, 96, 98);
         color: rgb(255, 255, 255);
       }
@@ -1321,6 +1330,7 @@ p#adding-note {
 }
 
 .user-stats {
+  font-weight: 100;
   color: #4e4e4e;
   width: 958px;
   height: 193px;
@@ -1328,6 +1338,7 @@ p#adding-note {
   background: #fff;
   margin: 28px auto;
   padding: 45px 0 0 0;
+  font-size: 14px;
 
   .nums {
     overflow: hidden;
@@ -1336,20 +1347,20 @@ p#adding-note {
   .left {
     float: left;
     width: 400px;
-    padding-left: 78px;
     h3 {
       color: #b4b4b4;
       font-size: 30px;
-      text-align: center;
+			padding-left: 30px;
     }
     .active {
       font-size: 66px;
       color: #06405d;
       float: left;
-      width: 165px;
+      width: 155px;
       text-align: right;
       font-weight: bold;
       padding-right: 20px;
+			padding-left: 30px;
     }
 
     .numbers {
@@ -1392,9 +1403,9 @@ p#adding-note {
 
       div {
         float: left;
-        width: 180px;
+        width: 190px;
         margin-left: 17px;
-        font-size: 13px;
+        font-size: 14px;
 
         span {
           font-size: 18px;
@@ -1411,79 +1422,67 @@ p#adding-note {
   .info {
     text-align: right;
     font-size: 11px;
+    font-weight: 400;
     clear: both;
     padding-right: 50px;
     padding-top: 25px;
   }
 }
 
-.progress-bar {
-  width: 958px;
-  margin: 60px auto 0;
-  color: #313132;
+.progress {
+	padding-top: 25px;
+	height: 275px;
+  font-weight: 100;
+  font-size: 14px;
+	h2 {
+		text-align: center;
+		font-size: 16px;
+		padding-bottom: 25px;
+		letter-spacing: 1.5px;
+	}
+	
+	.left { 
+		width: 500px; 
+		.numbers {
+			span { color: #285b26; }
+			span.a { color: #378733; }
+		}
+	}
+	.wrap { overflow: hidden; }
+	.g {
+		.active { color: #4db848; }
+	}
+	
 
-  h3 {
-    font-size: 22px;
-    text-align: center;
-    margin-bottom: 22px;
-  }
-
-  .bar {
-    position: relative;
-    height: 90px;
-    margin-bottom: 75px;
-    margin-top: 35px;
-  }
-
-  .bar .lvl {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 90px;
-
-    .num {
-      height: 47px;
-      line-height: 47px;
-      padding-right: 8px;
-      text-align: right;
-      color: #fff;
-      font-size: 16px;
+	.r {
+		width: 430px;
+		text-align: right;
+		.active {
+			float: none;
+			width: auto;
+			padding-right: 0;
+			text-align: right;
+		}
+	}
+	
+	.progress-bar {
+		height: 25px;
+		padding: 11px 30px;
+		
+		.bg { height: 25px; background: image-url('progress-bar-bg.png') top left repeat; }
+		.color { height: 25px;  background: image-url('progress-bar-color.png') top left repeat; }
+	}
+	
+	.info {
+		padding-top: 5px;
+		text-align: center;
+		color: #9c9c9c;
+    font-size: 14px;
+		strong {
       font-weight: bold;
-      -webkit-border-radius: 10px 0 0 10px;
-      border-radius: 10px 0 0 10px;
+      font-size: 18px;
     }
-
-    .desc {
-      padding-top: 12px;
-      text-align: right;
-      font-size: 11px;
-      border-right: 1px solid #dcdcdc;
-      float: right;
-      padding-right: 8px;
-    }
-
-  }
-
-  .bar .p0 .desc {
-    border: none
-  }
-  .bar .p0 .num {
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-  }
-
-  .p0 .num {
-    background-image: image-url('bar-p0.png');
-  }
-  .p1 .num {
-    background-image: image-url('bar-p1.png');
-  }
-  .p2 .num {
-    background-image: image-url('bar-p2.png');
-  }
-  .p3 .num {
-    background-image: image-url('bar-p3.png');
-  }
+	}
 }
 
 div.highlight {

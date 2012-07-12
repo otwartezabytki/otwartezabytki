@@ -230,3 +230,18 @@ pl:
       voivodeship:
         one: Województwo
         other: Województwa
+
+  plural:
+    relic:
+      zero:   zabytków
+      one:    zabytek
+      few:    zabytki
+      many:   zabytków
+      other:  zabytków
+    left_to_the_end:
+      zero:   "Pozostało do końca"
+      one:    "Pozostał do końca"
+      few:    "Pozostały do końca"
+      many:   "Pozostało do końca"
+      other:  "Pozostało do końca"
+

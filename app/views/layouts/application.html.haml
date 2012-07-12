@@ -18,7 +18,7 @@
     %link{:href => "http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,600,300&subset=latin,latin-ext", :rel => "stylesheet", :type => "text/css"}/
     :plain
       <meta property="og:title" content="Otwarte Zabytki" />
-      <meta property="og:description" content="Uzupełnij z nami bazę zabytków i pomóż stworzyć serwis. Skorzystaj z własnej wiedzy. Poszukaj informacji w książach lub w internecie. To naprawdę proste." />
+      <meta property="og:description" content="Uzupełnij z nami bazę zabytków i pomóż stworzyć serwis. Skorzystaj z własnej wiedzy. Poszukaj informacji w książkach lub w internecie. To naprawdę proste." />
       <meta property="og:image" content="http://otwartezabytki.pl/assets/face-share-logo.png" />
   %body{ :class => cookies["font-size"].to_s + " " + controller_name + " " + action_name + (params[:id] ? " resource_#{params[:id]}" : "") }
     .page
@@ -52,6 +52,8 @@
             %nav
               %ul
                 %li
+                  = link_to "Strona główna", root_path, :class => "home #{current_page?(root_path) ? "current" : ""}"
+                %li
                   = link_to "O projekcie", page_pl_path('o-projekcie'), :class => "about #{current_page?(about_path) ? "current" : ""}"
                 %li
                   = link_to "Pomoc", page_pl_path('pomoc'), :class => "help #{current_page?(strony_pomoc_path) ? "current" : ""}"
@@ -81,7 +83,7 @@
     - if Rails.env.production?
       :javascript
         var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', '#{Settings.ga_key}']);
+        _gaq.push(['_setAccount', '#{Settings.oz.ga_key}']);
         _gaq.push(['_trackPageview']);
         (function() {
           var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
