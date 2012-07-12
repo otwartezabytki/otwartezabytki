@@ -14,6 +14,6 @@ Geocoder.configure do |config|
   config.units = :km
 
   # caching (see below for details):
-  config.cache = Dalli::Client.new  unless ['test', 'development'].include?(Rails.env)
+  # config.cache = Dalli::Client.new  unless ['test', 'development'].include?(Rails.env)
 
 end
