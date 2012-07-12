@@ -18,7 +18,7 @@
           %a{:href => '#tabs-2', :style => "background-image: url('http://b.vimeocdn.com/ts/313/031/313031214_100.jpg')"}
         %li
           %a{:href => '#tabs-3', :style => "background-image: url('http://b.vimeocdn.com/ts/311/908/311908286_100.jpg')"}
-    
+
       #tabs-1.video
         = image_tag 'video-preview-1.jpg'
         %script(type="text/html")
@@ -53,13 +53,13 @@
     - stats = relics_statistics
 
     %h2 JAK WYGLĄDA NASZA BAZA ZABYTKÓW?
-  
+
     .nums
       .left.g
         %h3 Sprawdziliśmy
-        
+
         - # stats[0] - wszystkie
-        - # stats[1] - przez >= 1 osobne
+        - # stats[1] - przez >= 1 osobe
         - # stats[2] - przez >= 2 osoby
         - # stats[3] - przez >= 3 osoby
 
@@ -68,26 +68,25 @@
           .numbers
             .numbers-row
               %span= stats[3]
-              = relics_pl(stats[3])
+              = t('plural.relic', :count => stats[3])
               sprawdziły 3 osoby
             .numbers-row
               %span.a= stats[2]
-              = relics_pl(stats[2])
+              = t('plural.relic', :count => stats[2])
               sprawdziły dwie osoby
-        %h3= relics_pl(stats[1])
+        %h3= t('plural.relic', :count => stats[1])
       .left.r
-        - l = stats[0]-stats[3]
+        - l = stats[0]-stats[1]
         %h3
-          = pluralize(l, :zero => "Pozostało", :one => "Pozostał", :few => "Pozostały", :other => "Pozostało")
-          do końca
+          = t('plural.left_to_the_end', :count => l)
         .wrap
           .active= l
-        %h3= relics_pl(l)
-        
+        %h3= t('plural.relic', :count => l)
+
     .progress-bar
       .bg
-        .color{:style => "width: #{stats[3]*100/stats[0]}%"}
-        
+        .color{:style => "width: #{(stats[3]*100/stats[0].to_f).ceil}%"}
+
     .info
       %strong= stats[0]
       %br
