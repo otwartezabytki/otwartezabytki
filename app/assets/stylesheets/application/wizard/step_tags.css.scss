@@ -1,3 +1,5 @@
+@import 'button_states';
+
 .step-tags {
   .check_boxes ul {
     margin: 0;
@@ -39,5 +41,53 @@
 
   .column-third {
     width: 200px;
+  }
+
+  .action-skip a {
+    cursor: pointer;
+  }
+
+  h3 {
+    font-size: 13px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    clear: both;
+  }
+  p {
+    font-size: 16px;
+    padding: 10px 0;
+  }
+
+  li.choice {
+    span {
+      font-size: 14px;
+      cursor: pointer;
+    }
+    input:checked + span {
+      font-weight: bold;
+    }
+  }
+
+  .action-submit { display: inline-block; }
+
+  .action-submit a {
+    @include button_general;
+  }
+
+  &.step-view .action-submit a {
+    @include button_blurred;
+  }
+
+  &.step-edited .action-submit a {
+    @include button_pushed;
+  }
+
+  &.step-skipped {
+    .action-submit a {
+      @include button_blurred;
+    }
+    .action-skip a {
+      @include button_pushed;
+    }
   }
 }

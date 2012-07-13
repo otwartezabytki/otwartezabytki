@@ -225,6 +225,8 @@ $.fn.specialize
       this.input().save()
       this.view()
       this.saveLocalHistory()
+      this.removeClass('step-editing')
+
       setTimeout ->
         $('#map_canvas').auto_zoom();
       , 1000
@@ -342,39 +344,19 @@ $.fn.specialize
           div: '#map_canvas'
           width: 900
           height: 500
-          zoom: 14
+          zoom: 18
           lat: lat
           lng: lng
           mapTypeId: google.maps.MapTypeId.HYBRID
 
     auto_zoom: ->
-      zoom_map = (lat, lng) =>
-        $(this).zoom_at(lat, lng)
-        $(this).tooltip_marker(lat, lng) if $('#suggestion_street').val().length > 0
-
-
       latitude = $('#suggestion_latitude').val().toNumber()
       longitude = $('#suggestion_longitude').val().toNumber()
-      if !isNaN(latitude) & !isNaN(longitude)
-        zoom_map(latitude, longitude)
-      else
-        geocode_location(zoom_map)
-
-    tooltip_marker: (lat, lng) ->
-      that = this
-      map.removeMarkers()
-      marker = map.addMarker
-        lat: lat
-        lng: lng
-        icon: new google.maps.MarkerImage(marker_image_path, null, null, new google.maps.Point(112, 11))
-        mouseover: ->
-          that.circle_marker(lat, lng)
-
-    circle_marker: (lat, lng) ->
+      this.zoom_at(latitude, longitude)
       map.removeMarkers()
       map.addMarker
-        lat: lat
-        lng: lng
+        lat: latitude
+        lng: longitude
         icon: new google.maps.MarkerImage(small_marker_image_path, null, null, new google.maps.Point(8, 8))
 
     set_marker: (lat, lng) ->
@@ -430,7 +412,7 @@ jQuery ->
 
   # register actions for wizard
   ['edit', 'skip', 'confirm'].forEach (action) ->
-    $('.step-simple').on 'click', ".action-#{action} a" , ->
+    $('.step-simple,.step-gps').on 'click', ".action-#{action} a" , ->
       step_div = $(this).parents('.step:first')
 
       if !step_div.hasClass('step-edit') && step_div.hasClass('step-current')
@@ -439,7 +421,7 @@ jQuery ->
       return false # prevent the form submission
 
   ['submit', 'cancel'].forEach (action) ->
-    $('.step-simple').on 'click', ".action-#{action} a" , ->
+    $('.step-simple, .step-gps').on 'click', ".action-#{action} a" , ->
       step_div = $(this).parents('.step:first')
 
       if step_div.hasClass('step-current')
@@ -460,14 +442,6 @@ jQuery ->
       $(this).parents('.step:first').skip()
 
     return false
-
-
-  $('.step-gps').on 'click', ".action-submit a" , ->
-    step_div = $(this).parents('.step:first')
-    if step_div.hasClass('step-current') && step_div.hasClass('step-edit')
-      step_div.submit()
-
-    return false # prevent the form submission
 
   $('.step-gps').on 'click', ".action-skip a" , ->
     step_div = $(this).parents('.step:first')
@@ -500,10 +474,6 @@ jQuery ->
 
   $('#marker').draggable
     revert: true
-    start: ->
-      if $('#suggestion_street').val().length > 0
-        $('#map_canvas').circle_marker $('#suggestion_latitude').data('history'), $('#suggestion_longitude').data('history')
-
 
   $('#map_canvas').droppable
     drop: (event, ui) ->
@@ -518,31 +488,13 @@ jQuery ->
       marker_lat = lat + height * y_offset / $(this).height()
       marker_lng = lng + width * x_offset / $(this).width()
       $('#map_canvas').set_marker(marker_lat, marker_lng)
-      $(this).parents('.step').edit()
+      $(this).parents('.step').addClass('step-editing')
 
   $('#map_canvas').auto_zoom()
 
-  $('#suggestion_latitude, #suggestion_longitude').keyup ->
-    return false # disable temporalely
-    if $('#suggestion_latitude').val().length > 0 && $('#suggestion_longitude').val().length > 0
-      latitude = $('#suggestion_latitude').val().toNumber()
-      longitude = $('#suggestion_longitude').val().toNumber()
-      if !isNaN(latitude) & !isNaN(longitude)
-        if $('.step-gps').hasClass('step-edit')
-          $('.step-gps').cancel()
-        $('#suggestion_latitude').val(latitude)
-        $('#suggestion_longitude').val(longitude)
-        $('#map_canvas').zoom_at(latitude, longitude)
-
-  $(".steps").on "click", ".help-content .help", ->
+  $(".steps").on "click", ".help-content .help, .help-extended .close", ->
     if $(this).parents('.step').hasClass('step-current')
-      $(this).parents(".help-content").addClass('active')
-
-    false
-
-  $(".steps").on "click", ".help-extended .close", ->
-    if $(this).parents('.step').hasClass('step-current')
-      $(this).parents(".help-content").removeClass('active')
+      $(this).parents(".help-content").toggleClass('active')
 
     false
 

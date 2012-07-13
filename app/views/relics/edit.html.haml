@@ -440,17 +440,24 @@
           .help Pomoc
           .help-extended
             %span.close Zamknij pomoc
-            - if suggestion.suggestions.size == 0
-              %p Znajdź zabytek na mapie. Widok możesz przybliżać i oddalać przy użyciu przycisków „+” i „-”, które znajdziesz w lewym górnym rogu mapy. Gdy znajdziesz na mapie miejsce, w którym położony jest sprawdzany zabytek, przeciągnij tam czerwony znacznik z pola po prawej stronie. Gdy skończysz, wciśnij „Potwierdź”. Jeśli chcesz przerwać lub pominąć ten krok, wciśnij „Nie znam”.
-            - else
-              %p Postaraj się wskazać punkt środkowy zespołu zabytków (adres w wypadku zespołów zabytków nie zawsze dobrze podpowiada to miejsce). Jeśli trudno jest Ci określić to miejsce, spójrz na załączone przykłady. Dla takich zespołów jak np. mury miejskie, znajdź charakterystyczne miejsce (np. baszta).
+            - if suggestion.suggestions.size > 0
+              %p
+                Postaraj się wskazać punkt środkowy zespołu zabytków (adres w wypadku zespołów zabytków nie zawsze dobrze podpowiada to miejsce).
+                Jeśli trudno jest Ci określić to miejsce, spójrz na załączone przykłady.
+                Dla takich zespołów jak np. mury miejskie, znajdź charakterystyczne miejsce (np. baszta).
               .map
                 = link_to image_tag("help-map-group-thumb-1.png"), image_path("help-map-group-zielen.jpg"), :class => "colorbox", :title => "Przykład oznaczenia - punkt centralny"
                 = link_to image_tag("help-map-group-thumb-2.png"), image_path("help-map-group-mury.jpg"), :class => "colorbox", :title => "Przykład oznaczania: wybierzch charakterystyczne miejsce (np. dla murów miejskich baszta)"
 
-              %p Widok mapy możesz przybliżać i oddalać przy użyciu „+” i „-”, które znajdziesz w lewym górnym rogu mapy. Gdy znajdziesz na mapie właściwe miejsce, przeciągnij czerwony znacznik z pola po lewej stronie. Gdy skończysz, wciśnij „Tak, potwierdzam”.
+            %p
+              Sprawdź, czy podana lokalizacja jest poprawna. Jeśli jest jest poprawna, kliknij „Potwierdź”.
+              Jeśli chcesz ją poprawić, kliknij „Zmień”. Pokaże się pole, w którym można poprawić lokalizację.
+              Znajdź zabytek na mapie. Widok możesz przybliżać i oddalać przy użyciu przycisków „+” i „-”,
+              które znajdziesz w lewym górnym rogu mapy. Gdy znajdziesz na mapie miejsce, w którym położony jest
+              sprawdzany zabytek, przeciągnij tam czerwony znacznik z pola po prawej stronie.
+              Gdy skończysz, wciśnij „Zapisz”.
 
-              %p Jeśli chcesz pominąć ten krok, wciśnij „Nie, pomiń”."
+            %p Jeśli chcesz pominąć ten krok, wciśnij „Nie wiem”.
         %span.ico
         .values.values-edit.values-view
           .map-overlay
@@ -459,28 +466,27 @@
           #map_canvas
 
         .actions.actions-edit.actions-view.actions-navbar
+          = f.input :latitude, :as => :string, :label => "szerokość geograficzna", :placeholder => "szerokość", :input_html => { :maxlength => 10, :readonly => "readonly" }
+          = f.input :longitude, :as => :string, :label => "długość geograficzna", :placeholder => "długość", :input_html => { :maxlength => 10, :readonly => "readonly" }
+          = f.input :coordinates_action, :as => :hidden
           .marker-helper
             %h4 Przeciągnij znacznik na mapę:
             .marker-holder
               = image_tag 'marker.png', :id => 'marker'
-          = f.input :latitude, :as => :string, :label => "szerokość geograficzna", :placeholder => "szerokość", :input_html => { :maxlength => 10, :readonly => "readonly" }
-          = f.input :longitude, :as => :string, :label => "długość geograficzna", :placeholder => "długość", :input_html => { :maxlength => 10, :readonly => "readonly" }
-          = f.input :coordinates_action, :as => :hidden
+              .action.action-submit.btn= link_to "Zapisz", "#"
+              .action.action-cancel.btn= link_to "Anuluj", "#"
 
-        .actions.actions-view
-          %h3 Czy udało Ci się zaznaczyć właściwą lokalizację?
-          .action.action-submit.btn= link_to "Potwierdź", "#"
-          .action.action-skip.btn= link_to "Nie znam", "#"
-
-        .actions.actions-edit
-          %h3 Czy udało Ci się zaznaczyć właściwą lokalizację?
-          .action.action-submit.btn= link_to "Potwierdź", "#"
-          .action.action-skip.btn= link_to "Nie znam", "#"
+        .actions.actions-view.actions-edit
+          %h3 Czy zabytek znajduje się tutaj?
+          .action.action-confirm.btn= link_to "Potwierdź", "#"
+          .action.action-edit.btn= link_to "Zmień", "#"
+          .action.action-skip.btn= link_to "Nie wiem", "#"
 
         .actions.actions-done
-          %h3 Czy udało Ci się zaznaczyć właściwą lokalizację?
-          .action.action-submit.btn= link_to "Potwierdź", "#"
-          .action.action-skip.btn= link_to "Nie znam", "#"
+          %h3 Czy zabytek znajduje się tutaj?
+          .action.action-confirm.btn= link_to "Potwierdź", "#"
+          .action.action-edit.btn= link_to "Zmień", "#"
+          .action.action-skip.btn= link_to "Nie wiem", "#"
           .action.action-back.action-back-short
             (Zrobiłeś błąd?
             = link_to "Edytuj ponownie", "#"

@@ -1,22 +1,18 @@
+@import 'button_states';
+
 .step-gps {
   #map_canvas {
     border: 10px solid #fff;
   }
 
-  #marker {
-    cursor: pointer;
-    margin: 40px 0 0 47px;
-  }
-
-  #suggestion_latitude_input, #suggestion_longitude_input {
-    float: left;
-    width: 170px;
+  .input {
+    margin: 2px 0 0;
   }
 
   input[type="text"][readonly] {
     color: #1e5d7d;
     font-size: 14px;
-    border: 1px solid #346d8a;
+    border: 0px;
     border-radius: 2px;
     -webkit-border-radius: 2px;
     box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 0 5px 1px rgba(30, 93, 125, 0.3);
@@ -25,6 +21,7 @@
     font-weight: 600;
     filter: none;
     padding-left: 0;
+    margin: 0px;
   }
 
   min-height: 300px;
@@ -49,11 +46,51 @@
 
   .marker-helper {
     background-color: white;
-    padding: 10px;
+    padding: 40px 10px 10px;
+    position: absolute;
+    bottom: 0px;
+    display: none;
+
+    .action-submit {
+      display: none;
+    }
+
+    h4 {
+      text-align: center;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 20px;
+    }
+
+    .marker-holder {
+      background: asset-data-url('marker-helper.png') center center no-repeat;
+      margin: 20px auto;
+      width: 118px;
+      height: 118px;
+
+      #marker {
+        cursor: pointer;
+        margin: 28px 0 10px 47px;
+      }
+
+    }
+
   }
 
-  &.step-edit #marker {
-    display: none;
+  &.step-edit {
+    .marker-helper {
+      display: block;
+    }
+  }
+
+  &.step-editing {
+    .marker-helper .action {
+      display: block;
+    }
+
+    #marker {
+      display: none;
+    }
   }
 
   &.step-current {
@@ -105,18 +142,35 @@
   .actions {
     clear: right;
     padding: 0;
+    padding-top: 15px;
 
     &.actions-navbar {
       float: right;
       width: 172px;
       margin: 0;
       margin-top: 25px;
-      height: 420px;
+      height: 405px;
       background: #fff;
     }
 
     &.actions-done {
+      clear: both !important;
       background: transparent;
+    }
+
+    .action-submit {
+      padding: 34px 0;
+      a {
+        @include button_general;
+        margin: 18px;
+        &:hover { @include button_hover; }
+        &:active { @include button_active; }
+      }
+    }
+
+    .action-cancel a {
+      position: static;
+      padding: 0 40px;
     }
   }
 

@@ -843,21 +843,6 @@ p#adding-note {
   }
 }
 
-.marker-helper {
-  h4 {
-    text-align: center;
-    font-size: 14px;
-    font-weight: 700;
-    line-height: 20px;
-  }
-  .marker-holder {
-    background: asset-data-url('marker-helper.png') center center no-repeat;
-    margin: 20px auto;
-    width: 118px;
-    height: 118px;
-  }
-}
-
 .search-no-results {
   background: image-url('no-results-bg.png') no-repeat top left;
   height: 360px;

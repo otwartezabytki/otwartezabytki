@@ -1,0 +1,66 @@
+@mixin button_general {
+  color: #fff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
+  text-decoration: none;
+  font-size: 14px;
+  padding: 8px 20px;
+  margin-right: 25px;
+  font-weight: 600;
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2), inset 0 -1px 2px 0 rgba(0, 0, 0, 0.3);
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+  @include button_normal;
+}
+
+@mixin button_normal {
+  background: rgb(120, 145, 159); /* Old browsers */
+  background: -moz-linear-gradient(top, rgba(120, 145, 159, 1) 0%, rgba(95, 121, 135, 1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(120, 145, 159, 1)), color-stop(100%, rgba(95, 121, 135, 1))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, rgba(120, 145, 159, 1) 0%, rgba(95, 121, 135, 1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, rgba(120, 145, 159, 1) 0%, rgba(95, 121, 135, 1) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, rgba(120, 145, 159, 1) 0%, rgba(95, 121, 135, 1) 100%); /* IE10+ */
+  background: linear-gradient(to bottom, rgba(120, 145, 159, 1) 0%, rgba(95, 121, 135, 1) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#78919f', endColorstr = '#5f7987', GradientType = 0); /* IE6-9 */
+}
+
+@mixin button_hover {
+  background: rgb(67, 125, 155); /* Old browsers */
+  background: -moz-linear-gradient(top, rgba(67, 125, 155, 1) 0%, rgba(37, 94, 124, 1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(67, 125, 155, 1)), color-stop(100%, rgba(37, 94, 124, 1))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, rgba(67, 125, 155, 1) 0%, rgba(37, 94, 124, 1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, rgba(67, 125, 155, 1) 0%, rgba(37, 94, 124, 1) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, rgba(67, 125, 155, 1) 0%, rgba(37, 94, 124, 1) 100%); /* IE10+ */
+  background: linear-gradient(to bottom, rgba(67, 125, 155, 1) 0%, rgba(37, 94, 124, 1) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#437d9b', endColorstr = '#255e7c', GradientType = 0); /* IE6-9 */
+}
+
+@mixin button_active {
+  background: rgb(36, 94, 124); /* Old browsers */
+  background: -moz-linear-gradient(top, rgba(36, 94, 124, 1) 0%, rgba(67, 125, 154, 1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(36, 94, 124, 1)), color-stop(100%, rgba(67, 125, 154, 1))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, rgba(36, 94, 124, 1) 0%, rgba(67, 125, 154, 1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, rgba(36, 94, 124, 1) 0%, rgba(67, 125, 154, 1) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, rgba(36, 94, 124, 1) 0%, rgba(67, 125, 154, 1) 100%); /* IE10+ */
+  background: linear-gradient(to bottom, rgba(36, 94, 124, 1) 0%, rgba(67, 125, 154, 1) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#245e7c', endColorstr = '#437d9a', GradientType = 0); /* IE6-9 */
+}
+
+@mixin button_pushed {
+  background: rgb(28, 45, 54); /* Old browsers */
+  background: -moz-linear-gradient(top, rgba(28, 45, 54, 1) 0%, rgba(78, 95, 104, 1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(28, 45, 54, 1)), color-stop(100%, rgba(78, 95, 104, 1))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, rgba(28, 45, 54, 1) 0%, rgba(78, 95, 104, 1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, rgba(28, 45, 54, 1) 0%, rgba(78, 95, 104, 1) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, rgba(28, 45, 54, 1) 0%, rgba(78, 95, 104, 1) 100%); /* IE10+ */
+  background: linear-gradient(to bottom, rgba(28, 45, 54, 1) 0%, rgba(78, 95, 104, 1) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#1c2d36', endColorstr = '#4e5f68', GradientType = 0); /* IE6-9 */
+  filter: alpha(opacity=50);
+  opacity: 0.5;
+  font-weight: 700;
+  cursor: default !important;
+}
+
+@mixin button_blurred {
+  opacity: 0.3;
+  cursor: default !important;
+}
