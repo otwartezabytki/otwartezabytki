@@ -87,7 +87,7 @@ class RelicsController < ApplicationController
 
   def gonext
     current_user.mark_relic_as_seen(params[:id])
-    redirect_to [:edit, Relic.next_for(current_user, session[:search_params])]
+    redirect_to [:edit, ensure_not_seen_relic]
   end
 
   def thank_you
@@ -95,13 +95,12 @@ class RelicsController < ApplicationController
       @request_email = true
     end
 
-    @next_relic = Relic.next_for(current_user, session[:search_params])
+    @next_relic = ensure_not_seen_relic
   end
 
   def corrected
     @next_relics = Relic.next_few_for(current_user, search_params[:search_params], 3)
   end
-
 
   def suggester
     query = params[:q1].to_s.strip
@@ -167,6 +166,28 @@ class RelicsController < ApplicationController
   end
 
   protected
+
+    def ensure_not_seen_relic
+      possible_next = Relic.next_for(current_user, session[:search_params])
+      if current_user.seen_relic_ids.include?(possible_next.id.to_i)
+        location = session[:search_params][:location].to_s.split('-').map {|l| l.split(':') }
+        location = relic.get_parent_ids if location.blank?
+
+        conds = Hash[
+          [:voivodeship_id, :district_id, :commune_id, :place_id].zip(location)
+        ].inject({}) { |mem, (k, v)| mem[k] = v if v; mem }
+
+        next_relic = Relic.next_random_in(conds)
+        next_relic = Relic.next_random_in(conds.slice(:voivodeship_id, :district_id, :commune_id)) if current_user.seen_relic_ids.include?(next_relic)
+        next_relic = Relic.next_random_in(conds.slice(:voivodeship_id, :district_id)) if current_user.seen_relic_ids.include?(next_relic)
+        next_relic = Relic.next_random_in(conds.slice(:voivodeship_id)) if current_user.seen_relic_ids.include?(next_relic)
+        next_relic = Relic.next_random_in({}) if current_user.seen_relic_ids.include?(next_relic)
+        session[:search_params] = { :q1 => nil, :location => location.map{|l| l.instance_of?(Array) ? l.join(':') : l }.join('-') }
+        next_relic
+      else
+        possible_next
+      end
+    end
 
     def search_params
       params.slice(:q1)

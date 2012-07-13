@@ -50,18 +50,18 @@ class User < ActiveRecord::Base
     return @corrected_relic_ids if defined? @corrected_relic_ids
     @corrected_relic_ids = suggestions.roots.joins(:relic).where("relics.edit_count < 3").group(:relic_id).pluck(:relic_id)
   end
-  cattr_accessor :seen_relic_order
 
   def mark_relic_as_seen(relic_id)
     sr = self.seen_relics.find_or_create_by_relic_id relic_id
     sr.touch
     if seen_relic_ids.first == relic_id
-      self.class.seen_relic_order == 'asc' ? self.class.seen_relic_order = 'desc' : self.class.seen_relic_order = 'asc'
+      self.seen_relic_order = (self.seen_relic_order == 'asc' ? 'desc' : 'asc')
+      self.update_attribue(:seen_relic_order, self.seen_relic_order) if self.seen_relic_order_changed?
     end
   end
 
   def seen_relic_ids
-    self.seen_relics.order("updated_at #{self.class.seen_relic_order}").pluck(:relic_id)
+    self.seen_relics.order("updated_at #{self.seen_relic_order}").pluck(:relic_id)
   end
 
   def earn_points
