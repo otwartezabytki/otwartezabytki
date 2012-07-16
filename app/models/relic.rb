@@ -102,6 +102,11 @@ class Relic < ActiveRecord::Base
         end if load
       end
     end
+
+    def overall_count
+      facets['overall']['total'].to_i rescue 0
+    end
+
   end
 
   Tire::Results::Item.class_eval do
