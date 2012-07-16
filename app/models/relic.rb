@@ -69,7 +69,6 @@ class Relic < ActiveRecord::Base
       na.indexes :place_id
     end
   end
-  Tire.configure { logger 'log/elasticsearch.log' }
 
   Tire::Results::Collection.class_eval do
     def highlighted_tags
