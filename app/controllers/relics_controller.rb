@@ -174,10 +174,10 @@ class RelicsController < ApplicationController
         ].inject({}) { |mem, (k, v)| mem[k] = v if v; mem }
 
         next_relic = Relic.next_random_in(conds)
-        next_relic = Relic.next_random_in(conds.slice(:voivodeship_id, :district_id, :commune_id)) if current_user.seen_relic_ids.include?(next_relic)
-        next_relic = Relic.next_random_in(conds.slice(:voivodeship_id, :district_id)) if current_user.seen_relic_ids.include?(next_relic)
-        next_relic = Relic.next_random_in(conds.slice(:voivodeship_id)) if current_user.seen_relic_ids.include?(next_relic)
-        next_relic = Relic.next_random_in({}) if current_user.seen_relic_ids.include?(next_relic)
+        next_relic = Relic.next_random_in(conds.slice(:voivodeship_id, :district_id, :commune_id)) if current_user.seen_relic_ids.include?(next_relic.id)
+        next_relic = Relic.next_random_in(conds.slice(:voivodeship_id, :district_id)) if current_user.seen_relic_ids.include?(next_relic.id)
+        next_relic = Relic.next_random_in(conds.slice(:voivodeship_id)) if current_user.seen_relic_ids.include?(next_relic.id)
+        next_relic = Relic.next_random_in({}) if current_user.seen_relic_ids.include?(next_relic.id)
         session[:search_params] = { :q1 => nil, :location => location.map{|l| l.instance_of?(Array) ? l.join(':') : l }.join('-') }
         next_relic
       else
