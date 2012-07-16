@@ -490,27 +490,6 @@ jQuery ->
 
   $('.step').each -> $(this).saveHistory()
 
-  $('#marker').draggable
-    revert: true
-
-  $('#map_canvas').droppable
-    drop: (event, ui) ->
-
-      x_offset = (ui.offset.left - $(this).offset().left + 39)
-      y_offset = (ui.offset.top - $(this).offset().top + 55)
-
-      lng = map.map.getBounds().getSouthWest().lng()
-      lat = map.map.getBounds().getNorthEast().lat()
-      width = map.map.getBounds().getNorthEast().lng() - map.map.getBounds().getSouthWest().lng()
-      height = map.map.getBounds().getSouthWest().lat() - map.map.getBounds().getNorthEast().lat()
-      marker_lat = lat + height * y_offset / $(this).height()
-      marker_lng = lng + width * x_offset / $(this).width()
-      $('#map_canvas').set_marker(marker_lat, marker_lng)
-      $(this).parents('.step').addClass('step-editing')
-
-  $('#map_canvas').auto_zoom()
-  $('#map_canvas').blinking()
-
   $(".steps").on "click", ".help-content .help, .help-extended .close", ->
     if $(this).parents('.step').hasClass('step-current')
       $(this).parents(".help-content").toggleClass('active')
@@ -565,6 +544,31 @@ jQuery ->
 
 
   spinner = new Spinner(wizard_spinner_opts).spin($('.overlay')[0])
+
+window.google_maps_loaded = ->
+  jQuery ->
+    window.loadGMaps();
+
+    $('#marker').draggable
+      revert: true
+
+    $('#map_canvas').droppable
+      drop: (event, ui) ->
+
+        x_offset = (ui.offset.left - $(this).offset().left + 39)
+        y_offset = (ui.offset.top - $(this).offset().top + 55)
+
+        lng = map.map.getBounds().getSouthWest().lng()
+        lat = map.map.getBounds().getNorthEast().lat()
+        width = map.map.getBounds().getNorthEast().lng() - map.map.getBounds().getSouthWest().lng()
+        height = map.map.getBounds().getSouthWest().lat() - map.map.getBounds().getNorthEast().lat()
+        marker_lat = lat + height * y_offset / $(this).height()
+        marker_lng = lng + width * x_offset / $(this).width()
+        $('#map_canvas').set_marker(marker_lat, marker_lng)
+        $(this).parents('.step').addClass('step-editing')
+
+    $('#map_canvas').auto_zoom()
+    $('#map_canvas').blinking()
 
 # for animations
 $(window).load ->

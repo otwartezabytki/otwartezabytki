@@ -6,7 +6,11 @@
  * Released under the MIT License.
  */
 
-var GMaps = (function($) {
+var GMaps = null;
+
+window.loadGMaps = function() {
+
+  GMaps = (function($) {
     "use strict";
 
     var GMaps = function(options) {
@@ -1078,3 +1082,5 @@ var GMaps = (function($) {
 
     return GMaps;
 }(jQuery || $));
+
+}
