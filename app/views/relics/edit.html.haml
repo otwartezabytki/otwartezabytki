@@ -527,5 +527,14 @@
     }
 
 - content_for :footer_javascripts do
-  != javascript_include_tag "http://maps.googleapis.com/maps/api/js?key=#{Settings.oz.gm_key}&sensor=false".html_safe
   != javascript_include_tag "wizard"
+
+  :javascript
+    function loadGoogleMaps() {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src = "http://maps.googleapis.com/maps/api/js?key=#{Settings.oz.gm_key}&sensor=false&callback=google_maps_loaded";
+      document.body.appendChild(script);
+    }
+    window.onload = loadGoogleMaps
+

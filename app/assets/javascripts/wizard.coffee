@@ -344,7 +344,7 @@ $.fn.specialize
           div: '#map_canvas'
           width: 900
           height: 500
-          zoom: 18
+          zoom: 17
           lat: lat
           lng: lng
           mapTypeId: google.maps.MapTypeId.HYBRID
@@ -354,6 +354,11 @@ $.fn.specialize
       longitude = $('#suggestion_longitude').val().toNumber()
       this.zoom_at(latitude, longitude)
       map.removeMarkers()
+      this.circle_marker()
+
+    circle_marker: ->
+      latitude = $('#suggestion_latitude').val().toNumber()
+      longitude = $('#suggestion_longitude').val().toNumber()
       map.addMarker
         lat: latitude
         lng: longitude
@@ -386,6 +391,19 @@ $.fn.specialize
         , 500
       , 500
       this
+
+    blinking: ->
+      if !this.parents('.step').hasClass('step-editing') && this.parents('.step').hasClass('step-current')
+        map.counter ||= 1
+        map.counter += 1
+        if map.counter % 2 || this.parents('.step').hasClass('step-edit')
+          this.circle_marker() if map.markers.length == 0
+        else
+          map.removeMarkers()
+
+      setTimeout ->
+        $('#map_canvas').blinking()
+      , 1000
 
 jQuery ->
 
@@ -472,26 +490,6 @@ jQuery ->
 
   $('.step').each -> $(this).saveHistory()
 
-  $('#marker').draggable
-    revert: true
-
-  $('#map_canvas').droppable
-    drop: (event, ui) ->
-
-      x_offset = (ui.offset.left - $(this).offset().left + 39)
-      y_offset = (ui.offset.top - $(this).offset().top + 55)
-
-      lng = map.map.getBounds().getSouthWest().lng()
-      lat = map.map.getBounds().getNorthEast().lat()
-      width = map.map.getBounds().getNorthEast().lng() - map.map.getBounds().getSouthWest().lng()
-      height = map.map.getBounds().getSouthWest().lat() - map.map.getBounds().getNorthEast().lat()
-      marker_lat = lat + height * y_offset / $(this).height()
-      marker_lng = lng + width * x_offset / $(this).width()
-      $('#map_canvas').set_marker(marker_lat, marker_lng)
-      $(this).parents('.step').addClass('step-editing')
-
-  $('#map_canvas').auto_zoom()
-
   $(".steps").on "click", ".help-content .help, .help-extended .close", ->
     if $(this).parents('.step').hasClass('step-current')
       $(this).parents(".help-content").toggleClass('active')
@@ -546,6 +544,31 @@ jQuery ->
 
 
   spinner = new Spinner(wizard_spinner_opts).spin($('.overlay')[0])
+
+window.google_maps_loaded = ->
+  jQuery ->
+    window.loadGMaps();
+
+    $('#marker').draggable
+      revert: true
+
+    $('#map_canvas').droppable
+      drop: (event, ui) ->
+
+        x_offset = (ui.offset.left - $(this).offset().left + 39)
+        y_offset = (ui.offset.top - $(this).offset().top + 55)
+
+        lng = map.map.getBounds().getSouthWest().lng()
+        lat = map.map.getBounds().getNorthEast().lat()
+        width = map.map.getBounds().getNorthEast().lng() - map.map.getBounds().getSouthWest().lng()
+        height = map.map.getBounds().getSouthWest().lat() - map.map.getBounds().getNorthEast().lat()
+        marker_lat = lat + height * y_offset / $(this).height()
+        marker_lng = lng + width * x_offset / $(this).width()
+        $('#map_canvas').set_marker(marker_lat, marker_lng)
+        $(this).parents('.step').addClass('step-editing')
+
+    $('#map_canvas').auto_zoom()
+    $('#map_canvas').blinking()
 
 # for animations
 $(window).load ->
