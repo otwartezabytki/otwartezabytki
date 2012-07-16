@@ -341,7 +341,7 @@
                         Spróbuj znaleźć datę powstania zabytku (np. na stronach internetowych lub w książkach).
                         Jeśli Ci się nie uda, kliknij „Nie wiem”, a automatycznie przejdziesz do kolejnego punktu.
                 .values.values-edit.values-view
-                  = f2.input :dating_of_obj, :as => :string, :label => "Z kiedy?", :placeholder => "Brak daty powstania", :input_html => { :readonly => true }
+                  = f2.input :dating_of_obj, :as => :string, :label => "Data powstania", :placeholder => "Brak daty powstania", :input_html => { :readonly => true }
                   = f2.input :dating_of_obj_action, :as => :hidden
 
                 - if f2.object.dating_of_obj.present?
