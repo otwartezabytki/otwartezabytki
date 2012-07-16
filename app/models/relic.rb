@@ -163,34 +163,34 @@ class Relic < ActiveRecord::Base
             "descendants.street" => {}
         end
         facet "voivodeships" do
-          terms "voivodeship.name", :script => "_source.voivodeship.name + '_' + _source.voivodeship.id", :size => 16, :order => 'term'
+          terms nil, :script_field => "_source.voivodeship.name + '_' + _source.voivodeship.id", :size => 16, :order => 'term'
         end
 
         if location.size > 0
           filter :terms, 'voivodeship.id' => location[0]
           facet "districts", :facet_filter => { :terms => { 'voivodeship.id' => location[0] } } do
-            terms "district.name", :script => "_source.district.name + '_' + _source.district.id", :size => 10_000, :order => 'term'
+            terms nil, :script_field => "_source.district.name + '_' + _source.district.id", :size => 10_000, :order => 'term'
           end
         end
 
         if location.size > 1
           filter :terms, 'district.id' => location[1]
           facet "communes", :facet_filter => { :terms => { 'district.id' => location[1] } } do
-            terms "commune.name", :script => "_source.commune.name + '_' + _source.virtual_commune_id", :size => 10_000, :order => 'term'
+            terms nil, :script_field => "_source.commune.name + '_' + _source.virtual_commune_id", :size => 10_000, :order => 'term'
           end
         end
 
         if location.size > 2
           filter :terms, 'commune.id' => location[2]
           facet "places", :facet_filter => { :terms => { 'commune.id' => location[2]} } do
-             terms "place.name", :script => "_source.place.name + '_' + _source.place.id", :size => 10_000, :order => 'term'
+             terms nil, :script_field => "_source.place.name + '_' + _source.place.id", :size => 10_000, :order => 'term'
           end
         end
 
         filter :terms, 'place.id' => location[3] if location.size > 3
 
         facet "overall" do
-          terms :id, :script => 1, :global => true
+          terms nil, :script_field => 1, :global => true
         end
 
         corrected_faset_filter = {}
@@ -247,16 +247,16 @@ class Relic < ActiveRecord::Base
         end
 
         facet "voivodeships" do
-          terms "voivodeship.name", :script => "_source.voivodeship.name + '_' + _source.voivodeship.id", :size => 3
+          terms nil, :script_field => "_source.voivodeship.name + '_' + _source.voivodeship.id", :size => 3
         end
         facet "districts" do
-          terms "district.name", :script => "_source.district.name + '_' + _source.district.id", :size => 3
+          terms nil, :script_field => "_source.district.name + '_' + _source.district.id", :size => 3
         end
         facet "communes" do
-          terms "commune.name", :script => "_source.commune.name + '_' + _source.virtual_commune_id", :size => 3
+          terms nil, :script_field => "_source.commune.name + '_' + _source.virtual_commune_id", :size => 3
         end
         facet "places" do
-           terms "place.name", :script => "_source.place.name + '_' + _source.place.id", :size => 3
+           terms nil, :script_field => "_source.place.name + '_' + _source.place.id", :size => 3
         end
       end
     end
