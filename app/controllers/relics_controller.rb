@@ -3,11 +3,8 @@ class RelicsController < ApplicationController
   expose(:relics) do
     p1 = params.merge(:corrected_relic_ids => current_user.try(:corrected_relic_ids))
     if p1[:corrected_relic_ids].blank?
-      p2 = p1.slice(:q1, :page, :location)
-      cache_key = p2.values.join(' ').parameterize
-      cache_key = "blank-search-query" if cache_key.blank?
-      Rails.cache.fetch(cache_key, :expires_in => 15.minutes) do
-        Relic.search(p2)
+      Rails.cache.fetch(uniq_cache_key, :expires_in => 15.minutes) do
+        Relic.search p1.slice(:q1, :page, :location)
       end
     else
       Relic.search(p1)
@@ -106,7 +103,7 @@ class RelicsController < ApplicationController
     query = params[:q1].to_s.strip
     render :json => [] and return unless query.present?
 
-    cached_json = Rails.cache.fetch("suggester-#{query.parameterize}", :expires_in => 1.day) do
+    cached_json = Rails.cache.fetch(uniq_cache_key("suggester"), :expires_in => 1.day) do
       results = Relic.suggester(query)
       navigators_json = []
       navigators_json << {
@@ -166,7 +163,6 @@ class RelicsController < ApplicationController
   end
 
   protected
-
     def ensure_not_seen_relic
       possible_next = Relic.next_for(current_user, session[:search_params])
       if current_user.seen_relic_ids.include?(possible_next.id.to_i)
@@ -186,6 +182,18 @@ class RelicsController < ApplicationController
         next_relic
       else
         possible_next
+      end
+    end
+
+    def uniq_cache_key namespace = nil
+      sliced_params = params[:q1].to_s.split.sort + params.slice(:page, :location).values
+      cache_key =  (Digest::SHA1.new << sliced_params.compact.join(' ')).to_s
+      if cache_key.blank?
+        "blank-search-query"
+      elsif namespace
+        "#{namespace}-#{cache_key}"
+      else
+        cache_key
       end
     end
 

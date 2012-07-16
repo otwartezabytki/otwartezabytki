@@ -224,7 +224,12 @@ class Relic < ActiveRecord::Base
       tire.search(:load => false, :per_page => 1) do
         query do
           boolean do
-            must { string Relic.analyze_query(q),:default_operator => "AND" }
+            must { string Relic.analyze_query(q), :default_operator => "AND", :fields => [
+              "identification^5",
+              "street",
+              "place_full_name^2",
+              "descendants.identification^3"              ]
+            }
           end
         end
 
