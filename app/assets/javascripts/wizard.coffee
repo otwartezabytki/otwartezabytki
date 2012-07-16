@@ -344,7 +344,7 @@ $.fn.specialize
           div: '#map_canvas'
           width: 900
           height: 500
-          zoom: 18
+          zoom: 17
           lat: lat
           lng: lng
           mapTypeId: google.maps.MapTypeId.HYBRID
@@ -354,6 +354,11 @@ $.fn.specialize
       longitude = $('#suggestion_longitude').val().toNumber()
       this.zoom_at(latitude, longitude)
       map.removeMarkers()
+      this.circle_marker()
+
+    circle_marker: ->
+      latitude = $('#suggestion_latitude').val().toNumber()
+      longitude = $('#suggestion_longitude').val().toNumber()
       map.addMarker
         lat: latitude
         lng: longitude
@@ -386,6 +391,19 @@ $.fn.specialize
         , 500
       , 500
       this
+
+    blinking: ->
+      if !this.parents('.step').hasClass('step-editing') && this.parents('.step').hasClass('step-current')
+        map.counter ||= 1
+        map.counter += 1
+        if map.counter % 2 || this.parents('.step').hasClass('step-edit')
+          this.circle_marker() if map.markers.length == 0
+        else
+          map.removeMarkers()
+
+      setTimeout ->
+        $('#map_canvas').blinking()
+      , 1000
 
 jQuery ->
 
@@ -491,6 +509,7 @@ jQuery ->
       $(this).parents('.step').addClass('step-editing')
 
   $('#map_canvas').auto_zoom()
+  $('#map_canvas').blinking()
 
   $(".steps").on "click", ".help-content .help, .help-extended .close", ->
     if $(this).parents('.step').hasClass('step-current')
