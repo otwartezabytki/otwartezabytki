@@ -85,7 +85,7 @@
 
     .progress-bar
       .bg
-        .color{:style => "width: #{(stats[1]*100/stats[0].to_f).ceil}%"}
+        .color{:style => "width: #{(stats[1]*100/stats[0].to_f).round(2)}%"}
 
     .info
       %strong= stats[0]
