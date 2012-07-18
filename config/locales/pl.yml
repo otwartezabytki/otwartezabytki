@@ -213,22 +213,40 @@ pl:
 
     models:
       relic:
-        one: Zabytek
+        zero:  Zabytek
+        one:   Zabytek
+        few:   Zabytki
+        many:  Zabytki
         other: Zabytki
       user:
-        one: Użytkownik
+        zero:  Użytkownik
+        one:   Użytkownik
+        few:   Użytkownicy
+        many:  Użytkownicy
         other: Użytkownicy
       place:
-        one: Miejscowość
+        zero:  Miejscowość
+        one:   Miejscowość
+        few:   Miejscowości
+        many:  Miejscowości
         other: Miejscowości
       commune:
-        one: Gmina
+        zero:  Gmina
+        one:   Gmina
+        few:   Gminy
+        many:  Gminy
         other: Gminy
       district:
-        one: Powiat
+        zero:  Powiat
+        one:   Powiat
+        few:   Powiaty
+        many:  Powiaty
         other: Powiaty
       voivodeship:
-        one: Województwo
+        zero:  Województwo
+        one:   Województwo
+        few:   Województwa
+        many:  Województwa
         other: Województwa
 
   plural:

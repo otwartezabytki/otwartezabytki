@@ -224,7 +224,7 @@ class RelicsController < ApplicationController
         return true
       end
       suggestion_count = Suggestion.roots.not_skipped.where(:ip_address => request.remote_ip).where('created_at >= ?', 1.minute.ago).count
-      puts "Suggestion count: #{suggestion_count}"
+      # puts "Suggestion count: #{suggestion_count}"
       if suggestion_count > 60
         Rails.cache.write("need_captcha_#{request.remote_ip}", 1)
         true

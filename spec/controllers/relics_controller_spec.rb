@@ -51,7 +51,7 @@ describe RelicsController do
       it "redirects to the thank you page" do
         relic = create :relic
         put :update, { :id => relic.to_param, :suggestion => { :identification => 'New Identification'} }, valid_session
-        response.should redirect_to(thank_you_relic_path(relic.to_param))
+        response.should redirect_to([:gonext, relic])
       end
 
       it "should remember ip address of sender" do

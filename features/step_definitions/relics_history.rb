@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 Given /^there is at least one relic in database$/ do
-  @relic = Relic.first
+  @relic = FactoryGirl.create :relic
 end
 
 Given /^identification of that relic have been modified$/ do
