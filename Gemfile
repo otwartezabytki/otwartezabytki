@@ -90,4 +90,5 @@ group :test do
   gem 'rb-fsevent'
 
   gem 'shoulda', '~> 3.0'
+  gem 'simplecov', :require => false
 end
