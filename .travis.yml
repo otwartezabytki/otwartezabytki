@@ -1,0 +1,16 @@
+language: ruby
+before_script:
+  - psql -c 'create database otwartezabytki_test;' -U otwartezabytki
+  - cp config/database.yml.example config/database.yml
+script:
+  - bundle exec rspec spec
+  - bundle exec cucumber
+before_install:
+  - sudo service elasticsearch start
+  - sleep 3
+rvm:
+  - 1.9.2
+  - 1.9.3
+branches:
+  only:
+    - master

@@ -1,4 +1,5 @@
 # otwarte zabytki
+[![Travis CI](https://secure.travis-ci.org/monterail/otwartezabytki.png)](http://travis-ci.org/monterail/otwartezabytki)
 
 ### application init
  - brew update
