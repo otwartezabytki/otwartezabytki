@@ -1,6 +1,6 @@
 language: ruby
 before_script:
-  - psql -c 'create database otwartezabytki_test;' -U otwartezabytki
+  - psql -c 'create database otwartezabytki_test;' -U postgres
   - cp config/database.yml.example config/database.yml
 script:
   - bundle exec rspec spec
@@ -13,4 +13,5 @@ rvm:
   - 1.9.3
 branches:
   only:
+    - dev
     - master

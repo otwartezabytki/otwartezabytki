@@ -11,5 +11,5 @@ test:
   encoding: unicode
   database: otwartezabytki_test
   pool: 5
-  username: otwartezabytki
+  username: postgres
   password:
