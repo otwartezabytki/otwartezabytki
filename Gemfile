@@ -20,18 +20,15 @@ gem 'haml-rails'
 gem 'coffee-filter'
 gem 'sugar-rails'
 
-gem 'foreman'
 gem 'geocoder'
 gem 'simple_form', '~> 2.0'
-gem 'twitter-bootstrap-rails'
+
 gem 'decent_exposure'
 gem 'kaminari'
 gem 'ancestry'
 gem 'curb'
 gem 'tire', '0.4.2'
 gem 'rocket_tag'
-gem 'formtastic'
-gem 'formtastic-bootstrap'
 gem 'airbrake'
 
 # versioning

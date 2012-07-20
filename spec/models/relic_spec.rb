@@ -28,6 +28,7 @@ describe Relic do
 
       # update by update_attributes
       relic.update_attributes(:place_id => leszno.id)
+      relic.reload
       relic.place_id.should eq leszno.id
       relic.commune_id.should eq leszno.commune.id
       relic.district_id.should eq leszno.commune.district.id
