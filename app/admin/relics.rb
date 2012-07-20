@@ -28,7 +28,7 @@ ActiveAdmin.register Relic do
       f.input :identification
       f.input :group
 
-      f.buttons
+      f.actions
     end
 
   end
@@ -57,7 +57,7 @@ ActiveAdmin.register Relic do
   action_item :only => :show  do
     unless resource.live?
       link_to t('buttons.revert_this_version'), revert_admin_relic_path(resource, :version => params[:version]),
-        :method => :put, :confirm => t('messages.are_you_sure')
+        :method => :put, :data => { :confirm => t('messages.are_you_sure') }
     end
   end
 

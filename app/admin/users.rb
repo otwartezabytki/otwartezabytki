@@ -21,7 +21,7 @@ ActiveAdmin.register User do
       f.input :role, :collection => [:admin, :user], :include_blank => true
     end
 
-    f.buttons
+    f.actions
   end
 
 
