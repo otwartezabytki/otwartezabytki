@@ -71,6 +71,7 @@ group :development, :test do
 
   # for routes in /rails/routes
   gem 'sextant'
+  gem 'guard-cucumber'
 end
 
 group :test do
@@ -89,6 +90,6 @@ group :test do
   gem 'growl'
   gem 'rb-fsevent'
 
-  gem 'shoulda', '~> 3.0'
+  gem 'shoulda-matchers'
   gem 'simplecov', :require => false
 end
