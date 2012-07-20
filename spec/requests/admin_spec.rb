@@ -27,7 +27,7 @@ describe "Admin panel" do
       get admin_dashboard_path
       response.status.should be(200)
       response.body.should have_content t "active_admin.dashboard"
-    end    
+    end
   end
 
   context "as logged in admin user" do
