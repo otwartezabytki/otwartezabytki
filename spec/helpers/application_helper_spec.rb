@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe ApplicationHelper do
-  befoer { refresh_relics_index }
+  before(:each) { refresh_relics_index }
 
   context "users statistics" do
     it "should return statistic results" do
