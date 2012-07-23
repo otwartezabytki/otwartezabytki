@@ -8,8 +8,8 @@ script:
   - bundle exec rspec spec
   - bundle exec cucumber
 before_install:
+  - sudo /usr/share/elasticsearch/bin/plugin -install chytreg/elasticsearch-analysis-morfologik/1.0.0
   - sudo service elasticsearch start
-  - sudo service memcached start
 rvm:
   - 1.9.2
   - 1.9.3
