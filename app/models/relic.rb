@@ -1,4 +1,5 @@
 # -*- encoding : utf-8 -*-
+require 'relic/tire_extensions'
 class Relic < ActiveRecord::Base
   has_many :suggestions
   belongs_to :place

@@ -9,7 +9,7 @@ script:
   - bundle exec cucumber
 before_install:
   - sudo service elasticsearch start
-  - sleep 10
+  - sudo service memcached start
 rvm:
   - 1.9.2
   - 1.9.3

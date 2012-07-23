@@ -1,6 +1,6 @@
 module Tire
   module Results
-    module Collection
+    class Collection
       def highlighted_tags
         return @highlighted_tags if defined? @highlighted_tags
         @highlighted_tags = @response['hits']['hits'].inject([]) do |m, h|
@@ -42,7 +42,7 @@ end
 
 module Tire
   module Results
-    module Item
+    class Item
       def corrected?(user = nil)
         @is_corrected ||= {}
         return @is_corrected[user.try(:id)] if @is_corrected[user.try(:id)]
