@@ -17,6 +17,9 @@ Spork.prefork do
   RSpec.configure do |config|
     config.include Devise::TestHelpers, :type => :controller
 
+    config.filter_run :focus => true
+    config.run_all_when_everything_filtered = true
+
     config.mock_with :rspec
     config.fixture_path = "#{::Rails.root}/spec/fixtures"
     config.use_transactional_fixtures = true

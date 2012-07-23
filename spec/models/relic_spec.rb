@@ -33,4 +33,66 @@ describe Relic do
     end
   end
 
+  context "reindex some relics" do
+    it "recreate index structure and index relics" do
+      r1, r2 = create(:relic), create(:relic)
+      Relic.index.delete
+      Relic.index.should_not exist
+
+      Relic.reindex [r1, r2]
+
+      Relic.tire.search('*').total.should eq 2
+      Relic.index.should exist
+    end
+  end
+
+  context "analyze_query" do
+    pending 'method will be deprecated soon'
+  end
+
+  context "search" do
+    pending 'method will change pretty soon'
+  end
+
+  context "suggester" do
+    pending 'method will be deprecated soon'
+  end
+
+  context "full_identification"do
+    it "should return relic identification" do
+      relic = create(:relic)
+      relic.full_identification.should match %r(#{relic.identification})
+      relic.full_identification.should match %r(#{relic.register_number})
+      relic.full_identification.should match %r(#{relic.dating_of_obj})
+    end
+  end
+
+  context "relic correctness" do
+    it "should be corrected when has more than 3 suggestions" do
+      relic = create(:relic)
+      4.times { relic.suggestions.create :identification => 'Pałac zamkowy' }
+      relic.should be_corrected
+    end
+
+    it "should be incorect for new created relics" do
+      relic = create(:relic)
+      relic.should_not be_corrected
+    end
+
+    it "should be corected if an user make suggestion" do
+      relic = create(:relic)
+      user = create(:user)
+      relic.suggestions.create :identification => 'Pałac zamkowy', :user => user
+      relic.corrected_by?(user).should be_true
+    end
+  end
+
+  context "place_full_name" do
+    it "should return place full location" do
+      relic = create(:relic)
+      3.times { create(:relic, :parent => relic) }
+      relic.place_full_name.should match %r(#{relic.voivodeship.name})
+    end
+  end
+
 end
