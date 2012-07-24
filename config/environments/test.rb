@@ -36,5 +36,5 @@ Otwartezabytki::Application.configure do
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
 
-  config.cache_store = :dalli_store
+  config.cache_store = :null_store
 end

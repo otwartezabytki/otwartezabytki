@@ -24,7 +24,6 @@ describe Relic do
     it "should crate new version if it's reifed to previous version" do
       relic = create :relic
       relic_name = relic.identification
-
       relic.update_attributes(:identification => "new identification")
       relic = relic.versions.last.reify
       relic.save!

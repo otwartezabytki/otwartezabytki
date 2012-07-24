@@ -24,9 +24,9 @@ module Relic::PlaceCaching
 
   def cache_location_fields
     if self.place
-      self.commune_id = self.place.commune.id
-      self.district_id = self.place.commune.district.id
-      self.voivodeship_id = self.place.commune.district.voivodeship.id
+      self.commune_id     = self.place.commune_id
+      self.district_id    = self.place.commune.district_id
+      self.voivodeship_id = self.place.commune.district.voivodeship_id
     end
   end
 
@@ -46,55 +46,18 @@ module Relic::PlaceCaching
   end
 
   def commune
-    cache_location_fields unless self[:commune_id]
-
-    if self[:commune_id]
-      require "#{Rails.root}/app/models/commune.rb"
-      Rails.cache.fetch("commune_#{self[:commune_id]}", :expires_in => 1.day) do
-        super
-      end
-    else
-      nil
-    end
+    Commune.cached(:find, :with => commune_id) if commune_id
   end
 
   def district
-    cache_location_fields unless self[:district_id]
-
-    if self[:district_id]
-      require "#{Rails.root}/app/models/district.rb"
-      Rails.cache.fetch("district_#{self[:district_id]}", :expires_in => 1.day) do
-        super
-      end
-    else
-      nil
-    end
+    District.cached(:find, :with => district_id) if district_id
   end
 
   def voivodeship
-    cache_location_fields unless self[:voivodeship_id]
-
-    if self[:voivodeship_id]
-      require "#{Rails.root}/app/models/voivodeship.rb"
-      Rails.cache.fetch("voivodeship_#{self[:voivodeship_id]}", :expires_in => 1.day) do
-        super
-      end
-    else
-      nil
-    end
-
+    Voivodeship.cached(:find, :with => voivodeship_id) if voivodeship_id
   end
 
   def place
-
-    if self[:place_id]
-      require "#{Rails.root}/app/models/place.rb"
-      Rails.cache.fetch("place_#{self[:place_id]}", :expires_in => 1.day) do
-        super
-      end
-    else
-      nil
-    end
-
+    Place.cached(:find, :with => place_id) if place_id
   end
 end

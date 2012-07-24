@@ -25,9 +25,7 @@ module Tire
           terms.map! do |t|
             id = t['term'].split('_').last
             klass = name.classify.constantize
-            t['obj'] = Rails.cache.fetch("#{name.classify.downcase}_#{id}", :expires_in => 1.day) do
-              klass.find(id.split(':').first)
-            end
+            t['obj'] = klass.cached(:find, :with => id.split(':').first)
             t
           end if load
         end
