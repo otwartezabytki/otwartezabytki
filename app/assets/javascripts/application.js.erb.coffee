@@ -81,9 +81,9 @@ jQuery ->
   toggleFontResizeButtons()
 
   # bootstrap
-  $("a[rel=popover]").popover()
-  $(".tooltip").tooltip()
-  $("a[rel=tooltip]").tooltip()
+  # $("a[rel=popover]").popover()
+  # $(".tooltip").tooltip()
+  # $("a[rel=tooltip]").tooltip()
 
   #tabs
   show_tab = (panel) ->
