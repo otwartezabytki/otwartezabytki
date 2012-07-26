@@ -72,6 +72,9 @@ group :development, :test do
   gem 'guard-cucumber'
 end
 
+# assets javascript compiler
+gem 'therubyracer', :group => :production
+
 group :test do
   # for defining tests
   gem 'cucumber-rails', :require => false
