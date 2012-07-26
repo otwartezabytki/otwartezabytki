@@ -1,15 +1,15 @@
 # -*- encoding : utf-8 -*-
 class RelicsController < ApplicationController
-  expose(:relics) do
-    p1 = params.merge(:corrected_relic_ids => current_user.try(:corrected_relic_ids))
-    if p1[:corrected_relic_ids].blank?
-      Rails.cache.fetch(uniq_cache_key, :expires_in => 15.minutes) do
-        Relic.search p1.slice(:q1, :page, :location)
-      end
-    else
-      Relic.search(p1)
-    end
-  end
+  # expose(:relics) do
+  #   p1 = params.merge(:corrected_relic_ids => current_user.try(:corrected_relic_ids))
+  #   if p1[:corrected_relic_ids].blank?
+  #     Rails.cache.fetch(uniq_cache_key, :expires_in => 15.minutes) do
+  #       Relic.search p1.slice(:q1, :page, :location)
+  #     end
+  #   else
+  #     Relic.search(p1)
+  #   end
+  # end
   expose(:suggestion) { Suggestion.new(:relic_id => params[:id]) }
   expose(:relic) do
     if id = params[:relic_id] || params[:id]
@@ -21,7 +21,7 @@ class RelicsController < ApplicationController
     end
   end
 
-  helper_method :search_params, :location_breadcrumbs, :need_captcha
+  helper_method :search_params, :location_breadcrumbs, :need_captcha, :relics
 
   before_filter :current_user!, :only => [:edit, :create, :update, :gonext, :thank_you]
 
@@ -29,9 +29,14 @@ class RelicsController < ApplicationController
     redirect_to edit_relic_path(params[:id]) and return
   end
 
+  def relics
+    return @relics if defined? @relics
+    @relics = Search.new(params[:search] || {}).perform
+  end
+
   def index
-    SearchTerm.store(params[:q1])
-    session[:search_params] = params.slice(:q1, :location)
+    # SearchTerm.store(params[:q1])
+    # session[:search_params] = params.slice(:q1, :location)
     gon.highlighted_tags = relics.highlighted_tags
 
     idx = relics.results.index {|r| r.corrected?(current_user) }
@@ -100,56 +105,56 @@ class RelicsController < ApplicationController
   end
 
   def suggester
-    query = params[:q1].to_s.strip
-    render :json => [] and return unless query.present?
+    # query = params[:q1].to_s.strip
+    render :json => [] #and return unless query.present?
 
-    cached_json = Rails.cache.fetch(uniq_cache_key("suggester"), :expires_in => 1.day) do
-      results = Relic.suggester(query)
-      navigators_json = []
-      navigators_json << {
-        :label => "cała Polska (#{results.total_count})",
-        :value => query,
-        :path  => relics_path(search_params)
-      } unless results.total_count.zero?
+    # cached_json = Rails.cache.fetch(uniq_cache_key("suggester"), :expires_in => 1.day) do
+    #   results = Relic.suggester(query)
+    #   navigators_json = []
+    #   navigators_json << {
+    #     :label => "cała Polska (#{results.total_count})",
+    #     :value => query,
+    #     :path  => relics_path(search_params)
+    #   } unless results.total_count.zero?
 
-      results.terms('voivodeships', false, true).each do |hash|
-        obj = hash['obj']
-        navigators_json << {
-          :label => "<strong>#{query}</strong> - woj. #{obj.name} (#{hash['count']})",
-          :value => query,
-          :path  => relics_path(search_params.merge(:location => obj.id))
-        }
-      end if results.terms('districts').size > 1
+    #   results.terms('voivodeships', false, true).each do |hash|
+    #     obj = hash['obj']
+    #     navigators_json << {
+    #       :label => "<strong>#{query}</strong> - woj. #{obj.name} (#{hash['count']})",
+    #       :value => query,
+    #       :path  => relics_path(search_params.merge(:location => obj.id))
+    #     }
+    #   end if results.terms('districts').size > 1
 
-      results.terms('districts', false, true).each do |hash|
-        obj = hash['obj']
-        navigators_json << {
-          :label => "<strong>#{query}</strong> - woj. #{obj.voivodeship.name}, pow. #{obj.name} (#{hash['count']})",
-          :value => query,
-          :path  => relics_path(search_params.merge(:location => [obj.voivodeship_id, obj.id].join('-')))
-        }
-      end if results.terms('communes').size > 1
+    #   results.terms('districts', false, true).each do |hash|
+    #     obj = hash['obj']
+    #     navigators_json << {
+    #       :label => "<strong>#{query}</strong> - woj. #{obj.voivodeship.name}, pow. #{obj.name} (#{hash['count']})",
+    #       :value => query,
+    #       :path  => relics_path(search_params.merge(:location => [obj.voivodeship_id, obj.id].join('-')))
+    #     }
+    #   end if results.terms('communes').size > 1
 
-      results.terms('communes', false, true).each do |hash|
-        obj = hash['obj']
-        navigators_json << {
-          :label => "<strong>#{query}</strong> - woj. #{obj.district.voivodeship.name}, pow. #{obj.district.name}, gm. #{obj.name} (#{hash['count']})",
-          :value => query,
-          :path  => relics_path(search_params.merge(:location => [obj.district.voivodeship_id, obj.district_id, obj.id].join('-')))
-        }
-      end if results.terms('places').size > 1
+    #   results.terms('communes', false, true).each do |hash|
+    #     obj = hash['obj']
+    #     navigators_json << {
+    #       :label => "<strong>#{query}</strong> - woj. #{obj.district.voivodeship.name}, pow. #{obj.district.name}, gm. #{obj.name} (#{hash['count']})",
+    #       :value => query,
+    #       :path  => relics_path(search_params.merge(:location => [obj.district.voivodeship_id, obj.district_id, obj.id].join('-')))
+    #     }
+    #   end if results.terms('places').size > 1
 
-      results.terms('places', false, true).each do |hash|
-        obj = hash['obj']
-        navigators_json << {
-          :label => "<strong>#{query}</strong> - #{obj.name}, woj. #{obj.commune.district.voivodeship.name}, pow. #{obj.commune.district.name}, gm. #{obj.commune.name} (#{hash['count']})",
-          :value => query,
-          :path  => relics_path(search_params.merge(:location => [obj.commune.district.voivodeship_id, obj.commune.district_id, obj.commune_id, obj.id].join('-')))
-        }
-      end
-      navigators_json
-    end
-    render :json => cached_json
+    #   results.terms('places', false, true).each do |hash|
+    #     obj = hash['obj']
+    #     navigators_json << {
+    #       :label => "<strong>#{query}</strong> - #{obj.name}, woj. #{obj.commune.district.voivodeship.name}, pow. #{obj.commune.district.name}, gm. #{obj.commune.name} (#{hash['count']})",
+    #       :value => query,
+    #       :path  => relics_path(search_params.merge(:location => [obj.commune.district.voivodeship_id, obj.commune.district_id, obj.commune_id, obj.id].join('-')))
+    #     }
+    #   end
+    #   navigators_json
+    # end
+    # render :json => cached_json
   end
 
   def download

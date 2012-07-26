@@ -1,0 +1,14 @@
+.clearfix
+= semantic_form_for Search.new(params[:s] || {}), :object_name => 's', :url => relics_path, :html => { :class => 'well form-advance-search' }, :method => :get do |f|
+  = f.input :q, :label => false, :placeholder => "co"
+  = f.input :place, :label => false, :placeholder => "gdzie"
+  = f.input :from,  :label => false, :placeholder => "od"
+  = f.input :to,    :label => false, :placeholder => "do"
+  = f.input :categories, :as => :check_boxes, :collection => Search.categories
+  = f.input :polish, :as => :check_boxes, :collection => [['polonijne', true], ['niepolonijne', false]]
+  = f.input :photos, :as => :check_boxes, :collection => [['ze zdjęciem', true], ['brak zdjęcia', false]]
+  = f.input :description, :as => :check_boxes, :collection => [['z opisem', true], ['brak opisu', false]]
+  = f.input :states, :as => :check_boxes, :collection => ['sprawdzone', 'niesprawdzone', 'uzupełnione'].zip(Relic::States)
+  = f.input :existence, :as => :check_boxes, :collection => ['istniejące', 'archiwalne', 'spolecznociowe'].zip(Relic::Existences)
+
+  = f.action :submit, :label => 'Szukaj', :button_html => { :name => nil }

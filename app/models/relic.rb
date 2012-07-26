@@ -1,6 +1,9 @@
 # -*- encoding : utf-8 -*-
 require 'relic/tire_extensions'
 class Relic < ActiveRecord::Base
+  States = ['checked', 'unchecked', 'filled']
+  Existences = ['existed', 'archived', 'social']
+
   has_many :suggestions
   belongs_to :place
 
@@ -46,7 +49,7 @@ class Relic < ActiveRecord::Base
         :default => {
           :type      => "custom",
           :tokenizer => "standard",
-          :filter    => "standard, lowercase, pl_synonym, pl_stop, morfologik_stem, lowercase, asciifolding, unique"
+          :filter    => "standard, lowercase, pl_synonym, pl_stop, morfologik_stem, unique"
         }
       }
     }
@@ -89,132 +92,41 @@ class Relic < ActiveRecord::Base
       end.join(' ')
     end
 
-    def search(params)
-      tire.search(:load => false, :page => params[:page], :per_page => 10) do
-        location = params[:location].to_s.split('-').map {|l| l.split(':') }
-        corrected_relic_ids = (params[:corrected_relic_ids] || []).map(&:to_s)
-        seen_relic_ids =(params[:seen_relic_ids]||[]).map(&:to_s)
+    # def suggester q
+    #   tire.search(:load => false, :per_page => 1) do
+    #     query do
+    #       boolean do
+    #         must { string Relic.analyze_query(q), :default_operator => "AND", :fields => [
+    #           "identification^5",
+    #           "street",
+    #           "place_full_name^2",
+    #           "descendants.identification^3"              ]
+    #         }
+    #       end
+    #     end
 
-        q1 = Relic.analyze_query params[:q1]
-        query do
-          boolean do
-            must { string q1, :default_operator => "AND", :fields => [
-              "identification^5",
-              "street",
-              "place_full_name^2",
-              "descendants.identification^3"              ]
-            }
-          end
-        end
-        # # hack to use missing-filter
-        # # http://www.elasticsearch.org/guide/reference/query-dsl/missing-filter.html
-        # query_value = self.instance_variable_get("@query").instance_variable_get("@value")
-        # query_value[:bool][:must] << { constant_score: { filter: { missing: { field: "ancestry" } } } }
-        if q1 != '*'
-          highlight "identification" => {},
-            "street" => {},
-            "place_full_name" => {},
-            "descendants.identification" => {},
-            "descendants.street" => {}
-        end
-        facet "voivodeships" do
-          terms nil, :script_field => "_source.voivodeship.name + '_' + _source.voivodeship.id", :size => 16, :order => 'term'
-        end
+    #     if q != '*'
+    #       highlight "identification" => {},
+    #         "street" => {},
+    #         "place_full_name" => {},
+    #         "descendants.identification" => {},
+    #         "descendants.street" => {}
+    #     end
 
-        if location.size > 0
-          filter :terms, 'voivodeship.id' => location[0]
-          facet "districts", :facet_filter => { :terms => { 'voivodeship.id' => location[0] } } do
-            terms nil, :script_field => "_source.district.name + '_' + _source.district.id", :size => 10_000, :order => 'term'
-          end
-        end
-
-        if location.size > 1
-          filter :terms, 'district.id' => location[1]
-          facet "communes", :facet_filter => { :terms => { 'district.id' => location[1] } } do
-            terms nil, :script_field => "_source.commune.name + '_' + _source.virtual_commune_id", :size => 10_000, :order => 'term'
-          end
-        end
-
-        if location.size > 2
-          filter :terms, 'commune.id' => location[2]
-          facet "places", :facet_filter => { :terms => { 'commune.id' => location[2]} } do
-             terms nil, :script_field => "_source.place.name + '_' + _source.place.id", :size => 10_000, :order => 'term'
-          end
-        end
-
-        filter :terms, 'place.id' => location[3] if location.size > 3
-
-        facet "overall" do
-          terms nil, :script_field => 1, :global => true
-        end
-
-        corrected_faset_filter = {}
-        term_params = Hash[
-          ['voivodeship.id', 'district.id', 'commune.id', 'place.id'].zip(location)
-        ].inject({}) { |mem, (k, v)| mem[k] = v if v; mem }
-        corrected_faset_filter = { :facet_filter => { :terms => term_params } } if term_params.present?
-
-        facet "corrected", corrected_faset_filter do
-          terms :edit_count, :script => "(corrected_relic_ids.contains(doc['id'].value.toString()) || doc['edit_count'].value > 2) ? 1 : 0", :all_terms => true, :params => {
-            'corrected_relic_ids' => corrected_relic_ids
-          }
-        end
-        sort do
-          by '_script', {
-              'script' => %q(
-                i = -seen_relic_ids.indexOf(doc['id'].value.toString());
-                f0 = (i * 100) + (doc['edit_count'].value * f1) - doc['skip_count'].value;
-                if( corrected_relic_ids.contains(doc['id'].value.toString()) || doc['edit_count'].value > 2 ) { f2 + f0; } else { f0; }
-              ).squish,
-              'type' => 'number',
-              'params' => {
-                'f1' => 100,
-                'f2' => -100_000_000,
-                'corrected_relic_ids' => corrected_relic_ids,
-                'seen_relic_ids' => seen_relic_ids
-              },
-              'order' => 'desc'
-            }
-          by '_score', 'desc'
-        end
-      end
-    end
-
-    def suggester q
-      tire.search(:load => false, :per_page => 1) do
-        query do
-          boolean do
-            must { string Relic.analyze_query(q), :default_operator => "AND", :fields => [
-              "identification^5",
-              "street",
-              "place_full_name^2",
-              "descendants.identification^3"              ]
-            }
-          end
-        end
-
-        if q != '*'
-          highlight "identification" => {},
-            "street" => {},
-            "place_full_name" => {},
-            "descendants.identification" => {},
-            "descendants.street" => {}
-        end
-
-        facet "voivodeships" do
-          terms nil, :script_field => "_source.voivodeship.name + '_' + _source.voivodeship.id", :size => 3
-        end
-        facet "districts" do
-          terms nil, :script_field => "_source.district.name + '_' + _source.district.id", :size => 3
-        end
-        facet "communes" do
-          terms nil, :script_field => "_source.commune.name + '_' + _source.virtual_commune_id", :size => 3
-        end
-        facet "places" do
-           terms nil, :script_field => "_source.place.name + '_' + _source.place.id", :size => 3
-        end
-      end
-    end
+    #     facet "voivodeships" do
+    #       terms nil, :script_field => "_source.voivodeship.name + '_' + _source.voivodeship.id", :size => 3
+    #     end
+    #     facet "districts" do
+    #       terms nil, :script_field => "_source.district.name + '_' + _source.district.id", :size => 3
+    #     end
+    #     facet "communes" do
+    #       terms nil, :script_field => "_source.commune.name + '_' + _source.virtual_commune_id", :size => 3
+    #     end
+    #     facet "places" do
+    #        terms nil, :script_field => "_source.place.name + '_' + _source.place.id", :size => 3
+    #     end
+    #   end
+    # end
 
     def next_for(user, search_params)
       params = (search_params || {}).merge(:per_page => 1, :seen_relic_ids => user.seen_relic_ids, :corrected_relic_ids => user.corrected_relic_ids)
@@ -241,7 +153,7 @@ class Relic < ActiveRecord::Base
       :identification   => identification,
       :street           => street,
       :place_full_name  => place_full_name,
-      :kind             => kind,
+      # :kind             => kind,
       :descendants      => self.descendants.map(&:to_descendant_hash),
       :edit_count       => self.edit_count,
       :skip_count       => self.skip_count,
@@ -250,6 +162,16 @@ class Relic < ActiveRecord::Base
       :commune          => { :id => self.commune_id,                :name => self.commune.name },
       :virtual_commune_id => self.place.virtual_commune_id,
       :place            => { :id => self.place_id,                  :name => self.place.name },
+      # new search fields
+      :description      => 'some description',
+      :has_description  => true,
+      :from             => '',
+      :to               => '',
+      :categories       => ['cat1', 'cat2'],
+      :from_poland      => true,  # lub false
+      :has_photos       => false, # lub true
+      :state            => 'unchecked',
+      :existance        => 'existed'
     }.merge(Hash[ids]).to_json
   end
 

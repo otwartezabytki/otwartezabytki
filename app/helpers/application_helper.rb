@@ -48,32 +48,33 @@ module ApplicationHelper
   end
 
   def random_search_suggestions
-    types = SuggestedType.order("RANDOM()").map {|e| e.name }
-    places = Relic.roots.select("place_id, COUNT(id) as cnt").group(:place_id).having("COUNT(id) > 5").order("RANDOM()").limit(5).includes(:place).map {|r| r.place.name }
-    suggestions = []
+    return ""
+    # types = SuggestedType.order("RANDOM()").map {|e| e.name }
+    # places = Relic.roots.select("place_id, COUNT(id) as cnt").group(:place_id).having("COUNT(id) > 5").order("RANDOM()").limit(5).includes(:place).map {|r| r.place.name }
+    # suggestions = []
 
-    first = types.shift
-    count = Relic.search(:q1 => first).total_count
-    suggestions[0] = [first, count]
+    # first = types.shift
+    # count = Relic.search(:q1 => first).total_count
+    # suggestions[0] = [first, count]
 
-    first = places.shift
-    count = Relic.search(:q1 => first).total_count
-    suggestions[2] = [first, count]
+    # first = places.shift
+    # count = Relic.search(:q1 => first).total_count
+    # suggestions[2] = [first, count]
 
-    types.each do |type|
-      places.each do |place|
-        q = type + " " + place
-        count = Relic.search(:q1 => q).total_count
-        if count > 0
-          suggestions[1] = [q, count]
-          break
-        end
-      end
-    end
+    # types.each do |type|
+    #   places.each do |place|
+    #     q = type + " " + place
+    #     count = Relic.search(:q1 => q).total_count
+    #     if count > 0
+    #       suggestions[1] = [q, count]
+    #       break
+    #     end
+    #   end
+    # end
 
-    suggestions.map do |label, count|
-      link_to "#{label} <span>(#{count})</span>".html_safe, relics_path(:q1 => label)
-    end.join(", ").html_safe
+    # suggestions.map do |label, count|
+    #   link_to "#{label} <span>(#{count})</span>".html_safe, relics_path(:q1 => label)
+    # end.join(", ").html_safe
   end
 
   def link_to_facet obj, location, deep, &block
