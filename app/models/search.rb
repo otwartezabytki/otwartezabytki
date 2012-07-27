@@ -3,7 +3,8 @@ class Search
   include ActiveModel::Conversion
   extend ActiveModel::Naming
 
-  attr_accessor :q, :place, :from, :to, :categories, :polish, :photos, :description, :states, :existence, :page
+  attr_accessor :q, :place, :from, :to, :categories, :has_photos, :has_description, :states, :existence, :page
+  attr_accessor :facet_filter_terms
 
   def page
     @page || 1
@@ -22,24 +23,31 @@ class Search
   def query
     return @_q if defined? @_q
     @_q = @q.to_s.strip
-    @_q = '*' if @_q.blank?
+    # @_q = '*' if @_q.blank?
     @_q
   end
 
-  class << self
-    def categories
-      ['cat1', 'cat2']
-    end
+  def categories
+    @categories.reject!(&:blank?) if @categories
+    @categories
+  end
+
+  def states
+    @states.reject!(&:blank?) if @states
+    @states
+  end
+
+  def existance
+    @existance.reject!(&:blank?) if @existance
+    @existance
   end
 
   def enable_highlight
-    if query != '*'
-      @tsearch.highlight "identification" => {},
-        "street" => {},
-        "place_full_name" => {},
-        "descendants.identification" => {},
-        "descendants.street" => {}
-    end
+    @tsearch.highlight "identification" => {},
+      "street" => {},
+      "place_full_name" => {},
+      "descendants.identification" => {},
+      "descendants.street" => {}
   end
 
   def enable_sort
@@ -81,28 +89,28 @@ class Search
 
   def enable_facet_navigation
     location = [] #params[:location].to_s.split('-').map {|l| l.split(':') }
-
-    @tsearch.facet "voivodeships" do
+    voivodeship_facet_filter  = @facet_filter_terms.present? ? { :facet_filter => { :term => @facet_filter_terms } } : {}
+    @tsearch.facet "voivodeships", voivodeship_facet_filter do
       terms nil, :script_field => "_source.voivodeship.name + '_' + _source.voivodeship.id", :size => 16, :order => 'term'
     end
 
     if location.size > 0
       @tsearch.filter :terms, 'voivodeship.id' => location[0]
-      @tsearch.facet "districts", :facet_filter => { :terms => { 'voivodeship.id' => location[0] } } do
+      @tsearch.facet "districts", :facet_filter => { :term => @facet_filter_terms.merge('voivodeship.id' => location[0]) } do
         terms nil, :script_field => "_source.district.name + '_' + _source.district.id", :size => 10_000, :order => 'term'
       end
     end
 
     if location.size > 1
       @tsearch.filter :terms, 'district.id' => location[1]
-      @tsearch.facet "communes", :facet_filter => { :terms => { 'district.id' => location[1] } } do
+      @tsearch.facet "communes", :facet_filter => { :term => @facet_filter_terms.merge('district.id' => location[1]) } do
         terms nil, :script_field => "_source.commune.name + '_' + _source.virtual_commune_id", :size => 10_000, :order => 'term'
       end
     end
 
     if location.size > 2
       @tsearch.filter :terms, 'commune.id' => location[2]
-      @tsearch.facet "places", :facet_filter => { :terms => { 'commune.id' => location[2]} } do
+      @tsearch.facet "places", :facet_filter => { :term => @facet_filter_terms.merge('commune.id' => location[2]) } do
          terms nil, :script_field => "_source.place.name + '_' + _source.place.id", :size => 10_000, :order => 'term'
       end
     end
@@ -117,23 +125,57 @@ class Search
       query do
         boolean do
           must { string data.query, :default_operator => "AND", :fields => [
-            "identification^5",
-            "street",
-            "place_full_name^2",
-            "descendants.identification^3"              ]
-          }
+            "identification^10",
+            "descendants.identification^8"
+          ]} if data.query.present?
+          must { string data.place, :default_operator => "AND", :fields => [
+            "place_full_name^5",
+            "street^3"
+          ]} if data.place.present?
         end
+      end if [data.query, data.place].any? &:present?
+
+      # facet "has_photos" do
+      #   terms "has_photos"
+      # end
+
+      # facet "has_description" do
+      #   terms "has_description"
+      # end
+      data.facet_filter_terms = {}
+      if data.categories.present?
+        data.facet_filter_terms['categories'] = data.categories
+        filter :terms, 'categories' => data.categories, :execution => 'and'
       end
-      facet "overall" do
+      unless data.has_photos.nil?
+        data.facet_filter_terms['has_photos'] = data.has_photos
+        filter :term, 'has_photos' => data.has_photos
+      end
+      unless data.has_description.nil?
+        data.facet_filter_terms['has_description'] = data.has_description
+        filter :term, 'has_description' => data.has_description
+      end
+      if data.states.present?
+        data.facet_filter_terms['state'] = data.states
+        filter :terms, 'state' => data.states, :execution => 'and'
+      end
+      if data.existance.present?
+        data.facet_filter_terms['existence'] = data.existence
+        filter :terms, 'existence' => data.existence, :execution => 'and'
+      end
+
+      overall_facet_filter  = data.facet_filter_terms.present? ? { :facet_filter => { :term => data.facet_filter_terms } } : {}
+      facet "overall", overall_facet_filter do
         terms nil, :script_field => 1, :global => true
       end
+
     end
 
     # enable additions search features
     enable_facet_navigation
     enable_correccted_facet
     enable_highlight
-    enable_sort
+    # enable_sort
 
     @tsearch.results
   end

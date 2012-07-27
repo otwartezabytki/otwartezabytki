@@ -48,6 +48,7 @@ module ApplicationHelper
   end
 
   def random_search_suggestions
+    # hack because of meta_seach
     return ""
     # types = SuggestedType.order("RANDOM()").map {|e| e.name }
     # places = Relic.roots.select("place_id, COUNT(id) as cnt").group(:place_id).having("COUNT(id) > 5").order("RANDOM()").limit(5).includes(:place).map {|r| r.place.name }

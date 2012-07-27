@@ -9,6 +9,9 @@
         - if relic.descendants.present?
           %span
           = relic.descendants.map(&:identification).join(', ')
+      .include
+        %span
+        = relic.categories.sort.join(', ')
       - if relic.corrected?(current_user)
         .modified
       - else

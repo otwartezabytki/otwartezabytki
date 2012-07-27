@@ -65,6 +65,11 @@ class Relic < ActiveRecord::Base
       na.indexes :edit_count, :type => "integer"
       na.indexes :skip_count, :type => "integer"
       na.indexes :virtual_commune_id
+      na.indexes :categories
+      na.indexes :has_photos,       :type => "boolean"
+      na.indexes :has_description,  :type => "boolean"
+      na.indexes :state
+      na.indexes :existance
 
       # backward compatibility
       na.indexes :voivodeship_id
@@ -165,13 +170,13 @@ class Relic < ActiveRecord::Base
       # new search fields
       :description      => 'some description',
       :has_description  => true,
-      :from             => '',
-      :to               => '',
-      :categories       => ['cat1', 'cat2'],
-      :from_poland      => true,  # lub false
-      :has_photos       => false, # lub true
-      :state            => 'unchecked',
-      :existance        => 'existed'
+      # :from             => '',
+      # :to               => '',
+      # sample categoires
+      :categories       => Tag.all.values.sample(3),
+      :has_photos       => [true, false].sample,
+      :state            => States.sample,
+      :existance        => Existences.sample
     }.merge(Hash[ids]).to_json
   end
 
