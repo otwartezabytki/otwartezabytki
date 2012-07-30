@@ -7,6 +7,11 @@ require 'factory_girl'
 require 'capybara/rspec'
 
 Spork.prefork do
+  if ENV["RUBYMINE_HOME"]
+    $:.unshift(File.expand_path("rb/testing/patch/common", ENV["RUBYMINE_HOME"]))
+    $:.unshift(File.expand_path("rb/testing/patch/bdd", ENV["RUBYMINE_HOME"]))
+  end
+
   require 'simplecov' unless ENV['DRB']
   ENV["RAILS_ENV"] ||= 'test'
   require File.expand_path("../../config/environment", __FILE__)

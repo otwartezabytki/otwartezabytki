@@ -62,6 +62,9 @@ gem 'whenever', :require => false
 # bot secrity
 gem 'recaptcha', :require => 'recaptcha/rails'
 
+# file upload
+gem 'carrierwave'
+
 group :development, :test do
   # for debugging
   gem 'ruby-debug19'
