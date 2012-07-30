@@ -17,12 +17,12 @@ describe Document do
     document.file.identifier.should include('favicon')
   end
 
-  it "should upload each document under /public/system/uploads/documents path" do
+  it "should upload each document under /public/system/uploads/document path" do
     document = create(:document)
     document.file = File.open(Rails.root + 'public/favicon.gif')
     document.save!
 
-    document.file.current_path.should include('/public/system/uploads/documents')
+    document.file.current_path.should include('/public/system/uploads/document')
   end
 
   it "should upload each document under different path and don't delete old file" do
