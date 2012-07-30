@@ -29,4 +29,9 @@ describe Relic do
     create(:relic).should respond_to(:links)
     create(:link).should respond_to(:relic)
   end
+
+  it "should have symmetric events relation" do
+    create(:relic).should respond_to(:events)
+    create(:event).should respond_to(:relic)
+  end
 end
