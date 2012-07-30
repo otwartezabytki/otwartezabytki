@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120730105611) do
+ActiveRecord::Schema.define(:version => 20120730125006) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -106,6 +106,7 @@ ActiveRecord::Schema.define(:version => 20120730105611) do
     t.string   "tags"
     t.integer  "skip_count",      :default => 0
     t.integer  "edit_count",      :default => 0
+    t.text     "description"
   end
 
   add_index "relics", ["ancestry"], :name => "index_relics_on_ancestry"

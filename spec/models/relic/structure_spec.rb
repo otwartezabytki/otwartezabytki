@@ -10,4 +10,8 @@ describe Relic do
     create(:relic).should respond_to(:photos)
     create(:photo).should respond_to(:relic)
   end
+
+  it "should have description field" do
+    create(:relic).should respond_to(:description)
+  end
 end
