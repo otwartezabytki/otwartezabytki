@@ -14,4 +14,9 @@ describe Relic do
   it "should have description field" do
     create(:relic).should respond_to(:description)
   end
+
+  it "should have symmetric alerts relation" do
+    create(:relic).should respond_to(:alerts)
+    create(:alert).should respond_to(:relic)
+  end
 end

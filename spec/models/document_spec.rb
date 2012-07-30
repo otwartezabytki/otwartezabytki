@@ -1,6 +1,11 @@
 require 'spec_helper'
 
 describe Document do
+  it "should belong to relic and user" do
+    build(:document).should respond_to(:user)
+    build(:document).should respond_to(:relic)
+  end
+
   it "should have working uploader on file attribute" do
     document = create(:document)
     document.file = File.open(Rails.root + 'public/favicon.gif')

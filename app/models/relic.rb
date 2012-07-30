@@ -4,6 +4,8 @@ class Relic < ActiveRecord::Base
   has_many :suggestions
   has_many :documents, :dependent => :destroy
   has_many :photos, :dependent => :destroy
+  has_many :alerts, :dependent => :destroy
+
   belongs_to :place
 
   attr_protected :id, :created_at, :update_at

@@ -1,6 +1,11 @@
 require 'spec_helper'
 
 describe Photo do
+  it "should belong to relic and user" do
+    build(:photo).should respond_to(:user)
+    build(:photo).should respond_to(:relic)
+  end
+
   it "should have working uploader on file attribute" do
     photo = create(:photo)
     photo.file = File.open(Rails.root + 'public/favicon.gif')
