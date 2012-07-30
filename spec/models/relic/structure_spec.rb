@@ -24,4 +24,9 @@ describe Relic do
     create(:relic).should respond_to(:entries)
     create(:entry).should respond_to(:relic)
   end
+
+  it "should have symmetric links relation" do
+    create(:relic).should respond_to(:links)
+    create(:link).should respond_to(:relic)
+  end
 end

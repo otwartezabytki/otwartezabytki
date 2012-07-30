@@ -6,6 +6,7 @@ class Relic < ActiveRecord::Base
   has_many :photos, :dependent => :destroy
   has_many :alerts, :dependent => :destroy
   has_many :entries, :dependent => :destroy
+  has_many :links, :dependent => :destroy
 
   belongs_to :place
 
