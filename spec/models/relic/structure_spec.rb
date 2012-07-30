@@ -19,4 +19,9 @@ describe Relic do
     create(:relic).should respond_to(:alerts)
     create(:alert).should respond_to(:relic)
   end
+
+  it "should have symmetric entries relation" do
+    create(:relic).should respond_to(:entries)
+    create(:entry).should respond_to(:relic)
+  end
 end
