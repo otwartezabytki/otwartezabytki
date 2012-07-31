@@ -26,7 +26,7 @@ class RelicsController < ApplicationController
   before_filter :current_user!, :only => [:edit, :create, :update, :gonext, :thank_you]
 
   def show
-    redirect_to edit_relic_path(params[:id]) and return
+    relic.present? # raise ActiveRecord::RecordNotFound before entering template
   end
 
   def index
