@@ -1,4 +1,39 @@
 # encoding: utf-8
+# == Schema Information
+#
+# Table name: suggestions
+#
+#  id                    :integer          not null, primary key
+#  relic_id              :integer
+#  user_id               :integer
+#  place_id              :integer
+#  place_id_action       :string(255)      default("skip")
+#  identification        :text
+#  identification_action :string(255)      default("skip")
+#  street                :string(255)
+#  street_action         :string(255)      default("skip")
+#  dating_of_obj         :string(255)
+#  dating_of_obj_action  :string(255)      default("skip")
+#  latitude              :float
+#  longitude             :float
+#  coordinates_action    :string(255)      default("skip")
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  tags                  :string(255)
+#  tags_action           :string(255)      default("skip")
+#  ancestry              :integer
+#  skipped               :boolean          default(FALSE)
+#  ip_address            :string(255)
+#
+# Indexes
+#
+#  index_suggestions_on_ancestry               (ancestry)
+#  index_suggestions_on_coordinates_action     (coordinates_action)
+#  index_suggestions_on_dating_of_obj_action   (dating_of_obj_action)
+#  index_suggestions_on_identification_action  (identification_action)
+#  index_suggestions_on_place_id_action        (place_id_action)
+#
+
 class Suggestion < ActiveRecord::Base
   belongs_to :user
   belongs_to :relic

@@ -73,6 +73,9 @@ group :development, :test do
   # for routes in /rails/routes
   gem 'sextant'
   gem 'guard-cucumber'
+
+  # for annotating db schema in models
+  gem 'annotate', ">=2.5.0"
 end
 
 # assets javascript compiler
