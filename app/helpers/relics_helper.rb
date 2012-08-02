@@ -35,4 +35,11 @@ module RelicsHelper
       ["#{labels[t['term']]} (#{t['count']})", t['term']]
     end
   end
+
+  def disabled search, name
+    relics.terms(name).inject([]) { |r, t|
+      r <<  t['term'] if  t['count'].zero?
+      r
+    } - search.send(name)
+  end
 end
