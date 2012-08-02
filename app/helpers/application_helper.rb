@@ -78,11 +78,13 @@ module ApplicationHelper
     # end.join(", ").html_safe
   end
 
-  def link_to_facet obj, location, deep, &block
+  def link_to_facet obj, deep, &block
     name, id  = obj['term'].split('_')
+    location  = params[:search].try(:[], :location).to_s.split('-')
     selected  = location[deep] == id
     label     = "#{name} <span>#{obj['count']}</span>".html_safe
-    link      = link_to label, relics_path(search_params.merge(:location => (location.first(deep) << id).join('-')))
+    cond      = search_params({:location => (location.first(deep) << id).join('-')})
+    link      = link_to label, relics_path(cond)
     output = []
     if selected
       output << content_tag(:div, :class => 'selected') do

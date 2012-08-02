@@ -163,8 +163,9 @@ class RelicsController < ApplicationController
       end
     end
 
-    def search_params
-      params.slice(:q1)
+    def search_params opt = {}
+      cond = params[:search] || {}
+      { :search => cond.merge(opt) }
     end
 
     def location_breadcrumbs

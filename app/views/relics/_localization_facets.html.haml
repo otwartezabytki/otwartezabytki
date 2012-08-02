@@ -2,21 +2,20 @@
   %h3 Lokalizacja
   %ul.nav.nav-list.all
     %li
-      = link_to "Cała Polska <span>#{relics.overall_count}</span>".html_safe, relics_path(search_params)
+      = link_to "Cała Polska <span>#{relics.overall_count}</span>".html_safe, relics_path(search_params(:location => nil))
   %ul.nav.nav-list
-    - location = params[:location].to_s.split('-')
     - relics.terms('voivodeships', true).each do |obj|
       %li
-        = link_to_facet obj, location, 0 do
+        = link_to_facet obj, 0 do
           %ul
             - relics.terms('districts', true).each do |obj|
               %li
-                = link_to_facet obj, location, 1 do
+                = link_to_facet obj, 1 do
                   %ul
                     - relics.terms('communes', true).each do |obj|
                       %li
-                        = link_to_facet obj, location, 2 do
+                        = link_to_facet obj, 2 do
                           %ul
                             - relics.terms('places', true).each do |obj|
                               %li
-                                = link_to_facet obj, location, 3
+                                = link_to_facet obj, 3
