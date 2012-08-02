@@ -45,7 +45,7 @@
 
       = render :partial => "relics", :locals => {:collection => @corrected }
 
-    = paginate relics
+    = paginate relics, :remote => true
 
     - unless relics.incorrect_count.zero?
       %p#adding-note

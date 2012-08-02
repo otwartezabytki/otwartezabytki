@@ -36,8 +36,12 @@ default_spinner_opts =
 jQuery ->
 
   # search autoreload
-  $('input[type=checkbox]').click ->
+  $('body').on 'click', 'form.form-advance-search input[type=checkbox]', ->
     $(this).parents('form:first').submit()
+
+  $('body').on 'ajax:success', 'form.form-advance-search, nav.pagination, div.sidebar-nav', (e, data) ->
+    ['form.form-advance-search', '#main div.sidebar-nav', '#relics'].map (el) ->
+      $(el).replaceWith $(data).find(el)
 
   # autocomplete
   $input = $('input.search-query')

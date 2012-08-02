@@ -84,7 +84,7 @@ module ApplicationHelper
     selected  = location[deep] == id
     label     = "#{name} <span>#{obj['count']}</span>".html_safe
     cond      = search_params({:location => (location.first(deep) << id).join('-')})
-    link      = link_to label, relics_path(cond)
+    link      = link_to label, relics_path(cond), :remote => true
     output = []
     if selected
       output << content_tag(:div, :class => 'selected') do

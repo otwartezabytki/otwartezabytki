@@ -1,5 +1,5 @@
 .clearfix
-= semantic_form_for Search.new(params[:search] || {}), :object_name => 's', :url => relics_path, :html => { :class => 'well form-advance-search' }, :method => :get do |f|
+= semantic_form_for Search.new(params[:search] || {}), :object_name => 's', :url => relics_path, :html => { :class => 'well form-advance-search' }, :method => :get, :remote => true do |f|
   = f.input :q, :label => false, :placeholder => "co", :input_html => { :class => 'search-query'}
   = f.input :place, :label => false, :placeholder => "gdzie"
 

@@ -6,10 +6,6 @@ class Search
   attr_accessor :q, :place, :from, :to, :categories, :state, :existance, :location
   attr_accessor :conditions, :page
 
-  def page
-    @page || 1
-  end
-
   def initialize(attributes = {})
     attributes.each do |name, value|
       next if value.blank?
@@ -129,7 +125,12 @@ class Search
     instance = self
     prepare_conditions
 
-    @tsearch = Tire.search(Relic.tire.index_name, :load => false, :page => page, :per_page => 10) do
+    @tsearch = Tire.search(Relic.tire.index_name, :page => page, :per_page => 10) do
+      # pagination
+      size( options[:per_page].to_i ) if options[:per_page]
+      from( options[:page].to_i <= 1 ? 0 : (options[:per_page].to_i * (options[:page].to_i-1)) ) if options[:page] && options[:per_page]
+
+      # query
       query do
         boolean do
           must { string instance.query, :default_operator => "AND", :fields => [
@@ -147,8 +148,8 @@ class Search
 
       Rails.logger.info instance.filter_facet_conditions
 
-      facet "overall", instance.filter_facet_conditions do
-        terms nil, :script_field => 1
+      facet "overall", instance.filter_facet_conditions('voivodeship.id', 'district.id', 'commune.id', 'place.id') do
+        terms nil, :script_field => 1, :global => true
       end
 
       facet 'categories', instance.filter_facet_conditions('categories') do

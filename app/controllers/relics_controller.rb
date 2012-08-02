@@ -31,7 +31,7 @@ class RelicsController < ApplicationController
 
   def relics
     return @relics if defined? @relics
-    @relics = Search.new(params[:search] || {}).perform
+    @relics = Search.new(search_params(:page => params[:page])[:search]).perform
   end
 
   def index

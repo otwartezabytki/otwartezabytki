@@ -2,7 +2,7 @@
   %h3 Lokalizacja
   %ul.nav.nav-list.all
     %li
-      = link_to "Cała Polska <span>#{relics.overall_count}</span>".html_safe, relics_path(search_params(:location => nil))
+      = link_to "Cała Polska <span>#{relics.overall_count}</span>".html_safe, relics_path(search_params(:location => nil)), :remote => true
   %ul.nav.nav-list
     - relics.terms('voivodeships', true).each do |obj|
       %li
