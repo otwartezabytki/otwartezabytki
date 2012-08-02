@@ -75,6 +75,8 @@ end
 # assets javascript compiler
 gem 'therubyracer', :group => :production
 
+gem 'ffi-aspell', :require => 'ffi/aspell'
+
 group :test do
   # for defining tests
   gem 'cucumber-rails', :require => false

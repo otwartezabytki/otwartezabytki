@@ -167,6 +167,8 @@ GEM
       multipart-post (~> 1.1)
     fastercsv (1.5.5)
     ffi (1.0.11)
+    ffi-aspell (0.0.3)
+      ffi (>= 1.0.11)
     fixed_width-multibyte (0.2.3)
       activesupport
     formtastic (2.1.1)
@@ -448,6 +450,7 @@ DEPENDENCIES
   dm-chunked_query
   dm-sqlite-adapter
   factory_girl_rails
+  ffi-aspell
   geocoder
   gon
   growl
