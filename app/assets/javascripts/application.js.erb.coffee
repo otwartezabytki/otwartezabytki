@@ -34,6 +34,11 @@ default_spinner_opts =
   left: 180
 
 jQuery ->
+
+  # search autoreload
+  $('input[type=checkbox]').click ->
+    $(this).parents('form:first').submit()
+
   # autocomplete
   $input = $('input.search-query')
   if $input.length > 0
@@ -41,7 +46,7 @@ jQuery ->
       html: true,
       minLength: 2,
       source: (request, callback) ->
-        $.getJSON "/relics/suggester", q1: request.term, callback
+        $.getJSON "/relics/suggester", q: request.term, callback
       select: (event, ui) ->
         window.location = ui.item.path
     )

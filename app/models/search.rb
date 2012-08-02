@@ -3,8 +3,8 @@ class Search
   include ActiveModel::Conversion
   extend ActiveModel::Naming
 
-  attr_accessor :q, :place, :from, :to, :categories, :has_photos, :has_description, :states, :existence, :page
-  attr_accessor :facet_filter_terms
+  attr_accessor :q, :place, :from, :to, :categories, :state, :existance, :location
+  attr_accessor :conditions, :page
 
   def page
     @page || 1
@@ -12,7 +12,8 @@ class Search
 
   def initialize(attributes = {})
     attributes.each do |name, value|
-      send("#{name}=", value) if value.present?
+      next if value.blank?
+      send("#{name}=", value)
     end if attributes.present?
   end
 
@@ -27,19 +28,16 @@ class Search
     @_q
   end
 
-  def categories
-    @categories.reject!(&:blank?) if @categories
-    @categories
+  [:categories, :state, :existance].each do |name|
+    define_method name do
+      return [] if instance_variable_get("@#{name}").blank?
+      instance_variable_get("@#{name}").reject!(&:blank?)
+      instance_variable_get("@#{name}")
+    end
   end
 
-  def states
-    @states.reject!(&:blank?) if @states
-    @states
-  end
-
-  def existance
-    @existance.reject!(&:blank?) if @existance
-    @existance
+  def location
+    @location.to_s.split('-').map {|l| l.split(':') }
   end
 
   def enable_highlight
@@ -88,87 +86,82 @@ class Search
   end
 
   def enable_facet_navigation
-    location = [] #params[:location].to_s.split('-').map {|l| l.split(':') }
-    voivodeship_facet_filter  = @facet_filter_terms.present? ? { :facet_filter => { :term => @facet_filter_terms } } : {}
-    @tsearch.facet "voivodeships", voivodeship_facet_filter do
+    @tsearch.facet "voivodeships", filter_facet_conditions do
       terms nil, :script_field => "_source.voivodeship.name + '_' + _source.voivodeship.id", :size => 16, :order => 'term'
     end
 
-    if location.size > 0
-      @tsearch.filter :terms, 'voivodeship.id' => location[0]
-      @tsearch.facet "districts", :facet_filter => { :term => @facet_filter_terms.merge('voivodeship.id' => location[0]) } do
-        terms nil, :script_field => "_source.district.name + '_' + _source.district.id", :size => 10_000, :order => 'term'
-      end
+    @tsearch.facet "districts", filter_facet_conditions do
+      terms nil, :script_field => "_source.district.name + '_' + _source.district.id", :size => 10_000, :order => 'term'
+    end if location.size > 0
+
+    @tsearch.facet "communes", filter_facet_conditions do
+      terms nil, :script_field => "_source.commune.name + '_' + _source.virtual_commune_id", :size => 10_000, :order => 'term'
+    end if location.size > 1
+
+    @tsearch.facet "places", filter_facet_conditions do
+       terms nil, :script_field => "_source.place.name + '_' + _source.place.id", :size => 10_000, :order => 'term'
+    end if location.size > 2
+  end
+
+  def filter_facet_conditions *keys
+    terms = @conditions.except(*keys)
+    return {} if terms.blank?
+    {
+      'facet_filter' => {
+        'and' => terms.map { |k, v| {"terms" => { k => v}} }
+      }
+    }
+  end
+
+  def prepare_conditions
+    @conditions = ['categories', 'state', 'existance'].inject({}) do |r, t|
+      r[t] = send(t) if send(t).present?
+      r
     end
-
-    if location.size > 1
-      @tsearch.filter :terms, 'district.id' => location[1]
-      @tsearch.facet "communes", :facet_filter => { :term => @facet_filter_terms.merge('district.id' => location[1]) } do
-        terms nil, :script_field => "_source.commune.name + '_' + _source.virtual_commune_id", :size => 10_000, :order => 'term'
-      end
-    end
-
-    if location.size > 2
-      @tsearch.filter :terms, 'commune.id' => location[2]
-      @tsearch.facet "places", :facet_filter => { :term => @facet_filter_terms.merge('commune.id' => location[2]) } do
-         terms nil, :script_field => "_source.place.name + '_' + _source.place.id", :size => 10_000, :order => 'term'
-      end
-    end
-
-    @tsearch.filter :terms, 'place.id' => location[3] if location.size > 3
-
+    location_conditions = Hash[
+      ['voivodeship.id', 'district.id', 'commune.id', 'place.id'].zip(location)
+    ].inject({}) { |mem, (k, v)| mem[k] = v if v; mem }
+    @conditions.merge! location_conditions
+    @conditions
   end
 
   def perform
-    data = self
+    instance = self
+    prepare_conditions
+
     @tsearch = Tire.search(Relic.tire.index_name, :load => false, :page => page, :per_page => 10) do
       query do
         boolean do
-          must { string data.query, :default_operator => "AND", :fields => [
+          must { string instance.query, :default_operator => "AND", :fields => [
             "identification^10",
             "descendants.identification^8"
-          ]} if data.query.present?
-          must { string data.place, :default_operator => "AND", :fields => [
+          ]} if instance.query.present?
+          must { string instance.place, :default_operator => "AND", :fields => [
             "place_full_name^5",
             "street^3"
-          ]} if data.place.present?
+          ]} if instance.place.present?
         end
-      end if [data.query, data.place].any? &:present?
+      end if [instance.query, instance.place].any? &:present?
 
-      # facet "has_photos" do
-      #   terms "has_photos"
-      # end
+      instance.conditions.each { |k, v| filter :terms, k => v }
 
-      # facet "has_description" do
-      #   terms "has_description"
-      # end
-      data.facet_filter_terms = {}
-      if data.categories.present?
-        data.facet_filter_terms['categories'] = data.categories
-        filter :terms, 'categories' => data.categories, :execution => 'and'
-      end
-      unless data.has_photos.nil?
-        data.facet_filter_terms['has_photos'] = data.has_photos
-        filter :term, 'has_photos' => data.has_photos
-      end
-      unless data.has_description.nil?
-        data.facet_filter_terms['has_description'] = data.has_description
-        filter :term, 'has_description' => data.has_description
-      end
-      if data.states.present?
-        data.facet_filter_terms['state'] = data.states
-        filter :terms, 'state' => data.states, :execution => 'and'
-      end
-      if data.existance.present?
-        data.facet_filter_terms['existence'] = data.existence
-        filter :terms, 'existence' => data.existence, :execution => 'and'
+      Rails.logger.info instance.filter_facet_conditions
+
+      facet "overall", instance.filter_facet_conditions do
+        terms nil, :script_field => 1
       end
 
-      overall_facet_filter  = data.facet_filter_terms.present? ? { :facet_filter => { :term => data.facet_filter_terms } } : {}
-      facet "overall", overall_facet_filter do
-        terms nil, :script_field => 1, :global => true
+      facet 'categories', instance.filter_facet_conditions('categories') do
+        terms :categories, :size => Tag.all.size, :all_terms => true
       end
 
+      facet 'state', instance.filter_facet_conditions('state') do
+        terms :state, :all_terms => true
+      end
+
+      facet 'existance', instance.filter_facet_conditions('existance') do
+        terms :existance, :all_terms => true
+      end
     end
 
     # enable additions search features
