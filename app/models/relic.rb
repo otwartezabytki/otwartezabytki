@@ -97,42 +97,6 @@ class Relic < ActiveRecord::Base
       end.join(' ')
     end
 
-    # def suggester q
-    #   tire.search(:load => false, :per_page => 1) do
-    #     query do
-    #       boolean do
-    #         must { string Relic.analyze_query(q), :default_operator => "AND", :fields => [
-    #           "identification^5",
-    #           "street",
-    #           "place_full_name^2",
-    #           "descendants.identification^3"              ]
-    #         }
-    #       end
-    #     end
-
-    #     if q != '*'
-    #       highlight "identification" => {},
-    #         "street" => {},
-    #         "place_full_name" => {},
-    #         "descendants.identification" => {},
-    #         "descendants.street" => {}
-    #     end
-
-    #     facet "voivodeships" do
-    #       terms nil, :script_field => "_source.voivodeship.name + '_' + _source.voivodeship.id", :size => 3
-    #     end
-    #     facet "districts" do
-    #       terms nil, :script_field => "_source.district.name + '_' + _source.district.id", :size => 3
-    #     end
-    #     facet "communes" do
-    #       terms nil, :script_field => "_source.commune.name + '_' + _source.virtual_commune_id", :size => 3
-    #     end
-    #     facet "places" do
-    #        terms nil, :script_field => "_source.place.name + '_' + _source.place.id", :size => 3
-    #     end
-    #   end
-    # end
-
     def next_for(user, search_params)
       params = (search_params || {}).merge(:per_page => 1, :seen_relic_ids => user.seen_relic_ids, :corrected_relic_ids => user.corrected_relic_ids)
       self.search(params).first || self.first(:offset => rand(self.count))
