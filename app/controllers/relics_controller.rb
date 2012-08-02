@@ -105,56 +105,17 @@ class RelicsController < ApplicationController
   end
 
   def suggester
-    # query = params[:q1].to_s.strip
-    render :json => [] #and return unless query.present?
-
-    # cached_json = Rails.cache.fetch(uniq_cache_key("suggester"), :expires_in => 1.day) do
-    #   results = Relic.suggester(query)
-    #   navigators_json = []
-    #   navigators_json << {
-    #     :label => "cała Polska (#{results.total_count})",
-    #     :value => query,
-    #     :path  => relics_path(search_params)
-    #   } unless results.total_count.zero?
-
-    #   results.terms('voivodeships', false, true).each do |hash|
-    #     obj = hash['obj']
-    #     navigators_json << {
-    #       :label => "<strong>#{query}</strong> - woj. #{obj.name} (#{hash['count']})",
-    #       :value => query,
-    #       :path  => relics_path(search_params.merge(:location => obj.id))
-    #     }
-    #   end if results.terms('districts').size > 1
-
-    #   results.terms('districts', false, true).each do |hash|
-    #     obj = hash['obj']
-    #     navigators_json << {
-    #       :label => "<strong>#{query}</strong> - woj. #{obj.voivodeship.name}, pow. #{obj.name} (#{hash['count']})",
-    #       :value => query,
-    #       :path  => relics_path(search_params.merge(:location => [obj.voivodeship_id, obj.id].join('-')))
-    #     }
-    #   end if results.terms('communes').size > 1
-
-    #   results.terms('communes', false, true).each do |hash|
-    #     obj = hash['obj']
-    #     navigators_json << {
-    #       :label => "<strong>#{query}</strong> - woj. #{obj.district.voivodeship.name}, pow. #{obj.district.name}, gm. #{obj.name} (#{hash['count']})",
-    #       :value => query,
-    #       :path  => relics_path(search_params.merge(:location => [obj.district.voivodeship_id, obj.district_id, obj.id].join('-')))
-    #     }
-    #   end if results.terms('places').size > 1
-
-    #   results.terms('places', false, true).each do |hash|
-    #     obj = hash['obj']
-    #     navigators_json << {
-    #       :label => "<strong>#{query}</strong> - #{obj.name}, woj. #{obj.commune.district.voivodeship.name}, pow. #{obj.commune.district.name}, gm. #{obj.commune.name} (#{hash['count']})",
-    #       :value => query,
-    #       :path  => relics_path(search_params.merge(:location => [obj.commune.district.voivodeship_id, obj.commune.district_id, obj.commune_id, obj.id].join('-')))
-    #     }
-    #   end
-    #   navigators_json
-    # end
-    # render :json => cached_json
+    results = KeywordStat.search params[:q]
+    results = KeywordStat.search(KeywordStat.spellcheck(params[:q])) if results.blank?
+    render :json => [] and return if results.blank?
+    json = results.map do |r|
+      {
+        :label => "#{r.identification}",
+        :value => r.identification,
+        :path  => relics_path(:search => {:q => r.identification})
+      }
+    end
+    render :json => json
   end
 
   def download
