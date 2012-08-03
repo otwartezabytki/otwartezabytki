@@ -8,13 +8,13 @@
       %h1 2. Wybierz zabytek:
       %span.arrow
 
-    - if relics.incorrect_count.zero?
+    - if relics.total.zero?
       .search-no-results
         %p
           Nie ma do sprawdzenia żadnych zabytków
           %br
           pasujących do słowa
-          %strong „#{params[:q1]}”
+          %strong „TODO”
         %p
           Chesz dodać zabytek, którego nie możesz znaleźć?
           %br
@@ -23,9 +23,9 @@
           Możesz natomiast przejrzeć listę innych zabytków, które wymagają sprawdzenia:
           %br
           = random_search_suggestions
-    - elsif @pending.present?
+    - elsif relics.present?
       %div.relic-header
-        %h2 Total (#{relics.total})
+        %h2 Zabytki (#{relics.total})
         - if location_breadcrumbs.present?
           %div.breadcrumb
             %p Gdzie:
@@ -33,17 +33,11 @@
               - c = location_breadcrumbs.size
               - location_breadcrumbs.take(c-1).each do |l|
                 %li
-                  = link_to l[:label], l[:path]
+                  = link_to l[:label], l[:path], :remote => true
                   %span &#187;
               %li= location_breadcrumbs.last[:label]
 
-      = render :partial => "relics", :locals => {:collection => @pending }
-
-    - if @corrected.present?
-      %div.relic-header
-        %h2.changed Zabytki sprawdzone (#{relics.correct_count})
-
-      = render :partial => "relics", :locals => {:collection => @corrected }
+      = render :partial => "relics", :locals => {:collection => relics }
 
     = paginate relics, :remote => true
 

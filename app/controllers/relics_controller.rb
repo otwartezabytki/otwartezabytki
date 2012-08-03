@@ -21,7 +21,7 @@ class RelicsController < ApplicationController
     end
   end
 
-  helper_method :search_params, :location_breadcrumbs, :need_captcha, :relics
+  helper_method :search_params, :need_captcha, :relics
 
   before_filter :current_user!, :only => [:edit, :create, :update, :gonext, :thank_you]
 
@@ -38,13 +38,6 @@ class RelicsController < ApplicationController
     # SearchTerm.store(params[:q1])
     # session[:search_params] = params.slice(:q1, :location)
     gon.highlighted_tags = relics.highlighted_tags
-
-    idx = relics.results.index {|r| r.corrected?(current_user) }
-    if idx
-      @pending, @corrected = relics.take(idx), relics.drop(idx)
-    else
-      @pending, @corrected = relics, []
-    end
   end
 
   def edit
@@ -166,21 +159,6 @@ class RelicsController < ApplicationController
     def search_params opt = {}
       cond = params[:search] || {}
       { :search => cond.merge(opt) }
-    end
-
-    def location_breadcrumbs
-      return @location_breadcrumbs if defined? @location_breadcrumbs
-      @location_breadcrumbs = [ {:path => relics_path(search_params), :label => 'Cała Polska'} ]
-      klasses = [Voivodeship, District, Commune, Place]
-      location_arry = params[:location].to_s.split('-')
-
-      location_arry.each_with_index do |id,i|
-        l = Rails.cache.fetch("#{klasses[i].to_s.downcase}_#{id}", :expires_in => 1.day) do
-          klasses[i].find(id.split(':').first)
-        end
-        @location_breadcrumbs << {:path => relics_path(search_params.merge(:location =>location_arry.first(i+1).join('-'))), :label => l.name }
-      end if location_arry.present?
-      @location_breadcrumbs
     end
 
   private

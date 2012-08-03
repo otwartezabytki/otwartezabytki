@@ -39,7 +39,10 @@ Search =
     $('body').on 'click', 'form.form-advance-search input[type=checkbox]', ->
       $(this).parents('form:first').submit()
 
-    $('body').on 'ajax:success', 'form.form-advance-search, nav.pagination, div.sidebar-nav', (e, data) ->
+    $('body').on 'change', 'form.form-advance-search select', ->
+      $(this).parents('form:first').submit()
+
+    $('body').on 'ajax:success', 'form.form-advance-search, nav.pagination, div.sidebar-nav, div.breadcrumb', (e, data) ->
       Search.render(data)
       # pushState
       history.pushState { searchreload: true }, $(data).find('title').text(), '/relics?' + $('form.form-advance-search').serialize()

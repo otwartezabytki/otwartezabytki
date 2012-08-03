@@ -104,4 +104,21 @@ module ApplicationHelper
     end
   end
 
+
+  def location_breadcrumbs
+    return @location_breadcrumbs if defined? @location_breadcrumbs
+    @location_breadcrumbs = [ {:path => relics_path(search_params(:location => nil)), :label => 'Cała Polska'} ]
+    klasses = [Voivodeship, District, Commune, Place]
+    location_arry = search_params[:search][:location].to_s.split('-')
+
+    location_arry.each_with_index do |id,i|
+      l = Rails.cache.fetch("#{klasses[i].to_s.downcase}_#{id}", :expires_in => 1.day) do
+        klasses[i].find(id.split(':').first)
+      end
+      cond = search_params(:location => location_arry.first(i+1).join('-'))
+      @location_breadcrumbs << {:path => relics_path(cond), :label => l.name }
+    end if location_arry.present?
+    @location_breadcrumbs
+  end
+
 end
