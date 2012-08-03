@@ -1,15 +1,15 @@
 .clearfix
-= semantic_form_for Search.new(params[:search] || {}), :object_name => 's', :url => relics_path, :html => { :class => 'well form-advance-search' }, :method => :get, :remote => true do |f|
+= semantic_form_for Search.new(params[:search] || {}), :object_name => 's', :url => relics_path, :html => { :class => 'well form-advance-search' }, :method => :get, :remote => defined?(relics) do |f|
   = f.input :q, :label => false, :placeholder => "co", :input_html => { :class => 'search-query'}
   = f.input :place, :label => false, :placeholder => "gdzie"
 
   -# = f.input :from,  :label => false, :placeholder => "od"
   -# = f.input :to,    :label => false, :placeholder => "do"
-
-  = f.input :categories, :as => :check_boxes, :collection => categoires_facets, :disabled => disabled(f.object, 'categories'), :label => 'Kategorie'
-  = f.input :state,      :as => :check_boxes, :collection => state_facets,      :disabled => disabled(f.object, 'state')
-  = f.input :existance,  :as => :check_boxes, :collection => existance_facets,  :disabled => disabled(f.object, 'existance')
-  = f.input :location,   :as => :hidden, :input_html => { :value => f.object.location.join('-') }
-  = f.input :order, :as => :select, :collection => order_collection, :include_blank => false, :selected => f.object.order
+  - if defined?(relics)
+    = f.input :categories, :as => :check_boxes, :collection => categoires_facets, :disabled => disabled(f.object, 'categories'), :label => 'Kategorie'
+    = f.input :state,      :as => :check_boxes, :collection => state_facets,      :disabled => disabled(f.object, 'state')
+    = f.input :existance,  :as => :check_boxes, :collection => existance_facets,  :disabled => disabled(f.object, 'existance')
+    = f.input :location,   :as => :hidden, :input_html => { :value => f.object.location.join('-') }
+    = f.input :order, :as => :select, :collection => order_collection, :include_blank => false, :selected => f.object.order
 
   = f.action :submit, :label => 'Szukaj', :button_html => { :name => nil }
