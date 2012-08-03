@@ -42,4 +42,18 @@ module RelicsHelper
       r
     } - search.send(name)
   end
+
+  def order_collection
+    [
+      ['Trafnosc ASC', 'score.asc'],
+      ['Trafnosc DESC', 'score.desc'],
+      ['A-Z', 'alfabethic.asc'],
+      ['Z-A', 'alfabethic.desc'],
+      ['Najpierw ze zdjęciem', 'photo.asc'],
+      ['Najpierw bez zdjęciem', 'photo.desc'],
+      ['Najpierw z opisem', 'desription.asc'],
+      ['Najpierw bez opisu', 'description.desc']
+    ]
+  end
+
 end

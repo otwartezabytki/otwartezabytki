@@ -3,7 +3,7 @@ class Search
   include ActiveModel::Conversion
   extend ActiveModel::Naming
 
-  attr_accessor :q, :place, :from, :to, :categories, :state, :existance, :location
+  attr_accessor :q, :place, :from, :to, :categories, :state, :existance, :location, :order
   attr_accessor :conditions, :page
 
   def initialize(attributes = {})
@@ -20,7 +20,6 @@ class Search
   def query
     return @_q if defined? @_q
     @_q = @q.to_s.strip
-    # @_q = '*' if @_q.blank?
     @_q
   end
 
@@ -36,6 +35,10 @@ class Search
     @location.to_s.split('-').map {|l| l.split(':') }
   end
 
+  def order
+    @order || 'score.desc'
+  end
+
   def enable_highlight
     @tsearch.highlight "identification" => {},
       "street" => {},
@@ -45,24 +48,49 @@ class Search
   end
 
   def enable_sort
-    corrected_relic_ids = seen_relic_ids = []
+    # corrected_relic_ids = seen_relic_ids = []
+    # @tsearch.sort do
+    #   by '_script', {
+    #       'script' => %q(
+    #         i = -seen_relic_ids.indexOf(doc['id'].value.toString());
+    #         f0 = (i * 100) + (doc['edit_count'].value * f1) - doc['skip_count'].value;
+    #         if( corrected_relic_ids.contains(doc['id'].value.toString()) || doc['edit_count'].value > 2 ) { f2 + f0; } else { f0; }
+    #       ).squish,
+    #       'type' => 'number',
+    #       'params' => {
+    #         'f1' => 100,
+    #         'f2' => -100_000_000,
+    #         'corrected_relic_ids' => corrected_relic_ids,
+    #         'seen_relic_ids' => seen_relic_ids
+    #       },
+    #       'order' => 'desc'
+    #     }
+    #   by '_score', 'desc'
+    # end
+
+    type, direction = order.split('.')
     @tsearch.sort do
-      by '_script', {
-          'script' => %q(
-            i = -seen_relic_ids.indexOf(doc['id'].value.toString());
-            f0 = (i * 100) + (doc['edit_count'].value * f1) - doc['skip_count'].value;
-            if( corrected_relic_ids.contains(doc['id'].value.toString()) || doc['edit_count'].value > 2 ) { f2 + f0; } else { f0; }
-          ).squish,
+      case type
+      when 'score'
+        by '_score', direction
+      when 'alfabethic'
+        by 'identification.untouched', direction
+      when 'photo'
+        by '_script', {
+          'script' => '_source.has_photos ? 10 * doc.score : doc.score',
           'type' => 'number',
-          'params' => {
-            'f1' => 100,
-            'f2' => -100_000_000,
-            'corrected_relic_ids' => corrected_relic_ids,
-            'seen_relic_ids' => seen_relic_ids
-          },
-          'order' => 'desc'
+          'order' => direction
         }
-      by '_score', 'desc'
+      when 'description'
+        by '_script', {
+          'script' => '_source.has_description ? 10 * doc.score : doc.score',
+          'type' => 'number',
+          'order' => direction
+        }
+      else
+        # default
+        by '_score', 'desc'
+      end
     end
   end
 
@@ -167,9 +195,8 @@ class Search
 
     # enable additions search features
     enable_facet_navigation
-    enable_correccted_facet
     enable_highlight
-    # enable_sort
+    enable_sort
 
     @tsearch.results
   end

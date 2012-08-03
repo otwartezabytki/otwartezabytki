@@ -55,8 +55,12 @@ class Relic < ActiveRecord::Base
     }
 
   mapping do
+    indexes :identification, :type => "multi_field", :fields => {
+      :identification =>  { "type" => "string", "index" => "analyzed" },
+      :untouched =>  { "type" => "string", "index" => "not_analyzed" }
+    }
+
     with_options :index => :analyzed do |a|
-      a.indexes :identification
       a.indexes :street
     end
     with_options :index => :not_analyzed do |na|
@@ -133,7 +137,7 @@ class Relic < ActiveRecord::Base
       :place            => { :id => self.place_id,                  :name => self.place.name },
       # new search fields
       :description      => 'some description',
-      :has_description  => true,
+      :has_description  => [true, false].sample,
       # :from             => '',
       # :to               => '',
       # sample categoires

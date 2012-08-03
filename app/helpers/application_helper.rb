@@ -104,7 +104,6 @@ module ApplicationHelper
     end
   end
 
-
   def location_breadcrumbs
     return @location_breadcrumbs if defined? @location_breadcrumbs
     @location_breadcrumbs = [ {:path => relics_path(search_params(:location => nil)), :label => 'Cała Polska'} ]
