@@ -33,15 +33,30 @@ default_spinner_opts =
   top: 88
   left: 180
 
-jQuery ->
 
-  # search autoreload
-  $('body').on 'click', 'form.form-advance-search input[type=checkbox]', ->
-    $(this).parents('form:first').submit()
+Search =
+  init: ->
+    $('body').on 'click', 'form.form-advance-search input[type=checkbox]', ->
+      $(this).parents('form:first').submit()
 
-  $('body').on 'ajax:success', 'form.form-advance-search, nav.pagination, div.sidebar-nav', (e, data) ->
+    $('body').on 'ajax:success', 'form.form-advance-search, nav.pagination, div.sidebar-nav', (e, data) ->
+      Search.render(data)
+      # pushState
+      history.pushState { searchreload: true }, $(data).find('title').text(), '/relics?' + $('form.form-advance-search').serialize()
+  render: (data) ->
     ['form.form-advance-search', '#main div.sidebar-nav', '#relics'].map (el) ->
       $(el).replaceWith $(data).find(el)
+
+# window
+window.onload = ->
+  window.onpopstate = (e) ->
+    location = history.location || document.location
+    if e.state?.searchreload or location.pathname.match(/\/?relics\/?$/)
+      $.get location, Search.render
+
+jQuery ->
+  # search autoreload
+  Search.init()
 
   # autocomplete
   $input = $('input.search-query')
