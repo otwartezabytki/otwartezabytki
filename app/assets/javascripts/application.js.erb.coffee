@@ -46,9 +46,23 @@ Search =
       Search.render(data)
       # pushState
       history.pushState { searchreload: true }, $(data).find('title').text(), '/relics?' + $('form.form-advance-search').serialize()
+  autocomplete: ->
+    # autocomplete
+    $input = $('input.autocomplete-q')
+    if $input.length > 0
+      $input.autocomplete(
+        html: true,
+        minLength: 2,
+        source: (request, callback) ->
+          $.getJSON "/relics/suggester", q: request.term, callback
+        select: (event, ui) ->
+          window.location = ui.item.path
+      )
+
   render: (data) ->
     ['form.form-advance-search', '#main div.sidebar-nav', '#relics'].map (el) ->
       $(el).replaceWith $(data).find(el)
+    Search.autocomplete()
 
 # window
 window.onload = ->
@@ -60,18 +74,7 @@ window.onload = ->
 jQuery ->
   # search autoreload
   Search.init()
-
-  # autocomplete
-  $input = $('input.search-query')
-  if $input.length > 0
-    $input.autocomplete(
-      html: true,
-      minLength: 2,
-      source: (request, callback) ->
-        $.getJSON "/relics/suggester", q: request.term, callback
-      select: (event, ui) ->
-        window.location = ui.item.path
-    )
+  Search.autocomplete()
 
   # highlight
   $highlightArea = $('div.search-results .relic')

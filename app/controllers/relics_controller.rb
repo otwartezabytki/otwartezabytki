@@ -1,15 +1,16 @@
 # -*- encoding : utf-8 -*-
 class RelicsController < ApplicationController
-  # expose(:relics) do
-  #   p1 = params.merge(:corrected_relic_ids => current_user.try(:corrected_relic_ids))
-  #   if p1[:corrected_relic_ids].blank?
-  #     Rails.cache.fetch(uniq_cache_key, :expires_in => 15.minutes) do
-  #       Relic.search p1.slice(:q1, :page, :location)
-  #     end
-  #   else
-  #     Relic.search(p1)
-  #   end
-  # end
+  expose(:relics) do
+    # p1 = params.merge(:corrected_relic_ids => current_user.try(:corrected_relic_ids))
+    # if p1[:corrected_relic_ids].blank?
+    #   Rails.cache.fetch(uniq_cache_key, :expires_in => 15.minutes) do
+    #     Relic.search p1.slice(:q1, :page, :location)
+    #   end
+    # else
+    #   Relic.search(p1)
+    # end
+    tsearch.perform
+  end
   expose(:suggestion) { Suggestion.new(:relic_id => params[:id]) }
   expose(:relic) do
     if id = params[:relic_id] || params[:id]
@@ -21,17 +22,12 @@ class RelicsController < ApplicationController
     end
   end
 
-  helper_method :search_params, :need_captcha, :relics
+  helper_method :need_captcha
 
   before_filter :current_user!, :only => [:edit, :create, :update, :gonext, :thank_you]
 
   def show
     redirect_to edit_relic_path(params[:id]) and return
-  end
-
-  def relics
-    return @relics if defined? @relics
-    @relics = Search.new(search_params(:page => params[:page])[:search]).perform
   end
 
   def index
@@ -99,11 +95,17 @@ class RelicsController < ApplicationController
 
   def suggester
     results = KeywordStat.search params[:q]
-    results = KeywordStat.search(KeywordStat.spellcheck(params[:q])) if results.blank?
-    render :json => [] and return if results.blank?
-    json = results.map do |r|
-      {
-        :label => "#{r.identification}",
+    suggestions = KeywordStat.search(KeywordStat.spellcheck(params[:q])) if results.blank?
+
+    json = []
+    collection = []
+    collection = results if results.present?
+    collection = suggestions if suggestions.present?
+
+    collection.each_with_index do |r, i|
+      label = (results.blank? and i.zero?) ? "Czy chodziło ci o: #{r.identification}" : "#{r.identification}"
+      json << {
+        :label => label,
         :value => r.identification,
         :path  => relics_path(:search => {:q => r.identification})
       }
@@ -154,11 +156,6 @@ class RelicsController < ApplicationController
       else
         cache_key
       end
-    end
-
-    def search_params opt = {}
-      cond = params[:search] || {}
-      { :search => cond.merge(opt) }
     end
 
   private

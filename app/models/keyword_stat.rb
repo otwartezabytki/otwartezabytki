@@ -78,7 +78,7 @@ class KeywordStat < ActiveRecord::Base
       # add asterisk only for last word
       split[-1] = "#{split[-1]}*"
       prepared_q = split.join(' ')
-      tire.search(:load => false, :page => 1, :per_page => 10) do
+      tire.search(:load => false, :page => 1, :per_page => 5) do
         query { string prepared_q, :default_operator => 'AND' }
         filter :range, :count => {:gt => 1}
         sort do

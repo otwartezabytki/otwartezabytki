@@ -1,7 +1,7 @@
 .clearfix
-= semantic_form_for Search.new(params[:search] || {}), :object_name => 's', :url => relics_path, :html => { :class => 'well form-advance-search' }, :method => :get, :remote => defined?(relics) do |f|
-  = f.input :q, :label => false, :placeholder => "co", :input_html => { :class => 'search-query'}
-  = f.input :place, :label => false, :placeholder => "gdzie"
+= semantic_form_for tsearch, :url => relics_path, :html => { :class => 'well form-advance-search' }, :method => :get, :remote => defined?(relics) do |f|
+  = f.input :q, :label => false, :placeholder => "co", :input_html => { :class => 'autocomplete-q'}
+  = f.input :place, :label => false, :placeholder => "gdzie", :input_html => { :class => 'autocomplete-place'}
 
   -# = f.input :from,  :label => false, :placeholder => "od"
   -# = f.input :to,    :label => false, :placeholder => "do"

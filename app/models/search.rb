@@ -201,4 +201,9 @@ class Search
     @tsearch.results
   end
 
+  def suggestions
+    return [] unless @tsearch.results.total.zero?
+    KeywordStat.search KeywordStat.spellcheck(query)
+  end
+
 end
