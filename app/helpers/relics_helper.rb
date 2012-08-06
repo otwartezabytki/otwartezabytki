@@ -30,8 +30,22 @@ module RelicsHelper
   end
 
   def existance_facets
-    labels = Hash[Relic::Existences.zip(['istniejące', 'archiwalne', 'społecznosciowe'])]
+    labels = Hash[Relic::Existences.zip(['istniejące w rejestrze', 'archiwalne', 'społecznie dodane'])]
     relics.terms('existance', true).map do |t|
+      ["#{labels[t['term']]} (#{t['count']})", t['term']]
+    end
+  end
+
+  def has_photos_facets
+    labels = {'F' => 'brak zdjęcia', 'T' => 'ze zdjęciem'}
+    relics.terms('has_photos', true).map do |t|
+      ["#{labels[t['term']]} (#{t['count']})", t['term']]
+    end
+  end
+
+  def has_description_facets
+    labels = {'F' => 'brak opisu', 'T' => 'z opisem'}
+    relics.terms('has_description', true).map do |t|
       ["#{labels[t['term']]} (#{t['count']})", t['term']]
     end
   end
@@ -49,10 +63,6 @@ module RelicsHelper
       ['Trafnosc DESC', 'score.desc'],
       ['A-Z', 'alfabethic.asc'],
       ['Z-A', 'alfabethic.desc'],
-      ['Najpierw ze zdjęciem', 'photo.asc'],
-      ['Najpierw bez zdjęciem', 'photo.desc'],
-      ['Najpierw z opisem', 'desription.asc'],
-      ['Najpierw bez opisu', 'description.desc']
     ]
   end
 
