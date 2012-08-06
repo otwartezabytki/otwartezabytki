@@ -2,7 +2,7 @@
   - collection.each do |relic|
     .relic
       .name
-        = link_to relic.identification, edit_relic_path(relic)
+        = link_to relic.identification, relic_path(relic)
       .pathway= relic.place_full_name
       .street= relic.street
       .include
@@ -13,4 +13,4 @@
         .modified
       - else
         .change
-          = link_to "Sprawdź »", edit_relic_path(relic), :class => 'btn btn-mini'
+          = link_to "Zobacz »", relic_path(relic), :class => 'btn btn-mini'

@@ -85,6 +85,7 @@ pl:
       long: "%d %B %Y, %H:%M"
       date: "%Y-%m-%d"
       tdate: "%Y-%m-%d %H:%M"
+      verbose: "%d.%m.%Y, %H:%M"
     am: "przed południem"
     pm: "po południu"
 

@@ -33,6 +33,15 @@ default_spinner_opts =
   top: 88
   left: 180
 
+
+@documentLoaded = (document) ->
+  $(document).find('textarea.redactor').redactor
+    focus: false
+    buttons: ['bold', 'italic', 'link', 'unorderedlist']
+    lang: 'pl'
+
+  $(document).find('form').data('remote', 'true')
+
 jQuery ->
   # autocomplete
   $input = $('input.search-query')
@@ -114,6 +123,8 @@ jQuery ->
     speed:    0,
     timeout:  4000
   })
+
+  window.documentLoaded(document)
 
 if document.body.className.match(/thank_you/)
   window.fbAsyncInit = ->

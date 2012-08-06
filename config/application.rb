@@ -66,10 +66,12 @@ module Otwartezabytki
     end
     unless ['test', 'development'].include?(Rails.env)
       # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-      config.assets.precompile += %w( active_admin.js wizard.js ie8.css )
+      config.assets.precompile += %w( active_admin.js wizard.js ie8.css profile.js )
       config.cache_store = :dalli_store, { :namespace => "otwartezabytki-#{Rails.env}", :expires_in => 1.day, :compress => true }
     end
 
     config.action_mailer.default_url_options = { :host => Settings.oz.host }
+
+    config.action_view.sanitized_allowed_tags = ['table', 'tr', 'td', 'strong', 'em', 'li', 'ul', 'ol', 'a', 'p', 'div']
   end
 end

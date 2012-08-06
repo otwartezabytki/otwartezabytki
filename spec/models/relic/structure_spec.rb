@@ -35,10 +35,13 @@ describe Relic do
     build(:event).should respond_to(:relic)
   end
 
-  it "should have both tags and categories" do
-    build(:relic).should respond_to(:tags)
-    build(:relic).should respond_to(:categories)
+  it "should have accessible both tags and categories" do
     build(:relic).should have_accessible(:tags)
     build(:relic).should have_accessible(:categories)
+  end
+
+  it "should have tags and categories as arrays" do
+    build(:relic).tags.should be_a(Array)
+    build(:relic).categories.should be_a(Array)
   end
 end

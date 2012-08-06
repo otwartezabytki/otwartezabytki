@@ -1,0 +1,10 @@
+%section.description
+  %h2 Opis
+  - if relic.description.present?
+    = link_to 'edytuj', edit_section_relic_path(relic.id, :description), :title => 'edytuj opis zabytku', :"data-ajax" => true
+    .content= sanitize relic.description
+  - else
+    .placeholder
+      %p Nikt nie napisał jeszcze opisu dla tego zabytku
+      %p Zrób to Ty!
+      = link_to "dodaj opis", edit_section_relic_path(relic.id, :description), :"data-ajax" => true

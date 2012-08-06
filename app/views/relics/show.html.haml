@@ -1,1 +1,68 @@
-%h1= relic.identification
+%section.general_info
+  %h1= relic.identification
+  .register_number
+    Numer w rejestrze:
+    = relic.register_number
+  .location_name
+    = "#{relic.place.name}, powiat #{relic.district.name}, gmina #{relic.commune.name}"
+    %br
+    = relic.street
+  .categories= relic.categories.join(', ')
+
+= render :partial => "relics/show/description"
+
+%section.tags
+  %strong Tagi:
+  - if relic.tags.length > 0
+    %span.content= relic.tags.join(', ')
+  - else
+    %span.placeholder
+      nie dodano żadnych, dodaj pierwszy!
+      = link_to "otaguj zabytek", edit_section_relic_path(relic.id, :tags)
+
+%section.photos
+  %h2 Zdjęcia
+  = link_to "galeria (#{relic.photos.count})", show_gallery_relic_path(relic.id)
+  .content
+    - relic.photos.each do |photo|
+      = link_to image_tag(photo.file.thumb.url, :alt => "zdjęcie zabytku dodane przez #{photo.author}"), show_gallery_relic_path(relic.id, photo.id)
+
+%section.entries
+  %h2 Społeczność
+  - relic.entries.each do |entry|
+    %article.entry
+      %h3= entry.title
+      .content= entry.body
+      .footer
+        = gravatar_image_tag(entry.user.email, :alt => "")
+        %span.username= entry.user.username
+        ,
+        %span.created_at= l(entry.created_at, :format => :verbose)
+
+  %strong Tagi:
+  %span.tags_content= relic.tags.join(', ')
+
+%section.links
+  %h2 Linki, źródła, powiązania
+
+%section.location
+  %h2 Lokalizacja
+  - if relic.latitude.present? && relic.longitude.present?
+    .coordinates
+      = relic.latitude.round(6).to_s + ", " + relic.longitude.round(6).to_s
+%section.events
+  %h2 Oś czasu
+
+%section.documents
+  %h2 Dokumenty urzędowe
+
+- content_for :footer_javascripts do
+  != javascript_include_tag "profile"
+
+  :javascript
+    function loadGoogleMaps() {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src = "http://maps.googleapis.com/maps/api/js?key=#{Settings.oz.gm_key}&sensor=false&callback=google_maps_loaded";
+      document.body.appendChild(script);
+    }

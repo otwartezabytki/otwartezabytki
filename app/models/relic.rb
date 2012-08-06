@@ -63,6 +63,7 @@ class Relic < ActiveRecord::Base
 
   serialize :source
   serialize :tags, Array
+  serialize :categories, Array
 
   # versioning
   has_paper_trail :class_name => 'RelicVersion', :on => [:update, :destroy]
@@ -339,6 +340,11 @@ class Relic < ActiveRecord::Base
   end
 
   def update_relic_index
+    # always update root document
+    root.tire.update_index
+  end
+
+  def create_relic_index
     # always update root document
     root.tire.update_index
   end
