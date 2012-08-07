@@ -33,6 +33,9 @@ default_spinner_opts =
   top: 88
   left: 180
 
+
+@documentLoaded = ->
+
 jQuery ->
   # autocomplete
   $input = $('input.search-query')
@@ -114,6 +117,8 @@ jQuery ->
     speed:    0,
     timeout:  4000
   })
+
+  window.documentLoaded(document)
 
 if document.body.className.match(/thank_you/)
   window.fbAsyncInit = ->

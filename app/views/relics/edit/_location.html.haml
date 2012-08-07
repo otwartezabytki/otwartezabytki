@@ -1,0 +1,52 @@
+%section.location
+  %h2 Lokalizacja
+  = semantic_form_for relic do |f|
+    .help-content.active
+      .help Pomoc
+      .help-extended
+        %span.close Zamknij pomoc
+        %p
+          Sprawdź, czy nazwa zabytku jest poprawna (np. jeśli zaczyna się od małej litery, popraw ją na wielką).
+          Jeśli chcesz ją poprawić, kliknij „Zmień”. Pojawi się pole, w którym można poprawić nazwę.
+          Następnie naciśnij „Zapisz”, aby zachować poprawioną nazwę. Jeśli jest poprawna, kliknij „Potwierdź”.
+          Jeśli nie wiesz, czy nazwa jest poprawna, spróbuj znaleźć informacje na stronach internetowych lub w książkach.
+          Jeśli Ci się nie uda, kliknij „Nie wiem”, a automatycznie przejdziesz do kolejnego punktu.
+          W przypadku popełnienia błędu kliknij „Edytuj ponownie” i edytuj ponownie.
+
+    = hidden_field 'section', params[:section]
+
+    .row
+      .column.column-left
+        = f.input :place_id, :as => :select,
+          :collection => f.object.commune.places.not_custom, :selected => f.object.place.id, :label => "Miejscowość",
+          :include_blank => false, :input_html => { :style => "width: 160px;" }
+
+        = f.input :street, :as => :string, :label => "Adres"
+
+        = f.submit 'Zapisz zmiany'
+        lub
+        = link_to "anuluj", relic_path(relic.id)
+
+      .column.column-middle
+        #map_canvas{ :style => "width: 340px; height: 340px;" }
+
+      .column.column-right
+        .marker-helper
+          %h4
+            Przeciągnij
+            %br
+            znacznik na mapę:
+          .marker-holder
+            = image_tag 'marker.png', :id => 'marker'
+        = f.input :latitude, :as => :string, :label => "szerokość geograficzna", :placeholder => "szerokość", :input_html => { :maxlength => 10, :readonly => "readonly" }
+        = f.input :longitude, :as => :string, :label => "długość geograficzna", :placeholder => "długość", :input_html => { :maxlength => 10, :readonly => "readonly" }
+
+- content_for :footer_javascripts do
+  :javascript
+    function loadGoogleMaps() {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src = "http://maps.googleapis.com/maps/api/js?key=#{Settings.oz.gm_key}&sensor=false&callback=google_maps_loaded";
+      document.body.appendChild(script);
+    }
+    window.onload = loadGoogleMaps

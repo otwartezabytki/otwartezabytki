@@ -39,6 +39,15 @@ Spork.prefork do
     config.before(:each) do
       refresh_relics_index
     end
+
+    config.include Devise::TestHelpers, :type => :controller
+    config.extend ControllerMacros, :type => :controller
+    config.include RequestHelpers, :type => :request
+
+
+    config.before(:each) do
+      refresh_relics_index
+    end
   end
   DatabaseCleaner.strategy = :truncation
 end
@@ -57,7 +66,7 @@ Spork.each_run do
   }
 end
 
-def sample_path file
+def sample_path(file)
   file_path = "#{Rails.root}/spec/samples/#{file}"
   raise Exception.new("File not found: #{file_path}") unless File.exists?(file_path)
   file_path

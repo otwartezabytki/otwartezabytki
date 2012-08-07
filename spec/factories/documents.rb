@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :document do
     relic
-    user
+    user :factory => :registered_user
     name "Sample Document"
     size 1024
     mime "application/doc"

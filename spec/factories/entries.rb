@@ -2,9 +2,9 @@
 
 FactoryGirl.define do
   factory :entry do
-    relic_id 1
-    user_id 1
-    title "MyString"
-    body "MyText"
+    relic
+    user :factory => :registered_user
+    sequence(:title) { |n| "Sample Title #{n}" }
+    sequence(:body) { |n| "Very long body of entry number #{n}" }
   end
 end

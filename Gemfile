@@ -22,6 +22,8 @@ gem 'sugar-rails'
 
 gem 'geocoder'
 gem 'simple_form', '~> 2.0'
+gem 'formtastic'
+gem 'formtastic-bootstrap'
 
 gem 'decent_exposure'
 gem 'kaminari'
@@ -64,6 +66,10 @@ gem 'recaptcha', :require => 'recaptcha/rails'
 
 # file upload
 gem 'carrierwave'
+gem 'mini_magick'
+
+# gravatars
+gem 'gravatar_image_tag'
 
 group :development, :test do
   # for debugging
@@ -86,6 +92,7 @@ group :test do
   gem 'cucumber-rails', :require => false
   gem 'rspec-rails',  '~> 2.0'
   gem 'factory_girl_rails'
+  gem 'forgery', '0.5.0'
   gem 'database_cleaner'
   gem 'capybara'
 
