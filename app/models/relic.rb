@@ -75,6 +75,10 @@ class Relic < ActiveRecord::Base
       na.indexes :state
       na.indexes :existance
 
+      na.indexes :has_round_date,  :type => "boolean"
+      na.indexes :from,  :type => "integer"
+      na.indexes :to,  :type => "integer"
+
       # backward compatibility
       na.indexes :voivodeship_id
       na.indexes :district_id
@@ -120,6 +124,8 @@ class Relic < ActiveRecord::Base
 
   def to_indexed_json
     # backward compatibility
+    dp = DateParser.new(['1 ćw XX', '1916', '1907-1909'].sample)
+    from, to = dp.results
     ids = [:voivodeship_id, :district_id, :commune_id, :place_id].zip(get_parent_ids)
     {
       :id               => id,
@@ -138,8 +144,9 @@ class Relic < ActiveRecord::Base
       # new search fields
       :description      => 'some description',
       :has_description  => [true, false].sample,
-      # :from             => '',
-      # :to               => '',
+      :from             => from,
+      :to               => to,
+      :has_round_date   => dp.rounded?,
       # sample categoires
       :categories       => Tag.all.values.sample(3),
       :has_photos       => [true, false].sample,

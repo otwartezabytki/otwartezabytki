@@ -3,8 +3,9 @@
   = f.input :q, :label => false, :placeholder => "co", :input_html => { :class => 'autocomplete-q'}
   = f.input :place, :label => false, :placeholder => "gdzie", :input_html => { :class => 'autocomplete-place'}
 
-  -# = f.input :from,  :label => false, :placeholder => "od"
-  -# = f.input :to,    :label => false, :placeholder => "do"
+  = f.input :from,  :label => false, :placeholder => "od"
+  = f.input :to,    :label => false, :placeholder => "do"
+
   - if defined?(relics)
     = f.input :categories, :as => :check_boxes, :collection => categoires_facets, :disabled => disabled(f.object, 'categories'), :label => 'Kategorie'
     = f.input :state,      :as => :check_boxes, :collection => state_facets,      :disabled => disabled(f.object, 'state')

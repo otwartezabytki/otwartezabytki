@@ -12,6 +12,9 @@
       .include
         %span
         = relic.categories.sort.join(', ')
+      .include
+        %span
+        = "#{relic.from} - #{relic.to}"
       - if relic.corrected?(current_user)
         .modified
       - else

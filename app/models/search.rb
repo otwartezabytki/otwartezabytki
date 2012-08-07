@@ -4,7 +4,7 @@ class Search
   extend ActiveModel::Naming
 
   attr_accessor :q, :place, :from, :to, :categories, :state, :existance, :location, :order
-  attr_accessor :conditions, :page, :has_photos, :has_description
+  attr_accessor :conditions, :range_conditions, :page, :has_photos, :has_description
 
   def initialize(attributes = {})
     attributes.each do |name, value|
@@ -48,52 +48,13 @@ class Search
   end
 
   def enable_sort
-    # corrected_relic_ids = seen_relic_ids = []
-    # @tsearch.sort do
-    #   by '_script', {
-    #       'script' => %q(
-    #         i = -seen_relic_ids.indexOf(doc['id'].value.toString());
-    #         f0 = (i * 100) + (doc['edit_count'].value * f1) - doc['skip_count'].value;
-    #         if( corrected_relic_ids.contains(doc['id'].value.toString()) || doc['edit_count'].value > 2 ) { f2 + f0; } else { f0; }
-    #       ).squish,
-    #       'type' => 'number',
-    #       'params' => {
-    #         'f1' => 100,
-    #         'f2' => -100_000_000,
-    #         'corrected_relic_ids' => corrected_relic_ids,
-    #         'seen_relic_ids' => seen_relic_ids
-    #       },
-    #       'order' => 'desc'
-    #     }
-    #   by '_score', 'desc'
-    # end
-
     type, direction = order.split('.')
     @tsearch.sort do
-      case type
-      when 'score'
-        by '_score', direction
-      when 'alfabethic'
+      if type == 'alfabethic'
         by 'identification.untouched', direction
       else
-        # default
-        by '_score', 'desc'
+        by '_score', direction
       end
-    end
-  end
-
-  def enable_correccted_facet
-    location = corrected_relic_ids = []
-    corrected_faset_filter = {}
-    term_params = Hash[
-      ['voivodeship.id', 'district.id', 'commune.id', 'place.id'].zip(location)
-    ].inject({}) { |mem, (k, v)| mem[k] = v if v; mem }
-    corrected_faset_filter = { :facet_filter => { :terms => term_params } } if term_params.present?
-
-    @tsearch.facet "corrected", corrected_faset_filter do
-      terms :edit_count, :script => "(corrected_relic_ids.contains(doc['id'].value.toString()) || doc['edit_count'].value > 2) ? 1 : 0", :all_terms => true, :params => {
-        'corrected_relic_ids' => corrected_relic_ids
-      }
     end
   end
 
@@ -117,15 +78,18 @@ class Search
 
   def filter_facet_conditions *keys
     terms = @conditions.except(*keys)
-    return {} if terms.blank?
+    terms_cond = []
+    terms_cond = terms.map { |k, v| {"terms" => { k => v}} } if terms.present?
+    terms_cond << { 'or' => @range_conditions } if range_conditions?
+    return {} if terms_cond.blank?
     {
       'facet_filter' => {
-        'and' => terms.map { |k, v| {"terms" => { k => v}} }
+        'and' => terms_cond
       }
     }
   end
 
-  def prepare_conditions
+  def build_conditions
     @conditions = ['categories', 'state', 'existance', 'has_photos', 'has_description'].inject({}) do |r, t|
       r[t] = send(t) if send(t).present?
       r
@@ -137,9 +101,39 @@ class Search
     @conditions
   end
 
+  def build_range_conditions
+      cond = [['from', 'gte'], ['to', 'lte']]
+      values = [@from, @to].map(&:to_i)
+      cond1 = cond2 = {}
+
+      cond1 = values.each_with_index.inject({}) do |mem, (e, i)|
+        key1, key2 = cond[i]
+        mem[key1] = { key2 => e } if e > 0
+        mem
+      end
+
+      cond2 = DateParser.round_range(*values).each_with_index.inject({}) do |mem, (e, i)|
+        key1, key2 = cond[i]
+        mem[key1] = { key2 => e } if e > 0
+        mem
+      end if values.all? { |v| v > 0 }
+
+      cond3 = [[cond1, {'has_round_date' => false}], [cond2, {'has_round_date' => true}]].map do |c|
+        range, term = c
+        {'and' => [{'range' => range}, {'term' => term}]} if range.present?
+      end.compact
+      @range_conditions = cond3.present? ? cond3 : []
+      @range_conditions
+  end
+
+  def range_conditions?
+    @range_conditions.present?
+  end
+
   def perform
     instance = self
-    prepare_conditions
+    build_conditions
+    build_range_conditions
 
     @tsearch = Tire.search(Relic.tire.index_name, :page => page, :per_page => 10) do
       # pagination
@@ -161,8 +155,7 @@ class Search
       end if [instance.query, instance.place].any? &:present?
 
       instance.conditions.each { |k, v| filter :terms, k => v }
-
-      Rails.logger.info instance.filter_facet_conditions
+      filter 'or', instance.range_conditions if instance.range_conditions?
 
       facet "overall", instance.filter_facet_conditions('voivodeship.id', 'district.id', 'commune.id', 'place.id') do
         terms nil, :script_field => 1, :global => true
