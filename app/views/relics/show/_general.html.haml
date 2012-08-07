@@ -1,0 +1,35 @@
+%section.general_info
+  %h1= relic.identification
+  = link_to 'edytuj', edit_section_relic_path(relic.id, :general), :title => 'edytuj ogólne dane zabytku', :"data-ajax" => true
+  .status
+    = t("relic.status.#{relic.status}")
+  .register_number
+    %strong Numer w rejestrze:
+    = relic.register_number
+  .location_name
+    %strong Lokalizacja:
+    %p= "#{relic.place.name}, powiat #{relic.district.name}, gmina #{relic.commune.name}"
+    %p= relic.street
+    - if relic.latitude.present? && relic.longitude.present?
+      %p= relic.latitude.round(6).to_s + ", " + relic.longitude.round(6).to_s
+    %p= link_to "pokaż na mapie »", show_section_relic_path(relic.id, :section => :location)
+  .dating
+    %strong Data powstania:
+    - if relic.dating_of_obj.present?
+      %span.content= relic.dating_of_obj
+    - else
+      %span.placeholder= link_to "brak danych, uzupełnij »", edit_section_relic_path(relic.id, :general)
+  .categories
+    %strong Kategorie:
+    - if relic.categories.length > 0
+      %span.content= relic.categories.map{ |c| Category.all[c] }.join(', ')
+    - else
+      %span.placeholder
+        = link_to "nie dodano, uzupełnij »", edit_section_relic_path(relic.id, :general)
+  .tags
+    %strong Tagi:
+    - if relic.tags.length > 0
+      %span.content= relic.tags.join(', ')
+    - else
+      %span.placeholder
+        = link_to "nie dodano, uzupełnij »", edit_section_relic_path(relic.id, :general)

@@ -249,15 +249,15 @@
           = f.input :tags_action, :as => :hidden
           .column.column-first
             = f.input :tags, :as => :check_boxes,
-              :collection => Tag.first_column, :label => "",
+              :collection => Category.first_column, :label => "",
               :input_html => { :multiple => true }
           .column.column-second
             = f.input :tags, :as => :check_boxes,
-              :collection => Tag.second_column, :label => "",
+              :collection => Category.second_column, :label => "",
               :input_html => { :multiple => true }
           .column.column-third
             = f.input :tags, :as => :check_boxes,
-              :collection => Tag.third_column, :label => "",
+              :collection => Category.third_column, :label => "",
               :input_html => { :multiple => true }
         .actions.actions-view
           %h3 Potwierdź lub pomiń:
@@ -407,15 +407,15 @@
                   = f2.input :tags_action, :as => :hidden
                   .column.column-first
                     = f2.input :tags, :as => :check_boxes,
-                      :collection => Tag.first_column, :label => "",
+                      :collection => Category.first_column, :label => "",
                       :input_html => { :multiple => true }
                   .column.column-second
                     = f2.input :tags, :as => :check_boxes,
-                      :collection => Tag.second_column, :label => "",
+                      :collection => Category.second_column, :label => "",
                       :input_html => { :multiple => true }
                   .column.column-third
                     = f2.input :tags, :as => :check_boxes,
-                      :collection => Tag.third_column, :label => "",
+                      :collection => Category.third_column, :label => "",
                       :input_html => { :multiple => true }
 
                 .actions.actions-view

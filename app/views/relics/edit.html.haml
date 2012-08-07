@@ -1,2 +1,17 @@
-- if params[:section].present?
-  = render :partial => "relics/edit/#{params[:section]}"
+.edit_relic
+  %nav
+    %h1 Edycja zabytku
+    %ul
+      %li= link_to_unless_current 'Podstawowe informacje', edit_section_relic_path(relic.id, :general)
+      %li= link_to_unless_current 'Lokalizacja', edit_section_relic_path(relic.id, :location)
+      %li= link_to_unless_current 'Oś czasu', edit_section_relic_path(relic.id, :events)
+      %li= link_to_unless_current 'Społeczność', edit_section_relic_path(relic.id, :entries)
+      %li= link_to_unless_current 'Linki, źródła, powiązania', edit_section_relic_path(relic.id, :links)
+      %li= link_to_unless_current 'Dokumenty urzędowe', edit_section_relic_path(relic.id, :documents)
+      %li= link_to_unless_current 'Opis', edit_section_relic_path(relic.id, :description)
+      %li= link_to_unless_current 'Zdjęcia', edit_section_relic_path(relic.id, :photos)
+  - if params[:section].present?
+    = render :partial => "relics/edit/#{params[:section]}"
+
+- content_for :footer_javascripts do
+  != javascript_include_tag "profile"

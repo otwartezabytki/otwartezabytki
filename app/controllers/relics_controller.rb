@@ -29,6 +29,9 @@ class RelicsController < ApplicationController
   before_filter :authenticate_user!, :only => [:edit, :create, :update]
 
   def show
+    if params[:section].present?
+      render "relics/show/_#{params[:section]}" and return
+    end
     relic.present? # raise ActiveRecord::RecordNotFound before entering template
   end
 

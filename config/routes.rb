@@ -11,6 +11,8 @@ Otwartezabytki::Application.routes.draw do
     :passwords => "users/passwords"
   }
 
+  resources :tags, :only => :index
+
   resources :relics, :only => [:edit, :update, :index, :show, :edit, :update] do
     collection do
       get :suggester
@@ -20,9 +22,9 @@ Otwartezabytki::Application.routes.draw do
       get :corrected
       get :thank_you
       get :gonext
-      match 'edit/:section', :to => 'relics#edit', :as => "edit_section"
       match 'gallery(/:photo_id)', :to => 'relics#gallery', :as => 'show_gallery'
-
+      match 'edit/:section', :to => 'relics#edit', :as => "edit_section"
+      match 'show/:section', :to => 'relics#show', :as => "show_section"
     end
   end
 

@@ -1,6 +1,20 @@
 %section.description
+  .help-content.active
+    .help Pomoc
+    .help-extended
+      %span.close Zamknij pomoc
+      %p
+        Sprawdź, czy nazwa zabytku jest poprawna (np. jeśli zaczyna się od małej litery, popraw ją na wielką).
+        Jeśli chcesz ją poprawić, kliknij „Zmień”. Pojawi się pole, w którym można poprawić nazwę.
+        Następnie naciśnij „Zapisz”, aby zachować poprawioną nazwę. Jeśli jest poprawna, kliknij „Potwierdź”.
+        Jeśli nie wiesz, czy nazwa jest poprawna, spróbuj znaleźć informacje na stronach internetowych lub w książkach.
+        Jeśli Ci się nie uda, kliknij „Nie wiem”, a automatycznie przejdziesz do kolejnego punktu.
+        W przypadku popełnienia błędu kliknij „Edytuj ponownie” i edytuj ponownie.
+
   %h2 Opis
-  = semantic_form_for relic, :html => { :style => "width: 585px;"} do |f|
+  = semantic_form_for relic do |f|
     = hidden_field 'section', params[:section]
     = f.input :description, :label => false, :input_html => { :class => "redactor", :style => 'height: 190px;' }
-    = f.submit 'zapisz'
+    = f.submit 'Zapisz zmiany'
+    lub
+    = link_to "anuluj", relic_path(relic.id)

@@ -65,6 +65,26 @@ class Relic < ActiveRecord::Base
   serialize :tags, Array
   serialize :categories, Array
 
+  before_validation do
+    if tags_changed? && tags.is_a?(Array)
+      tmp = []
+      self.tags.each do |tag|
+        tmp += tag.split(',').map(&:strip) if tag.present?
+      end
+      self.tags = tmp
+    end
+  end
+
+  before_validation do
+    if categories_changed? && categories.is_a?(Array)
+      tmp = []
+      self.categories.each do |category|
+        tmp += category.split(',').map(&:strip) if category.present?
+      end
+      self.categories = tmp
+    end
+  end
+
   # versioning
   has_paper_trail :class_name => 'RelicVersion', :on => [:update, :destroy]
 
@@ -355,6 +375,10 @@ class Relic < ActiveRecord::Base
 
   def corrected?
     suggestions.count >= 3
+  end
+
+  def status
+    :checked_but_not_filled
   end
 
 end

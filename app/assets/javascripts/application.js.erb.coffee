@@ -34,13 +34,7 @@ default_spinner_opts =
   left: 180
 
 
-@documentLoaded = (document) ->
-  $(document).find('textarea.redactor').redactor
-    focus: false
-    buttons: ['bold', 'italic', 'link', 'unorderedlist']
-    lang: 'pl'
-
-  $(document).find('form').data('remote', 'true')
+@documentLoaded = ->
 
 jQuery ->
   # autocomplete
