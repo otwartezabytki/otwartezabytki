@@ -1,6 +1,7 @@
 language: ruby
 bundler_args: --without development
 before_script:
+  - sudo apt-get install aspell libaspell-dev aspell-pl
   - psql -c 'create database otwartezabytki_test;' -U postgres
   - cp config/database.yml.example config/database.yml
   - bundle exec rake db:schema:load
