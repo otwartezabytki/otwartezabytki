@@ -171,7 +171,7 @@ class Search
       end
 
       facet 'categories', instance.filter_facet_conditions('categories') do
-        terms :categories, :size => Tag.all.size, :all_terms => true
+        terms :categories, :size => Category.all.size, :all_terms => true
       end
 
       ['state', 'existance', 'has_photos', 'has_description'].each do |name|

@@ -22,6 +22,8 @@ gem 'sugar-rails'
 
 gem 'geocoder'
 gem 'simple_form', '~> 2.0'
+gem 'formtastic'
+gem 'formtastic-bootstrap'
 
 gem 'decent_exposure'
 gem 'kaminari'
@@ -65,6 +67,13 @@ gem 'whenever', :require => false
 # bot secrity
 gem 'recaptcha', :require => 'recaptcha/rails'
 
+# file upload
+gem 'carrierwave'
+gem 'mini_magick'
+
+# gravatars
+gem 'gravatar_image_tag'
+
 group :development, :test do
   # for debugging
   gem 'ruby-debug19'
@@ -73,6 +82,9 @@ group :development, :test do
   # for routes in /rails/routes
   gem 'sextant'
   gem 'guard-cucumber'
+
+  # for annotating db schema in models
+  gem 'annotate', ">=2.5.0"
 end
 
 # assets javascript compiler
@@ -85,6 +97,7 @@ group :test do
   gem 'cucumber-rails', :require => false
   gem 'rspec-rails',  '~> 2.0'
   gem 'factory_girl_rails'
+  gem 'forgery', '0.5.0'
   gem 'database_cleaner'
   gem 'capybara'
 

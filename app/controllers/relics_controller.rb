@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 class RelicsController < ApplicationController
+
   expose(:relics) do
     # p1 = params.merge(:corrected_relic_ids => current_user.try(:corrected_relic_ids))
     # if p1[:corrected_relic_ids].blank?
@@ -11,7 +12,9 @@ class RelicsController < ApplicationController
     # end
     tsearch.perform
   end
+
   expose(:suggestion) { Suggestion.new(:relic_id => params[:id]) }
+
   expose(:relic) do
     if id = params[:relic_id] || params[:id]
       Relic.find(id).tap do |r|
@@ -24,10 +27,13 @@ class RelicsController < ApplicationController
 
   helper_method :need_captcha
 
-  before_filter :current_user!, :only => [:edit, :create, :update, :gonext, :thank_you]
+  before_filter :authenticate_user!, :only => [:edit, :create, :update]
 
   def show
-    redirect_to edit_relic_path(params[:id]) and return
+    if params[:section].present?
+      render "relics/show/_#{params[:section]}" and return
+    end
+    relic.present? # raise ActiveRecord::RecordNotFound before entering template
   end
 
   def index
@@ -38,42 +44,20 @@ class RelicsController < ApplicationController
 
   def edit
 
-    if current_user && current_user.suggestions.roots.where(:relic_id => params[:id], :skipped => false).count > 0
-      redirect_to thank_you_relic_path(params[:id]), :notice => "Już poprawiłeś ten zabytek, dziękujemy!" and return
-    end
-
-    if relic.suggestions.not_skipped.count >= 3
-      redirect_to corrected_relic_path(params[:id]), :notice => "Ten zabytek został już przejrzany. Zapraszamy za miesiąc." and return
-    end
-
-    suggestion.fill_subrelics
   end
 
   def update
-
-    suggestion.user_id = current_user.id
-    suggestion.ip_address = request.remote_ip
-    suggestion.attributes = params[:suggestion]
-
-    if need_captcha
-      if verify_recaptcha(:model => suggestion, :timeout => 30)
-        Rails.cache.delete("need_captcha_#{request.remote_ip}")
+    if params[:section]
+      if relic.save
+        redirect_to relic_path(relic.id, :section => params[:section]) and return
       else
-        render "edit_captcha" and return
-      end
-    end
-
-    if suggestion.save
-      if suggestion.is_skipped?
-        redirect_to [:gonext, suggestion.relic]
-      else
-        redirect_to [:thank_you, suggestion.relic]
+        flash[:error] = "Popraw proszę błędy wskazane poniżej"
+        render 'edit' and return
       end
     else
-      flash[:error] = suggestion.errors.full_messages
-      render "edit"
+      flash[:error] = "Nie można zaktualizować całego zabytku na raz. Podaj sekcję."
+      redirect_to relic_path(relic.id)
     end
-
   end
 
   def gonext

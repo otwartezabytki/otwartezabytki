@@ -85,6 +85,7 @@ pl:
       long: "%d %B %Y, %H:%M"
       date: "%Y-%m-%d"
       tdate: "%Y-%m-%d %H:%M"
+      verbose: "%d.%m.%Y, %H:%M"
     am: "przed południem"
     pm: "po południu"
 
@@ -203,6 +204,8 @@ pl:
         street: "Ulica"
         register_number: "Aktualny numer rejestru"
         national_number: "NID"
+        categories: "Kategorie"
+        tags: "Tagi"
       user:
         email: Adres e-mail
         password: Hasło
@@ -262,4 +265,8 @@ pl:
       few:    "Pozostały do końca"
       many:   "Pozostało do końca"
       other:  "Pozostało do końca"
+
+  relic:
+    status:
+      checked_but_not_filled: "Sprawdzony, ale nieuzupełniony"
 

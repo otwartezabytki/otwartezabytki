@@ -33,7 +33,6 @@ default_spinner_opts =
   top: 88
   left: 180
 
-
 Search =
   init: ->
     $('body').on 'click', 'form.form-advance-search input[type=checkbox]', ->
@@ -70,6 +69,8 @@ window.onload = ->
     location = history.location || document.location
     if e.state?.searchreload or location.pathname.match(/\/?relics\/?$/)
       $.get location, Search.render
+
+@documentLoaded = ->
 
 jQuery ->
   # search autoreload
@@ -144,6 +145,8 @@ jQuery ->
     speed:    0,
     timeout:  4000
   })
+
+  window.documentLoaded(document)
 
 if document.body.className.match(/thank_you/)
   window.fbAsyncInit = ->

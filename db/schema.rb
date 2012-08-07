@@ -28,6 +28,15 @@ ActiveRecord::Schema.define(:version => 20120807131012) do
   add_index "active_admin_comments", ["namespace"], :name => "index_active_admin_comments_on_namespace"
   add_index "active_admin_comments", ["resource_type", "resource_id"], :name => "index_admin_notes_on_resource_type_and_resource_id"
 
+  create_table "alerts", :force => true do |t|
+    t.integer  "relic_id"
+    t.integer  "user_id"
+    t.string   "kind"
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "communes", :force => true do |t|
     t.integer  "district_id"
     t.string   "name"
@@ -45,11 +54,61 @@ ActiveRecord::Schema.define(:version => 20120807131012) do
     t.string   "nr"
   end
 
+  create_table "documents", :force => true do |t|
+    t.integer  "relic_id"
+    t.integer  "user_id"
+    t.string   "name"
+    t.integer  "size"
+    t.string   "mime"
+    t.string   "file"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "entries", :force => true do |t|
+    t.integer  "relic_id"
+    t.integer  "user_id"
+    t.string   "title"
+    t.text     "body"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "events", :force => true do |t|
+    t.integer  "relic_id"
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "date"
+    t.date     "date_start"
+    t.date     "date_end"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "keyword_stats", :force => true do |t|
     t.string   "identification"
     t.integer  "count"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+  end
+
+  create_table "links", :force => true do |t|
+    t.integer  "relic_id"
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "url"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "photos", :force => true do |t|
+    t.integer  "relic_id"
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "author"
+    t.string   "file"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "places", :force => true do |t|
@@ -89,13 +148,15 @@ ActiveRecord::Schema.define(:version => 20120807131012) do
     t.string   "date_end"
     t.string   "kind"
     t.boolean  "approved",        :default => false
-    t.string   "tags"
+    t.string   "categories"
     t.integer  "skip_count",      :default => 0
     t.integer  "edit_count",      :default => 0
     t.string   "type",            :default => "Relic"
     t.string   "country_code",    :default => "pl"
     t.string   "fprovince"
     t.string   "fplace"
+    t.text     "description",     :default => ""
+    t.string   "tags"
   end
 
   add_index "relics", ["ancestry"], :name => "index_relics_on_ancestry"

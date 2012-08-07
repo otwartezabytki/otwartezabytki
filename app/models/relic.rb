@@ -1,3 +1,44 @@
+# == Schema Information
+#
+# Table name: relics
+#
+#  id              :integer          not null, primary key
+#  place_id        :integer
+#  identification  :text
+#  group           :string(255)
+#  number          :integer
+#  materail        :string(255)
+#  dating_of_obj   :string(255)
+#  street          :string(255)
+#  register_number :string(255)
+#  nid_id          :string(255)
+#  latitude        :float
+#  longitude       :float
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  internal_id     :string(255)
+#  ancestry        :string(255)
+#  source          :text
+#  commune_id      :integer
+#  district_id     :integer
+#  voivodeship_id  :integer
+#  register_date   :date
+#  date_norm       :string(255)
+#  date_start      :string(255)
+#  date_end        :string(255)
+#  kind            :string(255)
+#  approved        :boolean          default(FALSE)
+#  categories      :string(255)
+#  skip_count      :integer          default(0)
+#  edit_count      :integer          default(0)
+#  description     :text
+#  tags            :string(255)
+#
+# Indexes
+#
+#  index_relics_on_ancestry  (ancestry)
+#
+
 # -*- encoding : utf-8 -*-
 require 'relic/tire_extensions'
 class Relic < ActiveRecord::Base
@@ -5,11 +46,18 @@ class Relic < ActiveRecord::Base
   Existences = ['existed', 'archived', 'social']
 
   has_many :suggestions
+  has_many :documents, :dependent => :destroy
+  has_many :photos, :dependent => :destroy
+  has_many :alerts, :dependent => :destroy
+  has_many :entries, :dependent => :destroy
+  has_many :links, :dependent => :destroy
+  has_many :events, :dependent => :destroy
+
   belongs_to :place
 
   attr_protected :id, :created_at, :update_at
-  attr_accessible :dating_of_obj, :group, :id, :identification, :materail, :national_number, :number, :place_id, :register_number, :street, :internal_id, :source, :tags
-  attr_accessible :dating_of_obj, :group, :id, :identification, :materail, :national_number, :number, :place_id, :register_number, :street, :internal_id, :source, :tags, :as => :admin
+  attr_accessible :dating_of_obj, :group, :id, :identification, :materail, :national_number, :number, :place_id, :register_number, :street, :internal_id, :source, :tags, :categories
+  attr_accessible :dating_of_obj, :group, :id, :identification, :materail, :national_number, :number, :place_id, :register_number, :street, :internal_id, :source, :tags, :categories, :as => :admin
 
   include PlaceCaching
   include Validations
@@ -18,6 +66,27 @@ class Relic < ActiveRecord::Base
 
   serialize :source
   serialize :tags, Array
+  serialize :categories, Array
+
+  before_validation do
+    if tags_changed? && tags.is_a?(Array)
+      tmp = []
+      self.tags.each do |tag|
+        tmp += tag.split(',').map(&:strip) if tag.present?
+      end
+      self.tags = tmp
+    end
+  end
+
+  before_validation do
+    if categories_changed? && categories.is_a?(Array)
+      tmp = []
+      self.categories.each do |category|
+        tmp += category.split(',').map(&:strip) if category.present?
+      end
+      self.categories = tmp
+    end
+  end
 
   # versioning
   has_paper_trail :class_name => 'RelicVersion', :on => [:update, :destroy]
@@ -124,7 +193,7 @@ class Relic < ActiveRecord::Base
 
   def to_indexed_json
     # backward compatibility
-    dp = DateParser.new(['1 ćw XX', '1916', '1907-1909'].sample)
+    dp = DateParser.new(['1 cw XX', '1916', '1907-1909'].sample)
     from, to = dp.results
     ids = [:voivodeship_id, :district_id, :commune_id, :place_id].zip(get_parent_ids)
     {
@@ -148,7 +217,7 @@ class Relic < ActiveRecord::Base
       :to               => to,
       :has_round_date   => dp.rounded?,
       # sample categoires
-      :categories       => Tag.all.values.sample(3),
+      :categories       => Category.all.values.sample(3),
       :has_photos       => [true, false].sample,
       :state            => States.sample,
       :existance        => Existences.sample
@@ -197,12 +266,21 @@ class Relic < ActiveRecord::Base
     root.tire.update_index
   end
 
+  def create_relic_index
+    # always update root document
+    root.tire.update_index
+  end
+
   def corrected_by?(user)
     user.suggestions.where(:relic_id => self.id).count > 0
   end
 
   def corrected?
     suggestions.count >= 3
+  end
+
+  def status
+    :checked_but_not_filled
   end
 
 end
