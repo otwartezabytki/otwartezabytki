@@ -49,9 +49,18 @@ class Search
 
   def enable_sort
     type, direction = order.split('.')
+    instance = self
     @tsearch.sort do
       if type == 'alfabethic'
         by 'identification.untouched', direction
+      elsif instance.range_conditions?
+        by '_script', {
+          'script' => %q(
+            if(_source.has_round_date) { doc.score; } else { doc.score * 100; }
+          ).squish,
+          'type' => 'number',
+          'order' => direction
+        }
       else
         by '_score', direction
       end
