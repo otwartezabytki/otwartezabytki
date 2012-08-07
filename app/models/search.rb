@@ -111,28 +111,28 @@ class Search
   end
 
   def build_range_conditions
-      cond = [['from', 'gte'], ['to', 'lte']]
-      values = [@from, @to].map(&:to_i)
-      cond1 = cond2 = {}
+    cond = [['from', 'gte'], ['to', 'lte']]
+    values = [@from, @to].map(&:to_i)
+    cond1 = cond2 = {}
 
-      cond1 = values.each_with_index.inject({}) do |mem, (e, i)|
-        key1, key2 = cond[i]
-        mem[key1] = { key2 => e } if e > 0
-        mem
-      end
+    cond1 = values.each_with_index.inject({}) do |mem, (e, i)|
+      key1, key2 = cond[i]
+      mem[key1] = { key2 => e } if e > 0
+      mem
+    end
 
-      cond2 = DateParser.round_range(*values).each_with_index.inject({}) do |mem, (e, i)|
-        key1, key2 = cond[i]
-        mem[key1] = { key2 => e } if e > 0
-        mem
-      end if values.all? { |v| v > 0 }
+    cond2 = DateParser.round_range(*values).each_with_index.inject({}) do |mem, (e, i)|
+      key1, key2 = cond[i]
+      mem[key1] = { key2 => e } if e > 0
+      mem
+    end if values.all? { |v| v > 0 }
 
-      cond3 = [[cond1, {'has_round_date' => false}], [cond2, {'has_round_date' => true}]].map do |c|
-        range, term = c
-        {'and' => [{'range' => range}, {'term' => term}]} if range.present?
-      end.compact
-      @range_conditions = cond3.present? ? cond3 : []
-      @range_conditions
+    cond3 = [[cond1, {'has_round_date' => false}], [cond2, {'has_round_date' => true}]].map do |c|
+      range, term = c
+      {'and' => [{'range' => range}, {'term' => term}]} if range.present?
+    end.compact
+    @range_conditions = cond3.present? ? cond3 : []
+    @range_conditions
   end
 
   def range_conditions?

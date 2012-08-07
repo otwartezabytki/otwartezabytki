@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120730122227) do
+ActiveRecord::Schema.define(:version => 20120807131012) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -71,12 +71,12 @@ ActiveRecord::Schema.define(:version => 20120730122227) do
     t.string   "materail"
     t.string   "dating_of_obj"
     t.string   "street"
-    t.string   "register_number"
+    t.text     "register_number"
     t.string   "nid_id"
     t.float    "latitude"
     t.float    "longitude"
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
     t.string   "internal_id"
     t.string   "ancestry"
     t.text     "source"
@@ -92,6 +92,10 @@ ActiveRecord::Schema.define(:version => 20120730122227) do
     t.string   "tags"
     t.integer  "skip_count",      :default => 0
     t.integer  "edit_count",      :default => 0
+    t.string   "type",            :default => "Relic"
+    t.string   "country_code",    :default => "pl"
+    t.string   "fprovince"
+    t.string   "fplace"
   end
 
   add_index "relics", ["ancestry"], :name => "index_relics_on_ancestry"
