@@ -1,5 +1,12 @@
 # -*- encoding : utf-8 -*-
 class DateParser
+
+  class << self
+    def round_range from, to
+      [ (from.to_i - 1) / 25 * 25 + 1, (to.to_i / 25.0).ceil * 25 + 1 ]
+    end
+  end
+
   def initialize string = nil
     @string = string.to_s
   end
@@ -13,7 +20,12 @@ class DateParser
     results = [get_arabic_date(@s), get_arabic_date(@e)].flatten.compact
     a_start, a_end = results.first.to_s, results.last.to_s
     a_end = a_start.first(2) + a_end if a_end.size == 2
-    [a_start, a_end]
+    [ (a_start.blank? ? nil : a_start.to_i), (a_end.blank? ? nil : a_end.to_i) ]
+  end
+
+  def rounded?
+    split!
+    ![@s, @e].find_all(&:present?).all? { |s| s.match(/^.*?(\d+)$/) }
   end
 
   def parse_century roman
