@@ -55,7 +55,9 @@ gem 'newrelic_rpm'
 gem 'rails_config', '0.2.5'
 gem 'dalli'
 gem 'will_cache'
+# roman letters converter
 gem 'arrabiata'
+gem 'iso_country_codes'
 
 # background jobs
 gem 'whenever', :require => false
