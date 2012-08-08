@@ -11,11 +11,26 @@
 #= require jquery.ui.dialog
 #= require jquery.ui.autocomplete
 #= require jquery.ui.tabs
+#= require jquery.ui.progressbar
+
+#= require ./vendor/froogaloop
+#= require ./vendor/jquery.cookie
+#= require ./vendor/jquery.autocomplete-html
+#= require ./vendor/jquery.cycle
+#= require ./vendor/jquery.iframe-transport
+#= require ./vendor/jquery.fileupload
+#= require ./vendor/jquery.highlight-3
+#= require ./vendor/jquery.transition.min
+#= require ./vendor/redactor
+#= require ./vendor/select2
+#= require ./vendor/spin.min
 #= require_tree ./vendor
 
 @marker_image_path = "<%= image_path('wizard-gps-circle-with-info.png') %>"
 @small_marker_image_path = "<%= image_path('wizard-gps-circle.png') %>"
 @geocoder_search_path = "/geocoder/search"
+
+@photo_upload_button = "<%= image_path('upload-input.png') %>"
 
 default_spinner_opts =
   lines: 13
@@ -119,6 +134,10 @@ jQuery ->
   })
 
   window.documentLoaded(document)
+
+  $('.alert').on 'click', 'a.close', ->
+    $(this).parent('.alert').hide()
+    false
 
 if document.body.className.match(/thank_you/)
   window.fbAsyncInit = ->

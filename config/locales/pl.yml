@@ -213,7 +213,8 @@ pl:
         role: Rola
         created_at: Założenie konta
         updated_at: Zaktualizowanie danych
-
+      photo:
+        author: "Dane autora (imię, nazwisko)"
     models:
       relic:
         zero:  Zabytek

@@ -53,8 +53,24 @@ class Relic < ActiveRecord::Base
   belongs_to :place
 
   attr_protected :id, :created_at, :update_at
-  attr_accessible :dating_of_obj, :group, :id, :identification, :materail, :national_number, :number, :place_id, :register_number, :street, :internal_id, :source, :tags, :categories
-  attr_accessible :dating_of_obj, :group, :id, :identification, :materail, :national_number, :number, :place_id, :register_number, :street, :internal_id, :source, :tags, :categories, :as => :admin
+
+  # currently used in photo view
+  attr_accessor :license_agreement
+
+  accessible_attributes = :dating_of_obj, :group, :id, :identification, :materail,
+                          :national_number, :number, :place_id, :register_number,
+                          :street, :internal_id, :source, :tags, :categories, :photos_attributes
+
+
+  accepts_nested_attributes_for :photos, :allow_destroy => true
+  accepts_nested_attributes_for :documents, :allow_destroy => true
+
+  accepts_nested_attributes_for :entries
+  accepts_nested_attributes_for :links
+  accepts_nested_attributes_for :events
+
+  attr_accessible accessible_attributes
+  attr_accessible accessible_attributes, :as => :admin
 
   include PlaceCaching
   include Validations

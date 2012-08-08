@@ -16,7 +16,9 @@ class Photo < ActiveRecord::Base
   belongs_to :relic
   belongs_to :user
 
-  attr_accessible :author, :name, :relic_id, :user_id
+  attr_accessible :relic_id, :user_id, :author, :file
 
   mount_uploader :file, PhotoUploader
+
+  validates :file, :relic, :user, :presence => true
 end

@@ -1,0 +1,39 @@
+%section.photos
+  %h2 Podstawowe informacje
+  = semantic_form_for relic, :url => relic_path(relic.id, :section => :photos), :html => { :multipart => true }  do |f|
+    .help-content.active
+      .help Pomoc
+      .help-extended
+        %span.close Zamknij pomoc
+        %p
+          Sprawdź, czy nazwa zabytku jest poprawna (np. jeśli zaczyna się od małej litery, popraw ją na wielką).
+          Jeśli chcesz ją poprawić, kliknij „Zmień”. Pojawi się pole, w którym można poprawić nazwę.
+          Następnie naciśnij „Zapisz”, aby zachować poprawioną nazwę. Jeśli jest poprawna, kliknij „Potwierdź”.
+
+    = f.semantic_fields_for :photos do |f2|
+      - if f2.object.new_record?
+        .photo.hidden
+          .preview.preview-placeholder
+          .photo-content
+            %p
+              %strong Trwa wgrywanie, proszę czekać...
+              = link_to 'anuluj', '#', :class => "cancel_upload"
+            %p
+              .progressbar
+                .value 0%
+      - else
+        .photo
+          .preview= image_tag f2.object.file.thumb.url
+          .photo-content
+            = f2.input :author
+            - if f2.object.user_id == current_user.id
+              = f2.hidden_field :_destroy
+              = link_to 'usuń zdjęcie', '#', :class => "remove_photo"
+
+    = file_field_tag "photo[file]", :class => 'photo_upload', :"data-url" => "#{relic_photos_path(relic.id)}"
+
+    = f.input :license_agreement, :input_html => { :checked => 'checked' }, :as => :boolean, :label => "Oświadczam, że posiadam prawa do publikowania na stronie OtwarteZabytki.pl dodane powyżej zdjęcia."
+
+    = f.submit 'Zapisz zmiany'
+    lub
+    = link_to "anuluj", relic_path(relic.id)

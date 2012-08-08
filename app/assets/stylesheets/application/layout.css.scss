@@ -1481,3 +1481,19 @@ ul.nav li a.selected {
   font-weight: bold;
   width: 400px;
 }
+
+.alert {
+  display: block;
+  padding: 10px;
+  &.alert-error {
+    background-color: #f55;
+    color: white;
+  }
+  a.close {
+    display: block;
+    width: 50px;
+    text-align: right;
+    float: right;
+    color: white;
+  }
+}

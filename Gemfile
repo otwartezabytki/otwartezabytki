@@ -71,6 +71,9 @@ gem 'mini_magick'
 # gravatars
 gem 'gravatar_image_tag'
 
+# api
+gem 'rabl'
+
 group :development, :test do
   # for debugging
   gem 'ruby-debug19'

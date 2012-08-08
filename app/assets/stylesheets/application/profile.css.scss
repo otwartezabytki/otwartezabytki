@@ -215,4 +215,54 @@
     }
   }
 
+
+  section.photos {
+    .photo {
+      clear: both;
+
+      &.hidden {
+        display: none;
+      }
+
+      .preview {
+        width: 125px;
+        height: 125px;
+        float: left;
+        position: relative;
+        border: 3px solid white;
+        margin: 0 5px 0 0;
+      }
+
+      .photo-content {
+        float: left;
+        width: 500px;
+      }
+
+      .preview-placeholder {
+        background-color: #eee;
+      }
+    }
+
+    input[type="text"] {
+      width: 350px;
+    }
+
+    .progressbar {
+      position: relative;
+      height: 16px;
+      margin: 4px 0;
+    }
+
+    .progressbar .value {
+      position: absolute;
+      left: 49%;
+      top: 2px;
+    }
+
+    .photo_upload {
+      display: block;
+      margin: 10px 0;
+      clear: both;
+    }
+  }
 }

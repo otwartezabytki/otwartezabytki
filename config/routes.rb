@@ -23,9 +23,12 @@ Otwartezabytki::Application.routes.draw do
       get :thank_you
       get :gonext
       match 'gallery(/:photo_id)', :to => 'relics#gallery', :as => 'show_gallery'
-      match 'edit/:section', :to => 'relics#edit', :as => "edit_section"
-      match 'show/:section', :to => 'relics#show', :as => "show_section"
+      match 'edit/:section', :to => 'relics#edit', :as => 'edit_section'
+      match 'show/:section', :to => 'relics#show', :as => 'show_section'
     end
+
+    resources :photos
+    resources :documents
   end
 
   resources :tags, :only => [:create]

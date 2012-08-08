@@ -13,7 +13,6 @@
 
   %h2 Opis
   = semantic_form_for relic do |f|
-    = hidden_field 'section', params[:section]
     = f.input :description, :label => false, :input_html => { :class => "redactor", :style => 'height: 190px;' }
     = f.submit 'Zapisz zmiany'
     lub

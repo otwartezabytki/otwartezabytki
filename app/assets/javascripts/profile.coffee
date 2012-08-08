@@ -129,7 +129,65 @@ jQuery ->
 
   $('#relic_place_id').select2()
 
+
 window.google_maps_loaded = ->
   jQuery ->
     window.loadGMaps();
     $('#map_canvas').auto_zoom()
+
+jQuery ->
+  return unless $('section.photos').length
+
+  upload_spinner_opts =
+    lines: 8
+    length: 0
+    width: 6
+    radius: 10
+    rotate: 0
+    color: '#555'
+    speed: 0.8
+    trail: 55
+    shadow: false
+    hwaccel: false
+    className: 'spinner'
+    zIndex: 2e9
+    top: 46
+    left: 46
+
+  if $('.preview-placeholder').length
+    spinner = new Spinner(upload_spinner_opts).spin($('.preview-placeholder')[0])
+
+  $('.progressbar').progressbar(value: 0, change: (e) -> $(e.target).find('.value').text($('.progressbar').progressbar("value") + "%"))
+
+  photo_xhr = $(".photo_upload").fileupload
+    type: "POST"
+    dataType: "json"
+
+    add: (e, data) ->
+      $('.photo.hidden').removeClass('hidden')
+      $(".photo_upload").hide()
+      data.submit()
+
+    submit: (e, data) ->
+      data.formData = { foo: "bar" }
+
+    progressall: (e, data) ->
+      progress = parseInt(data.loaded / data.total * 100, 10)
+      $('.progressbar').progressbar("value", progress)
+
+    done: (e, data) ->
+      document.location.reload()
+
+  $('.cancel_upload').click ->
+    photo_xhr.abort() if photo_xhr?
+
+  $('.remove_photo').click ->
+    $(this).parents('.photo:first').find('input[name*="_destroy"]').val(true)
+    $(this).parents('form:first').submit()
+    false
+
+  $('form.relic').submit ->
+    if $('#relic_license_agreement:checked').length == 0
+      confirm('Ponieważ nie posiadasz praw do publikowania tych zdjęć, zostaną one usunięte. Kontynuować?')
+    else
+      true

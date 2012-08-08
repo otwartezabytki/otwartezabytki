@@ -1,8 +1,7 @@
 %section.general
   %h2 Podstawowe informacje
   = semantic_form_for relic do |f|
-
-    .help-content
+    .help-content.active
       .help Pomoc
       .help-extended
         %span.close Zamknij pomoc
@@ -14,11 +13,8 @@
           Jeśli Ci się nie uda, kliknij „Nie wiem”, a automatycznie przejdziesz do kolejnego punktu.
           W przypadku popełnienia błędu kliknij „Edytuj ponownie” i edytuj ponownie.
 
-    = hidden_field 'section', params[:section]
     = f.input :identification, :as => :string
-
     = f.input :tags, :input_html => { :value => relic.tags.join(','), :style => "width: 510px", :multiple => true }
-
     .select
       %label Kategorie
       .input

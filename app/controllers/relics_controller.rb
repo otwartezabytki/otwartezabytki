@@ -12,8 +12,6 @@ class RelicsController < ApplicationController
     end
   end
 
-  expose(:suggestion) { Suggestion.new(:relic_id => params[:id]) }
-
   expose(:relic) do
     if id = params[:relic_id] || params[:id]
       Relic.find(id).tap do |r|
@@ -49,20 +47,23 @@ class RelicsController < ApplicationController
   end
 
   def edit
-
+    relic.photos.build
   end
 
   def update
-    if params[:section]
-      if relic.save
-        redirect_to relic_path(relic.id, :section => params[:section]) and return
-      else
-        flash[:error] = "Popraw proszę błędy wskazane poniżej"
+    if relic.save
+      if params[:section] == 'photos' && params[:commit].blank?
         render 'edit' and return
+      else
+        if relic.license_agreement != "1"
+          relic.photos.where(:user_id => current_user.id).destroy_all
+        end
+
+        redirect_to relic_path(relic.id) and return
       end
     else
-      flash[:error] = "Nie można zaktualizować całego zabytku na raz. Podaj sekcję."
-      redirect_to relic_path(relic.id)
+      flash[:error] = "Popraw proszę błędy wskazane poniżej"
+      render 'edit' and return
     end
   end
 
