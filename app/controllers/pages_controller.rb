@@ -8,6 +8,8 @@ class PagesController < HighVoltage::PagesController
     case params[:id]
       when 'share_close'
         nil
+      when 'under_construction'
+        'under_construction'
       else
         'application'
     end

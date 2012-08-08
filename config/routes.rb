@@ -1,5 +1,8 @@
 # -*- encoding : utf-8 -*-
 Otwartezabytki::Application.routes.draw do
+  # under construction
+  match '*path' => 'pages#show', :id => 'under_construction'
+  root :to      => 'pages#show', :id => 'under_construction'
 
   ActiveAdmin.routes(self)
 

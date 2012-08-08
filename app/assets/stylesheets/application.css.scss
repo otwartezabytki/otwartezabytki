@@ -19,3 +19,17 @@
  *= require application/wizard
  *= require vendor/colorbox
 */
+
+
+.under_construction {
+  border-top: 1px solid gainsboro;
+  div {
+    line-height: 22px;
+    margin: 20px 0;
+    font-size: 16px;
+  }
+  h2 {
+    margin: 30px 0 20px;
+    font-size: 25px;
+  }
+}
