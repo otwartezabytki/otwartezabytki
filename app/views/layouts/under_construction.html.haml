@@ -1,0 +1,64 @@
+!!! 5
+%html(lang="en")
+  %head
+    %meta(charset="utf-8")
+    %meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    %title= content_for?(:title) ? yield(:title) : "Otwarte Zabytki"
+    %link(rel="shortcut icon" href="/favicon.gif")
+    %meta(property="og:title" content="Otwarte Zabytki")
+    %meta(property="og:description" content="Społecznościowa akcja tworzenia bazy zabytków. Dołącz!")
+    %meta(property="og:image" content="#{root_url[0..-2]}#{image_path('logo-facebook.jpg')}")
+    = csrf_meta_tags
+    / Le HTML5 shim, for IE6-8 support of HTML elements
+    /[if lt IE 9]
+      = javascript_include_tag "http://html5shim.googlecode.com/svn/trunk/html5.js"
+    = stylesheet_link_tag "application", :media => "all"
+    /[if lt IE 9]
+      = stylesheet_link_tag "ie8", :media => "all"
+    %link{:href => "http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,600,300&subset=latin,latin-ext", :rel => "stylesheet", :type => "text/css"}/
+    :plain
+      <meta property="og:title" content="Otwarte Zabytki" />
+      <meta property="og:description" content="Uzupełnij z nami bazę zabytków i pomóż stworzyć serwis. Skorzystaj z własnej wiedzy. Poszukaj informacji w książkach lub w internecie. To naprawdę proste." />
+      <meta property="og:image" content="http://otwartezabytki.pl/assets/face-share-logo.png" />
+  %body{ :class => cookies["font-size"].to_s + " " + controller_name + " " + action_name + (params[:id] ? " resource_#{params[:id]}" : "") }
+    .page
+      #root
+        %header#header
+          .container
+            %a.btn.btn-navbar(data-target=".nav-collapse" data-toggle="collapse")
+              %span.icon-bar
+              %span.icon-bar
+              %span.icon-bar
+            %h1
+              %a(href=root_path) Otwarte Zabytki
+            %a{:href => 'http://centrumcyfrowe.pl/', :target => '_blank', :class => 'cc_logo'}
+        %section#main
+          .container
+            .row
+              = yield
+        #root-footer
+      %footer#footer.container= render 'shared/footer'
+    #fb-root
+
+    != include_gon(:camel_case => true)
+    != javascript_include_tag "application"
+    != yield :footer_javascripts
+    - if Rails.env.production?
+      :javascript
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', '#{Settings.oz.ga_key}']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+      :javascript
+        var pkBaseURL = (("https:" == document.location.protocol) ?  "https://centrumcyfrowe.pl/piwik/" : "http://centrumcyfrowe.pl/piwik/");
+        document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+      :javascript
+        try {
+        var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 2);
+        piwikTracker.trackPageView();
+        piwikTracker.enableLinkTracking();
+        } catch( err ) {}
