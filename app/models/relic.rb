@@ -175,6 +175,13 @@ class Relic < ActiveRecord::Base
       index.refresh
     end
 
+    def reindex_sample
+      index.delete
+      index.create :mappings => tire.mapping_to_hash, :settings => tire.settings
+      index.import Relic.roots.select('DISTINCT identification, *').limit(100).map(&:sample_json)
+      index.refresh
+    end
+
     def analyze_query q
       analyzed = Relic.index.analyze q
       return '*' if !analyzed or (analyzed and analyzed['tokens'].blank?)
@@ -201,13 +208,12 @@ class Relic < ActiveRecord::Base
 
   end
 
-  def to_indexed_json
-    # backward compatibility
+  def sample_json
     dp = DateParser.new(['1 cw XX', '1916', '1907-1909'].sample)
     from, to = dp.results
-    ids = [:voivodeship_id, :district_id, :commune_id, :place_id].zip(get_parent_ids)
     {
       :id               => id,
+      :type             => 'relic',
       :identification   => identification,
       :street           => street,
       :place_full_name  => place_full_name,
@@ -232,9 +238,41 @@ class Relic < ActiveRecord::Base
       :state            => States.sample,
       :existance        => Existences.sample,
       :country          => ['pl', 'de', 'gb'].sample,
-      # :fprovince        => fprovince,
-      :fplace           => ['Warszawa', 'Berlin', 'Londyn'].sample
-    }.merge(Hash[ids]).to_json
+    }
+  end
+
+  def to_indexed_json
+    # backward compatibility
+    dp = DateParser.new(['1 cw XX', '1916', '1907-1909'].sample)
+    from, to = dp.results
+    {
+      :id               => id,
+      :type             => 'relic',
+      :identification   => identification,
+      :street           => street,
+      :place_full_name  => place_full_name,
+      # :kind             => kind,
+      :descendants      => self.descendants.map(&:to_descendant_hash),
+      :edit_count       => self.edit_count,
+      :skip_count       => self.skip_count,
+      :voivodeship      => { :id => self.voivodeship_id,            :name => self.voivodeship.name },
+      :district         => { :id => self.district_id,               :name => self.district.name },
+      :commune          => { :id => self.commune_id,                :name => self.commune.name },
+      :virtual_commune_id => self.place.virtual_commune_id,
+      :place            => { :id => self.place_id,                  :name => self.place.name },
+      # new search fields
+      :description      => 'some description',
+      :has_description  => [true, false].sample,
+      :from             => from,
+      :to               => to,
+      :has_round_date   => dp.rounded?,
+      # sample categoires
+      :categories       => Category.all.values.sample(3),
+      :has_photos       => [true, false].sample,
+      :state            => States.sample,
+      :existance        => Existences.sample,
+      :country          => ['pl', 'de', 'gb'].sample,
+    }.to_json
   end
 
   def to_descendant_hash
