@@ -69,30 +69,30 @@ class Search
 
   def enable_facet_navigation
     if navfacet?('pl')
-      @tsearch.facet "voivodeships", filter_facet_conditions do
+      @tsearch.facet "voivodeships", filter_facet_conditions('voivodeship.id', 'district.id', 'commune.id', 'place.id') do
         terms nil, :script_field => "_source.voivodeship.name + '_' + _source.voivodeship.id", :size => 16, :order => 'term'
       end
 
-      @tsearch.facet "districts", filter_facet_conditions do
+      @tsearch.facet "districts", filter_facet_conditions('district.id', 'commune.id', 'place.id') do
         terms nil, :script_field => "_source.district.name + '_' + _source.district.id", :size => 10_000, :order => 'term'
       end if location.size > 1
 
-      @tsearch.facet "communes", filter_facet_conditions do
+      @tsearch.facet "communes", filter_facet_conditions('commune.id', 'place.id') do
         terms nil, :script_field => "_source.commune.name + '_' + _source.virtual_commune_id", :size => 10_000, :order => 'term'
       end if location.size > 2
 
-      @tsearch.facet "places", filter_facet_conditions do
+      @tsearch.facet "places", filter_facet_conditions('place.id') do
          terms nil, :script_field => "_source.place.name + '_' + _source.place.id", :size => 10_000, :order => 'term'
       end if location.size > 3
     elsif navfacet?('world')
-      @tsearch.facet "countires", filter_facet_conditions do
+      @tsearch.facet "countires", filter_facet_conditions('country') do
         terms 'country', :size => 10_000, :order => 'term'
       end
     end
   end
 
   def filter_facet_conditions *keys
-    terms_cond = array_conditions keys
+    terms_cond = array_conditions *keys
     return {} if terms_cond.blank?
     {
       'facet_filter' => {
@@ -197,7 +197,7 @@ class Search
       filter 'and',instance.array_conditions if instance.array_conditions.present?
       filter 'or', instance.range_conditions if instance.range_conditions?
 
-      ['overall','world', 'poland'].each do |name|
+      ['overall', 'world', 'poland'].each do |name|
         facet name, instance.gloabl_filter_conditions(name) do
           terms nil, :script_field => 1, :global => true
         end
