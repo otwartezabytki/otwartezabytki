@@ -4,6 +4,7 @@ Otwartezabytki::Application.routes.draw do
   # match '*path' => 'pages#show', :id => 'under_construction'
   # root :to      => 'pages#show', :id => 'under_construction'
 
+
   mount Tolk::Engine => '/admin/tolk', :as => 'tolk'
   ActiveAdmin.routes(self)
 
