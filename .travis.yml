@@ -1,7 +1,6 @@
 language: ruby
 bundler_args: --without development
 before_script:
-  - sudo apt-get install aspell libaspell-dev aspell-pl
   - psql -c 'create database otwartezabytki_test;' -U postgres
   - cp config/database.yml.example config/database.yml
   - bundle exec rake db:schema:load
@@ -11,6 +10,7 @@ script:
 before_install:
   - sudo /usr/share/elasticsearch/bin/plugin -install chytreg/elasticsearch-analysis-morfologik/1.0.0
   - sudo service elasticsearch start
+  - sudo apt-get install aspell libaspell-dev aspell-pl
 rvm:
   - 1.9.2
   - 1.9.3

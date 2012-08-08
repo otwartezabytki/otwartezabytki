@@ -2,20 +2,28 @@
   %h3 Lokalizacja
   %ul.nav.nav-list.all
     %li
-      = link_to "Cała Polska <span>#{relics.overall_count}</span>".html_safe, relics_path(search_params(:location => nil)), :remote => true
-  %ul.nav.nav-list
-    - relics.terms('voivodeships', true).each do |obj|
-      %li
-        = link_to_facet obj, 0 do
-          %ul
-            - relics.terms('districts', true).each do |obj|
-              %li
-                = link_to_facet obj, 1 do
-                  %ul
-                    - relics.terms('communes', true).each do |obj|
-                      %li
-                        = link_to_facet obj, 2 do
-                          %ul
-                            - relics.terms('places', true).each do |obj|
-                              %li
-                                = link_to_facet obj, 3
+      = link_to "Cały Świat <span>#{relics.count('overall')}</span>".html_safe, relics_path(search_params(:location => nil)), :remote => true
+    %li
+      = link_to "Polska <span>#{relics.count('poland')}</span>".html_safe, relics_path(search_params(:location => 'pl')), :remote => true
+      %ul.nav.nav-list
+        - relics.terms('voivodeships', true).each do |obj|
+          %li
+            = link_to_facet obj, 1 do
+              %ul
+                - relics.terms('districts', true).each do |obj|
+                  %li
+                    = link_to_facet obj, 2 do
+                      %ul
+                        - relics.terms('communes', true).each do |obj|
+                          %li
+                            = link_to_facet obj, 3 do
+                              %ul
+                                - relics.terms('places', true).each do |obj|
+                                  %li
+                                    = link_to_facet obj, 4
+    %li
+      = link_to "Poza polską <span>#{relics.count('world')}</span>".html_safe, relics_path(search_params(:location => 'world')), :remote => true
+      %ul.nav.nav-list
+        - relics.terms('countires', true).each do |obj|
+          %li
+            = link_to_facet obj, 1

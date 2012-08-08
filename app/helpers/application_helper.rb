@@ -78,17 +78,21 @@ module ApplicationHelper
     # end.join(", ").html_safe
   end
 
+  def location_array
+    return @location_array if defined? @location_array
+    @location_array = search_params[:search][:location].to_s.split('-')
+  end
+
   def link_to_facet obj, deep, &block
-    name, id  = obj['term'].split('_')
-    location  = params[:search].try(:[], :location).to_s.split('-')
-    selected  = location[deep] == id
+    name, id  = location_array.first.to_s.include?('world') ? [I18n.t(obj['term'].upcase, :scope => 'countries'), obj['term']] : obj['term'].split('_')
+    selected  = location_array[deep] == id
     label     = "#{name} <span>#{obj['count']}</span>".html_safe
-    cond      = search_params({:location => (location.first(deep) << id).join('-')})
+    cond      = search_params({:location => (location_array.first(deep) << id).join('-')})
     link      = link_to label, relics_path(cond), :remote => true
     output = []
     if selected
       output << content_tag(:div, :class => 'selected') do
-        if location.size == (deep + 1)
+        if location_array.size == (deep + 1)
           content_tag(:p, label)
         else
           link
@@ -108,15 +112,14 @@ module ApplicationHelper
     return @location_breadcrumbs if defined? @location_breadcrumbs
     @location_breadcrumbs = [ {:path => relics_path(search_params(:location => nil)), :label => 'Cała Polska'} ]
     klasses = [Voivodeship, District, Commune, Place]
-    location_arry = search_params[:search][:location].to_s.split('-')
 
-    location_arry.each_with_index do |id,i|
+    location_array.each_with_index do |id,i|
       l = Rails.cache.fetch("#{klasses[i].to_s.downcase}_#{id}", :expires_in => 1.day) do
         klasses[i].find(id.split(':').first)
       end
-      cond = search_params(:location => location_arry.first(i+1).join('-'))
+      cond = search_params(:location => location_array.first(i+1).join('-'))
       @location_breadcrumbs << {:path => relics_path(cond), :label => l.name }
-    end if location_arry.present?
+    end if location_array.present?
     @location_breadcrumbs
   end
 

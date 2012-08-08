@@ -59,7 +59,9 @@ gem 'dalli'
 gem 'will_cache'
 # roman letters converter
 gem 'arrabiata'
-gem 'iso_country_codes'
+gem 'rails-i18n'
+gem 'i18n-country-translations'
+gem 'i18n_country_select'
 
 # background jobs
 gem 'whenever', :require => false

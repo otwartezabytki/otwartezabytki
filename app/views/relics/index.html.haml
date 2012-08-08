@@ -24,16 +24,16 @@
     - elsif relics.present?
       %div.relic-header
         %h2 Zabytki (#{relics.total})
-        - if location_breadcrumbs.present?
-          %div.breadcrumb
-            %p Gdzie:
-            %ul
-              - c = location_breadcrumbs.size
-              - location_breadcrumbs.take(c-1).each do |l|
-                %li
-                  = link_to l[:label], l[:path], :remote => true
-                  %span &#187;
-              %li= location_breadcrumbs.last[:label]
+        -# - if location_breadcrumbs.present?
+        -#   %div.breadcrumb
+        -#     %p Gdzie:
+        -#     %ul
+        -#       - c = location_breadcrumbs.size
+        -#       - location_breadcrumbs.take(c-1).each do |l|
+        -#         %li
+        -#           = link_to l[:label], l[:path], :remote => true
+        -#           %span &#187;
+        -#       %li= location_breadcrumbs.last[:label]
 
       = render :partial => "relics", :locals => {:collection => relics }
 

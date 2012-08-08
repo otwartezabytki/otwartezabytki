@@ -40,7 +40,7 @@
 #
 
 # -*- encoding : utf-8 -*-
-require 'relic/tire_extensions'
+ActiveSupport::Dependencies.depend_on 'relic/tire_extensions'
 class Relic < ActiveRecord::Base
   States = ['checked', 'unchecked', 'filled']
   Existences = ['existed', 'archived', 'social']
@@ -129,6 +129,15 @@ class Relic < ActiveRecord::Base
       :untouched =>  { "type" => "string", "index" => "not_analyzed" }
     }
 
+    indexes :fprovince, :type => "multi_field", :fields => {
+      :fprovince =>  { "type" => "string", "index" => "analyzed" },
+      :untouched =>  { "type" => "string", "index" => "not_analyzed" }
+    }
+    indexes :fplace, :type => "multi_field", :fields => {
+      :fplace =>  { "type" => "string", "index" => "analyzed" },
+      :untouched =>  { "type" => "string", "index" => "not_analyzed" }
+    }
+
     with_options :index => :analyzed do |a|
       a.indexes :street
     end
@@ -147,6 +156,7 @@ class Relic < ActiveRecord::Base
       na.indexes :has_round_date,  :type => "boolean"
       na.indexes :from,  :type => "integer"
       na.indexes :to,  :type => "integer"
+      na.indexes :country
 
       # backward compatibility
       na.indexes :voivodeship_id
@@ -220,7 +230,10 @@ class Relic < ActiveRecord::Base
       :categories       => Category.all.values.sample(3),
       :has_photos       => [true, false].sample,
       :state            => States.sample,
-      :existance        => Existences.sample
+      :existance        => Existences.sample,
+      :country          => ['pl', 'de', 'gb'].sample,
+      # :fprovince        => fprovince,
+      :fplace           => ['Warszawa', 'Berlin', 'Londyn'].sample
     }.merge(Hash[ids]).to_json
   end
 
@@ -231,7 +244,6 @@ class Relic < ActiveRecord::Base
       :street           => street,
     }
   end
-
 
   def full_identification
     "#{identification} (#{register_number}) datowanie: #{dating_of_obj}; ulica: #{street}"
@@ -283,4 +295,11 @@ class Relic < ActiveRecord::Base
     :checked_but_not_filled
   end
 
+  def country_code= value
+    @country_code = (value || 'pl').upcase
+  end
+
+  def country
+    I18n.t(country_code.upcase, :scope => 'countries')
+  end
 end

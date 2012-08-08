@@ -2,7 +2,7 @@ class ForeignRelicSupport < ActiveRecord::Migration
   def up
     change_column :relics, :register_number, :text
     add_column :relics, :type, :string, :default => 'Relic'
-    add_column :relics, :country_code, :string, :default => 'pl'
+    add_column :relics, :country_code, :string, :default => 'PL'
     add_column :relics, :fprovince, :string
     add_column :relics, :fplace, :string
   end

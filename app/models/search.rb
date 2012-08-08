@@ -68,28 +68,43 @@ class Search
   end
 
   def enable_facet_navigation
-    @tsearch.facet "voivodeships", filter_facet_conditions do
-      terms nil, :script_field => "_source.voivodeship.name + '_' + _source.voivodeship.id", :size => 16, :order => 'term'
+    if navfacet?('pl')
+      @tsearch.facet "voivodeships", filter_facet_conditions do
+        terms nil, :script_field => "_source.voivodeship.name + '_' + _source.voivodeship.id", :size => 16, :order => 'term'
+      end
+
+      @tsearch.facet "districts", filter_facet_conditions do
+        terms nil, :script_field => "_source.district.name + '_' + _source.district.id", :size => 10_000, :order => 'term'
+      end if location.size > 1
+
+      @tsearch.facet "communes", filter_facet_conditions do
+        terms nil, :script_field => "_source.commune.name + '_' + _source.virtual_commune_id", :size => 10_000, :order => 'term'
+      end if location.size > 2
+
+      @tsearch.facet "places", filter_facet_conditions do
+         terms nil, :script_field => "_source.place.name + '_' + _source.place.id", :size => 10_000, :order => 'term'
+      end if location.size > 3
+    elsif navfacet?('world')
+      @tsearch.facet "countires", filter_facet_conditions do
+        terms 'country', :size => 10_000, :order => 'term'
+      end
     end
-
-    @tsearch.facet "districts", filter_facet_conditions do
-      terms nil, :script_field => "_source.district.name + '_' + _source.district.id", :size => 10_000, :order => 'term'
-    end if location.size > 0
-
-    @tsearch.facet "communes", filter_facet_conditions do
-      terms nil, :script_field => "_source.commune.name + '_' + _source.virtual_commune_id", :size => 10_000, :order => 'term'
-    end if location.size > 1
-
-    @tsearch.facet "places", filter_facet_conditions do
-       terms nil, :script_field => "_source.place.name + '_' + _source.place.id", :size => 10_000, :order => 'term'
-    end if location.size > 2
   end
 
   def filter_facet_conditions *keys
-    terms = @conditions.except(*keys)
-    terms_cond = []
-    terms_cond = terms.map { |k, v| {"terms" => { k => v}} } if terms.present?
-    terms_cond << { 'or' => @range_conditions } if range_conditions?
+    terms_cond = array_conditions keys
+    return {} if terms_cond.blank?
+    {
+      'facet_filter' => {
+        'and' => terms_cond
+      }
+    }
+  end
+
+  def gloabl_filter_conditions name
+    terms_cond = array_conditions 'world', 'pl', 'voivodeship.id', 'district.id', 'commune.id', 'place.id', 'country'
+    terms_cond << { 'term' => { 'country' => 'pl'}}               if name == 'poland'
+    terms_cond << { 'not' => { 'term' => { 'country' => 'pl'}} }  if name == 'world'
     return {} if terms_cond.blank?
     {
       'facet_filter' => {
@@ -103,11 +118,27 @@ class Search
       r[t] = send(t) if send(t).present?
       r
     end
+    location_zip = location.first.to_s.include?('pl') ? ['navfacet', 'voivodeship.id', 'district.id', 'commune.id', 'place.id'] : ['navfacet', 'country']
     location_conditions = Hash[
-      ['voivodeship.id', 'district.id', 'commune.id', 'place.id'].zip(location)
-    ].inject({}) { |mem, (k, v)| mem[k] = v if v; mem }
+      location.zip(location_zip).map(&:reverse)
+    ]
     @conditions.merge! location_conditions
     @conditions
+  end
+
+  def navfacet? name
+    @conditions['navfacet'].try(:include?, name)
+  end
+
+  def array_conditions *keys
+    keys ||= []
+    terms = @conditions.except *(keys << 'navfacet')
+    terms_cond = []
+    terms_cond = terms.map { |k, v| {"terms" => { k => v}} }      if terms.present?
+    terms_cond << { 'or' => @range_conditions }                   if range_conditions?
+    terms_cond << { 'term' => { 'country' => 'pl'}}               if !keys.include?('pl')    and navfacet?('pl')
+    terms_cond << { 'not' => { 'term' => { 'country' => 'pl'}} }  if !keys.include?('world') and navfacet?('world')
+    terms_cond
   end
 
   def build_range_conditions
@@ -163,11 +194,13 @@ class Search
         end
       end if [instance.query, instance.place].any? &:present?
 
-      instance.conditions.each { |k, v| filter :terms, k => v }
+      filter 'and',instance.array_conditions if instance.array_conditions.present?
       filter 'or', instance.range_conditions if instance.range_conditions?
 
-      facet "overall", instance.filter_facet_conditions('voivodeship.id', 'district.id', 'commune.id', 'place.id') do
-        terms nil, :script_field => 1, :global => true
+      ['overall','world', 'poland'].each do |name|
+        facet name, instance.gloabl_filter_conditions(name) do
+          terms nil, :script_field => 1, :global => true
+        end
       end
 
       facet 'categories', instance.filter_facet_conditions('categories') do
