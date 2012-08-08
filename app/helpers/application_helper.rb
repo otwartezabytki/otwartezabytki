@@ -84,7 +84,7 @@ module ApplicationHelper
   end
 
   def link_to_facet obj, deep, &block
-    name, id  = location_array.first.to_s.include?('world') ? [I18n.t(obj['term'].upcase, :scope => 'countries'), obj['term']] : obj['term'].split('_')
+    name, id  = obj['term'].include?('_') ? obj['term'].split('_') : [I18n.t(obj['term'].upcase, :scope => 'countries'), obj['term']]
     selected  = location_array[deep] == id
     label     = "#{name} <span>#{obj['count']}</span>".html_safe
     cond      = search_params({:location => (location_array.first(deep) << id).join('-')})
