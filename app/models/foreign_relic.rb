@@ -1,0 +1,2 @@
+class ForeignRelic < Relic
+end

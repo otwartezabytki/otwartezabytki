@@ -31,8 +31,12 @@ module Tire
         end
       end
 
-      def overall_count
-        facets['overall']['total'].to_i rescue 0
+      def count name = nil
+        if name.present?
+          facets[name]['total'].to_i rescue 0
+        else
+          super
+        end
       end
     end
   end

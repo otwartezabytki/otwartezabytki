@@ -57,6 +57,11 @@ gem 'newrelic_rpm'
 gem 'rails_config', '0.2.5'
 gem 'dalli'
 gem 'will_cache'
+# roman letters converter
+gem 'arrabiata'
+gem 'rails-i18n'
+gem 'i18n-country-translations'
+gem 'i18n_country_select'
 
 # background jobs
 gem 'whenever', :require => false
@@ -89,6 +94,8 @@ end
 
 # assets javascript compiler
 gem 'therubyracer', :group => :production
+
+gem 'ffi-aspell', :require => 'ffi/aspell'
 
 group :test do
   # for defining tests

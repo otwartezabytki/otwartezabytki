@@ -48,21 +48,49 @@ default_spinner_opts =
   top: 88
   left: 180
 
+Search =
+  init: ->
+    $('body').on 'click', 'form.form-advance-search input[type=checkbox]', ->
+      $(this).parents('form:first').submit()
+
+    $('body').on 'change', 'form.form-advance-search select', ->
+      $(this).parents('form:first').submit()
+
+    $('body').on 'ajax:success', 'form.form-advance-search, nav.pagination, div.sidebar-nav, div.breadcrumb', (e, data) ->
+      Search.render(data)
+      # pushState
+      history.pushState { searchreload: true }, $(data).find('title').text(), '/relics?' + $('form.form-advance-search').serialize()
+  autocomplete: ->
+    # autocomplete
+    $input = $('input.autocomplete-q')
+    if $input.length > 0
+      $input.autocomplete(
+        html: true,
+        minLength: 2,
+        source: (request, callback) ->
+          $.getJSON "/relics/suggester", q: request.term, callback
+        select: (event, ui) ->
+          window.location = ui.item.path
+      )
+
+  render: (data) ->
+    ['form.form-advance-search', '#main div.sidebar-nav', '#relics'].map (el) ->
+      $(el).replaceWith $(data).find(el)
+    Search.autocomplete()
+
+# window
+window.onload = ->
+  window.onpopstate = (e) ->
+    location = history.location || document.location
+    if e.state?.searchreload or location.pathname.match(/\/?relics\/?$/)
+      $.get location, Search.render
 
 @documentLoaded = ->
 
 jQuery ->
-  # autocomplete
-  $input = $('input.search-query')
-  if $input.length > 0
-    $input.autocomplete(
-      html: true,
-      minLength: 2,
-      source: (request, callback) ->
-        $.getJSON "/relics/suggester", q1: request.term, callback
-      select: (event, ui) ->
-        window.location = ui.item.path
-    )
+  # search autoreload
+  Search.init()
+  Search.autocomplete()
 
   # highlight
   $highlightArea = $('div.search-results .relic')

@@ -146,7 +146,7 @@ a {
 }
 
 .form-search {
-  float: right;
+  float: left;
   margin: 13px 0 0 15px;
   -webkit-border-radius: 2px;
   border-radius: 2px;
@@ -225,7 +225,7 @@ a {
 #menu {
   .container {
     border-top: 1px solid #dcdcdc;
-    height: 60px;
+    // height: 60px;
   }
   nav {
     ul li {
@@ -1425,9 +1425,9 @@ p#adding-note {
 		padding-bottom: 25px;
 		letter-spacing: 1.5px;
 	}
-	
-	.left { 
-		width: 500px; 
+
+	.left {
+		width: 500px;
 		.numbers {
 			span { color: #285b26; }
 			span.a { color: #378733; }
@@ -1437,7 +1437,7 @@ p#adding-note {
 	.g {
 		.active { color: #4db848; }
 	}
-	
+
 
 	.r {
 		width: 430px;
@@ -1449,15 +1449,15 @@ p#adding-note {
 			text-align: right;
 		}
 	}
-	
+
 	.progress-bar {
 		height: 25px;
 		padding: 11px 30px;
-		
+
 		.bg { height: 25px; background: image-url('progress-bar-bg.png') top left repeat; }
 		.color { height: 25px;  background: image-url('progress-bar-color.png') top left repeat; }
 	}
-	
+
 	.info {
 		padding-top: 5px;
 		text-align: center;

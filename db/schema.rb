@@ -85,6 +85,13 @@ ActiveRecord::Schema.define(:version => 20120808151222) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "keyword_stats", :force => true do |t|
+    t.string   "identification"
+    t.integer  "count"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
   create_table "links", :force => true do |t|
     t.integer  "relic_id"
     t.integer  "user_id"
@@ -124,12 +131,12 @@ ActiveRecord::Schema.define(:version => 20120808151222) do
     t.string   "materail"
     t.string   "dating_of_obj"
     t.string   "street"
-    t.string   "register_number"
+    t.text     "register_number"
     t.string   "nid_id"
     t.float    "latitude"
     t.float    "longitude"
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
     t.string   "internal_id"
     t.string   "ancestry"
     t.text     "source"
@@ -147,6 +154,10 @@ ActiveRecord::Schema.define(:version => 20120808151222) do
     t.integer  "edit_count",      :default => 0
     t.text     "description"
     t.string   "tags"
+    t.string   "type",            :default => "Relic"
+    t.string   "country_code",    :default => "PL"
+    t.string   "fprovince"
+    t.string   "fplace"
   end
 
   add_index "relics", ["ancestry"], :name => "index_relics_on_ancestry"

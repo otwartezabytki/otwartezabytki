@@ -170,7 +170,7 @@ jQuery ->
 
     submit: (e, data) ->
       data.formData = { foo: "bar" }
-
+RAILS
     progressall: (e, data) ->
       progress = parseInt(data.loaded / data.total * 100, 10)
       $('.progressbar').progressbar("value", progress)

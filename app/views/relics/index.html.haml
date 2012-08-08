@@ -8,44 +8,36 @@
       %h1 2. Wybierz zabytek:
       %span.arrow
 
-    - if relics.incorrect_count.zero?
+    - if relics.total.zero?
       .search-no-results
         %p
           Nie ma do sprawdzenia żadnych zabytków
           %br
           pasujących do słowa
-          %strong „#{params[:q1]}”
-        %p
-          Chesz dodać zabytek, którego nie możesz znaleźć?
-          %br
-          Będzie to możliwe za miesiąc, w pełnej wersji serwisu.
-        %p
-          Możesz natomiast przejrzeć listę innych zabytków, które wymagają sprawdzenia:
-          %br
-          = random_search_suggestions
-    - elsif @pending.present?
+          %strong „#{tsearch.query}”
+        - if tsearch.suggestions.present?
+          %p
+            Czy chodziło ci może o:
+            - tsearch.suggestions.each do |s|
+              %strong= "#{s.identification},"
+
+    - elsif relics.present?
       %div.relic-header
-        %h2 Zabytki do sprawdzenia (#{relics.incorrect_count})
-        - if location_breadcrumbs.present?
-          %div.breadcrumb
-            %p Gdzie:
-            %ul
-              - c = location_breadcrumbs.size
-              - location_breadcrumbs.take(c-1).each do |l|
-                %li
-                  = link_to l[:label], l[:path]
-                  %span &#187;
-              %li= location_breadcrumbs.last[:label]
+        %h2 Zabytki (#{relics.total})
+        -# - if location_breadcrumbs.present?
+        -#   %div.breadcrumb
+        -#     %p Gdzie:
+        -#     %ul
+        -#       - c = location_breadcrumbs.size
+        -#       - location_breadcrumbs.take(c-1).each do |l|
+        -#         %li
+        -#           = link_to l[:label], l[:path], :remote => true
+        -#           %span &#187;
+        -#       %li= location_breadcrumbs.last[:label]
 
-      = render :partial => "relics", :locals => {:collection => @pending }
+      = render :partial => "relics", :locals => {:collection => relics }
 
-    - if @corrected.present?
-      %div.relic-header
-        %h2.changed Zabytki sprawdzone (#{relics.correct_count})
-
-      = render :partial => "relics", :locals => {:collection => @corrected }
-
-    = paginate relics
+    = paginate relics, :remote => true
 
     - unless relics.incorrect_count.zero?
       %p#adding-note

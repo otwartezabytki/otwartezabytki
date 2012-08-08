@@ -1,0 +1,19 @@
+.clearfix
+= semantic_form_for tsearch, :url => relics_path, :html => { :class => 'well form-advance-search' }, :method => :get, :remote => defined?(relics) do |f|
+  = f.input :q, :label => false, :placeholder => "co", :input_html => { :class => 'autocomplete-q'}
+  = f.input :place, :label => false, :placeholder => "gdzie", :input_html => { :class => 'autocomplete-place'}
+
+  = f.input :from,  :label => false, :placeholder => "od"
+  = f.input :to,    :label => false, :placeholder => "do"
+
+  - if defined?(relics)
+    = f.input :categories, :as => :check_boxes, :collection => categoires_facets, :disabled => disabled(f.object, 'categories'), :label => 'Kategorie'
+    = f.input :state,      :as => :check_boxes, :collection => state_facets,      :disabled => disabled(f.object, 'state')
+    = f.input :existance,  :as => :check_boxes, :collection => existance_facets,  :disabled => disabled(f.object, 'existance')
+    = f.input :location,   :as => :hidden, :input_html => { :value => f.object.location.join('-') }
+    = f.input :has_photos,  :as => :check_boxes, :collection => has_photos_facets,  :disabled => disabled(f.object, 'has_photos')
+    = f.input :has_description,  :as => :check_boxes, :collection => has_description_facets,  :disabled => disabled(f.object, 'has_description')
+
+    = f.input :order, :as => :select, :collection => order_collection, :include_blank => false, :selected => f.object.order
+
+  = f.action :submit, :label => 'Szukaj', :button_html => { :name => nil }

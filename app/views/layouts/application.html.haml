@@ -4,7 +4,7 @@
     %meta(charset="utf-8")
     %meta(name="viewport" content="width=device-width, initial-scale=1.0")
     %title= content_for?(:title) ? yield(:title) : "Otwarte Zabytki"
-    %link(rel="shortcut icon" href="/favicon.gif")
+    = favicon_link_tag  "favicon.gif", :type => 'image/gif'
     %meta(property="og:title" content="Otwarte Zabytki")
     %meta(property="og:description" content="Społecznościowa akcja tworzenia bazy zabytków. Dołącz!")
     %meta(property="og:image" content="#{root_url[0..-2]}#{image_path('logo-facebook.jpg')}")
@@ -20,6 +20,7 @@
       <meta property="og:title" content="Otwarte Zabytki" />
       <meta property="og:description" content="Uzupełnij z nami bazę zabytków i pomóż stworzyć serwis. Skorzystaj z własnej wiedzy. Poszukaj informacji w książkach lub w internecie. To naprawdę proste." />
       <meta property="og:image" content="http://otwartezabytki.pl/assets/face-share-logo.png" />
+
   %body{ :class => cookies["font-size"].to_s + " " + controller_name + " " + action_name + (params[:id] ? " resource_#{params[:id]}" : "") }
     .page
       #root
@@ -60,13 +61,11 @@
                   = link_to "Kontakt", page_pl_path('kontakt'), :class => "contact  #{current_page?(strony_kontakt_path) ? "current" : ""}"
                 %li
                   = link_to "Pobierz dane", page_pl_path('pobierz-dane'), :class => "download #{current_page?(download_path) ? "current" : ""}"
-
-            = simple_form_for Relic.new, :url => relics_path, :html => { :class => 'well form-search'},:method => :get do |f|
-              = f.input :q1, :label => false, :input_html => {:name => 'q1', :value => params[:q1], :class => "search-query"}, :placeholder => "wpisz, czego szukasz"
-              = f.button :submit, 'Szukaj »', :name => nil
             .text
               %span.plus
               %span.minus
+
+            = render 'shared/search'
         %section#main
           .container
             - if flash[:error] || flash[:notice]
