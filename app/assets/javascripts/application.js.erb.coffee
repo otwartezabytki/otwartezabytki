@@ -41,7 +41,7 @@ Search =
     $('body').on 'change', 'form.form-advance-search select', ->
       $(this).parents('form:first').submit()
 
-    $('body').on 'ajax:success', 'form.form-advance-search, nav.pagination, div.sidebar-nav, div.breadcrumb', (e, data) ->
+    $('body').on 'ajax:success', 'form.form-advance-search, div.sidebar-nav, #relics', (e, data) ->
       Search.render(data)
       # pushState
       history.pushState { searchreload: true }, $(data).find('title').text(), '/relics?' + $('form.form-advance-search').serialize()
