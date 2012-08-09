@@ -181,31 +181,6 @@ class Relic < ActiveRecord::Base
       index.import Relic.roots.select('DISTINCT identification, *').limit(100).map(&:sample_json)
       index.refresh
     end
-
-    def analyze_query q
-      analyzed = Relic.index.analyze q
-      return '*' if !analyzed or (analyzed and analyzed['tokens'].blank?)
-      analyzed['tokens'].group_by{|i| i['position']}.inject([]) do |s1, (k, v)|
-        s1 << v.inject([]) {|s2, t| s2 << "#{t['token']}*"; s2}.join(' OR ')
-        s1
-      end.join(' ')
-    end
-
-    def next_for(user, search_params)
-      params = (search_params || {}).merge(:per_page => 1, :seen_relic_ids => user.seen_relic_ids, :corrected_relic_ids => user.corrected_relic_ids)
-      self.search(params).first || self.first(:offset => rand(self.count))
-    end
-
-    def next_random_in(conditions)
-      self.where(conditions).first(:offset => rand(self.where(conditions).count))
-    end
-
-    def next_few_for(user, search_params, count)
-      params = (search_params || {}).merge(:per_page => count, :corrected_relic_ids => user.corrected_relic_ids)
-      res = self.search(params).take(count)
-      res.empty? ? self.where(:offset => rand(self.count)).limit(count) : res
-    end
-
   end
 
   def sample_json
@@ -312,11 +287,6 @@ class Relic < ActiveRecord::Base
   end
 
   def update_relic_index
-    # always update root document
-    root.tire.update_index
-  end
-
-  def create_relic_index
     # always update root document
     root.tire.update_index
   end
