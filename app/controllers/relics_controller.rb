@@ -46,26 +46,6 @@ class RelicsController < ApplicationController
     end
   end
 
-  def suggester
-    results = KeywordStat.search params[:q]
-    suggestions = KeywordStat.search(KeywordStat.spellcheck(params[:q])) if results.blank?
-
-    json = []
-    collection = []
-    collection = results if results.present?
-    collection = suggestions if suggestions.present?
-
-    collection.each_with_index do |r, i|
-      label = (results.blank? and i.zero?) ? "Czy chodziło ci o: #{r.identification}" : "#{r.identification}"
-      json << {
-        :label => label,
-        :value => r.identification,
-        :path  => relics_path(:search => {:q => r.identification})
-      }
-    end
-    render :json => json
-  end
-
   def download
     file_path = Rails.root.join('public', 'system', 'relics_history.csv')
 

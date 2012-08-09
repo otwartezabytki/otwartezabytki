@@ -56,9 +56,9 @@ Search =
         html: true,
         minLength: 2,
         source: (request, callback) ->
-          $.getJSON "/relics/suggester", q: request.term, callback
+          $.getJSON "/suggester/query", q: request.term, callback
         select: (event, ui) ->
-          window.location = ui.item.path
+          $('form.form-advance-search').submit( )
       )
 
   highlight: ->
