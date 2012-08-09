@@ -45,6 +45,9 @@ Search =
       Search.render(data)
       # pushState
       history.pushState { searchreload: true }, $(data).find('title').text(), '/relics?' + $('form.form-advance-search').serialize()
+    Search.autocomplete()
+    Search.highlight()
+
   autocomplete: ->
     # autocomplete
     $input = $('input.autocomplete-q')
@@ -58,10 +61,22 @@ Search =
           window.location = ui.item.path
       )
 
-  render: (data) ->
+  highlight: ->
+    # highlight
+    $highlightArea = $('div.search-results .relic')
+    if $highlightArea.length > 0 and gon.highlightedTags
+      for tag in gon.highlightedTags
+        $highlightArea.highlight(tag)
+
+  render: (data) =>
+    # gon script hack
+    try
+      gonScript = data.match(/<script>(.*window\.gon.*?)<\/script>/)[1]
+      jQuery.globalEval gonScript
     ['form.form-advance-search', '#main div.sidebar-nav', '#relics'].map (el) ->
       $(el).replaceWith $(data).find(el)
     Search.autocomplete()
+    Search.highlight()
 
 # window
 window.onload = ->
@@ -75,13 +90,6 @@ window.onload = ->
 jQuery ->
   # search autoreload
   Search.init()
-  Search.autocomplete()
-
-  # highlight
-  $highlightArea = $('div.search-results .relic')
-  if $highlightArea.length > 0 and gon.highlightedTags
-    for tag in gon.highlightedTags
-      $highlightArea.highlight(tag)
 
   # font resize
   toggleFontResizeButtons = () ->
