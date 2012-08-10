@@ -30,6 +30,7 @@
     font-weight: 600;
     &.news{
       text-align: center;
+      margin: 40px 0;
     }
     &.newsletter{
       box-shadow: 0 0 3px 0 rgba(0,0,0,.3);
@@ -74,5 +75,13 @@
   h2 {
     margin: 30px 0 20px;
     font-size: 25px;
+  }
+  .about_top{
+    margin-bottom: 0;
+    font-size: 28px;
+  }
+  .content_more_about{
+    margin-top: 0;
+    font-weight: normal;
   }
 }
