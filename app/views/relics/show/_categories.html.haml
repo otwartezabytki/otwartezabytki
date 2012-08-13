@@ -1,0 +1,22 @@
+%section.show.general
+  %h2 Sekcje
+  - if relic.categories.length > 0 || relic.tags.length > 0
+    .categories
+      %strong Kategorie:
+      - if relic.categories.length > 0
+        %span.content= relic.categories.map{ |c| Category.all[c] }.join(', ')
+      - else
+        %span.placeholder
+          = link_to "nie dodano, uzupełnij »", edit_section_relic_path(relic.id, :categories)
+    .tags
+      %strong Tagi:
+      - if relic.tags.length > 0
+        %span.content= relic.tags.join(', ')
+      - else
+        %span.placeholder
+          = link_to "nie dodano, uzupełnij »", edit_section_relic_path(relic.id, :categories)
+  - else
+    .placeholder
+      %p Zabytek nie został jeszcze skategoryzowany.
+      %p Zrób to Ty!
+      = link_to "dodaj kategorie", edit_section_relic_path(relic.id, :categories), :"data-ajax" => true
