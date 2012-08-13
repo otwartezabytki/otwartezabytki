@@ -7,9 +7,11 @@
  *= require ./profile/general
  *= require ./profile/links
  *= require ./profile/location
- *= require ./profile/main
  *= require ./profile/photos
 */
+
+@import "compass/layout";
+@import "compass/css3";
 
 .relics.show .container {
   section {
@@ -55,10 +57,6 @@
     .column-third {
       width: 140px;
     }
-
-    select, input[type="text"] {
-      width: 510px;
-    }
   }
 
   section.general.show {
@@ -67,9 +65,6 @@
   }
 
   section.location {
-    #map_canvas {
-      border: 10px solid #fff;
-    }
 
     .input {
       margin: 2px 0 0;
@@ -114,17 +109,18 @@
 
     .marker-helper {
       background-color: white;
-      padding: 40px 10px 10px;
+      padding: 0;
 
       h4 {
         text-align: center;
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 700;
         line-height: 20px;
+        color: #313132;
       }
 
       .marker-holder {
-        background: asset-data-url('marker-helper.png') center center no-repeat;
+        background: asset-data-url('marker-helper-118.png') center center no-repeat;
         margin: 20px auto;
         width: 118px;
         height: 118px;
@@ -146,11 +142,7 @@
     }
 
     .column-left {
-      width: 180px;
       position: relative;
-      input[type="text"], select {
-        width: 160px;
-      }
     }
   }
 
@@ -306,4 +298,192 @@ section.show.photos {
 
 span.block {
   display: block;
+}
+
+.edit_relic{
+  background: asset-data-url("profile-edit-bg.png") repeat-y;
+  display: inline-block;
+  h1, h2{
+    font-weight: 600;
+    font-size: 16px;
+    color: #fff;
+    height: 45px;
+    line-height: 45px;
+  }
+  h1{
+    @include background(linear-gradient(#36596b, #2f5163));
+    padding: 0 12px;
+  }
+  h2{
+    @include background(linear-gradient(#4b6d7e, #436576));
+    padding: 0 20px;
+  }
+  nav{
+    width: 213px;
+    ul{
+      li{ 
+        span{
+          background: #fff asset-data-url("profile-edit-nav-icons.png") no-repeat;
+          font-size: 13px;
+          padding: 0 10px 0 34px;
+          color: #343434;
+          height: 34px;
+          line-height: 34px;
+          border-bottom: 1px solid #c3c3c3;
+          display: block;
+        }
+        a{
+          padding: 0 10px 0 34px;
+          display: block;
+          border-bottom: 1px solid #c3c3c3;
+          color: #47697b;
+          text-shadow: 0 1px 1px #fff;
+          background: asset-data-url("profile-edit-nav-icons.png") no-repeat;
+          span{
+            padding: 0;
+            background: none;
+            border: 0;
+            color: #47697b;
+          }
+        }
+        &.general{
+          span{
+            background-position: 9px -293px;
+          }
+          a{
+            background-position: 9px 10px;
+          }  
+        }
+        &.location{
+          span{
+            background-position: 9px -327px;
+          }
+          a{
+            background-position: 9px -24px;
+          }  
+        }
+        &.events{
+          span{
+            background-position: 9px -363px;
+          }
+          a{
+            background-position: 9px -59px;
+          }  
+        }
+        &.entries{
+          span{
+            background-position: 9px -466px;
+          }
+          a{
+            background-position: 9px -161px;
+          }  
+        }
+        &.links{
+          span{
+            background-position: 9px -499px;
+          }
+          a{
+            background-position: 9px -195px;
+          }  
+        }
+        &.documents{
+          span{
+            background-position: 9px -532px;
+          }
+          a{
+            background-position: 9px -229px;
+          }  
+        }
+        &.categories{
+          span{
+            background-position: 9px -429px;
+          }
+          a{
+            background-position: 9px -127px;
+          }  
+        }
+        &.description{
+          span{
+            background-position: 9px -394px;
+          }
+          a{
+            background-position: 9px -92px;
+          }  
+        }
+        &.photos{
+          span{
+            background-position: 9px -565px;
+          }
+          a{
+            background-position: 9px -262px;
+          }  
+        }
+      }
+    }
+  }
+}
+
+section.edit{
+  width: 741px;
+  form{
+    padding: 15px 20px;
+    label{
+      font-weight: 700;
+      font-size: 14px;
+      color: #313132;
+      display: block;
+    }
+    p.description{
+      line-height: 20px;
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+    span.block{
+      font-size: 12px;
+      color: #505057;
+      background: #f1f3f5 asset-data-url("icon-hint.png") 9px 50% no-repeat;
+      padding: 6px 30px;
+      line-height: 16px;
+      margin-top: 10px;
+    }
+    .input input{
+      display: block;
+      border: 1px solid #646464;
+      @include box-shadow(0 1px 1px 0 rgba(0,0,0,.1), inset 0 1px 3px 0 rgba(0,0,0,.3));
+      @include border-radius(2px);
+      height: 34px;
+      padding: 0 10px;
+      font-size: 14px;
+      color: #313132;
+      font-weight: 600;
+      width: 680px;
+      margin: 10px 0;
+    }
+    .actions{
+      border-top: 1px solid #e5e5e5;
+      padding-top: 20px;
+      margin-top: 10px;
+      color: #878787;
+      font-style: italic;
+      font-size: 12px;
+      a{
+        color: #d50000;
+        font-style: normal;
+      }
+      input[type="submit"]{
+        @include background(linear-gradient(#48b119, #2f9900));
+        @include border-radius(2px);
+        color: #fff;
+        font-size: 12px;
+        text-shadow: 0 1px 0 rgba(0,0,0,.5);
+        border: 0;
+        height: 30px;
+        padding: 0 12px;
+        cursor: pointer;
+        &:hover{
+          background: #34a900;
+        }
+      }
+    }
+  }
 }
