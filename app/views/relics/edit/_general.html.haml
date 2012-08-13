@@ -14,23 +14,6 @@
           W przypadku popełnienia błędu kliknij „Edytuj ponownie” i edytuj ponownie.
 
     = f.input :identification, :as => :string
-    = f.input :tags, :input_html => { :value => relic.tags.join(','), :style => "width: 510px", :multiple => true }
-    .select
-      %label Kategorie
-      .input
-        .column.column-first
-          = f.input :categories, :as => :check_boxes,
-            :collection => Category.first_column.invert, :label => "",
-            :input_html => { :multiple => true }
-        .column.column-second
-          = f.input :categories, :as => :check_boxes,
-            :collection => Category.second_column.invert, :label => "",
-            :input_html => { :multiple => true }
-        .column.column-third
-          = f.input :categories, :as => :check_boxes,
-            :collection => Category.third_column.invert, :label => "",
-            :input_html => { :multiple => true }
-
     = f.submit 'zapisz zmiany'
     lub
     = link_to "anuluj", relic_path(relic.id)

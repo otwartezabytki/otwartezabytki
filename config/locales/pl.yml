@@ -272,3 +272,7 @@ pl:
     status:
       checked_but_not_filled: "Sprawdzony, ale nieuzupełniony"
 
+  formtastic:
+    hints:
+      relic:
+        identification: "Lorem ipsum dolor sit amet"
