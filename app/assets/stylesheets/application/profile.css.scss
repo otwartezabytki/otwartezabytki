@@ -1,3 +1,16 @@
+/*
+ *= require_self
+ *= require ./profile/description
+ *= require ./profile/documents
+ *= require ./profile/entries
+ *= require ./profile/events
+ *= require ./profile/general
+ *= require ./profile/links
+ *= require ./profile/location
+ *= require ./profile/main
+ *= require ./profile/photos
+*/
+
 .relics.show .container {
   section {
     padding: 10px;
@@ -15,7 +28,6 @@
 
   > nav, > section {
     float: left;
-    padding: 0 10px;
   }
 
   > nav {
@@ -25,21 +37,7 @@
   > section {
     width: 720px;
   }
-
-
-  h1 {
-    font-size: 20px;
-    font-weight: bold;
-    line-height: 42px;
-    width: 100%;
-  }
-
-  h2 {
-    font-size: 20px;
-    line-height: 42px;
-    width: 100%;
-  }
-
+  
   section.general.edit {
     .column {
       display: inline-block;
@@ -180,7 +178,6 @@
     }
     &.active {
       padding: 0;
-      margin: 0px -25px 0 -25px;
       .help {
         display: none;
       }
@@ -306,3 +303,5 @@ section.show.photos {
     }
   }
 }
+
+

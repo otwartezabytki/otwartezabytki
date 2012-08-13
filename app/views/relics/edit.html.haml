@@ -2,13 +2,13 @@
   %nav
     %h1 Edycja zabytku
     %ul
-      %li= link_to_unless_current 'Podstawowe informacje', edit_section_relic_path(relic.id, :general)
-      %li= link_to_unless_current 'Lokalizacja', edit_section_relic_path(relic.id, :location)
-      %li= link_to_unless_current 'Oś czasu', edit_section_relic_path(relic.id, :events)
-      %li= link_to_unless_current 'Społeczność', edit_section_relic_path(relic.id, :entries)
-      %li= link_to_unless_current 'Linki, źródła, powiązania', edit_section_relic_path(relic.id, :links)
-      %li= link_to_unless_current 'Dokumenty urzędowe', edit_section_relic_path(relic.id, :documents)
-      %li= link_to_unless_current 'Opis', edit_section_relic_path(relic.id, :description)
-      %li= link_to_unless_current 'Zdjęcia', edit_section_relic_path(relic.id, :photos)
+      %li.general= link_to_unless_current '<span>Podstawowe informacje</span>'.html_safe, edit_section_relic_path(relic.id, :general)
+      %li.location= link_to_unless_current '<span>Lokalizacja</span>'.html_safe, edit_section_relic_path(relic.id, :location)
+      %li.events= link_to_unless_current '<span>Oś czasu</span>'.html_safe, edit_section_relic_path(relic.id, :events)
+      %li.entries= link_to_unless_current '<span>Społeczność</span>'.html_safe, edit_section_relic_path(relic.id, :entries)
+      %li.links= link_to_unless_current '<span>Linki, źródła, powiązania</span>'.html_safe, edit_section_relic_path(relic.id, :links)
+      %li.documents= link_to_unless_current '<span>Dokumenty urzędowe</span>'.html_safe, edit_section_relic_path(relic.id, :documents)
+      %li.description= link_to_unless_current '<span>Opis</span>'.html_safe, edit_section_relic_path(relic.id, :description)
+      %li.photos= link_to_unless_current '<span>Zdjęcia</span>'.html_safe, edit_section_relic_path(relic.id, :photos)
   - if params[:section].present?
     = render :partial => "relics/edit/#{params[:section]}"
