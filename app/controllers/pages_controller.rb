@@ -9,21 +9,10 @@ class PagesController < ApplicationController
   end
 
   protected
-<<<<<<< HEAD
     def layout_for_page
       case params[:id]
         when 'share_close' then nil
         else 'application'
       end
-=======
-  def layout_for_page
-    case params[:id]
-      when 'share_close'
-        nil
-      when 'under_construction'
-        'under_construction'
-      else
-        'application'
->>>>>>> add under construction site
     end
 end
