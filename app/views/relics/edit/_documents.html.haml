@@ -1,0 +1,57 @@
+%section.edit.documents
+  %h2 Dokumenty
+  = semantic_form_for relic, :url => section_relic_path(relic.id, :section => :documents), :html => { :multipart => true }, :remote => true  do |f|
+    .help-content.active
+      .help Pomoc
+      .help-extended
+        %span.close Zamknij pomoc
+        %p
+          Sprawdź, czy nazwa zabytku jest poprawna (np. jeśli zaczyna się od małej litery, popraw ją na wielką).
+          Jeśli chcesz ją poprawić, kliknij „Zmień”. Pojawi się pole, w którym można poprawić nazwę.
+          Następnie naciśnij „Zapisz”, aby zachować poprawioną nazwę. Jeśli jest poprawna, kliknij „Potwierdź”.
+
+    - relic.documents.each do |document|
+      - if document.user_id == current_user.id
+        = f.semantic_fields_for :documents, document do |f2|
+          .document
+            .column-left
+              .preview{ :class => document.mime_class }
+              - if document.user_id == current_user.id
+                = link_to 'Usuń plik', relic_document_path(relic.id, document.id),
+                  :method => :delete,
+                  :remote => true,
+                  :confirm => "Czy aby na pewno?",
+                  :class => "remove_document"
+            .column-right
+              = f2.input :name, :input_html => { :class => "name" }
+              = f2.input :description, :input_html => { :class => "description" }
+      - else
+        .document
+          .column-left
+            .preview
+              = image_tag document.midi.url
+          .column-right
+            %label= t 'activerecord.attributes.document.name'
+            %p= document.name
+            %label= t 'activerecord.attributes.document.description'
+            %p= document.description
+
+    .document.hidden
+      .column-left
+        .preview.preview-placeholder
+
+      .column-right
+        %p
+          %strong Trwa wgrywanie, proszę czekać...
+          = link_to 'anuluj', '#', :class => "cancel_upload"
+        %p
+          .progressbar
+            .value 0%
+
+    = file_field_tag "document[file]", :class => 'document_upload', :"data-url" => "#{relic_documents_path(relic.id)}"
+
+    = f.input :documents_info
+
+    = f.submit 'Zapisz zmiany'
+    lub
+    = link_to "anuluj", relic_path(relic.id)

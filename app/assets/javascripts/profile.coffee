@@ -204,18 +204,14 @@ jQuery.initializer 'section.edit.photos', ->
     photo_xhr.abort() if photo_xhr?
 
   $remove_photo.click ->
-    return false unless confirm('Czy aby na pewno?')
-    $(this).parents('.photo:first').find('input[name*="_destroy"]').val(true)
-    $(this).parents('form:first').submit()
-    false
+    $(this).parents('.photo:first').find('input[type="text"]').each ->
+      $.cookie($(this).attr('id'), '')
 
   $form.submit ->
     if $section.find('#relic_license_agreement:checked').length == 0
       confirm('Ponieważ nie posiadasz praw do publikowania tych zdjęć, zostaną one usunięte. Kontynuować?')
     else
       true
-
-
 
   $section.on 'keyup', 'input.author', ->
     $input = $(this)
@@ -237,4 +233,62 @@ jQuery.initializer 'section.edit.photos', ->
     $.cookie($(this).attr('id'), $(this).val())
 
   $section.find('input.date_taken, input.author').each ->
+    $(this).val($.cookie($(this).attr('id'))) if $(this).val().length == 0 && $.cookie($(this).attr('id'))
+
+
+jQuery.initializer 'section.edit.documents', ->
+  $section = $(this)
+  $preview_placeholder = $section.find('.preview-placeholder')
+  $progressbar = $section.find('.progressbar')
+  $document_hidden = $section.find('.document.hidden')
+  $document_upload = $section.find(".document_upload")
+  $form = $section.find('form.relic')
+  $cancel_upload = $section.find('.cancel_upload')
+  $remove_document = $section.find('.remove_document')
+
+  upload_spinner_opts = {
+    lines: 8, length: 0, width: 6, radius: 10, rotate: 0, color: '#555', speed: 0.8, trail: 55,
+    shadow: false, hwaccel: false, className: 'spinner', zIndex: 2e9, top: 46, left: 46
+  }
+
+  if $preview_placeholder.length
+    spinner = new Spinner(upload_spinner_opts).spin($preview_placeholder[0])
+
+  $progressbar.progressbar
+    value: 0,
+    change: (e) ->
+      $(e.target).find('.value').text($progressbar.progressbar("value") + "%")
+
+  document_xhr = $(".document_upload").fileupload
+    type: "POST"
+    dataType: "html"
+
+    add: (e, data) ->
+      $document_hidden.removeClass('hidden')
+      $document_upload.hide()
+      data.submit()
+
+    submit: (e, data) ->
+      data.formData = {}
+
+    progressall: (e, data) ->
+      progress = parseInt(data.loaded / data.total * 100, 10)
+      $progressbar.progressbar("value", progress)
+
+    done: (e, data) ->
+      $new_section = $(data.result).find('section.edit')
+      $section.replaceWith($new_section)
+      $new_section.initialize()
+
+  $cancel_upload.click ->
+    document_xhr.abort() if document_xhr?
+
+  $remove_document.click ->
+    $(this).parents('.document:first').find('input[type="text"]').each ->
+      $.cookie($(this).attr('id'), '')
+
+  $section.on 'change', 'input.name, input.description', ->
+    $.cookie($(this).attr('id'), $(this).val())
+
+  $section.find('input.name, input.description').each ->
     $(this).val($.cookie($(this).attr('id'))) if $(this).val().length == 0 && $.cookie($(this).attr('id'))

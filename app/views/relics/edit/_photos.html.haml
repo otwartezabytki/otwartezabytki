@@ -18,7 +18,11 @@
               .preview
                 = image_tag photo.file.midi.url
               - if photo.user_id == current_user.id
-                = link_to 'usuń zdjęcie', relic_photo_path(relic.id, photo.id), :method => :delete, :remote => true
+                = link_to 'usuń zdjęcie', relic_photo_path(relic.id, photo.id),
+                  :method => :delete,
+                  :remote => true,
+                  :confirm => "Czy aby na pewno?",
+                  :class => "remove_photo"
             .column-right
               = f2.input :author, :input_html => { :class => "author" }
               = f2.input :date_taken, :input_html => { :class => "date_taken" }

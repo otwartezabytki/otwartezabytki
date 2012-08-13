@@ -41,6 +41,9 @@ class RelicsController < ApplicationController
     updated_nested_resources(:photos).each do |photo|
       authorize! :update, photo
     end
+    updated_nested_resources(:documents).each do |photo|
+      authorize! :document, photo
+    end
 
     if params[:section] == 'photos' && relic.license_agreement != "1"
       relic.photos.where(:user_id => current_user.id).destroy_all

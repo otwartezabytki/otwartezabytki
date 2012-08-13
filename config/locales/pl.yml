@@ -64,7 +64,7 @@ pl:
   date:
     formats:
       default: "%d.%m.%Y"
-      short: "%d %b"
+      short: "%e %b %Y"
       long: "%d %B %Y"
       verbose: "%A, %d %B %Y"
 
@@ -206,6 +206,7 @@ pl:
         national_number: "NID"
         categories: "Kategorie"
         tags: "Tagi"
+        documents_info: "Gdzie szukać?"
       user:
         email: Adres e-mail
         password: Hasło
@@ -216,6 +217,9 @@ pl:
       photo:
         author: "Dane autora (imię, nazwisko)"
         date_taken: "Data wykonania"
+      document:
+        name: Nazwa
+        description: Krótki opis
     models:
       relic:
         zero:  Zabytek
@@ -275,4 +279,11 @@ pl:
   formtastic:
     hints:
       relic:
-        identification: "Lorem ipsum dolor sit amet"
+        identification: Lorem ipsum dolor sit amet
+        documents_info: Lorem ipsum dolor sit amet
+      document:
+        name: Lorem ipsum dolor sit amet
+        description: Lorem ipsum dolor sit amet
+      photo:
+        author: Lorem ipsum dolor sit amet
+        date_taken: Lorem ipsum dolor sit amet
