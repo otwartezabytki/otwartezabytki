@@ -6,7 +6,7 @@
   = f.input :from,  :label => false, :placeholder => "od"
   = f.input :to,    :label => false, :placeholder => "do"
 
-  - if defined?(relics)
+  - if defined?(relics) && action_name == 'index'
     = f.input :categories, :as => :check_boxes, :collection => categoires_facets, :disabled => disabled(f.object, 'categories'), :label => 'Kategorie'
     = f.input :state,      :as => :check_boxes, :collection => state_facets,      :disabled => disabled(f.object, 'state')
     = f.input :existance,  :as => :check_boxes, :collection => existance_facets,  :disabled => disabled(f.object, 'existance')

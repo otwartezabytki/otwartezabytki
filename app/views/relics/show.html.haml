@@ -1,45 +1,12 @@
+.row
+  = render :partial => "relics/show/photos"
+  = render :partial => "relics/show/general"
 
-= render :partial => "relics/show/general"
-= render :partial => "relics/show/description"
+.row
+  .column
+    = render :partial => "relics/show/description"
+    = render :partial => "relics/show/entries"
 
-%section.photos
-  %h2 Zdjęcia
-  = link_to "galeria (#{relic.photos.count})", show_gallery_relic_path(relic.id)
-  .content
-    - relic.photos.each do |photo|
-      = link_to image_tag(photo.file.thumb.url, :alt => "zdjęcie zabytku dodane przez #{photo.author}"), show_gallery_relic_path(relic.id, photo.id)
-
-%section.entries
-  %h2 Społeczność
-  - relic.entries.each do |entry|
-    %article.entry
-      %h3= entry.title
-      .content= entry.body
-      .footer
-        = gravatar_image_tag(entry.user.email, :alt => "")
-        %span.username= entry.user.username
-        ,
-        %span.created_at= l(entry.created_at, :format => :verbose)
-
-  %strong Tagi:
-  %span.tags_content= relic.tags.join(', ')
-
-%section.links
-  %h2 Linki, źródła, powiązania
-
-%section.events
-  %h2 Oś czasu
-
-%section.documents
-  %h2 Dokumenty urzędowe
-
-- content_for :footer_javascripts do
-  != javascript_include_tag "profile"
-
-  :javascript
-    function loadGoogleMaps() {
-      var script = document.createElement("script");
-      script.type = "text/javascript";
-      script.src = "http://maps.googleapis.com/maps/api/js?key=#{Settings.oz.gm_key}&sensor=false&callback=google_maps_loaded";
-      document.body.appendChild(script);
-    }
+  .column
+    = render :partial => "relics/show/events"
+    = render :partial => "relics/show/documents"

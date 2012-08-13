@@ -1,6 +1,6 @@
-%section.photos
-  %h2 Podstawowe informacje
-  = semantic_form_for relic, :url => relic_path(relic.id, :section => :photos), :html => { :multipart => true }  do |f|
+%section.edit.photos
+  %h2 Zdjęcia
+  = semantic_form_for relic, :url => section_relic_path(relic.id, :section => :photos), :html => { :multipart => true }, :remote => true  do |f|
     .help-content.active
       .help Pomoc
       .help-extended
@@ -10,25 +10,40 @@
           Jeśli chcesz ją poprawić, kliknij „Zmień”. Pojawi się pole, w którym można poprawić nazwę.
           Następnie naciśnij „Zapisz”, aby zachować poprawioną nazwę. Jeśli jest poprawna, kliknij „Potwierdź”.
 
-    = f.semantic_fields_for :photos do |f2|
-      - if f2.object.new_record?
-        .photo.hidden
-          .preview.preview-placeholder
-          .photo-content
-            %p
-              %strong Trwa wgrywanie, proszę czekać...
-              = link_to 'anuluj', '#', :class => "cancel_upload"
-            %p
-              .progressbar
-                .value 0%
+    - relic.photos.each do |photo|
+      - if photo.user_id == current_user.id
+        = f.semantic_fields_for :photos, photo do |f2|
+          .photo
+            .column-left
+              .preview
+                = image_tag photo.file.midi.url
+              - if photo.user_id == current_user.id
+                = link_to 'usuń zdjęcie', relic_photo_path(relic.id, photo.id), :method => :delete, :remote => true
+            .column-right
+              = f2.input :author, :input_html => { :class => "author" }
+              = f2.input :date_taken, :input_html => { :class => "date_taken" }
       - else
         .photo
-          .preview= image_tag f2.object.file.thumb.url
-          .photo-content
-            = f2.input :author
-            - if f2.object.user_id == current_user.id
-              = f2.hidden_field :_destroy
-              = link_to 'usuń zdjęcie', '#', :class => "remove_photo"
+          .column-left
+            .preview
+              = image_tag photo.midi.url
+          .column-right
+            %label= t 'activerecord.attributes.photo.author'
+            %p= photo.author
+            %label= t 'activerecord.attributes.photo.date_taken'
+            %p= photo.date_taken
+
+    .photo.hidden
+      .column-left
+        .preview.preview-placeholder
+
+      .column-right
+        %p
+          %strong Trwa wgrywanie, proszę czekać...
+          = link_to 'anuluj', '#', :class => "cancel_upload"
+        %p
+          .progressbar
+            .value 0%
 
     = file_field_tag "photo[file]", :class => 'photo_upload', :"data-url" => "#{relic_photos_path(relic.id)}"
 

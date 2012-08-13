@@ -1,0 +1,11 @@
+%section.show.entries
+  %h2 Społeczność
+  - relic.entries.each do |entry|
+    %article.entry
+      %h3= entry.title
+      .content= entry.body
+      .footer
+        = gravatar_image_tag(entry.user.email, :alt => "")
+        %span.username= entry.user.username
+        ,
+        %span.created_at= l(entry.created_at, :format => :verbose)

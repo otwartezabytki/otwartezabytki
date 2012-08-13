@@ -14,6 +14,9 @@ Otwartezabytki::Application.routes.draw do
   resources :tags, :only => :index
 
   resources :relics, :only => [:edit, :update, :index, :show, :edit, :update] do
+    resources :photos
+    resources :documents
+
     collection do
       get :suggester
     end
@@ -22,13 +25,10 @@ Otwartezabytki::Application.routes.draw do
       get :corrected
       get :thank_you
       get :gonext
-      match 'gallery(/:photo_id)', :to => 'relics#gallery', :as => 'show_gallery'
-      match 'edit/:section', :to => 'relics#edit', :as => 'edit_section'
-      match 'show/:section', :to => 'relics#show', :as => 'show_section'
+      match 'section/:section/edit', :to => 'relics#edit', :as => 'edit_section'
+      match 'section/:section', :to => 'relics#show', :as => 'section', :via => :get
+      match 'section/:section', :to => 'relics#update', :as => 'section', :via => :put
     end
-
-    resources :photos
-    resources :documents
   end
 
   resources :tags, :only => [:create]

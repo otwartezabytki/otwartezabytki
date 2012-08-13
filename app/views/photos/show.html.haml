@@ -1,0 +1,26 @@
+%section.show.photo
+  %h2 Galeria (#{tree_photos.count})
+  .content
+    .photo_content(data-replace="section.show.photo .photo_content")
+      - if tree_photos.one_before(photo.id).present?
+        = link_to "«", relic_photo_path(relic.id, tree_photos.one_before(photo.id)), :remote => true
+
+      .full-photo= image_tag(tree_photo.file.full.url)
+
+      - if tree_photos.one_after(photo.id).present?
+        = link_to "»", relic_photo_path(relic.id, tree_photos.one_after(photo.id)), :remote => true
+
+      .info-left
+        %p Autor: #{tree_photo.author}
+        %p Data wykonania: #{tree_photo.date_taken}
+        %p Creative Commons 3.0
+      .info-right
+        %p
+          Zdjęcie należy do obiektu
+          = link_to relic.identification, relic_path(relic.id)
+
+        - if relic.parent
+          należącego do zespołu zabytków
+          = link_to relic.parent.identification, relic_path(relic.parent.id)
+
+    %ul#slider_midi.jcarousel-skin-midi{ :"data-photos" => tree_photos.all.to_json }

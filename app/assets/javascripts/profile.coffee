@@ -1,15 +1,3 @@
-#jQuery ->
-#  $('section.description').on 'click', 'a[data-ajax=true]', ->
-#    jQuery.get this.href, (data) ->
-#      $('section.description').html($(data).find('section.description').html())
-#      window.documentLoaded($('section.description'))
-#
-#    false
-#
-#  $('section.description').on 'ajax:success', 'form', (event, data) ->
-#    $('section.description').html($(data).find('section.description').html())
-#    window.documentLoaded($('section.description'))
-
 #= require sugar
 #= require jquery-specializer
 #= require gmaps
@@ -135,59 +123,118 @@ window.google_maps_loaded = ->
     window.loadGMaps();
     $('#map_canvas').auto_zoom()
 
-jQuery ->
-  return unless $('section.photos').length
+jQuery.initializer 'section.show.photos', ->
+  $section = this
+  if slider = $section.find('#slider_mini')
+    photos = $(slider).data('photos')
+    $(slider).jcarousel
+      size: photos.length
+      itemLoadCallback:
+        onBeforeAnimation: (carousel, state) ->
+          for i in [carousel.first..carousel.last]
+            continue if carousel.has(i)
+            break if i > photos.length
+            item = photos[i - 1]
+            carousel.add(i, "<a href='#{Routes.relic_photo_path(item.relic_id, item.id)}' data-main='#{item.main}'><img src='#{item.file.mini.url}' width='80' height='60' alt='Zdjęcie zrobione przez #{item.author}' /></a>")
 
-  upload_spinner_opts =
-    lines: 8
-    length: 0
-    width: 6
-    radius: 10
-    rotate: 0
-    color: '#555'
-    speed: 0.8
-    trail: 55
-    shadow: false
-    hwaccel: false
-    className: 'spinner'
-    zIndex: 2e9
-    top: 46
-    left: 46
+    $(slider).on 'click', 'a[data-main]', ->
+      $section.find('.main-photo img').attr('src', $(this).data('main'))
+      $section.find('.main-photo').attr('href', $(this).attr('href'))
+      false
 
-  if $('.preview-placeholder').length
-    spinner = new Spinner(upload_spinner_opts).spin($('.preview-placeholder')[0])
+jQuery.initializer 'section.show.photo', ->
+  $section = this
+  if slider = $section.find('#slider_midi')[0]
+    photos = $(slider).data('photos')
+    $(slider).jcarousel
+      size: photos.length
+      itemLoadCallback:
+        onBeforeAnimation: (carousel, state) ->
+          for i in [carousel.first..carousel.last]
+            continue if carousel.has(i)
+            break if i > photos.length
+            item = photos[i - 1]
+            carousel.add(i, "<a data-remote='true' href='#{Routes.relic_photo_path(item.relic_id, item.id)}' data-main='#{item.main}'><img src='#{item.file.midi.url}' alt='Zdjęcie zrobione przez #{item.author}' /></a>")
 
-  $('.progressbar').progressbar(value: 0, change: (e) -> $(e.target).find('.value').text($('.progressbar').progressbar("value") + "%"))
+jQuery.initializer 'section.edit.photos', ->
+  $section = $(this)
+  $preview_placeholder = $section.find('.preview-placeholder')
+  $progressbar = $section.find('.progressbar')
+  $photo_hidden = $section.find('.photo.hidden')
+  $photo_upload = $section.find(".photo_upload")
+  $form = $section.find('form.relic')
+  $cancel_upload = $section.find('.cancel_upload')
+  $remove_photo = $section.find('.remove_photo')
+
+  upload_spinner_opts = {
+    lines: 8, length: 0, width: 6, radius: 10, rotate: 0, color: '#555', speed: 0.8, trail: 55,
+    shadow: false, hwaccel: false, className: 'spinner', zIndex: 2e9, top: 46, left: 46
+  }
+
+  if $preview_placeholder.length
+    spinner = new Spinner(upload_spinner_opts).spin($preview_placeholder[0])
+
+  $progressbar.progressbar
+    value: 0,
+    change: (e) ->
+      $(e.target).find('.value').text($progressbar.progressbar("value") + "%")
 
   photo_xhr = $(".photo_upload").fileupload
     type: "POST"
-    dataType: "json"
+    dataType: "html"
 
     add: (e, data) ->
-      $('.photo.hidden').removeClass('hidden')
-      $(".photo_upload").hide()
+      $photo_hidden.removeClass('hidden')
+      $photo_upload.hide()
       data.submit()
 
     submit: (e, data) ->
-      data.formData = { foo: "bar" }
-RAILS
+      data.formData = {}
+
     progressall: (e, data) ->
       progress = parseInt(data.loaded / data.total * 100, 10)
-      $('.progressbar').progressbar("value", progress)
+      $progressbar.progressbar("value", progress)
 
     done: (e, data) ->
-      document.location.reload()
+      $new_section = $(data.result).find('section.edit')
+      $section.replaceWith($new_section)
+      $new_section.initialize()
 
-  $('.cancel_upload').click ->
+  $cancel_upload.click ->
     photo_xhr.abort() if photo_xhr?
 
-  $('.remove_photo').click ->
+  $remove_photo.click ->
+    return false unless confirm('Czy aby na pewno?')
     $(this).parents('.photo:first').find('input[name*="_destroy"]').val(true)
     $(this).parents('form:first').submit()
     false
 
-  $('form.relic').submit ->
-    if $('#relic_license_agreement:checked').length == 0
+  $form.submit ->
+    if $section.find('#relic_license_agreement:checked').length == 0
       confirm('Ponieważ nie posiadasz praw do publikowania tych zdjęć, zostaną one usunięte. Kontynuować?')
     else
       true
+
+
+
+  $section.on 'keyup', 'input.author', ->
+    $input = $(this)
+    $input.addClass('edited')
+    $section.find("input.author:not(.edited)").each ->
+      if $(this).hasClass('connected') || $(this).val().length == 0
+        $(this).val($input.val()).addClass('connected')
+        $(this).trigger('change')
+
+  $section.on 'keyup', 'input.date_taken', ->
+    $input = $(this)
+    $input.addClass('edited')
+    $section.find("input.date_taken:not(.edited)").each ->
+      if $(this).hasClass('connected') || $(this).val().length == 0
+        $(this).val($input.val()).addClass('connected')
+        $(this).trigger('change')
+
+  $section.on 'change', 'input.date_taken, input.author', ->
+    $.cookie($(this).attr('id'), $(this).val())
+
+  $section.find('input.date_taken, input.author').each ->
+    $(this).val($.cookie($(this).attr('id'))) if $(this).val().length == 0 && $.cookie($(this).attr('id'))

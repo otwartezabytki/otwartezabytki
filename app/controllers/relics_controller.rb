@@ -2,14 +2,6 @@
 class RelicsController < ApplicationController
 
   expose(:relics) do
-    # p1 = params.merge(:corrected_relic_ids => current_user.try(:corrected_relic_ids))
-    # if p1[:corrected_relic_ids].blank?
-    #   Rails.cache.fetch(uniq_cache_key, :expires_in => 15.minutes) do
-    #     Relic.search p1.slice(:q1, :page, :location)
-    #   end
-    # else
-    #   Relic.search(p1)
-    # end
     tsearch.perform
   end
 
@@ -41,20 +33,23 @@ class RelicsController < ApplicationController
   end
 
   def edit
-    relic.photos.build
+
   end
 
   def update
-    if relic.save
-      if params[:section] == 'photos' && params[:commit].blank?
-        render 'edit' and return
-      else
-        if relic.license_agreement != "1"
-          relic.photos.where(:user_id => current_user.id).destroy_all
-        end
+    authorize! :update, relic
+    updated_nested_resources(:photos).each do |photo|
+      authorize! :update, photo
+    end
 
-        redirect_to relic_path(relic.id) and return
-      end
+    if params[:section] == 'photos' && relic.license_agreement != "1"
+      relic.photos.where(:user_id => current_user.id).destroy_all
+      flash[:notice] = "Ponieważ nie zgodziłeś się na opublikowanie dodanych zdjęć, zostały one usunięte."
+      redirect_to relic_path(relic.id) and return
+    end
+
+    if relic.save
+      redirect_to relic_path(relic.id) and return
     else
       flash[:error] = "Popraw proszę błędy wskazane poniżej"
       render 'edit' and return
@@ -159,5 +154,29 @@ class RelicsController < ApplicationController
         false
       end
     end
+
+    def updated_nested_resources(resource_name)
+      nested_ids = []
+
+      if params[:relic] && params[:relic]["#{resource_name}_attributes"]
+        params[:relic]["#{resource_name}_attributes"].each do |index, photo|
+          nested_ids.push(photo["id"].to_i)
+        end
+      end
+
+      nested_ids.size ? relic.send(resource_name.to_sym).find(nested_ids) : []
+    end
+
+  def destroyed_nested_resources(resource_name)
+    nested_ids = []
+
+    if params[:relic] && params[:relic]["#{resource_name}_attributes"]
+      params[:relic]["#{resource_name}_attributes"].each do |index, photo|
+        nested_ids.push(photo["id"].to_i) if photo["_destroy"].to_i != 0
+      end
+    end
+
+    nested_ids.size ? relic.send(resource_name.to_sym).find(nested_ids) : []
+  end
 
 end

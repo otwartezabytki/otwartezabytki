@@ -1,4 +1,4 @@
-%section.general_info
+%section.show.general
   %h1= relic.identification
   = link_to 'edytuj', edit_section_relic_path(relic.id, :general), :title => 'edytuj ogólne dane zabytku', :"data-ajax" => true
   .status
@@ -12,7 +12,7 @@
     %p= relic.street
     - if relic.latitude.present? && relic.longitude.present?
       %p= relic.latitude.round(6).to_s + ", " + relic.longitude.round(6).to_s
-    %p= link_to "pokaż na mapie »", show_section_relic_path(relic.id, :section => :location)
+    %p= link_to "pokaż na mapie »", section_relic_path(relic.id, :section => :location)
   .dating
     %strong Data powstania:
     - if relic.dating_of_obj.present?

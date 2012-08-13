@@ -40,7 +40,7 @@
     width: 100%;
   }
 
-  section.general {
+  section.general.edit {
     .column {
       display: inline-block;
       vertical-align: top;
@@ -61,6 +61,11 @@
     select, input[type="text"] {
       width: 510px;
     }
+  }
+
+  section.general.show {
+    width: 655px;
+    height: 355px;
   }
 
   section.location {
@@ -219,23 +224,31 @@
   section.photos {
     .photo {
       clear: both;
+      margin-bottom: 16px;
 
       &.hidden {
         display: none;
       }
 
+      .column-left {
+        display: inline-block;
+        margin-right: 5px;
+        text-align: center;
+        vertical-align: top;
+      }
+
+      .column-right {
+        display: inline-block;
+        width: 500px;
+        vertical-align: top;
+      }
+
       .preview {
         width: 125px;
         height: 125px;
-        float: left;
         position: relative;
         border: 3px solid white;
         margin: 0 5px 0 0;
-      }
-
-      .photo-content {
-        float: left;
-        width: 500px;
       }
 
       .preview-placeholder {
@@ -263,6 +276,33 @@
       display: block;
       margin: 10px 0;
       clear: both;
+    }
+  }
+}
+
+section.show.photos {
+  float: right;
+  width: 300px;
+  height: 655px;
+  position: relative;
+
+  #slider {
+    position: absolute;
+    bottom: 0;
+  }
+
+  .actions {
+    position: absolute;
+    top: 0;
+
+    a {
+      display: block;
+      float: left;
+      width: 150px;
+      height: 30px;
+      line-height: 30px;
+      background-color: #98fb98;
+      text-align: center;
     }
   }
 }

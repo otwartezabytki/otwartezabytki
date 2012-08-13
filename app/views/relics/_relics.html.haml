@@ -11,7 +11,7 @@
           = relic.descendants.map(&:identification).join(', ')
       .include
         %span
-        = relic.categories.sort.join(', ')
+        = (relic.categories || []).sort.join(', ')
       .include
         %span
         = "#{relic.from} - #{relic.to}"

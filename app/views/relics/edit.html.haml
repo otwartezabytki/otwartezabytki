@@ -12,6 +12,3 @@
       %li= link_to_unless_current 'Zdjęcia', edit_section_relic_path(relic.id, :photos)
   - if params[:section].present?
     = render :partial => "relics/edit/#{params[:section]}"
-
-- content_for :footer_javascripts do
-  != javascript_include_tag "profile"

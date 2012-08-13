@@ -215,6 +215,7 @@ pl:
         updated_at: Zaktualizowanie danych
       photo:
         author: "Dane autora (imię, nazwisko)"
+        date_taken: "Data wykonania"
     models:
       relic:
         zero:  Zabytek

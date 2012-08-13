@@ -6,16 +6,11 @@ Możesz uzupełniać bazę anonimowo albo założyć konto i śledzić swoje pos
 </div>
 <div class="form_box">
   <div class="login_intro_txt">Zarejestruj się i śledź swoje postępy</div>
-<%= semantic_form_for(current_user, :url => user_registration_path, :html => { :method => :put }) do |f| %>
+<%= semantic_form_for(user, :url => user_registration_path) do |f| %>
   <%= f.semantic_errors %>
   <%= f.hidden_field :registration, :value => true %>
   <%= f.input :email, :required => false, :autofocus => true %>
-  
-  
-  
   <%= f.input :username, :required => false, :label => "Nazwa użytkownika".html_safe %>
-  
-  
   <%= f.submit "Zarejestruj się" %>
 <% end %>
 </div>

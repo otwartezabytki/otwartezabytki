@@ -47,6 +47,7 @@ class Relic < ActiveRecord::Base
 
   has_many :suggestions
   has_many :documents, :dependent => :destroy
+
   has_many :photos, :dependent => :destroy
   has_many :alerts, :dependent => :destroy
   has_many :entries, :dependent => :destroy
@@ -355,5 +356,14 @@ class Relic < ActiveRecord::Base
 
   def country
     I18n.t(country_code.upcase, :scope => 'countries')
+  end
+
+  def main_photo
+    @main_photo ||= self.photos.where(:main => true).first || self.photos.first
+  end
+
+  # @return photos for relic and it's descendants
+  def all_photos
+    Photo.where(:relic_id => [id] + descendant_ids)
   end
 end
