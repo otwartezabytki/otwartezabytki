@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120809134226) do
+ActiveRecord::Schema.define(:version => 20120813165254) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -61,8 +61,9 @@ ActiveRecord::Schema.define(:version => 20120809134226) do
     t.integer  "size"
     t.string   "mime"
     t.string   "file"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.string   "description"
   end
 
   create_table "entries", :force => true do |t|
@@ -159,6 +160,7 @@ ActiveRecord::Schema.define(:version => 20120809134226) do
     t.string   "country_code",    :default => "PL"
     t.string   "fprovince"
     t.string   "fplace"
+    t.text     "documents_info"
   end
 
   add_index "relics", ["ancestry"], :name => "index_relics_on_ancestry"

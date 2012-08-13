@@ -63,7 +63,8 @@ class Relic < ActiveRecord::Base
 
   accessible_attributes = :dating_of_obj, :group, :id, :identification, :materail,
                           :national_number, :number, :place_id, :register_number,
-                          :street, :internal_id, :source, :tags, :categories, :photos_attributes
+                          :street, :internal_id, :source, :tags, :categories, :photos_attributes,
+                          :documents_attributes, :documents_info
 
 
   accepts_nested_attributes_for :photos, :allow_destroy => true

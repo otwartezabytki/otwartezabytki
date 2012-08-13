@@ -17,11 +17,29 @@ class Document < ActiveRecord::Base
   belongs_to :relic
   belongs_to :user
 
-  attr_accessible :mimetype, :name, :size, :file
+  attr_accessible :mimetype, :name, :size, :file, :description, :mime
 
   mount_uploader :file, DocumentUploader
 
+  validates :file, :relic, :user, :presence => true
+  validates :name, :description, :presence => true, :unless => :new_record?
+
   def remove_file!
     Rails.logger.info("skip removing physical file of document ##{self.id} ")
+  end
+
+  def mime_class
+    mime.gsub(/application\//, '').gsub(/\W+/, '-')
+  end
+
+  before_save :update_file_attributes
+
+  private
+
+  def update_file_attributes
+    if file.present? && file_changed?
+      self.mime = file.file.content_type
+      self.size = file.file.size
+    end
   end
 end

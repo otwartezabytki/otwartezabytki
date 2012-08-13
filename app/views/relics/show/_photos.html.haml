@@ -1,7 +1,7 @@
 %section.show.photos(data-replace="section.show.photos")
   - if relic.main_photo.present?
     .content
-      = link_to image_tag(relic.main_photo.file.main.url), relic_photo_path(relic.id, relic.main_photo.id), :class => "main-photo"
+      = link_to image_tag(relic.main_photo.file.maxi.url), relic_photo_path(relic.id, relic.main_photo.id), :class => "main-photo"
       .actions
         = link_to "zobacz galerię (#{relic.all_photos.count})", relic_photo_path(relic.id, relic.all_photos.first.id), :class => "show-photos", :remote => true
         = link_to "dodaj zdjęcia", edit_section_relic_path(relic.id, :section => :photos), :class => "edit-photos", :remote => true

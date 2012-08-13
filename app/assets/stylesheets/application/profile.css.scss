@@ -267,6 +267,64 @@
       clear: both;
     }
   }
+
+  section.documents {
+    .document {
+      clear: both;
+      margin-bottom: 16px;
+
+      &.hidden {
+        display: none;
+      }
+
+      .column-left {
+        display: inline-block;
+        margin-right: 5px;
+        text-align: center;
+        vertical-align: top;
+      }
+
+      .column-right {
+        display: inline-block;
+        width: 500px;
+        vertical-align: top;
+      }
+
+      .preview {
+        width: 125px;
+        height: 125px;
+        position: relative;
+        border: 3px solid white;
+        margin: 0 5px 0 0;
+      }
+
+      .preview-placeholder {
+        background-color: #eee;
+      }
+    }
+
+    input[type="text"] {
+      width: 350px;
+    }
+
+    .progressbar {
+      position: relative;
+      height: 16px;
+      margin: 4px 0;
+    }
+
+    .progressbar .value {
+      position: absolute;
+      left: 49%;
+      top: 2px;
+    }
+
+    .photo_upload {
+      display: block;
+      margin: 10px 0;
+      clear: both;
+    }
+  }
 }
 
 section.show.photos {
