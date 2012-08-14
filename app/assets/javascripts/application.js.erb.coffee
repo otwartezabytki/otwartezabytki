@@ -12,6 +12,7 @@
 #= require jquery.ui.autocomplete
 #= require jquery.ui.tabs
 #= require jquery.ui.progressbar
+#= require jquery.ui.sortable
 
 #= require ./vendor/froogaloop
 #= require ./vendor/jquery.cookie
@@ -55,6 +56,7 @@ jQuery.fn.initialize = ->
 
 poping_history = false
 ajax_callback = (data, status, xhr) ->
+  console.log(xhr.status)
   if xhr.getResponseHeader('Content-Type').match(/text\/html/)
     $parsed_data = $('<div>').append($(data))
 

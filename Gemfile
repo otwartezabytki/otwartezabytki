@@ -82,6 +82,9 @@ gem 'rabl'
 # rails routes in javascirpt
 gem 'js-routes'
 
+# sorting links and relic events
+gem 'acts_as_list'
+
 group :development, :test do
   # for debugging
   gem 'ruby-debug19'

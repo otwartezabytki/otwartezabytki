@@ -26,11 +26,12 @@ class Ability
       can :update, Relic
       can :manage, Event
       can :manage, Entry
-      can :manage, Link
       can :create, Photo
       can :manage, Photo, :user_id => user.id
       can :create, Document
       can :manage, Document, :user_id => user.id
+      can :create, Link
+      can :manage, Link
     end
 
     can :create, User

@@ -16,6 +16,11 @@ Otwartezabytki::Application.routes.draw do
   resources :relics, :only => [:edit, :update, :index, :show, :edit, :update] do
     resources :photos
     resources :documents
+    resources :links do
+      collection do
+        post :sort
+      end
+    end
 
     collection do
       get :suggester
