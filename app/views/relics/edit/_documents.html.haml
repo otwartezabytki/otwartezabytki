@@ -1,15 +1,7 @@
 %section.edit.documents
   %h2 Dokumenty
   = semantic_form_for relic, :url => section_relic_path(relic.id, :section => :documents), :html => { :multipart => true }, :remote => true  do |f|
-    .help-content.active
-      .help Pomoc
-      .help-extended
-        %span.close Zamknij pomoc
-        %p
-          Sprawdź, czy nazwa zabytku jest poprawna (np. jeśli zaczyna się od małej litery, popraw ją na wielką).
-          Jeśli chcesz ją poprawić, kliknij „Zmień”. Pojawi się pole, w którym można poprawić nazwę.
-          Następnie naciśnij „Zapisz”, aby zachować poprawioną nazwę. Jeśli jest poprawna, kliknij „Potwierdź”.
-
+    %p.description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sed felis magna, eu dapibus turpis. Vivamus fringilla dui vitae lacus consequat adipiscing. Nullam ultrices leo at sem vestibulum commodo.
     - relic.documents.each do |document|
       - if document.user_id == current_user.id
         = f.semantic_fields_for :documents, document do |f2|
@@ -47,11 +39,11 @@
         %p
           .progressbar
             .value 0%
-
-    = file_field_tag "document[file]", :class => 'document_upload', :"data-url" => "#{relic_documents_path(relic.id)}"
+    .file-upload
+      = file_field_tag "document[file]", :class => 'document_upload', :"data-url" => "#{relic_documents_path(relic.id)}"
 
     = f.input :documents_info
-
-    = f.submit 'Zapisz zmiany'
-    lub
-    = link_to "anuluj", relic_path(relic.id)
+    .actions 
+      = f.submit 'Zapisz zmiany'
+      lub
+      = link_to "anuluj", relic_path(relic.id)

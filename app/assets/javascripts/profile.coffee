@@ -248,7 +248,7 @@ jQuery.initializer 'section.edit.documents', ->
 
   upload_spinner_opts = {
     lines: 8, length: 0, width: 6, radius: 10, rotate: 0, color: '#555', speed: 0.8, trail: 55,
-    shadow: false, hwaccel: false, className: 'spinner', zIndex: 2e9, top: 46, left: 46
+    shadow: false, hwaccel: false, className: 'spinner', zIndex: 2e9, top: 16, left: 16
   }
 
   if $preview_placeholder.length
@@ -292,6 +292,12 @@ jQuery.initializer 'section.edit.documents', ->
 
   $section.find('input.name, input.description').each ->
     $(this).val($.cookie($(this).attr('id'))) if $(this).val().length == 0 && $.cookie($(this).attr('id'))
+
+  $("#document_file").filestyle
+    image: "/assets/file-upload.png"
+    imageheight: 25
+    imagewidth: 134
+    width: 134
 
 jQuery.initializer 'section.edit.links', ->
   $(this).find('ol.sortable').sortable

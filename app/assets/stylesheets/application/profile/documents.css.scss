@@ -1,0 +1,100 @@
+@import "compass/layout";
+@import "compass/css3";
+
+.documents{
+  .document{
+    border-bottom: 1px solid #bfbfbf;
+    padding-bottom: 20px;
+    .column-left{
+      .preview{
+        @include box-shadow(0 1px 3px 0 rgba(0,0,0,.3));
+        width: 75px;
+        height: 75px;
+        background: asset-data-url("file_extension_tmp.png") center center no-repeat;
+      }
+      .preview-placeholder{
+        width: 65px;
+        height: 65px;
+        border: 5px solid #fff;
+      }
+      .remove_document{
+        background: asset-data-url("icon-delete.png") no-repeat;
+        padding-left: 20px;
+        color: #d00;
+        font-size: 12px;
+        line-height: 18px;
+        margin-top: 10px;
+        text-align: left;
+        display: block;
+      }
+      .image-jpeg{
+        background: asset-data-url("file_extension_jpg.png") center center no-repeat;
+      }
+      .image-gif{
+        background: asset-data-url("file_extension_gif.png") center center no-repeat;
+      }
+      .image-png{
+        background: asset-data-url("file_extension_png.png") center center no-repeat;
+      }
+      .zip{
+        background: asset-data-url("file_extension_zip.png") center center no-repeat;
+      }
+      .octet-stream{
+        background: asset-data-url("file_extension_rar.png") center center no-repeat;
+      }
+      .pdf{
+        background: asset-data-url("file_extension_pdf.png") center center no-repeat;
+      }
+      .msword, .vnd-openxmlformats-officedocument-wordprocessingml-document, .vnd-oasis-opendocument-text{
+        background: asset-data-url("file_extension_doc.png") center center no-repeat;
+      }
+      .vnd-ms-excel, .vnd-openxmlformats-officedocument-spreadsheetml-sheet{
+        background: asset-data-url("file_extension_xls.png") center center no-repeat;
+      }
+      .vnd-ms-powerpoint, .vnd-openxmlformats-officedocument-presentationml-presentation{
+        background: asset-data-url("file_extension_pps.png") center center no-repeat;
+      }
+    }
+    p{ 
+      strong{
+        font-weight: 700;
+        font-size: 14px;
+      }
+      .cancel_upload{
+        font-weight: normal;
+        color: #d00;
+      }
+    }
+    .error{
+      input, textarea{
+        border: 1px solid #d10000;
+        @include box-shadow(0 0 5px 0 rgba(154,0,0,.3));
+      }
+      .help-inline{
+        font-size: 12px;
+        color: #D51818;
+        margin-top: -2px;
+        margin-bottom: 15px;
+        display: block;
+      }
+    }
+  }
+  .file-upload{
+    padding-bottom: 15px;
+    border-bottom: 1px solid #bfbfbf;
+    margin-bottom: 20px;
+  }
+  .input{
+    textarea#relic_documents_info{
+      width: 680px;
+      height: 55px;
+      padding: 10px;
+      max-height: 1000px;
+      max-width: 680px;
+      @include box-shadow(inset 0 1px 3px 0 rgba(0,0,0,.3), 0 1px 1px 0 rgba(0,0,0,.1));
+      @include border-radius(2px);
+      border: 1px solid #646464;
+      margin-top: 10px;
+    }
+  }
+}
