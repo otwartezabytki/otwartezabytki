@@ -19,6 +19,7 @@
 #= require ./vendor/jquery.cycle
 #= require ./vendor/jquery.iframe-transport
 #= require ./vendor/jquery.fileupload
+#= require ./vendor/jquery.filestyle
 #= require ./vendor/jquery.highlight-3
 #= require ./vendor/jquery.transition.min
 #= require ./vendor/jquery.jcarousel
