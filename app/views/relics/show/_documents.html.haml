@@ -16,4 +16,4 @@
   - else
     .placeholder
       %p Nikt jeszcze nie wgrał żadnego pliku. Bądź pierwszy.
-      = link_to "wgraj plik", edit_section_relic_path(relic.id, :documents), :"data-ajax" => true
+      = link_to "wgraj plik", edit_section_relic_path(relic.id, :documents), :remote => true

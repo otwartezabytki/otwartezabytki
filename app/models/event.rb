@@ -18,4 +18,9 @@ class Event < ActiveRecord::Base
   belongs_to :user
 
   attr_accessible :date, :date_end, :date_start, :name, :relic_id, :user_id
+
+  acts_as_list :scope => :relic
+
+  validates :relic, :user, :presence => true
+  validates :name, :date, :presence => true, :unless => :new_record?
 end

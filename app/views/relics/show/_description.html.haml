@@ -7,4 +7,4 @@
     .placeholder
       %p Nikt nie napisał jeszcze opisu dla tego zabytku
       %p Zrób to Ty!
-      = link_to "dodaj opis", edit_section_relic_path(relic.id, :description), :"data-ajax" => true
+      = link_to "dodaj opis", edit_section_relic_path(relic.id, :description), :remote => true

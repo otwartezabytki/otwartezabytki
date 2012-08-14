@@ -21,6 +21,11 @@ Otwartezabytki::Application.routes.draw do
         post :sort
       end
     end
+    resources :events do
+      collection do
+        post :sort
+      end
+    end
 
     collection do
       get :suggester

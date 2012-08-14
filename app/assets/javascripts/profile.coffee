@@ -304,3 +304,9 @@ jQuery.initializer 'section.edit.links', ->
     axis: 'y'
     update: ->
       $.post($(this).data('update-url'), $(this).sortable('serialize'))
+
+jQuery.initializer 'section.edit.events', ->
+  $(this).find('ol.sortable').sortable
+    axis: 'y'
+    update: ->
+      $.post($(this).data('update-url'), $(this).sortable('serialize'))

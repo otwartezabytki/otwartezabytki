@@ -21,4 +21,4 @@
     .placeholder
       %p Zabytek nie został jeszcze skategoryzowany.
       %p Zrób to Ty!
-      = link_to "dodaj kategorie", edit_section_relic_path(relic.id, :categories), :"data-ajax" => true
+      = link_to "dodaj kategorie", edit_section_relic_path(relic.id, :categories), :remote => true

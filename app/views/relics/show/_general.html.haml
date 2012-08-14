@@ -1,6 +1,6 @@
 %section.show.general
   %h1= relic.identification
-  = link_to 'edytuj', edit_section_relic_path(relic.id, :general), :title => 'edytuj ogólne dane zabytku', :"data-ajax" => true
+  = link_to 'edytuj', edit_section_relic_path(relic.id, :general), :title => 'edytuj ogólne dane zabytku', :remote => true
   .status
     = t("relic.status.#{relic.status}")
   .register_number

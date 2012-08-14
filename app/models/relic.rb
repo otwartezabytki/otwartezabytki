@@ -52,7 +52,7 @@ class Relic < ActiveRecord::Base
   has_many :alerts, :dependent => :destroy
   has_many :entries, :dependent => :destroy
   has_many :links, :dependent => :destroy, :order => 'position'
-  has_many :events, :dependent => :destroy
+  has_many :events, :dependent => :destroy, :order => 'position'
 
   belongs_to :place
 
@@ -64,15 +64,11 @@ class Relic < ActiveRecord::Base
   accessible_attributes = :dating_of_obj, :group, :id, :identification, :materail,
                           :national_number, :number, :place_id, :register_number,
                           :street, :internal_id, :source, :tags, :categories, :photos_attributes,
-                          :documents_attributes, :documents_info, :links_attributes, :links_info
+                          :documents_attributes, :documents_info, :links_attributes, :links_info,
+                          :events_attributes
 
 
-  accepts_nested_attributes_for :photos, :allow_destroy => true
-  accepts_nested_attributes_for :documents, :allow_destroy => true
-
-  accepts_nested_attributes_for :entries
-  accepts_nested_attributes_for :links
-  accepts_nested_attributes_for :events
+  accepts_nested_attributes_for :photos, :documents, :entries, :links, :events
 
   attr_accessible accessible_attributes
   attr_accessible accessible_attributes, :as => :admin
