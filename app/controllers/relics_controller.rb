@@ -38,11 +38,11 @@ class RelicsController < ApplicationController
 
   def update
     authorize! :update, relic
-    updated_nested_resources(:photos).each do |photo|
-      authorize! :update, photo
-    end
-    updated_nested_resources(:documents).each do |photo|
-      authorize! :document, photo
+
+    [:photos, :documents, :links].each do |subresource|
+      updated_nested_resources(subresource).each do |concrete_subresource|
+        authorize! :update, concrete_subresource
+      end
     end
 
     if params[:section] == 'photos' && relic.license_agreement != "1"

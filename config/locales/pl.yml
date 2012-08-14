@@ -207,6 +207,7 @@ pl:
         categories: "Kategorie"
         tags: "Tagi"
         documents_info: "Gdzie szukać?"
+        links_info: "Gdzie szukać?"
       user:
         email: Adres e-mail
         password: Hasło
@@ -279,8 +280,9 @@ pl:
   formtastic:
     hints:
       relic:
-        identification: Lorem ipsum dolor sit amet
-        documents_info: Lorem ipsum dolor sit amet
+        identification: To jest informacja o nazwie zabytku
+        documents_info: To jest informacja gdzie szukać dokumenty
+        links_info: To jest informacja gdzie szukać linki
       document:
         name: Lorem ipsum dolor sit amet
         description: Lorem ipsum dolor sit amet

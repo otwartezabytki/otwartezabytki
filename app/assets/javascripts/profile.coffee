@@ -125,7 +125,7 @@ window.google_maps_loaded = ->
 
 jQuery.initializer 'section.show.photos', ->
   $section = this
-  if slider = $section.find('#slider_mini')
+  if slider = $section.find('#slider_mini')[0]
     photos = $(slider).data('photos')
     $(slider).jcarousel
       size: photos.length
@@ -292,3 +292,9 @@ jQuery.initializer 'section.edit.documents', ->
 
   $section.find('input.name, input.description').each ->
     $(this).val($.cookie($(this).attr('id'))) if $(this).val().length == 0 && $.cookie($(this).attr('id'))
+
+jQuery.initializer 'section.edit.links', ->
+  $(this).find('ol.sortable').sortable
+    axis: 'y'
+    update: ->
+      $.post($(this).data('update-url'), $(this).sortable('serialize'))
