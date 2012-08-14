@@ -235,6 +235,12 @@ jQuery.initializer 'section.edit.photos', ->
   $section.find('input.date_taken, input.author').each ->
     $(this).val($.cookie($(this).attr('id'))) if $(this).val().length == 0 && $.cookie($(this).attr('id'))
 
+  $("#photo_file").filestyle
+    image: "/assets/photo-upload.png"
+    imageheight: 25
+    imagewidth: 154
+    width: 154
+
 
 jQuery.initializer 'section.edit.documents', ->
   $section = $(this)

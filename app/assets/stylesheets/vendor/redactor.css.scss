@@ -1,6 +1,7 @@
 .redactor_box {	     
 	position: relative;
-	border: 1px solid #ddd;	
+	border: 1px solid #646464;
+	border-radius: 2px;	
 /* 	line-height: 0; */
 }
 .redactor_box, .redactor_box textarea {
@@ -58,16 +59,16 @@ body .redactor_box_fullscreen {
 	list-style: none;
 	font-size: 0;
 	background: #f2f2f2;
-	background: -moz-linear-gradient(top,  #f5f5f5 0%, #ddd 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f5f5f5), color-stop(100%,#ddd));
-	background: -webkit-linear-gradient(top,  #f5f5f5 0%,#ddd 100%);
-	background: -o-linear-gradient(top,  #f5f5f5 0%,#ddd 100%);
-	background: -ms-linear-gradient(top,  #f5f5f5 0%,#ddd 100%);
-	background: linear-gradient(top,  #f5f5f5 0%,#ddd 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f5f5', endColorstr='#dddddd',GradientType=0 );
+	background: -moz-linear-gradient(top,  #f5f5f5 0%, #e3e3e3 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f5f5f5), color-stop(100%,#e3e3e3));
+	background: -webkit-linear-gradient(top,  #f5f5f5 0%,#e3e3e3 100%);
+	background: -o-linear-gradient(top,  #f5f5f5 0%,#e3e3e3 100%);
+	background: -ms-linear-gradient(top,  #f5f5f5 0%,#e3e3e3 100%);
+	background: linear-gradient(top,  #f5f5f5 0%,#e3e3e3 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f5f5', endColorstr='#e3e3e3',GradientType=0 );
 	overflow: hidden;	
 	height: 33px;
-	border-bottom: 1px solid #bbb;
+	border-bottom: 1px solid #898989;
 }
 .redactor_toolbar li {
 	float: left !important;

@@ -1,0 +1,73 @@
+@import "compass/layout";
+@import "compass/css3";
+
+.photos{
+  .photo{
+    border-bottom: 1px solid #bfbfbf;
+    padding-bottom: 20px;
+    .column-left{
+      .preview{
+        @include box-shadow(0 1px 3px 0 rgba(0,0,0,.3));
+        width: 125px;
+        height: 125px;
+        border: 5px solid #fff;
+      }
+      .remove_photo{
+        background: asset-data-url("icon-delete.png") 2px 1px no-repeat;
+        padding-left: 20px;
+        color: #d00;
+        font-size: 12px;
+        line-height: 18px;
+        text-align: center;
+        position: relative;
+        top: 5px;
+      }
+    }
+  }
+  p{ 
+    strong{
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .cancel_upload{
+      font-weight: normal;
+      color: #d00;
+    }
+  }
+  .error{
+    input, textarea{
+      border: 1px solid #d10000;
+      @include box-shadow(0 0 5px 0 rgba(154,0,0,.3));
+    }
+    .help-inline{
+      font-size: 12px;
+      color: #D51818;
+      margin-top: -2px;
+      margin-bottom: 15px;
+      display: block;
+    }
+  }
+  .file.photo_upload + div{
+    left: -162px !important;
+  }
+  .photo-upload{
+    padding-bottom: 15px;
+    border-bottom: 1px solid #BFBFBF;
+    margin-bottom: 20px;
+  }
+  #relic_license_agreement_input{
+    #relic_license_agreement{
+      width: auto;
+      height: auto;
+      margin: 5px 0;
+      display: inline-block;
+    }
+    span{
+      color: #d00;
+      font-size: 12px;
+      margin-top: 3px;
+      display: inline-block;
+      vertical-align: top;
+    }
+  }
+}
