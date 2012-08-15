@@ -323,30 +323,208 @@
   }
 }
 
-section.show.photos {
-  float: right;
-  width: 300px;
-  height: 655px;
-  position: relative;
+.show.photos{
+  background: #fff;
+  .actions{
+    margin: 1px;
+    a{
+      font-size: 12px;
+      font-weight: 600;
+      color: #fff;
+      text-transform: uppercase;
+      @include border-radius(2px);
+      &.show-photos{
+        @include background(linear-gradient(#4b6d7e, #436576));
+      }
+      &.edit-photos{
+        @include background(linear-gradient(#eb8308, #e37b00));
+      }
+    }
+  }
+}
 
+.row.first-row{
+  display: table;
+  border: 1px solid #fff;
+  background: #f5f5f5;
+  padding: 0;
+}
+
+.row.second-row{
+  background: #fff;
+  padding: 25px;
+  display: inline-block;
+  section.show{
+    position: relative;
+    margin-bottom: 40px;
+    .edit-relic-link{
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
+  .column-left{
+    float: left;
+    margin-right: 35px;
+    width: 590px;
+  }
+  .column-right{
+    float: left;
+    width: 285px;
+  }
+  h2{
+    font-size: 22px;
+    font-weight: normal;
+    border-bottom: 2px solid #8499a4;
+    padding-bottom: 15px;
+    padding-right: 100px;
+    margin-bottom: 20px;
+  }
+  .placeholder{
+    @include border-radius(4px);
+    border: 2px dashed #8f8f8f;
+    text-align: center;
+    padding: 40px 20px;
+    p{
+      line-height: 22px;
+      color: #6d6e71;
+      font-size: 15px;
+      font-weight: 600;
+    }
+    a{
+      min-width: 150px;
+      text-transform: uppercase;
+      text-shadow: 0 1px 0 rgba(30,110,6,0.5);
+      color: #fff;
+      font-size: 12px;
+      padding: 8px 10px;
+      @include background(linear-gradient(#41a223, #399a1b));
+      @include border-radius(2px);
+      display: inline-block;
+      margin: 10px 0;
+      &:hover{
+        color: #fff;
+        background: #399a1b;
+      }
+    }
+  }
+}
+
+section.show.photos {
+  display: table-cell;
+  width: 300px;
+  position: relative;
+  background: #fff;
+  vertical-align: top;
+  border-left: 1px solid #fff;
   #slider {
     position: absolute;
     bottom: 0;
   }
-
   .actions {
-    position: absolute;
-    top: 0;
-
+    margin: 0 0 1px;
+    display: inline-block;
+    vertical-align: top;
     a {
       display: block;
       float: left;
       width: 150px;
       height: 30px;
       line-height: 30px;
-      background-color: #98fb98;
       text-align: center;
+      font-size: 12px;
+      font-weight: 600;
+      color: #fff;
+      text-transform: uppercase;
+      @include border-radius(2px);
+      &.show-photos{
+        @include background(linear-gradient(#4b6d7e, #436576));
+      }
+      &.edit-photos{
+        @include background(linear-gradient(#eb8308, #e37b00));
+        width: 149px;
+        margin-left: 1px;
+      }
     }
+  }
+  .jcarousel-skin-mini{
+    .jcarousel-next-horizontal, .jcarousel-prev-horizontal{
+      background: asset-data-url("jcarousel-buttons.png") no-repeat;
+    }
+    .jcarousel-next-horizontal{
+      background-position: -28px 0;  
+      &.jcarousel-next-disabled{
+        background-position: -28px -60px;  
+      }
+    }
+    .jcarousel-prev-horizontal{
+      background-position: 0 0;
+      &.jcarousel-prev-disabled{
+        background-position: 0 -60px;
+      }
+    }
+  }
+  .jcarousel-item-horizontal{
+    border-right: 1px solid #fff;
+    &:first-child{
+      border-left: 1px solid #fff;
+    }
+  }
+}
+
+section.show.general{
+  display: table-cell;
+  width: 611px;
+  padding: 17px 20px 25px 25px;
+  border-right: 2px solid #486a7c;
+  h1{
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 27px;
+  }
+  .status{
+    margin: 15px 0;
+  }
+  .location_name{
+    background: asset-data-url("edit-relic-ico-location.png") 0 3px no-repeat;
+  }
+  .dating{
+    background: asset-data-url("edit-relic-ico-date.png") 0 3px no-repeat;
+  }
+  .register_number{
+    background: asset-data-url("edit-relic-ico-list.png") 0 4px no-repeat;
+  }
+  .location_name, .dating, .register_number{
+    padding-left: 20px;
+    font-size: 13px;
+    line-height: 18px;
+    margin-bottom: 15px;
+    strong{
+      font-weight: 700;
+    }
+  }
+}
+
+section.show.links{
+  ul li{
+    padding-left: 20px;
+    background: asset-data-url("edit-relic-ico-link.png") no-repeat;
+  }
+}
+
+.edit-relic-link{
+  float: right;
+  @include background(linear-gradient(#eb8308, #e37b00));
+  @include border-radius(2px);
+  font-size: 12px;
+  color: #fff;
+  font-weight: 600;
+  text-shadow: 0 -1px 0 rgba(142,77,0,0.5);
+  padding: 8px 11px;
+  text-transform: uppercase;
+  line-height: 12px;
+  &:hover{
+    color: #fff;
   }
 }
 
@@ -545,3 +723,51 @@ section.edit{
 ol.sortable li {
   cursor: move;
 }
+
+.notice{
+  @include background(linear-gradient(#f8e8c9, #efdfc0));
+  position: relative;
+  padding: 15px 95px 20px;
+  min-height: 75px;
+  .info{
+    position: absolute;
+    background: asset-data-url("notice-icon-info.png") no-repeat;
+    width: 35px;
+    height: 35px;
+    left: 20px;
+    top: 40%;
+  }
+  .separator{
+    position: absolute;
+    background: asset-data-url("notice-separator.png") no-repeat;
+    width: 2px;
+    height: 110px;
+    left: 75px;
+    top: 15px;
+  }
+  h3{
+    color: #e67e03;
+    font-weight: 600;
+    font-size: 16px;
+    text-shadow: 0 1px 0 #fff;
+  }
+  p{
+    line-height: 22px;
+    font-weight: 600;
+    font-size: 13px;
+    text-shadow: 0 1px 0 #fff;
+    margin-top: 6px;
+  }
+  .close{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: #d40000;
+    font-weight: 600;
+    text-shadow: 0 1px 0 #fff;
+    font-size: 12px;
+    padding-left: 18px;
+    background: asset-data-url("icon-remove.png") no-repeat;
+  }
+}
+

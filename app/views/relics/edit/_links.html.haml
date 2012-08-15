@@ -15,7 +15,7 @@
             = content_tag_for :li, link do
               
               = f2.input :url, :label => false, :hint => false, :class => "url"
-              = f2.input :name, :label => false, :hint => false, :class => "description"
+              = f2.input :name, :label => false, :hint => false, :class => "info"
               = link_to 'usuń', relic_link_path(relic.id, link.id),
                 :method => :delete,
                 :remote => true,

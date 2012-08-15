@@ -1,12 +1,10 @@
 %section.show.general
+  = link_to 'edytuj', edit_section_relic_path(relic.id, :general), :title => 'edytuj ogólne dane zabytku', :remote => true, :class => "edit-relic-link"
   %h1= relic.identification
-  = link_to 'edytuj', edit_section_relic_path(relic.id, :general), :title => 'edytuj ogólne dane zabytku', :remote => true
   .status
     = t("relic.status.#{relic.status}")
-  .register_number
-    %strong Numer w rejestrze:
-    = relic.register_number
   .location_name
+    = link_to 'edytuj', edit_section_relic_path(relic.id, :general), :title => 'edytuj ogólne dane zabytku', :remote => true, :class => "edit-relic-link"
     %strong Lokalizacja:
     %p= "#{relic.place.name}, powiat #{relic.district.name}, gmina #{relic.commune.name}"
     %p= relic.street
@@ -14,8 +12,12 @@
       %p= relic.latitude.round(6).to_s + ", " + relic.longitude.round(6).to_s
     %p= link_to "pokaż na mapie »", section_relic_path(relic.id, :section => :location)
   .dating
+    = link_to 'edytuj', edit_section_relic_path(relic.id, :general), :title => 'edytuj ogólne dane zabytku', :remote => true, :class => "edit-relic-link"
     %strong Data powstania:
     - if relic.dating_of_obj.present?
       %span.content= relic.dating_of_obj
     - else
       %span.placeholder= link_to "brak danych, uzupełnij »", edit_section_relic_path(relic.id, :general)
+  .register_number
+    %strong Numer w rejestrze:
+    = relic.register_number
