@@ -64,7 +64,6 @@ ajax_callback = (data, status, xhr) ->
       jQuery.globalEval $parsed_data.find('script:contains(window.gon)').text()
 
     try_to_process_replace = (node) ->
-      console.log node
       return unless node
       to_replace = $($(node).data('replace'))
       if to_replace.length
@@ -118,6 +117,7 @@ jQuery.initializer 'input.autocomplete-place', ->
     source: (request, callback) ->
       $.getJSON "/suggester/place", $('form.form-advance-search').serialize(), callback
     select: (event, ui) ->
+      $('form.form-advance-search input#search_location').val(ui.item.location)
       $('form.form-advance-search').submit( )
   )
 

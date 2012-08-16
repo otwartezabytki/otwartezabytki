@@ -23,7 +23,7 @@ class SuggesterController < ApplicationController
       navigators_json << {
         :label => "<strong>woj. #{obj.name}</strong> (#{hash['count']})",
         :value => "woj. #{obj.name}",
-        :path  => relics_path(search_params(:location => obj.id))
+        :location => ['pl', obj.id].join('-')
       }
     end
 
@@ -32,7 +32,7 @@ class SuggesterController < ApplicationController
       navigators_json << {
         :label => "woj. #{obj.voivodeship.name}, <strong>pow. #{obj.name}</strong> (#{hash['count']})",
         :value => "woj. #{obj.voivodeship.name}, pow. #{obj.name}",
-        :path  => relics_path(search_params(:location => [obj.voivodeship_id, obj.id].join('-')))
+        :location => ['pl', obj.voivodeship_id, obj.id].join('-')
       }
     end
 
@@ -41,7 +41,7 @@ class SuggesterController < ApplicationController
       navigators_json << {
         :label => "woj. #{obj.district.voivodeship.name}, pow. #{obj.district.name}, <strong>gm. #{obj.name}</strong> (#{hash['count']})",
         :value => "woj. #{obj.district.voivodeship.name}, pow. #{obj.district.name}, gm. #{obj.name}",
-        :path  => relics_path(search_params(:location => [obj.district.voivodeship_id, obj.district_id, obj.id].join('-')))
+        :location => ['pl', obj.district.voivodeship_id, obj.district_id, obj.id].join('-')
       }
     end
 
@@ -50,7 +50,7 @@ class SuggesterController < ApplicationController
       navigators_json << {
         :label => "woj. #{obj.commune.district.voivodeship.name}, pow. #{obj.commune.district.name}, gm. #{obj.commune.name}, <strong>#{obj.name}</strong> (#{hash['count']})",
         :label => "woj. #{obj.commune.district.voivodeship.name}, pow. #{obj.commune.district.name}, gm. #{obj.commune.name}, #{obj.name}",
-        :path  => relics_path(search_params(:location => [obj.commune.district.voivodeship_id, obj.commune.district_id, obj.commune_id, obj.id].join('-')))
+        :location => ['pl', obj.commune.district.voivodeship_id, obj.commune.district_id, obj.virtual_commune_id, obj.id].join('-')
       }
     end
 
@@ -60,7 +60,7 @@ class SuggesterController < ApplicationController
       navigators_json << {
         :label => "woj. #{obj.commune.district.voivodeship.name}, pow. #{obj.commune.district.name}, gm. #{obj.commune.name}, #{obj.name}, <strong> #{street}</strong> (#{hash['count']})",
         :value => "woj. #{obj.commune.district.voivodeship.name}, pow. #{obj.commune.district.name}, gm. #{obj.commune.name}, #{obj.name}, #{street}",
-        :path  => relics_path(search_params(:location => [obj.commune.district.voivodeship_id, obj.commune.district_id, obj.commune_id, obj.id].join('-')))
+        :location => ['pl', obj.commune.district.voivodeship_id, obj.commune.district_id, obj.virtual_commune_id, obj.id].join('-')
       }
     end
     render :json => navigators_json.reverse
