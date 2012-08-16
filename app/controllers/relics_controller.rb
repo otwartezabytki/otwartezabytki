@@ -16,7 +16,6 @@ class RelicsController < ApplicationController
   end
 
   helper_method :need_captcha
-
   before_filter :authenticate_user!, :only => [:edit, :create, :update]
 
   def show
@@ -28,7 +27,6 @@ class RelicsController < ApplicationController
 
   def index
     # SearchTerm.store(params[:q1])
-    # session[:search_params] = params.slice(:q1, :location)
     gon.highlighted_tags = relics.highlighted_tags
   end
 
@@ -64,43 +62,6 @@ class RelicsController < ApplicationController
     end
   end
 
-  def gonext
-    current_user.mark_relic_as_seen(params[:id])
-    redirect_to [:edit, ensure_not_seen_relic]
-  end
-
-  def thank_you
-    if current_user && current_user.suggestions.count >= 3 && current_user.email.blank?
-      @request_email = true
-    end
-
-    @next_relic = ensure_not_seen_relic
-  end
-
-  def corrected
-    @next_relics = Relic.next_few_for(current_user, search_params[:search_params], 3)
-  end
-
-  def suggester
-    results = KeywordStat.search params[:q]
-    suggestions = KeywordStat.search(KeywordStat.spellcheck(params[:q])) if results.blank?
-
-    json = []
-    collection = []
-    collection = results if results.present?
-    collection = suggestions if suggestions.present?
-
-    collection.each_with_index do |r, i|
-      label = (results.blank? and i.zero?) ? "Czy chodziło ci o: #{r.identification}" : "#{r.identification}"
-      json << {
-        :label => label,
-        :value => r.identification,
-        :path  => relics_path(:search => {:q => r.identification})
-      }
-    end
-    render :json => json
-  end
-
   def download
     file_path = Rails.root.join('public', 'system', 'relics_history.csv')
 
@@ -112,28 +73,6 @@ class RelicsController < ApplicationController
   end
 
   protected
-    def ensure_not_seen_relic
-      possible_next = Relic.next_for(current_user, session[:search_params])
-      if current_user.seen_relic_ids.include?(possible_next.id.to_i)
-        location = session[:search_params][:location].to_s.split('-').map {|l| l.split(':') }
-        location = relic.get_parent_ids if location.blank?
-
-        conds = Hash[
-          [:voivodeship_id, :district_id, :commune_id, :place_id].zip(location)
-        ].inject({}) { |mem, (k, v)| mem[k] = v if v; mem }
-
-        next_relic = Relic.next_random_in(conds)
-        next_relic = Relic.next_random_in(conds.slice(:voivodeship_id, :district_id, :commune_id)) if current_user.seen_relic_ids.include?(next_relic.id)
-        next_relic = Relic.next_random_in(conds.slice(:voivodeship_id, :district_id)) if current_user.seen_relic_ids.include?(next_relic.id)
-        next_relic = Relic.next_random_in(conds.slice(:voivodeship_id)) if current_user.seen_relic_ids.include?(next_relic.id)
-        next_relic = Relic.next_random_in({}) if current_user.seen_relic_ids.include?(next_relic.id)
-        session[:search_params] = { :q1 => nil, :location => location.map{|l| l.instance_of?(Array) ? l.join(':') : l }.join('-') }
-        next_relic
-      else
-        possible_next
-      end
-    end
-
     def uniq_cache_key namespace = nil
       sliced_params = params[:q1].to_s.split.sort + params.slice(:page, :location).values
       cache_key =  (Digest::SHA1.new << sliced_params.compact.join(' ')).to_s
@@ -145,8 +84,6 @@ class RelicsController < ApplicationController
         cache_key
       end
     end
-
-  private
 
     def need_captcha
       if Rails.cache.read("need_captcha_#{request.remote_ip}")

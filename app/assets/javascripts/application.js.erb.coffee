@@ -104,10 +104,13 @@ Search =
     $('body').on 'change', 'form.form-advance-search select', ->
       $(this).parents('form:first').submit()
 
-    $('body').on 'ajax:success', 'form.form-advance-search, nav.pagination, div.sidebar-nav, div.breadcrumb', (e, data) ->
+    $('body').on 'ajax:success', 'form.form-advance-search, div.sidebar-nav, #relics', (e, data) ->
       Search.render(data)
       # pushState
       history.pushState { searchreload: true }, $(data).find('title').text(), '/relics?' + $('form.form-advance-search').serialize()
+    Search.autocomplete()
+    Search.highlight()
+
   autocomplete: ->
     # autocomplete
     $input = $('input.autocomplete-q')
@@ -116,26 +119,41 @@ Search =
         html: true,
         minLength: 2,
         source: (request, callback) ->
-          $.getJSON "/relics/suggester", q: request.term, callback
+          $.getJSON "/suggester/query", $('form.form-advance-search').serialize(), callback
         select: (event, ui) ->
-          window.location = ui.item.path
+          $('form.form-advance-search').submit( )
+      )
+    $input = $('input.autocomplete-place')
+    if $input.length > 0
+      $input.autocomplete(
+        html: true,
+        minLength: 2,
+        source: (request, callback) ->
+          $.getJSON "/suggester/place", $('form.form-advance-search').serialize(), callback
+        select: (event, ui) ->
+          $('form.form-advance-search').submit( )
       )
 
-  render: (data) ->
+  highlight: ->
+    # highlight
+    $highlightArea = $('div.search-results .relic')
+    if $highlightArea.length > 0 and gon.highlightedTags
+      for tag in gon.highlightedTags
+        $highlightArea.highlight(tag)
+
+  render: (data) =>
+    # gon script hack
+    try
+      gonScript = data.match(/<script>(.*window\.gon.*?)<\/script>/)[1]
+      jQuery.globalEval gonScript
     ['form.form-advance-search', '#main div.sidebar-nav', '#relics'].map (el) ->
       $(el).replaceWith $(data).find(el)
     Search.autocomplete()
+    Search.highlight()
 
 jQuery ->
   # search autoreload
   Search.init()
-  Search.autocomplete()
-
-  # highlight
-  $highlightArea = $('div.search-results .relic')
-  if $highlightArea.length > 0 and gon.highlightedTags
-    for tag in gon.highlightedTags
-      $highlightArea.highlight(tag)
 
   # font resize
   toggleFontResizeButtons = () ->

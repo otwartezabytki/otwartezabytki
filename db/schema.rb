@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120814160527) do
+ActiveRecord::Schema.define(:version => 20120816100440) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -35,6 +35,13 @@ ActiveRecord::Schema.define(:version => 20120814160527) do
     t.string   "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "autocomplitions", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.datetime "indexed_at"
   end
 
   create_table "communes", :force => true do |t|
@@ -85,13 +92,6 @@ ActiveRecord::Schema.define(:version => 20120814160527) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "position"
-  end
-
-  create_table "keyword_stats", :force => true do |t|
-    t.string   "identification"
-    t.integer  "count"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
   end
 
   create_table "links", :force => true do |t|
@@ -156,12 +156,12 @@ ActiveRecord::Schema.define(:version => 20120814160527) do
     t.string   "categories"
     t.integer  "skip_count",      :default => 0
     t.integer  "edit_count",      :default => 0
-    t.text     "description"
-    t.string   "tags"
     t.string   "type",            :default => "Relic"
     t.string   "country_code",    :default => "PL"
     t.string   "fprovince"
     t.string   "fplace"
+    t.text     "description",     :default => ""
+    t.string   "tags"
     t.text     "documents_info"
     t.text     "links_info"
   end

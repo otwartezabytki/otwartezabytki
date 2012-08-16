@@ -1,3 +1,5 @@
+# -*- encoding : utf-8 -*-
+
 # == Schema Information
 #
 # Table name: relics
@@ -39,7 +41,6 @@
 #  index_relics_on_ancestry  (ancestry)
 #
 
-# -*- encoding : utf-8 -*-
 ActiveSupport::Dependencies.depend_on 'relic/tire_extensions'
 class Relic < ActiveRecord::Base
   States = ['checked', 'unchecked', 'filled']
@@ -154,9 +155,17 @@ class Relic < ActiveRecord::Base
       :untouched =>  { "type" => "string", "index" => "not_analyzed" }
     }
 
-    with_options :index => :analyzed do |a|
-      a.indexes :street
+    indexes :autocomplitions do
+      indexes :name, :type => "multi_field", :fields => {
+        :name =>  { "type" => "string", "index" => "analyzed" },
+        :untouched =>  { "type" => "string", "index" => "not_analyzed" }
+      }
     end
+
+    indexes :tags do
+      indexes :name, :index => :not_analyzed
+    end
+
     with_options :index => :not_analyzed do |na|
       na.indexes :id
       na.indexes :kind
@@ -173,12 +182,7 @@ class Relic < ActiveRecord::Base
       na.indexes :from,  :type => "integer"
       na.indexes :to,  :type => "integer"
       na.indexes :country
-
-      # backward compatibility
-      na.indexes :voivodeship_id
-      na.indexes :district_id
-      na.indexes :commune_id
-      na.indexes :place_id
+      na.indexes :street_normalized
     end
   end
 
@@ -197,31 +201,6 @@ class Relic < ActiveRecord::Base
       index.import Relic.roots.select('DISTINCT identification, *').limit(100).map(&:sample_json)
       index.refresh
     end
-
-    def analyze_query q
-      analyzed = Relic.index.analyze q
-      return '*' if !analyzed or (analyzed and analyzed['tokens'].blank?)
-      analyzed['tokens'].group_by{|i| i['position']}.inject([]) do |s1, (k, v)|
-        s1 << v.inject([]) {|s2, t| s2 << "#{t['token']}*"; s2}.join(' OR ')
-        s1
-      end.join(' ')
-    end
-
-    def next_for(user, search_params)
-      params = (search_params || {}).merge(:per_page => 1, :seen_relic_ids => user.seen_relic_ids, :corrected_relic_ids => user.corrected_relic_ids)
-      self.search(params).first || self.first(:offset => rand(self.count))
-    end
-
-    def next_random_in(conditions)
-      self.where(conditions).first(:offset => rand(self.where(conditions).count))
-    end
-
-    def next_few_for(user, search_params, count)
-      params = (search_params || {}).merge(:per_page => count, :corrected_relic_ids => user.corrected_relic_ids)
-      res = self.search(params).take(count)
-      res.empty? ? self.where(:offset => rand(self.count)).limit(count) : res
-    end
-
   end
 
   def sample_json
@@ -232,6 +211,7 @@ class Relic < ActiveRecord::Base
       :type             => 'relic',
       :identification   => identification,
       :street           => street,
+      :street_normalized => street_normalized,
       :place_full_name  => place_full_name,
       # :kind             => kind,
       :descendants      => self.descendants.map(&:to_descendant_hash),
@@ -254,6 +234,9 @@ class Relic < ActiveRecord::Base
       :state            => States.sample,
       :existance        => Existences.sample,
       :country          => ['pl', 'de', 'gb'].sample,
+      # tags
+      :tags             => [],
+      :autocomplitions  => ['puchatka', 'szlachciatka', 'chata polska', 'chata mazurska', 'chata wielkopolska'].shuffle.first(rand(4) + 1).map {|e| {'name' => e}}
     }
   end
 
@@ -303,6 +286,14 @@ class Relic < ActiveRecord::Base
     "#{identification} (#{register_number}) datowanie: #{dating_of_obj}; ulica: #{street}"
   end
 
+  def street_normalized
+    street_normalized = street.split('/').first.to_s
+    street_normalized.gsub!(/[\W\d]+$/i, '')
+    street_normalized.gsub!(/\d+[a-z]?([i,\/\s]+)?\d+[a-z]$/i, '')
+    street_normalized.strip!
+    street_normalized
+  end
+
   def get_parent_ids
     [voivodeship_id, district_id, commune_id, place_id]
   end
@@ -328,11 +319,6 @@ class Relic < ActiveRecord::Base
   end
 
   def update_relic_index
-    # always update root document
-    root.tire.update_index
-  end
-
-  def create_relic_index
     # always update root document
     root.tire.update_index
   end

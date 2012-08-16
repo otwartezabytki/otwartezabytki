@@ -13,9 +13,5 @@
         Wysłaliśmy Ci hasło na podany przez Ciebie adres e-mail.
         Będzie Ci potrzebne do zalogowania się przy ponownej wizycie.
 
-    - if session[:search_params].present?
-      = link_to edit_relic_path(Relic.next_for(current_user, session[:search_params])), :class => "btn" do
-        Przejdź do następnego zabytku &raquo;
-    - else
-      = link_to root_path, :class => "btn" do
-        Przejdź do wyszukiwania zabytków &raquo;
+    = link_to root_path, :class => "btn" do
+      Przejdź do wyszukiwania zabytków &raquo;

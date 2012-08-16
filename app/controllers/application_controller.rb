@@ -35,8 +35,8 @@ class ApplicationController < ActionController::Base
   end
 
   def search_params opt = {}
-    cond = params[:search] || {}
-    { :search => cond.merge(opt) }
+    cond = (params[:search] || {}).inject(HashWithIndifferentAccess.new) {|m, (k,v)| m[k] = v if v.present?; m}
+    { :search => cond.merge(opt.with_indifferent_access) }.with_indifferent_access
   end
 
   def after_sign_in_path_for(resource)

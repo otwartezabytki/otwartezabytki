@@ -446,6 +446,8 @@ GEM
       multi_json (~> 1.0)
       rake
       rest-client (~> 1.6)
+    tire-contrib (0.1.1)
+      tire
     todonotes (0.1.0)
       log4r
     treetop (1.4.10)
@@ -542,6 +544,7 @@ DEPENDENCIES
   sugar-rails
   therubyracer
   tire (= 0.4.2)
+  tire-contrib
   uglifier (>= 1.0.3)
   unicode
   whenever

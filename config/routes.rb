@@ -13,7 +13,7 @@ Otwartezabytki::Application.routes.draw do
 
   resources :tags, :only => :index
 
-  resources :relics, :only => [:edit, :update, :index, :show, :edit, :update] do
+  resources :relics, :except => [:destory]do
     resources :photos, :documents, :entries
     resources :links do
       collection do
@@ -26,19 +26,18 @@ Otwartezabytki::Application.routes.draw do
       end
     end
 
-    collection do
-      get :suggester
-    end
-
     member do
-      get :corrected
-      get :thank_you
-      get :gonext
+      # get :corrected
+      # get :thank_you
+      # get :gonext
       match 'section/:section/edit', :to => 'relics#edit', :as => 'edit_section'
       match 'section/:section', :to => 'relics#show', :as => 'section', :via => :get
       match 'section/:section', :to => 'relics#update', :as => 'section', :via => :put
     end
   end
+
+  get 'suggester/query'
+  get 'suggester/place'
 
   resources :tags, :only => [:create]
 

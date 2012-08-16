@@ -1,11 +1,10 @@
 # -*- encoding : utf-8 -*-
-class KeywordStat < ActiveRecord::Base
-  attr_accessible :count, :identification
+class Autocomplition < ActiveRecord::Base
   include Tire::Model::Search
   include Tire::Model::Callbacks
 
   # create different index for testing
-  index_name("#{Rails.env}-keyword-stats")
+  index_name("#{Rails.env}-autocomplitions")
   settings :number_of_shards => 5, :number_of_replicas => 1,
     :analysis => {
       :filter => {
@@ -44,6 +43,9 @@ class KeywordStat < ActiveRecord::Base
           new_key.gsub!(/ob\.?.*$/, '')
           new_key.gsub!(/tzw\.?.*$/, '')
           new_key.gsub!(/p\.?w.*$/, '')
+          new_key.gsub!(/[\W\d]+$/i, '')
+          new_key.gsub!(/\d+[a-z]?([i,\/\s]+)?\d+[a-z]$/i, '')
+          new_key.gsub!(/([i,\/\s]+)?\d+[a-z]$/i, '')
           new_key.gsub!(/[\s,]*$/, '')
           new_key.gsub!(/\s{2,}/, ' ')
           new_key.strip!
@@ -63,10 +65,10 @@ class KeywordStat < ActiveRecord::Base
     def reindex
       index.delete
       gen_stat_file
-      KeywordStat.delete_all
+      delete_all
       index.create :mappings => tire.mapping_to_hash, :settings => tire.settings
       CSV.foreach("#{Rails.root}/tmp/file_stat.csv") do |row|
-        KeywordStat.create Hash[[:count, :identification].zip(row)]
+        create Hash[[:count, :identification].zip(row)]
       end
       index.refresh
     end

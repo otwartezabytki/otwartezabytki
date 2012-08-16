@@ -20,10 +20,11 @@ module Tire
       end
 
       def terms name, unicode_order = false, load = false
-        (self.facets[name].try(:[], 'terms') || []).tap do |terms|
+        ((self.facets || {}).get_deep(name, 'terms') || []).tap do |terms|
           terms.sort_by!{ |t| Unicode.downcase(t['term']) } if unicode_order
           terms.map! do |t|
             id = t['term'].split('_').last
+            name = 'place' if name == 'streets'
             klass = name.classify.constantize
             t['obj'] = klass.cached(:find, :with => id.split(':').first)
             t
