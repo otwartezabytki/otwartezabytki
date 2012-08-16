@@ -313,3 +313,6 @@ jQuery.initializer 'section.edit.entries, section.edit.entries .entries-showcase
     focus: false
     buttons: ['bold', 'italic', 'link', 'unorderedlist']
     lang: 'pl'
+
+jQuery.initializer 'section.show.events', ->
+  $("#scrollbar").tinyscrollbar()
