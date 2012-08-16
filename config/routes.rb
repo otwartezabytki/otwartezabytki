@@ -14,8 +14,7 @@ Otwartezabytki::Application.routes.draw do
   resources :tags, :only => :index
 
   resources :relics, :only => [:edit, :update, :index, :show, :edit, :update] do
-    resources :photos
-    resources :documents
+    resources :photos, :documents, :entries
     resources :links do
       collection do
         post :sort

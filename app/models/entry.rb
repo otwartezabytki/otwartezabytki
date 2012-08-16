@@ -16,4 +16,6 @@ class Entry < ActiveRecord::Base
   belongs_to :user
 
   attr_accessible :body, :relic_id, :title, :user_id
+
+  validates :relic, :title, :body, :presence => true
 end

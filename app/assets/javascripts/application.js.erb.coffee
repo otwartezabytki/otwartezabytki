@@ -54,9 +54,8 @@ jQuery.fn.initialize = ->
     $(this).find(selector).each ->
       $.each callbacks, (_, callback) => callback.call($(this))
 
-poping_history = false
+popping_state = false
 ajax_callback = (data, status, xhr) ->
-  console.log(xhr.status)
   if xhr.getResponseHeader('Content-Type').match(/text\/html/)
     $parsed_data = $('<div>').append($(data))
 
@@ -69,27 +68,32 @@ ajax_callback = (data, status, xhr) ->
       else
         try_to_process_replace($(node).parents('[data-replace]:first')[0])
 
-
-
     $parsed_data.find('[data-replace]').each ->
       unless $(this).find('[data-replace]').length
         try_to_process_replace(this)
 
-    unless poping_history
+    unless popping_state
       path = xhr.getResponseHeader('x-path')
-      history.pushState { autoreload: true, path: path }, $parsed_data.find('title').text(), path
-      poping_history = false
+      history.pushState { autoreload: true, path: path }, $parsed_data.find('title').text(), xhr.getResponseHeader('x-path')
 
 $(document).on 'ajax:success', 'form[data-remote], a[data-remote]', (e, data, status, xhr) ->
   ajax_callback(data, status, xhr)
 
+$(document).on 'ajax:error', 'form[data-remote], a[data-remote]', (e, xhr, status, error) ->
+  jQuery.cookie('return_path', window.location.href, path: '/')
+  window.location.href = Routes.new_user_session_path() if error == "Unauthorized"
+
 $(window).load ->
-  $(window).bind 'popstate', (event) ->
-    console.log(event)
-    if event.originalEvent.state?.autoreload
-      poping_history = true
-      path = event.originalEvent.state?.path
-      $.ajax(path).success(ajax_callback).error(-> poping_history = false)
+  setTimeout ->
+    $(window).bind 'popstate', (event) ->
+      state = event.originalEvent.state
+      console.log('pop state', document.location, event)
+      popping_state = true
+      if state && state.autoreload
+        $.ajax(state.path).success(ajax_callback).complete(-> popping_state = false)
+      else
+        $.ajax(document.location).success(ajax_callback).complete(-> popping_state = false)
+  , 500
 
 Search =
   init: ->
@@ -120,15 +124,6 @@ Search =
     ['form.form-advance-search', '#main div.sidebar-nav', '#relics'].map (el) ->
       $(el).replaceWith $(data).find(el)
     Search.autocomplete()
-
-# window
-#window.onload = ->
-#  window.onpopstate = (e) ->
-#    location = history.location || document.location
-#    if e.state?.searchreload or location.pathname.match(/\/?relics\/?$/)
-#      $.get location, Search.render
-
-@documentLoaded = ->
 
 jQuery ->
   # search autoreload
@@ -218,8 +213,6 @@ jQuery ->
     speed:    0,
     timeout:  4000
   })
-
-  window.documentLoaded(document)
 
   $('.alert').on 'click', 'a.close', ->
     $(this).parent('.alert').hide()

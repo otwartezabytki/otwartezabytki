@@ -65,7 +65,7 @@ class Relic < ActiveRecord::Base
                           :national_number, :number, :place_id, :register_number,
                           :street, :internal_id, :source, :tags, :categories, :photos_attributes,
                           :documents_attributes, :documents_info, :links_attributes, :links_info,
-                          :events_attributes
+                          :events_attributes, :entries_attributes
 
 
   accepts_nested_attributes_for :photos, :documents, :entries, :links, :events
@@ -81,6 +81,8 @@ class Relic < ActiveRecord::Base
   serialize :source
   serialize :tags, Array
   serialize :categories, Array
+
+  validates :identification, :presence => true, :if => :identification_changed?
 
   before_validation do
     if tags_changed? && tags.is_a?(Array)

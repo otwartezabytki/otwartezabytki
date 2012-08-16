@@ -221,6 +221,9 @@ pl:
       document:
         name: Nazwa
         description: Krótki opis
+      entry:
+        title: Tytuł
+        body: Opis
     models:
       relic:
         zero:  Zabytek
@@ -284,8 +287,11 @@ pl:
         documents_info: To jest informacja gdzie szukać dokumenty
         links_info: To jest informacja gdzie szukać linki
       document:
-        name: Lorem ipsum dolor sit amet
-        description: Lorem ipsum dolor sit amet
+        name: Do jest podpowiedź do nazwy dokumentu
+        description: To jest podpowiedź do opisu dokumentu
       photo:
-        author: Lorem ipsum dolor sit amet
-        date_taken: Lorem ipsum dolor sit amet
+        author: To jest podpowiedź do autora zdjęcia
+        date_taken: To jest podpowiedź do daty wykonania zdjęcia
+      entry:
+        title: To jest podpowiedź do tytułu wpisu społeczności
+        body: To jest podpowiedź do opisu wpisu społeczności

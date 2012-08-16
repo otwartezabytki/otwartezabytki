@@ -38,4 +38,8 @@ class ApplicationController < ActionController::Base
     cond = params[:search] || {}
     { :search => cond.merge(opt) }
   end
+
+  def after_sign_in_path_for(resource)
+    cookies[:return_path] || super
+  end
 end

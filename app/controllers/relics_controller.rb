@@ -33,13 +33,13 @@ class RelicsController < ApplicationController
   end
 
   def edit
-
+    relic.entries.build
   end
 
   def update
     authorize! :update, relic
 
-    [:photos, :documents, :links].each do |subresource|
+    [:photos, :documents, :links, :entries].each do |subresource|
       updated_nested_resources(subresource).each do |concrete_subresource|
         authorize! :update, concrete_subresource
       end
@@ -52,7 +52,12 @@ class RelicsController < ApplicationController
     end
 
     if relic.save
-      redirect_to relic_path(relic.id) and return
+      if params[:entry_id]
+        params[:entry_id] = nil
+        render 'edit' and return
+      else
+        redirect_to relic_path(relic.id) and return
+      end
     else
       flash[:error] = "Popraw proszę błędy wskazane poniżej"
       render 'edit' and return
@@ -163,7 +168,7 @@ class RelicsController < ApplicationController
 
       if params[:relic] && params[:relic]["#{resource_name}_attributes"]
         params[:relic]["#{resource_name}_attributes"].each do |index, photo|
-          nested_ids.push(photo["id"].to_i)
+          nested_ids.push(photo["id"].to_i) if photo["id"].to_i > 0
         end
       end
 
