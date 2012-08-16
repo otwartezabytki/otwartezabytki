@@ -2,14 +2,14 @@
   %nav
     %h1 Edycja zabytku
     %ul
-      %li.general= link_to_unless_current '<span>Podstawowe informacje</span>'.html_safe, edit_section_relic_path(relic.id, :general)
-      %li.location= link_to_unless_current '<span>Lokalizacja</span>'.html_safe, edit_section_relic_path(relic.id, :location)
-      %li.events= link_to_unless_current '<span>Oś czasu</span>'.html_safe, edit_section_relic_path(relic.id, :events)
-      %li.entries= link_to_unless_current '<span>Społeczność</span>'.html_safe, edit_section_relic_path(relic.id, :entries)
-      %li.links= link_to_unless_current '<span>Linki, źródła, powiązania</span>'.html_safe, edit_section_relic_path(relic.id, :links)
-      %li.documents= link_to_unless_current '<span>Dokumenty urzędowe</span>'.html_safe, edit_section_relic_path(relic.id, :documents)
-      %li.categories= link_to_unless_current '<span>Kategorie i tagi</span>'.html_safe, edit_section_relic_path(relic.id, :categories)
-      %li.description= link_to_unless_current '<span>Opis</span>'.html_safe, edit_section_relic_path(relic.id, :description)
-      %li.photos= link_to_unless_current '<span>Zdjęcia</span>'.html_safe, edit_section_relic_path(relic.id, :photos)
+      %li.general= link_to_unless_current '<span>Podstawowe informacje</span>'.html_safe, edit_section_relic_path(relic.id, :general), :remote => true
+      %li.location= link_to_unless_current '<span>Lokalizacja</span>'.html_safe, edit_section_relic_path(relic.id, :location), :remote => true
+      %li.events= link_to_unless_current '<span>Oś czasu</span>'.html_safe, edit_section_relic_path(relic.id, :events), :remote => true
+      %li.entries= link_to_unless_current '<span>Społeczność</span>'.html_safe, edit_section_relic_path(relic.id, :entries), :remote => true
+      %li.links= link_to_unless_current '<span>Linki, źródła, powiązania</span>'.html_safe, edit_section_relic_path(relic.id, :links), :remote => true
+      %li.documents= link_to_unless_current '<span>Dokumenty urzędowe</span>'.html_safe, edit_section_relic_path(relic.id, :documents), :remote => true
+      %li.categories= link_to_unless_current '<span>Kategorie i tagi</span>'.html_safe, edit_section_relic_path(relic.id, :categories), :remote => true
+      %li.description= link_to_unless_current '<span>Opis</span>'.html_safe, edit_section_relic_path(relic.id, :description), :remote => true
+      %li.photos= link_to_unless_current '<span>Zdjęcia</span>'.html_safe, edit_section_relic_path(relic.id, :photos), :remote => true
   - if params[:section].present?
     = render :partial => "relics/edit/#{params[:section]}"

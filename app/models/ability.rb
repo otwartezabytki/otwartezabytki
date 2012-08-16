@@ -24,13 +24,13 @@ class Ability
 
     if user
       can :update, Relic
-      can :manage, Entry
       can :create, Photo
       can :manage, Photo, :user_id => user.id
       can :create, Document
       can :manage, Document, :user_id => user.id
       can :manage, Link
       can :manage, Event
+      can :manage, Entry
     end
 
     can :create, User

@@ -1,6 +1,6 @@
 %section.edit.description
   %h2 Opis
-  = semantic_form_for relic do |f|
+  = semantic_form_for relic, :url => section_relic_path(relic.id, :section => :description), :remote => true do |f|
     = f.input :description, :label => false, :input_html => { :class => "redactor", :style => 'height: 190px;' }
     .actions
       = f.submit 'Zapisz zmiany'

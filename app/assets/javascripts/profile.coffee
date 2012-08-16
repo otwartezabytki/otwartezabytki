@@ -94,35 +94,6 @@ $.fn.specialize
         $('#map_canvas').blinking()
       , 1000
 
-
-jQuery ->
-  $(".edit_relic").on "click", ".help-content .help, .help-extended .close", ->
-    $(this).parents(".help-content").toggleClass('active')
-
-    false
-
-
-  $(document).find('textarea.redactor').redactor
-    focus: false
-    buttons: ['bold', 'italic', 'link', 'unorderedlist']
-    lang: 'pl'
-
-  $('#relic_tags').select2
-    query: (query) -> $.get('/tags?query=q', (tags) -> query.callback({ results: tags }))
-    initSelection: (element, callback) ->
-      data = []
-      $(element.val().split(',')).each(-> data.push({ id: this, text: this }))
-      callback(data)
-    multiple: true
-
-  $('#relic_place_id').select2()
-
-
-window.google_maps_loaded = ->
-  jQuery ->
-    window.loadGMaps();
-    $('#map_canvas').auto_zoom()
-
 jQuery.initializer 'section.show.photos', ->
   $section = this
   if slider = $section.find('#slider_mini')[0]
@@ -316,3 +287,29 @@ jQuery.initializer 'section.edit.events', ->
     axis: 'y'
     update: ->
       $.post($(this).data('update-url'), $(this).sortable('serialize'))
+
+jQuery.initializer 'section.edit.description', ->
+  $(this).find('textarea.redactor').redactor
+    focus: false
+    buttons: ['bold', 'italic', 'link', 'unorderedlist']
+    lang: 'pl'
+
+jQuery.initializer 'section.edit.categories', ->
+  $('#relic_tags').select2
+    query: (query) -> $.get('/tags?query=q', (tags) -> query.callback({ results: tags }))
+    initSelection: (element, callback) ->
+      data = []
+      $(element.val().split(',')).each(-> data.push({ id: this, text: this }))
+      callback(data)
+    multiple: true
+
+jQuery.initializer 'section.edit.location', ->
+  $('#relic_place_id').select2()
+  window.loadGMaps() if not GMaps
+  $('#map_canvas').auto_zoom()
+
+jQuery.initializer 'section.edit.entries, section.edit.entries .entries-showcase', ->
+  $(this).find('textarea.redactor:first').redactor
+    focus: false
+    buttons: ['bold', 'italic', 'link', 'unorderedlist']
+    lang: 'pl'
