@@ -24,6 +24,7 @@
 #= require ./vendor/jquery.highlight-3
 #= require ./vendor/jquery.transition.min
 #= require ./vendor/jquery.jcarousel
+#= require ./vendor/jquery.tinyscrollbar.min
 #= require ./vendor/redactor
 #= require ./vendor/select2
 #= require ./vendor/spin.min

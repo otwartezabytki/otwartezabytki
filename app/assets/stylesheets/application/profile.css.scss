@@ -683,10 +683,60 @@ section.show.general{
   }
 }
 
+section.show.description{
+  .content p{
+    line-height: 22px;
+    font-size: 14px;
+    margin-bottom: 15px;
+    &:last-child{
+      margin-bottom: 0;
+    }
+  }
+}
+
+section.show.entries{
+  .content{
+    -moz-column-count: 2;
+    -moz-column-gap: 20px;
+    -moz-column-fill: auto;
+    -webkit-column-count: 2;
+    -webkit-column-gap: 20px;
+    -webkit-column-fill: auto;
+    column-count: 2;
+    column-gap: 20px;
+    column-fill: auto;
+    .entry{
+      width: 242px;
+    }
+  }
+}
+
 section.show.links{
   ul li{
     padding-left: 20px;
     background: asset-data-url("edit-relic-ico-link.png") no-repeat;
+  }
+}
+
+section.show.categories{
+  .categories, .tags{
+    font-size: 13px;
+    margin-bottom: 4px;
+    strong{
+      font-weight: 700;
+      padding-left: 20px;
+      background: asset-data-url("edit-relic-ico-folder.png") 0 4px no-repeat;
+      line-height: 18px;
+    }
+    span{
+      color: #47697a;
+    }
+  }
+  .tags{
+    margin-bottom: 0;
+    strong{
+      background: asset-data-url("edit-relic-ico-tags.png") 2px 3px no-repeat;
+    }
   }
 }
 
@@ -703,6 +753,124 @@ section.show.links{
   line-height: 12px;
   &:hover{
     color: #fff;
+  }
+}
+
+section.show.events{
+  .content{
+    #scrollbar {
+      width: 285px;
+      clear: both;
+      margin: 20px 0 10px;
+      .viewport {
+        width: 230px;
+        height: 200px;
+        overflow: hidden;
+        position: relative; 
+      }
+      .overview {
+        list-style: none;
+        position: absolute;
+        left: 0;
+        top: 0; 
+      }
+      .thumb {
+        .end {
+          background-color: #7f7f7f; 
+          @include border-radius(2px);
+        }
+        background-color: #7f7f7f; 
+        @include border-radius(2px);
+      }
+      .scrollbar {
+        position: relative;
+        float: right;
+        width: 5px; 
+      }
+      .track {
+        height: 100%;
+        width: 4px;
+        position: relative;
+        padding: 0 1px; 
+      }
+      .thumb {
+        height: 20px;
+        width: 4px;
+        cursor: pointer;
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        .end {
+          overflow: hidden;
+          height: 5px;
+          width: 4px; 
+        } 
+      }
+      .disable {
+        display: none; 
+      } 
+    }
+    li{
+      padding-left: 20px;
+      background: asset-data-url("event-bullet.png") 5px 4px no-repeat;
+      margin-bottom: 10px;
+      strong{
+        font-weight: 700;
+      }
+    }
+          
+  }
+}
+
+section.show.documents{
+  .document{
+    padding: 0 0 14px 37px;
+    border: 0;
+    display: inline-block;
+    width: 245px;
+    background: asset-data-url("file_extension_tmp.png") top left no-repeat;
+    &.image-jpeg{
+      background: asset-data-url("file_extension_jpg.png") top left no-repeat;
+    }
+    &.image-gif{
+      background: asset-data-url("file_extension_gif.png") top left no-repeat;
+    }
+    &.image-png{
+      background: asset-data-url("file_extension_png.png") top left no-repeat;
+    }
+    &.zip{
+      background: asset-data-url("file_extension_zip.png") top left no-repeat;
+    }
+    &.octet-stream{
+      background: asset-data-url("file_extension_rar.png") top left no-repeat;
+    }
+    &.pdf{
+      background: asset-data-url("file_extension_pdf.png") top left no-repeat;
+    }
+    &.msword, .vnd-openxmlformats-officedocument-wordprocessingml-document, .vnd-oasis-opendocument-text{
+      background: asset-data-url("file_extension_doc.png") top left no-repeat;
+    }
+    &.vnd-ms-excel, .vnd-openxmlformats-officedocument-spreadsheetml-sheet{
+      background: asset-data-url("file_extension_xls.png") top left no-repeat;
+    }
+    &.vnd-ms-powerpoint, .vnd-openxmlformats-officedocument-presentationml-presentation{
+      background: asset-data-url("file_extension_pps.png") top left no-repeat;
+    }
+    h3{
+      a{
+        color: #47697a;
+        font-size: 13px;
+      }
+    }
+    p{
+      float: left;
+      font-size: 12px;
+      line-height: 16px;
+      margin-right: 15px;
+      &:last-child{
+        margin: 0;
+      }
+    }
   }
 }
 
