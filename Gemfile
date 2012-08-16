@@ -30,6 +30,7 @@ gem 'kaminari'
 gem 'ancestry'
 gem 'curb'
 gem 'tire', '0.4.2'
+gem 'tire-contrib'
 gem 'rocket_tag'
 gem 'airbrake'
 
