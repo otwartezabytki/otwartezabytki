@@ -58,8 +58,12 @@ popping_state = false
 ajax_callback = (data, status, xhr) ->
   if xhr.getResponseHeader('Content-Type').match(/text\/html/)
     $parsed_data = $('<div>').append($(data))
+    # gon script hack
+    try
+      jQuery.globalEval $parsed_data.find('script:contains(window.gon)').text()
 
     try_to_process_replace = (node) ->
+      console.log node
       return unless node
       to_replace = $($(node).data('replace'))
       if to_replace.length
@@ -95,65 +99,37 @@ $(window).load ->
         $.ajax(document.location).success(ajax_callback).complete(-> popping_state = false)
   , 500
 
-Search =
-  init: ->
-    $('body').on 'click', 'form.form-advance-search input[type=checkbox]', ->
-      $(this).parents('form:first').submit()
 
-    $('body').on 'change', 'form.form-advance-search select', ->
-      $(this).parents('form:first').submit()
+jQuery.initializer 'input.autocomplete-q', ->
+  this.autocomplete(
+    html: true,
+    minLength: 2,
+    source: (request, callback) ->
+      $.getJSON "/suggester/query", $('form.form-advance-search').serialize(), callback
+    select: (event, ui) ->
+      $('form.form-advance-search').submit( )
+  )
 
-    $('body').on 'ajax:success', 'form.form-advance-search, div.sidebar-nav, #relics', (e, data) ->
-      Search.render(data)
-      # pushState
-      history.pushState { searchreload: true }, $(data).find('title').text(), '/relics?' + $('form.form-advance-search').serialize()
-    Search.autocomplete()
-    Search.highlight()
+jQuery.initializer 'input.autocomplete-place', ->
+  this.autocomplete(
+    html: true,
+    minLength: 2,
+    source: (request, callback) ->
+      $.getJSON "/suggester/place", $('form.form-advance-search').serialize(), callback
+    select: (event, ui) ->
+      $('form.form-advance-search').submit( )
+  )
 
-  autocomplete: ->
-    # autocomplete
-    $input = $('input.autocomplete-q')
-    if $input.length > 0
-      $input.autocomplete(
-        html: true,
-        minLength: 2,
-        source: (request, callback) ->
-          $.getJSON "/suggester/query", $('form.form-advance-search').serialize(), callback
-        select: (event, ui) ->
-          $('form.form-advance-search').submit( )
-      )
-    $input = $('input.autocomplete-place')
-    if $input.length > 0
-      $input.autocomplete(
-        html: true,
-        minLength: 2,
-        source: (request, callback) ->
-          $.getJSON "/suggester/place", $('form.form-advance-search').serialize(), callback
-        select: (event, ui) ->
-          $('form.form-advance-search').submit( )
-      )
+jQuery.initializer 'input[type=checkbox]', ->
+  this.click =>
+    this.parents('form:first').submit()
 
-  highlight: ->
-    # highlight
-    $highlightArea = $('div.search-results .relic')
-    if $highlightArea.length > 0 and gon.highlightedTags
-      for tag in gon.highlightedTags
-        $highlightArea.highlight(tag)
-
-  render: (data) =>
-    # gon script hack
-    try
-      gonScript = data.match(/<script>(.*window\.gon.*?)<\/script>/)[1]
-      jQuery.globalEval gonScript
-    ['form.form-advance-search', '#main div.sidebar-nav', '#relics'].map (el) ->
-      $(el).replaceWith $(data).find(el)
-    Search.autocomplete()
-    Search.highlight()
+jQuery.initializer 'div.search-results .relic', ->
+  if this.length > 0 and gon.highlightedTags
+    for tag in gon.highlightedTags
+      this.highlight(tag)
 
 jQuery ->
-  # search autoreload
-  Search.init()
-
   # font resize
   toggleFontResizeButtons = () ->
     $("span.plus, span.minus").removeClass("disabled")

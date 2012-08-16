@@ -1,5 +1,5 @@
 .clearfix
-= semantic_form_for tsearch, :url => relics_path, :html => { :class => 'well form-advance-search' }, :method => :get, :remote => defined?(relics) do |f|
+= semantic_form_for tsearch, :url => relics_path, :html => { :class => 'well form-advance-search', 'data-replace' => 'section#menu form.form-advance-search'  }, :method => :get, :remote => defined?(relics) do |f|
   = f.input :q, :label => false, :placeholder => "co", :input_html => { :class => 'autocomplete-q'}
   = f.input :place, :label => false, :placeholder => "gdzie", :input_html => { :class => 'autocomplete-place'}
 
