@@ -1,4 +1,4 @@
-ActiveAdmin.register KeywordStat do
+ActiveAdmin.register Autocomplition do
   # controller.authorize_resource
 
   # filter :id

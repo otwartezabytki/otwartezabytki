@@ -1,3 +1,5 @@
+# -*- encoding : utf-8 -*-
+
 # == Schema Information
 #
 # Table name: relics
@@ -39,7 +41,6 @@
 #  index_relics_on_ancestry  (ancestry)
 #
 
-# -*- encoding : utf-8 -*-
 ActiveSupport::Dependencies.depend_on 'relic/tire_extensions'
 class Relic < ActiveRecord::Base
   States = ['checked', 'unchecked', 'filled']
@@ -138,9 +139,17 @@ class Relic < ActiveRecord::Base
       :untouched =>  { "type" => "string", "index" => "not_analyzed" }
     }
 
-    with_options :index => :analyzed do |a|
-      a.indexes :street
+    indexes :autocomplitions do
+      indexes :name, :type => "multi_field", :fields => {
+        :name =>  { "type" => "string", "index" => "analyzed" },
+        :untouched =>  { "type" => "string", "index" => "not_analyzed" }
+      }
     end
+
+    indexes :tags do
+      indexes :name, :index => :not_analyzed
+    end
+
     with_options :index => :not_analyzed do |na|
       na.indexes :id
       na.indexes :kind
@@ -157,12 +166,7 @@ class Relic < ActiveRecord::Base
       na.indexes :from,  :type => "integer"
       na.indexes :to,  :type => "integer"
       na.indexes :country
-
-      # backward compatibility
-      na.indexes :voivodeship_id
-      na.indexes :district_id
-      na.indexes :commune_id
-      na.indexes :place_id
+      na.indexes :street_normalized
     end
   end
 
@@ -191,6 +195,7 @@ class Relic < ActiveRecord::Base
       :type             => 'relic',
       :identification   => identification,
       :street           => street,
+      :street_normalized => street_normalized,
       :place_full_name  => place_full_name,
       # :kind             => kind,
       :descendants      => self.descendants.map(&:to_descendant_hash),
@@ -213,6 +218,9 @@ class Relic < ActiveRecord::Base
       :state            => States.sample,
       :existance        => Existences.sample,
       :country          => ['pl', 'de', 'gb'].sample,
+      # tags
+      :tags             => [],
+      :autocomplitions  => ['puchatka', 'szlachciatka', 'chata polska', 'chata mazurska', 'chata wielkopolska'].shuffle.first(rand(4) + 1).map {|e| {'name' => e}}
     }
   end
 
@@ -260,6 +268,14 @@ class Relic < ActiveRecord::Base
 
   def full_identification
     "#{identification} (#{register_number}) datowanie: #{dating_of_obj}; ulica: #{street}"
+  end
+
+  def street_normalized
+    street_normalized = street.split('/').first.to_s
+    street_normalized.gsub!(/[\W\d]+$/i, '')
+    street_normalized.gsub!(/\d+[a-z]?([i,\/\s]+)?\d+[a-z]$/i, '')
+    street_normalized.strip!
+    street_normalized
   end
 
   def get_parent_ids

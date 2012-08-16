@@ -56,7 +56,17 @@ Search =
         html: true,
         minLength: 2,
         source: (request, callback) ->
-          $.getJSON "/suggester/query", q: request.term, callback
+          $.getJSON "/suggester/query", $('form.form-advance-search').serialize(), callback
+        select: (event, ui) ->
+          $('form.form-advance-search').submit( )
+      )
+    $input = $('input.autocomplete-place')
+    if $input.length > 0
+      $input.autocomplete(
+        html: true,
+        minLength: 2,
+        source: (request, callback) ->
+          $.getJSON "/suggester/place", $('form.form-advance-search').serialize(), callback
         select: (event, ui) ->
           $('form.form-advance-search').submit( )
       )

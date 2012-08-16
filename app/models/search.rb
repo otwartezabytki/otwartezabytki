@@ -101,6 +101,20 @@ class Search
     }
   end
 
+  def autocomplete_place_conds *fields
+    terms_cond = array_conditions
+    pq = PreparedQuery.new(place)
+    if pq.exists?
+      terms_cond << {'query' => {'query_string' => {'query' => pq.build, 'fields' => fields, 'default_operator' => 'AND'}}}
+    end
+    return {} if terms_cond.blank?
+    {
+      'facet_filter' => {
+        'and' => terms_cond
+      }
+    }
+  end
+
   def gloabl_filter_conditions name
     terms_cond = array_conditions 'world', 'pl', 'voivodeship.id', 'district.id', 'commune.id', 'place.id', 'country'
     terms_cond << { 'term' => { 'country' => 'pl'}}               if name == 'poland'
@@ -170,7 +184,8 @@ class Search
     @range_conditions.present?
   end
 
-  def perform
+
+  def build_tsearch
     instance = self
     build_conditions
     build_range_conditions
@@ -185,7 +200,8 @@ class Search
         boolean do
           must { string instance.query, :default_operator => "AND", :fields => [
             "identification^10",
-            "descendants.identification^8"
+            "descendants.identification^8",
+            "autocomplitions.name"
           ]} if instance.query.present?
           must { string instance.place, :default_operator => "AND", :fields => [
             "place_full_name^5",
@@ -213,18 +229,82 @@ class Search
         end
       end
     end
+  end
 
+  def perform
+    build_tsearch
     # enable additions search features
     enable_facet_navigation
     enable_highlight
     enable_sort
+    @tsearch.results
+  end
 
+  def autocomplete_name
+    instance = self
+    build_conditions
+    build_range_conditions
+
+    @tsearch = Tire.search(Relic.tire.index_name, :page => page, :size => 0) do
+      # query
+      query do
+        string instance.place, :default_operator => "AND", :fields => [
+            "place_full_name^5",
+            "street^3"
+          ]
+      end if instance.place.present?
+
+      filter 'and',instance.array_conditions if instance.array_conditions.present?
+      filter 'or', instance.range_conditions if instance.range_conditions?
+      pq = PreparedQuery.new(instance.query)
+      facet "autocomplitions" do
+        terms 'autocomplitions.name.untouched', 'size' => 20, 'script' => "term ~= regexp ? true : false", 'params' => {
+          'regexp' => pq.regexp
+        }
+      end if pq.exists?
+    end
+    @tsearch.results
+  end
+
+  def autocomplete_place
+    instance = self
+    build_conditions
+    build_range_conditions
+
+    @tsearch = Tire.search(Relic.tire.index_name, :page => page, :size => 0) do
+      # query
+      query do
+        string instance.query, :default_operator => "AND", :fields => [
+          "identification^10",
+          "descendants.identification^8",
+          "autocomplitions.name"
+        ]
+      end if instance.query.present?
+
+      filter 'and',instance.array_conditions if instance.array_conditions.present?
+      filter 'or', instance.range_conditions if instance.range_conditions?
+
+      facet "voivodeships", instance.autocomplete_place_conds('voivodeship.name') do
+        terms nil, :script_field => "_source.voivodeship.name + '_' + _source.voivodeship.id", :size => 3
+      end
+      facet "districts", instance.autocomplete_place_conds('district.name') do
+        terms nil, :script_field => "_source.district.name + '_' + _source.district.id", :size => 3
+      end
+      facet "communes", instance.autocomplete_place_conds('commune.name') do
+        terms nil, :script_field => "_source.commune.name + '_' + _source.virtual_commune_id", :size => 3
+      end
+      facet "places", instance.autocomplete_place_conds('place.name') do
+        terms nil, :script_field => "_source.place.name + '_' + _source.place.id", :size => 3
+      end
+      facet "streets", instance.autocomplete_place_conds('street_normalized') do
+        terms nil, :script_field => "_source.street_normalized + '_' + _source.place.name + '_' + _source.place.id", :size => 3
+      end
+    end
     @tsearch.results
   end
 
   def suggestions
-    return [] unless @tsearch.results.total.zero?
-    KeywordStat.search KeywordStat.spellcheck(query)
+    return [] # unless @tsearch.results.total.zero?
+    # KeywordStat.search KeywordStat.spellcheck(query)
   end
-
 end
