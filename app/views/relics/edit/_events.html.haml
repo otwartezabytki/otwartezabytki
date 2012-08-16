@@ -4,11 +4,11 @@
   = semantic_form_for relic, :url => section_relic_path(relic.id, :section => :events), :remote => true do |f|
     %p.description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sed felis magna, eu dapibus turpis. Vivamus fringilla dui vitae lacus consequat adipiscing. Nullam ultrices leo at sem vestibulum commodo.
     - if relic.events.count > 0
-      %p
-        %span l.p.
-        %span Data / Okres
-        %span Opis
-        %span Akcje
+      %p.header
+        %span.number l.p.
+        %span.date Data / Okres
+        %span.info Opis
+        %span.action Akcje
       %ol
         %li
           = f.input :dating_of_obj, :label => false, :hint => false
@@ -17,16 +17,18 @@
         - relic.events.each do |event|
           = f.semantic_fields_for :events, event do |f2|
             = content_tag_for :li, event do
-              = f2.input :date, :label => false, :hint => false
-              = f2.input :name, :label => false, :hint => false
+              = f2.input :date, :label => false, :hint => false, :class => "date"
+              = f2.input :name, :label => false, :hint => false, :class => "info"
               = link_to 'usuń', relic_event_path(relic.id, event.id),
                 :method => :delete,
                 :remote => true,
                 :confirm => "Czy aby na pewno?",
                 :class => "remove_event"
-      = link_to 'Dodaj kolejne wydarzenie...', relic_events_path(relic.id), :method => :post, :remote => true
+      .add-event
+        = link_to 'Dodaj kolejne wydarzenie...', relic_events_path(relic.id), :method => :post, :remote => true
     - else
-      = link_to 'Dodaj nowe wydarzenie...', relic_events_path(relic.id), :method => :post, :remote => true
+      .add-event
+        = link_to 'Dodaj nowe wydarzenie...', relic_events_path(relic.id), :method => :post, :remote => true
 
     .actions
       = f.submit 'zapisz zmiany'
