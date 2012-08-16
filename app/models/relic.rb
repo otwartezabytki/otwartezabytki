@@ -48,17 +48,31 @@ class Relic < ActiveRecord::Base
 
   has_many :suggestions
   has_many :documents, :dependent => :destroy
+
   has_many :photos, :dependent => :destroy
   has_many :alerts, :dependent => :destroy
   has_many :entries, :dependent => :destroy
-  has_many :links, :dependent => :destroy
-  has_many :events, :dependent => :destroy
+  has_many :links, :dependent => :destroy, :order => 'position'
+  has_many :events, :dependent => :destroy, :order => 'position'
 
   belongs_to :place
 
   attr_protected :id, :created_at, :update_at
-  attr_accessible :dating_of_obj, :group, :id, :identification, :materail, :national_number, :number, :place_id, :register_number, :street, :internal_id, :source, :tags, :categories
-  attr_accessible :dating_of_obj, :group, :id, :identification, :materail, :national_number, :number, :place_id, :register_number, :street, :internal_id, :source, :tags, :categories, :as => :admin
+
+  # currently used in photo view
+  attr_accessor :license_agreement
+
+  accessible_attributes = :dating_of_obj, :group, :id, :identification, :materail,
+                          :national_number, :number, :place_id, :register_number,
+                          :street, :internal_id, :source, :tags, :categories, :photos_attributes,
+                          :documents_attributes, :documents_info, :links_attributes, :links_info,
+                          :events_attributes, :entries_attributes
+
+
+  accepts_nested_attributes_for :photos, :documents, :entries, :links, :events
+
+  attr_accessible accessible_attributes
+  attr_accessible accessible_attributes, :as => :admin
 
   include PlaceCaching
   include Validations
@@ -68,6 +82,8 @@ class Relic < ActiveRecord::Base
   serialize :source
   serialize :tags, Array
   serialize :categories, Array
+
+  validates :identification, :presence => true, :if => :identification_changed?
 
   before_validation do
     if tags_changed? && tags.is_a?(Array)
@@ -325,5 +341,14 @@ class Relic < ActiveRecord::Base
 
   def country
     I18n.t(country_code.upcase, :scope => 'countries')
+  end
+
+  def main_photo
+    @main_photo ||= self.photos.where(:main => true).first || self.photos.first
+  end
+
+  # @return photos for relic and it's descendants
+  def all_photos
+    Photo.where(:relic_id => [id] + descendant_ids)
   end
 end

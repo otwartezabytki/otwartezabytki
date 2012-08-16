@@ -1,0 +1,17 @@
+%section.show.entries
+  %h2 Społeczność
+  - if relic.entries.count > 0
+    = link_to 'edytuj', edit_section_relic_path(relic.id, :entries), :title => 'edytuj wpisu użytkowników o zabytku', :remote => true
+    .content
+      - relic.entries.each do |entry|
+        %article.entry
+          %h3= entry.title
+          .body= sanitize entry.body
+  - else
+    .placeholder
+      %p
+        Nie nie napisał jeszcze opisu dla tego zabytku.
+        %br
+        Zrób to Ty!
+
+      = link_to "dodaj wpis", edit_section_relic_path(relic.id, :entries), :remote => true

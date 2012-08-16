@@ -1,34 +1,21 @@
-%section.location
+%section.edit.location
   %h2 Lokalizacja
   = semantic_form_for relic do |f|
-    .help-content.active
-      .help Pomoc
-      .help-extended
-        %span.close Zamknij pomoc
-        %p
-          Sprawdź, czy nazwa zabytku jest poprawna (np. jeśli zaczyna się od małej litery, popraw ją na wielką).
-          Jeśli chcesz ją poprawić, kliknij „Zmień”. Pojawi się pole, w którym można poprawić nazwę.
-          Następnie naciśnij „Zapisz”, aby zachować poprawioną nazwę. Jeśli jest poprawna, kliknij „Potwierdź”.
-          Jeśli nie wiesz, czy nazwa jest poprawna, spróbuj znaleźć informacje na stronach internetowych lub w książkach.
-          Jeśli Ci się nie uda, kliknij „Nie wiem”, a automatycznie przejdziesz do kolejnego punktu.
-          W przypadku popełnienia błędu kliknij „Edytuj ponownie” i edytuj ponownie.
-
-    = hidden_field 'section', params[:section]
-
     .row
       .column.column-left
         = f.input :place_id, :as => :select,
           :collection => f.object.commune.places.not_custom, :selected => f.object.place.id, :label => "Miejscowość",
-          :include_blank => false, :input_html => { :style => "width: 160px;" }
+          :include_blank => false, :input_html => { :style => "width: 234px;" }
 
         = f.input :street, :as => :string, :label => "Adres"
 
-        = f.submit 'Zapisz zmiany'
-        lub
-        = link_to "anuluj", relic_path(relic.id)
+        .actions 
+          = f.submit 'Zapisz zmiany'
+          lub
+          = link_to "anuluj", relic_path(relic.id)
 
       .column.column-middle
-        #map_canvas{ :style => "width: 340px; height: 340px;" }
+        #map_canvas{ :style => "width: 309px; height: 309px;" }
 
       .column.column-right
         .marker-helper

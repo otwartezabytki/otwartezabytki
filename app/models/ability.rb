@@ -20,10 +20,20 @@ class Ability
       can :history, SuggestedType
       can :update, SuggestedType
       can :revert, SuggestedType
-
-    else
-      can :create, User
     end
+
+    if user
+      can :update, Relic
+      can :create, Photo
+      can :manage, Photo, :user_id => user.id
+      can :create, Document
+      can :manage, Document, :user_id => user.id
+      can :manage, Link
+      can :manage, Event
+      can :manage, Entry
+    end
+
+    can :create, User
 
     # See the wiki for details: https://github.com/ryanb/cancan/wiki/Defining-Abilities
   end

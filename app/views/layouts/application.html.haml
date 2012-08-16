@@ -67,7 +67,19 @@
 
             = render 'shared/search'
         %section#main
-          .container
+          .container{ :'data-replace' => 'section#main .container' }
+            - if flash[:error] || flash[:notice]
+              .row
+                - if flash[:error]
+                  .alert.alert-error
+                    = link_to 'x', '#', :class => "close", :"data-dismiss" => 'alert'
+                    = flash[:error]
+
+                - elsif flash[:notice]
+                  .alert.flash-info
+                    = link_to 'x', '#', :class => "close", :"data-dismiss" => 'alert'
+                    = flash[:notice]
+
             .row
               = yield
         #root-footer

@@ -1,0 +1,2 @@
+object photo
+attributes :id

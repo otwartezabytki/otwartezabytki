@@ -72,10 +72,19 @@ gem 'recaptcha', :require => 'recaptcha/rails'
 
 # file upload
 gem 'carrierwave'
-gem 'mini_magick'
+gem 'mini_magick', :git => "git://github.com/gmanley/mini_magick.git", :branch => "graphicsmagick-fix"
 
 # gravatars
 gem 'gravatar_image_tag'
+
+# api
+gem 'rabl'
+
+# rails routes in javascirpt
+gem 'js-routes'
+
+# sorting links and relic events
+gem 'acts_as_list'
 
 group :development, :test do
   # for debugging

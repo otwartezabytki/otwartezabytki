@@ -68,8 +68,9 @@ ActiveRecord::Schema.define(:version => 20120816100440) do
     t.integer  "size"
     t.string   "mime"
     t.string   "file"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.string   "description"
   end
 
   create_table "entries", :force => true do |t|
@@ -90,6 +91,7 @@ ActiveRecord::Schema.define(:version => 20120816100440) do
     t.date     "date_end"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "position"
   end
 
   create_table "links", :force => true do |t|
@@ -99,6 +101,7 @@ ActiveRecord::Schema.define(:version => 20120816100440) do
     t.string   "url"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "position"
   end
 
   create_table "photos", :force => true do |t|
@@ -109,6 +112,8 @@ ActiveRecord::Schema.define(:version => 20120816100440) do
     t.string   "file"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.boolean  "main"
+    t.string   "date_taken"
   end
 
   create_table "places", :force => true do |t|
@@ -157,6 +162,8 @@ ActiveRecord::Schema.define(:version => 20120816100440) do
     t.string   "fplace"
     t.text     "description",     :default => ""
     t.string   "tags"
+    t.text     "documents_info"
+    t.text     "links_info"
   end
 
   add_index "relics", ["ancestry"], :name => "index_relics_on_ancestry"

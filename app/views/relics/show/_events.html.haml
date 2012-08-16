@@ -1,0 +1,19 @@
+%section.show.events
+  %h2 Wydarzenia
+  - if relic.events.count > 0
+    = link_to 'edytuj', edit_section_relic_path(relic.id, :events), :title => 'edytuj wydarzenia związane z zabytkiem', :remote => true, :class => "edit-relic-link"
+    .content
+      %ul
+        - relic.events.each do |event|
+          %li
+            %strong= event.date
+            \-
+            = event.name
+  - else
+    .placeholder
+      %p
+        Nikt jeszcze nie dodał żadnej historii
+        %br
+        Bądź pierwszy!
+
+      = link_to "dodaj wydarzenie", edit_section_relic_path(relic.id, :events), :remote => true

@@ -5,8 +5,6 @@ class RelicsController < ApplicationController
     tsearch.perform
   end
 
-  expose(:suggestion) { Suggestion.new(:relic_id => params[:id]) }
-
   expose(:relic) do
     if id = params[:relic_id] || params[:id]
       Relic.find(id).tap do |r|
@@ -32,17 +30,35 @@ class RelicsController < ApplicationController
     gon.highlighted_tags = relics.highlighted_tags
   end
 
+  def edit
+    relic.entries.build
+  end
+
   def update
-    if params[:section]
-      if relic.save
-        redirect_to relic_path(relic.id, :section => params[:section]) and return
-      else
-        flash[:error] = "Popraw proszę błędy wskazane poniżej"
+    authorize! :update, relic
+
+    [:photos, :documents, :links, :entries].each do |subresource|
+      updated_nested_resources(subresource).each do |concrete_subresource|
+        authorize! :update, concrete_subresource
+      end
+    end
+
+    if params[:section] == 'photos' && relic.license_agreement != "1"
+      relic.photos.where(:user_id => current_user.id).destroy_all
+      flash[:notice] = "Ponieważ nie zgodziłeś się na opublikowanie dodanych zdjęć, zostały one usunięte."
+      redirect_to relic_path(relic.id) and return
+    end
+
+    if relic.save
+      if params[:entry_id]
+        params[:entry_id] = nil
         render 'edit' and return
+      else
+        redirect_to relic_path(relic.id) and return
       end
     else
-      flash[:error] = "Nie można zaktualizować całego zabytku na raz. Podaj sekcję."
-      redirect_to relic_path(relic.id)
+      flash[:error] = "Popraw proszę błędy wskazane poniżej"
+      render 'edit' and return
     end
   end
 
@@ -83,5 +99,29 @@ class RelicsController < ApplicationController
         false
       end
     end
+
+    def updated_nested_resources(resource_name)
+      nested_ids = []
+
+      if params[:relic] && params[:relic]["#{resource_name}_attributes"]
+        params[:relic]["#{resource_name}_attributes"].each do |index, photo|
+          nested_ids.push(photo["id"].to_i) if photo["id"].to_i > 0
+        end
+      end
+
+      nested_ids.size ? relic.send(resource_name.to_sym).find(nested_ids) : []
+    end
+
+  def destroyed_nested_resources(resource_name)
+    nested_ids = []
+
+    if params[:relic] && params[:relic]["#{resource_name}_attributes"]
+      params[:relic]["#{resource_name}_attributes"].each do |index, photo|
+        nested_ids.push(photo["id"].to_i) if photo["_destroy"].to_i != 0
+      end
+    end
+
+    nested_ids.size ? relic.send(resource_name.to_sym).find(nested_ids) : []
+  end
 
 end

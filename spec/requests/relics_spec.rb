@@ -112,7 +112,7 @@ describe "Relics" do
 
       relic.photos.each do |photo|
         page.should have_css("a[href='#{show_gallery_relic_path(relic.id, photo.id)}']")
-        page.should have_css("img[src='#{photo.file.thumb.url}']")
+        page.should have_css("img[src='#{photo.file.midi.url}']")
       end
     end
 

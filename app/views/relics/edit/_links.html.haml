@@ -1,0 +1,33 @@
+%section.edit.links
+  %h2 Linki, źródła, powiązania
+
+  = semantic_form_for relic, :url => section_relic_path(relic.id, :section => :links), :remote => true do |f|
+    %p.description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sed felis magna, eu dapibus turpis. Vivamus fringilla dui vitae lacus consequat adipiscing. Nullam ultrices leo at sem vestibulum commodo.
+    - if relic.links.count > 0
+      %p.header
+        %span.number l.p.
+        %span.url Adres URL
+        %span.info Opis
+        %span.action Akcje
+      %ol.sortable{ :"data-update-url" => sort_relic_links_path(relic.id) }
+        - relic.links.each do |link|
+          = f.semantic_fields_for :links, link do |f2|
+            = content_tag_for :li, link do
+              
+              = f2.input :url, :label => false, :hint => false, :class => "url"
+              = f2.input :name, :label => false, :hint => false, :class => "info"
+              = link_to 'usuń', relic_link_path(relic.id, link.id),
+                :method => :delete,
+                :remote => true,
+                :confirm => "Czy aby na pewno?",
+                :class => "remove_link"
+      .add-link
+        = link_to 'Dodaj kolejny link...', relic_links_path(relic.id), :method => :post, :remote => true
+    - else
+      .add-link
+        = link_to 'Dodaj nowy link...', relic_links_path(relic.id), :method => :post, :remote => true
+    = f.input :links_info
+    .actions
+      = f.submit 'zapisz zmiany'
+      lub
+      = link_to "anuluj", relic_path(relic.id)
