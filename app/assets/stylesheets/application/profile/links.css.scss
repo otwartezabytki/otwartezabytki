@@ -39,9 +39,15 @@
       padding: 10px 0 10px 10px;
       border-bottom: 1px solid #b2b2b2;
       list-style-position: inside;
+      position: relative;
+      line-height: 25px;
       > div{
         display: inline-block;
-        margin-right: 10px;
+        position: absolute;
+        top: 10px;
+        &.string{
+          left: 225px;
+        }
         .input input{
           margin: 0;
           height: 22px;
@@ -63,12 +69,14 @@
         }
       }
       .remove_link{
-        background: asset-data-url("icon-delete.png") 2px 1px no-repeat;
+        background: asset-data-url("icon-delete.png") 2px 4px no-repeat;
         padding-left: 20px;
         color: #d00;
         font-size: 12px;
         line-height: 25px;
         font-weight: normal;
+        float: right;
+        margin-right: 25px;
       }
     }
   }

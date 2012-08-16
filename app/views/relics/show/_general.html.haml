@@ -2,7 +2,17 @@
   = link_to 'edytuj', edit_section_relic_path(relic.id, :general), :title => 'edytuj ogólne dane zabytku', :remote => true, :class => "edit-relic-link"
   %h1= relic.identification
   .status
-    = t("relic.status.#{relic.status}")
+    %div 
+      = t("relic.status.#{relic.status}")
+    .revise.success
+      .ico
+      %span przejrzany
+    .fill
+      .ico
+      %span nieuzupełniony
+    .relic-info
+      Zabytek 
+      %strong rejestrowy
   .location_name
     = link_to 'edytuj', edit_section_relic_path(relic.id, :general), :title => 'edytuj ogólne dane zabytku', :remote => true, :class => "edit-relic-link"
     %strong Lokalizacja:

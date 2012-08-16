@@ -599,7 +599,69 @@ section.show.general{
     line-height: 27px;
   }
   .status{
+    display: inline-block;
+    width: 100%;
     margin: 15px 0;
+    .fill, .revise{
+      background: #f1f1f1;
+      @include box-shadow(0 1px 0 0 #fff, inset 0 0 3px 0 rgba(0,0,0,0.1));
+      border: 1px solid #e0e0e0;
+      padding: 7px 15px 7px 25px;
+      position: relative;
+      float: left;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #a5a5a5;
+      .ico{
+        top: 8px;
+        left: 7px;
+        position: absolute;
+      }
+      &.success{
+        @include box-shadow(inset 0 0 15px 0 rgba(42, 129, 0, 0.2));
+        border: 1px solid #2a8100;
+        color: #2a8100;
+        font-weight: 700;
+      }
+    }
+    .fill{
+      @include border-radius(0px 4px 4px 0px);
+      .ico{
+        width: 14px;
+        height: 12px;
+        background: asset-data-url("edit-relic-ico-fill.png") no-repeat;
+      }
+      &.success{
+        .ico{
+          background: asset-data-url("edit-relic-ico-fill-success.png") no-repeat;
+        }  
+      }
+    }
+   .revise{
+      @include border-radius(4px 0px 0px 4px);
+      .ico{
+        width: 15px;
+        height: 13px;
+        background: asset-data-url("edit-relic-ico-revise.png") no-repeat;
+      }
+      &.success{
+        .ico{
+          background: asset-data-url("edit-relic-ico-revise-success.png") no-repeat;
+        }  
+      }
+    }
+    .relic-info{
+      margin-left: 10px;
+      padding-left: 20px;
+      font-size: 12px;
+      background: asset-data-url("edit-relic-ico-info.png") no-repeat;
+      display: inline-block;
+      line-height: 16px;
+      margin-top: 7px;
+      strong{
+        font-weight: 700;
+      }
+    } 
   }
   .location_name{
     background: asset-data-url("edit-relic-ico-location.png") 0 3px no-repeat;

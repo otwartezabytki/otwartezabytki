@@ -26,6 +26,37 @@
   .action{
     width: 55px;
   }
+  ol.first{
+    li{
+      list-style-type: decimal;
+      font-weight: 700;
+      font-size: 13px;
+      height: 25px;
+      overflow: hidden;
+      padding: 10px 0 10px 10px;
+      border-bottom: 1px solid #b2b2b2;
+      list-style-position: inside;
+      position: relative;
+      line-height: 25px;
+      > div{
+        position: absolute;
+        top: 10px;
+        &.string{
+          margin-left: 50px;
+        }
+        &.name{
+          left: 225px;
+        }
+        div input{
+          margin: 0;
+          height: 22px;
+          font-size: 13px;
+          font-weight: normal;
+          width: 135px;
+        }
+      }
+    }
+  }
   .sortable{
     display: inline-block;
     width: 100%;
@@ -39,9 +70,18 @@
       padding: 10px 0 10px 10px;
       border-bottom: 1px solid #b2b2b2;
       list-style-position: inside;
+      position: relative;
+      line-height: 25px;
       > div{
-        display: inline-block;
-        margin-right: 10px;
+        position: absolute;
+        top: 10px;
+        left: 225px;
+        &:first-child{
+          left: 60px;
+          .input input{
+            width: 135px;
+          }
+        }
         .input input{
           margin: 0;
           height: 22px;
@@ -63,12 +103,14 @@
         }
       }
       .remove_event{
-        background: asset-data-url("icon-delete.png") 2px 1px no-repeat;
+        background: asset-data-url("icon-delete.png") 2px 4px no-repeat;
         padding-left: 20px;
         color: #d00;
         font-size: 12px;
         line-height: 25px;
         font-weight: normal;
+        float: right;
+        margin-right: 25px;
       }
     }
   }

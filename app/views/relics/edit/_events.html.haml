@@ -9,11 +9,11 @@
         %span.date Data / Okres
         %span.info Opis
         %span.action Akcje
-      %ol
+      %ol.first
         %li
           = f.input :dating_of_obj, :label => false, :hint => false
           .name Data powstania
-      %ol.sortable{ :"data-update-url" => sort_relic_events_path(relic.id) }
+      %ol.sortable{ :"data-update-url" => sort_relic_events_path(relic.id), :start => "2" }
         - relic.events.each do |event|
           = f.semantic_fields_for :events, event do |f2|
             = content_tag_for :li, event do
