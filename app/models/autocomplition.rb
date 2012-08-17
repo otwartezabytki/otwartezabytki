@@ -1,33 +1,35 @@
 # -*- encoding : utf-8 -*-
 class Autocomplition < ActiveRecord::Base
-  include Tire::Model::Search
-  include Tire::Model::Callbacks
+  # include Tire::Model::Search
+  # include Tire::Model::Callbacks
+
+  attr_accessible :name, :indexed_at
 
   # create different index for testing
-  index_name("#{Rails.env}-autocomplitions")
-  settings :number_of_shards => 5, :number_of_replicas => 1,
-    :analysis => {
-      :filter => {
-        :pl_stop => {
-          :type           => "stop",
-          :ignore_case    => true,
-          :stopwords_path => "#{Rails.root}/config/elasticsearch/stopwords.txt"
-        },
-        :pl_synonym => {
-          :type           => "synonym",
-          :ignore_case    => true,
-          :expand         => false,
-          :synonyms_path  => "#{Rails.root}/config/elasticsearch/synonyms.txt"
-        }
-      },
-      :analyzer => {
-        :default => {
-          :type      => "custom",
-          :tokenizer => "standard",
-          :filter    => "standard, lowercase, pl_synonym, pl_stop, morfologik_stem, unique"
-        }
-      }
-    }
+  # index_name("#{Rails.env}-autocomplitions")
+  # settings :number_of_shards => 5, :number_of_replicas => 1,
+  #   :analysis => {
+  #     :filter => {
+  #       :pl_stop => {
+  #         :type           => "stop",
+  #         :ignore_case    => true,
+  #         :stopwords_path => "#{Rails.root}/config/elasticsearch/stopwords.txt"
+  #       },
+  #       :pl_synonym => {
+  #         :type           => "synonym",
+  #         :ignore_case    => true,
+  #         :expand         => false,
+  #         :synonyms_path  => "#{Rails.root}/config/elasticsearch/synonyms.txt"
+  #       }
+  #     },
+  #     :analyzer => {
+  #       :default => {
+  #         :type      => "custom",
+  #         :tokenizer => "standard",
+  #         :filter    => "standard, lowercase, pl_synonym, pl_stop, morfologik_stem, unique"
+  #       }
+  #     }
+  #   }
 
   class << self
     def gen_stat_file
@@ -63,33 +65,30 @@ class Autocomplition < ActiveRecord::Base
     end
 
     def reindex
-      index.delete
+      # index.delete
       gen_stat_file
       delete_all
-      index.create :mappings => tire.mapping_to_hash, :settings => tire.settings
+      # index.create :mappings => tire.mapping_to_hash, :settings => tire.settings
       CSV.foreach("#{Rails.root}/tmp/file_stat.csv") do |row|
-        create Hash[[:count, :identification].zip(row)]
+        create :name => row.last
       end
-      index.refresh
+      # index.refresh
     end
 
-    def search q = nil
-      q = q.to_s.strip
-      return nil if q.size < 3
-      split = q.split
-      # add asterisk only for last word
-      split[-1] = "#{split[-1]}*"
-      prepared_q = split.join(' ')
-      tire.search(:load => false, :page => 1, :per_page => 5) do
-        query { string prepared_q, :default_operator => 'AND' }
-        filter :range, :count => {:gt => 1}
-        sort do
-          by '_script', {
-            'script' =>  '_source.count * doc.score',
-            'type' => 'number',
-            'order' => 'desc'
-          }
-        end
+    def assign_to_relics
+      find_each do |tag|
+        page = 1
+        begin
+          results = Search.new(:q => tag.name, :page => page, :per_page => 1000).perform
+          next if results.blank?
+          page += 1
+          collection = results.map do |relic|
+            relic.autocomplitions = ((relic.autocomplitions || []) << tag.name.downcase).uniq
+            relic
+          end
+          Relic.tire.index.bulk_store collection
+        end while results.total > ((page - 1) * 1000)
+        tag.touch(:indexed_at)
       end
     end
 
@@ -101,7 +100,6 @@ class Autocomplition < ActiveRecord::Base
         word.size > 3 ? speller.suggestions(word).first.try(:downcase) : word
       end.compact.join(' ')
     end
-
   end
 
 end

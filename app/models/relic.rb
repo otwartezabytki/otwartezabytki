@@ -155,16 +155,10 @@ class Relic < ActiveRecord::Base
       :untouched =>  { "type" => "string", "index" => "not_analyzed" }
     }
 
-    indexes :autocomplitions do
-      indexes :name, :type => "multi_field", :fields => {
-        :name =>  { "type" => "string", "index" => "analyzed" },
-        :untouched =>  { "type" => "string", "index" => "not_analyzed" }
-      }
-    end
-
-    indexes :tags do
-      indexes :name, :index => :not_analyzed
-    end
+    indexes :autocomplitions, :type => "multi_field", :fields => {
+      :autocomplitions =>  { "type" => "string", "index" => "analyzed" },
+      :untouched =>  { "type" => "string", "index" => "not_analyzed" }
+    }
 
     with_options :index => :not_analyzed do |na|
       na.indexes :id
@@ -183,6 +177,7 @@ class Relic < ActiveRecord::Base
       na.indexes :to,  :type => "integer"
       na.indexes :country
       na.indexes :street_normalized
+      na.indexes :tags
     end
   end
 
@@ -195,10 +190,10 @@ class Relic < ActiveRecord::Base
       index.refresh
     end
 
-    def reindex_sample
+    def reindex_sample amount = 100
       index.delete
       index.create :mappings => tire.mapping_to_hash, :settings => tire.settings
-      index.import Relic.roots.select('DISTINCT identification, *').limit(100).map(&:sample_json)
+      index.import Relic.roots.select('DISTINCT identification, *').limit(amount).map(&:sample_json)
       index.refresh
     end
   end
@@ -223,18 +218,13 @@ class Relic < ActiveRecord::Base
       :virtual_commune_id => self.place.virtual_commune_id,
       :place            => { :id => self.place_id,                  :name => self.place.name },
       # new search fields
-      :description      => 'some description',
-      :has_description  => [true, false].sample,
-      :from             => from,
-      :to               => to,
-      :has_round_date   => dp.rounded?,
-      # sample categoires
       :categories       => Category.all.values.sample(3),
       :has_photos       => [true, false].sample,
       :state            => States.sample,
       :existance        => Existences.sample,
       :country          => ['pl', 'de', 'gb'].sample,
-      :autocomplitions  => ['puchatka', 'szlachciatka', 'chata polska', 'chata mazurska', 'chata wielkopolska'].shuffle.first(rand(4) + 1).map {|e| {'name' => e}}
+      :tags             => ['wawel', 'zamek', 'zespół pałacowy', 'zamek królewski'].shuffle.first(rand(2) + 1).shuffle.first(rand(4) + 1),
+      :autocomplitions  => ['puchatka', 'szlachciatka', 'chata polska', 'chata mazurska', 'chata wielkopolska'].shuffle.first(rand(4) + 1)
     }.merge(dating_hash)
   end
 
@@ -265,8 +255,7 @@ class Relic < ActiveRecord::Base
       :state            => state,
       :existance        => existance,
       :country          => country_code.downcase,
-      :tags             => tags,
-      :autocomplitions  => []
+      :tags             => tags
     }.merge(dating_hash).to_json
   end
 
