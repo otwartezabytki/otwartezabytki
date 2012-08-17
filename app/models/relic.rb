@@ -46,38 +46,28 @@ class Relic < ActiveRecord::Base
   States = ['checked', 'unchecked', 'filled']
   Existences = ['existed', 'archived', 'social']
 
-  has_many :suggestions
-  has_many :documents, :dependent => :destroy
+  has_ancestry
 
+  belongs_to :user
+  belongs_to :place
+
+  has_many :documents, :dependent => :destroy
   has_many :photos, :dependent => :destroy
   has_many :alerts, :dependent => :destroy
   has_many :entries, :dependent => :destroy
-  has_many :links, :dependent => :destroy, :order => 'position'
-  has_many :events, :dependent => :destroy, :order => 'position'
+  has_many :links, :order => 'position', :dependent => :destroy
+  has_many :events, :order => 'position', :dependent => :destroy
 
-  belongs_to :place
-
-  attr_protected :id, :created_at, :update_at
-
-  # currently used in photo view
   attr_accessor :license_agreement
+  attr_accessible :identification, :place_id, :dating_of_obj, :latitude, :longitude,
+                  :street, :tags, :categories, :photos_attributes, :description,
+                  :documents_attributes, :documents_info, :links_attributes, :links_info,
+                  :events_attributes, :entries_attributes, :license_agreement, :user_id, :user
 
-  accessible_attributes = :dating_of_obj, :group, :id, :identification, :materail,
-                          :national_number, :number, :place_id, :register_number,
-                          :street, :internal_id, :source, :tags, :categories, :photos_attributes,
-                          :documents_attributes, :documents_info, :links_attributes, :links_info,
-                          :events_attributes, :entries_attributes
-
-
-  accepts_nested_attributes_for :photos, :documents, :entries, :links, :events
-
-  attr_accessible accessible_attributes
-  attr_accessible accessible_attributes, :as => :admin
+  accepts_nested_attributes_for :photos, :documents, :entries, :links, :events, :allow_destroy => true
 
   include PlaceCaching
   include Validations
-
-  has_ancestry
 
   serialize :source
   serialize :tags, Array
@@ -350,5 +340,12 @@ class Relic < ActiveRecord::Base
   # @return photos for relic and it's descendants
   def all_photos
     Photo.where(:relic_id => [id] + descendant_ids)
+  end
+
+  private
+
+  def fill_user(resource)
+    Rails.logger.info("foobar")
+    resource.user = user
   end
 end

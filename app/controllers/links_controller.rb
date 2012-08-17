@@ -28,14 +28,4 @@ class LinksController < ApplicationController
     redirect_to edit_section_relic_path(relic.id, :links)
   end
 
-  def sort
-    params[:link].each_with_index do |link_id, index|
-      link = links.all.find{ |l| l.id.to_i == link_id.to_i }
-      authorize! :update, link
-      link.update_attribute(:position, index + 1)
-    end
-
-    render nothing: true
-  end
-
 end

@@ -13,6 +13,8 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   gem 'chosen-rails'
   gem 'jquery-ui-rails'
+  gem 'twitter-bootstrap-rails'
+  gem 'bootstrap-sass', '~> 2.0.4.0'
 end
 
 gem 'jquery-rails'

@@ -95,6 +95,10 @@ class User < ActiveRecord::Base
     @earn_points = self.suggestions.not_skipped.count
   end
 
+  def ability
+    @ability ||= Ability.new(self)
+  end
+
   class << self
     def reset_password_by_token(attributes={})
       recoverable = find_or_initialize_with_error_by(:reset_password_token, attributes[:reset_password_token])

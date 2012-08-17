@@ -19,6 +19,18 @@ geocode_location = (callback) ->
     else
       callback() if callback?
 
+remember_values = (context, selector, remove_context, remove_selector) ->
+  $(context).on 'keyup', selector, ->
+    $.cookie(window.location.href + '/' + $(this).attr('id'), $(this).val())
+
+  $(context).find(selector).each ->
+    value = $.cookie(window.location.href + '/' + $(this).attr('id'))
+    $(this).val(value) if $(this).val().length == 0 && value
+
+  $(context).find(remove_selector).click ->
+    $(this).parents(remove_context + ":first").find(selector).each ->
+      $.cookie(window.location.href + '/' + $(this).attr('id'), '')
+
 $.fn.specialize
 
   '#map_canvas':
@@ -277,16 +289,20 @@ jQuery.initializer 'section.edit.documents', ->
     width: 134
 
 jQuery.initializer 'section.edit.links', ->
+  $section = $(this)
   $(this).find('ol.sortable').sortable
     axis: 'y'
     update: ->
-      $.post($(this).data('update-url'), $(this).sortable('serialize'))
+      $section.find('.event-position').each (index) ->
+        $(this).val(index + 1)
 
 jQuery.initializer 'section.edit.events', ->
+  $section = $(this)
   $(this).find('ol.sortable').sortable
     axis: 'y'
     update: ->
-      $.post($(this).data('update-url'), $(this).sortable('serialize'))
+      $section.find('.event-position').each (index) ->
+        $(this).val(index + 1)
 
 jQuery.initializer 'section.edit.description', ->
   $(this).find('textarea.redactor').redactor
@@ -316,3 +332,38 @@ jQuery.initializer 'section.edit.entries, section.edit.entries .entries-showcase
 
 jQuery.initializer 'section.show.events', ->
   $("#scrollbar").tinyscrollbar()
+
+jQuery.initializer 'section.show.general', ->
+  $(this).find("#relic_location_popover").popover
+    title: -> $("##{$(this).data("title-id")}").html()
+    content: -> $("##{$(this).data("content-id")}").html()
+    delay: 100000
+
+  $(this).find("#relic_location_popover").click ->
+    $(this).popover('toggle')
+    false
+
+$('body').on "click", ".close_popover", ->
+  $("##{$(this).data('popover-id')}").popover('hide')
+  false
+
+jQuery.initializer 'section.edit.events', ->
+  $section = $(this)
+
+  $('.add_event').click ->
+    template = $($(this).data('template'))
+    html = template.html()
+    next_id = parseInt(template.data('next-id'))
+    template.data('next-id', next_id + 1)
+    html = html.replace(/\[\d+\]/g, "[#{next_id}]")
+    html = html.replace(/_\d+_/g, "_#{next_id}_")
+    $(html).appendTo(template.parent())
+    $section.find('.event-position').each (index) ->
+      $(this).val(index + 1)
+    false
+
+  $(this).on 'click', '.remove_event', ->
+    if confirm("Czy na pewno?")
+      $(this).parents('.event:first').hide()
+      $(this).parents('.event:first').find('input[name*="_destroy"]').val("1")
+    false

@@ -19,8 +19,7 @@ class Link < ActiveRecord::Base
 
   acts_as_list :scope => :relic
 
-  validates :relic, :user, :presence => true
-  validates :url, :name, :presence => true, :unless => :new_record?
+  validates :relic, :user, :url, :name, :presence => true
   validates_format_of :url, :with => URI::regexp(%w(http https ftp)), :if => :url_changed?
 
   def shortened_url

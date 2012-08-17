@@ -29,6 +29,7 @@
 #= require ./vendor/select2
 #= require ./vendor/spin.min
 #= require js-routes
+#= require twitter/bootstrap
 
 #= require_self
 #= require profile
@@ -58,6 +59,7 @@ jQuery.fn.initialize = ->
 popping_state = false
 ajax_callback = (data, status, xhr) ->
   if xhr.getResponseHeader('Content-Type').match(/text\/html/)
+    preserve_selector = $(this).data('preserve')
     $parsed_data = $('<div>').append($(data))
     # gon script hack
     try
@@ -67,6 +69,9 @@ ajax_callback = (data, status, xhr) ->
       return unless node
       to_replace = $($(node).data('replace'))
       if to_replace.length
+        window.node = node
+        preserve_elements = to_replace.find(preserve_selector)
+        preserve_elements.each -> $(node).find('#' + $(this).attr('id')).replaceWith(this) if $(this).attr('id')
         to_replace.replaceWith(node)
         $(node).initialize()
       else
@@ -81,11 +86,13 @@ ajax_callback = (data, status, xhr) ->
       history.pushState { autoreload: true, path: path }, $parsed_data.find('title').text(), xhr.getResponseHeader('x-path')
 
 $(document).on 'ajax:success', 'form[data-remote], a[data-remote]', (e, data, status, xhr) ->
-  ajax_callback(data, status, xhr)
+  ajax_callback.call(this, data, status, xhr)
+  e.stopPropagation()
 
 $(document).on 'ajax:error', 'form[data-remote], a[data-remote]', (e, xhr, status, error) ->
   jQuery.cookie('return_path', window.location.href, path: '/')
   window.location.href = Routes.new_user_session_path() if error == "Unauthorized"
+  e.stopPropagation()
 
 $(window).load ->
   setTimeout ->

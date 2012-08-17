@@ -12,7 +12,7 @@
         .actions 
           = f.submit 'Zapisz zmiany'
           lub
-          = link_to "anuluj", relic_path(relic.id)
+          = link_to "anuluj", relic_path(relic.id), :remote => true
 
       .column.column-middle
         #map_canvas{ :style => "width: 309px; height: 309px;" }

@@ -11,12 +11,10 @@
  *= require application/reset
  *
  *= require jquery.ui.all
- *= require chosen
- *=
+ * require application/bootstrap
  *= require application/layout
  *= require application/static
  *= require application/user
- *= require application/wizard
  *= require application/profile
  *= require vendor/colorbox
  *= require vendor/redactor
@@ -24,4 +22,3 @@
  *= require vendor/jcarousel-mini
  *= require vendor/jcarousel-midi
 */
-

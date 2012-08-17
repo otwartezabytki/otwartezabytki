@@ -22,4 +22,4 @@
     .actions
       = f.submit 'zapisz zmiany'
       lub
-      = link_to "anuluj", relic_path(relic.id)
+      = link_to "anuluj", relic_path(relic.id), :remote => true

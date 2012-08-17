@@ -9,6 +9,7 @@ class RelicsController < ApplicationController
     if id = params[:relic_id] || params[:id]
       Relic.find(id).tap do |r|
         r.attributes = params[:relic] unless request.get?
+        r.user_id = current_user.id if request.put? || request.post?
       end
     else
       Relic.new(params[:relic])
@@ -36,12 +37,6 @@ class RelicsController < ApplicationController
 
   def update
     authorize! :update, relic
-
-    [:photos, :documents, :links, :entries].each do |subresource|
-      updated_nested_resources(subresource).each do |concrete_subresource|
-        authorize! :update, concrete_subresource
-      end
-    end
 
     if params[:section] == 'photos' && relic.license_agreement != "1"
       relic.photos.where(:user_id => current_user.id).destroy_all
