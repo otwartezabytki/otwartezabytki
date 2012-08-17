@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120816100440) do
+ActiveRecord::Schema.define(:version => 20120817132141) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -39,9 +39,10 @@ ActiveRecord::Schema.define(:version => 20120816100440) do
 
   create_table "autocomplitions", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
     t.datetime "indexed_at"
+    t.integer  "count",      :default => 0
   end
 
   create_table "communes", :force => true do |t|
