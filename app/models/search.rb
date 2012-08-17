@@ -320,7 +320,8 @@ class Search
   end
 
   def suggestions
-    return [] # unless @tsearch.results.total.zero?
-    # KeywordStat.search KeywordStat.spellcheck(query)
+    return [] unless @tsearch.results.total.zero?
+    pq = PreparedQuery.new Autocomplition.spellcheck(query)
+    Autocomplition.where(["name ~* ?", pq.regexp]).order('count DESC').limit(5)
   end
 end

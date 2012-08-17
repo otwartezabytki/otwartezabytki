@@ -3,7 +3,7 @@ class Autocomplition < ActiveRecord::Base
   # include Tire::Model::Search
   # include Tire::Model::Callbacks
 
-  attr_accessible :name, :indexed_at
+  attr_accessible :name, :count, :indexed_at
 
   # create different index for testing
   # index_name("#{Rails.env}-autocomplitions")
@@ -70,7 +70,7 @@ class Autocomplition < ActiveRecord::Base
       delete_all
       # index.create :mappings => tire.mapping_to_hash, :settings => tire.settings
       CSV.foreach("#{Rails.root}/tmp/file_stat.csv") do |row|
-        create :name => row.last
+        create Hash[[:count, :name].zip(row)]
       end
       # index.refresh
     end
