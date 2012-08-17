@@ -204,8 +204,8 @@ class Relic < ActiveRecord::Base
   end
 
   def sample_json
-    dp = DateParser.new(['1 cw XX', '1916', '1907-1909'].sample)
-    from, to = dp.results
+    dp = DateParser.new ['1 cw XX', '1916', '1907-1909'].sample
+    dating_hash = Hash[[:from, :to, :has_round_date].zip(dp.results << dp.rounded?)]
     {
       :id               => id,
       :type             => 'relic',
@@ -215,8 +215,8 @@ class Relic < ActiveRecord::Base
       :place_full_name  => place_full_name,
       # :kind             => kind,
       :descendants      => self.descendants.map(&:to_descendant_hash),
-      :edit_count       => self.edit_count,
-      :skip_count       => self.skip_count,
+      # :edit_count       => self.edit_count,
+      # :skip_count       => self.skip_count,
       :voivodeship      => { :id => self.voivodeship_id,            :name => self.voivodeship.name },
       :district         => { :id => self.district_id,               :name => self.district.name },
       :commune          => { :id => self.commune_id,                :name => self.commune.name },
@@ -234,44 +234,40 @@ class Relic < ActiveRecord::Base
       :state            => States.sample,
       :existance        => Existences.sample,
       :country          => ['pl', 'de', 'gb'].sample,
-      # tags
-      :tags             => [],
       :autocomplitions  => ['puchatka', 'szlachciatka', 'chata polska', 'chata mazurska', 'chata wielkopolska'].shuffle.first(rand(4) + 1).map {|e| {'name' => e}}
-    }
+    }.merge(dating_hash)
   end
 
   def to_indexed_json
-    # backward compatibility
-    dp = DateParser.new(['1 cw XX', '1916', '1907-1909'].sample)
-    from, to = dp.results
+    dp = DateParser.new dating_of_obj
+    dating_hash = Hash[[:from, :to, :has_round_date].zip(dp.results << dp.rounded?)]
     {
       :id               => id,
       :type             => 'relic',
       :identification   => identification,
       :street           => street,
+      :street_normalized => street_normalized,
       :place_full_name  => place_full_name,
       # :kind             => kind,
       :descendants      => self.descendants.map(&:to_descendant_hash),
-      :edit_count       => self.edit_count,
-      :skip_count       => self.skip_count,
+      # :edit_count       => self.edit_count,
+      # :skip_count       => self.skip_count,
       :voivodeship      => { :id => self.voivodeship_id,            :name => self.voivodeship.name },
       :district         => { :id => self.district_id,               :name => self.district.name },
       :commune          => { :id => self.commune_id,                :name => self.commune.name },
       :virtual_commune_id => self.place.virtual_commune_id,
       :place            => { :id => self.place_id,                  :name => self.place.name },
-      # new search fields
-      :description      => 'some description',
-      :has_description  => [true, false].sample,
-      :from             => from,
-      :to               => to,
-      :has_round_date   => dp.rounded?,
-      # sample categoires
-      :categories       => Category.all.values.sample(3),
-      :has_photos       => [true, false].sample,
-      :state            => States.sample,
-      :existance        => Existences.sample,
-      :country          => ['pl', 'de', 'gb'].sample,
-    }.to_json
+      # new fields
+      :description      => description,
+      :has_description  => description?,
+      :categories       => categories,
+      :has_photos       => has_photos?,
+      :state            => state,
+      :existance        => existance,
+      :country          => country_code.downcase,
+      :tags             => tags,
+      :autocomplitions  => []
+    }.merge(dating_hash).to_json
   end
 
   def to_descendant_hash
@@ -280,10 +276,6 @@ class Relic < ActiveRecord::Base
       :identification   => identification,
       :street           => street,
     }
-  end
-
-  def full_identification
-    "#{identification} (#{register_number}) datowanie: #{dating_of_obj}; ulica: #{street}"
   end
 
   def street_normalized
@@ -351,4 +343,19 @@ class Relic < ActiveRecord::Base
   def all_photos
     Photo.where(:relic_id => [id] + descendant_ids)
   end
+
+  def has_photos?
+    all_photos.exists?
+  end
+
+  def state
+    # TODO
+    States.sample
+  end
+
+  def existance
+    # TODO
+    Existences.sample
+  end
+
 end
