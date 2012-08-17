@@ -316,3 +316,10 @@ jQuery.initializer 'section.edit.entries, section.edit.entries .entries-showcase
 
 jQuery.initializer 'section.show.events', ->
   $("#scrollbar").tinyscrollbar()
+
+jQuery.initializer 'section.show.general', ->
+  $(".show-map").click ->
+    $(".map").show()
+
+  $(".map .close").click ->
+    $(".map").hide()

@@ -18,9 +18,15 @@
     %strong Lokalizacja:
     %p= "#{relic.place.name}, powiat #{relic.district.name}, gmina #{relic.commune.name}"
     %p= relic.street
-    - if relic.latitude.present? && relic.longitude.present?
-      %p= relic.latitude.round(6).to_s + ", " + relic.longitude.round(6).to_s
-    %p= link_to "pokaż na mapie »", section_relic_path(relic.id, :section => :location)
+    
+    #map
+      =# link_to "pokaż na mapie »", section_relic_path(relic.id, :section => :location)
+      %span.show-map pokaż na mapie »
+      %div.map
+        .close zamknij
+        - if relic.latitude.present? && relic.longitude.present?
+          %p= relic.latitude.round(6).to_s + ", " + relic.longitude.round(6).to_s
+
   .dating
     = link_to 'edytuj', edit_section_relic_path(relic.id, :general), :title => 'edytuj ogólne dane zabytku', :remote => true, :class => "edit-relic-link"
     %strong Data powstania:
