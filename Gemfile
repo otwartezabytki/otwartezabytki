@@ -79,6 +79,9 @@ gem 'gravatar_image_tag'
 # api
 gem 'rabl'
 
+# wizard
+gem 'wicked'
+
 group :development, :test do
   # for debugging
   gem 'ruby-debug19'

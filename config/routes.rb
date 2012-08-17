@@ -10,7 +10,7 @@ Otwartezabytki::Application.routes.draw do
     :sessions => "users/sessions",
     :passwords => "users/passwords"
   }
-
+  resources :create_relic
   resources :tags, :only => :index
 
   resources :relics, :only => [:edit, :update, :index, :show, :edit, :new, :update] do

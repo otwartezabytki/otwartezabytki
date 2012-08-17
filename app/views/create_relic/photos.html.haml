@@ -1,0 +1,50 @@
+.edit_relic.new_relic
+  = render :partial => "stages", :locals => { :stage => 4 }
+  .creator
+    %section.main
+      %section.creator-step
+        %p.intro
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras convallis luctus malesuada. Pellentesque purus augue, facilisis id hendrerit et, tincidunt a mauris. 
+        %p.intro
+          Vivamus vestibulum semper odio, nec volutpat sapien egestas ut. Nam iaculis dapibus eros convallis mollis. Nullam non ligula ut leo porta venenatis sed in nibh.
+      %section.creator-step
+        .field.text.textarea
+          %label.main Opis
+          %textarea
+        %aside
+          %h3 O czym warto wspomnieć w opisie zabytku?
+          %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare venenatis pulvinar. Vestibulum suscipit enim in urna placerat aliquam.
+      %section.creator-step
+        %h3 Zdjęcia
+        .field.photo
+          .thumb-wrapper
+            .thumb
+              %img{:src => "http://placekitten.com/125/125"}
+          .field.text.photo-info
+            %label.main Dane autora:
+            %input{:type => 'text'}
+            = link_to 'usuń zdjęcie', '#', :class => 'delete-photo'
+        .field.photo
+          .thumb-wrapper
+            .thumb
+          .field.text.photo-info
+            %strong.label Trwa wgrywanie, proszę czekać...
+            = link_to 'anuluj', '#', :class => 'cancel'
+            .progress-bar
+              .progress-box
+                .progress-line{:style => 'width: 43%'}
+              %span.progress-value 43%
+        = link_to 'wgraj kolejne zdjecie', '#', :class => 'add-photo'
+        .field.disclaimer
+          %input{:type => 'checkbox'}
+          %label Oświadczam, że posiadam prawa do opublikowania na stronie OtwarteZabytki.pl dodane powyżej zdjęcia. Oraz krótki tekst o licencji... Lorem ipsum dolor sit amet........
+
+        %aside
+          %h3 Pamiętaj o licencji i prawach autoskich!
+          %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare venenatis pulvinar. Vestibulum suscipit enim in urna placerat aliquam.
+      = link_to '#', :class => 'next-step' do
+        %strong Zakończ!
+        %small ...i zobacz dodany zabytek
+    
+- content_for :footer_javascripts do
+  != javascript_include_tag "profile"
