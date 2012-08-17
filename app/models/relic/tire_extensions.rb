@@ -20,10 +20,11 @@ module Tire
       end
 
       def terms name, unicode_order = false, load = false
-        (self.facets[name].try(:[], 'terms') || []).tap do |terms|
+        ((self.facets || {}).get_deep(name, 'terms') || []).tap do |terms|
           terms.sort_by!{ |t| Unicode.downcase(t['term']) } if unicode_order
           terms.map! do |t|
             id = t['term'].split('_').last
+            name = 'place' if name == 'streets'
             klass = name.classify.constantize
             t['obj'] = klass.cached(:find, :with => id.split(':').first)
             t
@@ -46,6 +47,7 @@ module Tire
   module Results
     class Item
       def corrected?(user = nil)
+        return false
         @is_corrected ||= {}
         return @is_corrected[user.try(:id)] if @is_corrected[user.try(:id)]
         @is_corrected[user.try(:id)] = (!!user and user.corrected_relic_ids.include?(self[:id].to_i)) or self[:edit_count] > 2

@@ -4,7 +4,7 @@ class Search
   extend ActiveModel::Naming
 
   attr_accessor :q, :place, :from, :to, :categories, :state, :existance, :location, :order
-  attr_accessor :conditions, :range_conditions, :page, :has_photos, :has_description
+  attr_accessor :conditions, :range_conditions, :per_page, :page, :has_photos, :has_description
 
   def initialize(attributes = {})
     attributes.each do |name, value|
@@ -19,7 +19,7 @@ class Search
 
   def query
     return @_q if defined? @_q
-    @_q = @q.to_s.strip
+    @_q = @q.to_s.strip.gsub(/['"]/i, '')
     @_q
   end
 
@@ -37,6 +37,10 @@ class Search
 
   def order
     @order || 'score.desc'
+  end
+
+  def per_page
+    @per_page || 10
   end
 
   def enable_highlight
@@ -93,6 +97,20 @@ class Search
 
   def filter_facet_conditions *keys
     terms_cond = array_conditions *keys
+    return {} if terms_cond.blank?
+    {
+      'facet_filter' => {
+        'and' => terms_cond
+      }
+    }
+  end
+
+  def autocomplete_place_conds *fields
+    terms_cond = array_conditions
+    pq = PreparedQuery.new(place)
+    if pq.exists?
+      terms_cond << {'query' => {'query_string' => {'query' => pq.build, 'fields' => fields, 'default_operator' => 'AND'}}}
+    end
     return {} if terms_cond.blank?
     {
       'facet_filter' => {
@@ -170,12 +188,12 @@ class Search
     @range_conditions.present?
   end
 
-  def perform
+  def build_tsearch
     instance = self
     build_conditions
     build_range_conditions
 
-    @tsearch = Tire.search(Relic.tire.index_name, :page => page, :per_page => 10) do
+    @tsearch = Tire.search(Relic.tire.index_name, :page => page, :per_page => per_page) do
       # pagination
       size( options[:per_page].to_i ) if options[:per_page]
       from( options[:page].to_i <= 1 ? 0 : (options[:per_page].to_i * (options[:page].to_i-1)) ) if options[:page] && options[:per_page]
@@ -183,14 +201,15 @@ class Search
       # query
       query do
         boolean do
-          must { string instance.query, :default_operator => "AND", :fields => [
-            "identification^10",
-            "descendants.identification^8"
-          ]} if instance.query.present?
-          must { string instance.place, :default_operator => "AND", :fields => [
-            "place_full_name^5",
-            "street^3"
-          ]} if instance.place.present?
+          if instance.query.present?
+            should { text "identification",               instance.query, 'operator' => 'AND', 'boost' => 10 }
+            should { text "descendants.identification",   instance.query, 'operator' => 'AND', 'boost' => 8 }
+            should { text "autocomplitions",              instance.query, 'operator' => 'AND', 'boost' => 1 }
+          end
+          if instance.place.present?
+            should { text "place_full_name", instance.place, 'operator' => 'AND', 'boost' => 5 }
+            should { text "street",          instance.place, 'operator' => 'AND', 'boost' => 3 }
+          end
         end
       end if [instance.query, instance.place].any? &:present?
 
@@ -213,18 +232,96 @@ class Search
         end
       end
     end
+  end
 
+  def perform
+    build_tsearch
     # enable additions search features
     enable_facet_navigation
     enable_highlight
     enable_sort
+    @tsearch.results
+  end
 
+  def autocomplete_name
+    instance = self
+    build_conditions
+    build_range_conditions
+
+    @tsearch = Tire.search(Relic.tire.index_name, :size => 0) do
+      # query
+      query do
+        string instance.place, :default_operator => "AND", :fields => [
+            "place_full_name^5",
+            "street^3"
+          ]
+      end if instance.place.present?
+
+      filter 'and',instance.array_conditions if instance.array_conditions.present?
+      filter 'or', instance.range_conditions if instance.range_conditions?
+      pq = PreparedQuery.new(instance.query)
+      facet "autocomplitions" do
+        terms 'autocomplitions.untouched', 'size' => 20, 'script' => "term ~= regexp ? true : false", 'params' => {
+          'regexp' => pq.regexp
+        }
+      end if pq.exists?
+    end
+    @tsearch.results
+  end
+
+  def autocomplete_place
+    instance = self
+    build_conditions
+    build_range_conditions
+
+    @tsearch = Tire.search(Relic.tire.index_name, :size => 0) do
+      # query
+      query do
+        string instance.query, :default_operator => "AND", :fields => [
+          "identification^10",
+          "descendants.identification^8",
+          "autocomplitions"
+        ]
+      end if instance.query.present?
+
+      filter 'and',instance.array_conditions if instance.array_conditions.present?
+      filter 'or', instance.range_conditions if instance.range_conditions?
+
+      facet "voivodeships", instance.autocomplete_place_conds('voivodeship.name') do
+        terms nil, :script_field => "_source.voivodeship.name + '_' + _source.voivodeship.id", :size => 3
+      end
+      facet "districts", instance.autocomplete_place_conds('district.name') do
+        terms nil, :script_field => "_source.district.name + '_' + _source.district.id", :size => 3
+      end
+      facet "communes", instance.autocomplete_place_conds('commune.name') do
+        terms nil, :script_field => "_source.commune.name + '_' + _source.virtual_commune_id", :size => 3
+      end
+      facet "places", instance.autocomplete_place_conds('place.name') do
+        terms nil, :script_field => "_source.place.name + '_' + _source.place.id", :size => 3
+      end
+      facet "streets", instance.autocomplete_place_conds('street_normalized') do
+        terms nil, :script_field => "_source.street_normalized + '_' + _source.place.name + '_' + _source.place.id", :size => 3
+      end
+    end
+    @tsearch.results
+  end
+
+  def autocomplete_tags
+    instance = self
+    @tsearch = Tire.search(Relic.tire.index_name, :size => 0) do
+      pq = PreparedQuery.new(instance.query)
+      facet "tags" do
+        terms 'tags', 'size' => 20, 'script' => "term ~= regexp ? true : false", 'params' => {
+          'regexp' => pq.regexp
+        }
+      end if pq.exists?
+    end
     @tsearch.results
   end
 
   def suggestions
     return [] unless @tsearch.results.total.zero?
-    KeywordStat.search KeywordStat.spellcheck(query)
+    pq = PreparedQuery.new Autocomplition.spellcheck(query)
+    Autocomplition.where(["name ~* ?", pq.regexp]).order('count DESC').limit(5)
   end
-
 end

@@ -1,10 +1,11 @@
 # encoding: utf-8
 class Users::RegistrationsController < ApplicationController
   respond_to :html
-  before_filter :current_user!
+
+  expose(:user)
 
   def new
-    render :edit
+    render :new
   end
 
   def edit
@@ -12,18 +13,14 @@ class Users::RegistrationsController < ApplicationController
   end
 
   def create
-    update
-  end
-
-  def update
-    if current_user.update_attributes(params[:user])
+    if user.save
       flash[:notice] = t('notices.reservation_thanks')
-      current_user.send(:generate_reset_password_token!)
-      UserMailer.welcome_email(current_user, current_user.password, current_user.reset_password_token).deliver
-      sign_in current_user, :bypass => true
-      respond_with current_user, :location => after_update_path_for(current_user)
+      user.send(:generate_reset_password_token!)
+      UserMailer.welcome_email(user, user.password, user.reset_password_token).deliver
+      sign_in user, :bypass => true
+      respond_with user, :location => after_update_path_for(user)
     else
-      respond_with current_user
+      respond_with user
     end
   end
 

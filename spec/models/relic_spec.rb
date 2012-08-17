@@ -45,27 +45,6 @@ describe Relic do
     end
   end
 
-  context "analyze_query" do
-    pending 'method will be deprecated soon'
-  end
-
-  context "search" do
-    pending 'method will change pretty soon'
-  end
-
-  context "suggester" do
-    pending 'method will be deprecated soon'
-  end
-
-  context "full_identification"do
-    it "should return relic identification" do
-      relic = create(:relic)
-      relic.full_identification.should match %r(#{relic.identification})
-      relic.full_identification.should match %r(#{relic.register_number})
-      relic.full_identification.should match %r(#{relic.dating_of_obj})
-    end
-  end
-
   context "relic correctness" do
     it "should be corrected when has more than 3 suggestions" do
       relic = create(:relic)

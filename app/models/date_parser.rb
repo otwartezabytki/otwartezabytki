@@ -35,7 +35,7 @@ class DateParser
 
   def get_arabic_date s
     return nil if s.blank?
-    if s.match /^.*?(\d+)$/
+    if s.match /^.*?(\d+)/
       # przed 1986, 1964
       [$1, $1]
     elsif s.match /(\d).*?[cć]w.*?([IVX]+)/

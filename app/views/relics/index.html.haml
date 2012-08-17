@@ -19,7 +19,12 @@
           %p
             Czy chodziło ci może o:
             - tsearch.suggestions.each do |s|
-              %strong= "#{s.identification},"
+              = link_to relics_path(search_params(:q => s.name)), :remote => true do
+                %strong= "#{s.name},"
+        %p
+          Nie zanalazłeś tego czego szukasz?
+          %br
+          %strong DODAJ ZABYTEK
 
     - elsif relics.present?
       %div.relic-header

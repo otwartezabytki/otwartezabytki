@@ -1,0 +1,9 @@
+%html(lang="en")
+  %head
+    %meta(charset="utf-8")
+    %title= content_for?(:title) ? yield(:title) : "Otwarte Zabytki"
+  %body
+    = render 'shared/search'
+    .container{ :'data-replace' => 'section#main .container' }
+      = yield
+    != include_gon(:camel_case => true)

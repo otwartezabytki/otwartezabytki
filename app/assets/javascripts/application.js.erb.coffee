@@ -12,6 +12,7 @@
 #= require jquery.ui.autocomplete
 #= require jquery.ui.tabs
 #= require jquery.ui.progressbar
+#= require jquery.ui.sortable
 
 #= require ./vendor/froogaloop
 #= require ./vendor/jquery.cookie
@@ -19,85 +20,117 @@
 #= require ./vendor/jquery.cycle
 #= require ./vendor/jquery.iframe-transport
 #= require ./vendor/jquery.fileupload
+#= require ./vendor/jquery.filestyle
 #= require ./vendor/jquery.highlight-3
 #= require ./vendor/jquery.transition.min
+#= require ./vendor/jquery.jcarousel
+#= require ./vendor/jquery.tinyscrollbar.min
 #= require ./vendor/redactor
 #= require ./vendor/select2
 #= require ./vendor/spin.min
-#= require_tree ./vendor
+#= require js-routes
+
+#= require_self
+#= require profile
+
 
 @marker_image_path = "<%= image_path('wizard-gps-circle-with-info.png') %>"
 @small_marker_image_path = "<%= image_path('wizard-gps-circle.png') %>"
 @geocoder_search_path = "/geocoder/search"
-
 @photo_upload_button = "<%= image_path('upload-input.png') %>"
 
-default_spinner_opts =
-  lines: 13
-  length: 7
-  width: 4
-  radius: 10
-  rotate: 0
-  color: '#000'
-  speed: 1
-  trail: 60
-  shadow: false
-  hwaccel: false
-  className: 'spinner'
-  zIndex: 2e9
-  top: 88
-  left: 180
+observed_selectors = {}
 
-Search =
-  init: ->
-    $('body').on 'click', 'form.form-advance-search input[type=checkbox]', ->
-      $(this).parents('form:first').submit()
+jQuery.initializer = (selector, callback) ->
+  jQuery -> $(selector).each -> callback.call($(this))
+  observed_selectors[selector] = [] if typeof observed_selectors[selector] == 'undefined'
+  observed_selectors[selector].push(callback)
 
-    $('body').on 'change', 'form.form-advance-search select', ->
-      $(this).parents('form:first').submit()
+jQuery.fn.initialize = ->
+  $.each observed_selectors, (selector, callbacks) =>
+    this.each ->
+      if $(this).is(selector)
+        $.each callbacks, (_, callback) => callback.call($(this))
 
-    $('body').on 'ajax:success', 'form.form-advance-search, nav.pagination, div.sidebar-nav, div.breadcrumb', (e, data) ->
-      Search.render(data)
-      # pushState
-      history.pushState { searchreload: true }, $(data).find('title').text(), '/relics?' + $('form.form-advance-search').serialize()
-  autocomplete: ->
-    # autocomplete
-    $input = $('input.autocomplete-q')
-    if $input.length > 0
-      $input.autocomplete(
-        html: true,
-        minLength: 2,
-        source: (request, callback) ->
-          $.getJSON "/relics/suggester", q: request.term, callback
-        select: (event, ui) ->
-          window.location = ui.item.path
-      )
+    $(this).find(selector).each ->
+      $.each callbacks, (_, callback) => callback.call($(this))
 
-  render: (data) ->
-    ['form.form-advance-search', '#main div.sidebar-nav', '#relics'].map (el) ->
-      $(el).replaceWith $(data).find(el)
-    Search.autocomplete()
+popping_state = false
+ajax_callback = (data, status, xhr) ->
+  if xhr.getResponseHeader('Content-Type').match(/text\/html/)
+    $parsed_data = $('<div>').append($(data))
+    # gon script hack
+    try
+      jQuery.globalEval $parsed_data.find('script:contains(window.gon)').text()
 
-# window
-window.onload = ->
-  window.onpopstate = (e) ->
-    location = history.location || document.location
-    if e.state?.searchreload or location.pathname.match(/\/?relics\/?$/)
-      $.get location, Search.render
+    try_to_process_replace = (node) ->
+      return unless node
+      to_replace = $($(node).data('replace'))
+      if to_replace.length
+        to_replace.replaceWith(node)
+        $(node).initialize()
+      else
+        try_to_process_replace($(node).parents('[data-replace]:first')[0])
 
-@documentLoaded = ->
+    $parsed_data.find('[data-replace]').each ->
+      unless $(this).find('[data-replace]').length
+        try_to_process_replace(this)
+
+    unless popping_state
+      path = xhr.getResponseHeader('x-path')
+      history.pushState { autoreload: true, path: path }, $parsed_data.find('title').text(), xhr.getResponseHeader('x-path')
+
+$(document).on 'ajax:success', 'form[data-remote], a[data-remote]', (e, data, status, xhr) ->
+  ajax_callback(data, status, xhr)
+
+$(document).on 'ajax:error', 'form[data-remote], a[data-remote]', (e, xhr, status, error) ->
+  jQuery.cookie('return_path', window.location.href, path: '/')
+  window.location.href = Routes.new_user_session_path() if error == "Unauthorized"
+
+$(window).load ->
+  setTimeout ->
+    $(window).bind 'popstate', (event) ->
+      state = event.originalEvent.state
+      console.log('pop state', document.location, event)
+      popping_state = true
+      if state && state.autoreload
+        $.ajax(state.path).success(ajax_callback).complete(-> popping_state = false)
+      else
+        $.ajax(document.location).success(ajax_callback).complete(-> popping_state = false)
+  , 500
+
+
+jQuery.initializer 'input.autocomplete-q', ->
+  this.autocomplete(
+    html: true,
+    minLength: 2,
+    source: (request, callback) ->
+      $.getJSON "/suggester/query", $('form.form-advance-search').serialize(), callback
+    select: (event, ui) ->
+      $('form.form-advance-search').submit( )
+  )
+
+jQuery.initializer 'input.autocomplete-place', ->
+  this.autocomplete(
+    html: true,
+    minLength: 2,
+    source: (request, callback) ->
+      $.getJSON "/suggester/place", $('form.form-advance-search').serialize(), callback
+    select: (event, ui) ->
+      $('form.form-advance-search input#search_location').val(ui.item.location)
+      $('form.form-advance-search').submit( )
+  )
+
+jQuery.initializer 'input[type=checkbox]', ->
+  this.click =>
+    this.parents('form:first').submit()
+
+jQuery.initializer 'div.search-results .relic', ->
+  if this.length > 0 and gon.highlightedTags
+    for tag in gon.highlightedTags
+      this.highlight(tag)
 
 jQuery ->
-  # search autoreload
-  Search.init()
-  Search.autocomplete()
-
-  # highlight
-  $highlightArea = $('div.search-results .relic')
-  if $highlightArea.length > 0 and gon.highlightedTags
-    for tag in gon.highlightedTags
-      $highlightArea.highlight(tag)
-
   # font resize
   toggleFontResizeButtons = () ->
     $("span.plus, span.minus").removeClass("disabled")
@@ -134,7 +167,22 @@ jQuery ->
   #tabs
   show_tab = (panel) ->
     unless $(panel).find('iframe').length
-      spinner = new Spinner(default_spinner_opts).spin(panel)
+      spinner = new Spinner(
+        lines: 13
+        length: 7
+        width: 4
+        radius: 10
+        rotate: 0
+        color: '#000'
+        speed: 1
+        trail: 60
+        shadow: false
+        hwaccel: false
+        className: 'spinner'
+        zIndex: 2e9
+        top: 88
+        left: 180
+      ).spin(panel)
       $(panel).append($(panel).find('script').html())
       $(panel).find('iframe').load ->
         $(this).css(opacity: 1)
@@ -160,8 +208,6 @@ jQuery ->
     speed:    0,
     timeout:  4000
   })
-
-  window.documentLoaded(document)
 
   $('.alert').on 'click', 'a.close', ->
     $(this).parent('.alert').hide()

@@ -64,7 +64,7 @@ pl:
   date:
     formats:
       default: "%d.%m.%Y"
-      short: "%d %b"
+      short: "%e %b %Y"
       long: "%d %B %Y"
       verbose: "%A, %d %B %Y"
 
@@ -206,6 +206,8 @@ pl:
         national_number: "NID"
         categories: "Kategorie"
         tags: "Tagi"
+        documents_info: "Gdzie szukać?"
+        links_info: "Gdzie szukać?"
       user:
         email: Adres e-mail
         password: Hasło
@@ -215,6 +217,13 @@ pl:
         updated_at: Zaktualizowanie danych
       photo:
         author: "Dane autora (imię, nazwisko)"
+        date_taken: "Data wykonania"
+      document:
+        name: Nazwa
+        description: Krótki opis
+      entry:
+        title: Tytuł
+        body: Opis
     models:
       relic:
         zero:  Zabytek
@@ -271,3 +280,18 @@ pl:
     status:
       checked_but_not_filled: "Sprawdzony, ale nieuzupełniony"
 
+  formtastic:
+    hints:
+      relic:
+        identification: To jest informacja o nazwie zabytku
+        documents_info: To jest informacja gdzie szukać dokumenty
+        links_info: To jest informacja gdzie szukać linki
+      document:
+        name: Do jest podpowiedź do nazwy dokumentu
+        description: To jest podpowiedź do opisu dokumentu
+      photo:
+        author: To jest podpowiedź do autora zdjęcia
+        date_taken: To jest podpowiedź do daty wykonania zdjęcia
+      entry:
+        title: To jest podpowiedź do tytułu wpisu społeczności
+        body: To jest podpowiedź do opisu wpisu społeczności

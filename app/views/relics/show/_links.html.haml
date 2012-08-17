@@ -1,0 +1,19 @@
+%section.show.links
+  %h2 Linki, źródła, powiązania
+  - if relic.links.count > 0
+    = link_to 'edytuj', edit_section_relic_path(relic.id, :links), :title => 'edytuj linki powiązane z zabytkiem', :remote => true, :class => "edit-relic-link"
+    .content
+      %ul
+        - relic.links.each do |link|
+          %li
+            = link_to link.shortened_url, link.url
+            \-
+            = link.name
+  - else
+    .placeholder
+      %p
+        Nikt jeszcze nie dodał żadnych linków.
+        %br
+        Bądź pierwszy!
+
+      = link_to "dodaj link", edit_section_relic_path(relic.id, :links), :remote => true

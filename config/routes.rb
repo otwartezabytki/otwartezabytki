@@ -13,23 +13,31 @@ Otwartezabytki::Application.routes.draw do
   resources :create_relic
   resources :tags, :only => :index
 
-  resources :relics, :only => [:edit, :update, :index, :show, :edit, :new, :update] do
-    collection do
-      get :suggester
+  resources :relics, :except => [:destory]do
+    resources :photos, :documents, :entries
+    resources :links do
+      collection do
+        post :sort
+      end
+    end
+    resources :events do
+      collection do
+        post :sort
+      end
     end
 
     member do
-      get :corrected
-      get :thank_you
-      get :gonext
-      match 'gallery(/:photo_id)', :to => 'relics#gallery', :as => 'show_gallery'
-      match 'edit/:section', :to => 'relics#edit', :as => 'edit_section'
-      match 'show/:section', :to => 'relics#show', :as => 'show_section'
+      # get :corrected
+      # get :thank_you
+      # get :gonext
+      match 'section/:section/edit', :to => 'relics#edit', :as => 'edit_section'
+      match 'section/:section', :to => 'relics#show', :as => 'section', :via => :get
+      match 'section/:section', :to => 'relics#update', :as => 'section', :via => :put
     end
-
-    resources :photos
-    resources :documents
   end
+
+  get 'suggester/query'
+  get 'suggester/place'
 
   resources :tags, :only => [:create]
 

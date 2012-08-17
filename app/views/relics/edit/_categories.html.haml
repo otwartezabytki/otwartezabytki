@@ -1,0 +1,25 @@
+%section.edit.categories
+  %h2 Tagi i kategorie
+  = semantic_form_for relic, :url => section_relic_path(relic.id, :section => :categories), :remote => true do |f|
+    %p.description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sed felis magna, eu dapibus turpis. Vivamus fringilla dui vitae lacus consequat adipiscing. Nullam ultrices leo at sem vestibulum commodo.
+    = f.input :tags, :input_html => { :value => relic.tags.join(','), :style => "width: 680px", :multiple => true }
+    .select
+      %label Kategorie
+      .input
+        .column.column-first
+          = f.input :categories, :as => :check_boxes,
+            :collection => Category.first_column.invert, :label => "",
+            :input_html => { :multiple => true }
+        .column.column-second
+          = f.input :categories, :as => :check_boxes,
+            :collection => Category.second_column.invert, :label => "",
+            :input_html => { :multiple => true }
+        .column.column-third
+          = f.input :categories, :as => :check_boxes,
+            :collection => Category.third_column.invert, :label => "",
+            :input_html => { :multiple => true }
+
+    .actions
+      = f.submit 'zapisz zmiany'
+      lub
+      = link_to "anuluj", relic_path(relic.id)

@@ -67,7 +67,7 @@
 
             = render 'shared/search'
         %section#main
-          .container
+          .container{ :'data-replace' => 'section#main .container' }
             - if flash[:error] || flash[:notice]
               .row
                 - if flash[:error]

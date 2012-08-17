@@ -13,12 +13,23 @@
 #
 
 class Photo < ActiveRecord::Base
+  include Rails.application.routes.url_helpers
+
   belongs_to :relic
   belongs_to :user
 
-  attr_accessible :relic_id, :user_id, :author, :file
+  attr_accessible :relic_id, :user_id, :author, :file, :date_taken
 
   mount_uploader :file, PhotoUploader
 
   validates :file, :relic, :user, :presence => true
+  validates :author, :date_taken, :presence => true, :unless => :new_record?
+
+  def self.one_after(photo_id)
+    where('id > ?', photo_id).order('id ASC').limit(1).first
+  end
+
+  def self.one_before(photo_id)
+    where('id < ?', photo_id).order('id DESC').limit(1).first
+  end
 end

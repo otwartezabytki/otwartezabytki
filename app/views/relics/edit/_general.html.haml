@@ -1,36 +1,9 @@
-%section.general
+%section.edit.general
   %h2 Podstawowe informacje
-  = semantic_form_for relic do |f|
-    .help-content.active
-      .help Pomoc
-      .help-extended
-        %span.close Zamknij pomoc
-        %p
-          Sprawdź, czy nazwa zabytku jest poprawna (np. jeśli zaczyna się od małej litery, popraw ją na wielką).
-          Jeśli chcesz ją poprawić, kliknij „Zmień”. Pojawi się pole, w którym można poprawić nazwę.
-          Następnie naciśnij „Zapisz”, aby zachować poprawioną nazwę. Jeśli jest poprawna, kliknij „Potwierdź”.
-          Jeśli nie wiesz, czy nazwa jest poprawna, spróbuj znaleźć informacje na stronach internetowych lub w książkach.
-          Jeśli Ci się nie uda, kliknij „Nie wiem”, a automatycznie przejdziesz do kolejnego punktu.
-          W przypadku popełnienia błędu kliknij „Edytuj ponownie” i edytuj ponownie.
-
+  = semantic_form_for relic, :url => section_relic_path(relic.id, :section => :general), :remote => true do |f|
+    %p.description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sed felis magna, eu dapibus turpis. Vivamus fringilla dui vitae lacus consequat adipiscing. Nullam ultrices leo at sem vestibulum commodo.
     = f.input :identification, :as => :string
-    = f.input :tags, :input_html => { :value => relic.tags.join(','), :style => "width: 510px", :multiple => true }
-    .select
-      %label Kategorie
-      .input
-        .column.column-first
-          = f.input :categories, :as => :check_boxes,
-            :collection => Category.first_column.invert, :label => "",
-            :input_html => { :multiple => true }
-        .column.column-second
-          = f.input :categories, :as => :check_boxes,
-            :collection => Category.second_column.invert, :label => "",
-            :input_html => { :multiple => true }
-        .column.column-third
-          = f.input :categories, :as => :check_boxes,
-            :collection => Category.third_column.invert, :label => "",
-            :input_html => { :multiple => true }
-
-    = f.submit 'zapisz zmiany'
-    lub
-    = link_to "anuluj", relic_path(relic.id)
+    .actions 
+      = f.submit 'zapisz zmiany'
+      lub
+      = link_to "anuluj", relic_path(relic.id)

@@ -1,3 +1,5 @@
+# -*- encoding : utf-8 -*-
+
 # == Schema Information
 #
 # Table name: relics
@@ -39,7 +41,6 @@
 #  index_relics_on_ancestry  (ancestry)
 #
 
-# -*- encoding : utf-8 -*-
 ActiveSupport::Dependencies.depend_on 'relic/tire_extensions'
 class Relic < ActiveRecord::Base
   States = ['checked', 'unchecked', 'filled']
@@ -47,11 +48,12 @@ class Relic < ActiveRecord::Base
 
   has_many :suggestions
   has_many :documents, :dependent => :destroy
+
   has_many :photos, :dependent => :destroy
   has_many :alerts, :dependent => :destroy
   has_many :entries, :dependent => :destroy
-  has_many :links, :dependent => :destroy
-  has_many :events, :dependent => :destroy
+  has_many :links, :dependent => :destroy, :order => 'position'
+  has_many :events, :dependent => :destroy, :order => 'position'
 
   belongs_to :place
 
@@ -62,15 +64,12 @@ class Relic < ActiveRecord::Base
 
   accessible_attributes = :dating_of_obj, :group, :id, :identification, :materail,
                           :national_number, :number, :place_id, :register_number,
-                          :street, :internal_id, :source, :tags, :categories, :photos_attributes
+                          :street, :internal_id, :source, :tags, :categories, :photos_attributes,
+                          :documents_attributes, :documents_info, :links_attributes, :links_info,
+                          :events_attributes, :entries_attributes
 
 
-  accepts_nested_attributes_for :photos, :allow_destroy => true
-  accepts_nested_attributes_for :documents, :allow_destroy => true
-
-  accepts_nested_attributes_for :entries
-  accepts_nested_attributes_for :links
-  accepts_nested_attributes_for :events
+  accepts_nested_attributes_for :photos, :documents, :entries, :links, :events
 
   attr_accessible accessible_attributes
   attr_accessible accessible_attributes, :as => :admin
@@ -83,6 +82,8 @@ class Relic < ActiveRecord::Base
   serialize :source
   serialize :tags, Array
   serialize :categories, Array
+
+  validates :identification, :presence => true, :if => :identification_changed?
 
   before_validation do
     if tags_changed? && tags.is_a?(Array)
@@ -154,9 +155,11 @@ class Relic < ActiveRecord::Base
       :untouched =>  { "type" => "string", "index" => "not_analyzed" }
     }
 
-    with_options :index => :analyzed do |a|
-      a.indexes :street
-    end
+    indexes :autocomplitions, :type => "multi_field", :fields => {
+      :autocomplitions =>  { "type" => "string", "index" => "analyzed" },
+      :untouched =>  { "type" => "string", "index" => "not_analyzed" }
+    }
+
     with_options :index => :not_analyzed do |na|
       na.indexes :id
       na.indexes :kind
@@ -173,12 +176,8 @@ class Relic < ActiveRecord::Base
       na.indexes :from,  :type => "integer"
       na.indexes :to,  :type => "integer"
       na.indexes :country
-
-      # backward compatibility
-      na.indexes :voivodeship_id
-      na.indexes :district_id
-      na.indexes :commune_id
-      na.indexes :place_id
+      na.indexes :street_normalized
+      na.indexes :tags
     end
   end
 
@@ -191,104 +190,73 @@ class Relic < ActiveRecord::Base
       index.refresh
     end
 
-    def reindex_sample
+    def reindex_sample amount = 100
       index.delete
       index.create :mappings => tire.mapping_to_hash, :settings => tire.settings
-      index.import Relic.roots.select('DISTINCT identification, *').limit(100).map(&:sample_json)
+      index.import Relic.roots.select('DISTINCT identification, *').limit(amount).map(&:sample_json)
       index.refresh
     end
-
-    def analyze_query q
-      analyzed = Relic.index.analyze q
-      return '*' if !analyzed or (analyzed and analyzed['tokens'].blank?)
-      analyzed['tokens'].group_by{|i| i['position']}.inject([]) do |s1, (k, v)|
-        s1 << v.inject([]) {|s2, t| s2 << "#{t['token']}*"; s2}.join(' OR ')
-        s1
-      end.join(' ')
-    end
-
-    def next_for(user, search_params)
-      params = (search_params || {}).merge(:per_page => 1, :seen_relic_ids => user.seen_relic_ids, :corrected_relic_ids => user.corrected_relic_ids)
-      self.search(params).first || self.first(:offset => rand(self.count))
-    end
-
-    def next_random_in(conditions)
-      self.where(conditions).first(:offset => rand(self.where(conditions).count))
-    end
-
-    def next_few_for(user, search_params, count)
-      params = (search_params || {}).merge(:per_page => count, :corrected_relic_ids => user.corrected_relic_ids)
-      res = self.search(params).take(count)
-      res.empty? ? self.where(:offset => rand(self.count)).limit(count) : res
-    end
-
   end
 
   def sample_json
-    dp = DateParser.new(['1 cw XX', '1916', '1907-1909'].sample)
-    from, to = dp.results
+    dp = DateParser.new ['1 cw XX', '1916', '1907-1909'].sample
+    dating_hash = Hash[[:from, :to, :has_round_date].zip(dp.results << dp.rounded?)]
     {
       :id               => id,
       :type             => 'relic',
       :identification   => identification,
       :street           => street,
+      :street_normalized => street_normalized,
       :place_full_name  => place_full_name,
       # :kind             => kind,
       :descendants      => self.descendants.map(&:to_descendant_hash),
-      :edit_count       => self.edit_count,
-      :skip_count       => self.skip_count,
+      # :edit_count       => self.edit_count,
+      # :skip_count       => self.skip_count,
       :voivodeship      => { :id => self.voivodeship_id,            :name => self.voivodeship.name },
       :district         => { :id => self.district_id,               :name => self.district.name },
       :commune          => { :id => self.commune_id,                :name => self.commune.name },
       :virtual_commune_id => self.place.virtual_commune_id,
       :place            => { :id => self.place_id,                  :name => self.place.name },
       # new search fields
-      :description      => 'some description',
-      :has_description  => [true, false].sample,
-      :from             => from,
-      :to               => to,
-      :has_round_date   => dp.rounded?,
-      # sample categoires
       :categories       => Category.all.values.sample(3),
       :has_photos       => [true, false].sample,
       :state            => States.sample,
       :existance        => Existences.sample,
       :country          => ['pl', 'de', 'gb'].sample,
-    }
+      :tags             => ['wawel', 'zamek', 'zespół pałacowy', 'zamek królewski'].shuffle.first(rand(2) + 1).shuffle.first(rand(4) + 1),
+      :autocomplitions  => ['puchatka', 'szlachciatka', 'chata polska', 'chata mazurska', 'chata wielkopolska'].shuffle.first(rand(4) + 1)
+    }.merge(dating_hash)
   end
 
   def to_indexed_json
-    # backward compatibility
-    dp = DateParser.new(['1 cw XX', '1916', '1907-1909'].sample)
-    from, to = dp.results
+    dp = DateParser.new dating_of_obj
+    dating_hash = Hash[[:from, :to, :has_round_date].zip(dp.results << dp.rounded?)]
     {
       :id               => id,
       :type             => 'relic',
       :identification   => identification,
       :street           => street,
+      :street_normalized => street_normalized,
       :place_full_name  => place_full_name,
       # :kind             => kind,
       :descendants      => self.descendants.map(&:to_descendant_hash),
-      :edit_count       => self.edit_count,
-      :skip_count       => self.skip_count,
+      # :edit_count       => self.edit_count,
+      # :skip_count       => self.skip_count,
       :voivodeship      => { :id => self.voivodeship_id,            :name => self.voivodeship.name },
       :district         => { :id => self.district_id,               :name => self.district.name },
       :commune          => { :id => self.commune_id,                :name => self.commune.name },
       :virtual_commune_id => self.place.virtual_commune_id,
       :place            => { :id => self.place_id,                  :name => self.place.name },
-      # new search fields
-      :description      => 'some description',
-      :has_description  => [true, false].sample,
-      :from             => from,
-      :to               => to,
-      :has_round_date   => dp.rounded?,
-      # sample categoires
-      :categories       => Category.all.values.sample(3),
-      :has_photos       => [true, false].sample,
-      :state            => States.sample,
-      :existance        => Existences.sample,
-      :country          => ['pl', 'de', 'gb'].sample,
-    }.to_json
+      # new fields
+      :description      => description,
+      :has_description  => description?,
+      :categories       => categories,
+      :has_photos       => has_photos?,
+      :state            => state,
+      :existance        => existance,
+      :country          => country_code.downcase,
+      :tags             => tags
+    }.merge(dating_hash).to_json
   end
 
   def to_descendant_hash
@@ -299,8 +267,12 @@ class Relic < ActiveRecord::Base
     }
   end
 
-  def full_identification
-    "#{identification} (#{register_number}) datowanie: #{dating_of_obj}; ulica: #{street}"
+  def street_normalized
+    street_normalized = street.split('/').first.to_s
+    street_normalized.gsub!(/[\W\d]+$/i, '')
+    street_normalized.gsub!(/\d+[a-z]?([i,\/\s]+)?\d+[a-z]$/i, '')
+    street_normalized.strip!
+    street_normalized
   end
 
   def get_parent_ids
@@ -332,11 +304,6 @@ class Relic < ActiveRecord::Base
     root.tire.update_index
   end
 
-  def create_relic_index
-    # always update root document
-    root.tire.update_index
-  end
-
   def corrected_by?(user)
     user.suggestions.where(:relic_id => self.id).count > 0
   end
@@ -356,4 +323,28 @@ class Relic < ActiveRecord::Base
   def country
     I18n.t(country_code.upcase, :scope => 'countries')
   end
+
+  def main_photo
+    @main_photo ||= self.photos.where(:main => true).first || self.photos.first
+  end
+
+  # @return photos for relic and it's descendants
+  def all_photos
+    Photo.where(:relic_id => [id] + descendant_ids)
+  end
+
+  def has_photos?
+    all_photos.exists?
+  end
+
+  def state
+    # TODO
+    States.sample
+  end
+
+  def existance
+    # TODO
+    Existences.sample
+  end
+
 end

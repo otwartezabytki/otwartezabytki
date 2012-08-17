@@ -3,6 +3,22 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :page_pl_path, :search_params, :tsearch
 
+  # disabling because it doesn't work with history back when page is retrieved from cache
+  layout :resolve_layout
+  def resolve_layout
+    if request.xhr?
+      'ajax'
+    else
+      'application'
+    end
+  end
+
+  # for ajax history management
+  before_filter do
+    response.headers['x-path'] = request.fullpath
+  end
+
+  # for logging out anonymous users
   before_filter do
     if current_user.present? && current_user.username.blank?
       sign_out current_user
@@ -19,7 +35,11 @@ class ApplicationController < ActionController::Base
   end
 
   def search_params opt = {}
-    cond = params[:search] || {}
-    { :search => cond.merge(opt) }
+    cond = (params[:search] || {}).inject(HashWithIndifferentAccess.new) {|m, (k,v)| m[k] = v if v.present?; m}
+    { :search => cond.merge(opt.with_indifferent_access) }.with_indifferent_access
+  end
+
+  def after_sign_in_path_for(resource)
+    cookies[:return_path] || super
   end
 end
