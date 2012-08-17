@@ -108,6 +108,9 @@ class RelicsController < ApplicationController
     end
   end
 
+  def new
+  end
+
   protected
     def ensure_not_seen_relic
       possible_next = Relic.next_for(current_user, session[:search_params])

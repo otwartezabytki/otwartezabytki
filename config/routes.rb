@@ -13,7 +13,7 @@ Otwartezabytki::Application.routes.draw do
 
   resources :tags, :only => :index
 
-  resources :relics, :only => [:edit, :update, :index, :show, :edit, :update] do
+  resources :relics, :only => [:edit, :update, :index, :show, :edit, :new, :update] do
     collection do
       get :suggester
     end
