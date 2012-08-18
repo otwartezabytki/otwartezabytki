@@ -28,4 +28,6 @@ class Link < ActiveRecord::Base
     shortened_path = "..." + shortened_path[-20..-1].to_s if shortened_path.length > 20
     "#{uri.host}/#{shortened_path}"
   end
+
+  include CanCan::Authorization
 end

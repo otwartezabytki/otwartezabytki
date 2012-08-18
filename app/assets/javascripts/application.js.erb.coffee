@@ -87,6 +87,9 @@ ajax_callback = (data, status, xhr) ->
               fitToView: false
               fixed: false
               scrolling: 'no'
+              afterShow: ->
+                $.fancybox.wrap.bind 'onReset', (e) ->
+                  $('.main-container:last').remove()
               afterClose: ->
                 history.pushState { autoreload: true, path: window.before_fancybox_url }, $('title').text(), window.before_fancybox_url
             $(node).initialize()

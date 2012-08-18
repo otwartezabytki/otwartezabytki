@@ -21,7 +21,7 @@
             = f2.input :name, :label => false, :hint => false, :class => "info"
             = f2.hidden_field :position, :class => "event-position"
             = f2.hidden_field :_destroy
-            = link_to 'usuń', '#', :confirm => "Czy aby na pewno?", :class => "remove_event"
+            = link_to 'usuń', '#', :class => "remove_event"
 
       %script{ :type => "text/html", :id => "event_template", :"data-next-id" => relic.events.length }
         = f.semantic_fields_for :events, relic.events.build do |f2|
@@ -30,7 +30,7 @@
             = f2.input :name, :label => false, :hint => false, :class => "info"
             = f2.hidden_field :position, :class => "event-position"
             = f2.hidden_field :_destroy
-            = link_to 'usuń', '#', :confirm => "Czy aby na pewno?", :class => "remove_event"
+            = link_to 'usuń', '#', :class => "remove_event"
 
     .add-event
       = link_to 'Dodaj kolejne wydarzenie...', '#', :class => "add_event", :"data-template" => "#event_template"

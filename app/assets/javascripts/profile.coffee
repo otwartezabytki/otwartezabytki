@@ -288,22 +288,6 @@ jQuery.initializer 'section.edit.documents', ->
     imagewidth: 134
     width: 134
 
-jQuery.initializer 'section.edit.links', ->
-  $section = $(this)
-  $(this).find('ol.sortable').sortable
-    axis: 'y'
-    update: ->
-      $section.find('.event-position').each (index) ->
-        $(this).val(index + 1)
-
-jQuery.initializer 'section.edit.events', ->
-  $section = $(this)
-  $(this).find('ol.sortable').sortable
-    axis: 'y'
-    update: ->
-      $section.find('.event-position').each (index) ->
-        $(this).val(index + 1)
-
 jQuery.initializer 'section.edit.description', ->
   $(this).find('textarea.redactor').redactor
     focus: false
@@ -367,3 +351,38 @@ jQuery.initializer 'section.edit.events', ->
       $(this).parents('.event:first').hide()
       $(this).parents('.event:first').find('input[name*="_destroy"]').val("1")
     false
+
+  $(this).find('ol.sortable').sortable
+    axis: 'y'
+    update: ->
+      $section.find('.event-position').each (index) ->
+        $(this).val(index + 1)
+
+jQuery.initializer 'section.edit.links', ->
+  $section = $(this)
+
+  $(this).on 'click', '.add_link', ->
+    template = $($(this).data('template'))
+    html = template.html()
+    next_id = parseInt(template.data('next-id'))
+    template.data('next-id', next_id + 1)
+    html = html.replace(/\[\d+\]/g, "[#{next_id}]")
+    html = html.replace(/_\d+_/g, "_#{next_id}_")
+    $(html).appendTo(template.parent())
+    $section.find('.link-position').each (index) ->
+      $(this).val(index + 1)
+    $('#links_container').show()
+    false
+
+  $(this).on 'click', '.remove_link', ->
+    if confirm("Czy na pewno?")
+      $(this).parents('.link:first').hide()
+      $(this).parents('.link:first').find('input[name*="_destroy"]').val("1")
+      $('#links_container').hide() if $('.link:visible').length == 0
+    false
+
+  $(this).find('ol.sortable').sortable
+    axis: 'y'
+    update: ->
+      $section.find('.link-position').each (index) ->
+        $(this).val(index + 1)
