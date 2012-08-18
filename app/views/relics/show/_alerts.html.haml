@@ -1,0 +1,28 @@
+%section.show.alerts
+  %h2 Alerty
+  - if relic.events.count > 0
+    = link_to image_tag('edit-relic-ico-alert.png') + 'zgłoś alert', edit_section_relic_path(relic.id, :events), :title => 'edytuj alerty związane z zabytkiem', :remote => true, :class => "edit-relic-link"
+    .content
+      .not-fixed
+        %h4 Zgłoszone alerty nienaprawione
+        %ul
+          %li
+            .image
+              = image_tag("alert-example-image.png")
+            %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum suscipit, magna quis pellentesque faucibus, tortor magna rutrum.
+      .fixed
+        %h4 Zgłoszone alerty poprawione
+        %ul
+          %li
+            .image
+              = image_tag("alert-image-mini-example.png")
+            %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum suscipit, magna quis pellentesque faucibus, tortor magna rutrum.
+      %a.alert-link zgłoś, że zabytek nie istnieje
+  - else
+    .placeholder
+      %p
+        Nie zgłoszono żadnych alertów do tej pory...
+
+      = link_to image_tag('edit-relic-ico-alert.png') + "zgłoś alert", edit_section_relic_path(relic.id, :events), :remote => true
+
+      %a.alert-link zgłoś, że zabytek nie istnieje
