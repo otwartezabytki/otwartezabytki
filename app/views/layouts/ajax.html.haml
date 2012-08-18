@@ -2,8 +2,13 @@
   %head
     %meta(charset="utf-8")
     %title= content_for?(:title) ? yield(:title) : "Otwarte Zabytki"
+    / Prevent showing bare page on history back
+    :javascript
+      window.onload = function() {
+        window.location.reload()
+      }
   %body
     = render 'shared/search'
-    .container{ :'data-replace' => 'section#main .container' }
+    .container.main-container{ :'data-replace' => '.main-container' }
       = yield
     != include_gon(:camel_case => true)

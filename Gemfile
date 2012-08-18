@@ -15,6 +15,7 @@ group :assets do
   gem 'jquery-ui-rails'
   gem 'twitter-bootstrap-rails'
   gem 'bootstrap-sass', '~> 2.0.4.0'
+  gem 'fancybox-rails', :git => 'https://github.com/sverigemeny/fancybox-rails'
 end
 
 gem 'jquery-rails'

@@ -26,7 +26,7 @@ class PhotoUploader < CarrierWave::Uploader::Base
   end
 
   version :maxi do
-    process :resize_to_fill => [300, 335]
+    process :resize_to_fill => [300, 300]
   end
 
   version :full do

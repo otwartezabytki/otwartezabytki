@@ -30,6 +30,7 @@
 #= require ./vendor/spin.min
 #= require js-routes
 #= require twitter/bootstrap
+#= require fancybox
 
 #= require_self
 #= require profile
@@ -39,6 +40,8 @@
 @small_marker_image_path = "<%= image_path('wizard-gps-circle.png') %>"
 @geocoder_search_path = "/geocoder/search"
 @photo_upload_button = "<%= image_path('upload-input.png') %>"
+
+$.ajaxSetup(dataType: 'html')
 
 observed_selectors = {}
 
@@ -59,23 +62,34 @@ jQuery.fn.initialize = ->
 popping_state = false
 ajax_callback = (data, status, xhr) ->
   if xhr.getResponseHeader('Content-Type').match(/text\/html/)
-    preserve_selector = $(this).data('preserve')
     $parsed_data = $('<div>').append($(data))
-    # gon script hack
-    try
+
+    try # gon script hack
       jQuery.globalEval $parsed_data.find('script:contains(window.gon)').text()
 
     try_to_process_replace = (node) ->
-      return unless node
-      to_replace = $($(node).data('replace'))
-      if to_replace.length
-        window.node = node
-        preserve_elements = to_replace.find(preserve_selector)
-        preserve_elements.each -> $(node).find('#' + $(this).attr('id')).replaceWith(this) if $(this).attr('id')
-        to_replace.replaceWith(node)
-        $(node).initialize()
+      data_replace_parent = $(node).parents('[data-replace]:first')[0]
+
+      if $('body.relics.show').length && $parsed_data.find('#no-fancybox').length == 0
+        to_replace = $('.fancybox-wrap').find($(node).data('replace'))
+
+        if to_replace.length
+          to_replace.replaceWith(node)
+          $(node).initialize()
+        else
+          if data_replace_parent
+            try_to_process_replace(data_replace_parent)
+          else
+            $.fancybox($(node), padding: 3, fitToView: false, fixed: false, scrolling: 'no')
+            $(node).initialize()
       else
-        try_to_process_replace($(node).parents('[data-replace]:first')[0])
+        to_replace = $($(node).data('replace'))
+        if to_replace.length
+          to_replace.replaceWith(node)
+          $.fancybox.close()
+          $(node).initialize()
+        else
+          try_to_process_replace(data_replace_parent) if data_replace_parent
 
     $parsed_data.find('[data-replace]').each ->
       unless $(this).find('[data-replace]').length
@@ -86,12 +100,15 @@ ajax_callback = (data, status, xhr) ->
       history.pushState { autoreload: true, path: path }, $parsed_data.find('title').text(), xhr.getResponseHeader('x-path')
 
 $(document).on 'ajax:success', 'form[data-remote], a[data-remote]', (e, data, status, xhr) ->
+  popping_state = false
   ajax_callback.call(this, data, status, xhr)
   e.stopPropagation()
 
 $(document).on 'ajax:error', 'form[data-remote], a[data-remote]', (e, xhr, status, error) ->
-  jQuery.cookie('return_path', window.location.href, path: '/')
-  window.location.href = Routes.new_user_session_path() if error == "Unauthorized"
+  popping_state = false
+  if error == "Unauthorized"
+    jQuery.cookie('return_path', window.location.href, path: '/') # used for redirecting after login
+    window.location.href = Routes.new_user_session_path()
   e.stopPropagation()
 
 $(window).load ->
