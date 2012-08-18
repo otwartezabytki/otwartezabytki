@@ -1,7 +1,8 @@
-%section.edit.links
-  %h2 Linki, źródła, powiązania
-
-  = semantic_form_for relic, :url => section_relic_path(relic.id, :section => :links), :remote => true do |f|
+%h2 Linki, źródła, powiązania
+= semantic_form_for relic, :url => section_relic_path(relic.id, :section => :links), :remote => true do |f|
+  - if request.xhr?
+    = render 'shared/flash', :flash => flash
+  .row
     %p.description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sed felis magna, eu dapibus turpis. Vivamus fringilla dui vitae lacus consequat adipiscing. Nullam ultrices leo at sem vestibulum commodo.
     - if relic.links.count > 0
       %p.header
@@ -13,7 +14,7 @@
         - relic.links.each do |link|
           = f.semantic_fields_for :links, link do |f2|
             = content_tag_for :li, link do
-              
+
               = f2.input :url, :label => false, :hint => false, :class => "url"
               = f2.input :name, :label => false, :hint => false, :class => "info"
               = link_to 'usuń', relic_link_path(relic.id, link.id),

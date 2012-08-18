@@ -1,6 +1,8 @@
 # -*- encoding : utf-8 -*-
 class RelicsController < ApplicationController
 
+  before_filter :enable_fancybox, :only => [:edit, :update]
+
   expose(:relics) do
     tsearch.perform
   end
@@ -20,14 +22,13 @@ class RelicsController < ApplicationController
   before_filter :authenticate_user!, :only => [:edit, :create, :update]
 
   def show
+    relic.present? # raise ActiveRecord::RecordNotFound before entering template
     if params[:section].present?
       render "relics/show/_#{params[:section]}" and return
     end
-    relic.present? # raise ActiveRecord::RecordNotFound before entering template
   end
 
   def index
-    # SearchTerm.store(params[:q1])
     gon.highlighted_tags = relics.highlighted_tags
   end
 

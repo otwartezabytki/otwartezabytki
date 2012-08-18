@@ -68,9 +68,10 @@ ajax_callback = (data, status, xhr) ->
       jQuery.globalEval $parsed_data.find('script:contains(window.gon)').text()
 
     try_to_process_replace = (node) ->
+      console.log($(node))
       data_replace_parent = $(node).parents('[data-replace]:first')[0]
 
-      if $('body.relics.show').length && $parsed_data.find('#no-fancybox').length == 0
+      if $('#fancybox').length && xhr.getResponseHeader('x-fancybox')
         to_replace = $('.fancybox-wrap').find($(node).data('replace'))
 
         if to_replace.length
@@ -80,10 +81,17 @@ ajax_callback = (data, status, xhr) ->
           if data_replace_parent
             try_to_process_replace(data_replace_parent)
           else
-            $.fancybox($(node), padding: 3, fitToView: false, fixed: false, scrolling: 'no')
+            window.before_fancybox_url = document.location.href
+            $.fancybox $(node),
+              padding: 3
+              fitToView: false
+              fixed: false
+              scrolling: 'no'
+              afterClose: ->
+                history.pushState { autoreload: true, path: window.before_fancybox_url }, $('title').text(), window.before_fancybox_url
             $(node).initialize()
       else
-        to_replace = $($(node).data('replace'))
+        to_replace = $('#root').find($(node).data('replace'))
         if to_replace.length
           to_replace.replaceWith(node)
           $.fancybox.close()
@@ -122,7 +130,6 @@ $(window).load ->
       else
         $.ajax(document.location).success(ajax_callback).complete(-> popping_state = false)
   , 500
-
 
 jQuery.initializer 'input.autocomplete-q', ->
   this.autocomplete(

@@ -42,4 +42,8 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     cookies[:return_path] || super
   end
+
+  def enable_fancybox
+    response.headers['x-fancybox'] = 'true' if request.xhr?
+  end
 end

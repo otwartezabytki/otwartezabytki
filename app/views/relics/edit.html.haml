@@ -12,4 +12,5 @@
       %li.description= link_to_unless_current '<span>Opis</span>'.html_safe, edit_section_relic_path(relic.id, :description), :remote => true
       %li.photos= link_to_unless_current '<span>Zdjęcia</span>'.html_safe, edit_section_relic_path(relic.id, :photos), :remote => true
   - if params[:section].present?
-    = render :partial => "relics/edit/#{params[:section]}"
+    %section.edit{ :class => params[:section] }
+      = render :partial => "relics/edit/#{params[:section]}"

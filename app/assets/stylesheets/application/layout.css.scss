@@ -1482,22 +1482,6 @@ ul.nav li a.selected {
   width: 400px;
 }
 
-.alert {
-  display: block;
-  padding: 10px;
-  &.alert-error {
-    background-color: #f55;
-    color: white;
-  }
-  a.close {
-    display: block;
-    width: 50px;
-    text-align: right;
-    float: right;
-    color: white;
-  }
-}
-
 #main {
   clear: both;
 }
@@ -1509,4 +1493,63 @@ ul.nav li a.selected {
 .fancybox-close {
   top: 8px;
   right: 12px;
+}
+
+
+.alert {
+  @include background(linear-gradient(#f8e8c9, #efdfc0));
+  position: relative;
+  padding: 15px 25px;
+  img.alert-icon {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    vertical-align: middle;
+    margin-right: 17px;
+  }
+  img.alert-separator {
+    width: 2px;
+    height: 30px;
+    vertical-align: middle;
+    display: inline-block;
+    margin-right: 15px;
+  }
+  .alert-content {
+    vertical-align: middle;
+    display: inline-block;
+    h3{
+      color: #e67e03;
+      font-weight: 600;
+      font-size: 16px;
+      text-shadow: 0 1px 0 #fff;
+    }
+    p{
+      line-height: 22px;
+      font-weight: 600;
+      font-size: 13px;
+      text-shadow: 0 1px 0 #fff;
+    }
+  }
+
+  .close{
+    position: absolute;
+    height: 14px;
+    right: 15px;
+    top: 15px;
+    color: #d40000;
+    font-weight: 600;
+    text-shadow: 0 1px 0 #fff;
+    font-size: 12px;
+    padding-left: 18px;
+    background: asset-data-url("icon-remove.png") no-repeat;
+  }
+}
+
+section.edit .alert {
+  margin-bottom: 8px;
+  padding: 6px 20px;
+  img.alert-icon {
+    width: 24px;
+    height: 24px;
+  }
 }

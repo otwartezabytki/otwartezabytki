@@ -1,6 +1,8 @@
-%section.edit.categories
-  %h2 Tagi i kategorie
-  = semantic_form_for relic, :url => section_relic_path(relic.id, :section => :categories), :remote => true do |f|
+%h2 Tagi i kategorie
+= semantic_form_for relic, :url => section_relic_path(relic.id, :section => :categories), :remote => true do |f|
+  - if request.xhr?
+    = render 'shared/flash', :flash => flash
+  .row
     %p.description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sed felis magna, eu dapibus turpis. Vivamus fringilla dui vitae lacus consequat adipiscing. Nullam ultrices leo at sem vestibulum commodo.
     = f.input :tags, :input_html => { :value => relic.tags.join(','), :style => "width: 680px", :multiple => true }
     .select

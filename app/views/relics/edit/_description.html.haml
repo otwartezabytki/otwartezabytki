@@ -1,6 +1,8 @@
-%section.edit.description
-  %h2 Opis
-  = semantic_form_for relic, :url => section_relic_path(relic.id, :section => :description), :remote => true do |f|
+%h2 Opis
+= semantic_form_for relic, :url => section_relic_path(relic.id, :section => :description), :remote => true do |f|
+  - if request.xhr?
+    = render 'shared/flash', :flash => flash
+  .row
     = f.input :description, :label => false, :input_html => { :class => "redactor", :style => 'height: 190px;' }
     .actions
       = f.submit 'Zapisz zmiany'
