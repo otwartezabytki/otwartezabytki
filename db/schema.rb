@@ -11,11 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(:version => 20120817134224) do
-=======
-ActiveRecord::Schema.define(:version => 20120817132141) do
->>>>>>> e43d141631a701354885597c4452df5d4f0de1ca
+ActiveRecord::Schema.define(:version => 20120818150012) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -115,10 +111,12 @@ ActiveRecord::Schema.define(:version => 20120817132141) do
     t.string   "name"
     t.string   "author"
     t.string   "file"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
     t.boolean  "main"
     t.string   "date_taken"
+    t.integer  "file_full_width"
+    t.integer  "file_full_height"
   end
 
   create_table "places", :force => true do |t|

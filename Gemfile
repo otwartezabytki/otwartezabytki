@@ -74,6 +74,7 @@ gem 'recaptcha', :require => 'recaptcha/rails'
 
 # file upload
 gem 'carrierwave'
+gem 'carrierwave-meta'
 gem 'mini_magick', :git => "git://github.com/gmanley/mini_magick.git", :branch => "graphicsmagick-fix"
 
 # gravatars

@@ -2,6 +2,7 @@
 
 class PhotoUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
+  include CarrierWave::Meta
 
   # Include the Sprockets helpers for Rails 3.1+ asset pipeline compatibility:
   include Sprockets::Helpers::RailsHelper
@@ -15,8 +16,6 @@ class PhotoUploader < CarrierWave::Uploader::Base
   def store_dir
     "system/uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
-
-  # Create different versions of your uploaded files:
 
   version :mini do
     process :resize_to_fill => [80, 60]
@@ -32,6 +31,7 @@ class PhotoUploader < CarrierWave::Uploader::Base
 
   version :full do
     process :resize_to_fit => [800, 600]
+    process :store_meta
   end
 
   # Add a white list of extensions which are allowed to be uploaded.
