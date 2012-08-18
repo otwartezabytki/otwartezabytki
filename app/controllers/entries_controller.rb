@@ -18,8 +18,12 @@ class EntriesController < ApplicationController
 
   def update
     authorize! :update, entry
-    entry.save
-    respond_with(relic, entry)
+    if entry.save
+      redirect_to edit_section_relic_path(relic.id, :section => :entries, :entry_id => 0)
+    else
+      params[:section] = 'entries'
+      render 'relics/edit'
+    end
   end
 
   def destroy

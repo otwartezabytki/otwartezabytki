@@ -1114,8 +1114,13 @@ span.block {
 
 section.edit{
   width: 747px;
-  form{
+  .row {
     padding: 15px 20px;
+  }
+  .row + .row {
+    padding-top: 0;
+  }
+  form{
     label{
       font-weight: 700;
       font-size: 14px;
