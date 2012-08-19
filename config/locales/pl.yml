@@ -224,6 +224,9 @@ pl:
       entry:
         title: Tytuł
         body: Opis
+      alert:
+        file: "Zdjęcie:"
+        description: "Opis:"
     models:
       relic:
         zero:  Zabytek
@@ -295,3 +298,6 @@ pl:
       entry:
         title: To jest podpowiedź do tytułu wpisu społeczności
         body: To jest podpowiedź do opisu wpisu społeczności
+      alert:
+        file: To jest podpowiedź do pliku alertu
+        description: To jest podpowiedź do opisu alertu

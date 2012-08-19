@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120818150012) do
+ActiveRecord::Schema.define(:version => 20120819011716) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -31,10 +31,11 @@ ActiveRecord::Schema.define(:version => 20120818150012) do
   create_table "alerts", :force => true do |t|
     t.integer  "relic_id"
     t.integer  "user_id"
-    t.string   "kind"
     t.string   "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "file"
+    t.string   "state"
   end
 
   create_table "autocomplitions", :force => true do |t|

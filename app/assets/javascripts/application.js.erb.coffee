@@ -67,8 +67,20 @@ ajax_callback = (data, status, xhr) ->
     try # gon script hack
       jQuery.globalEval $parsed_data.find('script:contains(window.gon)').text()
 
+    show_fancybox = (node) ->
+      window.before_fancybox_url = document.location.href
+      $.fancybox $(node),
+        padding: 3
+        fitToView: false
+        fixed: false
+        scrolling: 'no'
+        afterShow: ->
+          $.fancybox.wrap.bind 'onReset', (e) ->
+            $('body > .main-container:last').remove()
+        afterClose: ->
+          history.pushState { autoreload: true, path: window.before_fancybox_url }, $('title').text(), window.before_fancybox_url
+
     try_to_process_replace = (node) ->
-      console.log($(node))
       data_replace_parent = $(node).parents('[data-replace]:first')[0]
 
       if $('#fancybox').length && xhr.getResponseHeader('x-fancybox')
@@ -78,20 +90,10 @@ ajax_callback = (data, status, xhr) ->
           to_replace.replaceWith(node)
           $(node).initialize()
         else
-          if data_replace_parent
+          if data_replace_parent && !$(node).is('[data-fancybox]')
             try_to_process_replace(data_replace_parent)
           else
-            window.before_fancybox_url = document.location.href
-            $.fancybox $(node),
-              padding: 3
-              fitToView: false
-              fixed: false
-              scrolling: 'no'
-              afterShow: ->
-                $.fancybox.wrap.bind 'onReset', (e) ->
-                  $('.main-container:last').remove()
-              afterClose: ->
-                history.pushState { autoreload: true, path: window.before_fancybox_url }, $('title').text(), window.before_fancybox_url
+            show_fancybox(node)
             $(node).initialize()
       else
         to_replace = $('#root').find($(node).data('replace'))
@@ -242,10 +244,6 @@ jQuery ->
     speed:    0,
     timeout:  4000
   })
-
-  $('.alert').on 'click', 'a.close', ->
-    $(this).parent('.alert').hide()
-    false
 
 if document.body.className.match(/thank_you/)
   window.fbAsyncInit = ->

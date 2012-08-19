@@ -31,6 +31,7 @@ class Ability
       can :manage, Link
       can :manage, Entry
       can :manage, Event
+      can :create, Alert
     end
 
     can :create, User

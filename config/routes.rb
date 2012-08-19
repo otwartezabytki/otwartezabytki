@@ -21,6 +21,7 @@ Otwartezabytki::Application.routes.draw do
     end
 
     resources :photos, :documents, :entries, :links, :events
+    resources :alerts, :only => [:new, :create]
   end
 
   get 'suggester/query'

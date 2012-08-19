@@ -4,6 +4,7 @@ pl:
   notices:
     reservation_thanks: "Dziękujemy za rejestrację! Na podany adres e-mail zostało wysłane Twoje hasło. Tymczasem zachęcamy do dalszego poprawiania zabytków:"
     relic_reverted: "Zabytek został przywrócony do poprzedniej wersji"
+    alert_added: "Alert został dodany. Dziękujemy."
   buttons:
     show_history: "Pokaż historię"
     revert_this_version: "Przywróć tę wersję"

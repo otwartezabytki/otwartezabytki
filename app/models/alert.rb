@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 # == Schema Information
 #
 # Table name: alerts
@@ -15,5 +17,12 @@ class Alert < ActiveRecord::Base
   belongs_to :relic
   belongs_to :user
 
-  attr_accessible :description, :kind, :relic_id, :user_id
+  attr_accessible :relic_id, :user_id, :file, :description
+
+  validates :description, :presence => true
+
+  scope :fixed, where("state = ?", "fixed")
+  scope :not_fixed, where("state != ? or state is null", "fixed")
+
+  mount_uploader :file, AlertUploader
 end
