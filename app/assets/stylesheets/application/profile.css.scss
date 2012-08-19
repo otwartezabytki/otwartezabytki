@@ -783,6 +783,11 @@ section.show.categories{
 }
 
 section.show.alerts{
+  .content {
+    max-height: 300px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
   position: relative;
   .edit-relic-link{
     img{
@@ -802,6 +807,7 @@ section.show.alerts{
       border-bottom: 1px solid #e5e5e5;
       margin-bottom: 10px;
       display: inline-block;
+      position: relative;
       .image{
         padding: 3px;
         @include box-shadow(0 1px 2px 0 rgba(0,0,0,0.3));
@@ -831,6 +837,7 @@ section.show.alerts{
       border-bottom: 1px solid #e5e5e5;
       margin-bottom: 10px;
       display: inline-block;
+      position: relative;
       .image {
         padding: 3px;
         @include box-shadow(0 1px 2px 0 rgba(0,0,0,0.3));
@@ -890,57 +897,36 @@ section.show.alerts{
 
 section.show.events{
   .content{
-    #scrollbar {
-      width: 285px;
-      clear: both;
-      margin: 20px 0 10px;
-      .viewport {
-        width: 230px;
-        height: 200px;
-        overflow: hidden;
-        position: relative; 
-      }
-      .overview {
-        list-style: none;
-        position: absolute;
-        left: 0;
-        top: 0; 
-      }
-      .thumb {
-        .end {
-          background-color: #7f7f7f; 
-          @include border-radius(2px);
-        }
-        background-color: #7f7f7f; 
+    .viewport {
+      width: 100%;
+      max-height: 200px;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      position: relative;
+    }
+    .thumb {
+      .end {
+        background-color: #7f7f7f;
         @include border-radius(2px);
       }
-      .scrollbar {
-        position: relative;
-        float: right;
-        width: 5px; 
-      }
-      .track {
-        height: 100%;
-        width: 4px;
-        position: relative;
-        padding: 0 1px; 
-      }
-      .thumb {
-        height: 20px;
-        width: 4px;
-        cursor: pointer;
+      background-color: #7f7f7f;
+      @include border-radius(2px);
+    }
+    .thumb {
+      height: 20px;
+      width: 4px;
+      cursor: pointer;
+      overflow: hidden;
+      position: absolute;
+      top: 0;
+      .end {
         overflow: hidden;
-        position: absolute;
-        top: 0;
-        .end {
-          overflow: hidden;
-          height: 5px;
-          width: 4px; 
-        } 
+        height: 5px;
+        width: 4px;
       }
-      .disable {
-        display: none; 
-      } 
+    }
+    .disable {
+      display: none;
     }
     li{
       padding-left: 20px;
