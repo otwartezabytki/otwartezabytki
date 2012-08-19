@@ -27,12 +27,13 @@
       %script(type="text/html" id="location_body")
         %img{ src: "http://maps.googleapis.com/maps/api/staticmap?center=#{relic.latitude.to_f},#{relic.longitude.to_f}&zoom=17&size=260x160&sensor=false&markers=#{relic.latitude.to_f},#{relic.longitude.to_f}&maptype=hybrid", width: 260, height: 160 }
   .dating
-    = link_to 'edytuj', edit_section_relic_path(relic.id, :events), :title => 'edytuj datowanie zabytku', :remote => true, :class => "edit-relic-link"
+    - if relic.dating_of_obj.present?
+      = link_to 'edytuj', edit_section_relic_path(relic.id, :events), :title => 'edytuj datowanie zabytku', :remote => true, :class => "edit-relic-link"
     %strong Data powstania:
     - if relic.dating_of_obj.present?
       %span.content= relic.dating_of_obj
     - else
-      %span.placeholder= link_to "brak danych, uzupełnij »", edit_section_relic_path(relic.id, :events)
+      %span.placeholder= link_to "brak danych, uzupełnij »", edit_section_relic_path(relic.id, :events), :remote => true
   - if relic.register_number.present?
     .register_number
       %strong Numer w rejestrze:
