@@ -13,10 +13,11 @@
       = semantic_form_for [relic, entry], :remote => true  do |f|
         = f.input :title, :hint => false
         = f.input :body, :hint => false, :input_html => { :class => "redactor" }
-        = f.submit 'zapisz'
-        = link_to 'usuń', relic_entry_path(relic.id, entry.id), :method => :delete, :remote => true
-        lub
-        = link_to 'anuluj', edit_section_relic_path(relic.id, :section => :entries, :entry_id => 0), :remote => true
+        .actions
+          = f.submit 'zapisz'
+          = link_to 'usuń', relic_entry_path(relic.id, entry.id), :method => :delete, :remote => true
+          lub
+          = link_to 'anuluj', edit_section_relic_path(relic.id, :section => :entries, :entry_id => 0), :remote => true
     - else
       = content_tag_for :article, entry do
         %h3= entry.title

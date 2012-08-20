@@ -500,7 +500,7 @@ section.show.photos{
     font-weight: normal;
     border-bottom: 2px solid #8499a4;
     padding-bottom: 15px;
-    padding-right: 100px;
+    padding-right: 70px;
     margin-bottom: 20px;
   }
   .placeholder{
@@ -543,6 +543,28 @@ section.show.photos {
   #slider {
     position: absolute;
     bottom: 0;
+  }
+  .main-photo{
+    position: relative;
+    display: block;
+    span{
+      position: absolute;
+      left: 0;
+      bottom: 2px;
+      padding: 8px;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 600;
+      background: rgba(0,0,0,0.5);
+    }
+    em{
+      position: absolute;
+      width: 106px;
+      height: 107px;
+      top: 97px;
+      left: 102px;
+      background: asset-data-url("edit-relic-ico-zoom.png") no-repeat;
+    }
   }
   .actions {
     margin: 0 0 1px;
@@ -723,6 +745,33 @@ section.show.general{
   #map{
     position: relative;
   }
+  .original {
+    float: left;
+    margin: 3px 3px 0 0;
+    @include background(linear-gradient(#4b6d7e, #436576));
+    color: #fff;
+    border: 0;
+    font-size: 12px;
+    font-weight: 300;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
+    text-transform: uppercase;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    cursor: pointer;
+    &:hover {
+      @include background(linear-gradient(#437994, #2b607b));
+      text-decoration: none;
+    }
+    &:active {
+      @include background(linear-gradient(#2b607b, #437993));
+    }
+    span{
+      padding: 9px 12px 6px 29px;
+      display: block;
+      font-weight: 600;
+      background: asset-data-url("edit-relic-ico-original.png") 10px 10px no-repeat;
+    }
+  }
 }
 
 section.show.description{
@@ -732,6 +781,21 @@ section.show.description{
     margin-bottom: 15px;
     &:last-child{
       margin-bottom: 0;
+    }
+  }
+  p{
+    b{
+      font-weight: bold;
+    }
+    i{
+      font-style: italic;
+    }
+  }
+  ul{
+    padding-left: 20px;
+    margin: 10px 0;
+    li{
+      list-style-type: disc;
     }
   }
 }
@@ -749,6 +813,22 @@ section.show.entries{
     column-fill: auto;
     .entry{
       width: 242px;
+      p{
+        b{
+          font-weight: bold;
+        }
+        i{
+          font-style: italic;
+        }
+      }
+      ul{
+        padding-left: 20px;
+        margin: 10px 0;
+        li{
+          list-style-type: disc;
+          font-family: Georgia, Arial, sans-serif;
+        }
+      }
     }
   }
 }
@@ -756,7 +836,8 @@ section.show.entries{
 section.show.links{
   ul li{
     padding-left: 20px;
-    background: asset-data-url("edit-relic-ico-link.png") no-repeat;
+    background: asset-data-url("edit-relic-ico-link.png") 0 3px no-repeat;
+    line-height: 22px;
   }
 }
 
@@ -1147,18 +1228,24 @@ section.edit{
       line-height: 16px;
       margin-top: 10px;
     }
-    .string input {
-      display: block;
-      border: 1px solid #646464;
-      @include box-shadow(0 1px 1px 0 rgba(0,0,0,.1), inset 0 1px 3px 0 rgba(0,0,0,.3));
-      @include border-radius(2px);
-      height: 34px;
-      padding: 0 10px;
-      font-size: 14px;
-      color: #313132;
-      font-weight: 600;
-      width: 680px;
-      margin: 10px 0;
+    .string{ 
+      input {
+        display: block;
+        border: 1px solid #646464;
+        @include box-shadow(0 1px 1px 0 rgba(0,0,0,.1), inset 0 1px 3px 0 rgba(0,0,0,.3));
+        @include border-radius(2px);
+        height: 34px;
+        padding: 0 10px;
+        font-size: 14px;
+        color: #313132;
+        font-weight: 600;
+        width: 680px;
+        margin: 10px 0;
+      }
+      &.error input{
+        border: 1px solid #d10000;
+        @include box-shadow(0 0 5px 0 rgba(154,0,0,.3));
+      }
     }
     .boolean span {
       font-size: 13px;
@@ -1194,4 +1281,52 @@ section.edit{
 
 ol.sortable li {
   cursor: move;
+}
+
+div.fancybox-close{
+  background: asset-data-url("edit-relic-ico-close.png") center center no-repeat;
+}
+
+.error{
+  .input{
+    input.error, textarea.error, .redactor_box{
+      border: 1px solid #d10000;
+      @include box-shadow(0 0 5px 0 rgba(154,0,0,.3));
+    }
+    .help-inline{
+      font-size: 12px;
+      color: #D51818;
+      margin-top: -2px;
+      margin-bottom: 15px;
+      display: block;
+    }
+    .redactor_box + .help-inline{
+      margin-top: 10px;
+    }
+  }
+}
+
+.popover{
+  .popover-inner{
+    padding: 0;
+    @include background(linear-gradient(#f6f7f8, #eaeaeb));
+    .popover-title{
+      background: none;
+      border: 0;
+      p{
+        font-weight: 700;
+        float: left;
+        &.close{
+          float: right;
+          a{
+            color: #af0c0c;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+    .popover-content{
+      background: none;
+    }
+  }
 }
