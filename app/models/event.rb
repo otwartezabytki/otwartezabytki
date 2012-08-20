@@ -11,16 +11,18 @@
 #  date_end   :date
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  position   :integer
 #
 
 class Event < ActiveRecord::Base
   belongs_to :relic
   belongs_to :user
 
-  attr_accessible :date, :date_end, :date_start, :name, :relic_id, :user_id
+  attr_accessible :date, :date_end, :date_start, :name, :relic_id, :user, :position
 
   acts_as_list :scope => :relic
 
-  validates :relic, :user, :presence => true
-  validates :name, :date, :presence => true, :unless => :new_record?
+  validates :relic, :user, :name, :date, :presence => true
+
+  include CanCan::Authorization
 end

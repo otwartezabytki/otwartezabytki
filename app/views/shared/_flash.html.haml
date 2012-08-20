@@ -1,0 +1,17 @@
+- if flash[:error] || flash[:notice]
+  .row
+    - if flash[:error]
+      .flash.flash-error
+        = link_to 'ukryj', '#', :class => "close", :"data-dismiss" => 'flash'
+        = image_tag 'notice-icon-info.png', :class => 'flash-icon'
+        = image_tag 'notice-separator.png', :class => 'flash-separator'
+        .flash-content
+          %p= flash[:error]
+
+    - elsif flash[:notice]
+      .flash.flash-info
+        = link_to 'ukryj', '#', :class => "close", :"data-dismiss" => 'flash'
+        = image_tag 'notice-icon-info.png', :class => 'flash-icon'
+        = image_tag 'notice-separator.png', :class => 'flash-separator'
+        .flash-content
+          %p= flash[:notice]

@@ -66,4 +66,8 @@ module RelicsHelper
     ]
   end
 
+  def link_to_section_tab(name)
+    link_to_unless_current "<span>#{t "relic_tabs." + name.to_s + ".name"}</span>".html_safe, edit_section_relic_path(relic.id, name), :remote => true
+  end
+
 end

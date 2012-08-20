@@ -69,9 +69,12 @@
       overflow: hidden;
       padding: 10px 0 10px 10px;
       border-bottom: 1px solid #b2b2b2;
+      border-top: 1px solid #b2b2b2;
+      margin-top: -1px;
       list-style-position: inside;
       position: relative;
       line-height: 25px;
+      background-color: white;
       > div{
         position: absolute;
         top: 10px;

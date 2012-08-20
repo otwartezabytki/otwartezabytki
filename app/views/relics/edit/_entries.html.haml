@@ -1,46 +1,26 @@
-%section.edit.entries
-  %h2 Społeczność
+.row
   = semantic_form_for relic, :url => section_relic_path(relic.id, :section => :entries), :remote => true  do |f|
-    %p.description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sed felis magna, eu dapibus turpis. Vivamus fringilla dui vitae lacus consequat adipiscing. Nullam ultrices leo at sem vestibulum commodo.
     = f.semantic_fields_for :entries, relic.entries.find(&:new_record?) do |f2|
       = f2.input :title
       = f2.input :body, :input_html => { :class => "redactor" }
-      .actions
-        = f.submit 'dodaj i zapisz'
-
-  - if params[:entry_id].to_i > 0
-    .entries-showcase{ :"data-replace" => ".entries-showcase" }
-      = semantic_form_for relic, :url => section_relic_path(relic.id, :section => :entries, :entry_id => params[:entry_id]), :remote => true  do |f|
-        - relic.entries.select{ |e| !e.new_record? }.sort_by(&:id).each do |entry|
-          - if params[:entry_id].to_i == entry.id
-            = content_tag_for :div, entry do
-              = f.semantic_fields_for :entries, entry do |f2|
-                = f2.input :title, :hint => false
-                = f2.input :body, :hint => false, :input_html => { :class => "redactor" }
-                = f2.submit 'zapisz'
-                = link_to 'usuń', relic_entry_path(relic.id, entry.id), :method => :delete, :remote => true
-                lub
-                = link_to 'anuluj', edit_section_relic_path(relic.id, :section => :entries, :entry_id => 0), :remote => true
-          - else
-            = content_tag_for :div, entry do
-              %h3= entry.title
-              .body= sanitize entry.body
-              = link_to 'aktualizuj', edit_section_relic_path(relic.id, :section => :entries, :entry_id => entry.id), :remote => true
-  - else
-    .entries-showcase
-      = semantic_form_for relic, :url => section_relic_path(relic.id, :section => :entries, :entry_id => params[:entry_id]), :remote => true  do |f|
-        - relic.entries.select{ |e| !e.new_record? }.sort_by(&:id).each do |entry|
-          - if params[:entry_id].to_i == entry.id
-            = content_tag_for :div, entry do
-              = f.semantic_fields_for :entries, entry do |f2|
-                = f2.input :title, :hint => false
-                = f2.input :body, :hint => false, :input_html => { :class => "redactor" }
-                = f2.submit 'zapisz'
-                = link_to 'usuń', relic_entry_path(relic.id, entry.id), :method => :delete, :remote => true
-                lub
-                = link_to 'anuluj', edit_section_relic_path(relic.id, :section => :entries, :entry_id => 0), :remote => true
-          - else
-            = content_tag_for :div, entry do
-              %h3= entry.title
-              .body= sanitize entry.body
-              = link_to 'aktualizuj', edit_section_relic_path(relic.id, :section => :entries, :entry_id => entry.id), :remote => true
+    .actions
+      = f.submit 'dodaj i zapisz'
+      lub
+      = link_to "anuluj", relic_path(relic.id), :remote => true
+.row.entries-showcase{ :"data-replace" => (!params[:entry_id].nil? ? ".entries-showcase" : "#nonexistent") }
+  - relic.entries.select{ |e| !e.new_record? }.sort_by(&:id).each do |entry|
+    - if params[:entry_id].to_i == entry.id
+      = semantic_form_for [relic, entry], :remote => true  do |f|
+        = f.input :title, :hint => false
+        = f.input :body, :hint => false, :input_html => { :class => "redactor" }
+        = f.submit 'zapisz'
+        = link_to 'usuń', relic_entry_path(relic.id, entry.id), :method => :delete, :remote => true
+        lub
+        = link_to 'anuluj', edit_section_relic_path(relic.id, :section => :entries, :entry_id => 0), :remote => true
+    - else
+      = content_tag_for :article, entry do
+        %h3= entry.title
+        .body= sanitize entry.body
+        = link_to 'aktualizuj', edit_section_relic_path(relic.id, :section => :entries, :entry_id => entry.id),
+          :remote => true,
+          :class => "update"

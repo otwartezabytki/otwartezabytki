@@ -29,8 +29,9 @@ class Ability
       can :create, Document
       can :manage, Document, :user_id => user.id
       can :manage, Link
-      can :manage, Event
       can :manage, Entry
+      can :manage, Event
+      can :create, Alert
     end
 
     can :create, User

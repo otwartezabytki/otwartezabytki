@@ -1,7 +1,5 @@
-%section.edit.photos
-  %h2 Zdjęcia
+.row
   = semantic_form_for relic, :url => section_relic_path(relic.id, :section => :photos), :html => { :multipart => true }, :remote => true  do |f|
-    %p.description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sed felis magna, eu dapibus turpis. Vivamus fringilla dui vitae lacus consequat adipiscing. Nullam ultrices leo at sem vestibulum commodo.
     - relic.photos.each do |photo|
       - if photo.user_id == current_user.id
         = f.semantic_fields_for :photos, photo do |f2|
@@ -49,4 +47,4 @@
     .actions
       = f.submit 'Zapisz zmiany'
       lub
-      = link_to "anuluj", relic_path(relic.id)
+      = link_to "anuluj", relic_path(relic.id), :remote => true

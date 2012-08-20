@@ -1,6 +1,7 @@
 class PhotosController < ApplicationController
 
   before_filter :authenticate_user!, :only => [:edit, :create, :update, :destroy]
+  before_filter :enable_fancybox, :only => [:show]
 
   respond_to :html, :json
 

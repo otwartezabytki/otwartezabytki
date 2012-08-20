@@ -28,14 +28,4 @@ class EventsController < ApplicationController
     redirect_to edit_section_relic_path(relic.id, :events)
   end
 
-  def sort
-    params[:event].each_with_index do |event_id, index|
-      event = events.all.find{ |l| l.id.to_i == event_id.to_i }
-      authorize! :update, event
-      event.update_attribute(:position, index + 1)
-    end
-
-    render nothing: true
-  end
-
 end

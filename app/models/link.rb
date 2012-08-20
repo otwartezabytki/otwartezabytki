@@ -9,6 +9,7 @@
 #  url        :string(255)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  position   :integer
 #
 
 class Link < ActiveRecord::Base
@@ -19,8 +20,7 @@ class Link < ActiveRecord::Base
 
   acts_as_list :scope => :relic
 
-  validates :relic, :user, :presence => true
-  validates :url, :name, :presence => true, :unless => :new_record?
+  validates :relic, :user, :url, :name, :presence => true
   validates_format_of :url, :with => URI::regexp(%w(http https ftp)), :if => :url_changed?
 
   def shortened_url
@@ -29,4 +29,6 @@ class Link < ActiveRecord::Base
     shortened_path = "..." + shortened_path[-20..-1].to_s if shortened_path.length > 20
     "#{uri.host}/#{shortened_path}"
   end
+
+  include CanCan::Authorization
 end

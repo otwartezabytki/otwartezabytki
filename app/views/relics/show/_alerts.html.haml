@@ -1,0 +1,36 @@
+%section.show.alerts
+  %h2 Alerty
+  - if relic.alerts.count > 0
+    = link_to image_tag('edit-relic-ico-alert.png') + "zgłoś alert", new_relic_alert_path(relic.id), :remote => true, :title => "dodaj alert do zabytku", :class => "edit-relic-link"
+    .content
+      - if relic.alerts.not_fixed.count > 0
+        .not-fixed
+          %h4 Zgłoszone alerty nienaprawione
+          %ul
+            - relic.alerts.not_fixed.each do |alert|
+              %li
+                - if alert.file?
+                  .image= image_tag alert.file.midi.url, :width => 80, :height => 80
+                = simple_format alert.description
+      - if relic.alerts.fixed.count > 0
+        .fixed
+          %h4 Zgłoszone alerty poprawione
+          %ul
+            - relic.alerts.fixed.each do |alert|
+              %li
+                - if alert.file?
+                  .image= image_tag alert.file.mini.url, :width => 45, :height => 45
+                = simple_format alert.description
+      = link_to new_relic_alert_path(relic.id, :description => "zabytek nie istnieje"), :remote => true, :class => "alert-link" do
+        zgłoś, że zabytek nie istnieje
+  - else
+    .placeholder
+      %p
+        Nie zgłoszono żadnych alertów
+        %br
+        do tej pory...
+
+      = link_to image_tag('edit-relic-ico-alert.png') + "zgłoś alert", new_relic_alert_path(relic.id), :remote => true
+
+      = link_to new_relic_alert_path(relic.id, :kind => "nieistnienie", :description => "zabytek nie istnieje"), :remote => true, :class => "alert-link" do
+        zgłoś, że zabytek nie istnieje

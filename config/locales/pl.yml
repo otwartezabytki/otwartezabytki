@@ -196,7 +196,7 @@ pl:
     attributes:
       relic:
         place_id: "Miejsce"
-        identification: "Określenie obiektu"
+        identification: "Nazwa obiektu"
         group: "Określenie zespołu"
         number: "Liczba obiektów"
         materail: "Materiał"
@@ -208,6 +208,10 @@ pl:
         tags: "Tagi"
         documents_info: "Gdzie szukać?"
         links_info: "Gdzie szukać?"
+        polish_relic: "Lokalizacja znajduje się w Polsce"
+        country_code: "Kraj"
+        fprovince: "Prowincja"
+        fplace: "Miejscowość"
       user:
         email: Adres e-mail
         password: Hasło
@@ -224,6 +228,9 @@ pl:
       entry:
         title: Tytuł
         body: Opis
+      alert:
+        file: "Zdjęcie:"
+        description: "Opis:"
     models:
       relic:
         zero:  Zabytek
@@ -286,6 +293,11 @@ pl:
         identification: To jest informacja o nazwie zabytku
         documents_info: To jest informacja gdzie szukać dokumenty
         links_info: To jest informacja gdzie szukać linki
+        place: Informacja o miejscowości
+        country_code: Informacja o kraju
+        fprovince: Informacja o prowincji
+        fplace: Informacja o miejscowości
+        street: Informacja o ulicy
       document:
         name: Do jest podpowiedź do nazwy dokumentu
         description: To jest podpowiedź do opisu dokumentu
@@ -295,3 +307,6 @@ pl:
       entry:
         title: To jest podpowiedź do tytułu wpisu społeczności
         body: To jest podpowiedź do opisu wpisu społeczności
+      alert:
+        file: To jest podpowiedź do pliku alertu
+        description: To jest podpowiedź do opisu alertu

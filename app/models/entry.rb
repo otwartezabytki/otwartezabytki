@@ -18,4 +18,6 @@ class Entry < ActiveRecord::Base
   attr_accessible :body, :relic_id, :title, :user_id
 
   validates :relic, :title, :body, :presence => true
+
+  include CanCan::Authorization
 end

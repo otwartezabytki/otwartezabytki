@@ -1,8 +1,7 @@
-%section.edit.description
-  %h2 Opis
+.row
   = semantic_form_for relic, :url => section_relic_path(relic.id, :section => :description), :remote => true do |f|
     = f.input :description, :label => false, :input_html => { :class => "redactor", :style => 'height: 190px;' }
     .actions
       = f.submit 'Zapisz zmiany'
       lub
-      = link_to "anuluj", relic_path(relic.id)
+      = link_to "anuluj", relic_path(relic.id), :remote => true

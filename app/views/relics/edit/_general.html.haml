@@ -1,9 +1,7 @@
-%section.edit.general
-  %h2 Podstawowe informacje
+.row
   = semantic_form_for relic, :url => section_relic_path(relic.id, :section => :general), :remote => true do |f|
-    %p.description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sed felis magna, eu dapibus turpis. Vivamus fringilla dui vitae lacus consequat adipiscing. Nullam ultrices leo at sem vestibulum commodo.
     = f.input :identification, :as => :string
-    .actions 
+    .actions
       = f.submit 'zapisz zmiany'
       lub
-      = link_to "anuluj", relic_path(relic.id)
+      = link_to "anuluj", relic_path(relic.id), :remote => true

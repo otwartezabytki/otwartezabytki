@@ -46,7 +46,7 @@ class Search
   def enable_highlight
     @tsearch.highlight "identification" => {},
       "street" => {},
-      "place_full_name" => {},
+      "place_with_address" => {},
       "descendants.identification" => {},
       "descendants.street" => {}
   end
@@ -207,8 +207,7 @@ class Search
             should { text "autocomplitions",              instance.query, 'operator' => 'AND', 'boost' => 1 }
           end
           if instance.place.present?
-            should { text "place_full_name", instance.place, 'operator' => 'AND', 'boost' => 5 }
-            should { text "street",          instance.place, 'operator' => 'AND', 'boost' => 3 }
+            should { text "place_with_address", instance.place, 'operator' => 'AND', 'boost' => 5 }
           end
         end
       end if [instance.query, instance.place].any? &:present?
@@ -252,7 +251,7 @@ class Search
       # query
       query do
         string instance.place, :default_operator => "AND", :fields => [
-            "place_full_name^5",
+            "place_with_address^5",
             "street^3"
           ]
       end if instance.place.present?
@@ -300,7 +299,7 @@ class Search
         terms nil, :script_field => "_source.place.name + '_' + _source.place.id", :size => 3
       end
       facet "streets", instance.autocomplete_place_conds('street_normalized') do
-        terms nil, :script_field => "_source.street_normalized + '_' + _source.place.name + '_' + _source.place.id", :size => 3
+        terms nil, :script_field => "doc['street_normalized.untouched'].value + '_' + _source.place.name + '_' + _source.place.id", :size => 3
       end
     end
     @tsearch.results

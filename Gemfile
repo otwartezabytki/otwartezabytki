@@ -13,6 +13,9 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   gem 'chosen-rails'
   gem 'jquery-ui-rails'
+  gem 'twitter-bootstrap-rails'
+  gem 'bootstrap-sass', '~> 2.0.4.0'
+  gem 'fancybox-rails', :git => 'https://github.com/sverigemeny/fancybox-rails'
 end
 
 gem 'jquery-rails'
@@ -72,6 +75,7 @@ gem 'recaptcha', :require => 'recaptcha/rails'
 
 # file upload
 gem 'carrierwave'
+gem 'carrierwave-meta'
 gem 'mini_magick', :git => "git://github.com/gmanley/mini_magick.git", :branch => "graphicsmagick-fix"
 
 # gravatars

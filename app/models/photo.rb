@@ -2,14 +2,18 @@
 #
 # Table name: photos
 #
-#  id         :integer          not null, primary key
-#  relic_id   :integer
-#  user_id    :integer
-#  name       :string(255)
-#  author     :string(255)
-#  file       :string(255)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id               :integer          not null, primary key
+#  relic_id         :integer
+#  user_id          :integer
+#  name             :string(255)
+#  author           :string(255)
+#  file             :string(255)
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  main             :boolean
+#  date_taken       :string(255)
+#  file_full_width  :integer
+#  file_full_height :integer
 #
 
 class Photo < ActiveRecord::Base

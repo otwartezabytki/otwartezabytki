@@ -2,32 +2,43 @@
   = link_to 'edytuj', edit_section_relic_path(relic.id, :general), :title => 'edytuj ogólne dane zabytku', :remote => true, :class => "edit-relic-link"
   %h1= relic.identification
   .status
-    %div 
-      = t("relic.status.#{relic.status}")
-    .revise.success
-      .ico
-      %span przejrzany
-    .fill
-      .ico
-      %span nieuzupełniony
-    .relic-info
-      Zabytek 
-      %strong rejestrowy
+    - if relic.approved?
+      .revise.success
+        .ico
+        %span przejrzany
+    - else
+      .fill
+        .ico
+        %span nieuzupełniony
+    - if relic.register_number.present?
+      .relic-info
+        Zabytek
+        %strong rejestrowy
   .location_name
-    = link_to 'edytuj', edit_section_relic_path(relic.id, :general), :title => 'edytuj ogólne dane zabytku', :remote => true, :class => "edit-relic-link"
+    = link_to 'edytuj', edit_section_relic_path(relic.id, :location), :title => 'edytuj ogólne dane zabytku', :remote => true, :class => "edit-relic-link"
     %strong Lokalizacja:
-    %p= "#{relic.place.name}, powiat #{relic.district.name}, gmina #{relic.commune.name}"
+    - if relic.polish_relic
+      %p= "#{relic.place.name}, powiat #{relic.district.name}, gmina #{relic.commune.name}"
+    - else
+      %p= [I18n.t(relic.country_code, :scope => :countries), relic.fprovince, relic.fplace].select(&:present?).join(', ')
     %p= relic.street
     - if relic.latitude.present? && relic.longitude.present?
-      %p= relic.latitude.round(6).to_s + ", " + relic.longitude.round(6).to_s
-    %p= link_to "pokaż na mapie »", section_relic_path(relic.id, :section => :location)
+      %p= link_to "pokaż na mapie »", '#', :id => "relic_location_popover", :"data-content-id" => "location_body", :"data-title-id" => "location_title"
+      %script(type="text/html" id="location_title")
+        %p= relic.latitude.round(6).to_s + ", " + relic.longitude.round(6).to_s
+        %p= link_to "zamknij", "#", :class => "close_popover", :"data-popover-id" => "relic_location_popover"
+      %script(type="text/html" id="location_body")
+        %img{ src: "http://maps.googleapis.com/maps/api/staticmap?center=#{relic.latitude.to_f},#{relic.longitude.to_f}&zoom=17&size=260x160&sensor=false&markers=#{relic.latitude.to_f},#{relic.longitude.to_f}&maptype=hybrid", width: 260, height: 160 }
   .dating
-    = link_to 'edytuj', edit_section_relic_path(relic.id, :general), :title => 'edytuj ogólne dane zabytku', :remote => true, :class => "edit-relic-link"
+    - if relic.dating_of_obj.present?
+      = link_to 'edytuj', edit_section_relic_path(relic.id, :events), :title => 'edytuj datowanie zabytku', :remote => true, :class => "edit-relic-link"
     %strong Data powstania:
     - if relic.dating_of_obj.present?
       %span.content= relic.dating_of_obj
     - else
-      %span.placeholder= link_to "brak danych, uzupełnij »", edit_section_relic_path(relic.id, :general)
-  .register_number
-    %strong Numer w rejestrze:
-    = relic.register_number
+      %span.placeholder= link_to "brak danych, uzupełnij »", edit_section_relic_path(relic.id, :events), :remote => true
+  - if relic.register_number.present?
+    .register_number
+      %strong Numer w rejestrze:
+      %p= relic.register_number
+  = link_to 'wersja oryginalna', relic_path(relic.id, :original => true), :class => "original"

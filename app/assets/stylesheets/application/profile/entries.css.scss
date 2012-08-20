@@ -11,18 +11,20 @@
     margin-top: 10px;
   }
   .entries-showcase{
-    form{
-      -moz-column-count: 2;
-      -moz-column-gap: 10px;
-      -moz-column-fill: auto;
-      -webkit-column-count: 2;
-      -webkit-column-gap: 10px;
-      -webkit-column-fill: auto;
-      column-count: 2;
-      column-gap: 15px;
-      column-fill: auto;
+    -moz-column-count: 2;
+    -moz-column-gap: 10px;
+    -moz-column-fill: auto;
+    -webkit-column-count: 2;
+    -webkit-column-gap: 10px;
+    -webkit-column-fill: auto;
+    column-count: 2;
+    column-gap: 15px;
+    column-fill: auto;
+    input[type="text"], textarea {
+      width: 278px !important;
     }
   }
+
   .entry{
     @include box-shadow(0 1px 3px 0 rgba(0,0,0,0.3));
     padding: 15px 20px;
@@ -42,7 +44,7 @@
       font-size: 14px;
       font-family: Georgia, serif;
     }
-    a{
+    a.update {
       padding-left: 20px;
       line-height: 18px;
       background: asset-data-url("entry-ico-update.png") 0 3px no-repeat;

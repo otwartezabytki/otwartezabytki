@@ -49,7 +49,7 @@ class SuggesterController < ApplicationController
       obj = hash['obj']
       navigators_json << {
         :label => "woj. #{obj.commune.district.voivodeship.name}, pow. #{obj.commune.district.name}, gm. #{obj.commune.name}, <strong>#{obj.name}</strong> (#{hash['count']})",
-        :label => "woj. #{obj.commune.district.voivodeship.name}, pow. #{obj.commune.district.name}, gm. #{obj.commune.name}, #{obj.name}",
+        :value => "woj. #{obj.commune.district.voivodeship.name}, pow. #{obj.commune.district.name}, gm. #{obj.commune.name}, #{obj.name}",
         :location => ['pl', obj.commune.district.voivodeship_id, obj.commune.district_id, obj.virtual_commune_id, obj.id].join('-')
       }
     end
@@ -57,6 +57,7 @@ class SuggesterController < ApplicationController
     results.terms('streets', false, true).each do |hash|
       obj = hash['obj']
       street = hash['term'].split('_').first
+      next if street.blank?
       navigators_json << {
         :label => "woj. #{obj.commune.district.voivodeship.name}, pow. #{obj.commune.district.name}, gm. #{obj.commune.name}, #{obj.name}, <strong> #{street}</strong> (#{hash['count']})",
         :value => "woj. #{obj.commune.district.voivodeship.name}, pow. #{obj.commune.district.name}, gm. #{obj.commune.name}, #{obj.name}, #{street}",

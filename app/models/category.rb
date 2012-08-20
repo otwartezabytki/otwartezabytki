@@ -8,15 +8,15 @@ class Category
         'sakralny'            => 'sakralny',
         'militarny'           => 'militarny',
         'przemysłowy'         => 'przemysłowy',
-        'kultury (np. teatr)' => 'kultury'
+        'kultury'             => 'kultury (np. teatr)'
       }
     end
 
     def second_column
       {
-        'edukacyjny (np. uniwersytet)'          => 'edukacyjny',
-        'użyteczności publicznej (np. ratusz)'  => 'użyteczności_publicznej',
-        'dworski/pałacowy'                      => 'dworski_pałacowy',
+        'edukacyjny'                            => 'edukacyjny (np. uniwersytet)',
+        'użyteczności_publicznej'               => 'użyteczności publicznej (np. ratusz)',
+        'dworski_pałacowy'                      => 'dworski/pałacowy',
         'cmentarny'                             => 'cmentarny',
         'przyrodniczy'                          => 'przyrodniczy',
         'miejski'                               => 'miejski'

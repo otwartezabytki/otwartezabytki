@@ -19,10 +19,6 @@
 #  username               :string(255)
 #  seen_relic_order       :string(255)      default("asc")
 #
-# Indexes
-#
-#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
-#
 
 class User < ActiveRecord::Base
   has_many :suggestions
@@ -93,6 +89,10 @@ class User < ActiveRecord::Base
   def earn_points
     return @earn_points if defined? @earn_points
     @earn_points = self.suggestions.not_skipped.count
+  end
+
+  def ability
+    @ability ||= Ability.new(self)
   end
 
   class << self

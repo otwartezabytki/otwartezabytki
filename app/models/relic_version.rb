@@ -12,10 +12,6 @@
 #  object_changes :text
 #  comment        :string(255)
 #
-# Indexes
-#
-#  index_versions_on_item_type_and_item_id  (item_type,item_id)
-#
 
 class RelicVersion < Version
   self.table_name = :versions

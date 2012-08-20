@@ -12,7 +12,7 @@
 #  materail        :string(255)
 #  dating_of_obj   :string(255)
 #  street          :string(255)
-#  register_number :string(255)
+#  register_number :text
 #  nid_id          :string(255)
 #  latitude        :float
 #  longitude       :float
@@ -35,55 +35,49 @@
 #  edit_count      :integer          default(0)
 #  description     :text
 #  tags            :string(255)
+#  type            :string(255)      default("Relic")
+#  country_code    :string(255)      default("PL")
+#  fprovince       :string(255)
+#  fplace          :string(255)
+#  documents_info  :text
+#  links_info      :text
+#  user_id         :integer
 #
-# Indexes
-#
-#  index_relics_on_ancestry  (ancestry)
-#
-
 ActiveSupport::Dependencies.depend_on 'relic/tire_extensions'
 class Relic < ActiveRecord::Base
   States = ['checked', 'unchecked', 'filled']
   Existences = ['existed', 'archived', 'social']
 
-  has_many :suggestions
-  has_many :documents, :dependent => :destroy
+  has_ancestry
 
+  belongs_to :user
+  belongs_to :place
+
+  has_many :documents, :dependent => :destroy
   has_many :photos, :dependent => :destroy
   has_many :alerts, :dependent => :destroy
   has_many :entries, :dependent => :destroy
-  has_many :links, :dependent => :destroy, :order => 'position'
-  has_many :events, :dependent => :destroy, :order => 'position'
+  has_many :links, :order => 'position', :dependent => :destroy
+  has_many :events, :order => 'position', :dependent => :destroy
 
-  belongs_to :place
+  attr_accessor :license_agreement, :polish_relic
+  attr_accessible :identification, :place_id, :dating_of_obj, :latitude, :longitude,
+                  :street, :tags, :categories, :photos_attributes, :description,
+                  :documents_attributes, :documents_info, :links_attributes, :links_info,
+                  :events_attributes, :entries_attributes, :license_agreement, :polish_relic,
+                  :geocoded
 
-  attr_protected :id, :created_at, :update_at
-
-  # currently used in photo view
-  attr_accessor :license_agreement
-
-  accessible_attributes = :dating_of_obj, :group, :id, :identification, :materail,
-                          :national_number, :number, :place_id, :register_number,
-                          :street, :internal_id, :source, :tags, :categories, :photos_attributes,
-                          :documents_attributes, :documents_info, :links_attributes, :links_info,
-                          :events_attributes, :entries_attributes
-
-
-  accepts_nested_attributes_for :photos, :documents, :entries, :links, :events
-
-  attr_accessible accessible_attributes
-  attr_accessible accessible_attributes, :as => :admin
+  accepts_nested_attributes_for :photos, :documents, :entries, :links, :events, :allow_destroy => true
 
   include PlaceCaching
   include Validations
-
-  has_ancestry
 
   serialize :source
   serialize :tags, Array
   serialize :categories, Array
 
   validates :identification, :presence => true, :if => :identification_changed?
+  validates :place, :presence => true, :if => :polish_relic
 
   before_validation do
     if tags_changed? && tags.is_a?(Array)
@@ -135,7 +129,7 @@ class Relic < ActiveRecord::Base
         :default => {
           :type      => "custom",
           :tokenizer => "standard",
-          :filter    => "standard, lowercase, pl_synonym, pl_stop, morfologik_stem, unique"
+          :filter    => "standard, lowercase, pl_synonym, pl_stop, morfologik_stem, unique, lowercase"
         }
       }
     }
@@ -160,6 +154,11 @@ class Relic < ActiveRecord::Base
       :untouched =>  { "type" => "string", "index" => "not_analyzed" }
     }
 
+    indexes :street_normalized, :type => "multi_field", :fields => {
+      :street_normalized =>  { "type" => "string", "index" => "analyzed" },
+      :untouched =>  { "type" => "string", "index" => "not_analyzed" }
+    }
+
     with_options :index => :not_analyzed do |na|
       na.indexes :id
       na.indexes :kind
@@ -176,7 +175,6 @@ class Relic < ActiveRecord::Base
       na.indexes :from,  :type => "integer"
       na.indexes :to,  :type => "integer"
       na.indexes :country
-      na.indexes :street_normalized
       na.indexes :tags
     end
   end
@@ -206,7 +204,6 @@ class Relic < ActiveRecord::Base
       :type             => 'relic',
       :identification   => identification,
       :street           => street,
-      :street_normalized => street_normalized,
       :place_full_name  => place_full_name,
       # :kind             => kind,
       :descendants      => self.descendants.map(&:to_descendant_hash),
@@ -232,30 +229,31 @@ class Relic < ActiveRecord::Base
     dp = DateParser.new dating_of_obj
     dating_hash = Hash[[:from, :to, :has_round_date].zip(dp.results << dp.rounded?)]
     {
-      :id               => id,
-      :type             => 'relic',
-      :identification   => identification,
-      :street           => street,
-      :street_normalized => street_normalized,
-      :place_full_name  => place_full_name,
-      # :kind             => kind,
-      :descendants      => self.descendants.map(&:to_descendant_hash),
-      # :edit_count       => self.edit_count,
-      # :skip_count       => self.skip_count,
-      :voivodeship      => { :id => self.voivodeship_id,            :name => self.voivodeship.name },
-      :district         => { :id => self.district_id,               :name => self.district.name },
-      :commune          => { :id => self.commune_id,                :name => self.commune.name },
-      :virtual_commune_id => self.place.virtual_commune_id,
-      :place            => { :id => self.place_id,                  :name => self.place.name },
+      :id                   => id,
+      :type                 => 'relic',
+      :identification       => identification,
+      :street               => street,
+      :street_normalized    => street_normalized,
+      :place_full_name      => place_full_name,
+      :place_with_address   => place_with_address,
+      # :kind               => kind,
+      :descendants          => self.descendants.map(&:to_descendant_hash),
+      # :edit_count         => self.edit_count,
+      # :skip_count         => self.skip_count,
+      :voivodeship          => { :id => self.voivodeship_id,   :name => self.voivodeship.name },
+      :district             => { :id => self.district_id,      :name => self.district.name },
+      :commune              => { :id => self.commune_id,       :name => self.commune.name },
+      :virtual_commune_id   => self.place.virtual_commune_id,
+      :place                => { :id => self.place_id,         :name => self.place.name },
       # new fields
-      :description      => description,
-      :has_description  => description?,
-      :categories       => categories,
-      :has_photos       => has_photos?,
-      :state            => state,
-      :existance        => existance,
-      :country          => country_code.downcase,
-      :tags             => tags
+      :description          => description,
+      :has_description      => description?,
+      :categories           => categories,
+      :has_photos           => has_photos?,
+      :state                => state,
+      :existance            => existance,
+      :country              => country_code.downcase,
+      :tags                 => tags
     }.merge(dating_hash).to_json
   end
 
@@ -347,4 +345,25 @@ class Relic < ActiveRecord::Base
     Existences.sample
   end
 
+  def polish_relic
+    self.class == Relic
+  end
+
+  def latitude=(value)
+    super
+    if latitude_changed?
+      self.geocoded = true
+    end
+  end
+
+  def longitude=(value)
+    super
+    if longitude_changed?
+      self.geocoded = true
+    end
+  end
+
+  def place_with_address
+    "#{place_full_name}, #{street_normalized}"
+  end
 end

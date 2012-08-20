@@ -1,14 +1,36 @@
 # -*- encoding : utf-8 -*-
 class RelicsController < ApplicationController
 
+  before_filter :enable_fancybox, :only => [:edit, :update]
+
   expose(:relics) do
     tsearch.perform
   end
 
   expose(:relic) do
     if id = params[:relic_id] || params[:id]
-      Relic.find(id).tap do |r|
+      r = Relic.find(id)
+
+      if params[:original].present? && request.get? && r.versions.count > 0
+        flash.now[:notice] = "To jest podgląd oryginalnej wersji zabytku. <a href='#{relic_path(id)}'>zobacz wersję obecną</a>.".html_safe
+        r = r.versions.first.reify
+        r.id = 0
+        r
+      else
+        # change relic type if requested
+        if params[:relic] && !request.get?
+          if params[:relic]['polish_relic'] == '0' && r.class == Relic
+            r.update_attribute(:type, 'ForeignRelic')
+            r = Relic.find(r.id)
+          elsif params[:relic]['polish_relic'] == '1' && r.class == ForeignRelic
+            r.update_attribute(:type, 'Relic')
+            r = Relic.find(r.id)
+          end
+        end
+
         r.attributes = params[:relic] unless request.get?
+        r.user_id = current_user.id if request.put? || request.post?
+        r
       end
     else
       Relic.new(params[:relic])
@@ -19,14 +41,13 @@ class RelicsController < ApplicationController
   before_filter :authenticate_user!, :only => [:edit, :create, :update]
 
   def show
+    relic.present? # raise ActiveRecord::RecordNotFound before entering template
     if params[:section].present?
       render "relics/show/_#{params[:section]}" and return
     end
-    relic.present? # raise ActiveRecord::RecordNotFound before entering template
   end
 
   def index
-    # SearchTerm.store(params[:q1])
     gon.highlighted_tags = relics.highlighted_tags
   end
 
@@ -36,12 +57,6 @@ class RelicsController < ApplicationController
 
   def update
     authorize! :update, relic
-
-    [:photos, :documents, :links, :entries].each do |subresource|
-      updated_nested_resources(subresource).each do |concrete_subresource|
-        authorize! :update, concrete_subresource
-      end
-    end
 
     if params[:section] == 'photos' && relic.license_agreement != "1"
       relic.photos.where(:user_id => current_user.id).destroy_all
