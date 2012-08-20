@@ -1,9 +1,5 @@
-%h2 Wydarzenia
-= semantic_form_for relic, :url => section_relic_path(relic.id, :section => :events), :remote => true do |f|
-  - if request.xhr?
-    = render 'shared/flash', :flash => flash
-  .row
-    %p.description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sed felis magna, eu dapibus turpis. Vivamus fringilla dui vitae lacus consequat adipiscing. Nullam ultrices leo at sem vestibulum commodo.
+.row
+  = semantic_form_for relic, :url => section_relic_path(relic.id, :section => :events), :remote => true do |f|
     %p.header
       %span.number l.p.
       %span.date Data / Okres

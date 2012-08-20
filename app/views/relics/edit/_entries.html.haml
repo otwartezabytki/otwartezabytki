@@ -1,9 +1,5 @@
-%h2 Społeczność
-- if request.xhr?
-  = render 'shared/flash', :flash => flash
 .row
   = semantic_form_for relic, :url => section_relic_path(relic.id, :section => :entries), :remote => true  do |f|
-    %p.description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sed felis magna, eu dapibus turpis. Vivamus fringilla dui vitae lacus consequat adipiscing. Nullam ultrices leo at sem vestibulum commodo.
     = f.semantic_fields_for :entries, relic.entries.find(&:new_record?) do |f2|
       = f2.input :title
       = f2.input :body, :input_html => { :class => "redactor" }

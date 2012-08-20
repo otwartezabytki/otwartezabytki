@@ -196,7 +196,7 @@ pl:
     attributes:
       relic:
         place_id: "Miejsce"
-        identification: "Określenie obiektu"
+        identification: "Nazwa obiektu"
         group: "Określenie zespołu"
         number: "Liczba obiektów"
         materail: "Materiał"

@@ -1,8 +1,5 @@
-%h2 Lokalizacja
-= semantic_form_for relic do |f|
-  - if request.xhr?
-    = render 'shared/flash', :flash => flash
-  .row
+.row
+  = semantic_form_for relic do |f|
     .column.column-left
       = f.input :place_id, :as => :select,
         :collection => f.object.commune.places.not_custom, :selected => f.object.place.id, :label => "Miejscowość",
@@ -29,12 +26,12 @@
       =# f.input :latitude, :as => :string, :label => "szerokość geograficzna", :placeholder => "szerokość", :input_html => { :maxlength => 10, :readonly => "readonly" }
       =# f.input :longitude, :as => :string, :label => "długość geograficzna", :placeholder => "długość", :input_html => { :maxlength => 10, :readonly => "readonly" }
 
-- content_for :footer_javascripts do
-:javascript
-  function loadGoogleMaps() {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    script.src = "http://maps.googleapis.com/maps/api/js?key=#{Settings.oz.gm_key}&sensor=false&callback=google_maps_loaded";
-    document.body.appendChild(script);
-  }
-  window.onload = loadGoogleMaps
+  - content_for :footer_javascripts do
+  :javascript
+    function loadGoogleMaps() {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src = "http://maps.googleapis.com/maps/api/js?key=#{Settings.oz.gm_key}&sensor=false&callback=google_maps_loaded";
+      document.body.appendChild(script);
+    }
+    window.onload = loadGoogleMaps

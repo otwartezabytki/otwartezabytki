@@ -8,3 +8,31 @@ pl:
   buttons:
     show_history: "Pokaż historię"
     revert_this_version: "Przywróć tę wersję"
+  relic_tabs:
+    general:
+      name: Nazwa obiektu
+      description: To jest podpowiedź do zakładki nazwy obiektu
+    location:
+      name: Lokalizacja
+      description: To jest podpowiedź do zakładki lokalizacji obiektu
+    events:
+      name: Wydarzenia
+      description: To jest podpowiedź do zakładki wydarzeń
+    description:
+      name: Opis
+      description: To jest podpowiedź do zakładki opisu
+    entries:
+      name: Społeczność
+      description: To jest podpowiedź do zakładki społeczność
+    links:
+      name: Linki, źródła, powiązania
+      description: To jest podpowiedź do zakładki linki
+    categories:
+      name: Kategorie i tagi
+      description: To jest podpowiedź do zakładki kategorie
+    documents:
+      name: Dokumenty urzędowe
+      description: To jest podpowiedź do zakładki dokumenty
+    photos:
+      name: Zdjęcia
+      description: To jest podpowiedź do zakładki zdjęcia
