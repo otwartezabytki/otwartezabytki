@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: autocomplitions
+#
+#  id         :integer          not null, primary key
+#  name       :string(255)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  indexed_at :datetime
+#  count      :integer          default(0)
+#
+
 # -*- encoding : utf-8 -*-
 class Autocomplition < ActiveRecord::Base
   # include Tire::Model::Search

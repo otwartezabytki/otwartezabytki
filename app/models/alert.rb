@@ -1,5 +1,4 @@
 # encoding: utf-8
-
 # == Schema Information
 #
 # Table name: alerts
@@ -7,10 +6,11 @@
 #  id          :integer          not null, primary key
 #  relic_id    :integer
 #  user_id     :integer
-#  kind        :string(255)
 #  description :string(255)
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  file        :string(255)
+#  state       :string(255)
 #
 
 class Alert < ActiveRecord::Base

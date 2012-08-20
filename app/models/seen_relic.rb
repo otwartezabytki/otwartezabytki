@@ -8,12 +8,6 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-# Indexes
-#
-#  index_seen_relics_on_relic_id              (relic_id)
-#  index_seen_relics_on_user_id               (user_id)
-#  index_seen_relics_on_user_id_and_relic_id  (user_id,relic_id)
-#
 
 class SeenRelic < ActiveRecord::Base
   belongs_to :relic

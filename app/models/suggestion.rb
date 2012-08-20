@@ -25,14 +25,6 @@
 #  skipped               :boolean          default(FALSE)
 #  ip_address            :string(255)
 #
-# Indexes
-#
-#  index_suggestions_on_ancestry               (ancestry)
-#  index_suggestions_on_coordinates_action     (coordinates_action)
-#  index_suggestions_on_dating_of_obj_action   (dating_of_obj_action)
-#  index_suggestions_on_identification_action  (identification_action)
-#  index_suggestions_on_place_id_action        (place_id_action)
-#
 
 class Suggestion < ActiveRecord::Base
   belongs_to :user

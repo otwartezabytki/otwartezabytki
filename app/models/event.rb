@@ -11,6 +11,7 @@
 #  date_end   :date
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  position   :integer
 #
 
 class Event < ActiveRecord::Base

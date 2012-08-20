@@ -19,10 +19,6 @@
 #  username               :string(255)
 #  seen_relic_order       :string(255)      default("asc")
 #
-# Indexes
-#
-#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
-#
 
 class User < ActiveRecord::Base
   has_many :suggestions

@@ -1,5 +1,3 @@
-# -*- encoding : utf-8 -*-
-
 # == Schema Information
 #
 # Table name: relics
@@ -12,7 +10,7 @@
 #  materail        :string(255)
 #  dating_of_obj   :string(255)
 #  street          :string(255)
-#  register_number :string(255)
+#  register_number :text
 #  nid_id          :string(255)
 #  latitude        :float
 #  longitude       :float
@@ -35,12 +33,16 @@
 #  edit_count      :integer          default(0)
 #  description     :text
 #  tags            :string(255)
-#
-# Indexes
-#
-#  index_relics_on_ancestry  (ancestry)
+#  type            :string(255)      default("Relic")
+#  country_code    :string(255)      default("PL")
+#  fprovince       :string(255)
+#  fplace          :string(255)
+#  documents_info  :text
+#  links_info      :text
+#  user_id         :integer
 #
 
+# -*- encoding : utf-8 -*-
 ActiveSupport::Dependencies.depend_on 'relic/tire_extensions'
 class Relic < ActiveRecord::Base
   States = ['checked', 'unchecked', 'filled']
