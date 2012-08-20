@@ -129,7 +129,7 @@ class Relic < ActiveRecord::Base
         :default => {
           :type      => "custom",
           :tokenizer => "standard",
-          :filter    => "standard, lowercase, pl_synonym, pl_stop, morfologik_stem, unique"
+          :filter    => "standard, lowercase, pl_synonym, pl_stop, morfologik_stem, unique, lowercase"
         }
       }
     }
@@ -154,6 +154,11 @@ class Relic < ActiveRecord::Base
       :untouched =>  { "type" => "string", "index" => "not_analyzed" }
     }
 
+    indexes :street_normalized, :type => "multi_field", :fields => {
+      :street_normalized =>  { "type" => "string", "index" => "analyzed" },
+      :untouched =>  { "type" => "string", "index" => "not_analyzed" }
+    }
+
     with_options :index => :not_analyzed do |na|
       na.indexes :id
       na.indexes :kind
@@ -170,7 +175,6 @@ class Relic < ActiveRecord::Base
       na.indexes :from,  :type => "integer"
       na.indexes :to,  :type => "integer"
       na.indexes :country
-      na.indexes :street_normalized
       na.indexes :tags
     end
   end
@@ -200,7 +204,6 @@ class Relic < ActiveRecord::Base
       :type             => 'relic',
       :identification   => identification,
       :street           => street,
-      :street_normalized => street_normalized,
       :place_full_name  => place_full_name,
       # :kind             => kind,
       :descendants      => self.descendants.map(&:to_descendant_hash),
@@ -226,30 +229,31 @@ class Relic < ActiveRecord::Base
     dp = DateParser.new dating_of_obj
     dating_hash = Hash[[:from, :to, :has_round_date].zip(dp.results << dp.rounded?)]
     {
-      :id               => id,
-      :type             => 'relic',
-      :identification   => identification,
-      :street           => street,
-      :street_normalized => street_normalized,
-      :place_full_name  => place_full_name,
-      # :kind             => kind,
-      :descendants      => self.descendants.map(&:to_descendant_hash),
-      # :edit_count       => self.edit_count,
-      # :skip_count       => self.skip_count,
-      :voivodeship      => { :id => self.voivodeship_id,            :name => self.voivodeship.name },
-      :district         => { :id => self.district_id,               :name => self.district.name },
-      :commune          => { :id => self.commune_id,                :name => self.commune.name },
-      :virtual_commune_id => self.place.virtual_commune_id,
-      :place            => { :id => self.place_id,                  :name => self.place.name },
+      :id                   => id,
+      :type                 => 'relic',
+      :identification       => identification,
+      :street               => street,
+      :street_normalized    => street_normalized,
+      :place_full_name      => place_full_name,
+      :place_with_address   => place_with_address,
+      # :kind               => kind,
+      :descendants          => self.descendants.map(&:to_descendant_hash),
+      # :edit_count         => self.edit_count,
+      # :skip_count         => self.skip_count,
+      :voivodeship          => { :id => self.voivodeship_id,   :name => self.voivodeship.name },
+      :district             => { :id => self.district_id,      :name => self.district.name },
+      :commune              => { :id => self.commune_id,       :name => self.commune.name },
+      :virtual_commune_id   => self.place.virtual_commune_id,
+      :place                => { :id => self.place_id,         :name => self.place.name },
       # new fields
-      :description      => description,
-      :has_description  => description?,
-      :categories       => categories,
-      :has_photos       => has_photos?,
-      :state            => state,
-      :existance        => existance,
-      :country          => country_code.downcase,
-      :tags             => tags
+      :description          => description,
+      :has_description      => description?,
+      :categories           => categories,
+      :has_photos           => has_photos?,
+      :state                => state,
+      :existance            => existance,
+      :country              => country_code.downcase,
+      :tags                 => tags
     }.merge(dating_hash).to_json
   end
 
@@ -357,5 +361,9 @@ class Relic < ActiveRecord::Base
     if longitude_changed?
       self.geocoded = true
     end
+  end
+
+  def place_with_address
+    "#{place_full_name}, #{street_normalized}"
   end
 end
