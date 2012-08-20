@@ -43,4 +43,7 @@
 #
 
 class ForeignRelic < Relic
+  def self.model_name
+    Relic.model_name
+  end
 end

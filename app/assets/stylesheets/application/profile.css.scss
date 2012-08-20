@@ -1147,7 +1147,7 @@ section.edit{
       line-height: 16px;
       margin-top: 10px;
     }
-    .input input{
+    .string input {
       display: block;
       border: 1px solid #646464;
       @include box-shadow(0 1px 1px 0 rgba(0,0,0,.1), inset 0 1px 3px 0 rgba(0,0,0,.3));
@@ -1159,6 +1159,9 @@ section.edit{
       font-weight: 600;
       width: 680px;
       margin: 10px 0;
+    }
+    .boolean span {
+      font-size: 13px;
     }
     .actions{
       border-top: 1px solid #e5e5e5;

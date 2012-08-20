@@ -1,3 +1,5 @@
+# -*- encoding : utf-8 -*-
+
 # == Schema Information
 #
 # Table name: relics
@@ -41,8 +43,6 @@
 #  links_info      :text
 #  user_id         :integer
 #
-
-# -*- encoding : utf-8 -*-
 ActiveSupport::Dependencies.depend_on 'relic/tire_extensions'
 class Relic < ActiveRecord::Base
   States = ['checked', 'unchecked', 'filled']
@@ -60,11 +60,12 @@ class Relic < ActiveRecord::Base
   has_many :links, :order => 'position', :dependent => :destroy
   has_many :events, :order => 'position', :dependent => :destroy
 
-  attr_accessor :license_agreement
+  attr_accessor :license_agreement, :polish_relic
   attr_accessible :identification, :place_id, :dating_of_obj, :latitude, :longitude,
                   :street, :tags, :categories, :photos_attributes, :description,
                   :documents_attributes, :documents_info, :links_attributes, :links_info,
-                  :events_attributes, :entries_attributes, :license_agreement, :user_id, :user
+                  :events_attributes, :entries_attributes, :license_agreement, :polish_relic,
+                  :geocoded
 
   accepts_nested_attributes_for :photos, :documents, :entries, :links, :events, :allow_destroy => true
 
@@ -76,6 +77,7 @@ class Relic < ActiveRecord::Base
   serialize :categories, Array
 
   validates :identification, :presence => true, :if => :identification_changed?
+  validates :place, :presence => true, :if => :polish_relic
 
   before_validation do
     if tags_changed? && tags.is_a?(Array)
@@ -339,10 +341,21 @@ class Relic < ActiveRecord::Base
     Existences.sample
   end
 
-  private
+  def polish_relic
+    self.class == Relic
+  end
 
-  def fill_user(resource)
-    Rails.logger.info("foobar")
-    resource.user = user
+  def latitude=(value)
+    super
+    if latitude_changed?
+      self.geocoded = true
+    end
+  end
+
+  def longitude=(value)
+    super
+    if longitude_changed?
+      self.geocoded = true
+    end
   end
 end

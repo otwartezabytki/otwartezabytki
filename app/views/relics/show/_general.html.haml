@@ -17,7 +17,10 @@
   .location_name
     = link_to 'edytuj', edit_section_relic_path(relic.id, :location), :title => 'edytuj ogólne dane zabytku', :remote => true, :class => "edit-relic-link"
     %strong Lokalizacja:
-    %p= "#{relic.place.name}, powiat #{relic.district.name}, gmina #{relic.commune.name}"
+    - if relic.polish_relic
+      %p= "#{relic.place.name}, powiat #{relic.district.name}, gmina #{relic.commune.name}"
+    - else
+      %p= [I18n.t(relic.country_code, :scope => :countries), relic.fprovince, relic.fplace].select(&:present?).join(', ')
     %p= relic.street
     - if relic.latitude.present? && relic.longitude.present?
       %p= link_to "pokaż na mapie »", '#', :id => "relic_location_popover", :"data-content-id" => "location_body", :"data-title-id" => "location_title"

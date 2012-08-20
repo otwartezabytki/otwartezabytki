@@ -9,10 +9,22 @@ class RelicsController < ApplicationController
 
   expose(:relic) do
     if id = params[:relic_id] || params[:id]
-      Relic.find(id).tap do |r|
-        r.attributes = params[:relic] unless request.get?
-        r.user_id = current_user.id if request.put? || request.post?
+      r = Relic.find(id)
+
+      # change relic type if requested
+      if params[:relic] && !request.get?
+        if params[:relic]['polish_relic'] == '0' && r.class == Relic
+          r.update_attribute(:type, 'ForeignRelic')
+          r = Relic.find(r.id)
+        elsif params[:relic]['polish_relic'] == '1' && r.class == ForeignRelic
+          r.update_attribute(:type, 'Relic')
+          r = Relic.find(r.id)
+        end
       end
+
+      r.attributes = params[:relic] unless request.get?
+      r.user_id = current_user.id if request.put? || request.post?
+      r
     else
       Relic.new(params[:relic])
     end

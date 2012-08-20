@@ -208,6 +208,10 @@ pl:
         tags: "Tagi"
         documents_info: "Gdzie szukać?"
         links_info: "Gdzie szukać?"
+        polish_relic: "Lokalizacja znajduje się w Polsce"
+        country_code: "Kraj"
+        fprovince: "Prowincja"
+        fplace: "Miejscowość"
       user:
         email: Adres e-mail
         password: Hasło
@@ -289,6 +293,11 @@ pl:
         identification: To jest informacja o nazwie zabytku
         documents_info: To jest informacja gdzie szukać dokumenty
         links_info: To jest informacja gdzie szukać linki
+        place: Informacja o miejscowości
+        country_code: Informacja o kraju
+        fprovince: Informacja o prowincji
+        fplace: Informacja o miejscowości
+        street: Informacja o ulicy
       document:
         name: Do jest podpowiedź do nazwy dokumentu
         description: To jest podpowiedź do opisu dokumentu

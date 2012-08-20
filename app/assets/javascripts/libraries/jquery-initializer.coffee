@@ -19,6 +19,7 @@ jQuery.fn.initialize = ->
 popping_state = false
 ajax_callback = (data, status, xhr) ->
   if xhr.getResponseHeader('Content-Type').match(/text\/html/)
+    window.map = null # hack for location view...
     $parsed_data = $('<div>').append($(data))
 
     try # gon script hack

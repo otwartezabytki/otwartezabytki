@@ -1,28 +1,35 @@
-.location{
-	form{
-		.column-left{
-			width: 238px;
-      input[type="text"]{
+.location {
+  form {
+    .column-left {
+      width: 238px;
+      input[type="text"] {
         width: 210px;
       }
-      select{
+      select {
         margin: 10px 0;
         width: 238px;
       }
-      .select2-container, .select2-dropdown-open{
+      .select2-container, .select2-dropdown-open {
         margin: 10px 0;
       }
-		}
-    .column-middle{
+      .boolean {
+        margin-bottom: 8px;
+      }
+    }
+    .column-middle {
       width: 309px;
       margin: 0 15px;
     }
-    .column-right{
+    .column-right {
       width: 118px;
     }
-    #relic_place_id_input, #relic_street_input{
+    #relic_place_id_input, #relic_street_input {
       border-top: 1px solid #e5e5e5;
       padding-top: 10px;
     }
-	}
+  }
+
+  form.geocoded .marker-helper {
+    display: none;
+  }
 }
