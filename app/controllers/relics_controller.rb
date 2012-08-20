@@ -11,20 +11,27 @@ class RelicsController < ApplicationController
     if id = params[:relic_id] || params[:id]
       r = Relic.find(id)
 
-      # change relic type if requested
-      if params[:relic] && !request.get?
-        if params[:relic]['polish_relic'] == '0' && r.class == Relic
-          r.update_attribute(:type, 'ForeignRelic')
-          r = Relic.find(r.id)
-        elsif params[:relic]['polish_relic'] == '1' && r.class == ForeignRelic
-          r.update_attribute(:type, 'Relic')
-          r = Relic.find(r.id)
+      if params[:original].present? && request.get? && r.versions.count > 0
+        flash.now[:notice] = "To jest podgląd oryginalnej wersji zabytku. <a href='#{relic_path(id)}'>zobacz wersję obecną</a>.".html_safe
+        r = r.versions.first.reify
+        r.id = 0
+        r
+      else
+        # change relic type if requested
+        if params[:relic] && !request.get?
+          if params[:relic]['polish_relic'] == '0' && r.class == Relic
+            r.update_attribute(:type, 'ForeignRelic')
+            r = Relic.find(r.id)
+          elsif params[:relic]['polish_relic'] == '1' && r.class == ForeignRelic
+            r.update_attribute(:type, 'Relic')
+            r = Relic.find(r.id)
+          end
         end
-      end
 
-      r.attributes = params[:relic] unless request.get?
-      r.user_id = current_user.id if request.put? || request.post?
-      r
+        r.attributes = params[:relic] unless request.get?
+        r.user_id = current_user.id if request.put? || request.post?
+        r
+      end
     else
       Relic.new(params[:relic])
     end

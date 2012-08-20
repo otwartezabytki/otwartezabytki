@@ -40,4 +40,5 @@
   - if relic.register_number.present?
     .register_number
       %strong Numer w rejestrze:
-      = relic.register_number
+      %p= relic.register_number
+  = link_to 'wersja oryginalna', relic_path(relic.id, :original => true), :class => "original"

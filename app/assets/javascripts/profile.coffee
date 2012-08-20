@@ -38,3 +38,8 @@ jQuery.initializer 'section.show.photo', ->
 $('body').on "click", ".close_popover", ->
   $("##{$(this).data('popover-id')}").popover('hide')
   false
+
+jQuery.initializer 'body.relics.show', ->
+  this.on 'click', 'a[href^="/relics/0/"]', (e) ->
+    alert('To tylko podgląd. Nie możesz nic edytować.')
+    false
