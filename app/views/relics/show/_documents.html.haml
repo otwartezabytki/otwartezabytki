@@ -1,9 +1,9 @@
 %section.show.documents
   %h2 Dokumenty urzędowe
-  - if relic.documents.count > 0
+  - if relic.all_documents.count > 0
     = link_to 'edytuj', edit_section_relic_path(relic.id, :documents), :title => 'edytuj dokumenty urzędowe zabytku', :remote => true, :class => "edit-relic-link"
     .content
-      - relic.documents.each do |document|
+      - relic.all_documents.each do |document|
         .document{ :class => document.mime_class }
           %h3= link_to document.name, document.file.url
           %p

@@ -335,6 +335,18 @@ class Relic < ActiveRecord::Base
     all_photos.exists?
   end
 
+  def all_documents
+    Document.where(:relic_id => [id] + descendant_ids).order("relic_id ASC, position ASC")
+  end
+
+  def all_links
+    Link.where(:relic_id => [id] + descendant_ids).order("relic_id ASC, position ASC")
+  end
+
+  def all_events
+    Event.where(:relic_id => [id] + descendant_ids).order("relic_id ASC, position ASC")
+  end
+
   def state
     # TODO
     States.sample
