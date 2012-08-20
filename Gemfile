@@ -93,6 +93,9 @@ gem 'js-routes'
 # sorting links and relic events
 gem 'acts_as_list'
 
+# download documents as zip
+gem 'rubyzip'
+
 group :development, :test do
   # for debugging
   gem 'ruby-debug19'

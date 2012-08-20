@@ -90,6 +90,27 @@ class RelicsController < ApplicationController
   def new
   end
 
+  def download_zip
+    if relic.documents.count >  0
+
+      file_name = "dokumenty-zabytku-#{relic.id}-#{relic.identification.parameterize.to_s}.zip"
+      t = Tempfile.new("my-temp-filename-#{Time.now}")
+
+      ::Zip::ZipOutputStream.open(t.path) do |zip|
+        relic.documents.each do |document|
+          zip.put_next_entry(document.file.identifier)
+          zip.print IO.read(document.file.file.to_file)
+        end
+      end
+
+      send_file t.path, :type => 'application/zip',
+        :disposition => 'attachment',
+        :filename => file_name
+
+      t.close
+    end
+  end
+
   protected
     def uniq_cache_key namespace = nil
       sliced_params = params[:q1].to_s.split.sort + params.slice(:page, :location).values

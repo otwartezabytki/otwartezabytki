@@ -11,9 +11,10 @@
             = l document.created_at.to_date, :format => :short
           %p
             rozmiar:
-            = (document.size / 1024 / 1024).round(1)
+            = (document.size / 1024.0 / 1024.0).round(1)
             MB
+      = link_to "wgraj plik", download_zip_relic_path(relic.id)
   - else
     .placeholder
       %p Nikt jeszcze nie wgrał żadnego pliku. Bądź pierwszy.
-      = link_to "wgraj plik", edit_section_relic_path(relic.id, :documents), :remote => true
+      = link_to "dodaj plik", edit_section_relic_path(relic.id, :documents), :remote => true
