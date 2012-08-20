@@ -1,6 +1,6 @@
 #= require sugar
-#= require jquery-specializer
-#= require gmaps
+#= require lib/jquery-specializer
+#= require vendor/gmaps
 
 map = undefined
 
