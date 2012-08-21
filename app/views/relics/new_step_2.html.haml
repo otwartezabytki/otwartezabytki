@@ -1,0 +1,48 @@
+.edit_relic.new_relic
+  = render :partial => "stages", :locals => { :stage => 2 }
+  .creator
+    %section.main
+      %section.creator-step
+        %p.intro
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras convallis luctus malesuada. Pellentesque purus augue, facilisis id hendrerit et, tincidunt a mauris. 
+        %p.intro
+          Vivamus vestibulum semper odio, nec volutpat sapien egestas ut. Nam iaculis dapibus eros convallis mollis. Nullam non ligula ut leo porta venenatis sed in nibh.
+      %section.creator-step
+        .field.select.zone
+          %label.main Województwo
+          %select 
+            %option opcja 1
+            %option opcja 2
+            %option opcja 3
+        .field.select.zone
+          %label.main Powiat
+          %select 
+            %option opcja 1
+            %option opcja 2
+            %option opcja 3
+        .field.select.zone
+          %label.main Gmina
+          %select 
+            %option opcja 1
+            %option opcja 2
+            %option opcja 3
+        %aside
+          %h3 Jakim cudem te dane są już uzupełnione?
+          %p Otwartezabytki.pl korzysta równocześnie z kilku zaawansowanych i szczegółówych bibliotek geograficznych, również Wikipedii oraz Google Maps. Stąd też potrafimy już na tym etapie pomóc Ci w uzupełnianiu informacji o zabytkach.
+          %p Adres natomiast wstępnie ustaliliśmy na podstawi tego co zaznaczyłeś na mapie w poprzednim kroku.
+          %p= link_to 'Dowiedz się więcej...', '#', :class => 'footlink'
+      %section.creator-step
+        .field.text
+          %label.main Miejscowość
+          %input{:type => 'text'}
+      %section.creator-step
+        .field.text.link
+          %label.main Ulica
+          %input{:type => 'text'}
+          = link_to 'Kliknij tutaj, jeśli obiekt nie ma adresu', '#'
+      = link_to '#', :class => 'next-step' do
+        %strong Przejdź dalej &raquo;
+        %small Krok 3
+    
+- content_for :footer_javascripts do
+  != javascript_include_tag "profile"

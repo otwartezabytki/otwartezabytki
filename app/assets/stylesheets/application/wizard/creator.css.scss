@@ -1,0 +1,386 @@
+@import '../mixins';
+@import 'button_states';
+
+.new_relic{
+  .creator{
+    background: #fff;
+    @include single-box-shadow(rgba(0,0,0,0.15), 0, 0, 3px);
+    section.main{
+      @include clearfix;
+      width: 671px;
+      padding: 8px 17px 24px 16px;
+      background: asset-data-url("misc-splitter.png") repeat-y top right;
+      p.intro{
+        line-height: 16px;
+        margin-bottom: 16px;
+      }
+    }
+    section.creator-step{
+      margin-top: 16px;
+      position: relative;
+      @include clearfix;
+      h3, label.main, strong.label{
+        font-weight: bold;
+        line-height: 32px;
+      }
+
+      label.main{ display: block;}
+    }
+    aside{
+      position: absolute;
+      right: -273px;
+      top: -8px;
+      width: 224px;
+      padding: 0 16px;
+      h3{
+        font-weight: bold;
+        line-height: 20px;
+        span{
+          color: #fbad18;
+        }
+      }
+      p{
+        margin-top: 16px;
+      }
+      a.footlink{ font-weight: bold;}
+    }
+    /* form elements */
+    input[type="text"]{
+      font-size: 14px;
+      padding: 9px;
+      @include background-image(linear-gradient(#fafafa, #fff)); 
+      border: 1px solid #727272;
+      @include border-radius(2px);
+      @include box-shadow(0 1px 1px 0 rgba(0, 0, 0, 0.1), 0 1px 3px 0 rgba(0, 0, 0, 0.3) inset);
+    }
+    .field {
+      position: relative;
+      @include clearfix;
+    }
+    .field.marker:before{
+      display: block;
+      width: 8px;
+      height: 14px;
+      background: asset-data-url("icon-marker.png") no-repeat;
+      position: absolute;
+      left: 12px;
+      top: 45px;
+      content: "";
+    }
+    .field.aside{
+      position: absolute;
+      right: 0;
+      top: 8px;
+    }
+    .field.text{
+      input[type="text"]{
+        width: 521px;
+      }
+    }
+    .field.search{
+      input[type="text"]{
+        width: 500px;
+        padding-left: 30px;
+      }
+      input[type="submit"]{
+        float: right;
+        @include button-bluenavy;
+        font-size: 14px;
+        padding: 10px 26px;
+      }
+    }
+    .field.link{
+      padding-bottom: 20px;
+      a{
+        position: absolute;
+        bottom: 0;
+        right: 132px;
+      }
+    }
+    .field.zone{
+      float: left;
+      width: 172px;
+      margin-right: 15px;
+      select{
+        width: 170px;
+      }
+    }
+    .field.photo{
+      padding: 9px 0;
+      .thumb-wrapper{
+        float: left;
+        width: 125px;
+        padding: 5px;
+        @include single-box-shadow(rgba(0,0,0,0.35), 0, 1px, 3px);
+        .thumb{
+          width: 125px;
+          height: 125px;
+          background: asset-data-url("spinner-big.gif") no-repeat center center #efefef; 
+        }
+      }
+      .photo-info{
+        margin-left: 10px;
+        float: left;
+        width: 410px;
+        input[type="text"]{
+          padding: 5px;
+          font-size: 13px;
+          width: 385px;
+        }
+        a.delete-photo{
+          margin-top: 16px;
+          color: #dd0000;
+          display: inline-block;
+          padding-left: 20px;
+          line-height: 18px;
+          font-size: 12px;
+          background: asset-data-url("icon-trash.png") no-repeat left center;
+        }
+        a.cancel{
+          color: #dd0000;
+        }
+        .progress-bar{
+          text-align: center;
+          width: 397px;
+          .progress-box{            
+            @include background-image(linear-gradient(#fafafa, #fff)); 
+            border: 1px solid #727272;
+            @include border-radius(2px);
+            @include box-shadow(0 1px 1px 0 rgba(0, 0, 0, 0.1), 0 1px 3px 0 rgba(0, 0, 0, 0.3) inset);
+            overflow: hidden;
+            height: 10px;
+            .progress-line{
+              @include border-radius(1px);
+              @include background-image(linear-gradient(#6a8593, #3a5663)); 
+              height: 10px;
+            }
+          }
+          span.progress-value{
+            font-size: 12px;
+            line-height: 18px;
+          }
+        }
+      }
+    }
+    .field.disclaimer{
+      input[type="checkbox"]{
+        float: left; 
+        margin-right: 10px;
+      }
+      label{
+        font-weight: bold;
+        line-height: 18px;
+        color: #dd0000;
+        font-size: 12px;
+        float: left;
+        width: 635px;
+      }
+    } 
+    .inactive{
+      opacity: 0.35;
+    }
+    /* specyfic steps */
+    .places-wrapper{
+      overflow: hidden;
+      border: 1px solid #c1c1c1;
+      background: #e5e5e5;
+      @include border-radius(3px);
+    }
+    ul.places{
+      margin: 4px;
+      background: #fff;
+      min-height: 140px;
+      li{
+        @include clearfix;
+        padding: 3px;
+        padding-left: 10px;
+        line-height: 21px;
+        strong{ font-weight: bold;}
+        &.even{
+          background: #f5f5f5;
+        }
+        a{
+          float: right;
+          padding: 0 16px 0 19px;
+          @include button-bluenavy;
+        }
+      }
+    }
+
+
+    /* map */
+    .map-wrapper{
+      position: relative;
+    }
+    #map_canvas{
+    }
+    .marker-helper {
+      background-color: white;
+      padding: 10px;
+      position: absolute;
+      top: 0px;
+      right: 0;
+      h4 {
+        text-align: center;
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 20px;
+      }
+
+      .marker-holder {
+        background: asset-data-url('marker-helper.png') center center no-repeat;
+        margin: 20px auto;
+        width: 118px;
+        height: 118px;
+
+        #marker {
+          cursor: pointer;
+          margin: 28px 0 10px 47px;
+        }
+
+      }
+
+    }
+
+    /* photos */
+    a.add-photo{
+      display: inline-block;
+      font-weight: bold;
+      line-height: 24px;
+      padding: 0 15px;
+      margin: 9px 0 48px;
+      @include button-bluenavy;
+    }
+    .next-step{
+      float: right;
+      margin-top: 36px;
+      padding: 15px 30px; 
+      @include button-bluenavy;
+      text-align: center;
+      strong, small{ display: block;}
+      strong{
+        font-size: 16px;
+        text-transform: uppercase;
+        font-weight: 600;
+        line-height: 18px;
+      }
+      small{
+        line-height: 18px;
+        font-size: 12px;
+        color: #9eb6c3;
+      }
+    }
+  }
+}
+.suggested-relics-wrapper{
+  background: #fff;
+  width: 760px;
+  @include clearfix;
+  h1{
+    line-height: 45px;
+    background: #47697b;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  h1, .info, ul li{
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .info{
+    padding-top: 16px;
+    padding-bottom: 12px;
+    p{
+      padding: 2px 0;
+      line-height: 20px;
+    }
+  }
+  ul li{
+    @include clearfix;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    &.even{
+      background: #f5f5f5;
+    }
+    img{
+      display: block;
+      float: left;
+      @include border-radius(4px);
+    }
+    .description{
+      width: 580px;
+      float: left;
+      margin-left: 15px;
+      h3{
+        font-size: 16px;
+        line-height: 22px;
+      }
+      span{
+        font-size: 13px;
+        line-height: 24px;
+        padding-left: 24px;
+        display: block;
+        strong{ font-weight: bold;}
+        &.marker{
+          background: asset-data-url("icon-marker.png") no-repeat 3px 6px;
+        }
+        &.category{
+          background: asset-data-url("icon-folder.png") no-repeat 2px 7px;
+        }
+        &.date{
+          background: asset-data-url("icon-calendar.png") no-repeat 1px 5px;
+        }
+        &.choose{
+          color: #278a00;
+          line-height: 46px;
+          padding-left: 0;
+          a{
+            background: #278a00;
+            display: inline-block;
+            color: #fff;
+            border: 0;
+            font-size: 12px;
+            font-weight: 600;
+            text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
+            @include border-radius(2px);
+            cursor: pointer;
+            text-decoration: none;
+            line-height: 26px;
+            padding: 0 10px;
+            margin-left: 4px;
+            text-transform: uppercase;
+            &:hover{
+              background-color: #2fa201;
+            }
+          }
+        }
+      }
+    }
+  }
+  a.not-found{
+    float: right;
+    margin: 25px 20px 25px 0;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    line-height: 38px;
+    padding: 0 20px;
+    @include button-bluenavy;
+  }
+}
+body.relics.new #colorbox {
+  #cboxLoadedContent{
+    border: 3px solid rgba(0,0,0,0.1);
+    @include border-radius(4px);
+    overflow: hidden;
+    #cboxContent{
+      margin-top: 0;
+    }
+  }
+
+  #cboxClose, #cboxClose:hover{
+    background: asset-data-url("misc-x-white.png") no-repeat center center;
+    top: 15px;
+    right: 12px;
+  }
+}

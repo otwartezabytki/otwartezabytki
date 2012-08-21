@@ -21,4 +21,7 @@ class PreparedQuery
     build.to_s.gsub('*', '.*')
   end
 
+  def clean
+    build.to_s.gsub(/\*+/, '')
+  end
 end

@@ -1,3 +1,9 @@
+- if relic.id == 0
+  .original-version
+    %a{:href => "#", :class => "btn"} &#171; zobacz wersję obecną
+    .content
+      %h3 Przeglądasz wersję oryginalną
+      %p Oznacza to, że istnieje również wersja z naniesionymi przez Ciebie poprawkami.
 #fancybox
 .row.first-row
   = render :partial => "relics/show/general"
@@ -8,6 +14,7 @@
     = render :partial => "relics/show/entries"
     = render :partial => "relics/show/links"
   .column-right
+    = render :partial => "relics/show/subrelics"
     = render :partial => "relics/show/categories"
     = render :partial => "relics/show/alerts"
     = render :partial => "relics/show/events"

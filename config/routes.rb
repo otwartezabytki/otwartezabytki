@@ -10,7 +10,7 @@ Otwartezabytki::Application.routes.draw do
     :sessions => "users/sessions",
     :passwords => "users/passwords"
   }
-
+  resources :create_relic
   resources :tags, :only => :index
 
   resources :relics, :except => :destroy do
@@ -18,6 +18,7 @@ Otwartezabytki::Application.routes.draw do
       match 'section/:section/edit', :to => 'relics#edit', :as => 'edit_section'
       match 'section/:section', :to => 'relics#show', :as => 'section', :via => :get
       match 'section/:section', :to => 'relics#update', :as => 'section', :via => :put
+      get :download_zip
     end
 
     resources :photos, :documents, :entries, :links, :events

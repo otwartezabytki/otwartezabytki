@@ -1,11 +1,11 @@
 %section.show.events
   %h2 Wydarzenia
-  - if relic.events.count > 0
+  - if relic.all_events.count > 0
     = link_to 'edytuj', edit_section_relic_path(relic.id, :events), :title => 'edytuj wydarzenia związane z zabytkiem', :remote => true, :class => "edit-relic-link"
     .content
       .viewport
         %ul
-          - relic.events.each do |event|
+          - relic.all_events.each do |event|
             %li
               %strong= event.date
               \-

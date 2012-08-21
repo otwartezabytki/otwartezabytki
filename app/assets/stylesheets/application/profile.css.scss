@@ -1307,9 +1307,36 @@ div.fancybox-close{
 }
 
 .popover{
+  &.right{
+    .arrow{
+      display: none;
+    }
+  }
   .popover-inner{
-    padding: 0;
     @include background(linear-gradient(#f6f7f8, #eaeaeb));
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: visible;
+    &:before{
+      content: ' ';
+      border-color: transparent rgba(0, 0, 0, 0.2) transparent transparent;
+      border-style: solid;
+      border-width: 9px;
+      position: absolute;
+      top: 47%;
+      left: -17px;
+    }
+    &:after{
+      content: ' ';
+      border-color: transparent #F6F7F8 transparent transparent;
+      border-style: solid;
+      border-width: 9px;
+      position: absolute;
+      bottom: auto;
+      top: 47%;
+      left: -16px;
+    }
     .popover-title{
       background: none;
       border: 0;
@@ -1327,6 +1354,56 @@ div.fancybox-close{
     }
     .popover-content{
       background: none;
+    }
+  }
+}
+
+.original-version{
+  width: 100%;
+  position: fixed;
+  @include background(linear-gradient(rgba(242,242,242,0.9), rgba(229,229,229,0.9)));
+  @include box-shadow(0 1px 1px 0 rgba(0,0,0,0.4));
+  min-height: 83px;
+  top: 0;
+  left: 0;
+  .btn{
+    float: left;
+    margin: 30px 0 0 10px;
+    @include background(linear-gradient(#4b6d7e, #436576));
+    color: white;
+    border: 0;
+    font-size: 12px;
+    font-weight: 600;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
+    text-transform: uppercase;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    cursor: pointer;
+    padding: 9px 12px 6px;
+    text-transform: uppercase;
+    &:hover {
+      @include background(linear-gradient(#437994, #2b607b));
+      text-decoration: none;
+    }
+    &:active {
+      @include background(linear-gradient(#2b607b, #437993));
+    }
+  }
+  .content{
+    width: 760px;
+    margin: 15px auto 0;
+    text-align: center;
+    color: #333;
+    text-shadow: 0 1px 1px #fff;
+    h3{
+      font-size: 18px;
+      font-weight: 600;
+      margin: 10px 0;
+      text-transform: uppercase;
+    }
+    p{
+      font-weight: 600;
+      font-size: 14px;
     }
   }
 }

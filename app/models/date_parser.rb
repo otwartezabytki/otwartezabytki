@@ -72,7 +72,8 @@ class DateParser
         nil
       end
     else
-      raise "Can't parse: #{s}"
+      puts "Can't parse: #{s}"
+      nil
     end
   end
 end

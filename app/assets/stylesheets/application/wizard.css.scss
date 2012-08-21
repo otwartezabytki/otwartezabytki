@@ -7,9 +7,12 @@
  *= require ./wizard/step_tags
  *= require ./wizard/step_gps
  *= require ./wizard/step_submit
+ *= require ./wizard/stages
+ *= require ./wizard/creator
 */
 
-body.relics.edit {
+
+body.relics.edit, body.relics.new {
 
   .overlay {
     opacity: 0.5;

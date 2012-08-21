@@ -489,6 +489,9 @@ GEM
     whenever (0.7.3)
       activesupport (>= 2.3.4)
       chronic (~> 0.6.3)
+    wicked (0.2.0)
+      activesupport (>= 3.0.7)
+      rails (>= 3.0.7)
     will_cache (0.0.9)
     xpath (0.1.4)
       nokogiri (~> 1.3)
@@ -561,6 +564,7 @@ DEPENDENCIES
   rocket_tag
   rspec-rails (~> 2.0)
   ruby-debug19
+  rubyzip
   sass-rails (~> 3.2.3)
   sextant
   shoulda-matchers
@@ -575,4 +579,5 @@ DEPENDENCIES
   uglifier (>= 1.0.3)
   unicode
   whenever
+  wicked
   will_cache
