@@ -51,7 +51,7 @@ class Autocomplition < ActiveRecord::Base
       next if results.blank?
       page += 1
       collection = results.map do |relic|
-        hash = relit.to_hash
+        hash = relic.to_hash
         hash[:autocomplitions] = ((hash[:autocomplitions] || []) << self.name.downcase).uniq
         hash
       end
