@@ -43,6 +43,22 @@ class Autocomplition < ActiveRecord::Base
   #     }
   #   }
 
+
+  def assign_search_results
+    page = 1
+    begin
+      results = Search.new(:q => self.name, :page => page, :per_page => 1000).perform
+      next if results.blank?
+      page += 1
+      collection = results.map do |relic|
+        hash = relit.to_hash
+        hash[:autocomplitions] = ((hash[:autocomplitions] || []) << self.name.downcase).uniq
+        hash
+      end
+      Relic.tire.index.bulk_store collection
+    end while results.total > ((page - 1) * 1000)
+  end
+
   class << self
     def gen_stat_file
       CSV.open("#{Rails.root}/tmp/file_stat.csv", 'w') do |csv|
@@ -89,17 +105,7 @@ class Autocomplition < ActiveRecord::Base
 
     def assign_to_relics
       find_each do |tag|
-        page = 1
-        begin
-          results = Search.new(:q => tag.name, :page => page, :per_page => 1000).perform
-          next if results.blank?
-          page += 1
-          collection = results.map do |relic|
-            relic.autocomplitions = ((relic.autocomplitions || []) << tag.name.downcase).uniq
-            relic
-          end
-          Relic.tire.index.bulk_store collection
-        end while results.total > ((page - 1) * 1000)
+        tag.assign_search_results
         tag.touch(:indexed_at)
       end
     end
