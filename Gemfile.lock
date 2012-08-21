@@ -564,6 +564,7 @@ DEPENDENCIES
   rocket_tag
   rspec-rails (~> 2.0)
   ruby-debug19
+  rubyzip
   sass-rails (~> 3.2.3)
   sextant
   shoulda-matchers

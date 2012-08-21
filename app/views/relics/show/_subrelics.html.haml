@@ -1,0 +1,17 @@
+- if relic.is_root? && relic.has_children?
+  %section.show.subrelics
+    %h2
+      = image_tag 'notice-icon-info.png', :class => 'flash-icon'
+      %span Oglądasz właśnie profil zabytku, będący częścią zespołu zabytków.
+    .content
+      %ul.subrelics-tree
+        = render 'shared/tree', :node => relic.subtree.arrange
+- elsif root = relic.ancestor_ids.first
+  %section.show.subrelics
+    %h2
+      = image_tag 'notice-icon-info.png', :class => 'flash-icon'
+      %span Oglądasz właśnie profil zabytku, który posiada pewne podzabytki.
+    .content
+      %ul.subrelics-tree
+        = render 'shared/tree', :node => Relic.find(root).subtree.arrange
+
