@@ -45,6 +45,7 @@
 #
 ActiveSupport::Dependencies.depend_on 'relic/tire_extensions'
 class Relic < ActiveRecord::Base
+  include AASM
   States = ['checked', 'unchecked', 'filled']
   Existences = ['existed', 'archived', 'social']
 
@@ -65,7 +66,7 @@ class Relic < ActiveRecord::Base
                   :street, :tags, :categories, :photos_attributes, :description,
                   :documents_attributes, :documents_info, :links_attributes, :links_info,
                   :events_attributes, :entries_attributes, :license_agreement, :polish_relic,
-                  :geocoded
+                  :geocoded, :build_state
 
   accepts_nested_attributes_for :photos, :documents, :entries, :links, :events, :allow_destroy => true
 
@@ -76,8 +77,26 @@ class Relic < ActiveRecord::Base
   serialize :tags, Array
   serialize :categories, Array
 
+  aasm :column => :build_state do
+    state :create_step, :initial => true
+    state :address_step
+    state :details_step
+    state :photos_step
+    state :finish_step
+  end
+
   validates :identification, :presence => true, :if => :identification_changed?
   validates :place, :presence => true, :if => :polish_relic
+
+  # build step validations
+  with_options :if => :details_step? do |step|
+    step.validates :reason, :identification, :presence => true
+  end
+
+  with_options :if => :photos_step? do |step|
+    step.validates :description, :presence => true
+  end
+
 
   before_validation do
     if tags_changed? && tags.is_a?(Array)
@@ -266,7 +285,7 @@ class Relic < ActiveRecord::Base
   end
 
   def street_normalized
-    street_normalized = street.split('/').first.to_s
+    street_normalized = street.to_s.split('/').first.to_s
     street_normalized.gsub!(/[\W\d]+$/i, '')
     street_normalized.gsub!(/\d+[a-z]?([i,\/\s]+)?\d+[a-z]$/i, '')
     street_normalized.strip!

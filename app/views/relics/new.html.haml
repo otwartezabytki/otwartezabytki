@@ -1,5 +1,6 @@
+#fancybox
 .edit_relic.new_relic
-  = render :partial => "stages", :locals => { :stage => 1 }
+  = render :partial => "relics/build/stages", :locals => { :stage => 1 }
   .creator
     %section.main
       %section.creator-step
@@ -23,24 +24,12 @@
           %label chcę dodać zabytek spoza Polski
         .field.text.search.marker
           %label.main Miejscowość
-          %input{:type => 'text'}
+          %input{:type => 'text', :class => 'autocomplete-polish-place'}
           %input{:type => 'submit', :value => "Szukaj &raquo;".html_safe, :class => 'btn'}
       %section.creator-step
         %h3 O którą miejscowość Ci chodziło?
         .places-wrapper
           %ul.places
-            %li.odd
-              dolnośląskie &gt; wrocławski &gt;
-              %strong dobre
-              = link_to 'wybieram &raquo;'.html_safe, '#'
-            %li.even
-              dolnośląskie &gt; jeleniogórski &gt;
-              %strong dobre
-              = link_to 'wybieram &raquo;'.html_safe, '#'
-            %li.odd
-              świętokrzyskie &gt; kielecki &gt;
-              %strong dobre
-              = link_to 'wybieram &raquo;'.html_safe, '#'
       %section.creator-step
         %h3 Zaznacz obiekt na mapie
         .map-wrapper

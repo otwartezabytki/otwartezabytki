@@ -87,7 +87,9 @@ class RelicsController < ApplicationController
     end
   end
 
-  def new
+  def create
+    @relic = Relic.create(params[:relic])
+    redirect_to relic_build_path(@relic, :address)
   end
 
   def download_zip

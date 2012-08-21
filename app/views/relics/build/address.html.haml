@@ -1,0 +1,49 @@
+.edit_relic.new_relic
+  = render :partial => "stages", :locals => { :stage => 2 }
+  .creator
+    %section.main
+      %section.creator-step
+        %p.intro
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras convallis luctus malesuada. Pellentesque purus augue, facilisis id hendrerit et, tincidunt a mauris.
+        %p.intro
+          Vivamus vestibulum semper odio, nec volutpat sapien egestas ut. Nam iaculis dapibus eros convallis mollis. Nullam non ligula ut leo porta venenatis sed in nibh.
+      = semantic_form_for relic, :url => relic_build_path(relic) do |f|
+        = f.input :voivodeship_id
+        = f.input :district_id
+        = f.input :commune_id
+        = f.input :place_id
+        = f.input :street
+        .actions
+          = f.submit 'Przejdź dalej &raquo;'.html_safe
+
+      -# %section.creator-step
+      -#   .field.select.zone
+      -#     %label.main Województwo
+      -#     %select
+      -#       %option= relic.voivodeship_id
+      -#   .field.select.zone
+      -#     %label.main Powiat
+      -#     %select
+      -#       %option= relic.district_id
+
+      -#   .field.select.zone
+      -#     %label.main Gmina
+      -#     %select
+      -#       %option= relic.commune_id
+      -#   %aside
+      -#     %h3 Jakim cudem te dane są już uzupełnione?
+      -#     %p Otwartezabytki.pl korzysta równocześnie z kilku zaawansowanych i szczegółówych bibliotek geograficznych, również Wikipedii oraz Google Maps. Stąd też potrafimy już na tym etapie pomóc Ci w uzupełnianiu informacji o zabytkach.
+      -#     %p Adres natomiast wstępnie ustaliliśmy na podstawi tego co zaznaczyłeś na mapie w poprzednim kroku.
+      -#     %p= link_to 'Dowiedz się więcej...', '#', :class => 'footlink'
+      -# %section.creator-step
+      -#   .field.text
+      -#     %label.main Miejscowość
+      -#     %input{:type => 'text', :value => relic.place.name}
+      -# %section.creator-step
+      -#   .field.text.link
+      -#     %label.main Ulica
+      -#     %input{:type => 'text'}
+      -#     = link_to 'Kliknij tutaj, jeśli obiekt nie ma adresu', '#'
+      -# = link_to relic_build_path(relic), :class => 'next-step', :method => :put do
+      -#   %strong Przejdź dalej &raquo;
+      -#   %small Krok 3

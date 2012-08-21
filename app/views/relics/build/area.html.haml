@@ -1,0 +1,34 @@
+-#--------- dummy content to run in colorbox! ----------
+.suggested-relics-wrapper
+  %h1 Znaleźliśmy #{@relics.total} zabytki w tej okolicy!
+  .info
+    %p
+      Dokładnie w tej okolicy znaleźliśmy
+      %strong
+        = succeed ',' do
+          #{@relics.total} zabytki
+      które już istnieją w naszej bazie danych.
+    %p Czy jesteś pewien że to nie jest któryś z listy poniżej? Nie chcemy dublować zabytków w bazie, a łatwiej przejść do edycji już istniejących obiektów niż dublować nieuzupełnione inforacje...
+  %ul.suggested-relics
+    - @relics.each do |r|
+      %li{:class => cycle('even', 'odd')}
+        %img{:src => "http://placekitten.com/125/125", :class => 'thumb'}
+        .description
+          %h3
+            = r.identification
+          %span.marker
+            = r.place_full_name
+          - if r.categories.present?
+            %span.category
+              %strong Kategorie:
+              = r.categories.join(', ')
+          - if r.dating_of_obj.present?
+            %span.date
+              %strong Data powstania:
+              = r.dating_of_obj
+          %span.choose
+            %strong To jest ten zabytek!
+            = link_to 'Chcę go uzupełnić &raquo;'.html_safe, r
+  = semantic_form_for Relic.new(:place_id => params[:location].to_s.split('-').last) do |f|
+    = f.input :place_id, :as => :hidden
+    = f.action :submit, :button_html => { :value => 'Nie ma go na liście &raquo;'.html_safe, :class => 'not-found' }

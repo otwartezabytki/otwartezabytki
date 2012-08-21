@@ -16,6 +16,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    aasm (3.0.8)
     actionmailer (3.2.7)
       actionpack (= 3.2.7)
       mail (~> 2.4.4)
@@ -500,6 +501,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aasm
   activeadmin
   acts_as_list
   airbrake

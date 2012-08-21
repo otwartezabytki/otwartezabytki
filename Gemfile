@@ -96,6 +96,9 @@ gem 'acts_as_list'
 # download documents as zip
 gem 'rubyzip'
 
+# state machine
+gem 'aasm'
+
 group :development, :test do
   # for debugging
   gem 'ruby-debug19'
