@@ -30,4 +30,9 @@ class Place < ActiveRecord::Base
   def location_string
     ['pl', commune.district.voivodeship_id, commune.district_id, virtual_commune_id, id].join('-')
   end
+
+  def location_names
+    [commune.district.voivodeship.name, commune.district.name, commune.name, name]
+  end
+
 end

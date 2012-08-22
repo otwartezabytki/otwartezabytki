@@ -17,7 +17,7 @@ class SuggesterController < ApplicationController
   def place_from_poland
     pq = PreparedQuery.new(params[:q])
     @places = if pq.exists?
-      Place.where(["LOWER(name) LIKE ?", "#{pq.clean.downcase}%"])
+      Place.where(["LOWER(name) LIKE ?", "#{pq.clean.downcase}"])
     else
       []
     end

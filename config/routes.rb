@@ -23,7 +23,7 @@ Otwartezabytki::Application.routes.draw do
     resources :photos, :documents, :entries, :links, :events
     resources :alerts, :only => [:new, :create]
     collection do
-      match 'build/:location/area', :to  => "relics/build#area"
+      match 'build/area', :to  => "relics/build#area"
       match ':relic_id/build/:id', :to => "relics/build#show", :via => :delete
     end
     resources :build, :controller => 'relics/build', :only => [:index, :show, :update]

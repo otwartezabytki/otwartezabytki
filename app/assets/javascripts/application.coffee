@@ -39,23 +39,61 @@
 
 # TEMP
 
-jQuery.initializer 'body', ->
-  $input = this.find("input.autocomplete-polish-place")
-  return false unless $input.length > 0
-  $ul = $('div.places-wrapper ul')
-  $input.autocomplete(
-    minLength: 2,
-    source: (request, callback) ->
-      $.getJSON "/suggester/place_from_poland", q: request.term, callback
-  )
-  $input.data("autocomplete")._renderMenu = (ul, items) ->
-    $ul.text('')
-    for item in items
-      @_renderItem ul, item
-  $input.data("autocomplete")._renderItem = (ul, item ) ->
-    data = [item.voivodeship_name, item.district_name, item.commune_name]
-    data.push "<strong>#{item.name}</strong>"
-    $(
-      "<li>#{data.join(' > ')}
-       <a data-remote=true href='/relics/build/#{item.location}/area'>wybieram &raquo;</a> </li>"
-    ).appendTo($ul)
+jQuery.initializer 'section.creator-step.location', ->
+  $('input[name=foreign_relic]').change ->
+    if $(this).is(':checked')
+      $('.polish-location').hide()
+      $('.foreign-location').show()
+    else
+      $('.foreign-location').hide()
+      $('.polish-location').show()
+
+  window.ensuring_google_maps_loaded ->
+    do window.ensure_geolocation
+    $('#marker').draggable
+      revert: true
+
+    $('#map_canvas').droppable
+      drop: (event, ui) ->
+
+        x_offset = (ui.offset.left - $(this).offset().left + 39)
+        y_offset = (ui.offset.top - $(this).offset().top + 55)
+
+        lng = map.map.getBounds().getSouthWest().lng()
+        lat = map.map.getBounds().getNorthEast().lat()
+        width = map.map.getBounds().getNorthEast().lng() - map.map.getBounds().getSouthWest().lng()
+        height = map.map.getBounds().getSouthWest().lat() - map.map.getBounds().getNorthEast().lat()
+        marker_lat = lat + height * y_offset / $(this).height()
+        marker_lng = lng + width * x_offset / $(this).width()
+        $('#map_canvas').set_marker(marker_lat, marker_lng)
+        $('form.relic .actions').show()
+
+    $('#map_canvas').auto_zoom()
+    $('#map_canvas').blinking()
+
+
+trigger_geolocation = (locationString) ->
+  locationArray = locationString.split(';')
+  callback =  (lat, lng) ->
+    $('#map_canvas').zoom_at(lat, lng)
+    map.removeMarkers()
+    $('#map_canvas').circle_marker(lat, lng)
+    $('form.relic').removeClass('geocoded')
+    $('#relic_geocoded').val("0")
+    $('form.relic .actions').hide()
+
+  voivodeship = locationArray[0]
+  district    = locationArray[1]
+  commune     = locationArray[2]
+  city        = locationArray[3]
+
+  jQuery.get geocoder_search_path, {voivodeship, district, commune, city}, (result) ->
+    if result.length > 0
+      callback(result[0].latitude.round(7), result[0].longitude.round(7))
+  , 'json'
+
+$('body').on 'click', 'div.places-wrapper ul li a', (e) ->
+  e.preventDefault()
+  trigger_geolocation $(this).data('location-names')
+
+
