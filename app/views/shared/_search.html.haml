@@ -1,20 +1,37 @@
 - if action_name == 'index'
-  .clearfix
   = semantic_form_for tsearch, :url => relics_path, :html => { :class => 'well form-advance-search', 'data-replace' => 'section#menu form.form-advance-search'  }, :method => :get, :remote => defined?(relics) do |f|
-    = f.input :q, :label => false, :placeholder => "co", :input_html => { :class => 'autocomplete-q'}
-    = f.input :place, :label => false, :placeholder => "gdzie", :input_html => { :class => 'autocomplete-place'}
+    %section.main-search
+      .field.subject
+        = f.input :q, :label => "Co:", :placeholder => "co", :input_html => { :class => 'autocomplete-q'}, :hint => "np. cmentarz, stocznie poniemieckie, chopinowski"
 
-    = f.input :from,  :label => false, :placeholder => "od"
-    = f.input :to,    :label => false, :placeholder => "do"
-
+      .field.place
+        = f.input :place, :label => "Gdzie:", :placeholder => "gdzie", :input_html => { :class => 'autocomplete-place'}, :hint => "np. Małkinia, ul. Grodzka w Krakowie"
+      .field.time
+        %label Data powstania:
+        %span.block np. pocz. XIV w., 1780, 1919-1913
+        .wrap
+          = f.input :from,  :label => "od:"
+          = f.input :to,    :label => "do:"
+      .field
+        = f.action :submit, :label => 'Szukaj &raquo;'.html_safe, :button_html => { :name => nil }
     - if defined?(relics)
-      = f.input :categories, :as => :check_boxes, :collection => categoires_facets, :disabled => disabled(f.object, 'categories'), :label => 'Kategorie'
-      = f.input :state,      :as => :check_boxes, :collection => state_facets,      :disabled => disabled(f.object, 'state')
-      = f.input :existance,  :as => :check_boxes, :collection => existance_facets,  :disabled => disabled(f.object, 'existance')
-      = f.input :location,   :as => :hidden, :input_html => { :value => f.object.location.join('-') }
-      = f.input :has_photos,  :as => :check_boxes, :collection => has_photos_facets,  :disabled => disabled(f.object, 'has_photos')
-      = f.input :has_description,  :as => :check_boxes, :collection => has_description_facets,  :disabled => disabled(f.object, 'has_description')
-
-      = f.input :order, :as => :select, :collection => order_collection, :include_blank => false, :selected => f.object.order
-
-    = f.action :submit, :label => 'Szukaj', :button_html => { :name => nil }
+      %section.second-search
+        .wrap
+          .column
+            %h4 Stan:
+            = f.input :state, :label => false, :as => :check_boxes, :collection => state_facets,      :disabled => disabled(f.object, 'state')
+          .column
+            %h4 Zawartość:
+            = f.input :has_photos,  :label => false, :as => :check_boxes, :collection => has_photos_facets,  :disabled => disabled(f.object, 'has_photos')
+            = f.input :has_description,  :label => false, :as => :check_boxes, :collection => has_description_facets,  :disabled => disabled(f.object, 'has_description')
+          .column
+            %h4 Rodzaj:
+            = f.input :existance,  :label => false, :as => :check_boxes, :collection => existance_facets,  :disabled => disabled(f.object, 'existance')
+        -#= f.input :categories, :as => :check_boxes, :collection => categoires_facets, :disabled => disabled(f.object, 'categories'), :label => 'Kategorie'
+        
+        
+        -#= f.input :location,   :as => :hidden, :input_html => { :value => f.object.location.join('-') }
+        
+        
+      %section.order
+        = f.input :order, :as => :select, :label => "sortuj według:", :collection => order_collection, :include_blank => false, :selected => f.object.order
