@@ -23,6 +23,32 @@
     input[type="text"], textarea {
       width: 278px !important;
     }
+    .actions{
+      border-top: 1px solid #e5e5e5;
+      padding-top: 20px;
+      margin-top: 10px;
+      color: #878787;
+      font-style: italic;
+      font-size: 12px;
+      a{
+        color: #d50000;
+        font-style: normal;
+      }
+      input[type="submit"]{
+        @include background(linear-gradient(#48b119, #2f9900));
+        @include border-radius(2px);
+        color: #fff;
+        font-size: 12px;
+        text-shadow: 0 1px 0 rgba(0,0,0,.5);
+        border: 0;
+        height: 30px;
+        padding: 0 12px;
+        cursor: pointer;
+        &:hover{
+          background: #34a900;
+        }
+      }
+    }
   }
 
   .entry{
@@ -52,6 +78,24 @@
       font-size: 12px;
       display: block;
       margin-top: 10px;
+    }
+    .body{
+      p{
+        b{
+          font-weight: bold;
+        }
+        i{
+          font-style: italic;
+        }
+      }
+      ul{
+        padding-left: 20px;
+        margin: 10px 0;
+        li{
+          list-style-type: disc;
+          font-family: Georgia, Arial, sans-serif;
+        }
+      }
     }
   }
 }

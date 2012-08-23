@@ -15,6 +15,7 @@
               = f2.hidden_field :position, :class => "link-position"
               = f2.hidden_field :_destroy
               = link_to 'usuń', '#', :class => "remove_link"
+              .arrow
         %script{ :type => "text/html", :id => "link_template", :"data-next-id" => relic.links.length, :"data-container" => "#links_container" }
           = f.semantic_fields_for :links, relic.links.build do |f2|
             %li.link
@@ -23,6 +24,7 @@
               = f2.hidden_field :position, :class => "link-positione"
               = f2.hidden_field :_destroy
               = link_to 'usuń', '#', :class => "remove_link"
+              .arrow
     .add-link
       = link_to 'Dodaj nowy link...', "#", :class => "add_link", :"data-template" => "#link_template"
 
