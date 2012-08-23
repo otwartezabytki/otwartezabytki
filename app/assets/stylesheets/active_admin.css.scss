@@ -1,10 +1,15 @@
 /*
- *= require chosen
+ *= require vendor/select2
+ *= require vendor/redactor
  */
 
 @import "active_admin/mixins";
 @import "active_admin/base";
 
-select {
-  min-width: 100px;
+ins {
+  color: green;
+}
+
+del {
+  color: red;
 }

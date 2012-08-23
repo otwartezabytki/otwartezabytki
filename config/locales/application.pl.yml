@@ -3,7 +3,7 @@ pl:
     are_you_sure: "Czy jesteś pewien?"
   notices:
     reservation_thanks: "Dziękujemy za rejestrację! Na podany adres e-mail zostało wysłane Twoje hasło. Tymczasem zachęcamy do dalszego poprawiania zabytków:"
-    relic_reverted: "Zabytek został przywrócony do poprzedniej wersji"
+    relic_reverted: "Objekt został przywrócony do wskazanej wersji."
     alert_added: "Alert został dodany. Dziękujemy."
   buttons:
     show_history: "Pokaż historię"

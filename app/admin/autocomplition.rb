@@ -1,4 +1,8 @@
+# encoding: utf-8
+
 ActiveAdmin.register Autocomplition do
+  menu :label => "Autouzupełnienia", :parent => "Wyszukiwarka"
+
   # controller.authorize_resource
 
   # filter :id
