@@ -25,6 +25,22 @@ Otwartezabytki::Application.routes.draw do
     resources :alerts, :only => [:new, :create]
   end
 
+  namespace :api do
+    namespace :v1 do
+      resource :info do
+        get :relics
+        get :places
+      end
+
+      resources :relics
+
+      # resources :voivodeships, :only => [:index, :show]
+      # resources :districts, :only => [:index, :show]
+      # resources :communes, :only => [:index, :show]
+      resources :places, :only => [:index, :show]
+    end
+  end
+
   get 'suggester/query'
   get 'suggester/place'
 

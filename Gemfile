@@ -96,6 +96,9 @@ gem 'acts_as_list'
 # download documents as zip
 gem 'rubyzip'
 
+# api
+gem "jbuilder"
+
 group :development, :test do
   # for debugging
   gem 'ruby-debug19'

@@ -59,6 +59,9 @@ class User < ActiveRecord::Base
       generated_password = [0..9, 'a'..'z', 'A'..'Z'].map(&:to_a).reduce(:+).sample(8).join
       self.password = generated_password
       self.password_confirmation = generated_password
+
+      # Generate API key
+      self.api_key = Devise.friendly_token
     end
 
   end

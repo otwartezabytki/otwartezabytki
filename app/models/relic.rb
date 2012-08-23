@@ -225,7 +225,7 @@ class Relic < ActiveRecord::Base
     }.merge(dating_hash)
   end
 
-  def to_indexed_json
+  def to_indexed_hash
     dp = DateParser.new dating_of_obj
     dating_hash = Hash[[:from, :to, :has_round_date].zip(dp.results << dp.rounded?)]
     {
@@ -254,7 +254,11 @@ class Relic < ActiveRecord::Base
       :existance            => existance,
       :country              => country_code.downcase,
       :tags                 => tags
-    }.merge(dating_hash).to_json
+    }.merge(dating_hash)
+  end
+
+  def to_indexed_json
+    to_indexed_hash.to_json
   end
 
   def to_descendant_hash
@@ -266,7 +270,7 @@ class Relic < ActiveRecord::Base
   end
 
   def street_normalized
-    street_normalized = street.split('/').first.to_s
+    street_normalized = street.to_s.split('/').first.to_s
     street_normalized.gsub!(/[\W\d]+$/i, '')
     street_normalized.gsub!(/\d+[a-z]?([i,\/\s]+)?\d+[a-z]$/i, '')
     street_normalized.strip!
