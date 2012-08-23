@@ -41,6 +41,75 @@ module Api
                 :required => false
               },{
                 :allowMultiple => false,
+                :dataType => "string",
+                :description => "Place",
+                :name => "place",
+                :paramType => "query",
+                :required => false
+              },{
+                :allowMultiple => false,
+                :dataType => "string",
+                :description => "From",
+                :name => "from",
+                :paramType => "query",
+                :required => false
+              },{
+                :allowMultiple => false,
+                :dataType => "string",
+                :description => "To",
+                :name => "to",
+                :paramType => "query",
+                :required => false
+              },{
+                :allowMultiple => false,
+                :dataType => "boolean",
+                :description => "Has photos?",
+                :name => "has_photos",
+                :paramType => "query",
+                :required => false
+              },{
+                :allowMultiple => false,
+                :dataType => "boolean",
+                :description => "Include descendants?",
+                :name => "include_descendants",
+                :paramType => "query",
+                :required => false
+              },{
+                :allowMultiple => false,
+                :dataType => "boolean",
+                :description => "Has description?",
+                :name => "has_description",
+                :paramType => "query",
+                :required => false
+              },{
+                :allowMultiple => false,
+                :dataType => "string",
+                :allowableValues => {
+                  :valueType => "LIST",
+                  :values => ['score.asc', 'score.desc', 'alfabethic.asc', 'alfabethic.desc'],
+                },
+                :description => "Order",
+                :name => "order",
+                :paramType => "query",
+                :required => false
+              },{
+                :allowMultiple => true,
+                :dataType => "Array",
+                :defaultValue => Relic::States,
+                :description => "State (comma separated)",
+                :name => "state",
+                :paramType => "query",
+                :required => false
+              },{
+                :allowMultiple => true,
+                :dataType => "Array",
+                :defaultValue => Relic::Existences,
+                :description => "Existence (comma separated)",
+                :name => "existence",
+                :paramType => "query",
+                :required => false
+              },{
+                :allowMultiple => false,
                 :dataType => "int",
                 :description => "Page",
                 :name => "page",
@@ -56,7 +125,7 @@ module Api
               :parameters => [{
                 :allowMultiple => false,
                 :dataType => "Relic",
-                :description => "Relic json data (place_id, identification, description)",
+                :description => "Relic json data (place_id, identification, description, parent_id)",
                 :name => "relic",
                 :paramType => "body",
                 :required => true,

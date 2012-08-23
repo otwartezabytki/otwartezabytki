@@ -7,6 +7,13 @@ module Api
 
       def index
         p = params.slice(:query, :place, :from, :to, :categories, :state, :existance, :location, :has_photos, :has_description, :order)
+
+        [:state, :existance].each do |key|
+          if p[key] && !p[key].is_a?(Array)
+            p[key] = p.delete(key).split(",")
+          end
+        end
+
         params[:search] = p.merge(:q => p.delete(:query))
 
         @relics = tsearch.perform
@@ -20,6 +27,7 @@ module Api
         @relic = Relic.new(params[:relic])
         @relic.user_id = @user.id
         @relic.created_via_api = true
+        @relic.parent_id = params[:relic][:parent_id]
 
         if @relic.save
           render :show
