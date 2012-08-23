@@ -1407,3 +1407,74 @@ div.fancybox-close{
     }
   }
 }
+
+section.show.subrelics{
+  @include background(linear-gradient(#4b6d7e, #436576));
+  @include border-radius(4px);
+  h2{
+    font-size: 13px;
+    color: #fff;
+    background: asset-data-url("edit-relic-ico-info-white.png") 15px 25px no-repeat;
+    margin: 0;
+    padding: 15px 15px 15px 45px;
+    border-bottom: 1px solid #3b5664;
+    line-height: 18px;
+    text-shadow: 0 1px 1px rgba(0,0,0,.3);
+  }
+  .content{
+    border-top: 1px solid #5b7e90;
+    padding: 15px 10px 20px 20px;
+    ul.subrelics-tree {
+      ul > li:first-child > .line{
+        margin-top: -8px;
+        height: 18px;
+      }
+      ul:first-child > li > .line{
+        border-right: 0;
+      } 
+      > li:first-child{
+          background: none !important;
+          padding: 0;
+          > .line{
+            display: none;
+          }
+      }
+      li{
+        margin-top: 6px;
+        padding-left: 20px;
+        position: relative;
+        &.node{
+          font-weight: 700;
+          background: asset-data-url("folder-horizontal.png") no-repeat;
+        }
+        &.leaf{
+          font-weight: normal;
+          background: asset-data-url("tree-document.png") no-repeat;
+        }
+        &.add{
+          font-weight: normal;
+          background: asset-data-url("tree-add.png") no-repeat;
+          a{
+            font-style: italic;
+            font-size: 11px;
+            color: #93b6c8;
+          }
+        }
+        a{
+          color: #fff;
+          font-size: 13px;
+          text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+        }
+        .line{
+          border-left: 1px dotted #fff;
+          border-bottom: 1px dotted #fff;
+          height: 22px;
+          position: absolute;
+          margin-left: 0;
+          margin-top: -12px;
+          width: 12px;
+        }
+      }
+    }
+  }
+}
