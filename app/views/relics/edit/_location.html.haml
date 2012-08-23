@@ -5,7 +5,7 @@
       .polish-location{ :style => (relic.polish_relic ? "" : "display: none;") }
         = f.input :place_id, :as => :select,
           :collection => f.object.commune.places.not_custom, :selected => f.object.place.id, :label => "Miejscowość",
-          :include_blank => false, :input_html => { :style => "width: 234px;" }
+          :include_blank => false, :input_html => { :style => "width: 234px;" }, :hint => t('formtastic.hints.relic.place')
       .foreign-location{ :style => (relic.polish_relic ? "display: none;" : "") }
         = f.input :country_code, :as => :select, :include_blank => false, :default => "PL",
           :collection => I18nCountrySelect::Countries::COUNTRY_CODES.map{|code| [I18n.t(code, :scope => :countries), code]}.sort_alphabetical_by(&:first)

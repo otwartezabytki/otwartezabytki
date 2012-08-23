@@ -39,6 +39,9 @@ $('body').on "click", ".close_popover", ->
   $("##{$(this).data('popover-id')}").popover('hide')
   false
 
+$('.flash-info-permament .close').click ->
+  $(".flash-info-permament").slideUp()
+
 jQuery.initializer 'body.relics.show', ->
   this.on 'click', 'a[href^="/relics/0/"]', (e) ->
     alert('To tylko podgląd. Nie możesz nic edytować.')

@@ -298,6 +298,9 @@ pl:
         fprovince: Informacja o prowincji
         fplace: Informacja o miejscowości
         street: Informacja o ulicy
+        place: Informacja o miejscowości
+        tags: This is hint for tags
+        categories: This is hint for categories
       document:
         name: Do jest podpowiedź do nazwy dokumentu
         description: To jest podpowiedź do opisu dokumentu

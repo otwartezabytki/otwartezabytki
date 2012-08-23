@@ -1,9 +1,11 @@
 .row
   = semantic_form_for relic, :url => section_relic_path(relic.id, :section => :categories), :remote => true do |f|
-    = f.input :tags, :input_html => { :value => relic.tags.join(','), :style => "width: 680px", :multiple => true }
+    = f.input :tags, :input_html => { :value => relic.tags.join(','), :style => "width: 680px", :multiple => true }, 
+              :hint => t('formtastic.hints.relic.tags')
     .select
       %label Kategorie
       .input
+        %span.block= t('formtastic.hints.relic.categories')
         .column.column-first
           = f.input :categories, :as => :check_boxes,
             :collection => Category.first_column.invert, :label => "",
