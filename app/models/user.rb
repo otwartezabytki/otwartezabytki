@@ -61,7 +61,7 @@ class User < ActiveRecord::Base
       self.password_confirmation = generated_password
 
       # Generate API key
-      self.api_key = Devise.friendly_token
+      self.generate_api_key!
     end
 
   end
@@ -96,6 +96,14 @@ class User < ActiveRecord::Base
 
   def ability
     @ability ||= Ability.new(self)
+  end
+
+  def generate_api_key!
+    self.api_key = Devise.friendly_token
+  end
+
+  def generate_api_secret!
+    self.api_secret = Devise.friendly_token
   end
 
   class << self

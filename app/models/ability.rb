@@ -10,6 +10,7 @@ class Ability
       can :edit, User
       can :update, User
       can :show, User
+      can :generate_api_secret, User
 
       can :manage, Relic
       can :history, Relic
