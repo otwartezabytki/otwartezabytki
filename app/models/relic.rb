@@ -60,7 +60,7 @@ class Relic < ActiveRecord::Base
   has_many :links, :order => 'position', :dependent => :destroy
   has_many :events, :order => 'position', :dependent => :destroy
 
-  attr_accessor :license_agreement, :polish_relic
+  attr_accessor :license_agreement, :polish_relic, :created_via_api
   attr_accessible :identification, :place_id, :dating_of_obj, :latitude, :longitude,
                   :street, :tags, :categories, :photos_attributes, :description,
                   :documents_attributes, :documents_info, :links_attributes, :links_info,
@@ -78,6 +78,8 @@ class Relic < ActiveRecord::Base
 
   validates :identification, :presence => true, :if => :identification_changed?
   validates :place, :presence => true, :if => :polish_relic
+
+  validates :place, :identification, :description, :presence => true, :if => :created_via_api
 
   before_validation do
     if tags_changed? && tags.is_a?(Array)

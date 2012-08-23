@@ -53,14 +53,28 @@ module Api
               :httpMethod => "POST",
               :nickname => "CreateRelic",
               :notes => "Create new relic",
-              :parameters => [
+              :parameters => [{
                 :allowMultiple => false,
                 :dataType => "Relic",
-                :description => "Relic data",
+                :description => "Relic json data (place_id, identification, description)",
                 :name => "relic",
                 :paramType => "body",
+                :required => true,
+                :defaultValue => <<-EOS
+{
+  "place_id": 10,
+  "identification": "Cmentarz",
+  "description": "Bardzo piekny"
+}
+                EOS
+              },{
+                :allowMultiple => false,
+                :dataType => "string",
+                :description => "API Secret",
+                :name => "api_secret",
+                :paramType => "query",
                 :required => true
-              ],
+              }],
               :responseClass => "Relic",
               :summary => "Create new relic"
             }],

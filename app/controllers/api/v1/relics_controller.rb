@@ -3,6 +3,7 @@ module Api
   module V1
     class RelicsController < ApiController
       before_filter :api_authenticate
+      before_filter :api_authorize, :only => [:create]
 
       def index
         p = params.slice(:query, :place, :from, :to, :categories, :state, :existance, :location, :has_photos, :has_description, :order)
@@ -17,6 +18,9 @@ module Api
 
       def create
         @relic = Relic.new(params[:relic])
+        @relic.user_id = @user.id
+        @relic.created_via_api = true
+
         if @relic.save
           render :show
         else

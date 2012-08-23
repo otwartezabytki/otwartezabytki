@@ -29,7 +29,7 @@ module Api
       def api_authorize
         api_authenticate
 
-        unless @user.api_secret && @user_api_secret == params[:api_secret]
+        unless @user.api_secret && @user.api_secret == params[:api_secret]
           render :json => {:error => "API secret mismatch"}, :status => :unauthorized
         end
       end
