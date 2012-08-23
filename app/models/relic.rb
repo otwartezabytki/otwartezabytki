@@ -177,7 +177,7 @@ class Relic < ActiveRecord::Base
       :street_normalized =>  { "type" => "string", "index" => "analyzed" },
       :untouched =>  { "type" => "string", "index" => "not_analyzed" }
     }
-
+    indexes :coordinates, :type => "geo_point"
     with_options :index => :not_analyzed do |na|
       na.indexes :id
       na.indexes :kind
@@ -240,7 +240,9 @@ class Relic < ActiveRecord::Base
       :existance        => Existences.sample,
       :country          => ['pl', 'de', 'gb'].sample,
       :tags             => ['wawel', 'zamek', 'zespół pałacowy', 'zamek królewski'].shuffle.first(rand(2) + 1).shuffle.first(rand(4) + 1),
-      :autocomplitions  => ['puchatka', 'szlachciatka', 'chata polska', 'chata mazurska', 'chata wielkopolska'].shuffle.first(rand(4) + 1)
+      :autocomplitions  => ['puchatka', 'szlachciatka', 'chata polska', 'chata mazurska', 'chata wielkopolska'].shuffle.first(rand(4) + 1),
+      # Lat Lon As Array Format in [lon, lat]
+      :coordinates       => [longitude, latitude]
     }.merge(dating_hash)
   end
 
@@ -272,7 +274,9 @@ class Relic < ActiveRecord::Base
       :state                => state,
       :existance            => existance,
       :country              => country_code.downcase,
-      :tags                 => tags
+      :tags                 => tags,
+      # Lat Lon As Array Format in [lon, lat]
+      :coordinates          => [longitude, latitude]
     }.merge(dating_hash).to_json
   end
 

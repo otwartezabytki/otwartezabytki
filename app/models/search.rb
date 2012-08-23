@@ -3,7 +3,7 @@ class Search
   include ActiveModel::Conversion
   extend ActiveModel::Naming
 
-  attr_accessor :q, :place, :from, :to, :categories, :state, :existance, :location, :order
+  attr_accessor :q, :place, :from, :to, :categories, :state, :existance, :location, :order, :lat, :lon
   attr_accessor :conditions, :range_conditions, :per_page, :page, :has_photos, :has_description
 
   def initialize(attributes = {})
@@ -156,6 +156,14 @@ class Search
     terms_cond << { 'or' => @range_conditions }                   if range_conditions?
     terms_cond << { 'term' => { 'country' => 'pl'}}               if !keys.include?('pl')    and navfacet?('pl')
     terms_cond << { 'not' => { 'term' => { 'country' => 'pl'}} }  if !keys.include?('world') and navfacet?('world')
+    if [@lat, @lon].all?(&:present?)
+      terms_cond << {
+        'geo_distance' => {
+          'distance' => '0.2km',
+          'coordinates' => [@lon, @lat]
+        }
+      }
+    end
     terms_cond
   end
 

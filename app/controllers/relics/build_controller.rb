@@ -8,7 +8,10 @@ class Relics::BuildController < ApplicationController
   expose(:relic)
 
   def area
-    @relics = Search.new(:per_page => 5).perform
+    @relics = Search.new(:per_page => 20,
+      :lat => params.get_deep('relic', 'latitude'),
+      :lon => params.get_deep('relic', 'longitude')
+    ).perform
   end
 
   def show
