@@ -18,7 +18,29 @@
       %section.second-search
         .wrap
           .column
-            %h4 Stan:
+            %h4
+              Stan:
+              .help
+                = image_tag 'ico-help.png'
+                .help-wrapper
+                  = link_to 'zamknij', '#', :class => 'close'
+                  %h3 Oznaczenia stanu
+                  %ul
+                    %li
+                      .tag
+                        %span.done Uzupełniony
+                      .text
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer mattis vulputate nulla adipisci.
+                    %li
+                      .tag
+                        %span.undone Nieuzupełniony
+                      .text
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer mattis vulputate nulla adipisci.
+                    %li
+                      .tag
+                        %span.unchecked Niesprawdzony
+                      .text
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer mattis vulputate nulla adipisci.
             = f.input :state, :label => false, :as => :check_boxes, :collection => state_facets,      :disabled => disabled(f.object, 'state')
           .column
             %h4 Zawartość:
