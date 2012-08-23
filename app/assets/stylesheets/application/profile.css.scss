@@ -1425,10 +1425,6 @@ section.show.subrelics{
     border-top: 1px solid #5b7e90;
     padding: 15px 10px 20px 20px;
     ul.subrelics-tree {
-      ul > li:first-child > .line{
-        margin-top: -8px;
-        height: 18px;
-      }
       ul:first-child > li > .line{
         border-right: 0;
       } 
@@ -1446,6 +1442,16 @@ section.show.subrelics{
         &.node{
           font-weight: 700;
           background: asset-data-url("folder-horizontal.png") no-repeat;
+          overflow: hidden;
+          .leaf{
+            .line{
+              border-bottom: 1px dotted white;
+              margin-top: -7px;
+              border-left: 0;
+              margin-left: -32px;
+              width: 10px;
+            }
+          }
         }
         &.leaf{
           font-weight: normal;
@@ -1467,11 +1473,10 @@ section.show.subrelics{
         }
         .line{
           border-left: 1px dotted #fff;
-          border-bottom: 1px dotted #fff;
-          height: 22px;
+          height: 100%;
           position: absolute;
-          margin-left: 0;
-          margin-top: -12px;
+          margin-left: -13px;
+          margin-top: 22px;
           width: 12px;
         }
       }
