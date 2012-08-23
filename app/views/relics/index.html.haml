@@ -3,11 +3,8 @@
 
 %div{:class => relics.empty? ? "span9" : "span9"}
   #relics
+    = render 'shared/search'
     - model_class = Relic.new.class
-    .page-header
-      %h1 2. Wybierz zabytek:
-      %span.arrow
-
     - if relics.total.zero?
       .search-no-results
         %p
@@ -27,8 +24,8 @@
           %strong DODAJ ZABYTEK
 
     - elsif relics.present?
-      %div.relic-header
-        %h2 Zabytki (#{relics.total})
+      %div.relic-header.search
+        %h2 Wyniki wyszukiwania (#{relics.total})
         -# - if location_breadcrumbs.present?
         -#   %div.breadcrumb
         -#     %p Gdzie:

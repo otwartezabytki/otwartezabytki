@@ -26,7 +26,7 @@
       %p= link_to "pokaż na mapie »", '#', :id => "relic_location_popover", :"data-content-id" => "location_body", :"data-title-id" => "location_title"
       %script(type="text/html" id="location_title")
         %p= relic.latitude.round(6).to_s + ", " + relic.longitude.round(6).to_s
-        %p= link_to "zamknij", "#", :class => "close_popover", :"data-popover-id" => "relic_location_popover"
+        %p.close= link_to "zamknij", "#", :class => "close_popover", :"data-popover-id" => "relic_location_popover"
       %script(type="text/html" id="location_body")
         %img{ src: "http://maps.googleapis.com/maps/api/staticmap?center=#{relic.latitude.to_f},#{relic.longitude.to_f}&zoom=17&size=260x160&sensor=false&markers=#{relic.latitude.to_f},#{relic.longitude.to_f}&maptype=hybrid", width: 260, height: 160 }
   .dating
@@ -41,4 +41,4 @@
     .register_number
       %strong Numer w rejestrze:
       %p= relic.register_number
-  = link_to 'wersja oryginalna', relic_path(relic.id, :original => true), :class => "original"
+  = link_to content_tag(:span, 'wersja oryginalna'), relic_path(relic.id, :original => true), :class => "original"

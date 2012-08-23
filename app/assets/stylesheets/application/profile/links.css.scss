@@ -30,21 +30,55 @@
     display: inline-block;
     width: 100%;
     margin-bottom: 15px;
-    .link{
+    li.link{
       list-style-type: decimal;
       font-weight: 700;
       font-size: 13px;
-      height: 25px;
-      overflow: hidden;
       padding: 10px 0 10px 10px;
       border-bottom: 1px solid #b2b2b2;
+      border-top: 1px solid #b2b2b2;
+      margin-top: -1px;
       list-style-position: inside;
       position: relative;
       line-height: 25px;
+      background-color: #fff;
+      float: left;
+      width: 100%;
+      .arrow{
+        position: absolute;
+        width: 8px;
+        height: 14px;
+        background: asset-data-url("edit-relic-ico-arrows.png") no-repeat;
+        top: 15px;
+        left: 0;
+      }
+      &:first-child .arrow{
+        background: asset-data-url("edit-relic-ico-arrow-down.png") no-repeat;
+        top: 21px;
+      }
+      &:last-child .arrow{
+        background: asset-data-url("edit-relic-ico-arrow-up.png") no-repeat;
+        top: 21px;
+      }
       > div{
         display: inline-block;
         position: absolute;
         top: 10px;
+        &.url.error{
+          position: relative;
+          float: right;
+          top: 0px;
+          left: -502px;
+          width: 160px;
+          .input{
+            float: left;
+            .help-inline{
+              margin-bottom: 0;
+              margin-top: 2px;
+              line-height: 13px;
+            }
+          }
+        }
         &.string{
           left: 225px;
         }
@@ -61,6 +95,27 @@
       .url{
         .input input{
           width: 135px;
+          display: block;
+          border: 1px solid #646464;
+          -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1), inset 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+          -moz-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1), inset 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+          box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1), inset 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+          -webkit-border-radius: 2px;
+          -moz-border-radius: 2px;
+          -ms-border-radius: 2px;
+          -o-border-radius: 2px;
+          border-radius: 2px;
+          padding: 0 10px;
+          font-size: 14px;
+          color: #313132;
+          margin: 0;
+          height: 22px;
+          font-size: 13px;
+          font-weight: normal;
+          &.error{
+            border: 1px solid #d10000;
+            @include box-shadow(0 0 5px 0 rgba(154,0,0,.3));
+          }
         }
       }
       .string{
@@ -77,6 +132,9 @@
         font-weight: normal;
         float: right;
         margin-right: 25px;
+        position: absolute;
+        top: 10px;
+        right: 0;
       }
     }
   }
