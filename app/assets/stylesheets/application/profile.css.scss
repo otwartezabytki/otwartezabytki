@@ -640,7 +640,7 @@ section.show.general{
       float: left;
       text-transform: uppercase;
       letter-spacing: 1px;
-      color: #a5a5a5;
+      color: #666;
       .ico{
         top: 8px;
         left: 7px;
@@ -1404,6 +1404,82 @@ div.fancybox-close{
     p{
       font-weight: 600;
       font-size: 14px;
+    }
+  }
+}
+
+section.show.subrelics{
+  @include background(linear-gradient(#4b6d7e, #436576));
+  @include border-radius(4px);
+  h2{
+    font-size: 13px;
+    color: #fff;
+    background: asset-data-url("edit-relic-ico-info-white.png") 15px 25px no-repeat;
+    margin: 0;
+    padding: 15px 15px 15px 45px;
+    border-bottom: 1px solid #3b5664;
+    line-height: 18px;
+    text-shadow: 0 1px 1px rgba(0,0,0,.3);
+  }
+  .content{
+    border-top: 1px solid #5b7e90;
+    padding: 15px 10px 20px 20px;
+    ul.subrelics-tree {
+      ul:first-child > li > .line{
+        border-right: 0;
+      } 
+      > li:first-child{
+          background: none !important;
+          padding: 0;
+          > .line{
+            display: none;
+          }
+      }
+      li{
+        margin-top: 6px;
+        padding-left: 20px;
+        position: relative;
+        &.node{
+          font-weight: 700;
+          background: asset-data-url("folder-horizontal.png") no-repeat;
+          overflow: hidden;
+          .leaf{
+            .line{
+              border-bottom: 1px dotted white;
+              margin-top: -7px;
+              border-left: 0;
+              margin-left: -32px;
+              width: 10px;
+            }
+          }
+        }
+        &.leaf{
+          font-weight: normal;
+          background: asset-data-url("tree-document.png") no-repeat;
+        }
+        &.add{
+          font-weight: normal;
+          background: asset-data-url("tree-add.png") no-repeat;
+          a{
+            font-style: italic;
+            font-size: 11px;
+            color: #93b6c8;
+          }
+        }
+        a{
+          color: #fff;
+          font-size: 13px;
+          text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+        }
+        .line{
+          border-left: 1px dotted #fff;
+          height: 100%;
+          position: absolute;
+          margin-left: -13px;
+          margin-top: 22px;
+          width: 12px;
+        }
+      }
     }
   }
 }
