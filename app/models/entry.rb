@@ -15,9 +15,11 @@ class Entry < ActiveRecord::Base
   belongs_to :relic
   belongs_to :user
 
-  attr_accessible :body, :relic_id, :title, :user_id
+  attr_accessible :body, :relic_id, :title, :user_id, :as => [:default, :admin]
 
   validates :relic, :title, :body, :presence => true
 
   include CanCan::Authorization
+
+  has_paper_trail
 end

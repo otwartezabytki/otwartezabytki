@@ -1,12 +1,16 @@
+# encoding: utf-8
+
 ActiveAdmin.register Relic do
+  menu :label => "Zabytki", :parent => "Zasoby", :priority => 1
+
   controller.authorize_resource
 
   filter :identification
   filter :group
 
-  filter :voivodeship
-  filter :district
-  filter :commune
+  filter :voivodeship, :input_html => { :class => "select2", :style => "width: 241px" }, :label => "Województwo"
+  filter :district, :input_html => { :class => "select2", :style => "width: 241px" }, :label => "Powiat"
+  filter :commune, :input_html => { :class => "select2", :style => "width: 241px" }, :label => "Miejscowość"
 
   index do
     column :register_number
@@ -14,40 +18,40 @@ ActiveAdmin.register Relic do
     column :district
     column :commune
     column :identification
-    column do |relic|
-      if relic.versions.count > 0
-        link_to "History", history_admin_relic_path(relic)
-      end
-    end
     default_actions
   end
 
   form do |f|
     f.inputs do
-      f.input :register_number
-      f.input :identification
+      f.input :identification, :as => :string
+      f.input :description
+      f.input :place_id
+      f.input :group
+      f.input :number
+      f.input :materail
+      f.input :dating_of_obj
+      f.input :street
+      f.input :register_number, :as => :string
+      f.input :nid_id
+      f.input :latitude
+      f.input :longitude
+      f.input :ancestry
+      f.input :kind
+      f.input :approved
+      f.input :categories, :as => :check_boxes,
+              :collection => Category.all.invert, :label => "",
+              :input_html => { :multiple => true }
+      f.input :tags, :input_html => { :value => relic.tags.join(','), :style => "width: 680px", :multiple => true }
+      f.input :country_code
+      f.input :fprovince
+      f.input :fplace
+      f.input :documents_info
+      f.input :links_info
       f.input :group
 
-      f.actions
+      f.buttons
     end
 
-  end
-
-  member_action :history do
-    @relic = Relic.find(params[:id])
-    @versions = @relic.versions
-  end
-
-  member_action :revert, :method => :put do
-    @relic = Relic.find(params[:id])
-    @version = @relic.versions.where(:id => params[:version]).first.reify
-
-    if @version.save
-      redirect_to admin_relic_path(@relic.id), :notice => t("notices.relic_reverted")
-    else
-      flash[:error] = @version.errors.full_messages
-      redirect_to admin_relic_path(@relic.id, :version => @version.id)
-    end
   end
 
   action_item :only => :show do

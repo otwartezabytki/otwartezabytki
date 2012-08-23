@@ -75,6 +75,6 @@ module Otwartezabytki
 
     config.action_mailer.default_url_options = { :host => Settings.oz.host }
 
-    config.action_view.sanitized_allowed_tags = ['table', 'tr', 'td', 'strong', 'em', 'li', 'ul', 'ol', 'a', 'p', 'div']
+    config.action_view.sanitized_allowed_tags = ['table', 'tr', 'td', 'strong', 'em', 'li', 'ul', 'ol', 'a', 'p', 'div', 'del', 'ins']
   end
 end

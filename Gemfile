@@ -45,6 +45,7 @@ gem 'activeadmin'
 gem 'meta_search',    '>= 1.1.0.pre'
 gem 'devise'
 gem 'cancan'
+gem 'activeadmin-cancan'
 
 gem 'multi_json', '~> 1.0.3'
 gem 'json', '~> 1.5.4'
@@ -98,6 +99,9 @@ gem 'rubyzip'
 
 # api
 gem "jbuilder"
+
+# diff changes in admin panel
+gem 'htmldiff'
 
 group :development, :test do
   # for debugging

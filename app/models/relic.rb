@@ -65,7 +65,9 @@ class Relic < ActiveRecord::Base
                   :street, :tags, :categories, :photos_attributes, :description,
                   :documents_attributes, :documents_info, :links_attributes, :links_info,
                   :events_attributes, :entries_attributes, :license_agreement, :polish_relic,
-                  :geocoded
+                  :geocoded, :as => [:default, :admin]
+
+  attr_accessible :ancestry, :materail, :register_number, :approved, :group, :as => :admin
 
   accepts_nested_attributes_for :photos, :documents, :entries, :links, :events, :allow_destroy => true
 
@@ -102,7 +104,7 @@ class Relic < ActiveRecord::Base
   end
 
   # versioning
-  has_paper_trail :class_name => 'RelicVersion', :on => [:update, :destroy]
+  has_paper_trail
 
   include Tire::Model::Search
 

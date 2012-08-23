@@ -6,21 +6,15 @@ class Ability
     if user && user.admin?
       can :index, Dashboard
 
-      can :index, User
-      can :edit, User
-      can :update, User
-      can :show, User
+      can :manage, User
       can :generate_api_secret, User
-
       can :manage, Relic
-      can :history, Relic
-      can :update, Relic
-      can :revert, Relic
-
       can :manage, SuggestedType
-      can :history, SuggestedType
-      can :update, SuggestedType
-      can :revert, SuggestedType
+      can :index, Version
+      can :show, Version
+      can :manage, Document
+      can :manage, Photo
+      can :manage, Entry
     end
 
     if user

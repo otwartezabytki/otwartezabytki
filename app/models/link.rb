@@ -16,12 +16,14 @@ class Link < ActiveRecord::Base
   belongs_to :relic
   belongs_to :user
 
-  attr_accessible :name, :relic_id, :url, :user_id, :position
+  attr_accessible :name, :relic_id, :url, :user_id, :position, :as => [:default, :admin]
 
   acts_as_list :scope => :relic
 
   validates :relic, :user, :url, :name, :presence => true
   validates_format_of :url, :with => URI::regexp(%w(http https ftp)), :if => :url_changed?
+
+  has_paper_trail
 
   def shortened_url
     uri = URI::parse(url)
