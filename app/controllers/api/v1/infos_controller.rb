@@ -15,7 +15,7 @@ module Api
               :path => "/places.{format}"
             }
           ],
-          :basePath => "http://otwartezabytki.dev/api/v1/info",
+          :basePath => "http://#{Settings.oz.host}/api/v1/info",
           :swaggerVersion => "1.1"
         })
       end
@@ -23,7 +23,7 @@ module Api
       def relics
         respond_with({
           :apiVersion => "1.0",
-          :basePath => "http://otwartezabytki.dev/api/v1",
+          :basePath => "http://#{Settings.oz.host}/api/v1",
           :resourcePath => "/relics",
           :swaggerVersion => "1.1",
           :apis => [{
@@ -117,7 +117,7 @@ module Api
       def places
         respond_with({
           :apiVersion => "1.0",
-          :basePath => "http://otwartezabytki.dev/api/v1",
+          :basePath => "http://#{Settings.oz.host}/api/v1",
           :resourcePath => "/places",
           :swaggerVersion => "1.1",
           :apis => [{
