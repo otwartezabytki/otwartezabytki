@@ -129,19 +129,37 @@ module Api
             },{
               :httpMethod => "POST",
               :nickname => "CreateRelic",
-              :notes => "Create new relic",
+              :notes => "Create new relic<br/>
+                <strong>Required relic parameters:</strong> place_id, identification, description, reason<br/>
+                <strong>Optional relic parameters:</strong> parent_id, latitude, longitude, number, dating_of_obj,
+                  street, register_number, categories, tags, country_code, fprovinde, fplace, document_info, links_info
+              ",
               :parameters => [{
                 :allowMultiple => false,
                 :dataType => "Relic",
-                :description => "Relic json data (place_id, identification, description, parent_id)",
+                :description => "Relic json data",
                 :name => "relic",
                 :paramType => "body",
                 :required => true,
                 :defaultValue => <<-EOS
 {
   "place_id": 10,
-  "identification": "Cmentarz",
-  "description": "Bardzo piekny"
+  "identification": "Suler",
+  "description": "CEO",
+  "reason": "You tell me ..."
+  "latitude": 0.0,
+  "longitude": 0.0,
+  "number": 1,
+  "dating_of_obj": "ok. 1600",
+  "street": "Brossa 5",
+  "register_number": "??",
+  "categories": "",
+  "tags": "",
+  "country_code": "PL",
+  "fprovinde": "",
+  "fplace": "",
+  "document_info": "",
+  "links_info": ""
 }
                 EOS
               },{

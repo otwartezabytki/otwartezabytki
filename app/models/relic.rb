@@ -99,7 +99,7 @@ class Relic < ActiveRecord::Base
     step.validates :description, :presence => true
   end
 
-  validates :place, :identification, :description, :presence => true, :if => :created_via_api
+  validates :place, :identification, :description, :reason, :presence => true, :if => :created_via_api
 
   before_validation do
     if tags_changed? && tags.is_a?(Array)
