@@ -3,18 +3,22 @@ class Search
   include ActiveModel::Conversion
   extend ActiveModel::Naming
 
-  attr_accessor :q, :place, :from, :to, :categories, :state, :existance, :location, :order, :lat, :lon
+  attr_accessor :q, :place, :from, :to, :categories, :state, :existance, :location, :order, :lat, :lon, :load
   attr_accessor :conditions, :range_conditions, :per_page, :page, :has_photos, :has_description
 
   def initialize(attributes = {})
     attributes.each do |name, value|
-      next if value.blank?
+      next if value.blank? or !respond_to?("#{name}=")
       send("#{name}=", value)
     end if attributes.present?
   end
 
   def persisted?
     false
+  end
+
+  def load
+    !!@load
   end
 
   def query
@@ -201,7 +205,7 @@ class Search
     build_conditions
     build_range_conditions
 
-    @tsearch = Tire.search(Relic.tire.index_name, :page => page, :per_page => per_page) do
+    @tsearch = Tire.search(Relic.tire.index_name, :page => page, :per_page => per_page, :load => load) do
       # pagination
       size( options[:per_page].to_i ) if options[:per_page]
       from( options[:page].to_i <= 1 ? 0 : (options[:per_page].to_i * (options[:page].to_i-1)) ) if options[:page] && options[:per_page]
