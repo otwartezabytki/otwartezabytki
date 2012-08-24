@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120823134342) do
+ActiveRecord::Schema.define(:version => 20120824111629) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string    "resource_id",                :null => false
@@ -277,6 +277,24 @@ ActiveRecord::Schema.define(:version => 20120823134342) do
     t.timestamp "created_at", :limit => 6, :null => false
     t.timestamp "updated_at", :limit => 6, :null => false
     t.string    "nr"
+  end
+
+  create_table "widget_templates", :force => true do |t|
+    t.string   "type"
+    t.string   "name"
+    t.text     "description"
+    t.string   "thumb"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "widgets", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "widget_template_id"
+    t.string   "uid"
+    t.text     "config"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
 end

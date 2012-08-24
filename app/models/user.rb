@@ -23,6 +23,7 @@
 class User < ActiveRecord::Base
   has_many :suggestions
   has_many :seen_relics
+  has_many :widgets
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable

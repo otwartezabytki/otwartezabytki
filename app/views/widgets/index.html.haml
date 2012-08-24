@@ -1,0 +1,6 @@
+%ul
+  - widgets.each do |widget|
+    %li
+      %h4= widget.name
+      %p= widget.description
+      = link_to "Użyj widgeta", new_widget_path(:template => widget.id)

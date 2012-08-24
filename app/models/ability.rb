@@ -15,6 +15,7 @@ class Ability
       can :manage, Document
       can :manage, Photo
       can :manage, Entry
+      can :manage, WidgetTemplate
     end
 
     if user

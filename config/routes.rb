@@ -29,6 +29,9 @@ Otwartezabytki::Application.routes.draw do
     resources :build, :controller => 'relics/build', :only => [:index, :show, :update]
   end
 
+  resources :widgets
+  get "/widget/:uid.js", :to => "widgets#js", :as => :widget_js
+
   namespace :api do
     namespace :v1 do
       resource :info do
