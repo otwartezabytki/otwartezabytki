@@ -18,9 +18,7 @@ module Api
 
       # Check api_key
       def api_authenticate
-        @user ||= User.find_by_api_key(params[:api_key])
-
-        unless @user
+        unless api_user
           render :json => {:error => "API key not found"}, :status => :unauthorized
         end
       end
@@ -29,8 +27,24 @@ module Api
       def api_authorize
         api_authenticate
 
-        unless @user.api_secret && @user.api_secret == params[:api_secret]
+        unless api_user.api_secret && api_user.api_secret == params[:api_secret]
           render :json => {:error => "API secret mismatch"}, :status => :unauthorized
+        end
+      end
+
+      def api_user
+        @api_user ||= User.find_by_api_key(params[:api_key])
+      end
+
+      def user_for_paper_trail
+        api_user
+      end
+
+      def info_for_paper_trail
+        if api_user
+          {:source => "API: #{api_user.api_key}"}
+        else
+          {}
         end
       end
     end

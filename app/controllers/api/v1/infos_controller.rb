@@ -143,21 +143,23 @@ module Api
                 :required => true,
                 :defaultValue => <<-EOS
 {
-  "identification": "Suler",
-  "description": "CEO",
-  "categories": "",
-  "state": "",
-  "dating_of_obj": "ok. 1600",
-  "place_id": 10,
-  "latitude": 0.0,
-  "longitude": 0.0,
-  "tags": "",
-  "country_code": "PL",
-  "fprovinde": "",
-  "fplace": "",
-  "document_info": "",
-  "links_info": "",
-  "reason": "You tell me ..."
+  "relic": {
+    "identification": "Suler",
+    "description": "CEO",
+    "categories": [],
+    "state": "",
+    "dating_of_obj": "ok. 1600",
+    "place_id": 10,
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "tags": [],
+    "country_code": "PL",
+    "fprovince": "",
+    "fplace": "",
+    "documents_info": "",
+    "links_info": "",
+    "reason": "You tell me ..."
+  }
 }
                 EOS
               },{
@@ -215,8 +217,10 @@ module Api
                 :required => true,
                 :defaultValue => <<-EOS
 {
-  "latitude": 0.0,
-  "longitude": 0.0
+  "relic": {
+    "latitude": 0.0,
+    "longitude": 0.0
+  }
 }
                 EOS
               },{

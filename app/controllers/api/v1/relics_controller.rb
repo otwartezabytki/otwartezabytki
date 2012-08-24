@@ -25,10 +25,18 @@ module Api
       end
 
       def create
+        # TODO (missing model fields)
+        params[:relic].delete(:state)
+        # ----
+
+
+
         @relic = Relic.new(params[:relic])
-        @relic.user_id = @user.id
+        @relic.user_id = api_user.id
         @relic.created_via_api = true
         @relic.parent_id = params[:relic][:parent_id]
+        @relic.reason = params[:relic][:reason]
+
 
         if @relic.save
           render :show
@@ -39,7 +47,7 @@ module Api
 
       def update
         @relic = Relic.find(params[:id])
-        @relic.user_id = @user.id
+        @relic.user_id = api_user.id
 
         if @relic.update_attributes(params[:relic])
           render :show

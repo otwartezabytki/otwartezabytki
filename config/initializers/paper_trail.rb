@@ -1,4 +1,5 @@
 class Version < ActiveRecord::Base
+  attr_accessible :source
   scope :relics, where(:item_type => "Relic")
   scope :documents, where(:item_type => "Document")
   scope :photos, where(:item_type => "Photo")
