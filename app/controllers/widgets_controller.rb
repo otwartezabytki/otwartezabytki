@@ -1,9 +1,12 @@
 class WidgetsController < ApplicationController
   before_filter :authenticate_user!, :except => [:index, :js]
 
-  expose(:widgets) { WidgetTemplate.all }
-
   def index
+    @widgets = WidgetTemplate.all
+  end
+
+  def my
+    @widgets = current_user.widgets
   end
 
   def new
