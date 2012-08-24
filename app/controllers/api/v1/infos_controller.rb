@@ -63,15 +63,15 @@ module Api
               },{
                 :allowMultiple => false,
                 :dataType => "boolean",
-                :description => "Has photos?",
-                :name => "has_photos",
+                :description => "Include descendants?",
+                :name => "include_descendants",
                 :paramType => "query",
                 :required => false
               },{
                 :allowMultiple => false,
                 :dataType => "boolean",
-                :description => "Include descendants?",
-                :name => "include_descendants",
+                :description => "Has photos?",
+                :name => "has_photos",
                 :paramType => "query",
                 :required => false
               },{
@@ -90,6 +90,14 @@ module Api
                 },
                 :description => "Order",
                 :name => "order",
+                :paramType => "query",
+                :required => false
+              },{
+                :allowMultiple => true,
+                :dataType => "Array",
+                :defaultValue => Category.all.keys,
+                :description => "Categories (comma separated)",
+                :name => "categories",
                 :paramType => "query",
                 :required => false
               },{

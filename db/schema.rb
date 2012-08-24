@@ -11,11 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(:version => 20120821140522) do
-=======
 ActiveRecord::Schema.define(:version => 20120823134342) do
->>>>>>> 2c1d8ace90c4b206e1db315ceed982030ac46e59
 
   create_table "active_admin_comments", :force => true do |t|
     t.string    "resource_id",                :null => false
@@ -136,48 +132,6 @@ ActiveRecord::Schema.define(:version => 20120823134342) do
   end
 
   create_table "relics", :force => true do |t|
-<<<<<<< HEAD
-    t.integer  "place_id"
-    t.text     "identification"
-    t.string   "group"
-    t.integer  "number"
-    t.string   "materail"
-    t.string   "dating_of_obj"
-    t.string   "street"
-    t.text     "register_number"
-    t.string   "nid_id"
-    t.float    "latitude"
-    t.float    "longitude"
-    t.datetime "created_at",                           :null => false
-    t.datetime "updated_at",                           :null => false
-    t.string   "internal_id"
-    t.string   "ancestry"
-    t.text     "source"
-    t.integer  "commune_id"
-    t.integer  "district_id"
-    t.integer  "voivodeship_id"
-    t.date     "register_date"
-    t.string   "date_norm"
-    t.string   "date_start"
-    t.string   "date_end"
-    t.string   "kind"
-    t.boolean  "approved",        :default => false
-    t.string   "categories"
-    t.integer  "skip_count",      :default => 0
-    t.integer  "edit_count",      :default => 0
-    t.string   "type",            :default => "Relic"
-    t.string   "country_code",    :default => "PL"
-    t.string   "fprovince"
-    t.string   "fplace"
-    t.text     "description",     :default => ""
-    t.string   "tags"
-    t.text     "documents_info"
-    t.text     "links_info"
-    t.integer  "user_id"
-    t.boolean  "geocoded"
-    t.string   "build_state"
-    t.text     "reason"
-=======
     t.integer   "place_id"
     t.text      "identification"
     t.string    "group"
@@ -216,7 +170,8 @@ ActiveRecord::Schema.define(:version => 20120823134342) do
     t.text      "links_info"
     t.integer   "user_id"
     t.boolean   "geocoded"
->>>>>>> 2c1d8ace90c4b206e1db315ceed982030ac46e59
+    t.string    "build_state"
+    t.text      "reason"
   end
 
   add_index "relics", ["ancestry"], :name => "index_relics_on_ancestry"

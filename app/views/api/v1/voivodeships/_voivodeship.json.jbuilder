@@ -1,2 +1,2 @@
-json.id voivodeship[:id]
-json.name voivodeship[:name]
+json.id voivodeship.id
+json.name voivodeship.name

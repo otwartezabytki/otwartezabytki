@@ -7,6 +7,6 @@ end
 
 json.relics do |json|
   json.array!(@relics) do |json, relic|
-    json.partial! "api/v1/relics/relic", :relic => relic, :data => relic.to_hash
+    json.partial! "api/v1/relics/relic", :relic => relic
   end
 end

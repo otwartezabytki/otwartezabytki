@@ -16,6 +16,7 @@ module Api
 
         params[:search] = p.merge(:q => p.delete(:query))
 
+        tsearch.load = true
         @relics = tsearch.perform
       end
 

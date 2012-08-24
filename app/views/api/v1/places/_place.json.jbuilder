@@ -1,7 +1,6 @@
-json.id place[:id]
-json.name place[:name]
-json.full_name place[:full_name] if place[:full_name]
-json.with_address place[:with_address] if place[:with_address]
+json.id place.id
+json.name place.name
+json.full_name place.location_names
 
 if params[:include_details]
   json.commune do |json|
