@@ -5,10 +5,6 @@ class WidgetTemplate < ActiveRecord::Base
 
   has_many :widgets
 
-  def config
-    Config.new
-  end
-
   def partial_name
     self.class.name.underscore
   end
