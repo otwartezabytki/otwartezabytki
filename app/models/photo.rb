@@ -22,12 +22,15 @@ class Photo < ActiveRecord::Base
   belongs_to :relic
   belongs_to :user
 
-  attr_accessible :relic_id, :user_id, :author, :file, :date_taken
+  attr_accessible :author, :file, :date_taken, :as => [:default, :admin]
+  attr_accessible :relic_id, :user_id, :as => :admin
 
   mount_uploader :file, PhotoUploader
 
   validates :file, :relic, :user, :presence => true
   validates :author, :date_taken, :presence => true, :unless => :new_record?
+
+  has_paper_trail
 
   def self.one_after(photo_id)
     where('id > ?', photo_id).order('id ASC').limit(1).first

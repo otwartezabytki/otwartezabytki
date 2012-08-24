@@ -212,6 +212,16 @@ pl:
         country_code: "Kraj"
         fprovince: "Prowincja"
         fplace: "Miejscowość"
+        type: "Typ zabytku"
+        latitude: "Szerokość geograficzna"
+        longitude: "Długość geograficzna"
+        description: "Opis"
+        user_id: "Użytkownik"
+        ancestry: "W zespołach"
+        approved: "Zabytek zatwierdzony"
+        voivodeship: "Województwo"
+        district: "Powiat"
+        commune: "Gmina"
       user:
         email: Adres e-mail
         password: Hasło
@@ -220,17 +230,42 @@ pl:
         created_at: Założenie konta
         updated_at: Zaktualizowanie danych
       photo:
+        relic_id: ID zabytku
+        relic: Zabytek
         author: "Dane autora (imię, nazwisko)"
         date_taken: "Data wykonania"
       document:
         name: Nazwa
         description: Krótki opis
+        relic_id: ID zabytku
+        relic: Zabytek
+        file: Plik
       entry:
+        relic_id: ID zabytku
+        relic: Zabytek
         title: Tytuł
         body: Opis
       alert:
+        relic_id: ID zabytku
+        relic: Zabytek
         file: "Zdjęcie:"
         description: "Opis:"
+      link:
+        relic_id: ID zabytku
+        relic: Zabytek
+        url: "Adres URL"
+        name: "Nazwa linku"
+        position: "Kolejność"
+      event:
+        relic_id: ID zabytku
+        relic: Zabytek
+        name: "Nazwa wydarzenia"
+        position: "Kolejność"
+      version:
+        item_type: "Rodzaj"
+        item: "Zasób"
+
+
     models:
       relic:
         zero:  Zabytek
@@ -268,7 +303,43 @@ pl:
         few:   Województwa
         many:  Województwa
         other: Województwa
-
+      version:
+        zero:  Wersji
+        one:   Wersja
+        few:   Wersji
+        many:  Wersji
+        other: Tablica zmian
+      document:
+        zero: dokumentów
+        one: dokument
+        few: dokumenty
+        many: dokumentów
+        other: dokumentów
+        other: Tablica zmian
+      photo:
+        zero: zdjęć
+        one: zdjęcie
+        few: zdjęć
+        many: zdjęć
+        other: zdjęć
+      event:
+        zero: wydarzeń
+        one: wydarzenie
+        few: wydarzeń
+        many: wydarzeń
+        other: wydarzenia
+      entry:
+        zero: wpisów
+        one: wpis
+        few: wpisów
+        many: wpisów
+        other: wpisów
+      links:
+        zero: linków
+        one: link
+        few: linków
+        many: linków
+        other: linków
   plural:
     relic:
       zero:   zabytków
@@ -298,6 +369,9 @@ pl:
         fprovince: Informacja o prowincji
         fplace: Informacja o miejscowości
         street: Informacja o ulicy
+        place: Informacja o miejscowości
+        tags: This is hint for tags
+        categories: This is hint for categories
       document:
         name: Do jest podpowiedź do nazwy dokumentu
         description: To jest podpowiedź do opisu dokumentu
@@ -310,3 +384,21 @@ pl:
       alert:
         file: To jest podpowiedź do pliku alertu
         description: To jest podpowiedź do opisu alertu
+
+  version:
+    item_type:
+      Relic: "zabytek"
+      Event: "wydarzenie"
+      Entry: "wpis"
+      Photo: "zdjęcie"
+      Document: "dokument"
+    event:
+      create: "stworzył"
+      update: "zaktualizował"
+      destroy: "usunął"
+
+  active_admin:
+    comments:
+      no_comments_yet: "Brak komentarzy"
+      add: "Dodaj komentarz"
+      title_content: "Komantarz do zasobu:"

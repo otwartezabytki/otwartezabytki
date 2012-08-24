@@ -22,6 +22,7 @@ class Place < ActiveRecord::Base
   validates :name, :presence => true
 
   scope :not_custom, where(:custom => false)
+  scope :search, lambda {|term| where("name ILIKE ?", "%#{term}%") }
 
   def virtual_commune_id
     self[:virtual_commune_id] || self[:commune_id]

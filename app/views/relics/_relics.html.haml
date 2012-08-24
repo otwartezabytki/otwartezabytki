@@ -1,22 +1,39 @@
 .search-results
   - collection.each do |relic|
     .relic
-      .name
-        = link_to relic.identification, relic_path(relic)
-      .pathway= relic.place_full_name
-      .street= relic.street
-      .include
-        - if relic.descendants.present?
-          %span
-          = relic.descendants.map(&:identification).join(', ')
-      .include
-        %span
-        = (relic.categories || []).sort.join(', ')
-      .include
-        %span
-        = "#{relic.from} - #{relic.to}"
-      - if relic.corrected?(current_user)
-        .modified
-      - else
-        .change
-          = link_to "Zobacz »", relic_path(relic), :class => 'btn btn-mini'
+      .thumb
+        = image_tag "bg-relic-image-ph.png"
+      .body
+        .name
+          %h2= link_to relic.identification, relic_path(relic)
+        .tag
+          %span.done Uzupełniony
+          %span.undone Nieuzupełniony
+          %span.unchecked Niesprawdzony
+        .pathway
+          %span.label lokalizacja:
+          = relic.place_full_name
+        .street
+          - unless relic.street.blank?
+            %span.known= relic.street
+          - else
+            %span.unknown Adres niedosępny
+        - unless relic.from.blank?
+          .time
+            %span.label data powstania: 
+            = relic.from
+            -#= "#{relic.from} - #{relic.to}"
+        - if false
+          .include
+            - if relic.descendants.present?
+              %span
+              = relic.descendants.map(&:identification).join(', ')
+          .include
+            %span
+            = (relic.categories || []).sort.join(', ')
+        - if false
+          - if relic.corrected?(current_user)
+            .modified
+          - else
+            .change
+              = link_to "Zobacz »", relic_path(relic), :class => 'btn btn-mini'

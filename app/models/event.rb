@@ -18,11 +18,14 @@ class Event < ActiveRecord::Base
   belongs_to :relic
   belongs_to :user
 
-  attr_accessible :date, :date_end, :date_start, :name, :relic_id, :user, :position
+  attr_accessible :date, :name, :position, :as => [:default, :admin]
+  attr_accessible :user_id, :relic_id, :as => [:admin]
 
   acts_as_list :scope => :relic
 
   validates :relic, :user, :name, :date, :presence => true
 
   include CanCan::Authorization
+
+  has_paper_trail
 end

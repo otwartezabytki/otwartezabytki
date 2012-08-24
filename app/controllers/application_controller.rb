@@ -25,6 +25,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  rescue_from CanCan::AccessDenied do |exception|
+    if current_user
+      redirect_to root_path, :notice => exception.message
+    else
+      redirect_to new_user_session_path, :notice => exception.message
+    end
+  end
+
   def page_pl_path(path)
     "/strony/#{path}"
   end
