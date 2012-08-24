@@ -143,7 +143,6 @@ module Api
                 :required => true,
                 :defaultValue => <<-EOS
 {
-  "parent_id",
   "identification": "Suler",
   "description": "CEO",
   "categories": "",
@@ -175,7 +174,7 @@ module Api
             :path => "/relics.{format}"
           },{
             :description => "Operations on relics",
-            :operations => [
+            :operations => [{
               :httpMethod => "GET",
               :nickname => "GetRelicByID",
               :notes => "Returns a relic based on ID",
@@ -193,7 +192,48 @@ module Api
                 :code => 404,
                 :reason => "The relic cannot be found"
               }]
-            ],
+            },{
+              :httpMethod => "PUT",
+              :nickname => "UpdateRelic",
+              :notes => "Update relic<br/>
+                <strong>Relic parameters:</strong> place_id, identification, description, latitude, longitude, dating_of_obj,
+                  categories, tags, country_code, fprovinde, fplace, document_info, links_info
+              ",
+              :parameters => [{
+                :allowMultiple => false,
+                :dataType => "int",
+                :description => "Relic ID",
+                :name => "id",
+                :paramType => "path",
+                :required => true
+              },{
+                :allowMultiple => false,
+                :dataType => "Relic",
+                :description => "Relic json data",
+                :name => "relic",
+                :paramType => "body",
+                :required => true,
+                :defaultValue => <<-EOS
+{
+  "latitude": 0.0,
+  "longitude": 0.0
+}
+                EOS
+              },{
+                :allowMultiple => false,
+                :dataType => "string",
+                :description => "API Secret",
+                :name => "api_secret",
+                :paramType => "query",
+                :required => true
+              }],
+              :responseClass => "Relic",
+              :summary => "Update relic",
+              :errorResponses => [{
+                :code => 404,
+                :reason => "The relic cannot be found"
+              }]
+            }],
             :path => "/relics/{id}.{format}"
           }],
           :models => {

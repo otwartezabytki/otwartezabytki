@@ -3,7 +3,7 @@ module Api
   module V1
     class RelicsController < ApiController
       before_filter :api_authenticate
-      before_filter :api_authorize, :only => [:create]
+      before_filter :api_authorize, :only => [:create, :update]
 
       def index
         p = params.slice(:query, :place, :from, :to, :categories, :state, :existance, :location, :has_photos, :has_description, :order)
@@ -31,6 +31,17 @@ module Api
         @relic.parent_id = params[:relic][:parent_id]
 
         if @relic.save
+          render :show
+        else
+          render :json => {:errors => @relic.errors}, :status => :unprocessable_entity
+        end
+      end
+
+      def update
+        @relic = Relic.find(params[:id])
+        @relic.user_id = @user.id
+
+        if @relic.update_attributes(params[:relic])
           render :show
         else
           render :json => {:errors => @relic.errors}, :status => :unprocessable_entity
