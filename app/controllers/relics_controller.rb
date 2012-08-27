@@ -12,10 +12,7 @@ class RelicsController < ApplicationController
       r = Relic.find(id)
 
       if params[:original].present? && request.get? && r.versions.count > 0
-        flash.now[:notice] = "To jest podgląd oryginalnej wersji zabytku. <a href='#{relic_path(id)}'>zobacz wersję obecną</a>.".html_safe
-        r = r.versions.first.reify
-        r.id = 0
-        r
+        r.versions.first.reify.tap { |r| r.id = 0 }
       else
         # change relic type if requested
         if params[:relic] && !request.get?

@@ -1359,6 +1359,7 @@ div.fancybox-close{
 }
 
 .original-version{
+  z-index: 10000;
   width: 100%;
   position: fixed;
   @include background(linear-gradient(rgba(242,242,242,0.9), rgba(229,229,229,0.9)));
