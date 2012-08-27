@@ -46,13 +46,13 @@ Otwartezabytki::Application.routes.draw do
       # resources :voivodeships, :only => [:index, :show]
       # resources :districts, :only => [:index, :show]
       # resources :communes, :only => [:index, :show]
-      resources :places, :only => [:index, :show]
+      resources :places, :only => [:index, :show, :results]
     end
   end
 
   get 'suggester/query'
   get 'suggester/place'
-  get 'suggester/place_from_poland'
+  get 'suggester/place_from_poland', :as => :place_from_poland
 
   resources :tags, :only => [:create]
 

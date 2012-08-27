@@ -91,10 +91,14 @@ class RelicsController < ApplicationController
     if params[:q].present?
       pq = PreparedQuery.new(params[:q])
       @places = if pq.exists?
-        Place.where(["LOWER(name) LIKE ?", "#{pq.clean.downcase}"])
+        Place.where(["LOWER(name) LIKE ?", "#{pq.clean.downcase}"]).map do |p|
+          p.conditional_geocode!
+          p
+        end
       else
         []
       end
+      relic.place = @places.first if @places.size == 1
     end
   end
 

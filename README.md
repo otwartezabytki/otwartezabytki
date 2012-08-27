@@ -3,7 +3,7 @@
 
 ### application init
  - brew update
- - brew install elasticsearch postgresql aspell --lang=pl
+ - brew install elasticsearch postgresql graphicsmagick aspell --lang=pl
  - cp config/database.yml.example config/database.yml
  - create database and database users for dev and testing
  - bundle install

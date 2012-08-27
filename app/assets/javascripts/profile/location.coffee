@@ -116,13 +116,16 @@ window.ensuring_google_maps_loaded = (callback) ->
     do window.load_google_maps
 
 window.ensure_geolocation = ->
-  $('#relic_latitude').val 52.4118436
-  $('#relic_longitude').val 19.0984013
-  try
-    navigator.geolocation.getCurrentPosition (pos) ->
-      $('#relic_latitude').val pos.coords.latitude
-      $('#relic_longitude').val pos.coords.longitude
-      $('#map_canvas').auto_zoom()
+  if $('#relic_latitude').val().length > 0
+    $('#map_canvas').auto_zoom()
+  else
+    $('#relic_latitude').val 52.4118436
+    $('#relic_longitude').val 19.0984013
+    try
+      navigator.geolocation.getCurrentPosition (pos) ->
+        $('#relic_latitude').val pos.coords.latitude
+        $('#relic_longitude').val pos.coords.longitude
+        $('#map_canvas').auto_zoom()
 
 jQuery.initializer 'section.edit.location', ->
   $('#relic_place_id').select2()

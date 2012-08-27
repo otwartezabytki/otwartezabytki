@@ -1,1 +1,12 @@
-= render :template => 'relics/new'
+%section.search-place-results{  :"data-replace" => "section.search-place-results" }
+  - if @places.blank?
+    brak wyników
+  - else
+    %section.creator-step
+      %h3 O którą miejscowość Ci chodziło?
+      .places-wrapper
+        %ul.places
+          - @places.each do |place|
+            %li
+              = (place.location_names.first(place.location_names.size - 1) << "<strong>#{place.name}</strong>").join(' > ').html_safe
+              = link_to "wybieram &raquo;".html_safe, 'javascript: void(0);', 'data-location-names' => place.location_names.join(';'), 'data-location' => place.location_string

@@ -39,7 +39,18 @@
 
 # TEMP
 
-jQuery.initializer 'section.creator-step.location', ->
+jQuery.initializer 'div.new_relic section.main', ->
+  this.on 'click', 'div.places-wrapper ul li a', (e) ->
+    e.preventDefault()
+    $('form.relic .actions').hide()
+    $('#relic_place_id').val $(this).data('place_id')
+    lat = $(this).data('coordinates').split(',')[0]
+    lng = $(this).data('coordinates').split(',')[1]
+
+    $('#map_canvas').zoom_at(lat, lng)
+    map.removeMarkers()
+    $('#map_canvas').circle_marker(lat, lng)
+
   $('input[name=foreign_relic]').change ->
     if $(this).is(':checked')
       $('.polish-location').hide()
@@ -72,28 +83,24 @@ jQuery.initializer 'section.creator-step.location', ->
     $('#map_canvas').blinking()
 
 
-trigger_geolocation = (locationString) ->
-  locationArray = locationString.split(';')
-  callback =  (lat, lng) ->
-    $('#map_canvas').zoom_at(lat, lng)
-    map.removeMarkers()
-    $('#map_canvas').circle_marker(lat, lng)
-    $('form.relic').removeClass('geocoded')
-    $('#relic_geocoded').val("0")
-    $('form.relic .actions').hide()
+# trigger_geolocation = (locationString) ->
+#   locationArray = locationString.split(';')
+#   callback =  (lat, lng) ->
+#     $('#map_canvas').zoom_at(lat, lng)
+#     map.removeMarkers()
+#     $('#map_canvas').circle_marker(lat, lng)
+#     $('form.relic').removeClass('geocoded')
+#     $('#relic_geocoded').val("0")
+#     $('form.relic .actions').hide()
 
-  voivodeship = locationArray[0]
-  district    = locationArray[1]
-  commune     = locationArray[2]
-  city        = locationArray[3]
+#   voivodeship = locationArray[0]
+#   district    = locationArray[1]
+#   commune     = locationArray[2]
+#   city        = locationArray[3]
 
-  jQuery.get geocoder_search_path, {voivodeship, district, commune, city}, (result) ->
-    if result.length > 0
-      callback(result[0].latitude.round(7), result[0].longitude.round(7))
-  , 'json'
-
-$('body').on 'click', 'div.places-wrapper ul li a', (e) ->
-  e.preventDefault()
-  trigger_geolocation $(this).data('location-names')
+#   jQuery.get geocoder_search_path, {voivodeship, district, commune, city}, (result) ->
+#     if result.length > 0
+#       callback(result[0].latitude.round(7), result[0].longitude.round(7))
+#   , 'json'
 
 
