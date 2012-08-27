@@ -69,7 +69,7 @@ class Relic < ActiveRecord::Base
                   :street, :tags, :categories, :photos_attributes, :description,
                   :documents_attributes, :documents_info, :links_attributes, :links_info,
                   :events_attributes, :entries_attributes, :license_agreement, :polish_relic,
-                  :geocoded, :build_state, :as => [:default, :admin]
+                  :geocoded, :build_state, :parent_id, :as => [:default, :admin]
 
   attr_accessible :ancestry, :materail, :register_number, :approved, :group, :as => :admin
 
@@ -423,5 +423,13 @@ class Relic < ActiveRecord::Base
 
   def parse_date
     self.date_start, self.date_end = DateParser.new(dating_of_obj).results
+  end
+
+  def parent_id=(value)
+    if value.present?
+      self.parent = Relic.find(value)
+    else
+      self.parent = nil
+    end
   end
 end

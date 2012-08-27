@@ -406,6 +406,7 @@ pl:
       destroy: "usunął"
 
   active_admin:
+    update_model: Rekord zaktualizowany
     comments:
       no_comments_yet: "Brak komentarzy"
       add: "Dodaj komentarz"
