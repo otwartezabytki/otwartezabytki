@@ -366,7 +366,7 @@ class Relic < ActiveRecord::Base
   end
 
   def all_documents
-    Document.where(:relic_id => [id] + descendant_ids).order("relic_id ASC, position ASC")
+    Document.where(:relic_id => [id] + descendant_ids).order("relic_id ASC")
   end
 
   def all_links
