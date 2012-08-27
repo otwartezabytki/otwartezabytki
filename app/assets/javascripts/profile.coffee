@@ -46,3 +46,16 @@ jQuery.initializer 'body.relics.show', ->
   this.on 'click', 'a[href^="/relics/0/"]', (e) ->
     alert('To tylko podgląd. Nie możesz nic edytować.')
     false
+
+jQuery.initializer 'section.edit', ->
+  this.find('form').each ->
+    $form = $(this)
+
+    $form.on 'change', 'input', ->
+      $form.data('changed', true)
+
+    $form.on 'click', 'a.cancel', ->
+      if $form.data('changed') || $form.find('input.error').length
+        return confirm('Na pewno? Stracisz wprowadzone zmiany w tej sekcji.')
+      else
+        return true
