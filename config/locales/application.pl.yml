@@ -36,3 +36,7 @@ pl:
     photos:
       name: Zdjęcia
       description: To jest podpowiedź do zakładki zdjęcia
+  alert_states:
+    new: Nowy
+    in_progress: Do naprawy
+    fixed: Naprawiony
