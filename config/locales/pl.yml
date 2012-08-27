@@ -389,6 +389,7 @@ pl:
       Entry: "wpis"
       Photo: "zdjęcie"
       Document: "dokument"
+      Link: "link"
     event:
       create: "stworzył"
       update: "zaktualizował"

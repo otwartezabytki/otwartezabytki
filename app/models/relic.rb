@@ -102,7 +102,7 @@ class Relic < ActiveRecord::Base
   end
 
   # versioning
-  has_paper_trail
+  has_paper_trail :skip => [:skip_count, :edit_count, :updated_at, :created_at]
 
   include Tire::Model::Search
 

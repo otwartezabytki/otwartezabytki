@@ -16,4 +16,8 @@ class DocumentUploader < CarrierWave::Uploader::Base
     %w(exe jar)
   end
 
+  def remove!
+
+  end
+
 end

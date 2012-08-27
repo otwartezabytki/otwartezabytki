@@ -18,6 +18,7 @@ ActiveAdmin.register Photo do
 
   form do |f|
     f.inputs do
+      f.input :relic_id
       f.input :author
       f.input :date_taken
       f.input :file

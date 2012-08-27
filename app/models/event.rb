@@ -27,5 +27,5 @@ class Event < ActiveRecord::Base
 
   include CanCan::Authorization
 
-  has_paper_trail
+  has_paper_trail :skip => [:created_at, :updated_at]
 end

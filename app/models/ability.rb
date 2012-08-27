@@ -9,11 +9,13 @@ class Ability
       can :manage, User
       can :manage, Relic
       can :manage, SuggestedType
-      can :index, Version
-      can :show, Version
       can :manage, Document
       can :manage, Photo
       can :manage, Entry
+
+      can :index, Version
+      can :show, Version
+      can :revert, Version
     end
 
     if user
@@ -29,7 +31,5 @@ class Ability
     end
 
     can :create, User
-
-    # See the wiki for details: https://github.com/ryanb/cancan/wiki/Defining-Abilities
   end
 end

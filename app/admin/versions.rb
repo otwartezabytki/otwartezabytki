@@ -5,14 +5,6 @@ ActiveAdmin.register Version, :sort_order => 'id_desc' do
 
   menu :label => "Tablica zmian", :priority => 1
 
-  scope 'Zabytki', :relics
-  scope 'Wpisy', :entries
-  scope 'Wydarzenia', :events
-  scope 'Linki', :links
-  scope 'Zdjęcia', :photos
-  scope 'Dokumenty', :documents
-
-
   index do
 
     column 'Data', :sortable => :created_at do |e|
@@ -37,9 +29,9 @@ ActiveAdmin.register Version, :sort_order => 'id_desc' do
     end
 
     column 'Zasób' do |e|
-      object = e.reify
       name = t("version.item_type." + e.item_type)
-
+      object = e.preview
+      next unless object
       case e.item_type
         when "Relic"
           link_to name, admin_relic_path(e.item_id), :title => object.identification
@@ -57,61 +49,112 @@ ActiveAdmin.register Version, :sort_order => 'id_desc' do
     end
 
     column 'Szybki podgląd' do |e|
+      object = e.preview
+      next unless object
       ignores = ["commune_id", "voivodeship_id", "district_id"]
 
-      dl :style => "width: 400px;" do
-        e.changeset.each do |key, (before, after)|
-          next if ignores.include?(key)
-          next if before.blank? && after.blank?
-          dt t("activerecord.attributes.#{e.item_type.downcase}.#{key}")
+      dl :style => "width: 300px;" do
+        if e.event == 'update'
+          e.changeset.each do |key, (before, after)|
+            next if ignores.include?(key)
+            next if before.blank? && after.blank?
+            dt t("activerecord.attributes.#{e.item_type.downcase}.#{key}")
 
-          if after.class == String
-            dd sanitize(HTMLDiff::DiffBuilder.new(before || "", after || "").build)
-          elsif after.class == Array
-            dd do
-              ((after || []) - (before || [])).each do |e|
-                ins e
-                span " "
+            if after.class == String
+              dd sanitize(HTMLDiff::DiffBuilder.new(before || "", after || "").build)
+            elsif after.class == Array
+              dd do
+                ((after || []) - (before || [])).each do |e|
+                  ins e
+                  span " "
+                end
+                ((before || []) - (after || [])).each do |e|
+                  del e
+                  span " "
+                end
               end
-              ((before || []) - (after || [])).each do |e|
-                del e
-                span " "
-              end
+            else
+              dd "#{before || "pusty"} => #{after || "~"}"
             end
-          elsif e.item_type == "Photo" && key == 'file'
-            dd do
-              key.class
-              #image_tag before.midi.url || ""
-              #image_tag after.midi.url || ""
+          end
+        elsif e.event == 'create' || e.event == 'destroy'
+          if e.item_type == "Photo"
+            para do
+              image_tag object.file.midi.url
             end
-          else
-            dd "#{before || "pusty"} => #{after || "~"}"
+          elsif e.item_type == "Document"
+            para do
+              link_to "pobierz dokument #{object.file.identifier}", object.file.url
+            end
+          elsif e.item_type == "Event"
+            dl do
+              dt "Nazwa"
+              dd object.name
+              dt "Data"
+              dd object.date
+            end
+          elsif e.item_type == "Link"
+            dl do
+              dt "Nazwa"
+              dd object.name
+              dt "URL"
+              dd object.url
+            end
+          elsif e.item_type == "Entry"
+            dl do
+              dt "Tytuł"
+              dd object.title
+              dt "Treść"
+              dd sanitize object.body
+            end
           end
         end
 
-        "brak poważnych zmian"
+        e.event == "update" ? "brak poważnych zmian" : ""
       end
 
     end
 
+    column do |e|
+      para do
+        link_to("Cofnij", revert_admin_version_path(e), :method => :put)
+      end
+    end
+
     default_actions
-  end
-
-  show do
-
   end
 
   member_action :revert, :method => :put do
     @version = Version.find(params[:id])
     @object = @version.reify
 
-    if @object.save
-      redirect_to admin_relic_path(@relic.id), :notice => t("notices.relic_reverted")
+    if @version.event == 'create'
+      Kernel.const_get(@version.item_type).find(@version.item_id).destroy
+      redirect_to admin_versions_path, :notice => "Objekt został przywrócony do wersji przed zmianami."
     else
-      flash[:error] = @version.errors.full_messages
-      redirect_to admin_relic_path(@relic.id, :version => @version.id)
+      if @object.save
+        redirect_to admin_versions_path, :notice => "Objekt został przywrócony do wersji przed zmianami."
+      else
+        flash[:error] = @version.errors.full_messages
+        redirect_to admin_version_path(@version.id)
+      end
     end
   end
 
-  filter :event, :label => "akcję", :as => :select, :collection => [["aktualizacja", "update"], ["usunięcie", "destroy"], ["utworzenie", "create"]]
+  action_item :only => :show  do
+    link_to "Przywróć do wersji przed zmianą", revert_admin_version_path(resource),
+            :method => :put, :data => { :confirm => t("Na pewno?") }
+  end
+
+  filter :created_at, :label => "Czas zmiany"
+
+  filter :whodunnit, :as => :string, :label => "ID użytkownika"
+
+  filter :event, :label => "Akcja", :as => :select,
+         :collection => [["aktualizacja", "update"], ["usunięcie", "destroy"], ["utworzenie", "create"]]
+
+  filter :item_type, :label => "Rodzaj", :as => :select,
+         :collection => [["Zabytek", "Relic"], ["Dokument", "Document"], ["Zdjęcie", "Photo"], ["Wpis", "Entry"], ["Wydarzenie", "Event"], ["Link", "Link"]]
+
+  filter :item_id, :as => :numeric, :label => "ID rekordu"
 end

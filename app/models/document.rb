@@ -18,14 +18,15 @@ class Document < ActiveRecord::Base
   belongs_to :relic
   belongs_to :user
 
-  attr_accessible :name, :description, :file, as: [:default, :admin]
+  attr_accessible :name, :description, :file, :as => [:default, :admin]
+  attr_accessible :relic_id, :user_id, :as => :admin
 
   mount_uploader :file, DocumentUploader
 
   validates :file, :relic, :user, :presence => true
   validates :name, :description, :presence => true, :unless => :new_record?
 
-  has_paper_trail
+  has_paper_trail :skip => [:created_at, :updated_at]
 
   def remove_file!
     Rails.logger.info("skip removing physical file of document ##{self.id} ")
@@ -36,7 +37,6 @@ class Document < ActiveRecord::Base
   end
 
   before_save :update_file_attributes
-
 
   private
 

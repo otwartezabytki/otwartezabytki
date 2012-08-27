@@ -40,4 +40,8 @@ class PhotoUploader < CarrierWave::Uploader::Base
     %w(jpg jpeg png)
   end
 
+  def remove!
+
+  end
+
 end

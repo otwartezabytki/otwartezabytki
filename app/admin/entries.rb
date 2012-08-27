@@ -3,6 +3,8 @@
 ActiveAdmin.register Entry do
   menu :label => "Wpisy", :parent => "Zasoby"
 
+  controller.authorize_resource
+
   index do
     column :id
     column :relic do |e|
@@ -17,7 +19,7 @@ ActiveAdmin.register Entry do
 
   form do |f|
     f.inputs do
-      f.input :user_id
+      f.input :relic_id
       f.input :title
       f.input :body, :wrapper_html => { :style => "width: 500px; position: relative;" }, :label => false
       f.buttons

@@ -30,7 +30,7 @@ class Photo < ActiveRecord::Base
   validates :file, :relic, :user, :presence => true
   validates :author, :date_taken, :presence => true, :unless => :new_record?
 
-  has_paper_trail
+  has_paper_trail :skip => [:created_at, :updated_at]
 
   def self.one_after(photo_id)
     where('id > ?', photo_id).order('id ASC').limit(1).first

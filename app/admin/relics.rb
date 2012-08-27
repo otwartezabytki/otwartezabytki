@@ -54,17 +54,6 @@ ActiveAdmin.register Relic do
 
   end
 
-  action_item :only => :show do
-    link_to t('buttons.show_history'), history_admin_relic_path(resource)
-  end
-
-  action_item :only => :show  do
-    unless resource.live?
-      link_to t('buttons.revert_this_version'), revert_admin_relic_path(resource, :version => params[:version]),
-        :method => :put, :data => { :confirm => t('messages.are_you_sure') }
-    end
-  end
-
   controller do
     def show
       @relic = Relic.find(params[:id])
