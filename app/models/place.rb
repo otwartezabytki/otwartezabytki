@@ -19,6 +19,8 @@ class Place < ActiveRecord::Base
   belongs_to :commune
   has_many :relics, :dependent => :destroy
 
+  geocoded_by :address
+
   validates :name, :presence => true
 
   scope :not_custom, where(:custom => false)
@@ -34,6 +36,17 @@ class Place < ActiveRecord::Base
 
   def location_names
     [commune.district.voivodeship.name, commune.district.name, commune.name, name]
+  end
+
+  def address
+    location_names.join(', ')
+  end
+
+  def conditional_geocode!
+    unless latitude?
+      geocode
+      save!
+    end
   end
 
 end

@@ -30,7 +30,7 @@
       - if defined? @places
         - if @places.blank?
           brak wyników
-        - else
+        - elsif @places.size > 1
           %section.creator-step
             %h3 O którą miejscowość Ci chodziło?
             .places-wrapper
@@ -38,7 +38,7 @@
                 - @places.each do |place|
                   %li
                     = (place.location_names.first(place.location_names.size - 1) << "<strong>#{place.name}</strong>").join(' > ').html_safe
-                    = link_to "wybieram &raquo;".html_safe, 'javascript: void(0);', 'data-location-names' => place.location_names.join(';'), 'data-location' => place.location_string
+                    = link_to "wybieram &raquo;".html_safe, 'javascript: void(0);', 'data-place_id' => place.id, 'data-coordinates' => "#{place.latitude}, #{place.longitude}"
       %section.creator-step.location
         = semantic_form_for relic, :url => build_area_relics_path, :method => :get, :remote => true do |f|
           .column
@@ -62,11 +62,9 @@
                 znacznik na mapę:
               .marker-holder
                 = image_tag 'marker.png', :id => 'marker'
+            = f.hidden_field :place_id
             = f.hidden_field :latitude
             = f.hidden_field :longitude
-            = f.hidden_field :geocoded
-
-
       -# %section.creator-step
       -#   %h3 Zaznacz obiekt na mapie
       -#   .map-wrapper
