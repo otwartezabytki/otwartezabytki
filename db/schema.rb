@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120824152327) do
+ActiveRecord::Schema.define(:version => 20120827145208) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(:version => 20120824152327) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.string   "description"
+    t.integer  "position"
   end
 
   create_table "entries", :force => true do |t|
@@ -89,11 +90,11 @@ ActiveRecord::Schema.define(:version => 20120824152327) do
     t.integer  "user_id"
     t.string   "name"
     t.string   "date"
-    t.date     "date_start"
-    t.date     "date_end"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "position"
+    t.integer  "date_start"
+    t.integer  "date_end"
   end
 
   create_table "links", :force => true do |t|
@@ -155,25 +156,25 @@ ActiveRecord::Schema.define(:version => 20120824152327) do
     t.integer  "voivodeship_id"
     t.date     "register_date"
     t.string   "date_norm"
-    t.string   "date_start"
-    t.string   "date_end"
     t.string   "kind"
     t.boolean  "approved",        :default => false
     t.string   "categories"
     t.integer  "skip_count",      :default => 0
     t.integer  "edit_count",      :default => 0
+    t.text     "description"
+    t.string   "tags"
     t.string   "type",            :default => "Relic"
     t.string   "country_code",    :default => "PL"
     t.string   "fprovince"
     t.string   "fplace"
-    t.text     "description",     :default => ""
-    t.string   "tags"
     t.text     "documents_info"
     t.text     "links_info"
     t.integer  "user_id"
     t.boolean  "geocoded"
     t.string   "build_state"
     t.text     "reason"
+    t.integer  "date_start"
+    t.integer  "date_end"
   end
 
   add_index "relics", ["ancestry"], :name => "index_relics_on_ancestry"

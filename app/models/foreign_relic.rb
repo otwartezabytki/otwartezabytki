@@ -24,8 +24,6 @@
 #  voivodeship_id  :integer
 #  register_date   :date
 #  date_norm       :string(255)
-#  date_start      :string(255)
-#  date_end        :string(255)
 #  kind            :string(255)
 #  approved        :boolean          default(FALSE)
 #  categories      :string(255)
@@ -40,6 +38,11 @@
 #  documents_info  :text
 #  links_info      :text
 #  user_id         :integer
+#  geocoded        :boolean
+#  build_state     :string(255)
+#  reason          :text
+#  date_start      :integer
+#  date_end        :integer
 #
 
 class ForeignRelic < Relic

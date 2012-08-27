@@ -9,7 +9,7 @@
       %ol.sortable
         - relic.links.sort_by{ |e| e.position || 1000 }.each do |link|
           = f.semantic_fields_for :links, link do |f2|
-            = content_tag_for :li, link do
+            = content_tag_for :li, link, :class => "move" do
               = f2.input :url, :label => false, :hint => false, :class => "url"
               = f2.input :name, :label => false, :hint => false, :class => "info"
               = f2.hidden_field :position, :class => "link-position"
@@ -18,7 +18,7 @@
               .arrow
         %script{ :type => "text/html", :id => "link_template", :"data-next-id" => relic.links.length, :"data-container" => "#links_container" }
           = f.semantic_fields_for :links, relic.links.build do |f2|
-            %li.link
+            %li.link.move
               = f2.input :url, :label => false, :hint => false, :class => "url"
               = f2.input :name, :label => false, :hint => false, :class => "info"
               = f2.hidden_field :position, :class => "link-positione"

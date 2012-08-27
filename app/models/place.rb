@@ -11,6 +11,8 @@
 #  from_teryt         :boolean          default(TRUE)
 #  custom             :boolean          default(FALSE)
 #  virtual_commune_id :string(255)
+#  latitude           :float
+#  longitude          :float
 #
 
 # -*- encoding : utf-8 -*-
