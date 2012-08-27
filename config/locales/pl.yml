@@ -182,6 +182,10 @@ pl:
         format: "%{attribute} %{message}"
 
       models:
+        photo:
+          attributes:
+            file:
+              size_too_big: "Rozmiar zdjęcia jest zbyt duży (maksymalnie 1MB)"
         user:
           attributes:
             email:

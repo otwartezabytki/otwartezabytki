@@ -16,8 +16,12 @@ class PhotosController < ApplicationController
   def create
     authorize! :create, photo
     photo.user = current_user
-    photo.save
-    choosen_redirect_path
+    if photo.save
+      choosen_redirect_path
+    else
+      flash[:error] = photo.errors.first.last
+      redirect_to edit_section_relic_path(relic.id, :photos)
+    end
   end
 
   def update
