@@ -33,7 +33,7 @@ class Document < ActiveRecord::Base
   end
 
   def mime_class
-    mime.gsub(/application\//, '').gsub(/\W+/, '-')
+    (mime || "").gsub(/application\//, '').gsub(/\W+/, '-')
   end
 
   before_save :update_file_attributes
