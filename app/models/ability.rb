@@ -7,6 +7,7 @@ class Ability
       can :index, Dashboard
 
       can :manage, User
+      can :generate_api_secret, User
       can :manage, Relic
       can :manage, SuggestedType
       can :manage, Document
@@ -16,6 +17,7 @@ class Ability
       can :index, Version
       can :show, Version
       can :revert, Version
+      can :manage, WidgetTemplate
     end
 
     if user

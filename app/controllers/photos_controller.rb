@@ -17,7 +17,7 @@ class PhotosController < ApplicationController
     authorize! :create, photo
     photo.user = current_user
     photo.save
-    redirect_to edit_section_relic_path(relic.id, :photos)
+    choosen_redirect_path
   end
 
   def update
@@ -29,7 +29,17 @@ class PhotosController < ApplicationController
   def destroy
     authorize! :destroy, photo
     photo.destroy
-    redirect_to edit_section_relic_path(relic.id, :photos)
+    choosen_redirect_path
   end
+
+  private
+    def choosen_redirect_path
+      path = if !!params[:build]
+        relic_build_path(relic, :photos)
+      else
+        edit_section_relic_path(relic.id, :photos)
+      end
+      redirect_to path
+    end
 
 end

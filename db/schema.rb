@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120820060317) do
+ActiveRecord::Schema.define(:version => 20120824152327) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -170,6 +170,8 @@ ActiveRecord::Schema.define(:version => 20120820060317) do
     t.text     "links_info"
     t.integer  "user_id"
     t.boolean  "geocoded"
+    t.string   "build_state"
+    t.text     "reason"
   end
 
   add_index "relics", ["ancestry"], :name => "index_relics_on_ancestry"
@@ -251,6 +253,8 @@ ActiveRecord::Schema.define(:version => 20120820060317) do
     t.string   "role",                   :default => "user"
     t.string   "username"
     t.string   "seen_relic_order",       :default => "asc"
+    t.string   "api_key"
+    t.string   "api_secret"
   end
 
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
@@ -264,6 +268,7 @@ ActiveRecord::Schema.define(:version => 20120820060317) do
     t.datetime "created_at"
     t.text     "object_changes"
     t.string   "comment"
+    t.string   "source"
   end
 
   add_index "versions", ["item_type", "item_id"], :name => "index_versions_on_item_type_and_item_id"
@@ -273,6 +278,24 @@ ActiveRecord::Schema.define(:version => 20120820060317) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "nr"
+  end
+
+  create_table "widget_templates", :force => true do |t|
+    t.string   "type"
+    t.string   "name"
+    t.text     "description"
+    t.string   "thumb"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "widgets", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "widget_template_id"
+    t.string   "uid"
+    t.text     "config"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
 end

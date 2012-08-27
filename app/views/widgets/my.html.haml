@@ -1,0 +1,6 @@
+%ul
+  - @widgets.each do |widget|
+    %li
+      = widget.widget_template.name
+      = widget.uid
+      = widget.config

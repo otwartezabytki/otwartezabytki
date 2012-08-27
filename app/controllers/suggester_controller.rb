@@ -14,6 +14,15 @@ class SuggesterController < ApplicationController
     render :json => json
   end
 
+  def place_from_poland
+    pq = PreparedQuery.new(params[:q])
+    @places = if pq.exists?
+      Place.where(["LOWER(name) LIKE ?", "#{pq.clean.downcase}"])
+    else
+      []
+    end
+  end
+
   def place
     results = Search.new(params[:search]).autocomplete_place
     navigators_json = []

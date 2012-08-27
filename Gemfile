@@ -97,6 +97,12 @@ gem 'acts_as_list'
 # download documents as zip
 gem 'rubyzip'
 
+# state machine
+gem 'aasm'
+
+# api
+gem "jbuilder"
+
 # diff changes in admin panel
 gem 'htmldiff'
 

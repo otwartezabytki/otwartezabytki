@@ -10,7 +10,6 @@ Otwartezabytki::Application.routes.draw do
     :sessions => "users/sessions",
     :passwords => "users/passwords"
   }
-  resources :create_relic
   resources :tags, :only => :index
 
   resources :relics, :except => :destroy do
@@ -23,10 +22,37 @@ Otwartezabytki::Application.routes.draw do
 
     resources :photos, :documents, :entries, :links, :events
     resources :alerts, :only => [:new, :create]
+    collection do
+      match 'build/area', :to  => "relics/build#area"
+      match ':relic_id/build/:id', :to => "relics/build#show", :via => :delete
+    end
+    resources :build, :controller => 'relics/build', :only => [:index, :show, :update]
+  end
+
+  resources :widgets do
+    get :my, :on => :collection
+  end
+  get "/widget/:uid.js", :to => "widgets#js", :as => :widget_js
+
+  namespace :api do
+    namespace :v1 do
+      resource :info do
+        get :relics
+        get :places
+      end
+
+      resources :relics
+
+      # resources :voivodeships, :only => [:index, :show]
+      # resources :districts, :only => [:index, :show]
+      # resources :communes, :only => [:index, :show]
+      resources :places, :only => [:index, :show]
+    end
   end
 
   get 'suggester/query'
   get 'suggester/place'
+  get 'suggester/place_from_poland'
 
   resources :tags, :only => [:create]
 

@@ -4,6 +4,7 @@ ActiveAdmin.register User do
   filter :id
   filter :email
   filter :created_at
+  filter :api_key
 
   index do
     column :id
@@ -22,6 +23,19 @@ ActiveAdmin.register User do
     end
 
     f.actions
+  end
+
+
+  member_action :generate_api_secret, :method => :put do
+    @user = User.find(params[:id])
+    @user.generate_api_secret!
+    @user.save
+
+    redirect_to admin_user_path(@user.id)
+  end
+
+  action_item :only => :show  do
+    link_to t('buttons.generate_api_secret'), generate_api_secret_admin_user_path(resource), :method => :put
   end
 
 

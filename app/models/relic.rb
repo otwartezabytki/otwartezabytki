@@ -45,6 +45,7 @@
 #
 ActiveSupport::Dependencies.depend_on 'relic/tire_extensions'
 class Relic < ActiveRecord::Base
+  include AASM
   States = ['checked', 'unchecked', 'filled']
   Existences = ['existed', 'archived', 'social']
 
@@ -60,12 +61,12 @@ class Relic < ActiveRecord::Base
   has_many :links, :order => 'position', :dependent => :destroy
   has_many :events, :order => 'position', :dependent => :destroy
 
-  attr_accessor :license_agreement, :polish_relic
+  attr_accessor :license_agreement, :polish_relic, :created_via_api
   attr_accessible :identification, :place_id, :dating_of_obj, :latitude, :longitude,
                   :street, :tags, :categories, :photos_attributes, :description,
                   :documents_attributes, :documents_info, :links_attributes, :links_info,
                   :events_attributes, :entries_attributes, :license_agreement, :polish_relic,
-                  :geocoded, :as => [:default, :admin]
+                  :geocoded, :build_state, :as => [:default, :admin]
 
   attr_accessible :ancestry, :materail, :register_number, :approved, :group, :as => :admin
 
@@ -78,8 +79,27 @@ class Relic < ActiveRecord::Base
   serialize :tags, Array
   serialize :categories, Array
 
+  aasm :column => :build_state do
+    state :create_step, :initial => true
+    state :address_step
+    state :details_step
+    state :photos_step
+    state :finish_step
+  end
+
   validates :identification, :presence => true, :if => :identification_changed?
   validates :place, :presence => true, :if => :polish_relic
+
+  # build step validations
+  with_options :if => :details_step? do |step|
+    step.validates :reason, :identification, :presence => true
+  end
+
+  with_options :if => :photos_step? do |step|
+    step.validates :description, :presence => true
+  end
+
+  validates :place, :identification, :description, :reason, :presence => true, :if => :created_via_api
 
   before_validation do
     if tags_changed? && tags.is_a?(Array)
@@ -160,7 +180,7 @@ class Relic < ActiveRecord::Base
       :street_normalized =>  { "type" => "string", "index" => "analyzed" },
       :untouched =>  { "type" => "string", "index" => "not_analyzed" }
     }
-
+    indexes :coordinates, :type => "geo_point"
     with_options :index => :not_analyzed do |na|
       na.indexes :id
       na.indexes :kind
@@ -223,11 +243,13 @@ class Relic < ActiveRecord::Base
       :existance        => Existences.sample,
       :country          => ['pl', 'de', 'gb'].sample,
       :tags             => ['wawel', 'zamek', 'zespół pałacowy', 'zamek królewski'].shuffle.first(rand(2) + 1).shuffle.first(rand(4) + 1),
-      :autocomplitions  => ['puchatka', 'szlachciatka', 'chata polska', 'chata mazurska', 'chata wielkopolska'].shuffle.first(rand(4) + 1)
+      :autocomplitions  => ['puchatka', 'szlachciatka', 'chata polska', 'chata mazurska', 'chata wielkopolska'].shuffle.first(rand(4) + 1),
+      # Lat Lon As Array Format in [lon, lat]
+      :coordinates       => [longitude, latitude]
     }.merge(dating_hash)
   end
 
-  def to_indexed_json
+  def to_indexed_hash
     dp = DateParser.new dating_of_obj
     dating_hash = Hash[[:from, :to, :has_round_date].zip(dp.results << dp.rounded?)]
     {
@@ -255,8 +277,14 @@ class Relic < ActiveRecord::Base
       :state                => state,
       :existance            => existance,
       :country              => country_code.downcase,
-      :tags                 => tags
-    }.merge(dating_hash).to_json
+      :tags                 => tags,
+      # Lat Lon As Array Format in [lon, lat]
+      :coordinates          => [longitude, latitude]
+    }.merge(dating_hash)
+  end
+
+  def to_indexed_json
+    to_indexed_hash.to_json
   end
 
   def to_descendant_hash
@@ -268,7 +296,7 @@ class Relic < ActiveRecord::Base
   end
 
   def street_normalized
-    street_normalized = street.split('/').first.to_s
+    street_normalized = street.to_s.split('/').first.to_s
     street_normalized.gsub!(/[\W\d]+$/i, '')
     street_normalized.gsub!(/\d+[a-z]?([i,\/\s]+)?\d+[a-z]$/i, '')
     street_normalized.strip!

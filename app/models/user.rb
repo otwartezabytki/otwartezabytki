@@ -23,6 +23,7 @@
 class User < ActiveRecord::Base
   has_many :suggestions
   has_many :seen_relics
+  has_many :widgets
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
@@ -59,6 +60,9 @@ class User < ActiveRecord::Base
       generated_password = [0..9, 'a'..'z', 'A'..'Z'].map(&:to_a).reduce(:+).sample(8).join
       self.password = generated_password
       self.password_confirmation = generated_password
+
+      # Generate API key
+      self.generate_api_key!
     end
 
   end
@@ -93,6 +97,14 @@ class User < ActiveRecord::Base
 
   def ability
     @ability ||= Ability.new(self)
+  end
+
+  def generate_api_key!
+    self.api_key = Devise.friendly_token
+  end
+
+  def generate_api_secret!
+    self.api_secret = Devise.friendly_token
   end
 
   class << self

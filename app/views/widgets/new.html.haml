@@ -1,0 +1,8 @@
+widgets/new
+= template.name
+
+= semantic_form_for @widget, :url => widgets_path(:template => template.id) do |f|
+  = semantic_fields_for :config, @widget.config do |form|
+    = render :partial => template.partial_name, :locals => {:form => form}
+
+  = f.submit

@@ -8,6 +8,6 @@
       = f.input :file, :as => :file
       = f.input :description, :as => :text, :input_html => { :value => params[:description] }
       .actions
-        = f.submit "dodaj alert"
+        = f.submit "zgłoś alert"
         lub
         = link_to 'anuluj', relic_path(relic.id), :remote => true

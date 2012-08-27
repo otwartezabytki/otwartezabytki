@@ -24,6 +24,10 @@ ActiveAdmin.register Version, :sort_order => 'id_desc' do
       end
     end
 
+    column 'Zródło' do |e|
+      e.source
+    end
+
     column 'Akcja' do |e|
       t("version.event." + e.event)
     end

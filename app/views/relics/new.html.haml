@@ -1,0 +1,85 @@
+#fancybox
+.edit_relic.new_relic
+  = render :partial => "relics/build/stages", :locals => { :stage => 1 }
+  .creator
+    %section.main
+      %section.creator-step
+        %aside
+          %h3
+            Jaka jest różnica między
+            %br
+            %span zabytkiem
+            a
+            = succeed '?' do
+              %span zespołem zabytków
+          %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque suscipit malesuada ipsum, non vehicula nunc mollis ut. Duis nisl lorem, volutpat in tincidunt vel, volutpat in tellus.
+          %p= link_to 'Chcę jednak dodać zespół zabytków', '#', :clas => 'footlink'
+        %p.intro
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras convallis luctus malesuada. Pellentesque purus augue, facilisis id hendrerit et, tincidunt a mauris.
+        %p.intro
+          Vivamus vestibulum semper odio, nec volutpat sapien egestas ut. Nam iaculis dapibus eros convallis mollis. Nullam non ligula ut leo porta venenatis sed in nibh.
+      %section.creator-step
+        = form_tag new_relic_path, :method => :get, :remote => true do
+          .field.checkbox
+            %input{:type => 'checkbox', :name => 'foreign_relic'}
+            %label chcę dodać zabytek spoza Polski
+          .field.text.search.marker
+            %label.main Miejscowość
+            %input{:type => 'text', :name => 'q', :value => params[:q]}
+            %input{:type => 'submit', :value => "Szukaj &raquo;".html_safe, :class => 'btn'}
+      - if defined? @places
+        - if @places.blank?
+          brak wyników
+        - else
+          %section.creator-step
+            %h3 O którą miejscowość Ci chodziło?
+            .places-wrapper
+              %ul.places
+                - @places.each do |place|
+                  %li
+                    = (place.location_names.first(place.location_names.size - 1) << "<strong>#{place.name}</strong>").join(' > ').html_safe
+                    = link_to "wybieram &raquo;".html_safe, 'javascript: void(0);', 'data-location-names' => place.location_names.join(';'), 'data-location' => place.location_string
+      %section.creator-step.location
+        = semantic_form_for relic, :url => build_area_relics_path, :method => :get, :remote => true do |f|
+          .column
+            .foreign-location{ :style => (relic.polish_relic ? "display: none;" : "") }
+              = f.input :country_code, :as => :select, :include_blank => false, :default => "PL",
+                :collection => I18nCountrySelect::Countries::COUNTRY_CODES.map{|code| [I18n.t(code, :scope => :countries), code]}.sort_alphabetical_by(&:first)
+              = f.input :fprovince
+              = f.input :fplace
+            -# = f.input :street
+            .actions{:style => 'display:none;'}
+              = f.submit 'Przejdź dalej &raquo;'.html_safe
+
+          .column
+            #map_canvas{ :style => "width: 309px; height: 309px;" }
+
+          .column
+            .marker-helper
+              %h4
+                Przeciągnij
+                %br
+                znacznik na mapę:
+              .marker-holder
+                = image_tag 'marker.png', :id => 'marker'
+            = f.hidden_field :latitude
+            = f.hidden_field :longitude
+            = f.hidden_field :geocoded
+
+
+      -# %section.creator-step
+      -#   %h3 Zaznacz obiekt na mapie
+      -#   .map-wrapper
+      -#     #map_canvas{ :style => "width: 515px; height: 380px;" }
+      -#       = image_tag "ph-map.png"
+      -#     .marker-helper
+      -#       %h4
+      -#         Przeciągnij
+      -#         %br
+      -#         znacznik na mapę:
+      -#       .marker-holder
+      -#         = image_tag 'marker.png', :id => 'marker'
+
+      -# = link_to relic_path, :class => 'next-step' do
+      -#   %strong Przejdź dalej &raquo;
+      -#   %small Krok 2

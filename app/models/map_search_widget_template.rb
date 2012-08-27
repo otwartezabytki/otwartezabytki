@@ -1,0 +1,4 @@
+class MapSearchWidgetTemplate < WidgetTemplate
+
+
+end

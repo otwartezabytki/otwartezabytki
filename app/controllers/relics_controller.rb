@@ -88,6 +88,19 @@ class RelicsController < ApplicationController
   end
 
   def new
+    if params[:q].present?
+      pq = PreparedQuery.new(params[:q])
+      @places = if pq.exists?
+        Place.where(["LOWER(name) LIKE ?", "#{pq.clean.downcase}"])
+      else
+        []
+      end
+    end
+  end
+
+  def create
+    @relic = Relic.create(params[:relic])
+    redirect_to relic_build_path(@relic, :address)
   end
 
   def download_zip

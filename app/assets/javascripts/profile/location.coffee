@@ -25,7 +25,7 @@ geocode_location = (callback) ->
       if result.length > 0
         callback(result[0].latitude.round(7), result[0].longitude.round(7))
     , 'json'
-    
+
 $.fn.specialize
 
   '#map_canvas':
@@ -98,22 +98,31 @@ $.fn.specialize
 window.google_maps_loaded = ->
   window.is_google_maps_loaded = true
   window.loadGMaps() if not GMaps
-  do google_maps_loaded_callback if google_maps_loaded_callback
+  do window.google_maps_loaded_callback if window.google_maps_loaded_callback
 
-google_maps_loaded_callback = null
+window.google_maps_loaded_callback = null
 
-load_google_maps = ->
+window.load_google_maps = ->
   script = document.createElement("script")
   script.type = "text/javascript"
   script.src = "http://maps.googleapis.com/maps/api/js?key=#{window.google_maps_key}&sensor=false&callback=google_maps_loaded"
   document.body.appendChild(script)
 
-ensuring_google_maps_loaded = (callback) ->
+window.ensuring_google_maps_loaded = (callback) ->
   if window.is_google_maps_loaded
     do callback
   else
-    google_maps_loaded_callback = callback
-    do load_google_maps
+    window.google_maps_loaded_callback = callback
+    do window.load_google_maps
+
+window.ensure_geolocation = ->
+  $('#relic_latitude').val 52.4118436
+  $('#relic_longitude').val 19.0984013
+  try
+    navigator.geolocation.getCurrentPosition (pos) ->
+      $('#relic_latitude').val pos.coords.latitude
+      $('#relic_longitude').val pos.coords.longitude
+      $('#map_canvas').auto_zoom()
 
 jQuery.initializer 'section.edit.location', ->
   $('#relic_place_id').select2()
@@ -125,7 +134,8 @@ jQuery.initializer 'section.edit.location', ->
       $('.polish-location').hide()
       $('.foreign-location').show()
 
-  ensuring_google_maps_loaded ->
+  window.ensuring_google_maps_loaded ->
+    window.ensure_geolocation
     $('#marker').draggable
       revert: true
 
