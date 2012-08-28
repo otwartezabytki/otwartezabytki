@@ -35,7 +35,7 @@ class DateParser
 
   def get_arabic_date s
     return nil if s.blank?
-    if s.match /^.*?(\d+)/
+    if s.match /^.*?(\d{4}).*?$/
       # przed 1986, 1964
       [$1, $1]
     elsif s.match /(\d).*?[cć]w.*?([IVX]+)/
@@ -50,7 +50,7 @@ class DateParser
       century = parse_century($2)
       a_end = century + (half * 50)
       [a_end - 50, a_end]
-    elsif s.match /kon.*?([IVX]+)/
+    elsif s.match(/kon.*?([IVX]+)/) || s.match(/k\.?\s+([IVX]+)/)
       # kon. XIX
       century = ((Arrabiata.to_arabic($1)) * 100) + 1
       [century - 25, century]
@@ -59,6 +59,7 @@ class DateParser
       century = parse_century($1)
       [century, century + 25]
     elsif s.match /.*?([IVX]+)/
+      # XV/XVI
       centuries = s.scan(/.*?([IVX]+)/).flatten
       if centuries.size == 1
         a_start = parse_century(centuries.first)
