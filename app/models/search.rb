@@ -3,7 +3,7 @@ class Search
   include ActiveModel::Conversion
   extend ActiveModel::Naming
 
-  attr_accessor :q, :place, :from, :to, :categories, :state, :existance, :location, :order, :lat, :lon, :load
+  attr_accessor :q, :place, :from, :to, :categories, :state, :existance, :location, :order, :lat, :lon, :bounding_box, :load
   attr_accessor :conditions, :range_conditions, :per_page, :page, :has_photos, :has_description
 
   def initialize(attributes = {})
@@ -32,6 +32,12 @@ class Search
       return [] if instance_variable_get("@#{name}").blank?
       instance_variable_get("@#{name}").reject!(&:blank?)
       instance_variable_get("@#{name}")
+    end
+  end
+
+  def bounding_box?
+    if @bounding_box.present?
+      @top_left, @bottom_right = @bounding_box.split('|')
     end
   end
 
@@ -165,6 +171,16 @@ class Search
         'geo_distance' => {
           'distance' => '0.2km',
           'coordinates' => [@lon, @lat]
+        }
+      }
+    end
+    if bounding_box?
+      terms_cond << {
+        'geo_bounding_box' => {
+          'coordinates' => {
+            "top_left" => @top_left,
+            "bottom_right" => @bottom_right
+          }
         }
       }
     end
