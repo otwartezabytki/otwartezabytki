@@ -7,11 +7,11 @@
 #  user_id    :integer
 #  name       :string(255)
 #  date       :string(255)
-#  date_start :date
-#  date_end   :date
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  position   :integer
+#  date_start :integer
+#  date_end   :integer
 #
 
 class Event < ActiveRecord::Base
@@ -28,4 +28,17 @@ class Event < ActiveRecord::Base
   include CanCan::Authorization
 
   has_paper_trail :skip => [:created_at, :updated_at]
+
+  before_validation :parse_date
+  validate :date_must_be_parsed, :if => :date_changed?
+
+  def date_must_be_parsed
+    if date_start.blank? || date_end.blank?
+      errors.add(:date, I18n.t("errors.messages.date_must_be_parsed"))
+    end
+  end
+
+  def parse_date
+    self.date_start, self.date_end = DateParser.new(date).results
+  end
 end

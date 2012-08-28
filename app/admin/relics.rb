@@ -23,6 +23,7 @@ ActiveAdmin.register Relic do
 
   form do |f|
     f.inputs do
+      f.input :parent_id, :as => :string, :label => "ID zespołu zabytków"
       f.input :identification, :as => :string
       f.input :description
       f.input :place_id
@@ -35,7 +36,6 @@ ActiveAdmin.register Relic do
       f.input :nid_id
       f.input :latitude
       f.input :longitude
-      f.input :ancestry
       f.input :kind
       f.input :approved
       f.input :categories, :as => :check_boxes,

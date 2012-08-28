@@ -2,12 +2,12 @@
 class DateParser
 
   class << self
-    def round_range from, to
+    def round_range(from, to)
       [ (from.to_i - 1) / 25 * 25 + 1, (to.to_i / 25.0).ceil * 25 + 1 ]
     end
   end
 
-  def initialize string = nil
+  def initialize(string = nil)
     @string = string.to_s
   end
 

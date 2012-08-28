@@ -13,6 +13,7 @@ class Ability
       can :manage, Document
       can :manage, Photo
       can :manage, Entry
+      can :manage, Alert
 
       can :index, Version
       can :show, Version

@@ -28,7 +28,8 @@
         %p= relic.latitude.round(6).to_s + ", " + relic.longitude.round(6).to_s
         %p.close= link_to "zamknij", "#", :class => "close_popover", :"data-popover-id" => "relic_location_popover"
       %script(type="text/html" id="location_body")
-        %img{ src: "http://maps.googleapis.com/maps/api/staticmap?center=#{relic.latitude.to_f},#{relic.longitude.to_f}&zoom=17&size=260x160&sensor=false&markers=#{relic.latitude.to_f},#{relic.longitude.to_f}&maptype=hybrid", width: 260, height: 160 }
+        = link_to "https://maps.google.com/?q=#{relic.latitude.to_f},#{relic.longitude.to_f}&t=h", :target => :_blank do
+          %img{ src: "http://maps.googleapis.com/maps/api/staticmap?center=#{relic.latitude.to_f},#{relic.longitude.to_f}&zoom=17&size=260x160&sensor=false&markers=#{relic.latitude.to_f},#{relic.longitude.to_f}&maptype=hybrid", width: 260, height: 160 }
   .dating
     - if relic.dating_of_obj.present?
       = link_to 'edytuj', edit_section_relic_path(relic.id, :events), :title => 'edytuj datowanie zabytku', :remote => true, :class => "edit-relic-link"

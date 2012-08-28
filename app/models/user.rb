@@ -18,6 +18,8 @@
 #  role                   :string(255)      default("user")
 #  username               :string(255)
 #  seen_relic_order       :string(255)      default("asc")
+#  api_key                :string(255)
+#  api_secret             :string(255)
 #
 
 class User < ActiveRecord::Base

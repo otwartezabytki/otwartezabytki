@@ -10,7 +10,7 @@
         = f.input :dating_of_obj, :label => false, :hint => false
         .name Data powstania
     %ol.sortable{ :start => "2" }
-      - relic.events.sort_by{ |e| e.position || 1000 }.each do |event|
+      - relic.events.each do |event|
         = f.semantic_fields_for :events, event do |f2|
           = content_tag_for :li, event, :style => (event.marked_for_destruction? ? "display: none" : "") do
             = f2.input :date, :label => false, :hint => false, :class => "date"
@@ -18,7 +18,6 @@
             = f2.hidden_field :position, :class => "event-position"
             = f2.hidden_field :_destroy
             = link_to 'usuń', '#', :class => "remove_event"
-            %span.arrow
 
       %script{ :type => "text/html", :id => "event_template", :"data-next-id" => relic.events.length }
         = f.semantic_fields_for :events, relic.events.build do |f2|
@@ -28,11 +27,10 @@
             = f2.hidden_field :position, :class => "event-position"
             = f2.hidden_field :_destroy
             = link_to 'usuń', '#', :class => "remove_event"
-            %span.arrow
 
     .add-event
       = link_to 'Dodaj kolejne wydarzenie...', '#', :class => "add_event", :"data-template" => "#event_template"
     .actions
       = f.submit 'zapisz zmiany'
       lub
-      = link_to "anuluj", relic_path(relic.id), :remote => true
+      = link_to "anuluj", relic_path(relic.id), :remote => true, :class => "cancel"

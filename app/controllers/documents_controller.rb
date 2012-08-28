@@ -15,7 +15,11 @@ class DocumentsController < ApplicationController
   def create
     authorize! :create, document
     document.user = current_user
-    document.save
+
+    unless document.save
+      flash[:error] = document.errors.first.last
+    end
+
     redirect_to edit_section_relic_path(relic.id, :documents)
   end
 

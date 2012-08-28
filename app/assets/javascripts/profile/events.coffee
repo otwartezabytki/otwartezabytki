@@ -18,9 +18,3 @@ jQuery.initializer 'section.edit.events', ->
       $(this).parents('.event:first').hide()
       $(this).parents('.event:first').find('input[name*="_destroy"]').val("1")
     false
-
-  $(this).find('ol.sortable').sortable
-    axis: 'y'
-    update: ->
-      $section.find('.event-position').each (index) ->
-        $(this).val(index + 1)

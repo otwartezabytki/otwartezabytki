@@ -12,8 +12,8 @@ class DocumentUploader < CarrierWave::Uploader::Base
     "#{Rails.root}/tmp/uploads/documents"
   end
 
-  def extension_black_list
-    %w(exe jar)
+  def extension_white_list
+    %w(pdf jpg jpeg png tiff)
   end
 
   def remove!

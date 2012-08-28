@@ -18,6 +18,7 @@ class Alert < ActiveRecord::Base
   belongs_to :user
 
   attr_accessible :relic_id, :user_id, :file, :description
+  attr_accessible :state, :as => :admin
 
   validates :description, :presence => true
 
@@ -25,4 +26,8 @@ class Alert < ActiveRecord::Base
   scope :not_fixed, where("state != ? or state is null", "fixed")
 
   mount_uploader :file, AlertUploader
+
+  def state
+    self[:state] || "new"
+  end
 end

@@ -26,8 +26,6 @@
 #  voivodeship_id  :integer
 #  register_date   :date
 #  date_norm       :string(255)
-#  date_start      :string(255)
-#  date_end        :string(255)
 #  kind            :string(255)
 #  approved        :boolean          default(FALSE)
 #  categories      :string(255)
@@ -42,6 +40,11 @@
 #  documents_info  :text
 #  links_info      :text
 #  user_id         :integer
+#  geocoded        :boolean
+#  build_state     :string(255)
+#  reason          :text
+#  date_start      :integer
+#  date_end        :integer
 #
 ActiveSupport::Dependencies.depend_on 'relic/tire_extensions'
 class Relic < ActiveRecord::Base
@@ -59,14 +62,14 @@ class Relic < ActiveRecord::Base
   has_many :alerts, :dependent => :destroy
   has_many :entries, :dependent => :destroy
   has_many :links, :order => 'position', :dependent => :destroy
-  has_many :events, :order => 'position', :dependent => :destroy
+  has_many :events, :order => 'date_start', :dependent => :destroy
 
   attr_accessor :license_agreement, :polish_relic, :created_via_api
   attr_accessible :identification, :place_id, :dating_of_obj, :latitude, :longitude,
                   :street, :tags, :categories, :photos_attributes, :description,
                   :documents_attributes, :documents_info, :links_attributes, :links_info,
                   :events_attributes, :entries_attributes, :license_agreement, :polish_relic,
-                  :geocoded, :build_state, :as => [:default, :admin]
+                  :geocoded, :build_state, :parent_id, :as => [:default, :admin]
 
   attr_accessible :ancestry, :materail, :register_number, :approved, :group, :as => :admin
 
@@ -89,6 +92,15 @@ class Relic < ActiveRecord::Base
 
   validates :identification, :presence => true, :if => :identification_changed?
   validates :place, :presence => true, :if => :polish_relic
+
+  before_validation :parse_date
+  validate :date_must_be_parsed, :if => :dating_of_obj_changed?
+
+  def date_must_be_parsed
+    if date_start.blank? || date_end.blank?
+      errors.add(:dating_of_obj, I18n.t("errors.messages.date_must_be_parsed"))
+    end
+  end
 
   # build step validations
   with_options :if => :details_step? do |step|
@@ -366,7 +378,7 @@ class Relic < ActiveRecord::Base
   end
 
   def all_documents
-    Document.where(:relic_id => [id] + descendant_ids).order("relic_id ASC, position ASC")
+    Document.where(:relic_id => [id] + descendant_ids).order("relic_id ASC")
   end
 
   def all_links
@@ -374,7 +386,7 @@ class Relic < ActiveRecord::Base
   end
 
   def all_events
-    Event.where(:relic_id => [id] + descendant_ids).order("relic_id ASC, position ASC")
+    Event.where(:relic_id => [id] + descendant_ids).order("date_start ASC")
   end
 
   def state
@@ -407,5 +419,17 @@ class Relic < ActiveRecord::Base
 
   def place_with_address
     "#{place_full_name}, #{street_normalized}"
+  end
+
+  def parse_date
+    self.date_start, self.date_end = DateParser.new(dating_of_obj).results
+  end
+
+  def parent_id=(value)
+    if value.present?
+      self.parent = Relic.find(value)
+    else
+      self.parent = nil
+    end
   end
 end

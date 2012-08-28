@@ -7,9 +7,16 @@
         %ul
           - relic.all_events.each do |event|
             %li
-              %strong= event.date
-              \-
-              = event.name
+              - if event.relic_id == relic.id
+                %strong= event.date
+                \-
+                = event.name
+              - else
+                %strong
+                  %span<>= link_to event.relic.identification, relic_path(event.relic.id)
+                  %span<>= ", #{event.date}"
+                \-
+                = event.name
   - else
     .placeholder
       %p

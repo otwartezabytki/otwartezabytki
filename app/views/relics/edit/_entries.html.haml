@@ -6,7 +6,7 @@
     .actions
       = f.submit 'dodaj i zapisz'
       lub
-      = link_to "anuluj", relic_path(relic.id), :remote => true
+      = link_to "anuluj", relic_path(relic.id), :remote => true, :class => "cancel"
 .row.entries-showcase{ :"data-replace" => (!params[:entry_id].nil? ? ".entries-showcase" : "#nonexistent") }
   - relic.entries.select{ |e| !e.new_record? }.sort_by(&:id).each do |entry|
     - if params[:entry_id].to_i == entry.id
@@ -17,7 +17,7 @@
           = f.submit 'zapisz'
           = link_to 'usuń', relic_entry_path(relic.id, entry.id), :method => :delete, :remote => true
           lub
-          = link_to 'anuluj', edit_section_relic_path(relic.id, :section => :entries, :entry_id => 0), :remote => true
+          = link_to 'anuluj', edit_section_relic_path(relic.id, :section => :entries, :entry_id => 0), :remote => true, :class => "cancel"
     - else
       = content_tag_for :article, entry do
         %h3= entry.title
