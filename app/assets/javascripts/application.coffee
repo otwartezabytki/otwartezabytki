@@ -103,4 +103,5 @@ jQuery.initializer 'div.new_relic section.main', ->
 #       callback(result[0].latitude.round(7), result[0].longitude.round(7))
 #   , 'json'
 
-
+$('.flash-info-permament .close').click ->
+  $(".flash-info-permament").slideUp()

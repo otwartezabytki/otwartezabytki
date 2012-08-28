@@ -179,16 +179,11 @@ Version: 3.0 Timestamp: Tue Jul 31 21:09:16 PDT 2012
 }
 
 .select2-search input {
-    background: #fff image-url('select2.png') no-repeat 100% -22px;
-    background: image-url('select2.png') no-repeat 100% -22px, -webkit-gradient(linear, left bottom, left top, color-stop(0.85, white), color-stop(0.99, #eeeeee));
-    background: image-url('select2.png') no-repeat 100% -22px, -webkit-linear-gradient(center bottom, white 85%, #eeeeee 99%);
-    background: image-url('select2.png') no-repeat 100% -22px, -moz-linear-gradient(center bottom, white 85%, #eeeeee 99%);
-    background: image-url('select2.png') no-repeat 100% -22px, -o-linear-gradient(bottom, white 85%, #eeeeee 99%);
-    background: image-url('select2.png') no-repeat 100% -22px, -ms-linear-gradient(top, #ffffff 85%, #eeeeee 99%);
-    background: image-url('select2.png') no-repeat 100% -22px, linear-gradient(top, #ffffff 85%, #eeeeee 99%);
-    padding: 4px 20px 4px 5px;
+    background: image-url('select2.png') no-repeat 100% -22px;
+    padding: 4px 20px 4px 12px;
     outline: 0;
-    border: 1px solid #aaa;
+    border: 0;
+    color: #fff;
     font-family: sans-serif;
     font-size: 1em;
     width:100%;
@@ -325,8 +320,20 @@ Version: 3.0 Timestamp: Tue Jul 31 21:09:16 PDT 2012
   background: transparent;
 }
 .select2-results .select2-no-results {
-  background: #f4f4f4;
+  background: #3875d7;
+  color: #fff;
+  background-color: #436373;
+  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #4d7184), color-stop(0.5, #436373));
+  background-image: -webkit-linear-gradient(center bottom, #4d7184 0%, #436373 50%);
+  background-image: -moz-linear-gradient(center bottom, #4d7184 0%, #436373 50%);
+  background-image: -o-linear-gradient(bottom, #4d7184 0%, #436373 50%);
+  background-image: -ms-linear-gradient(top, #4d7184 0%,#436373 50%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4d7184', endColorstr='#436373',GradientType=0 );
+  background-image: linear-gradient(top, #4d7184 0%,#436373 50%);
+  font-style: italic;
   display: list-item;
+  padding: 6px 15px;
+  margin: 0;
 }
 
 .select2-results .select2-selection-limit {
