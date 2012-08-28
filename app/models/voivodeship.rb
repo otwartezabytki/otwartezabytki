@@ -11,6 +11,7 @@
 
 # -*- encoding : utf-8 -*-
 class Voivodeship < ActiveRecord::Base
+  include GeocodeViewport
   attr_accessible :id, :name, :nr
   has_many :districts, :dependent => :destroy
   has_many :communes, :through => :districts
@@ -18,4 +19,8 @@ class Voivodeship < ActiveRecord::Base
   has_many :relics, :through => :places
 
   validates :name, :presence => true
+
+  def address
+    ['Polska', name].join(', ')
+  end
 end

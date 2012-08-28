@@ -15,11 +15,10 @@
 
 # -*- encoding : utf-8 -*-
 class Place < ActiveRecord::Base
+  include GeocodeViewport
   attr_accessible :id, :name, :commune_id, :sym, :from_teryt
   belongs_to :commune
   has_many :relics, :dependent => :destroy
-
-  geocoded_by :address
 
   validates :name, :presence => true
 
@@ -39,7 +38,7 @@ class Place < ActiveRecord::Base
   end
 
   def address
-    location_names.join(', ')
+    location_names.unshift('Polska').join(', ')
   end
 
   def conditional_geocode!

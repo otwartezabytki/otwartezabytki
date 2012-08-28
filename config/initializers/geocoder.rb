@@ -13,6 +13,9 @@ Geocoder.configure do |config|
   # set default units to kilometers:
   config.units = :km
 
+  # language
+  config.language = :pl
+
   # caching (see below for details):
   # config.cache = Dalli::Client.new  unless ['test', 'development'].include?(Rails.env)
 

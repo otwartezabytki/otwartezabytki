@@ -12,10 +12,15 @@
 
 # -*- encoding : utf-8 -*-
 class District < ActiveRecord::Base
+  include GeocodeViewport
   attr_accessible :id, :name, :voivodeship_id, :nr
   belongs_to :voivodeship
   has_many :communes, :dependent => :destroy
   has_many :places, :through => :communes
 
   validates :name, :presence => true
+
+  def address
+    ['Polska', voivodeship.name, name].join(', ')
+  end
 end

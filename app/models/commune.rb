@@ -13,10 +13,14 @@
 
 # -*- encoding : utf-8 -*-
 class Commune < ActiveRecord::Base
+  include GeocodeViewport
   attr_accessible :id, :name, :district_id, :nr, :kind
   belongs_to :district
   has_many :places, :dependent => :destroy
 
   validates :name, :presence => true
 
+  def address
+    ['Polska', district.voivodeship.name, district.name, name].join(', ')
+  end
 end
