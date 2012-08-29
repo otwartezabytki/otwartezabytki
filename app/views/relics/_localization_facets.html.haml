@@ -25,6 +25,6 @@
     %li
       = link_to_facet ({'term' => 'Poza polską_world', 'count' => relics.count('world')}), 0 do
         %ul
-          - relics.terms('countires', true).each do |obj|
+          - relics.terms('countries', true).each do |obj|
             %li
               = link_to_facet obj, 1

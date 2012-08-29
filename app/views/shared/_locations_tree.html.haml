@@ -1,0 +1,8 @@
+- node.each do |facet, subfacets|
+  = content_tag :li do
+    = link_to widget_path(widget.id, :search => modify_search_params(params[:search], :"#{facet.class.name.underscore}_id" => facet.id, :zoom => facet.default_zoom)) do
+      %span.facet_name= facet.name
+      %span.relic_count= facet.facet_count
+    - if subfacets && subfacets.length > 0
+      = content_tag :ul do
+        = render 'shared/locations_tree', :node => subfacets

@@ -1,6 +1,18 @@
-.sidebar
-  %pre
-    = JSON.pretty_generate(widget_search_results.facets)
+.sidebar{ :"data-replace" => ".sidebar" }
+  %h1.logo OtwarteZabytki
+  = semantic_form_for widget_search, :url => widget_path(widget.uid), :method => :get do |f|
+    = f.hidden_field :zoom, :value => params[:search][:zoom] || 5
+    %section.search
+      %h2
+        Wyszukaj
+        = link_to '?', '#', :class => "tooltip", :"data-placement" => "right", :title => "To jest podpowiedź do pola wyszukiwania."
+      = f.input :q, :label => false, :input_html => { :class => 'autocomplete-q'}
+    %section.locations
+      %h2
+        Lokalizacje
+        = link_to '?', '#', :class => "tooltip", :"data-placement" => "right", :title => "To jest podpowiedź do pola lokalizacje."
+      %ul
+        = render 'shared/locations_tree', :node => widget_search_results.widget_facets_tree
 .map
 
 :javascript
