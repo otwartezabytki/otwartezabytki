@@ -29,7 +29,7 @@ class WidgetsController < ApplicationController
     Search.new(params[:search])
   end
 
-  expose(:widget_search_results) do
+  expose(:relics) do
     widget_search.perform
   end
 
