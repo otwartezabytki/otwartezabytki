@@ -783,13 +783,13 @@ div.relic {
       @include text-shadow(rgba(0,0,0,0.3) 0 1px 1px);
       @include box-shadow(inset rgba(0,0,0,0.4) 0 1px 3px);
       &.done{
-        @include background(linear-gradient(#90b86e, #afd78c));
+        @include background(linear-gradient(#82a663, #a1c481));
       }
       &.undone{
-        @include background(linear-gradient(#e0a876, #fec695));
+        @include background(linear-gradient(#ca7a32, #fbab63));
       }
       &.unchecked{
-        @include background(linear-gradient(#a3a4a6, #c1c3c5));
+        @include background(linear-gradient(#7d7f7f, #9c9d9d));
       }
     }
   }
