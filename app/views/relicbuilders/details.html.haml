@@ -7,7 +7,8 @@
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras convallis luctus malesuada. Pellentesque purus augue, facilisis id hendrerit et, tincidunt a mauris.
         %p.intro
           Vivamus vestibulum semper odio, nec volutpat sapien egestas ut. Nam iaculis dapibus eros convallis mollis. Nullam non ligula ut leo porta venenatis sed in nibh.
-      = semantic_form_for relic, :url => relic_build_path(relic) do |f|
+      = semantic_form_for @relic, :url => relicbuilder_path(:id => @relic) do |f|
+        = f.input :build_state, :as => :hidden
         = f.input :identification, :as => :string, :label => 'Nazwa'
         = f.input :reason, :input_html => { :class => 'redactor' }, :label => 'Uzasadnienie'
         .actions

@@ -8,9 +8,10 @@
         %p.intro
           Vivamus vestibulum semper odio, nec volutpat sapien egestas ut. Nam iaculis dapibus eros convallis mollis. Nullam non ligula ut leo porta venenatis sed in nibh.
       %section.edit.photos
-        = semantic_form_for relic, :url => relic_build_path(relic), :html => { :multipart => true }  do |f|
+        = semantic_form_for @relic, :url => relicbuilder_path(:id => @relic), :html => { :multipart => true }, :method => :put  do |f|
+          = f.input :build_state, :as => :hidden
           = f.input :description, :input_html => { :class => 'redactor' }
-          - relic.photos.each do |photo|
+          - @relic.photos.each do |photo|
             - if photo.user_id == current_user.id
               = f.semantic_fields_for :photos, photo do |f2|
                 .photo
@@ -18,7 +19,7 @@
                     .preview
                       = image_tag photo.file.midi.url
                     - if photo.user_id == current_user.id
-                      = link_to 'usuń zdjęcie', relic_photo_path(relic.id, photo.id, :build => true),
+                      = link_to 'usuń zdjęcie', relic_photo_path(@relic.id, photo.id, :build => true),
                         :method => :delete,
                         :remote => true,
                         :confirm => "Czy aby na pewno?",
@@ -50,7 +51,7 @@
                   .value 0%
 
           .photo-upload
-            = file_field_tag "photo[file]", :class => 'photo_upload', :"data-url" => "#{relic_photos_path(relic, :build => true)}"
+            = file_field_tag "photo[file]", :class => 'photo_upload', :"data-url" => "#{relic_photos_path(@relic, :build => true)}"
 
           = f.input :license_agreement, :input_html => { :checked => 'checked' }, :as => :boolean, :label => "Oświadczam, że posiadam prawa do publikowania na stronie OtwarteZabytki.pl dodane powyżej zdjęcia."
 
