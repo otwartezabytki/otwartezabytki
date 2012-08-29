@@ -1796,3 +1796,9 @@ section.edit .flash {
     height: 24px;
   }
 }
+
+#relics .search-no-results{
+  background: #fff;
+  position: relative;
+  z-index: 11;
+}

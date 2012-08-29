@@ -1,7 +1,7 @@
 .sidebar{ :"data-replace" => ".sidebar" }
   %h1.logo OtwarteZabytki
   = semantic_form_for widget_search, :url => widget_path(widget.uid), :method => :get do |f|
-    = f.hidden_field :zoom, :value => params[:search][:zoom] || 5
+    = f.hidden_field :zoom, :value => params[:search].try(:[], :zoom) || 5
     %section.search
       %h2
         Wyszukaj
@@ -11,10 +11,13 @@
       %h2
         Lokalizacje
         = link_to '?', '#', :class => "tooltip", :"data-placement" => "right", :title => "To jest podpowiedź do pola lokalizacje."
-      %ul
-        = render 'shared/locations_tree', :node => relics.widget_facets_tree
+      - if relics.widget_facets_tree
+        %ul
+          = render 'shared/locations_tree', :node => relics.widget_facets_tree
     %section.categories
-      %h2 Kategorie
+      %h2
+        Kategorie
+        = link_to '?', '#', :class => "tooltip", :"data-placement" => "right", :title => "To jest podpowiedź do kategorii."
       = f.input :categories, :as => :check_boxes, :collection => categoires_facets, :disabled => disabled(f.object, 'categories'), :label => 'Kategorie', :label => false
 .map
 
