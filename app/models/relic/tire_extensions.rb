@@ -39,6 +39,31 @@ module Tire
           super
         end
       end
+
+      def widget_facets(name)
+        terms(name, true, true).map do |result|
+          result["obj"].tap { |o| o.facet_count = result["count"] }
+        end
+      end
+
+      def widget_facets_tree
+        levels = ["communes", "districts", "voivodeships", "countries", nil]
+        facets = levels.each_cons(2).to_a.find { |pair| self.facets.keys.include?(pair.first) }.reverse.compact
+
+        first_level = widget_facets(facets.first || facets.second)
+        result = Hash[first_level.map{ |first| [first, []] }]
+
+        if facets.last
+          second_level = widget_facets(facets.last)
+          second_level.each do |second|
+            if obj = first_level.find{ |first| first.id == second.parent_id }
+              result[obj].push(second)
+            end
+          end
+        end
+
+        result
+      end
     end
   end
 end

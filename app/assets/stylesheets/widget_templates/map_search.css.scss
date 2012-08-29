@@ -1,1 +1,8 @@
 body { background-color: #ffb6c1; }
+
+div.tooltip {
+  position: absolute;
+  padding: 5px;
+  background-color: black;
+  color: white;
+}

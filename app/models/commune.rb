@@ -20,7 +20,17 @@ class Commune < ActiveRecord::Base
 
   validates :name, :presence => true
 
+  attr_accessor :facet_count
+
   def address
     ['Polska', district.voivodeship.name, district.name, name].join(', ')
+  end
+
+  def parent_id
+    district_id
+  end
+
+  def default_zoom
+    10
   end
 end

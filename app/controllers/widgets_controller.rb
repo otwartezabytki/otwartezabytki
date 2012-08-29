@@ -25,8 +25,12 @@ class WidgetsController < ApplicationController
     the_widget
   end
 
-  expose(:widget_search_results) do
-    Search.new(params[:search]).perform_widget_search
+  expose(:widget_search) do
+    Search.new(params[:search])
+  end
+
+  expose(:relics) do
+    widget_search.perform
   end
 
   def show
