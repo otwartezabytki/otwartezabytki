@@ -9,7 +9,7 @@
           Vivamus vestibulum semper odio, nec volutpat sapien egestas ut. Nam iaculis dapibus eros convallis mollis. Nullam non ligula ut leo porta venenatis sed in nibh.
       %section.edit.photos
         = semantic_form_for @relic, :url => relicbuilder_path(:id => @relic), :html => { :multipart => true }, :method => :put  do |f|
-          = f.input :build_state
+          = f.input :build_state, :as => :hidden
           = f.input :description, :input_html => { :class => 'redactor' }
           - @relic.photos.each do |photo|
             - if photo.user_id == current_user.id
