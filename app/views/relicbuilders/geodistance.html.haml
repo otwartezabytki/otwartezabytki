@@ -29,8 +29,4 @@
           %span.choose
             %strong To jest ten zabytek!
             = link_to 'Chcę go uzupełnić &raquo;'.html_safe, r
-  = semantic_form_for Relic.new(params[:relic]) do |f|
-    = f.input :latitude
-    = f.input :longitude
-    = f.input :place_id
-    = f.action :submit, :button_html => { :value => 'Nie ma go na liście &raquo;'.html_safe, :class => 'not-found' }
+  = link_to 'Nie ma go na liście &raquo;'.html_safe, address_relicbuilder_path(params[:relic].slice(:latitude, :longitude, :place_id)), :class => 'not-found'

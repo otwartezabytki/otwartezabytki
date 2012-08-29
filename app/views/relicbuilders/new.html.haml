@@ -1,6 +1,6 @@
 #fancybox
 .edit_relic.new_relic
-  = render :partial => "relics/build/stages", :locals => { :stage => 1 }
+  = render :partial => "relicbuilders/stages", :locals => { :stage => 1 }
   .creator
     %section.main
       %section.creator-step
@@ -19,7 +19,7 @@
         %p.intro
           Vivamus vestibulum semper odio, nec volutpat sapien egestas ut. Nam iaculis dapibus eros convallis mollis. Nullam non ligula ut leo porta venenatis sed in nibh.
       %section.creator-step
-        = form_tag new_relic_path, :method => :get, :remote => true do
+        = form_tag new_relicbuilder_path, :method => :get, :remote => true do
           .field.checkbox
             %input{:type => 'checkbox', :name => 'foreign_relic'}
             %label chcę dodać zabytek spoza Polski
@@ -40,9 +40,10 @@
                     = (place.location_names.first(place.location_names.size - 1) << "<strong>#{place.name}</strong>").join(' > ').html_safe
                     = link_to "wybieram &raquo;".html_safe, 'javascript: void(0);', 'data-place_id' => place.id, 'data-coordinates' => "#{place.latitude}, #{place.longitude}"
       %section.creator-step.location
-        = semantic_form_for relic, :url => build_area_relics_path, :method => :get, :remote => true do |f|
+        = semantic_form_for @relic, :url => geodistance_relicbuilder_path, :method => :get, :remote => true do |f|
           .column
-            .foreign-location{ :style => (relic.polish_relic ? "display: none;" : "") }
+            .foreign-location
+            -# { :style => (relic.polish_relic ? "display: none;" : "") }
               = f.input :country_code, :as => :select, :include_blank => false, :default => "PL",
                 :collection => I18nCountrySelect::Countries::COUNTRY_CODES.map{|code| [I18n.t(code, :scope => :countries), code]}.sort_alphabetical_by(&:first)
               = f.input :fprovince

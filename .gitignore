@@ -4,7 +4,7 @@
 .sass-cache
 capybara-*.html
 .rspec
-/.bundle
+/*.bundle
 /vendor/bundle
 /log/*
 /tmp/*
@@ -26,3 +26,4 @@ config/environments/*.local.yml
 /public/system/
 /tmp/
 /public/uploads/
+.idea/*

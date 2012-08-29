@@ -12,7 +12,7 @@ Otwartezabytki::Application.routes.draw do
   }
   resources :tags, :only => :index
 
-  resources :relics, :except => :destroy do
+  resources :relics, :except => [:new, :create, :destroy] do
     member do
       match 'section/:section/edit', :to => 'relics#edit', :as => 'edit_section'
       match 'section/:section', :to => 'relics#show', :as => 'section', :via => :get
@@ -22,11 +22,13 @@ Otwartezabytki::Application.routes.draw do
 
     resources :photos, :documents, :entries, :links, :events
     resources :alerts, :only => [:new, :create]
-    collection do
-      match 'build/area', :to  => "relics/build#area"
-      match ':relic_id/build/:id', :to => "relics/build#show", :via => :delete
-    end
-    resources :build, :controller => 'relics/build', :only => [:index, :show, :update]
+  end
+
+  resource :relicbuilder, :only => [:new, :update, :create] do
+    get :address
+    get :geodistance
+    get :details
+    get :photos
   end
 
   resources :widgets

@@ -13,11 +13,6 @@ GIT
     fancybox-rails (0.1.4)
       railties (>= 3.1.0)
 
-PATH
-  remote: ../swagger-rails
-  specs:
-    swagger-rails (0.0.1)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -591,7 +586,6 @@ DEPENDENCIES
   simplecov
   spork-rails
   sugar-rails
-  swagger-rails!
   therubyracer
   tire (= 0.4.2)
   tire-contrib
