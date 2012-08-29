@@ -50,4 +50,11 @@ class Place < ActiveRecord::Base
     end
   end
 
+  def parent_id
+    commune_id
+  end
+
+  def default_zoom
+    10
+  end
 end

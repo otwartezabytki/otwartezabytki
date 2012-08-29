@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(:version => 20120827145208) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.string   "description"
+    t.integer  "position"
   end
 
   create_table "entries", :force => true do |t|
@@ -167,12 +168,12 @@ ActiveRecord::Schema.define(:version => 20120827145208) do
     t.string   "categories"
     t.integer  "skip_count",      :default => 0
     t.integer  "edit_count",      :default => 0
+    t.text     "description"
+    t.string   "tags"
     t.string   "type",            :default => "Relic"
     t.string   "country_code",    :default => "PL"
     t.string   "fprovince"
     t.string   "fplace"
-    t.text     "description",     :default => ""
-    t.string   "tags"
     t.text     "documents_info"
     t.text     "links_info"
     t.integer  "user_id"
