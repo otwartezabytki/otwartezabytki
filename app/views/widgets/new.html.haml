@@ -1,8 +1,14 @@
-widgets/new
-= template.name
+- if widget_template.new_record?
+  %h2 Dostępne widgety:
+  %ul
+    - widget_templates.each do |widget_template|
+      %li
+        %h4= widget_template.name
+        %p= widget_template.description
+        = link_to "Użyj widgeta", new_widget_path(:widget_template_id => widget_template.id)
+- else
+  = widget_template.name
 
-= semantic_form_for @widget, :url => widgets_path(:template => template.id) do |f|
-  = semantic_fields_for :config, @widget.config do |form|
-    = render :partial => template.partial_name, :locals => {:form => form}
-
-  = f.submit
+  = semantic_form_for widget, :url => widgets_path(:widget_template_id => params[:widget_template_id]) do |f|
+    = render "/widgets/edit/#{widget_template.partial_name}", :form => f
+    = f.submit

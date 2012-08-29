@@ -19,7 +19,7 @@ class WidgetTemplate < ActiveRecord::Base
   has_many :widgets
 
   def partial_name
-    self.class.name.underscore
+    self.class.name.underscore.split('/').last
   end
 
   class << self

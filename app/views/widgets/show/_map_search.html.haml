@@ -1,0 +1,11 @@
+.sidebar
+  %pre
+    = JSON.pretty_generate(widget_search_results.facets)
+.map
+
+:javascript
+  config = #{widget.config.to_json};
+= content_for :stylesheets do
+  = stylesheet_link_tag "widget_templates/map_search"
+= content_for :javascripts do
+  = javascript_include_tag "widget_templates/map_search"

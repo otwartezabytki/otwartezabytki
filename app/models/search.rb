@@ -4,7 +4,7 @@ class Search
   extend ActiveModel::Naming
 
   attr_accessor :q, :place, :from, :to, :categories, :state, :existance, :location, :order, :lat, :lon, :bounding_box, :load
-  attr_accessor :conditions, :range_conditions, :per_page, :page, :has_photos, :has_description
+  attr_accessor :conditions, :range_conditions, :per_page, :page, :has_photos, :has_description, :facets
 
   def initialize(attributes = {})
     attributes.each do |name, value|
@@ -45,6 +45,10 @@ class Search
     @location.to_s.split('-').map {|l| l.split(':') }
   end
 
+  def facets
+    @facets.to_s.split(',')
+  end
+
   def order
     @order || 'score.desc'
   end
@@ -82,25 +86,28 @@ class Search
   end
 
   def enable_facet_navigation
-    if navfacet?('pl')
+    if navfacet?('pl') || facets.size > 0
+
       @tsearch.facet "voivodeships", filter_facet_conditions('voivodeship.id', 'district.id', 'commune.id', 'place.id') do
         terms nil, :script_field => "_source.voivodeship.name + '_' + _source.voivodeship.id", :size => 16, :order => 'term'
       end
 
       @tsearch.facet "districts", filter_facet_conditions('district.id', 'commune.id', 'place.id') do
-        terms nil, :script_field => "_source.district.name + '_' + _source.district.id", :size => 10_000, :order => 'term'
-      end if location.size > 1
+        terms nil, :script_field => "_source.district.name + '_' + _source.district.id", :size => 100, :order => 'term'
+      end if location.size > 1 || facets.include?('districts')
 
       @tsearch.facet "communes", filter_facet_conditions('commune.id', 'place.id') do
-        terms nil, :script_field => "_source.commune.name + '_' + _source.virtual_commune_id", :size => 10_000, :order => 'term'
-      end if location.size > 2
+        terms nil, :script_field => "_source.commune.name + '_' + _source.virtual_commune_id", :size => 100, :order => 'term'
+      end if location.size > 2 || facets.include?('communes')
 
       @tsearch.facet "places", filter_facet_conditions('place.id') do
-         terms nil, :script_field => "_source.place.name + '_' + _source.place.id", :size => 10_000, :order => 'term'
-      end if location.size > 3
-    elsif navfacet?('world')
+         terms nil, :script_field => "_source.place.name + '_' + _source.place.id", :size => 500, :order => 'term'
+      end if location.size > 3 || facets.include?('places')
+    end
+
+    if navfacet?('world') || facets.include?('countries')
       @tsearch.facet "countires", filter_facet_conditions('country') do
-        terms 'country', :size => 10_000, :order => 'term'
+        terms 'country', :size => 200, :order => 'term'
       end
     end
   end

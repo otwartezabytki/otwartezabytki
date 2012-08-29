@@ -1,6 +1,11 @@
-%ul
-  - widgets.each do |widget|
-    %li
-      %h4= widget.name
-      %p= widget.description
-      = link_to "Użyj widgeta", new_widget_path(:template => widget.id)
+- if widgets.length > 0
+  %h1 Twoje widgety:
+  .widgets
+    - widgets.each do |widget|
+      .widget
+        %h2= widget.widget_template.name
+        %input{ type: 'text', value: widget.snippet(request.host) }
+        = link_to 'Edytuj widget', edit_widget_path(widget.id)
+- else
+  %h1 Nie posiadasz jeszcze żadnych widgetów
+  = render :template => 'widgets/new'

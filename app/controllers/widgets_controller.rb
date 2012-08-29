@@ -1,52 +1,59 @@
+# encoding: utf-8
 class WidgetsController < ApplicationController
+  layout "widget", :only => :show
+
   before_filter :authenticate_user!, :except => [:index, :js]
 
-  def index
-    @widgets = WidgetTemplate.all
+  expose(:widget_templates) { WidgetTemplate.scoped }
+  expose(:widget_template)
+
+  expose(:widgets) { current_user.widgets }
+  expose(:widget) do
+    the_widget = if params[:id].present?
+      if params[:id].match(/^\d+$/)
+        widgets.find(params[:id])
+      else
+        widgets.find_by_uid!(params[:id])
+      end
+    else
+      w = widgets.build
+      w.widget_template = WidgetTemplate.find(params[:widget_template_id]) if params[:widget_template_id]
+      w
+    end
+
+    the_widget.attributes = params[:widget] unless request.get?
+    the_widget
   end
 
-  def my
-    @widgets = current_user.widgets
+  expose(:widget_search_results) do
+    Search.new(params[:search]).perform_widget_search
   end
 
-  def new
-    @template = WidgetTemplate.find(params[:template])
-    @widget = @template.widgets.new
+  def show
+    if respond_to?(widget.widget_template.partial_name)
+      send(widget.widget_template.partial_name)
+    end
   end
 
   def create
-    @template = WidgetTemplate.find(params[:template])
-    @widget = @template.widgets.new(params[:widget])
-    @widget.config = params[:config]
-    @widget.user_id = current_user.id
-    if @widget.save
-      redirect_to @widget
+    if widget.save
+      redirect_to widgets_path, :notice => "Widget został stworzony"
     else
+      flash[:error] = "Nie udało się stworzyć widgeta. Popraw błędy poniżej."
       render :new
     end
   end
 
-  def show
-    @widget = current_user.widgets.find(params[:id])
-    @template = @widget.widget_template
-  end
-
   def update
-    @widget = current_user.widgets.find(params[:id])
-    @template = @widget.widget_template
-
-    params[:widget] ||= {}
-    params[:widget][:config] = params[:config]
-    if @widget.update_attributes(params[:widget])
-      redirect_to @widget
+    if widget.save
+      redirect_to widgets_path, :notice => "Widget został zaktualizowany"
     else
-      render :show
+      flash[:error] = "Nie udało się zaktualizować widgeta. Popraw błędy poniżej."
+      render :edit
     end
   end
 
-  def js
-    @widget = Widget.find_by_uid!(params[:uid])
-    @config = @widget.config
-    render "widgets/js/#{@widget.widget_template.partial_name}.js", :layout => false, :content_type => "application/js"
+  def map_search
+
   end
 end

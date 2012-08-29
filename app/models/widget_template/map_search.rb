@@ -11,7 +11,6 @@
 #  updated_at  :datetime         not null
 #
 
-class MapSearchWidgetTemplate < WidgetTemplate
-
+class WidgetTemplate::MapSearch < WidgetTemplate
 
 end
