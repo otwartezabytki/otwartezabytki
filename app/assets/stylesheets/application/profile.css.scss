@@ -468,7 +468,6 @@ section.show.photos{
 .row.first-row{
   display: table;
   border: 1px solid #fff;
-  background: #f5f5f5;
   padding: 0;
 }
 
@@ -1457,6 +1456,9 @@ section.show.subrelics{
         &.leaf{
           font-weight: normal;
           background: asset-data-url("tree-document.png") no-repeat;
+        }
+        &.current{
+          font-weight: 700;
         }
         &.add{
           font-weight: normal;
