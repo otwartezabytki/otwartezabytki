@@ -4,8 +4,14 @@ class RelicbuildersController < ApplicationController
 
   def new
     @relic = Relic.new
-    if params[:q].present?
-      pq = PreparedQuery.new(params[:q])
+    @location = LocationBuilder.new params[:location]
+    if @location.foreign_relic?
+      if geo = Geocoder.search(@location.foreign_address).first
+        @relic.latitude   = geo.latitude
+        @relic.longitude  = geo.longitude
+      end
+    elsif @location.polish_place?
+      pq = PreparedQuery.new @location.polish_place
       @places = if pq.exists?
         Place.where(["LOWER(name) LIKE ?", "#{pq.clean.downcase}"]).map do |p|
           p.conditional_geocode!
@@ -26,21 +32,31 @@ class RelicbuildersController < ApplicationController
   end
 
   def address
-    @relic = Relic.new :build_state => 'address_step'
     geo_hash = Place.find_by_position(params[:latitude], params[:longitude])
     place = if geo_hash && geo_hash.get_deep(:objs, :place)
       geo_hash.get_deep(:objs, :place)
-    elsif params[:place_id]
+    elsif params[:place_id].present?
       Place.find(params[:place_id])
     end
-
+    @relic = if geo_hash[:foreign]
+      ForeignRelic.new(
+        :build_state  => 'address_step',
+        :country_code => geo_hash[:country_code],
+        :fprovince    => geo_hash[:voivodeship],
+        :fplace       => geo_hash[:place]
+      )
+    else
+      Relic.new :build_state => 'address_step'
+    end
     @relic.place = place if place
     @relic.street = (geo_hash || {}).get_deep(:street)
   end
 
   def create
-    @relic = Relic.new (params[:relic] || {}).except(:voivodeship_id, :district_id, :commune_id)
-    if @relic.save
+    attributes = (params[:relic] || {}).except(:voivodeship_id, :district_id, :commune_id)
+    @relic = Relic.new attributes
+    @relic = ForeignRelic.new(attributes) if @relic.foreign_relic?
+    if @relic.save!
       redirect_to details_relicbuilder_path(:id => @relic)
     else
       render :address

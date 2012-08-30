@@ -49,4 +49,37 @@ class ForeignRelic < Relic
   def self.model_name
     Relic.model_name
   end
+
+  def to_indexed_hash
+    dp = DateParser.new dating_of_obj
+    dating_hash = Hash[[:from, :to, :has_round_date].zip(dp.results << dp.rounded?)]
+    {
+      :id                   => id,
+      :type                 => 'relic',
+      :identification       => identification,
+      :street               => street,
+      :street_normalized    => street_normalized,
+      :place_full_name      => place_full_name,
+      :place_with_address   => place_with_address,
+      :descendants          => self.descendants.map(&:to_descendant_hash),
+      :fprovince            => fprovince,
+      :fplace               => fplace,
+      # new fields
+      :description          => description,
+      :has_description      => description?,
+      :categories           => categories,
+      :has_photos           => has_photos?,
+      :state                => state,
+      :existance            => existance,
+      :country              => country_code.downcase,
+      :tags                 => tags,
+      # Lat Lon As Array Format in [lon, lat]
+      :coordinates          => [longitude, latitude]
+    }.merge(dating_hash)
+  end
+
+  def place_full_name(include_place = true)
+    [fprovince, fplace].compact.join(', ')
+  end
+
 end

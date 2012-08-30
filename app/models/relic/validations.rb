@@ -3,7 +3,27 @@ module Relic::Validations
   extend ActiveSupport::Concern
 
   included do
-    validates :place_id, :presence => true
+    validates :place, :presence => true, :unless => :foreign_relic?
+
+    # build step validations
+    with_options :if => :details_step? do |step|
+      step.validates :reason, :identification, :presence => true
+    end
+
+    with_options :if => :photos_step? do |step|
+      step.validates :description, :presence => true
+    end
+
+    validates :identification, :presence => true, :if => :identification_changed?
+    validate :date_must_be_parsed, :if => :dating_of_obj_changed?
+
+    # api create validation
+    validates :place, :identification, :description, :reason, :presence => true, :if => :created_via_api
   end
 
+  def date_must_be_parsed
+    if date_start.blank? || date_end.blank?
+      errors.add(:dating_of_obj, I18n.t("errors.messages.date_must_be_parsed"))
+    end
+  end
 end

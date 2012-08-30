@@ -19,14 +19,18 @@
         %p.intro
           Vivamus vestibulum semper odio, nec volutpat sapien egestas ut. Nam iaculis dapibus eros convallis mollis. Nullam non ligula ut leo porta venenatis sed in nibh.
       %section.creator-step
-        = form_tag new_relicbuilder_path, :method => :get, :remote => true do
-          .field.checkbox
-            %input{:type => 'checkbox', :name => 'foreign_relic'}
-            %label chcę dodać zabytek spoza Polski
+        = semantic_form_for LocationBuilder.new(params[:location]), :as => 'location', :url => new_relicbuilder_path, :method => :get, :remote => true do |f|
+          = f.input :foreign_relic, :as => :boolean, :label => 'chcę dodać zabytek spoza Polski'
           .field.text.search.marker
-            %label.main Miejscowość
-            %input{:type => 'text', :name => 'q', :value => params[:q]}
-            %input{:type => 'submit', :value => "Szukaj &raquo;".html_safe, :class => 'btn'}
+            .polish-location{:style => "#{ 'display: none;' unless f.object.foreign_relic.to_i.zero?}"}
+              = f.input :polish_place, :label => 'Miejscowość'
+            .foreign-location{:style => "#{ 'display: none;' if f.object.foreign_relic.to_i.zero?}"}
+              = f.label :country_code, 'W jakim kraju'
+              = f.country_code_select :country_code, [['Polska','PL' ]]
+              = f.input :original_name, :label => 'Nazwa oryginalna'
+              = f.input :polish_name, :label => 'Nazwa spolszczona'
+          .actions
+            = f.submit "Szukaj &raquo;".html_safe, :class => 'btn'
       - if defined? @places
         - if @places.blank?
           brak wyników
@@ -39,45 +43,23 @@
                   %li
                     = (place.location_names.first(place.location_names.size - 1) << "<strong>#{place.name}</strong>").join(' > ').html_safe
                     = link_to "wybieram &raquo;".html_safe, 'javascript: void(0);', 'data-place_id' => place.id, 'data-coordinates' => "#{place.latitude}, #{place.longitude}"
+
       %section.creator-step.location
         = semantic_form_for @relic, :url => geodistance_relicbuilder_path, :method => :get, :remote => true do |f|
           .column
-            .foreign-location
-            -# { :style => (relic.polish_relic ? "display: none;" : "") }
-              = f.input :country_code, :as => :select, :include_blank => false, :default => "PL",
-                :collection => I18nCountrySelect::Countries::COUNTRY_CODES.map{|code| [I18n.t(code, :scope => :countries), code]}.sort_alphabetical_by(&:first)
-              = f.input :fprovince
-              = f.input :fplace
-            -# = f.input :street
+            #map_canvas{ :style => "width: 309px; height: 309px;" }
+          .column
+            .marker-helper
+              %h3 Zaznacz obiekt na mapie
+              .marker-holder
+                = image_tag 'marker.png', :id => 'marker'
+          = f.hidden_field :place_id
+          = f.hidden_field :latitude
+          = f.hidden_field :longitude
+          .column
             .actions{:style => 'display:none;'}
               = f.submit 'Przejdź dalej &raquo;'.html_safe
 
-          .column
-            #map_canvas{ :style => "width: 309px; height: 309px;" }
-
-          .column
-            .marker-helper
-              %h4
-                Przeciągnij
-                %br
-                znacznik na mapę:
-              .marker-holder
-                = image_tag 'marker.png', :id => 'marker'
-            = f.hidden_field :place_id
-            = f.hidden_field :latitude
-            = f.hidden_field :longitude
-      -# %section.creator-step
-      -#   %h3 Zaznacz obiekt na mapie
-      -#   .map-wrapper
-      -#     #map_canvas{ :style => "width: 515px; height: 380px;" }
-      -#       = image_tag "ph-map.png"
-      -#     .marker-helper
-      -#       %h4
-      -#         Przeciągnij
-      -#         %br
-      -#         znacznik na mapę:
-      -#       .marker-holder
-      -#         = image_tag 'marker.png', :id => 'marker'
 
       -# = link_to relic_path, :class => 'next-step' do
       -#   %strong Przejdź dalej &raquo;

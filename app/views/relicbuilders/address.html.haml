@@ -9,11 +9,17 @@
           Vivamus vestibulum semper odio, nec volutpat sapien egestas ut. Nam iaculis dapibus eros convallis mollis. Nullam non ligula ut leo porta venenatis sed in nibh.
       = semantic_form_for @relic, :url => relicbuilder_path do |f|
         = f.input :build_state, :as => :hidden
-        = f.input :voivodeship_id
-        = f.input :district_id
-        = f.input :commune_id
-        = f.input :place_id
-        = f.input :street
+        - if f.object.is_a? ForeignRelic
+          = f.country_code_select :country_code
+          = f.input :fprovince
+          = f.input :fplace
+          = f.input :street
+        - else
+          = f.input :voivodeship_id
+          = f.input :district_id
+          = f.input :commune_id
+          = f.input :place_id
+          = f.input :street
         .actions
           = f.submit 'Przejdź dalej &raquo;'.html_safe
 

@@ -90,28 +90,7 @@ class Relic < ActiveRecord::Base
     state :finish_step
   end
 
-  validates :identification, :presence => true, :if => :identification_changed?
-  validates :place, :presence => true, :if => :polish_relic
-
   before_validation :parse_date
-  validate :date_must_be_parsed, :if => :dating_of_obj_changed?
-
-  def date_must_be_parsed
-    if date_start.blank? || date_end.blank?
-      errors.add(:dating_of_obj, I18n.t("errors.messages.date_must_be_parsed"))
-    end
-  end
-
-  # build step validations
-  with_options :if => :details_step? do |step|
-    step.validates :reason, :identification, :presence => true
-  end
-
-  with_options :if => :photos_step? do |step|
-    step.validates :description, :presence => true
-  end
-
-  validates :place, :identification, :description, :reason, :presence => true, :if => :created_via_api
 
   before_validation do
     if tags_changed? && tags.is_a?(Array)
@@ -336,7 +315,6 @@ class Relic < ActiveRecord::Base
     else
       ["woj. #{voivodeship.name}", "pow. #{district.name}", "gm. #{commune.name}", place.name].join(', ')
     end
-
   end
 
   def update_relic_index
@@ -357,7 +335,7 @@ class Relic < ActiveRecord::Base
   end
 
   def country_code= value
-    @country_code = (value || 'pl').upcase
+    self[:country_code] = (value || 'pl').upcase
   end
 
   def country
@@ -401,6 +379,10 @@ class Relic < ActiveRecord::Base
 
   def polish_relic
     self.class == Relic
+  end
+
+  def foreign_relic?
+    country_code.upcase != 'PL'
   end
 
   def latitude=(value)

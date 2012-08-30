@@ -52,7 +52,8 @@ class Place < ActiveRecord::Base
   class << self
     def find_by_position(lat, lng)
       find_by_type = lambda do |data, *type|
-        (data['address_components'].find { |c| type.all? { |t| c['types'].include?(t) } } || {})['long_name']
+        attr = ['short_name', 'long_name'].include?(type.last) ? type.pop : 'long_name'
+        (data['address_components'].find { |c| type.all? { |t| c['types'].include?(t) } } || {})[attr]
       end
       geo = Geocoder.search([lat, lng].map{|l| l.gsub(',','.').to_f}.join(', ')).find do |result|
         find_by_type.call(result.data, 'locality', 'political').present?
@@ -60,14 +61,20 @@ class Place < ActiveRecord::Base
       if geo
         data = geo.data
         location = {
+          :foreign      => false,
           :street       => [find_by_type.call(data, 'route'), find_by_type.call(data, 'street_number')].compact.join(' '),
           :place        => find_by_type.call(data, 'locality', 'political'),
           :commune      => find_by_type.call(data, 'administrative_area_level_3', 'political'),
           :district     => find_by_type.call(data, 'administrative_area_level_2', 'political'),
           :voivodeship  => find_by_type.call(data, 'administrative_area_level_1', 'political'),
-          :country      => find_by_type.call(data, 'country', 'political')
+          :country      => find_by_type.call(data, 'country', 'political'),
+          :country_code => find_by_type.call(data, 'country', 'political', 'short_name')
         }
-        return location if location[:country] != 'Polska'
+        Rails.logger.info location
+        if location[:country] != 'Polska'
+          location[:foreign] = true
+          return location
+        end
 
         conds = [ "LOWER(places.name) = LOWER(?)", "LOWER(communes.name) = LOWER(?)", "LOWER(districts.name) = LOWER(?)", "LOWER(voivodeships.name) = LOWER(?)" ]
         location[:objs] = {}

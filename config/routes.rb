@@ -28,7 +28,7 @@ Otwartezabytki::Application.routes.draw do
     get :address
     get :geodistance
     get :details
-    get :photos
+    match 'photos', :via => [:get, :delete]
   end
 
   resources :widgets

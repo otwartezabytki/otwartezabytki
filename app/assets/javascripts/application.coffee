@@ -51,7 +51,7 @@ jQuery.initializer 'div.new_relic section.main', ->
     map.removeMarkers()
     $('#map_canvas').circle_marker(lat, lng)
 
-  $('input[name=foreign_relic]').change ->
+  $('#location_foreign_relic').change ->
     if $(this).is(':checked')
       $('.polish-location').hide()
       $('.foreign-location').show()

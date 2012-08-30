@@ -39,7 +39,7 @@ class PhotosController < ApplicationController
   private
     def choosen_redirect_path
       path = if !!params[:build]
-        relic_build_path(relic, :photos)
+        photos_relicbuilder_path(:id => relic.id)
       else
         edit_section_relic_path(relic.id, :photos)
       end
