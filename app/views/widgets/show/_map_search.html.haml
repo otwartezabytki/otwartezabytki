@@ -5,19 +5,19 @@
     %section.search
       %h2
         Wyszukaj
-        = link_to '?', '#', :class => "tooltip", :"data-placement" => "right", :title => "To jest podpowiedź do pola wyszukiwania."
+        = link_to image_tag("widget-helper.png"), '#', :class => "tooltip", :"data-placement" => "right", :title => "To jest podpowiedź do pola wyszukiwania."
       = f.input :q, :label => false, :input_html => { :class => 'autocomplete-q'}
     %section.locations
       %h2
         Lokalizacje
-        = link_to '?', '#', :class => "tooltip", :"data-placement" => "right", :title => "To jest podpowiedź do pola lokalizacje."
+        = link_to image_tag("widget-helper.png"), '#', :class => "tooltip", :"data-placement" => "right", :title => "To jest podpowiedź do pola lokalizacje."
       - if relics.widget_facets_tree
         %ul
           = render 'shared/locations_tree', :node => relics.widget_facets_tree
     %section.categories
       %h2
         Kategorie
-        = link_to '?', '#', :class => "tooltip", :"data-placement" => "right", :title => "To jest podpowiedź do kategorii."
+        = link_to image_tag("widget-helper.png"), '#', :class => "tooltip", :"data-placement" => "right", :title => "To jest podpowiedź do kategorii."
       = f.input :categories, :as => :check_boxes, :collection => categoires_facets, :disabled => disabled(f.object, 'categories'), :label => 'Kategorie', :label => false
 .map
 

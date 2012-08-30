@@ -15,6 +15,14 @@
         margin-bottom: 16px;
       }
     }
+    section.location{
+      .column{
+        display: inline-block;
+        &.full_width{
+          width: 100%;
+        }
+      }
+    }
     section.creator-step{
       margin-top: 16px;
       position: relative;
@@ -56,15 +64,36 @@
     .field {
       position: relative;
       @include clearfix;
+      display: inline-block;
+      &.search .foreign-location{
+        > div{
+          display: inline-block;
+          width: 174px;
+          margin-left: 8px;
+          position: relative;
+          &:first-child{
+            margin-left: 0;
+          }
+          &.select{
+            float: left;
+          }
+          select{
+            width: 170px;
+          }
+          input{
+            width: 130px;
+          }
+        }
+      }
     }
-    .field.marker:before{
+    .field.marker .input:before{
       display: block;
       width: 8px;
       height: 14px;
       background: asset-data-url("icon-marker.png") no-repeat;
       position: absolute;
       left: 12px;
-      top: 45px;
+      top: 27px;
       content: "";
     }
     .field.aside{
@@ -77,7 +106,7 @@
         width: 521px;
       }
     }
-    .field.search{
+    .field.search, .actions{
       input[type="text"]{
         width: 500px;
         padding-left: 30px;
@@ -88,6 +117,9 @@
         font-size: 14px;
         padding: 10px 26px;
       }
+    }
+    .actions{
+      display: inline-block;
     }
     .field.link{
       padding-bottom: 20px;
@@ -196,6 +228,9 @@
         padding-left: 10px;
         line-height: 21px;
         strong{ font-weight: bold;}
+        &:hover{
+          background: #f5f5f5;
+        }
         &.even{
           background: #f5f5f5;
         }
@@ -214,32 +249,33 @@
     }
     #map_canvas{
     }
-    .marker-helper {
-      background-color: white;
-      padding: 10px;
-      position: absolute;
-      top: 0px;
-      right: 0;
-      h4 {
+    section.location{
+      .marker-helper {
+        background-color: white;
+        width: 135px;
+        padding: 0 10px;
         text-align: center;
-        font-size: 14px;
-        font-weight: 700;
-        line-height: 20px;
-      }
-
-      .marker-holder {
-        background: asset-data-url('marker-helper.png') center center no-repeat;
-        margin: 20px auto;
-        width: 118px;
-        height: 118px;
-
-        #marker {
-          cursor: pointer;
-          margin: 28px 0 10px 47px;
+        h3 {
+          text-align: center;
+          font-size: 14px;
+          font-weight: 700;
+          line-height: 20px;
         }
-
+        .marker-holder {
+          background: asset-data-url('marker-helper.png') center center no-repeat;
+          margin: 20px auto;
+          width: 118px;
+          height: 118px;
+          #marker {
+            cursor: pointer;
+            margin: 40px 0 10px 15px;
+          }
+        }
       }
-
+      .actions{
+        float: right;
+        margin-top: 40px;
+      }
     }
 
     /* photos */
@@ -383,4 +419,8 @@ body.relics.new #colorbox {
     top: 15px;
     right: 12px;
   }
+}
+
+#location_foreign_relic_input{
+  text-align: right;
 }
