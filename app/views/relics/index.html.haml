@@ -64,29 +64,32 @@
               = f.input :existance, :label => false, :as => :check_boxes, :collection => existance_facets,  :disabled => disabled(f.object, 'existance')
         %section.order
           = f.input :order, :as => :select, :label => "sortuj według:", :collection => order_collection, :include_blank => false, :selected => f.object.order
-      - if relics.total.zero?
-        .search-no-results
-          %p
-            Nie ma do sprawdzenia żadnych zabytków
-            %br
-            pasujących do słowa
-            %strong „#{tsearch.query}”
-          - if tsearch.suggestions.present?
+      %section.results
+        .loading{:style => 'display:none;'}
+          %h3 Trwa ładowanie wyników proszę czekać!!!
+        - if relics.total.zero?
+          .search-no-results
             %p
-              Czy chodziło ci może o:
-              - tsearch.suggestions.each do |s|
-                = link_to relics_path(search_params(:q => s.name)), :remote => true do
-                  %strong= "#{s.name},"
-          %p
-            Nie zanalazłeś tego czego szukasz?
-            %br
-            = link_to new_relicbuilder_path do
-              %strong DODAJ ZABYTEK
+              Nie ma do sprawdzenia żadnych zabytków
+              %br
+              pasujących do słowa
+              %strong „#{tsearch.query}”
+            - if tsearch.suggestions.present?
+              %p
+                Czy chodziło ci może o:
+                - tsearch.suggestions.each do |s|
+                  = link_to relics_path(search_params(:q => s.name)), :remote => true do
+                    %strong= "#{s.name},"
+            %p
+              Nie zanalazłeś tego czego szukasz?
+              %br
+              = link_to new_relicbuilder_path do
+                %strong DODAJ ZABYTEK
 
-      - elsif relics.present?
-        %div.relic-header.search
-          %h2 Wyniki wyszukiwania (#{relics.total})
-        = render :partial => "relics", :locals => {:collection => relics }
+        - elsif relics.present?
+          %div.relic-header.search
+            %h2 Wyniki wyszukiwania (#{relics.total})
+          = render :partial => "relics", :locals => {:collection => relics }
 
-      = paginate relics, :remote => true
+        = paginate relics, :remote => true
 

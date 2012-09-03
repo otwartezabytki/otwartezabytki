@@ -1,4 +1,10 @@
 jQuery.initializer 'body.relics.index .main-container', ->
+  this.on 'ajax:beforeSend', 'form[data-remote], a[data-remote]', (e, data, status, xhr) ->
+    $('form section.results .loading').show()
+
+  this.on 'ajax:complete', 'form[data-remote], a[data-remote]', (e, data, status, xhr) ->
+    $('form section.results .loading').hide()
+
   this.find("input.autocomplete-q").autocomplete
     html: true,
     minLength: 2,
