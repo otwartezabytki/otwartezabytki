@@ -12,6 +12,8 @@
 # -*- encoding : utf-8 -*-
 class Voivodeship < ActiveRecord::Base
   include GeocodeViewport
+  include Relic::BoundingBox
+
   attr_accessible :id, :name, :nr
   has_many :districts, :dependent => :destroy
   has_many :communes, :through => :districts
@@ -32,5 +34,9 @@ class Voivodeship < ActiveRecord::Base
 
   def self.zoom_range
     7..8
+  end
+
+  def self.visible_from
+    2
   end
 end

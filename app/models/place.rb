@@ -18,6 +18,8 @@
 # -*- encoding : utf-8 -*-
 class Place < ActiveRecord::Base
   include GeocodeViewport
+  include Relic::BoundingBox
+
   attr_accessible :id, :name, :commune_id, :sym, :from_teryt
   belongs_to :commune
   has_many :relics, :dependent => :destroy
@@ -125,5 +127,9 @@ class Place < ActiveRecord::Base
 
   def self.zoom_range
     11..20
+  end
+
+  def self.visible_from
+    0.05
   end
 end

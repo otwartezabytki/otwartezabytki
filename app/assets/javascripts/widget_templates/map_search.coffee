@@ -42,40 +42,48 @@ jQuery.initializer '.sidebar', ->
         div: '#map_canvas'
         mapTypeId: google.maps.MapTypeId.HYBRID
 
-    location_scroller = $('.locations .antiscroll-wrap').antiscroll(x: false).data('antiscroll')
-    categories_scroller = $('.categories .antiscroll-wrap').antiscroll(x: false).data('antiscroll')
+    if boundingbox = $sidebar.data('boundingbox')
+      southWest = new google.maps.LatLng(boundingbox[0].lat, boundingbox[0].lng);
+      northEast = new google.maps.LatLng(boundingbox[1].lat, boundingbox[1].lng);
+      window.gmap.fitBounds([southWest, northEast])
 
-    $(window).resize ->
-      location_scroller.refresh()
-      categories_scroller.refresh()
+  location_scroller = $('.locations .antiscroll-wrap').antiscroll(x: false).data('antiscroll')
+  categories_scroller = $('.categories .antiscroll-wrap').antiscroll(x: false).data('antiscroll')
 
-    $('#search_categories_input input[type="checkbox"]').change ->
-      $('#new_search').submit()
+  $(window).resize ->
+    location_scroller.refresh()
+    categories_scroller.refresh()
 
-    if $$('.locations').length && $$('.categories').length
-      $$('.locations a.show-more').click ->
-        $$('.locations').animate height: '100%', ->
-          location_scroller.refresh()
-        $$('.locations').addClass('maxed').removeClass('mined')
-        $.cookie('section-shown', 'locations')
-        false
+  $('#search_categories_input input[type="checkbox"]').change ->
+    $('#new_search').submit()
 
-      $$('.categories a.show-more').click ->
-        $$('.locations').animate height: '0%'
-        $$('.categories').animate height: '100%', ->
-          categories_scroller.refresh()
-        $$('.categories').addClass('maxed').removeClass('mined')
-        $.cookie('section-shown', 'categories')
-        false
+  $('#search_categories_input input[type="checkbox"]:disabled').each ->
+    $(this).parents('choice').hide()
 
-      $$('a.show-less').click ->
-        $$('.locations').animate height: '60%', ->
-          location_scroller.refresh()
+  if $$('.locations').length && $$('.categories').length
+    $$('.locations a.show-more').click ->
+      $$('.locations').animate height: '100%', ->
+        location_scroller.refresh()
+      $$('.locations').addClass('maxed').removeClass('mined')
+      $.cookie('section-shown', 'locations')
+      false
 
-        $$('.categories').animate height: '40%', ->
-          categories_scroller.refresh()
+    $$('.categories a.show-more').click ->
+      $$('.locations').animate height: '0%'
+      $$('.categories').animate height: '100%', ->
+        categories_scroller.refresh()
+      $$('.categories').addClass('maxed').removeClass('mined')
+      $.cookie('section-shown', 'categories')
+      false
 
-        $$('.locations').removeClass('maxed').removeClass('mined')
-        $$('.categories').removeClass('maxed').removeClass('mined')
-        $.cookie('section-shown', null)
-        false
+    $$('a.show-less').click ->
+      $$('.locations').animate height: '60%', ->
+        location_scroller.refresh()
+
+      $$('.categories').animate height: '40%', ->
+        categories_scroller.refresh()
+
+      $$('.locations').removeClass('maxed').removeClass('mined')
+      $$('.categories').removeClass('maxed').removeClass('mined')
+      $.cookie('section-shown', null)
+      false

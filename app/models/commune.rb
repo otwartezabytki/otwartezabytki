@@ -14,6 +14,8 @@
 # -*- encoding : utf-8 -*-
 class Commune < ActiveRecord::Base
   include GeocodeViewport
+  include Relic::BoundingBox
+
   attr_accessible :id, :name, :district_id, :nr, :kind
   belongs_to :district
   has_many :places, :dependent => :destroy
@@ -32,5 +34,9 @@ class Commune < ActiveRecord::Base
 
   def self.zoom_range
     9..10
+  end
+
+  def self.visible_from
+    0.2
   end
 end

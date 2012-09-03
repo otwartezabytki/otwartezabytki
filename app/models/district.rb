@@ -13,6 +13,8 @@
 # -*- encoding : utf-8 -*-
 class District < ActiveRecord::Base
   include GeocodeViewport
+  include Relic::BoundingBox
+
   attr_accessible :id, :name, :voivodeship_id, :nr
   belongs_to :voivodeship
   has_many :communes, :dependent => :destroy
@@ -32,5 +34,9 @@ class District < ActiveRecord::Base
 
   def self.zoom_range
     6..10
+  end
+
+  def self.visible_from
+    0.5
   end
 end

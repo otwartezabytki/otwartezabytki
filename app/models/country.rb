@@ -3,6 +3,7 @@ class Country
   include ActiveModel::Conversion
   extend ActiveModel::Naming
   extend WillCache::Cacheable
+  include Relic::BoundingBox
 
   def self.find(country_code)
     new(country_code)
@@ -54,6 +55,10 @@ class Country
       :longitue => longitude,
       :facet_count => facet_count
     }
+  end
+
+  def self.visible_from
+    5
   end
 
   protected

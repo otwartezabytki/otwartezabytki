@@ -41,6 +41,10 @@ class Search
     end
   end
 
+  def location_object
+    @location_object
+  end
+
 
   def location=(value)
     _, location_type, location_ids = value.match('^(country|voivodeship|district|commune|place):(.*)$').to_a
@@ -49,17 +53,22 @@ class Search
     @location = if location_type.present? && location_ids.present? && location_ids.length > 0
       case location_type
         when 'country'
+          @location_object = Country.find(location_ids.first)
           [location_ids]
         when 'voivodeship'
+          @location_object = Voivodeship.find(location_ids.first)
           [['pl'], location_ids]
         when 'district'
+          @location_object = District.find(location_ids.first)
           voivodeship_ids = District.where(:id => location_ids).map(&:voivodeship_id).uniq.map(&:to_s)
           [['pl'], voivodeship_ids, location_ids]
         when 'commune'
+          @location_object = Commune.find(location_ids.first)
           district_ids = Commune.where(:id => location_ids).map(&:district_id).uniq.map(&:to_s)
           voivodeship_ids = District.where(:id => district_ids).map(&:voivodeship_id).uniq.map(&:to_s)
           [['pl'], voivodeship_ids, district_ids, location_ids]
         when 'place'
+          @location_object = Place.find(location_ids.first)
           commune_ids = Place.where(:id => location_ids).map(&:commune_id).uniq.map(&:to_s)
           district_ids = Commune.where(:id => commune_ids).map(&:district_id).uniq.map(&:to_s)
           voivodeship_ids = District.where(:id => district_ids).map(&:voivodeship_id).uniq.map(&:to_s)
@@ -85,12 +94,6 @@ class Search
       when 4 then ["countries", "voivodeships", "districts", "communes", "places"]
       when 5 then ["countries", "voivodeships", "districts", "communes", "places"]
     end
-  end
-
-  def zoom
-    [Country, Voivodeship, District, Commune, Place][location.length - 1].find(location.last.first).default_zoom
-  rescue
-    0
   end
 
   def order

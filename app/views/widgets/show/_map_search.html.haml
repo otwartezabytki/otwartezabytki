@@ -1,4 +1,4 @@
-.sidebar{ :"data-replace" => ".sidebar" }
+.sidebar{ :"data-replace" => ".sidebar", :"data-boundingbox" => widget_search.location_object.try(:bounding_box).try(:to_json) }
   = link_to '/', :target => :_top do
     %h1.logo
   = semantic_form_for widget_search, :url => widget_path(widget.uid), :method => :get, :remote => true do |f|
