@@ -15,10 +15,7 @@
           = f.input :fplace
           = f.input :street
         - else
-          = f.input :voivodeship_id
-          = f.input :district_id
-          = f.input :commune_id
-          = f.input :place_id
+          = render :partial => 'administrative_level', :locals => { :relic => @relic }
           = f.input :street
         .actions
           = f.submit 'Przejdź dalej &raquo;'.html_safe

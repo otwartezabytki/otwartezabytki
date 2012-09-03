@@ -116,7 +116,7 @@ window.ensuring_google_maps_loaded = (callback) ->
     do window.load_google_maps
 
 window.ensure_geolocation = ->
-  if $('#relic_latitude').val().length > 0
+  if $('#relic_latitude').val()?.length > 0
     $('#map_canvas').auto_zoom()
   else
     $('#relic_latitude').val 52.4118436

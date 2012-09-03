@@ -29,6 +29,20 @@ class RelicbuildersController < ApplicationController
       :lat => params.get_deep('relic', 'latitude'),
       :lon => params.get_deep('relic', 'longitude')
     ).perform
+    if @relics.total.zero?
+      render :js => "window.location = '#{address_relicbuilder_path(params[:relic].slice(:latitude, :longitude, :place_id))}';"
+    end
+  end
+
+  def administrative_level
+    @voivodeship = Voivodeship.find_by_id params.get_deep('relic', 'voivodeship_id')
+    @district = District.find_by_id params.get_deep('relic', 'district_id')
+    @commune = Commune.find_by_id params.get_deep('relic', 'commune_id')
+
+    @district = @commune.district if @commune
+    @voivodeship = @district.voivodeship if @district
+
+    render :partial => 'administrative_level', :layout => false
   end
 
   def address
@@ -56,7 +70,7 @@ class RelicbuildersController < ApplicationController
     attributes = (params[:relic] || {}).except(:voivodeship_id, :district_id, :commune_id)
     @relic = Relic.new attributes
     @relic = ForeignRelic.new(attributes) if @relic.foreign_relic?
-    if @relic.save!
+    if @relic.save
       redirect_to details_relicbuilder_path(:id => @relic)
     else
       render :address
