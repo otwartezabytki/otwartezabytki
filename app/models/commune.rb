@@ -30,7 +30,7 @@ class Commune < ActiveRecord::Base
     district_id
   end
 
-  def default_zoom
-    10
+  def self.zoom_range
+    9..10
   end
 end

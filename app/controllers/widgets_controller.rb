@@ -1,8 +1,16 @@
 # encoding: utf-8
 class WidgetsController < ApplicationController
-  layout "widget", :only => :show
+  layout :resolve_widget_layout, :only => :show
 
-  before_filter :authenticate_user!, :except => [:index, :js]
+  def resolve_widget_layout
+    if request.xhr?
+      'ajax'
+    else
+      'widget'
+    end
+  end
+
+  before_filter :authenticate_user!, :except => [:show]
 
   expose(:widget_templates) { WidgetTemplate.scoped }
   expose(:widget_template)
@@ -11,9 +19,9 @@ class WidgetsController < ApplicationController
   expose(:widget) do
     the_widget = if params[:id].present?
       if params[:id].match(/^\d+$/)
-        widgets.find(params[:id])
+        Widget.find(params[:id])
       else
-        widgets.find_by_uid!(params[:id])
+        Widget.find_by_uid!(params[:id])
       end
     else
       w = widgets.build
@@ -26,6 +34,7 @@ class WidgetsController < ApplicationController
   end
 
   expose(:widget_search) do
+    params[:search] ||= { :location => 'country:pl' }
     Search.new(params[:search])
   end
 

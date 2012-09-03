@@ -306,6 +306,52 @@
         color: #9eb6c3;
       }
     }
+    #relic_identification_input, #relic_reason_input, #relic_description_input, #relic_street_input{
+      label{
+        font-weight: 700;
+        display: block;
+        margin: 5px 0;
+      }
+      input{
+        width: 650px;
+        margin-bottom: 10px;
+      }
+      .block{
+        font-size: 12px;
+        color: #505057;
+        background: #f1f3f5 asset-data-url("icon-hint.png") 9px 50% no-repeat;
+        padding: 6px 30px;
+        line-height: 16px;
+        margin-bottom: 10px;
+      }
+      textarea{
+        padding: 5px;
+        width: 658px;
+      }
+    }
+    section.edit{
+      width: 670px;
+      &.photos .actions{
+        input[type="submit"]{
+          float: left;
+        }
+      }
+      form .string input{
+        height: auto;
+      }
+      input[type="text"]{
+        width: 505px;
+      }
+      .row{
+        padding: 15px 0;
+      }
+      #relic_description_input{
+        margin-bottom: 20px;
+      }
+      #relic_description.redactor{
+        width: 670px;
+      }
+    }
   }
 }
 .suggested-relics-wrapper{
@@ -350,6 +396,8 @@
       h3{
         font-size: 16px;
         line-height: 22px;
+        color: #323232;
+        font-weight: 700;
       }
       span{
         font-size: 13px;
@@ -423,4 +471,27 @@ body.relics.new #colorbox {
 
 #location_foreign_relic_input{
   text-align: right;
+}
+
+.error{
+  .input{
+    input.error, textarea.error, .redactor_box{
+      border: 1px solid #d10000;
+      @include box-shadow(0 0 5px 0 rgba(154,0,0,.3));
+    }
+    .help-inline{
+      font-size: 12px;
+      color: #D51818;
+      margin-top: -2px;
+      margin-bottom: 15px;
+      display: block;
+    }
+    .redactor_box + .help-inline{
+      margin-top: 10px;
+    }
+  }
+}
+
+.fancybox-inner .suggested-relics-wrapper{
+  width: 960px;
 }

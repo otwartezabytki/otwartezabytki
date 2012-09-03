@@ -122,16 +122,4 @@ module ApplicationHelper
     end if location_array.present?
     @location_breadcrumbs
   end
-
-  def modify_search_params(params, options = {})
-    location_fields = ['commune_id', 'district_id', 'voivodeship_id', 'country_id']
-
-    options.each do |key, value|
-      params = params.except(*location_fields) if location_fields.include?(key.to_s)
-      params[key] = value
-    end
-
-    params
-  end
-
 end

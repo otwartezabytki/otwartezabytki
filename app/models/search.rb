@@ -4,7 +4,7 @@ class Search
   extend ActiveModel::Naming
 
   attr_accessor :q, :place, :from, :to, :categories, :state, :existance, :location, :order, :lat, :lon, :bounding_box, :load
-  attr_accessor :conditions, :range_conditions, :per_page, :page, :has_photos, :has_description, :facets, :zoom, :country_id
+  attr_accessor :conditions, :range_conditions, :per_page, :page, :has_photos, :has_description, :facets, :zoom
 
   def initialize(attributes = {})
     attributes.each do |name, value|
@@ -41,45 +41,56 @@ class Search
     end
   end
 
-  # pl-
+
+  def location=(value)
+    _, location_type, location_ids = value.match('^(country|voivodeship|district|commune|place):(.*)$').to_a
+    location_ids = location_ids.split(',') if location_ids.present?
+
+    @location = if location_type.present? && location_ids.present? && location_ids.length > 0
+      case location_type
+        when 'country'
+          [location_ids]
+        when 'voivodeship'
+          [['pl'], location_ids]
+        when 'district'
+          voivodeship_ids = District.where(:id => location_ids).map(&:voivodeship_id).uniq.map(&:to_s)
+          [['pl'], voivodeship_ids, location_ids]
+        when 'commune'
+          district_ids = Commune.where(:id => location_ids).map(&:district_id).uniq.map(&:to_s)
+          voivodeship_ids = District.where(:id => district_ids).map(&:voivodeship_id).uniq.map(&:to_s)
+          [['pl'], voivodeship_ids, district_ids, location_ids]
+        when 'place'
+          commune_ids = Place.where(:id => location_ids).map(&:commune_id).uniq.map(&:to_s)
+          district_ids = Commune.where(:id => commune_ids).map(&:district_id).uniq.map(&:to_s)
+          voivodeship_ids = District.where(:id => district_ids).map(&:voivodeship_id).uniq.map(&:to_s)
+          [['pl'], voivodeship_ids, district_ids, commune_ids, location_ids]
+        else
+          []
+      end
+    else
+      value.to_s.split('-').map {|l| l.split(':') }
+    end
+  end
+
   def location
-    @location.to_s.split('-').map {|l| l.split(':') }
-  end
-
-  def country_id=(id)
-    @country_id = id
-    @location = id
-  end
-
-  def voivodeship_id=(id)
-    @voivodeship_id = id
-    @location = "pl-#{id}"
-  end
-
-  def district_id=(id)
-    @district_id = id
-    @location = "pl-#{District.find(id).voivodeship_id}-#{id}"
-  end
-
-  def commune_id=(id)
-    @commune_id = id
-    @location = "pl-#{Commune.find(id).district.voivodeship_id}-#{Commune.find(id).district_id}-#{id}"
+    @location || []
   end
 
   def facets
-    @facets.to_s.split(',')
+    case location.length
+      when 0 then ["countries"]
+      when 1 then ["countries", "voivodeships"]
+      when 2 then ["countries", "voivodeships", "districts"]
+      when 3 then ["countries", "voivodeships", "districts", "communes"]
+      when 4 then ["countries", "voivodeships", "districts", "communes", "places"]
+      when 5 then ["countries", "voivodeships", "districts", "communes", "places"]
+    end
   end
 
-  def zoom=(zoom)
-    facets = case zoom.to_i
-      when 0..4 then ["countries"]
-      when 5..6 then ["countries", "voivodeships"]
-      when 7..8 then ["voivodeships", "districts"]
-      when 9..10 then ["districts", "communes"]
-      when 11..20 then ["communes", "places"]
-    end
-
-    @facets = facets.join(',')
+  def zoom
+    [Country, Voivodeship, District, Commune, Place][location.length - 1].find(location.last.first).default_zoom
+  rescue
+    0
   end
 
   def order
@@ -119,26 +130,26 @@ class Search
   end
 
   def enable_facet_navigation
-    if navfacet?('pl') || facets.size > 0
+    if navfacet?('pl')
 
       @tsearch.facet "voivodeships", filter_facet_conditions('voivodeship.id', 'district.id', 'commune.id', 'place.id') do
         terms nil, :script_field => "_source.voivodeship.name + '_' + _source.voivodeship.id", :size => 16, :order => 'term'
-      end if facets.size == 0 || facets.include?('voivodeships')
+      end if facets.size > 0
 
       @tsearch.facet "districts", filter_facet_conditions('district.id', 'commune.id', 'place.id') do
         terms nil, :script_field => "_source.district.name + '_' + _source.district.id", :size => 100, :order => 'term'
-      end if location.size > 1 || facets.include?('districts')
+      end if location.size > 1
 
       @tsearch.facet "communes", filter_facet_conditions('commune.id', 'place.id') do
         terms nil, :script_field => "_source.commune.name + '_' + _source.virtual_commune_id", :size => 100, :order => 'term'
-      end if location.size > 2 || facets.include?('communes')
+      end if location.size > 2
 
       @tsearch.facet "places", filter_facet_conditions('place.id') do
          terms nil, :script_field => "_source.place.name + '_' + _source.place.id", :size => 500, :order => 'term'
-      end if location.size > 3 || facets.include?('places')
+      end if location.size > 3
     end
 
-    if navfacet?('world') || facets.include?('countries')
+    if navfacet?('world')
       @tsearch.facet "countries", filter_facet_conditions('country') do
         terms 'country', :size => 200, :order => 'term'
       end

@@ -18,7 +18,7 @@ module RelicsHelper
 
   def categoires_facets
     relics.terms('categories', true).map do |t|
-      ["#{Category.all.key(t['term'])} (#{t['count']})", t['term']]
+      ["#{Category.all[t['term']]} (#{t['count']})", t['term']]
     end
   end
 

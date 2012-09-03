@@ -27,6 +27,8 @@ class Place < ActiveRecord::Base
   scope :not_custom, where(:custom => false)
   scope :search, lambda {|term| where("name ILIKE ?", "%#{term}%") }
 
+  attr_accessor :facet_count
+
   def virtual_commune_id
     self[:virtual_commune_id] || self[:commune_id]
   end
@@ -121,7 +123,7 @@ class Place < ActiveRecord::Base
     commune_id
   end
 
-  def default_zoom
-    10
+  def self.zoom_range
+    11..20
   end
 end

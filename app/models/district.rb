@@ -30,7 +30,7 @@ class District < ActiveRecord::Base
     voivodeship_id
   end
 
-  def default_zoom
-    8
+  def self.zoom_range
+    6..10
   end
 end

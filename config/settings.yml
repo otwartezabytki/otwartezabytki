@@ -1,5 +1,6 @@
 debug_assets: true
 oz:
-  ga_key: 'Your Google Analitics key'
+  gm_key: 'Your Google Maps key'
+  ga_key: 'Your Google Analytics key'
   email_sender: kontakt@otwartezabytki.pl
   host: otwartezabytki.dev
