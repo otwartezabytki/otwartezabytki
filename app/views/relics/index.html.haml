@@ -2,7 +2,13 @@
   = f.hidden_field :location, :value => f.object.location.join('-')
   .span3
     = render 'localization_facets'
-    = f.input :categories, :as => :check_boxes, :collection => categoires_facets, :disabled => disabled(f.object, 'categories'), :label => 'Kategorie'
+    %h3 Kategorie:
+    %hr
+    = f.input :categories, :as => :check_boxes, :collection => categoires_facets('first'), :disabled => disabled(f.object, 'categories'), :label => false
+    %hr
+    = f.input :categories, :as => :check_boxes, :collection => categoires_facets('second'), :disabled => disabled(f.object, 'categories'), :label => false
+    %hr
+    = f.input :categories, :as => :check_boxes, :collection => categoires_facets('third'), :disabled => disabled(f.object, 'categories'), :label => false
 
 
   %div{:class => relics.empty? ? "span9" : "span9"}
@@ -58,7 +64,6 @@
               = f.input :existance, :label => false, :as => :check_boxes, :collection => existance_facets,  :disabled => disabled(f.object, 'existance')
         %section.order
           = f.input :order, :as => :select, :label => "sortuj według:", :collection => order_collection, :include_blank => false, :selected => f.object.order
-      - model_class = Relic.new.class
       - if relics.total.zero?
         .search-no-results
           %p
@@ -84,10 +89,4 @@
         = render :partial => "relics", :locals => {:collection => relics }
 
       = paginate relics, :remote => true
-
-      - unless relics.incorrect_count.zero?
-        %p#adding-note
-          Chesz dodać zabytek, którego nie możesz znaleźć?
-          %br
-          Będzie to możliwe za miesiąc, w pełnej wersji serwisu.
 

@@ -16,10 +16,12 @@ module RelicsHelper
     ].sample
   end
 
-  def categoires_facets
+  def categoires_facets column = nil
     relics.terms('categories', true).map do |t|
-      ["#{Category.all[t['term']]} (#{t['count']})", t['term']]
-    end
+      if column.blank? or Category.send("#{column}_column").keys.include? t['term']
+        ["#{Category.all[t['term']]} (#{t['count']})", t['term']]
+      end
+    end.compact
   end
 
   def state_facets
