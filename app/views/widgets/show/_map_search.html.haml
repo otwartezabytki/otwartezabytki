@@ -1,25 +1,43 @@
 .sidebar{ :"data-replace" => ".sidebar" }
-  %h1.logo OtwarteZabytki
-  = semantic_form_for widget_search, :url => widget_path(widget.uid), :method => :get do |f|
-    = f.hidden_field :zoom, :value => params[:search].try(:[], :zoom) || 5
+  = link_to '/', :target => :_top do
+    %h1.logo
+  = semantic_form_for widget_search, :url => widget_path(widget.uid), :method => :get, :remote => true do |f|
+    = f.hidden_field :location, :value => params[:search].try(:[], "location")
     %section.search
       %h2
         Wyszukaj
         = link_to image_tag("widget-helper.png"), '#', :class => "tooltip", :"data-placement" => "right", :title => "To jest podpowiedź do pola wyszukiwania."
       = f.input :q, :label => false, :input_html => { :class => 'autocomplete-q'}
-    %section.locations
-      %h2
-        Lokalizacje
-        = link_to image_tag("widget-helper.png"), '#', :class => "tooltip", :"data-placement" => "right", :title => "To jest podpowiedź do pola lokalizacje."
-      - if relics.widget_facets_tree
-        %ul
-          = render 'shared/locations_tree', :node => relics.widget_facets_tree
-    %section.categories
-      %h2
-        Kategorie
-        = link_to image_tag("widget-helper.png"), '#', :class => "tooltip", :"data-placement" => "right", :title => "To jest podpowiedź do kategorii."
-      = f.input :categories, :as => :check_boxes, :collection => categoires_facets, :disabled => disabled(f.object, 'categories'), :label => 'Kategorie', :label => false
+    .fluid_block
+      %section.locations{ :class => (cookies['section-shown'] == 'locations' ? "maxed" : cookies['section-shown'] == 'categories' ? 'mined' : '') }
+        %h2
+          Lokalizacje
+          = link_to image_tag("widget-helper.png"), '#', :class => "tooltip", :"data-placement" => "right", :title => "To jest podpowiedź do pola lokalizacje."
+        .antiscroll-wrap.locations_tree
+          .antiscroll-inner
+            %ul
+              %li
+                = link_to widget_path(widget.id, :search => params[:search].merge(:"location" => "country:pl")), :remote => true do
+                  %span.facet_name Polska
+                  %span.relic_count (#{relics.count('poland')})
+              - if relics.polish_facets_tree.length > 0
+                %ul
+                  = render 'shared/locations_tree', :node => relics.polish_facets_tree
+        = link_to 'pokaż więcej »', '#', :class => "", :class => "show-more"
+        = link_to '« pokaż mniej', '#', :class => "", :class => "show-less"
+      %section.categories{ :class => (cookies['section-shown'] == 'categories' ? "maxed" : cookies['section-shown'] == 'locations' ? 'mined' : '') }
+        %h2
+          Kategorie
+          = link_to image_tag("widget-helper.png"), '#', :class => "tooltip", :"data-placement" => "right", :title => "To jest podpowiedź do kategorii."
+
+        .antiscroll-wrap
+          .antiscroll-inner
+            = f.input :categories, :as => :check_boxes, :collection => categoires_facets, :disabled => disabled(f.object, 'categories'), :label => 'Kategorie', :label => false
+        = link_to 'pokaż więcej »', '#', :class => "", :class => "show-more"
+        = link_to '« pokaż mniej', '#', :class => "", :class => "show-less"
+= link_to 'wyszukiwanie<br />zaawansowane »'.html_safe, relics_path, :target => :_top, :class => "advanced_search"
 .map
+  #map_canvas{ :style => "width: 100%; height: 100%;" }
 
 :javascript
   config = #{widget.config.to_json};

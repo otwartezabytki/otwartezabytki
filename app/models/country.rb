@@ -37,7 +37,11 @@ class Country
   end
 
   def default_zoom
-    5
+    4
+  end
+
+  def self.zoom_range
+    0..4
   end
 
   attr_accessor :facet_count

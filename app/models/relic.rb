@@ -228,7 +228,7 @@ class Relic < ActiveRecord::Base
       :virtual_commune_id => self.place.virtual_commune_id,
       :place            => { :id => self.place_id,                  :name => self.place.name },
       # new search fields
-      :categories       => Category.all.values.sample(3),
+      :categories       => Category.all.keys.sample(3),
       :has_photos       => [true, false].sample,
       :state            => States.sample,
       :existance        => Existences.sample,

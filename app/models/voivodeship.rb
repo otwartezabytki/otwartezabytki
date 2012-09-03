@@ -30,7 +30,7 @@ class Voivodeship < ActiveRecord::Base
     'pl'
   end
 
-  def default_zoom
-    7
+  def self.zoom_range
+    7..8
   end
 end

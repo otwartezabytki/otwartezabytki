@@ -16,4 +16,14 @@ module GeocodeViewport
     end
   end
 
+  def default_zoom
+    east = viewport.split('|').first.split(',').last.to_f
+    west = viewport.split('|').last.split(',').last.to_f
+    angle = east - west
+    angle += 360.0 if angle < 0.0
+    zoom = (Math.log(360.0 / angle) / Math.log(2)).floor
+
+    [self.class.zoom_range.to_a.last, [self.class.zoom_range.to_a.first, zoom].max, zoom].min
+  end
+
 end

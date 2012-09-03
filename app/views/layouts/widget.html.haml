@@ -8,9 +8,10 @@
     = yield :stylesheets
     %link{:href => "http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,600,300&subset=latin,latin-ext", :rel => "stylesheet", :type => "text/css"}
   %body{ :class => controller_name + " " + action_name + " " + widget.widget_template.partial_name }
-    %section#main
-      .container.main-container{ :'data-replace' => '.main-container' }
-        = yield
+    #root
+      %section#main
+        .container.main-container{ :'data-replace' => '.main-container' }
+          = yield
     != include_gon(:camel_case => true)
     = yield :javascripts
     - if Rails.env.production?

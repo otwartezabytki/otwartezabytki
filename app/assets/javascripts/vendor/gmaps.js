@@ -6,7 +6,7 @@
  * Released under the MIT License.
  */
 
-var GMaps = null;
+GMaps = null;
 
 window.loadGMaps = function() {
 

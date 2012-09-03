@@ -57,7 +57,7 @@ ajax_callback = (data, status, xhr) ->
         to_replace = $('#root').find($(node).data('replace'))
         if to_replace.length
           to_replace.replaceWith(node)
-          $.fancybox.close()
+          $.fancybox.close() if $.fancybox
           $(node).initialize()
         else
           try_to_process_replace(data_replace_parent) if data_replace_parent
