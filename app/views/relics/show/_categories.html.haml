@@ -1,20 +1,20 @@
 %section.show.categories
   %h2 Sekcje
   - if relic.categories.length > 0 || relic.tags.length > 0
-    = link_to 'edytuj', edit_section_relic_path(relic.id, :categories), :title => 'edytuj kategorie zabytku', :remote => true, :class => "edit-relic-link"
+    = link_to 'edytuj', edit_section_relic_path(relic, :categories), :title => 'edytuj kategorie zabytku', :remote => true, :class => "edit-relic-link"
     .content
       .categories
         %strong Kategorie:
         - if relic.categories.length > 0
           %span.content= relic.categories.map{ |c| Category.all[c] }.join(', ')
         - else
-          = link_to "nie dodano, uzupełnij »", edit_section_relic_path(relic.id, :categories), :remote => true
+          = link_to "nie dodano, uzupełnij »", edit_section_relic_path(relic, :categories), :remote => true
       .tags
         %strong Tagi:
         - if relic.tags.length > 0
           %span.content= relic.tags.join(', ')
         - else
-          = link_to "nie dodano, uzupełnij »", edit_section_relic_path(relic.id, :categories), :remote => true
+          = link_to "nie dodano, uzupełnij »", edit_section_relic_path(relic, :categories), :remote => true
   - else
     .placeholder
       %p Zabytek nie został jeszcze skategoryzowany.
