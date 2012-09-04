@@ -1,5 +1,168 @@
-body.widgets {
-  h1 { font-size: 28px; line-height: 30px; }
-  h2 { font-size: 24px; line-height: 30px; }
-  input[type="text"] { width: 600px; }
+@import "compass/layout";
+@import "compass/css3";
+
+section.widgets{
+  h1{
+    background: asset-data-url("icon-download.png") no-repeat;
+    background-position: 30px;
+    background-color: #546f7d; /* Old browsers */
+    background-color: -moz-linear-gradient(top, #546f7d 0%, #436576 100%); /* FF3.6+ */
+    background-color: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #546f7d), color-stop(100%, #436576)); /* Chrome,Safari4+ */
+    background-color: -webkit-linear-gradient(top, #546f7d 0%, #436576 100%); /* Chrome10+,Safari5.1+ */
+    background-color: -o-linear-gradient(top, #546f7d 0%, #436576 100%); /* Opera 11.10+ */
+    background-color: -ms-linear-gradient(top, #546f7d 0%, #436576 100%); /* IE10+ */
+    background-color: linear-gradient(to bottom, #546f7d 0%, #436576 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#546f7d', endColorstr = '#436576', GradientType = 0); /* IE6-9 */
+    margin: 0;
+    height: 55px;
+    padding: 25px 0 0 80px;
+    width: 878px;
+  }
+  .content{
+    background: #fff;
+    @include box-shadow(0 0 3px 0 rgba(0,0,0,0.2));
+    padding: 35px 30px;
+    display: inline-block;
+    width: 900px;
+    .description{
+      float: left;
+      width: 285px;
+      h3{
+        font-size: 20px;
+        line-height: 22px;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+      p{
+        line-height: 17px;
+        font-size: 13px;
+        margin-bottom: 25px;
+      }
+    }
+    .widgets{
+      margin-left: 315px;
+      .widget{
+        border-bottom: 3px solid #486a7c;
+        margin-bottom: 30px;
+        .image{
+          float: left;
+          margin-bottom: 20px;
+        }
+        .widget_content{
+          margin-left: 220px;
+        }
+        h2{
+          font-weight: 600;
+          font-size: 22px;
+          line-height: 27px;
+          margin-bottom: 10px;
+        }
+        p{
+          font-size: 13px;
+          line-height: 18px;
+        }
+        .actions{
+          display: inline-block;
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+.use-widget, .edit_widget .sidebar input[type="submit"]{
+  margin: 25px 0 20px;
+  @include background(linear-gradient(#4b6d7e, #436576));
+  color: #fff;
+  border: 0;
+  font-size: 12px;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
+  text-transform: uppercase;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  padding: 7px 20px;
+  cursor: pointer;
+  float: left;
+  font-weight: 600;
+  &:hover {
+    @include background(linear-gradient(#437994, #2b607b));
+    text-decoration: none;
+    color: #fff;
+  }
+  &:active {
+    @include background(linear-gradient(#2b607b, #437893));
+  }
+}
+
+.edit_widget{
+  background: #fff asset-data-url("edit-widget-bg.png") repeat-y;
+  display: inline-block;
+  width: 100%;
+  input[type="text"], textarea{
+    @include border-radius(2px);
+    border: 1px solid #646464;
+    @include background(linear-gradient(#fafafa, #ffffff));
+    @include box-shadow(inset 0 1px 3px 0 rgba(0,0,0,.3), 0 1px 1px 0 rgba(0,0,0,.1));
+    height: 30px;
+    padding: 0 8px;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 10px 0 20px;
+    width: 180px;
+  }
+  h1{
+    font-weight: 600;
+    font-size: 16px;
+    color: #fff;
+    height: 45px;
+    line-height: 45px;
+    @include background(linear-gradient(#36596b, #2f5163));
+    padding: 0 12px;
+    span{
+      font-style: italic;
+    }
+  }
+  .sidebar{
+    float: left;
+    width: 198px;
+    padding: 20px 15px;
+    label{
+      font-weight: 700;
+      font-size: 14px;
+      display: block;
+    }
+    input[type="submit"]{
+      float: right;
+      padding: 7px 15px;
+      margin: 0;
+    }
+  }
+  .content{
+    margin-left: 228px;
+    padding: 20px;
+    h2{
+      font-weight: 600;
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+    .help-inline, .block{
+      font-size: 12px;
+      color: #505057;
+      background: #F1F3F5 asset-data-url("icon-hint.png") 9px 50% no-repeat;
+      padding: 6px 30px;
+      line-height: 16px;
+      margin-top: 10px;
+      display: block;
+    }
+    textarea{
+      padding: 12px;
+      width: 666px;
+      max-width: 666px;
+      height: 50px;
+      max-height: 500px;
+      font-weight: normal;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+    }
+  }
 }
