@@ -52,7 +52,7 @@ class RelicbuildersController < ApplicationController
     elsif params[:place_id].present?
       Place.find(params[:place_id])
     end
-    @relic = if geo_hash[:foreign]
+    @relic = if geo_hash && geo_hash[:foreign]
       ForeignRelic.new(
         :build_state  => 'address_step',
         :country_code => geo_hash[:country_code],

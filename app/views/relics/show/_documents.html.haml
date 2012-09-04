@@ -1,7 +1,7 @@
 %section.show.documents
   %h2 Dokumenty urzędowe
   - if relic.all_documents.count > 0
-    = link_to 'edytuj', edit_section_relic_path(relic.id, :documents), :title => 'edytuj dokumenty urzędowe zabytku', :remote => true, :class => "edit-relic-link"
+    = link_to 'edytuj', edit_section_relic_path(relic, :documents), :title => 'edytuj dokumenty urzędowe zabytku', :remote => true, :class => "edit-relic-link"
     .content
       - relic.all_documents.each do |document|
         .document{ :class => document.mime_class }
@@ -13,7 +13,7 @@
             rozmiar:
             = (document.size / 1024.0 / 1024.0).round(1)
             MB
-      = link_to "wgraj plik", download_zip_relic_path(relic.id)
+      = link_to "wgraj plik", download_zip_relic_path(relic)
   - else
     .placeholder
       %p Nikt jeszcze nie wgrał żadnego pliku. Bądź pierwszy.

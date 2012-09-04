@@ -76,6 +76,9 @@ end
 module Tire
   module Results
     class Item
+      def slug
+        self[:slug] || self[:id]
+      end
       def corrected?(user = nil)
         return false
         @is_corrected ||= {}

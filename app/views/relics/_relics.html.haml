@@ -5,7 +5,7 @@
         = image_tag "bg-relic-image-ph.png"
       .body
         .name
-          %h2= link_to relic.identification, relic_path(relic)
+          %h2= link_to relic.identification, relic_path(relic.slug)
         = state_tag(relic)
         .pathway
           %span.label lokalizacja:

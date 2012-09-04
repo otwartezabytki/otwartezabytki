@@ -1,7 +1,7 @@
 %section.show.entries
   %h2 Społeczność
   - if relic.entries.count > 0
-    = link_to 'edytuj', edit_section_relic_path(relic.id, :entries), :title => 'edytuj wpisu użytkowników o zabytku', :remote => true, :class => "edit-relic-link"
+    = link_to 'edytuj', edit_section_relic_path(relic, :entries), :title => 'edytuj wpisu użytkowników o zabytku', :remote => true, :class => "edit-relic-link"
     .content
       - relic.entries.each do |entry|
         %article.entry
@@ -14,4 +14,4 @@
         %br
         Zrób to Ty!
 
-      = link_to "dodaj wpis", edit_section_relic_path(relic.id, :entries), :remote => true
+      = link_to "dodaj wpis", edit_section_relic_path(relic, :entries), :remote => true

@@ -72,7 +72,6 @@ class Place < ActiveRecord::Base
           :country      => find_by_type.call(data, 'country', 'political'),
           :country_code => find_by_type.call(data, 'country', 'political', 'short_name')
         }
-        Rails.logger.info location
         if location[:country] != 'Polska'
           location[:foreign] = true
           return location

@@ -3,7 +3,7 @@
   .content
     .photo_content(data-replace="section.show.photo .photo_content")
       - if tree_photos.one_before(photo.id).present?
-        = link_to "«", relic_photo_path(relic.id, tree_photos.one_before(photo.id)), :remote => true, :class => "prev" 
+        = link_to "«", relic_photo_path(relic.id, tree_photos.one_before(photo.id)), :remote => true, :class => "prev"
       - if tree_photos.one_after(photo.id).present?
         = link_to "»", relic_photo_path(relic.id, tree_photos.one_after(photo.id)), :remote => true, :class => "next"
       .photo_center{ :style => "width: #{tree_photo.file_full_width || 800}px; margin: 0 auto;" }
@@ -19,10 +19,10 @@
         .info-right
           %p
             Zdjęcie należy do obiektu
-            = link_to relic.identification, relic_path(relic.id)
+            = link_to relic.identification, [relic]
 
           - if relic.parent
             należącego do zespołu zabytków
-            = link_to relic.parent.identification, relic_path(relic.parent.id)
+            = link_to relic.parent.identification, [relic.parent]
 
     %ul#slider_midi.jcarousel-skin-midi{ :"data-photos" => tree_photos.all.to_json }
