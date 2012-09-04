@@ -555,6 +555,9 @@ a {
 
 .span9 #relics {
   width: 720px;
+  section.results{
+    position: relative;
+  }
 }
 
 #relic-edit {
@@ -633,6 +636,55 @@ a {
       padding: 7px 0 7px 0px;
       background: none;
     }
+  }
+}
+
+.sidebar-categories{
+  margin-top: 20px;
+  h3 {
+    background: asset-data-url('icon-categories.png') no-repeat;
+    padding-left: 28px;
+    margin: 20px 0;
+    font-size: 16px;
+    line-height: 18px;
+  }
+  .choices-group{
+    padding-bottom: 5px;
+    border-bottom: 1px solid #dcdcdc;
+    margin-bottom: 15px;
+    margin-right: 10px;
+    label{
+      font-weight: 600;
+      padding: 3px 0;
+      display: block;
+    }
+    span {
+      em{
+        background: #dce4e8;
+        color: #236282;
+        float: right;
+        margin-top: -4px;
+        padding: 4px 5px;
+        font-size: 12px;
+        @include border-radius(2px);
+        font-style: normal;
+      }
+    }
+  }
+}
+
+.results .loading{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,0.7) asset-data-url("loading-bg.png") 0 82px no-repeat;
+  z-index: 2;
+  h3{
+    font-size: 20px;
+    font-weight: 600;
+    color: #0e0e0e;
+    text-align: center;
+    margin-top: 165px;
   }
 }
 
