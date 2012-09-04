@@ -4,7 +4,7 @@
     - widgets.each do |widget|
       .widget
         %h2= widget.widget_template.name
-        %input{ type: 'text', value: widget.snippet(request.host) }
+        %input{ type: 'text', value: widget.snippet }
         = link_to 'Edytuj widget', edit_widget_path(widget.id)
 - else
   %h1 Nie posiadasz jeszcze żadnych widgetów

@@ -22,6 +22,11 @@ class WidgetTemplate < ActiveRecord::Base
     self.class.name.underscore.split('/').last
   end
 
+  def snippet(widget)
+    widget_url = Rails.application.routes.url_helpers.widget_url(widget.uid, :host => Settings.oz.host)
+    "<iframe src='#{widget_url}' width='#{widget.config.width || 635}' height='#{widget.config.height || 500}'></iframe>"
+  end
+
   class << self
     def configuration(*args)
       args.each do |arg|
