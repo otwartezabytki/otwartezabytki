@@ -25,11 +25,9 @@ class Widget < ActiveRecord::Base
 
   validates :widget_template_id, :presence => true
 
-  def snippet(host)
-    widget_url = Rails.application.routes.url_helpers.widget_url(uid, :host => host)
-    "<iframe src='#{widget_url}' width='#{config.width || 635}' height='#{config.height || 500}'></iframe>"
+  def snippet
+    widget_template.snippet(self)
   end
-
 
   protected
 
