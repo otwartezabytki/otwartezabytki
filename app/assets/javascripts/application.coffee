@@ -135,3 +135,42 @@ $(document).ready ->
 
   target = document.getElementById("spin")
   spinner = new Spinner(opts).spin(target)
+
+$ ->
+  $("#search_order").select2
+    minimumResultsForSearch: 6
+    dropdownCssClass: 'search-order-dropdown'
+    containerCssClass: 'search-order-container'
+    width: '170px'
+
+$('#location_foreign_relic').change ->
+  $("#location_country_code").select2
+    minimumResultsForSearch: 250
+    dropdownCssClass: 'search-order-dropdown'
+    containerCssClass: 'search-order-container'
+    width: '170px'
+
+$ ->
+  $("#relic_voivodeship_id").select2
+    minimumResultsForSearch: 20
+    dropdownCssClass: 'search-order-dropdown'
+    containerCssClass: 'search-order-container'
+    width: '175px'
+  
+  $("#relic_district_id").select2
+    minimumResultsForSearch: 50
+    dropdownCssClass: 'search-order-dropdown'
+    containerCssClass: 'search-order-container'
+    width: '175px'
+  
+  $("#relic_commune_id").select2
+    minimumResultsForSearch: 50
+    dropdownCssClass: 'search-order-dropdown'
+    containerCssClass: 'search-order-container'
+    width: '175px'
+
+  $("#relic_place_id").select2
+    minimumResultsForSearch: 20
+    dropdownCssClass: 'search-order-dropdown'
+    containerCssClass: 'search-order-container'
+    width: '555px'
