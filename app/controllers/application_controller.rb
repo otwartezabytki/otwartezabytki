@@ -8,6 +8,8 @@ class ApplicationController < ActionController::Base
   def resolve_layout
     if request.xhr?
       'ajax'
+    elsif Subdomain.matches?(request)
+      'iframe'
     else
       'application'
     end
