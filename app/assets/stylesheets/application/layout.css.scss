@@ -641,8 +641,9 @@ a {
 
 .sidebar-categories{
   margin-top: 20px;
+  width: 240px;
   h3 {
-    // background: asset-data-url('icon-categories.png') no-repeat;
+    background: asset-data-url('icon-categories.png') no-repeat;
     padding-left: 28px;
     margin: 20px 0;
     font-size: 16px;
@@ -677,7 +678,7 @@ a {
   position: absolute;
   width: 100%;
   height: 100%;
-  // background: rgba(255,255,255,0.7) asset-data-url("loading-bg.png") 0 82px no-repeat;
+  background: rgba(255,255,255,0.7) asset-data-url("loading-bg.png") 0 82px no-repeat;
   z-index: 2;
   h3{
     font-size: 20px;
