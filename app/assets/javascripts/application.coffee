@@ -114,3 +114,24 @@ jQuery.initializer 'div.new_relic section.main', ->
 
 $('.flash-info-permament .close').click ->
   $(".flash-info-permament").slideUp()
+
+$(document).ready ->
+  opts =
+    lines: 9 # The number of lines to draw
+    length: 0 # The length of each line
+    width: 8 # The line thickness
+    radius: 16 # The radius of the inner circle
+    corners: 1 # Corner roundness (0..1)
+    rotate: 0 # The rotation offset
+    color: "#000" # #rgb or #rrggbb
+    speed: 0.7 # Rounds per second
+    trail: 40 # Afterglow percentage
+    shadow: false # Whether to render a shadow
+    hwaccel: false # Whether to use hardware acceleration
+    className: "spinner" # The CSS class to assign to the spinner
+    zIndex: 2e9 # The z-index (defaults to 2000000000)
+    top: 100 # Top position relative to parent in px
+    left: 332 # Left position relative to parent in px
+
+  target = document.getElementById("spin")
+  spinner = new Spinner(opts).spin(target)

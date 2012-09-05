@@ -19,7 +19,7 @@ module RelicsHelper
   def categoires_facets column = nil
     relics.terms('categories', true).map do |t|
       if column.blank? or Category.send("#{column}_column").keys.include? t['term']
-        ["#{Category.all[t['term']]} (#{t['count']})", t['term']]
+        ["#{Category.all[t['term']]} <em>#{t['count']}</em>".html_safe, t['term']]
       end
     end.compact
   end

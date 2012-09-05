@@ -2,13 +2,11 @@
   = f.hidden_field :location, :value => f.object.location.join('-')
   .span3
     = render 'localization_facets'
-    %h3 Kategorie:
-    %hr
-    = f.input :categories, :as => :check_boxes, :collection => categoires_facets('first'), :disabled => disabled(f.object, 'categories'), :label => false
-    %hr
-    = f.input :categories, :as => :check_boxes, :collection => categoires_facets('second'), :disabled => disabled(f.object, 'categories'), :label => false
-    %hr
-    = f.input :categories, :as => :check_boxes, :collection => categoires_facets('third'), :disabled => disabled(f.object, 'categories'), :label => false
+    .sidebar-categories
+      %h3 Kategorie:
+      = f.input :categories, :as => :check_boxes, :collection => categoires_facets('first'), :disabled => disabled(f.object, 'categories'), :label => false
+      = f.input :categories, :as => :check_boxes, :collection => categoires_facets('second'), :disabled => disabled(f.object, 'categories'), :label => false
+      = f.input :categories, :as => :check_boxes, :collection => categoires_facets('third'), :disabled => disabled(f.object, 'categories'), :label => false
 
 
   %div{:class => relics.empty? ? "span9" : "span9"}
@@ -66,25 +64,20 @@
           = f.input :order, :as => :select, :label => "sortuj według:", :collection => order_collection, :include_blank => false, :selected => f.object.order
       %section.results
         .loading{:style => 'display:none;'}
+          #spin
           %h3 Trwa ładowanie wyników proszę czekać!!!
         - if relics.total.zero?
           .search-no-results
             %p
-              Nie ma do sprawdzenia żadnych zabytków
+              Żaden z zabytków w naszej bazie
               %br
-              pasujących do słowa
-              %strong „#{tsearch.query}”
+              nie spełnia podanych kryteriów.
             - if tsearch.suggestions.present?
               %p
                 Czy chodziło ci może o:
                 - tsearch.suggestions.each do |s|
                   = link_to relics_path(search_params(:q => s.name)), :remote => true do
                     %strong= "#{s.name},"
-            %p
-              Nie zanalazłeś tego czego szukasz?
-              %br
-              = link_to new_relicbuilder_path do
-                %strong DODAJ ZABYTEK
 
         - elsif relics.present?
           %div.relic-header.search
@@ -92,4 +85,3 @@
           = render :partial => "relics", :locals => {:collection => relics }
 
         = paginate relics, :remote => true
-
