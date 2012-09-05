@@ -1,6 +1,7 @@
 # -*- encoding : utf-8 -*-
 class RelicbuildersController < ApplicationController
   before_filter :enable_fancybox, :only => [:geodistance]
+  helper_method :address_params
 
   def new
     @relic = Relic.new
@@ -22,6 +23,7 @@ class RelicbuildersController < ApplicationController
       end
       @relic.place = @places.first if @places.size == 1
     end
+    @relic.parent_id = params[:parent_id]
   end
 
   def geodistance
@@ -30,7 +32,7 @@ class RelicbuildersController < ApplicationController
       :lon => params.get_deep('relic', 'longitude')
     ).perform
     if @relics.total.zero?
-      render :js => "window.location = '#{address_relicbuilder_path(params[:relic].slice(:latitude, :longitude, :place_id))}';"
+      render :js => "window.location = '#{address_relicbuilder_path(address_params)}';"
     end
   end
 
@@ -63,6 +65,7 @@ class RelicbuildersController < ApplicationController
       Relic.new :build_state => 'address_step'
     end
     @relic.place = place if place
+    @relic.parent_id = params[:parent_id]
     @relic.street = (geo_hash || {}).get_deep(:street)
   end
 
@@ -106,5 +109,10 @@ class RelicbuildersController < ApplicationController
       render @relic.build_state.to_s.gsub('_step', '')
     end
   end
+
+  protected
+    def address_params
+      (params[:relic] || {}).slice(:latitude, :longitude, :place_id, :parent_id)
+    end
 
 end

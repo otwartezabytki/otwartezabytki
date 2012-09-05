@@ -39,6 +39,11 @@
 
 # TEMP
 
+jQuery('body.relicbuilders textarea.redactor').redactor
+  focus: false
+  buttons: ['bold', 'italic', 'link', 'unorderedlist']
+  lang: 'pl'
+
 jQuery.initializer 'div.administrative-level', ->
   self = this
   this.on 'change', 'select', (e) ->

@@ -29,4 +29,4 @@
           %span.choose
             %strong To jest ten zabytek!
             = link_to 'Chcę go uzupełnić &raquo;'.html_safe, r
-  = link_to 'Nie ma go na liście &raquo;'.html_safe, address_relicbuilder_path(params[:relic].slice(:latitude, :longitude, :place_id)), :class => 'not-found'
+  = link_to 'Nie ma go na liście &raquo;'.html_safe, address_relicbuilder_path(address_params), :class => 'not-found'

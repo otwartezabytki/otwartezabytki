@@ -3,12 +3,14 @@
   .creator
     %section.main
       %section.creator-step
+        = render :partial => 'parent_relic', :object => @relic.parent
         %p.intro
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras convallis luctus malesuada. Pellentesque purus augue, facilisis id hendrerit et, tincidunt a mauris.
         %p.intro
           Vivamus vestibulum semper odio, nec volutpat sapien egestas ut. Nam iaculis dapibus eros convallis mollis. Nullam non ligula ut leo porta venenatis sed in nibh.
       = semantic_form_for @relic, :url => relicbuilder_path do |f|
-        = f.input :build_state, :as => :hidden
+        = f.hidden_field :build_state
+        = f.hidden_field :parent_id
         - if f.object.is_a? ForeignRelic
           = f.country_code_select :country_code
           = f.input :fprovince
