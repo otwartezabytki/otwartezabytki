@@ -58,6 +58,7 @@ class Place < ActiveRecord::Base
         (data['address_components'].find { |c| type.all? { |t| c['types'].include?(t) } } || {})[attr]
       end
       geo = Geocoder.search([lat, lng].map{|l| l.gsub(',','.').to_f}.join(', ')).find do |result|
+        Rails.logger.info "geo: #{result.inspect}"
         find_by_type.call(result.data, 'locality', 'political').present?
       end
       if geo
