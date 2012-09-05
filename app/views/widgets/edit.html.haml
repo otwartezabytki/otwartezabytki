@@ -1,17 +1,17 @@
 .edit_widget
-  %h1 
-    Konfiguracja widgetu 
-    %span '(nazwa widgetu)'
+  %h1
+    Konfiguracja widgetu
+    %span '#{widget.widget_template.name}'
   .sidebar
     = semantic_form_for widget do |f|
       = render "/widgets/edit/#{widget.widget_template.partial_name}", :form => f
       = f.submit
   .content
     %h2 Podgląd wygenerowanego widgetu
+    .preview
+      = raw(widget.snippet)
+
     %h2 Wygenerowany kod do wstawienia na stronę
     %div
-      %span.block Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulumque sapien. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum que sapien. 
-      %textarea{:cols => "20", :rows => "3"} <script src=”http://otwartezabytki.pl/widget/search.js?api_key=12” />
-
-
-<script type="text/javascript" src="#{widget_url(widget.uid, :format => "js")}"></script>
+      %span.block Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulumque sapien. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum que sapien.
+      %textarea{:cols => "20", :rows => "3"}= widget.snippet
