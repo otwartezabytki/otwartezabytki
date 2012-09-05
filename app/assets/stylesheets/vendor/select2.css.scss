@@ -1,3 +1,6 @@
+@import "compass/layout";
+@import "compass/css3";
+
 /*
 Version: 3.0 Timestamp: Tue Jul 31 21:09:16 PDT 2012
 */
@@ -535,3 +538,57 @@ disabled look for already selected choices in the results dropdown
 .select2-result-unselectable .select2-match { font-weight: normal; }
 
 .select2-offscreen { position: absolute; left: -10000px; }
+
+/* search-order */
+
+.search-order-container{ 
+  &.select2-dropdown-open .select2-choice div b{
+    background-position: 3px 7px;
+  }
+  .select2-choice{ 
+    background-color: #fefefe;
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #d2d2d2), color-stop(0.5, #fefefe));
+    background-image: -webkit-linear-gradient(center bottom, #d2d2d2 0%, #fefefe 50%);
+    background-image: -moz-linear-gradient(center bottom, #d2d2d2 0%, #fefefe 50%);
+    background-image: -o-linear-gradient(bottom, #d2d2d2 0%, #fefefe 50%);
+    background-image: -ms-linear-gradient(top, #d2d2d2 0%, #fefefe 50%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#d2d2d2', endColorstr = '#fefefe', GradientType = 0);
+    background-image: linear-gradient(top, #d2d2d2 0%, #fefefe 50%);
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    border: 1px solid #b0b0b0;
+    box-shadow: inset 0 -1px 2px 0 rgba(0,0,0,0.3);
+    height: 29px;
+    line-height: 29px;
+    div{
+      background: none;
+      border: 0;
+      b{
+        background: asset-data-url("search-order-select2.png") 3px 7px no-repeat;
+      }
+    }
+    span{
+      text-align: left;
+    }
+  }
+}
+
+.search-order-dropdown{
+  margin-top: -3px;
+  background: #ddd;
+  border: 1px solid #b0b0b0;
+  border-top: 0;
+  color: #313132;
+  @include box-shadow(none);
+  @include border-top-radius(0);
+  @include border-bottom-radius(2px);
+  .select2-results{
+    li:first-child{
+      @include border-radius(0);
+    }
+    li:last-child{
+      @include border-bottom-radius(2px);  
+    }
+  }
+}
