@@ -6,7 +6,7 @@ module Relic::Validations
     validates :place, :presence => true, :unless => :foreign_relic?
 
     # build step validations
-    with_options :if => :details_step? do |step|
+    with_options :if => lambda{ |o| o.details_step? or o.photos_step? } do |step|
       step.validates :reason, :identification, :presence => true
     end
 
@@ -26,4 +26,17 @@ module Relic::Validations
       errors.add(:dating_of_obj, I18n.t("errors.messages.date_must_be_parsed"))
     end
   end
+
+  def invalid_step
+    return 'details' if [:reason, :identification].any?{|k| errors.keys.include?(k)}
+    return 'photos'  if [:description].any?{|k| errors.keys.include?(k)}
+    'address'
+  end
+
+  def invalid_step_view
+    self.build_state = "#{invalid_step}"
+    invalid_step
+  end
+
+
 end

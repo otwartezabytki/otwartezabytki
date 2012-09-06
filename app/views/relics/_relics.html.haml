@@ -5,11 +5,8 @@
         = image_tag "bg-relic-image-ph.png"
       .body
         .name
-          %h2= link_to relic.identification, relic_path(relic)
-        .tag
-          %span.done Uzupełniony
-          %span.undone Nieuzupełniony
-          %span.unchecked Niesprawdzony
+          %h2= link_to relic.identification, relic_path(relic.slug)
+        = state_tag(relic)
         .pathway
           %span.label lokalizacja:
           = relic.place_full_name
@@ -20,7 +17,7 @@
             %span.unknown Adres niedosępny
         - unless relic.from.blank?
           .time
-            %span.label data powstania: 
+            %span.label data powstania:
             = relic.from
             -#= "#{relic.from} - #{relic.to}"
         - if false

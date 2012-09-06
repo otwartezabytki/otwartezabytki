@@ -231,7 +231,7 @@ a {
     font-size: 14px;
     padding: 9px;
     padding-left: 28px;
-    @include background-image(linear-gradient(#fafafa, #fff)); 
+    @include background-image(linear-gradient(#fafafa, #fff));
     border: 1px solid #727272;
     @include border-radius(2px);
     @include box-shadow(0 1px 1px 0 rgba(0, 0, 0, 0.1), 0 1px 3px 0 rgba(0, 0, 0, 0.3) inset);
@@ -315,7 +315,7 @@ a {
       float: right;
     }
     .string{
-      label{ 
+      label{
         font-size: 13px;
         margin-right: 5px;
         line-height: 34px;
@@ -332,13 +332,13 @@ a {
       padding: 5px;
       padding-left: 24px;
       width: 95px!important;
-    } 
+    }
   }
   section.second-search{
     border-top: 1px solid #fff;
     padding-top: 5px;
     padding-bottom: 5px;
-    
+
     .wrap{
       @include clearfix;
       padding: 13px 8px;
@@ -394,11 +394,11 @@ a {
         h3{
           margin-left: 18px;
         }
-        li{ 
+        li{
           @include clearfix;
           margin: 9px 0;
         }
-        .tag{ 
+        .tag{
           float: left;
           text-align: right;
           width: 126px;
@@ -424,7 +424,7 @@ a {
             }
           }
         }
-        .text{ 
+        .text{
           font-size: 13px;
           width: 210px;
           float: right;
@@ -555,6 +555,9 @@ a {
 
 .span9 #relics {
   width: 720px;
+  section.results{
+    position: relative;
+  }
 }
 
 #relic-edit {
@@ -633,6 +636,56 @@ a {
       padding: 7px 0 7px 0px;
       background: none;
     }
+  }
+}
+
+.sidebar-categories{
+  margin-top: 20px;
+  width: 240px;
+  h3 {
+    background: asset-data-url('icon-categories.png') no-repeat;
+    padding-left: 28px;
+    margin: 20px 0;
+    font-size: 16px;
+    line-height: 18px;
+  }
+  .choices-group{
+    padding-bottom: 5px;
+    border-bottom: 1px solid #dcdcdc;
+    margin-bottom: 15px;
+    margin-right: 10px;
+    label{
+      font-weight: 600;
+      padding: 3px 0;
+      display: block;
+    }
+    span {
+      em{
+        background: #dce4e8;
+        color: #236282;
+        float: right;
+        margin-top: -4px;
+        padding: 4px 5px;
+        font-size: 12px;
+        @include border-radius(2px);
+        font-style: normal;
+      }
+    }
+  }
+}
+
+.results .loading{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,0.7) asset-data-url("loading-bg.png") 0 82px no-repeat;
+  z-index: 2;
+  h3{
+    font-size: 20px;
+    font-weight: 600;
+    color: #0e0e0e;
+    text-align: center;
+    margin-top: 165px;
   }
 }
 
@@ -782,10 +835,10 @@ div.relic {
       @include border-radius(3px);
       @include text-shadow(rgba(0,0,0,0.3) 0 1px 1px);
       @include box-shadow(inset rgba(0,0,0,0.4) 0 1px 3px);
-      &.done{
+      &.checked{
         @include background(linear-gradient(#82a663, #a1c481));
       }
-      &.undone{
+      &.filled{
         @include background(linear-gradient(#ca7a32, #fbab63));
       }
       &.unchecked{

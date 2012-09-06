@@ -3,13 +3,14 @@
   .creator
     %section.main
       %section.creator-step
+        = render :partial => 'parent_relic', :object => @relic.parent
         %p.intro
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras convallis luctus malesuada. Pellentesque purus augue, facilisis id hendrerit et, tincidunt a mauris.
         %p.intro
           Vivamus vestibulum semper odio, nec volutpat sapien egestas ut. Nam iaculis dapibus eros convallis mollis. Nullam non ligula ut leo porta venenatis sed in nibh.
       %section.edit.photos
         = semantic_form_for @relic, :url => relicbuilder_path(:id => @relic), :html => { :multipart => true }, :method => :put  do |f|
-          = f.input :build_state, :as => :hidden
+          = f.hidden_field :build_state
           = f.input :description, :input_html => { :class => 'redactor' }
           - @relic.photos.each do |photo|
             - if photo.user_id == current_user.id
@@ -96,11 +97,3 @@
       -# = link_to relic_build_path(relic), :class => 'next-step', :method => :put do
       -#   %strong Zakończ!
       -#   %small ...i zobacz dodany zabytek
-
-- content_for :footer_javascripts do
-  -# != javascript_include_tag "profile"
-  :coffeescript
-    $('textarea.redactor').redactor
-      focus: false
-      buttons: ['bold', 'italic', 'link', 'unorderedlist']
-      lang: 'pl'

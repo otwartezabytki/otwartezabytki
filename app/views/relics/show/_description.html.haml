@@ -1,10 +1,10 @@
 %section.show.description
   %h2 Opis
   - if relic.description.present?
-    = link_to 'edytuj', edit_section_relic_path(relic.id, :description), :title => 'edytuj opis zabytku', :remote => true, :class => "edit-relic-link"
+    = link_to 'edytuj', edit_section_relic_path(relic, :description), :title => 'edytuj opis zabytku', :remote => true, :class => "edit-relic-link"
     .content= sanitize relic.description
   - else
     .placeholder
       %p Nikt nie napisał jeszcze opisu dla tego zabytku
       %p Zrób to Ty!
-      = link_to "dodaj opis", edit_section_relic_path(relic.id, :description), :remote => true
+      = link_to "dodaj opis", edit_section_relic_path(relic, :description), :remote => true

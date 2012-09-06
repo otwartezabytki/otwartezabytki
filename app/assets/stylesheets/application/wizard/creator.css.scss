@@ -86,6 +86,22 @@
         }
       }
     }
+    #new_location{
+      .field.marker .foreign-location .input:before{
+        left: 12px;
+        top: 37px;
+      }
+      .search-order-container .select2-choice{
+        height: 37px;
+        line-height: 37px;
+        div b{
+          background: asset-data-url("search-order-select2.png") 3px 11px no-repeat;
+        }
+      }
+      .select2-dropdown-open .select2-choice div b{
+        background-position: 3px 11px;
+      }
+    }
     .field.marker .input:before{
       display: block;
       width: 8px;
@@ -329,6 +345,11 @@
         width: 658px;
       }
     }
+    #relic_street_input{
+      input{
+        width: 535px;
+      }
+    }
     section.edit{
       width: 670px;
       &.photos .actions{
@@ -494,4 +515,35 @@ body.relics.new #colorbox {
 
 .fancybox-inner .suggested-relics-wrapper{
   width: 960px;
+}
+
+form#new_relic{
+  .one-third{
+    float: left;
+    width: 175px;
+    margin-right: 15px;
+  }
+  .row, .one-third{
+    label{
+      display: block;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    margin-bottom: 25px;
+  }
+  .row{
+    display: inline-block;
+    width: 555px;
+  }
+  #relic_street_input{
+    width: 555px;
+  }
+}
+
+.foreign-location{
+  label{
+    display: block;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
 }

@@ -214,6 +214,7 @@ class Relic < ActiveRecord::Base
     dating_hash = Hash[[:from, :to, :has_round_date].zip(dp.results << dp.rounded?)]
     {
       :id               => id,
+      :slug             => to_param,
       :type             => 'relic',
       :identification   => identification,
       :street           => street,
@@ -245,6 +246,7 @@ class Relic < ActiveRecord::Base
     dating_hash = Hash[[:from, :to, :has_round_date].zip(dp.results << dp.rounded?)]
     {
       :id                   => id,
+      :slug                 => to_param,
       :type                 => 'relic',
       :identification       => identification,
       :street               => street,
@@ -421,5 +423,10 @@ class Relic < ActiveRecord::Base
 
   def up
     place
+  end
+
+  def to_param
+    slug = [(fplace || place.name), identification].join('-').gsub(/\d+/, '').parameterize
+    [id, slug] * '-'
   end
 end

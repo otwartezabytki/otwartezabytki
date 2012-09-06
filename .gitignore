@@ -26,4 +26,5 @@ config/environments/*.local.yml
 /public/system/
 /tmp/
 /public/uploads/
+.rvmrc
 .idea/*

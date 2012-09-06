@@ -25,6 +25,7 @@ Otwartezabytki::Application.routes.draw do
   end
 
   resource :relicbuilder, :only => [:new, :update, :create] do
+    get :administrative_level
     get :address
     get :geodistance
     get :details

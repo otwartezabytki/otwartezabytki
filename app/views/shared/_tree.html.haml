@@ -1,7 +1,7 @@
 - node.each do |rel, subrelics|
   = content_tag :li, :class => ((subrelics.length > 0 ? "node " : "leaf ") + (rel == relic ? "current  " : "") ).strip do
     %span.line
-    = link_to rel.identification, relic_path(rel.id), :remote => true
+    = link_to rel.identification, [rel], :remote => true
     - if subrelics.length > 0
       = content_tag :ul do
         = render 'shared/tree', :node => subrelics

@@ -1,5 +1,5 @@
 %section.show.general
-  = link_to 'edytuj', edit_section_relic_path(relic.id, :general), :title => 'edytuj ogólne dane zabytku', :remote => true, :class => "edit-relic-link"
+  = link_to 'edytuj', edit_section_relic_path(relic, :general), :title => 'edytuj ogólne dane zabytku', :remote => true, :class => "edit-relic-link"
   %h1= relic.identification
   .status
     - if relic.approved?
@@ -15,7 +15,7 @@
         Zabytek
         %strong rejestrowy
   .location_name
-    = link_to 'edytuj', edit_section_relic_path(relic.id, :location), :title => 'edytuj ogólne dane zabytku', :remote => true, :class => "edit-relic-link"
+    = link_to 'edytuj', edit_section_relic_path(relic, :location), :title => 'edytuj ogólne dane zabytku', :remote => true, :class => "edit-relic-link"
     %strong Lokalizacja:
     - if relic.polish_relic
       %p= "#{relic.place.name}, powiat #{relic.district.name}, gmina #{relic.commune.name}"
@@ -32,14 +32,14 @@
           %img{ src: "http://maps.googleapis.com/maps/api/staticmap?center=#{relic.latitude.to_f},#{relic.longitude.to_f}&zoom=17&size=260x160&sensor=false&markers=#{relic.latitude.to_f},#{relic.longitude.to_f}&maptype=hybrid", width: 260, height: 160 }
   .dating
     - if relic.dating_of_obj.present?
-      = link_to 'edytuj', edit_section_relic_path(relic.id, :events), :title => 'edytuj datowanie zabytku', :remote => true, :class => "edit-relic-link"
+      = link_to 'edytuj', edit_section_relic_path(relic, :events), :title => 'edytuj datowanie zabytku', :remote => true, :class => "edit-relic-link"
     %strong Data powstania:
     - if relic.dating_of_obj.present?
       %span.content= relic.dating_of_obj
     - else
-      %span.placeholder= link_to "brak danych, uzupełnij »", edit_section_relic_path(relic.id, :events), :remote => true
+      %span.placeholder= link_to "brak danych, uzupełnij »", edit_section_relic_path(relic, :events), :remote => true
   - if relic.register_number.present?
     .register_number
       %strong Numer w rejestrze:
       %p= relic.register_number
-  = link_to content_tag(:span, 'wersja oryginalna'), relic_path(relic.id, :original => true), :class => "original"
+  = link_to content_tag(:span, 'wersja oryginalna'), relic_path(relic, :original => true), :class => "original"

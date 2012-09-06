@@ -4,6 +4,7 @@
   .creator
     %section.main
       %section.creator-step
+        = render :partial => 'parent_relic', :object => @relic.parent
         %aside
           %h3
             Jaka jest różnica między
@@ -55,6 +56,7 @@
               %h3 Przeciągnij znacznik na mapę
               .marker-holder
                 = image_tag 'marker.png', :id => 'marker'
+          = f.hidden_field :parent_id
           = f.hidden_field :place_id
           = f.hidden_field :latitude
           = f.hidden_field :longitude

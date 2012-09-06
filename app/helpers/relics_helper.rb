@@ -16,10 +16,12 @@ module RelicsHelper
     ].sample
   end
 
-  def categoires_facets
+  def categoires_facets column = nil
     relics.terms('categories', true).map do |t|
-      ["#{Category.all[t['term']]} (#{t['count']})", t['term']]
-    end
+      if column.blank? or Category.send("#{column}_column").keys.include? t['term']
+        ["#{Category.all[t['term']]} <em>#{t['count']}</em>".html_safe, t['term']]
+      end
+    end.compact
   end
 
   def state_facets
@@ -84,6 +86,13 @@ module RelicsHelper
         tree.map { |v| leafs_of(v) }.flatten
       else
         [tree]
+    end
+  end
+
+  def state_tag relic
+    labels = Hash[Relic::States.zip(['Sprawdzony', 'Niesprawdzony', 'Uzupełniony'])]
+    content_tag :div, :class => 'tag' do
+      content_tag :span, labels[relic.state], :class => relic.state
     end
   end
 

@@ -21,7 +21,7 @@
       <meta property="og:description" content="Uzupełnij z nami bazę zabytków i pomóż stworzyć serwis. Skorzystaj z własnej wiedzy. Poszukaj informacji w książkach lub w internecie. To naprawdę proste." />
       <meta property="og:image" content="http://otwartezabytki.pl/assets/face-share-logo.png" />
 
-  %body{ :class => cookies["font-size"].to_s + " " + controller_name + " " + action_name + (params[:id] ? " resource_#{params[:id]}" : "") }
+  %body{ :class => [cookies["font-size"].to_s, controller_name, action_name, ("resource_#{params[:id]}" if params[:id])].join(' ') }
     .page
       #root
         %header#header
@@ -65,7 +65,7 @@
               %span.plus
               %span.minus
 
-            -#= render 'shared/search'
+            = render 'shared/search'
         %section#main
           .container.main-container{ :'data-replace' => '.main-container' }
             = render 'shared/flash', :flash => flash

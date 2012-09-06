@@ -3,22 +3,21 @@
   .creator
     %section.main
       %section.creator-step
+        = render :partial => 'parent_relic', :object => @relic.parent
         %p.intro
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras convallis luctus malesuada. Pellentesque purus augue, facilisis id hendrerit et, tincidunt a mauris.
         %p.intro
           Vivamus vestibulum semper odio, nec volutpat sapien egestas ut. Nam iaculis dapibus eros convallis mollis. Nullam non ligula ut leo porta venenatis sed in nibh.
-      = semantic_form_for @relic, :url => relicbuilder_path do |f|
-        = f.input :build_state, :as => :hidden
+      = semantic_form_for @relic, :url => relicbuilder_path(:id => @relic.try(:id)) do |f|
+        = f.hidden_field :build_state
+        = f.hidden_field :parent_id
         - if f.object.is_a? ForeignRelic
           = f.country_code_select :country_code
           = f.input :fprovince
           = f.input :fplace
           = f.input :street
         - else
-          = f.input :voivodeship_id
-          = f.input :district_id
-          = f.input :commune_id
-          = f.input :place_id
+          = render :partial => 'administrative_level', :locals => { :relic => @relic }
           = f.input :street
         .actions
           = f.submit 'Przejdź dalej &raquo;'.html_safe

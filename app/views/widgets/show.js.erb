@@ -1,1 +1,2 @@
-<%= render "/widgets/show/#{widget.widget_template.partial_name}" %>
+<%=raw open("http://#{Settings.oz.host}/assets/widget_templates/add_relic.js").read %>
+jQuery('#oz_add_relic_widget').html('<%= escape_javascript(render "/widgets/show/#{widget.widget_template.partial_name}")%>');
