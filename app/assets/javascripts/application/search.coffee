@@ -1,5 +1,29 @@
 jQuery.initializer 'body.relics.index .main-container', ->
+  search_spinner_opts =
+    lines: 9 # The number of lines to draw
+    length: 0 # The length of each line
+    width: 8 # The line thickness
+    radius: 16 # The radius of the inner circle
+    corners: 1 # Corner roundness (0..1)
+    rotate: 0 # The rotation offset
+    color: "#000" # #rgb or #rrggbb
+    speed: 0.7 # Rounds per second
+    trail: 40 # Afterglow percentage
+    shadow: false # Whether to render a shadow
+    hwaccel: false # Whether to use hardware acceleration
+    className: "spinner" # The CSS class to assign to the spinner
+    zIndex: 2e9 # The z-index (defaults to 2000000000)
+    top: 100 # Top position relative to parent in px
+    left: 332 # Left position relative to parent in px
+
+  this.find("#search_order").select2
+    minimumResultsForSearch: 6
+    dropdownCssClass: 'search-order-dropdown'
+    containerCssClass: 'search-order-container'
+    width: '170px'
+
   this.on 'ajax:beforeSend', 'form[data-remote], a[data-remote]', (e, data, status, xhr) ->
+    new Spinner(search_spinner_opts).spin(document.getElementById('spin'))
     $('form section.results .loading').show()
 
   this.on 'ajax:complete', 'form[data-remote], a[data-remote]', (e, data, status, xhr) ->
