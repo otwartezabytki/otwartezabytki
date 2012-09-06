@@ -54,19 +54,23 @@ class RelicbuildersController < ApplicationController
     elsif params[:place_id].present?
       Place.find(params[:place_id])
     end
-    @relic = if geo_hash && geo_hash[:foreign]
-      ForeignRelic.new(
-        :build_state  => 'address_step',
-        :country_code => geo_hash[:country_code],
-        :fprovince    => geo_hash[:voivodeship],
-        :fplace       => geo_hash[:place]
-      )
+    if @relic = Relic.find_by_id(params[:relic_id])
+      @relic.build_state = 'address_step'
     else
-      Relic.new :build_state => 'address_step'
+      @relic = if geo_hash && geo_hash[:foreign]
+        ForeignRelic.new(
+          :build_state  => 'address_step',
+          :country_code => geo_hash[:country_code],
+          :fprovince    => geo_hash[:voivodeship],
+          :fplace       => geo_hash[:place]
+        )
+      else
+        Relic.new :build_state => 'address_step'
+      end
+      @relic.place = place if place
+      @relic.parent_id = params[:parent_id]
+      @relic.street = (geo_hash || {}).get_deep(:street)
     end
-    @relic.place = place if place
-    @relic.parent_id = params[:parent_id]
-    @relic.street = (geo_hash || {}).get_deep(:street)
   end
 
   def create
@@ -92,27 +96,35 @@ class RelicbuildersController < ApplicationController
 
   def update
     @relic = Relic.find(params[:id])
-    @relic.attributes = params[:relic]
+    @relic.attributes = (params[:relic] || {}).except(:voivodeship_id, :district_id, :commune_id)
     if @relic.build_state == 'photos_step' && @relic.license_agreement != "1"
       @relic.photos.where(:user_id => current_user.id).destroy_all
       flash[:notice] = "Ponieważ nie zgodziłeś się na opublikowanie dodanych zdjęć, zostały one usunięte."
       redirect_to photos_relicbuilder_path(:id => @relic) and return
     end
     if @relic.save
-      if @relic.build_state == 'photos_step'
-        @relic.update_attributes :build_state => "finish_step"
-        redirect_to @relic, :notice => 'Gratulacje dodałe nowy zabytek'
+      case @relic.build_state
+      when 'address_step'
+        redirect_to details_relicbuilder_path(:id => @relic)
+      when 'details_step'
+        redirect_to photos_relicbuilder_path(:id => @relic)
+      when 'photos_step'
+        if @relic.update_attributes :build_state => "finish_step"
+          redirect_to @relic, :notice => 'Gratulacje dodałeś nowy zabytek'
+        else
+          render @relic.invalid_step_view
+        end
       else
-        redirect_to photos_relicbuilder_path(:id => @relic) and return
+        raise Exception.new("Incorrect build step!")
       end
     else
-      render @relic.build_state.to_s.gsub('_step', '')
+      render @relic.invalid_step_view
     end
   end
 
   protected
     def address_params
-      (params[:relic] || {}).slice(:latitude, :longitude, :place_id, :parent_id)
+      (params[:relic] || params).slice(:latitude, :longitude, :place_id, :parent_id)
     end
 
 end

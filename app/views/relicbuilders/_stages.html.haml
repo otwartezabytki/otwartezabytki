@@ -1,17 +1,35 @@
 %ol.relic-stages
   %li.first{:class => stage == 1 ? 'active' : ''}
     %span krok 1
-    %h3 sprawdź istnienie
+    %h3
+      - if stage > 1
+        = link_to "sprawdź istnienie", new_relicbuilder_path(:parent_id => @relic.parent_id), 'data-confirm' => "Uwaga utracisz wprowadzone dane, rozpoczniesz process dodawania zabytku jeszcze raz. Jesteś pewien?"
+      - else
+        sprawdź istnienie
     %p Lorem ipsum dolor sit amet, consectetur adipiscing.
   %li{:class => stage == 2 ? 'active' : ''}
     %span krok 2
-    %h3 dane adresowe
+    %h3
+      - if stage > 2
+        - p = [:latitude, :longitude, :place_id, :parent_id].inject(address_params){|m, p| m[p] ||= @relic.send(p);m}
+        - p[:relic_id] = @relic.try(:id)
+        = link_to "dane adresowe", address_relicbuilder_path(p)
+      - else
+        dane adresowe
     %p Lorem ipsum dolor sit amet, consectetur adipiscing.
   %li{:class => stage == 3 ? 'active' : ''}
     %span krok 3
-    %h3 szczegóły
+    %h3
+      - if [2, 4].include?(stage) and @relic.id?
+        = link_to "szczegóły", details_relicbuilder_path(:id => @relic.try(:id))
+      - else
+        szczegóły
     %p Lorem ipsum dolor sit amet, consectetur adipiscing.
   %li.last{:class => stage == 4 ? 'active' : ''}
     %span krok 4
-    %h3 opis i zdjęcia
+    %h3
+      - if [2, 3].include?(stage) and @relic.id?
+        = link_to "opis i zdjęcia", photos_relicbuilder_path(:id => @relic.try(:id))
+      - else
+        opis i zdjęcia
     %p Lorem ipsum dolor sit amet, consectetur adipiscing.

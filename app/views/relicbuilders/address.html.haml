@@ -8,7 +8,7 @@
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras convallis luctus malesuada. Pellentesque purus augue, facilisis id hendrerit et, tincidunt a mauris.
         %p.intro
           Vivamus vestibulum semper odio, nec volutpat sapien egestas ut. Nam iaculis dapibus eros convallis mollis. Nullam non ligula ut leo porta venenatis sed in nibh.
-      = semantic_form_for @relic, :url => relicbuilder_path do |f|
+      = semantic_form_for @relic, :url => relicbuilder_path(:id => @relic.try(:id)) do |f|
         = f.hidden_field :build_state
         = f.hidden_field :parent_id
         - if f.object.is_a? ForeignRelic
