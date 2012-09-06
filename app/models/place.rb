@@ -121,15 +121,25 @@ class Place < ActiveRecord::Base
     end
   end
 
-  def parent_id
+  def full_name
+    name
+  end
+
+  def up_id
     commune_id
   end
 
-  def self.zoom_range
-    11..20
+  def up
+    commune
+  end
+
+  def bounding_box
+    right_up_lat, right_up_lng, left_down_lat, left_down_lng = viewport.split('|').map{ |e| e.split(',') }.flatten
+
+    [{lat: right_up_lat, lng: left_down_lng}, { lat: left_down_lat, lng: right_up_lng }]
   end
 
   def self.visible_from
-    0.05
+    5
   end
 end

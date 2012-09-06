@@ -24,19 +24,23 @@ class Voivodeship < ActiveRecord::Base
 
   attr_accessor :facet_count
 
+  def full_name
+    name
+  end
+
   def address
     ['Polska', name].join(', ')
   end
 
-  def parent_id
+  def up_id
     'pl'
   end
 
-  def self.zoom_range
-    7..8
+  def up
+    Country.find(up_id)
   end
 
   def self.visible_from
-    2
+    200
   end
 end

@@ -24,19 +24,23 @@ class District < ActiveRecord::Base
 
   attr_accessor :facet_count
 
+  def full_name
+    "pow. #{name}"
+  end
+
   def address
     ['Polska', voivodeship.name, name].join(', ')
   end
 
-  def parent_id
+  def up_id
     voivodeship_id
   end
 
-  def self.zoom_range
-    6..10
+  def up
+    voivodeship
   end
 
   def self.visible_from
-    0.5
+    50
   end
 end

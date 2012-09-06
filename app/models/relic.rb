@@ -414,4 +414,12 @@ class Relic < ActiveRecord::Base
       self.parent = nil
     end
   end
+
+  def up_id
+    place_id
+  end
+
+  def up
+    place
+  end
 end

@@ -46,23 +46,23 @@ module Tire
         end
       end
 
-      def polish_facets_tree(level = "voivodeships")
+      def polish_facets_tree(level = nil)
         return @polish_facets_tree if @polish_facets_tree
 
-        levels = {
-          "voivodeships" => "districts",
-          "districts" => "communes",
-          "communes" => "places"
-        }
+        levels = ["countries", "voivodeships", "districts", "communes", "places",  nil]
+
+        if level.present?
+          next_level = levels.each_cons(2).to_a.find{ |key| level == key.first }.last
+        else
+          level, next_level = levels.each_cons(2).to_a.find{ |key| facets.keys.include?(key.first) }
+        end
 
         result = Hash[widget_facets(level).map{ |first| [first, Hash.new] }]
 
-        if levels[level].present? && self.facets.keys.include?(levels[level])
-          values = polish_facets_tree(levels[level])
-
-          values.each do |key, _|
-            if obj = result.keys.find{ |location| location.id == key.parent_id }
-              result[obj][key] = values[key]
+        if next_level.present?
+          polish_facets_tree(next_level).each do |key, value|
+            if obj = result.keys.find{ |location| location.id == key.up_id }
+              result[obj][key] = value
             end
           end
         end
