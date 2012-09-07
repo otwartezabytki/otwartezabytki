@@ -1,1 +1,26 @@
 //= require fancybox
+@import "compass/layout";
+@import "compass/css3";
+
+#oz_add_relic_widget{
+  @include background(linear-gradient(#4b6d7e, #436576));
+  color: #fff;
+  border: 0;
+  font-size: 12px;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
+  text-transform: uppercase;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  padding: 7px 20px;
+  cursor: pointer;
+  float: left;
+  font-weight: 600;
+  &:hover {
+    @include background(linear-gradient(#437994, #2b607b));
+    text-decoration: none;
+    color: #fff;
+  }
+  &:active {
+    @include background(linear-gradient(#2b607b, #437893));
+  }
+}
