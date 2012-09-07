@@ -1,5 +1,5 @@
 class Subdomain
   def self.matches?(request)
-    request.subdomain.present? && request.subdomain != 'www' && request.include?('iframe')
+    request.subdomain.present? && request.subdomain != 'www' && request.subdomain.include?('iframe')
   end
 end
