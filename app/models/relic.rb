@@ -71,7 +71,7 @@ class Relic < ActiveRecord::Base
                   :events_attributes, :entries_attributes, :license_agreement, :polish_relic,
                   :geocoded, :build_state, :parent_id, :as => [:default, :admin]
 
-  attr_accessible :ancestry, :materail, :register_number, :approved, :group, :as => :admin
+  attr_accessible :ancestry, :materail, :register_number, :approved, :group, :state, :existence, :as => :admin
 
   accepts_nested_attributes_for :photos, :documents, :entries, :links, :events, :allow_destroy => true
 
@@ -111,6 +111,9 @@ class Relic < ActiveRecord::Base
       self.categories = tmp
     end
   end
+
+  validates :state, :inclusion => { :in => States }
+  validates :existence, :inclusion => { :in => Existences }
 
   # versioning
   has_paper_trail :skip => [:skip_count, :edit_count, :updated_at, :created_at]
@@ -182,7 +185,7 @@ class Relic < ActiveRecord::Base
       na.indexes :has_photos,       :type => "boolean"
       na.indexes :has_description,  :type => "boolean"
       na.indexes :state
-      na.indexes :existance
+      na.indexes :existence
 
       na.indexes :has_round_date,  :type => "boolean"
       na.indexes :from,  :type => "integer"
@@ -231,8 +234,8 @@ class Relic < ActiveRecord::Base
       # new search fields
       :categories       => Category.all.keys.sample(3),
       :has_photos       => [true, false].sample,
-      :state            => States.sample,
-      :existance        => Existences.sample,
+      :state            => state,
+      :existence        => existence,
       :country          => ['pl', 'de', 'gb'].sample,
       :tags             => ['wawel', 'zamek', 'zespół pałacowy', 'zamek królewski'].shuffle.first(rand(2) + 1).shuffle.first(rand(4) + 1),
       :autocomplitions  => ['puchatka', 'szlachciatka', 'chata polska', 'chata mazurska', 'chata wielkopolska'].shuffle.first(rand(4) + 1),
@@ -268,7 +271,7 @@ class Relic < ActiveRecord::Base
       :categories           => categories,
       :has_photos           => has_photos?,
       :state                => state,
-      :existance            => existance,
+      :existence            => existence,
       :country              => country_code.downcase,
       :tags                 => tags,
       # Lat Lon As Array Format in [lon, lat]
@@ -369,16 +372,6 @@ class Relic < ActiveRecord::Base
     Event.where(:relic_id => [id] + descendant_ids).order("date_start ASC")
   end
 
-  def state
-    # TODO
-    States.sample
-  end
-
-  def existance
-    # TODO
-    Existences.sample
-  end
-
   def polish_relic
     self.class == Relic
   end
@@ -415,6 +408,14 @@ class Relic < ActiveRecord::Base
     else
       self.parent = nil
     end
+  end
+
+  def up_id
+    place_id
+  end
+
+  def up
+    place
   end
 
   def to_param

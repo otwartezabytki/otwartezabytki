@@ -1,7 +1,7 @@
-- node.sort_by{ | _, subfacets| -subfacets.size }.each do |facet, subfacets|
+- node.each do |facet, subfacets|
   = content_tag :li do
-    = link_to widget_path(widget.id, :search => params[:search].merge(:"location" => "#{facet.class.name.underscore}:#{facet.id}")), :remote => true do
-      %span.facet_name= facet.name
+    = link_to widget_path(widget.id, :search => params[:search].merge(:bounding_box => nil, :location => "#{facet.class.name.underscore}:#{facet.respond_to?(:virtual_id) ? facet.virtual_id : facet.id}")), :remote => true do
+      %span.facet_name= facet.full_name
       %span.relic_count (#{facet.facet_count})
     - if subfacets && subfacets.length > 0
       = content_tag :ul do

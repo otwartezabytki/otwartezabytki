@@ -31,9 +31,9 @@ module RelicsHelper
     end
   end
 
-  def existance_facets
+  def existence_facets
     labels = Hash[Relic::Existences.zip(['istniejące w rejestrze', 'archiwalne', 'społecznie dodane'])]
-    relics.terms('existance', true).map do |t|
+    relics.terms('existence', true).map do |t|
       ["#{labels[t['term']]} (#{t['count']})", t['term']]
     end
   end
@@ -70,6 +70,23 @@ module RelicsHelper
 
   def link_to_section_tab(name)
     link_to_unless_current "<span>#{t "relic_tabs." + name.to_s + ".name"}</span>".html_safe, edit_section_relic_path(relic.id, name), :remote => true
+  end
+
+  def leafs_of(tree)
+    case tree
+      when Hash
+        tree.map do |k,v|
+          if v.blank? || v.empty?
+            [k]
+          else
+            leafs_of(v)
+          end
+        end.flatten
+      when Array
+        tree.map { |v| leafs_of(v) }.flatten
+      else
+        [tree]
+    end
   end
 
   def state_tag relic

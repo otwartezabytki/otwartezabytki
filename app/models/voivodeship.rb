@@ -12,6 +12,8 @@
 # -*- encoding : utf-8 -*-
 class Voivodeship < ActiveRecord::Base
   include GeocodeViewport
+  include Relic::BoundingBox
+
   attr_accessible :id, :name, :nr
   has_many :districts, :dependent => :destroy
   has_many :communes, :through => :districts
@@ -22,15 +24,23 @@ class Voivodeship < ActiveRecord::Base
 
   attr_accessor :facet_count
 
+  def full_name
+    name
+  end
+
   def address
     ['Polska', name].join(', ')
   end
 
-  def parent_id
+  def up_id
     'pl'
   end
 
-  def self.zoom_range
-    7..8
+  def up
+    Country.find(up_id)
+  end
+
+  def self.visible_from
+    200
   end
 end

@@ -42,4 +42,15 @@ class Photo < ActiveRecord::Base
   def self.one_before(photo_id)
     where('id < ?', photo_id).order('id DESC').limit(1).first
   end
+
+  def as_json(options)
+    {
+      :id => id,
+      :author => author,
+      :date_taken => date_taken,
+      :file => file.as_json(options)[:file],
+      :file_full_width => file_full_width,
+      :file_full_width => file_full_width,
+    }
+  end
 end

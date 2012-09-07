@@ -15,7 +15,8 @@ json.(relic,
   :fprovince,
   :fplace,
   :documents_info,
-  :links_info
+  :links_info,
+  :main_photo
 )
 
 if params[:include_descendants]
