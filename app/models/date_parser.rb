@@ -5,6 +5,11 @@ class DateParser
     def round_range(from, to)
       [ (from.to_i - 1) / 25 * 25 + 1, (to.to_i / 25.0).ceil * 25 + 1 ]
     end
+
+    def logger
+      @logger ||= Logger.new("#{Rails.root}/log/#{Rails.env}_date_parser.log")
+    end
+
   end
 
   def initialize(string = nil)
@@ -73,7 +78,10 @@ class DateParser
         nil
       end
     else
-      puts "Can't parse: #{s}"
+      DateParser.logger.error "\n--error: get_arabic_date(#{s})"
+      DateParser.logger.error "@string = #{@string})"
+      DateParser.logger.error "split! #{[@s, @e].inspect})"
+
       nil
     end
   end
