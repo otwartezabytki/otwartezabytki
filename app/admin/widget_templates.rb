@@ -12,7 +12,7 @@ ActiveAdmin.register WidgetTemplate do
     f.inputs do
       f.input :name
       f.input :description
-      f.input :type
+      f.input :thumb, :as => :file
     end
 
     f.buttons

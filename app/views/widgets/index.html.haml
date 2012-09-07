@@ -1,25 +1,22 @@
-- if widgets.length > 0
-  %section.widgets
-    %h1.about_top Widgety:
-    .content
-      .description
-        %h3 Czym są widgety?
-        %p Nulla facilisi. Ut metus nulla, iaculis at imperdiet quis, semper sit amet velit. Donec fermentum turpis id nulla iaculis rutrum. Mauris consequat, tellus vitae consectetur dignissim, est risus tempus dolor, at varius odio sapien sit amet lacus. Integer vulputate.
-        %h3 Jak skonfigurować widget?
-        %p Nulla facilisi. Ut metus nulla, iaculis at imperdiet quis, semper sit amet velit. Donec fermentum turpis id nulla iaculis rutrum. Mauris consequat, tellus vitae consectetur dignissim.
-        %p Nulla facilisi. Ut metus nulla, iaculis at imperdiet quis, semper sit amet velit. Donec fermentum turpis id nulla iaculis rutrum.
-        %h3 Chcesz stworzyć widget?
-        %p Nulla facilisi. Ut metus nulla, iaculis at imperdiet quis, semper sit amet velit. Donec fermentum turpis id nulla iaculis rutrum. Mauris consequat, tellus vitae consectetur dignissim, est risus tempus dolor, at varius odio sapien sit amet lacus. Integer vulputate
-      .widgets
-        - widgets.each do |widget|
-          .widget
+%section.widgets
+  %h1.about_top Widgety:
+  .content
+    .description
+      %h3 Czym są widgety?
+      %p Nulla facilisi. Ut metus nulla, iaculis at imperdiet quis, semper sit amet velit. Donec fermentum turpis id nulla iaculis rutrum. Mauris consequat, tellus vitae consectetur dignissim, est risus tempus dolor, at varius odio sapien sit amet lacus. Integer vulputate.
+      %h3 Jak skonfigurować widget?
+      %p Nulla facilisi. Ut metus nulla, iaculis at imperdiet quis, semper sit amet velit. Donec fermentum turpis id nulla iaculis rutrum. Mauris consequat, tellus vitae consectetur dignissim.
+      %p Nulla facilisi. Ut metus nulla, iaculis at imperdiet quis, semper sit amet velit. Donec fermentum turpis id nulla iaculis rutrum.
+      %h3 Chcesz stworzyć widget?
+      %p Nulla facilisi. Ut metus nulla, iaculis at imperdiet quis, semper sit amet velit. Donec fermentum turpis id nulla iaculis rutrum. Mauris consequat, tellus vitae consectetur dignissim, est risus tempus dolor, at varius odio sapien sit amet lacus. Integer vulputate
+    .widgets
+      - widget_templates.each do |widget_template|
+        .widget
+          - if widget_template.thumb.url
             .image
-              =image_tag "widget-image-example.jpg"
-            .widget_content
-              %h2= widget.widget_template.name
-              %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec placerat mollis sapien, in egestas neque cursus eget. Donec ante arcu, sollicitudin vel fringilla at, fermentum in metus. Vivamus nec mattis metus. Donec in turpis nisl. Cras arcu augue, bibendum ut facilisis ege.
-              .actions
-                = link_to 'Użyj widgeta', edit_widget_path(widget.id), :class => "use-widget btn"
-- else
-  %h1 Nie posiadasz jeszcze żadnych widgetów
-  = render :template => 'widgets/new'
+              = image_tag widget_template.thumb.url, :width => "200", :height => "180"
+          .widget_content
+            %h2= widget_template.name
+            %p= widget_template.description
+            .actions
+              = link_to 'Użyj widgeta', widgets_path(:widget_template_id => widget_template.id), :class => "use-widget btn", :method => :post

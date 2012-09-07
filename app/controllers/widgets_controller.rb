@@ -52,16 +52,16 @@ class WidgetsController < ApplicationController
 
   def create
     if widget.save
-      redirect_to widgets_path, :notice => "Widget został stworzony"
+      redirect_to edit_widget_path(widget.id)
     else
-      flash[:error] = "Nie udało się stworzyć widgeta. Popraw błędy poniżej."
-      render :new
+      flash[:error] = "Nie udało się stworzyć widgeta. Zgłoś błąd administracji."
+      redirect_to widgets_path
     end
   end
 
   def update
     if widget.save
-      redirect_to widgets_path, :notice => "Widget został zaktualizowany"
+      redirect_to edit_widget_path(widget.id), :notice => "Widget został zaktualizowany"
     else
       flash[:error] = "Nie udało się zaktualizować widgeta. Popraw błędy poniżej."
       render :edit
