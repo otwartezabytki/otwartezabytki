@@ -47,15 +47,18 @@
       #relic_license_agreement{
         width: auto;
         height: auto;
-        margin: 5px 0;
-        display: inline-block;
+        margin: 0 5px 5px 0;
       }
       span{
         color: #d00;
         font-size: 12px;
         margin-top: 3px;
+      }
+      em.icons{
+        width: 58px;
+        height: 16px;
+        background: asset-data-url("cc-icons.png") no-repeat;
         display: inline-block;
-        vertical-align: top;
       }
     }
   }

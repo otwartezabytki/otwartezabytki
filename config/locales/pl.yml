@@ -377,8 +377,8 @@ pl:
         fplace: Informacja o miejscowości
         street: Informacja o ulicy
         place: Informacja o miejscowości
-        tags: This is hint for tags
-        categories: This is hint for categories
+        tags: "Dodaj tagi, które pomogą poruszać się po katalogu."
+        categories: "Wybierz kategorie, które Twoim zdaniem pasują do opisywanego zabytku."
       document:
         name: Do jest podpowiedź do nazwy dokumentu
         description: To jest podpowiedź do opisu dokumentu

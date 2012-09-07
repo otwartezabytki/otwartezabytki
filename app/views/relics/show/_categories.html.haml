@@ -1,7 +1,7 @@
 %section.show.categories
   %h2 Sekcje
   - if relic.categories.length > 0 || relic.tags.length > 0
-    = link_to 'edytuj', edit_section_relic_path(relic, :categories), :title => 'edytuj kategorie zabytku', :remote => true, :class => "edit-relic-link"
+    = link_to 'uzupełnij', edit_section_relic_path(relic, :categories), :title => 'edytuj kategorie zabytku', :remote => true, :class => "edit-relic-link"
     .content
       .categories
         %strong Kategorie:
