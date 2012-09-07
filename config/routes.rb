@@ -32,7 +32,7 @@ Otwartezabytki::Application.routes.draw do
     match 'photos', :via => [:get, :delete]
   end
 
-  resources :widgets
+  resources :widgets, :except => [:new]
 
   namespace :api do
     namespace :v1 do

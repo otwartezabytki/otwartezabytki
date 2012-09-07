@@ -5,6 +5,11 @@ class DateParser
     def round_range(from, to)
       [ (from.to_i - 1) / 25 * 25 + 1, (to.to_i / 25.0).ceil * 25 + 1 ]
     end
+
+    def logger
+      @logger ||= Logger.new("#{Rails.root}/log/#{Rails.env}_date_parser.log")
+    end
+
   end
 
   def initialize(string = nil)
@@ -38,15 +43,30 @@ class DateParser
     if s.match /^.*?(\d{4}).*?$/
       # przed 1986, 1964
       [$1, $1]
+    elsif s.match /(\d+)(\s+)?w/
+      c = $1.to_i
+      [(c - 1) * 100 + 1, c * 100]
     elsif s.match /(\d).*?[cć]w.*?([IVX]+)/
       # 2 cw XIX
       quarter = ($1 || 1).to_i
       century = parse_century($2)
       a_end = century + (quarter * 25)
       [a_end - 25, a_end]
+    elsif s.match /(I{1,3}V?).*?[cć]w.*?([IVX]+)/
+      # II cw XIX
+      quarter =  Arrabiata.to_arabic($1 || 'I')
+      century = parse_century($2)
+      a_end = century + (quarter * 25)
+      [a_end - 25, a_end]
     elsif s.match /(\d).*?po[lł].*?([IVX]+)/
       # 1 pol XIX
       half = ($1 || 1).to_i
+      century = parse_century($2)
+      a_end = century + (half * 50)
+      [a_end - 50, a_end]
+    elsif s.match /(I{1,2}).*?po[lł].*?([IVX]+)/
+      # II pol XIX
+      half = Arrabiata.to_arabic($1 || 'I')
       century = parse_century($2)
       a_end = century + (half * 50)
       [a_end - 50, a_end]
@@ -73,7 +93,9 @@ class DateParser
         nil
       end
     else
-      puts "Can't parse: #{s}"
+      DateParser.logger.error "\n--error: get_arabic_date(#{s})"
+      DateParser.logger.error "@string = #{@string})"
+      DateParser.logger.error "split! #{[@s, @e].inspect})"
       nil
     end
   end
