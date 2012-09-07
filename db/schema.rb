@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120827145208) do
+ActiveRecord::Schema.define(:version => 20120906151147) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(:version => 20120827145208) do
     t.float    "latitude"
     t.float    "longitude"
     t.string   "viewport"
+    t.string   "virtual_id"
   end
 
   create_table "districts", :force => true do |t|
@@ -239,12 +240,6 @@ ActiveRecord::Schema.define(:version => 20120827145208) do
   add_index "suggestions", ["dating_of_obj_action"], :name => "index_suggestions_on_dating_of_obj_action"
   add_index "suggestions", ["identification_action"], :name => "index_suggestions_on_identification_action"
   add_index "suggestions", ["place_id_action"], :name => "index_suggestions_on_place_id_action"
-
-  create_table "tags", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",     :null => false

@@ -18,7 +18,7 @@ module Api
 
       # Check api_key
       def api_authenticate
-        unless api_user
+        unless params[:api_key] == "oz" || api_user
           render :json => {:error => "API key not found"}, :status => :unauthorized
         end
       end

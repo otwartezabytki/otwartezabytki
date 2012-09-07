@@ -417,6 +417,14 @@ class Relic < ActiveRecord::Base
     end
   end
 
+  def up_id
+    place_id
+  end
+
+  def up
+    place
+  end
+
   def to_param
     slug = [(fplace || place.name), identification].join('-').gsub(/\d+/, '').parameterize
     [id, slug] * '-'

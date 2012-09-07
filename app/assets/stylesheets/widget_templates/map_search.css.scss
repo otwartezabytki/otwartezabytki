@@ -81,14 +81,20 @@ form{
   display: inline-block;
   width: 179px;
   h2{
+    position: relative;
     color: #343434;
     font-size: 12px;
     margin: 0;
     font-family: 'Open Sans', sans-serif;
     border-top: 1px solid #e4e4e4;
-    padding: 10px 0 5px 10px;
+    padding: 0px 0 0px 10px;
+    height: 36px;
+    span {
+      white-space: nowrap;
+      padding-right: 24px;
+    }
   }
-  input#search_q{
+  input#search_query{
     margin: 0 0 13px 10px;
     padding: 0 25px 0 10px;
     @include border-radius(2px);
@@ -101,7 +107,7 @@ form{
     color: #313132;
     width: 122px;
   }
-  #search_q_input .input{
+  #search_query_input .input{
     position: relative;
     &:before{
       position: absolute;
@@ -125,7 +131,6 @@ form{
     padding-left: 10px;
     margin: 5px 0;
     li{
-      white-space: nowrap;
       list-style-type: none;
       font-size: 12px;
       &:before{
@@ -190,9 +195,11 @@ form{
   width: 179px;
 }
 
-.tooltip{
-  float: right;
+a.tooltip{
+  position: absolute;
+  right: 0;
   padding: 4px;
+  top: 5px;
 }
 
 .show-more, .show-less {
@@ -223,5 +230,31 @@ form{
   height: 0%;
   .show-more, .show-less {
     display: none;
+  }
+}
+
+
+.relic-info {
+  position: relative;
+  width: 300px;
+  min-height: 60px;
+  .photo-wrapper {
+    margin-right: 4px;
+    img {
+      width: 50px;
+      height: 50px;
+      margin: 3px;
+    }
+    position: absolute;
+    left: 0;
+  }
+  .relic-info-content {
+    h3 {
+      margin: 0;
+    }
+  }
+
+  .photo-wrapper + .relic-info-content {
+    margin-left: 60px;
   }
 }

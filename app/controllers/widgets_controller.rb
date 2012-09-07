@@ -35,10 +35,12 @@ class WidgetsController < ApplicationController
 
   expose(:widget_search) do
     params[:search] ||= { :location => 'country:pl' }
+    params[:search]["widget"] = "1"
     Search.new(params[:search])
   end
 
   expose(:relics) do
+    widget_search.load = true
     widget_search.perform
   end
 

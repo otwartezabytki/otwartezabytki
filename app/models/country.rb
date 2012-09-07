@@ -3,6 +3,7 @@ class Country
   include ActiveModel::Conversion
   extend ActiveModel::Naming
   extend WillCache::Cacheable
+  include Relic::BoundingBox
 
   def self.find(country_code)
     new(country_code)
@@ -24,6 +25,10 @@ class Country
     I18n.t(@country_code.upcase, :scope => 'countries')
   end
 
+  def full_name
+    name
+  end
+
   def latitude
     self.class.coordinates[@country_code.upcase].first
   end
@@ -32,16 +37,20 @@ class Country
     self.class.coordinates[@country_code.upcase].last
   end
 
-  def parent_id
-    nil
+  def up_id
+    1
+  end
+
+  def up
+    World.new
   end
 
   def default_zoom
     4
   end
 
-  def self.zoom_range
-    0..4
+  def self.visible_from
+    200
   end
 
   attr_accessor :facet_count
@@ -54,6 +63,10 @@ class Country
       :longitue => longitude,
       :facet_count => facet_count
     }
+  end
+
+  def self.visible_from
+    700
   end
 
   protected
@@ -233,7 +246,7 @@ class Country
       "PG" => [-6.0000, 147.0000],
       "PH" => [13.0000, 122.0000],
       "PK" => [30.0000, 70.0000],
-      "PL" => [52.0000, 20.0000],
+      "PL" => [52.0000, 19.0000],
       "PM" => [46.8333, -56.3333],
       "PR" => [18.2500, -66.5000],
       "PS" => [32.0000, 35.2500],
