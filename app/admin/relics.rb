@@ -23,7 +23,14 @@ ActiveAdmin.register Relic do
 
   form do |f|
     f.inputs do
-      f.input :parent_id, :as => :string, :label => "ID zespołu zabytków"
+
+      descendants = if f.object.root
+        (f.object.root.descendants + [f.object.root] - [f.object]).uniq.map{ |descendant| ["#{descendant.identification} (##{descendant.id})", descendant.id]}
+      else
+        []
+      end
+
+      f.input :parent_id, :as => :select, :label => "ID zespołu zabytków", :collection => descendants, :selected => f.object.parent_id
       f.input :identification, :as => :string
       f.input :description
       f.input :place_id
