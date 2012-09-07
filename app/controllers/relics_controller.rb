@@ -35,7 +35,7 @@ class RelicsController < ApplicationController
   end
 
   helper_method :need_captcha
-  before_filter :authenticate_user!, :only => [:edit, :create, :update]
+  before_filter :authenticate_user!, :only => [:edit, :update]
 
   def show
     relic.present? # raise ActiveRecord::RecordNotFound before entering template

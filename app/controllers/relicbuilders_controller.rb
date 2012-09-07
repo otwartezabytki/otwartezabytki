@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 class RelicbuildersController < ApplicationController
+  before_filter :authenticate_user!, :except => [:geodistance, :administrative_level]
   before_filter :enable_fancybox, :only => [:geodistance]
   helper_method :address_params
 
@@ -77,6 +78,7 @@ class RelicbuildersController < ApplicationController
     attributes = (params[:relic] || {}).except(:voivodeship_id, :district_id, :commune_id)
     @relic = Relic.new attributes
     @relic = ForeignRelic.new(attributes) if @relic.foreign_relic?
+    @relic.user_id = current_user.id
     if @relic.save
       redirect_to details_relicbuilder_path(:id => @relic)
     else
