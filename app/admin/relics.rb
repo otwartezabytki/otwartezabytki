@@ -31,6 +31,9 @@ ActiveAdmin.register Relic do
       end
 
       f.input :parent_id, :as => :select, :label => "ID zespołu zabytków", :collection => descendants, :selected => f.object.parent_id
+      f.input :state, :as => :select, :include_blank => false, :collection => { "Sprawdzony" => "checked", "Niesprawdzony" => "unchecked", "Uzupełniony" => "filled" }
+      f.input :existence, :as => :select, :include_blank => false, :collection => { "Rejestrowy" => "existed", "Archiwalny" => "archived", "Społecznościowy" => "social" }
+
       f.input :identification, :as => :string
       f.input :description
       f.input :place_id

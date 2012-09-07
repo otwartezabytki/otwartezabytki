@@ -70,7 +70,7 @@ class ForeignRelic < Relic
       :categories           => categories,
       :has_photos           => has_photos?,
       :state                => state,
-      :existance            => existance,
+      :existence            => existence,
       :country              => country_code.downcase,
       :tags                 => tags,
       # Lat Lon As Array Format in [lon, lat]

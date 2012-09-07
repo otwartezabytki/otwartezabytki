@@ -59,7 +59,7 @@
               = f.input :has_description, :label => false, :as => :check_boxes, :collection => has_description_facets,  :disabled => disabled(f.object, 'has_description')
             .column
               %h4 Rodzaj:
-              = f.input :existance, :label => false, :as => :check_boxes, :collection => existance_facets,  :disabled => disabled(f.object, 'existance')
+              = f.input :existence, :label => false, :as => :check_boxes, :collection => existence_facets,  :disabled => disabled(f.object, 'existence')
         %section.order
           = f.input :order, :as => :select, :label => "sortuj według:", :collection => order_collection, :include_blank => false, :selected => f.object.order
       %section.results
