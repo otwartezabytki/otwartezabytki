@@ -3,7 +3,7 @@ class Search
   include ActiveModel::Conversion
   extend ActiveModel::Naming
 
-  attr_accessor :q, :query, :place, :from, :to, :categories, :state, :existance, :location, :order, :lat, :lon, :load
+  attr_accessor :q, :query, :place, :from, :to, :categories, :state, :existence, :location, :order, :lat, :lon, :load
   attr_accessor :conditions, :range_conditions, :per_page, :page, :has_photos, :has_description, :facets, :zoom, :widget
   attr_accessor :bounding_box
 
@@ -36,7 +36,7 @@ class Search
     @_q
   end
 
-  [:categories, :state, :existance, :has_photos, :has_description].each do |name|
+  [:categories, :state, :existence, :has_photos, :has_description].each do |name|
     define_method name do
       return [] if instance_variable_get("@#{name}").blank?
       instance_variable_get("@#{name}").reject!(&:blank?)
@@ -238,7 +238,7 @@ class Search
   end
 
   def build_conditions
-    @conditions = ['categories', 'state', 'existance', 'has_photos', 'has_description'].inject({}) do |r, t|
+    @conditions = ['categories', 'state', 'existence', 'has_photos', 'has_description'].inject({}) do |r, t|
       r[t] = send(t) if send(t).present?
       r
     end
@@ -350,7 +350,7 @@ class Search
         terms :categories, :size => Category.all.size, :all_terms => true
       end
 
-      ['state', 'existance', 'has_photos', 'has_description'].each do |name|
+      ['state', 'existence', 'has_photos', 'has_description'].each do |name|
         facet name, instance.filter_facet_conditions(name) do
           terms name, :all_terms => true
         end

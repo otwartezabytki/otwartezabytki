@@ -31,9 +31,9 @@ module RelicsHelper
     end
   end
 
-  def existance_facets
+  def existence_facets
     labels = Hash[Relic::Existences.zip(['istniejące w rejestrze', 'archiwalne', 'społecznie dodane'])]
-    relics.terms('existance', true).map do |t|
+    relics.terms('existence', true).map do |t|
       ["#{labels[t['term']]} (#{t['count']})", t['term']]
     end
   end

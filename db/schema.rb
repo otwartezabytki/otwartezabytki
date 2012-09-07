@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120906151147) do
+ActiveRecord::Schema.define(:version => 20120907115108) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -182,6 +182,8 @@ ActiveRecord::Schema.define(:version => 20120906151147) do
     t.text     "reason"
     t.integer  "date_start"
     t.integer  "date_end"
+    t.string   "state"
+    t.string   "existence"
   end
 
   add_index "relics", ["ancestry"], :name => "index_relics_on_ancestry"
