@@ -16,23 +16,23 @@ pl:
       name: Lokalizacja
       description: To jest podpowiedź do zakładki lokalizacji obiektu
     events:
-      name: Wydarzenia
-      description: To jest podpowiedź do zakładki wydarzeń
+      name: Ważne daty
+      description: Wpisz najważniejsze daty z historii obiektu wraz z krótkim opisem.
     description:
       name: Opis
-      description: To jest podpowiedź do zakładki opisu
+      description: Napisz 3-4 zdania zawierające najważniejsze informacje o obiekcie.
     entries:
       name: Społeczność
-      description: To jest podpowiedź do zakładki społeczność
+      description: "Podziel się z innymi legendą, anegdotą, ciekawą historią związaną z zabytkiem."
     links:
       name: Linki, źródła, powiązania
-      description: To jest podpowiedź do zakładki linki
+      description: Podaj ciekawe internetowe i papierowe źródła informacji o zabytku.
     categories:
       name: Kategorie i tagi
       description: To jest podpowiedź do zakładki kategorie
     documents:
       name: Dokumenty urzędowe
-      description: To jest podpowiedź do zakładki dokumenty
+      description: "Dysponujesz dokumentacją, którą możesz legalnie udostępnić innym? Załącz pliki tutaj."
     photos:
       name: Zdjęcia
       description: To jest podpowiedź do zakładki zdjęcia

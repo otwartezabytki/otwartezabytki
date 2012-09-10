@@ -42,7 +42,7 @@
     .photo-upload
       = file_field_tag "photo[file]", :class => 'photo_upload', :"data-url" => "#{relic_photos_path(relic.id)}"
 
-    = f.input :license_agreement, :input_html => { :checked => 'checked' }, :as => :boolean, :label => "Oświadczam, że posiadam prawa do publikowania na stronie OtwarteZabytki.pl dodane powyżej zdjęcia."
+    = f.input :license_agreement, :input_html => { :checked => 'checked' }, :as => :boolean, :label => 'Oświadczam, że posiadam prawa do zdjęć, które publikuję na stronie otwartezabytki.pl. Zdjęcia te udostępniam na licencji <a href="http://creativecommons.org/licenses/by-sa/3.0/pl/" target="_blank">Creative Commons Uznanie Autorstwa-Na Tych Samych Warunkach 3.0 Polska</a> <em class="icons"></em>'.html_safe
 
     .actions
       = f.submit 'Zapisz zmiany'
