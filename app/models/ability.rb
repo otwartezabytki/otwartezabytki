@@ -18,7 +18,6 @@ class Ability
       can :index, Version
       can :show, Version
       can :revert, Version
-      can :manage, WidgetTemplate
     end
 
     if user

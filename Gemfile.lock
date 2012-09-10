@@ -211,6 +211,7 @@ GEM
     formtastic-bootstrap (1.1.1)
       formtastic
       rails (~> 3.1)
+    friendly_id (4.0.8)
     fssm (0.2.9)
     geocoder (1.1.2)
     gherkin (2.11.1)
@@ -542,6 +543,7 @@ DEPENDENCIES
   forgery (= 0.5.0)
   formtastic
   formtastic-bootstrap
+  friendly_id
   geocoder
   gon
   gravatar_image_tag

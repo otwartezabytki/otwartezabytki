@@ -7,7 +7,7 @@
       = javascript_include_tag "http://html5shim.googlecode.com/svn/trunk/html5.js"
     = yield :stylesheets
     %link{:href => "http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,600,300&subset=latin,latin-ext", :rel => "stylesheet", :type => "text/css"}
-  %body{ :class => [controller_name, action_name, widget.widget_template.partial_name].join(' ') }
+  %body{ :class => [controller_name, action_name, widget.class.partial_name].join(' ') }
     #root
       %section#main
         .container.main-container{ :'data-replace' => '.main-container' }

@@ -14,19 +14,38 @@
 class Widget < ActiveRecord::Base
   attr_accessible :config, :as => [:default, :admin]
 
-  belongs_to :user
-  belongs_to :widget_template
-
   serialize :config, Hash
+
+  extend FriendlyId
+  friendly_id :uid
 
   def config
     OpenStruct.new(self.attributes['config'])
   end
 
-  validates :widget_template_id, :presence => true
-
   def snippet
-    widget_template.snippet(self)
+    ""
+  end
+
+  class << self
+    include ActionView::Helpers::TagHelper
+    include ActionView::Helpers::AssetTagHelper
+
+    def thumb
+      "widgets/#{partial_name}.png"
+    end
+
+    def title
+      I18n.t("widget.#{partial_name}.title")
+    end
+
+    def description
+      I18n.t("widget.#{partial_name}.description")
+    end
+
+    def partial_name
+      name.underscore.split('/').last
+    end
   end
 
   protected

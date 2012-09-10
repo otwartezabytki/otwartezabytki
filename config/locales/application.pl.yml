@@ -40,3 +40,13 @@ pl:
     new: Nowy
     in_progress: Do naprawy
     fixed: Naprawiony
+
+  widget:
+    map_search:
+      title: Widget Mapowy
+      description: Opis widgetu mapowego
+      thumb: widget-image-example.jpg
+    add_relic:
+      title: Widget dodający zabytek
+      description: Opis widgetu dodającego zabytek
+      thumb: widget-image-example.jpg

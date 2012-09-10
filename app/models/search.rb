@@ -18,7 +18,7 @@ class Search
     false
   end
 
-  def load
+  def load100
     !!@load
   end
 

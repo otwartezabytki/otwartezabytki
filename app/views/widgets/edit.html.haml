@@ -1,10 +1,10 @@
 .edit_widget
   %h1
     Konfiguracja widgetu
-    %span '#{widget.widget_template.name}'
+    %span '#{widget.class.title}'
   .sidebar
-    = semantic_form_for widget do |f|
-      = render "/widgets/edit/#{widget.widget_template.partial_name}", :form => f
+    = semantic_form_for widget, :url => widgets_map_search_path(widget) do |f|
+      = render "/widgets/edit/#{widget.class.partial_name}", :form => f
       = f.submit
   .content
     %h2 Podgląd wygenerowanego widgetu

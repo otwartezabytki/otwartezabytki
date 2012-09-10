@@ -2,7 +2,7 @@
   .sidebar
     = link_to '/', :target => :_top do
       %h1.logo
-    = semantic_form_for widget_search, :url => widget_path(widget.uid), :method => :get, :remote => true do |f|
+    = semantic_form_for widget_search, :url => widgets_map_search_path(widget.uid), :method => :get, :remote => true do |f|
       = f.hidden_field :location, :value => params[:search].try(:[], "location")
       = f.hidden_field :bounding_box, :value => params[:search].try(:[], "bounding_box")
       %section.search
@@ -14,7 +14,7 @@
         %section.locations{ :class => (cookies['section-shown'] == 'locations' ? "maxed" : cookies['section-shown'] == 'categories' ? 'mined' : '') }
           %h2
             - if up = widget_search.location_object.up
-              = link_to up.full_name, widget_path(widget.id, :search => params[:search].merge(:bounding_box => nil, :"location" => "#{up.class.name.underscore}:#{up.id}")), :remote => true
+              = link_to up.full_name, widgets_map_search_path(widget.id, :search => params[:search].merge(:bounding_box => nil, :"location" => "#{up.class.name.underscore}:#{up.id}")), :remote => true
             %span= "⟩&nbsp;".html_safe + widget_search.location_object.full_name
             = link_to image_tag("widget-helper.png"), '#', :class => "tooltip", :"data-placement" => "right", :title => "To jest podpowiedź do pola lokalizacje."
           .antiscroll-wrap.locations_tree
@@ -50,6 +50,6 @@
 :javascript
   config = #{widget.config.to_json};
 = content_for :stylesheets do
-  = stylesheet_link_tag "widget_templates/map_search"
+  = stylesheet_link_tag "widgets/map_search"
 = content_for :javascripts do
-  = javascript_include_tag "widget_templates/map_search"
+  = javascript_include_tag "widgets/map_search"

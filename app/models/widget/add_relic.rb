@@ -1,21 +1,21 @@
 # == Schema Information
 #
-# Table name: widget_templates
+# Table name: widgets
 #
-#  id          :integer          not null, primary key
-#  type        :string(255)
-#  name        :string(255)
-#  description :text
-#  thumb       :string(255)
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  id                 :integer          not null, primary key
+#  user_id            :integer
+#  widget_template_id :integer
+#  uid                :string(255)
+#  config             :text
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
 #
 
-class WidgetTemplate::AddRelic < WidgetTemplate
+class Widget::AddRelic < Widget
 
-  def snippet(widget)
-    widget_url = Rails.application.routes.url_helpers.widget_url(widget.uid, :host => Settings.oz.host)
-%Q(<script type="text/javascript">
+  def snippet
+    widget_url = Rails.application.routes.url_helpers.widgets_add_relic_url(uid, :host => Settings.oz.host)
+    %Q(<script type="text/javascript">
   (function(){
     function async_load(){
       var s = document.createElement('script');

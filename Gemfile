@@ -106,6 +106,9 @@ gem "jbuilder"
 # diff changes in admin panel
 gem 'htmldiff'
 
+# friendly id for widgets
+gem 'friendly_id'
+
 group :development, :test do
   # for debugging
   gem 'ruby-debug19'
