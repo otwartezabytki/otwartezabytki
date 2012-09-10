@@ -56,3 +56,7 @@ jQuery.initializer 'section.edit', ->
         return confirm('Na pewno? Stracisz wprowadzone zmiany w tej sekcji.')
       else
         return true
+
+jQuery.initializer 'section.show.subrelics', ->
+  $(".subrelics-tree li a").click ->
+    $('body').scrollTop(0)
