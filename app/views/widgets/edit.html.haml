@@ -1,9 +1,9 @@
-.edit_widget
+.edit_widget#widget_wrapper{ :"data-replace" => "#widget_wrapper", :"data-fancybox" => true }
   %h1
     Konfiguracja widgetu
     %span '#{widget.class.title}'
   .sidebar
-    = semantic_form_for widget_map_search, :url => widgets_map_search_path(widget) do |f|
+    = semantic_form_for widget_map_search, :url => widgets_map_search_path(widget), :remote => true do |f|
       = render "/widgets/edit/#{widget.class.partial_name}", :form => f
       = f.submit "Zaktualizuj widget"
   - if widget.valid?

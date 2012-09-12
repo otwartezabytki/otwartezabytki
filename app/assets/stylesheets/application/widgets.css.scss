@@ -96,9 +96,10 @@ section.widgets{
 }
 
 .edit_widget{
+  width: 960px;
+  overflow-x: hidden;
   background: #fff asset-data-url("edit-widget-bg.png") repeat-y;
   display: inline-block;
-  width: 100%;
   input[type="text"], textarea{
     @include border-radius(2px);
     border: 1px solid #646464;

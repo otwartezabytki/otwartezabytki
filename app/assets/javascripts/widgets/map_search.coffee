@@ -206,7 +206,6 @@ jQuery.initializer '#map_widget', ->
 
 
     if (boundingbox && not_dragged) || !gmap.getBounds()
-      console.log(boundingbox)
       southWest = new google.maps.LatLng(boundingbox[0].lat, boundingbox[0].lng)
       northEast = new google.maps.LatLng(boundingbox[1].lat, boundingbox[1].lng)
       bounds = new google.maps.LatLngBounds(southWest, northEast)
@@ -244,7 +243,9 @@ jQuery.initializer '#map_widget', ->
       if @facet_count > 1
         new google.maps.RelicMarker latlng, @facet_count, gmap, =>
           not_dragged = true
+          console.log('now dragged')
           $('#search_location').val("#{@type}:#{@id}")
+          $('#search_bounding_box').val("")
           $('#new_search').submit()
       else
         marker = new google.maps.Marker

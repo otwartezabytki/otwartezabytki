@@ -1,4 +1,5 @@
-%section.widgets
+#fancybox
+%section.widgets#widget_wrapper{ :"data-replace" => "#widget_wrapper" }
   %h1.about_top Widgety:
   .content
     .description
@@ -19,4 +20,4 @@
             %h2= widget_template.title
             %p= widget_template.description
             .actions
-              = link_to 'Użyj widgeta', method(:"widgets_#{widget_template.partial_name.pluralize}_path").call(), :class => "use-widget btn", :method => :post
+              = link_to 'Użyj widgeta', method(:"widgets_#{widget_template.partial_name.pluralize}_path").call(), :class => "use-widget btn", :method => :post, :remote => true
