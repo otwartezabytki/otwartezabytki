@@ -439,12 +439,14 @@ class Search
     @tsearch = Tire.search(Relic.tire.index_name, :size => 0) do
       pq = PreparedQuery.new(instance.query)
       facet "tags" do
-        terms 'tags', 'size' => 20, 'script' => "term ~= regexp ? true : false", 'params' => {
+        terms 'tags', 'size' => 10, 'script' => "term ~= regexp ? true : false", 'params' => {
           'regexp' => pq.regexp
         }
       end if pq.exists?
     end
-    @tsearch.results
+    @tsearch.results.facets['tags']['terms'].map{ |term| term['term'] }
+  rescue
+    []
   end
 
   def suggestions

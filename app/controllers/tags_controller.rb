@@ -3,7 +3,7 @@ class TagsController < ApplicationController
   respond_to :json
 
   expose(:tags) do
-    ['foo', 'bar', 'baz']
+    Search.new(:query => params[:query]).autocomplete_tags
   end
 
   def index
