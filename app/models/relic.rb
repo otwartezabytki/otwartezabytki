@@ -112,8 +112,8 @@ class Relic < ActiveRecord::Base
     end
   end
 
-  validates :state, :inclusion => { :in => States }
-  validates :existence, :inclusion => { :in => Existences }
+  validates :state, :inclusion => { :in => States }, :if => :state_changed?
+  validates :existence, :inclusion => { :in => Existences }, :if => :existence_changed?
 
   # versioning
   has_paper_trail :skip => [:skip_count, :edit_count, :updated_at, :created_at]

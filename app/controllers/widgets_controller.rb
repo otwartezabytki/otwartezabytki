@@ -6,7 +6,4 @@ class WidgetsController < ApplicationController
     request.xhr? ? 'ajax' : 'widget'
   end
 
-  expose(:widget)
-
-
 end

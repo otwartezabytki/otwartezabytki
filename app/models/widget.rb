@@ -19,10 +19,6 @@ class Widget < ActiveRecord::Base
   extend FriendlyId
   friendly_id :uid
 
-  def config
-    OpenStruct.new(self.attributes['config'])
-  end
-
   def snippet
     ""
   end
@@ -46,6 +42,39 @@ class Widget < ActiveRecord::Base
     def partial_name
       name.underscore.split('/').last
     end
+
+    def serialized_attr_accessor(*args)
+      args.flat_map{ |e| e.is_a?(Hash) ? e.to_a : [[e, nil]] }.each do |(method_name, default_value)|
+        if default_value == true || default_value == false
+          define_method(method_name) do
+            !!((self.attributes['config'] || {})[method_name])
+          end
+        else
+          define_method(method_name) do
+            (self.attributes['config'] || {})[method_name] || default_value
+          end
+        end
+
+        if default_value.is_a?(Integer)
+          define_method("#{method_name}=") do |value|
+            self.attributes['config'] ||= {}
+            self.attributes['config'][method_name] = value.to_i
+          end
+        elsif default_value == true || default_value == false
+          define_method("#{method_name}=") do |value|
+            self.attributes['config'] ||= {}
+            self.attributes['config'][method_name] = string_to_bool(value)
+          end
+        else
+          define_method("#{method_name}=") do |value|
+            self.attributes['config'] ||= {}
+            self.attributes['config'][method_name] = value
+          end
+        end
+
+        attr_accessible method_name, "#{method_name}=", :as => [:default, :admin]
+      end
+    end
   end
 
   protected
@@ -54,5 +83,11 @@ class Widget < ActiveRecord::Base
 
   def generate_uid
     self.uid ||= Devise.friendly_token
+  end
+
+  def string_to_bool(value)
+    return true if value == true || value =~ (/(true|t|yes|y|1)$/i)
+    return false if value == false || value.blank? || value =~ (/(false|f|no|n|0)$/i)
+    raise ArgumentError.new("invalid value for Boolean: \"#{value}\"")
   end
 end

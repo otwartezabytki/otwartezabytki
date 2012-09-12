@@ -3,15 +3,16 @@
     Konfiguracja widgetu
     %span '#{widget.class.title}'
   .sidebar
-    = semantic_form_for widget, :url => widgets_map_search_path(widget) do |f|
+    = semantic_form_for widget_map_search, :url => widgets_map_search_path(widget) do |f|
       = render "/widgets/edit/#{widget.class.partial_name}", :form => f
-      = f.submit
-  .content
-    %h2 Podgląd wygenerowanego widgetu
-    .preview
-      = raw(widget.snippet)
+      = f.submit "Zaktualizuj widget"
+  - if widget.valid?
+    .content
+      %h2 Podgląd wygenerowanego widgetu
+      .preview
+        = raw(widget.snippet)
 
-    %h2 Wygenerowany kod do wstawienia na stronę
-    %div
-      %span.block Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulumque sapien. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum que sapien.
-      %textarea{:cols => "20", :rows => "3"}= widget.snippet
+      %h2 Wygenerowany kod do wstawienia na stronę
+      %div
+        %span.block Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulumque sapien. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum que sapien.
+        %textarea{:cols => "20", :rows => "3"}= widget.snippet

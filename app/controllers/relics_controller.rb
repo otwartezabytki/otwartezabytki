@@ -69,7 +69,7 @@ class RelicsController < ApplicationController
         redirect_to relic_path(relic.id) and return
       end
     else
-      flash[:error] = "Popraw proszę błędy wskazane poniżej"
+      flash[:error] = "Popraw proszę błędy wskazane poniżej."
       render 'edit' and return
     end
   end

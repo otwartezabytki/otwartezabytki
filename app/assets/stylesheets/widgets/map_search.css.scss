@@ -65,6 +65,9 @@ div.tooltip {
   top: 0;
   bottom: 0;
   left: 180px;
+  &.full {
+    left: 0px;
+  }
 }
 
 h1{

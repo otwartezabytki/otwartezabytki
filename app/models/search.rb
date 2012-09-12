@@ -100,15 +100,18 @@ class Search
   end
 
   def facets
-    navbar_facets = ["countries", "voivodeships", "districts", "communes", "places"].drop(location.length)
+    available_facets = ["countries", "voivodeships", "districts", "communes", "places"]
+    navbar_facets = available_facets.drop(location.length)
 
     if bounding_box?
-      visible_facets = [Country, Voivodeship, District, Commune].select{ |e| e.visible_from >= bounding_box_size }
-        .map(&:name).map(&:downcase).map(&:pluralize)
+      visible_facets = [World, Country, Voivodeship, District, Commune].each_cons(2).to_a.select{ |e| e.first.visible_from >= bounding_box_size }
+        .map(&:last).map(&:name).map(&:downcase).map(&:pluralize)
 
-      first_facet = navbar_facets.first
+      first_navbar_facet = navbar_facets.first
       navbar_facets &= visible_facets
-      navbar_facets = [first_facet] if navbar_facets.blank? && bounding_box_size > Place.visible_from
+      if navbar_facets.blank? && bounding_box_size > Place.visible_from
+        navbar_facets = [first_navbar_facet || available_facets.first]
+      end
     else
       navbar_facets = navbar_facets[0..0]
     end
@@ -459,7 +462,7 @@ class Search
       @bounding_box_size ||= [
         haversine_distance(top_left.first, top_left.last, top_left.first, bottom_right.last),
         haversine_distance(top_left.first, top_left.last, bottom_right.first, top_left.last)
-      ].min
+      ].min * 0.96
     end
   end
 

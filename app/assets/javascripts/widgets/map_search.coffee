@@ -97,6 +97,8 @@ construct_relic_marker = ->
     remove: ->
       @div.remove() if @div
 
+not_dragged = true
+
 initialize_gmap = ->
   if !window.gmap
     window.gmap = new google.maps.Map document.getElementById('map_canvas'),
@@ -131,6 +133,7 @@ initialize_gmap = ->
         bottom_right = "#{south_west.lat()},#{north_east.lng()}"
         $('#search_bounding_box').val("#{top_left};#{bottom_right}")
         $('#new_search').submit()
+        not_dragged = false
     , 3000
 
     google.maps.event.addListener gmap, 'idle', init
@@ -191,14 +194,19 @@ jQuery.initializer '#map_widget', ->
 
     search_params = jQuery.parseJSON($('#search_params').html())
 
-    boundingbox = if search_params.boundingbox
-      [top_left, bottom_right] = search_params.boundingbox
+    window.parent.postMessage(JSON.stringify(event: "on_params_changed", params: search_params), "*")
+
+    boundingbox = if search_params.bounding_box
+      [top_left, bottom_right] = search_params.bounding_box.split(';')
+      top_left = top_left.split(',')
+      bottom_right = bottom_right.split(',')
       [{lat: top_left[0], lng: top_left[1]}, {lat: bottom_right[0], lng: bottom_right[1]}]
     else
       $sidebar.data('boundingbox')
 
-    not_dragged = search_params.bounding_box == "" || !search_params.bounding_box?
+
     if (boundingbox && not_dragged) || !gmap.getBounds()
+      console.log(boundingbox)
       southWest = new google.maps.LatLng(boundingbox[0].lat, boundingbox[0].lng)
       northEast = new google.maps.LatLng(boundingbox[1].lat, boundingbox[1].lng)
       bounds = new google.maps.LatLngBounds(southWest, northEast)
