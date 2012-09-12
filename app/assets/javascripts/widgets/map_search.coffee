@@ -243,6 +243,7 @@ jQuery.initializer '#map_widget', ->
 
       if @facet_count > 1
         new google.maps.RelicMarker latlng, @facet_count, gmap, =>
+          not_dragged = true
           $('#search_location').val("#{@type}:#{@id}")
           $('#new_search').submit()
       else

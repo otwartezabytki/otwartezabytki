@@ -104,14 +104,15 @@ class Search
     navbar_facets = available_facets.drop(location.length)
 
     if bounding_box?
-      visible_facets = [World, Country, Voivodeship, District, Commune].each_cons(2).to_a.select{ |e| e.first.visible_from >= bounding_box_size }
+      visible_facets = [World, Country, Voivodeship, District, Commune, Place].each_cons(2).to_a.select{ |e| e.first.visible_from >= bounding_box_size }
         .map(&:last).map(&:name).map(&:downcase).map(&:pluralize)
 
-      first_navbar_facet = navbar_facets.first
-      navbar_facets &= visible_facets
-      if navbar_facets.blank? && bounding_box_size > Place.visible_from
-        navbar_facets = [first_navbar_facet || available_facets.first]
-      end
+      #first_navbar_facet = navbar_facets.first
+      #navbar_facets &= visible_facets
+      #if navbar_facets.blank? #&& bounding_box_size > Commune.visible_from
+      #  navbar_facets = [first_navbar_facet || "places"]
+      #end
+      puts "Asdfa"
     else
       navbar_facets = navbar_facets[0..0]
     end
