@@ -1,7 +1,7 @@
 %section.show.events
   %h2 Ważne daty
   - if relic.all_events.count > 0
-    = link_to 'uzupełnij', edit_section_relic_path(relic, :events), :title => 'edytuj wydarzenia związane z zabytkiem', :remote => true, :class => "edit-relic-link"
+    = link_to 'uzupełnij', edit_section_relic_path(relic.id, :events), :title => 'edytuj wydarzenia związane z zabytkiem', :remote => true, :class => "edit-relic-link"
     .content
       .viewport
         %ul
@@ -24,4 +24,4 @@
         %br
         Bądź pierwszy!
 
-      = link_to "dodaj wydarzenie", edit_section_relic_path(relic, :events), :remote => true
+      = link_to "dodaj wydarzenie", edit_section_relic_path(relic.id, :events), :remote => true
