@@ -37,6 +37,13 @@ ajax_callback = (data, status, xhr) ->
         afterShow: ->
           $.fancybox.wrap.bind 'onReset', (e) ->
             $('body > .main-container:last').remove()
+        beforeClose: ->
+          $form = $('.fancybox-wrap form:first')
+          if serialized_data = $form.data('serialized')
+            if serialized_data != $form.serialize()
+              return confirm("Jeśli wyjdziesz zmiany nie zostaną zapisane. Kontynuować?")
+
+          return true
         afterClose: ->
           history.pushState { autoreload: true, path: window.before_fancybox_url }, $('title').text(), window.before_fancybox_url
 
@@ -88,7 +95,6 @@ $(window).load ->
   setTimeout ->
     $(window).bind 'popstate', (event) ->
       state = event.originalEvent.state
-      console.log('pop state', document.location, event)
       popping_state = true
       if state && state.autoreload
         $.ajax(state.path).success(ajax_callback).complete(-> popping_state = false)
