@@ -11,7 +11,9 @@
           :collection => I18nCountrySelect::Countries::COUNTRY_CODES.map{|code| [I18n.t(code, :scope => :countries), code]}.sort_alphabetical_by(&:first)
         = f.input :fprovince
         = f.input :fplace
-      = f.input :street
+      .street_input{ :style => (relic.street.blank? ? "display: none" : "") }
+        = f.input :street
+      = link_to (relic.street.blank? ? "Znam dokładny adres" : "Nie da się ustalić adresu"), '#', :class => "toggle_street_input"
       .actions
         = f.submit 'Zapisz zmiany'
         lub

@@ -137,6 +137,17 @@ jQuery.initializer 'section.edit.location', ->
       $('.polish-location').hide()
       $('.foreign-location').show()
 
+  this.find(".toggle_street_input").click ->
+    if $('.street_input').is(':visible')
+      $('.street_input').hide()
+      $('.street_input input').val("")
+      $(this).text("Znam dokładny adres")
+    else
+      $('.street_input').show()
+      $(this).text("Nie da się ustalić adresu")
+
+    false
+
   window.ensuring_google_maps_loaded ->
     window.ensure_geolocation
     $('#marker').draggable
