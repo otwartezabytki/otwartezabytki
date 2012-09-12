@@ -203,6 +203,7 @@ pl:
       relic:
         place_id: "Miejsce"
         identification: "Nazwa obiektu"
+        common_name: "Nazwa zwyczajowa"
         group: "Określenie zespołu"
         number: "Liczba obiektów"
         materail: "Materiał"
@@ -369,6 +370,7 @@ pl:
     hints:
       relic:
         identification: To jest informacja o nazwie zabytku
+        common_name: Jeśli zabytek ma jedną lub więcej nazw zwyczajowych, wpisz je.
         documents_info: To jest informacja gdzie szukać dokumenty
         links_info: To jest informacja gdzie szukać linki
         place: Informacja o miejscowości

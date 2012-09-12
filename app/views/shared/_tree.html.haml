@@ -2,7 +2,8 @@
   = content_tag :li, :class => ((subrelics.length > 0 ? "node " : "leaf ") + (rel == relic ? "current  " : "") ).strip do
     %span.line
     = link_to rel.identification, [rel], :remote => true
-    - if subrelics.length > 0
+    - if subrelics.length > 0 || rel == relic
       = content_tag :ul do
-        = render 'shared/tree', :node => subrelics
+        - if subrelics.length > 0
+          = render 'shared/tree', :node => subrelics
         %li.add= link_to 'dodaj', new_relicbuilder_path(:parent_id => rel.id),:class => "add_relic"

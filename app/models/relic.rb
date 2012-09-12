@@ -69,7 +69,7 @@ class Relic < ActiveRecord::Base
                   :street, :tags, :categories, :photos_attributes, :description,
                   :documents_attributes, :documents_info, :links_attributes, :links_info,
                   :events_attributes, :entries_attributes, :license_agreement, :polish_relic,
-                  :geocoded, :build_state, :parent_id, :as => [:default, :admin]
+                  :geocoded, :build_state, :parent_id, :common_name, :as => [:default, :admin]
 
   attr_accessible :ancestry, :materail, :register_number, :approved, :group, :state, :existence, :as => :admin
 

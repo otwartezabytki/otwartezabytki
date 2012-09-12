@@ -1,6 +1,7 @@
 .row
   = semantic_form_for relic, :url => section_relic_path(relic.id, :section => :general), :remote => true do |f|
     = f.input :identification, :as => :string
+    = f.input :common_name, :as => :string
     .actions
       = f.submit 'zapisz zmiany'
       lub
