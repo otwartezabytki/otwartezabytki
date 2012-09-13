@@ -180,3 +180,10 @@ jQuery.initializer 'section.edit.location', ->
         $('#map_canvas').circle_marker(lat, lng)
         $('form.relic').removeClass('geocoded')
         $('#relic_geocoded').val("0")
+
+  countries_locations = jQuery.parseJSON($('#countries_location').html())
+  $('#relic_country_code').select2()
+  $('#relic_country_code').change ->
+    location = countries_locations[$(this).val()]
+    $('#map_canvas').zoom_at(location[0], location[1])
+    map.setZoom(5)

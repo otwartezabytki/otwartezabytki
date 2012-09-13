@@ -7,8 +7,11 @@
           :collection => f.object.commune.places.not_custom, :selected => f.object.place.id, :label => "Miejscowość",
           :include_blank => false, :input_html => { :style => "width: 234px;" }, :hint => t('formtastic.hints.relic.place')
       .foreign-location{ :style => (relic.polish_relic ? "display: none;" : "") }
+        %script(type="application/json" id="countries_location")
+          != Country.coordinates.to_json
         = f.input :country_code, :as => :select, :include_blank => false, :default => "PL",
-          :collection => I18nCountrySelect::Countries::COUNTRY_CODES.map{|code| [I18n.t(code, :scope => :countries), code]}.sort_alphabetical_by(&:first)
+          :collection => Country.coordinates.keys.map{|code| [I18n.t(code, :scope => :countries), code]}.sort_alphabetical_by(&:first),
+          :input_html => { :style => "width: 234px;" }
         = f.input :fprovince
         = f.input :fplace
       .street_input{ :style => (relic.street.blank? ? "display: none" : "") }
