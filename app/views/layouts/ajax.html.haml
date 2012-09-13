@@ -10,5 +10,8 @@
   %body
     = render 'shared/search'
     .container.main-container{ :'data-replace' => '.main-container' }
-      = yield
+      - unless response.headers['x-fancybox'] == 'true'
+        = render 'shared/flash', :flash => flash
+      .row
+        = yield
     != include_gon(:camel_case => true)

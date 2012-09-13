@@ -66,6 +66,10 @@ class RelicsController < ApplicationController
         params[:entry_id] = nil
         render 'edit' and return
       else
+        if params[:section] == "photos"
+          flash[:notice] = "Galeria zdjęć została zaktualizowana. Dziękujemy!"
+        end
+
         redirect_to relic_path(relic.id) and return
       end
     else
