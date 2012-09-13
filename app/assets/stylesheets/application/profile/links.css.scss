@@ -151,13 +151,17 @@
       margin-top: 10px;
     }
 	}
-  .add-link a{
-    color: #36a007;
-    font-weight: 700;
-    font-size: 13px;
-    background: asset-data-url("icon-add.png") no-repeat;
-    padding-left: 20px;
+  .add-link {
     margin-bottom: 30px;
-    display: block;
+    a{
+      color: #36a007;
+      font-weight: 700;
+      font-size: 13px;
+      background: asset-data-url("icon-add.png") no-repeat;
+      background-position: left center;
+      padding-left: 20px;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
   }
 }
