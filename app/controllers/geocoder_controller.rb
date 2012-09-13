@@ -4,11 +4,17 @@ class GeocoderController < ApplicationController
       params[:query]
     elsif params[:country_code].present?
       search_foreign
+    elsif params[:place_id].present?
+      search_place(params[:place_id])
     else
       search_polish
     end
 
     render :json => results
+  end
+
+  def search_place(place_id)
+    [{ :latitude => Place.find(place_id).latitude, :longitude => Place.find(place_id).longitude }]
   end
 
   def search_polish

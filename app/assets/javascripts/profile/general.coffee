@@ -21,3 +21,8 @@ jQuery.initializer 'section.edit', ->
         confirm("Jeśli wyjdziesz zmiany nie zostaną zapisane. Kontynuować?")
       else
         true
+
+    $form.submit ->
+      serialized_form = $(this).serialize()
+      $form.data('serialized', serialized_form)
+      true

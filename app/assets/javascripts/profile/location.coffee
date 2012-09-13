@@ -11,7 +11,9 @@ geocode_location = (callback) ->
     city = $('.select2-choice').text().trim()
     street = $('#relic_street').val().trim()
 
-    jQuery.get geocoder_search_path, {voivodeship, district, commune, city, street}, (result) ->
+    place_id = $('#relic_place_id').val()
+
+    jQuery.get geocoder_search_path, {place_id}, (result) ->
       if result.length > 0
         callback(result[0].latitude.round(7), result[0].longitude.round(7))
     , 'json'
@@ -62,7 +64,7 @@ $.fn.specialize
 
     set_marker: (lat, lng) ->
       $('form.relic').addClass('geocoded')
-      $('#relic_geocoded').val("1")
+      $('#relic_geocoded').val("t")
       map.removeMarkers()
 
       marker = map.addMarker
@@ -129,6 +131,9 @@ window.ensure_geolocation = ->
 
 jQuery.initializer 'section.edit.location', ->
   $('#relic_place_id').select2()
+  $('#relic_place_id').change ->
+    $('#relic_street').val("")
+
   $('#relic_polish_relic').change ->
     if $(this).is(':checked')
       $('.foreign-location').hide()
@@ -179,7 +184,7 @@ jQuery.initializer 'section.edit.location', ->
         map.removeMarkers()
         $('#map_canvas').circle_marker(lat, lng)
         $('form.relic').removeClass('geocoded')
-        $('#relic_geocoded').val("0")
+        $('#relic_geocoded').val("f")
 
   countries_locations = jQuery.parseJSON($('#countries_location').html())
   $('#relic_country_code').select2()

@@ -29,7 +29,13 @@
     }
   }
 
-  form.geocoded .marker-helper {
-    display: none;
+  form.geocoded {
+    .auto_geolocated {
+      display: none;
+    }
+
+    .marker-helper {
+      display: none;
+    }
   }
 }
