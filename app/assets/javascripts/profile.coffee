@@ -60,3 +60,7 @@ jQuery.initializer 'section.edit', ->
 jQuery.initializer 'section.show.subrelics', ->
   $(".subrelics-tree li a").click ->
     $('body').scrollTop(0)
+
+jQuery ->
+  $('body').on 'click', '.flash-info-permament span', ->
+    $.cookie('flash_hidden', true)
