@@ -77,8 +77,9 @@ jQuery.initializer 'section.edit.photos', ->
   $section.find('input.date_taken, input.author').each ->
     $(this).val($.cookie($(this).attr('id'))) if $(this).val().length == 0 && $.cookie($(this).attr('id'))
 
+  image = if $('#photo_file').hasClass('first') then first_photo_upload else photo_upload
   $("#photo_file").filestyle
-    image: "/assets/photo-upload.png"
+    image: image
     imageheight: 25
     imagewidth: 154
     width: 154
