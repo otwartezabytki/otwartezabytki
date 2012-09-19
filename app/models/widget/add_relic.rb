@@ -13,6 +13,10 @@
 
 class Widget::AddRelic < Widget
 
+  serialized_attr_accessor :button_type => 'small'
+
+  validates :button_type, :inclusion => {:in => ['small', 'medium', 'big']}
+
   def snippet
     widget_url = Rails.application.routes.url_helpers.widgets_add_relic_url(uid, :host => Settings.oz.host)
     %Q(<script type="text/javascript">

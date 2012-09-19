@@ -3,7 +3,7 @@
     Konfiguracja widgetu
     %span '#{widget.class.title}'
   .sidebar
-    = semantic_form_for widget_map_search, :url => widgets_map_search_path(widget), :remote => true do |f|
+    = semantic_form_for widget, :url => self.send("widgets_#{widget.class.partial_name}_path", widget), :remote => true do |f|
       = render "/widgets/edit/#{widget.class.partial_name}", :form => f
       = f.submit "Zaktualizuj widget"
   - if widget.valid?
@@ -11,7 +11,6 @@
       %h2 Podgląd wygenerowanego widgetu
       .preview
         = raw(widget.snippet)
-
       %h2 Wygenerowany kod do wstawienia na stronę
       %div
         %span.block Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulumque sapien. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum que sapien.
