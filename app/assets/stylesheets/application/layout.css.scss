@@ -242,6 +242,9 @@ a {
     font-weight: bold;
     line-height: 18px;
   }
+  li label{
+    cursor: pointer;
+  }
   section.main-search{
     padding-left: 22px;
     padding-bottom: 18px;
