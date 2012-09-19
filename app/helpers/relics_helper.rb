@@ -61,8 +61,7 @@ module RelicsHelper
 
   def order_collection
     [
-      ['Trafnosc ASC', 'score.asc'],
-      ['Trafnosc DESC', 'score.desc'],
+      ['Trafność', 'score.desc'],
       ['A-Z', 'alfabethic.asc'],
       ['Z-A', 'alfabethic.desc'],
     ]
