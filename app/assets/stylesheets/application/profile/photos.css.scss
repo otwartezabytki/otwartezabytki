@@ -42,6 +42,10 @@
       padding-bottom: 15px;
       border-bottom: 1px solid #BFBFBF;
       margin-bottom: 20px;
+      input.photo_upload.first + div{
+        background-position: 0 0 !important;
+        padding-bottom: 7px !important;
+      }
     }
     #relic_license_agreement_input{
       #relic_license_agreement{
