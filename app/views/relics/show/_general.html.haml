@@ -2,14 +2,7 @@
   = link_to 'uzupełnij', edit_section_relic_path(relic.id, :general), :title => 'edytuj ogólne dane zabytku', :remote => true, :class => "edit-relic-link"
   %h1= relic.identification
   .status
-    - if relic.approved?
-      .revise.success
-        .ico
-        %span przejrzany
-    - else
-      .fill
-        .ico
-        %span nieuzupełniony
+    = state_tag(relic)
     - if relic.register_number.present?
       .relic-info
         Zabytek
