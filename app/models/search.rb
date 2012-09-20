@@ -336,7 +336,7 @@ class Search
             should { text "autocomplitions",              instance.query, 'operator' => 'AND', 'boost' => 1 }
           end
           if instance.place.present?
-            should { text "place_with_address", instance.place, 'operator' => 'AND', 'boost' => 5 }
+            must { text "place_with_address", instance.place, 'operator' => 'AND', 'boost' => 5 }
           end
         end
       end if [instance.query, instance.place].any? &:present?
