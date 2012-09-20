@@ -621,6 +621,7 @@ section.show.general{
   width: 611px;
   padding: 17px 20px 25px 25px;
   border-right: 2px solid #486a7c;
+  background: #fff;
   h1{
     font-size: 22px;
     font-weight: 600;
@@ -1093,6 +1094,12 @@ span.block {
   h2{
     @include background(linear-gradient(#4b6d7e, #436576));
     padding: 0 20px;
+    &.complex{
+      padding: 12px 20px;
+      margin-bottom: 20px;
+      height: auto;
+      line-height: 26px;
+    }
   }
   nav{
     width: 213px;
