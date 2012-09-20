@@ -14,23 +14,9 @@
 #= require jquery.ui.tabs
 #= require jquery.ui.progressbar
 #= require jquery.ui.sortable
-#= require ./vendor/froogaloop
-#= require ./vendor/jquery.cookie
-#= require ./vendor/jquery.autocomplete-html
-#= require ./vendor/jquery.cycle
-#= require ./vendor/jquery.iframe-transport
-#= require ./vendor/jquery.fileupload
-#= require ./vendor/jquery.filestyle
-#= require ./vendor/jquery.highlight-3
-#= require ./vendor/jquery.transition.min
-#= require ./vendor/jquery.jcarousel
-#= require ./vendor/jquery.tinyscrollbar.min
-#= require ./vendor/redactor
-#= require ./vendor/select2
-#= require ./vendor/spin.min
+#= require_tree ./vendor
 #= require js-routes
 #= require twitter/bootstrap
-#= require fancybox
 
 #= require variables
 #= require_tree ./libraries

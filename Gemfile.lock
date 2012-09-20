@@ -6,13 +6,6 @@ GIT
     mini_magick (3.4)
       subexec (~> 0.2.1)
 
-GIT
-  remote: https://github.com/sverigemeny/fancybox-rails
-  revision: 17db886581f38fbcd4b0ac0349fc9493554ee261
-  specs:
-    fancybox-rails (0.1.4)
-      railties (>= 3.1.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -538,7 +531,6 @@ DEPENDENCIES
   dm-chunked_query
   dm-sqlite-adapter
   factory_girl_rails
-  fancybox-rails!
   ffi-aspell
   forgery (= 0.5.0)
   formtastic
