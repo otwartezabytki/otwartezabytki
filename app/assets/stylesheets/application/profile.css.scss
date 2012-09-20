@@ -1094,6 +1094,12 @@ span.block {
   h2{
     @include background(linear-gradient(#4b6d7e, #436576));
     padding: 0 20px;
+    &.complex{
+      padding: 12px 20px;
+      margin-bottom: 20px;
+      height: auto;
+      line-height: 26px;
+    }
   }
   nav{
     width: 213px;
