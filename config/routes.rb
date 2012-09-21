@@ -35,8 +35,11 @@ Otwartezabytki::Application.routes.draw do
   match '/widgets', :to => "widgets#index"
 
   namespace :widgets do
-    resources :map_searches, :only => [:show, :edit, :create, :update], :path => "/map_search"
-    resources :add_relics, :only => [:show, :edit, :create, :update], :path => "/add_relics"
+    with_options :only => [:show, :edit, :create, :update] do |w|
+      w.resources :map_searches, :path => "/map_search"
+      w.resources :add_relics, :path => "/add_relics"
+      w.resources :add_alerts, :path => "/add_alerts"
+    end
   end
 
   namespace :api do

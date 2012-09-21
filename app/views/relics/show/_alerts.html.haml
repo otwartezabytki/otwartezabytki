@@ -1,4 +1,4 @@
-%section.show.alerts
+%section.show.alerts#anchor-alerts
   %h2 Alerty
   - if relic.alerts.count > 0
     = link_to image_tag('edit-relic-ico-alert.png') + "zgłoś alert", new_relic_alert_path(relic), :remote => true, :title => "dodaj alert do zabytku", :class => "edit-relic-link"

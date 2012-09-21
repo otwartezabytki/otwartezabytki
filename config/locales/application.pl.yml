@@ -50,3 +50,7 @@ pl:
       title: Widget dodający zabytek
       description: Opis widgetu dodającego zabytek
       thumb: widget-image-example.jpg
+    add_alert:
+      title: Widget dodaj Alerta
+      description: Opis widgetu dodaj alerta
+      thumb: widget-image-example.jpg
