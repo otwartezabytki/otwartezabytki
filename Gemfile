@@ -119,6 +119,7 @@ group :development, :test do
 
   # for annotating db schema in models
   gem 'annotate', ">=2.5.0"
+  gem 'quiet_assets'
 end
 
 # assets javascript compiler
