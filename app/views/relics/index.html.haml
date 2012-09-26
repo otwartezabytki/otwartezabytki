@@ -26,6 +26,7 @@
               = f.input :to,    :label => "do:"
           .field
             = f.action :submit, :label => 'Szukaj &raquo;'.html_safe, :button_html => { :name => nil }
+          = link_to 'Opcje filtrowania', '#', :class =>'filter-options'
         %section.second-search
           .wrap
             .column

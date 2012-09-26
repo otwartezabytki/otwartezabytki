@@ -250,6 +250,7 @@ a {
     padding-bottom: 18px;
     @include clearfix;
     border-bottom: 1px solid #dadada;
+    position: relative;
     .field{
       float: left;
       width: 326px;
@@ -309,6 +310,17 @@ a {
         }
       }
     }
+    a.filter-options{
+      position: absolute;
+      padding-right: 10px;
+      bottom: 30px;
+      right: 230px;
+      background: asset-data-url("edit-relic-ico-arrow-down.png") no-repeat right center;
+      &.shown{
+        background: asset-data-url("edit-relic-ico-arrow-up.png") no-repeat right center;
+      }
+
+    }
   }
   .field.time{
     #search_from_input{
@@ -341,7 +353,7 @@ a {
     border-top: 1px solid #fff;
     padding-top: 5px;
     padding-bottom: 5px;
-
+    display: none;
     .wrap{
       @include clearfix;
       padding: 13px 8px;
