@@ -112,7 +112,7 @@ group :development, :test do
   # for debugging
   gem 'ruby-debug19'
   gem 'pry-rails'
-
+  gem 'pry-doc'
   # for routes in /rails/routes
   gem 'sextant'
   gem 'guard-cucumber'
