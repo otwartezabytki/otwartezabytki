@@ -11,7 +11,7 @@
       %h3 Chcesz stworzyć widget?
       %p Nulla facilisi. Ut metus nulla, iaculis at imperdiet quis, semper sit amet velit. Donec fermentum turpis id nulla iaculis rutrum. Mauris consequat, tellus vitae consectetur dignissim, est risus tempus dolor, at varius odio sapien sit amet lacus. Integer vulputate
     .widgets
-      - [Widget::MapSearch, Widget::AddRelic].each do |widget_template|
+      - [Widget::MapSearch, Widget::AddRelic, Widget::AddAlert].each do |widget_template|
         .widget
           - if widget_template.thumb
             .image
@@ -20,4 +20,4 @@
             %h2= widget_template.title
             %p= widget_template.description
             .actions
-              = link_to 'Użyj widgeta', method(:"widgets_#{widget_template.partial_name.pluralize}_path").call(), :class => "use-widget btn", :method => :post, :remote => true
+              = link_to 'Użyj widgeta', method(:"widgets_#{widget_template.partial_name.pluralize}_path").call(), :class => "use-widget btn", :method => :post

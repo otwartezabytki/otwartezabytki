@@ -332,6 +332,8 @@ GEM
       yard (~> 0.8.1)
     pry-rails (0.1.6)
       pry
+    quiet_assets (1.0.1)
+      railties (~> 3.1)
     rabl (0.7.1)
       activesupport (>= 2.3.14)
       multi_json (~> 1.0)
@@ -567,6 +569,7 @@ DEPENDENCIES
   pg
   pry-doc
   pry-rails
+  quiet_assets
   rabl
   rails (~> 3.2.3)
   rails-i18n

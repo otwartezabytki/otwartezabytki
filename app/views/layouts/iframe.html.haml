@@ -6,6 +6,7 @@
     /[if lt IE 9]
       = javascript_include_tag "http://html5shim.googlecode.com/svn/trunk/html5.js"
     = stylesheet_link_tag "application", :media => "all"
+    = stylesheet_link_tag "iframe", :media => "all"
     /[if lt IE 9]
       = stylesheet_link_tag "ie8", :media => "all"
     %link{:href => "http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,600,300&subset=latin,latin-ext", :rel => "stylesheet", :type => "text/css"}
@@ -17,6 +18,9 @@
     != include_gon(:camel_case => true)
     != javascript_include_tag "application"
     = yield :footer_javascripts
+    :coffeescript
+      window.parent.postMessage(JSON.stringify(event: "on_iframe_init", params: {width: document.width, height: document.height }), "*")
+
     - if Rails.env.production?
       :javascript
         var _gaq = _gaq || [];

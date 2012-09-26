@@ -1,0 +1,2 @@
+<%= Otwartezabytki::Application.assets.find_asset('widgets/add_alert.js').source.html_safe %>
+oz_jQuery('#oz_add_alert_widget').html('<%= escape_javascript(render "/widgets/show/#{widget.class.partial_name}")%>');

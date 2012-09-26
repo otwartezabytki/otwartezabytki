@@ -1,0 +1,87 @@
+@import "vendor/jquery.fancybox";
+@import "compass/layout";
+@import "compass/css3";
+
+#oz_add_alert_widget{
+  @include background(linear-gradient(#4b6d7e, #436576));
+  width: 300px;
+  padding: 4px;
+  @include border-radius(2px);
+  .widget-box{
+    @include background(linear-gradient(#fff, #f5f5f5));
+    @include border-radius(2px);
+    padding-bottom: 16px;
+    padding-top: 8px;
+  }
+  .actions{
+    text-align: center;
+  }
+  h3{
+    background: #f2f2f2;
+    border-top: 1px solid #e7e7e7;
+    line-height: 30px;
+    height: 30px;
+    color: #505051;
+    font-size: 12px;
+    font-weight: normal;
+    padding: 0 12px;
+    font-family: 'Open Sans',​sans-serif;
+  }
+  h2{
+    line-height: 18px;
+    height: 18px;
+    color: #527c8c;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 0 12px;
+    font-family: 'Open Sans',​sans-serif;
+  }
+  .widget-logo{
+    background: asset-data-url("logo-widget.png") no-repeat;
+    width: 157px;
+    height: 31px;
+    margin-left: 12px;
+  }
+  button{
+    
+    @include border-radius(2px);
+    color: #fff;
+    font-size: 12px;
+    border: 0;
+    height: 30px;
+    padding: 0 12px;
+    cursor: pointer;
+    text-transform: uppercase;
+    &.none{
+      cursor: normal;
+      @include background(linear-gradient(#d8d8d8, #c4c4c4));
+      @include text-shadow( 0 -1px 0 rgba(0,0,0,0.3));
+      margin-right: 10px;
+    }
+    &.show{
+      @include background(linear-gradient(#f22729, #de1f09));  
+      @include text-shadow( 0 -1px 0 rgba(0,0,0,0.3));
+      padding-right: 8px;
+      @include box-shadow(rgba(255,0,0,0.3) 0 0 5px);
+      margin-right: 10px;
+      span{
+        @include background(linear-gradient(#c91e1d, #bc1908));  
+        display: inline-block;
+        @include border-radius(2px);
+        line-height: 18px;
+        height: 18px;
+        padding: 0 4px;
+      }
+      &:hover{
+        background: #f22729;
+      }
+    }
+    &.create{
+      @include background(linear-gradient(rgba(120, 145, 159, 1), rgba(95, 121, 135, 1)));  
+      @include text-shadow( 0 -1px 0 rgba(0,0,0,0.6));
+      &:hover{
+        background: rgb(120, 145, 159);
+      }
+    }
+  }
+}
