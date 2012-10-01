@@ -22,6 +22,20 @@ jQuery.initializer 'body.relics.index .main-container', ->
     containerCssClass: 'search-order-container'
     width: '170px'
 
+  this.find("section.main-search a.filter-options").click (e) ->
+    e.preventDefault()
+    filter = $("section.second-search")
+    link = $(this)
+    if link.hasClass "shown"
+      filter.slideUp()
+      link.removeClass "shown"
+    else
+      filter.slideDown()
+      link.addClass("shown")
+
+  this.find("nav.pagination").click ->
+    $("html, body").animate({ scrollTop: 0 }, 600);
+
   this.on 'ajax:beforeSend', 'form[data-remote], a[data-remote]', (e, data, status, xhr) ->
     new Spinner(search_spinner_opts).spin(document.getElementById('spin'))
     $('form section.results .loading').show()
