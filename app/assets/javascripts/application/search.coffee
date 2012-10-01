@@ -33,6 +33,17 @@ jQuery.initializer 'body.relics.index .main-container', ->
       filter.slideDown()
       link.addClass("shown")
 
+  this.find("div.sidebar-categories a.sacral-options").click (e) ->
+    e.preventDefault()
+    filter = $("div.sacral-categories")
+    link = $(this)
+    if link.hasClass "shown"
+      filter.slideUp()
+      link.removeClass "shown"
+    else
+      filter.slideDown()
+      link.addClass("shown")
+
   this.find('a.show-voivodeships').click (e) ->
     e.preventDefault()
     $(this).parents('li:first').remove()

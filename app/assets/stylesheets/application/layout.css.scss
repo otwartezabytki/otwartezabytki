@@ -319,7 +319,6 @@ a {
       &.shown{
         background: asset-data-url("edit-relic-ico-arrow-up.png") no-repeat right center;
       }
-
     }
   }
   .field.time{
@@ -685,6 +684,16 @@ a {
         @include border-radius(2px);
         font-style: normal;
       }
+    }
+  }
+  a.sacral-options{
+    // position: absolute;
+    padding-right: 10px;
+    // bottom: 30px;
+    // right: 230px;
+    background: asset-data-url("edit-relic-ico-arrow-down.png") no-repeat right center;
+    &.shown{
+      background: asset-data-url("edit-relic-ico-arrow-up.png") no-repeat right center;
     }
   }
 }

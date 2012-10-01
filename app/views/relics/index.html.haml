@@ -6,7 +6,11 @@
       %h3 Kategorie:
       = f.input :categories, :as => :check_boxes, :collection => categoires_facets('first'), :disabled => disabled(f.object, 'categories'), :label => false
       = f.input :categories, :as => :check_boxes, :collection => categoires_facets('second'), :disabled => disabled(f.object, 'categories'), :label => false
-      = f.input :categories, :as => :check_boxes, :collection => categoires_facets('third'), :disabled => disabled(f.object, 'categories'), :label => false
+      - hidden_sacral = !f.object.categories.any?{|c| Category.send("third_column").keys.include?(c)}
+      %h4
+        = link_to 'Sakralny', '#', :class => ('sacral-options ' + (hidden_sacral ? '' : 'shown'))
+      .sacral-categories{:style => ('display:none;' if hidden_sacral)}
+        = f.input :categories, :as => :check_boxes, :collection => categoires_facets('third'), :disabled => disabled(f.object, 'categories'), :label => false
 
 
   %div{:class => relics.empty? ? "span9" : "span9"}
