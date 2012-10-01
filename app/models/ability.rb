@@ -14,6 +14,7 @@ class Ability
       can :manage, Photo
       can :manage, Entry
       can :manage, Alert
+      can :manage, Autocomplition
 
       can :index, Version
       can :show, Version

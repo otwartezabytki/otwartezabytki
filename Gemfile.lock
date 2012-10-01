@@ -6,6 +6,13 @@ GIT
     mini_magick (3.4)
       subexec (~> 0.2.1)
 
+PATH
+  remote: ~/monterail/tolk
+  specs:
+    tolk (1.3.3)
+      will_paginate
+      ya2yaml (~> 0.26)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -499,8 +506,10 @@ GEM
       activesupport (>= 3.0.7)
       rails (>= 3.0.7)
     will_cache (0.0.9)
+    will_paginate (3.0.3)
     xpath (0.1.4)
       nokogiri (~> 1.3)
+    ya2yaml (0.31)
 
 PLATFORMS
   ruby
@@ -586,6 +595,7 @@ DEPENDENCIES
   therubyracer
   tire (= 0.4.2)
   tire-contrib
+  tolk!
   twitter-bootstrap-rails
   uglifier (>= 1.0.3)
   unicode
