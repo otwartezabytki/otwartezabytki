@@ -96,7 +96,7 @@ class Search
   end
 
   def location
-    @location || []
+    @location || ['pl']
   end
 
   def facets
