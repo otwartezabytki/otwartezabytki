@@ -26,8 +26,9 @@
               = f.input :to,    :label => "do:"
           .field
             = f.action :submit, :label => 'Szukaj &raquo;'.html_safe, :button_html => { :name => nil }
-          = link_to 'Opcje filtrowania', '#', :class =>'filter-options'
-        %section.second-search
+          - hidden_filter = [f.object.state, f.object.has_photos, f.object.has_description, f.object.existence].flatten.compact.blank?
+          = link_to 'Opcje filtrowania', '#', :class => ('filter-options ' + (hidden_filter ? '' : 'shown'))
+        %section.second-search{:style => ('display:none;' if hidden_filter)}
           .wrap
             .column
               %h4
@@ -53,14 +54,14 @@
                           %span.unchecked Niesprawdzony
                         .text
                           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer mattis vulputate nulla adipisci.
-              = f.input :state, :label => false, :as => :check_boxes, :collection => state_facets,      :disabled => disabled(f.object, 'state')
+              = f.input :state, :label => false, :as => :check_boxes, :collection => state_facets, :disabled => disabled(f.object, 'state')
             .column
               %h4 Zawartość:
-              = f.input :has_photos, :label => false, :as => :check_boxes, :collection => has_photos_facets,  :disabled => disabled(f.object, 'has_photos')
-              = f.input :has_description, :label => false, :as => :check_boxes, :collection => has_description_facets,  :disabled => disabled(f.object, 'has_description')
+              = f.input :has_photos, :label => false, :as => :check_boxes, :collection => has_photos_facets, :disabled => disabled(f.object, 'has_photos')
+              = f.input :has_description, :label => false, :as => :check_boxes, :collection => has_description_facets, :disabled => disabled(f.object, 'has_description')
             .column
               %h4 Rodzaj:
-              = f.input :existence, :label => false, :as => :check_boxes, :collection => existence_facets,  :disabled => disabled(f.object, 'existence')
+              = f.input :existence, :label => false, :as => :check_boxes, :collection => existence_facets, :disabled => disabled(f.object, 'existence')
         %section.order
           = f.input :order, :as => :select, :label => "sortuj według:", :collection => order_collection, :include_blank => false, :selected => f.object.order
       %section.results

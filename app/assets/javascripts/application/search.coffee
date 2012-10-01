@@ -33,6 +33,11 @@ jQuery.initializer 'body.relics.index .main-container', ->
       filter.slideDown()
       link.addClass("shown")
 
+  this.find('a.show-voivodeships').click (e) ->
+    e.preventDefault()
+    $(this).parents('li:first').remove()
+    $('ul.voivodeships').show()
+
   this.find("nav.pagination").click ->
     $("html, body").animate({ scrollTop: 0 }, 600);
 

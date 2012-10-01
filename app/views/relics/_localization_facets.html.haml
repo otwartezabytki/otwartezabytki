@@ -29,11 +29,3 @@
           - relics.terms('countries', true).each do |obj|
             %li
               = link_to_facet obj, 1
-
-- content_for :footer_javascripts do
-  :coffeescript
-    jQuery ->
-      $(document).on 'click', 'a.show-voivodeships', (e) ->
-        e.preventDefault()
-        $(this).parents('li:first').remove()
-        $('ul.voivodeships').show()
