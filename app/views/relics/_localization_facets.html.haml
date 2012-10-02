@@ -1,12 +1,10 @@
 .well.sidebar-nav
   %h3 Lokalizacja
-  %ul.nav.nav-list.all
-    %li
-      = link_to "Cały Świat <span>#{relics.count('overall')}</span>".html_safe, relics_path(search_params(:location => nil)), :remote => true
   %ul.nav.nav-list
+    - hidden_voivodeships = (location_array.include?('pl') and location_array.size == 1)
     %li
       = link_to_facet ({'term' => 'Polska_pl', 'count' => relics.count('poland')}), 0 do
-        %ul
+        %ul.voivodeships{:style => ('display:none;' if hidden_voivodeships)}
           - relics.terms('voivodeships', true).each do |obj|
             %li
               = link_to_facet obj, 1 do
@@ -22,8 +20,11 @@
                                   - relics.terms('places', true).each do |obj|
                                     %li
                                       = link_to_facet obj, 4
+    - if hidden_voivodeships
+      %li
+        = link_to 'Pokaż wojewewództwa', '#', :class => 'show-voivodeships'
     %li
-      = link_to_facet ({'term' => 'Poza polską_world', 'count' => relics.count('world')}), 0 do
+      = link_to_facet ({'term' => 'Zabytki znajdujące się poza Polską_world', 'count' => relics.count('world')}), 0 do
         %ul
           - relics.terms('countries', true).each do |obj|
             %li

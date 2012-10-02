@@ -80,7 +80,7 @@ module ApplicationHelper
 
   def location_array
     return @location_array if defined? @location_array
-    @location_array = search_params[:search][:location].to_s.split('-')
+    @location_array = (search_params[:search][:location] || 'pl').to_s.split('-')
   end
 
   def link_to_facet obj, deep, &block

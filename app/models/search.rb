@@ -96,7 +96,7 @@ class Search
   end
 
   def location
-    @location || []
+    @location || ['pl']
   end
 
   def facets
@@ -329,7 +329,7 @@ class Search
 
       # query
       query do
-        boolean do
+        boolean(:minimum_number_should_match => 1) do
           if instance.query.present?
             should { text "identification",               instance.query, 'operator' => 'AND', 'boost' => 10 }
             should { text "descendants.identification",   instance.query, 'operator' => 'AND', 'boost' => 8 }
