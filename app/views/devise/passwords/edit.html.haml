@@ -1,0 +1,14 @@
+.login_title_forgot
+  %h2 Zmiana hasła
+.form_box_forgot
+  .ask_account Zmień hasło
+  = simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f|
+    = f.input :reset_password_token, :as => :hidden, :error => false
+    - unless resource.errors[:reset_password_token].empty?
+      .alert.alert-error
+        Token stracił ważność. #{link_to "Wyślij zapytanie o nowy", new_password_path(resource_name)}.
+    .form-inputs
+      = f.input :password, :label => "Nowe hasło"
+      = f.input :password_confirmation, :label => "Powtórz nowe hasło"
+    .form-actions
+      = f.button :submit, "Zmień hasło"
