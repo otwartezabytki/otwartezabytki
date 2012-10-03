@@ -1,36 +1,32 @@
 .search-results
-  - collection.each do |relic|
-    .relic
-      .thumb
-        = image_tag "bg-relic-image-ph.png"
-      .body
-        .name
-          %h2= link_to relic.identification, relic_path(relic.slug)
-        = state_tag(relic)
-        .pathway
-          %span.label lokalizacja:
-          = relic.place_full_name
-        .street
-          - unless relic.street.blank?
-            %span.known= relic.street
-          - else
-            %span.unknown Adres niedosępny
-        - unless relic.from.blank?
-          .time
-            %span.label data powstania:
-            = relic.from
-            -#= "#{relic.from} - #{relic.to}"
-        - if false
-          .include
-            - if relic.descendants.present?
-              %span
-              = relic.descendants.map(&:identification).join(', ')
-          .include
-            %span
-            = (relic.categories || []).sort.join(', ')
-        - if false
-          - if relic.corrected?(current_user)
-            .modified
-          - else
-            .change
-              = link_to "Zobacz »", relic_path(relic), :class => 'btn btn-mini'
+  %table.relics
+    %thead
+      %tr.relic
+        %th.body
+          %span.label Zabytek
+        %th.location
+          %span.label Lokalizacja
+        %th.date
+          %span.label Data powstania
+    %tbody
+      - collection.each do |relic|
+        %tr.relic
+          %td.body
+            .thumb
+              = image_tag "bg-relic-image-ph-small.gif"
+            .name
+              %h2= link_to relic.identification, relic_path(relic.slug)
+            = state_tag(relic)
+          %td.location
+            .pathway
+              = relic.place_full_name
+            .street
+              - unless relic.street.blank?
+                %span.known= relic.street
+              - else
+                %span.unknown Adres niedosępny
+          %td.date
+            - unless relic.from.blank?
+              .time
+                = relic.from
+        
