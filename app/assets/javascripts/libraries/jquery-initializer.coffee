@@ -87,7 +87,8 @@ $(document).on 'ajax:success', 'form[data-remote], a[data-remote]', (e, data, st
 $(document).on 'ajax:error', 'form[data-remote], a[data-remote]', (e, xhr, status, error) ->
   popping_state = false
   if error == "Unauthorized"
-    jQuery.cookie('return_path', window.location.href, path: '/') # used for redirecting after login
+    return_path = $(e.currentTarget).attr('href') || window.location.pathname
+    jQuery.cookie('return_path', return_path, path: '/') # used for redirecting after login
     window.location.href = Routes.new_user_session_path()
   e.stopPropagation()
 

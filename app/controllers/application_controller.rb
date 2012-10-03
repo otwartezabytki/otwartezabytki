@@ -50,7 +50,8 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    stored_location_for(resource) || cookies[:return_path] || signed_in_root_path(resource)
+    cookies.delete(:return_path) if Subdomain.matches?(request)
+    stored_location_for(resource) || cookies.delete(:return_path) || signed_in_root_path(resource)
   end
 
   def enable_fancybox
