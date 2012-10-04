@@ -20,6 +20,8 @@ class Alert < ActiveRecord::Base
   attr_accessible :relic_id, :user_id, :file, :description
   attr_accessible :state, :as => :admin
 
+  after_create :new_alert_notification
+
   validates :description, :presence => true
 
   scope :fixed, where("state = ?", "fixed")
@@ -29,5 +31,9 @@ class Alert < ActiveRecord::Base
 
   def state
     self[:state] || "new"
+  end
+
+  def new_alert_notification
+    AlertMailer.notify_oz(self).deliver
   end
 end
