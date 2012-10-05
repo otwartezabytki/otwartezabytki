@@ -38,9 +38,10 @@ class Search
 
   [:categories, :state, :existence, :has_photos, :has_description].each do |name|
     define_method name do
-      return [] if instance_variable_get("@#{name}").blank?
-      instance_variable_get("@#{name}").reject!(&:blank?)
-      instance_variable_get("@#{name}")
+      variable = instance_variable_get("@#{name}")
+      return [] if variable.blank?
+      variable = variable.split(',') if variable.kind_of?(String)
+      variable.reject(&:blank?)
     end
   end
 

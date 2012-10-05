@@ -108,6 +108,9 @@ gem 'htmldiff'
 # friendly id for widgets
 gem 'friendly_id'
 
+# faster asset precompiling
+gem 'turbo-sprockets-rails3'
+
 group :development, :test do
   # for debugging
   gem 'ruby-debug19'
