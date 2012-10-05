@@ -52,4 +52,8 @@ class Alert < ActiveRecord::Base
     end
     true
   end
+
+  def formatted_body
+    Haml::Engine.new(File.read("#{Rails.root}/app/views/alerts/_formatted_body.html.haml")).render(Object.new, {:alert => self})
+  end
 end

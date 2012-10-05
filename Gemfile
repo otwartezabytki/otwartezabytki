@@ -110,6 +110,7 @@ gem 'friendly_id'
 
 # faster asset precompiling
 gem 'turbo-sprockets-rails3'
+gem 'rubyzip'
 
 group :development, :test do
   # for debugging
