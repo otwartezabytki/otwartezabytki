@@ -46,6 +46,7 @@ class Photo < ActiveRecord::Base
   def as_json(options)
     {
       :id => id,
+      :relic_id => relic_id,
       :author => author,
       :date_taken => date_taken,
       :file => file.as_json(options)[:file],
