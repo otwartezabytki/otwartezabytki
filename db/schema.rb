@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121003134519) do
+ActiveRecord::Schema.define(:version => 20121005131908) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -344,6 +344,31 @@ ActiveRecord::Schema.define(:version => 20121003134519) do
     t.string   "wuoz_key"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "wuoz_alerts", :force => true do |t|
+    t.integer  "wuoz_agency_id"
+    t.integer  "alert_id"
+    t.datetime "sent_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "wuoz_notifications", :force => true do |t|
+    t.integer  "wuoz_agency_id"
+    t.text     "subject"
+    t.text     "body"
+    t.text     "alert_ids"
+    t.string   "zip_file"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "wuoz_regions", :force => true do |t|
+    t.integer  "wuoz_agency_id"
+    t.integer  "district_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
 end

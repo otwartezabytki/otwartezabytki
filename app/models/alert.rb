@@ -21,6 +21,8 @@ class Alert < ActiveRecord::Base
   attr_accessible :state, :as => :admin
 
   after_create :new_alert_notification
+  after_create :create_wuoz_alerts
+  after_destroy :destroy_wuoz_alerts
 
   validates :description, :presence => true
 
@@ -35,5 +37,19 @@ class Alert < ActiveRecord::Base
 
   def new_alert_notification
     AlertMailer.notify_oz(self).deliver
+  end
+
+  def create_wuoz_alerts
+    WuozRegion.where(:district_id => self.relic.district_id).all.each do |region|
+      WuozAlert.find_or_create_by_wuoz_agency_id_and_alert_id(region.wuoz_agency_id, self.id)
+    end
+    true
+  end
+
+  def destroy_wuoz_alerts
+    WuozRegion.where(:district_id => self.relic.district_id).all.each do |region|
+      WuozAlert.where(:wuoz_agency_id => region.wuoz_agency_id, :alert_id => self.id).destroy_all
+    end
+    true
   end
 end
