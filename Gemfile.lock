@@ -516,7 +516,7 @@ PLATFORMS
 
 DEPENDENCIES
   aasm
-  activeadmin
+  activeadmin (~> 0.4.4)
   activeadmin-cancan
   acts_as_list
   airbrake
