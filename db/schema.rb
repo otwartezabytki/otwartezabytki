@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121005131908) do
+ActiveRecord::Schema.define(:version => 20121008082104) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -340,10 +340,10 @@ ActiveRecord::Schema.define(:version => 20121005131908) do
     t.string   "director"
     t.string   "email"
     t.string   "address"
-    t.string   "districts"
+    t.string   "district_names"
     t.string   "wuoz_key"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "wuoz_alerts", :force => true do |t|

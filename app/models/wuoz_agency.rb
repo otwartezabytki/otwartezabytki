@@ -1,5 +1,5 @@
 class WuozAgency < ActiveRecord::Base
-  attr_accessible :city, :director, :email, :address, :districts, :wuoz_key
+  attr_accessible :city, :director, :email, :address, :district_names, :wuoz_key
   has_many :wuoz_regions
   has_many :districts, :through => :wuoz_regions
   has_many :wuoz_alerts
@@ -32,7 +32,7 @@ class WuozAgency < ActiveRecord::Base
   end
 
   def seed_wouz_regions
-    self[:districts].split(',').map do |name|
+    district_names.split(',').map do |name|
       results = District.where(['name = ?', name.strip])
       Rails.logger.error "Cant find #{id}: #{name}" if results.blank?
       results.each do |r|
