@@ -15,6 +15,7 @@ class Ability
       can :manage, Entry
       can :manage, Alert
       can :manage, WuozAgency
+      can :manage, Autocomplition
 
       can :index, Version
       can :show, Version
