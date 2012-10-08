@@ -15,7 +15,7 @@
             .thumb
               = image_tag "bg-relic-image-ph-small.gif"
             .name
-              %h2= link_to relic.identification, relic_path(relic.slug)
+              %h2= link_to relic.identification, relic_path(relic.slug), :remote => true
             = state_tag(relic)
           %td.location
             .pathway

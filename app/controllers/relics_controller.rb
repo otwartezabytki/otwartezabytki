@@ -39,6 +39,7 @@ class RelicsController < ApplicationController
 
   def show
     relic.present? # raise ActiveRecord::RecordNotFound before entering template
+    cookies[:last_relic_id] = relic.id
     if params[:section].present?
       render "relics/show/_#{params[:section]}" and return
     end

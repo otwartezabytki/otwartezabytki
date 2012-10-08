@@ -7,7 +7,7 @@
     %br/
   Każdy uczestnik może się zarejestrować i śledzić własne postępy.
   %br/
-  = link_to "Zarejestruj się tutaj", new_user_registration_path
+  = link_to "Zarejestruj się tutaj", new_user_registration_path, :remote => true
   %br/
   .ask_account Czy konto jest mi potrzebne?
   Możesz uzupełniać bazę anonimowo albo założyć konto i śledzić własne postępy.
@@ -17,12 +17,12 @@
     .alert.alert-info= flash[:notice]
   - if flash[:error]
     .alert.alert-error= flash[:error]
-  = semantic_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+  = semantic_form_for(resource, :as => resource_name, :url => session_path(resource_name), :remote => true) do |f|
     = f.semantic_errors
     = f.input :email, :required => false, :autofocus => true
     = f.input :password, :required => false
     - if devise_mapping.recoverable? && controller_name != 'passwords'
       .link_form
-        = link_to "Nie otrzymałeś lub nie pamiętasz hasła?", new_password_path(resource_name)
+        = link_to "Nie otrzymałeś lub nie pamiętasz hasła?", new_password_path(resource_name), :remote => true
         %br/
     = f.submit "Zaloguj się"

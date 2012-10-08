@@ -1830,11 +1830,14 @@ ul.nav li a.selected {
   background: #000;
 }
 
+.fancybox-inner {
+  background: #fff;
+}
+
 .fancybox-close {
   top: 8px;
   right: 12px;
 }
-
 
 .flash {
   @include background(linear-gradient(#f8e8c9, #efdfc0));
