@@ -5,6 +5,10 @@ pl:
     reservation_thanks: "Dziękujemy za rejestrację! Na podany adres e-mail zostało wysłane Twoje hasło. Tymczasem zachęcamy do dalszego poprawiania zabytków:"
     relic_reverted: "Objekt został przywrócony do wskazanej wersji."
     alert_added: "Alert został dodany. Dziękujemy."
+    unpublished_photos_has_been_delete: "Ponieważ nie zgodziłeś się na opublikowanie dodanych zdjęć, zostały one usunięte."
+    new_relic_has_been_added: 'Gratulacje dodałeś nowy zabytek'
+    gallery_has_been_updated: "Galeria zdjęć została zaktualizowana. Dziękujemy!"
+    please_correct_errors: "Popraw proszę błędy wskazane poniżej."
   buttons:
     show_history: "Pokaż historię"
     revert_this_version: "Przywróć tę wersję"

@@ -101,7 +101,7 @@ class RelicbuildersController < ApplicationController
     @relic.attributes = (params[:relic] || {}).except(:voivodeship_id, :district_id, :commune_id)
     if @relic.build_state == 'photos_step' && @relic.license_agreement != "1"
       @relic.photos.where(:user_id => current_user.id).destroy_all
-      flash[:notice] = "Ponieważ nie zgodziłeś się na opublikowanie dodanych zdjęć, zostały one usunięte."
+      flash[:notice] = t('notices.unpublished_photos_has_been_delete')
       redirect_to photos_relicbuilder_path(:id => @relic) and return
     end
     if @relic.save
@@ -112,7 +112,7 @@ class RelicbuildersController < ApplicationController
         redirect_to photos_relicbuilder_path(:id => @relic)
       when 'photos_step'
         if @relic.update_attributes :build_state => "finish_step"
-          redirect_to @relic, :notice => 'Gratulacje dodałeś nowy zabytek'
+          redirect_to @relic, :notice => t('notices.new_relic_has_been_added')
         else
           render @relic.invalid_step_view
         end

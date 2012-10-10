@@ -5,7 +5,7 @@ Geocoder.configure do |config|
   config.lookup = :google
 
   # to use an API key:
-  config.api_key = Settings.oz.gm_key
+  # config.api_key = Settings.oz.gm_key
 
   # geocoding service request timeout, in seconds (default 3):
   config.timeout = 5

@@ -1,35 +1,35 @@
 %ol.relic-stages
   %li.first{:class => stage == 1 ? 'active' : ''}
-    %span krok 1
+    %span= t('views.relicbuilders.stages.step1')
     %h3
       - if stage > 1
-        = link_to "sprawdź istnienie", new_relicbuilder_path(:parent_id => @relic.parent_id), 'data-confirm' => "Uwaga utracisz wprowadzone dane, rozpoczniesz process dodawania zabytku jeszcze raz. Jesteś pewien?"
+        = link_to t('views.relicbuilders.stages.check_existance'), new_relicbuilder_path(:parent_id => @relic.parent_id), 'data-confirm' => t('views.relicbuilders.stages.check_existance_confirm')
       - else
-        sprawdź istnienie
-    %p Lorem ipsum dolor sit amet, consectetur adipiscing.
+        = t('views.relicbuilders.stages.check_existance')
+    %p= t('views.relicbuilders.stages.step1_description1')
   %li{:class => stage == 2 ? 'active' : ''}
-    %span krok 2
+    %span= t('views.relicbuilders.stages.step2')
     %h3
       - if stage > 2
         - p = [:latitude, :longitude, :place_id, :parent_id].inject(address_params){|m, p| m[p] ||= @relic.send(p);m}
         - p[:relic_id] = @relic.try(:id)
-        = link_to "dane adresowe", address_relicbuilder_path(p)
+        = link_to t('views.relicbuilders.stages.address'), address_relicbuilder_path(p)
       - else
-        dane adresowe
-    %p Lorem ipsum dolor sit amet, consectetur adipiscing.
+        = t('views.relicbuilders.stages.address')
+    %p= t('views.relicbuilders.stages.step1_description2')
   %li{:class => stage == 3 ? 'active' : ''}
-    %span krok 3
+    %span= t('views.relicbuilders.stages.step3')
     %h3
       - if [2, 4].include?(stage) and @relic.id?
-        = link_to "szczegóły", details_relicbuilder_path(:id => @relic.try(:id))
+        = link_to t('views.relicbuilders.stages.details'), details_relicbuilder_path(:id => @relic.try(:id))
       - else
-        szczegóły
-    %p Lorem ipsum dolor sit amet, consectetur adipiscing.
+        = t('views.relicbuilders.stages.details')
+    %p= t('views.relicbuilders.stages.step1_description3')
   %li.last{:class => stage == 4 ? 'active' : ''}
-    %span krok 4
+    %span= t('views.relicbuilders.stages.step4')
     %h3
       - if [2, 3].include?(stage) and @relic.id?
-        = link_to "opis i zdjęcia", photos_relicbuilder_path(:id => @relic.try(:id))
+        = link_to t('views.relicbuilders.stages.photos'), photos_relicbuilder_path(:id => @relic.try(:id))
       - else
-        opis i zdjęcia
-    %p Lorem ipsum dolor sit amet, consectetur adipiscing.
+        = t('views.relicbuilders.stages.photos')
+    %p= t('views.relicbuilders.stages.step1_description4')

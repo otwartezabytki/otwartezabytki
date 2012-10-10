@@ -1,5 +1,5 @@
 %section.show.photo
-  %h2 Galeria (#{tree_photos.count})
+  %h2= t('views.photos.show.header', :count => tree_photos.count)
   .content
     .photo_content(data-replace="section.show.photo .photo_content")
       - if tree_photos.one_before(photo.id).present?
@@ -13,16 +13,20 @@
           .full-photo= image_tag(tree_photo.file.full.url)
 
         .info-left
-          %p Autor: #{tree_photo.author}
-          %p Data wykonania: #{tree_photo.date_taken}
-          %p Creative Commons 3.0
+          %p
+            = t('activerecord.attributes.photo.author')
+            = tree_photo.author
+          %p
+            = t('activerecord.attributes.photo.date_taken')
+            = tree_photo.date_taken
+          %p= t('views.photos.show.license')
         .info-right
           %p
-            Zdjęcie należy do obiektu
+            = t('views.photos.show.photo_belongs_to')
             = link_to relic.identification, [relic]
 
           - if relic.parent
-            należącego do zespołu zabytków
+            = t('views.photos.show.relic_parent')
             = link_to relic.parent.identification, [relic.parent]
 
     %ul#slider_midi.jcarousel-skin-midi{ :"data-photos" => tree_photos.all.to_json }

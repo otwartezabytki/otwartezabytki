@@ -57,7 +57,7 @@ class RelicsController < ApplicationController
 
     if params[:section] == 'photos' && relic.license_agreement != "1"
       relic.photos.where(:user_id => current_user.id).destroy_all
-      flash[:notice] = "Ponieważ nie zgodziłeś się na opublikowanie dodanych zdjęć, zostały one usunięte."
+      flash[:notice] = t('notices.unpublished_photos_has_been_delete')
       redirect_to relic_path(relic.id) and return
     end
 
@@ -67,13 +67,13 @@ class RelicsController < ApplicationController
         render 'edit' and return
       else
         if params[:section] == "photos"
-          flash[:notice] = "Galeria zdjęć została zaktualizowana. Dziękujemy!"
+          flash[:notice] = t('notices.gallery_has_been_updated')
         end
 
         redirect_to relic_path(relic.id) and return
       end
     else
-      flash[:error] = "Popraw proszę błędy wskazane poniżej."
+      flash[:error] = t('notices.please_correct_errors')
       render 'edit' and return
     end
   end

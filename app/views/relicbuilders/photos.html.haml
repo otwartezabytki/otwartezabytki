@@ -4,10 +4,8 @@
     %section.main
       %section.creator-step
         = render :partial => 'parent_relic', :object => @relic.parent
-        %p.intro
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras convallis luctus malesuada. Pellentesque purus augue, facilisis id hendrerit et, tincidunt a mauris.
-        %p.intro
-          Vivamus vestibulum semper odio, nec volutpat sapien egestas ut. Nam iaculis dapibus eros convallis mollis. Nullam non ligula ut leo porta venenatis sed in nibh.
+        %p.intro= t('views.relicbuilders.photos.intro1')
+        %p.intro= t('views.relicbuilders.photos.intro2')
       %section.edit.photos
         = semantic_form_for @relic, :url => relicbuilder_path(:id => @relic), :html => { :multipart => true }, :method => :put  do |f|
           = f.hidden_field :build_state
@@ -20,10 +18,10 @@
                     .preview
                       = image_tag photo.file.midi.url
                     - if photo.user_id == current_user.id
-                      = link_to 'usuń zdjęcie', relic_photo_path(@relic.id, photo.id, :build => true),
+                      = link_to t('views.relicbuilders.photos.delete_photo'), relic_photo_path(@relic.id, photo.id, :build => true),
                         :method => :delete,
                         :remote => true,
-                        :confirm => "Czy aby na pewno?",
+                        :confirm => t('views.relicbuilders.photos.delete_confirm'),
                         :class => "remove_photo"
                   .column-right
                     = f2.input :author, :input_html => { :class => "author" }
@@ -34,9 +32,9 @@
                   .preview
                     = image_tag photo.midi.url
                 .column-right
-                  %label= t 'activerecord.attributes.photo.author'
+                  %label= t('activerecord.attributes.photo.author')
                   %p= photo.author
-                  %label= t 'activerecord.attributes.photo.date_taken'
+                  %label= t('activerecord.attributes.photo.date_taken')
                   %p= photo.date_taken
 
           .photo.hidden
@@ -45,7 +43,7 @@
 
             .column-right
               %p
-                %strong Trwa wgrywanie, proszę czekać...
+                %strong= t('views.relicbuilders.photos.loading')
                 = link_to 'anuluj', '#', :class => "cancel_upload"
               %p
                 .progressbar
@@ -54,46 +52,7 @@
           .photo-upload
             = file_field_tag "photo[file]", :class => 'photo_upload', :"data-url" => "#{relic_photos_path(@relic, :build => true)}"
 
-          = f.input :license_agreement, :input_html => { :checked => 'checked' }, :as => :boolean, :label => "Oświadczam, że posiadam prawa do publikowania na stronie OtwarteZabytki.pl dodane powyżej zdjęcia."
+          = f.input :license_agreement, :input_html => { :checked => 'checked' }, :as => :boolean, :label => t('views.relicbuilders.photos.statement')
 
           .actions
-            = f.submit 'Zakończ! i zobacz dodany zabytek'
-
-      -# %section.creator-step
-      -#   .field.text.textarea
-      -#     %label.main Opis
-      -#     %textarea
-      -#   %aside
-      -#     %h3 O czym warto wspomnieć w opisie zabytku?
-      -#     %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare venenatis pulvinar. Vestibulum suscipit enim in urna placerat aliquam.
-      -# %section.creator-step
-      -#   %h3 Zdjęcia
-      -#   .field.photo
-      -#     .thumb-wrapper
-      -#       .thumb
-      -#         %img{:src => "http://placekitten.com/125/125"}
-      -#     .field.text.photo-info
-      -#       %label.main Dane autora:
-      -#       %input{:type => 'text'}
-      -#       = link_to 'usuń zdjęcie', '#', :class => 'delete-photo'
-      -#   .field.photo
-      -#     .thumb-wrapper
-      -#       .thumb
-      -#     .field.text.photo-info
-      -#       %strong.label Trwa wgrywanie, proszę czekać...
-      -#       = link_to 'anuluj', '#', :class => 'cancel'
-      -#       .progress-bar
-      -#         .progress-box
-      -#           .progress-line{:style => 'width: 43%'}
-      -#         %span.progress-value 43%
-      -#   = link_to 'wgraj kolejne zdjecie', '#', :class => 'add-photo'
-      -#   .field.disclaimer
-      -#     %input{:type => 'checkbox'}
-      -#     %label Oświadczam, że posiadam prawa do opublikowania na stronie OtwarteZabytki.pl dodane powyżej zdjęcia. Oraz krótki tekst o licencji... Lorem ipsum dolor sit amet........
-
-      -#   %aside
-      -#     %h3 Pamiętaj o licencji i prawach autoskich!
-      -#     %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare venenatis pulvinar. Vestibulum suscipit enim in urna placerat aliquam.
-      -# = link_to relic_build_path(relic), :class => 'next-step', :method => :put do
-      -#   %strong Zakończ!
-      -#   %small ...i zobacz dodany zabytek
+            = f.submit t('views.relicbuilders.photos.submit')

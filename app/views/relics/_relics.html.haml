@@ -3,11 +3,11 @@
     %thead
       %tr.relic
         %th.body
-          %span.label Zabytek
+          %span.label= t('views.relics.show.relics.name')
         %th.location
-          %span.label Lokalizacja
+          %span.label= t('views.relics.show.relics.location')
         %th.date
-          %span.label Data powstania
+          %span.label= t('views.relics.show.relics.create_date')
     %tbody
       - collection.each do |relic|
         %tr.relic
@@ -24,9 +24,9 @@
               - unless relic.street.blank?
                 %span.known= relic.street
               - else
-                %span.unknown Adres niedosępny
+                %span.unknown= t('views.relics.show.relics.unknown_address')
           %td.date
             - unless relic.from.blank?
               .time
                 = relic.from
-        
+

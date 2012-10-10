@@ -5,9 +5,9 @@
     %meta(name="viewport" content="width=device-width, initial-scale=1.0")
     %title= content_for?(:title) ? yield(:title) : "Otwarte Zabytki"
     = favicon_link_tag  "favicon.gif", :type => 'image/gif'
-    %meta(property="og:title" content="Otwarte Zabytki")
-    %meta(property="og:description" content="Społecznościowa akcja tworzenia bazy zabytków. Dołącz!")
-    %meta(property="og:image" content="#{root_url[0..-2]}#{image_path('logo-facebook.jpg')}")
+    %meta{:property => "og:title", :content => t('layouts.application.og.title')}
+    %meta{:property => "og:description", :content => t('layouts.application.og.description')}
+    %meta{:property => "og:image", :content => t('layouts.application.og.image')}
     = csrf_meta_tags
     / Le HTML5 shim, for IE6-8 support of HTML elements
     /[if lt IE 9]
@@ -15,12 +15,7 @@
     = stylesheet_link_tag "application", :media => "all"
     /[if lt IE 9]
       = stylesheet_link_tag "ie8", :media => "all"
-    %link{:href => "http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,600,300&subset=latin,latin-ext", :rel => "stylesheet", :type => "text/css"}/
-    :plain
-      <meta property="og:title" content="Otwarte Zabytki" />
-      <meta property="og:description" content="Uzupełnij z nami bazę zabytków i pomóż stworzyć serwis. Skorzystaj z własnej wiedzy. Poszukaj informacji w książkach lub w internecie. To naprawdę proste." />
-      <meta property="og:image" content="http://otwartezabytki.pl/assets/face-share-logo.png" />
-
+    %link{:href => "http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,600,300&subset=latin,latin-ext", :rel => "stylesheet", :type => "text/css"}
   %body{ :class => [cookies["font-size"].to_s, controller_name, action_name, ("resource_#{params[:id]}" if params[:id])].join(' ') }
     .page
       #root
@@ -32,35 +27,36 @@
               %span.icon-bar
             %h1
               %a(href=root_path) Otwarte Zabytki
-            %section.disclaimer
-              W pierwszej części cyfrowego czynu społecznego można wziąć udział do 7 sierpnia. Pod koniec sierpnia na otwartezabytki.pl udostępnimy aplikację z nowymi funkcjonalnościami.
+            %section.disclaimer= t('layouts.application.disclaimer')
             %nav#userNav
               %ul
                 - if current_user && current_user.registered? && current_user.errors.size == 0
-                  %li Witaj, #{ current_user.username || current_user.email }
-                  %li Liczba Twoich zabytków: #{current_user.earn_points}
-                  %li= link_to 'Wyloguj się', destroy_user_session_path, :method => :delete, :class => 'logout'
+                  %li= t('layouts.application.hello', :username => (current_user.username || current_user.email))
+                  %li= t('layouts.application.relics_count', :count => current_user.earn_points)
+                  %li= link_to t('layouts.application.logout'), destroy_user_session_path, :method => :delete, :class => 'logout'
                 - else
-                  %li Liczba Twoich zabytków: #{current_user.try(:earn_points) || 0}
+                  %li= t('layouts.application.relics_count', :count => current_user.try(:earn_points) || 0)
                   %li
-                    %a{:href => new_user_session_path, :class => 'login'} Zaloguj
+                    %a{:href => new_user_session_path, :class => 'login'}
+                      = t('layouts.application.login')
                   %li
-                    %a{:href => new_user_registration_path, :class => 'register'} Zarejestruj
+                    %a{:href => new_user_registration_path, :class => 'register'}
+                      = t('layouts.application.register')
             %a{:href => 'http://centrumcyfrowe.pl/', :target => '_blank', :class => 'cc_logo'}
         %section#menu
           .container
             %nav
               %ul
                 %li
-                  = link_to "Strona główna", root_path, :class => "home #{current_page?(root_path) ? "current" : ""}"
+                  = link_to t('layouts.application.homepage'), root_path, :class => "home #{current_page?(root_path) ? "current" : ""}"
                 %li
-                  = link_to "O projekcie", page_pl_path('o-projekcie'), :class => "about #{current_page?(about_path) ? "current" : ""}"
+                  = link_to t('layouts.application.about'), page_pl_path('o-projekcie'), :class => "about #{current_page?(about_path) ? "current" : ""}"
                 %li
-                  = link_to "Pomoc", page_pl_path('pomoc'), :class => "help #{current_page?(strony_pomoc_path) ? "current" : ""}"
+                  = link_to t('layouts.application.help'), page_pl_path('pomoc'), :class => "help #{current_page?(strony_pomoc_path) ? "current" : ""}"
                 %li
-                  = link_to "Kontakt", page_pl_path('kontakt'), :class => "contact  #{current_page?(strony_kontakt_path) ? "current" : ""}"
+                  = link_to t('layouts.application.contact'), page_pl_path('kontakt'), :class => "contact  #{current_page?(strony_kontakt_path) ? "current" : ""}"
                 %li
-                  = link_to "Pobierz dane", page_pl_path('pobierz-dane'), :class => "download #{current_page?(download_path) ? "current" : ""}"
+                  = link_to t('layouts.application.download_data'), page_pl_path('pobierz-dane'), :class => "download #{current_page?(download_path) ? "current" : ""}"
             .text
               %span.plus
               %span.minus

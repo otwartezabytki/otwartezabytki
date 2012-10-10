@@ -1,16 +1,13 @@
 .login_title_forgot
-  %h2 Nie masz hasła?
+  %h2= t('.header', :scope => 'views')
 .form_box_forgot
-  .ask_account Co zrobić jeśli nie mam hasła?
-  .txt_forgot
-    Hasło zostało wysłane do Ciebie mailem w momencie
-    rejestracji. Jeśli nie możesz go znaleźć, wyślemy
-    je ponownie.
+  .ask_account= t('.ask_account', :scope => 'views')
+  .txt_forgot= t('.password_has_been_sent')
   = simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
     - unless resource.errors.empty?
       .alert.alert-error
-        Podany adres e-mail nie został znaleziony
+        = t('.wrong_email', :scope => 'views')
     .form-inputs
       = f.input :email, :error => false
     .form-actions
-      = f.button :submit, "Wyślij link do resetowania hasła"
+      = f.button :submit, t('.submit', :scope => 'views')

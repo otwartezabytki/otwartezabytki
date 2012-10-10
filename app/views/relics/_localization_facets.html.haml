@@ -1,5 +1,5 @@
 .well.sidebar-nav
-  %h3 Lokalizacja
+  %h3= t('views.relics.show.localization_facets.header')
   %ul.nav.nav-list
     - hidden_voivodeships = (location_array.include?('pl') and location_array.size == 1)
     %li
@@ -22,9 +22,9 @@
                                       = link_to_facet obj, 4
     - if hidden_voivodeships
       %li
-        = link_to 'Pokaż wojewewództwa', '#', :class => 'show-voivodeships'
+        = link_to t('views.relics.show.localization_facets.show_voivodeships'), '#', :class => 'show-voivodeships'
     %li
-      = link_to_facet ({'term' => 'Zabytki znajdujące się poza Polską_world', 'count' => relics.count('world')}), 0 do
+      = link_to_facet ({'term' => "#{t('views.relics.show.localization_facets.world_relics')}_world", 'count' => relics.count('world')}), 0 do
         %ul
           - relics.terms('countries', true).each do |obj|
             %li
