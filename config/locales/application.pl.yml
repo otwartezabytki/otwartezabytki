@@ -11,31 +11,31 @@ pl:
   relic_tabs:
     general:
       name: Nazwa obiektu
-      description: To jest podpowiedź do zakładki nazwy obiektu
+      description: " "
     location:
       name: Lokalizacja
-      description: To jest podpowiedź do zakładki lokalizacji obiektu
+      description: Sprawdź, czy adres jest poprawny. Czy zabytek zaznaczony jest na mapie we właściwym miejscu?
     events:
       name: Ważne daty
-      description: Wpisz najważniejsze daty z historii obiektu wraz z krótkim opisem.
+      description: "Wpisz najważniejsze daty z historii obiektu, dodaj krótki opis. np. 1536 - zamek spłonął podczas pożaru miasta"
     description:
       name: Opis
-      description: Napisz 3-4 zdania zawierające najważniejsze informacje o obiekcie.
+      description: Napisz zwięzłą informację na temat zabytku. Pamiętaj o podaniu źródła!
     entries:
       name: Społeczność
-      description: "Podziel się z innymi legendą, anegdotą, ciekawą historią związaną z zabytkiem."
+      description: Tu wpisz ciekawą anegdotę, historię lub legendę związaną z zabytkiem.
     links:
       name: Linki, źródła, powiązania
-      description: Podaj ciekawe internetowe i papierowe źródła informacji o zabytku.
+      description: Podaj istotne dla obiektu źródła informacji (adresy www, tytuły publikacji).
     categories:
       name: Kategorie i tagi
-      description: To jest podpowiedź do zakładki kategorie
+      description: Przypisz do zabytku odpowiednie tagi i kategorie. Kieruj się własnym uznaniem.
     documents:
       name: Dokumenty urzędowe
-      description: "Dysponujesz dokumentacją, którą możesz legalnie udostępnić innym? Załącz pliki tutaj."
+      description: "Załącz dokumenty urzędowe i materiały archiwalne dot. zabytku. Dopuszczalne formaty: pdf, jpg, png, gif. Upewnij się, że dysponujesz prawami do udostępnienia materiałów."
     photos:
       name: Zdjęcia
-      description: To jest podpowiedź do zakładki zdjęcia
+      description: "Załącz jedno lub więcej zdjęcie zabytku. Dopuszczalne formaty: Zadbaj o to, aby przeglądanie zdjęć sprawiało przyjemność innym użytkownikom - zamieszczaj wyłącznie zdjęcia dobrej jakości. "
   alert_states:
     new: Nowy
     in_progress: Do naprawy

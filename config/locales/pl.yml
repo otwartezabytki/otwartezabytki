@@ -369,18 +369,18 @@ pl:
   formtastic:
     hints:
       relic:
-        identification: To jest informacja o nazwie zabytku
+        identification: "Popraw i uzupełnij (jeśli to konieczne) nazwę zespołu. Jeśli oprócz nazwy oficjalnej, zabytek funkcjonuje pod nazwą zwyczajową, dopisz ją. <br> Np.:  Zamek Przemysła, pot. Zamek Gargamela"
         common_name: Jeśli zabytek ma jedną lub więcej nazw zwyczajowych, wpisz je.
-        documents_info: To jest informacja gdzie szukać dokumenty
-        links_info: To jest informacja gdzie szukać linki
-        place: Informacja o miejscowości
+        documents_info: Jeśli wiesz, gdzie fizycznie znajduje się dokumentacja zabytku, wpisz informacje dla innych zainteresowanych.
+        links_info: Jeśli wiesz, gdzie fizycznie znajduje się ciekawe opracowanie na temat zabytku, wpisz informacje dla innych zainteresowanych.
+        place: Wybierz z listy lub wpisz prawidłową nazwę, jeśli nie ma jej na liście.
         country_code: Informacja o kraju
         fprovince: Informacja o prowincji
-        fplace: Informacja o miejscowości
-        street: Informacja o ulicy
+        fplace: Wybierz z listy lub wpisz prawidłową nazwę, jeśli nie ma jej na liście.
+        street: Wpisz nazwę ulicy, np. ul. Adama Mickiewicza 34. Czasami zabytek znajduje przy głównej drodze we wsi lub z dala od domów i nie można przypisać mu konkretnej ulicy. Jeśli tak jest w tym przypadku, zaznacz x
         place: Informacja o miejscowości
-        tags: "Dodaj tagi, które pomogą poruszać się po katalogu."
-        categories: "Wybierz kategorie, które Twoim zdaniem pasują do opisywanego zabytku."
+        tags: Dodaj tagi, które pomogą poruszać się po katalogu, np. zamek, hołd_lenny, gotyk, renesans, Przemysł II, Krzyżacy, Gargamel, rezydencje_władców_Polski
+        categories: Wybierz kategorie, które Twoim zdaniem pasują do opisywanego zabytku.
       document:
         name: Do jest podpowiedź do nazwy dokumentu
         description: To jest podpowiedź do opisu dokumentu
@@ -388,8 +388,8 @@ pl:
         author: To jest podpowiedź do autora zdjęcia
         date_taken: To jest podpowiedź do daty wykonania zdjęcia
       entry:
-        title: To jest podpowiedź do tytułu wpisu społeczności
-        body: To jest podpowiedź do opisu wpisu społeczności
+        title: Nadaj tytuł. Np. Legenda o powstaniu zamku
+        body: Pamiętaj o podaniu źródła!
       alert:
         file: To jest podpowiedź do pliku alertu
         description: To jest podpowiedź do opisu alertu

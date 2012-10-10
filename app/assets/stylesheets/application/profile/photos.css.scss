@@ -36,7 +36,8 @@
       }
     }
     .file.photo_upload + div{
-      left: -162px !important;
+      left: 0 !important;
+      float: left;
     }
     .photo-upload{
       padding-bottom: 15px;

@@ -1,6 +1,16 @@
 %h1
   Konfiguracja widgetu
   %span '#{widget.class.title}'
+- if widget.valid?
+  .content
+    %h2 Wybierz ustawienia widżetu
+    %p Przykładowo jeśli chcesz wyświetlić na swojej stronie mapkę z cmentarzami żydowskimi z województwa dolnośląskiego, wybierz wojedzwództwo dolnośląskie z lokalizacji oraz kategorie „cmentarz” i „żydowski”. Nastepnie skopiuj tekst do wstawienia na stronę
+    .preview
+      = raw(widget.snippet)
+    %h2 Wygenerowany kod do wstawienia na stronę
+    %div
+      %span.block Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulumque sapien. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum que sapien.
+      %textarea{:cols => "20", :rows => "3"}= widget.snippet
 .sidebar
   = semantic_form_for widget, :url => self.send("widgets_#{widget.class.partial_name}_path", widget) do |f|
     = f.input :width, :label => "Szerokość widgeta"
@@ -11,12 +21,3 @@
                  :hint => "Ustawisz je poruszając mapką podglądową po prawej stronie.",
                  :input_html => { :readonly => "readonly" }
     = f.submit "Zaktualizuj widget"
-- if widget.valid?
-  .content
-    %h2 Podgląd wygenerowanego widgetu
-    .preview
-      = raw(widget.snippet)
-    %h2 Wygenerowany kod do wstawienia na stronę
-    %div
-      %span.block Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulumque sapien. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum que sapien.
-      %textarea{:cols => "20", :rows => "3"}= widget.snippet

@@ -15,7 +15,7 @@
 
 class Widget::MapSearch < Widget
 
-  serialized_attr_accessor :width => 690, :height => 500, :hide_sidebar => true
+  serialized_attr_accessor :width => 920, :height => 500, :hide_sidebar => true
   serialized_attr_accessor :api_params => {}
 
   validates :width, :height, :presence => true, :numericality => { :greater_than_or_equal_to => 500, :less_than_or_equal_to => 1600 }

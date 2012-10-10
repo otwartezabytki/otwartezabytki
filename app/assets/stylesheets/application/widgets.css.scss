@@ -98,7 +98,7 @@ section.widgets{
 .edit_widget{
   width: 960px;
   overflow-x: hidden;
-  background: #fff asset-data-url("edit-widget-bg.png") repeat-y;
+  background: #fff;
   display: inline-block;
   input[type="text"], textarea{
     @include border-radius(2px);
@@ -126,8 +126,19 @@ section.widgets{
   }
   .sidebar{
     float: left;
-    width: 198px;
+    width: 920px;
     padding: 20px 15px;
+    .widget_map_search{
+      div{
+        float: left;
+        margin-right: 10px;
+        width: 210px;
+      }
+    }
+    #widget_map_search_api_params{
+      max-width: 245px;
+      width: 245px;
+    }
     label{
       font-weight: 700;
       font-size: 14px;
@@ -140,7 +151,6 @@ section.widgets{
     }
   }
   .content{
-    margin-left: 228px;
     padding: 20px;
     .preview {margin-bottom: 20px;}
     h2{
@@ -159,8 +169,8 @@ section.widgets{
     }
     textarea{
       padding: 12px;
-      width: 666px;
-      max-width: 666px;
+      width: 894px;
+      max-width: 894px;
       height: 50px;
       max-height: 500px;
       font-weight: normal;
