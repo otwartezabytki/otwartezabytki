@@ -1,5 +1,9 @@
 %section.show.documents
   %h2 Dokumenty urzędowe
+  - if relic.documents_info.present?
+    .where-to-find
+      %h3 Gdzie szukać?
+      %p= relic.documents_info
   - if relic.all_documents.count > 0
     = link_to 'dodaj plik', edit_section_relic_path(relic.id, :documents), :title => 'edytuj dokumenty urzędowe zabytku', :remote => true, :class => "edit-relic-link"
     .content

@@ -33,12 +33,33 @@ jQuery.initializer 'body.relics.index .main-container', ->
       filter.slideDown()
       link.addClass("shown")
 
+  this.find("div.sidebar-categories a.sacral-options").click (e) ->
+    e.preventDefault()
+    filter = $("div.sacral-categories")
+    link = $(this)
+    if link.hasClass "shown"
+      filter.slideUp()
+      link.removeClass "shown"
+    else
+      filter.slideDown()
+      link.addClass("shown")
+
+  this.find('a.show-voivodeships').click (e) ->
+    e.preventDefault()
+    $(this).parents('li:first').remove()
+    $('ul.voivodeships').show()
+
+  this.find("nav.pagination").click ->
+    $("html, body").animate({ scrollTop: 0 }, 600);
+
   this.on 'ajax:beforeSend', 'form[data-remote], a[data-remote]', (e, data, status, xhr) ->
-    new Spinner(search_spinner_opts).spin(document.getElementById('spin'))
-    $('form section.results .loading').show()
+    if status.url.match(/^\/relics\?/)
+      new Spinner(search_spinner_opts).spin(document.getElementById('spin'))
+      $('form section.results .loading').show()
 
   this.on 'ajax:complete', 'form[data-remote], a[data-remote]', (e, data, status, xhr) ->
-    $('form section.results .loading').hide()
+    if status.url.match(/^\/relics\?/)
+      $('form section.results .loading').hide()
 
   this.find("input.autocomplete-q").autocomplete
     html: true,

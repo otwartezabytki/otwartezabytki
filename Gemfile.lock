@@ -480,6 +480,9 @@ GEM
     treetop (1.4.10)
       polyglot
       polyglot (>= 0.3.1)
+    turbo-sprockets-rails3 (0.1.7)
+      railties (>= 3.1.0)
+      sprockets (>= 2.0.0)
     twitter-bootstrap-rails (2.1.1)
       actionpack (>= 3.1)
       less-rails (~> 2.2.2)
@@ -591,6 +594,7 @@ DEPENDENCIES
   therubyracer
   tire (= 0.4.2)
   tire-contrib
+  turbo-sprockets-rails3
   twitter-bootstrap-rails
   uglifier (>= 1.0.3)
   unicode

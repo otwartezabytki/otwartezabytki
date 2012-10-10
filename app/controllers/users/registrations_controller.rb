@@ -1,5 +1,8 @@
 # encoding: utf-8
 class Users::RegistrationsController < ApplicationController
+
+  before_filter :enable_fancybox
+
   respond_to :html
 
   expose(:user)

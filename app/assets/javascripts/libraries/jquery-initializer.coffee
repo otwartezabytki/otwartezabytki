@@ -14,13 +14,16 @@ jQuery.fn.initialize = ->
         $.each callbacks, (_, callback) => callback.call($(this))
 
     $(this).find(selector).each ->
+    $(this).find(selector).each ->
       $.each callbacks, (_, callback) => callback.call($(this))
 
 popping_state = false
+last_xhr = null
 ajax_callback = (data, status, xhr) ->
   if xhr.getResponseHeader('Content-Type').match(/text\/javascript/)
     jQuery.globalEval data
   else if xhr.getResponseHeader('Content-Type').match(/text\/html/)
+    last_xhr = xhr
     window.map = null # hack for location view...
     $parsed_data = $('<div>').append($(data))
 
@@ -46,6 +49,8 @@ ajax_callback = (data, status, xhr) ->
           return true
         afterClose: ->
           history.pushState { autoreload: true, path: window.before_fancybox_url }, $('title').text(), window.before_fancybox_url
+          if last_xhr? && $('body').data('logged').toString() != last_xhr.getResponseHeader('x-logged').toString()
+            window.location.href = window.location.pathname
 
     try_to_process_replace = (node) ->
       data_replace_parent = $(node).parents('[data-replace]:first')[0]
@@ -87,7 +92,8 @@ $(document).on 'ajax:success', 'form[data-remote], a[data-remote]', (e, data, st
 $(document).on 'ajax:error', 'form[data-remote], a[data-remote]', (e, xhr, status, error) ->
   popping_state = false
   if error == "Unauthorized"
-    jQuery.cookie('return_path', window.location.href, path: '/') # used for redirecting after login
+    return_path = $(e.currentTarget).attr('href') || window.location.pathname
+    jQuery.cookie('return_path', return_path, path: '/') # used for redirecting after login
     window.location.href = Routes.new_user_session_path()
   e.stopPropagation()
 

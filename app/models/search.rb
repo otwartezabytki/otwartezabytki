@@ -38,9 +38,10 @@ class Search
 
   [:categories, :state, :existence, :has_photos, :has_description].each do |name|
     define_method name do
-      return [] if instance_variable_get("@#{name}").blank?
-      instance_variable_get("@#{name}").reject!(&:blank?)
-      instance_variable_get("@#{name}")
+      variable = instance_variable_get("@#{name}")
+      return [] if variable.blank?
+      variable = variable.split(',') if variable.kind_of?(String)
+      variable.reject(&:blank?)
     end
   end
 
@@ -96,7 +97,7 @@ class Search
   end
 
   def location
-    @location || []
+    @location || ['pl']
   end
 
   def facets
@@ -329,7 +330,7 @@ class Search
 
       # query
       query do
-        boolean do
+        boolean(:minimum_number_should_match => 1) do
           if instance.query.present?
             should { text "identification",               instance.query, 'operator' => 'AND', 'boost' => 10 }
             should { text "descendants.identification",   instance.query, 'operator' => 'AND', 'boost' => 8 }

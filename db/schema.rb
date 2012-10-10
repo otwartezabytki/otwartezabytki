@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120913140619) do
+ActiveRecord::Schema.define(:version => 20121008082104) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -253,6 +253,32 @@ ActiveRecord::Schema.define(:version => 20120913140619) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "tolk_locales", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tolk_locales", ["name"], :name => "index_tolk_locales_on_name", :unique => true
+
+  create_table "tolk_phrases", :force => true do |t|
+    t.text     "key"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tolk_translations", :force => true do |t|
+    t.integer  "phrase_id"
+    t.integer  "locale_id"
+    t.text     "text"
+    t.text     "previous_text"
+    t.boolean  "primary_updated", :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tolk_translations", ["phrase_id", "locale_id"], :name => "index_tolk_translations_on_phrase_id_and_locale_id", :unique => true
+
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",     :null => false
     t.string   "encrypted_password",     :default => "",     :null => false
@@ -307,6 +333,42 @@ ActiveRecord::Schema.define(:version => 20120913140619) do
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
     t.string   "type"
+  end
+
+  create_table "wuoz_agencies", :force => true do |t|
+    t.string   "city"
+    t.string   "director"
+    t.string   "email"
+    t.string   "address"
+    t.string   "district_names"
+    t.string   "wuoz_key"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "wuoz_alerts", :force => true do |t|
+    t.integer  "wuoz_agency_id"
+    t.integer  "alert_id"
+    t.datetime "sent_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "wuoz_notifications", :force => true do |t|
+    t.integer  "wuoz_agency_id"
+    t.text     "subject"
+    t.text     "body"
+    t.text     "alert_ids"
+    t.string   "zip_file"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "wuoz_regions", :force => true do |t|
+    t.integer  "wuoz_agency_id"
+    t.integer  "district_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
 end

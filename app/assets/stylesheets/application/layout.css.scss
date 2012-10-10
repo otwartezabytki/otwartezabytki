@@ -244,6 +244,18 @@ a {
   }
   li label{
     cursor: pointer;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 20px;
+    span.box{
+      display: inline-block;
+      float: right;
+      color: #5f879b;
+      background: #d7dfe3;
+      @include border-radius(3px);
+      line-height: 19px;
+      padding: 0 6px;
+    }
   }
   section.main-search{
     padding-left: 22px;
@@ -319,7 +331,6 @@ a {
       &.shown{
         background: asset-data-url("edit-relic-ico-arrow-up.png") no-repeat right center;
       }
-
     }
   }
   .field.time{
@@ -353,7 +364,6 @@ a {
     border-top: 1px solid #fff;
     padding-top: 5px;
     padding-bottom: 5px;
-    display: none;
     .wrap{
       @include clearfix;
       padding: 13px 8px;
@@ -615,6 +625,10 @@ a {
         background: #dce4e8;
         color: #236282;
       }
+      &.show-voivodeships{
+        background: asset-data-url('bg-triangle-right.png') no-repeat 20px 50%;
+        padding-left: 38px;
+      }
     }
     .selected {
       border-radius: 2px;
@@ -686,6 +700,16 @@ a {
         @include border-radius(2px);
         font-style: normal;
       }
+    }
+  }
+  a.sacral-options{
+    // position: absolute;
+    padding-right: 10px;
+    // bottom: 30px;
+    // right: 230px;
+    background: asset-data-url("edit-relic-ico-arrow-down.png") no-repeat right center;
+    &.shown{
+      background: asset-data-url("edit-relic-ico-arrow-up.png") no-repeat right center;
     }
   }
 }
@@ -801,99 +825,123 @@ a {
     }
   }
 }
-
-div.relic {
+table.relics{
   background: #fff;
-  border-bottom: 1px solid #e5e5e5;
-  border-right: 1px solid #e5e5e5;
-  border-left: 1px solid #e5e5e5;
-  padding: 15px 24px 20px 24px;
-  position: relative;
-  line-height: 18px;
-  @include clearfix;
-  .name {
-    font-size: 16px;
-    font-weight: 600;
-    color: $blue;
-    padding-bottom: 6px;
+  th, td{
+    padding: 15px 12px 20px;
   }
-  .thumb{
-    float: left;
-    width: 118px;
-    padding: 3px;
-    margin-right: 13px;
-    @include border-radius(3px);
-    border: 1px solid #d4d4d4;
-    @include box-shadow(rgba(0,0,0,0.3) 0 1px 3px);
-    img{ display: block;}
+  th{
+    text-align: left;
   }
-  .body{
-    float: left;
-    width: 530px;
+  th.date{
+    width: 108px;
   }
-  .modified {
-    position: absolute;
-    top: 40px;
-    right: 45px;
-    width: 34px;
-    height: 26px;
-    background: asset-data-url('relic-modified-big.png') no-repeat;
+  td.location{
   }
-  .tag{
-    span{
-      color: #fff;
-      text-transform: uppercase;
-      display: inline-block;
-      font-size: 11px;
-      line-height: 19px;
-      padding: 0 8px;
-      font-weight: normal;
-      @include border-radius(3px);
-      @include text-shadow(rgba(0,0,0,0.3) 0 1px 1px);
-      @include box-shadow(inset rgba(0,0,0,0.4) 0 1px 3px);
-      &.checked{
-        @include background(linear-gradient(#82a663, #a1c481));
-      }
-      &.filled{
-        @include background(linear-gradient(#ca7a32, #fbab63));
-      }
-      &.unchecked{
-        @include background(linear-gradient(#7d7f7f, #9c9d9d));
-      }
-    }
+  th.date, td.date{
+    text-align: right;
   }
-  .pathway, .time{
+  td.body{
+    width: 400px;
+  }
+  th.body{
+    padding-left: 28px;
+    width: 380px;
+    background: asset-data-url("icon-relic.png") no-repeat 10px 14px;
+  }
+  th.location{
+    background: asset-data-url("edit-relic-ico-location.png") no-repeat 6px 18px;
+  }
+  th.date{
+    background: asset-data-url("edit-relic-ico-date.png") no-repeat 8px 18px;
+  }
+  th{
     padding-left: 23px;
-    padding-top: 8px;
     span.label{
       font-weight: bold;
     }
   }
-  .street{
-    padding-left: 23px;
-    span.unknown{
+  .relic {
+    background: #fff;
+    border-bottom: 1px solid #e5e5e5;
+    border-right: 1px solid #e5e5e5;
+    border-left: 1px solid #e5e5e5;
+    /*padding: 15px 24px 20px 24px;*/
+    line-height: 18px;
+
+    .name {
+      font-size: 14px;
+      font-weight: 600;
+      color: $blue;
+      padding-bottom: 6px;
+    }
+    .thumb{
+      float: left;
+      width: 60px;
+      padding: 3px;
+      margin-right: 13px;
+      @include border-radius(3px);
+      border: 1px solid #d4d4d4;
+      @include box-shadow(rgba(0,0,0,0.3) 0 1px 3px);
+      img{ display: block;}
+    }
+    .body{
+      /*width: 530px;*/
+    }
+    .modified {
+      position: absolute;
+      top: 40px;
+      right: 45px;
+      width: 34px;
+      height: 26px;
+      background: asset-data-url('relic-modified-big.png') no-repeat;
+    }
+    .tag{
+      span{
+        color: #fff;
+        text-transform: uppercase;
+        display: inline-block;
+        font-size: 11px;
+        line-height: 19px;
+        padding: 0 8px;
+        font-weight: normal;
+        @include border-radius(3px);
+        @include text-shadow(rgba(0,0,0,0.3) 0 1px 1px);
+        @include box-shadow(inset rgba(0,0,0,0.4) 0 1px 3px);
+        &.checked{
+          @include background(linear-gradient(#82a663, #a1c481));
+        }
+        &.filled{
+          @include background(linear-gradient(#ca7a32, #fbab63));
+        }
+        &.unchecked{
+          @include background(linear-gradient(#7d7f7f, #9c9d9d));
+        }
+      }
+    }
+    .street{
+      span.unknown{
+        font-style: italic;
+      }
+    }
+    .include {
+      color: $blue;
+      font-weight: 600;
+      margin-top: 6px;
+      padding-left: 5px;
+      span {
+        float: left;
+        width: 5px;
+        height: 17px;
+        background: $blue;
+        margin-right: 10px;
+      }
+    }
+    .time em{
       font-style: italic;
     }
   }
-  .pathway{
-    background: asset-data-url("edit-relic-ico-location.png") no-repeat 6px 10px;
-  }
-  .time{
-    background: asset-data-url("edit-relic-ico-date.png") no-repeat 3px 10px;
-  }
-  .include {
-    color: $blue;
-    font-weight: 600;
-    margin-top: 6px;
-    padding-left: 5px;
-    span {
-      float: left;
-      width: 5px;
-      height: 17px;
-      background: $blue;
-      margin-right: 10px;
-    }
-  }
+
 }
 
 .pagination {
@@ -1801,11 +1849,14 @@ ul.nav li a.selected {
   background: #000;
 }
 
+.fancybox-inner {
+  background: #fff;
+}
+
 .fancybox-close {
   top: 8px;
   right: 12px;
 }
-
 
 .flash {
   @include background(linear-gradient(#f8e8c9, #efdfc0));

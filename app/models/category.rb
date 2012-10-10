@@ -5,7 +5,6 @@ class Category
       {
         'mieszkalny'          => 'mieszkalny',
         'gospodarczy'         => 'gospodarczy',
-        'sakralny'            => 'sakralny',
         'militarny'           => 'militarny',
         'przemysłowy'         => 'przemysłowy',
         'kultury'             => 'kultury (np. teatr)'
@@ -32,7 +31,6 @@ class Category
         'muzułmański'   => 'muzułmański',
         'łemkowski'     => 'łemkowski',
         'unicki'        => 'unicki',
-        'inny'          => 'inny'
       }
     end
 

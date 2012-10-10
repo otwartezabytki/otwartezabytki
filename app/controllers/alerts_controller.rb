@@ -1,3 +1,4 @@
+# encoding: utf-8
 class AlertsController < ApplicationController
   before_filter :authenticate_user!, :only => [:new, :create]
 
@@ -8,6 +9,11 @@ class AlertsController < ApplicationController
   expose(:alert)
 
   def new
+    if params[:description].match(/zabytek nie istnieje/)
+      relic.update_attribute(:existence, "archived")
+      flash.now[:notice] = "Zabytek został zarchiwizowany."
+    end
+
     render Subdomain.matches?(request) ? 'alerts/iframe/new' : 'new'
   end
 

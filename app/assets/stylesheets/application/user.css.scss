@@ -1,4 +1,4 @@
-body.sessions, body.registrations, body.passwords {
+.sessions, .registrations, .passwords, .fancybox-inner {
 
   .login_title {
     width: 880px;
@@ -259,6 +259,15 @@ body.sessions, body.registrations, body.passwords {
   #user_username_input label span {
     font-size: 10px;
     color: #aaa;
+  }
+}
+
+.fancybox-inner {
+  .form_box, .form_box_forgot {
+    margin-bottom: 80px;
+  }
+  .right_txt_box {
+    margin-right: 150px;
   }
 }
 
