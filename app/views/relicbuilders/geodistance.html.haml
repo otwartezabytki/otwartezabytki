@@ -1,14 +1,8 @@
--#--------- dummy content to run in colorbox! ----------
 .suggested-relics-wrapper
-  %h1 Znaleźliśmy #{@relics.total} zabytki w tej okolicy!
+  %h1= t('views.relicbuilders.geodistance.header', :count => @relics.total)
   .info
-    %p
-      Dokładnie w tej okolicy znaleźliśmy
-      %strong
-        = succeed ',' do
-          #{@relics.total} zabytki
-      które już istnieją w naszej bazie danych.
-    %p Czy jesteś pewien że to nie jest któryś z listy poniżej? Nie chcemy dublować zabytków w bazie, a łatwiej przejść do edycji już istniejących obiektów niż dublować nieuzupełnione inforacje...
+    %p= t('views.relicbuilders.geodistance.info_html')
+    %p= t('views.relicbuilders.geodistance.are_you_sure')
   %ul.suggested-relics
     - @relics.each do |r|
       %li{:class => cycle('even', 'odd')}
@@ -20,13 +14,13 @@
             = r.place_full_name
           - if r.categories.present?
             %span.category
-              %strong Kategorie:
+              %strong= t('views.relicbuilders.geodistance.categories')
               = r.categories.join(', ')
           - if r.dating_of_obj.present?
             %span.date
-              %strong Data powstania:
+              %strong= t('views.relicbuilders.geodistance.dating')
               = r.dating_of_obj
           %span.choose
-            %strong To jest ten zabytek!
-            = link_to 'Chcę go uzupełnić &raquo;'.html_safe, r
-  = link_to 'Nie ma go na liście &raquo;'.html_safe, address_relicbuilder_path(address_params), :class => 'not-found'
+            %strong= t('views.relicbuilders.geodistance.that_one')
+            = link_to t('views.relicbuilders.geodistance.choose_html'), r
+  = link_to t('views.relicbuilders.geodistance.not_found_html'), address_relicbuilder_path(address_params), :class => 'not-found'

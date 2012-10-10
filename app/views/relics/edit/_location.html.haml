@@ -4,7 +4,7 @@
       = f.input :polish_relic, :as => :boolean
       .polish-location{ :style => (relic.polish_relic ? "" : "display: none;") }
         = f.input :place_id, :as => :select,
-          :collection => f.object.commune.places.not_custom, :selected => f.object.place.id, :label => "Miejscowość",
+          :collection => f.object.commune.places.not_custom, :selected => f.object.place.id, :label => t('activerecord.attributes.models.place.zero'),
           :include_blank => false, :input_html => { :style => "width: 234px;" }, :hint => t('formtastic.hints.relic.place')
       .foreign-location{ :style => (relic.polish_relic ? "display: none;" : "") }
         %script(type="application/json" id="countries_location")
@@ -16,21 +16,18 @@
         = f.input :fplace
       .street_input{ :style => (relic.street.blank? ? "display: none" : "") }
         = f.input :street
-      = link_to (relic.street.blank? ? "Znam dokładny adres" : "Nie da się ustalić adresu"), '#', :class => "toggle_street_input"
+      = link_to (relic.street.blank? ? t('views.relics.edit.location.known_address') : t('views.relics.edit.location.unknown_address')), '#', :class => "toggle_street_input"
       .actions
-        = f.submit 'Zapisz zmiany'
-        lub
-        = link_to "anuluj", relic_path(relic.id), :remote => true, :class => "cancel"
+        = f.submit t('views.relics.edit.save')
+        = t('views.relics.edit.or')
+        = link_to t('views.relics.edit.cancel'), relic_path(relic.id), :remote => true, :class => "cancel"
 
     .column.column-middle
       #map_canvas{ :style => "width: 309px; height: 309px;" }
-      %p.auto_geolocated lokacja przybliżona
+      %p.auto_geolocated= t('views.relics.edit.location.approximate_geolocation')
     .column.column-right
       .marker-helper
-        %h4
-          Przeciągnij
-          %br
-          znacznik na mapę:
+        %h4= t('views.relics.edit.location.drop_marker_html')
         .marker-holder
           = image_tag 'marker.png', :id => 'marker'
       = f.hidden_field :latitude

@@ -1,14 +1,15 @@
 .login_title_forgot
-  %h2 Zmiana hasła
+  %h2= t('views.devise.passwords.edit.header')
 .form_box_forgot
-  .ask_account Zmień hasło
+  .ask_account= t('views.devise.passwords.edit.ask_account')
   = simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }, :remote => true) do |f|
     = f.input :reset_password_token, :as => :hidden, :error => false
     - unless resource.errors[:reset_password_token].empty?
       .alert.alert-error
-        Token stracił ważność. #{link_to "Wyślij zapytanie o nowy", new_password_path(resource_name)}.
+        = t('views.devise.passwords.edit.alert_error')
+        = link_to t('views.devise.passwords.edit.new_password_request'), new_password_path(resource_name)}.
     .form-inputs
-      = f.input :password, :label => "Nowe hasło"
-      = f.input :password_confirmation, :label => "Powtórz nowe hasło"
+      = f.input :password, :label => t('views.devise.passwords.edit.password')
+      = f.input :password_confirmation, :label => t('views.devise.passwords.edit.password_confirmation')
     .form-actions
-      = f.button :submit, "Zmień hasło"
+      = f.button :submit, t('views.devise.passwords.edit.submit')

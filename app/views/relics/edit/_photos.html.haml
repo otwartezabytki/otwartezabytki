@@ -8,10 +8,10 @@
               .preview
                 = image_tag photo.file.midi.url
               - if photo.user_id == current_user.id
-                = link_to 'usuń zdjęcie', relic_photo_path(relic.id, photo.id),
+                = link_to t('views.relics.edit.photos.delete_photo'), relic_photo_path(relic.id, photo.id),
                   :method => :delete,
                   :remote => true,
-                  :confirm => "Czy aby na pewno?",
+                  :confirm => t('views.relics.edit.photos.delete_confirm'),
                   :class => "remove_photo"
             .column-right
               = f2.input :author, :input_html => { :class => "author" }
@@ -22,9 +22,9 @@
             .preview
               = image_tag photo.midi.url
           .column-right
-            %label= t 'activerecord.attributes.photo.author'
+            %label= t('activerecord.attributes.photo.author')
             %p= photo.author
-            %label= t 'activerecord.attributes.photo.date_taken'
+            %label= t('activerecord.attributes.photo.date_taken')
             %p= photo.date_taken
 
     .photo.hidden
@@ -33,8 +33,8 @@
 
       .column-right
         %p
-          %strong Trwa wgrywanie, proszę czekać...
-          = link_to 'anuluj', '#', :class => "cancel_upload"
+          %strong= t('views.relics.edit.photos.loading')
+          = link_to t('views.relics.edit.cancel'), '#', :class => "cancel_upload"
         %p
           .progressbar
             .value 0%
@@ -42,9 +42,8 @@
     .photo-upload
       = file_field_tag "photo[file]", :class => 'photo_upload' + (relic.photos.length > 0 ? "" : " first"), :"data-url" => "#{relic_photos_path(relic.id)}"
 
-    = f.input :license_agreement, :input_html => { :checked => 'checked' }, :as => :boolean, :label => 'Oświadczam, że posiadam prawa do zdjęć, które publikuję na stronie otwartezabytki.pl. Zdjęcia te udostępniam na licencji <a href="http://creativecommons.org/licenses/by-sa/3.0/pl/" target="_blank">Creative Commons Uznanie Autorstwa-Na Tych Samych Warunkach 3.0 Polska</a> <em class="icons"></em>'.html_safe
-
+    = f.input :license_agreement, :input_html => { :checked => 'checked' }, :as => :boolean, :label => t('views.relics.edit.photos.statement_html')
     .actions
-      = f.submit 'Zapisz zmiany'
-      lub
-      = link_to "anuluj", relic_path(relic.id), :remote => true, :class => "cancel"
+      = f.submit t('views.relics.edit.save')
+      = t('views.relics.edit.or')
+      = link_to t('views.relics.edit.cancel'), relic_path(relic.id), :remote => true, :class => "cancel"

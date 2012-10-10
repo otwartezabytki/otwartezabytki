@@ -6,54 +6,47 @@
       %section.creator-step
         = render :partial => 'parent_relic', :object => @relic.parent
         %aside
-          %h3
-            Jaka jest różnica między
-            %br
-            %span zabytkiem
-            a
-            = succeed '?' do
-              %span zespołem zabytków
-          %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque suscipit malesuada ipsum, non vehicula nunc mollis ut. Duis nisl lorem, volutpat in tincidunt vel, volutpat in tellus.
+          %h3= t('views.relicbuilders.new.header_html')
+
+          %p= t('views.relicbuilders.new.info')
           %p= link_to 'Chcę jednak dodać zespół zabytków', '#', :clas => 'footlink'
-        %p.intro
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras convallis luctus malesuada. Pellentesque purus augue, facilisis id hendrerit et, tincidunt a mauris.
-        %p.intro
-          Vivamus vestibulum semper odio, nec volutpat sapien egestas ut. Nam iaculis dapibus eros convallis mollis. Nullam non ligula ut leo porta venenatis sed in nibh.
+        %p.intro= t('views.relicbuilders.new.intro1')
+        %p.intro= t('views.relicbuilders.new.intro2')
       %section.creator-step
         = semantic_form_for LocationBuilder.new(params[:location]), :as => 'location', :url => new_relicbuilder_path, :method => :get, :remote => true do |f|
-          = f.input :foreign_relic, :as => :boolean, :label => 'chcę dodać zabytek spoza Polski'
+          = f.input :foreign_relic, :as => :boolean, :label => t('views.relicbuilders.new.add_foreign_relic')
           .field.text.search.marker
             .polish-location{:style => "#{ 'display: none;' unless f.object.foreign_relic.to_i.zero?}"}
-              = f.input :polish_place, :label => 'Miejscowość'
+              = f.input :polish_place, :label => t('views.relicbuilders.new.place')
             .foreign-location{:style => "#{ 'display: none;' if f.object.foreign_relic.to_i.zero?}"}
               .select
-                = f.label :country_code, 'W jakim kraju'
+                = f.label :country_code, t('views.relicbuilders.new.country_code')
                 = f.country_code_select :country_code, [['Polska','PL' ]]
-              = f.input :original_name, :label => 'Nazwa oryginalna'
-              = f.input :polish_name, :label => 'Nazwa spolszczona'
+              = f.input :original_name, :label => t('views.relicbuilders.new.original_name')
+              = f.input :polish_name, :label => t('views.relicbuilders.new.polish_name')
           .actions
-            = f.submit "Szukaj &raquo;".html_safe, :class => 'btn'
+            = f.submit t('views.relicbuilders.new.search_html'), :class => 'btn'
       - if defined? @places
         - if @places.blank?
-          brak wyników
+          = t('views.relicbuilders.new.no_results')
         - elsif @places.size > 1
           %section.creator-step
-            %h3 O którą miejscowość Ci chodziło?
+            %h3= t('views.relicbuilders.new.select_place')
             .places-wrapper
               %ul.places
                 - @places.each do |place|
                   %li
                     = (place.location_names.first(place.location_names.size - 1) << "<strong>#{place.name}</strong>").join(' > ').html_safe
-                    = link_to "wybieram &raquo;".html_safe, 'javascript: void(0);', 'data-place_id' => place.id, 'data-coordinates' => "#{place.latitude}, #{place.longitude}"
+                    = link_to t('views.relicbuilders.new.choose_html'), 'javascript: void(0);', 'data-place_id' => place.id, 'data-coordinates' => "#{place.latitude}, #{place.longitude}"
 
       %section.creator-step.location
         = semantic_form_for @relic, :url => geodistance_relicbuilder_path, :method => :get, :remote => true do |f|
-          %h3 Zaznacz obiekt na mapie
+          %h3= t('views.relicbuilders.new.select_on_map')
           .column
             #map_canvas{ :style => "width: 515px; height: 380px;" }
           .column
             .marker-helper
-              %h3 Przeciągnij znacznik na mapę
+              %h3= t('views.relicbuilders.new.drag_marker')
               .marker-holder
                 = image_tag 'marker.png', :id => 'marker'
           = f.hidden_field :parent_id
@@ -62,9 +55,4 @@
           = f.hidden_field :longitude
           .column.full_width
             .actions{:style => 'display:none;'}
-              = f.submit 'Przejdź dalej &raquo;'.html_safe
-
-
-      -# = link_to relic_path, :class => 'next-step' do
-      -#   %strong Przejdź dalej &raquo;
-      -#   %small Krok 2
+              = f.submit t('views.relicbuilders.next_step_html')

@@ -33,6 +33,6 @@ class DocumentsController < ApplicationController
     authorize! :destroy, document
     document.destroy
     redirect_to edit_section_relic_path(relic.id, :documents)
-  end  
-  
+  end
+
 end

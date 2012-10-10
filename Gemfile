@@ -40,7 +40,7 @@ gem 'airbrake'
 gem 'paper_trail', '~> 2'
 
 # admin panel
-gem 'activeadmin'
+gem 'activeadmin',    '~> 0.4.4'
 gem 'meta_search',    '>= 1.1.0.pre'
 gem 'devise'
 gem 'cancan'
@@ -130,6 +130,8 @@ end
 gem 'therubyracer', :group => :production
 
 gem 'ffi-aspell', :require => 'ffi/aspell'
+
+gem 'tolk', :git => "git://github.com/monterail/tolk.git"#, :path => '~/monterail/tolk'
 
 group :test do
   # for defining tests

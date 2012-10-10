@@ -1,6 +1,12 @@
 # -*- encoding : utf-8 -*-
+
+# require 'riddick/server'
 Otwartezabytki::Application.routes.draw do
 
+
+  mount Tolk::Engine => '/tolk', :as => 'tolk'
+
+  # mount Riddick::Server.new, at: 'riddick', as: 'riddick'
   ActiveAdmin.routes(self)
 
   devise_for :users, :path_names => {

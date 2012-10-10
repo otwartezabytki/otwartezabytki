@@ -1,13 +1,13 @@
 %section.new.alert{ :"data-fancybox" => true, :"data-replace" => "section.new.alert" }
-  %h2 Zgłoś alert!
+  %h2= t('views.alerts.new.header')
   - if request.xhr?
     = render 'shared/flash', :flash => flash
   .row
     = semantic_form_for [relic, alert], :remote => true do |f|
-      %p.description Wiesz, że obiekt wymaga opieki? Zaalarmuj!
+      %p.description= t('views.alerts.new.description')
       = f.input :file, :as => :file
       = f.input :description, :as => :text, :input_html => { :value => params[:description] }
       .actions
-        = f.submit "zgłoś alert"
+        = f.submit t('views.alerts.new.submit')
         lub
-        = link_to 'anuluj', relic_path(relic.id), :remote => true
+        = link_to t('views.alerts.new.cancel'), relic_path(relic.id), :remote => true

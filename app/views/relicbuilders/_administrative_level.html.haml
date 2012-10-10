@@ -5,20 +5,20 @@
 
 .administrative-level{'data-replace'=> 'div.administrative-level'}
   .one-third
-    = label_tag 'relic[voivodeship_id]', 'Województwo'
+    = label_tag 'relic[voivodeship_id]', t('views.relicbuilders.administrative_level.voivodeship')
     = select 'relic', 'voivodeship_id', options_from_collection_for_select(Voivodeship.order(:name), "id", "name", @voivodeship.try(:id))
   - if @voivodeship
     .one-third
-      = label_tag 'relic[district_id]', 'Powiat'
+      = label_tag 'relic[district_id]', t('views.relicbuilders.administrative_level.district')
       = select 'relic', 'district_id', options_from_collection_for_select(@voivodeship.districts.order(:name), "id", "name", @district.try(:id))
   - if @district
     .one-third
-      = label_tag 'relic[commune_id]', 'Gmina'
+      = label_tag 'relic[commune_id]', t('views.relicbuilders.administrative_level.commune')
       = select 'relic', 'commune_id', options_from_collection_for_select(@district.communes.order(:name), "id", "name", @commune.try(:id))
   - if @commune
     .row
-      = label_tag 'relic[place_id]', 'Miejscowość'
+      = label_tag 'relic[place_id]', t('views.relicbuilders.administrative_level.city')
       = select 'relic', 'place_id', options_from_collection_for_select(@commune.places.order(:name), "id", "name")
   - if @relic and @relic.errors[:place] and @relic.place_id.blank?
     .error
-      Proszę wybrać miejscowość
+      = t('views.relicbuilders.administrative_level.error')

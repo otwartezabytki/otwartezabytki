@@ -4,31 +4,11 @@
     %section.main
       %section.creator-step
         = render :partial => 'parent_relic', :object => @relic.parent
-        %p.intro
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras convallis luctus malesuada. Pellentesque purus augue, facilisis id hendrerit et, tincidunt a mauris.
-        %p.intro
-          Vivamus vestibulum semper odio, nec volutpat sapien egestas ut. Nam iaculis dapibus eros convallis mollis. Nullam non ligula ut leo porta venenatis sed in nibh.
+        %p.intro= t('views.relicbuilders.details.intro1')
+        %p.intro= t('views.relicbuilders.details.intro2')
       = semantic_form_for @relic, :url => relicbuilder_path(:id => @relic) do |f|
         = f.hidden_field :build_state
-        = f.input :identification, :as => :string, :label => 'Nazwa'
-        = f.input :reason, :input_html => { :class => 'redactor' }, :label => 'Uzasadnienie'
+        = f.input :identification, :as => :string, :label => t('views.relicbuilders.details.name')
+        = f.input :reason, :input_html => { :class => 'redactor' }, :label => t('views.relicbuilders.details.reason')
         .actions
-          = f.submit 'Przejdź dalej &raquo;'.html_safe
-
-      -# %section.creator-step
-      -#   .field.text
-      -#     %label.main Nazwa
-      -#     %input{:type => "text"}
-      -#   %aside
-      -#     %h3 Jak dobrać najlepszą nazwę?
-      -#     %p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-      -# %section.creator-step
-      -#   .field.text.textarea
-      -#     %label.main Uzasadnienie
-      -#     %textarea
-      -#   %aside
-      -#     %h3 Co decyduje o tym, ze dany obiekt można traktować jako zabytek?
-      -#     %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare venenatis pulvinar. Vestibulum suscipit enim in urna placerat aliquam.
-      -# = link_to relic_build_path(relic), :class => 'next-step', :method => :put do
-      -#   %strong Przejdź dalej &raquo;
-      -#   %small Krok 4
+          = f.submit t('views.relicbuilders.next_step_html')

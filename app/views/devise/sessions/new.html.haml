@@ -1,18 +1,17 @@
 .login_title
-  %h2
-    Zaloguj się #{resource.id}
+  %h2= t('.header', :scope => 'views')
 .right_txt_box
   .ask_account
-    Nie masz konta?
+    = t('.ask_account1', :scope => 'views')
     %br/
-  Każdy uczestnik może się zarejestrować i śledzić własne postępy.
+  = t('.ask_account2', :scope => 'views')
   %br/
-  = link_to "Zarejestruj się tutaj", new_user_registration_path, :remote => true
+  = link_to t('.register_here', :scope => 'views'), new_user_registration_path, :remote => true
   %br/
-  .ask_account Czy konto jest mi potrzebne?
-  Możesz uzupełniać bazę anonimowo albo założyć konto i śledzić własne postępy.
+  .ask_account= t('.ask_account3', :scope => 'views')
+  = t('.anonymous_account', :scope => 'views')
 .form_box
-  .login_intro_txt Zaloguj się do serwisu
+  .login_intro_txt= t('.login_intro', :scope => 'views')
   - if flash[:notice]
     .alert.alert-info= flash[:notice]
   - if flash[:error]
@@ -23,6 +22,6 @@
     = f.input :password, :required => false
     - if devise_mapping.recoverable? && controller_name != 'passwords'
       .link_form
-        = link_to "Nie otrzymałeś lub nie pamiętasz hasła?", new_password_path(resource_name), :remote => true
+        = link_to t('.forgot_password', :scope => 'views'), new_password_path(resource_name), :remote => true
         %br/
-    = f.submit "Zaloguj się"
+    = f.submit t('.submit', :scope => 'views')

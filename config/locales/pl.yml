@@ -431,3 +431,194 @@ pl:
     wuoz-w-zielonej-gorze: Wojewódzki Urząd Ochrony Zabytków w Zielonej Górze
     wuoz-w-lodzi: Wojewódzki Urząd Ochrony Zabytków w Łodzi
     wuoz-we-wroclawiu: Wojewódzki Urząd Ochrony Zabytków we Wrocławiu
+  views:
+    alerts:
+      iframe:
+        created:
+          header: "Dzięki za Alerta!"
+          show_alert: "Zobacz ALERTA"
+      new:
+        header: "Zgłoś alert!"
+        description: "Wiesz, że obiekt wymaga opieki? Zaalarmuj!"
+        submit: "Zgłoś Alert"
+        cancel: Anuluj
+    devise:
+      passwords:
+        edit:
+          header: 'Zmiana hasła'
+          ask_account: 'Zmień hasło'
+          alert_error: 'Token stracił ważność.'
+          new_password_request: "Wylij zapytanie o nowy"
+          password: 'Nowe hasło'
+          passoword_confirmation: 'Powtórz nowe hasło'
+          submit: 'Zmień hasło'
+        new:
+          header: 'Nie masz hasła?'
+          ask_account: Co zrobić jeśli nie mam hasła?
+          password_has_been_sent: 'Hasło zostało wysłane do Ciebie mailem w momencie rejestracji. Jeśli nie możesz go znaleźć, wyślemy je ponownie.'
+          wrong_email: 'Podany adres e-mail nie został znaleziony'
+          submit: "Wyślij link do resetowania hasła"
+      sessions:
+        new:
+          header: Zaloguj się
+          ask_account1: "Nie masz konta?"
+          ask_account2: "Każdy uczestnik może się zarejestrować i śledzić własne postępy."
+          register_here: "Zarejestruj się tutaj"
+          ask_account3: "Czy konto jest mi potrzebne?"
+          anonymous_account: 'Możesz uzupełniać bazę anonimowo albo założyć konto i śledzić własne postępy.'
+          login_intro: 'Zaloguj się do serwisu'
+          forgot_password: "Nie otrzymałeś lub nie pamiętasz hasła?"
+          submit: 'Zaloguj się'
+    photos:
+      show:
+        header: "Galeria %{count}"
+        license: Creative Commons 3.0
+        photo_belongs_to: Zdjęcie należy do obiektu
+        relic_parent: należącego do zespołu zabytków
+    places:
+      results:
+        no_results: brak wyników
+        header: O którą miejscowość Ci chodziło?
+        choose_html: "wybieram &raquo;"
+    relicbuilders:
+      next_step_html: 'Przejdź dalej &raquo;'
+      administrative_level:
+        voivodeship: Województwo
+        district: Powiat
+        commune: Gmina
+        city: Miejscowość
+        error: Proszę wybrać miejscowość
+      parent_relic:
+        complex: Dodajesz zabytek do zespołu
+      stages:
+        step1: krok 1
+        step2: krok 2
+        step3: krok 3
+        step4: krok 4
+        step1_description1: "Lorem ipsum dolor sit amet, consectetur adipiscing."
+        step1_description2: "Lorem ipsum dolor sit amet, consectetur adipiscing."
+        step1_description3: "Lorem ipsum dolor sit amet, consectetur adipiscing."
+        step1_description4: "Lorem ipsum dolor sit amet, consectetur adipiscing."
+        check_existance: sprawdź istnienie
+        check_existance_confirm: "Uwaga utracisz wprowadzone dane, rozpoczniesz process dodawania zabytku jeszcze raz. Jesteś pewien?"
+        address: "dane adresowe"
+        details: szczegóły
+        photos: zdjęcia i opis
+      address:
+        intro1: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras convallis luctus malesuada. Pellentesque purus augue, facilisis id hendrerit et, tincidunt a mauris."
+        intro2: "Vivamus vestibulum semper odio, nec volutpat sapien egestas ut. Nam iaculis dapibus eros convallis mollis. Nullam non ligula ut leo porta venenatis sed in nibh."
+      details:
+        intro1: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras convallis luctus malesuada. Pellentesque purus augue, facilisis id hendrerit et, tincidunt a mauris."
+        intro2: "Vivamus vestibulum semper odio, nec volutpat sapien egestas ut. Nam iaculis dapibus eros convallis mollis. Nullam non ligula ut leo porta venenatis sed in nibh."
+        name: Nazwa
+        reason: Uzasadnienie
+      geodistance:
+        header: "Znaleźliśmy %{count} zabytki w tej okolicy!"
+        info_html: "Dokładnie w tej okolicy znaleźliśmy <strong>%{count}</strong>, które już istnieją w naszej bazie danych."
+        are_you_sure: "Czy jesteś pewien że to nie jest któryś z listy poniżej? Nie chcemy dublować zabytków w bazie, a łatwiej przejść do edycji już istniejących obiektów niż dublować nieuzupełnione inforacje..."
+        not_found_html: 'Nie ma go na liście &raquo;'
+        categories: "Kategorie:"
+        dating: "Data powstania:"
+        that_one: To jest ten zabytek!
+        choose_html: 'Chcę go uzupełnić &raquo;'
+      new:
+        intro1: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras convallis luctus malesuada. Pellentesque purus augue, facilisis id hendrerit et, tincidunt a mauris."
+        intro2: "Vivamus vestibulum semper odio, nec volutpat sapien egestas ut. Nam iaculis dapibus eros convallis mollis. Nullam non ligula ut leo porta venenatis sed in nibh."
+        header_html: "Jaka jest różnica między <br/> <span>zabytkiem</span> a zespołem <span>zabytków</span>?"
+        info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque suscipit malesuada ipsum, non vehicula nunc mollis ut. Duis nisl lorem, volutpat in tincidunt vel, volutpat in tellus."
+        add_foreign_relic: "chcę dodać zabytek spoza Polski"
+        place: Miejscowość
+        country_code: W jakim kraju
+        original_name: 'Nazwa oryginalna'
+        polish_name: "Nazwa spolszczona"
+        search_html: "Szukaj &raquo;"
+        no_resutls: "Brak wyników"
+        select_place: O którą miejscowość Ci chodziło?
+        choose_html: "wybieram &raquo;"
+        select_on_map: Zaznacz obiekt na mapie
+        drag_marker: Przeciągnij znacznik na mapę
+      photos:
+        intro1: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras convallis luctus malesuada. Pellentesque purus augue, facilisis id hendrerit et, tincidunt a mauris."
+        intro2: "Vivamus vestibulum semper odio, nec volutpat sapien egestas ut. Nam iaculis dapibus eros convallis mollis. Nullam non ligula ut leo porta venenatis sed in nibh."
+        delete_photo: usuń zdjęcie
+        delete_confirm: Czy aby na pewno?
+        loading: "Trwa wgrywanie, proszę czekać..."
+        statement: "Oświadczam, że posiadam prawa do publikowania na stronie OtwarteZabytki.pl dodane powyżej zdjęcia."
+        submit: 'Zakończ! i zobacz dodany zabytek'
+    relics:
+      edit:
+        add_and_save: dodaj i zapisz
+        save: zapisz zmiany
+        or: lub
+        canel: anuluj
+        delete: usuń
+        update: 'aktualizuj'
+        categories:
+          name: Kategorie
+        documents:
+          loading: "Trwa wgrywanie, proszę czekać..."
+          cancel: anuluj
+          delete_file: Usuń plik
+          delete_confirm: "Czy aby na pewno?"
+        events:
+          number: l.p.
+          date: Data / Okres
+          info: Opis
+          action: Akcje
+          add_new_one: 'Dodaj kolejne wydarzenie...'
+          create_date: Data powstania
+        links:
+          number: l.p.
+          source_type: Typ żródła
+          url: URL
+          action: Akcje
+          add_internet_source: 'Dodaj źródło internetowe (link)...'
+          info: "Opis bibliograficzny (tytuł, autor, data i miejsce wydania)"
+          add_print_source: 'Dodaj źródło drukowane...'
+        location:
+          known_address: "Znam dokładny adres"
+          unknown_address: "Nie da się ustalić adresu"
+          approximate_geolocation: lokacja przybliżona
+          drop_marker_html: "Przeciągnij <br/> znacznik na mapę:"
+        photos:
+          loading: "Trwa wgrywanie, proszę czekać..."
+          statement_html: "Oświadczam, że posiadam prawa do zdjęć, które publikuję na stronie otwartezabytki.pl. Zdjęcia te udostępniam na licencji <a href="http://creativecommons.org/licenses/by-sa/3.0/pl/" target="_blank">Creative Commons Uznanie Autorstwa-Na Tych Samych Warunkach 3.0 Polska</a> <em class="icons"></em>"
+          delete_photo: usuń zdjęcie
+          delete_confirm: Czy aby na pewno?
+      show:
+        localication_facets:
+          header: Lokalizacja
+          show_voivodeships: 'Pokaż wojewewództwa'
+          world_relics: Zabytki znajdujące się poza Polską
+        relics:
+          name: Zabytek
+          location: Lokalizacja
+          create_date: Data powstania
+          unknown_address: Adres niedostępny
+        download:
+          relics_database: Baza danych zabytków
+          db_license: Baza dostępna jest na licencji
+          unavailable_file:  plik obecnie nie dostępny
+          download: Pobierz dane
+          info: Tu możesz pobrać plik w formacie .csv z aktualną zawartością bazy danych (katalogu zabytków), zawierającą historię edycji poszczególnych pól.
+
+
+  layouts:
+    application:
+      disclaimer: W pierwszej części cyfrowego czynu społecznego można wziąć udział do 7 sierpnia. Pod koniec sierpnia na otwartezabytki.pl udostępnimy aplikację z nowymi funkcjonalnościami.
+      hello: "Witaj, %{username}"
+      relics_count: "Liczba Twoich zabytków: %{count}"
+      login: Zaloguj
+      logout: Wyloguj
+      register: Zarejestruj
+      homepage: Strona główna
+      about: O projekcie
+      help: Pomoc
+      contact: Kontakt
+      download_data: Pobierz dane
+      og:
+        title: Otwarte Zabytki
+        description: Uzupełnij z nami bazę zabytków i pomóż stworzyć serwis. Skorzystaj z własnej wiedzy. Poszukaj informacji w książkach lub w internecie. To naprawdę proste.
+        image: http://otwartezabytki.pl/assets/face-share-logo.png
+
+

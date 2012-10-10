@@ -1,9 +1,9 @@
 .row
   = semantic_form_for relic, :url => section_relic_path(relic.id, :section => :categories), :remote => true do |f|
-    = f.input :tags, :input_html => { :value => relic.tags.join(','), :style => "width: 680px", :multiple => true }, 
+    = f.input :tags, :input_html => { :value => relic.tags.join(','), :style => "width: 680px", :multiple => true },
               :hint => t('formtastic.hints.relic.tags')
     .select
-      %label Kategorie
+      %label= t('views.relics.edit.categories.name')
       .input
         %span.block= t('formtastic.hints.relic.categories')
         .column.column-first
@@ -20,6 +20,6 @@
             :input_html => { :multiple => true }
 
     .actions
-      = f.submit 'zapisz zmiany'
-      lub
-      = link_to "anuluj", relic_path(relic.id), :remote => true, :class => "cancel"
+      = f.submit t('views.relics.edit.save')
+      = t('views.relics.edit.or')
+      = link_to t('views.relics.edit.cancel'), relic_path(relic.id), :remote => true, :class => "cancel"

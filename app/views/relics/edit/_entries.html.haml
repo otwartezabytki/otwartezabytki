@@ -4,9 +4,10 @@
       = f2.input :title
       = f2.input :body, :input_html => { :class => "redactor" }
     .actions
-      = f.submit 'dodaj i zapisz'
-      lub
-      = link_to "anuluj", relic_path(relic.id), :remote => true, :class => "cancel"
+      = f.submit t('views.relics.edit.add_and_save')
+      = t('views.relics.edit.or')
+      = link_to t('views.relics.edit.cancel'), relic_path(relic.id), :remote => true, :class => "cancel"
+
 .row.entries-showcase{ :"data-replace" => (!params[:entry_id].nil? ? ".entries-showcase" : "#nonexistent") }
   - relic.entries.select{ |e| !e.new_record? }.sort_by(&:id).each do |entry|
     - if params[:entry_id].to_i == entry.id
@@ -14,14 +15,14 @@
         = f.input :title, :hint => false
         = f.input :body, :hint => false, :input_html => { :class => "redactor" }
         .actions
-          = f.submit 'zapisz'
-          = link_to 'usuń', relic_entry_path(relic.id, entry.id), :method => :delete, :remote => true
-          lub
-          = link_to 'anuluj', edit_section_relic_path(relic.id, :section => :entries, :entry_id => 0), :remote => true, :class => "cancel"
+          = f.submit t('views.relics.edit.save')
+          = link_to t('views.relics.edit.delete'), relic_entry_path(relic.id, entry.id), :method => :delete, :remote => true
+          = t('views.relics.edit.or')
+          = link_to t('views.relics.edit.cancel'), edit_section_relic_path(relic.id, :section => :entries, :entry_id => 0), :remote => true, :class => "cancel"
     - else
       = content_tag_for :article, entry do
         %h3= entry.title
         .body= sanitize entry.body
-        = link_to 'aktualizuj', edit_section_relic_path(relic.id, :section => :entries, :entry_id => entry.id),
+        = link_to t('views.relics.edit.update'), edit_section_relic_path(relic.id, :section => :entries, :entry_id => entry.id),
           :remote => true,
           :class => "update"
