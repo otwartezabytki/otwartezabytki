@@ -2,7 +2,7 @@
   %h2= t('views.devise.passwords.edit.header')
 .form_box_forgot
   .ask_account= t('views.devise.passwords.edit.ask_account')
-  = simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f|
+  = simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }, :remote => true) do |f|
     = f.input :reset_password_token, :as => :hidden, :error => false
     - unless resource.errors[:reset_password_token].empty?
       .alert.alert-error

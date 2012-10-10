@@ -27,28 +27,28 @@ module RelicsHelper
   def state_facets
     labels = Hash[Relic::States.zip(['sprawdzone', 'niesprawdzone', 'uzupełnione'])]
     relics.terms('state', true).map do |t|
-      ["#{labels[t['term']]} (#{t['count']})", t['term']]
+      ["#{labels[t['term']]} <span class='box'>#{t['count']}</span>".html_safe, t['term']]
     end
   end
 
   def existence_facets
     labels = Hash[Relic::Existences.zip(['istniejące w rejestrze', 'archiwalne', 'społecznie dodane'])]
     relics.terms('existence', true).map do |t|
-      ["#{labels[t['term']]} (#{t['count']})", t['term']]
+      ["#{labels[t['term']]} <span class='box'>#{t['count']}</span>".html_safe, t['term']]
     end
   end
 
   def has_photos_facets
     labels = {'F' => 'brak zdjęcia', 'T' => 'ze zdjęciem'}
     relics.terms('has_photos', true).map do |t|
-      ["#{labels[t['term']]} (#{t['count']})", t['term']]
+      ["#{labels[t['term']]} <span class='box'>#{t['count']}</span>".html_safe, t['term']]
     end
   end
 
   def has_description_facets
     labels = {'F' => 'brak opisu', 'T' => 'z opisem'}
     relics.terms('has_description', true).map do |t|
-      ["#{labels[t['term']]} (#{t['count']})", t['term']]
+      ["#{labels[t['term']]} <span class='box'>#{t['count']}</span>".html_safe, t['term']]
     end
   end
 

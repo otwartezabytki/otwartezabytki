@@ -6,7 +6,7 @@
     %br/
   = t('.ask_account2', :scope => 'views')
   %br/
-  = link_to t('.register_here', :scope => 'views'), new_user_registration_path
+  = link_to t('.register_here', :scope => 'views'), new_user_registration_path, :remote => true
   %br/
   .ask_account= t('.ask_account3', :scope => 'views')
   = t('.anonymous_account', :scope => 'views')
@@ -16,12 +16,12 @@
     .alert.alert-info= flash[:notice]
   - if flash[:error]
     .alert.alert-error= flash[:error]
-  = semantic_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+  = semantic_form_for(resource, :as => resource_name, :url => session_path(resource_name), :remote => true) do |f|
     = f.semantic_errors
     = f.input :email, :required => false, :autofocus => true
     = f.input :password, :required => false
     - if devise_mapping.recoverable? && controller_name != 'passwords'
       .link_form
-        = link_to t('.forgot_password', :scope => 'views'), new_password_path(resource_name)
+        = link_to t('.forgot_password', :scope => 'views'), new_password_path(resource_name), :remote => true
         %br/
     = f.submit t('.submit', :scope => 'views')

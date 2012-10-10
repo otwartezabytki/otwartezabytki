@@ -244,6 +244,18 @@ a {
   }
   li label{
     cursor: pointer;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 20px;
+    span.box{
+      display: inline-block;
+      float: right;
+      color: #5f879b;
+      background: #d7dfe3;
+      @include border-radius(3px);
+      line-height: 19px;
+      padding: 0 6px;
+    }
   }
   section.main-search{
     padding-left: 22px;
@@ -613,6 +625,10 @@ a {
         background: #dce4e8;
         color: #236282;
       }
+      &.show-voivodeships{
+        background: asset-data-url('bg-triangle-right.png') no-repeat 20px 50%;
+        padding-left: 38px;
+      }
     }
     .selected {
       border-radius: 2px;
@@ -920,6 +936,9 @@ table.relics{
         background: $blue;
         margin-right: 10px;
       }
+    }
+    .time em{
+      font-style: italic;
     }
   }
 
@@ -1830,11 +1849,14 @@ ul.nav li a.selected {
   background: #000;
 }
 
+.fancybox-inner {
+  background: #fff;
+}
+
 .fancybox-close {
   top: 8px;
   right: 12px;
 }
-
 
 .flash {
   @include background(linear-gradient(#f8e8c9, #efdfc0));

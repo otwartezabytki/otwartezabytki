@@ -1,5 +1,7 @@
 class Users::SessionsController < Devise::SessionsController
 
+  before_filter :enable_fancybox
+
   # POST /resource/sign_in
   def create
     resource = warden.authenticate!(auth_options)
