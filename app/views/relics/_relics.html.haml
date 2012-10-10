@@ -13,7 +13,7 @@
         %tr.relic
           %td.body
             .thumb
-              = image_tag "bg-relic-image-ph-small.gif"
+              = link_to image_tag("bg-relic-image-ph-small.gif"), relic_path(relic.slug), :remote => true
             .name
               %h2= link_to relic.identification, relic_path(relic.slug), :remote => true
             = state_tag(relic)
@@ -26,7 +26,9 @@
               - else
                 %span.unknown Adres niedosępny
           %td.date
-            - unless relic.from.blank?
-              .time
+            .time
+              - unless relic.from.blank?
                 = relic.from
+              - else
+                %em Nieznana
         
