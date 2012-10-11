@@ -1,4 +1,4 @@
-# encoding: utf-8
+# -*- encoding : utf-8 -*-
 
 ActiveAdmin.register WuozAgency do
   menu :label => "Wysyłka", :parent => "Alerty"

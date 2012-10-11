@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # this module caches location fields for quick access
 module Relic::Validations
   extend ActiveSupport::Concern

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddLatLngToTerytModels < ActiveRecord::Migration
   def change
     add_column :communes, :latitude, :float

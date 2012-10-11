@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ChangeTypeOfDateStartEndColumns < ActiveRecord::Migration
   def up
     remove_column :relics, :date_start

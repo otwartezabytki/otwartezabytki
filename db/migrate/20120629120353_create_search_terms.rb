@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateSearchTerms < ActiveRecord::Migration
   def change
     create_table :search_terms do |t|

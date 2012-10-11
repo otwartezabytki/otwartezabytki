@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # config/initializers/geocoder.rb
 Geocoder.configure do |config|
 

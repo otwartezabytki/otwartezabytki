@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Users::PasswordsController < Devise::PasswordsController
 
   before_filter :enable_fancybox

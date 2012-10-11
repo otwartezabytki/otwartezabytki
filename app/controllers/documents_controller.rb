@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class DocumentsController < ApplicationController
 
   before_filter :authenticate_user!, :only => [:edit, :create, :update, :destroy]

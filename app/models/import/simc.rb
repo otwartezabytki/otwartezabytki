@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
  # -*- encoding : utf-8 -*-
 module Import
   # simc --> GUSowska baza miejscowosci

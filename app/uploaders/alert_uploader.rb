@@ -1,4 +1,4 @@
-# encoding: utf-8
+# -*- encoding : utf-8 -*-
 
 class AlertUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick

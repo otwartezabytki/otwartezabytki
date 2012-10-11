@@ -1,4 +1,4 @@
-# encoding: utf-8
+# -*- encoding : utf-8 -*-
 
 ActiveAdmin.register Relic do
   menu :label => "Zabytki", :parent => "Zasoby", :priority => 1

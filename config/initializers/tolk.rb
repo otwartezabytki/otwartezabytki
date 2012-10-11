@@ -1,4 +1,4 @@
-# encoding: utf-8
+# -*- encoding : utf-8 -*-
 
 # Tolk config file. Generated on September 28, 2012 13:29
 # See github.com/tolk/tolk for more informations

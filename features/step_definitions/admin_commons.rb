@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 Given /^I'm not logged in as admin user$/ do
   @current_user = nil
 end

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class SetDefaultRoleForUsers < ActiveRecord::Migration
   def up
     change_column_default(:users, :role, 'user')

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class DropAdminUsers < ActiveRecord::Migration
   def up
     drop_table :admin_users

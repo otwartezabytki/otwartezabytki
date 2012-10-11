@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class LinksController < ApplicationController
 
   before_filter :authenticate_user!, :only => [:edit, :create, :update, :destroy]

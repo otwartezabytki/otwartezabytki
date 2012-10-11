@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # require bounding_box_size method on class
 module Relic::BoundingBox
 

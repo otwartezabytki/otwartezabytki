@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module GeocodeViewport
   extend ActiveSupport::Concern
 

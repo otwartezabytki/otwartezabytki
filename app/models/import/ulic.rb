@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
  # -*- encoding : utf-8 -*-
 module Import
   # ulic --> GUSowska baza kodów ulic

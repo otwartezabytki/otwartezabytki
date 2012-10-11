@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class PreparedQuery
 
   def initialize query

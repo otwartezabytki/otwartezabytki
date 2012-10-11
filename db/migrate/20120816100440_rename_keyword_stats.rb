@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class RenameKeywordStats < ActiveRecord::Migration
   def up
     rename_table :keyword_stats, :autocomplitions

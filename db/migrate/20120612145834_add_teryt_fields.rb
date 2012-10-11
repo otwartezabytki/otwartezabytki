@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddTerytFields < ActiveRecord::Migration
   def change
     add_column :voivodeships, :nr, :string

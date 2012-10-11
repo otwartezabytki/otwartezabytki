@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateKeywordStats < ActiveRecord::Migration
   def change
     create_table :keyword_stats do |t|

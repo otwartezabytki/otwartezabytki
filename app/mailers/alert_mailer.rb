@@ -1,4 +1,4 @@
-# encoding: utf-8
+# -*- encoding : utf-8 -*-
 class AlertMailer < ActionMailer::Base
   default from: Settings.oz.email_sender
 

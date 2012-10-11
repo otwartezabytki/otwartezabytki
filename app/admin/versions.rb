@@ -1,4 +1,4 @@
-# encoding: utf-8
+# -*- encoding : utf-8 -*-
 
 ActiveAdmin.register Version, :sort_order => 'id_desc' do
   actions :index, :show

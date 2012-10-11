@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ForeignRelicSupport < ActiveRecord::Migration
   def up
     change_column :relics, :register_number, :text

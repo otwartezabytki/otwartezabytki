@@ -1,4 +1,4 @@
-# encoding: utf-8
+# -*- encoding : utf-8 -*-
 
 ActiveAdmin.register Photo do
   menu :label => "Zdjęcia", :parent => "Zasoby"

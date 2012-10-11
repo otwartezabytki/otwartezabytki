@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateTolkTables < ActiveRecord::Migration
   def self.up
     create_table :tolk_locales do |t|

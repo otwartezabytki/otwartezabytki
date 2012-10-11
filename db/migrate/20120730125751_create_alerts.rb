@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateAlerts < ActiveRecord::Migration
   def change
     create_table :alerts do |t|

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 def refresh_relics_index
   Relic.tire.index.delete
   Relic.tire.index.create(:mappings => Relic.tire.mapping_to_hash, :settings => Relic.tire.settings)

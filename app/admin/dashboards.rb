@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 ActiveAdmin::Dashboards.build do
 
   ActiveAdmin::Dashboards::DashboardController.class_eval do |controller|

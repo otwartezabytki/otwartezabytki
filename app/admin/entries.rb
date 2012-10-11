@@ -1,4 +1,4 @@
-# encoding: utf-8
+# -*- encoding : utf-8 -*-
 
 ActiveAdmin.register Entry do
   menu :label => "Wpisy", :parent => "Zasoby"

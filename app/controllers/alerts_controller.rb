@@ -1,4 +1,4 @@
-# encoding: utf-8
+# -*- encoding : utf-8 -*-
 class AlertsController < ApplicationController
   before_filter :authenticate_user!, :only => [:new, :create]
 

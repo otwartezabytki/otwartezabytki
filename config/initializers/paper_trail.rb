@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Version < ActiveRecord::Base
   attr_accessible :source
   scope :relics, where(:item_type => "Relic")

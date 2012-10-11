@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Search
   include ActiveModel::Validations
   include ActiveModel::Conversion

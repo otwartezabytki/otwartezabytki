@@ -1,4 +1,4 @@
-# encoding: utf-8
+# -*- encoding : utf-8 -*-
 
 ActiveAdmin.register Link do
   menu :label => "Linki", :parent => "Zasoby"

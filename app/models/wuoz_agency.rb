@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class WuozAgency < ActiveRecord::Base
   attr_accessible :city, :director, :email, :address, :district_names, :wuoz_key
   has_many :wuoz_regions

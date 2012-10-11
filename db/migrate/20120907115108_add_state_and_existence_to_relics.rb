@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddStateAndExistenceToRelics < ActiveRecord::Migration
   def change
     add_column :relics, :state, :string, :default => "unchecked"

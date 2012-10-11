@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 Formtastic::Helpers::FormHelper.builder = FormtasticBootstrap::FormBuilder
 FormtasticBootstrap::FormBuilder.i18n_lookups_by_default = true
 FormtasticBootstrap::FormBuilder.default_inline_hint_class = :block

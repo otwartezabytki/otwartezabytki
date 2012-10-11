@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class GeocoderController < ApplicationController
   def search
     results = if params[:query].present?

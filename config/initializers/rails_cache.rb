@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # "hack" for uninitialized model names
 if Rails.env.development?
   Dir.foreach("#{Rails.root}/app/models") do |model_name|

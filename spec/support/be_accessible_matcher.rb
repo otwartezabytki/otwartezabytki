@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 RSpec::Matchers.define :have_accessible do |attribute|
   match do |response|
     response.class.accessible_attributes.include?(attribute)

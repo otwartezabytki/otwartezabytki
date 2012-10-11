@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # lib/file_size_validator.rb
 # Based on: https://gist.github.com/795665
 

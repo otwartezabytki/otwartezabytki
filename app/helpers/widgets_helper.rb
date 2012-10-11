@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module WidgetsHelper
 
   # Converts facet from search results to Hash

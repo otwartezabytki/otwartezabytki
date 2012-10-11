@@ -1,4 +1,4 @@
-# encoding: utf-8
+# -*- encoding : utf-8 -*-
 class Users::RegistrationsController < ApplicationController
 
   before_filter :enable_fancybox

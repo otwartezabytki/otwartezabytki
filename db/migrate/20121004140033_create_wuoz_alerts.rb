@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateWuozAlerts < ActiveRecord::Migration
   def change
     create_table :wuoz_alerts do |t|

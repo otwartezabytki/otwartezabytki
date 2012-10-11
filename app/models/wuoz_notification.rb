@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class WuozNotification < ActiveRecord::Base
   attr_accessible :alert_ids, :body, :subject, :wuoz_agency_id, :zip_file
   belongs_to :wuoz_agency

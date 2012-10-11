@@ -1,4 +1,4 @@
-# encoding: utf-8
+# -*- encoding : utf-8 -*-
 
 ActiveAdmin.register Document do
   menu :label => "Dokumenty", :parent => "Zasoby"
