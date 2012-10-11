@@ -1,11 +1,8 @@
 .hello
   .about_top
     Witaj!
-
-
   .box
     %h3 Witaj, <strong>#{current_user.username}</strong>
-
     %p
       - if params[:notification] == 'password'
         Hasło do Twojego konta zostało zmienione.

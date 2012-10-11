@@ -2,16 +2,10 @@
 class PagesController < ApplicationController
   before_filter :authenticate_user!, :only => :hello
   layout :layout_for_page
+  append_view_path Page::Resolver.new
 
   def show
-    @page = Page.find_by_name(params[:id])
-    if @page
-      render :text => @page.body.html_safe, :layout => true
-    else
-      view = params[:id]
-      render404 and return if view.blank? or !File.exists?("#{Rails.root}/app/views/pages/#{view}.html.haml")
-      render view
-    end
+    render params[:id]
   end
 
   protected
