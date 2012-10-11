@@ -16,6 +16,6 @@
       %h2= t "relic_tabs.#{params[:section]}.name"
       - if request.xhr?
         = render 'shared/flash', :flash => flash
-      .row
+      .row{:class => "#{params[:section]}"}
         %p.description= t "relic_tabs.#{params[:section]}.description"
       = render :partial => "relics/edit/#{params[:section]}"
