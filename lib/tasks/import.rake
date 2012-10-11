@@ -107,4 +107,12 @@ namespace :import do
     end
   end
 
+  task :static_pages => :environment do
+    Dir.glob("#{Rails.root}/db/pages/*.erb").each do |path|
+      name = path.split('/').last.split('.').first
+      page = Page.find_or_create_by_name(name)
+      page.body = File.read(path)
+      page.save
+    end
+  end
 end

@@ -2,6 +2,7 @@
 class Page < ActiveRecord::Base
   translates :body, :title
   accepts_nested_attributes_for :translations
+  validates :name, :presence => true, :uniqueness => true
 
   class Resolver < ActionView::Resolver
     protected
