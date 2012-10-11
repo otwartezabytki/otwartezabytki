@@ -56,7 +56,7 @@ gem 'dm-chunked_query'
 gem 'dm-sqlite-adapter'
 gem 'unicode'
 gem 'gon'
-gem 'high_voltage'
+# gem 'high_voltage'
 gem 'newrelic_rpm'
 gem 'rails_config', '0.2.5'
 gem 'dalli'
@@ -111,6 +111,8 @@ gem 'friendly_id'
 # faster asset precompiling
 gem 'turbo-sprockets-rails3'
 gem 'rubyzip'
+gem 'globalize3'
+gem 'activeadmin-globalize3-inputs', :git => "git://github.com/corewebdesign/ActiveAdmin-Globalize3-inputs.git", :ref => 'c95c0a4495b1d2bf28d630005daadb95eadb3f3f'
 
 group :development, :test do
   # for debugging

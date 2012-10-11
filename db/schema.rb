@@ -1,4 +1,4 @@
-# encoding: UTF-8
+# -*- encoding : utf-8 -*-
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121008082104) do
+ActiveRecord::Schema.define(:version => 20121011084255) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -114,6 +114,26 @@ ActiveRecord::Schema.define(:version => 20121008082104) do
     t.string   "kind"
     t.string   "category"
     t.string   "formal_name"
+  end
+
+  create_table "page_translations", :force => true do |t|
+    t.integer  "page_id"
+    t.string   "locale"
+    t.string   "title"
+    t.text     "body"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "page_translations", ["locale"], :name => "index_page_translations_on_locale"
+  add_index "page_translations", ["page_id"], :name => "index_page_translations_on_page_id"
+
+  create_table "pages", :force => true do |t|
+    t.string   "name"
+    t.string   "title"
+    t.text     "body"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "photos", :force => true do |t|

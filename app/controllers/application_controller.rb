@@ -70,9 +70,15 @@ class ApplicationController < ActionController::Base
     { :search => cond.merge(opt.with_indifferent_access) }.with_indifferent_access
   end
 
-
   def enable_fancybox
     response.headers['x-fancybox'] = 'true' if request.xhr?
+  end
+
+  def render404
+    respond_to do |format|
+      format.html { render :file => "#{Rails.root}/public/404.html", :layout => false, :status => :not_found }
+      format.any  { head :not_found }
+    end
   end
 
   private

@@ -1,6 +1,7 @@
 /*
  *= require vendor/select2
  *= require vendor/redactor
+ *= require jquery.ui.tabs
  */
 
 @import "active_admin/mixins";
@@ -15,7 +16,6 @@ del {
 }
 
 nav ul {
-
   li {
     display: inline;
   }

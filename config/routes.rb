@@ -1,12 +1,7 @@
 # -*- encoding : utf-8 -*-
-
-# require 'riddick/server'
 Otwartezabytki::Application.routes.draw do
 
-
-  mount Tolk::Engine => '/tolk', :as => 'tolk'
-
-  # mount Riddick::Server.new, at: 'riddick', as: 'riddick'
+  mount Tolk::Engine => '/admin/tolk', :as => 'tolk'
   ActiveAdmin.routes(self)
 
   devise_for :users, :path_names => {
@@ -84,5 +79,5 @@ Otwartezabytki::Application.routes.draw do
   match "/facebook/share_close" => 'pages#show', :id => 'share_close'
   match "/hello"                  => 'pages#hello', :id => 'hello', :as => :hello
 
-  root :to => 'high_voltage/pages#show', :id => 'home'
+  root :to => 'pages#show', :id => 'home'
 end

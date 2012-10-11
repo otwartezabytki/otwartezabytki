@@ -1,4 +1,13 @@
 GIT
+  remote: git://github.com/corewebdesign/ActiveAdmin-Globalize3-inputs.git
+  revision: c95c0a4495b1d2bf28d630005daadb95eadb3f3f
+  ref: c95c0a4495b1d2bf28d630005daadb95eadb3f3f
+  specs:
+    activeadmin-globalize3-inputs (0.0.1)
+      activeadmin
+      globalize3
+
+GIT
   remote: git://github.com/gmanley/mini_magick.git
   revision: 4f25e64937d270f2232001541b50e21519aa7a33
   branch: graphicsmagick-fix
@@ -217,6 +226,10 @@ GEM
     geocoder (1.1.2)
     gherkin (2.11.1)
       json (>= 1.4.6)
+    globalize3 (0.2.0)
+      activemodel (>= 3.0.0)
+      activerecord (>= 3.0.0)
+      paper_trail (~> 2)
     gon (4.0.0)
       actionpack (>= 2.3.0)
       json
@@ -249,7 +262,6 @@ GEM
     hash_digest (1.0.0)
       activesupport
     hashr (0.0.21)
-    high_voltage (1.1.1)
     hike (1.2.1)
     htmldiff (0.0.1)
     httpauth (0.1)
@@ -526,6 +538,7 @@ DEPENDENCIES
   aasm
   activeadmin (~> 0.4.4)
   activeadmin-cancan
+  activeadmin-globalize3-inputs!
   acts_as_list
   airbrake
   ancestry
@@ -556,6 +569,7 @@ DEPENDENCIES
   formtastic-bootstrap
   friendly_id
   geocoder
+  globalize3
   gon
   gravatar_image_tag
   growl
@@ -564,7 +578,6 @@ DEPENDENCIES
   guard-rspec
   guard-spork
   haml-rails
-  high_voltage
   htmldiff
   i18n-country-translations
   i18n_country_select

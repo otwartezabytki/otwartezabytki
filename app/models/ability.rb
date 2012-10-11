@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Ability
   include CanCan::Ability
 
@@ -16,6 +17,7 @@ class Ability
       can :manage, Alert
       can :manage, WuozAgency
       can :manage, Autocomplition
+      can :manage, Page
 
       can :index, Version
       can :show, Version
