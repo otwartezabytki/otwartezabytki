@@ -3,11 +3,11 @@
     %thead
       %tr.relic
         %th.body
-          %span.label= t('views.relics.show.relics.name')
+          %span.label= t('views.relics.relics.name')
         %th.location
-          %span.label= t('views.relics.show.relics.location')
+          %span.label= t('views.relics.relics.location')
         %th.date
-          %span.label= t('views.relics.show.relics.create_date')
+          %span.label= t('views.relics.relics.create_date')
     %tbody
       - collection.each do |relic|
         %tr.relic
@@ -24,10 +24,10 @@
               - unless relic.street.blank?
                 %span.known= relic.street
               - else
-                %span.unknown= t('views.relics.show.relics.unknown_address')
+                %span.unknown= t('views.relics.relics.unknown_address')
           %td.date
             .time
               - unless relic.from.blank?
                 = relic.from
               - else
-                %em= t('views.relics.show.relics.unknown_from')
+                %em= t('views.relics.relics.unknown_from')

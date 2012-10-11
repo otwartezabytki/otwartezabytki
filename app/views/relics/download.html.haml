@@ -1,14 +1,13 @@
 .about_top.download_top
-  = t('views.relics.show.download.relics_database')
+  = t('views.relics.download.relics_database')
 .content_more_about
   %p.small
-    Tu możesz pobrać plik w formacie .csv z aktualną zawartością bazy danych (katalogu zabytków), zawierającą historię edycji poszczególnych pól.
+    = t('views.relics.download.info')
   %p.small
-    = t('views.relics.show.download.db_license')
-
+    = t('views.relics.download.db_license')
     = link_to 'Creative Commons Zero (CC0)', "http://creativecommons.org/choose/zero/"
   - if @export_url
     %p.small
-      = link_to t('views.relics.show.download.download'), @export_url, :class => 'download'
+      = link_to t('views.relics.download.download'), @export_url, :class => 'download'
   - else
-    %strong= t('views.relics.show.download.unavailable_file')
+    %strong= t('views.relics.download.unavailable_file')

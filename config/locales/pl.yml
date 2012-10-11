@@ -582,25 +582,26 @@ pl:
           drop_marker_html: "Przeciągnij <br/> znacznik na mapę:"
         photos:
           loading: "Trwa wgrywanie, proszę czekać..."
-          statement_html: "Oświadczam, że posiadam prawa do zdjęć, które publikuję na stronie otwartezabytki.pl. Zdjęcia te udostępniam na licencji <a href="http://creativecommons.org/licenses/by-sa/3.0/pl/" target="_blank">Creative Commons Uznanie Autorstwa-Na Tych Samych Warunkach 3.0 Polska</a> <em class="icons"></em>"
+          statement_html: 'Oświadczam, że posiadam prawa do zdjęć, które publikuję na stronie otwartezabytki.pl. Zdjęcia te udostępniam na licencji <a href="http://creativecommons.org/licenses/by-sa/3.0/pl/" target="_blank">Creative Commons Uznanie Autorstwa-Na Tych Samych Warunkach 3.0 Polska</a> <em class="icons"></em>'
           delete_photo: usuń zdjęcie
           delete_confirm: Czy aby na pewno?
       show:
-        localication_facets:
-          header: Lokalizacja
-          show_voivodeships: 'Pokaż wojewewództwa'
-          world_relics: Zabytki znajdujące się poza Polską
-        relics:
-          name: Zabytek
-          location: Lokalizacja
-          create_date: Data powstania
-          unknown_address: Adres niedostępny
-        download:
-          relics_database: Baza danych zabytków
-          db_license: Baza dostępna jest na licencji
-          unavailable_file:  plik obecnie nie dostępny
-          download: Pobierz dane
-          info: Tu możesz pobrać plik w formacie .csv z aktualną zawartością bazy danych (katalogu zabytków), zawierającą historię edycji poszczególnych pól.
+      localication_facets:
+        header: Lokalizacja
+        show_voivodeships: 'Pokaż wojewewództwa'
+        world_relics: Zabytki znajdujące się poza Polską
+      relics:
+        name: Zabytek
+        location: Lokalizacja
+        create_date: Data powstania
+        unknown_address: Adres niedostępny
+        unknown_from: Nieznana
+      download:
+        relics_database: Baza danych zabytków
+        db_license: Baza dostępna jest na licencji
+        unavailable_file:  plik obecnie nie dostępny
+        download: Pobierz dane
+        info: "Tu możesz pobrać plik w formacie .csv z aktualną zawartością bazy danych (katalogu zabytków), zawierającą historię edycji poszczególnych pól."
 
 
   layouts:
