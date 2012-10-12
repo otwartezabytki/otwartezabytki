@@ -1,18 +1,14 @@
 .top
   .container
-    %form#form-search
+    = semantic_form_for(tsearch, :url => relics_path, :method => :get, :id => 'form-search') do |f|
       %h2 Wyszukaj i uzupełnij...
-      .row
-        %label Co:
-        %span.example np. cmentarz, stocznie poniemieckie, chopinowski
-        %input{:type => "text", :class => "what"}
-      .row
-        %label Gdzie:
-        %span.example np. Małkinia, ul. Grodzka w Krakowie
-        %input{:type => "text", :class => "what"}
-      .actions
+      .field.subject
+        = f.input :q, :label => "Co:", :placeholder => "co", :input_html => { :class => 'autocomplete-q'}, :hint => "np. cmentarz, stocznie poniemieckie, chopinowski"
+      .field.place
+        = f.input :place, :label => "Gdzie:", :placeholder => "gdzie", :input_html => { :class => 'autocomplete-place'}, :hint => "np. Małkinia, ul. Grodzka w Krakowie"
+      .field
         %a{:href => "", :class => "how_it_works"} Jak działa wyszukiwarka
-        %input{:type => "submit", :class => "submit btn", :value => "szukaj »"}
+        = f.action :submit, :label => 'Szukaj &raquo;'.html_safe, :button_html => { :name => nil }
     .relic-example
       %h3 ... a wkrótce będziemy mogli oglądać zabytki tak:
       .relic-container
@@ -29,11 +25,11 @@
     .welcome
       %h3 Zapraszamy do współtworzenia katalogu Otwartych Zabytkó∑
       .left
-        Tworzymy obywatelską bazę zabytków. W projekcie wzięło udział już 
+        Tworzymy obywatelską bazę zabytków. W projekcie wzięło udział już
         %strong 15902 osób
-        , uzupełniliśmy 
-        %strong 3212 zabytki 
-        z rejestru IPN, dodaliśmy 
+        , uzupełniliśmy
+        %strong 3212 zabytki
+        z rejestru IPN, dodaliśmy
         %strong 28 nowych.
       .right
         %ul
@@ -64,41 +60,41 @@
   .right
     %h3 Ostatnio edytowane
     %ul.latest
-      %li 
+      %li
         .image
         .relic-content
           %p.title Starokatolicki Kościół Mariawitów ob. Rzymsko-Katolicki Kościół Rektoralny Środowisk Twórczych pw. Niepokalanego Poczęcia NMP
-          .change.added 
-            dodana lokalizacja 
+          .change.added
+            dodana lokalizacja
             %em ul. Towarowa 20
           %a{:href => ""} Przejdź do profilu zabytku
-      %li 
+      %li
         .image
         .relic-content
           %p.title Zamek książek mazowieckich (ruina)
-          .change.edited 
+          .change.edited
             edytowana data powstania:
             %em 2 poł. XIX w.
           %a{:href => ""} Przejdź do profilu zabytku
-      %li 
+      %li
         .image
         .relic-content
-          .change.edited 
+          .change.edited
             edytowana nazwa:
             %em.bold Pałac Królewski
           %a{:href => ""} Przejdź do profilu zabytku
-      %li 
+      %li
         .image
         .relic-content
           %p.title Zamek książek mazowieckich (ruina)
-          .change.edited 
+          .change.edited
             zmienił status na
             .status.filled uzupełniony
           %a{:href => ""} Przejdź do profilu zabytku
   .progress-bar
     .bg
       .color{:style => "width: 20%"}
-    .checked 
+    .checked
       %span 7827
       zabytków sprawdzonych
     .filled

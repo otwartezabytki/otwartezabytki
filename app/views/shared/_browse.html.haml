@@ -1,0 +1,55 @@
+- relics = tsearch.perform
+#browse-list{:style => ('display:none;')}
+  .categories-list
+    %h3 Kategorie:
+    - c = categoires_facets('non_sacral', relics).first
+    = link_to c.first, relics_path(:search => {:categories => [c.last]})
+    - hidden_sacral = true
+    %h4
+      = link_to 'sakralny', '#', :class => ('sacral-options ' + (hidden_sacral ? '' : 'shown'))
+    .sacral-categories{:style => ('display:none;' if hidden_sacral)}
+      - categoires_facets('sacral', relics).each do |c|
+        = link_to c.first, relics_path(:search => {:categories => [c.last]})
+    - categoires_facets('non_sacral', relics).drop(1).each do |c|
+      = link_to c.first, relics_path(:search => {:categories => [c.last]})
+  .localization-list
+    %h3= t('views.relics.localization_facets.header')
+    %ul.nav.nav-list
+      %li
+        = link_to_facet ({'term' => 'Polska_pl', 'count' => relics.count('poland')}), 0 do
+          %ul
+            - relics.terms('voivodeships', true).each do |obj|
+              %li
+                = link_to_facet obj, 1
+
+      %li
+        = link_to_facet ({'term' => "#{t('views.relics.localization_facets.world_relics')}_world", 'count' => relics.count('world')}), 0 do
+          %ul
+            - relics.terms('countries', true).each do |obj|
+              %li
+                = link_to_facet obj, 1
+
+- content_for :footer_javascripts do
+  :coffeescript
+    jQuery(document).on 'click', '#menu a.browse', (e) ->
+      e.preventDefault()
+      filter = $("div#browse-list")
+      link = $(this)
+      if link.hasClass "shown"
+        filter.slideUp()
+        link.removeClass "shown"
+      else
+        filter.slideDown()
+        link.addClass("shown")
+
+    jQuery.initializer '#browse-list', ->
+      this.on 'click', 'a.sacral-options', (e) ->
+        e.preventDefault()
+        filter = $("div.sacral-categories")
+        link = $(this)
+        if link.hasClass "shown"
+          filter.slideUp()
+          link.removeClass "shown"
+        else
+          filter.slideDown()
+          link.addClass("shown")
