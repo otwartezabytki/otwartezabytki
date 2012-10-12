@@ -16,12 +16,18 @@ module RelicsHelper
     ].sample
   end
 
-  def categoires_facets column = nil
+  def categoires_facets kind = nil
+    categories = case kind
+      when 'sacral' then Category.sacral
+      when 'non_sacral' then Category.non_sacral
+    else
+      Category.all
+    end.to_hash
     relics.terms('categories', true).map do |t|
-      if column.blank? or Category.send("#{column}_column").keys.include? t['term']
-        ["#{Category.all[t['term']]} <em>#{t['count']}</em>".html_safe, t['term']]
+      if categories.keys.include? t['term']
+        ["#{categories[t['term']]} <em>#{t['count']}</em>".html_safe, t['term']]
       end
-    end.compact
+    end.compact.sort {|a,b| categories.keys.index(a.last) <=> categories.keys.index(b.last)}
   end
 
   def state_facets

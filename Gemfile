@@ -113,6 +113,7 @@ gem 'turbo-sprockets-rails3'
 gem 'rubyzip'
 gem 'globalize3'
 gem 'activeadmin-globalize3-inputs', :git => "git://github.com/corewebdesign/ActiveAdmin-Globalize3-inputs.git", :ref => 'c95c0a4495b1d2bf28d630005daadb95eadb3f3f'
+gem 'acts_as_list'
 
 group :development, :test do
   # for debugging

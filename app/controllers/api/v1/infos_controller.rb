@@ -95,7 +95,7 @@ module Api
               },{
                 :allowMultiple => true,
                 :dataType => "Array",
-                :defaultValue => Category.all.keys,
+                :defaultValue => Category.to_hash.keys,
                 :description => "Categories (comma separated)",
                 :name => "categories",
                 :paramType => "query",

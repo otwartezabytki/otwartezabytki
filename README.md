@@ -9,7 +9,7 @@
  - bundle install
  - gunzip -c db/dump/%m_%d_%Y.sql.gz | script/rails db
  - bundle exec rake db:migrate
- - bundle exec rake import:static_pages
+ - bundle exec rake db:seed
  - script/rails s
 
 ### db dump command
