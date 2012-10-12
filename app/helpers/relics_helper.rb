@@ -16,7 +16,7 @@ module RelicsHelper
     ].sample
   end
 
-  def categoires_facets kind = nil
+  def categoires_facets kind = nil, relics = relics
     categories = case kind
       when 'sacral' then Category.sacral
       when 'non_sacral' then Category.non_sacral
