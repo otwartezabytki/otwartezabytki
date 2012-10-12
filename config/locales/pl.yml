@@ -617,6 +617,10 @@ pl:
       help: Pomoc
       contact: Kontakt
       download_data: Pobierz dane
+      widgets: Widżety
+      addrelic: Dodaj zabytek
+      search: Szukaj
+      browse: Przeglądaj
       og:
         title: Otwarte Zabytki
         description: Uzupełnij z nami bazę zabytków i pomóż stworzyć serwis. Skorzystaj z własnej wiedzy. Poszukaj informacji w książkach lub w internecie. To naprawdę proste.

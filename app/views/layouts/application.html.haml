@@ -27,7 +27,6 @@
               %span.icon-bar
             %h1
               %a(href=root_path) Otwarte Zabytki
-            %section.disclaimer= t('layouts.application.disclaimer')
             %nav#userNav
               %ul
                 - if current_user && current_user.registered? && current_user.errors.size == 0
@@ -52,16 +51,17 @@
                 %li
                   = link_to t('layouts.application.about'), page_pl_path('o-projekcie'), :class => "about #{current_page?(about_path) ? "current" : ""}"
                 %li
-                  = link_to t('layouts.application.help'), page_pl_path('pomoc'), :class => "help #{current_page?(strony_pomoc_path) ? "current" : ""}"
+                  = link_to t('layouts.application.download_data'), page_pl_path('pobierz-dane'), :class => "download #{current_page?(download_path) ? "current" : ""}"
                 %li
                   = link_to t('layouts.application.contact'), page_pl_path('kontakt'), :class => "contact  #{current_page?(strony_kontakt_path) ? "current" : ""}"
                 %li
-                  = link_to t('layouts.application.download_data'), page_pl_path('pobierz-dane'), :class => "download #{current_page?(download_path) ? "current" : ""}"
-            .text
-              %span.plus
-              %span.minus
-
-            = render 'shared/search'
+                  = link_to t('layouts.application.widgets'), page_pl_path('widgets'), :class => "widgets #{current_page?(root_path) ? "current" : ""}"
+                %li
+                  = link_to t('layouts.application.addrelic'), page_pl_path('dodaj-zabytek'), :class => "add-relic #{current_page?(root_path) ? "current" : ""}"
+                %li
+                  = link_to t('layouts.application.search'), page_pl_path('szukaj'), :class => "search #{current_page?(root_path) ? "current" : ""}"
+                %li
+                  = link_to t('layouts.application.browse'), page_pl_path('przegladaj'), :class => "browse #{current_page?(root_path) ? "current" : ""}"
         %section#main
           .container.main-container{ :'data-replace' => '.main-container' }
             = render 'shared/flash', :flash => flash

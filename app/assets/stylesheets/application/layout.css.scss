@@ -47,10 +47,10 @@ a {
   h1 {
     float: left;
     text-indent: -9999px;
-    width: 316px;
-    height: 81px;
-    background: image-url('logo.png') no-repeat;
-    margin-top: 32px;
+    width: 349px;
+    height: 86px;
+    background: image-url('logo-new.png') no-repeat;
+    margin-top: 20px;
     a {
       display: block;
       width: 100%;
@@ -481,7 +481,7 @@ a {
       float: left;
       a {
         color: #313132;
-        font-weight: normal;
+        font-weight: 600;
         font-size: 14px;
         line-height: 60px;
         text-shadow: 0 1px 0 #fff;
@@ -497,21 +497,21 @@ a {
         }
         &.home {
           padding-left: 24px;
-          background: asset-data-url('icon-menu-home.png') 4px 18px no-repeat;
+          background: asset-data-url('icon-menu-home.png') 4px 23px no-repeat;
           &:hover{
-            background: asset-data-url('icon-menu-home-hover.png') 4px 18px no-repeat;
+            background: asset-data-url('icon-menu-home-hover.png') 4px 23px no-repeat;
           }
           &.current {
-            background: asset-data-url('icon-menu-home-current.png') 4px 18px no-repeat;
+            background: asset-data-url('icon-menu-home-current.png') 4px 23px no-repeat;
           }
         }
         &.about {
-          background: asset-data-url('icon-menu-about.png') 0 23px no-repeat;
+          background: asset-data-url('icon-menu-about.png') 0 18px no-repeat;
           &:hover {
-            background: asset-data-url('icon-menu-about-hover.png') 0 23px no-repeat;
+            background: asset-data-url('icon-menu-about-hover.png') 0 18px no-repeat;
           }
           &.current {
-            background: asset-data-url('icon-menu-about-current.png') 0 23px no-repeat;
+            background: asset-data-url('icon-menu-about-current.png') 0 18px no-repeat;
           }
         }
         &.help {
@@ -539,6 +539,42 @@ a {
           }
           &.current {
             background: asset-data-url('icon-menu-download-current.png') 0 23px no-repeat;
+          }
+        }
+        &.widgets {
+          background: asset-data-url('icon-menu-widgets.png') 0 23px no-repeat;
+          &:hover{
+            background: asset-data-url('icon-menu-widgets-hover.png') 0 23px no-repeat;
+          }
+          &.current {
+            background: asset-data-url('icon-menu-widgets-current.png') 0 23px no-repeat;
+          }
+        }
+        &.add-relic {
+          background: asset-data-url('icon-menu-addrelic.png') 0 23px no-repeat;
+          &:hover{
+            background: asset-data-url('icon-menu-addrelic-hover.png') 0 23px no-repeat;
+          }
+          &.current {
+            background: asset-data-url('icon-menu-addrelic-current.png') 0 23px no-repeat;
+          }
+        }
+        &.search {
+          background: asset-data-url('icon-menu-search.png') 0 23px no-repeat;
+          &:hover{
+            background: asset-data-url('icon-menu-search-hover.png') 0 23px no-repeat;
+          }
+          &.current {
+            background: asset-data-url('icon-menu-search-current.png') 0 23px no-repeat;
+          }
+        }
+        &.browse {
+          background: asset-data-url('icon-menu-browse.png') 0 23px no-repeat;
+          &:hover{
+            background: asset-data-url('icon-menu-browse-hover.png') 0 23px no-repeat;
+          }
+          &.current {
+            background: asset-data-url('icon-menu-browse-current.png') 0 23px no-repeat;
           }
         }
       }
