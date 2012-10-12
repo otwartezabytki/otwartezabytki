@@ -42,3 +42,5 @@ jQuery.initializer 'body.show.resource_home', ->
     speed:    0,
     timeout:  4000
   })
+
+  $('#map-poland').cssMap({'size' : 500})

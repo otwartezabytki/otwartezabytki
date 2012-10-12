@@ -1,3 +1,4 @@
+//= require ../vendor/cssmap-poland
 @import "mixins";
 $experimental-support-for-svg: true;
 body {
@@ -1024,6 +1025,17 @@ p#adding-note {
         }
         .top {
           @include background(linear-gradient(#577787, #436271));
+          .container{
+            position: relative;
+          }
+          .relic-bg{
+            position: absolute;
+            width: 361px;
+            height: 239px;
+            background: image-url("header-relic.png") no-repeat;
+            left: -220px;
+            bottom: -15px;
+          }
           .more {
             float: left;
             width: 480px;
@@ -1954,7 +1966,7 @@ section.edit .flash {
 }
 
 #main{
-  #form-search{
+  #new_search{
     margin-top: 33px;
     float: left;
     padding: 35px 35px 30px 40px;
@@ -1992,7 +2004,7 @@ section.edit .flash {
       font-weight: 600;
       float: left;
     }
-    span.example{
+    span.block{
       font-size: 13px;
       text-align: right;
       display: block;
@@ -2019,25 +2031,28 @@ section.edit .flash {
         left: 0;
       }
     }
-    .btn {
-      float: right;
-      margin: 0;
-      @include background(linear-gradient(#4b6d7e, #436576));
-      color: #fff;
-      border: 0;
-      font-size: 12px;
-      font-weight: 600;
-      text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
-      text-transform: uppercase;
-      -webkit-border-radius: 2px;
-      border-radius: 2px;
-      padding: 10px 16px 9px 19px;
-      cursor: pointer;
-      &:hover {
-        @include background(linear-gradient(#437994, #2b607b));
-      }
-      &:active {
-        @include background(linear-gradient(#2b607b, #437893));
+    .action{
+      list-style-type: none;
+      input {
+        float: right;
+        margin: 0;
+        @include background(linear-gradient(#4b6d7e, #436576));
+        color: #fff;
+        border: 0;
+        font-size: 12px;
+        font-weight: 600;
+        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
+        text-transform: uppercase;
+        -webkit-border-radius: 2px;
+        border-radius: 2px;
+        padding: 10px 16px 9px 19px;
+        cursor: pointer;
+        &:hover {
+          @include background(linear-gradient(#437994, #2b607b));
+        }
+        &:active {
+          @include background(linear-gradient(#2b607b, #437893));
+        }
       }
     }
     .how_it_works{
@@ -2095,5 +2110,200 @@ section.edit .flash {
     width: 790px;
     margin-left: 170px;
     margin-top: 25px;
+    h3{
+      color: #f5f5f5;
+      font-size: 26px;
+      font-weight: 600;
+      text-shadow: 0 -1px 1px rgba(0,0,0,0.3);
+      margin-bottom: 10px;
+    }
+    .left, .right{
+      width: 380px;
+      float: left;
+      color: #fff;
+      font-size: 16px;
+      line-height: 26px;
+    }
+    .left{
+      margin-right: 20px;
+    }
+    strong{
+      font-weight: 700;
+    }
+    .right{
+      li{
+        background: asset-data-url("welcome-li.png") 0 5px no-repeat;
+        padding-left: 25px;
+      }
+      .btn{
+        padding: 10px;
+        color: #044d71;
+        font-size: 16px;
+        text-shadow: 0 1px 1px #fff;
+        @include background(linear-gradient(#f6f6f6, #d1d1d1));
+        @include border-radius(4px);
+        border: 0;
+        float: left;
+        margin: 25px 0 30px;
+        @include box-shadow(0 1px 1px 0 rgba(0,0,0,0.5), inset 0 -1px 2px 0 rgba(0,0,0,0.3));
+      }
+    }
+  }
+  .widgets-intro{
+    margin: 70px auto 0;
+    width: 960px;
+    ul{
+      display: inline-block;
+      width: 100%;
+      @include box-shadow(0 0 3px 0 rgba(0,0,0,0.3));
+      li{
+        float: left;
+        height: 150px;
+        background: #fff;
+        padding: 20px;
+        p{
+          line-height: 20px;
+        }
+        &.first{
+          width: 214px;
+          background: image-url("intro-widgets-bg.png") no-repeat;
+          text-shadow: 0 -1px 1px rgba(0,0,0,0.3);
+          color: #fff;
+          h3{
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 15px;
+          }
+        }
+        &.alerts, &.map-search, &.add{
+          h3{
+            margin-top: 5px;
+            padding-left: 45px;
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 36px;
+            margin-bottom: 15px;
+          }
+        } 
+        &.alerts{
+          width: 201px;
+          border-right: 1px solid #e5e5e5;
+          h3{
+            background: image-url("intro-alerts.png") no-repeat;
+          }
+        }
+        &.map-search{
+          width: 200px;
+          border-right: 1px solid #e5e5e5;
+          h3{
+            background: image-url("intro-mapsearch.png") no-repeat;
+          }
+        }
+        &.add{
+          width: 182px;
+          h3{
+            background: image-url("intro-add.png") no-repeat;
+          }
+        }
+      }
+    }
+  }
+  .stats{
+    width: 958px;
+    border: 1px solid rgb(220, 220, 220);
+    background: #fff;
+    margin: 28px auto;
+    h2{
+      line-height: 75px;
+      text-align: center;
+      border-bottom: 1px solid #e5e5e5;
+      font-weight: 700;
+      font-size: 26px;
+    }
+    .left{
+      float: left;
+      width: 476px;
+      h3{
+        font-weight: 600;
+        font-size: 20px;
+        text-align: center;
+        line-height: 50px;
+      }
+    }
+    .right{
+      width: 481px;
+      margin-left: 476px;
+      border-left: 1px solid #e5e5e5;
+      h3{
+        font-weight: 600;
+        font-size: 20px;
+        text-align: center;
+        line-height: 50px;
+      }
+      .latest{
+        li{
+          padding: 20px 15px;
+          border-top: 1px solid #e5e5e5;
+          .image{
+            float: left;
+            width: 56px;
+            height: 56px;
+            border: 3px solid #fff;
+            @include box-shadow(0 1px 3px 0 rgba(0,0,0,0.5));
+            @include border-radius(2px);
+          }
+          .relic-content{
+            margin-left: 75px;
+            font-size: 13px;
+            line-height: 15px;
+            min-height: 60px;
+            .title{
+              font-weight: 700;
+            }
+            .change{
+              padding: 3px 20px 4px 25px;
+              background: #fffadf;
+              margin: 5px 0;
+              float: left;
+            }
+            a{
+              display: inline-block;
+              width: 100%;
+              color: #1a1a1a;
+              text-decoration: underline;
+            }
+            em{
+              font-style: italic;
+            }
+          }
+        }
+      }
+    }
+  }
+  .progress-bar{
+    border-top: 1px solid #e5e5e5;
+    padding: 73px 36px 36px 28px;
+    position: relative;
+    .bg{
+      background: image-url("progress-bar-grey.png") no-repeat;
+      width: 900px;
+      height: 25px;
+      .color{
+        background: image-url("progress-bar-color.png") no-repeat;
+        height: 25px;
+      }
+    }
+    .total{
+      text-align: right;
+      color: #9a9a9a;
+      span{
+        font-size: 24px;
+        display: block;
+        font-weight: 700;
+      }
+      strong{
+        font-weight: 700;
+      }
+    }
   }
 }

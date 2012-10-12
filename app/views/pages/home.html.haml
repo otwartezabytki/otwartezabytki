@@ -1,5 +1,6 @@
 .top
   .container
+    .relic-bg
     = semantic_form_for(tsearch, :url => relics_path, :method => :get, :id => 'form-search') do |f|
       %h2 Wyszukaj i uzupełnij...
       .field.subject
@@ -8,7 +9,7 @@
         = f.input :place, :label => "Gdzie:", :placeholder => "gdzie", :input_html => { :class => 'autocomplete-place'}, :hint => "np. Małkinia, ul. Grodzka w Krakowie"
       .field
         %a{:href => "", :class => "how_it_works"} Jak działa wyszukiwarka
-        = f.action :submit, :label => 'Szukaj &raquo;'.html_safe, :button_html => { :name => nil }
+        = f.action :submit, :class => "submit btn", :label => 'Szukaj &raquo;'.html_safe, :button_html => { :name => nil }
     .relic-example
       %h3 ... a wkrótce będziemy mogli oglądać zabytki tak:
       .relic-container
@@ -24,20 +25,26 @@
             %strong data powstania:
             1679
     .welcome
-      %h3 Zapraszamy do współtworzenia katalogu Otwartych Zabytkó∑
+      %h3 Zapraszamy do współtworzenia katalogu Otwartych Zabytków
       .left
-        Tworzymy obywatelską bazę zabytków. W projekcie wzięło udział już
+        Tworzymy obywatelską bazę zabytków. 
+        %br
+        W projekcie wzięło udział już
         %strong 15902 osób
-        , uzupełniliśmy
+        , 
+        %br
+        uzupełniliśmy
         %strong 3212 zabytki
-        z rejestru IPN, dodaliśmy
+        z rejestru IPN, 
+        %br
+        dodaliśmy
         %strong 28 nowych.
       .right
         %ul
           %li Co to jest zabytek?
           %li Czym jest rejestr IPN?
           %li Co Ty możesz zrobić w projekcie?
-        %a{:href => "", :class => "btn"} Dowiedz się więcej »
+        %a{:href => "", :class => "btn"} Dowiedz się więcej &raquo;
 .widgets-intro
   %ul
     %li.first
@@ -53,16 +60,17 @@
       %h3 Dodaj
       %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed porta, ipsum vel.
 
-.user-stats
+.stats
   %h2 Jak wygląda nasza baza zabytków?
   .left
     %h3 Gdzie mamy najwięcej zabytków
-    .map
+    .map#map-poland
   .right
     %h3 Ostatnio edytowane
     %ul.latest
       %li
         .image
+          =image_tag "homepage-image-example.png"
         .relic-content
           %p.title Starokatolicki Kościół Mariawitów ob. Rzymsko-Katolicki Kościół Rektoralny Środowisk Twórczych pw. Niepokalanego Poczęcia NMP
           .change.added
@@ -71,6 +79,7 @@
           %a{:href => ""} Przejdź do profilu zabytku
       %li
         .image
+          =image_tag "homepage-image-example.png"
         .relic-content
           %p.title Zamek książek mazowieckich (ruina)
           .change.edited
@@ -79,6 +88,7 @@
           %a{:href => ""} Przejdź do profilu zabytku
       %li
         .image
+          =image_tag "homepage-image-example.png"
         .relic-content
           .change.edited
             edytowana nazwa:
@@ -86,11 +96,12 @@
           %a{:href => ""} Przejdź do profilu zabytku
       %li
         .image
+          =image_tag "homepage-image-example.png"
         .relic-content
           %p.title Zamek książek mazowieckich (ruina)
           .change.edited
             zmienił status na
-            .status.filled uzupełniony
+            %span.status.filled uzupełniony
           %a{:href => ""} Przejdź do profilu zabytku
   .progress-bar
     .bg
@@ -101,3 +112,10 @@
     .filled
       %span 3544
       zabytków uzupełnionych
+    .total
+      %span 76343
+      wszystkich zabytków w bazie
+      %br
+      w tym
+      %strong 52752
+      niesprawdzonych
