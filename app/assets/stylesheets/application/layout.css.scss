@@ -1023,10 +1023,7 @@ p#adding-note {
           float: none;
         }
         .top {
-          background: asset-data-url('top_bg.png') repeat-x;
-          .container {
-            background: asset-data-url('top_container_bg.png') repeat-x;
-          }
+          @include background(linear-gradient(#577787, #436271));
           .more {
             float: left;
             width: 480px;
@@ -1954,4 +1951,149 @@ section.edit .flash {
   background: #fff;
   position: relative;
   z-index: 11;
+}
+
+#main{
+  #form-search{
+    margin-top: 33px;
+    float: left;
+    padding: 35px 35px 30px 40px;
+    width: 495px;
+    height: 263px;
+    @include background(linear-gradient(#ffffff, #f2f2f2));
+    @include box-shadow(0 2px 20px 0 rgba(0,0,0,0.3));
+    position: relative;
+    overflow: hidden;
+    &::after{
+      content: '';
+      position: absolute;
+      width: 128px;
+      height: 29px;
+      background: asset-data-url("form-arrow.png") no-repeat;
+      top: 28px;
+      right: 15px;
+    }
+    &::before{
+      content: '';
+      position: absolute;
+      width: 398px;
+      height: 309px;
+      background: asset-data-url("form-bg.png") no-repeat;
+      bottom: -120px;
+      left: 0px;
+    }
+    h2{
+      font-size: 30px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    label{
+      font-size: 16px;
+      font-weight: 600;
+      float: left;
+    }
+    span.example{
+      font-size: 13px;
+      text-align: right;
+      display: block;
+    }
+    input[type="text"]{
+      @include background(linear-gradient(#fafafa, #ffffff));
+      @include border-radius(2px);
+      border: 1px solid #727272;
+      height: 38px;
+      position: relative;
+      padding: 0 15px 0 30px;
+      font-size: 13px;
+      margin: 8px 0 15px;
+      width: 448px;
+    }
+    input.what{
+      &:before{
+        content: '';
+        position: absolute;
+        width: 13px;
+        height: 16px;
+        background: asset-data-url("form-input-where-bg.png") no-repeat;
+        top: 0;
+        left: 0;
+      }
+    }
+    .btn {
+      float: right;
+      margin: 0;
+      @include background(linear-gradient(#4b6d7e, #436576));
+      color: #fff;
+      border: 0;
+      font-size: 12px;
+      font-weight: 600;
+      text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
+      text-transform: uppercase;
+      -webkit-border-radius: 2px;
+      border-radius: 2px;
+      padding: 10px 16px 9px 19px;
+      cursor: pointer;
+      &:hover {
+        @include background(linear-gradient(#437994, #2b607b));
+      }
+      &:active {
+        @include background(linear-gradient(#2b607b, #437893));
+      }
+    }
+    .how_it_works{
+      padding-top: 15px;
+      float: left;
+    }
+  }
+  .relic-example{
+    @include background(linear-gradient(#fafbfc, #e5e5e5));
+    margin-top: 40px;
+    float: left;
+    width: 350px;
+    height: 280px;
+    padding: 15px 20px;
+    h3{
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    .image{
+      float: left;
+      width: 56px;
+      height: 56px;
+      border: 3px solid #fff;
+      @include box-shadow(0 1px 3px 0 rgba(0,0,0,0.5));
+      @include border-radius(2px);
+    }
+    .relic-content{
+      margin-left: 75px;
+      font-size: 13px;
+      line-height: 15px;
+      a{
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 18px;
+      }
+      strong{
+        font-weight: 600;
+      }
+      .location_name, .date{
+        padding-left: 20px;
+        margin-top: 15px;
+      }
+      .location_name{
+        background: asset-data-url("edit-relic-ico-location.png") no-repeat;
+      }
+      .date{
+        background: asset-data-url("icon-calendar.png") no-repeat;
+      }
+
+    }
+  }
+  .welcome{
+    display: inline-block;
+    width: 790px;
+    margin-left: 170px;
+    margin-top: 25px;
+  }
 }
