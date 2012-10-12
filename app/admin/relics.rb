@@ -49,7 +49,7 @@ ActiveAdmin.register Relic do
       f.input :kind
       f.input :approved
       f.input :categories, :as => :check_boxes,
-              :collection => Category.all.invert, :label => "",
+              :collection => Category.to_hash.invert, :label => "",
               :input_html => { :multiple => true }
       f.input :tags, :input_html => { :value => relic.tags.join(','), :style => "width: 680px", :multiple => true }
       f.input :country_code

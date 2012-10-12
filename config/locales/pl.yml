@@ -586,7 +586,7 @@ pl:
           delete_photo: usuń zdjęcie
           delete_confirm: Czy aby na pewno?
       show:
-      localication_facets:
+      localization_facets:
         header: Lokalizacja
         show_voivodeships: 'Pokaż wojewewództwa'
         world_relics: Zabytki znajdujące się poza Polską
@@ -624,4 +624,27 @@ pl:
   translation:
     pl: Tłumaczenie polskie
     en: Tłumaczenie angielskie
+  category:
+    names:
+      przemyslowy_poprzemyslowy: "przemysłowy/poprzemysłowy"
+      katolicki: "katolicki"
+      prawoslawny: "prawosławny"
+      protestancki: "protestancki"
+      zydowski: "żydowski"
+      lemkowski: "łemkowski"
+      muzulmanski: "muzułmański"
+      unicki: "unicki"
+      budynek_gospodarczy: "budynek gospodarczy"
+      mieszkalny: "mieszkalny"
+      uzytecznosci_publicznej: "użyteczności publicznej"
+      architektura_inzynieryjna: "architektura inżynieryjna"
+      mala_architektura: "mała architektura"
+      dworski_palacowy_zamek: "dworski/pałacowy/zamek"
+      militarny: "militarny"
+      sportowy_kulturalny_edukacyjny: "sportowy/kulturalny/edukacyjny"
+      park_ogrod: "park/ogród"
+      uklad_urbanistyczny_zespol_budowlany: "układ urbanistyczny/zespół budowlany"
+    groups:
+      sakralny: "sakrlany"
+
 

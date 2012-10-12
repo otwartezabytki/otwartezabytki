@@ -6,7 +6,7 @@
       .categories
         %strong Kategorie:
         - if relic.categories.length > 0
-          %span.content= relic.categories.map{ |c| Category.all[c] }.join(', ')
+          %span.content= relic.categories.map{ |c| Category.to_hash[c] }.join(', ')
         - else
           = link_to "nie dodano, uzupełnij »", edit_section_relic_path(relic.id, :categories), :remote => true
       .tags

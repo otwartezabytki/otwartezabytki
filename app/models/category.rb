@@ -1,42 +1,32 @@
 # -*- encoding : utf-8 -*-
-class Category
+class Category < ActiveRecord::Base
+  attr_accessible :group_key, :name_key, :position, :column
+  acts_as_list
+
+  scope :sacral, where(:group_key => 'sakralny')
+  scope :non_sacral, where("group_key IS NULL")
+
+
   class << self
-    def first_column
-      {
-        'mieszkalny'          => 'mieszkalny',
-        'gospodarczy'         => 'gospodarczy',
-        'militarny'           => 'militarny',
-        'przemysłowy'         => 'przemysłowy',
-        'kultury'             => 'kultury (np. teatr)'
-      }
+    ['first', 'second', 'third'].each do |name|
+      define_method "#{name}_column" do
+        Category.where(:column => name).to_hash
+      end
     end
+    def to_hash
+      scoped.all.inject({}) do |memo, category|
+        memo[category.name_key] = category.name
+        memo
+      end
+    end
+  end
 
-    def second_column
-      {
-        'edukacyjny'                            => 'edukacyjny (np. uniwersytet)',
-        'użyteczności_publicznej'               => 'użyteczności publicznej (np. ratusz)',
-        'dworski_pałacowy'                      => 'dworski/pałacowy',
-        'cmentarny'                             => 'cmentarny',
-        'przyrodniczy'                          => 'przyrodniczy',
-        'miejski'                               => 'miejski'
-      }
-    end
+  def name
+    I18n.t("category.names.#{name_key}")
+  end
 
-    def third_column
-      {
-        'katolicki'     => 'katolicki',
-        'prawosławny'   => 'prawosławny',
-        'protestancki'  => 'protestancki',
-        'żydowski'      => 'żydowski',
-        'muzułmański'   => 'muzułmański',
-        'łemkowski'     => 'łemkowski',
-        'unicki'        => 'unicki',
-      }
-    end
-
-    def all
-      return @all if defined? @all
-      @all = first_column.merge(second_column).merge(third_column)
-    end
+  def group_name
+    return if group_key.blank?
+    I18n.t("category.groups.#{group_key}")
   end
 end
