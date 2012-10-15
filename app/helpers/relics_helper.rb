@@ -101,4 +101,28 @@ module RelicsHelper
     end
   end
 
+  def format_localization(relic)
+    a = []
+    a << relic.voivodeship.name
+    a << "pow. #{relic.district.name}"
+    a << "gm. #{relic.commune.name}"
+    a << [relic.place.name, relic.street].compact.join(' ')
+    a.join(' » ')
+  end
+
+  def kind_of_change(revision)
+    changed_fields = revision.changeset.keys
+    result = []
+    changed_fields.each do |field|
+      result << case field
+        when 'user_id' then 'przejrzany'
+        when 'longitude', 'latitude' then 'położenie zostało zmienione'
+        when 'categories' then 'kategorie zostały zaktualizowane'
+        when 'tags' then 'dodano tagi do zabytku'
+        when 'identification' then 'zmieniono nazwę'
+        when 'dating_of_obj' then 'znieniono datę'
+      end
+    end
+    result.compact.join(', ')
+  end
 end

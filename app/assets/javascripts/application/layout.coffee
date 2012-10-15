@@ -26,3 +26,26 @@ jQuery ->
     false
 
   toggleFontResizeButtons()
+
+jQuery.initializer '#menu', ->
+  this.find('a.browse').click (e) ->
+    e.preventDefault()
+    filter = $("div#browse-list")
+    link = $(this)
+    if link.hasClass "shown"
+      filter.slideUp()
+      link.removeClass "shown"
+    else
+      filter.slideDown()
+      link.addClass("shown")
+
+  this.find('a.sacral-options').click (e) ->
+    e.preventDefault()
+    filter = $("div.sacral-categories")
+    link = $(this)
+    if link.hasClass "shown"
+      filter.slideUp()
+      link.removeClass "shown"
+    else
+      filter.slideDown()
+      link.addClass("shown")

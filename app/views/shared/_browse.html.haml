@@ -28,28 +28,3 @@
             - relics.terms('countries', true).each do |obj|
               %li
                 = link_to_facet obj, 1
-
-- content_for :footer_javascripts do
-  :coffeescript
-    jQuery(document).on 'click', '#menu a.browse', (e) ->
-      e.preventDefault()
-      filter = $("div#browse-list")
-      link = $(this)
-      if link.hasClass "shown"
-        filter.slideUp()
-        link.removeClass "shown"
-      else
-        filter.slideDown()
-        link.addClass("shown")
-
-    jQuery.initializer '#browse-list', ->
-      this.on 'click', 'a.sacral-options', (e) ->
-        e.preventDefault()
-        filter = $("div.sacral-categories")
-        link = $(this)
-        if link.hasClass "shown"
-          filter.slideUp()
-          link.removeClass "shown"
-        else
-          filter.slideDown()
-          link.addClass("shown")

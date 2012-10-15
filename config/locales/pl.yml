@@ -229,6 +229,14 @@ pl:
         voivodeship: "Województwo"
         district: "Powiat"
         commune: "Gmina"
+        states:
+          checked: 'sprawdzony'
+          unchecked: 'niesprawdzony'
+          filled: 'uzupełniony'
+        existences:
+          existed: 'istniejący w rejestrze'
+          archived: 'archiwalny'
+          social: 'społecznie dodany'
       user:
         email: Adres e-mail
         password: Hasło

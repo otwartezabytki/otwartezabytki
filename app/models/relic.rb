@@ -112,6 +112,11 @@ class Relic < ActiveRecord::Base
     end
   end
 
+  # mark new created relics as social added
+  before_create do
+    self.existence = 'social'
+  end
+
   validates :state, :inclusion => { :in => States }, :if => :state_changed?
   validates :existence, :inclusion => { :in => Existences }, :if => :existence_changed?
 
@@ -196,6 +201,18 @@ class Relic < ActiveRecord::Base
   end
 
   class << self
+    def recently_modified_revisions
+      Version.select("DISTINCT(item_id), *").where(:item_type => 'Relic').last(5).reverse
+    end
+
+    def random_checked
+      checked_count = self.where(:state => 'checked').count
+      if checked_count.zero?
+        self.offset(rand(self.count)).first
+      else
+        self.where(:state => 'checked').offset(rand(checked_count)).first
+      end
+    end
 
     def reindex objs
       index.delete
@@ -421,5 +438,13 @@ class Relic < ActiveRecord::Base
   def to_param
     slug = [(fplace || place.name), identification].join('-').gsub(/\d+/, '').parameterize
     [id, slug] * '-'
+  end
+
+  def state_name
+    I18n.t("activerecord.attributes.relic.states.#{state}")
+  end
+
+  def existance_name
+    I18n.t("activerecord.attributes.relic.existences.#{existence}")
   end
 end

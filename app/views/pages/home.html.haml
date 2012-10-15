@@ -12,39 +12,42 @@
         = f.action :submit, :class => "submit btn", :label => 'Szukaj &raquo;'.html_safe, :button_html => { :name => nil }
     .relic-example
       %h3 ... a wkrótce będziemy mogli oglądać zabytki tak:
+      - example_relic = Relic.random_checked
       .relic-container
         .image
-          =image_tag "homepage-image-example.png"
+          - if example_relic.has_photos?
+            = image_tag example_relic.main_photo.file.url(:icon)
         .relic-content
-          %a{:href => ""} Starokatolicki Kościół Mariawitów ob. Rzymsko-Katolicki Kościół Rektoralny Środowisk Twórczych pw. Niepokalanego Poczęcia NMP
-          .status.filled uzupełniony
+          = link_to example_relic.identification, example_relic
+          .status.filled= example_relic.state_name
           .location_name
             %strong lokalizacja:
-            mazowieckie » pow. Warszawa » gm. Warszawa » Warszawa ul. Towarowa 20
-          .date
-            %strong data powstania:
-            1679
+            = format_localization(example_relic)
+          - if example_relic.dating_of_obj?
+            .date
+              %strong data powstania:
+              = example_relic.dating_of_obj
     .welcome
       %h3 Zapraszamy do współtworzenia katalogu Otwartych Zabytków
       .left
         Tworzymy obywatelską bazę zabytków.
         %br
         W projekcie wzięło udział już
-        %strong 15902 osób
+        %strong #{User.count} osób
         ,
         %br
         uzupełniliśmy
-        %strong 3212 zabytki
+        %strong #{Relic.where(:state => 'filled').count} zabytki
         z rejestru IPN,
         %br
         dodaliśmy
-        %strong 28 nowych.
+        %strong #{Relic.where(:existence => 'social').count} nowych.
       .right
         %ul
           %li Co to jest zabytek?
           %li Czym jest rejestr IPN?
           %li Co Ty możesz zrobić w projekcie?
-        %a{:href => "", :class => "btn"} Dowiedz się więcej &raquo;
+          = link_to "Dowiedz się więcej &raquo;", page_pl_path('o-projekcie'), :class => 'btn'
 .widgets-intro
   %ul
     %li.first
@@ -68,54 +71,29 @@
   .right
     %h3 Ostatnio edytowane
     %ul.latest
-      %li
-        .image
-          =image_tag "homepage-image-example.png"
-        .relic-content
-          %p.title Starokatolicki Kościół Mariawitów ob. Rzymsko-Katolicki Kościół Rektoralny Środowisk Twórczych pw. Niepokalanego Poczęcia NMP
-          .change.added
-            dodana lokalizacja
-            %em ul. Towarowa 20
-          %a{:href => ""} Przejdź do profilu zabytku
-      %li
-        .image
-          =image_tag "homepage-image-example.png"
-        .relic-content
-          %p.title Zamek książek mazowieckich (ruina)
-          .change.edited
-            edytowana data powstania:
-            %em 2 poł. XIX w.
-          %a{:href => ""} Przejdź do profilu zabytku
-      %li
-        .image
-          =image_tag "homepage-image-example.png"
-        .relic-content
-          .change.edited
-            edytowana nazwa:
-            %em.bold Pałac Królewski
-          %a{:href => ""} Przejdź do profilu zabytku
-      %li
-        .image
-          =image_tag "homepage-image-example.png"
-        .relic-content
-          %p.title Zamek książek mazowieckich (ruina)
-          .change.edited
-            zmienił status na
-            %span.status.filled uzupełniony
-          %a{:href => ""} Przejdź do profilu zabytku
+      - Relic.recently_modified_revisions.each do |revision|
+        %li
+          .image
+            - if revision.item.has_photos?
+              = image_tag revision.item.main_photo.file.url(:icon)
+          .relic-content
+            %p.title= revision.item.identification
+            .change.added
+              = kind_of_change(revision)
+            = link_to "Przejdź do profilu zabytku", revision.item
   .progress-bar
     .bg
-      .color{:style => "width: 20%"}
+      .color{:style => "width: #{Relic.where(:state => 'checked').count * 100 / Relic.count.to_f}%"}
     .checked
-      %span 7827
+      %span= Relic.where(:state => 'checked').count
       zabytków sprawdzonych
     .filled
-      %span 3544
+      %span= Relic.where(:state => 'filled').count
       zabytków uzupełnionych
     .total
-      %span 76343
+      %span= Relic.count
       wszystkich zabytków w bazie
       %br
       w tym
-      %strong 52752
+      %strong= Relic.where(:state => 'unchecked').count
       niesprawdzonych
