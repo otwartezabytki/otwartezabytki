@@ -95,6 +95,35 @@ section.widgets{
   }
 }
 
+.edit_widget.map_search h1{
+  line-height: 75px;
+  height: 75px;
+  font-size: 28px;
+  @include background(asset-data-url("icon-widgets-mapsearch.png") 27px 21px no-repeat, linear-gradient(#36596b, #2f5163));
+  padding-left: 70px;
+}
+
+.back{
+  padding: 10px;
+  color: #044d71;
+  font-size: 12px;
+  text-shadow: 0 1px 1px #fff;
+  @include background(linear-gradient(#f6f6f6, #d1d1d1));
+  @include border-radius(4px);
+  border: 0;
+  float: right;
+  line-height: 12px;
+  margin-top: 20px;
+  @include box-shadow(0 1px 1px 0 rgba(0,0,0,0.5), inset 0 -1px 2px 0 rgba(0,0,0,0.3));
+  &:hover{
+    @include background(linear-gradient(#ffffff, #ebebeb));
+    text-decoration: none;
+  }
+  &:active{
+    @include background(linear-gradient(#d9d9d9, #fefefe));
+  }
+}
+
 .edit_widget{
   width: 960px;
   overflow-x: hidden;
@@ -152,7 +181,9 @@ section.widgets{
   }
   .content{
     padding: 20px;
-    .preview {margin-bottom: 20px;}
+    .preview {
+      margin: 20px 0;
+    }
     h2{
       font-weight: 600;
       font-size: 18px;
