@@ -1,16 +1,16 @@
 .map#map-poland
   %ul.poland
     - Voivodeship.all.each_with_index do |v, i|
-      %li{:class => "pl#{i+1}"}
+      %li{:class => "pl#{i+1}", :redirect => relics_path(:search => {:location => "pl-#{v.id}"})}
         %a{:href => "##{v.name.parameterize}", :rel => "nofollow"}
           %h3= "woj. #{v.name}"
+          - group = v.relics.group(:state).count
           %table
             %tr
-              %td 2
-              %td 142
-              %td 3456
+              %td= group['filled']    || 0
+              %td= group['checked']   || 0
+              %td= group['unchecked'] || 0
             %tr
               %td uzupełnione
               %td sprawdzone
               %td niesprawdzone
-          %button Zobacz wszystkie >>
