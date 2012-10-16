@@ -112,17 +112,8 @@ module RelicsHelper
 
   def kind_of_change(revision)
     changed_fields = revision.changeset.keys
-    result = []
-    changed_fields.each do |field|
-      result << case field
-        when 'user_id' then 'przejrzany'
-        when 'longitude', 'latitude' then 'położenie zostało zmienione'
-        when 'categories' then 'kategorie zostały zaktualizowane'
-        when 'tags' then 'dodano tagi do zabytku'
-        when 'identification' then 'zmieniono nazwę'
-        when 'dating_of_obj' then 'znieniono datę'
-      end
-    end
-    result.compact.join(', ')
+    changed_fields.map do |k|
+      t("views.pages.home.revision_change.#{k}")
+    end.compact.join(', ')
   end
 end
