@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121012090149) do
+ActiveRecord::Schema.define(:version => 20121016144805) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -259,6 +259,7 @@ ActiveRecord::Schema.define(:version => 20121012090149) do
   end
 
   add_index "relics", ["ancestry"], :name => "index_relics_on_ancestry"
+  add_index "relics", ["voivodeship_id", "state"], :name => "index_relics_on_voivodeship_id_and_state"
 
   create_table "search_terms", :force => true do |t|
     t.string   "keyword"
