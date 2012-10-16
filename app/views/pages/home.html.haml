@@ -17,6 +17,8 @@
         .image
           - if example_relic.has_photos?
             = image_tag example_relic.main_photo.file.url(:icon)
+          - else
+            = image_tag "bg-relic-image-ph-small-56.png"
         .relic-content
           = link_to example_relic.identification, example_relic
           .status.filled= example_relic.state_name
@@ -76,6 +78,8 @@
           .image
             - if revision.item.has_photos?
               = image_tag revision.item.main_photo.file.url(:icon)
+            - else
+              = image_tag "bg-relic-image-ph-small-56.png"
           .relic-content
             %p.title= revision.item.identification
             .change.added
@@ -84,10 +88,10 @@
   .progress-bar
     .bg
       .color{:style => "width: #{Relic.where(:state => 'checked').count * 100 / Relic.count.to_f}%"}
-    .checked
+    .checked{:style => "left: 194px"}
       %span= Relic.where(:state => 'checked').count
       zabytków sprawdzonych
-    .filled
+    .filled{:style => "left: 94px"}
       %span= Relic.where(:state => 'filled').count
       zabytków uzupełnionych
     .total
