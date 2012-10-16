@@ -440,6 +440,21 @@ pl:
     wuoz-w-lodzi: Wojewódzki Urząd Ochrony Zabytków w Łodzi
     wuoz-we-wroclawiu: Wojewódzki Urząd Ochrony Zabytków we Wrocławiu
   views:
+    pages:
+      home:
+        revision_change:
+          categories: "zaktualizowano kategorie"
+          user_id: "zmieniono właściciela"
+          tags: "zaktualizowano tagi"
+          identification: "edytowano nazwę"
+          dating_of_obj: "wprowadzono datowanie obiektu"
+          place_id: "zmieniono miejscowość"
+          register_number: "poprawiono numer rejestru"
+          street: "poprawiono adres"
+          latitude: "zaktualizowano położenie"
+          longitude: "zaktualizowano położenie"
+          description: "zredagowano opis"
+
     alerts:
       iframe:
         created:

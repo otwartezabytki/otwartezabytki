@@ -88,10 +88,10 @@
   .progress-bar
     .bg
       .color{:style => "width: #{Relic.where(:state => 'checked').count * 100 / Relic.count.to_f}%"}
-    .checked{:style => "left: 194px"}
+    .checked{:style => "left: #{(Relic.where(:state => 'checked').count * 900 / Relic.count.to_f) + 16}px"}
       %span= Relic.where(:state => 'checked').count
       zabytków sprawdzonych
-    .filled{:style => "left: 94px"}
+    .filled{:style => "left: #{(Relic.where(:state => 'filled').count * 900 / Relic.count.to_f) + 16}px"}
       %span= Relic.where(:state => 'filled').count
       zabytków uzupełnionych
     .total

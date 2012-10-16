@@ -1,34 +1,16 @@
 .map#map-poland
   %ul.poland
-    %li.pl1
-      %a{:href => "#dolnoslaskie"} Dolnośląskie
-    %li.pl2
-      %a{:href => "#kujawsko-pomorskie"} Kujawsko-pomorskie
-    %li.pl3
-      %a{:href => "#lubelskie"} Lubelskie
-    %li.pl4
-      %a{:href => "#lubuskie"} Lubuskie
-    %li.pl5
-      %a{:href => "#lodzkie"} Łódzkie
-    %li.pl6
-      %a{:href => "#malopolskie"} Małopolskie
-    %li.pl7
-      %a{:href => "#mazowieckie"} Mazowieckie
-    %li.pl8
-      %a{:href => "#opolskie"} Opolskie
-    %li.pl9
-      %a{:href => "#podkarpackie"} Podkarpackie
-    %li.pl10
-      %a{:href => "#podlaskie"} Podlaskie
-    %li.pl11
-      %a{:href => "#pomorskie"} Pomorskie
-    %li.pl12
-      %a{:href => "#slaskie"} Śląskie
-    %li.pl13
-      %a{:href => "#swietokrzyskie"} Świętokrzyskie
-    %li.pl14
-      %a{:href => "#warminsko-mazurskie"} Warmińsko-mazurskie
-    %li.pl15
-      %a{:href => "#wielkopolskie"} Wielkopolskie
-    %li.pl16
-      %a{:href => "#zachodniopomorskie"} Zachodniopomorskie
+    - Voivodeship.all.each_with_index do |v, i|
+      %li{:class => "pl#{i+1}", :redirect => relics_path(:search => {:location => "pl-#{v.id}"})}
+        %a{:href => "##{v.name.parameterize}", :rel => "nofollow"}
+          %h3= "woj. #{v.name}"
+          - group = v.relics.group(:state).count
+          %table
+            %tr
+              %td= group['filled']    || 0
+              %td= group['checked']   || 0
+              %td= group['unchecked'] || 0
+            %tr
+              %td uzupełnione
+              %td sprawdzone
+              %td niesprawdzone
