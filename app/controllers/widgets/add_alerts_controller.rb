@@ -4,7 +4,8 @@ class Widgets::AddAlertsController < WidgetsController
 
   expose(:widget_add_alerts) { Widget::AddAlert.scoped }
   expose(:widget_add_alert)
-  expose(:widget) { widget_add_alerts.find(params[:id]) }
+  expose(:widget) { widget_add_alert }
+  helper_method :searched_relics
 
   def create
     if widget_add_alert.save
@@ -23,5 +24,10 @@ class Widgets::AddAlertsController < WidgetsController
       render :edit
     end
   end
+
+  protected
+    def searched_relics
+      @searched_relics ||= Search.new(:q => widget_add_alert.q, :load => true).perform.results
+    end
 
 end

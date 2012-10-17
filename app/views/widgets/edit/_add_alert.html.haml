@@ -3,8 +3,18 @@
   %span '#{widget.class.title}'
 .sidebar
   = semantic_form_for widget, :url => self.send("widgets_#{widget.class.partial_name}_path", widget) do |f|
-    = f.input :relic_id
-    = f.submit "Zaktualizuj widget"
+    = f.input :q, :label => false, :hint => "lorem ipsum"
+    = f.input :relic_id, :as => :hidden, :label => false
+    - if searched_relics.present?
+      %h3 O który zabytek dokładnie Ci chodziło
+      .relics-wrapper
+        %ul.relics
+          - searched_relics.each do |relic|
+            %li
+              %strong= relic.identification
+              = link_to t('views.relicbuilders.new.choose_html'), 'javascript: void(0);', 'data-relic_id' => relic.id, 'data-identification' => relic.identification
+
+    = f.submit (widget.valid? ? "Zaktualizuj widget" : 'Wyszukaj zabytek')
 .content
   - if widget.valid?
     %h2 Podgląd wygenerowanego widgetu
@@ -14,6 +24,9 @@
     %div
       %span.block Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulumque sapien. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum que sapien.
       %textarea{:cols => "20", :rows => "3"}= widget.snippet
-  - else
-    %h2 koniecznie podaj id zabytku
 
+- content_for(:footer_javascripts) do
+  :coffeescript
+    jQuery("a[data-relic_id]").click (e) ->
+      $('#widget_add_alert_relic_id').val $(this).data('relic_id')
+      $('#widget_add_alert_q').val $(this).data('identification')

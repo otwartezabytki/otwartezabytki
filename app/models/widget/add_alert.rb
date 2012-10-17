@@ -13,8 +13,7 @@
 #
 
 class Widget::AddAlert < Widget
-
-  serialized_attr_accessor :relic_id
+  serialized_attr_accessor :relic_id, :q
 
   validates :relic_id, :presence => true, :unless => :new_record?
 
