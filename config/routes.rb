@@ -57,6 +57,11 @@ Otwartezabytki::Application.routes.draw do
       # resources :districts, :only => [:index, :show]
       # resources :communes, :only => [:index, :show]
       resources :places, :only => [:index, :show, :results]
+      resources :users, :only => [] do
+        collection do
+          get :api_key_request
+        end
+      end
     end
   end
 

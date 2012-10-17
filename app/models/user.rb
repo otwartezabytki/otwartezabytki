@@ -110,6 +110,12 @@ class User < ActiveRecord::Base
     self.api_secret = Devise.friendly_token
   end
 
+  def ensure_api_keys_generated!
+    generate_api_key!     unless api_key?
+    generate_api_secret!  unless api_secret?
+    save!
+  end
+
   class << self
     def reset_password_by_token(attributes={})
       recoverable = find_or_initialize_with_error_by(:reset_password_token, attributes[:reset_password_token])
