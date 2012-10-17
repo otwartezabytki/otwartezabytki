@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'rails', '~> 3.2.3'
-
 gem 'pg'
 
 # Gems used only for assets and not required
@@ -36,8 +35,7 @@ gem 'tire-contrib'
 gem 'rocket_tag'
 gem 'airbrake'
 
-# versioning
-gem 'paper_trail', '~> 2'
+gem 'paper_trail', '~> 2' # versioning
 
 # admin panel
 gem 'activeadmin',    '~> 0.4.4'
@@ -50,91 +48,57 @@ gem 'multi_json', '~> 1.0.3'
 gem 'json', '~> 1.5.4'
 gem 'remote_table'
 
-# import data from sqlite
-gem 'data_mapper', '~> 1.2'
-gem 'dm-chunked_query'
-gem 'dm-sqlite-adapter'
 gem 'unicode'
 gem 'gon'
-# gem 'high_voltage'
 gem 'newrelic_rpm'
 gem 'rails_config', '0.2.5'
 gem 'dalli'
 gem 'will_cache'
-# roman letters converter
-gem 'arrabiata'
+gem 'arrabiata' # roman letters converter
 gem 'rails-i18n'
 gem 'i18n-country-translations'
 gem 'i18n_country_select'
 
-# background jobs
-gem 'whenever', :require => false
-
-# bot secrity
-gem 'recaptcha', :require => 'recaptcha/rails'
+gem 'whenever', :require => false               # cron jobs
+gem 'recaptcha', :require => 'recaptcha/rails'  # bot secrity
 
 # file upload
 gem 'carrierwave'
 gem 'carrierwave-meta'
 gem 'mini_magick', :git => "git://github.com/gmanley/mini_magick.git", :branch => "graphicsmagick-fix"
 
-# gravatars
-gem 'gravatar_image_tag'
+gem 'gravatar_image_tag'  # gravatars
+gem 'wicked'              # relicbuilder wizard
+gem 'js-routes'           # rails routes in javascirpt
+gem 'acts_as_list'        # sorting links and relic events
+gem 'rubyzip'             # download documents as zip
+gem 'aasm'                # state machine
 
 # api
 gem 'rabl'
-
-# wizard
-gem 'wicked'
-
-# rails routes in javascirpt
-gem 'js-routes'
-
-# sorting links and relic events
-gem 'acts_as_list'
-
-# download documents as zip
-gem 'rubyzip'
-
-# state machine
-gem 'aasm'
-
-# api
 gem "jbuilder"
 
-# diff changes in admin panel
-gem 'htmldiff'
+gem 'htmldiff'                # diff changes in admin panel
+gem 'friendly_id'             # friendly id for widgets
+gem 'turbo-sprockets-rails3'  # faster asset precompiling
 
-# friendly id for widgets
-gem 'friendly_id'
-
-# faster asset precompiling
-gem 'turbo-sprockets-rails3'
-gem 'rubyzip'
 gem 'globalize3'
 gem 'activeadmin-globalize3-inputs', :git => "git://github.com/corewebdesign/ActiveAdmin-Globalize3-inputs.git", :ref => 'c95c0a4495b1d2bf28d630005daadb95eadb3f3f'
-gem 'acts_as_list'
+
+gem 'ffi-aspell', :require => 'ffi/aspell'
+gem 'tolk', :git => "git://github.com/monterail/tolk.git"#, :path => '~/monterail/tolk'
 
 group :development, :test do
-  # for debugging
-  gem 'ruby-debug19'
+  gem 'ruby-debug19'        # for debugging
   gem 'pry-rails'
   gem 'pry-doc'
-  # for routes in /rails/routes
-  gem 'sextant'
+  gem 'sextant'             # for routes in /rails/routes
   gem 'guard-cucumber'
-
-  # for annotating db schema in models
-  gem 'annotate', ">=2.5.0"
+  gem 'annotate', ">=2.5.0" # for annotating db schema in models
   gem 'quiet_assets'
 end
 
-# assets javascript compiler
-gem 'therubyracer', :group => :production
-
-gem 'ffi-aspell', :require => 'ffi/aspell'
-
-gem 'tolk', :git => "git://github.com/monterail/tolk.git"#, :path => '~/monterail/tolk'
+gem 'therubyracer', :group => :production # assets javascript compiler
 
 group :test do
   # for defining tests
