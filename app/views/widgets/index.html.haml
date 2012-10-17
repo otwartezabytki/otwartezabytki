@@ -12,7 +12,8 @@
       %p Nulla facilisi. Ut metus nulla, iaculis at imperdiet quis, semper sit amet velit. Donec fermentum turpis id nulla iaculis rutrum. Mauris consequat, tellus vitae consectetur dignissim, est risus tempus dolor, at varius odio sapien sit amet lacus. Integer vulputate
     .widgets
       - [Widget::MapSearch, Widget::AddRelic, Widget::AddAlert].each do |widget_template|
-        %a{:href => method(:"widgets_#{widget_template.partial_name.pluralize}_path").call(), :class => "widget", :method => :post}
+        //%a{:href => method(:"widgets_#{widget_template.partial_name.pluralize}_path").call(), :class => "widget", :method => :post}
+        .widget
           - if widget_template.thumb
             %span.image
               = image_tag widget_template.thumb, :width => "200", :height => "180"
@@ -20,5 +21,5 @@
             %span.title{:class => widget_template.partial_name.pluralize}= widget_template.title
             %span.paragraph= widget_template.description
             %span.actions
-              %span.use-widget Użyj widgeta
-              //= link_to 'Użyj widgeta', method(:"widgets_#{widget_template.partial_name.pluralize}_path").call(), :class => "use-widget btn", :method => :post
+              //%span.use-widget Użyj widgeta
+              = link_to 'Użyj widgeta', method(:"widgets_#{widget_template.partial_name.pluralize}_path").call(), :class => "use-widget btn", :method => :post
