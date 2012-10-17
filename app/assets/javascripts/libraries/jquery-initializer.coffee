@@ -49,7 +49,7 @@ ajax_callback = (data, status, xhr) ->
           return true
         afterClose: ->
           history.pushState { autoreload: true, path: window.before_fancybox_url }, $('title').text(), window.before_fancybox_url
-          if last_xhr? && $('body').data('logged').toString() != last_xhr.getResponseHeader('x-logged').toString()
+          if last_xhr? && last_xhr.getResponseHeader('x-logged')? && $('body').data('logged').toString() != last_xhr.getResponseHeader('x-logged').toString()
             window.location.href = window.location.pathname
 
     try_to_process_replace = (node) ->

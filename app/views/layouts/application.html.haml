@@ -16,7 +16,7 @@
     /[if lt IE 9]
       = stylesheet_link_tag "ie8", :media => "all"
     %link{:href => "http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,600,300&subset=latin,latin-ext", :rel => "stylesheet", :type => "text/css"}
-  %body{ :class => [cookies["font-size"].to_s, controller_name, action_name, ("resource_#{params[:id]}" if params[:id])].join(' ') }
+  %body{ :class => [cookies["font-size"].to_s, controller_name, action_name, ("resource_#{params[:id]}" if params[:id])].join(' '), :data => { :logged => warden.authenticated?.to_s } }
     .page
       #root
         %header#header
