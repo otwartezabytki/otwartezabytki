@@ -12,12 +12,10 @@
   = t('.anonymous_account', :scope => 'views')
 .form_box
   .login_intro_txt= t('.login_intro', :scope => 'views')
-  - if flash[:notice]
-    .alert.alert-info= flash[:notice]
-  - if flash[:error]
-    .alert.alert-error= flash[:error]
+  - if flash[:alert]
+    .alert.alert-error= flash[:alert]
   = semantic_form_for(resource, :as => resource_name, :url => session_path(resource_name), :remote => true) do |f|
-    = f.semantic_errors
+
     = f.input :email, :required => false, :autofocus => true
     = f.input :password, :required => false
     - if devise_mapping.recoverable? && controller_name != 'passwords'

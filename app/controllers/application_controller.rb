@@ -3,36 +3,20 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :page_pl_path, :search_params, :tsearch
 
-  around_filter :intersect_warden
-
-  def intersect_warden
-    success = false
-    result = catch(:warden) do
-      temporary_result = yield
-      success = true
-      temporary_result
+  # disabling because it doesn't work with history back when page is retrieved from cache
+  layout :resolve_layout
+  def resolve_layout
+    if request.xhr?
+      'ajax'
+    elsif Subdomain.matches?(request)
+      'iframe'
+    else
+      'application'
     end
-
-    unless success
-      cookies[:return_path] = request.fullpath if request.fullpath != new_user_session_path
-      throw(:warden, result)
-    end
-end
-
-# disabling because it doesn't work with history back when page is retrieved from cache
-layout :resolve_layout
-def resolve_layout
-  if request.xhr?
-    'ajax'
-  elsif Subdomain.matches?(request)
-    'iframe'
-  else
-    'application'
   end
-end
 
 
-# for logging out anonymous users
+  # for logging out anonymous users
   before_filter do
     if current_user.present? && current_user.username.blank?
       sign_out current_user
@@ -79,6 +63,12 @@ end
       format.html { render :file => "#{Rails.root}/public/404.html", :layout => false, :status => :not_found }
       format.any  { head :not_found }
     end
+  end
+
+  protected
+
+  def save_return_path
+    cookies[:return_path] = request.fullpath if request.get?
   end
 
   private

@@ -70,6 +70,8 @@ ajax_callback = (data, status, xhr) ->
           else
             show_fancybox(node)
             $(node).initialize()
+      else if $('body').data('logged').toString() != last_xhr.getResponseHeader('x-logged').toString()
+          window.location.href = window.location.pathname
       else
         to_replace = $('#root').find($(node).data('replace'))
         if to_replace.length
@@ -97,10 +99,7 @@ $(document).on 'ajax:success', 'form[data-remote], a[data-remote]', (e, data, st
 
 $(document).on 'ajax:error', 'form[data-remote], a[data-remote]', (e, xhr, status, error) ->
   popping_state = false
-  if error == "Unauthorized"
-    return_path = $(e.currentTarget).attr('href') || window.location.pathname
-    jQuery.cookie('return_path', return_path, path: '/') # used for redirecting after login
-    window.location.href = Routes.new_user_session_path()
+  window.location.href = Routes.new_user_session_path() if error == "Unauthorized"
   e.stopPropagation()
 
 $(window).load ->

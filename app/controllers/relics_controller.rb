@@ -1,6 +1,7 @@
 # -*- encoding : utf-8 -*-
 class RelicsController < ApplicationController
 
+  before_filter :save_return_path
   before_filter :enable_fancybox, :only => [:edit, :update]
 
   expose(:relics) do
