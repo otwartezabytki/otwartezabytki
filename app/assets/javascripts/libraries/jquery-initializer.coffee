@@ -53,6 +53,9 @@ ajax_callback = (data, status, xhr) ->
             window.location.href = window.location.pathname
 
     try_to_process_replace = (node) ->
+      # if node to replace is not found, redirect
+      window.location.href = xhr.getResponseHeader('x-path') unless node?
+
       data_replace_parent = $(node).parents('[data-replace]:first')[0]
 
       if $('#fancybox').length && xhr.getResponseHeader('x-fancybox')
@@ -74,11 +77,14 @@ ajax_callback = (data, status, xhr) ->
           $.fancybox.close() if $.fancybox
           $(node).initialize()
         else
-          try_to_process_replace(data_replace_parent) if data_replace_parent
+          try_to_process_replace(data_replace_parent)
 
-    $parsed_data.find('[data-replace]').each ->
-      unless $(this).find('[data-replace]').length
-        try_to_process_replace(this)
+    if $parsed_data.find('[data-replace]').length
+      $parsed_data.find('[data-replace]').each ->
+        unless $(this).find('[data-replace]').length
+          try_to_process_replace(this)
+    else
+      window.location.href = xhr.getResponseHeader('x-path')
 
     unless popping_state
       path = xhr.getResponseHeader('x-path')

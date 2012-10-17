@@ -21,7 +21,7 @@ module RelicsHelper
       when 'sacral' then Category.sacral
       when 'non_sacral' then Category.non_sacral
     else
-      Category.all
+      Category
     end.to_hash
     relics.terms('categories', true).map do |t|
       if categories.keys.include? t['term']

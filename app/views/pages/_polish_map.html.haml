@@ -4,7 +4,7 @@
       %li{:class => "pl#{i+1}", :redirect => relics_path(:search => {:location => "pl-#{v.id}"})}
         %a{:href => "##{v.name.parameterize}", :rel => "nofollow"}
           %h3= "woj. #{v.name}"
-          - group = v.relics.group(:state).count
+          - group = Relic.where(:voivodeship_id => v.id).group(:state).count
           %table
             %tr
               %td= group['filled']    || 0

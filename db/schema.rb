@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121012090149) do
+ActiveRecord::Schema.define(:version => 20121016144805) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -125,45 +125,6 @@ ActiveRecord::Schema.define(:version => 20121012090149) do
     t.string   "formal_name"
   end
 
-  create_table "oauth_access_grants", :force => true do |t|
-    t.integer  "resource_owner_id", :null => false
-    t.integer  "application_id",    :null => false
-    t.string   "token",             :null => false
-    t.integer  "expires_in",        :null => false
-    t.string   "redirect_uri",      :null => false
-    t.datetime "created_at",        :null => false
-    t.datetime "revoked_at"
-    t.string   "scopes"
-  end
-
-  add_index "oauth_access_grants", ["token"], :name => "index_oauth_access_grants_on_token", :unique => true
-
-  create_table "oauth_access_tokens", :force => true do |t|
-    t.integer  "resource_owner_id"
-    t.integer  "application_id",    :null => false
-    t.string   "token",             :null => false
-    t.string   "refresh_token"
-    t.integer  "expires_in"
-    t.datetime "revoked_at"
-    t.datetime "created_at",        :null => false
-    t.string   "scopes"
-  end
-
-  add_index "oauth_access_tokens", ["refresh_token"], :name => "index_oauth_access_tokens_on_refresh_token", :unique => true
-  add_index "oauth_access_tokens", ["resource_owner_id"], :name => "index_oauth_access_tokens_on_resource_owner_id"
-  add_index "oauth_access_tokens", ["token"], :name => "index_oauth_access_tokens_on_token", :unique => true
-
-  create_table "oauth_applications", :force => true do |t|
-    t.string   "name",         :null => false
-    t.string   "uid",          :null => false
-    t.string   "secret",       :null => false
-    t.string   "redirect_uri", :null => false
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
-
-  add_index "oauth_applications", ["uid"], :name => "index_oauth_applications_on_uid", :unique => true
-
   create_table "page_translations", :force => true do |t|
     t.integer  "page_id"
     t.string   "locale"
@@ -259,6 +220,14 @@ ActiveRecord::Schema.define(:version => 20121012090149) do
   end
 
   add_index "relics", ["ancestry"], :name => "index_relics_on_ancestry"
+  add_index "relics", ["commune_id"], :name => "index_relics_on_commune_id"
+  add_index "relics", ["district_id"], :name => "index_relics_on_district_id"
+  add_index "relics", ["existence"], :name => "index_relics_on_existence"
+  add_index "relics", ["place_id"], :name => "index_relics_on_place_id"
+  add_index "relics", ["state"], :name => "index_relics_on_state"
+  add_index "relics", ["type"], :name => "index_relics_on_type"
+  add_index "relics", ["voivodeship_id", "state"], :name => "index_relics_on_voivodeship_id_and_state"
+  add_index "relics", ["voivodeship_id"], :name => "index_relics_on_voivodeship_id"
 
   create_table "search_terms", :force => true do |t|
     t.string   "keyword"
@@ -314,12 +283,6 @@ ActiveRecord::Schema.define(:version => 20121012090149) do
   add_index "suggestions", ["dating_of_obj_action"], :name => "index_suggestions_on_dating_of_obj_action"
   add_index "suggestions", ["identification_action"], :name => "index_suggestions_on_identification_action"
   add_index "suggestions", ["place_id_action"], :name => "index_suggestions_on_place_id_action"
-
-  create_table "tags", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
 
   create_table "tolk_locales", :force => true do |t|
     t.string   "name"
