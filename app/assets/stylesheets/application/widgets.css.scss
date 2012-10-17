@@ -45,19 +45,26 @@ section.widgets{
         border-bottom: 3px solid #486a7c;
         margin-bottom: 30px;
         min-height: 200px;
+        display: block;
+        &:hover{
+          text-decoration: none;
+        }
         .image{
           float: left;
           margin-bottom: 20px;
         }
         .widget_content{
           margin-left: 220px;
+          display: block;
         }
-        h2{
+        span.title{
           font-weight: 600;
           font-size: 22px;
           line-height: 27px;
           margin-bottom: 10px;
           padding-left: 35px;
+          display: block;
+          color: #313132;
           &.add_relics{
             background: asset-data-url("icon-widgetlist-add.png") no-repeat;
           }
@@ -68,9 +75,11 @@ section.widgets{
             background: asset-data-url("icon-widgetlist-alerts.png") no-repeat;
           }
         }
-        p{
+        .paragraph{
           font-size: 13px;
           line-height: 18px;
+          display: block;
+          color: #313132;
         }
         .actions{
           display: inline-block;
