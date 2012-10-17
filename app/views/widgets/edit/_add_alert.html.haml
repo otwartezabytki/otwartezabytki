@@ -11,8 +11,8 @@
         %ul.relics
           - searched_relics.each do |relic|
             %li
-              %strong= relic.identification
               = link_to t('views.relicbuilders.new.choose_html'), 'javascript: void(0);', 'data-relic_id' => relic.id, 'data-identification' => relic.identification
+              %strong= relic.identification
 
     = f.submit (widget.valid? ? "Zaktualizuj widget" : 'Wyszukaj zabytek')
 .content

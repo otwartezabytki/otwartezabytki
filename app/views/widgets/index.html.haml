@@ -17,7 +17,7 @@
             .image
               = image_tag widget_template.thumb, :width => "200", :height => "180"
           .widget_content
-            %h2= widget_template.title
+            %h2{:class => widget_template.partial_name.pluralize}= widget_template.title
             %p= widget_template.description
             .actions
               = link_to 'Użyj widgeta', method(:"widgets_#{widget_template.partial_name.pluralize}_path").call(), :class => "use-widget btn", :method => :post
