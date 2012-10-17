@@ -16,8 +16,8 @@
 #= require jquery.ui.sortable
 #= require_tree ./vendor
 #= require js-routes
-#= require twitter/bootstrap
-
+#= require twitter/bootstrap/bootstrap-tooltip
+#= require twitter/bootstrap/bootstrap-popover
 #= require variables
 #= require_tree ./libraries
 #= require profile
