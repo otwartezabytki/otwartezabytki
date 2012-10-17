@@ -121,7 +121,7 @@ class Relic < ActiveRecord::Base
   validates :existence, :inclusion => { :in => Existences }, :if => :existence_changed?
 
   # versioning
-  has_paper_trail :skip => [:skip_count, :edit_count, :updated_at, :created_at]
+  has_paper_trail :skip => [:skip_count, :edit_count, :updated_at, :created_at, :user_id]
 
   include Tire::Model::Search
 
@@ -202,7 +202,7 @@ class Relic < ActiveRecord::Base
 
   class << self
     def recently_modified_revisions
-      Version.select("DISTINCT(item_id), *").where(:item_type => 'Relic').last(5).reverse
+      Version.select("DISTINCT(item_id), *").where(:item_type => 'Relic', :event => "update").last(5).reverse
     end
 
     def random_checked

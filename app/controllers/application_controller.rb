@@ -8,31 +8,31 @@ class ApplicationController < ActionController::Base
   def intersect_warden
     success = false
     result = catch(:warden) do
-      result = yield
+      temporary_result = yield
       success = true
-      result
+      temporary_result
     end
 
     unless success
-      cookies[:return_path] = request.fullpath
+      cookies[:return_path] = request.fullpath if request.fullpath != new_user_session_path
       throw(:warden, result)
     end
+end
+
+# disabling because it doesn't work with history back when page is retrieved from cache
+layout :resolve_layout
+def resolve_layout
+  if request.xhr?
+    'ajax'
+  elsif Subdomain.matches?(request)
+    'iframe'
+  else
+    'application'
   end
-
-  # disabling because it doesn't work with history back when page is retrieved from cache
-  layout :resolve_layout
-  def resolve_layout
-    if request.xhr?
-      'ajax'
-    elsif Subdomain.matches?(request)
-      'iframe'
-    else
-      'application'
-    end
-  end
+end
 
 
-  # for logging out anonymous users
+# for logging out anonymous users
   before_filter do
     if current_user.present? && current_user.username.blank?
       sign_out current_user

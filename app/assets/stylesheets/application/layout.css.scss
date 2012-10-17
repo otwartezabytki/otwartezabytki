@@ -2197,6 +2197,8 @@ body.resource_home{
     .how_it_works{
       padding-top: 15px;
       float: left;
+      position: relative;
+      z-index: 1;
     }
   }
   .relic-example{
