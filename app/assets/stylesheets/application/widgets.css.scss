@@ -210,3 +210,31 @@ section.widgets{
     }
   }
 }
+
+.add_alert.edit_widget, .add_relic.edit_widget{
+  background: asset-data-url("widget-alert-bg.png") repeat-y;
+  h1{
+    line-height: 75px;
+    height: 75px;
+    font-size: 28px;
+    @include background(asset-data-url("icon-widgets-mapsearch.png") 27px 21px no-repeat, linear-gradient(#36596b, #2f5163));
+    padding-left: 70px;
+  }
+  .sidebar{
+    width: 495px;
+  }
+  .content{
+    margin-left: 525px;
+    textarea{
+      width: 362px;
+      max-width: 362px;
+      height: 60px;
+    }
+  }
+}
+
+.add_relic.edit_widget{
+  h1{
+    @include background(asset-data-url("icon-widgets-addalert.png") 27px 21px no-repeat, linear-gradient(#36596b, #2f5163));
+  }
+}

@@ -1,6 +1,6 @@
 %h1
-  Konfiguracja widgetu
-  %span '#{widget.class.title}'
+  #{widget.class.title}
+  %a.back{:href => widgets_path} &laquo; wróć do katalogu widgetów
 .sidebar
   = semantic_form_for widget, :url => self.send("widgets_#{widget.class.partial_name}_path", widget) do |f|
     = f.input :relic_id
