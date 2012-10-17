@@ -22,7 +22,6 @@ gem 'coffee-filter'
 gem 'sugar-rails'
 
 gem 'geocoder'
-gem 'simple_form', '~> 2.0'
 gem 'formtastic'
 gem 'formtastic-bootstrap'
 

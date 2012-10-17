@@ -1,8 +1,8 @@
 %h2 Resend confirmation instructions
-= simple_form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }, :remote => true) do |f|
+= semantic_form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }, :remote => true) do |f|
   = f.error_notification
   .form-inputs
     = f.input :email, :required => true
   .form-actions
-    = f.button :submit, "Resend confirmation instructions"
+    = f.submit "Resend confirmation instructions"
 = render "devise/shared/links"
