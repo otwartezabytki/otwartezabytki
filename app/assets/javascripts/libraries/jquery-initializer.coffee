@@ -37,6 +37,7 @@ ajax_callback = (data, status, xhr) ->
         fitToView: false
         fixed: false
         scrolling: 'no'
+        autoCenter: false
         afterShow: ->
           $.fancybox.wrap.bind 'onReset', (e) ->
             $('body > .main-container:last').remove()
