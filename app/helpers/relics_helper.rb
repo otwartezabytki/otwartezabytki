@@ -94,10 +94,18 @@ module RelicsHelper
     end
   end
 
-  def state_tag relic
+  def state_tag(relic)
     labels = Hash[Relic::States.zip(['Sprawdzony', 'Niesprawdzony', 'Uzupełniony'])]
     content_tag :div, :class => 'tag' do
-      content_tag :span, labels[relic.state], :class => relic.state
+      haml_concat (if relic.state == "filled" || relic.state == "checked"
+        content_tag :span, labels["checked"], :class => "checked"
+      else
+        content_tag :span, labels["unchecked"], :class => "unchecked"
+      end.to_s + if relic.state == "filled"
+        content_tag :span, labels["filled"], :class => "filled"
+      else
+        content_tag :span, "Nieuzupełniony", :class => "unfilled"
+      end.to_s)
     end
   end
 
