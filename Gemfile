@@ -85,7 +85,7 @@ gem 'globalize3'
 gem 'activeadmin-globalize3-inputs', :git => "git://github.com/corewebdesign/ActiveAdmin-Globalize3-inputs.git", :ref => 'c95c0a4495b1d2bf28d630005daadb95eadb3f3f'
 
 gem 'ffi-aspell', :require => 'ffi/aspell'
-gem 'tolk', :git => "git://github.com/monterail/tolk.git"#, :path => '~/monterail/tolk'
+gem 'tolk', :git => "git://github.com/monterail/tolk.git", :branch => "oz-custom"
 
 group :development, :test do
   gem 'ruby-debug19'        # for debugging
