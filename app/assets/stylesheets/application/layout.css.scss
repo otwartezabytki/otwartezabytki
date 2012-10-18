@@ -485,6 +485,22 @@ a {
         padding: 0 10px;
         border-left: 1px solid #f5f5f5;
         position: relative;
+        &:hover{
+          .arrow{
+            border-color: $blue-hover transparent transparent transparent;  
+          }
+        }
+        .arrow{
+          position: absolute;
+          width: 0px;
+          height: 0px;
+          border-style: solid;
+          border-width: 8px 5.5px 0 5.5px;
+          border-color: #313132 transparent transparent transparent;
+          top: 26px;
+          left: 110px;
+          z-index: 1;
+        }
         a{
           margin-right: 0;
         }
@@ -622,7 +638,7 @@ a {
         line-height: 60px;
         text-shadow: 0 1px 0 #fff;
         text-decoration: none;
-        margin-right: 27px;
+        margin-right: 23px;
         padding-left: 20px;
         display: block;
         &:hover {
@@ -696,17 +712,18 @@ a {
           }
         }
         &.search {
-          background: asset-data-url('icon-menu-search.png') 0 23px no-repeat;
+          background: asset-data-url('icon-menu-search.png') 0 22px no-repeat;
           &:hover{
-            background: asset-data-url('icon-menu-search-hover.png') 0 23px no-repeat;
+            background: asset-data-url('icon-menu-search-hover.png') 0 22px no-repeat;
           }
           &.current {
-            background: asset-data-url('icon-menu-search-current.png') 0 23px no-repeat;
+            background: asset-data-url('icon-menu-search-current.png') 0 22px no-repeat;
           }
         }
         &.browse {
           background: asset-data-url('icon-menu-browse.png') 0 23px no-repeat;
           position: static;
+          padding-right: 20px;
           &:hover{
             background: asset-data-url('icon-menu-browse-hover.png') 0 23px no-repeat;
           }
@@ -2570,4 +2587,35 @@ body.resource_home{
       }
     }
   }
+}
+
+.how-it-works-content{
+  font-size: 13px;
+  line-height: 18px;
+  h4{
+    font-weight: 700;
+    padding-left: 20px;
+    &.what{
+      background: asset-data-url("form-input-what-bg.png") 0 2px no-repeat;
+    }
+    &.where{
+      background: asset-data-url("form-input-where-bg.png") 0 2px no-repeat; 
+    }
+  }
+  p{
+    margin: 0 0 15px 20px;
+  }
+}
+.how-it-works-title{
+  color: #42738c;
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+#filled_relics, #checked_relics{
+  text-indent: -9999px;
+  width: 15px;
+  height: 13px;
+  background: asset-data-url("icon-help.png") no-repeat;
+  display: inline-block;
 }

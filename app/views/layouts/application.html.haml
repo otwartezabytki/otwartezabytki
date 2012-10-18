@@ -61,6 +61,7 @@
                 %li.gradient
                   = link_to t('layouts.application.search'), relics_path, :class => "search #{'current' if current_page?(relics_path)}"
                 %li.gradient
+                  .arrow
                   = link_to t('layouts.application.browse'), "#", :class => "browse"
                   = render 'shared/browse'
         %section#main
