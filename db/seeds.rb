@@ -19,7 +19,8 @@
   {:name_key => "militarny",                            :position => 15, :column => "third"},
   {:name_key => "sportowy_kulturalny_edukacyjny",       :position => 16, :column => "third"},
   {:name_key => "park_ogrod",                           :position => 17, :column => "third"},
-  {:name_key => "uklad_urbanistyczny_zespol_budowlany", :position => 18, :column => "third"}
+  {:name_key => "uklad_urbanistyczny_zespol_budowlany", :position => 18, :column => "third"},
+  {:name_key => "cmentarny",                            :position => 19, :column => "third"}
  ].each { |hash| c = Category.find_by_name_key(hash[:name_key]); Category.create(hash) unless c }
 
 # create static pages

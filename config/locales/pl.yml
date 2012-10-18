@@ -671,6 +671,7 @@ pl:
       sportowy_kulturalny_edukacyjny: "sportowy/kulturalny/edukacyjny"
       park_ogrod: "park/ogród"
       uklad_urbanistyczny_zespol_budowlany: "układ urbanistyczny/zespół budowlany"
+      cmentarny: "cmentarny"
     groups:
       sakralny: "sakrlany"
 
