@@ -8,7 +8,13 @@
       .field.place
         = f.input :place, :label => "Gdzie:", :placeholder => "gdzie", :input_html => { :class => 'autocomplete-place'}, :hint => "np. Małkinia, ul. Grodzka w Krakowie"
       .field
-        %a{:href => "", :class => "how_it_works"} Jak działa wyszukiwarka
+        = link_to "Jak działa wyszukiwarka?", "#", :id => "how_it_works", :class => "js-popover how_it_works",
+          :"data-title-id" => "how_it_works_title", :"data-content-id" => "how_it_works_content"
+        %script{ :id => "how_it_works_title", :type => "text/html" }
+          %p Jak działa wyszukiwarka?
+          %p.close= link_to "zamknij", "#", :class => "close_popover", :"data-popover-id" => "how_it_works"
+        %script{ :id => "how_it_works_content", :type => "text/html" }
+          Hello world!
         = f.action :submit, :class => "submit btn", :label => 'Szukaj &raquo;'.html_safe, :button_html => { :name => nil }
     .relic-example
       %h3 ... a wkrótce będziemy mogli oglądać zabytki tak:
@@ -91,9 +97,23 @@
     .checked{:style => "left: #{(Relic.where(:state => 'checked').count * 900 / Relic.count.to_f) + 16}px"}
       %span= Relic.where(:state => 'checked').count
       zabytków sprawdzonych
+      = link_to "?", "#", :id => "checked_relics", :class => "js-popover checked_relics",
+        :"data-title-id" => "checked_relics_title", :"data-content-id" => "checked_relics_content"
+      %script{ :id => "checked_relics_title", :type => "text/html" }
+        %p Co to zabytki sprawdzone?
+        %p.close= link_to "zamknij", "#", :class => "close_popover", :"data-popover-id" => "checked_relics"
+      %script{ :id => "checked_relics_content", :type => "text/html" }
+        Hello world!
     .filled{:style => "left: #{(Relic.where(:state => 'filled').count * 900 / Relic.count.to_f) + 16}px"}
       %span= Relic.where(:state => 'filled').count
       zabytków uzupełnionych
+      = link_to "?", "#", :id => "filled_relics", :class => "js-popover filled_relics",
+        :"data-title-id" => "filled_relics_title", :"data-content-id" => "filled_relics_content"
+      %script{ :id => "filled_relics_title", :type => "text/html" }
+        %p Co to zabytki uzupełnione?
+        %p.close= link_to "zamknij", "#", :class => "close_popover", :"data-popover-id" => "filled_relics"
+      %script{ :id => "filled_relics_content", :type => "text/html" }
+        Hello world!
     .total
       %span= Relic.count
       wszystkich zabytków w bazie

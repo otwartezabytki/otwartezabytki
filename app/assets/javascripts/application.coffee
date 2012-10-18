@@ -28,3 +28,18 @@ $(document).on 'click', '[data-dismiss]', (e) ->
   e.preventDefault()
   el = $(this).attr('data-dismiss')
   $(".#{el}").slideUp()
+
+# bootstrap-like popovers
+jQuery.initializer '.main-container', ->
+  this.find('a.js-popover').popover
+    title: -> $("##{$(this).data("title-id")}").html()
+    content: -> $("##{$(this).data("content-id")}").html()
+    delay: 100000
+
+  this.on "click", "a.close_popover", ->
+    $("##{$(this).data('popover-id')}").popover('hide')
+    false
+
+  this.on "click", "a.js-popover", ->
+    $(this).popover('toggle')
+    false

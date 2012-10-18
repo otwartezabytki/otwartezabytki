@@ -18,7 +18,8 @@
       %p= [I18n.t(relic.country_code, :scope => :countries), relic.fprovince, relic.fplace].select(&:present?).join(', ')
     %p= relic.street
     - if relic.latitude.present? && relic.longitude.present?
-      %p= link_to "pokaż na mapie »", '#', :id => "relic_location_popover", :"data-content-id" => "location_body", :"data-title-id" => "location_title"
+      %p= link_to "pokaż na mapie »", '#', :id => "relic_location_popover", :class => "js-popover",
+        :"data-content-id" => "location_body", :"data-title-id" => "location_title"
       %script(type="text/html" id="location_title")
         %p= relic.latitude.round(6).to_s + ", " + relic.longitude.round(6).to_s
         %p.close= link_to "zamknij", "#", :class => "close_popover", :"data-popover-id" => "relic_location_popover"
