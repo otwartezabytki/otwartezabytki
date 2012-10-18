@@ -1,12 +1,13 @@
+@import "compass/layout";
+@import "compass/css3";
+
 /* default tooltip */
 .css-map li a,.css-map li a:hover,#map-tooltip{
-  background: #111;
-  background: rgba(0,0,0,.8);
-  color: #eee;
-  font: normal 13px 'Lucida Grande',Arial,sans-serif;
+  border: 1px solid #b6b6b6;
+  @include background(linear-gradient(#fefefe, #ededed));
+  color: #313132;
   padding: .5em 1.2em;
   text-align: center;
-  text-shadow: 0 1px 0 #000;
   white-space: nowrap;
   -moz-border-radius: .6em;
   -ms-border-radius: .6em;
@@ -20,11 +21,10 @@
 
  /* tooltip arrow; when you change its size don't forget to set tooltipArrowHeight variable in the cssMap(); function */
  .css-map li a .tooltip-arrow{
-  bottom: -5px; /* must be the same as a border-width */
+  bottom: -12px; /* must be the same as a border-width */
   border: solid;
-  border-color: #111 transparent;
-  border-color: rgba(0,0,0,.8) transparent;
-  border-width: 5px 5px 0 5px; /* this's a height of the arrow */
+  border-color: #ededed transparent;
+  border-width: 12px 10px 0 10px; /* this's a height of the arrow */
   margin-left: -5px; /* must be the same as a border-width */
  }
  .css-map li a.tooltip-right .tooltip-arrow{
@@ -34,6 +34,24 @@
    border-width:0 5px 5px 5px;
    top: -5px;
   }
+
+.css-map li a h3{
+  color: #47697b;
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 700;
+}
+
+.css-map li a table td{
+  font-size: 12px;
+  padding-right: 20px;
+}
+
+.css-map li a table tr.numbers td{
+  font-size: 35px;
+  font-weight: 700;
+  text-align: left;
+}
 
  /* tooltip style when the region is activated */
  .css-map .active-region a{background-color: #111}
@@ -53,17 +71,15 @@
 
 /* default pre-loader */
 .map-loader{
-  background: #111;
-  background: rgba(0,0,0,.8);
-  color: #eee;
-  font: normal 14px 'Lucida Grande',Arial,sans-serif;
+  @include background(linear-gradient(#fefefe, #ededed));
+  color: #313132;
   padding: .6em 1.2em;
-  text-shadow: 0 1px 0 #000;
   -moz-border-radius: .6em;
   -ms-border-radius: .6em;
   -o-border-radius: .6em;
   -webkit-border-radius: .6em;
   border-radius: .6em;
+  border: 1px solid #b6b6b6;
  }
 .m500 .map-loader,.m340 .map-loader{font-size:12px}
 .m240 .map-loader,.m170 .map-loader{font-size:10px}

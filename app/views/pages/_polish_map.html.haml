@@ -6,7 +6,7 @@
           %h3= "woj. #{v.name}"
           - group = Relic.where(:voivodeship_id => v.id).group(:state).count
           %table
-            %tr
+            %tr.numbers
               %td= group['filled']    || 0
               %td= group['checked']   || 0
               %td= group['unchecked'] || 0

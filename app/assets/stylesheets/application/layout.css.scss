@@ -2326,50 +2326,72 @@ body.resource_home{
       @include box-shadow(0 0 3px 0 rgba(0,0,0,0.3));
       li{
         float: left;
-        height: 150px;
         background: #fff;
-        padding: 20px;
-        p{
+        a{
+          display: block;
+          padding: 20px;
+          height: 150px;
+          &:hover{
+            text-decoration: none;
+          }
+        }
+        .paragraph{
           line-height: 20px;
+          display: block;
+          color: #313132;
         }
         &.first{
-          width: 214px;
           background: image-url("intro-widgets-bg.png") no-repeat;
           text-shadow: 0 -1px 1px rgba(0,0,0,0.3);
-          color: #fff;
-          h3{
+          a{
+            color: #fff;
+            width: 214px;
+          }
+          .paragraph{
+            color: #fff;
+          }
+          .title{
             font-weight: 700;
             font-size: 18px;
             margin-bottom: 15px;
+            display: block;
           }
         }
         &.alerts, &.map-search, &.add{
-          h3{
+          .title{
             margin-top: 5px;
             padding-left: 45px;
             font-size: 20px;
             font-weight: 700;
             line-height: 36px;
             margin-bottom: 15px;
+            display: block;
+            color: #313132;
           }
         } 
         &.alerts{
-          width: 201px;
           border-right: 1px solid #e5e5e5;
-          h3{
+          a{
+            width: 201px;
+          }
+          .title{
             background: image-url("intro-alerts.png") no-repeat;
           }
         }
         &.map-search{
-          width: 200px;
           border-right: 1px solid #e5e5e5;
-          h3{
+          a{
+            width: 200px;
+          }
+          .title{
             background: image-url("intro-mapsearch.png") no-repeat;
           }
         }
         &.add{
-          width: 182px;
-          h3{
+          a{
+            width: 182px;
+          }
+          .title{
             background: image-url("intro-add.png") no-repeat;
           }
         }
@@ -2396,6 +2418,16 @@ body.resource_home{
         font-size: 20px;
         text-align: center;
         line-height: 50px;
+      }
+      #map-poland{
+        h3{
+          color: #47697b;
+          font-size: 16px;
+          line-height: 22px;
+          font-weight: 700;
+          text-align: left;
+          margin-bottom: 10px;
+        }
       }
     }
     .right{
