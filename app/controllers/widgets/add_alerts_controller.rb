@@ -4,7 +4,7 @@ class Widgets::AddAlertsController < WidgetsController
 
   expose(:widget_add_alerts) { Widget::AddAlert.scoped }
   expose(:widget_add_alert)
-  expose(:widget) { widget_add_alert }
+  expose(:widget) { widget_add_alerts.find(params[:id]) }
   helper_method :searched_relics
 
   def create
