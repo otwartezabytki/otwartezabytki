@@ -112,12 +112,12 @@ class Autocomplition < ActiveRecord::Base
     end
 
     def spellcheck sentence
-      speller = FFI::Aspell::Speller.new('pl')
-      speller.set("ignore-case", "true")
-      speller.suggestion_mode = 'fast'
-      sentence.split.map do |word|
-        word.size > 3 ? speller.suggestions(word).first.try(:downcase) : word
-      end.compact.join(' ')
+      # speller = FFI::Aspell::Speller.new('pl')
+      # speller.set("ignore-case", "true")
+      # speller.suggestion_mode = 'fast'
+      # sentence.split.map do |word|
+      #   word.size > 3 ? speller.suggestions(word).first.try(:downcase) : word
+      # end.compact.join(' ')
     end
   end
 
