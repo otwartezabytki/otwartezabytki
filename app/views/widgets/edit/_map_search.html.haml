@@ -12,7 +12,7 @@
       %span.block Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulumque sapien. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum que sapien.
       %textarea{:cols => "20", :rows => "3"}= widget.snippet
 .sidebar
-  = semantic_form_for widget, :url => self.send("widgets_#{widget.class.partial_name}_path", widget) do |f|
+  = semantic_form_for widget, :url => self.send("widgets_#{widget.class.partial_name}_path", widget), :remote => true do |f|
     = f.input :width, :label => "Szerokość widgeta", :required => false
     = f.input :height, :label => "Wysokość widgeta", :required => false
     = f.input :hide_sidebar, :as => :boolean, :label => "Ukryj pasek boczny", :required => false
@@ -20,4 +20,3 @@
                  :label => "Parametry do <a href='/api_doc/'>API</a>".html_safe,
                  :hint => "Ustawisz je poruszając mapką podglądową po prawej stronie.",
                  :input_html => { :readonly => "readonly" }
-    = f.submit "Zaktualizuj widget"
