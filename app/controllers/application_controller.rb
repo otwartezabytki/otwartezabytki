@@ -75,7 +75,7 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     cookies.delete(:return_path) if Subdomain.matches?(request)
-    stored_location_for(resource) || cookies.delete(:return_path) || relics_path
+    stored_location_for(resource) || cookies[:return_path] || relics_path
   end
 
   # Overwriting the sign_out redirect path method

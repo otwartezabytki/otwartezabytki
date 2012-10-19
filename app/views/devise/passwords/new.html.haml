@@ -3,7 +3,7 @@
 .form_box_forgot
   .ask_account= t('.ask_account', :scope => 'views')
   .txt_forgot= t('.password_has_been_sent', :scope => 'views')
-  = semantic_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }, :remote => true) do |f|
+  = semantic_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }, :remote => request.xhr?) do |f|
     - unless resource.errors.empty?
       .alert.alert-error
         = t('.wrong_email', :scope => 'views')

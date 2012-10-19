@@ -1,5 +1,7 @@
 # -*- encoding : utf-8 -*-
 class AlertsController < ApplicationController
+  before_filter :save_return_path
+
   before_filter :authenticate_user!, :only => [:new, :create]
 
   before_filter :enable_fancybox, :unless => lambda {|c| Subdomain.matches?(c.request) }
@@ -9,9 +11,9 @@ class AlertsController < ApplicationController
   expose(:alert)
 
   def new
-    if params[:description].match(/zabytek nie istnieje/)
-      relic.update_attribute(:existence, "archived")
-      flash.now[:notice] = "Zabytek został zarchiwizowany."
+    if params[:non_existent].present?
+      relic.update_attributes(:existence => "archived")
+      redirect_to relic_path(relic), :notice => "Zabytek został zarchiwizowany." and return
     end
 
     render Subdomain.matches?(request) ? 'alerts/iframe/new' : 'new'
