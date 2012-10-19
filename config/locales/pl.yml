@@ -280,6 +280,11 @@ pl:
       version:
         item_type: "Rodzaj"
         item: "Zasób"
+      wuoz_agency:
+        wuoz_name: Nazwa
+        city: Miasto
+        email: Email
+        alerts_count: Ilość alertów
 
 
     models:
@@ -356,6 +361,12 @@ pl:
         few: linków
         many: linków
         other: linków
+      wuoz_agency:
+        zero: "Urząd Ochrony Zabytków"
+        one: "Urząd Ochrony Zabytków"
+        few: "Urząd Ochrony Zabytków"
+        many: "Urzędy Ochrony Zabytków"
+        other: "Urzędy Ochrony Zabytków"
   plural:
     relic:
       zero:   zabytków

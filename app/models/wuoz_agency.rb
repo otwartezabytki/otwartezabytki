@@ -7,7 +7,7 @@ class WuozAgency < ActiveRecord::Base
   has_many :alerts, :through => :wuoz_alerts
   has_many :wuoz_notifications
 
-  scope :only_with_alerts, joins(:wuoz_alerts).where('wuoz_alerts.sent_at IS NULL').group('wuoz_agencies.id').having('COUNT(alert_id) > 0')
+  scope :only_with_alerts, where(:id => WuozAlert.not_sent.group('wuoz_agency_id').having('COUNT(alert_id) > 0').select(:wuoz_agency_id))
 
   def wuoz_name
     I18n.t("wuoz.#{wuoz_key}")
