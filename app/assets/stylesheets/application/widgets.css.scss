@@ -326,6 +326,14 @@ section.widgets{
 }
 
 .add_relic.edit_widget{
+  background: #fff;
+  .content{
+    margin-left: 0;
+    textarea{
+      width: 894px;
+      max-width: 894px;
+    }
+  }
   h1{
     @include background(asset-data-url("icon-widgets-addalert.png") 27px 21px no-repeat, linear-gradient(#36596b, #2f5163));
   }
