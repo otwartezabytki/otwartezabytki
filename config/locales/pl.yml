@@ -451,17 +451,27 @@ pl:
     pages:
       home:
         revision_change:
-          categories: "zaktualizowano kategorie"
-          user_id: "zmieniono właściciela"
-          tags: "zaktualizowano tagi"
-          identification: "edytowano nazwę"
-          dating_of_obj: "wprowadzono datowanie obiektu"
           place_id: "zmieniono miejscowość"
-          register_number: "poprawiono numer rejestru"
+          identification: "edytowano nazwę"
+          dating_of_obj: "wprowadzono datę obiektu"
           street: "poprawiono adres"
+          register_number: "poprawiono numer rejestru"
+          nid_id: "poprawiono numer rejestru"
           latitude: "zaktualizowano położenie"
           longitude: "zaktualizowano położenie"
+          ancestry: "zaktualizowano hirarchię w zespole zabytków"
+          approved: "zatewierdzono zabytek"
+          categories: "zaktualizowano kategorie"
           description: "zredagowano opis"
+          tags: "zaktualizowano tagi"
+          country_code: "edytowano kraj"
+          fprovince: "przypisano do prowincji"
+          fplace : zmieniono miejscowość
+          documents_info: "wprowadzono informacje o dokumentach"
+          links_info: "wprowadzono informacje o odnośnikach"
+          state: "zmieniono stan"
+          existence: "zmieniono stan"
+          common_name: "podano nazwę zwyczajową"
 
     alerts:
       iframe:

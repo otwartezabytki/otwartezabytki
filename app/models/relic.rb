@@ -115,7 +115,8 @@ class Relic < ActiveRecord::Base
   validates :existence, :inclusion => { :in => Existences }, :if => :existence_changed?
 
   # versioning
-  has_paper_trail :skip => [:updated_at, :created_at, :user_id]
+  has_paper_trail :skip => [:updated_at, :created_at, :user_id, :build_state, :kind, :date_start, :date_end,
+    :type, :commune_id, :district_id, :voivodeship_id, :geocoded, :reason]
 
   include Tire::Model::Search
 
