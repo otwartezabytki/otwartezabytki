@@ -80,12 +80,6 @@ module Tire
       def slug
         self[:slug] || self[:id]
       end
-      def corrected?(user = nil)
-        return false
-        @is_corrected ||= {}
-        return @is_corrected[user.try(:id)] if @is_corrected[user.try(:id)]
-        @is_corrected[user.try(:id)] = (!!user and user.corrected_relic_ids.include?(self[:id].to_i)) or self[:edit_count] > 2
-      end
     end
   end
 end

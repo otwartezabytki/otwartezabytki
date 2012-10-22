@@ -75,11 +75,6 @@ class User < ActiveRecord::Base
     force_password_required
   end
 
-  def corrected_relic_ids
-    return @corrected_relic_ids if defined? @corrected_relic_ids
-    @corrected_relic_ids = suggestions.roots.joins(:relic).where("relics.edit_count < 3").group(:relic_id).pluck(:relic_id)
-  end
-
   def mark_relic_as_seen(relic_id)
     sr = self.seen_relics.find_or_create_by_relic_id relic_id
     sr.touch

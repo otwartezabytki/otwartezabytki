@@ -1,5 +1,4 @@
 # -*- encoding : utf-8 -*-
-
 # == Schema Information
 #
 # Table name: relics
@@ -7,9 +6,6 @@
 #  id              :integer          not null, primary key
 #  place_id        :integer
 #  identification  :text
-#  group           :string(255)
-#  number          :integer
-#  materail        :string(255)
 #  dating_of_obj   :string(255)
 #  street          :string(255)
 #  register_number :text
@@ -18,20 +14,14 @@
 #  longitude       :float
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  internal_id     :string(255)
 #  ancestry        :string(255)
-#  source          :text
 #  commune_id      :integer
 #  district_id     :integer
 #  voivodeship_id  :integer
-#  register_date   :date
-#  date_norm       :string(255)
 #  kind            :string(255)
 #  approved        :boolean          default(FALSE)
 #  categories      :string(255)
-#  skip_count      :integer          default(0)
-#  edit_count      :integer          default(0)
-#  description     :text
+#  description     :text             default("")
 #  tags            :string(255)
 #  type            :string(255)      default("Relic")
 #  country_code    :string(255)      default("PL")
@@ -45,7 +35,11 @@
 #  reason          :text
 #  date_start      :integer
 #  date_end        :integer
+#  state           :string(255)      default("unchecked")
+#  existence       :string(255)      default("existed")
+#  common_name     :string(255)      default("")
 #
+
 ActiveSupport::Dependencies.depend_on 'relic/tire_extensions'
 class Relic < ActiveRecord::Base
   include AASM
@@ -71,7 +65,7 @@ class Relic < ActiveRecord::Base
                   :events_attributes, :entries_attributes, :license_agreement, :polish_relic,
                   :geocoded, :build_state, :parent_id, :common_name, :as => [:default, :admin]
 
-  attr_accessible :ancestry, :materail, :register_number, :approved, :group, :state, :existence, :as => :admin
+  attr_accessible :ancestry, :register_number, :approved, :state, :existence, :as => :admin
 
   accepts_nested_attributes_for :photos, :documents, :entries, :links, :events, :allow_destroy => true
 
@@ -121,7 +115,7 @@ class Relic < ActiveRecord::Base
   validates :existence, :inclusion => { :in => Existences }, :if => :existence_changed?
 
   # versioning
-  has_paper_trail :skip => [:skip_count, :edit_count, :updated_at, :created_at, :user_id]
+  has_paper_trail :skip => [:updated_at, :created_at, :user_id]
 
   include Tire::Model::Search
 
@@ -183,8 +177,6 @@ class Relic < ActiveRecord::Base
     with_options :index => :not_analyzed do |na|
       na.indexes :id
       na.indexes :kind
-      na.indexes :edit_count, :type => "integer"
-      na.indexes :skip_count, :type => "integer"
       na.indexes :virtual_commune_id
       na.indexes :categories
       na.indexes :has_photos,       :type => "boolean"
@@ -239,10 +231,8 @@ class Relic < ActiveRecord::Base
       :identification   => identification,
       :street           => street,
       :place_full_name  => place_full_name,
-      # :kind             => kind,
       :descendants      => self.descendants.map(&:to_descendant_hash),
-      # :edit_count       => self.edit_count,
-      # :skip_count       => self.skip_count,
+
       :voivodeship      => { :id => self.voivodeship_id,            :name => self.voivodeship.name },
       :district         => { :id => self.district_id,               :name => self.district.name },
       :commune          => { :id => self.commune_id,                :name => self.commune.name },
@@ -273,10 +263,7 @@ class Relic < ActiveRecord::Base
       :street_normalized    => street_normalized,
       :place_full_name      => place_full_name,
       :place_with_address   => place_with_address,
-      # :kind               => kind,
       :descendants          => self.descendants.map(&:to_descendant_hash),
-      # :edit_count         => self.edit_count,
-      # :skip_count         => self.skip_count,
       :voivodeship          => { :id => self.voivodeship_id,   :name => self.voivodeship.name },
       :district             => { :id => self.district_id,      :name => self.district.name },
       :commune              => { :id => self.commune_id,       :name => self.commune.name },
