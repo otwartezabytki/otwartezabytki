@@ -2111,6 +2111,10 @@ ul.nav li a.selected {
   }
 }
 
+.main-container > .row > .flash{
+  @include background(linear-gradient(#ececec, #d5d5d5));
+}
+
 section.edit .flash {
   margin-bottom: 8px;
   padding: 6px 20px;
@@ -2619,3 +2623,4 @@ body.resource_home{
   background: asset-data-url("icon-help.png") no-repeat;
   display: inline-block;
 }
+

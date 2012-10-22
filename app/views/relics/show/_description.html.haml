@@ -8,4 +8,5 @@
       %p Nikt nie napisał jeszcze opisu dla tego zabytku
       %p Zrób to Ty!
       = link_to "dodaj opis", edit_section_relic_path(relic.id, :description), :remote => true
-      %a.show-example{:href => image_path('help-screen-1.png'), :class => "fancybox"} Pokaż przykład
+      .example
+        %a.show-example{:href => image_path('help-screen-1.png'), :class => "fancybox"} Pokaż przykład

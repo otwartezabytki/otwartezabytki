@@ -377,7 +377,7 @@ pl:
   formtastic:
     hints:
       relic:
-        identification: "Popraw i uzupełnij (jeśli to konieczne) nazwę zespołu. Jeśli oprócz nazwy oficjalnej, zabytek funkcjonuje pod nazwą zwyczajową, dopisz ją. <br> Np.:  Zamek Przemysła, pot. Zamek Gargamela"
+        identification: "Popraw i uzupełnij (jeśli to konieczne) nazwę zespołu. Jeśli oprócz nazwy oficjalnej, zabytek funkcjonuje pod nazwą zwyczajową, dopisz ją. Np.:  Zamek Przemysła, pot. Zamek Gargamela"
         common_name: Jeśli zabytek ma jedną lub więcej nazw zwyczajowych, wpisz je.
         documents_info: Jeśli wiesz, gdzie fizycznie znajduje się dokumentacja zabytku, wpisz informacje dla innych zainteresowanych.
         links_info: Jeśli wiesz, gdzie fizycznie znajduje się ciekawe opracowanie na temat zabytku, wpisz informacje dla innych zainteresowanych.
