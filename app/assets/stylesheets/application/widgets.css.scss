@@ -196,6 +196,9 @@ section.widgets{
       float: right;
       padding: 7px 15px;
       margin: 0;
+      &.use-widget{
+        margin-top: 25px;
+      }
     }
   }
   .content{
@@ -255,12 +258,14 @@ section.widgets{
 .add_alert.edit_widget{
   .widget_add_alert{
     #widget_add_alert_q_input{
+      float: left;
+      width: 410px;
       .input{
         span.block{
           font-weight: 700;
         }
         #widget_add_alert_q{
-          width: 477px;
+          width: 390px;
         }
       }
     }
@@ -274,6 +279,8 @@ section.widgets{
         padding: 4px;
         background: #e5e5e5;
         @include border-radius(2px);
+        max-height: 170px;
+        overflow-x: scroll;
         border: 1px solid #b9b9b9;
         li{
           padding: 3px 3px 3px 12px;

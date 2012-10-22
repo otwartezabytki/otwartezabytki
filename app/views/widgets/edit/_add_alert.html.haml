@@ -3,7 +3,8 @@
   %a.back{:href => widgets_path} &laquo; wróć do katalogu widgetów
 .sidebar
   = semantic_form_for widget, :url => self.send("widgets_#{widget.class.partial_name}_path", widget) do |f|
-    = f.input :q, :label => false, :hint => "lorem ipsum"
+    = f.input :q, :label => false, :hint => "Wyszukaj zabytek"
+    %input{:type => "submit", :class => "use-widget", :value => "Szukaj"} 
     = f.input :relic_id, :as => :hidden, :label => false
     - if searched_relics.present?
       %h3 O który zabytek dokładnie Ci chodziło
