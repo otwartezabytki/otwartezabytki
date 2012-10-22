@@ -37,16 +37,12 @@ ActiveAdmin.register Relic do
       f.input :identification, :as => :string
       f.input :description
       f.input :place_id
-      f.input :group
-      f.input :number
-      f.input :materail
       f.input :dating_of_obj
       f.input :street
       f.input :register_number, :as => :string
       f.input :nid_id
       f.input :latitude
       f.input :longitude
-      f.input :kind
       f.input :approved
       f.input :categories, :as => :check_boxes,
               :collection => Category.to_hash.invert, :label => "",

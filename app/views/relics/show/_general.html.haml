@@ -5,10 +5,18 @@
   %h1= relic.identification
   .status
     = state_tag(relic)
-    - if relic.register_number.present?
-      .relic-info
+    - if relic.existence == "existed"
+      %span.relic-info
         Zabytek
-        %strong rejestrowy
+        %strong archiwalny
+    - elsif relic.existence == "archived"
+      %span.relic-info
+        Zabytek
+        %strong archiwalny
+    - elsif relic.existence == "social"
+      %span.relic-info
+        Zabytek
+        %strong społeczny
   .location_name
     = link_to 'uzupełnij', edit_section_relic_path(relic.id, :location), :title => 'edytuj ogólne dane zabytku', :remote => true, :class => "edit-relic-link"
     %strong Lokalizacja:

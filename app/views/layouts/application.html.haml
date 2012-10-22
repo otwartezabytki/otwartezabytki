@@ -3,7 +3,7 @@
   %head
     %meta(charset="utf-8")
     %meta(name="viewport" content="width=device-width, initial-scale=1.0")
-    %title= content_for?(:title) ? yield(:title) : "Otwarte Zabytki"
+    %title= content_for?(:title) ? "#{yield(:title)} - Otwarte Zabytki" : "Otwarte Zabytki"
     = favicon_link_tag  "favicon.gif", :type => 'image/gif'
     %meta{:property => "og:title", :content => t('layouts.application.og.title')}
     %meta{:property => "og:description", :content => t('layouts.application.og.description')}

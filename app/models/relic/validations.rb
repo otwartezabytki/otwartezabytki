@@ -35,7 +35,7 @@ module Relic::Validations
   end
 
   def invalid_step_view
-    self.build_state = "#{invalid_step}"
+    self.build_state = "#{invalid_step}_step"
     invalid_step
   end
 

@@ -47,13 +47,16 @@ class Link < ActiveRecord::Base
     "#{uri.host}/#{shortened_path}"
   end
 
-
   def url?
     kind == "url"
   end
 
   def paper?
     kind == "paper"
+  end
+
+  def url=(value)
+    self[:url] = "http://#{value}" unless value.match(/^(http|ftp)/)
   end
 
   include CanCan::Authorization

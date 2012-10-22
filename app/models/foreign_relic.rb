@@ -6,9 +6,6 @@
 #  id              :integer          not null, primary key
 #  place_id        :integer
 #  identification  :text
-#  group           :string(255)
-#  number          :integer
-#  materail        :string(255)
 #  dating_of_obj   :string(255)
 #  street          :string(255)
 #  register_number :text
@@ -17,20 +14,14 @@
 #  longitude       :float
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  internal_id     :string(255)
 #  ancestry        :string(255)
-#  source          :text
 #  commune_id      :integer
 #  district_id     :integer
 #  voivodeship_id  :integer
-#  register_date   :date
-#  date_norm       :string(255)
 #  kind            :string(255)
 #  approved        :boolean          default(FALSE)
 #  categories      :string(255)
-#  skip_count      :integer          default(0)
-#  edit_count      :integer          default(0)
-#  description     :text
+#  description     :text             default("")
 #  tags            :string(255)
 #  type            :string(255)      default("Relic")
 #  country_code    :string(255)      default("PL")
@@ -44,6 +35,9 @@
 #  reason          :text
 #  date_start      :integer
 #  date_end        :integer
+#  state           :string(255)      default("unchecked")
+#  existence       :string(255)      default("existed")
+#  common_name     :string(255)      default("")
 #
 
 class ForeignRelic < Relic
