@@ -1,10 +1,6 @@
 %h1
   #{widget.class.title}
   %a.back{:href => widgets_path} &laquo; wróć do katalogu widgetów
-.sidebar
-  = semantic_form_for widget, :url => self.send("widgets_#{widget.class.partial_name}_path", widget) do |f|
-    = f.input :button_type, :as => :select, :collection => ['small', 'medium', 'big']
-    = f.submit "Zaktualizuj widget"
 - if widget.valid?
   .content
     %h2 Podgląd wygenerowanego widgetu
