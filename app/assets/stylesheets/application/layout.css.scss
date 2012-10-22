@@ -475,13 +475,13 @@ a {
 #menu {
   .container {
     border-top: 1px solid #dcdcdc;
-    // height: 60px;
+    min-height: 59px;
   }
   nav {
     ul li {
       float: left;
       &.gradient{
-        @include background(linear-gradient(#ebeeef, #d2d7db));
+        background: asset-data-url("menu-gradient.png") repeat-x;
         padding: 0 10px;
         border-left: 1px solid #f5f5f5;
         position: relative;
@@ -509,7 +509,7 @@ a {
           width: 537px;
           top: 60px;
           right: 0;
-          z-index: 1;
+          z-index: 10;
           @include background(linear-gradient(#edf0f1, #d0d6db));
           padding: 20px;
           @include border-radius(2px 0 2px 2px);
@@ -635,7 +635,7 @@ a {
         color: #313132;
         font-weight: 600;
         font-size: 14px;
-        line-height: 60px;
+        line-height: 59px;
         text-shadow: 0 1px 0 #fff;
         text-decoration: none;
         margin-right: 23px;
@@ -648,7 +648,7 @@ a {
           color: $dark-blue;
         }
         &.home {
-          padding-left: 26px;
+          padding-left: 30px;
           background: asset-data-url('icon-menu-home.png') 4px 23px no-repeat;
           &:hover{
             background: asset-data-url('icon-menu-home-hover.png') 4px 23px no-repeat;
@@ -2535,6 +2535,7 @@ body.resource_home{
     border-top: 1px solid #e5e5e5;
     padding: 73px 30px 36px 28px;
     position: relative;
+    display: inline-block;
     .bg{
       background: image-url("progress-bar-grey.png") no-repeat;
       width: 900px;
