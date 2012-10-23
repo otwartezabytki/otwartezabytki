@@ -9,15 +9,18 @@
         .column.column-first
           = f.input :categories, :as => :check_boxes,
             :collection => Category.first_column.invert, :label => "",
-            :input_html => { :multiple => true }
+            :input_html => { :multiple => true },
+            :hint => false
         .column.column-second
           = f.input :categories, :as => :check_boxes,
             :collection => Category.second_column.invert, :label => "",
-            :input_html => { :multiple => true }
+            :input_html => { :multiple => true },
+            :hint => false
         .column.column-third
           = f.input :categories, :as => :check_boxes,
             :collection => Category.third_column.invert, :label => "",
-            :input_html => { :multiple => true }
+            :input_html => { :multiple => true },
+            :hint => false
 
     .actions
       = f.submit t('views.relics.edit.save')
