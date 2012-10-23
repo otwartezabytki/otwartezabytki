@@ -539,6 +539,9 @@ section.show.photos {
   background: #fff;
   vertical-align: top;
   border-left: 1px solid #fff;
+  .content{
+    position: relative;
+  }
   #slider {
     position: absolute;
     bottom: 0;
