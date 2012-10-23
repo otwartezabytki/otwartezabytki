@@ -1,7 +1,6 @@
 GIT
-  remote: git://github.com/corewebdesign/ActiveAdmin-Globalize3-inputs.git
-  revision: c95c0a4495b1d2bf28d630005daadb95eadb3f3f
-  ref: c95c0a4495b1d2bf28d630005daadb95eadb3f3f
+  remote: git://github.com/chytreg/activeadmin-globalize3-inputs.git
+  revision: 5d0d109b905e7db0471f0aaeb88ea326cfb77b93
   specs:
     activeadmin-globalize3-inputs (0.0.1)
       activeadmin

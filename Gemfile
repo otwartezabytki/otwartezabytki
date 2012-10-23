@@ -82,7 +82,7 @@ gem 'friendly_id'             # friendly id for widgets
 gem 'turbo-sprockets-rails3'  # faster asset precompiling
 
 gem 'globalize3'
-gem 'activeadmin-globalize3-inputs', :git => "git://github.com/corewebdesign/ActiveAdmin-Globalize3-inputs.git", :ref => 'c95c0a4495b1d2bf28d630005daadb95eadb3f3f'
+gem 'activeadmin-globalize3-inputs', :git => 'git://github.com/chytreg/activeadmin-globalize3-inputs.git'
 
 gem 'ffi-aspell', :require => 'ffi/aspell'
 gem 'tolk', :git => "git://github.com/monterail/tolk.git", :branch => "oz-custom"
