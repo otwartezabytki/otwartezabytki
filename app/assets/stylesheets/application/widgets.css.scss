@@ -181,6 +181,9 @@ section.widgets{
         float: left;
         margin-right: 10px;
         width: 210px;
+        &#widget_map_search_api_params_input{
+          display: none;
+        }
       }
     }
     #widget_map_search_api_params{
@@ -336,5 +339,11 @@ section.widgets{
   }
   h1{
     @include background(asset-data-url("icon-widgets-addalert.png") 27px 21px no-repeat, linear-gradient(#36596b, #2f5163));
+  }
+}
+
+.map_search.edit_widget{
+  .sidebar{
+    width: 890px;
   }
 }

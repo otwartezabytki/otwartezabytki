@@ -633,73 +633,53 @@ section.show.general{
     margin: 15px 0;
     .tag{
       span{
-        color: #fff;
+        background: #f1f1f1;
+        @include box-shadow(0 1px 0 0 #fff, inset 0 0 3px 0 rgba(0,0,0,0.1));
+        border: 1px solid #e0e0e0;
+        padding: 7px 15px 7px 25px;
+        position: relative;
+        float: left;
         text-transform: uppercase;
-        display: inline-block;
-        font-size: 11px;
-        line-height: 19px;
-        padding: 0 8px;
-        font-weight: normal;
-        @include border-radius(3px);
-        @include text-shadow(rgba(0,0,0,0.3) 0 1px 1px);
-        @include box-shadow(inset rgba(0,0,0,0.4) 0 1px 3px);
-        &.done{
-          @include background(linear-gradient(#90b86e, #afd78c));
+        letter-spacing: 1px;
+        color: #a5a5a5;
+        &:first-child{
+          @include border-radius(6px 0 0 6px);
         }
-        &.undone{
-          @include background(linear-gradient(#e0a876, #fec695));
+        &:last-child{
+          @include border-radius(0 6px 6px 0);
         }
-        &.unchecked{
-          @include background(linear-gradient(#a3a4a6, #c1c3c5));
+        &.done, &.checked, &.filled{
+          @include box-shadow(inset 0 0 15px 0 rgba(42, 129, 0, 0.2));
+          border: 1px solid #2a8100;
+          color: #2a8100;
+          font-weight: 700;
         }
-      }
-    }
-    .fill, .revise{
-      background: #f1f1f1;
-      @include box-shadow(0 1px 0 0 #fff, inset 0 0 3px 0 rgba(0,0,0,0.1));
-      border: 1px solid #e0e0e0;
-      padding: 7px 15px 7px 25px;
-      position: relative;
-      float: left;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: #666;
-      .ico{
-        top: 8px;
-        left: 7px;
-        position: absolute;
-      }
-      &.success{
-        @include box-shadow(inset 0 0 15px 0 rgba(42, 129, 0, 0.2));
-        border: 1px solid #2a8100;
-        color: #2a8100;
-        font-weight: 700;
-      }
-    }
-    .fill{
-      @include border-radius(0px 4px 4px 0px);
-      .ico{
-        width: 14px;
-        height: 12px;
-        background: asset-data-url("edit-relic-ico-fill.png") no-repeat;
-      }
-      &.success{
-        .ico{
+        &.unchecked::before, &.unfilled::before, &.checked::before, &.filled::before{
+          content: '';
+          position: absolute;
+          top: 8px;
+          left: 7px;
+        }
+        &.unchecked::before{
+          width: 14px;
+          height: 12px;
+          background: asset-data-url("edit-relic-ico-fill.png") no-repeat;
+        }
+        &.unfilled::before{
+          width: 15px;
+          height: 13px;
+          background: asset-data-url("edit-relic-ico-revise.png") no-repeat;
+        }
+        &.checked::before{
+          width: 14px;
+          height: 12px;
           background: asset-data-url("edit-relic-ico-fill-success.png") no-repeat;
-        }  
-      }
-    }
-   .revise{
-      @include border-radius(4px 0px 0px 4px);
-      .ico{
-        width: 15px;
-        height: 13px;
-        background: asset-data-url("edit-relic-ico-revise.png") no-repeat;
-      }
-      &.success{
-        .ico{
+        }
+        &.filled::before{
+          width: 15px;
+          height: 13px;
           background: asset-data-url("edit-relic-ico-revise-success.png") no-repeat;
-        }  
+        }
       }
     }
     .relic-info{
