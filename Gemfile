@@ -88,6 +88,7 @@ gem 'ffi-aspell', :require => 'ffi/aspell'
 gem 'tolk', :git => "git://github.com/monterail/tolk.git", :branch => "oz-custom"
 
 group :development, :test do
+  gem 'interactive_editor'
   gem 'ruby-debug19'        # for debugging
   gem 'pry-rails'
   gem 'pry-doc'
