@@ -3,6 +3,10 @@
   - if relic.parent.present?
     %h2= link_to relic.parent.identification, relic.parent, :remote => true
   %h1= relic.identification
+  - if relic.common_name.present?
+    %p
+      %strong Nazwa zwyczajowa:
+      =relic.common_name
   .status
     = state_tag(relic)
     - if relic.existence == "existed"
