@@ -5,14 +5,11 @@
     .sidebar-categories
       %h3 Kategorie:
       = f.input :categories, :as => :check_boxes, :collection => [categoires_facets('non_sacral').first], :disabled => disabled(f.object, 'categories'), :label => false
-      - hidden_sacral = !f.object.categories.any?{|c| Category.sacral.to_hash.keys.include?(c)}
-      %h4
-        = link_to 'Sakralny', '#', :class => ('sacral-options ' + (hidden_sacral ? '' : 'shown'))
+      - hidden_sacral = !f.object.categories.include?('sacral')
+      = f.input :categories, :as => :check_boxes, :collection => [["#{t('category.groups.sakralny')} <em>#{relics.count('sacral')}</em>".html_safe, 'sacral']], :input_html => {:class => 'sacral-options'} ,:label => false
       .sacral-categories{:style => ('display:none;' if hidden_sacral)}
         = f.input :categories, :as => :check_boxes, :collection => categoires_facets('sacral'), :disabled => disabled(f.object, 'categories'), :label => false
       = f.input :categories, :as => :check_boxes, :collection => categoires_facets('non_sacral').drop(1), :disabled => disabled(f.object, 'categories'), :label => false
-
-
 
   %div{:class => relics.empty? ? "span9" : "span9"}
     #relics

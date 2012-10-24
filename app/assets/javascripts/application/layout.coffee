@@ -41,7 +41,7 @@ jQuery.initializer '#menu', ->
 
   this.find('a.sacral-options').click (e) ->
     e.preventDefault()
-    filter = $("div.sacral-categories")
+    filter = $("#menu div.sacral-categories")
     link = $(this)
     if link.hasClass "shown"
       filter.slideUp()

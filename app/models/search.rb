@@ -37,13 +37,26 @@ class Search
     @_q
   end
 
-  [:categories, :state, :existence, :has_photos, :has_description].each do |name|
+  [:state, :existence, :has_photos, :has_description].each do |name|
     define_method name do
       variable = instance_variable_get("@#{name}")
       return [] if variable.blank?
       variable = variable.split(',') if variable.kind_of?(String)
       variable.reject(&:blank?)
     end
+  end
+
+  def categories
+    return @cached_categories if defined? @cached_categories
+    if @categories.blank?
+      @cached_categories = []
+    else
+      @cached_categories = @categories.split(',') if @categories.kind_of?(String)
+      @cached_categories ||= @categories.reject(&:blank?)
+      @cached_categories << 'sacral' if  !@cached_categories.include?('sakral') and @cached_categories.any? { |c| Category.sacral.pluck(:name_key).include?(c) }
+      Rails.logger.info "cat: #{@cached_categories.inspect}"
+    end
+    @cached_categories
   end
 
   def bounding_box=(value)
@@ -269,6 +282,7 @@ class Search
     terms_cond << { 'term' => { 'country' => @country } }    if @country.present?
     terms_cond << { 'term' => { 'country' => 'pl'} }               if !keys.include?('pl')    and navfacet?('pl')
     terms_cond << { 'not' => { 'term' => { 'country' => 'pl'}} }   if !keys.include?('world') and navfacet?('world')
+    terms_cond << { 'terms' => {'categories' => Category.sacral.pluck(:name_key)}} if keys.include?('sacral')
     if [@lat, @lon].all?(&:present?)
       terms_cond << {
         'geo_distance' => {
@@ -354,6 +368,10 @@ class Search
 
       facet 'categories', instance.filter_facet_conditions('categories') do
         terms :categories, :size => Category.all.size, :all_terms => true
+      end
+
+      facet 'sacral', instance.filter_facet_conditions('sacral') do
+        terms nil, :script_field => 1
       end
 
       ['state', 'existence', 'has_photos', 'has_description'].each do |name|

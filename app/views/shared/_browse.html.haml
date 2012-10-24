@@ -6,7 +6,7 @@
     = link_to c.first, relics_path(:search => {:categories => [c.last]})
     - hidden_sacral = true
     %h4
-      = link_to 'sakralny', '#', :class => ('sacral-options ' + (hidden_sacral ? '' : 'shown'))
+      = link_to "#{t('category.groups.sakralny')} <em>#{relics.count('sacral')}</em>".html_safe, '#', :class => ('sacral-options ' + (hidden_sacral ? '' : 'shown'))
     .sacral-categories{:style => ('display:none;' if hidden_sacral)}
       - categoires_facets('sacral', relics).each do |c|
         = link_to c.first, relics_path(:search => {:categories => [c.last]})

@@ -33,17 +33,6 @@ jQuery.initializer 'body.relics.index .main-container', ->
       filter.slideDown()
       link.addClass("shown")
 
-  this.find("div.sidebar-categories a.sacral-options").click (e) ->
-    e.preventDefault()
-    filter = $("div.sacral-categories")
-    link = $(this)
-    if link.hasClass "shown"
-      filter.slideUp()
-      link.removeClass "shown"
-    else
-      filter.slideDown()
-      link.addClass("shown")
-
   this.find('a.show-voivodeships').click (e) ->
     e.preventDefault()
     $(this).parents('li:first').remove()
@@ -79,6 +68,15 @@ jQuery.initializer 'body.relics.index .main-container', ->
       $('form').submit()
 
   this.find('input[type=checkbox]').click ->
+    if $(this).hasClass('sacral-options')
+      filter = $("div.sidebar-categories div.sacral-categories")
+      if $(this).is(':checked')
+        filter.find('input[type=checkbox]').attr('checked', 'checked')
+        filter.slideDown()
+      else
+        filter.find('input[type=checkbox]').removeAttr('checked')
+        filter.slideUp()
+    # submit
     $(this).parents('form:first').submit()
 
   this.find('select').change ->
