@@ -58,6 +58,10 @@ class ApplicationController < ActionController::Base
     response.headers['x-fancybox'] = 'true' if request.xhr?
   end
 
+  def enable_floating_fancybox
+    response.headers['x-float'] = 'true' if request.xhr?
+  end
+
   def render404
     respond_to do |format|
       format.html { render :file => "#{Rails.root}/public/404.html", :layout => false, :status => :not_found }

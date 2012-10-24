@@ -207,15 +207,15 @@ class Relic < ActiveRecord::Base
       end
     end
 
-    def reindex objs
+    def reindex(objs)
       index.delete
       index.create :mappings => tire.mapping_to_hash, :settings => tire.settings
       index.import objs
       index.refresh
     end
 
-    def reindex_sample amount = 100
-      index.delete
+    def reindex_sample(amount = 100, delete = true)
+      index.delete if delete
       index.create :mappings => tire.mapping_to_hash, :settings => tire.settings
       index.import Relic.roots.select('DISTINCT identification, *').limit(amount).map(&:sample_json)
       index.refresh

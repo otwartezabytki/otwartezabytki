@@ -1,6 +1,7 @@
 # -*- encoding : utf-8 -*-
 class RelicbuildersController < ApplicationController
   before_filter :save_return_path
+  before_filter :enable_floating_fancybox
 
   before_filter :authenticate_user!, :except => [:geodistance, :administrative_level]
   before_filter :enable_fancybox, :only => [:geodistance]
