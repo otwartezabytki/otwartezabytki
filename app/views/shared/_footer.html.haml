@@ -1,9 +1,5 @@
-.about
-  %p Otwarte Zabytki to projekt prowadzony przez Centrum Cyfrowe Projekt: Polska.
-  %p Centrum Cyfrowe Projekt: Polska, 03-808 Warszawa, ula. Mińska 25, bud. 74
-  %p Projekt finansowany ze środków Ministra Kultury i Dziedzictwa Narodowego w ramach konkursu Patriotyzm Jutra, ze środków finansowych otrzymanych od Ministerstwa Spraw Zagranicznych w ramach konkursu na realizację zadania „Współpraca z Polonią i Polakami” za granicą oraz ze środków CEE Trust.
-
-- if Rails.env.production?
+.about= t('layouts.application.footer.about_project_html')
+- unless Rails.env.development?
   .facebook-share
     :plain
       <iframe src="//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fotwartezabytki&amp;width=270&amp;height=62&amp;colorscheme=light&amp;show_faces=false&amp;border_color&amp;stream=false&amp;header=false" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:270px; height:62px;" allowTransparency="true"></iframe>
@@ -44,7 +40,8 @@
 .footer-bottom
   .footer-copyright
     %p
-      Treści zamieszczone w serwisie udostępniamy na licencji </br>
+      Treści zamieszczone w serwisie udostępniamy na licencji
+      %br
       = link_to "Creative Commons Uznanie autorstwa - Na tych samych warunkach 3.0 Polska", "http://creativecommons.org/licenses/by/3.0/pl"
   .footer-links
     %a{ :class => "footer-regulamin", :href => "/strony/regulamin"} Regulamin

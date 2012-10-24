@@ -666,6 +666,8 @@ pl:
         title: Otwarte Zabytki
         description: Uzupełnij z nami bazę zabytków i pomóż stworzyć serwis. Skorzystaj z własnej wiedzy. Poszukaj informacji w książkach lub w internecie. To naprawdę proste.
         image: http://otwartezabytki.pl/assets/face-share-logo.png
+      footer:
+        about_project_html: "<p>Otwarte Zabytki to projekt prowadzony przez Centrum Cyfrowe Projekt: Polska.</p><p>Centrum Cyfrowe Projekt: Polska, ul. Andersa 29, 00-159 Warszawa</p><p>Projekt finansowany ze środków Ministra Kultury i Dziedzictwa Narodowego w ramach konkursu Patriotyzm Jutra, ze środków finansowych otrzymanych od Ministerstwa Spraw Zagranicznych w ramach konkursu na realizację zadania „Współpraca z Polonią i Polakami” za granicą oraz ze środków CEE Trust.</p>"
   translation:
     pl: Tłumaczenie polskie
     en: Tłumaczenie angielskie
