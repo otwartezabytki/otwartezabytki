@@ -21,16 +21,16 @@
                 - if alert.file?
                   .image= image_tag alert.file.mini.url, :width => 45, :height => 45
                 = simple_format alert.description
-      = link_to new_relic_alert_path(relic, :non_existent => true), :class => "alert-link" do
-        zgłoś, że zabytek nie istnieje
+      - unless relic.existence == "archived"
+        = link_to new_relic_alert_path(relic, :non_existent => true), :class => "alert-link" do
+          zgłoś, że zabytek nie istnieje
   - else
     .placeholder
       %p
         Nie zgłoszono żadnych alertów
         %br
         do tej pory...
-
       = link_to image_tag('edit-relic-ico-alert.png') + "zgłoś alert", new_relic_alert_path(relic), :remote => true
-
-      = link_to new_relic_alert_path(relic.id,  :non_existent => true), :class => "alert-link" do
-        zgłoś, że zabytek nie istnieje
+      - unless relic.existence == "archived"
+        = link_to new_relic_alert_path(relic.id,  :non_existent => true), :class => "alert-link" do
+          zgłoś, że zabytek nie istnieje
