@@ -37,28 +37,19 @@
           .wrap
             .column
               %h4
-                Stan:
+                = t('views.relics.index.states.label')
                 .help
                   = image_tag 'ico-help.png'
                   .help-wrapper
-                    = link_to 'zamknij', '#', :class => 'close'
-                    %h3 Oznaczenia stanu
+                    = link_to t('views.relics.index.states.close'), '#', :class => 'close'
+                    %h3= t('views.relics.index.states.header')
                     %ul
-                      %li
-                        .tag
-                          %span.done Uzupełniony
-                        .text
-                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer mattis vulputate nulla adipisci.
-                      %li
-                        .tag
-                          %span.undone Nieuzupełniony
-                        .text
-                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer mattis vulputate nulla adipisci.
-                      %li
-                        .tag
-                          %span.unchecked Niesprawdzony
-                        .text
-                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer mattis vulputate nulla adipisci.
+                      - ['checked', 'unchecked', 'filled'].each do |s|
+                        %li
+                          .tag
+                            %span{:class => s}= t("views.relics.index.states.#{s}.header")
+                          .text= t("views.relics.index.states.#{s}.info")
+
               = f.input :state, :label => false, :as => :check_boxes, :collection => state_facets, :disabled => disabled(f.object, 'state')
             .column
               %h4 Zawartość:

@@ -439,10 +439,10 @@ a {
             @include border-radius(3px);
             @include text-shadow(rgba(0,0,0,0.3) 0 1px 1px);
             @include box-shadow(inset rgba(0,0,0,0.4) 0 1px 3px);
-            &.done{
+            &.filled{
               @include background(linear-gradient(#90b86e, #afd78c));
             }
-            &.undone{
+            &.checked{
               @include background(linear-gradient(#e0a876, #fec695));
             }
             &.unchecked{
@@ -487,7 +487,7 @@ a {
         position: relative;
         &:hover{
           .arrow{
-            border-color: $blue-hover transparent transparent transparent;  
+            border-color: $blue-hover transparent transparent transparent;
           }
         }
         .arrow{
@@ -601,7 +601,7 @@ a {
                   position: absolute;
                   left: 0;
                   top: 5px;
-                }  
+                }
               }
             }
           }
@@ -2393,7 +2393,7 @@ body.resource_home{
             display: block;
             color: #313132;
           }
-        } 
+        }
         &.alerts{
           border-right: 1px solid #e5e5e5;
           a{
@@ -2608,7 +2608,7 @@ body.resource_home{
       background: asset-data-url("form-input-what-bg.png") 0 2px no-repeat;
     }
     &.where{
-      background: asset-data-url("form-input-where-bg.png") 0 2px no-repeat; 
+      background: asset-data-url("form-input-where-bg.png") 0 2px no-repeat;
     }
   }
   p{

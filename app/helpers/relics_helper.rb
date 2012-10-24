@@ -31,28 +31,28 @@ module RelicsHelper
   end
 
   def state_facets
-    labels = Hash[Relic::States.zip(['sprawdzone', 'niesprawdzone', 'uzupełnione'])]
+    labels = t('activerecord.attributes.relic.states').with_indifferent_access
     relics.terms('state', true).map do |t|
       ["#{labels[t['term']]} <span class='box'>#{t['count']}</span>".html_safe, t['term']]
     end
   end
 
   def existence_facets
-    labels = Hash[Relic::Existences.zip(['istniejące w rejestrze', 'archiwalne', 'społecznie dodane'])]
+    labels = t('activerecord.attributes.relic.existences').with_indifferent_access
     relics.terms('existence', true).map do |t|
       ["#{labels[t['term']]} <span class='box'>#{t['count']}</span>".html_safe, t['term']]
     end
   end
 
   def has_photos_facets
-    labels = {'F' => 'brak zdjęcia', 'T' => 'ze zdjęciem'}
+    labels = t('activerecord.attributes.relic.photos_facets').with_indifferent_access
     relics.terms('has_photos', true).map do |t|
       ["#{labels[t['term']]} <span class='box'>#{t['count']}</span>".html_safe, t['term']]
     end
   end
 
   def has_description_facets
-    labels = {'F' => 'brak opisu', 'T' => 'z opisem'}
+    labels = t('activerecord.attributes.relic.description_facets').with_indifferent_access
     relics.terms('has_description', true).map do |t|
       ["#{labels[t['term']]} <span class='box'>#{t['count']}</span>".html_safe, t['term']]
     end
@@ -67,9 +67,9 @@ module RelicsHelper
 
   def order_collection
     [
-      ['Trafność', 'score.desc'],
-      ['A-Z', 'alfabethic.asc'],
-      ['Z-A', 'alfabethic.desc'],
+      [t('views.relics.index.order.score'), 'score.desc'],
+      [t('views.relics.index.order.az'), 'alfabethic.asc'],
+      [t('views.relics.index.order.za'), 'alfabethic.desc'],
     ]
   end
 
@@ -95,17 +95,9 @@ module RelicsHelper
   end
 
   def state_tag(relic)
-    labels = Hash[Relic::States.zip(['Sprawdzony', 'Niesprawdzony', 'Uzupełniony'])]
+    labels = t('activerecord.attributes.relic.states').with_indifferent_access
     content_tag :div, :class => 'tag' do
-      haml_concat (if relic.state == "filled" || relic.state == "checked"
-        content_tag :span, labels["checked"], :class => "checked"
-      else
-        content_tag :span, labels["unchecked"], :class => "unchecked"
-      end.to_s + if relic.state == "filled"
-        content_tag :span, labels["filled"], :class => "filled"
-      else
-        content_tag :span, "Nieuzupełniony", :class => "unfilled"
-      end.to_s)
+      content_tag :span, labels[relic.state], :class => relic.state
     end
   end
 

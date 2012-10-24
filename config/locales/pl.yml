@@ -234,6 +234,12 @@ pl:
           existed: 'istniejący w rejestrze'
           archived: 'archiwalny'
           social: 'społecznie dodany'
+        description_facets:
+          T: 'z opisem'
+          F: 'brak opisu'
+        photos_facets:
+          T: 'ze zdjęciem'
+          F: 'brak zdjęcia'
       user:
         email: Adres e-mail
         password: Hasło
@@ -587,6 +593,24 @@ pl:
         statement: "Oświadczam, że posiadam prawa do publikowania na stronie OtwarteZabytki.pl dodane powyżej zdjęcia."
         submit: 'Zakończ! i zobacz dodany zabytek'
     relics:
+      index:
+        order:
+          score: Trafność
+          az: A-Z
+          za: Z-A
+        states:
+          label: 'Stan:'
+          header: Oznaczenie stanu
+          close: zamknij
+          checked:
+            header: Sprawdzony
+            info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer mattis vulputate nulla adipisci."
+          unchecked:
+            header: Niesaprwdzony
+            info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer mattis vulputate nulla adipisci."
+          filled:
+            header: Uzupełniony
+            info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer mattis vulputate nulla adipisci."
       edit:
         add_and_save: dodaj i zapisz
         save: zapisz zmiany
