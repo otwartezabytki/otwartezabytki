@@ -27,6 +27,8 @@ ajax_callback = (data, status, xhr) ->
     window.map = null # hack for location view...
     $parsed_data = $('<div>').append($(data))
 
+    float_fancybox = last_xhr.getResponseHeader('x-float')?
+
     try # gon script hack
       jQuery.globalEval $parsed_data.find('script:contains(window.gon)').text()
 
@@ -34,10 +36,11 @@ ajax_callback = (data, status, xhr) ->
       window.before_fancybox_url = document.location.href
       $.fancybox $(node),
         padding: 3
-        fitToView: false
-        fixed: false
-        scrolling: 'no'
-        autoCenter: false
+        fitToView: float_fancybox
+        fixed: float_fancybox
+        scrolling: if float_fancybox then 'auto' else 'no'
+        autoCenter: float_fancybox
+        autoHeight: !float_fancybox
         afterShow: ->
           $.fancybox.wrap.bind 'onReset', (e) ->
             $('body > .main-container:last').remove()
