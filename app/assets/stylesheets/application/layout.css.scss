@@ -490,6 +490,9 @@ a {
             border-color: $blue-hover transparent transparent transparent;
           }
         }
+        &:last-child{
+          width: 111px;
+        }
         .arrow{
           position: absolute;
           width: 0px;

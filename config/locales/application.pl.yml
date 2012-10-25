@@ -47,14 +47,14 @@ pl:
 
   widget:
     map_search:
-      title: Widget Mapowy
-      description: Opis widgetu mapowego
+      title: Widżet Mapowy
+      description: Opis widżetu mapowego
       thumb: widget-image-example.jpg
     add_relic:
-      title: Widget dodający zabytek
-      description: Opis widgetu dodającego zabytek
+      title: Widżet dodający zabytek
+      description: Opis widżetu dodającego zabytek
       thumb: widget-image-example.jpg
     add_alert:
-      title: Widget dodaj Alerta
-      description: Opis widgetu dodaj alerta
+      title: Widżet dodaj Alerta
+      description: Opis widżetu dodaj alerta
       thumb: widget-image-example.jpg

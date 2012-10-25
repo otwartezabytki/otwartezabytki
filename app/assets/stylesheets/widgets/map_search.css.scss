@@ -186,6 +186,11 @@ form{
       height: 100%;
       overflow-x: hidden;
       overflow-y: scroll;
+      .choices-group{
+        label{
+          display: block;
+        }
+      }
     }
   }
 }
