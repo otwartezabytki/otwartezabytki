@@ -67,15 +67,15 @@
         %span.title Widżety »
         %span.paragraph To miejsce gdzie udostępniamy aplikacje korzystające z API Otwartych Zabytków. To miejsce gdzie udostępniamy aplikacje korzystające z API Otwartych Zabytków.
     %li.alerts
-      %a{:href => widgets_add_alerts_path}
+      = link_to widgets_add_alerts_path, :method => :post do
         %span.title Alerty
         %span.paragraph Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed porta, ipsum vel.
     %li.map-search
-      %a{:href => widgets_map_search_path}
+      = link_to widgets_map_searches_path, :method => :post do
         %span.title Map search
         %span.paragraph Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed porta, ipsum vel.
     %li.add
-      %a{:href => widgets_add_relics_path}
+      = link_to widgets_add_relics_path, :method => :post do
         %span.title Dodaj
         %span.paragraph Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed porta, ipsum vel.
 
