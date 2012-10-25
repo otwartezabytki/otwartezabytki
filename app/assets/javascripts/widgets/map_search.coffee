@@ -152,10 +152,19 @@ jQuery.initializer '#map_widget', ->
     location_scroller.refresh()
     categories_scroller.refresh()
 
-  $('#search_categories_input input[type="checkbox"]').change ->
+  $('.categories input[type="checkbox"]').change ->
+    if $(this).hasClass('sacral-options')
+      filter = $(".categories div.sacral-categories")
+      if $(this).is(':checked')
+        filter.find('input[type=checkbox]').attr('checked', 'checked')
+        filter.slideDown()
+      else
+        filter.find('input[type=checkbox]').removeAttr('checked')
+        filter.slideUp()
+    # submit
     $('#new_search').submit()
 
-  $('#search_categories_input input[type="checkbox"]:disabled').each ->
+  $('.categories input[type="checkbox"]:disabled').each ->
     $(this).parents('choice').hide()
 
   if $$('.locations').length && $$('.categories').length
