@@ -20,3 +20,5 @@
       %p Zabytek nie został jeszcze skategoryzowany.
       %p Zrób to Ty!
       = link_to "dodaj kategorie", edit_section_relic_path(relic.id, :categories), :remote => true
+      .example
+        %a.show-example{:href => image_path('screenshot-categories.jpg'), :class => "fancybox"} Pokaż przykład
