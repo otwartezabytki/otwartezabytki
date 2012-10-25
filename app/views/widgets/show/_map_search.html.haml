@@ -41,7 +41,24 @@
               = link_to image_tag("widget-helper.png"), '#', :class => "tooltip", :"data-placement" => "right", :title => "To jest podpowiedź do kategorii."
             .antiscroll-wrap
               .antiscroll-inner
-                = f.input :categories, :as => :check_boxes, :collection => categoires_facets, :disabled => disabled(f.object, 'categories'), :label => 'Kategorie', :label => false
+                -# categories
+                .inputs-list.choices-group
+                  - Category.roots.sort_by(&:name).each do |c|
+                    - if c.name_key == 'sakralny'
+                      - hidden_sacral = !f.object.categories.include?('sakralny')
+                      = f.label :categories, :value => c.name_key do
+                        = f.check_box :categories, {:multiple => true, :class => 'sacral-options'}, c.name_key, nil
+                        %span
+                          = c.name
+                          %em= relics.count('sacral')
+                      .sacral-categories{:style => ('display:none;' if hidden_sacral)}
+                        - c.children.sort_by(&:name).each do |child|
+                          - next unless categoires_facets_hash.keys.include?(child.name_key)
+                          = render :partial => 'shared/category_checkbox', :locals => {:f => f, :category => child}
+                    - else
+                      - next unless categoires_facets_hash.keys.include?(c.name_key)
+                      = render :partial => 'shared/category_checkbox', :locals => {:f => f, :category => c}
+
             = link_to 'pokaż więcej...', '#', :class => "", :class => "show-more"
             = link_to 'pokaż mniej...', '#', :class => "", :class => "show-less"
     = link_to 'wyszukiwanie<br />zaawansowane »'.html_safe, relics_path(params), :target => :_top, :class => "advanced_search"

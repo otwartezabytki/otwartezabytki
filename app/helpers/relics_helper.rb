@@ -16,18 +16,8 @@ module RelicsHelper
     ].sample
   end
 
-  def categoires_facets kind = nil, relics = relics
-    categories = case kind
-      when 'sacral' then Category.sacral
-      when 'non_sacral' then Category.non_sacral
-    else
-      Category
-    end.to_hash
-    relics.terms('categories', true).map do |t|
-      if categories.keys.include? t['term']
-        ["#{categories[t['term']]} <em>#{t['count']}</em>".html_safe, t['term']]
-      end
-    end.compact.sort {|a,b| categories.keys.index(a.last) <=> categories.keys.index(b.last)}
+  def categoires_facets_hash relics = relics
+    relics.terms('categories', true).inject({}) {|m, t| m[t['term']] = t['count']; m}
   end
 
   def state_facets

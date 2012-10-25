@@ -1,10 +1,11 @@
 # -*- encoding : utf-8 -*-
 class Category < ActiveRecord::Base
-  attr_accessible :group_key, :name_key, :position, :column
+  attr_accessible :parent, :name_key, :position, :column
+  has_ancestry
   acts_as_list
 
-  scope :sacral, where(:group_key => 'sakralny')
-  scope :non_sacral, where("group_key IS NULL")
+  # scope :sacral, where(:group_key => 'sakralny')
+  # scope :non_sacral, where("group_key IS NULL")
 
 
   class << self
@@ -19,14 +20,12 @@ class Category < ActiveRecord::Base
         memo
       end
     end
+    def sacral
+      children_of(self.find_by_name_key('sakralny'))
+    end
   end
 
   def name
     I18n.t("category.names.#{name_key}")
-  end
-
-  def group_name
-    return if group_key.blank?
-    I18n.t("category.groups.#{group_key}")
   end
 end

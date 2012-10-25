@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121016144805) do
+ActiveRecord::Schema.define(:version => 20121025095542) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -49,11 +49,13 @@ ActiveRecord::Schema.define(:version => 20121016144805) do
   create_table "categories", :force => true do |t|
     t.string   "name_key"
     t.integer  "position"
-    t.string   "group_key"
     t.string   "column"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "ancestry"
   end
+
+  add_index "categories", ["ancestry"], :name => "index_categories_on_ancestry"
 
   create_table "communes", :force => true do |t|
     t.integer  "district_id"
@@ -176,9 +178,6 @@ ActiveRecord::Schema.define(:version => 20121016144805) do
   create_table "relics", :force => true do |t|
     t.integer  "place_id"
     t.text     "identification"
-    t.string   "group"
-    t.integer  "number"
-    t.string   "materail"
     t.string   "dating_of_obj"
     t.string   "street"
     t.text     "register_number"
@@ -187,19 +186,13 @@ ActiveRecord::Schema.define(:version => 20121016144805) do
     t.float    "longitude"
     t.datetime "created_at",                               :null => false
     t.datetime "updated_at",                               :null => false
-    t.string   "internal_id"
     t.string   "ancestry"
-    t.text     "source"
     t.integer  "commune_id"
     t.integer  "district_id"
     t.integer  "voivodeship_id"
-    t.date     "register_date"
-    t.string   "date_norm"
     t.string   "kind"
     t.boolean  "approved",        :default => false
     t.string   "categories"
-    t.integer  "skip_count",      :default => 0
-    t.integer  "edit_count",      :default => 0
     t.text     "description",     :default => ""
     t.string   "tags"
     t.string   "type",            :default => "Relic"
@@ -283,6 +276,12 @@ ActiveRecord::Schema.define(:version => 20121016144805) do
   add_index "suggestions", ["dating_of_obj_action"], :name => "index_suggestions_on_dating_of_obj_action"
   add_index "suggestions", ["identification_action"], :name => "index_suggestions_on_identification_action"
   add_index "suggestions", ["place_id_action"], :name => "index_suggestions_on_place_id_action"
+
+  create_table "tags", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "tolk_locales", :force => true do |t|
     t.string   "name"

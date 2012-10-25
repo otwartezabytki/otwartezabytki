@@ -2,16 +2,18 @@
 #browse-list{:style => ('display:none;')}
   .categories-list
     %h3 Kategorie:
-    - c = categoires_facets('non_sacral', relics).first
-    = link_to c.first, relics_path(:search => {:categories => [c.last]})
-    - hidden_sacral = true
-    %h4
-      = link_to "#{t('category.groups.sakralny')} <em>#{relics.count('sacral')}</em>".html_safe, '#', :class => ('sacral-options ' + (hidden_sacral ? '' : 'shown'))
-    .sacral-categories{:style => ('display:none;' if hidden_sacral)}
-      - categoires_facets('sacral', relics).each do |c|
-        = link_to c.first, relics_path(:search => {:categories => [c.last]})
-    - categoires_facets('non_sacral', relics).drop(1).each do |c|
-      = link_to c.first, relics_path(:search => {:categories => [c.last]})
+    - categories_hash = categoires_facets_hash(relics)
+    - Category.roots.sort_by(&:name).each do |c|
+      - if c.name_key == 'sakralny'
+        %h4
+          = link_to "#{c.name} <em>#{relics.count('sacral')}</em>".html_safe, '#', :class => 'sacral-options'
+        .sacral-categories{:style => ('display:none;')}
+          - c.children.sort_by(&:name).each do |child|
+            - next unless categories_hash.keys.include?(child.name_key)
+            = link_to "#{child.name}<em>#{categories_hash[child.name_key]}</em>".html_safe, relics_path(:search => {:categories => [child.name_key]})
+      - else
+        - next unless categories_hash.keys.include?(c.name_key)
+        = link_to "#{c.name}<em>#{categories_hash[c.name_key]}</em>".html_safe, relics_path(:search => {:categories => [c.name_key]})
   .localization-list
     %h3= t('views.relics.localization_facets.header')
     %ul.nav.nav-list

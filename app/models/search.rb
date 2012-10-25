@@ -53,7 +53,7 @@ class Search
     else
       @cached_categories = @categories.split(',') if @categories.kind_of?(String)
       @cached_categories ||= @categories.reject(&:blank?)
-      @cached_categories << 'sacral' if  !@cached_categories.include?('sakral') and @cached_categories.any? { |c| Category.sacral.pluck(:name_key).include?(c) }
+      @cached_categories << 'sakralny' if !@cached_categories.include?('sakralny') and @cached_categories.any? { |c| Category.sacral.pluck(:name_key).include?(c) }
       Rails.logger.info "cat: #{@cached_categories.inspect}"
     end
     @cached_categories
@@ -230,6 +230,24 @@ class Search
     }
   end
 
+  def sacral_facet_conditions
+    # get sacral categories names
+    sacral_categories = Category.sacral.pluck(:name_key)
+    # choose only selected sacral categories from categoires attribute
+    filter_categories_array = categories.select {|s| sacral_categories.include?(s)}
+    # when no category selected we should choose everything
+    filter_categories_array = sacral_categories if filter_categories_array.empty?
+    # return facet_filter conditions
+    {
+      "facet_filter" => {
+        # skip categories from conditions, and use only the chosen one
+        "and" => array_conditions('categories') << { 'terms' => {
+          'categories' => filter_categories_array }
+        }
+      }
+    }
+  end
+
   def autocomplete_place_conds *fields
     terms_cond = array_conditions
     pq = PreparedQuery.new(place)
@@ -282,7 +300,7 @@ class Search
     terms_cond << { 'term' => { 'country' => @country } }    if @country.present?
     terms_cond << { 'term' => { 'country' => 'pl'} }               if !keys.include?('pl')    and navfacet?('pl')
     terms_cond << { 'not' => { 'term' => { 'country' => 'pl'}} }   if !keys.include?('world') and navfacet?('world')
-    terms_cond << { 'terms' => {'categories' => Category.sacral.pluck(:name_key)}} if keys.include?('sacral')
+
     if [@lat, @lon].all?(&:present?)
       terms_cond << {
         'geo_distance' => {
@@ -369,8 +387,7 @@ class Search
       facet 'categories', instance.filter_facet_conditions('categories') do
         terms :categories, :size => Category.all.size, :all_terms => true
       end
-
-      facet 'sacral', instance.filter_facet_conditions('sacral') do
+      facet 'sacral', instance.sacral_facet_conditions do
         terms nil, :script_field => 1
       end
 
