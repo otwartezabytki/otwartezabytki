@@ -35,6 +35,8 @@ class Link < ActiveRecord::Base
   validates :category, :presence => true, :inclusion => { :in => UrlCategories }, :if => :url?
   validates :category, :presence => true, :inclusion => { :in => PaperCategories }, :if => :paper?
 
+  validates :url, :name, :length => { :maximum => 255 }
+
   validates :relic, :user, :url, :name, :presence => true, :if => :url?
   validates :relic, :user, :formal_name, :name, :presence => true, :if => :paper?
 
@@ -44,7 +46,7 @@ class Link < ActiveRecord::Base
     uri = URI::parse(url)
     shortened_path = uri.path
     shortened_path = "..." + shortened_path[-20..-1].to_s if shortened_path.length > 20
-    "#{uri.host}/#{shortened_path}"
+    "#{uri.host}/#{shortened_path}".gsub(/\/*$/, '')
   end
 
   def url?
@@ -56,7 +58,12 @@ class Link < ActiveRecord::Base
   end
 
   def url=(value)
-    self[:url] = "http://#{value}" unless value.match(/^(http|ftp)/)
+    self[:url] = if value.match(/^(http|ftp)/)
+      value
+    else
+      "http://#{value}"
+    end
+
   end
 
   include CanCan::Authorization
