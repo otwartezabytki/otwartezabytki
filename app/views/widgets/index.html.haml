@@ -1,15 +1,18 @@
 #fancybox
 %section.widgets#widget_wrapper{ :"data-replace" => "#widget_wrapper" }
-  %h1.about_top Widgety:
+  %h1.about_top Widżety:
   .content
     .description
-      %h3 Czym są widgety?
-      %p Nulla facilisi. Ut metus nulla, iaculis at imperdiet quis, semper sit amet velit. Donec fermentum turpis id nulla iaculis rutrum. Mauris consequat, tellus vitae consectetur dignissim, est risus tempus dolor, at varius odio sapien sit amet lacus. Integer vulputate.
-      %h3 Jak skonfigurować widget?
-      %p Nulla facilisi. Ut metus nulla, iaculis at imperdiet quis, semper sit amet velit. Donec fermentum turpis id nulla iaculis rutrum. Mauris consequat, tellus vitae consectetur dignissim.
-      %p Nulla facilisi. Ut metus nulla, iaculis at imperdiet quis, semper sit amet velit. Donec fermentum turpis id nulla iaculis rutrum.
-      %h3 Chcesz stworzyć widget?
-      %p Nulla facilisi. Ut metus nulla, iaculis at imperdiet quis, semper sit amet velit. Donec fermentum turpis id nulla iaculis rutrum. Mauris consequat, tellus vitae consectetur dignissim, est risus tempus dolor, at varius odio sapien sit amet lacus. Integer vulputate
+      %h3 Czym są widżety?
+      %p Otwarte dane o zabytkach mogą Wam się przydać!
+      %p Udostępniamy Wam na dobry początek kilka przykładowych aplikacji, dzięki którym baza danych stanie się praktycznym źródłem wiedzy.
+      %h3 Jak użyć widżet?
+      %p Aby skorzystać z prezentowanych aplikacji, wystarczy zagnieździć kawałek kodu na dowolnej stronie internetowej.
+      %h3 Masz pomysł na widżet?
+      %p 
+        Jeśli masz pomysł na funkcjonalną aplikację wykorzystującą dane o Otwartych Zabytkach, podziel się nim z nami, a być może uda nam się go zrealizować (
+        %a{:href => "mailto:kontakt@otwartezabytki.pl"} kontakt@otwartezabytki.pl
+        )!
     .widgets
       - [Widget::MapSearch, Widget::AddRelic, Widget::AddAlert].each do |widget_template|
         = link_to method(:"widgets_#{widget_template.partial_name.pluralize}_path").call(), :class => "widget", :method => :post do

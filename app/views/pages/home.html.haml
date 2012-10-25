@@ -50,34 +50,33 @@
         %br
         uzupełniliśmy
         %strong #{Relic.where(:state => 'filled').count} zabytki
-        z rejestru IPN,
+        z rejestru NID,
         %br
         dodaliśmy
         %strong #{Relic.where(:existence => 'social').count} nowych.
       .right
         %ul
-          %li Co to jest zabytek?
-          %li Czym jest rejestr IPN?
-          %li Co Ty możesz zrobić w projekcie?
+          %li Czym jest zabytek?
+          %li Czym jest otwarty zabytek?
+          %li Jak możesz się włączyć?
           = link_to "Dowiedz się więcej &raquo;".html_safe, page_pl_path('o-projekcie'), :class => 'btn'
 .widgets-intro
   %ul
     %li.first
       %a{:href => widgets_path}
         %span.title Widżety »
-        %span.paragraph To miejsce gdzie udostępniamy aplikacje korzystające z API Otwartych Zabytków. To miejsce gdzie udostępniamy aplikacje korzystające z API Otwartych Zabytków.
+        %span.paragraph Na dobry początek udostępniamy kilka przykładowych aplikacji, dzięki którym łatwiej będzie wykorzystać dane o otwartych zabytkach na innych stronach internetowych.
     %li.alerts
       = link_to widgets_add_alerts_path, :method => :post do
-        %span.title Alerty
-        %span.paragraph Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed porta, ipsum vel.
+        %span.title Alerty:
+        %span.paragraph Zaalarmuj o złym stanie zabytku.
     %li.map-search
       = link_to widgets_map_searches_path, :method => :post do
-        %span.title Map search
-        %span.paragraph Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed porta, ipsum vel.
-    %li.add
+        %span.title Mapa:
+        %span.paragraph Wyszukaj zabytki na mapie.
       = link_to widgets_add_relics_path, :method => :post do
-        %span.title Dodaj
-        %span.paragraph Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed porta, ipsum vel.
+        %span.title Dodaj:
+        %span.paragraph Dodaj zabytki, których brakuje w naszej bazie.
 
 .stats
   %h2 Jak wygląda nasza baza zabytków?
