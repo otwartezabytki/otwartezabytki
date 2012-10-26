@@ -2,9 +2,9 @@
   #{widget.class.title}
   %a.back{:href => widgets_path} &laquo; wróć do katalogu widżetów
 .sidebar
-  = semantic_form_for widget, :url => self.send("widgets_#{widget.class.partial_name}_path", widget) do |f|
+  = semantic_form_for widget_add_alert, :url => self.send("widgets_#{widget.class.partial_name}_path", widget) do |f|
     = f.input :q, :label => false, :hint => "Wyszukaj zabytek"
-    %input{:type => "submit", :class => "use-widget", :value => "Szukaj"} 
+    = f.submit "Szukaj", :class => "use-widget"
     = f.input :relic_id, :as => :hidden, :label => false
     - if searched_relics.present?
       %h3 O który zabytek dokładnie Ci chodziło
@@ -14,8 +14,6 @@
             %li
               = link_to t('views.relicbuilders.new.choose_html'), 'javascript: void(0);', 'data-relic_id' => relic.id, 'data-identification' => relic.identification
               %strong= relic.identification
-
-    = f.submit (widget.valid? ? "Zaktualizuj widżet" : 'Wyszukaj zabytek')
 .content
   - if widget.valid?
     %h2 Podgląd wygenerowanego widżetu
@@ -30,4 +28,4 @@
   :coffeescript
     jQuery("a[data-relic_id]").click (e) ->
       $('#widget_add_alert_relic_id').val $(this).data('relic_id')
-      $('#widget_add_alert_q').val $(this).data('identification')
+      $(this).parents('form').submit()

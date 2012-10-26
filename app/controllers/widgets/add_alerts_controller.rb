@@ -11,23 +11,23 @@ class Widgets::AddAlertsController < WidgetsController
     if widget_add_alert.save
       redirect_to edit_widgets_add_alert_path(widget_add_alert)
     else
-      flash[:error] = "Nie udało się stworzyć widgeta. Zgłoś błąd administracji."
+      flash[:error] = "Nie udało się stworzyć widżeta. Zgłoś błąd administracji."
       redirect_to widgets_path
     end
   end
 
   def update
-    if widget_add_alert.save
+    if widget.relic_id != widget_add_alert.relic_id and widget_add_alert.save
       redirect_to edit_widgets_add_alert_path(widget_add_alert), :notice => "Widget został zaktualizowany"
     else
-      flash[:error] = "Nie udało się zaktualizować widgeta. Popraw błędy poniżej."
+      # flash[:error] = "Nie udało się zaktualizować widżeta. Popraw błędy poniżej."
       render :edit
     end
   end
 
   protected
     def searched_relics
-      @searched_relics ||= Search.new(:q => widget_add_alert.q, :load => true).perform.results
+      @searched_relics ||= Search.new(:q => widget_add_alert.q, :load => true).perform.results if widget_add_alert.q.present?
     end
 
 end
