@@ -4,7 +4,7 @@
       %span.number= t('views.relics.edit.events.number')
       %span.date= t('views.relics.edit.events.date')
       %span.info= t('views.relics.edit.events.info')
-      %span.action= t('views.relics.edit.events.actions')
+      %span.action= t('views.relics.edit.events.action')
     %ol.first
       %li
         = f.input :dating_of_obj, :label => false, :hint => false
@@ -29,7 +29,7 @@
             = link_to t('views.relics.edit.delete'), '#', :class => "remove_event"
 
     .add-event
-      = link_to t('views.relics.edit.events.add_new_onew'), '#', :class => "add_event", :"data-template" => "#event_template"
+      = link_to t('views.relics.edit.events.add_new_one'), '#', :class => "add_event", :"data-template" => "#event_template"
     .actions
       = f.submit t('views.relics.edit.save')
       = t('views.relics.edit.or')

@@ -615,7 +615,7 @@ pl:
         add_and_save: dodaj i zapisz
         save: zapisz zmiany
         or: lub
-        canel: anuluj
+        cancel: anuluj
         delete: usuń
         update: 'aktualizuj'
         categories:

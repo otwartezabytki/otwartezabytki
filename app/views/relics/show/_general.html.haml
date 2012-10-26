@@ -9,18 +9,9 @@
       =relic.common_name
   .status
     = state_tag(relic)
-    - if relic.existence == "existed"
-      %span.relic-info
-        Zabytek
-        %strong archiwalny
-    - elsif relic.existence == "archived"
-      %span.relic-info
-        Zabytek
-        %strong archiwalny
-    - elsif relic.existence == "social"
-      %span.relic-info
-        Zabytek
-        %strong społeczny
+    %span.relic-info
+      Zabytek
+      %strong= t("activerecord.attributes.relic.existences.#{relic.existence}")
   .location_name
     = link_to 'uzupełnij', edit_section_relic_path(relic.id, :location), :title => 'edytuj ogólne dane zabytku', :remote => true, :class => "edit-relic-link"
     %strong Lokalizacja:
