@@ -198,13 +198,14 @@ class Relic < ActiveRecord::Base
       Version.select("DISTINCT(item_id), *").where(:item_type => 'Relic', :event => "update").last(5).reverse
     end
 
-    def random_checked
-      checked_count = self.where(:state => 'checked').count
-      if checked_count.zero?
-        self.offset(rand(self.count)).first
-      else
-        self.where(:state => 'checked').offset(rand(checked_count)).first
+    def random_filled
+      conds = { :state => 'filled' }
+      relics_count = self.where(conds).count
+      if relics_count.zero?
+        conds[:state] = 'checked'
+        relics_count = self.where(conds).count
       end
+      self.where(conds).offset(rand(relics_count)).first
     end
 
     def reindex(objs)
