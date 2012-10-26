@@ -4,9 +4,10 @@
 - if widget.valid?
   .content
     %h2 Podgląd wygenerowanego widżetu
+    %span.block Znasz zabytek, którego nie ma w bazie Otwartych zabytków?
     .preview
       = raw(widget.snippet)
     %h2 Wygenerowany kod do wstawienia na stronę
     %div
-      %span.block Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulumque sapien. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum que sapien.
+      %span.block To jest gotowy kod do wstawienia na stronę. Wystarczy go skopiować i umieścić w odpowiednim miejscu na Twojej stronie.
       %textarea{:cols => "20", :rows => "3"}= widget.snippet

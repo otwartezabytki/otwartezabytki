@@ -39,7 +39,7 @@ pl:
       description: "Załącz dokumenty urzędowe i materiały archiwalne dot. zabytku. Dopuszczalne formaty: pdf, jpg, png, gif. Upewnij się, że dysponujesz prawami do udostępnienia materiałów."
     photos:
       name: Zdjęcia
-      description: "Załącz jedno lub więcej zdjęcie zabytku. Dopuszczalne formaty: Zadbaj o to, aby przeglądanie zdjęć sprawiało przyjemność innym użytkownikom - zamieszczaj wyłącznie zdjęcia dobrej jakości. "
+      description: "Załącz jedno lub więcej zdjęcie zabytku. Zadbaj o to, aby przeglądanie zdjęć sprawiało przyjemność innym użytkownikom - zamieszczaj wyłącznie zdjęcia dobrej jakości."
   alert_states:
     new: Nowy
     in_progress: Do naprawy

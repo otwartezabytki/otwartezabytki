@@ -4,7 +4,7 @@
 - if widget.valid?
   .content
     %h2 Wybierz ustawienia widżetu
-    %span.block Przykładowo jeśli chcesz wyświetlić na swojej stronie mapkę z cmentarzami żydowskimi z województwa dolnośląskiego, wybierz wojedzwództwo dolnośląskie z lokalizacji oraz kategorie „cmentarz” i „żydowski”. Nastepnie skopiuj tekst do wstawienia na stronę
+    %span.block Jeśli chcesz na przykład wyświetlić na swojej stronie mapkę z cmentarzami żydowskimi z województwa dolnośląskiego, wybierz województwo dolnośląskie z lokalizacji oraz kategorie „cmentarz” i „żydowski”. Następnie skopiuj kod do wstawienia na stronę.
     .preview
       = raw(widget.snippet)
     .sidebar
@@ -18,5 +18,5 @@
                      :input_html => { :readonly => "readonly" }
     %h2 Wygenerowany kod do wstawienia na stronę
     %div
-      %span.block Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulumque sapien. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum que sapien.
+      %span.block To jest gotowy kod do wstawienia na stronę, wygenerowany zgodnie z wybranymi przez Ciebie ustawieniami. Wystarczy go skopiować i umieścić w odpowiednim miejscu na Twojej stronie.
       %textarea{:cols => "20", :rows => "3"}= widget.snippet

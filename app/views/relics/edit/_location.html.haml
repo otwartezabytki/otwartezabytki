@@ -4,7 +4,7 @@
       = f.input :polish_relic, :as => :boolean
       .polish-location{ :style => (relic.polish_relic ? "" : "display: none;") }
         = f.input :place_id, :as => :select,
-          :collection => f.object.commune.places.not_custom, :selected => f.object.place.id, :label => t('activerecord.attributes.models.place.zero'),
+          :collection => f.object.commune.places.not_custom, :selected => f.object.place.id, :label => t('activerecord.attributes.relic.fplace'),
           :include_blank => false, :input_html => { :style => "width: 234px;" }, :hint => t('formtastic.hints.relic.place')
       .foreign-location{ :style => (relic.polish_relic ? "display: none;" : "") }
         %script(type="application/json" id="countries_location")

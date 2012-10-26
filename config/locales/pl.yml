@@ -391,7 +391,7 @@ pl:
   formtastic:
     hints:
       relic:
-        identification: "Popraw i uzupełnij (jeśli to konieczne) nazwę zespołu. Jeśli oprócz nazwy oficjalnej, zabytek funkcjonuje pod nazwą zwyczajową, dopisz ją. Np.:  Zamek Przemysła, pot. Zamek Gargamela"
+        identification: Popraw i uzupełnij (jeśli to konieczne) nazwę zabytku. 
         common_name: Jeśli zabytek ma jedną lub więcej nazw zwyczajowych, wpisz je.
         documents_info: Jeśli wiesz, gdzie fizycznie znajduje się dokumentacja zabytku, wpisz informacje dla innych zainteresowanych.
         links_info: Jeśli wiesz, gdzie fizycznie znajduje się ciekawe opracowanie na temat zabytku, wpisz informacje dla innych zainteresowanych.
@@ -399,16 +399,16 @@ pl:
         country_code: Informacja o kraju
         fprovince: Informacja o prowincji
         fplace: Wybierz z listy lub wpisz prawidłową nazwę, jeśli nie ma jej na liście.
-        street: Wpisz nazwę ulicy, np. ul. Adama Mickiewicza 34. Czasami zabytek znajduje przy głównej drodze we wsi lub z dala od domów i nie można przypisać mu konkretnej ulicy. Jeśli tak jest w tym przypadku, zaznacz x
-        place: Informacja o miejscowości
-        tags: Dodaj tagi, które pomogą poruszać się po katalogu, np. zamek, hołd_lenny, gotyk, renesans, Przemysł II, Krzyżacy, Gargamel, rezydencje_władców_Polski
+        street: "Wpisz nazwę ulicy, np. ul. Adama Mickiewicza 34. Czasami zabytek znajduje przy głównej drodze we wsi lub z dala od domów i nie można przypisać mu konkretnej ulicy. Jeśli tak jest w tym przypadku, zaznacz 'Nie da się ustalić adresu'."
+        place: Wpisz nazwę miejscowości lub wybierz ją z listy.
+        tags: Dodaj tagi, które pomogą poruszać się po katalogu, np. zamek, hołd lenny, gotyk, renesans, Przemysł II, Krzyżacy, Gargamel, rezydencje władców Polski. Kolejne tagi zatwierdzaj klawiszem Enter.
         categories: Wybierz kategorie, które Twoim zdaniem pasują do opisywanego zabytku.
       document:
         name: Do jest podpowiedź do nazwy dokumentu
         description: To jest podpowiedź do opisu dokumentu
       photo:
-        author: To jest podpowiedź do autora zdjęcia
-        date_taken: To jest podpowiedź do daty wykonania zdjęcia
+        author: Podaj imię i nazwisko autora. Jeśli nie są znane, podaj nick, którym posługuje się przy publikacji zdjęć.
+        date_taken: Podaj datę wykonania zdjęcia. Jeśli nie możesz jej ustalić wpisz "nieznana".
       entry:
         title: Nadaj tytuł. Np. Legenda o powstaniu zamku
         body: Pamiętaj o podaniu źródła!
