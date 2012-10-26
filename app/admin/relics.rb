@@ -31,8 +31,8 @@ ActiveAdmin.register Relic do
       end
 
       f.input :parent_id, :as => :select, :label => "ID zespołu zabytków", :collection => descendants, :selected => f.object.parent_id
-      f.input :state, :as => :select, :include_blank => false, :collection => { "Sprawdzony" => "checked", "Niesprawdzony" => "unchecked", "Uzupełniony" => "filled" }
-      f.input :existence, :as => :select, :include_blank => false, :collection => { "Rejestrowy" => "existed", "Archiwalny" => "archived", "Społecznościowy" => "social" }
+      f.input :state, :as => :select, :include_blank => false, :collection => t('activerecord.attributes.relic.states').to_a.map(&:reverse)
+      f.input :existence, :as => :select, :include_blank => false, :collection => t('activerecord.attributes.relic.existences').to_a.map(&:reverse)
 
       f.input :identification, :as => :string
       f.input :description
@@ -53,7 +53,6 @@ ActiveAdmin.register Relic do
       f.input :fplace
       f.input :documents_info
       f.input :links_info
-      f.input :group
 
       f.buttons
     end

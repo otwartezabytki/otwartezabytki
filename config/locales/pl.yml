@@ -226,14 +226,16 @@ pl:
         voivodeship: "Województwo"
         district: "Powiat"
         commune: "Gmina"
+        state: status
+        existence: stan
         states:
           checked: 'sprawdzony'
           unchecked: 'niesprawdzony'
           filled: 'uzupełniony'
         existences:
-          existed: 'istniejący w rejestrze'
+          existed: 'wpisany do rejestru zabytków'
           archived: 'archiwalny'
-          social: 'społecznie dodany'
+          social: 'dodany społecznościowo'
         description_facets:
           T: 'z opisem'
           F: 'brak opisu'
@@ -384,14 +386,10 @@ pl:
       many:   "Pozostało do końca"
       other:  "Pozostało do końca"
 
-  relic:
-    status:
-      checked_but_not_filled: "Sprawdzony, ale nieuzupełniony"
-
   formtastic:
     hints:
       relic:
-        identification: Popraw i uzupełnij (jeśli to konieczne) nazwę zabytku. 
+        identification: Popraw i uzupełnij (jeśli to konieczne) nazwę zabytku.
         common_name: Jeśli zabytek ma jedną lub więcej nazw zwyczajowych, wpisz je.
         documents_info: Jeśli wiesz, gdzie fizycznie znajduje się dokumentacja zabytku, wpisz informacje dla innych zainteresowanych.
         links_info: Jeśli wiesz, gdzie fizycznie znajduje się ciekawe opracowanie na temat zabytku, wpisz informacje dla innych zainteresowanych.

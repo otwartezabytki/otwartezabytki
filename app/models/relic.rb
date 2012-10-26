@@ -341,10 +341,6 @@ class Relic < ActiveRecord::Base
     suggestions.count >= 3
   end
 
-  def status
-    :checked_but_not_filled
-  end
-
   def country_code= value
     self[:country_code] = (value || 'pl').upcase
   end
