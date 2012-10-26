@@ -205,7 +205,7 @@ class Relic < ActiveRecord::Base
         conds[:state] = 'checked'
         relics_count = self.where(conds).count
       end
-      self.where(conds).offset(rand(relics_count)).first
+      self.where(conds).offset(rand(relics_count)).first || self.offset(rand(self.count)).first
     end
 
     def reindex(objs)
