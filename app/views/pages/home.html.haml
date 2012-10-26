@@ -42,18 +42,11 @@
     .welcome
       %h3 Zapraszamy do współtworzenia katalogu Otwartych Zabytków
       .left
-        Tworzymy obywatelską bazę zabytków.
+        Wybierz dowolny zabytek z naszej bazy. 
         %br
-        W projekcie wzięło udział już
-        %strong #{User.count} osób
-        ,
+        Wyszukaj informacje i uzupełnij jego profil. 
         %br
-        uzupełniliśmy
-        %strong #{Relic.where(:state => 'filled').count} zabytki
-        z rejestru NID,
-        %br
-        dodaliśmy
-        %strong #{Relic.where(:existence => 'social').count} nowych.
+        Jeśli Twojego zabytku nie ma w bazie - dodaj go.
       .right
         %ul
           %li Czym jest zabytek?
@@ -74,6 +67,7 @@
       = link_to widgets_map_searches_path, :method => :post do
         %span.title Mapa:
         %span.paragraph Wyszukaj zabytki na mapie.
+    %li.add
       = link_to widgets_add_relics_path, :method => :post do
         %span.title Dodaj:
         %span.paragraph Dodaj zabytki, których brakuje w naszej bazie.

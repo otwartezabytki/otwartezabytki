@@ -48,13 +48,13 @@ pl:
   widget:
     map_search:
       title: Widżet Mapowy
-      description: Opis widżetu mapowego
+      description: Wyszukaj zabytki na mapie. Zobacz, jakie zabytki znajdują się w Twojej okolicy.
       thumb: widget-image-example.jpg
     add_relic:
       title: Widżet dodający zabytek
-      description: Opis widżetu dodającego zabytek
+      description: Znasz zabytki, których brakuje w naszej bazie? Dodaj je i podziel się swoją wiedzą z innymi.
       thumb: widget-image-example.jpg
     add_alert:
       title: Widżet dodaj Alerta
-      description: Opis widżetu dodaj alerta
+      description: Jeśli wiesz, że jakiś zabytek jest w złym stanie - zaalarmuj. Dołącz zdjęcie i opis.
       thumb: widget-image-example.jpg
