@@ -5,6 +5,7 @@ class RelicbuildersController < ApplicationController
 
   before_filter :authenticate_user!, :except => [:geodistance, :administrative_level]
   before_filter :enable_fancybox, :only => [:geodistance]
+  before_filter :redirect_finished_relic, :only => [:address, :details, :photos, :update]
   helper_method :address_params
 
   def new
@@ -58,7 +59,7 @@ class RelicbuildersController < ApplicationController
     elsif params[:place_id].present?
       Place.find(params[:place_id])
     end
-    if @relic = Relic.find_by_id(params[:relic_id])
+    if @relic = Relic.find_by_id(params[:id])
       @relic.build_state = 'address_step'
     else
       @relic = if geo_hash && geo_hash[:foreign]
@@ -73,7 +74,7 @@ class RelicbuildersController < ApplicationController
       end
       @relic.place = place if place
       @relic.parent_id = params[:parent_id]
-      @relic.street = (geo_hash || {}).get_deep(:street)
+      @relic.street = (geo_hash || {}).get_deep(:street) || @relic.street
     end
   end
 
@@ -119,8 +120,10 @@ class RelicbuildersController < ApplicationController
         else
           render @relic.invalid_step_view
         end
+      when 'finish_step'
+        redirect_to @relic
       else
-        raise Exception.new("Incorrect build step!")
+        raise Exception.new("Incorrect build step: #{@relic.build_state}")
       end
     else
       render @relic.invalid_step_view
@@ -130,6 +133,13 @@ class RelicbuildersController < ApplicationController
   protected
     def address_params
       (params[:relic] || params).slice(:latitude, :longitude, :place_id, :parent_id)
+    end
+
+    def redirect_finished_relic
+      @relic = Relic.find_by_id(params[:id])
+      if @relic and @relic.build_state == 'finish_step'
+        redirect_to @relic
+      end
     end
 
 end

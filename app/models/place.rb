@@ -56,6 +56,7 @@ class Place < ActiveRecord::Base
   end
   class << self
     def find_by_position(lat, lng)
+      return nil unless lat and lng
       find_by_type = lambda do |data, *type|
         attr = ['short_name', 'long_name'].include?(type.last) ? type.pop : 'long_name'
         (data['address_components'].find { |c| type.all? { |t| c['types'].include?(t) } } || {})[attr]

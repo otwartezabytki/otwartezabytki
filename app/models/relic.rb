@@ -330,7 +330,7 @@ class Relic < ActiveRecord::Base
 
   def update_relic_index
     # always update root document
-    root.tire.update_index
+    root.tire.update_index if build_finished?
   end
 
   def corrected_by?(user)
@@ -431,5 +431,9 @@ class Relic < ActiveRecord::Base
 
   def existance_name
     I18n.t("activerecord.attributes.relic.existences.#{existence}")
+  end
+
+  def build_finished?
+    self.build_state == 'finish_step'
   end
 end

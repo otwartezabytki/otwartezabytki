@@ -11,8 +11,7 @@
     %span= t('views.relicbuilders.stages.step2')
     %h3
       - if stage > 2
-        - p = [:latitude, :longitude, :place_id, :parent_id].inject(address_params){|m, p| m[p] ||= @relic.send(p);m}
-        - p[:relic_id] = @relic.try(:id)
+        - p = [:id, :latitude, :longitude, :place_id, :parent_id].inject(address_params){|m, p| m[p] ||= @relic.send(p);m}
         = link_to t('views.relicbuilders.stages.address'), address_relicbuilder_path(p)
       - else
         = t('views.relicbuilders.stages.address')

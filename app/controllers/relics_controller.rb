@@ -3,6 +3,7 @@ class RelicsController < ApplicationController
 
   before_filter :save_return_path
   before_filter :enable_fancybox, :only => [:edit, :update]
+  before_filter :uncomplete_relic_redirect,  :only => [:show, :edit, :update]
 
   expose(:relics) do
     tsearch.perform
@@ -112,15 +113,11 @@ class RelicsController < ApplicationController
   end
 
   protected
-    def uniq_cache_key namespace = nil
-      sliced_params = params[:q1].to_s.split.sort + params.slice(:page, :location).values
-      cache_key =  (Digest::SHA1.new << sliced_params.compact.join(' ')).to_s
-      if cache_key.blank?
-        "blank-search-query"
-      elsif namespace
-        "#{namespace}-#{cache_key}"
-      else
-        cache_key
+    def uncomplete_relic_redirect
+      if !relic.build_finished?
+        relic.build_state = 'details_step'
+        relic.valid?
+        redirect_to method("#{relic.invalid_step_view}_relicbuilder_path").call({:id => relic}), :notice => "Twój zabytek nie jest jeszcze ukończony." and return
       end
     end
 
@@ -151,16 +148,15 @@ class RelicsController < ApplicationController
       nested_ids.size ? relic.send(resource_name.to_sym).find(nested_ids) : []
     end
 
-  def destroyed_nested_resources(resource_name)
-    nested_ids = []
+    def destroyed_nested_resources(resource_name)
+      nested_ids = []
 
-    if params[:relic] && params[:relic]["#{resource_name}_attributes"]
-      params[:relic]["#{resource_name}_attributes"].each do |index, photo|
-        nested_ids.push(photo["id"].to_i) if photo["_destroy"].to_i != 0
+      if params[:relic] && params[:relic]["#{resource_name}_attributes"]
+        params[:relic]["#{resource_name}_attributes"].each do |index, photo|
+          nested_ids.push(photo["id"].to_i) if photo["_destroy"].to_i != 0
+        end
       end
+
+      nested_ids.size ? relic.send(resource_name.to_sym).find(nested_ids) : []
     end
-
-    nested_ids.size ? relic.send(resource_name.to_sym).find(nested_ids) : []
-  end
-
 end
