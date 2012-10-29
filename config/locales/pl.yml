@@ -602,13 +602,13 @@ pl:
           close: zamknij
           checked:
             header: Sprawdzony
-            info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer mattis vulputate nulla adipisci."
+            info: "Dane częściowo zweryfikowane; wymagają dopracowania."
           unchecked:
             header: Niesaprwdzony
-            info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer mattis vulputate nulla adipisci."
+            info: "Dane zaczerpnięte wprost z rejestru zabytków NID; wymagają sprawdzenia i uzupełnienia."
           filled:
             header: Uzupełniony
-            info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer mattis vulputate nulla adipisci."
+            info: "Opis prawie doskonały :)"
       edit:
         add_and_save: dodaj i zapisz
         save: zapisz zmiany

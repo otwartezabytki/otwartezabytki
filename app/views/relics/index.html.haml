@@ -52,7 +52,7 @@
                     = link_to t('views.relics.index.states.close'), '#', :class => 'close'
                     %h3= t('views.relics.index.states.header')
                     %ul
-                      - ['checked', 'unchecked', 'filled'].each do |s|
+                      - ['unchecked', 'checked', 'filled'].each do |s|
                         %li
                           .tag
                             %span{:class => s}= t("views.relics.index.states.#{s}.header")

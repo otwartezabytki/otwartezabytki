@@ -98,23 +98,31 @@
     .checked{:style => "left: #{(Relic.where(:state => 'checked').count * 900 / Relic.count.to_f) + 16}px"}
       %span= Relic.where(:state => 'checked').count
       zabytków sprawdzonych
-      = link_to "?", "#", :id => "checked_relics", :class => "js-popover checked_relics",
-        :"data-title-id" => "checked_relics_title", :"data-content-id" => "checked_relics_content"
-      %script{ :id => "checked_relics_title", :type => "text/html" }
-        %p Co to zabytki sprawdzone?
-        %p.close= link_to "zamknij", "#", :class => "close_popover", :"data-popover-id" => "checked_relics"
-      %script{ :id => "checked_relics_content", :type => "text/html" }
-        Hello world!
+      .help
+        = image_tag 'ico-help.png'
+        .help-wrapper
+          = link_to t('views.relics.index.states.close'), '#', :class => 'close'
+          %h3= t('views.relics.index.states.header')
+          %ul
+            - ['unchecked', 'checked', 'filled'].each do |s|
+              %li
+                .tag
+                  %span{:class => s}= t("views.relics.index.states.#{s}.header")
+                .text= t("views.relics.index.states.#{s}.info")
     .filled{:style => "left: #{(Relic.where(:state => 'filled').count * 900 / Relic.count.to_f) + 16}px"}
       %span= Relic.where(:state => 'filled').count
       zabytków uzupełnionych
-      = link_to "?", "#", :id => "filled_relics", :class => "js-popover filled_relics",
-        :"data-title-id" => "filled_relics_title", :"data-content-id" => "filled_relics_content"
-      %script{ :id => "filled_relics_title", :type => "text/html" }
-        %p Co to zabytki uzupełnione?
-        %p.close= link_to "zamknij", "#", :class => "close_popover", :"data-popover-id" => "filled_relics"
-      %script{ :id => "filled_relics_content", :type => "text/html" }
-        Hello world!
+      .help
+        = image_tag 'ico-help.png'
+        .help-wrapper
+          = link_to t('views.relics.index.states.close'), '#', :class => 'close'
+          %h3= t('views.relics.index.states.header')
+          %ul
+            - ['unchecked', 'checked', 'filled'].each do |s|
+              %li
+                .tag
+                  %span{:class => s}= t("views.relics.index.states.#{s}.header")
+                .text= t("views.relics.index.states.#{s}.info")
     .total
       %span= Relic.count
       wszystkich zabytków w bazie
