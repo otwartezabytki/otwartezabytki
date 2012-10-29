@@ -803,11 +803,11 @@ pl:
         documents_info: "Jeśli wiesz, gdzie fizycznie znajduje się dokumentacja zabytku, wpisz informacje dla innych zainteresowanych."
         fplace: "Wybierz z listy lub wpisz prawidłową nazwę, jeśli nie ma jej na liście."
         fprovince: "Informacja o prowincji"
-        identification: "Popraw i uzupełnij (jeśli to konieczne) nazwę zabytku."
+        identification: "Popraw i uzupełnij (jeśli to konieczne) nazwę zespołu. Jeśli oprócz nazwy oficjalnej, zabytek funkcjonuje pod nazwą zwyczajową, dopisz ją. <br> Np.:  Zamek Przemysła, pot. Zamek Gargamela"
         links_info: "Jeśli wiesz, gdzie fizycznie znajduje się ciekawe opracowanie na temat zabytku, wpisz informacje dla innych zainteresowanych."
-        place: "Wpisz nazwę miejscowości lub wybierz ją z listy."
-        street: "Wpisz nazwę ulicy, np. ul. Adama Mickiewicza 34. Czasami zabytek znajduje przy głównej drodze we wsi lub z dala od domów i nie można przypisać mu konkretnej ulicy. Jeśli tak jest w tym przypadku, zaznacz 'Nie da się ustalić adresu'."
-        tags: "Dodaj tagi, które pomogą poruszać się po katalogu, np. zamek, hołd lenny, gotyk, renesans, Przemysł II, Krzyżacy, Gargamel, rezydencje władców Polski. Kolejne tagi zatwierdzaj klawiszem Enter."
+        place: "Informacja o miejscowości"
+        street: "Wpisz nazwę ulicy, np. ul. Adama Mickiewicza 34. Czasami zabytek znajduje przy głównej drodze we wsi lub z dala od domów i nie można przypisać mu konkretnej ulicy. Jeśli tak jest w tym przypadku, zaznacz x"
+        tags: "Dodaj tagi, które pomogą poruszać się po katalogu, np. zamek, hołd_lenny, gotyk, renesans, Przemysł II, Krzyżacy, Gargamel, rezydencje_władców_Polski"
   helpers:
     select:
       prompt: Wybierz
@@ -934,7 +934,8 @@ pl:
       description: "Sprawdź, czy adres jest poprawny. Czy zabytek zaznaczony jest na mapie we właściwym miejscu?"
       name: Lokalizacja
     photos:
-      description: "Załącz jedno lub więcej zdjęcie zabytku. Zadbaj o to, aby przeglądanie zdjęć sprawiało przyjemność innym użytkownikom - zamieszczaj wyłącznie zdjęcia dobrej jakości."
+      description: "Dodaj zwięzły opis zabytku.\n\
+          Załącz jedno lub więcej zdjęcie zabytku. Zadbaj o to, aby przeglądanie zdjęć sprawiało przyjemność innym użytkownikom - zamieszczaj wyłącznie zdjęcia dobrej jakości. "
       name: Zdjęcia
   support:
     array:
@@ -1050,8 +1051,8 @@ pl:
         no_results: "brak wyników"
     relicbuilders:
       address:
-        intro1: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras convallis luctus malesuada. Pellentesque purus augue, facilisis id hendrerit et, tincidunt a mauris."
-        intro2: "Vivamus vestibulum semper odio, nec volutpat sapien egestas ut. Nam iaculis dapibus eros convallis mollis. Nullam non ligula ut leo porta venenatis sed in nibh."
+        intro1: "Wpisz adres, pod którym znajduje się zabytek."
+        intro2: "*"
       administrative_level:
         city: Miejscowość
         commune: Gmina
@@ -1059,8 +1060,8 @@ pl:
         error: "Proszę wybrać miejscowość"
         voivodeship: Województwo
       details:
-        intro1: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras convallis luctus malesuada. Pellentesque purus augue, facilisis id hendrerit et, tincidunt a mauris."
-        intro2: "Vivamus vestibulum semper odio, nec volutpat sapien egestas ut. Nam iaculis dapibus eros convallis mollis. Nullam non ligula ut leo porta venenatis sed in nibh."
+        intro1: "Wpisz nazwę obiektu, zarówno oficjalną, jak i zwyczajową (jeśli istnieje). Uzasadnij, dlaczego ten zabytek powinien znaleźć się w bazie. Co jest w nim wartościowego? Dlaczego inni mogą się nim zainteresować?"
+        intro2: "*"
         name: Nazwa
         reason: Uzasadnienie
       geodistance:
@@ -1078,9 +1079,9 @@ pl:
         country_code: "W jakim kraju"
         drag_marker: "Przeciągnij znacznik na mapę"
         header_html: "Jaka jest różnica między <br/> <span>zabytkiem</span> a zespołem <span>zabytków</span>?"
-        info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque suscipit malesuada ipsum, non vehicula nunc mollis ut. Duis nisl lorem, volutpat in tincidunt vel, volutpat in tellus."
-        intro1: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras convallis luctus malesuada. Pellentesque purus augue, facilisis id hendrerit et, tincidunt a mauris."
-        intro2: "Vivamus vestibulum semper odio, nec volutpat sapien egestas ut. Nam iaculis dapibus eros convallis mollis. Nullam non ligula ut leo porta venenatis sed in nibh."
+        info: "Zabytek to pojedynczy obiekt (np. pałac). Natomiast zespół zabytków to powiązana przestrzennie grupa budynków wyodrębniona ze względu na formę architektoniczną, styl, zastosowane materiały, funkcję, czas powstania lub związek z wydarzeniami historycznymi. Np. może to być zespół fabryki, albo zespół kamienic w centrum pochodzących z jednego okresu."
+        intro1: "Sprawdź czy zabytek na pewno jeszcze nie znalazł się w naszej bazie. Zacznij od wpisania nazwy miejscowości (wciśnij szukaj, a mapa ustawi się w środku wybranej miejscowości), a potem wskaż obiekt na mapie. Następnie wciśnij \"przejdź dalej\". Pokaże się lista obiektów z naszej bazy, które znajdują się we wskazanej okolicy. Sprawdź, czy obiekt, który chcesz dodać, nie znajduje się na liście. Jeśli go nie ma, możesz kontynuować dodawanie zabytku do bazy,"
+        intro2: "*"
         no_resutls: "Brak wyników"
         original_name: "Nazwa oryginalna"
         place: Miejscowość
@@ -1092,42 +1093,24 @@ pl:
       parent_relic:
         complex: "Dodajesz zabytek do zespołu"
       photos:
-        intro1: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras convallis luctus malesuada. Pellentesque purus augue, facilisis id hendrerit et, tincidunt a mauris."
-        intro2: "Vivamus vestibulum semper odio, nec volutpat sapien egestas ut. Nam iaculis dapibus eros convallis mollis. Nullam non ligula ut leo porta venenatis sed in nibh."
+        intro1: "Załącz jedno lub więcej zdjęcie zabytku. Zadbaj o to, aby przeglądanie zdjęć sprawiało przyjemność innym użytkownikom - zamieszczaj wyłącznie zdjęcia dobrej jakości. "
+        intro2: "*"
         submit: "Zakończ! i zobacz dodany zabytek"
       stages:
         address: "dane adresowe"
-        check_existance: "sprawdź istnienie"
+        check_existance: "sprawdź w bazie"
         check_existance_confirm: "Uwaga utracisz wprowadzone dane, rozpoczniesz process dodawania zabytku jeszcze raz. Jesteś pewien?"
         details: szczegóły
         photos: "zdjęcia i opis"
         step1: "krok 1"
-        step1_description1: "Lorem ipsum dolor sit amet, consectetur adipiscing."
-        step1_description2: "Lorem ipsum dolor sit amet, consectetur adipiscing."
-        step1_description3: "Lorem ipsum dolor sit amet, consectetur adipiscing."
-        step1_description4: "Lorem ipsum dolor sit amet, consectetur adipiscing."
+        step1_description1: "Sprawdź, czy zabytek na pewno nie jest już w naszej bazie."
+        step1_description2: "Podaj adres, pod którym znajduje się dodawany zabytek."
+        step1_description3: "Wpisz nazwę zabytku i uzasadnij, dlaczego powinien znaleźć się w naszej bazie."
+        step1_description4: "Dodaj zdjęcia i zwięzły opis zabytku."
         step2: "krok 2"
         step3: "krok 3"
         step4: "krok 4"
     relics:
-      index:
-        order:
-          score: Trafność
-          az: A-Z
-          za: Z-A
-        states:
-          label: 'Stan:'
-          header: Oznaczenie stanu
-          close: zamknij
-          checked:
-            header: Sprawdzony
-            info: "Dane częściowo zweryfikowane; wymagają dopracowania."
-          unchecked:
-            header: Niesprawdzony
-            info: "Dane zaczerpnięte wprost z rejestru zabytków NID; wymagają sprawdzenia i uzupełnienia."
-          filled:
-            header: Uzupełniony
-            info: "Opis prawie doskonały :)"
       download:
         db_license: "Baza dostępna jest na licencji"
         download: "Pobierz dane"
@@ -1204,17 +1187,20 @@ pl:
       show: ~
   widget:
     add_alert:
-      description: "Jeśli wiesz, że jakiś zabytek jest w złym stanie - zaalarmuj. Dołącz zdjęcie i opis."
+      description: |-
+          Znalazłeś/aś zabytek w złym stanie? Zaalarmuj! Dzięki tej aplikacji możesz błyskawicznie zareagować i przesłać nam informacje.
+          Będziemy je gromadzić i regularnie przesyłać do odpowiednich władz.
       thumb: widget-image-example.jpg
-      title: "Widżet dodaj Alerta"
+      title: "Widget \"Dodaj alert\""
     add_relic:
-      description: "Znasz zabytki, których brakuje w naszej bazie? Dodaj je i podziel się swoją wiedzą z innymi."
+      description: "Zabytek, którego szukasz nie został jeszcze dodany do katalogu Otwartych Zabytków?\n\
+          Ta aplikacja umożliwi dodanie go w każdej chwili, wraz z opisem i zestawem zdjęć. "
       thumb: widget-image-example.jpg
-      title: "Widżet dodający zabytek"
+      title: "Widget \"Dodaj zabytek\""
     map_search:
-      description: "Wyszukaj zabytki na mapie. Zobacz, jakie zabytki znajdują się w Twojej okolicy."
+      description: "Dzięki tej aplikacji możesz zobaczyć zabytki z naszej bazy na mapie. Możesz zawęzić listę wyświetlanych zabytków w oparciu o położenie i kategorie (np. tylko cmentarze w Zamościu lub wszystkie pałace i kamienice w województwie śląskim)."
       thumb: widget-image-example.jpg
-      title: "Widżet Mapowy"
+      title: "Widget Mapowy"
   wuoz:
     wuoz-w-bialymstoku: "Wojewódzki Urząd Ochrony Zabytków w Białymstoku"
     wuoz-w-gdansku: "Wojewódzki Urząd Ochrony Zabytków w Gdańsku"
