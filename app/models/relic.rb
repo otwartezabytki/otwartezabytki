@@ -195,7 +195,11 @@ class Relic < ActiveRecord::Base
 
   class << self
     def recently_modified_revisions
-      Version.select("DISTINCT(item_id), *").where(:item_type => 'Relic', :event => "update").last(5).reverse
+      Version.select('DISTINCT ON (item_id) * ')
+        .order('item_id, versions.id DESC')
+        .where(:item_type => 'Relic', :event => 'update')
+        .joins('INNER JOIN relics on relics.id = versions.item_id')
+        .last(5).reverse
     end
 
     def random_filled
