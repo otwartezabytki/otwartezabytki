@@ -76,6 +76,8 @@ class Relic < ActiveRecord::Base
   serialize :tags, Array
   serialize :categories, Array
 
+  scope :created, where(:build_state => 'finish_step')
+
   aasm :column => :build_state do
     state :create_step, :initial => true
     state :address_step
@@ -198,7 +200,7 @@ class Relic < ActiveRecord::Base
       Version.select('DISTINCT ON (item_id) * ')
         .order('item_id, versions.id DESC')
         .where(:item_type => 'Relic', :event => 'update')
-        .joins('INNER JOIN relics on relics.id = versions.item_id')
+        .joins("INNER JOIN relics on relics.id = versions.item_id AND relics.build_state = 'finish_step'")
         .last(5).reverse
     end
 

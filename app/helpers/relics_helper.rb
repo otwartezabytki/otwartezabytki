@@ -106,4 +106,14 @@ module RelicsHelper
       t("views.pages.home.revision_change.#{k}")
     end.compact.join(', ')
   end
+
+  def relic_stats
+    return @relic_stats if defined? @relic_stats
+    @relic_stats = {
+      :unchecked  => Relic.created.where(:state => 'unchecked').count,
+      :checked    => Relic.created.where(:state => 'checked').count,
+      :filled     => Relic.created.where(:state => 'filled').count,
+      :total      => Relic.created.count
+    }
+  end
 end

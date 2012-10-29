@@ -42,9 +42,9 @@
     .welcome
       %h3 Zapraszamy do współtworzenia katalogu Otwartych Zabytków
       .left
-        Wybierz dowolny zabytek z naszej bazy. 
+        Wybierz dowolny zabytek z naszej bazy.
         %br
-        Wyszukaj informacje i uzupełnij jego profil. 
+        Wyszukaj informacje i uzupełnij jego profil.
         %br
         Jeśli Twojego zabytku nie ma w bazie - dodaj go.
       .right
@@ -94,9 +94,9 @@
             = link_to "Przejdź do profilu zabytku", revision.item
   .progress-bar
     .bg
-      .color{:style => "width: #{Relic.where(:state => 'checked').count * 100 / Relic.count.to_f}%"}
-    .checked{:style => "left: #{(Relic.where(:state => 'checked').count * 900 / Relic.count.to_f) + 16}px"}
-      %span= Relic.where(:state => 'checked').count
+      .color{:style => "width: #{relic_stats[:checked] * 100 / relic_stats[:total].to_f}%"}
+    .checked{:style => "left: #{(relic_stats[:checked] * 900 / relic_stats[:total].to_f) + 16}px"}
+      %span= relic_stats[:checked]
       zabytków sprawdzonych
       .help
         = image_tag 'ico-help.png'
@@ -109,8 +109,8 @@
                 .tag
                   %span{:class => s}= t("views.relics.index.states.#{s}.header")
                 .text= t("views.relics.index.states.#{s}.info")
-    .filled{:style => "left: #{(Relic.where(:state => 'filled').count * 900 / Relic.count.to_f) + 16}px"}
-      %span= Relic.where(:state => 'filled').count
+    .filled{:style => "left: #{(relic_stats[:filled] * 900 / relic_stats[:total].to_f) + 16}px"}
+      %span= relic_stats[:filled]
       zabytków uzupełnionych
       .help
         = image_tag 'ico-help.png'
@@ -124,9 +124,9 @@
                   %span{:class => s}= t("views.relics.index.states.#{s}.header")
                 .text= t("views.relics.index.states.#{s}.info")
     .total
-      %span= Relic.count
+      %span= relic_stats[:total]
       wszystkich zabytków w bazie
       %br
       w tym
-      %strong= Relic.where(:state => 'unchecked').count
+      %strong= relic_stats[:unchecked]
       niesprawdzonych
