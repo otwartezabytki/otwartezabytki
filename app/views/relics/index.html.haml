@@ -76,11 +76,11 @@
           .search-no-results
             %p= t('views.relics.index.no_results_html')
             - if tsearch.suggestions.present?
-              %p
-                = t('views.relics.index.suggestion')
-                - tsearch.suggestions.each do |s|
-                  = link_to relics_path(search_params(:q => s.name)), :remote => true do
-                    %strong= "#{s.name},"
+              -# %p
+              -#   = t('views.relics.index.suggestion')
+              -#   - tsearch.suggestions.each do |s|
+              -#     = link_to relics_path(search_params(:q => s.name)), :remote => true do
+              -#       %strong= "#{s.name},"
 
         - elsif relics.present?
           %div.relic-header.search
