@@ -18,10 +18,10 @@
                     .preview
                       = image_tag photo.file.midi.url
                     - if photo.user_id == current_user.id
-                      = link_to t('views.relicbuilders.photos.delete_photo'), relic_photo_path(@relic.id, photo.id, :build => true),
+                      = link_to t('views.relics.edit.photos.delete_photo'), relic_photo_path(@relic.id, photo.id, :build => true),
                         :method => :delete,
                         :remote => true,
-                        :confirm => t('views.relicbuilders.photos.delete_confirm'),
+                        :confirm => t('views.relics.edit.photos.delete_confirm'),
                         :class => "remove_photo"
                   .column-right
                     = f2.input :author, :input_html => { :class => "author" }
@@ -43,7 +43,7 @@
 
             .column-right
               %p
-                %strong= t('views.relicbuilders.photos.loading')
+                %strong= t('views.relics.edit.photos.loading')
                 = link_to 'anuluj', '#', :class => "cancel_upload"
               %p
                 .progressbar
@@ -52,7 +52,7 @@
           .photo-upload
             = file_field_tag "photo[file]", :class => 'photo_upload', :"data-url" => "#{relic_photos_path(@relic, :build => true)}"
 
-          = f.input :license_agreement, :input_html => { :checked => 'checked' }, :as => :boolean, :label => t('views.relicbuilders.photos.statement')
+          = f.input :license_agreement, :input_html => { :checked => 'checked' }, :as => :boolean, :label => t('views.relics.edit.photos.statement_html')
 
           .actions
             = f.submit t('views.relicbuilders.photos.submit')

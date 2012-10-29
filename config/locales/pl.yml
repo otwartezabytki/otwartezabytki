@@ -585,10 +585,6 @@ pl:
       photos:
         intro1: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras convallis luctus malesuada. Pellentesque purus augue, facilisis id hendrerit et, tincidunt a mauris."
         intro2: "Vivamus vestibulum semper odio, nec volutpat sapien egestas ut. Nam iaculis dapibus eros convallis mollis. Nullam non ligula ut leo porta venenatis sed in nibh."
-        delete_photo: usuń zdjęcie
-        delete_confirm: Czy aby na pewno?
-        loading: "Trwa wgrywanie, proszę czekać..."
-        statement: "Oświadczam, że posiadam prawa do publikowania na stronie OtwarteZabytki.pl dodane powyżej zdjęcia."
         submit: 'Zakończ! i zobacz dodany zabytek'
     relics:
       index:
