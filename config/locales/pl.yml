@@ -1172,7 +1172,7 @@ pl:
           header: "Oznaczenie stanu"
           label: "Stan:"
           unchecked:
-            header: Niesaprwdzony
+            header: Niesprawdzony
             info: "Dane zaczerpnięte wprost z rejestru zabytków NID; wymagają sprawdzenia i uzupełnienia."
       localization_facets:
         header: Lokalizacja
@@ -1191,16 +1191,16 @@ pl:
           Znalazłeś/aś zabytek w złym stanie? Zaalarmuj! Dzięki tej aplikacji możesz błyskawicznie zareagować i przesłać nam informacje.
           Będziemy je gromadzić i regularnie przesyłać do odpowiednich władz.
       thumb: widget-image-example.jpg
-      title: "Widget \"Dodaj alert\""
+      title: "Widżet \"Dodaj alert\""
     add_relic:
       description: "Zabytek, którego szukasz nie został jeszcze dodany do katalogu Otwartych Zabytków?\n\
           Ta aplikacja umożliwi dodanie go w każdej chwili, wraz z opisem i zestawem zdjęć. "
       thumb: widget-image-example.jpg
-      title: "Widget \"Dodaj zabytek\""
+      title: "Widżet \"Dodaj zabytek\""
     map_search:
       description: "Dzięki tej aplikacji możesz zobaczyć zabytki z naszej bazy na mapie. Możesz zawęzić listę wyświetlanych zabytków w oparciu o położenie i kategorie (np. tylko cmentarze w Zamościu lub wszystkie pałace i kamienice w województwie śląskim)."
       thumb: widget-image-example.jpg
-      title: "Widget Mapowy"
+      title: "Widżet Mapowy"
   wuoz:
     wuoz-w-bialymstoku: "Wojewódzki Urząd Ochrony Zabytków w Białymstoku"
     wuoz-w-gdansku: "Wojewódzki Urząd Ochrony Zabytków w Gdańsku"
