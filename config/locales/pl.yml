@@ -604,7 +604,7 @@ pl:
             header: Sprawdzony
             info: "Dane częściowo zweryfikowane; wymagają dopracowania."
           unchecked:
-            header: Niesaprwdzony
+            header: Niesprawdzony
             info: "Dane zaczerpnięte wprost z rejestru zabytków NID; wymagają sprawdzenia i uzupełnienia."
           filled:
             header: Uzupełniony
