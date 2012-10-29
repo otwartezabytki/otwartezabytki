@@ -987,8 +987,8 @@ pl:
           alert_error: "Token stracił ważność."
           ask_account: "Zmień hasło"
           header: "Zmiana hasła"
-          new_password_request: "Wylij zapytanie o nowy"
-          passoword_confirmation: "Powtórz nowe hasło"
+          new_password_request: "Wśylij zapytanie o nowy"
+          password_confirmation: "Powtórz nowe hasło"
           password: "Nowe hasło"
           submit: "Zmień hasło"
         new:
