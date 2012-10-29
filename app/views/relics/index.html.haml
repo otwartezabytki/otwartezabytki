@@ -3,7 +3,7 @@
   .span3
     = render 'localization_facets'
     .sidebar-categories
-      %h3 Kategorie:
+      %h3= t('views.relics.index.categories')
       -# categories
       .inputs-list.choices-group
         - Category.roots.sort_by(&:name).each do |c|
@@ -27,20 +27,20 @@
       .form-advance-search
         %section.main-search
           .field.subject
-            = f.input :q, :label => "Co:", :placeholder => "co", :input_html => { :class => 'autocomplete-q'}, :hint => "np. cmentarz, stocznie poniemieckie, chopinowski"
+            = f.input :q, :input_html => { :class => 'autocomplete-q'}
 
           .field.place
-            = f.input :place, :label => "Gdzie:", :placeholder => "gdzie", :input_html => { :class => 'autocomplete-place'}, :hint => "np. Małkinia, ul. Grodzka w Krakowie"
+            = f.input :place, :input_html => { :class => 'autocomplete-place'}
           .field.time
-            %label Data powstania:
-            %span.block np. 1780, 1919-1913
+            %label= t('views.relics.index.build_date')
+            %span.block= t('views.relics.index.build_date_example')
             .wrap
-              = f.input :from,  :label => "od:"
-              = f.input :to,    :label => "do:"
+              = f.input :from
+              = f.input :to
           .field
-            = f.action :submit, :label => 'Szukaj &raquo;'.html_safe, :button_html => { :name => nil }
+            = f.action :submit, :label => t('formtastic.actions.search_html'), :button_html => { :name => nil }
           - hidden_filter = [f.object.state, f.object.has_photos, f.object.has_description, f.object.existence].flatten.compact.blank?
-          = link_to 'Opcje filtrowania', '#', :class => ('filter-options ' + (hidden_filter ? '' : 'shown'))
+          = link_to t('views.relics.index.filter_options'), '#', :class => ('filter-options ' + (hidden_filter ? '' : 'shown'))
         %section.second-search{:style => ('display:none;' if hidden_filter)}
           .wrap
             .column
@@ -60,34 +60,31 @@
 
               = f.input :state, :label => false, :as => :check_boxes, :collection => state_facets, :disabled => disabled(f.object, 'state')
             .column
-              %h4 Zawartość:
+              %h4= t('views.relics.index.content')
               = f.input :has_photos, :label => false, :as => :check_boxes, :collection => has_photos_facets, :disabled => disabled(f.object, 'has_photos')
               = f.input :has_description, :label => false, :as => :check_boxes, :collection => has_description_facets, :disabled => disabled(f.object, 'has_description')
             .column
-              %h4 Rodzaj:
+              %h4= t('views.relics.index.kind')
               = f.input :existence, :label => false, :as => :check_boxes, :collection => existence_facets, :disabled => disabled(f.object, 'existence')
         %section.order
-          = f.input :order, :as => :select, :label => "sortuj według:", :collection => order_collection, :include_blank => false, :selected => f.object.order
+          = f.input :order, :as => :select, :collection => order_collection, :include_blank => false, :selected => f.object.order
       %section.results
         .loading{:style => 'display:none;'}
           #spin
-          %h3 Trwa ładowanie wyników proszę czekać!!!
+          %h3= t('views.relics.index.loading')
         - if relics.total.zero?
           .search-no-results
-            %p
-              Żaden z zabytków w naszej bazie
-              %br
-              nie spełnia podanych kryteriów.
+            %p= t('views.relics.index.no_results_html')
             - if tsearch.suggestions.present?
               %p
-                Czy chodziło ci może o:
+                = t('views.relics.index.suggestion')
                 - tsearch.suggestions.each do |s|
                   = link_to relics_path(search_params(:q => s.name)), :remote => true do
                     %strong= "#{s.name},"
 
         - elsif relics.present?
           %div.relic-header.search
-            %h2 Wyniki wyszukiwania (#{relics.total})
+            %h2= t('views.relics.index.search_results', :count => relics.total)
           = render :partial => "relics", :locals => {:collection => relics }
 
         = paginate relics, :remote => true

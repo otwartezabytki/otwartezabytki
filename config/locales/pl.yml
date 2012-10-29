@@ -783,6 +783,8 @@ pl:
         one: "%{model} nie został zachowany z powodu jednego błędu"
         other: "%{model} nie został zachowany z powodu %{count} błędów"
   formtastic:
+    actions:
+      search_html: "Szukaj &raquo;"
     hints:
       alert:
         description: "To jest podpowiedź do opisu alertu"
@@ -808,6 +810,20 @@ pl:
         place: "Informacja o miejscowości"
         street: "Wpisz nazwę ulicy, np. ul. Adama Mickiewicza 34. Czasami zabytek znajduje przy głównej drodze we wsi lub z dala od domów i nie można przypisać mu konkretnej ulicy. Jeśli tak jest w tym przypadku, zaznacz x"
         tags: "Dodaj tagi, które pomogą poruszać się po katalogu, np. zamek, hołd_lenny, gotyk, renesans, Przemysł II, Krzyżacy, Gargamel, rezydencje_władców_Polski"
+      search:
+        place: "np. Małkinia, ul. Grodzka w Krakowie"
+        q: "np. cmentarz, stocznie poniemieckie, chopinowski"
+    labels:
+      search:
+        from: "od:"
+        order: "sortuj według:"
+        place: "Gdzie:"
+        q: "Co:"
+        to: "do:"
+    placeholders:
+      search:
+        place: gdzie
+        q: co
   helpers:
     select:
       prompt: Wybierz
@@ -988,8 +1004,8 @@ pl:
           ask_account: "Zmień hasło"
           header: "Zmiana hasła"
           new_password_request: "Wśylij zapytanie o nowy"
-          password_confirmation: "Powtórz nowe hasło"
           password: "Nowe hasło"
+          password_confirmation: "Powtórz nowe hasło"
           submit: "Zmień hasło"
         new:
           ask_account: "Co zrobić jeśli nie mam hasła?"
@@ -1157,10 +1173,19 @@ pl:
         save: "zapisz zmiany"
         update: aktualizuj
       index:
+        build_date: "Data powstania:"
+        build_date_example: "np. 1780, 1919-1913"
+        categories: "Kategorie:"
+        content: "Zawartość:"
+        filter_options: "Opcje filtrowania"
+        kind: Rodzaj
+        loading: "Trwa ładowanie wyników proszę czekać!!!"
+        no_results_html: "Żaden z zabytków w naszej bazie<br/>nie spełnia podanych kryteriów."
         order:
           az: A-Z
           score: Trafność
           za: Z-A
+        search_results: "Wyniki wyszukiwania (%{count})"
         states:
           checked:
             header: Sprawdzony
@@ -1174,6 +1199,7 @@ pl:
           unchecked:
             header: Niesprawdzony
             info: "Dane zaczerpnięte wprost z rejestru zabytków NID; wymagają sprawdzenia i uzupełnienia."
+        suggestion: "Czy chodziło ci może o:"
       localization_facets:
         header: Lokalizacja
         show_voivodeships: "Pokaż wojewewództwa"

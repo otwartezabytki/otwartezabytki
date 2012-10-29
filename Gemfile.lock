@@ -7,6 +7,13 @@ GIT
       globalize3
 
 GIT
+  remote: git://github.com/chytreg/ffi-aspell.git
+  revision: 04196c5cf86da5774f0b4d504d68f4042e82e292
+  specs:
+    ffi-aspell (0.0.3)
+      ffi (>= 1.0.11)
+
+GIT
   remote: git://github.com/gmanley/mini_magick.git
   revision: 4f25e64937d270f2232001541b50e21519aa7a33
   branch: graphicsmagick-fix
@@ -22,13 +29,6 @@ GIT
     tolk (1.3.3)
       kaminari
       ya2yaml (~> 0.26)
-
-GIT
-  remote: git@github.com:chytreg/ffi-aspell.git
-  revision: 04196c5cf86da5774f0b4d504d68f4042e82e292
-  specs:
-    ffi-aspell (0.0.3)
-      ffi (>= 1.0.11)
 
 GEM
   remote: https://rubygems.org/
