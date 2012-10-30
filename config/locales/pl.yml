@@ -139,7 +139,7 @@ pl:
           F: "brak zdjęcia"
           T: "ze zdjęciem"
         place_id: Miejsce
-        polish_relic: "Lokalizacja znajduje się w Polsce"
+        polish_relic: "Zabytek znajduje się w Polsce"
         register_number: "Aktualny numer rejestru"
         state: status
         states:
