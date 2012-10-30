@@ -1,0 +1,18 @@
+.login_title
+  %h2= t('.header', :scope => 'views')
+.right_txt_box
+
+.form_box
+  .login_intro_txt
+    Zapraszamy do współtworzenia katalogu Otwartych Zabytków
+  - if flash[:alert]
+    .alert.alert-error= flash[:alert]
+  = semantic_form_for(resource, :as => resource_name, :url => session_path(resource_name), :remote => request.xhr?) do |f|
+
+    = f.input :email, :required => false, :autofocus => true
+    = f.input :password, :required => false
+    - if devise_mapping.recoverable? && controller_name != 'passwords'
+      .link_form
+        = link_to t('.forgot_password', :scope => 'views'), new_password_path(resource_name, :host => Settings.oz.host, :only_path => false), :target => '_blank'
+        %br/
+    = f.submit t('.submit', :scope => 'views')

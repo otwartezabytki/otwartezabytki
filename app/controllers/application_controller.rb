@@ -2,6 +2,10 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :page_pl_path, :search_params, :tsearch
+  # iframe views path
+  before_filter do
+    prepend_view_path("app/views/iframe") if Subdomain.matches?(request)
+  end
 
   # disabling because it doesn't work with history back when page is retrieved from cache
   layout :resolve_layout

@@ -15,26 +15,16 @@ class AlertsController < ApplicationController
       relic.update_attributes(:existence => "archived")
       redirect_to relic_path(relic), :notice => "Zabytek został zarchiwizowany." and return
     end
-
-    render Subdomain.matches?(request) ? 'alerts/iframe/new' : 'new'
   end
 
   def create
     authorize! :create, Alert
-
     alert.user_id = current_user.try(:id)
-    if Subdomain.matches?(request)
-      if alert.save
-        render 'alerts/iframe/created'
-      else
-        render 'alerts/iframe/new'
-      end
+    if alert.save
+      render 'created' and return if Subdomain.matches?(request)
+      redirect_to relic, :notice => t('notices.alert_added')
     else
-      if alert.save
-        redirect_to relic, :notice => t('notices.alert_added')
-      else
-        render 'new'
-      end
+      render 'new'
     end
   end
 end
