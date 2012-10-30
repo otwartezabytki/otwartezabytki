@@ -29,4 +29,10 @@ class LocationBuilder
     return "" unless foreign_relic?
     [Country.find(@country_code).name, @original_name, @polish_name].compact.join(', ')
   end
+
+  def geocode_result
+    [foreign_address, Country.find(@country_code).name].map do |query|
+      Geocoder.search(query).first
+    end.compact.first
+  end
 end

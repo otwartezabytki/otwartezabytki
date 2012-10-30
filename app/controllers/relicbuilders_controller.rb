@@ -12,7 +12,7 @@ class RelicbuildersController < ApplicationController
     @relic = Relic.new
     @location = LocationBuilder.new params[:location]
     if @location.foreign_relic?
-      if geo = Geocoder.search(@location.foreign_address).first
+      if geo = @location.geocode_result
         @relic.latitude   = geo.latitude
         @relic.longitude  = geo.longitude
       end
