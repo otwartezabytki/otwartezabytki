@@ -27,6 +27,13 @@ jQuery ->
 
   toggleFontResizeButtons()
 
+jQuery.initializer '#footer', ->
+  # jquery footer cycle
+  this.find(".partner-slider-1, .partner-slider-2, .partner-slider-3").cycle
+    fx: 'fade',
+    speed:    0,
+    timeout:  4000
+
 jQuery.initializer '#menu', ->
   this.find('a.browse').click (e) ->
     e.preventDefault()

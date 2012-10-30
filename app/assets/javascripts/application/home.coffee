@@ -1,10 +1,4 @@
 jQuery.initializer 'body.show.resource_home', ->
-  # jquery footer cycle
-  this.find(".partner-slider-1, .partner-slider-2, .partner-slider-3").cycle
-    fx: 'fade',
-    speed:    0,
-    timeout:  4000
-
   this.find('#map-poland').cssMap
     size: 340
     onClick: (li) ->
