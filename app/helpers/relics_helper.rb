@@ -116,4 +116,12 @@ module RelicsHelper
       :total      => Relic.created.count
     }
   end
+
+  def polish_places(relic)
+    if relic.try(:commune)
+      relic.commune.places.not_custom
+    else
+      Place.not_custom.limit(100)
+    end
+  end
 end
