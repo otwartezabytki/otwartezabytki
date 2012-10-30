@@ -30,7 +30,7 @@
               .photo
                 .column-left
                   .preview
-                    = image_tag photo.midi.url
+                    = image_tag photo.file.midi.url
                 .column-right
                   %label= t('activerecord.attributes.photo.author')
                   %p= photo.author
