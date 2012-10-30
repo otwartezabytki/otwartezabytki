@@ -9,10 +9,12 @@
       = semantic_form_for @relic, :url => relicbuilder_path(:id => @relic.try(:id)) do |f|
         = f.hidden_field :build_state
         = f.hidden_field :parent_id
+        = f.hidden_field :latitude
+        = f.hidden_field :longitude
         - if f.object.is_a? ForeignRelic
           = f.country_code_select :country_code
-          = f.input :fprovince
-          = f.input :fplace
+          = f.input :fprovince, :hint => false
+          = f.input :fplace, :hint => false
           = f.input :street
         - else
           = render :partial => 'administrative_level', :locals => { :relic => @relic }

@@ -864,6 +864,7 @@ pl:
     relic_reverted: "Objekt został przywrócony do wskazanej wersji."
     reservation_thanks: "Dziękujemy za rejestrację! Na podany adres e-mail zostało wysłane Twoje hasło. Tymczasem zachęcamy do dalszego poprawiania zabytków:"
     unpublished_photos_has_been_delete: "Ponieważ nie zgodziłeś się na opublikowanie dodanych zdjęć, zostały one usunięte."
+    there_is_no_relics_in_the_area: "W naszej bazie nie ma zabytków znajdująych się w tej okolicy. Możesz kontynuować dodawanie zabytku"
   number:
     currency:
       format:
@@ -1098,7 +1099,7 @@ pl:
         info: "Zabytek to pojedynczy obiekt (np. pałac). Natomiast zespół zabytków to powiązana przestrzennie grupa budynków wyodrębniona ze względu na formę architektoniczną, styl, zastosowane materiały, funkcję, czas powstania lub związek z wydarzeniami historycznymi. Np. może to być zespół fabryki, albo zespół kamienic w centrum pochodzących z jednego okresu."
         intro1: "Sprawdź czy zabytek na pewno jeszcze nie znalazł się w naszej bazie. Zacznij od wpisania nazwy miejscowości (wciśnij szukaj, a mapa ustawi się w środku wybranej miejscowości), a potem wskaż obiekt na mapie. Następnie wciśnij \"przejdź dalej\". Pokaże się lista obiektów z naszej bazy, które znajdują się we wskazanej okolicy. Sprawdź, czy obiekt, który chcesz dodać, nie znajduje się na liście. Jeśli go nie ma, możesz kontynuować dodawanie zabytku do bazy,"
         intro2: "*"
-        no_resutls: "Brak wyników"
+        no_results: "Brak wyników"
         original_name: "Nazwa oryginalna"
         place: Miejscowość
         polish_name: "Nazwa spolszczona"

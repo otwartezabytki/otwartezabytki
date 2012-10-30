@@ -84,6 +84,7 @@ $.fn.specialize
       $('#map_canvas').zoom_at(lat, lng)
 
     blinking: ->
+      clearTimeout(map.timer) if map.timer
       if map && $('#map_canvas').length
         unless $('form.relic').hasClass('geocoded')
           map.counter ||= 1
@@ -92,8 +93,7 @@ $.fn.specialize
             this.circle_marker(map.circle_lat, map.circle_lng) if map.markers.length == 0
           else
             map.removeMarkers()
-
-        setTimeout ->
+        map.timer = setTimeout ->
           $('#map_canvas').blinking()
         , 1000
 

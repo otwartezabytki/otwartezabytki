@@ -13,7 +13,8 @@
         %p.intro= t('views.relicbuilders.new.intro1')
         %p.intro= t('views.relicbuilders.new.intro2')
       %section.creator-step
-        = semantic_form_for LocationBuilder.new(params[:location]), :as => 'location', :url => new_relicbuilder_path, :method => :get, :remote => true do |f|
+        - location = LocationBuilder.new(params[:location])
+        = semantic_form_for location, :as => 'location', :url => new_relicbuilder_path, :method => :get, :remote => true do |f|
           = f.input :foreign_relic, :as => :boolean, :label => t('views.relicbuilders.new.add_foreign_relic')
           .field.text.search.marker
             .polish-location{:style => "#{ 'display: none;' unless f.object.foreign_relic.to_i.zero?}"}
@@ -21,23 +22,24 @@
             .foreign-location{:style => "#{ 'display: none;' if f.object.foreign_relic.to_i.zero?}"}
               .select
                 = f.label :country_code, t('views.relicbuilders.new.country_code')
-                = f.country_code_select :country_code, [['Polska','PL' ]]
+                = f.country_code_select :country_code
               = f.input :original_name, :label => t('views.relicbuilders.new.original_name')
               = f.input :polish_name, :label => t('views.relicbuilders.new.polish_name')
           .actions
             = f.submit t('views.relicbuilders.new.search_html'), :class => 'btn'
-      - if defined? @places
-        - if @places.blank?
-          = t('views.relicbuilders.new.no_results')
-        - elsif @places.size > 1
-          %section.creator-step
-            %h3= t('views.relicbuilders.new.select_place')
-            .places-wrapper
-              %ul.places
-                - @places.each do |place|
-                  %li
-                    = (place.location_names.first(place.location_names.size - 1) << "<strong>#{place.name}</strong>").join(' > ').html_safe
-                    = link_to t('views.relicbuilders.new.choose_html'), 'javascript: void(0);', 'data-place_id' => place.id, 'data-coordinates' => "#{place.latitude}, #{place.longitude}"
+      .polish-location{:style => "#{ 'display: none;' unless location.foreign_relic.to_i.zero?}"}
+        - if defined? @places
+          - if @places.blank?
+            = t('views.relicbuilders.new.no_results')
+          - elsif @places.size > 1
+            %section.creator-step
+              %h3= t('views.relicbuilders.new.select_place')
+              .places-wrapper
+                %ul.places
+                  - @places.each do |place|
+                    %li
+                      = (place.location_names.first(place.location_names.size - 1) << "<strong>#{place.name}</strong>").join(' > ').html_safe
+                      = link_to t('views.relicbuilders.new.choose_html'), 'javascript: void(0);', 'data-place_id' => place.id, 'data-coordinates' => "#{place.latitude}, #{place.longitude}"
 
       %section.creator-step.location
         = semantic_form_for @relic, :url => geodistance_relicbuilder_path, :method => :get, :remote => true do |f|

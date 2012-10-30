@@ -48,12 +48,14 @@ jQuery.initializer 'div.new_relic section.main', ->
     map.removeMarkers()
     $('#map_canvas').circle_marker(lat, lng)
 
+
+  $("#location_country_code, #relic_country_code").select2
+    minimumResultsForSearch: 250
+    dropdownCssClass: 'search-order-dropdown'
+    containerCssClass: 'search-order-container'
+    width: '170px'
+
   $('#location_foreign_relic').change ->
-    $("#location_country_code").select2
-      minimumResultsForSearch: 250
-      dropdownCssClass: 'search-order-dropdown'
-      containerCssClass: 'search-order-container'
-      width: '170px'
     if $(this).is(':checked')
       $('.polish-location').hide()
       $('.foreign-location').show()

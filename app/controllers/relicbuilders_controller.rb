@@ -37,6 +37,7 @@ class RelicbuildersController < ApplicationController
       :lon => params.get_deep('relic', 'longitude')
     ).perform
     if @relics.total.zero?
+      flash[:notice] = t('notices.there_is_no_relics_in_the_area')
       render :js => "window.location = '#{address_relicbuilder_path(address_params)}';"
     end
   end
@@ -72,9 +73,11 @@ class RelicbuildersController < ApplicationController
       else
         Relic.new :build_state => 'address_step'
       end
-      @relic.place = place if place
-      @relic.parent_id = params[:parent_id]
-      @relic.street = (geo_hash || {}).get_deep(:street) || @relic.street
+      @relic.place      = place if place
+      @relic.parent_id  = params[:parent_id]
+      @relic.street     = (geo_hash || {}).get_deep(:street) || @relic.street
+      @relic.latitude   = (geo_hash || params).get_deep(:latitude)
+      @relic.longitude  = (geo_hash || params).get_deep(:longitude)
     end
   end
 
