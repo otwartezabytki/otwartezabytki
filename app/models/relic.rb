@@ -237,6 +237,7 @@ class Relic < ActiveRecord::Base
       :slug             => to_param,
       :type             => 'relic',
       :identification   => identification,
+      :common_name      => common_name,
       :street           => street,
       :place_full_name  => place_full_name,
       :descendants      => self.descendants.map(&:to_descendant_hash),
@@ -267,6 +268,7 @@ class Relic < ActiveRecord::Base
       :slug                 => to_param,
       :type                 => 'relic',
       :identification       => identification,
+      :common_name          => common_name,
       :street               => street,
       :street_normalized    => street_normalized,
       :place_full_name      => place_full_name,
@@ -299,6 +301,7 @@ class Relic < ActiveRecord::Base
     {
       :id               => id,
       :identification   => identification,
+      :common_name      => common_name,
       :street           => street,
     }
   end
