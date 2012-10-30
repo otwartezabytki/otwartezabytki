@@ -367,6 +367,7 @@ class Search
           if instance.query.present?
             should { text "identification",               instance.query, 'operator' => 'AND', 'boost' => 10 }
             should { text "descendants.identification",   instance.query, 'operator' => 'AND', 'boost' => 8 }
+            should { text "tags",                         instance.query, 'operator' => 'AND', 'boost' => 3 }
             should { text "autocomplitions",              instance.query, 'operator' => 'AND', 'boost' => 1 }
           end
           if instance.place.present?
