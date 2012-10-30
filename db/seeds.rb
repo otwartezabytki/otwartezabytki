@@ -35,26 +35,26 @@
   end if children.present?
 end
 
-# # create static pages
-# Dir.glob("#{Rails.root}/db/pages/*.erb").each do |path|
-#   name = path.split('/').last.split('.').first
-#   page = Page.find_or_create_by_name(name)
-#   page.body = File.read(path)
-#   page.save
-# end
+# create static pages
+Dir.glob("#{Rails.root}/db/pages/*.erb").each do |path|
+  name = path.split('/').last.split('.').first
+  page = Page.find_or_create_by_name(name)
+  page.body = File.read(path)
+  page.save
+end
 
-# # create wuoz agencies
-# WuozAgency.connection.execute("TRUNCATE #{WuozAgency.table_name};") # truncate
-# hash = JSON.parse(File.open("#{Rails.root}/db/json/wuoz-agencies.json").read)
-# hash.each do |key, obj|
-#   obj['agencies'].each do |attrs|
-#     agency = WuozAgency.create attrs.merge('wuoz_key' => key)
-#     agency.district_names.split(',').map do |name|
-#       results = District.where(['name = ?', name.strip])
-#       Rails.logger.error "Cant find #{agency.id}: #{name}" if results.blank?
-#       results.each do |r|
-#         WuozRegion.find_or_create_by_wuoz_agency_id_and_district_id(agency.id, r.id)
-#       end
-#     end
-#   end
-# end
+# create wuoz agencies
+WuozAgency.connection.execute("TRUNCATE #{WuozAgency.table_name};") # truncate
+hash = JSON.parse(File.open("#{Rails.root}/db/json/wuoz-agencies.json").read)
+hash.each do |key, obj|
+  obj['agencies'].each do |attrs|
+    agency = WuozAgency.create attrs.merge('wuoz_key' => key)
+    agency.district_names.split(',').map do |name|
+      results = District.where(['name = ?', name.strip])
+      Rails.logger.error "Cant find #{agency.id}: #{name}" if results.blank?
+      results.each do |r|
+        WuozRegion.find_or_create_by_wuoz_agency_id_and_district_id(agency.id, r.id)
+      end
+    end
+  end
+end

@@ -1,6 +1,5 @@
 # -*- encoding : utf-8 -*-
 class RelicsController < ApplicationController
-
   before_filter :save_return_path
   before_filter :enable_fancybox, :only => [:edit, :update]
   before_filter :uncomplete_relic_redirect,  :only => [:show, :edit, :update]
@@ -82,6 +81,7 @@ class RelicsController < ApplicationController
   end
 
   def download
+    append_view_path Page::Resolver.new
     file_path = Rails.root.join('public', 'system', 'relics_history.csv')
 
     if File.exists?(file_path)

@@ -1128,12 +1128,6 @@ pl:
         step3: "krok 3"
         step4: "krok 4"
     relics:
-      download:
-        db_license: "Baza dostępna jest na licencji"
-        download: "Pobierz dane"
-        info: "Tu możesz pobrać plik w formacie .csv z aktualną zawartością bazy danych (katalogu zabytków), zawierającą historię edycji poszczególnych pól."
-        relics_database: "Baza danych zabytków"
-        unavailable_file: "plik obecnie nie dostępny"
       edit:
         add_and_save: "dodaj i zapisz"
         cancel: anuluj
