@@ -126,7 +126,7 @@ class Relic < ActiveRecord::Base
   after_save :update_relic_index
 
   # create different index for testing
-  index_name("#{Rails.env}-relics")
+  index_name("#{Setting.oz.index_env}-relics")
 
   settings :number_of_shards => 5, :number_of_replicas => 1,
     :analysis => {
