@@ -6,10 +6,7 @@
   %ul.suggested-relics
     - @relics.each do |r|
       %li{:class => cycle('even', 'odd')}
-        - if r.main_photo
-          = image_tag r.main_photo.file.url(:midi), :class => 'thumb'
-        - else
-          = image_tag "bg-relic-image-ph.png", :class => 'thumb'
+        = image_tag r.main_photo.file.url(:midi), :class => 'thumb'
         .description
           %h3
             = r.identification

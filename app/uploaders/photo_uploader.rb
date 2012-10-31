@@ -48,4 +48,8 @@ class PhotoUploader < CarrierWave::Uploader::Base
 
   end
 
+  # fallback
+  def default_url
+    "fallback/" + ["photo", version_name, "default.png"].compact.join('_')
+  end
 end

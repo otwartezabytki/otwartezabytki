@@ -25,10 +25,7 @@
       - example_relic = Relic.random_filled
       .relic-container
         .image
-          - if example_relic.has_photos?
-            = image_tag example_relic.main_photo.file.url(:icon)
-          - else
-            = image_tag "bg-relic-image-ph-small-56.png"
+          = image_tag example_relic.main_photo.file.url(:icon)
         .relic-content
           = link_to example_relic.identification, example_relic
           .status.filled= example_relic.state_name
@@ -83,10 +80,7 @@
       - Relic.recently_modified_revisions.each do |revision|
         %li
           .image
-            - if revision.item.has_photos?
-              = image_tag revision.item.main_photo.file.url(:icon)
-            - else
-              = image_tag "bg-relic-image-ph-small-56.png"
+            = image_tag revision.item.main_photo.file.url(:icon)
           .relic-content
             %p.title= revision.item.identification
             .change.added

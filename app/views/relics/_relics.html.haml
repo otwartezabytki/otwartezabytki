@@ -13,21 +13,21 @@
         %tr.relic
           %td.body
             .thumb
-              = link_to image_tag("bg-relic-image-ph-small.gif"), relic_path(relic.slug), :remote => true
+              = link_to image_tag(relic.main_photo.file.url(:icon)), relic, :remote => true
             .name
-              %h2= link_to relic.identification, relic_path(relic.slug), :remote => true
+              %h2= link_to relic.identification, relic, :remote => true
             = state_tag(relic)
           %td.location
             .pathway
               = relic.place_full_name
             .street
-              - unless relic.street.blank?
+              - if relic.street?
                 %span.known= relic.street
               - else
                 %span.unknown= t('views.relics.relics.unknown_address')
           %td.date
             .time
-              - unless relic.from.blank?
-                = relic.from
+              - if relic.date_start?
+                = relic.date_start
               - else
                 %em= t('views.relics.relics.unknown_from')

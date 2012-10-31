@@ -359,7 +359,8 @@ class Relic < ActiveRecord::Base
   end
 
   def main_photo
-    @main_photo ||= self.photos.where(:main => true).first || self.photos.first
+    return @main_photo if defined? @main_photo
+    @main_photo = (self.photos.order('CASE(photos.main) WHEN TRUE THEN 0 ELSE 1 END').first || self.photos.new)
   end
 
   # @return photos for relic and it's descendants

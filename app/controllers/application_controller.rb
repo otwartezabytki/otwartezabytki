@@ -50,7 +50,7 @@ class ApplicationController < ActionController::Base
 
   def tsearch
     return @tsearch if defined? @tsearch
-    @tsearch = Search.new search_params(:page => params[:page])[:search]
+    @tsearch = Search.new search_params(:page => params[:page], :load => true)[:search]
   end
 
   def search_params opt = {}
