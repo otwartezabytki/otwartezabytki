@@ -805,7 +805,7 @@ pl:
         documents_info: "Jeśli wiesz, gdzie fizycznie znajduje się dokumentacja zabytku, wpisz informacje dla innych zainteresowanych."
         fplace: "Wybierz z listy lub wpisz prawidłową nazwę, jeśli nie ma jej na liście."
         fprovince: "Informacja o prowincji"
-        identification: "Popraw i uzupełnij (jeśli to konieczne) nazwę zespołu."
+        identification: "Popraw i uzupełnij (jeśli to konieczne) nazwę zabytku."
         links_info: "Jeśli wiesz, gdzie fizycznie znajduje się ciekawe opracowanie na temat zabytku, wpisz informacje dla innych zainteresowanych."
         place: "Wpisz nazwę miejscowości lub wybierz ją z listy."
         street: "Wpisz nazwę ulicy, np. ul. Adama Mickiewicza 34. Czasami zabytek znajduje przy głównej drodze we wsi lub z dala od domów i nie można przypisać mu konkretnej ulicy. Jeśli tak jest w tym przypadku, zaznacz 'Nie da się ustalić adresu'."
