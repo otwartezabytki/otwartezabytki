@@ -157,7 +157,6 @@ class Relic < ActiveRecord::Base
       :identification =>  { "type" => "string", "index" => "analyzed" },
       :untouched =>  { "type" => "string", "index" => "not_analyzed" }
     }
-
     indexes :fprovince, :type => "multi_field", :fields => {
       :fprovince =>  { "type" => "string", "index" => "analyzed" },
       :untouched =>  { "type" => "string", "index" => "not_analyzed" }
@@ -166,12 +165,14 @@ class Relic < ActiveRecord::Base
       :fplace =>  { "type" => "string", "index" => "analyzed" },
       :untouched =>  { "type" => "string", "index" => "not_analyzed" }
     }
-
     indexes :autocomplitions, :type => "multi_field", :fields => {
       :autocomplitions =>  { "type" => "string", "index" => "analyzed" },
       :untouched =>  { "type" => "string", "index" => "not_analyzed" }
     }
-
+    indexes :tags, :type => "multi_field", :fields => {
+      :tags =>  { "type" => "string", "index" => "analyzed" },
+      :untouched =>  { "type" => "string", "index" => "not_analyzed" }
+    }
     indexes :street_normalized, :type => "multi_field", :fields => {
       :street_normalized =>  { "type" => "string", "index" => "analyzed" },
       :untouched =>  { "type" => "string", "index" => "not_analyzed" }
@@ -191,7 +192,6 @@ class Relic < ActiveRecord::Base
       na.indexes :from,  :type => "integer"
       na.indexes :to,  :type => "integer"
       na.indexes :country
-      na.indexes :tags
     end
   end
 
@@ -253,7 +253,7 @@ class Relic < ActiveRecord::Base
       :state            => state,
       :existence        => existence,
       :country          => ['pl', 'de', 'gb'].sample,
-      :tags             => ['wawel', 'zamek', 'zespół pałacowy', 'zamek królewski'].shuffle.first(rand(2) + 1).shuffle.first(rand(4) + 1),
+      :tags             => ['WaWel', 'ZameK', 'zespół pałacowy', 'zamek królewski'].shuffle.first(rand(2) + 1).shuffle.first(rand(4) + 1),
       :autocomplitions  => ['puchatka', 'szlachciatka', 'chata polska', 'chata mazurska', 'chata wielkopolska'].shuffle.first(rand(4) + 1),
       # Lat Lon As Array Format in [lon, lat]
       :coordinates       => [longitude, latitude]
