@@ -1,7 +1,7 @@
 .suggested-relics-wrapper
   %h1= t('views.relicbuilders.geodistance.header', :count => @relics.total)
   .info
-    %p= t('views.relicbuilders.geodistance.info_html')
+    %p= t('views.relicbuilders.geodistance.info_html', :count => @relics.total)
     %p= t('views.relicbuilders.geodistance.are_you_sure')
   %ul.suggested-relics
     - @relics.each do |r|
@@ -16,7 +16,7 @@
             %span.category
               %strong= t('views.relicbuilders.geodistance.categories')
               = r.categories.join(', ')
-          - if r.dating_of_obj.present?
+          - if r.dating_of_obj?
             %span.date
               %strong= t('views.relicbuilders.geodistance.dating')
               = r.dating_of_obj

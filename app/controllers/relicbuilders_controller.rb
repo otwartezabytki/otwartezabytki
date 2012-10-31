@@ -34,7 +34,8 @@ class RelicbuildersController < ApplicationController
   def geodistance
     @relics = Search.new(:per_page => 20,
       :lat => params.get_deep('relic', 'latitude'),
-      :lon => params.get_deep('relic', 'longitude')
+      :lon => params.get_deep('relic', 'longitude'),
+      :load => true
     ).perform
     if @relics.total.zero?
       flash[:notice] = t('notices.there_is_no_relics_in_the_area')
