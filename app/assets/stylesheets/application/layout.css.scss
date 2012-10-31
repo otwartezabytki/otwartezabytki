@@ -439,10 +439,10 @@ a {
             @include border-radius(3px);
             @include text-shadow(rgba(0,0,0,0.3) 0 1px 1px);
             @include box-shadow(inset rgba(0,0,0,0.4) 0 1px 3px);
-            &.filled{
+            &.checked{
               @include background(linear-gradient(#90b86e, #afd78c));
             }
-            &.checked{
+            &.filled{
               @include background(linear-gradient(#e0a876, #fec695));
             }
             &.unchecked{
@@ -1100,10 +1100,10 @@ table.relics{
         @include text-shadow(rgba(0,0,0,0.3) 0 1px 1px);
         @include box-shadow(inset rgba(0,0,0,0.4) 0 1px 3px);
         margin-right: 10px;
-        &.checked{
+        &.filled{
           @include background(linear-gradient(#82a663, #a1c481));
         }
-        &.filled{
+        &.checked{
           @include background(linear-gradient(#ca7a32, #fbab63));
         }
         &.unchecked{
@@ -2281,10 +2281,10 @@ body.resource_home{
         @include border-radius(3px);
         @include text-shadow(rgba(0,0,0,0.3) 0 1px 1px);
         @include box-shadow(inset rgba(0,0,0,0.4) 0 1px 3px);
-        &.filled{
+        &.checked{
           @include background(linear-gradient(#82a663, #a1c481));
         }
-        &.checked{
+        &.filled{
           @include background(linear-gradient(#ca7a32, #fbab63));
         }
         &.unchecked{
@@ -2641,10 +2641,10 @@ body.resource_home{
               @include border-radius(3px);
               @include text-shadow(rgba(0,0,0,0.3) 0 1px 1px);
               @include box-shadow(inset rgba(0,0,0,0.4) 0 1px 3px);
-              &.filled{
+              &.checked{
                 @include background(linear-gradient(#90b86e, #afd78c));
               }
-              &.checked{
+              &.filled{
                 @include background(linear-gradient(#e0a876, #fec695));
               }
               &.unchecked{
