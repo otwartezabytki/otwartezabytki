@@ -43,9 +43,9 @@ class Link < ActiveRecord::Base
   has_paper_trail :skip => [:created_at, :updated_at]
 
   def shortened_url
-    uri = URI::parse(url)
-    shortened_path = uri.path
-    shortened_path = "..." + shortened_path[-20..-1].to_s if shortened_path.length > 20
+    uri = URI::parse(URI::encode(url))
+    shortened_path = URI::decode(uri.path)
+    shortened_path = shortened_path[1..20].to_s + "..." if shortened_path.length > 20
     "#{uri.host}/#{shortened_path}".gsub(/\/*$/, '')
   end
 
