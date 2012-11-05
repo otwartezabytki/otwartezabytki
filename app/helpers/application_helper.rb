@@ -83,6 +83,31 @@ module ApplicationHelper
     @location_array = (search_params[:search][:location] || 'pl').to_s.split('-')
   end
 
+  def link_to_browse obj, deep, &block
+    name, id  = obj['term'].include?('_') ? obj['term'].split('_') : [I18n.t(obj['term'].upcase, :scope => 'countries'), obj['term']]
+    selected  = location_array[deep] == id
+    label     = "#{name} <span>#{obj['count']}</span>".html_safe
+    cond      = {:search => {:location => (location_array.first(deep) << id).join('-')}}
+    link      = link_to label, relics_path(cond)
+    output = []
+    if selected
+      output << content_tag(:div, :class => 'selected') do
+        if location_array.size == (deep + 1)
+          content_tag(:p, label)
+        else
+          link
+        end
+      end
+    else
+      output <<  link
+    end
+    if selected and block_given?
+      output.join.html_safe + capture(&block)
+    else
+      output.join.html_safe
+    end
+  end
+
   def link_to_facet obj, deep, &block
     name, id  = obj['term'].include?('_') ? obj['term'].split('_') : [I18n.t(obj['term'].upcase, :scope => 'countries'), obj['term']]
     selected  = location_array[deep] == id

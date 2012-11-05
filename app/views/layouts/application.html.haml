@@ -63,7 +63,8 @@
                 %li.gradient
                   .arrow
                   = link_to t('layouts.application.browse'), "#", :class => "browse"
-                  = render 'shared/browse'
+                  - unless request.xhr?
+                    = render 'shared/browse'
         %section#main
           .container.main-container{ :'data-replace' => '.main-container' }
             = render 'shared/flash', :flash => flash

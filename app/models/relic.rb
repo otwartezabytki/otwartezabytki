@@ -123,7 +123,18 @@ class Relic < ActiveRecord::Base
   include Tire::Model::Search
 
   # custom tire callback
-  after_save :update_relic_index
+  after_save do
+    # always update root document
+    if build_finished?
+      root.tire.update_index
+      Rails.cache.delete('views/browse-list')
+    end
+  end
+
+  after_destroy do
+    tire.update_index
+    Rails.cache.delete('views/browse-list')
+  end
 
   # create different index for testing
   index_name("#{Settings.oz.index_env}-relics")
@@ -335,11 +346,6 @@ class Relic < ActiveRecord::Base
     else
       ["woj. #{voivodeship.name}", "pow. #{district.name}", "gm. #{commune.name}", place.name].join(', ')
     end
-  end
-
-  def update_relic_index
-    # always update root document
-    root.tire.update_index if build_finished?
   end
 
   def corrected_by?(user)

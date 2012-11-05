@@ -1,32 +1,33 @@
-- relics = tsearch.perform
-#browse-list{:style => ('display:none;')}
-  .categories-list
-    %h3 Kategorie:
-    - categories_hash = categoires_facets_hash(relics)
-    - Category.roots.sort_by(&:name).each do |c|
-      - if c.name_key == 'sakralny'
-        %h4
-          = link_to "#{c.name} <em>#{relics.count('sacral')}</em>".html_safe, '#', :class => 'sacral-options'
-        .sacral-categories{:style => ('display:none;')}
-          - c.children.sort_by(&:name).each do |child|
-            - next unless categories_hash.keys.include?(child.name_key)
-            = link_to "#{child.name}<em>#{categories_hash[child.name_key]}</em>".html_safe, relics_path(:search => {:categories => [child.name_key]})
-      - else
-        - next unless categories_hash.keys.include?(c.name_key)
-        = link_to "#{c.name}<em>#{categories_hash[c.name_key]}</em>".html_safe, relics_path(:search => {:categories => [c.name_key]})
-  .localization-list
-    %h3= t('views.relics.localization_facets.header')
-    %ul.nav.nav-list
-      %li
-        = link_to_facet ({'term' => 'Polska_pl', 'count' => relics.count('poland')}), 0 do
-          %ul
-            - relics.terms('voivodeships', true).each do |obj|
-              %li
-                = link_to_facet obj, 1
+- cache "browse-list" do
+  - relics =  Search.new.perform
+  #browse-list{:style => ('display:none;')}
+    .categories-list
+      %h3 Kategorie:
+      - categories_hash = categoires_facets_hash(relics)
+      - Category.roots.sort_by(&:name).each do |c|
+        - if c.name_key == 'sakralny'
+          %h4
+            = link_to "#{c.name} <em>#{relics.count('sacral')}</em>".html_safe, '#', :class => 'sacral-options'
+          .sacral-categories{:style => ('display:none;')}
+            - c.children.sort_by(&:name).each do |child|
+              - next unless categories_hash.keys.include?(child.name_key)
+              = link_to "#{child.name}<em>#{categories_hash[child.name_key]}</em>".html_safe, relics_path(:search => {:categories => [child.name_key]})
+        - else
+          - next unless categories_hash.keys.include?(c.name_key)
+          = link_to "#{c.name}<em>#{categories_hash[c.name_key]}</em>".html_safe, relics_path(:search => {:categories => [c.name_key]})
+    .localization-list
+      %h3= t('views.relics.localization_facets.header')
+      %ul.nav.nav-list
+        %li
+          = link_to_browse ({'term' => 'Polska_pl', 'count' => relics.count('poland')}), 0 do
+            %ul
+              - relics.terms('voivodeships', true).each do |obj|
+                %li
+                  = link_to_browse obj, 1
 
-      %li
-        = link_to_facet ({'term' => "#{t('views.relics.localization_facets.world_relics')}_world", 'count' => relics.count('world')}), 0 do
-          %ul
-            - relics.terms('countries', true).each do |obj|
-              %li
-                = link_to_facet obj, 1
+        %li
+          = link_to_browse ({'term' => "#{t('views.relics.localization_facets.world_relics')}_world", 'count' => relics.count('world')}), 0 do
+            %ul
+              - relics.terms('countries', true).each do |obj|
+                %li
+                  = link_to_browse obj, 1
