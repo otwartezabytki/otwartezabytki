@@ -439,14 +439,14 @@ a {
             @include border-radius(3px);
             @include text-shadow(rgba(0,0,0,0.3) 0 1px 1px);
             @include box-shadow(inset rgba(0,0,0,0.4) 0 1px 3px);
-            &.checked{
-              @include background(linear-gradient(#90b86e, #afd78c));
-            }
-            &.filled{
-              @include background(linear-gradient(#e0a876, #fec695));
-            }
             &.unchecked{
               @include background(linear-gradient(#a3a4a6, #c1c3c5));
+            }
+            &.checked{
+              @include background(linear-gradient(#e0a876, #fec695));
+            }
+            &.filled{
+              @include background(linear-gradient(#90b86e, #afd78c));
             }
           }
         }
@@ -1100,17 +1100,14 @@ table.relics{
         @include text-shadow(rgba(0,0,0,0.3) 0 1px 1px);
         @include box-shadow(inset rgba(0,0,0,0.4) 0 1px 3px);
         margin-right: 10px;
-        &.filled{
-          @include background(linear-gradient(#82a663, #a1c481));
+        &.unchecked{
+          @include background(linear-gradient(#a3a4a6, #c1c3c5));
         }
         &.checked{
-          @include background(linear-gradient(#ca7a32, #fbab63));
+          @include background(linear-gradient(#e0a876, #fec695));
         }
-        &.unchecked{
-          @include background(linear-gradient(#7d7f7f, #9c9d9d));
-        }
-        &.unfilled{
-          @include background(linear-gradient(#7d7f7f, #9c9d9d));
+        &.filled{
+          @include background(linear-gradient(#90b86e, #afd78c));
         }
       }
     }
@@ -2281,14 +2278,14 @@ body.resource_home{
         @include border-radius(3px);
         @include text-shadow(rgba(0,0,0,0.3) 0 1px 1px);
         @include box-shadow(inset rgba(0,0,0,0.4) 0 1px 3px);
+        &.unchecked{
+          @include background(linear-gradient(#a3a4a6, #c1c3c5));
+        }
         &.checked{
-          @include background(linear-gradient(#82a663, #a1c481));
+          @include background(linear-gradient(#e0a876, #fec695));
         }
         &.filled{
-          @include background(linear-gradient(#ca7a32, #fbab63));
-        }
-        &.unchecked{
-          @include background(linear-gradient(#7d7f7f, #9c9d9d));
+          @include background(linear-gradient(#90b86e, #afd78c));
         }
       }
     }
@@ -2641,14 +2638,14 @@ body.resource_home{
               @include border-radius(3px);
               @include text-shadow(rgba(0,0,0,0.3) 0 1px 1px);
               @include box-shadow(inset rgba(0,0,0,0.4) 0 1px 3px);
-              &.checked{
-                @include background(linear-gradient(#90b86e, #afd78c));
-              }
-              &.filled{
-                @include background(linear-gradient(#e0a876, #fec695));
-              }
               &.unchecked{
                 @include background(linear-gradient(#a3a4a6, #c1c3c5));
+              }
+              &.checked{
+                @include background(linear-gradient(#e0a876, #fec695));
+              }
+              &.filled{
+                @include background(linear-gradient(#90b86e, #afd78c));
               }
             }
           }

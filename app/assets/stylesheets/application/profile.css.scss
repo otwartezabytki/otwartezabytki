@@ -28,7 +28,7 @@
   > section {
     width: 720px;
   }
-  
+
   section.general.edit {
     .column {
       display: inline-block;
@@ -384,7 +384,7 @@ section.show.photos{
     height: 45px;
     line-height: 45px;
   }
-  .content{   
+  .content{
     .info-left, .info-right{
       width: 45%;
       margin: 5px 0;
@@ -599,9 +599,9 @@ section.show.photos {
       background: asset-data-url("jcarousel-buttons.png") no-repeat;
     }
     .jcarousel-next-horizontal{
-      background-position: -28px 0;  
+      background-position: -28px 0;
       &.jcarousel-next-disabled{
-        background-position: -28px -60px;  
+        background-position: -28px -60px;
       }
     }
     .jcarousel-prev-horizontal{
@@ -639,18 +639,13 @@ section.show.general{
         background: #f1f1f1;
         @include box-shadow(0 1px 0 0 #fff, inset 0 0 3px 0 rgba(0,0,0,0.1));
         border: 1px solid #e0e0e0;
-        padding: 7px 15px 7px 25px;
+        padding: 7px 7px 7px 25px;
         position: relative;
         float: left;
         text-transform: uppercase;
         letter-spacing: 1px;
         color: #a5a5a5;
-        &:first-child{
-          @include border-radius(6px 0 0 6px);
-        }
-        &:last-child{
-          @include border-radius(0 6px 6px 0);
-        }
+        @include border-radius(6px);
         &.done, &.checked, &.filled{
           @include box-shadow(inset 0 0 15px 0 rgba(42, 129, 0, 0.2));
           border: 1px solid #2a8100;
@@ -686,7 +681,7 @@ section.show.general{
       }
     }
     .relic-info{
-      /*margin-left: 10px;*/
+      margin-left: 10px;
       padding-left: 20px;
       font-size: 12px;
       background: asset-data-url("edit-relic-ico-info.png") no-repeat;
@@ -696,7 +691,7 @@ section.show.general{
       strong{
         font-weight: 700;
       }
-    } 
+    }
   }
   .location_name{
     background: asset-data-url("edit-relic-ico-location.png") 0 3px no-repeat;
@@ -1023,7 +1018,7 @@ section.show.events{
         font-weight: 700;
       }
     }
-          
+
   }
 }
 
@@ -1121,7 +1116,7 @@ span.block {
   nav{
     width: 213px;
     ul{
-      li{ 
+      li{
         span{
           background: #fff asset-data-url("profile-edit-nav-icons.png") no-repeat;
           font-size: 13px;
@@ -1152,7 +1147,7 @@ span.block {
           }
           a{
             background-position: 9px 10px;
-          }  
+          }
         }
         &.location{
           span{
@@ -1160,7 +1155,7 @@ span.block {
           }
           a{
             background-position: 9px -24px;
-          }  
+          }
         }
         &.events{
           span{
@@ -1168,7 +1163,7 @@ span.block {
           }
           a{
             background-position: 9px -59px;
-          }  
+          }
         }
         &.entries{
           span{
@@ -1176,7 +1171,7 @@ span.block {
           }
           a{
             background-position: 9px -161px;
-          }  
+          }
         }
         &.links{
           span{
@@ -1184,7 +1179,7 @@ span.block {
           }
           a{
             background-position: 9px -195px;
-          }  
+          }
         }
         &.documents{
           span{
@@ -1192,7 +1187,7 @@ span.block {
           }
           a{
             background-position: 9px -229px;
-          }  
+          }
         }
         &.categories{
           span{
@@ -1200,7 +1195,7 @@ span.block {
           }
           a{
             background-position: 9px -127px;
-          }  
+          }
         }
         &.description{
           span{
@@ -1208,7 +1203,7 @@ span.block {
           }
           a{
             background-position: 9px -92px;
-          }  
+          }
         }
         &.photos{
           span{
@@ -1216,7 +1211,7 @@ span.block {
           }
           a{
             background-position: 9px -262px;
-          }  
+          }
         }
       }
     }
@@ -1251,7 +1246,7 @@ section.edit{
       line-height: 16px;
       margin-top: 10px;
     }
-    .string{ 
+    .string{
       input {
         display: block;
         border: 1px solid #646464;
@@ -1451,7 +1446,7 @@ section.show.subrelics{
     ul.subrelics-tree {
       ul:first-child > li > .line{
         border-right: 0;
-      } 
+      }
       > li:first-child{
           background: none !important;
           padding: 0;

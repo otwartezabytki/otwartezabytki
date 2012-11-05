@@ -28,7 +28,7 @@
           = image_tag example_relic.main_photo.file.url(:icon)
         .relic-content
           = link_to example_relic.identification, example_relic
-          .status.filled= example_relic.state_name
+          .status{:class => example_relic.state }= example_relic.state_name
           .location_name
             %strong lokalizacja:
             = format_localization(example_relic)
