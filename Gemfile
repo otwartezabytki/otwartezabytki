@@ -43,8 +43,8 @@ gem 'devise'
 gem 'cancan'
 gem 'activeadmin-cancan'
 
+gem 'yajl-ruby',    '1.1.0',  :require => 'yajl'
 gem 'multi_json',   '1.3.7'
-gem 'json',         '1.7.5'
 gem 'remote_table'
 
 gem 'unicode'
