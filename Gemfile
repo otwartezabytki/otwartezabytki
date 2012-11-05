@@ -43,8 +43,8 @@ gem 'devise'
 gem 'cancan'
 gem 'activeadmin-cancan'
 
-gem 'multi_json', '~> 1.0.3'
-gem 'json', '~> 1.5.4'
+gem 'multi_json',   '1.3.7'
+gem 'json',         '1.7.5'
 gem 'remote_table'
 
 gem 'unicode'
