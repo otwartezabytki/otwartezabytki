@@ -1,7 +1,8 @@
-jQuery('body.relicbuilders textarea.redactor').redactor
-  focus: false
-  buttons: ['bold', 'italic', 'link', 'unorderedlist']
-  lang: 'pl'
+jQuery.initializer 'body.relicbuilders', ->
+  $(this).find('textarea.redactor').redactor
+    focus: false
+    buttons: ['bold', 'italic', 'link', 'unorderedlist']
+    lang: 'pl'
 
 jQuery.initializer 'div.administrative-level', ->
   self = this

@@ -29,7 +29,7 @@ class Photo < ActiveRecord::Base
   mount_uploader :file, PhotoUploader
 
   validates :file, :relic, :user, :presence => true
-  validates :file, :file_size => { :maximum => 2.megabytes.to_i }
+  validates :file, :file_size => { :maximum => 3.megabytes.to_i }
   validates :author, :date_taken, :presence => true, :unless => :new_record?
 
 

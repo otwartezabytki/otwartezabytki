@@ -10,49 +10,51 @@
         = semantic_form_for @relic, :url => relicbuilder_path(:id => @relic), :html => { :multipart => true }, :method => :put  do |f|
           = f.hidden_field :build_state
           = f.input :description, :input_html => { :class => 'redactor' }
-          - @relic.photos.each do |photo|
-            - if photo.user_id == current_user.id
-              = f.semantic_fields_for :photos, photo do |f2|
+          .photo-attributes{:'data-replace' => ".photo-attributes"}
+            - @relic.photos.each do |photo|
+              - if photo.user_id == current_user.id
+                = f.semantic_fields_for :photos, photo do |f2|
+                  .photo
+                    .column-left
+                      .preview
+                        = image_tag photo.file.midi.url
+                      - if photo.user_id == current_user.id
+                        = link_to t('views.relics.edit.photos.delete_photo'), relic_photo_path(@relic.id, photo.id, :build => true),
+                          :method => :delete,
+                          :remote => true,
+                          :confirm => t('views.relics.edit.photos.delete_confirm'),
+                          :class => "remove_photo"
+
+                    .column-right
+                      = f2.input :author, :input_html => { :class => "author" }
+                      = f2.input :date_taken, :input_html => { :class => "date_taken" }
+              - else
                 .photo
                   .column-left
                     .preview
                       = image_tag photo.file.midi.url
-                    - if photo.user_id == current_user.id
-                      = link_to t('views.relics.edit.photos.delete_photo'), relic_photo_path(@relic.id, photo.id, :build => true),
-                        :method => :delete,
-                        :remote => true,
-                        :confirm => t('views.relics.edit.photos.delete_confirm'),
-                        :class => "remove_photo"
                   .column-right
-                    = f2.input :author, :input_html => { :class => "author" }
-                    = f2.input :date_taken, :input_html => { :class => "date_taken" }
-            - else
-              .photo
-                .column-left
-                  .preview
-                    = image_tag photo.file.midi.url
-                .column-right
-                  %label= t('activerecord.attributes.photo.author')
-                  %p= photo.author
-                  %label= t('activerecord.attributes.photo.date_taken')
-                  %p= photo.date_taken
+                    %label= t('activerecord.attributes.photo.author')
+                    %p= photo.author
+                    %label= t('activerecord.attributes.photo.date_taken')
+                    %p= photo.date_taken
 
-          .photo.hidden
-            .column-left
-              .preview.preview-placeholder
+            .photo.hidden
+              .column-left
+                .preview.preview-placeholder
 
-            .column-right
-              %p
-                %strong= t('views.relics.edit.photos.loading')
-                = link_to 'anuluj', '#', :class => "cancel_upload"
-              %p
-                .progressbar
-                  .value 0%
+              .column-right
+                %p
+                  %strong= t('views.relics.edit.photos.loading')
+                  = link_to 'anuluj', '#', :class => "cancel_upload"
+                %p
+                  .progressbar
+                    .value 0%
 
-          .photo-upload
-            = file_field_tag "photo[file]", :class => 'photo_upload', :"data-url" => "#{relic_photos_path(@relic, :build => true)}"
+            .photo-upload
+              = file_field_tag "photo[file]", :class => 'photo_upload', :"data-url" => "#{relic_photos_path(@relic, :build => true)}"
 
-          = f.input :license_agreement, :input_html => { :checked => 'checked' }, :as => :boolean, :label => t('views.relics.edit.photos.statement_html')
+            = f.input :license_agreement, :input_html => { :checked => 'checked' }, :as => :boolean, :label => t('views.relics.edit.photos.statement_html')
 
           .actions
             = f.submit t('views.relicbuilders.photos.submit')

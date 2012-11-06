@@ -1,10 +1,10 @@
-jQuery.initializer 'section.edit.photos', ->
+jQuery.initializer 'div.photo-attributes', ->
   $section = $(this)
   $preview_placeholder = $section.find('.preview-placeholder')
   $progressbar = $section.find('.progressbar')
   $photo_hidden = $section.find('.photo.hidden')
   $photo_upload = $section.find(".photo_upload")
-  $form = $section.find('form.relic')
+  $form = $section.parents('form.relic')
   $cancel_upload = $section.find('.cancel_upload')
   $remove_photo = $section.find('.remove_photo')
 
@@ -38,7 +38,7 @@ jQuery.initializer 'section.edit.photos', ->
       $progressbar.progressbar("value", progress)
 
     done: (e, data) ->
-      $new_section = $(data.result).find('section.edit')
+      $new_section = $(data.result).find('div.photo-attributes')
       $section.replaceWith($new_section)
       $new_section.initialize()
 

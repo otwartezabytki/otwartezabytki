@@ -21,7 +21,7 @@ class PhotosController < ApplicationController
       choosen_redirect_path
     else
       flash[:error] = photo.errors.first.last
-      redirect_to edit_section_relic_path(relic.id, :photos)
+      choosen_redirect_path
     end
   end
 
