@@ -1,15 +1,6 @@
 .login_title
   %h2= t('.header', :scope => 'views')
-.right_txt_box
-  .ask_account
-    = t('.ask_account1', :scope => 'views')
-    %br/
-  = t('.ask_account2', :scope => 'views')
-  %br/
-  = link_to t('.register_here', :scope => 'views'), new_user_registration_path, :remote => request.xhr?
-  %br/
-  .ask_account= t('.ask_account3', :scope => 'views')
-  = t('.anonymous_account', :scope => 'views')
+.right_txt_box= render 'devise/shared/new_account_info'
 .form_box
   .login_intro_txt= t('.login_intro', :scope => 'views')
   - if flash[:alert]

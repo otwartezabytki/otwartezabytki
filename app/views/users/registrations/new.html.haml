@@ -1,9 +1,5 @@
 .login_title_register Rejestracja do Otwartych Zabytków
-.right_txt_box
-  .ask_account Czy konto jest mi potrzebne?
-  Możesz uzupełniać bazę anonimowo albo założyć konto i śledzić swoje postępy.
-  .ask_account Masz już konto?
-  = link_to "Zaloguj się.", new_user_session_path, :remote => true
+.right_txt_box= render 'devise/shared/new_account_info'
 .form_box
   .login_intro_txt Zarejestruj się i śledź swoje postępy
   = semantic_form_for(user, :url => user_registration_path, :remote => true) do |f|

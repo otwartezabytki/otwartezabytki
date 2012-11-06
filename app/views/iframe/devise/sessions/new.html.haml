@@ -2,7 +2,6 @@
   .iframe-header
     %a.what-about{:href => page_pl_path('o-projekcie'), :target => "_blank", :host => Settings.oz.host, :only_path => false} O co chodzi?
     .widget-logo
-  %h3 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eleifend, justo sit amet mattis sagittis, dolor dui congue arcu, a scelerisque mi est vel nulla. Vestibulum id nulla et risus porttitor.
   .form_box
     .left
       %h2= t('.header', :scope => 'views')
@@ -18,8 +17,7 @@
         .actions
           = f.submit t('.submit', :scope => 'views')
     .right
-      %h4 Nie masz konta? 
-      %p Każdy uczestnik może się zarejestrować i śledzić własne postępy. 
-      %a{:href => new_user_registration_path, :target => "_blank", :host => Settings.oz.host, :only_path => false} Zarejestruj się tutaj 
       %h4 Czy konto jest mi potrzebne?
-      %p Możesz uzupełniać bazę anonimowo albo założyć konto i śledzić własne postępy.
+      %p Bazę można przeglądać bez konieczności logowania. Ale jeśli chcesz dodawać lub uzupełniać informacje - logowanie jest niezbędne.
+      %h4 Nie masz konta?
+      %a{:href => new_user_registration_path, :target => "_blank", :host => Settings.oz.host, :only_path => false} Zarejestruj się tutaj
