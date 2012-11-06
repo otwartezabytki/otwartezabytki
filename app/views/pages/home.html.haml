@@ -90,8 +90,7 @@
     .bg
       .color{:style => "width: #{relic_stats[:checked] * 100 / relic_stats[:total].to_f}%"}
     .checked{:style => "left: #{(relic_stats[:checked] * 900 / relic_stats[:total].to_f) + 16}px"}
-      %span= relic_stats[:checked]
-      zabytków sprawdzonych
+      = t('views.pages.home.stats_info.checked_html', :count => relic_stats[:checked])
       .help
         = image_tag 'ico-help.png'
         .help-wrapper
@@ -104,8 +103,7 @@
                   %span{:class => s}= t("views.relics.index.states.#{s}.header")
                 .text= t("views.relics.index.states.#{s}.info")
     .filled{:style => "left: #{(relic_stats[:filled] * 900 / relic_stats[:total].to_f) + 16}px"}
-      %span= relic_stats[:filled]
-      zabytków uzupełnionych
+      = t('views.pages.home.stats_info.filled_html', :count => relic_stats[:filled])
       .help
         = image_tag 'ico-help.png'
         .help-wrapper
@@ -118,9 +116,5 @@
                   %span{:class => s}= t("views.relics.index.states.#{s}.header")
                 .text= t("views.relics.index.states.#{s}.info")
     .total
-      %span= relic_stats[:total]
-      wszystkich zabytków w bazie
-      %br
-      w tym
-      %strong= relic_stats[:unchecked]
-      niesprawdzonych
+      = t('views.pages.home.stats_info.total_html', :count => relic_stats[:total])
+      = t('views.pages.home.stats_info.unchecked_html', :count => relic_stats[:unchecked])

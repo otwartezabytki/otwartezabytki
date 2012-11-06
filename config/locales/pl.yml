@@ -1048,6 +1048,27 @@ pl:
           state: "zmieniono stan"
           street: "poprawiono adres"
           tags: "zaktualizowano tagi"
+        stats_info:
+          total_html: "<span>%{count}</span>wszystkich zabytków w bazie <br/> w tym"
+          unchecked_html:
+            zero:   "<strong>%{count}</strong> niesprawdzonych"
+            one:    "<strong>%{count}</strong> niesprawdzony"
+            few:    "<strong>%{count}</strong> niesprawdzone"
+            many:   "<strong>%{count}</strong> niesprawdzonych"
+            other:  "<strong>%{count}</strong> niesprawdzonych"
+          checked_html:
+            zero:   "<span>%{count}</span> zabytków sprawdzonych"
+            one:    "<span>%{count}</span> zabytek sprawdzony"
+            few:    "<span>%{count}</span> zabytki sprawdzone"
+            many:   "<span>%{count}</span> zabytków sprawdzonych"
+            other:  "<span>%{count}</span> zabytków sprawdzonych"
+          filled_html:
+            zero:   "<span>%{count}</span> zabytków uzupełnionych"
+            one:    "<span>%{count}</span> zabytek uzupełniony"
+            few:    "<span>%{count}</span> zabytki uzupełnione"
+            many:   "<span>%{count}</span> zabytków uzupełnionych"
+            other:  "<span>%{count}</span> zabytków uzupełnionych"
+          total:
     pagination:
       first: Pierwsza
       last: Ostatnia
