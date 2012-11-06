@@ -121,7 +121,7 @@ ActiveAdmin.register Version, :sort_order => 'id_desc' do
 
     column do |e|
       para do
-        link_to("Cofnij", revert_admin_version_path(e), :method => :put)
+        link_to("Cofnij", revert_admin_version_path(e), :method => :put, :'data-confirm' => 'Na pewno?')
       end
     end
 
@@ -146,8 +146,7 @@ ActiveAdmin.register Version, :sort_order => 'id_desc' do
   end
 
   action_item :only => :show  do
-    link_to "Przywróć do wersji przed zmianą", revert_admin_version_path(resource),
-            :method => :put, :data => { :confirm => t("Na pewno?") }
+    link_to "Przywróć do wersji przed zmianą", revert_admin_version_path(resource), :method => :put, :'data-confirm' => 'Na pewno?'
   end
 
   filter :created_at, :label => "Czas zmiany"

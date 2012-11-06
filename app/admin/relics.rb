@@ -1,24 +1,29 @@
 # -*- encoding : utf-8 -*-
 
-ActiveAdmin.register Relic do
+ActiveAdmin.register Relic, {:sort_order => :id} do
   menu :label => "Zabytki", :parent => "Zasoby", :priority => 1
 
   controller.authorize_resource
 
+  filter :id
   filter :identification
-  filter :group
 
   filter :voivodeship, :input_html => { :class => "select2", :style => "width: 241px" }, :label => "Województwo"
   filter :district, :input_html => { :class => "select2", :style => "width: 241px" }, :label => "Powiat"
   filter :commune, :input_html => { :class => "select2", :style => "width: 241px" }, :label => "Miejscowość"
 
   index do
-    column :register_number
-    column :voivodeship
-    column :district
-    column :commune
+    column :id
     column :identification
+    column :register_number
+    column :voivodeship, :sortable => false
+    column :district, :sortable => false
+    column :commune, :sortable => false
     default_actions
+  end
+
+  action_item :only => [:show, :edit] do
+    link_to 'Profil zabytku', relic_path(relic), :target => "_blank"
   end
 
   form do |f|
