@@ -787,8 +787,8 @@ pl:
       search_html: "Szukaj &raquo;"
     hints:
       alert:
-        description: "To jest podpowiedź do opisu alertu"
-        file: "To jest podpowiedź do pliku alertu"
+        description: "Napisz, co złego dzieje się z tym zabytkiem."
+        file: "Dodaj zdjęcie zagrożonego zabytku."
       document:
         description: "To jest podpowiedź do opisu dokumentu"
         name: "Do jest podpowiedź do nazwy dokumentu"
