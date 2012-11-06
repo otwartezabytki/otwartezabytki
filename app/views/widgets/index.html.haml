@@ -9,10 +9,9 @@
       %h3 Jak użyć widżet?
       %p Aby skorzystać z prezentowanych aplikacji, wystarczy zagnieździć kawałek kodu na dowolnej stronie internetowej.
       %h3 Masz pomysł na widżet?
-      %p 
-        Jeśli masz pomysł na funkcjonalną aplikację wykorzystującą dane o Otwartych Zabytkach, podziel się nim z nami, a być może uda nam się go zrealizować (
-        %a{:href => "mailto:kontakt@otwartezabytki.pl"} kontakt@otwartezabytki.pl
-        )!
+      %p
+        Jeśli masz pomysł na funkcjonalną aplikację wykorzystującą dane o Otwartych Zabytkach, podziel się nim z nami, a być może uda nam się go zrealizować
+        = "(#{mail_to Settings.oz.email_sender})!".html_safe
     .widgets
       - [Widget::MapSearch, Widget::AddRelic, Widget::AddAlert].each do |widget_template|
         = link_to method(:"widgets_#{widget_template.partial_name.pluralize}_path").call(), :class => "widget", :method => :post do
