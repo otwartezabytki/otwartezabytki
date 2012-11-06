@@ -16,17 +16,18 @@ module Relic::Validations
     end
 
     validates :identification, :presence => true, :if => :identification_changed?
-    validate :date_must_be_parsed, :if => :dating_of_obj_changed?
+    # nonsense
+    # validate :date_must_be_parsed, :if => :dating_of_obj_changed?
 
     # api create validation
     validates :place, :identification, :description, :reason, :presence => true, :if => :created_via_api
   end
-
-  def date_must_be_parsed
-    if date_start.blank? || date_end.blank?
-      errors.add(:dating_of_obj, I18n.t("errors.messages.date_must_be_parsed"))
-    end
-  end
+  # nonsense implementation
+  # def date_must_be_parsed
+  #   if date_start.blank? || date_end.blank?
+  #     errors.add(:dating_of_obj, I18n.t("errors.messages.date_must_be_parsed"))
+  #   end
+  # end
 
   def invalid_step
     return 'details' if [:reason, :identification].any?{|k| errors.keys.include?(k)}
