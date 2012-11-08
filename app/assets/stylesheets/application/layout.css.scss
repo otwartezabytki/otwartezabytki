@@ -1065,6 +1065,19 @@ table.relics{
       font-weight: 600;
       color: $blue;
       padding-bottom: 6px;
+      .include {
+        font-size: 12px;
+        font-weight: 600;
+        margin-top: 6px;
+        padding-left: 5px;
+        span {
+          float: left;
+          width: 5px;
+          height: 17px;
+          background: $blue;
+          margin-right: 10px;
+        }
+      }
     }
     .thumb{
       float: left;
@@ -1088,6 +1101,7 @@ table.relics{
       background: asset-data-url('relic-modified-big.png') no-repeat;
     }
     .tag{
+      margin-left: 77px;
       span{
         color: #fff;
         text-transform: uppercase;

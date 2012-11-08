@@ -16,6 +16,11 @@
               = link_to image_tag(relic.main_photo.file.url(:icon)), relic, :remote => true
             .name
               %h2= link_to relic.identification, relic, :remote => true
+              - descendants = relic.descendants
+              - if descendants.present?
+                .include
+                  %span
+                  = descendants.map(&:identification).join('; ')
             = state_tag(relic)
           %td.location
             .pathway
