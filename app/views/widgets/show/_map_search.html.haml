@@ -15,7 +15,7 @@
         %section.search
           %h2
             Wyszukaj
-            = link_to image_tag("widget-helper.png"), '#', :class => "tooltip", :"data-placement" => "right", :title => "To jest podpowiedź do pola wyszukiwania."
+            = link_to image_tag("widget-helper.png"), '#', :class => "tooltip", :"data-placement" => "right", :title => "np. cmentarz, stocznie poniemieckie, chopinowski"
           = f.input :query, :label => false, :input_html => { :class => 'autocomplete-q'}
         .fluid_block
           %section.locations{ :class => (cookies['section-shown'] == 'locations' ? "maxed" : cookies['section-shown'] == 'categories' ? 'mined' : '') }
@@ -23,7 +23,7 @@
               - if up = widget_search.location_object.up
                 = link_to up.full_name, widgets_map_search_path(widget.id, :search => params[:search].merge(:bounding_box => nil, :"location" => "#{up.class.name.underscore}:#{up.id}")), :remote => true
               %span= "⟩&nbsp;".html_safe + widget_search.location_object.full_name
-              = link_to image_tag("widget-helper.png"), '#', :class => "tooltip", :"data-placement" => "right", :title => "To jest podpowiedź do pola lokalizacje."
+              = link_to image_tag("widget-helper.png"), '#', :class => "tooltip", :"data-placement" => "right", :title => "tu możesz zawęzić wyszukiwanie zabytków wg. ich lokalizacji"
             .antiscroll-wrap.locations_tree
               .antiscroll-inner
                 - if relics.polish_facets_tree.length > 0
@@ -38,7 +38,7 @@
           %section.categories{ :class => (cookies['section-shown'] == 'categories' ? "maxed" : cookies['section-shown'] == 'locations' ? 'mined' : '') }
             %h2
               Kategorie
-              = link_to image_tag("widget-helper.png"), '#', :class => "tooltip", :"data-placement" => "right", :title => "To jest podpowiedź do kategorii."
+              = link_to image_tag("widget-helper.png"), '#', :class => "tooltip", :"data-placement" => "right", :title => " tu możesz zawęzić wyszukiwanie zabytków wg. ich kategorii"
             .antiscroll-wrap
               .antiscroll-inner
                 -# categories
