@@ -42,7 +42,7 @@
     <script type="text/javascript">
         $(function () {
             window.swaggerUi = new SwaggerUi({
-                discoveryUrl:"http://otwartezabytki.dev/api/v1/info.json",
+                discoveryUrl: 'http://' + window.location.hostname + '/api/v1/info.json',
                 apiKey:"api-key",
                 dom_id:"swagger-ui-container",
                 supportHeaderParams: false,
