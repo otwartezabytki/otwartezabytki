@@ -824,6 +824,8 @@ pl:
       search:
         place: gdzie
         q: co
+    create: "Stwórz %{model}"
+    update: "Zaktualizuj %{model}"
   helpers:
     select:
       prompt: Wybierz

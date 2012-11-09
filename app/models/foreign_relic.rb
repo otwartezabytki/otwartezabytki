@@ -41,6 +41,10 @@
 #
 
 class ForeignRelic < Relic
+  before_save do
+    self.place_id = self.commune_id = self.district_id = self.voivodeship_id = nil
+  end
+
   def self.model_name
     Relic.model_name
   end
@@ -74,7 +78,7 @@ class ForeignRelic < Relic
   end
 
   def place_full_name(include_place = true)
-    [fprovince, fplace].compact.join(', ')
+    [country, fprovince, fplace].reject(&:blank?).join(', ')
   end
 
 end

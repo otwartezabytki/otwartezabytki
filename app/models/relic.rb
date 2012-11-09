@@ -445,7 +445,7 @@ class Relic < ActiveRecord::Base
     I18n.t("activerecord.attributes.relic.states.#{state}")
   end
 
-  def existance_name
+  def existence_name
     I18n.t("activerecord.attributes.relic.existences.#{existence}")
   end
 

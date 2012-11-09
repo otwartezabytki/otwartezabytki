@@ -24,7 +24,7 @@ module Relic::PlaceCaching
   end
 
   def cache_location_fields
-    if self.place
+    if self.place and self.polish_relic
       self.place.conditional_geocode!
       self.latitude       ||= self.place.latitude
       self.longitude      ||= self.place.longitude
