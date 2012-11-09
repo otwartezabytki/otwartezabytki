@@ -2,6 +2,7 @@
 class RelicsController < ApplicationController
   before_filter :save_return_path
   before_filter :enable_fancybox, :only => [:edit, :update]
+  before_filter :no_original_version, :only => [:show]
   before_filter :uncomplete_relic_redirect,  :only => [:show, :edit, :update]
 
   expose(:relics) do
@@ -13,7 +14,7 @@ class RelicsController < ApplicationController
       r = Relic.find(id)
 
       if params[:original].present? && request.get? && r.versions.count > 0
-        r.versions.first.reify.tap { |r| r.id = 0 }
+        r.versions.first.reify.tap { |r| r.try(:id=, 0) }
       else
         # change relic type if requested
         if params[:relic] && !request.get?
@@ -113,8 +114,16 @@ class RelicsController < ApplicationController
   end
 
   protected
+    def no_original_version
+      return true unless params[:original]
+      current_relic = (relic || Relic.find(params[:id]))
+      if current_relic.existence == 'social' or relic.empty?
+        redirect_to current_relic, :notice => "Zabytek nie posiada wersji oryginalnej." and return
+      end
+    end
+
     def uncomplete_relic_redirect
-      if !relic.build_finished?
+      if relic and !relic.build_finished?
         relic.build_state = 'details_step'
         relic.valid?
         redirect_to method("#{relic.invalid_step_view}_relicbuilder_path").call({:id => relic}), :notice => "Twój zabytek nie jest jeszcze ukończony." and return
