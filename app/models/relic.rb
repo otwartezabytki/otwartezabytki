@@ -207,14 +207,6 @@ class Relic < ActiveRecord::Base
   end
 
   class << self
-    def recently_modified_revisions
-      Version.select('DISTINCT ON (item_id) * ')
-        .order('item_id, versions.id DESC')
-        .where(:item_type => 'Relic', :event => 'update')
-        .joins("INNER JOIN relics on relics.id = versions.item_id AND relics.build_state = 'finish_step'")
-        .last(5).reverse
-    end
-
     def random_filled
       conds = { :state => 'filled' }
       relics_count = self.where(conds).count
