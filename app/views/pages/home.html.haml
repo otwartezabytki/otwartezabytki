@@ -86,7 +86,7 @@
               %p.title= hash[:identification]
               .change.added
                 = hash[:changes]
-              = link_to "Przejdź do profilu zabytku", relic_path(hash[:relic_id])
+              = link_to "Przejdź do profilu zabytku", relic_path(hash[:slug])
   .progress-bar
     .bg
       .color{:style => "width: #{relic_stats[:checked] * 100 / relic_stats[:total].to_f}%"}

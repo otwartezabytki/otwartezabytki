@@ -55,6 +55,7 @@ class RecentRevision
     return {} if relic.blank?
     {
       :relic_id => relic.id,
+      :slug => relic.to_param,
       :identification => relic.identification,
       :image_url => relic.main_photo.file.url(:icon),
       :changes => changes
