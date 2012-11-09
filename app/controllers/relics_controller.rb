@@ -117,7 +117,7 @@ class RelicsController < ApplicationController
     def no_original_version
       return true unless params[:original]
       current_relic = (relic || Relic.find(params[:id]))
-      if current_relic.existence == 'social' or relic.empty?
+      if current_relic.existence == 'social' or relic.blank?
         redirect_to current_relic, :notice => "Zabytek nie posiada wersji oryginalnej." and return
       end
     end
