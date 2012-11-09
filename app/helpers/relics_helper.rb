@@ -93,11 +93,15 @@ module RelicsHelper
 
   def format_localization(relic)
     a = []
-    a << relic.voivodeship.name
-    a << "pow. #{relic.district.name}"
-    a << "gm. #{relic.commune.name}"
-    a << [relic.place.name, relic.street].compact.join(' ')
-    a.join(' » ')
+    if relic.foreign_relic?
+      a = [relic.country, relic.fprovince, relic.fplace, relic.street]
+    else
+      a << relic.voivodeship.name
+      a << "pow. #{relic.district.name}"
+      a << "gm. #{relic.commune.name}"
+      a << [relic.place.name, relic.street].compact.join(' ')
+    end
+    a.reject(&:blank?).join(' » ')
   end
 
   def kind_of_change(revision)
