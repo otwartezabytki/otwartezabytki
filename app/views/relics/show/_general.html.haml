@@ -15,9 +15,9 @@
   .location_name
     = link_to 'uzupełnij', edit_section_relic_path(relic.id, :location), :title => 'edytuj ogólne dane zabytku', :remote => true, :class => "edit-relic-link"
     %strong Lokalizacja:
-    - if relic.polish_relic
+    - if relic.polish_relic and relic.place_id?
       %p= "#{relic.place.name}, powiat #{relic.district.name}, gmina #{relic.commune.name}"
-    - else
+    - elsif !relic.polish_relic
       %p= [I18n.t(relic.country_code, :scope => :countries), relic.fprovince, relic.fplace].select(&:present?).join(', ')
     %p= relic.street
     - if relic.latitude.present? && relic.longitude.present?
@@ -41,4 +41,7 @@
     .register_number
       %strong Numer w rejestrze:
       %p= relic.register_number
-  = link_to content_tag(:span, 'wersja oryginalna'), relic_path(relic.id, :original => true), :class => "original"
+  - if !relic.id.zero? and relic.original_relic.present?
+    = link_to content_tag(:span, 'wersja oryginalna'), relic_path(relic.id, :original => true), :class => "original"
+  - else
+    %div{:style => 'display:block; height: 50px;'}

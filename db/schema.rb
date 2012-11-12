@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121108154129) do
+ActiveRecord::Schema.define(:version => 20121112110434) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -125,6 +125,26 @@ ActiveRecord::Schema.define(:version => 20121108154129) do
     t.string   "kind"
     t.string   "category"
     t.string   "formal_name"
+  end
+
+  create_table "original_relics", :force => true do |t|
+    t.integer  "relic_id"
+    t.integer  "place_id"
+    t.text     "identification"
+    t.string   "dating_of_obj"
+    t.string   "street"
+    t.text     "register_number"
+    t.string   "nid_id"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "ancestry"
+    t.integer  "commune_id"
+    t.integer  "district_id"
+    t.integer  "voivodeship_id"
+    t.string   "kind"
+    t.text     "description",     :default => ""
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
   end
 
   create_table "page_translations", :force => true do |t|
@@ -276,12 +296,6 @@ ActiveRecord::Schema.define(:version => 20121108154129) do
   add_index "suggestions", ["dating_of_obj_action"], :name => "index_suggestions_on_dating_of_obj_action"
   add_index "suggestions", ["identification_action"], :name => "index_suggestions_on_identification_action"
   add_index "suggestions", ["place_id_action"], :name => "index_suggestions_on_place_id_action"
-
-  create_table "tags", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
 
   create_table "tolk_locales", :force => true do |t|
     t.string   "name"

@@ -1,5 +1,5 @@
 - content_for(:title, relic.identification)
-- if relic.id == 0
+- if relic.id.zero?
   .original-version
     %a{:href => relic_path(params[:id]), :class => "btn"} &#171; zobacz wersję obecną
     .content

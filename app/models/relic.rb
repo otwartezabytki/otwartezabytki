@@ -48,6 +48,7 @@ class Relic < ActiveRecord::Base
 
   has_ancestry
 
+  has_one    :original_relic
   belongs_to :user
   belongs_to :place
 

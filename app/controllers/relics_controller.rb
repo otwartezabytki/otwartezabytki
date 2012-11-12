@@ -13,8 +13,8 @@ class RelicsController < ApplicationController
     if id = params[:relic_id] || params[:id]
       r = Relic.find(id)
 
-      if params[:original].present? && request.get? && r.versions.count > 0
-        r.versions.first.reify.tap { |r| r.try(:id=, 0) }
+      if params[:original].present? && request.get?
+        r.original_relic
       else
         # change relic type if requested
         if params[:relic] && !request.get?
