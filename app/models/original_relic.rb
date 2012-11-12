@@ -1,4 +1,5 @@
 class OriginalRelic < ActiveRecord::Base
+  self.primary_key = "id"
   has_ancestry
 
   belongs_to :relic
