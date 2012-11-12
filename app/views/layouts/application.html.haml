@@ -27,6 +27,9 @@
               %span.icon-bar
             %h1
               %a(href=root_path) Otwarte Zabytki
+            %section.disclaimer
+              Wciąż udoskonalamy serwis i poprawiamy błędy. Jeśli masz jakieś uwagi lub znajdziesz błąd, prosimy o informację na: 
+              %a{:href => "mailto:kontakt-oz@centrumcyfrowe.pl"} kontakt-oz@centrumcyfrowe.pl
             %nav#userNav
               %ul
                 - if current_user && current_user.registered? && current_user.errors.size == 0

@@ -646,6 +646,7 @@ section.show.general{
     width: 100%;
     margin: 15px 0;
     .tag{
+      float: left;
       span{
         color: #fff;
         text-transform: uppercase;
@@ -676,7 +677,6 @@ section.show.general{
       background: asset-data-url("edit-relic-ico-info.png") no-repeat;
       display: inline-block;
       line-height: 16px;
-      margin-top: 7px;
       strong{
         font-weight: 700;
       }
