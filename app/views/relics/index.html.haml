@@ -12,7 +12,7 @@
             = f.label :categories, :value => c.name_key do
               = f.check_box :categories, {:multiple => true, :class => 'sacral-options'}, c.name_key, nil
               %span
-                = c.name
+                %strong= c.name
                 %em= relics.count('sacral')
             .sacral-categories{:style => ('display:none;' if hidden_sacral)}
               - c.children.sort_by(&:name).each do |child|
