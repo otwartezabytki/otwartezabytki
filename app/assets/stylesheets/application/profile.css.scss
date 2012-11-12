@@ -373,7 +373,7 @@ section.show.photos{
       }
       &.edit-photos{
         @include background(linear-gradient(#eb8308, #e37b00));
-        @include filter-gradient(#eb8308, #e37b00));
+        @include filter-gradient(#eb8308, #e37b00);
       }
     }
   }
@@ -383,7 +383,7 @@ section.show.photos{
   background-color: #fafafa;
   h2{
     @include background(linear-gradient(#4b6d7e, #436576));
-    @include filter-gradient(#4b6d7e, #436576));
+    @include filter-gradient(#4b6d7e, #436576);
     padding: 0 20px;
     font-weight: 600;
     font-size: 16px;
@@ -414,7 +414,7 @@ section.show.photos{
         height: 64px;
         line-height: 60px;
         @include background(linear-gradient(#4b6d7e, #436576));
-        @include filter-gradient(#4b6d7e, #436576));
+        @include filter-gradient(#4b6d7e, #436576);
         color: #fff;
         text-align: center;
         font-size: 30px;
@@ -529,7 +529,7 @@ section.show.photos{
       font-size: 12px;
       padding: 8px 10px;
       @include background(linear-gradient(#41a223, #399a1b));
-      @include filter-gradient(#41a223, #399a1b));
+      @include filter-gradient(#41a223, #399a1b);
       @include border-radius(2px);
       display: inline-block;
       margin: 10px 0;
@@ -595,11 +595,11 @@ section.show.photos {
       @include border-radius(2px);
       &.show-photos{
         @include background(linear-gradient(#4b6d7e, #436576));
-        @include filter-gradient(#4b6d7e, #436576));
+        @include filter-gradient(#4b6d7e, #436576);
       }
       &.edit-photos{
         @include background(linear-gradient(#eb8308, #e37b00));
-        @include filter-gradient(#eb8308, #e37b00));
+        @include filter-gradient(#eb8308, #e37b00);
         width: 149px;
         margin-left: 1px;
       }
@@ -761,7 +761,7 @@ section.show.general{
     float: left;
     margin: 3px 3px 0 0;
     @include background(linear-gradient(#4b6d7e, #436576));
-    @include filter-gradient(#4b6d7e, #436576));
+    @include filter-gradient(#4b6d7e, #436576);
     color: #fff;
     border: 0;
     font-size: 12px;
@@ -773,12 +773,12 @@ section.show.general{
     cursor: pointer;
     &:hover {
       @include background(linear-gradient(#437994, #2b607b));
-      @include filter-gradient(#437994, #2b607b));
+      @include filter-gradient(#437994, #2b607b);
       text-decoration: none;
     }
     &:active {
       @include background(linear-gradient(#2b607b, #437993));
-      @include filter-gradient(#2b607b, #437993));
+      @include filter-gradient(#2b607b, #437993);
     }
     span{
       padding: 9px 12px 6px 29px;
