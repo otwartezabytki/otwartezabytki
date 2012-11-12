@@ -36,6 +36,7 @@
       }
       input[type="submit"]{
         @include background(linear-gradient(#48b119, #2f9900));
+        @include filter-gradient(#48b119, #2f9900);
         @include border-radius(2px);
         color: #fff;
         font-size: 12px;
