@@ -1,7 +1,7 @@
 %section.show.general
   = link_to 'uzupełnij', edit_section_relic_path(relic.id, :general), :title => 'edytuj ogólne dane zabytku', :remote => true, :class => "edit-relic-link"
   - if relic.parent.present?
-    %h2= link_to relic.parent.identification, relic_path(relic.parent_id, :original => true), :remote => true
+    %h2= link_to relic.parent.identification, relic_path(relic.parent_id), :remote => true
   %h1= relic.identification
   - if relic.common_name.present?
     %p
