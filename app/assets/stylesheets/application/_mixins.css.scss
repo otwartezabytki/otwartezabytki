@@ -16,3 +16,30 @@ $dark-grey: #313132;
     @include background(linear-gradient(#437994, #2b607b));
   }
 }
+
+@mixin clearfix() {
+  /* For IE 6/7 (trigger hasLayout) */
+  zoom: 1;
+  /* For modern browsers */
+  &:before,
+  &:after {
+    content:"";
+    display:table;
+  }
+  &:after {
+      clear:both;
+  }
+}
+@mixin button-bluenavy{
+  
+          color: #fff;
+          border: 0;
+          font-size: 12px;
+          font-weight: 600;
+          text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
+          -webkit-border-radius: 2px;
+          border-radius: 2px;
+          cursor: pointer;
+          text-decoration: none;
+          @include backgroundnavy;
+}

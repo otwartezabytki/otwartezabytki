@@ -1,6 +1,32 @@
+# -*- encoding : utf-8 -*-
+# == Schema Information
+#
+# Table name: users
+#
+#  id                     :integer          not null, primary key
+#  email                  :string(255)      default(""), not null
+#  encrypted_password     :string(255)      default(""), not null
+#  reset_password_token   :string(255)
+#  reset_password_sent_at :datetime
+#  remember_created_at    :datetime
+#  sign_in_count          :integer          default(0)
+#  current_sign_in_at     :datetime
+#  last_sign_in_at        :datetime
+#  current_sign_in_ip     :string(255)
+#  last_sign_in_ip        :string(255)
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  role                   :string(255)      default("user")
+#  username               :string(255)
+#  seen_relic_order       :string(255)      default("asc")
+#  api_key                :string(255)
+#  api_secret             :string(255)
+#
+
 class User < ActiveRecord::Base
   has_many :suggestions
   has_many :seen_relics
+  has_many :widgets
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
@@ -37,6 +63,9 @@ class User < ActiveRecord::Base
       generated_password = [0..9, 'a'..'z', 'A'..'Z'].map(&:to_a).reduce(:+).sample(8).join
       self.password = generated_password
       self.password_confirmation = generated_password
+
+      # Generate API key
+      self.generate_api_key!
     end
 
   end
@@ -44,11 +73,6 @@ class User < ActiveRecord::Base
   # We don't require password because it is sent on e-mail
   def password_required?
     force_password_required
-  end
-
-  def corrected_relic_ids
-    return @corrected_relic_ids if defined? @corrected_relic_ids
-    @corrected_relic_ids = suggestions.roots.joins(:relic).where("relics.edit_count < 3").group(:relic_id).pluck(:relic_id)
   end
 
   def mark_relic_as_seen(relic_id)
@@ -67,6 +91,24 @@ class User < ActiveRecord::Base
   def earn_points
     return @earn_points if defined? @earn_points
     @earn_points = self.suggestions.not_skipped.count
+  end
+
+  def ability
+    @ability ||= Ability.new(self)
+  end
+
+  def generate_api_key!
+    self.api_key = Devise.friendly_token
+  end
+
+  def generate_api_secret!
+    self.api_secret = Devise.friendly_token
+  end
+
+  def ensure_api_keys_generated!
+    generate_api_key!     unless api_key?
+    generate_api_secret!  unless api_secret?
+    save!
   end
 
   class << self

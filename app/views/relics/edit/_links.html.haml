@@ -1,0 +1,80 @@
+.row
+  = semantic_form_for relic, :url => section_relic_path(relic.id, :section => :links), :remote => true, :html => { :"data-next-id" => relic.links.length + 1 } do |f|
+    #links.links_container{ :style => (relic.links.select(&:url?).length == 0 ? "display: none" : "") }
+      %p.header
+        %span.number= t('views.relics.edit.links.number')
+        %span.url= t('views.relics.edit.links.source_type')
+        %span.info= t('views.relics.edit.links.url')
+        %span.action= t('views.relics.edit.links.action')
+      %ol.sortable
+        - relic.links.select(&:url?).sort_by{ |e| e.position || 1000 }.each do |link|
+          = f.semantic_fields_for :links, link do |f2|
+            = content_tag_for :li, link, :class => "move" do
+              = f2.input :category, :label => false, :collection => Link::UrlCategories
+              = f2.input :url, :label => false, :hint => false, :class => "url"
+              = f2.input :name, :label => false, :hint => false, :class => "info"
+              = f2.hidden_field :position, :class => "link-position"
+              = f2.hidden_field :_destroy
+              = f2.hidden_field :kind, :value => "url"
+              = link_to t('views.relics.edit.delete'), '#', :class => "remove_link"
+              .description Opis:
+              .arrow
+        %script{ :type => "text/html", :id => "link_template", :"data-container" => "#links" }
+          = f.semantic_fields_for :links, relic.links.build do |f2|
+            %li.link.move
+
+              = f2.input :category, :label => false, :collection => Link::UrlCategories
+              = f2.input :url, :label => false, :hint => false, :class => "url"
+              = f2.input :name, :label => false, :hint => false, :class => "info"
+              = f2.hidden_field :position, :class => "link-position"
+              = f2.hidden_field :_destroy
+              = f2.hidden_field :kind, :value => "url"
+              = link_to t('views.relics.edit.delete'), '#', :class => "remove_link"
+              .description Opis:
+              .arrow
+    .add-link
+      - if relic.links.select(&:url?).length == 0
+        .strong Nie ma jeszcze żadnego źródła internetowego
+      = link_to t('views.relics.edit.links.add_internet_source'), "#", :class => "add_link", :"data-template" => "#link_template"
+
+    #papers.links_container{ :style => (relic.links.select(&:paper?).length == 0 ? "display: none" : "") }
+      %p.header
+        %span.number= t('views.relics.edit.links.number')
+        %span.url= t('views.relics.edit.links.source_type')
+        %span.info= t('views.relics.edit.links.info')
+        %span.action= t('views.relics.edit.links.action')
+      %ol.sortable
+        - relic.links.select(&:paper?).sort_by{ |e| e.position || 1000 }.each do |link|
+          = f.semantic_fields_for :links, link do |f2|
+            = content_tag_for :li, link, :class => "move" do
+              = f2.input :category, :label => false, :collection => Link::PaperCategories
+              = f2.input :formal_name, :label => false, :hint => false, :class => "url"
+              = f2.input :name, :label => false, :hint => false, :class => "info"
+              = f2.hidden_field :position, :class => "link-position"
+              = f2.hidden_field :_destroy
+              = f2.hidden_field :kind, :value => "paper"
+              = link_to t('views.relics.edit.delete'), '#', :class => "remove_link"
+              .description Opis:
+              .arrow
+        %script{ :type => "text/html", :id => "print_template", :"data-container" => "#papers" }
+          = f.semantic_fields_for :links, relic.links.build do |f2|
+            %li.link.move
+              = f2.input :category, :label => false, :collection => Link::PaperCategories
+              = f2.input :formal_name, :label => false, :hint => false, :class => "formal_name"
+              = f2.input :name, :label => false, :hint => false, :class => "info"
+              = f2.hidden_field :position, :class => "link-position"
+              = f2.hidden_field :_destroy
+              = f2.hidden_field :kind, :value => "paper"
+              = link_to t('views.relics.edit.delete'), '#', :class => "remove_link"
+              .description Opis:
+              .arrow
+    .add-link
+      - if relic.links.select(&:paper?).length == 0
+        .strong Nie ma jeszcze żadnego źródła drukowanego
+      = link_to t('views.relics.edit.links.add_print_source'), "#", :class => "add_link", :"data-template" => "#print_template"
+
+    = f.input :links_info
+    .actions
+      = f.submit t('views.relics.edit.save')
+      = t('views.relics.edit.or')
+      = link_to t('views.relics.edit.cancel'), relic_path(relic.id), :remote => true, :class => "cancel"

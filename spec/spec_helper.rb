@@ -7,6 +7,11 @@ require 'factory_girl'
 require 'capybara/rspec'
 
 Spork.prefork do
+  if ENV["RUBYMINE_HOME"]
+    $:.unshift(File.expand_path("rb/testing/patch/common", ENV["RUBYMINE_HOME"]))
+    $:.unshift(File.expand_path("rb/testing/patch/bdd", ENV["RUBYMINE_HOME"]))
+  end
+
   require 'simplecov' unless ENV['DRB']
   ENV["RAILS_ENV"] ||= 'test'
   require File.expand_path("../../config/environment", __FILE__)
@@ -34,6 +39,15 @@ Spork.prefork do
     config.before(:each) do
       refresh_relics_index
     end
+
+    config.include Devise::TestHelpers, :type => :controller
+    config.extend ControllerMacros, :type => :controller
+    config.include RequestHelpers, :type => :request
+
+
+    config.before(:each) do
+      refresh_relics_index
+    end
   end
   DatabaseCleaner.strategy = :truncation
 end
@@ -52,7 +66,7 @@ Spork.each_run do
   }
 end
 
-def sample_path file
+def sample_path(file)
   file_path = "#{Rails.root}/spec/samples/#{file}"
   raise Exception.new("File not found: #{file_path}") unless File.exists?(file_path)
   file_path

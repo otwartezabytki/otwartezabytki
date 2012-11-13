@@ -1,16 +1,38 @@
 .search-results
-  - collection.each do |relic|
-    .relic
-      .name
-        = link_to relic.identification, edit_relic_path(relic)
-      .pathway= relic.place_full_name
-      .street= relic.street
-      .include
-        - if relic.descendants.present?
-          %span
-          = relic.descendants.map(&:identification).join(', ')
-      - if relic.corrected?(current_user)
-        .modified
-      - else
-        .change
-          = link_to "Sprawdź »", edit_relic_path(relic), :class => 'btn btn-mini'
+  %table.relics
+    %thead
+      %tr.relic
+        %th.body
+          %span.label= t('views.relics.relics.name')
+        %th.location
+          %span.label= t('views.relics.relics.location')
+        %th.date
+          %span.label= t('views.relics.relics.create_date')
+    %tbody
+      - collection.each do |relic|
+        %tr.relic
+          %td.body
+            .thumb
+              = link_to image_tag(relic.main_photo.file.url(:icon)), relic, :remote => true
+            .name
+              %h2= link_to relic.identification, relic, :remote => true
+              - descendants = relic.descendants
+              - if descendants.present?
+                .include
+                  %span
+                  = descendants.map(&:identification).join('; ')
+            = state_tag(relic)
+          %td.location
+            .pathway
+              = relic.place_full_name
+            .street
+              - if relic.street?
+                %span.known= relic.street
+              - else
+                %span.unknown= t('views.relics.relics.unknown_address')
+          %td.date
+            .time
+              - if relic.date_start?
+                = relic.date_start
+              - else
+                %em= t('views.relics.relics.unknown_from')

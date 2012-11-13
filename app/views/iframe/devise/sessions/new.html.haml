@@ -1,0 +1,23 @@
+.iframe-content
+  .iframe-header
+    %a.what-about{:href => page_pl_path('o-projekcie'), :target => "_blank", :host => Settings.oz.host, :only_path => false} O co chodzi?
+    .widget-logo
+  .form_box
+    .left
+      %h2= t('.header', :scope => 'views')
+      - if flash[:alert]
+        .alert.alert-error= flash[:alert]
+      = semantic_form_for(resource, :as => resource_name, :url => session_path(resource_name), :remote => request.xhr?) do |f|
+
+        = f.input :email, :required => false, :autofocus => true
+        = f.input :password, :required => false
+        - if devise_mapping.recoverable? && controller_name != 'passwords'
+          .link_form
+            = link_to t('.forgot_password', :scope => 'views'), new_password_path(resource_name, :host => Settings.oz.host, :only_path => false), :target => '_blank'
+        .actions
+          = f.submit t('.submit', :scope => 'views')
+    .right
+      %h4 Czy konto jest mi potrzebne?
+      %p Bazę można przeglądać bez konieczności logowania. Ale jeśli chcesz dodawać lub uzupełniać informacje - logowanie jest niezbędne.
+      %h4 Nie masz konta?
+      %a{:href => new_user_registration_path, :target => "_blank", :host => Settings.oz.host, :only_path => false} Zarejestruj się tutaj

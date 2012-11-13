@@ -120,6 +120,13 @@
   background-color: #FFFFFF;
   line-height: 35px;
 
+  em.icons{
+    width: 58px;
+    height: 16px;
+    background: asset-data-url("cc-icons.png") no-repeat;
+    display: inline-block;
+  }
+
   p.top_big {
     font-size: 22px;
     color: #313132;

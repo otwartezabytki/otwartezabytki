@@ -1,0 +1,85 @@
+@import "compass/layout";
+@import "compass/css3";
+/* stylesheet for iframe layout */
+
+.alerts .main-container { width: 460px; }
+
+.iframe-content{
+  @include background(linear-gradient(#ffffff, #f2f2f2));
+  width: 450px;
+  border: 4px solid #4a6c7e;
+  @include border-radius(4px);
+  .widget-logo{
+    background: asset-data-url("logo-widget.png") no-repeat;
+    width: 157px;
+    height: 31px;
+    margin-left: 12px;
+  }
+  a.what-about{
+    color: #47687a;
+    text-decoration: underline;
+    font-size: 13px;
+    font-weight: 600;
+    float: right;
+    margin: 8px 10px 0;
+  }
+  .iframe-header{
+    padding: 10px 0;
+    border-bottom: 1px solid #e4e4e4;
+  }
+  h3{
+    line-height: 18px;
+    font-size: 13px;
+    color: #4e4e4e;
+    padding: 15px;
+    border-bottom: 1px solid #4e4e4e;
+  }
+  .form_box{
+    float: none;
+    width: auto;
+    height: auto;
+    background: none;
+    border: 0;
+    padding: 0;
+    display: inline-block;
+    .left{
+      float: left;
+      width: 227px;
+      padding: 15px 16px 20px 14px;
+      border-right: 1px solid #ddd;
+      h2{
+        font-size: 18px;
+        margin-bottom: 5px;
+        color: #4e4e4e;
+      }
+      label{
+        margin: 15px 0 5px;
+        font-weight: 700;
+        color: #313132;
+        font-size: 12px;
+        display: inline-block;
+      }
+      #user_email, #user_password{
+        width: 187px;
+      }
+      .link_form{
+        font-size: 11px;
+      }
+      .actions{
+        text-align: right;
+        input[type="submit"]{
+          float: right !important;
+        }
+      }
+    }
+    .right{
+      margin-left: 258px;
+      padding: 15px 30px 15px 15px;
+      background: asset-data-url("widget-login-shadow.png") 0 25px no-repeat;
+      h4{
+        margin: 15px 0;
+        font-weight: bold;
+      }
+    }
+  }
+}

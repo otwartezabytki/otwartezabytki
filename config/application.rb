@@ -10,6 +10,9 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
+require 'tire/rails/logger'
+require 'zip/zip'
+
 module Otwartezabytki
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
@@ -17,7 +20,7 @@ module Otwartezabytki
     # -- all .rb files in that directory are automatically loaded.
 
     # Custom directories with classes and modules you want to be autoloadable.
-    #config.autoload_paths += %W(#{config.root}/lib)
+    config.autoload_paths += %W(#{config.root}/lib)
 
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
@@ -32,6 +35,8 @@ module Otwartezabytki
 
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
     config.i18n.default_locale = config.i18n.locale = I18n.locale = :pl
+    config.i18n.available_locales = [:pl, :en]
+    config.i18n.fallbacks = true
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
@@ -48,13 +53,13 @@ module Otwartezabytki
     # This will create an empty whitelist of attributes available for mass-assignment for all models
     # in your app. As such, your models will need to explicitly whitelist or blacklist accessible
     # parameters by using an attr_accessible or attr_protected declaration.
-    config.active_record.whitelist_attributes = true
+    config.active_record.whitelist_attributes = false
 
     # Enable the asset pipeline
     config.assets.enabled = true
 
     # Version of your assets, change this if you want to expire all your assets
-    config.assets.version = '1.0'
+    config.assets.version = '1.2'
 
     # generators
     config.generators do |g|
@@ -66,10 +71,12 @@ module Otwartezabytki
     end
     unless ['test', 'development'].include?(Rails.env)
       # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-      config.assets.precompile += %w( active_admin.js wizard.js ie8.css )
+      config.assets.precompile += %w( active_admin.js ie8.css iframe.css widgets/* )
       config.cache_store = :dalli_store, { :namespace => "otwartezabytki-#{Rails.env}", :expires_in => 1.day, :compress => true }
     end
 
     config.action_mailer.default_url_options = { :host => Settings.oz.host }
+
+    config.action_view.sanitized_allowed_tags = ['table', 'tr', 'td', 'strong', 'em', 'li', 'ul', 'ol', 'a', 'p', 'div', 'del', 'ins']
   end
 end

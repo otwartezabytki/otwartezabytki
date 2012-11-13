@@ -1,4 +1,7 @@
+# -*- encoding : utf-8 -*-
 class Users::PasswordsController < Devise::PasswordsController
+
+  before_filter :enable_fancybox
 
   skip_before_filter :require_no_authentication
 

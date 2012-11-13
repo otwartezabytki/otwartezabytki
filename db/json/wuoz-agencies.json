@@ -1,0 +1,446 @@
+{
+  "wuoz-w-bialymstoku": {
+    "name": "Wojewódzki Urząd Ochrony Zabytków w Białymstoku",
+    "agencies": [
+      {
+        "city": "Białystok",
+        "director": "Andrzej Nowakowski",
+        "email": "sekretariat@wuoz.bialystok.pl",
+        "address": "ul. Dojlidy Fabryczne 23\n15-554 Białystok\ntel. (85) 741 23 32\nfax (85) 732 75 62\ne-mail: sekretariat@wuoz.bialystok.pl\n",
+        "district_names": "białostocki,bielski,hajnowski,moniecki,siemiatycki,sokólski"
+      },
+      {
+        "city": "Łomża",
+        "director": "Bolesław Gadawski",
+        "email": "del.lomza@wuoz.bialystok.pl",
+        "address": "ul. Nowa 2\n18-400 Łomża\ntel./fax (86) 216 34 08\ne-mail: del.lomza@wuoz.bialystok.pl\n",
+        "district_names": "łomżyński,grajewski,kolneński,wysokomazowiecki,zambrowski"
+      },
+      {
+        "city": "Suwałki",
+        "director": "Stanisław Tumidajewicz",
+        "email": "del.suwalki@wuoz.bialystok.pl",
+        "address": "ul. Sejneńska 13\n16-400 Suwałki\ntel./fax (87) 566 37 41\ne-mail: del.suwalki@wuoz.bialystok.pl\n",
+        "district_names": "augustowski,sejneński,suwalski"
+      }
+    ]
+  },
+  "wuoz-w-gdansku": {
+    "name": "Wojewódzki Urząd Ochrony Zabytków w Gdańsku",
+    "agencies": [
+      {
+        "city": "Gdańsk",
+        "director": "dr Marian Kwapiński",
+        "email": "gdansk@zabytki.mail.pl",
+        "address": "ul. Kotwiczników 20\n80-881 Gdańsk\ntel. (58) 301 62 67\nfax (58) 305-22-56\ne-mail: gdansk@zabytki.mail.pl\nwww.ochronazabytkow.gda.pl\n",
+        "district_names": "chojnicki,gdański,kartuski,kościerski,kwidzyński,malborski,nowodworski,pucki,starogardzki,sztumski,tczewski,wejherowski"
+      },
+      {
+        "city": "Słupsk",
+        "director": "Zdzisław Daczkowski",
+        "email": "slupsk@zabytki.mail.pl; zdzislaw.daczkowski@zabytki.mail.pl",
+        "address": "ul. Jaracza 6\n76-200 Słupsk\ntel./fax (59) 842 64 34\ne-mail: slupsk@zabytki.mail.pl; zdzislaw.daczkowski@zabytki.mail.pl\n",
+        "district_names": "bytowski,człuchowski,lęborski,słupski"
+      }
+    ]
+  },
+  "wuoz-w-katowicach": {
+    "name": "Wojewódzki Urząd Ochrony Zabytków w Katowicach",
+    "agencies": [
+      {
+        "city": "Katowice",
+        "director": "Barbara Klajmon",
+        "email": "wkz.katowice@poczta.internetdsl.pl",
+        "address": "ul. Francuska 12\n40-015 Katowice\ntel. (32) 253 77 98\nfax (32) 256 48 58\ne-mail: wkz.katowice@poczta.internetdsl.pl\nwuoz.katowice@poczta.internetdsl.pl\nwww.wkz.katowice.pl\n",
+        "district_names": "wodzisławski,będziński,tarnogórski,zawierciański,gliwicki,raciborski,pszczyński,mikołowski,rybnicki,bieruńsko-lędziński"
+      },
+      {
+        "city": "Bielsko-Biała",
+        "director": "Jacek Konior",
+        "email": "sozbb@vp.pl",
+        "address": "ul. Powstańców Śląskich 6\n43-300 Bielsko-Biała\ntel./fax (33) 812 37 74\ne-mail: sozbb@vp.pl\n",
+        "district_names": "bielski,cieszyński,żywiecki"
+      },
+      {
+        "city": "Częstochowa",
+        "director": "Aleksandra Janikowska-Perczak",
+        "email": "soz.czestochowa@wp.pl",
+        "address": "ul. Mirowska 8\n42-217 Częstochowa\ntel./fax (34) 365 16 38\ne-mail: soz.czestochowa@wp.pl\n",
+        "district_names": "częstochowski,kłobucki,lubliniecki,myszkowski"
+      }
+    ]
+  },
+  "wuoz-w-kielcach": {
+    "name": "Wojewódzki Urząd Ochrony Zabytków w Kielcach",
+    "agencies": [
+      {
+        "city": "Kielce",
+        "director": "Janusz Cedro",
+        "email": "zabkielce@onet.pl",
+        "address": "ul. Zamkowa 5\n25-009 Kielce\ntel. (41) 344 56 34, 344 27 20\nfax (41) 344 56 34\ne-mail: zabkielce@onet.pl\nwww.zabkielce.prot.pl\n",
+        "district_names": "buski,jędrzejowski,kazimierski,kielecki,konecki,ostrowiecki,pińczowski,skarżyski,starachowicki,włoszczowski,staszowski"
+      },
+      {
+        "city": "Sandomierz",
+        "director": "Jerzy Zub",
+        "email": "wuoz.sandomierz@wp.pl",
+        "address": "ul. Opatowska 9\n27-600 Sandomierz\ntel./fax (15) 644 61 81\ne-mail: wuoz.sandomierz@wp.pl\n",
+        "district_names": "opatowski,sandomierski,staszowski,ostrowiecki"
+      }
+    ]
+  },
+  "wuoz-w-krakowie": {
+    "name": "Wojewódzki Urząd Ochrony Zabytków w Krakowie",
+    "agencies": [
+      {
+        "city": "Kraków",
+        "director": "Jan Janczykowski",
+        "email": "krakow@wuoz.malopolska.pl",
+        "address": "ul. Kanonicza 24\n31-002 Kraków\ntel. (12) 426 41 00/01, (12) 426 10 10/11\nwww.wuoz.malopolska.pl\ne-mail: krakow@wuoz.malopolska.pl\n",
+        "district_names": "chrzanowski,krakowski,miechowski,myślenicki,olkuski,oświęcimski,proszowicki,suski,wadowicki,wielicki"
+      },
+      {
+        "city": "Nowy Sącz",
+        "director": "Krystyna Menio",
+        "email": "nowysacz@wuoz.malopolska.pl",
+        "address": "ul. Wiśniowieckiego 127\n33-300 Nowy Sącz\ntel./fax (18) 442 84 84\ne-mail: nowysacz@wuoz.malopolska.pl\n",
+        "district_names": "gorlicki,limanowski,nowosądecki"
+      },
+      {
+        "city": "Nowy Targ",
+        "director": "dr Mirosław Holewiński",
+        "email": "nowytarg@wuoz.malopolska.pl",
+        "address": "ul. Jana Kazimierza 22\n34-400 Nowy Targ\ntel. (18) 448 88 54\ne-mail: nowytarg@wuoz.malopolska.pl\n",
+        "district_names": "nowotarski,tatrzański"
+      },
+      {
+        "city": "Tarnów",
+        "director": "Andrzej Cetera",
+        "email": "tarnow@wuoz.malopolska.pl",
+        "address": "ul. Konarskiego 15\n33-100 Tarnów\ntel. (14) 621 28 27\ne-mail: tarnow@wuoz.malopolska.pl\n",
+        "district_names": "bocheński,brzeski,dąbrowski,tarnowski"
+      }
+    ]
+  },
+  "wuoz-w-lublinie": {
+    "name": "Wojewódzki Urząd Ochrony Zabytków w Lublinie",
+    "agencies": [
+      {
+        "city": "Lublin",
+        "director": "dr inż. arch. Halina Landecka",
+        "email": "info@wkz.lublin.pl",
+        "address": "ul. Archidiakońska 4\n20-113 Lublin\ntel./fax (81) 532 90 35, (81) 532 59 37,\n(81) 532 26 04\ne-mail: info@wkz.lublin.pl\nwww.wkz.lublin.pl\n",
+        "district_names": "janowski,kraśnicki,lubartowski,lubelski,łęczyński,opolski,puławski,rycki,świdnicki"
+      },
+      {
+        "city": "Biała Podlaska",
+        "director": "Jan Maraśkiewicz",
+        "email": "wuozdelbp@wp.pl",
+        "address": "ul. Janowska 27/29\n21-500 Biała Podlaska\ntel./fax (83) 343 58 24\ne-mail: wuozdelbp@wp.pl\n",
+        "district_names": "bialski,łukowski,parczewski,radzyński"
+      },
+      {
+        "city": "Chełm",
+        "director": "Stanisława Rudnik",
+        "email": "wuoz.delegatura.chelm@neostrada.pl",
+        "address": "ul. Plac Niepodległości 1 Blok E\n22-100 Chełm\ntel./fax (82) 565 59 72\ne-mail: wuoz.delegatura.chelm@neostrada.pl\n",
+        "district_names": "chełmski,krasnostawski,włodawski"
+      },
+      {
+        "city": "Zamość",
+        "director": "Grażyna Żurawicka",
+        "email": "wuoz_zamosc@op.pl",
+        "address": "ul. Staszica 29\n22-400 Zamość\ntel./fax 84 638 59 71\ne-mail: wuoz_zamosc@op.pl\n",
+        "district_names": "biłgorajski,hrubieszowski,tomaszowski,zamojski"
+      }
+    ]
+  },
+  "wuoz-w-olsztynie": {
+    "name": "Wojewódzki Urząd Ochrony Zabytków w Olsztynie",
+    "agencies": [
+      {
+        "city": "Olsztyn",
+        "director": "Barbara Zalewska",
+        "email": "wuoz.olsztyn@wuoz.olsztyn.pl",
+        "address": "ul. Podwale 1\n10-076 Olsztyn\ntel. (89) 521 85 30\nfax (89) 521 85 49\nwww.wuoz.olsztyn.pl\ne-mail: wuoz.olsztyn@wuoz.olsztyn.pl\n",
+        "district_names": "bartoszycki,działdowski,iławski,kętrzyński,mrągowski,nidzicki,nowomiejski,olsztyński,szczycieński"
+      },
+      {
+        "city": "Elbląg",
+        "director": "P.O. Maria Gawryluk",
+        "email": "wuoz.elblag@wuoz.olsztyn.pl",
+        "address": "ul. Świętego Ducha 19\n82-300 Elbląg\ntel. (55) 611 20 10\nfax (55) 611 20 15\ne-mail: wuoz.elblag@wuoz.olsztyn.pl\n",
+        "district_names": "braniewski,elbląski,lidzbarski"
+      },
+      {
+        "city": "Ełk",
+        "director": "Leszek Godzieba",
+        "email": "sozelk@wp.pl",
+        "address": "ul. Mickiewicza 11\n19-300 Ełk\ntel./fax (87) 621 61 52\ne-mail: sozelk@wp.pl\n\npowiaty: ełcki, giżycki, gołdapski,\nolecki, piski i węgorzewski",
+        "district_names": "ełcki,giżycki,gołdapski,olecki,piski,węgorzewski,mrągowski"
+      }
+    ]
+  },
+  "wuoz-w-opolu": {
+    "name": "Wojewódzki Urząd Ochrony Zabytków w Opolu",
+    "agencies": [
+      {
+        "city": "Opole",
+        "director": "Iwona Solisz",
+        "email": "wuoz.opole@neostrada.pl",
+        "address": "ul. Piastowska 14\n45-082 Opole\ntel. (77) 452 44 33\nfax (77) 452 47 50\ne-mail: wuoz.opole@neostrada.pl\nwosoz@wbd.pl\n",
+        "district_names": "brzeski,głubczycki,kędzierzyńsko-kozielski,kluczborski,krapkowicki,namysłowski,nyski,oleski,opolski,prudnicki,strzelecki"
+      }
+    ]
+  },
+  "wuoz-w-poznaniu": {
+    "name": "Wojewódzki Urząd Ochrony Zabytków w Poznaniu",
+    "agencies": [
+      {
+        "city": "Poznań",
+        "director": "Aleksander Starzyński",
+        "email": "wuoz@poznan.wuoz.gov.pl",
+        "address": "ul. Gołębia 2\n61-834 Poznań\ntel. (61) 852 80 03, 04\nfax (61) 852 80 02\ne-mail: wuoz@poznan.wuoz.gov.pl\n",
+        "district_names": "gnieźnieński,jarociński,międzychodzki,nowotomyski,obornicki,poznański,szamotulski,śremski,wągrowiecki,wrzesiński"
+      },
+      {
+        "city": "Kalisz",
+        "director": "Beata Matusiak",
+        "email": "kalisz@poznan.wuoz.gov.pl",
+        "address": "ul. Tuwima 10\n62-800 Kalisz\ntel. 62 767 23 21\nfax 62 757 64 21\ne-mail: kalisz@poznan.wuoz.gov.pl\n",
+        "district_names": "kaliski,kępiński,krotoszyński,ostrowski,ostrzeszowski,pleszewski"
+      },
+      {
+        "city": "Konin",
+        "director": "dr Janusz Tomala",
+        "email": "konin@poznan.wuoz.gov.pl",
+        "address": "Posada, ul. Tuwima 2\n62-530 Kazimierz Biskupi\ntel. (0-63) 244 71 26\nfax (0-63) 244 71 83\ne-mail: konin@poznan.wuoz.gov.pl\n",
+        "district_names": "kolski,koniński,słupecki,turecki"
+      },
+      {
+        "city": "Leszno",
+        "director": "Małgorzata Mikołajczak",
+        "email": "soz.leszno@poznan.uw.gov.pl",
+        "address": "Pl. Komeńskiego 6\n64-100 Leszno\ntel./fax (0-65) 529 93 83\ne-mail: soz.leszno@poznan.uw.gov.pl\n",
+        "district_names": "gostyński,kościański,leszczyński,rawicki,wolsztyński"
+      },
+      {
+        "city": "Piła",
+        "director": "Roman Chwaliszewski",
+        "email": "pila@poznan.wuoz.gov.pl",
+        "address": "ul. Śniadeckich 46\n64-920 Piła\ntel. (0-67) 352 07 15\nfax 0-67 352 07 16\ne-mail: pila@poznan.wuoz.gov.pl\n",
+        "district_names": "chodzieski,czarnkowsko-trzcianecki,pilski,złotowski"
+      }
+    ]
+  },
+  "wuoz-w-przemyslu": {
+    "name": "Wojewódzki Urząd Ochrony Zabytków w Przemyślu",
+    "agencies": [
+      {
+        "city": "Przemyśl",
+        "director": "dr Grażyna Stojak",
+        "email": "wkzabytkow@wuozprzemysl.pl",
+        "address": "ul. Jagiellońska 29\n37-700 Przemyśl\ntel. 16 678 59 44\ntel./fax 16 678 61 78\ne-mail: wkzabytkow@wuozprzemysl.pl\nwww.wuozprzemysl.pl\n",
+        "district_names": "jarosławski,przemyski,przeworski,lubaczowski"
+      },
+      {
+        "city": "Krosno",
+        "director": "Antoni Bosak",
+        "email": "psoz@poczta.onet.pl",
+        "address": "ul. Bieszczadzka 1\n38-400 Krosno\ntel. 13 432 03 06\ntel./fax 13 432 24 01\ne-mail: psoz@poczta.onet.pl\n",
+        "district_names": "bieszczadzki,brzozowski,jasielski,krośnieński,sanocki,leski"
+      },
+      {
+        "city": "Rzeszów",
+        "director": "Zbigniew Jucha",
+        "email": "sozrzeszow@poczta.onet.pl",
+        "address": "ul. Mickiewicza 7\n35-064 Rzeszów\ntel./fax (17) 853 94 61\ne-mail: sozrzeszow@poczta.onet.pl\n",
+        "district_names": "dębicki,kolbuszowski,leżajski,łańcucki,ropczycko-sędziszowski,rzeszowski,strzyżowski"
+      },
+      {
+        "city": "Tarnobrzeg",
+        "director": "Dominik Komada",
+        "email": "wouztbg@op.pl",
+        "address": "ul. 1 Maja 4\n39-400 Tarnobrzeg\ntel./fax (15) 822 15 95\ne-mail: wouztbg@op.pl\n",
+        "district_names": "mielecki,niżański,stalowowolski,tarnobrzeski"
+      }
+    ]
+  },
+  "wuoz-w-szczecinie": {
+    "name": "Wojewódzki Urząd Ochrony Zabytków w Szczecinie",
+    "agencies": [
+      {
+        "city": "Szczecin",
+        "director": "Ewa Stanecka",
+        "email": "sekretariat@wkz.szczecin.pl",
+        "address": "ul. Kuśnierska 14 a\n70-536 Szczecin\ntel./fax 91 433 70 66\nwww.wkz.szczecin.pl\ne-mail: sekretariat@wkz.szczecin.pl\n",
+        "district_names": "choszczeński,drawski,goleniowski,gryficki,gryfiński,kamieński,myśliborski,policki,pyrzycki,stargardzki,Szczecin,Świnoujście,wałecki"
+      },
+      {
+        "city": "Koszalin",
+        "director": "Ewa Kowalska",
+        "email": "koszalin@wkz.szczecin.pl",
+        "address": "ul. Zwycięstwa 125\n75-602 Koszalin\ntel. 94 342 61 47\nfax. 94 342 70 38\ne-mail: koszalin@wkz.szczecin.pl\n",
+        "district_names": "białogardzki,drawski,kołobrzeski,koszaliński,sławieński,szczecinecki,świdwiński"
+      }
+    ]
+  },
+  "wuoz-w-toruniu": {
+    "name": "Wojewódzki Urząd Ochrony Zabytków w Toruniu",
+    "agencies": [
+      {
+        "city": "Toruń",
+        "director": "Sambor Gawiński",
+        "email": "wo_soz_torun@poczta.onet.pl",
+        "address": "ul. Łazienna 8\n87-100 Toruń\ntel. (56) 655 47 51, 621 06 92\nfax (56) 655 46 84\nwww.torun.wkz.gov.pl\ne-mail: wo_soz_torun@poczta.onet.pl\n",
+        "district_names": "brodnicki,chełmiński,golubsko-dobrzyński,grudziądzki,toruński,wąbrzeski"
+      },
+      {
+        "city": "Bydgoszcz",
+        "director": "Iwona Brzozowska",
+        "email": "wuoz.bydgoszcz@neostrada.pl",
+        "address": "ul. Jezuicka 2\n85-102 Bydgoszcz\ntel. (52) 322 44 17, 322 49 98\nfax (52) 322 44 17\ne-mail: wuoz.bydgoszcz@neostrada.pl\n",
+        "district_names": "bydgoski,inowrocławski,mogileński,nakielski,sępoleński,świecki,tucholski,żniński"
+      },
+      {
+        "city": "Włocławek",
+        "director": "Danuta Walczewska",
+        "email": "wuoz.wloclawek@poczta.internetdsl.pl",
+        "address": "ul. Łęgska 42\n87-800 Włocławek\ntel.(54) 231 55 22\nfax (54) 231 55 22\ne-mail: wuoz.wloclawek@poczta.internetdsl.pl\n",
+        "district_names": "aleksandrowski,lipnowski,radziejowski,rypiński,włocławski"
+      }
+    ]
+  },
+  "wuoz-w-warszawie": {
+    "name": "Wojewódzki Urząd Ochrony Zabytków w Warszawie",
+    "agencies": [
+      {
+        "city": "Warszawa",
+        "director": "Rafał Nadolny",
+        "email": "info@mwkz.pl",
+        "address": "ul. Nowy Świat 18/20\n00-373 Warszawa\ntel. (22) 44 30 400\nfax (22) 44 30 401\nwww.mwkz.pl\ne-mail: info@mwkz.pl\n",
+        "district_names": "białobrzeski,grodziski,legionowski,makowski,nowodworski,otwocki,piaseczyński,pruszkowski,warszawski zachodni,zwoleński,żuromiński,żyrardowski,wołomiński"
+      },
+      {
+        "city": "Ciechanów",
+        "director": "Krzysztof Kaliściak",
+        "email": "ciechanow@mwkz.pl",
+        "address": "ul. Strażacka 6\n06-400 Ciechanów\ntel. (23) 672 49 52\ntel./fax (22) 673 29 01\ne-mail: ciechanow@mwkz.pl\n",
+        "district_names": "ciechanowski,mławski,płoński,pułtuski,żuromiński"
+      },
+      {
+        "city": "Ostrołęka",
+        "director": "Elżbieta Olejak",
+        "email": "ostroleka@mwkz.pl",
+        "address": "ul. Kościuszki 16\n07-400 Ostrołęka\ntel./fax (29) 764 22 38\ne-mail: ostroleka@mwkz.pl\n",
+        "district_names": "makowski,ostrołęcki,ostrowski,przasnyski,wyszkowski"
+      },
+      {
+        "city": "Płock",
+        "director": "Ewa Jaszczak",
+        "email": "plock@mwkz.pl",
+        "address": "ul. Zduńska 13A\n09-400 Płock\ntel. (24) 262 76 71, 262 78 34\ntel./fax (24) 262 75 58\ne-mail: plock@mwkz.pl\n",
+        "district_names": "gostyniński,płocki,sierpecki,sochaczewski"
+      },
+      {
+        "city": "Radom",
+        "director": "Marek Figiel",
+        "email": "radom@mwkz.pl",
+        "address": "ul. Żeromskiego 53\n26-600 Radom\ntel. (48) 363 92 14\ntel./fax (48) 363 85 14\ne-mail: radom@mwkz.pl\n",
+        "district_names": "białobrzeski,grójecki,kozienicki,lipski,przysuski,radomski,szydłowiecki,zwoleński"
+      },
+      {
+        "city": "Siedlce",
+        "director": "Stanisław Fiedorczuk",
+        "email": "siedlce@mwkz.pl",
+        "address": "ul. Bema 4a\n08-110 Siedlce\ntel./fax (25) 633 94 58\ne-mail: siedlce@mwkz.pl\n",
+        "district_names": "garwoliński,łosicki,miński,siedlecki,sokołowski,węgrowski"
+      }
+    ]
+  },
+  "wuoz-w-zielonej-gorze": {
+    "name": "Wojewódzki Urząd Ochrony Zabytków w Zielonej Górze",
+    "agencies": [
+      {
+        "city": "Zielona Góra",
+        "director": "Barbara Bielinis-Kopeć",
+        "email": "sekretariat.zgora@lwkz.pl",
+        "address": "ul. Kopernika 1\n65-063 Zielona Góra\ntel. (68) 324 73 90, 324 74 11\nfax (68) 325 37 45\nwww.lwkz.pl\ne-mail: sekretariat.zgora@lwkz.pl\n",
+        "district_names": "krośnieński,wschowski,zielonogórski,nowosolski,świebodziński,żagański,żarski"
+      },
+      {
+        "city": "Gorzów Wielkopolski",
+        "director": "Błażej Skaziński",
+        "email": "delegatura.gorzow@lwkz.pl",
+        "address": "ul. Kosynierów Gdyńskich 75\n66-400 Gorzów Wielkopolski\ntel./fax (95) 720 05 21, 720 03 46\nwww.lwkz.pl\ne-mail:  delegatura.gorzow@lwkz.pl\n",
+        "district_names": "strzelecko-drezdenecki,słubicki,gorzowski,międzyrzecki,sulęciński"
+      }
+    ]
+  },
+  "wuoz-w-lodzi": {
+    "name": "Wojewódzki Urząd Ochrony Zabytków w Łodzi",
+    "agencies": [
+      {
+        "city": "Łódź",
+        "director": "Wojciech Szygendowski",
+        "email": "WOSOZ_lodz@poczta.fm",
+        "address": "ul. Piotrkowska 99\n90-425 Łódź\ntel. (42) 632 52 33, 638 07 21\nfax (42) 638 07 36\nwww.wuoz.bip.lodz.pl\ne-mail: WOSOZ_lodz@poczta.fm\n",
+        "district_names": "brzeziński,łódzki wschodni,pabianicki,zgierski"
+      },
+      {
+        "city": "Piotrków Trybunalski",
+        "director": "Zygmunt Błaszczyk",
+        "email": "sozpt@pro.onet.pl",
+        "address": "ul. Farna 8\n97-300 Piotrków Trybunalski\ntel. (44) 647 62 79, 647 77 53\nfax (44) 647 62 79\ne-mail: sozpt@pro.onet.pl\n",
+        "district_names": "bełchatowski,opoczyński,pajęczański,piotrkowski,radomszczański,tomaszowski"
+      },
+      {
+        "city": "Sieradz",
+        "director": "Elżbieta Bąbka-Horbacz",
+        "email": "zabytki@nasze.pl",
+        "address": "ul. Kościuszki 3\n98-200 Sieradz\ntel./fax (43) 822 38 15\ne-mail: zabytki@nasze.pl\n",
+        "district_names": "łaski,poddębicki,sieradzki,wieluński,wieruszowski,zduńskowolski"
+      },
+      {
+        "city": "Skierniewice",
+        "director": "Marian Rożej",
+        "email": "zabytkiskce@wp.pl",
+        "address": "ul. Trzcińska 18\n96-100 Skierniewice\ntel. 46 833 90 35, 833 92 97\nfax 46 833 90 35\ne-mail: zabytkiskce@wp.pl\n",
+        "district_names": "kutnowski,łęczycki,łowicki,rawski,skierniewicki"
+      }
+    ]
+  },
+  "wuoz-we-wroclawiu": {
+    "name": "Wojewódzki Urząd Ochrony Zabytków we Wrocławiu",
+    "agencies": [
+      {
+        "city": "Wrocław",
+        "director": "Andrzej Kubik",
+        "email": "dwkz@dwkz.pl",
+        "address": "ul. Władysława Łokietka 11 \n50-243 Wrocław\ntel. 71 343 65 01, 344 38 92 \nfax 71 344 14 49, 395 80 10\nhttp://wosoz.ibip.wroc.pl\ne-mail: dwkz@dwkz.pl\n",
+        "district_names": "górowski,jaworski,jeleniogórski,milicki,oleśnicki,oławski,polkowicki,strzeliński,średzki,trzebnicki,wołowski,wrocławski"
+      },
+      {
+        "city": "Jelenia Góra",
+        "director": "Wojciech Kapałczyński",
+        "email": "dwkz-jg@dwkz.pl",
+        "address": "ul. 1-go Maja 23\n58-500 Jelenia Góra\ntel./fax 75 752 68 65\ntel. 75 767 63 85\ne-mail: dwkz-jg@dwkz.pl\n",
+        "district_names": "bolesławiecki,jeleniogórski,kamiennogórski,lubański,lwówecki,zgorzelecki"
+      },
+      {
+        "city": "Legnica",
+        "director": "Zdzisław Kurzeja",
+        "email": "dwkz-lg@dwkz.pl",
+        "address": "ul. Zamkowa 2\n59-220 Legnica\ntel. (76) 721 31 10\nfax (76) 721 31 21\ne-mail: dwkz-lg@dwkz.pl\n",
+        "district_names": "głogowski,legnicki,lubiński,polkowicki,złotoryjski"
+      },
+      {
+        "city": "Wałbrzych",
+        "director": "Barbara Nowak-Obelinda",
+        "email": "dwkz-wb@dwkz.pl",
+        "address": "ul. Zamkowa 3\n58-300 Wałbrzych\ntel. 74 842 64 18\nfax 74 842 66 60\ne-mail: dwkz-wb@dwkz.pl\n",
+        "district_names": "dzierżoniowski,kłodzki,świdnicki,wałbrzyski,ząbkowicki"
+      }
+    ]
+  }
+}

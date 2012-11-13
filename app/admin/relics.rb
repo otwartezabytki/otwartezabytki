@@ -1,64 +1,115 @@
-ActiveAdmin.register Relic do
+# -*- encoding : utf-8 -*-
+
+ActiveAdmin.register Relic, {:sort_order => :id} do
+  menu :label => "Zabytki", :parent => "Zasoby", :priority => 1
+
   controller.authorize_resource
 
+  filter :id
   filter :identification
-  filter :group
 
-  filter :voivodeship
-  filter :district
-  filter :commune
+  filter :voivodeship, :input_html => { :class => "select2", :style => "width: 241px" }, :label => "Województwo"
+  filter :district, :input_html => { :class => "select2", :style => "width: 241px" }, :label => "Powiat"
+  filter :commune, :input_html => { :class => "select2", :style => "width: 241px" }, :label => "Miejscowość"
 
   index do
-    column :register_number
-    column :voivodeship
-    column :district
-    column :commune
+    column :id
     column :identification
-    column do |relic|
-      if relic.versions.count > 0
-        link_to "History", history_admin_relic_path(relic)
-      end
-    end
+    column :register_number
+    column :voivodeship, :sortable => false
+    column :district, :sortable => false
+    column :commune, :sortable => false
     default_actions
+  end
+
+  action_item :only => [:show, :edit] do
+    link_to 'Profil zabytku', relic_path(relic), :target => "_blank"
   end
 
   form do |f|
     f.inputs do
-      f.input :register_number
-      f.input :identification
-      f.input :group
+      f.input :nid_id
+      descendants = if f.object.root
+        (f.object.root.descendants + [f.object.root] - [f.object]).uniq.map{ |descendant| ["#{descendant.identification} (##{descendant.id})", descendant.id]}
+      else
+        []
+      end
+      if descendants.present?
+        f.input :parent_id, :as => :select, :label => "ID zespołu zabytków", :collection => descendants, :selected => f.object.parent_id
+      end
+      f.input :state, :as => :select, :include_blank => false, :collection => t('activerecord.attributes.relic.states').to_a.map(&:reverse)
+      f.input :existence, :as => :select, :include_blank => false, :collection => t('activerecord.attributes.relic.existences').to_a.map(&:reverse)
+      f.input :approved
+      f.input :identification, :as => :string
+      f.input :common_name
+      f.input :description
+      f.input :register_number, :as => :string
 
-      f.actions
+      f.input :dating_of_obj
+      if f.object.foreign_relic?
+        f.input :country_code, :as => :select, :collection => I18n.t('countries').to_a.map(&:reverse)
+        f.input :fprovince
+        f.input :fplace
+      else
+        f.input :place_id
+      end
+      f.input :street
+      f.input :latitude
+      f.input :longitude
+
+      f.input :categories, :as => :check_boxes,
+              :collection => Category.to_hash.invert, :label => false,
+              :input_html => { :multiple => true }
+      f.input :tags, :input_html => { :value => relic.tags.join(','), :style => "width: 680px", :multiple => true }
+
+      f.input :documents_info,  :label => 'źródła dokumentów'
+      f.input :links_info,      :label => 'źródła linków'
+
+      f.buttons
     end
-
   end
 
-  member_action :history do
-    @relic = Relic.find(params[:id])
-    @versions = @relic.versions
-  end
-
-  member_action :revert, :method => :put do
-    @relic = Relic.find(params[:id])
-    @version = @relic.versions.where(:id => params[:version]).first.reify
-
-    if @version.save
-      redirect_to admin_relic_path(@relic.id), :notice => t("notices.relic_reverted")
-    else
-      flash[:error] = @version.errors.full_messages
-      redirect_to admin_relic_path(@relic.id, :version => @version.id)
+  show do |relic|
+    attributes_table do
+      row :id
+      row :reason if relic.reason?
+      row :nid_id
+      row :parent_id do
+        relic.parent.identification
+      end if relic.parent.present?
+      row :approved do
+        relic.reason ? 'Tak' : 'Nie'
+      end
+      row :state do
+        relic.state_name
+      end
+      row :existence do
+        relic.existence_name
+      end
+      row :identification
+      row :common_name
+      row :description
+      row :register_number
+      row :dating_of_obj
+      row 'Adres' do
+        relic.place_with_address
+      end
+      row :latitude
+      row :longitude
+      row :categories do
+        relic.categories.map{|c| Category.to_hash[c] }.join(', ')
+      end
+      row :tags do
+        relic.tags.join(', ')
+      end
+      row 'źródła dokumentów' do
+        relic.documents_info
+      end
+      row 'źródła linków' do
+        relic.links_info
+      end
     end
-  end
-
-  action_item :only => :show do
-    link_to t('buttons.show_history'), history_admin_relic_path(resource)
-  end
-
-  action_item :only => :show  do
-    unless resource.live?
-      link_to t('buttons.revert_this_version'), revert_admin_relic_path(resource, :version => params[:version]),
-        :method => :put, :data => { :confirm => t('messages.are_you_sure') }
-    end
+    active_admin_comments
   end
 
   controller do

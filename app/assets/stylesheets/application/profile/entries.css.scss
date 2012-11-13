@@ -1,0 +1,104 @@
+@import "compass/layout";
+@import "compass/css3";
+
+.entries{
+  textarea.redactor{
+    height: 85px;
+    width: 100%;
+    margin-top: 10px;
+  }
+  .redactor_box{
+    margin-top: 10px;
+  }
+  .entries-showcase{
+    -moz-column-count: 2;
+    -moz-column-gap: 10px;
+    -moz-column-fill: auto;
+    -webkit-column-count: 2;
+    -webkit-column-gap: 10px;
+    -webkit-column-fill: auto;
+    column-count: 2;
+    column-gap: 15px;
+    column-fill: auto;
+    input[type="text"], textarea {
+      width: 278px !important;
+    }
+    .actions{
+      border-top: 1px solid #e5e5e5;
+      padding-top: 20px;
+      margin-top: 10px;
+      color: #878787;
+      font-style: italic;
+      font-size: 12px;
+      a{
+        color: #d50000;
+        font-style: normal;
+      }
+      input[type="submit"]{
+        @include background(linear-gradient(#48b119, #2f9900));
+        @include filter-gradient(#48b119, #2f9900);
+        @include border-radius(2px);
+        color: #fff;
+        font-size: 12px;
+        text-shadow: 0 1px 0 rgba(0,0,0,.5);
+        border: 0;
+        height: 30px;
+        padding: 0 12px;
+        cursor: pointer;
+        &:hover{
+          background: #34a900;
+        }
+      }
+    }
+  }
+
+  .entry{
+    @include box-shadow(0 1px 3px 0 rgba(0,0,0,0.3));
+    padding: 15px 20px;
+    -moz-column-break-inside: avoid; 
+    -webkit-column-break-inside: avoid; 
+    column-break-inside: avoid; 
+    display: inline-block; 
+    margin: 0 2px 15px;
+    width: 300px;
+    h3{
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    p{
+      line-height: 20px;
+      font-size: 14px;
+      font-family: Georgia, serif;
+      margin-bottom: 10px;
+    }
+    a.update {
+      padding-left: 20px;
+      line-height: 18px;
+      background: asset-data-url("entry-ico-update.png") 0 3px no-repeat;
+      color: #e67e03;
+      font-size: 12px;
+      display: block;
+      margin-top: 10px;
+    }
+    .body{
+      overflow: hidden;
+      p{
+        b{
+          font-weight: bold;
+        }
+        i{
+          font-style: italic;
+        }
+      }
+      ul{
+        padding-left: 20px;
+        margin: 10px 0;
+        li{
+          list-style-type: disc;
+          font-family: Georgia, Arial, sans-serif;
+        }
+      }
+    }
+  }
+}

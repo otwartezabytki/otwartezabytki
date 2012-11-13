@@ -1,0 +1,60 @@
+#fancybox
+.edit_relic.new_relic
+  = render :partial => "relicbuilders/stages", :locals => { :stage => 1 }
+  .creator
+    %section.main
+      %section.creator-step
+        = render :partial => 'parent_relic', :object => @relic.parent
+        %aside
+          %h3= t('views.relicbuilders.new.header_html')
+
+          %p= t('views.relicbuilders.new.info')
+          %p= link_to 'Chcę jednak dodać zespół zabytków', '#', :clas => 'footlink'
+        %p.intro= t('views.relicbuilders.new.intro1')
+        %p.intro= t('views.relicbuilders.new.intro2')
+      %section.creator-step
+        - location = LocationBuilder.new(params[:location])
+        = semantic_form_for location, :as => 'location', :url => new_relicbuilder_path, :method => :get, :remote => true do |f|
+          = f.input :foreign_relic, :as => :boolean, :label => t('views.relicbuilders.new.add_foreign_relic')
+          .field.text.search.marker
+            .polish-location{:style => "#{ 'display: none;' unless f.object.foreign_relic.to_i.zero?}"}
+              = f.input :polish_place, :label => t('views.relicbuilders.new.place')
+            .foreign-location{:style => "#{ 'display: none;' if f.object.foreign_relic.to_i.zero?}"}
+              .select
+                = f.label :country_code, t('views.relicbuilders.new.country_code')
+                = f.country_code_select :country_code
+              = f.input :original_name, :label => t('views.relicbuilders.new.original_name')
+              = f.input :polish_name, :label => t('views.relicbuilders.new.polish_name')
+          .actions
+            = f.submit t('views.relicbuilders.new.search_html'), :class => 'btn'
+      .polish-location{:style => "#{ 'display: none;' unless location.foreign_relic.to_i.zero?}"}
+        - if defined? @places
+          - if @places.blank?
+            = t('views.relicbuilders.new.no_results')
+          - elsif @places.size > 1
+            %section.creator-step
+              %h3= t('views.relicbuilders.new.select_place')
+              .places-wrapper
+                %ul.places
+                  - @places.each do |place|
+                    %li
+                      = (place.location_names.first(place.location_names.size - 1) << "<strong>#{place.name}</strong>").join(' > ').html_safe
+                      = link_to t('views.relicbuilders.new.choose_html'), 'javascript: void(0);', 'data-place_id' => place.id, 'data-coordinates' => "#{place.latitude}, #{place.longitude}"
+
+      %section.creator-step.location
+        = semantic_form_for @relic, :url => geodistance_relicbuilder_path, :method => :get, :remote => true do |f|
+          %h3= t('views.relicbuilders.new.select_on_map')
+          .column
+            #map_canvas{ :style => "width: 515px; height: 380px;" }
+          .column
+            .marker-helper
+              %h3= t('views.relicbuilders.new.drag_marker')
+              .marker-holder
+                = image_tag 'marker.png', :id => 'marker'
+          = f.hidden_field :parent_id
+          = f.hidden_field :place_id
+          = f.hidden_field :latitude
+          = f.hidden_field :longitude
+          .column.full_width
+            .actions{:style => 'display:none;'}
+              = f.submit t('views.relicbuilders.next_step_html')

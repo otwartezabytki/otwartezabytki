@@ -1,0 +1,25 @@
+#fancybox
+%section.widgets#widget_wrapper{ :"data-replace" => "#widget_wrapper" }
+  %h1.about_top Widżety:
+  .content
+    .description
+      %h3 Czym są widżety?
+      %p Otwarte dane o zabytkach mogą Wam się przydać!
+      %p Udostępniamy kilka przykładowych aplikacji, dzięki którym łatwiej będzie wykorzystać dane o otwartych zabytkach na innych stronach internetowych.
+      %h3 Jak użyć widżet?
+      %p Aby skorzystać z prezentowanych aplikacji, wystarczy zagnieździć kawałek kodu na dowolnej stronie internetowej.
+      %h3 Masz pomysł na widżet?
+      %p
+        Jeśli masz pomysł na funkcjonalną aplikację wykorzystującą dane o Otwartych Zabytkach, podziel się nim z nami, a być może uda nam się go zrealizować
+        = "(#{mail_to Settings.oz.email_sender})!".html_safe
+    .widgets
+      - [Widget::MapSearch, Widget::AddRelic, Widget::AddAlert].each do |widget_template|
+        = link_to method(:"widgets_#{widget_template.partial_name.pluralize}_path").call(), :class => "widget", :method => :post do
+          - if widget_template.thumb
+            %span.image
+              = image_tag widget_template.thumb, :width => "200", :height => "180"
+          %span.widget_content
+            %span.title{:class => widget_template.partial_name.pluralize}= widget_template.title
+            %span.paragraph= widget_template.description
+            %span.actions
+              %span.use-widget Przetestuj

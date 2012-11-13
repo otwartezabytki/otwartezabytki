@@ -1,0 +1,50 @@
+.row
+  = semantic_form_for relic, :url => section_relic_path(relic.id, :section => :photos), :html => { :multipart => true }, :remote => true  do |f|
+    .photo-attributes{:'data-replace' => ".photo-attributes"}
+      - relic.photos.each do |photo|
+        - if photo.user_id == current_user.id
+          = f.semantic_fields_for :photos, photo do |f2|
+            .photo
+              .column-left
+                .preview
+                  = image_tag photo.file.midi.url
+                - if photo.user_id == current_user.id
+                  = link_to t('views.relics.edit.photos.delete_photo'), relic_photo_path(relic.id, photo.id),
+                    :method => :delete,
+                    :remote => true,
+                    :confirm => t('views.relics.edit.photos.delete_confirm'),
+                    :class => "remove_photo"
+              .column-right
+                = f2.input :author, :input_html => { :class => "author" }
+                = f2.input :date_taken, :input_html => { :class => "date_taken" }
+        - else
+          .photo
+            .column-left
+              .preview
+                = image_tag photo.file.midi.url
+            .column-right
+              %label= t('activerecord.attributes.photo.author')
+              %p= photo.author
+              %label= t('activerecord.attributes.photo.date_taken')
+              %p= photo.date_taken
+
+      .photo.hidden
+        .column-left
+          .preview.preview-placeholder
+
+        .column-right
+          %p
+            %strong= t('views.relics.edit.photos.loading')
+            = link_to t('views.relics.edit.cancel'), '#', :class => "cancel_upload"
+          %p
+            .progressbar
+              .value 0%
+
+      .photo-upload
+        = file_field_tag "photo[file]", :class => 'photo_upload' + (relic.photos.length > 0 ? "" : " first"), :"data-url" => "#{relic_photos_path(relic.id)}"
+
+      = f.input :license_agreement, :input_html => { :checked => 'checked' }, :as => :boolean, :label => t('views.relics.edit.photos.statement_html')
+    .actions
+      = f.submit t('views.relics.edit.save')
+      = t('views.relics.edit.or')
+      = link_to t('views.relics.edit.cancel'), relic_path(relic.id), :remote => true, :class => "cancel"

@@ -1,0 +1,10 @@
+.login_title_register Rejestracja do Otwartych Zabytków
+.right_txt_box= render 'devise/shared/new_account_info'
+.form_box
+  .login_intro_txt Zarejestruj się i śledź swoje postępy
+  = semantic_form_for(user, :url => user_registration_path, :remote => true) do |f|
+    = f.semantic_errors
+    = f.hidden_field :registration, :value => true
+    = f.input :username, :required => false, :label => "Nazwa użytkownika".html_safe
+    = f.input :email, :required => false, :autofocus => true
+    = f.submit "Zarejestruj się"

@@ -1,0 +1,40 @@
+.panel
+  %h3 Delegatura WUOZ
+  .panel_contents
+    #attributes_table_wuoz_agency_888.attributes_table.wuoz_agency
+      %table{:border => "0", :cellpadding => "0", :cellspacing => "0"}
+        %tbody
+          %tr
+            %th WUOZ
+            %td= wuoz_agency.wuoz_name
+          %tr
+            %th Delegatura
+            %td= wuoz_agency.city
+          %tr
+            %th Dyrektor
+            %td= wuoz_agency.director
+          %tr
+            %th Email
+            %td= wuoz_agency.email
+          %tr
+            %th Address
+            %td
+              %pre= wuoz_agency.address
+          %tr
+            %th Ilość Alertów
+            %td= wuoz_agency.alerts_count
+          %tr
+            %th Alerty:
+            %td
+              %ul
+                - wuoz_agency.alerts.limit(50).each do |alert|
+                  %li= link_to "#{alert.relic.identification} -> #{truncate(alert.description, :length => 20)}", [:admin, alert]
+.panel
+  %h3 Wyślij powiadomienie do delegatury
+  .panel_contents
+    = semantic_form_for wuoz_notification, :url => [:notify, :admin, wuoz_agency], :method => :post do |f|
+      = f.inputs do
+        = f.input :subject, :as => :string
+        = f.input :body
+      = f.actions :class => 'buttons' do
+        = f.action :submit, :label => 'Wyślij'

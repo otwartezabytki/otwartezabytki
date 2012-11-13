@@ -1,0 +1,26 @@
+.suggested-relics-wrapper
+  %h1= t('views.relicbuilders.geodistance.header', :count => @relics.total)
+  .info
+    %p= t('views.relicbuilders.geodistance.info_html', :count => @relics.total)
+    %p= t('views.relicbuilders.geodistance.are_you_sure')
+  %ul.suggested-relics
+    - @relics.each do |r|
+      %li{:class => cycle('even', 'odd')}
+        = image_tag r.main_photo.file.url(:midi), :class => 'thumb'
+        .description
+          %h3
+            = r.identification
+          %span.marker
+            = r.place_full_name
+          - if r.categories.present?
+            %span.category
+              %strong= t('views.relicbuilders.geodistance.categories')
+              = r.categories.join(', ')
+          - if r.dating_of_obj?
+            %span.date
+              %strong= t('views.relicbuilders.geodistance.dating')
+              = r.dating_of_obj
+          %span.choose
+            %strong= t('views.relicbuilders.geodistance.that_one')
+            = link_to t('views.relicbuilders.geodistance.choose_html'), r
+  = link_to t('views.relicbuilders.geodistance.not_found_html'), address_relicbuilder_path(address_params), :class => 'not-found'

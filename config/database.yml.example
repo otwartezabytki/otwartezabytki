@@ -5,6 +5,7 @@ development:
   pool: 5
   username: otwartezabytki
   password:
+  template: template0
 
 test:
   adapter: postgresql
@@ -13,3 +14,4 @@ test:
   pool: 5
   username: postgres
   password:
+  template: template0

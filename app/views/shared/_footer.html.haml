@@ -1,28 +1,25 @@
-.about
-  %p Otwarte Zabytki to projekt prowadzony przez Centrum Cyfrowe Projekt: Polska.
-  %p Centrum Cyfrowe Projekt: Polska, 03-808 Warszawa, ula. Mińska 25, bud. 74
-  %p Projekt finansowany ze środków Ministra Kultury i Dziedzictwa Narodowego w ramach konkursu Patriotyzm Jutra, ze środków finansowych otrzymanych od Ministerstwa Spraw Zagranicznych w ramach konkursu na realizację zadania „Współpraca z Polonią i Polakami” za granicą oraz ze środków CEE Trust.
-
-.facebook-share
-  :plain
-    <iframe src="//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fotwartezabytki&amp;width=270&amp;height=62&amp;colorscheme=light&amp;show_faces=false&amp;border_color&amp;stream=false&amp;header=false" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:270px; height:62px;" allowTransparency="true"></iframe>
+.about= t('layouts.application.footer.about_project_html')
+- unless Rails.env.development?
+  .facebook-share
+    :plain
+      <iframe src="//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fotwartezabytki&amp;width=270&amp;height=62&amp;colorscheme=light&amp;show_faces=false&amp;border_color&amp;stream=false&amp;header=false" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:270px; height:62px;" allowTransparency="true"></iframe>
 .partners
   .partner-big
     %h2 Patron
     .partner-bg
-      = link_to image_tag( 'partner-nid.png', :alt => 'Narodowy Instytut Dziedzictwa'), 'http://www.nid.pl/idm,160,rejestr-zabytkow.html'
-
+      .partner-slider-1
+        = link_to image_tag( 'partner-nid.png', :alt => 'Narodowy Instytut Dziedzictwa'), 'http://www.nid.pl/idm,160,rejestr-zabytkow.html'
+        = link_to image_tag( 'partner-dws.png', :alt => 'Dojrz@łość w sieci'), 'http://dojrzaloscwsieci.pl/'
   .partner-small
     %h2 Patroni medialni
     .partner-bg
-      .partner-slider-1
-        = link_to image_tag( 'partner-ngo.png', :alt => 'Portal Organizacji Pozarządowych' ), 'http://www.ngo.pl'
+      .partner-slider-2
         = link_to image_tag( 'partner-histmag.png', :alt => 'Histmag'), 'http://www.histmag.pl'
-        = link_to image_tag( 'partner-gw.png', :alt => 'Gazeta Wyborcza'), 'http://www.wyborcza.pl'
+        = link_to image_tag( 'partner-szkolazklasa.png', :alt => 'Szkoła z klasą 2.0'), 'http://www.ceo.org.pl/pl/szkolazklasa2zero'
   .partner-small
     %h2 Partner merytoryczny
     .partner-bg
-      .partner-slider-2
+      .partner-slider-3
         = link_to image_tag( 'partner-tit.png', :alt => 'Towarzystwo Inicjatyw Twórczych'), 'http://www.e.org.pl'
         = link_to image_tag( 'partner-frsi.png', :alt => 'Fundacja Rowzoju Społeczeństwa Informacyjnego'), 'http://www.frsi.org.pl/'
         = link_to image_tag( 'partner-pttk.png', :alt => 'PTTK'), 'http://om.pttk.pl/'
@@ -32,10 +29,11 @@
         = link_to image_tag( 'partner-myvimu.png', :alt => 'MyViMu.com - Moje Wirtualne Muzeum'), 'http://myvimu.com/'
         = link_to image_tag( 'partner-ceo.png', :alt => 'Centrum Edukacji Obywatelskiej'), 'http://www.ceo.org.pl/'
         = link_to image_tag( 'partner-historia.png', :alt => 'HISTORIA.org.pl'), 'http://www.historia.org.pl/'
+        = link_to image_tag( 'partner-pttk2.png', :alt => 'Polskie Towarzystwo Turystyczno-Krajoznawcze'), 'http://www.pttk.pl/'
   .partner-small.last
     %h2 Grantodawcy
     .partner-bg
-      .partner-slider-3
+      .partner-slider-4
         = link_to image_tag( 'partner-mhp.png', :alt => 'Muzeum Historii Polski'), 'http://www.muzhp.pl'
         = link_to image_tag( 'partner-pj.png', :alt => 'Patriotyzm Jutra'), 'http://www.muzhp.pl/konkursy/patriotyzm-jutra.html'
         = link_to image_tag( 'partner-msz.png', :alt => 'Ministerstwo Spraw Zagranicznych'), 'http://www.msz.gov.pl'
@@ -43,7 +41,8 @@
 .footer-bottom
   .footer-copyright
     %p
-      Treści zamieszczone w serwisie udostępniamy na licencji </br>
+      Treści zamieszczone w serwisie udostępniamy na licencji
+      %br
       = link_to "Creative Commons Uznanie autorstwa - Na tych samych warunkach 3.0 Polska", "http://creativecommons.org/licenses/by/3.0/pl"
   -# .footer-links
   -#   %a{ :class => "footer-regulamin", :href => "/strony/regulamin"} Regulamin

@@ -1,0 +1,95 @@
+.jcarousel-skin-mini {
+  height: 60px;
+}
+
+.jcarousel-skin-mini .jcarousel-container {
+
+}
+
+.jcarousel-skin-mini .jcarousel-container-horizontal {
+  width: 300px;
+}
+
+.jcarousel-skin-mini .jcarousel-clip {
+  overflow: hidden;
+}
+
+.jcarousel-skin-mini .jcarousel-clip-horizontal {
+  width:  243px;
+  height: 60px;
+  margin: 0 28px;
+}
+
+.jcarousel-skin-mini .jcarousel-item {
+  width: 80px;
+  height: 60px;
+}
+
+.jcarousel-skin-mini .jcarousel-item-horizontal {
+  margin-left: 0;
+  margin-right: 0px;
+  border-right: 1px solid black;
+}
+
+
+.jcarousel-skin-mini .jcarousel-item-placeholder {
+  background: #fff;
+  color: #000;
+}
+
+/**
+ *  Horizontal Buttons
+ */
+.jcarousel-skin-mini .jcarousel-next-horizontal {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 28px;
+  height: 60px;
+  cursor: pointer;
+  background: transparent image-url("jcarousel/next-horizontal-mini.png") no-repeat 0 0;
+}
+
+.jcarousel-skin-mini .jcarousel-next-horizontal:hover,
+.jcarousel-skin-mini .jcarousel-next-horizontal:focus {
+  background-position: -32px 0;
+}
+
+.jcarousel-skin-mini .jcarousel-next-horizontal:active {
+  background-position: -64px 0;
+}
+
+.jcarousel-skin-mini .jcarousel-next-disabled-horizontal,
+.jcarousel-skin-mini .jcarousel-next-disabled-horizontal:hover,
+.jcarousel-skin-mini .jcarousel-next-disabled-horizontal:focus,
+.jcarousel-skin-mini .jcarousel-next-disabled-horizontal:active {
+  cursor: default;
+  background-position: -96px 0;
+}
+
+.jcarousel-skin-mini .jcarousel-prev-horizontal {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 28px;
+  height: 60px;
+  cursor: pointer;
+  background: transparent image-url("jcarousel/prev-horizontal-mini.png") no-repeat 0 0;
+}
+
+.jcarousel-skin-mini .jcarousel-prev-horizontal:hover,
+.jcarousel-skin-mini .jcarousel-prev-horizontal:focus {
+  background-position: -32px 0;
+}
+
+.jcarousel-skin-mini .jcarousel-prev-horizontal:active {
+  background-position: -64px 0;
+}
+
+.jcarousel-skin-mini .jcarousel-prev-disabled-horizontal,
+.jcarousel-skin-mini .jcarousel-prev-disabled-horizontal:hover,
+.jcarousel-skin-mini .jcarousel-prev-disabled-horizontal:focus,
+.jcarousel-skin-mini .jcarousel-prev-disabled-horizontal:active {
+  cursor: default;
+  background-position: -96px 0;
+}

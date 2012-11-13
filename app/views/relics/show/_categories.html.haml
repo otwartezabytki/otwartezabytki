@@ -1,0 +1,26 @@
+%section.show.categories
+  %h2 Tagi, kategorie
+  - if relic.categories.length > 0 || relic.tags.length > 0
+    = link_to 'uzupełnij', edit_section_relic_path(relic.id, :categories), :title => 'edytuj kategorie zabytku', :remote => true, :class => "edit-relic-link"
+    .content
+      .categories
+        %strong Kategorie:
+        - if relic.categories.length > 0
+          %span.content
+            = relic.categories.map { |c| link_to(Category.to_hash[c], relics_path(:search => {:categories => [c]})) }.join(', ').html_safe
+        - else
+          = link_to "nie dodano, uzupełnij »", edit_section_relic_path(relic.id, :categories), :remote => true
+      .tags
+        %strong Tagi:
+        - if relic.tags.length > 0
+          %span.content
+            = relic.tags.map { |tag| link_to(tag, relics_path(:search => {:q => tag})) }.join(', ').html_safe
+        - else
+          = link_to "nie dodano, uzupełnij »", edit_section_relic_path(relic.id, :categories), :remote => true
+  - else
+    .placeholder
+      %p Zabytek nie został jeszcze skategoryzowany.
+      %p Zrób to Ty!
+      = link_to "dodaj kategorie", edit_section_relic_path(relic.id, :categories), :remote => true
+      .example
+        %a.show-example{:href => image_path('screenshot-categories.jpg'), :class => "fancybox"} Pokaż przykład

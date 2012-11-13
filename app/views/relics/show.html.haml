@@ -1,51 +1,34 @@
-.row-fluid
-  .span6
-    - model_class = relic.class
-    .page-header
-      %h1=t '.title', :default => model_class.model_name.human
-
-    %p
-      %strong= model_class.human_attribute_name(:place_id) + ':'
-      %br
-      = relic.place_full_name
-    %p
-      %strong= model_class.human_attribute_name(:identification) + ':'
-      %br
-      = relic.identification
-    %p
-      %strong= model_class.human_attribute_name(:kind) + ':'
-      %br
-      = relic.kind
-
-    %p
-      %strong= model_class.human_attribute_name(:dating_of_obj) + ':'
-      %br
-      = relic.dating_of_obj
-    %p
-      %strong= model_class.human_attribute_name(:street) + ':'
-      %br
-      = relic.street
-    %p
-      %strong= model_class.human_attribute_name(:register_number) + ':'
-      %br
-      = relic.register_number
-    %p
-      %strong= model_class.human_attribute_name(:latitude) + ':'
-      %br
-      = relic.latitude
-    %p
-      %strong= model_class.human_attribute_name(:longitude) + ':'
-      %br
-      = relic.longitude
-  .span6
-    .page-header
-      %h1 Descendants
-    %ul
-      - relic.descendants.each do |child|
-        %li
-          = child.full_identification
-
-
-.form-actions
-  = link_to t('.back', :default => t("helpers.links.back")), relics_path, :class => 'btn'
-  = link_to t('.edit', :default => t("helpers.links.edit")), edit_relic_path(relic), :class => 'btn'
+- content_for(:title, relic.identification)
+- if relic.id.zero?
+  .original-version
+    %a{:href => relic_path(params[:id]), :class => "btn"} &#171; zobacz wersję obecną
+    .content
+      %h3 Przeglądasz wersję oryginalną
+      %p Oznacza to, że istnieje również wersja z naniesionymi przez Ciebie poprawkami.
+#fancybox
+- unless cookies[:flash_hidden]
+  .row
+    .flash.flash-info.flash-info-permament
+      %span{:class => "close", :"data-dismiss" => 'flash-info-permament'} ukryj
+      = image_tag 'notice-icon-info.png', :class => 'flash-icon'
+      = image_tag 'notice-separator.png', :class => 'flash-separator'
+      .flash-content
+        %h3 O co chodzi?
+        %p Wyszukaj informacje i uzupełnij wybrane pola.
+        %p Skorzystaj z własnej wiedzy, poszukaj w książkach lub w internecie.
+        %p Sprawdź, czy informacje już uzupełnione są poprawne.
+        %p Pamiętaj o podaniu źródeł.
+.row.first-row
+  = render :partial => "relics/show/general"
+  = render :partial => "relics/show/photos"
+.row.second-row
+  .column-left
+    = render :partial => "relics/show/description"
+    = render :partial => "relics/show/entries"
+    = render :partial => "relics/show/links"
+  .column-right
+    = render :partial => "relics/show/subrelics"
+    = render :partial => "relics/show/categories"
+    = render :partial => "relics/show/alerts"
+    = render :partial => "relics/show/events"
+    = render :partial => "relics/show/documents"

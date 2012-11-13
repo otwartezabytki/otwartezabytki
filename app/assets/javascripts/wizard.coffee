@@ -1,6 +1,6 @@
 #= require sugar
-#= require jquery-specializer
-#= require gmaps
+#= require lib/jquery-specializer
+#= require vendor/gmaps
 
 map = undefined
 
@@ -565,10 +565,13 @@ window.google_maps_loaded = ->
         marker_lat = lat + height * y_offset / $(this).height()
         marker_lng = lng + width * x_offset / $(this).width()
         $('#map_canvas').set_marker(marker_lat, marker_lng)
-        $(this).parents('.step').addClass('step-editing')
+        $('form.relic').addClass('geocoded')
 
     $('#map_canvas').auto_zoom()
     $('#map_canvas').blinking()
+
+
+
 
 # for animations
 $(window).load ->

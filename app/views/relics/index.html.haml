@@ -1,55 +1,90 @@
-.span3
-  = render 'localization_facets'
+= semantic_form_for tsearch, :url => relics_path, :method => :get, :remote => true do |f|
+  = f.hidden_field :location, :value => f.object.location.join('-')
+  .span3
+    = render 'localization_facets'
+    .sidebar-categories
+      %h3= t('views.relics.index.categories')
+      -# categories
+      .inputs-list.choices-group
+        - Category.roots.sort_by(&:name).each do |c|
+          - if c.name_key == 'sakralny'
+            - hidden_sacral = !f.object.categories.include?('sakralny')
+            = f.label :categories, :value => c.name_key do
+              = f.check_box :categories, {:multiple => true, :class => 'sacral-options'}, c.name_key, nil
+              %span
+                %strong= c.name
+                %em= relics.count('sacral')
+            .sacral-categories{:style => ('display:none;' if hidden_sacral)}
+              - c.children.sort_by(&:name).each do |child|
+                - next unless categoires_facets_hash.keys.include?(child.name_key)
+                = render :partial => 'shared/category_checkbox', :locals => {:f => f, :category => child}
+          - else
+            - next unless categoires_facets_hash.keys.include?(c.name_key)
+            = render :partial => 'shared/category_checkbox', :locals => {:f => f, :category => c}
 
-%div{:class => relics.empty? ? "span9" : "span9"}
-  #relics
-    - model_class = Relic.new.class
-    .page-header
-      %h1 2. Wybierz zabytek:
-      %span.arrow
+  %div{:class => relics.empty? ? "span9" : "span9"}
+    #relics
+      .form-advance-search
+        %section.main-search
+          .field.subject
+            = f.input :q, :input_html => { :class => 'autocomplete-q'}
 
-    - if relics.incorrect_count.zero?
-      .search-no-results
-        %p
-          Nie ma do sprawdzenia żadnych zabytków
-          %br
-          pasujących do słowa
-          %strong „#{params[:q1]}”
-        %p
-          Chesz dodać zabytek, którego nie możesz znaleźć?
-          %br
-          Będzie to możliwe za miesiąc, w pełnej wersji serwisu.
-        %p
-          Możesz natomiast przejrzeć listę innych zabytków, które wymagają sprawdzenia:
-          %br
-          = random_search_suggestions
-    - elsif @pending.present?
-      %div.relic-header
-        %h2 Zabytki do sprawdzenia (#{relics.incorrect_count})
-        - if location_breadcrumbs.present?
-          %div.breadcrumb
-            %p Gdzie:
-            %ul
-              - c = location_breadcrumbs.size
-              - location_breadcrumbs.take(c-1).each do |l|
-                %li
-                  = link_to l[:label], l[:path]
-                  %span &#187;
-              %li= location_breadcrumbs.last[:label]
+          .field.place
+            = f.input :place, :input_html => { :class => 'autocomplete-place'}
+          .field.time
+            %label= t('views.relics.index.build_date')
+            %span.block= t('views.relics.index.build_date_example')
+            .wrap
+              = f.input :from
+              = f.input :to
+          .field
+            = f.action :submit, :label => t('formtastic.actions.search_html'), :button_html => { :name => nil }
+          - hidden_filter = [f.object.state, f.object.has_photos, f.object.has_description, f.object.existence].flatten.compact.blank?
+          = link_to t('views.relics.index.filter_options'), '#', :class => ('filter-options ' + (hidden_filter ? '' : 'shown'))
+        %section.second-search{:style => ('display:none;' if hidden_filter)}
+          .wrap
+            .column
+              %h4
+                = t('views.relics.index.states.label')
+                .help
+                  = image_tag 'ico-help.png'
+                  .help-wrapper
+                    = link_to t('views.relics.index.states.close'), '#', :class => 'close'
+                    %h3= t('views.relics.index.states.header')
+                    %ul
+                      - ['unchecked', 'checked', 'filled'].each do |s|
+                        %li
+                          .tag
+                            %span{:class => s}= t("views.relics.index.states.#{s}.header")
+                          .text= t("views.relics.index.states.#{s}.info")
 
-      = render :partial => "relics", :locals => {:collection => @pending }
+              = f.input :state, :label => false, :as => :check_boxes, :collection => state_facets, :disabled => disabled(f.object, 'state')
+            .column
+              %h4= t('views.relics.index.content')
+              = f.input :has_photos, :label => false, :as => :check_boxes, :collection => has_photos_facets, :disabled => disabled(f.object, 'has_photos')
+              = f.input :has_description, :label => false, :as => :check_boxes, :collection => has_description_facets, :disabled => disabled(f.object, 'has_description')
+            .column
+              %h4= t('views.relics.index.kind')
+              = f.input :existence, :label => false, :as => :check_boxes, :collection => existence_facets, :disabled => disabled(f.object, 'existence')
+        %section.order
+          = f.input :order, :as => :select, :collection => order_collection, :include_blank => false, :selected => f.object.order
+      %section.results
+        .loading{:style => 'display:none;'}
+          #spin
+          %h3= t('views.relics.index.loading')
+        - if relics.total.zero?
+          .search-no-results
+            %p= t('views.relics.index.no_results_html')
+            -# - if tsearch.suggestions.present?
+            -#   %p
+            -#     = t('views.relics.index.suggestion')
+            -#     - tsearch.suggestions.each do |s|
+            -#       = link_to relics_path(search_params(:q => s.name)), :remote => true do
+            -#         %strong= "#{s.name},"
 
-    - if @corrected.present?
-      %div.relic-header
-        %h2.changed Zabytki sprawdzone (#{relics.correct_count})
+        - elsif relics.present?
+          %div.relic-header.search
+            %h2= t('views.relics.index.search_results', :count => relics.total)
+          = render :partial => "relics", :locals => {:collection => relics }
 
-      = render :partial => "relics", :locals => {:collection => @corrected }
-
-    = paginate relics
-
-    - unless relics.incorrect_count.zero?
-      %p#adding-note
-        Chesz dodać zabytek, którego nie możesz znaleźć?
-        %br
-        Będzie to możliwe za miesiąc, w pełnej wersji serwisu.
-
+        = paginate relics, :remote => true

@@ -1,0 +1,79 @@
+#map_widget{ :"data-replace" => "#map_widget", :"data-boundingbox" => widget_search.location_object.try(:bounding_box).try(:to_json) }
+  - if widget.hide_sidebar == true
+    = semantic_form_for widget_search, :url => widgets_map_search_path(widget.uid), :method => :get, :remote => true do |f|
+      = f.hidden_field :location, :value => params[:search].try(:[], "location")
+      = f.hidden_field :bounding_box, :value => params[:search].try(:[], "bounding_box")
+      = f.hidden_field :query, :value => params[:search].try(:[], "query")
+      = f.hidden_field :categories, :value => params[:search].try(:[], "categories")
+  - else
+    .sidebar
+      = link_to '/', :target => :_top do
+        %h1.logo
+      = semantic_form_for widget_search, :url => widgets_map_search_path(widget.uid), :method => :get, :remote => true do |f|
+        = f.hidden_field :location, :value => params[:search].try(:[], "location")
+        = f.hidden_field :bounding_box, :value => params[:search].try(:[], "bounding_box")
+        %section.search
+          %h2
+            Wyszukaj
+            = link_to image_tag("widget-helper.png"), '#', :class => "tooltip", :"data-placement" => "right", :title => "np. cmentarz, stocznie poniemieckie, chopinowski"
+          = f.input :query, :label => false, :input_html => { :class => 'autocomplete-q'}
+        .fluid_block
+          %section.locations{ :class => (cookies['section-shown'] == 'locations' ? "maxed" : cookies['section-shown'] == 'categories' ? 'mined' : '') }
+            %h2
+              - if up = widget_search.location_object.up
+                = link_to up.full_name, widgets_map_search_path(widget.id, :search => params[:search].merge(:bounding_box => nil, :"location" => "#{up.class.name.underscore}:#{up.id}")), :remote => true
+              %span= "⟩&nbsp;".html_safe + widget_search.location_object.full_name
+              = link_to image_tag("widget-helper.png"), '#', :class => "tooltip", :"data-placement" => "right", :title => "tu możesz zawęzić wyszukiwanie zabytków wg. ich lokalizacji"
+            .antiscroll-wrap.locations_tree
+              .antiscroll-inner
+                - if relics.polish_facets_tree.length > 0
+                  %ul
+                    = render 'shared/locations_tree', :node => relics.polish_facets_tree
+                - else
+                  %ul
+                    - relics.each do |relic|
+                      %li= link_to relic.identification, "#", :class => "point-relic", :"data-id" => relic.id
+            = link_to 'pokaż więcej...', '#', :class => "", :class => "show-more"
+            = link_to 'pokaż mniej...', '#', :class => "", :class => "show-less"
+          %section.categories{ :class => (cookies['section-shown'] == 'categories' ? "maxed" : cookies['section-shown'] == 'locations' ? 'mined' : '') }
+            %h2
+              Kategorie
+              = link_to image_tag("widget-helper.png"), '#', :class => "tooltip", :"data-placement" => "right", :title => " tu możesz zawęzić wyszukiwanie zabytków wg. ich kategorii"
+            .antiscroll-wrap
+              .antiscroll-inner
+                -# categories
+                .inputs-list.choices-group
+                  - Category.roots.sort_by(&:name).each do |c|
+                    - if c.name_key == 'sakralny'
+                      - hidden_sacral = !f.object.categories.include?('sakralny')
+                      = f.label :categories, :value => c.name_key do
+                        = f.check_box :categories, {:multiple => true, :class => 'sacral-options'}, c.name_key, nil
+                        %span
+                          = c.name
+                          %em= relics.count('sacral')
+                      .sacral-categories{:style => ('display:none;' if hidden_sacral)}
+                        - c.children.sort_by(&:name).each do |child|
+                          - next unless categoires_facets_hash.keys.include?(child.name_key)
+                          = render :partial => 'shared/category_checkbox', :locals => {:f => f, :category => child}
+                    - else
+                      - next unless categoires_facets_hash.keys.include?(c.name_key)
+                      = render :partial => 'shared/category_checkbox', :locals => {:f => f, :category => c}
+
+            = link_to 'pokaż więcej...', '#', :class => "", :class => "show-more"
+            = link_to 'pokaż mniej...', '#', :class => "", :class => "show-less"
+    = link_to 'wyszukiwanie<br />zaawansowane »'.html_safe, relics_path(params), :target => :_top, :class => "advanced_search"
+  %script(type="application/json" id="search_params")
+    != params[:search].to_json
+  - if relics.polish_facets_tree.empty?
+    %script(type="application/json" id="search_results")
+      != relics.map{ |relic| relic_to_widget_data(relic) }.to_json
+  %script(type="application/json" id="group_markers")
+    != leafs_of(relics.polish_facets_tree).map{ |f| facet_to_marker(f) }.to_json
+.map{ :class => widget.hide_sidebar ? "full" : "" }
+  #map_canvas{ :style => "width: 100%; height: 100%;" }
+:javascript
+  config = #{widget.config.to_json};
+= content_for :stylesheets do
+  = stylesheet_link_tag "widgets/map_search"
+= content_for :javascripts do
+  = javascript_include_tag "widgets/map_search"

@@ -1,0 +1,34 @@
+%ol.relic-stages
+  %li.first{:class => stage == 1 ? 'active' : ''}
+    %span= t('views.relicbuilders.stages.step1')
+    %h3
+      - if stage > 1
+        = link_to t('views.relicbuilders.stages.check_existance'), new_relicbuilder_path(:parent_id => @relic.parent_id), 'data-confirm' => t('views.relicbuilders.stages.check_existance_confirm')
+      - else
+        = t('views.relicbuilders.stages.check_existance')
+    %p= t('views.relicbuilders.stages.step1_description1')
+  %li{:class => stage == 2 ? 'active' : ''}
+    %span= t('views.relicbuilders.stages.step2')
+    %h3
+      - if stage > 2
+        - p = [:id, :latitude, :longitude, :place_id, :parent_id].inject(address_params){|m, p| m[p] ||= @relic.send(p);m}
+        = link_to t('views.relicbuilders.stages.address'), address_relicbuilder_path(p)
+      - else
+        = t('views.relicbuilders.stages.address')
+    %p= t('views.relicbuilders.stages.step1_description2')
+  %li{:class => stage == 3 ? 'active' : ''}
+    %span= t('views.relicbuilders.stages.step3')
+    %h3
+      - if [2, 4].include?(stage) and @relic.id?
+        = link_to t('views.relicbuilders.stages.details'), details_relicbuilder_path(:id => @relic.try(:id))
+      - else
+        = t('views.relicbuilders.stages.details')
+    %p= t('views.relicbuilders.stages.step1_description3')
+  %li.last{:class => stage == 4 ? 'active' : ''}
+    %span= t('views.relicbuilders.stages.step4')
+    %h3
+      - if [2, 3].include?(stage) and @relic.id?
+        = link_to t('views.relicbuilders.stages.photos'), photos_relicbuilder_path(:id => @relic.try(:id))
+      - else
+        = t('views.relicbuilders.stages.photos')
+    %p= t('views.relicbuilders.stages.step1_description4')

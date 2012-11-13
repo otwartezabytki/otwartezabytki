@@ -1,31 +1,144 @@
 # -*- encoding : utf-8 -*-
-require 'relic/tire_extensions'
+# == Schema Information
+#
+# Table name: relics
+#
+#  id              :integer          not null, primary key
+#  place_id        :integer
+#  identification  :text
+#  dating_of_obj   :string(255)
+#  street          :string(255)
+#  register_number :text
+#  nid_id          :string(255)
+#  latitude        :float
+#  longitude       :float
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  ancestry        :string(255)
+#  commune_id      :integer
+#  district_id     :integer
+#  voivodeship_id  :integer
+#  kind            :string(255)
+#  approved        :boolean          default(FALSE)
+#  categories      :string(255)
+#  description     :text             default("")
+#  tags            :string(255)
+#  type            :string(255)      default("Relic")
+#  country_code    :string(255)      default("PL")
+#  fprovince       :string(255)
+#  fplace          :string(255)
+#  documents_info  :text
+#  links_info      :text
+#  user_id         :integer
+#  geocoded        :boolean
+#  build_state     :string(255)
+#  reason          :text
+#  date_start      :integer
+#  date_end        :integer
+#  state           :string(255)      default("unchecked")
+#  existence       :string(255)      default("existed")
+#  common_name     :string(255)      default("")
+#
+
+ActiveSupport::Dependencies.depend_on 'relic/tire_extensions'
 class Relic < ActiveRecord::Base
-  has_many :suggestions
+  include AASM
+  States = ['checked', 'unchecked', 'filled']
+  Existences = ['existed', 'archived', 'social']
+
+  has_ancestry
+
+  has_one    :original_relic
+  belongs_to :user
   belongs_to :place
 
-  attr_protected :id, :created_at, :update_at
-  attr_accessible :dating_of_obj, :group, :id, :identification, :materail, :national_number, :number, :place_id, :register_number, :street, :internal_id, :source, :tags
-  attr_accessible :dating_of_obj, :group, :id, :identification, :materail, :national_number, :number, :place_id, :register_number, :street, :internal_id, :source, :tags, :as => :admin
+  has_many :documents, :dependent => :destroy
+  has_many :photos, :dependent => :destroy
+  has_many :alerts, :dependent => :destroy
+  has_many :entries, :dependent => :destroy
+  has_many :links, :order => 'position', :dependent => :destroy
+  has_many :events, :order => 'date_start', :dependent => :destroy
+
+  attr_accessor :license_agreement, :polish_relic, :created_via_api
+  attr_accessible :identification, :place_id, :dating_of_obj, :latitude, :longitude,
+                  :street, :tags, :categories, :photos_attributes, :description,
+                  :documents_attributes, :documents_info, :links_attributes, :links_info,
+                  :events_attributes, :entries_attributes, :license_agreement, :polish_relic,
+                  :geocoded, :build_state, :parent_id, :common_name, :as => [:default, :admin]
+
+  attr_accessible :ancestry, :register_number, :approved, :state, :existence, :as => :admin
+
+  accepts_nested_attributes_for :photos, :documents, :entries, :links, :events, :allow_destroy => true
 
   include PlaceCaching
   include Validations
 
-  has_ancestry
-
   serialize :source
   serialize :tags, Array
+  serialize :categories, Array
+
+  scope :created, where(:build_state => 'finish_step')
+
+  aasm :column => :build_state do
+    state :create_step, :initial => true
+    state :address_step
+    state :details_step
+    state :photos_step
+    state :finish_step
+  end
+
+  before_validation :parse_date
+
+  before_validation do
+    if tags_changed? && tags.is_a?(Array)
+      tmp = []
+      self.tags.each do |tag|
+        tmp += tag.split(',').map(&:strip) if tag.present?
+      end
+      self.tags = tmp
+    end
+  end
+
+  before_validation do
+    if categories_changed? && categories.is_a?(Array)
+      tmp = []
+      self.categories.each do |category|
+        tmp += category.split(',').map(&:strip) if category.present?
+      end
+      self.categories = tmp
+    end
+  end
+
+  # mark new created relics as social added
+  before_create do
+    self.existence = 'social'
+  end
+
+  validates :state, :inclusion => { :in => States }, :if => :state_changed?
+  validates :existence, :inclusion => { :in => Existences }, :if => :existence_changed?
 
   # versioning
-  has_paper_trail :class_name => 'RelicVersion', :on => [:update, :destroy]
+  has_paper_trail :skip => [:updated_at, :created_at, :user_id, :build_state, :kind, :date_start, :date_end,
+    :type, :commune_id, :district_id, :voivodeship_id, :geocoded, :reason]
 
   include Tire::Model::Search
 
   # custom tire callback
-  after_save :update_relic_index
+  after_save do
+    # always update root document
+    if build_finished?
+      root.tire.update_index
+      Rails.cache.delete('views/browse-list')
+    end
+  end
+
+  after_destroy do
+    tire.update_index
+    Rails.cache.delete('views/browse-list')
+  end
 
   # create different index for testing
-  index_name("#{Rails.env}-relics")
+  index_name("#{Settings.oz.index_env}-relics")
 
   settings :number_of_shards => 5, :number_of_replicas => 1,
     :analysis => {
@@ -46,224 +159,163 @@ class Relic < ActiveRecord::Base
         :default => {
           :type      => "custom",
           :tokenizer => "standard",
-          :filter    => "standard, lowercase, pl_synonym, pl_stop, morfologik_stem, lowercase, asciifolding, unique"
+          :filter    => "standard, lowercase, pl_synonym, pl_stop, morfologik_stem, unique, lowercase"
         }
       }
     }
 
   mapping do
-    with_options :index => :analyzed do |a|
-      a.indexes :identification
-      a.indexes :street
-    end
+    indexes :identification, :type => "multi_field", :fields => {
+      :identification =>  { "type" => "string", "index" => "analyzed" },
+      :untouched =>  { "type" => "string", "index" => "not_analyzed" }
+    }
+    indexes :fprovince, :type => "multi_field", :fields => {
+      :fprovince =>  { "type" => "string", "index" => "analyzed" },
+      :untouched =>  { "type" => "string", "index" => "not_analyzed" }
+    }
+    indexes :fplace, :type => "multi_field", :fields => {
+      :fplace =>  { "type" => "string", "index" => "analyzed" },
+      :untouched =>  { "type" => "string", "index" => "not_analyzed" }
+    }
+    indexes :autocomplitions, :type => "multi_field", :fields => {
+      :autocomplitions =>  { "type" => "string", "index" => "analyzed" },
+      :untouched =>  { "type" => "string", "index" => "not_analyzed" }
+    }
+    indexes :tags, :type => "multi_field", :fields => {
+      :tags =>  { "type" => "string", "index" => "analyzed" },
+      :untouched =>  { "type" => "string", "index" => "not_analyzed" }
+    }
+    indexes :street_normalized, :type => "multi_field", :fields => {
+      :street_normalized =>  { "type" => "string", "index" => "analyzed" },
+      :untouched =>  { "type" => "string", "index" => "not_analyzed" }
+    }
+    indexes :coordinates, :type => "geo_point"
     with_options :index => :not_analyzed do |na|
       na.indexes :id
       na.indexes :kind
-      na.indexes :edit_count, :type => "integer"
-      na.indexes :skip_count, :type => "integer"
       na.indexes :virtual_commune_id
+      na.indexes :categories
+      na.indexes :has_photos,       :type => "boolean"
+      na.indexes :has_description,  :type => "boolean"
+      na.indexes :state
+      na.indexes :existence
 
-      # backward compatibility
-      na.indexes :voivodeship_id
-      na.indexes :district_id
-      na.indexes :commune_id
-      na.indexes :place_id
+      na.indexes :has_round_date,  :type => "boolean"
+      na.indexes :from,  :type => "integer"
+      na.indexes :to,  :type => "integer"
+      na.indexes :country
     end
   end
 
   class << self
+    def random_filled
+      conds = { :state => 'filled' }
+      relics_count = self.where(conds).count
+      if relics_count.zero?
+        conds[:state] = 'checked'
+        relics_count = self.where(conds).count
+      end
+      self.where(conds).offset(rand(relics_count)).first || self.offset(rand(self.count)).first
+    end
 
-    def reindex objs
+    def reindex(objs)
       index.delete
       index.create :mappings => tire.mapping_to_hash, :settings => tire.settings
       index.import objs
       index.refresh
     end
 
-    def analyze_query q
-      analyzed = Relic.index.analyze q
-      return '*' if !analyzed or (analyzed and analyzed['tokens'].blank?)
-      analyzed['tokens'].group_by{|i| i['position']}.inject([]) do |s1, (k, v)|
-        s1 << v.inject([]) {|s2, t| s2 << "#{t['token']}*"; s2}.join(' OR ')
-        s1
-      end.join(' ')
+    def reindex_sample(amount = 100, delete = true)
+      index.delete if delete
+      index.create :mappings => tire.mapping_to_hash, :settings => tire.settings
+      index.import Relic.roots.select('DISTINCT identification, *').limit(amount).map(&:sample_json)
+      index.refresh
     end
-
-    def search(params)
-      tire.search(:load => false, :page => params[:page], :per_page => 10) do
-        location = params[:location].to_s.split('-').map {|l| l.split(':') }
-        corrected_relic_ids = (params[:corrected_relic_ids] || []).map(&:to_s)
-        seen_relic_ids =(params[:seen_relic_ids]||[]).map(&:to_s)
-
-        q1 = Relic.analyze_query params[:q1]
-        query do
-          boolean do
-            must { string q1, :default_operator => "AND", :fields => [
-              "identification^5",
-              "street",
-              "place_full_name^2",
-              "descendants.identification^3"              ]
-            }
-          end
-        end
-        # # hack to use missing-filter
-        # # http://www.elasticsearch.org/guide/reference/query-dsl/missing-filter.html
-        # query_value = self.instance_variable_get("@query").instance_variable_get("@value")
-        # query_value[:bool][:must] << { constant_score: { filter: { missing: { field: "ancestry" } } } }
-        if q1 != '*'
-          highlight "identification" => {},
-            "street" => {},
-            "place_full_name" => {},
-            "descendants.identification" => {},
-            "descendants.street" => {}
-        end
-        facet "voivodeships" do
-          terms nil, :script_field => "_source.voivodeship.name + '_' + _source.voivodeship.id", :size => 16, :order => 'term'
-        end
-
-        if location.size > 0
-          filter :terms, 'voivodeship.id' => location[0]
-          facet "districts", :facet_filter => { :terms => { 'voivodeship.id' => location[0] } } do
-            terms nil, :script_field => "_source.district.name + '_' + _source.district.id", :size => 10_000, :order => 'term'
-          end
-        end
-
-        if location.size > 1
-          filter :terms, 'district.id' => location[1]
-          facet "communes", :facet_filter => { :terms => { 'district.id' => location[1] } } do
-            terms nil, :script_field => "_source.commune.name + '_' + _source.virtual_commune_id", :size => 10_000, :order => 'term'
-          end
-        end
-
-        if location.size > 2
-          filter :terms, 'commune.id' => location[2]
-          facet "places", :facet_filter => { :terms => { 'commune.id' => location[2]} } do
-             terms nil, :script_field => "_source.place.name + '_' + _source.place.id", :size => 10_000, :order => 'term'
-          end
-        end
-
-        filter :terms, 'place.id' => location[3] if location.size > 3
-
-        facet "overall" do
-          terms nil, :script_field => 1, :global => true
-        end
-
-        corrected_faset_filter = {}
-        term_params = Hash[
-          ['voivodeship.id', 'district.id', 'commune.id', 'place.id'].zip(location)
-        ].inject({}) { |mem, (k, v)| mem[k] = v if v; mem }
-        corrected_faset_filter = { :facet_filter => { :terms => term_params } } if term_params.present?
-
-        facet "corrected", corrected_faset_filter do
-          terms :edit_count, :script => "(corrected_relic_ids.contains(doc['id'].value.toString()) || doc['edit_count'].value > 2) ? 1 : 0", :all_terms => true, :params => {
-            'corrected_relic_ids' => corrected_relic_ids
-          }
-        end
-        sort do
-          by '_script', {
-              'script' => %q(
-                i = -seen_relic_ids.indexOf(doc['id'].value.toString());
-                f0 = (i * 100) + (doc['edit_count'].value * f1) - doc['skip_count'].value;
-                if( corrected_relic_ids.contains(doc['id'].value.toString()) || doc['edit_count'].value > 2 ) { f2 + f0; } else { f0; }
-              ).squish,
-              'type' => 'number',
-              'params' => {
-                'f1' => 100,
-                'f2' => -100_000_000,
-                'corrected_relic_ids' => corrected_relic_ids,
-                'seen_relic_ids' => seen_relic_ids
-              },
-              'order' => 'desc'
-            }
-          by '_score', 'desc'
-        end
-      end
-    end
-
-    def suggester q
-      tire.search(:load => false, :per_page => 1) do
-        query do
-          boolean do
-            must { string Relic.analyze_query(q), :default_operator => "AND", :fields => [
-              "identification^5",
-              "street",
-              "place_full_name^2",
-              "descendants.identification^3"              ]
-            }
-          end
-        end
-
-        if q != '*'
-          highlight "identification" => {},
-            "street" => {},
-            "place_full_name" => {},
-            "descendants.identification" => {},
-            "descendants.street" => {}
-        end
-
-        facet "voivodeships" do
-          terms nil, :script_field => "_source.voivodeship.name + '_' + _source.voivodeship.id", :size => 3
-        end
-        facet "districts" do
-          terms nil, :script_field => "_source.district.name + '_' + _source.district.id", :size => 3
-        end
-        facet "communes" do
-          terms nil, :script_field => "_source.commune.name + '_' + _source.virtual_commune_id", :size => 3
-        end
-        facet "places" do
-           terms nil, :script_field => "_source.place.name + '_' + _source.place.id", :size => 3
-        end
-      end
-    end
-
-    def next_for(user, search_params)
-      params = (search_params || {}).merge(:per_page => 1, :seen_relic_ids => user.seen_relic_ids, :corrected_relic_ids => user.corrected_relic_ids)
-      self.search(params).first || self.first(:offset => rand(self.count))
-    end
-
-    def next_random_in(conditions)
-      self.where(conditions).first(:offset => rand(self.where(conditions).count))
-    end
-
-    def next_few_for(user, search_params, count)
-      params = (search_params || {}).merge(:per_page => count, :corrected_relic_ids => user.corrected_relic_ids)
-      res = self.search(params).take(count)
-      res.empty? ? self.where(:offset => rand(self.count)).limit(count) : res
-    end
-
   end
 
-  def to_indexed_json
-    # backward compatibility
-    ids = [:voivodeship_id, :district_id, :commune_id, :place_id].zip(get_parent_ids)
+  def sample_json
+    dp = DateParser.new ['1 cw XX', '1916', '1907-1909'].sample
+    dating_hash = Hash[[:from, :to, :has_round_date].zip(dp.results << dp.rounded?)]
     {
       :id               => id,
+      :slug             => to_param,
+      :type             => 'relic',
       :identification   => identification,
+      :common_name      => common_name,
       :street           => street,
       :place_full_name  => place_full_name,
-      :kind             => kind,
       :descendants      => self.descendants.map(&:to_descendant_hash),
-      :edit_count       => self.edit_count,
-      :skip_count       => self.skip_count,
+
       :voivodeship      => { :id => self.voivodeship_id,            :name => self.voivodeship.name },
       :district         => { :id => self.district_id,               :name => self.district.name },
       :commune          => { :id => self.commune_id,                :name => self.commune.name },
       :virtual_commune_id => self.place.virtual_commune_id,
       :place            => { :id => self.place_id,                  :name => self.place.name },
-    }.merge(Hash[ids]).to_json
+      # new search fields
+      :categories       => (Category.to_hash.keys - ['sakralny']).sample(3),
+      :has_photos       => [true, false].sample,
+      :state            => state,
+      :existence        => existence,
+      :country          => ['pl', 'de', 'gb'].sample,
+      :tags             => ['WaWel', 'ZameK', 'zespół pałacowy', 'zamek królewski'].shuffle.first(rand(2) + 1).shuffle.first(rand(4) + 1),
+      :autocomplitions  => ['puchatka', 'szlachciatka', 'chata polska', 'chata mazurska', 'chata wielkopolska'].shuffle.first(rand(4) + 1),
+      # Lat Lon As Array Format in [lon, lat]
+      :coordinates       => [longitude, latitude]
+    }.merge(dating_hash)
+  end
+
+  def to_indexed_hash
+    dp = DateParser.new dating_of_obj
+    dating_hash = Hash[[:from, :to, :has_round_date].zip(dp.results << dp.rounded?)]
+    {
+      :id                   => id,
+      :slug                 => to_param,
+      :type                 => 'relic',
+      :identification       => identification,
+      :common_name          => common_name,
+      :street               => street,
+      :street_normalized    => street_normalized,
+      :place_full_name      => place_full_name,
+      :place_with_address   => place_with_address,
+      :descendants          => self.descendants.map(&:to_descendant_hash),
+      :voivodeship          => { :id => self.voivodeship_id,   :name => self.voivodeship.name },
+      :district             => { :id => self.district_id,      :name => self.district.name },
+      :commune              => { :id => self.commune_id,       :name => self.commune.name },
+      :virtual_commune_id   => self.place.virtual_commune_id,
+      :place                => { :id => self.place_id,         :name => self.place.name },
+      # new fields
+      :description          => description,
+      :has_description      => description?,
+      :categories           => categories,
+      :has_photos           => has_photos?,
+      :state                => state,
+      :existence            => existence,
+      :country              => country_code.downcase,
+      :tags                 => tags,
+      # Lat Lon As Array Format in [lon, lat]
+      :coordinates          => [longitude, latitude]
+    }.merge(dating_hash)
+  end
+
+  def to_indexed_json
+    to_indexed_hash.to_json
   end
 
   def to_descendant_hash
     {
       :id               => id,
       :identification   => identification,
+      :common_name      => common_name,
       :street           => street,
     }
   end
 
-
-  def full_identification
-    "#{identification} (#{register_number}) datowanie: #{dating_of_obj}; ulica: #{street}"
+  def street_normalized
+    street_normalized = street.to_s.split('/').first.to_s
+    street_normalized.gsub!(/[\W\d]+$/i, '')
+    street_normalized.gsub!(/\d+[a-z]?([i,\/\s]+)?\d+[a-z]$/i, '')
+    street_normalized.strip!
+    street_normalized
   end
 
   def get_parent_ids
@@ -287,12 +339,6 @@ class Relic < ActiveRecord::Base
     else
       ["woj. #{voivodeship.name}", "pow. #{district.name}", "gm. #{commune.name}", place.name].join(', ')
     end
-
-  end
-
-  def update_relic_index
-    # always update root document
-    root.tire.update_index
   end
 
   def corrected_by?(user)
@@ -301,6 +347,139 @@ class Relic < ActiveRecord::Base
 
   def corrected?
     suggestions.count >= 3
+  end
+
+  def country_code= value
+    self[:country_code] = (value || 'pl').upcase
+  end
+
+  def country
+    I18n.t(country_code.upcase, :scope => 'countries')
+  end
+
+  def main_photo
+    return @main_photo if defined? @main_photo
+    @main_photo = (self.all_photos.order('CASE(photos.main) WHEN TRUE THEN 0 ELSE 1 END').first || self.photos.new)
+  end
+
+  # @return photos for relic and it's descendants
+  def all_photos
+    Photo.where(:relic_id => [id] + descendant_ids)
+  end
+
+  def has_photos?
+    all_photos.exists?
+  end
+
+  def all_documents
+    Document.where(:relic_id => [id] + descendant_ids).order("relic_id ASC")
+  end
+
+  def all_links
+    Link.where(:relic_id => [id] + descendant_ids).order("relic_id ASC, position ASC")
+  end
+
+  def all_events
+    Event.where(:relic_id => [id] + descendant_ids).order("date_start ASC")
+  end
+
+  def polish_relic
+    self.class == Relic
+  end
+
+  def foreign_relic?
+    country_code.upcase != 'PL'
+  end
+
+  def latitude=(value)
+    super
+    if latitude_changed?
+      self.geocoded = true
+    end
+  end
+
+  def longitude=(value)
+    super
+    if longitude_changed?
+      self.geocoded = true
+    end
+  end
+
+  def place_with_address
+    "#{place_full_name}, #{street_normalized}"
+  end
+
+  def parse_date
+    self.date_start, self.date_end = DateParser.new(dating_of_obj).results
+  end
+
+  def parent_id=(value)
+    if value.present?
+      self.parent = Relic.find(value)
+    else
+      self.parent = nil
+    end
+  end
+
+  def up_id
+    place_id
+  end
+
+  def up
+    place
+  end
+
+  def to_param
+    slug = [(fplace || place.name), identification].join('-').gsub(/\d+/, '').parameterize
+    [id, slug] * '-'
+  end
+
+  def state_name
+    I18n.t("activerecord.attributes.relic.states.#{state}")
+  end
+
+  def existence_name
+    I18n.t("activerecord.attributes.relic.existences.#{existence}")
+  end
+
+  def build_finished?
+    self.build_state == 'finish_step'
+  end
+
+  def to_builder
+    json = Jbuilder.new
+    json.(self,
+      :id,
+      :nid_id,
+      :identification,
+      :description,
+      :categories,
+      :state,
+      :register_number,
+      :dating_of_obj,
+      :street,
+      :latitude,
+      :longitude,
+      :tags,
+      :country_code,
+      :fprovince,
+      :fplace,
+      :documents_info,
+      :links_info,
+    )
+    json.main_photo self.main_photo if self.has_photos?
+
+    json.descendants do |json|
+      json.array! self.descendants.map {|d| d.to_builder.attributes! }
+    end
+
+    json.place_id self.place.id
+    json.place_name self.place.name
+    json.commune_name self.place.commune.name
+    json.district_name self.place.commune.district.voivodeship.name
+    json.voivodeship_name self.place.commune.district.voivodeship.name
+
+    json
   end
 
 end

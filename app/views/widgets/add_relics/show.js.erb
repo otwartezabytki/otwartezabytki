@@ -1,0 +1,2 @@
+<%= Otwartezabytki::Application.assets.find_asset('widgets/add_relic.js').source.html_safe %>
+oz_jQuery('#oz_add_relic_widget').html('<%= escape_javascript(render "/widgets/show/#{widget.class.partial_name}")%>');

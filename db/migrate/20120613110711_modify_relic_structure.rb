@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ModifyRelicStructure < ActiveRecord::Migration
   def change
     add_column :relics, :register_date, :date

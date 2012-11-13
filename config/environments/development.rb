@@ -34,7 +34,7 @@ Otwartezabytki::Application.configure do
   config.assets.compress = false
 
   # Expands the lines which load the assets
-  config.assets.debug = true
+  config.assets.debug = Settings.debug_assets
 
   # Use mailcatcher for debugging e-mails
   config.action_mailer.delivery_method = :smtp

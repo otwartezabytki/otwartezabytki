@@ -3,12 +3,13 @@
 
 ### application init
  - brew update
- - brew install elasticsearch postgresql
+ - brew install elasticsearch postgresql graphicsmagick aspell --lang=pl
  - cp config/database.yml.example config/database.yml
  - create database and database users for dev and testing
  - bundle install
  - gunzip -c db/dump/%m_%d_%Y.sql.gz | script/rails db
  - bundle exec rake db:migrate
+ - bundle exec rake db:seed
  - script/rails s
 
 ### db dump command

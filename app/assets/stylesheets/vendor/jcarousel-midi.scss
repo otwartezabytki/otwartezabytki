@@ -1,0 +1,91 @@
+.jcarousel-skin-midi .jcarousel-container {
+
+}
+
+.jcarousel-skin-midi .jcarousel-container-horizontal {
+  width: 960px;
+}
+
+.jcarousel-skin-midi .jcarousel-clip {
+  overflow: hidden;
+}
+
+.jcarousel-skin-midi .jcarousel-clip-horizontal {
+  width:  880px;
+  height: 145px;
+  margin: 25px 40px;
+}
+
+.jcarousel-skin-midi .jcarousel-item {
+  width: 125px;
+  height: 125px;
+  border: 4px solid white;
+}
+
+.jcarousel-skin-midi .jcarousel-item-horizontal + .jcarousel-item-horizontal {
+  margin-left: 4px;
+  margin-right: 0;
+}
+
+
+.jcarousel-skin-midi .jcarousel-item-placeholder {
+  background: #fff;
+  color: #000;
+}
+
+/**
+ *  Horizontal Buttons
+ */
+.jcarousel-skin-midi .jcarousel-next-horizontal {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 28px;
+  height: 60px;
+  cursor: pointer;
+  background: transparent image-url("jcarousel/next-horizontal-midi.png") no-repeat 0 0;
+}
+
+.jcarousel-skin-midi .jcarousel-next-horizontal:hover,
+.jcarousel-skin-midi .jcarousel-next-horizontal:focus {
+  background-position: -32px 0;
+}
+
+.jcarousel-skin-midi .jcarousel-next-horizontal:active {
+  background-position: -64px 0;
+}
+
+.jcarousel-skin-midi .jcarousel-next-disabled-horizontal,
+.jcarousel-skin-midi .jcarousel-next-disabled-horizontal:hover,
+.jcarousel-skin-midi .jcarousel-next-disabled-horizontal:focus,
+.jcarousel-skin-midi .jcarousel-next-disabled-horizontal:active {
+  cursor: default;
+  background-position: -96px 0;
+}
+
+.jcarousel-skin-midi .jcarousel-prev-horizontal {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 28px;
+  height: 60px;
+  cursor: pointer;
+  background: transparent image-url("jcarousel/prev-horizontal-midi.png") no-repeat 0 0;
+}
+
+.jcarousel-skin-midi .jcarousel-prev-horizontal:hover,
+.jcarousel-skin-midi .jcarousel-prev-horizontal:focus {
+  background-position: -32px 0;
+}
+
+.jcarousel-skin-midi .jcarousel-prev-horizontal:active {
+  background-position: -64px 0;
+}
+
+.jcarousel-skin-midi .jcarousel-prev-disabled-horizontal,
+.jcarousel-skin-midi .jcarousel-prev-disabled-horizontal:hover,
+.jcarousel-skin-midi .jcarousel-prev-disabled-horizontal:focus,
+.jcarousel-skin-midi .jcarousel-prev-disabled-horizontal:active {
+  cursor: default;
+  background-position: -96px 0;
+}

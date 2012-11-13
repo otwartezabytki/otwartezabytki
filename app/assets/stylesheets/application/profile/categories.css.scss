@@ -1,0 +1,42 @@
+@import "compass/layout";
+@import "compass/css3";
+
+.categories{
+  .select > .input{
+    display: inline-block;
+    width: 100%;
+  }
+  .column{
+    float: left;
+    width: 230px;
+    margin-right: 20px;
+    &.column-third{
+      margin-right: 0;
+      width: 220px;
+    }
+    &.column-first{
+      width: 210px;
+    }
+  }
+
+
+  .select2-input {
+    height: 22px !important;
+  }
+}
+
+#relic_categories_input{
+  .choices{
+    margin: 10px 0;
+    input{
+      display: inline-block;
+      width: auto;
+      height: auto;
+      margin: 5px 0;
+    }
+    label{
+      font-weight: normal;
+      font-size: 13px;
+    }
+  }
+}

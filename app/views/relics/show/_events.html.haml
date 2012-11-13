@@ -1,0 +1,29 @@
+%section.show.events
+  %h2 Ważne daty
+  - if relic.all_events.count > 0
+    = link_to 'uzupełnij', edit_section_relic_path(relic.id, :events), :title => 'edytuj wydarzenia związane z zabytkiem', :remote => true, :class => "edit-relic-link"
+    .content
+      .viewport
+        %ul
+          - relic.all_events.each do |event|
+            %li
+              - if event.relic_id == relic
+                %strong= event.date
+                \-
+                = event.name
+              - else
+                %strong
+                  %span<>= link_to event.relic.identification, relic_path(event.relic)
+                  %span<>= ", #{event.date}"
+                \-
+                = event.name
+  - else
+    .placeholder
+      %p
+        Nikt jeszcze nie dodał żadnej historii
+        %br
+        Bądź pierwszy!
+
+      = link_to "dodaj wydarzenie", edit_section_relic_path(relic.id, :events), :remote => true
+      .example
+        %a.show-example{:href => image_path('screenshot-dates.jpg'), :class => "fancybox"} Pokaż przykład

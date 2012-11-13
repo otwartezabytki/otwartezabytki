@@ -1,0 +1,8 @@
+.row
+  = semantic_form_for relic, :url => section_relic_path(relic.id, :section => :general), :remote => true do |f|
+    = f.input :identification, :as => :string
+    = f.input :common_name, :as => :string
+    .actions
+      = f.submit t('views.relics.edit.save')
+      = t('views.relics.edit.or')
+      = link_to t('views.relics.edit.cancel'), relic_path(relic.id), :remote => true, :class => "cancel"

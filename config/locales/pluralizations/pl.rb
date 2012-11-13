@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # config/locales/pluralizations/pl.rb
 {:pl =>
   { :i18n =>

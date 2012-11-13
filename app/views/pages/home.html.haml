@@ -1,126 +1,121 @@
 .top
   .container
-    .more
-      %h2 Zadbajmy o polskie zabytki!
-      %p
-        Uzupełnij z nami bazę zabytków i&nbsp;pomóż stworzyć serwis.
-        %br
-        Skorzystaj z własnej wiedzy. Poszukaj informacji w&nbsp;książkach lub&nbsp;w&nbsp;internecie.
-        %strong To naprawdę proste.
-      #more-button
-        = link_to page_pl_path('dowiedz-sie-wiecej') do
-          Dowiedz się więcej &#187;
-    #tabs
-      %ul
-        %li
-          %a{:href => '#tabs-1', :style => "background-image: url('http://b.vimeocdn.com/ts/313/259/313259873_100.jpg')"}
-        %li
-          %a{:href => '#tabs-2', :style => "background-image: url('http://b.vimeocdn.com/ts/313/031/313031214_100.jpg')"}
-        %li
-          %a{:href => '#tabs-3', :style => "background-image: url('http://b.vimeocdn.com/ts/311/908/311908286_100.jpg')"}
-
-      #tabs-1.video
-        = image_tag 'video-preview-1.jpg'
-        %script(type="text/html")
-          <iframe id="tabs-1_video" src="http://player.vimeo.com/video/45066441?color=8cc1d1&api=1&player_id=tabs-1_video" color="8cc1d1" width="390" height="219" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-      #tabs-2.video
-        = image_tag 'video-preview-2.jpg', :style => "display:none;"
-        %script(type="text/html")
-          <iframe id="tabs-2_video" src="http://player.vimeo.com/video/45035633?color=8cc1d1&api=1&player_id=tabs-2_video" color="8cc1d1" width="390" height="219" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-      #tabs-3.video
-        = image_tag 'video-preview-3.jpg', :style => "display:none;"
-        %script(type="text/html")
-          <iframe id="tabs-3_video" src="http://player.vimeo.com/video/44879498?color=8cc1d1&api=1&player_id=tabs-3_video" color="8cc1d1" width="390" height="219" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-
-    .step1
-      %h3
-        Krok 1.
-        %span Zacznij od wyszukania zabytku:
-      %p.adding
-        (dodawanie nowych będzie możliwe za miesiąc)
-      %p
-        np.
-        %em cmentarz, dworek w Podkarpackiem, Pałac na Wodzie, Małkinia
-      = simple_form_for Relic.new, :url => relics_path, :html => { :class => 'well form-search'},:method => :get do |f|
-        = f.input :q1, :label => false, :input_html => {:name => 'q1', :value => params[:q1], :class => "search-query"}
-        = f.button :submit, 'Szukaj »', :name => nil
-      %p.examples
-        Skorzystaj z przykładów:
-        - cache("home_search_suggestions", :expires_in => 5.minutes) do
-          = random_search_suggestions
-.user-stats.progress
-  - cache("home_relics_statistics", :expires_in => 5.minutes) do
-    - stats = relics_statistics
-
-    %h2 JAK WYGLĄDA NASZA BAZA ZABYTKÓW?
-
-    .nums
-      .left.g
-        %h3 Sprawdziliśmy
-
-        - # stats[0] - wszystkie
-        - # stats[1] - przez >= 1 osobe
-        - # stats[2] - przez >= 2 osoby
-        - # stats[3] - przez >= 3 osoby
-
-        .wrap
-          .active= stats[1]
-          .numbers
-            .numbers-row
-              %span= stats[3]
-              = t('plural.relic', :count => stats[3])
-              sprawdziły 3 osoby
-            .numbers-row
-              %span.a= stats[2]
-              = t('plural.relic', :count => stats[2])
-              sprawdziły dwie osoby
-        %h3= t('plural.relic', :count => stats[1])
-      .left.r
-        - l = stats[0]-stats[1]
-        %h3
-          = t('plural.left_to_the_end', :count => l)
-        .wrap
-          .active= l
-        %h3= t('plural.relic', :count => l)
-
-    .progress-bar
-      .bg
-        .color{:style => "width: #{(stats[1]*100/stats[0].to_f).round(2)}%"}
-
-    .info
-      %strong= stats[0]
-      %br
-      wszystkich zabytków w bazie
-
-.user-stats
-  - cache("home_users_statistics", :expires_in => 5.minutes) do
-    - stats = users_statistics
-
-    .nums
+    .relic-bg
+    = semantic_form_for(tsearch, :url => relics_path, :method => :get, :id => 'form-search') do |f|
+      %h2 Wyszukaj i uzupełnij...
+      .field.subject
+        = f.input :q, :label => "Co:", :placeholder => "co", :input_html => { :class => 'autocomplete-q'}, :hint => "np. cmentarz, stocznie poniemieckie, chopinowski"
+      .field.place
+        = f.input :place, :label => "Gdzie:", :placeholder => "gdzie", :input_html => { :class => 'autocomplete-place'}, :hint => "np. Małkinia, ul. Grodzka w Krakowie"
+      .field
+        = link_to "Jak działa wyszukiwarka?", "#", :id => "how_it_works", :class => "js-popover how_it_works",
+          :"data-title-id" => "how_it_works_title", :"data-content-id" => "how_it_works_content"
+        %script{ :id => "how_it_works_title", :type => "text/html" }
+          %p.how-it-works-title Jak działa wyszukiwarka?
+          %p.close= link_to "zamknij", "#", :class => "close_popover", :"data-popover-id" => "how_it_works"
+        %script{ :id => "how_it_works_content", :type => "text/html" }
+          .how-it-works-content
+            %h4.what Co?
+            %p Wyszukuje po całych nazwach, słowach występujących w nazwach oraz tagach.
+            %h4.where Gdzie?
+            %p Wyszukuje ulice, nazwy miejscowości, województw, powiatów.
+        = f.action :submit, :class => "submit btn", :label => 'Szukaj &raquo;'.html_safe, :button_html => { :name => nil }
+    .relic-example
+      %h3 ... a wkrótce będziemy mogli oglądać zabytki tak:
+      - example_relic = Relic.random_filled
+      .relic-container
+        .image
+          = image_tag example_relic.main_photo.file.url(:icon)
+        .relic-content
+          = link_to example_relic.identification, example_relic
+          .status{:class => example_relic.state }= example_relic.state_name
+          .location_name
+            %strong lokalizacja:
+            = format_localization(example_relic)
+          - if example_relic.dating_of_obj?
+            .date
+              %strong data powstania:
+              = example_relic.dating_of_obj
+    .welcome
+      %h3 Zapraszamy do współtworzenia katalogu Otwartych Zabytków
       .left
-        %h3 Aktywnych użytkowników
-
-        .active= stats[0]
-        .numbers
-          .numbers-row
-            %span= stats[1]
-            zarejestrowanych
-          .numbers-row
-            %span.a= stats[2]
-            anonimowych *
-
-      - min, max = users_activity_statistics
-
+        Wybierz dowolny zabytek z naszej bazy.
+        %br
+        Wyszukaj informacje i uzupełnij jego profil.
+        %br
+        Jeśli Twojego zabytku nie ma w bazie - dodaj go.
       .right
-        - if max # just in case
-          .numbers-row
-            %strong #{max[4]}%
-            %div z nich sprawdza zabytki #{max[2]} między <span>#{max[0]}<sup>00</sup></span> a <span>#{max[1]}<sup>00</sup></span>
+        %ul
+          %li Czym jest zabytek?
+          %li Czym jest otwarty zabytek?
+          %li Jak możesz się włączyć?
+          = link_to "Dowiedz się więcej &raquo;".html_safe, page_pl_path('o-projekcie'), :class => 'btn'
+.widgets-intro
+  %ul
+    %li.first
+      %a{:href => widgets_path}
+        %span.title Widżety »
+        %span.paragraph Udostępniamy kilka przykładowych aplikacji, dzięki którym łatwiej będzie wykorzystać dane o otwartych zabytkach na innych stronach internetowych.
+    %li.alerts
+      = link_to widgets_add_alerts_path, :method => :post do
+        %span.title Alerty:
+        %span.paragraph Jeśli wiesz, że jakiś zabytek jest w złym stanie - zaalarmuj. Dołącz zdjęcie i opis.
+    %li.map-search
+      = link_to widgets_map_searches_path, :method => :post do
+        %span.title Mapa:
+        %span.paragraph Wyszukaj zabytki na mapie. Zobacz, jakie zabytki znajdują się w Twojej okolicy.
+    %li.add
+      = link_to widgets_add_relics_path, :method => :post do
+        %span.title Dodaj:
+        %span.paragraph Znasz zabytki, których brakuje w naszej bazie? Dodaj je i podziel się swoją wiedzą z innymi.
 
-        - if min
-          .numbers-row
-            %strong.a #{min[4]}%
-            %div a tylko tyle #{min[2]} między <span>#{min[0]}<sup>00</sup></span> a <span>#{min[1]}<sup>00</sup></span>
-
-    .info
-      * - Brak obowiązkowej rejestracji uniemożliwia nam dokładne zliczenie anonimowych uczestników czynu społecznego.
+.stats
+  %h2 Jak wygląda nasza baza zabytków?
+  .left
+    %h3 Gdzie mamy najwięcej zabytków
+    = render 'polish_map'
+  .right
+    - cache "recently-modified" do
+      %h3 Ostatnio edytowane
+      %ul.latest
+        - RecentRevision.recently_modified.each do |hash|
+          %li
+            .image
+              = image_tag hash[:image_url]
+            .relic-content
+              %p.title= hash[:identification]
+              .change.added
+                = hash[:changes]
+              = link_to "Przejdź do profilu zabytku", relic_path(hash[:slug])
+  .progress-bar
+    .bg
+      .color{:style => "width: #{relic_stats[:checked] * 100 / relic_stats[:total].to_f}%"}
+    .checked{:style => "left: #{(relic_stats[:checked] * 900 / relic_stats[:total].to_f) + 16}px"}
+      = t('views.pages.home.stats_info.checked_html', :count => relic_stats[:checked])
+      .help
+        = image_tag 'ico-help.png'
+        .help-wrapper
+          = link_to t('views.relics.index.states.close'), '#', :class => 'close'
+          %h3= t('views.relics.index.states.header')
+          %ul
+            - ['checked'].each do |s|
+              %li
+                .tag
+                  %span{:class => s}= t("views.relics.index.states.#{s}.header")
+                .text= t("views.relics.index.states.#{s}.info")
+    .filled{:style => "left: #{(relic_stats[:filled] * 900 / relic_stats[:total].to_f) + 16}px"}
+      = t('views.pages.home.stats_info.filled_html', :count => relic_stats[:filled])
+      .help
+        = image_tag 'ico-help.png'
+        .help-wrapper
+          = link_to t('views.relics.index.states.close'), '#', :class => 'close'
+          %h3= t('views.relics.index.states.header')
+          %ul
+            - ['filled'].each do |s|
+              %li
+                .tag
+                  %span{:class => s}= t("views.relics.index.states.#{s}.header")
+                .text= t("views.relics.index.states.#{s}.info")
+    .total
+      = t('views.pages.home.stats_info.total_html', :count => relic_stats[:total])
+      = t('views.pages.home.stats_info.unchecked_html', :count => relic_stats[:unchecked])

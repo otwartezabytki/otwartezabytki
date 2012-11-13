@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateSuggestedTypes < ActiveRecord::Migration
   def change
     create_table :suggested_types do |t|

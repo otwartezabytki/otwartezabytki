@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # Use this file to easily define all of your cron jobs.
 #
 # It's helpful, but not entirely necessary to understand cron before proceeding.
@@ -5,6 +6,6 @@
 
 set :output, "log/cron.log"
 
-every 1.hour do
-  rake "relic:export[public/system/relics_history.csv,10000]"
+every :monday, :at => '2am' do
+  rake "relic:export"
 end

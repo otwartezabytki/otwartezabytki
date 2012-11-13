@@ -1,0 +1,17 @@
+!!!
+%html
+  %head
+    %meta( content="text/html; charset=utf-8" http-equiv="Content Type" )
+  %body
+    %h1 Zgłoszono nowy Alert
+    %p Użytkownik: #{@alert.user.email}, dodał alert o treści:
+    %p= @alert.description
+    %p
+      do zabytku: #{@alert.relic.identification}
+
+    %p
+      \--
+      %br
+      Pozdrawiamy
+      %br
+      Zespół Otwartych Zabytków

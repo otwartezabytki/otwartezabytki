@@ -1,0 +1,27 @@
+%section.show.links
+  %h2 Linki, źródła, powiązania
+  - if relic.all_links.count > 0
+    = link_to 'uzupełnij', edit_section_relic_path(relic.id, :links), :title => 'edytuj linki powiązane z zabytkiem', :remote => true, :class => "edit-relic-link"
+    .content
+      %ul
+        - relic.all_links.each do |link|
+          - if link.url?
+            %li
+              = link_to link.shortened_url, link.url
+              \-
+              = link.name
+          - elsif link.paper?
+            %li
+              %strong= link.formal_name
+              \-
+              = link.name
+  - else
+    .placeholder
+      %p
+        Nikt jeszcze nie dodał żadnych linków.
+        %br
+        Bądź pierwszy!
+
+      = link_to "dodaj źródło", edit_section_relic_path(relic.id, :links), :remote => true
+      .example
+        %a.show-example{:href => image_path('screenshot-links.jpg'), :class => "fancybox"} Pokaż przykład

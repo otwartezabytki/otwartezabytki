@@ -1,0 +1,17 @@
+= stylesheet_link_tag "http://#{Settings.oz.host}/assets/widgets/add_alert.css"
+.widget-box
+  %a.what-about{:href => page_pl_path('o-projekcie'), :target => "_blank"} O co chodzi?
+  .widget-logo
+  %h3 Znalazłeś zabytek w złym stanie zaalarmuj!
+  %h2= widget.relic.identification
+  .actions
+    - if widget.relic.alerts.count.zero?
+      %button.none
+        Brak Alertów
+    - else
+      %button.show{:src => "http://#{Settings.oz.host}/relics/#{widget.relic.to_param}#anchor-alerts"}
+        Zobacz Alerty
+        %span= widget.relic.alerts.count
+
+    %button.create{:src => "http://iframe.#{Settings.oz.host}/relics/#{widget.relic_id}/alerts/new"}
+      Zgłoś Alert

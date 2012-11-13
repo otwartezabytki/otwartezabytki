@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddAncestryToRelics < ActiveRecord::Migration
   def change
     add_column :relics, :ancestry, :string

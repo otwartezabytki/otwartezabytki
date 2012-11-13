@@ -1,0 +1,12 @@
+%section.new.alert
+  %h2= t('views.alerts.new.header')
+  - if request.xhr?
+    = render 'shared/flash', :flash => flash
+  .row
+    = semantic_form_for [relic, alert], :remote => true do |f|
+      %p.description= t('views.alerts.new.description')
+      = f.input :file, :as => :file
+      %p.description= t('views.relics.edit.photos.statement_html')
+      = f.input :description, :as => :text, :input_html => { :value => params[:description] }
+      .actions
+        = f.submit t('views.alerts.new.submit')

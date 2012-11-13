@@ -1,4 +1,4 @@
-# encoding: utf-8
+# -*- encoding : utf-8 -*-
 
 Given /^there is at least one relic in database$/ do
   @relic = FactoryGirl.create :relic

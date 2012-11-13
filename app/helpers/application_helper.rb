@@ -48,43 +48,65 @@ module ApplicationHelper
   end
 
   def random_search_suggestions
-    types = SuggestedType.order("RANDOM()").map {|e| e.name }
-    places = Relic.roots.select("place_id, COUNT(id) as cnt").group(:place_id).having("COUNT(id) > 5").order("RANDOM()").limit(5).includes(:place).map {|r| r.place.name }
-    suggestions = []
+    # hack because of meta_seach
+    return ""
+    # types = SuggestedType.order("RANDOM()").map {|e| e.name }
+    # places = Relic.roots.select("place_id, COUNT(id) as cnt").group(:place_id).having("COUNT(id) > 5").order("RANDOM()").limit(5).includes(:place).map {|r| r.place.name }
+    # suggestions = []
 
-    first = types.shift
-    count = Relic.search(:q1 => first).total_count
-    suggestions[0] = [first, count]
+    # first = types.shift
+    # count = Relic.search(:q1 => first).total_count
+    # suggestions[0] = [first, count]
 
-    first = places.shift
-    count = Relic.search(:q1 => first).total_count
-    suggestions[2] = [first, count]
+    # first = places.shift
+    # count = Relic.search(:q1 => first).total_count
+    # suggestions[2] = [first, count]
 
-    types.each do |type|
-      places.each do |place|
-        q = type + " " + place
-        count = Relic.search(:q1 => q).total_count
-        if count > 0
-          suggestions[1] = [q, count]
-          break
-        end
-      end
-    end
+    # types.each do |type|
+    #   places.each do |place|
+    #     q = type + " " + place
+    #     count = Relic.search(:q1 => q).total_count
+    #     if count > 0
+    #       suggestions[1] = [q, count]
+    #       break
+    #     end
+    #   end
+    # end
 
-    suggestions.map do |label, count|
-      link_to "#{label} <span>(#{count})</span>".html_safe, relics_path(:q1 => label)
-    end.join(", ").html_safe
+    # suggestions.map do |label, count|
+    #   link_to "#{label} <span>(#{count})</span>".html_safe, relics_path(:q1 => label)
+    # end.join(", ").html_safe
   end
 
-  def link_to_facet obj, location, deep, &block
-    name, id  = obj['term'].split('_')
-    selected  = location[deep] == id
+  def location_array
+    return @location_array if defined? @location_array
+    @location_array = (search_params[:search][:location] || 'pl').to_s.split('-')
+  end
+
+  def link_to_browse obj, deep, &block
+    name, id  = obj['term'].include?('_') ? obj['term'].split('_') : [I18n.t(obj['term'].upcase, :scope => 'countries'), obj['term']]
     label     = "#{name} <span>#{obj['count']}</span>".html_safe
-    link      = link_to label, relics_path(search_params.merge(:location => (location.first(deep) << id).join('-')))
+    cond      = {:search => {:location => (location_array.first(deep) << id).join('-')}}
+    link      = link_to label, relics_path(cond)
+    output = []
+    output << link
+    if block_given?
+      output.join.html_safe + capture(&block)
+    else
+      output.join.html_safe
+    end
+  end
+
+  def link_to_facet obj, deep, &block
+    name, id  = obj['term'].include?('_') ? obj['term'].split('_') : [I18n.t(obj['term'].upcase, :scope => 'countries'), obj['term']]
+    selected  = location_array[deep] == id
+    label     = "#{name} <span>#{obj['count']}</span>".html_safe
+    cond      = search_params({:location => (location_array.first(deep) << id).join('-')})
+    link      = link_to label, relics_path(cond), :remote => true
     output = []
     if selected
       output << content_tag(:div, :class => 'selected') do
-        if location.size == (deep + 1)
+        if location_array.size == (deep + 1)
           content_tag(:p, label)
         else
           link
@@ -100,4 +122,18 @@ module ApplicationHelper
     end
   end
 
+  def location_breadcrumbs
+    return @location_breadcrumbs if defined? @location_breadcrumbs
+    @location_breadcrumbs = [ {:path => relics_path(search_params(:location => nil)), :label => 'Cała Polska'} ]
+    klasses = [Voivodeship, District, Commune, Place]
+
+    location_array.each_with_index do |id,i|
+      l = Rails.cache.fetch("#{klasses[i].to_s.downcase}_#{id}", :expires_in => 1.day) do
+        klasses[i].find(id.split(':').first)
+      end
+      cond = search_params(:location => location_array.first(i+1).join('-'))
+      @location_breadcrumbs << {:path => relics_path(cond), :label => l.name }
+    end if location_array.present?
+    @location_breadcrumbs
+  end
 end

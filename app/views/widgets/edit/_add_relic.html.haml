@@ -1,0 +1,12 @@
+%h1
+  #{widget.class.title}
+  %a.back{:href => widgets_path} &laquo; wróć do katalogu widżetów
+- if widget.valid?
+  .content
+    %h2 Podgląd wygenerowanego widżetu
+    .preview
+      = raw(widget.snippet)
+    %h2 Wygenerowany kod do wstawienia na stronę
+    %div
+      %span.block To jest gotowy kod do wstawienia na stronę. Wystarczy go skopiować i umieścić w odpowiednim miejscu na Twojej stronie.
+      %textarea{:cols => "20", :rows => "3"}= widget.snippet

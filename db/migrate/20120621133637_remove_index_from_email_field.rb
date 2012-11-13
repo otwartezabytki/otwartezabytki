@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class RemoveIndexFromEmailField < ActiveRecord::Migration
   def up
     remove_index :users, :email

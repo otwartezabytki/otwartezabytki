@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # this module caches location fields for quick access
 module Relic::PlaceCaching
   extend ActiveSupport::Concern
@@ -23,7 +24,10 @@ module Relic::PlaceCaching
   end
 
   def cache_location_fields
-    if self.place
+    if self.place and self.polish_relic
+      self.place.conditional_geocode!
+      self.latitude       ||= self.place.latitude
+      self.longitude      ||= self.place.longitude
       self.commune_id     = self.place.commune_id
       self.district_id    = self.place.commune.district_id
       self.voivodeship_id = self.place.commune.district.voivodeship_id

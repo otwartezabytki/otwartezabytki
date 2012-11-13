@@ -15,7 +15,7 @@
 
     %p Jeśli chcesz zmienić swoje hasło wejdź tutaj: #{ link_to 'Zmień hasło', edit_user_password_url(:reset_password_token => @reset_password_token) }
 
-    %p (Jeżeli nie zakładałeś konta - napisz na adres kontakt@otwartezabytki.pl, a usuniemy Twój adres e-mail z naszej bazy.)
+    %p (Jeżeli nie zakładałeś konta - napisz na adres #{Settings.oz.email_sender}, a usuniemy Twój adres e-mail z naszej bazy.)
 
     %p
       \--

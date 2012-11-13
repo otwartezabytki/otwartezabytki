@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateSeenRelics < ActiveRecord::Migration
   def change
     create_table :seen_relics do |t|
