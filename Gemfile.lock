@@ -89,7 +89,6 @@ GEM
     arel (3.0.2)
     arrabiata (0.4.0)
     bcrypt-ruby (3.0.1)
-    blankslate (2.1.2.4)
     bootstrap-sass (2.0.4.0)
     bourbon (2.1.1)
       sass (>= 3.1)
@@ -233,9 +232,8 @@ GEM
       responders (~> 0.6)
     interactive_editor (0.0.10)
       spoon (>= 0.0.1)
-    jbuilder (0.4.3)
+    jbuilder (0.8.2)
       activesupport (>= 3.0.0)
-      blankslate (>= 2.1.2.4)
     journey (1.0.4)
     jquery-rails (2.0.2)
       railties (>= 3.2.0, < 5.0)
@@ -308,9 +306,6 @@ GEM
       pry
     quiet_assets (1.0.1)
       railties (~> 3.1)
-    rabl (0.7.1)
-      activesupport (>= 2.3.14)
-      multi_json (~> 1.0)
     rack (1.4.1)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -545,7 +540,6 @@ DEPENDENCIES
   pry-doc
   pry-rails
   quiet_assets
-  rabl
   rails (~> 3.2.3)
   rails-i18n
   rails_config (= 0.2.5)

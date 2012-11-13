@@ -28,3 +28,4 @@ config/environments/*.local.yml
 /public/uploads/
 .rvmrc
 .idea/*
+current-relics.zip

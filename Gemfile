@@ -73,7 +73,6 @@ gem 'rubyzip'             # download documents as zip
 gem 'aasm'                # state machine
 
 # api
-gem 'rabl'
 gem "jbuilder"
 
 gem 'htmldiff'                # diff changes in admin panel

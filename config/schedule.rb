@@ -6,6 +6,6 @@
 
 set :output, "log/cron.log"
 
-every 1.hour do
-  rake "relic:export[public/system/relics_history.csv,10000]"
+every 1.day do
+  rake "relic:export"
 end

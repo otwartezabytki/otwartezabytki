@@ -445,4 +445,41 @@ class Relic < ActiveRecord::Base
   def build_finished?
     self.build_state == 'finish_step'
   end
+
+  def to_builder
+    json = Jbuilder.new
+    json.(self,
+      :id,
+      :nid_id,
+      :identification,
+      :description,
+      :categories,
+      :state,
+      :register_number,
+      :dating_of_obj,
+      :street,
+      :latitude,
+      :longitude,
+      :tags,
+      :country_code,
+      :fprovince,
+      :fplace,
+      :documents_info,
+      :links_info,
+    )
+    json.main_photo self.main_photo if self.has_photos?
+
+    json.descendants do |json|
+      json.array! self.descendants.map {|d| d.to_builder.attributes! }
+    end
+
+    json.place_id self.place.id
+    json.place_name self.place.name
+    json.commune_name self.place.commune.name
+    json.district_name self.place.commune.district.voivodeship.name
+    json.voivodeship_name self.place.commune.district.voivodeship.name
+
+    json
+  end
+
 end
