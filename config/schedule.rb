@@ -6,6 +6,6 @@
 
 set :output, "log/cron.log"
 
-every 1.day do
+every :monday, :at => '2am' do
   rake "relic:export"
 end
