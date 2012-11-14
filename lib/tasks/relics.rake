@@ -52,30 +52,6 @@ SQL
     end
   end
 
-  task :export_users, [:export_csv] => :environment do |t, args |
-sql = <<SQL
-  select
-    id as user_id,
-    last_sign_in_ip as ip,
-    email,
-    username
-  from
-    users;
-SQL
-    results = ActiveRecord::Base.connection.execute(sql)
-    ntuples = results.ntuples
-    processed_items = 0
-    CSV.open(args.export_csv, "wb", :force_quotes => true) do |csv|
-      csv << results[0].keys
-
-      results.each_entry do |entry|
-        csv << entry.values
-        processed_items += 1
-        puts "Progress: #{processed_items}/#{ntuples}" if processed_items % 1000 == 0
-      end
-    end
-  end
-
   task :export => :environment do
     new_zip_path = "#{Rails.root}/public/history/#{Date.today.to_s(:db)}-relics.zip"
     if File.exists?(new_zip_path)
@@ -93,7 +69,6 @@ SQL
               begin
                 z.put_next_entry("relics/#{r.id}.json")
                 z.print Yajl::Encoder.encode(r.to_builder.attributes!, :pretty => true, :indent => "  ")
-                raise 'Exception'
               rescue => ex
                 Airbrake.notify(
                   :error_class   => "Relic JSON error",
