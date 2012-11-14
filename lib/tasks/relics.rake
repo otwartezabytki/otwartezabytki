@@ -83,21 +83,31 @@ SQL
     else
       total   = Relic.created.roots.count
       counter = 0
-      tmpfile = Tempfile.new(["relics.zip", '.zip'])
+      tmpfile = Tempfile.new(['relics', '.zip'])
       begin
         Zip::ZipOutputStream.open(tmpfile.path) do |z|
           Relic.created.roots.includes(:place, :commune, :district, :voivodeship).find_in_batches do |objs|
             puts "Progress #{counter * 1000 * 100 / total} of 100%"
             counter += 1
             objs.each do |r|
-              z.put_next_entry("relics/#{r.id}.json")
-              z.print Yajl::Encoder.encode(r.to_builder.attributes!, :pretty => true, :indent => "  ")
+              begin
+                z.put_next_entry("relics/#{r.id}.json")
+                z.print Yajl::Encoder.encode(r.to_builder.attributes!, :pretty => true, :indent => "  ")
+                raise 'Exception'
+              rescue => ex
+                Airbrake.notify(
+                  :error_class   => "Relic JSON error",
+                  :error_message => "Relic JSON error: #{ex.message}",
+                  :parameters    => { :relic => r.inspect }
+                )
+              end
             end
           end
         end
-      ensure
+        puts "Progress 100 of 100%"
         FileUtils.cp tmpfile.path, new_zip_path
-        FileUtils.ln_s new_zip_path, "#{Rails.root}/current-relics.zip", :force => true
+        FileUtils.ln_s new_zip_path, "#{Rails.root}/history/current-relics.zip", :force => true
+      ensure
         tmpfile.close
       end
     end
