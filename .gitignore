@@ -29,3 +29,5 @@ config/environments/*.local.yml
 .rvmrc
 .idea/*
 current-relics.zip
+.tags
+.tags_sorted_by_file
