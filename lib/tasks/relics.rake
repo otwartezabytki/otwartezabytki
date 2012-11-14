@@ -81,7 +81,8 @@ SQL
         end
         puts "Progress 100 of 100%"
         FileUtils.cp tmpfile.path, new_zip_path
-        FileUtils.ln_s new_zip_path, "#{Rails.root}/history/current-relics.zip", :force => true
+        FileUtils.chmod 'go+r', new_zip_path
+        FileUtils.ln_s new_zip_path, "#{Rails.root}/public/history/current-relics.zip", :force => true
       ensure
         tmpfile.close
       end
