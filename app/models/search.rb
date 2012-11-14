@@ -127,7 +127,6 @@ class Search
       if navbar_facets.blank? && bounding_box_size > Commune.visible_from
         navbar_facets = [first_navbar_facet || "places"]
       end
-      puts "Asdfa"
     else
       navbar_facets = navbar_facets[0..0]
     end
@@ -373,7 +372,7 @@ class Search
             should { text "autocomplitions",              instance.query, 'operator' => 'AND', 'boost' => 1 }
           end
           if instance.place.present?
-            must { text "place_with_address", instance.place, 'operator' => 'AND', 'boost' => 5 }
+            must { string instance.place, :default_operator => "AND", :fields => ["place_with_address^5", "street^3"] }
           end
         end
       end if [instance.query, instance.place].any? &:present?

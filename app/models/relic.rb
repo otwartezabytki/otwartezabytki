@@ -274,9 +274,9 @@ class Relic < ActiveRecord::Base
       :identification       => identification,
       :common_name          => common_name,
       :street               => street,
-      :street_normalized    => street_normalized,
+      :street_normalized    => street(true),
       :place_full_name      => place_full_name,
-      :place_with_address   => place_with_address,
+      :place_with_address   => place_with_address(true),
       :descendants          => self.descendants.map(&:to_descendant_hash),
       :voivodeship          => { :id => self.voivodeship_id,   :name => self.voivodeship.name },
       :district             => { :id => self.district_id,      :name => self.district.name },
@@ -310,9 +310,10 @@ class Relic < ActiveRecord::Base
     }
   end
 
-  def street_normalized
-    street_normalized = street.to_s.split('/').first.to_s
-    street_normalized.gsub!(/[\W\d]+$/i, '')
+  def street(normalized = false)
+    return self[:street] unless normalized
+    street_normalized = self[:street].to_s.split('/').first.to_s
+    street_normalized.gsub!(/[^a-zA-Z0-9_]+[\d]+$/i, '')
     street_normalized.gsub!(/\d+[a-z]?([i,\/\s]+)?\d+[a-z]$/i, '')
     street_normalized.strip!
     street_normalized
@@ -405,8 +406,8 @@ class Relic < ActiveRecord::Base
     end
   end
 
-  def place_with_address
-    "#{place_full_name}, #{street_normalized}"
+  def place_with_address(norm = false)
+    [place_full_name, street(norm)].reject(&:blank?) * ", "
   end
 
   def parse_date
