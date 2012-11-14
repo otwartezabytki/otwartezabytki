@@ -52,7 +52,7 @@ class RecentRevision
   end
 
   def to_relic_hash
-    return {} if relic.blank?
+    return {} if relic.blank? or !relic.build_finished?
     {
       :relic_id => relic.id,
       :slug => relic.to_param,
