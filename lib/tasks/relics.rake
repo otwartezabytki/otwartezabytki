@@ -52,6 +52,30 @@ SQL
     end
   end
 
+  task :export_users, [:export_csv] => :environment do |t, args |
+sql = <<SQL
+  select
+    id as user_id,
+    last_sign_in_ip as ip,
+    email,
+    username
+  from
+    users;
+SQL
+    results = ActiveRecord::Base.connection.execute(sql)
+    ntuples = results.ntuples
+    processed_items = 0
+    CSV.open(args.export_csv, "wb", :force_quotes => true) do |csv|
+      csv << results[0].keys
+
+      results.each_entry do |entry|
+        csv << entry.values
+        processed_items += 1
+        puts "Progress: #{processed_items}/#{ntuples}" if processed_items % 1000 == 0
+      end
+    end
+  end
+
   task :export => :environment do
     new_zip_path = "#{Rails.root}/public/history/#{Date.today.to_s(:db)}-relics.zip"
     if File.exists?(new_zip_path)
@@ -59,21 +83,31 @@ SQL
     else
       total   = Relic.created.roots.count
       counter = 0
-      tmpfile = Tempfile.new(["relics.zip", '.zip'])
+      tmpfile = Tempfile.new(['relics', '.zip'])
       begin
         Zip::ZipOutputStream.open(tmpfile.path) do |z|
           Relic.created.roots.includes(:place, :commune, :district, :voivodeship).find_in_batches do |objs|
             puts "Progress #{counter * 1000 * 100 / total} of 100%"
             counter += 1
             objs.each do |r|
-              z.put_next_entry("relics/#{r.id}.json")
-              z.print Yajl::Encoder.encode(r.to_builder.attributes!, :pretty => true, :indent => "  ")
+              begin
+                z.put_next_entry("relics/#{r.id}.json")
+                z.print Yajl::Encoder.encode(r.to_builder.attributes!, :pretty => true, :indent => "  ")
+                raise 'Exception'
+              rescue => ex
+                Airbrake.notify(
+                  :error_class   => "Relic JSON error",
+                  :error_message => "Relic JSON error: #{ex.message}",
+                  :parameters    => { :relic => r.inspect }
+                )
+              end
             end
           end
         end
-      ensure
+        puts "Progress 100 of 100%"
         FileUtils.cp tmpfile.path, new_zip_path
-        FileUtils.ln_s new_zip_path, "#{Rails.root}/current-relics.zip", :force => true
+        FileUtils.ln_s new_zip_path, "#{Rails.root}/history/current-relics.zip", :force => true
+      ensure
         tmpfile.close
       end
     end
