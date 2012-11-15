@@ -1232,7 +1232,7 @@ pl:
       localization_facets:
         header: Lokalizacja
         show_voivodeships: "Pokaż wojewewództwa"
-        world_relics: "Zabytki znajdujące się poza Polską"
+        world_relics: "Zabytki poza Polską"
       relics:
         create_date: "Data powstania"
         location: Lokalizacja
