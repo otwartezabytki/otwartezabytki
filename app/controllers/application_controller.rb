@@ -34,6 +34,7 @@ class ApplicationController < ActionController::Base
 
   after_filter do
     response.headers['x-logged'] = warden.authenticated?.to_s
+    response.headers['x-csrf-token'] = form_authenticity_token unless request.get?
   end
 
   rescue_from CanCan::AccessDenied do |exception|

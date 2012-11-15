@@ -32,6 +32,10 @@ ajax_callback = (data, status, xhr) ->
     try # gon script hack
       jQuery.globalEval $parsed_data.find('script:contains(window.gon)').text()
 
+    if last_xhr.getResponseHeader('x-csrf-token')?
+      $('input[name=authenticity_token]').val(last_xhr.getResponseHeader('x-csrf-token'))
+      $('meta[name="csrf-token"]').attr('content', last_xhr.getResponseHeader('x-csrf-token'))
+
     show_fancybox = (node) ->
       window.before_fancybox_url = document.location.href
       $.fancybox $(node),
