@@ -11,7 +11,7 @@
       padding: 8px 17px 24px 16px;
       background: asset-data-url("misc-splitter.png") repeat-y top right;
       p.intro{
-        line-height: 16px;
+        line-height: 17px;
         margin-bottom: 16px;
       }
     }
@@ -31,7 +31,9 @@
         font-weight: bold;
         line-height: 32px;
       }
-
+      aside section.creator-step h3{
+        line-height: 20px;
+      }
       label.main{ display: block;}
     }
     aside{
@@ -49,6 +51,7 @@
       }
       p{
         margin-top: 16px;
+        line-height: 17px;
       }
       a.footlink{ font-weight: bold;}
     }
