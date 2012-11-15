@@ -7,10 +7,10 @@
             .column-left
               .preview{ :class => document.mime_class }
               - if document.user_id == current_user.id
-                = link_to t('views.relics.documents.delete_file'), relic_document_path(relic.id, document.id),
+                = link_to t('views.relics.edit.documents.delete_file'), relic_document_path(relic.id, document.id),
                   :method => :delete,
                   :remote => true,
-                  :confirm => t('views.relics.documents.delete_confirm'),
+                  :confirm => t('views.relics.edit.documents.delete_confirm'),
                   :class => "remove_document"
             .column-right
               = f2.input :name, :input_html => { :class => "name" }

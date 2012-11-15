@@ -60,7 +60,17 @@ class ApplicationController < ActionController::Base
   end
 
   def enable_fancybox
-    response.headers['x-fancybox'] = 'true' if request.xhr?
+    if request.xhr?
+      response.headers['x-fancybox'] = 'true'
+    else
+      if respond_to?('fancybox_root')
+        redirect_to(fancybox_root, :anchor => request.fullpath)
+      elsif respond_to?('relic')
+        redirect_to(relic_path(relic, :anchor => request.fullpath))
+      else
+        redirect_to(root_path)
+      end
+    end
   end
 
   def enable_floating_fancybox

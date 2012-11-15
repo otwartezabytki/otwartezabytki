@@ -71,9 +71,10 @@ class RelicsController < ApplicationController
       else
         if params[:section] == "photos"
           flash[:notice] = t('notices.gallery_has_been_updated')
+        else
+          flash[:notice] = t('notices.changes_has_been_saved')
         end
-
-        redirect_to relic_path(relic.id) and return
+        redirect_to edit_relic_path(relic.id, :section => params[:section])
       end
     else
       flash[:error] = t('notices.please_correct_errors')

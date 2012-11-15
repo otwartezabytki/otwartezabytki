@@ -119,4 +119,7 @@ $(window).load ->
         $.ajax(state.path).success(ajax_callback).complete(-> popping_state = false)
       else
         $.ajax(document.location).success(ajax_callback).complete(-> popping_state = false)
+
+    if window.location.hash.slice(1).match(/^\//)
+      $("a[href$='#{window.location.hash.slice(1)}']").click()
   , 500
