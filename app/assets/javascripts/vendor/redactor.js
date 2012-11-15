@@ -1801,8 +1801,8 @@ var RLANG = {
 			html = html.replace(/\n{3,}/gi, '\n');
 
 			// remove dirty p
-			html = html.replace(/<p><p>/gi, '<p>');
-			html = html.replace(/<\/p><\/p>/gi, '</p>');
+			// html = html.replace(/<p><p>/gi, '<p>');
+			// html = html.replace(/<\/p><\/p>/gi, '</p>');
 
 			// FF fix
 			if ($.browser.mozilla)
