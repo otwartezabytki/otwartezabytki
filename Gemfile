@@ -85,6 +85,8 @@ gem 'activeadmin-globalize3-inputs', :git => 'git://github.com/chytreg/activeadm
 gem 'ffi-aspell', :require => 'ffi/aspell', :git => 'git://github.com/chytreg/ffi-aspell.git'
 gem 'tolk', :git => "git://github.com/monterail/tolk.git", :branch => "oz-custom"
 
+gem 'foreman'
+
 group :development, :test do
   gem 'thin'
   gem 'interactive_editor'
