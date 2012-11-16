@@ -2,21 +2,16 @@ class RecentRevision
   attr_accessor :version
 
   class << self
-    def next(offset = 0)
-      new({:version => Version.order('id DESC').offset(offset).first})
+    def revisions
+      Rails.cache.fetch(:expires_in => 5.minutes) do
+        Version.order('id DESC').limit(100).all.map do |version| 
+          new(:version => version).to_relic_hash
+        end
+      end
     end
 
     def recently_modified
-      recently_modified = []
-      start, count = 0, Version.count
-      while(recently_modified.size < 5 and start < count)
-        relic_hash = self.next(start).to_relic_hash
-        if relic_hash.present? and !recently_modified.any? {|e| e[:relic_id] == relic_hash[:relic_id]}
-          recently_modified << relic_hash
-        end
-        start += 1
-      end
-      recently_modified
+      revisions.compact.uniq { |relic_hash| relic_hash[:relic_id] }.select{ |relic_hash| relic_hash[:relic_id].present? }
     end
   end
 
