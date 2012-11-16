@@ -940,7 +940,7 @@ pl:
       name: "Dokumenty urzędowe"
     entries:
       description: "Tu wpisz ciekawą anegdotę, historię lub legendę związaną z zabytkiem."
-      name: Społeczność
+      name: "Ciekawostki, legendy, anegdoty"
     events:
       description: "Wpisz najważniejsze daty z historii obiektu, dodaj krótki opis. np. 1536 - zamek spłonął podczas pożaru miasta"
       name: "Ważne daty"
@@ -1129,7 +1129,7 @@ pl:
         choose_html: "wybieram &raquo;"
         country_code: "W jakim kraju"
         drag_marker: "Przeciągnij znacznik na mapę"
-        header_html: "Jaka jest różnica między <br/> <span>zabytkiem</span> a zespołem <span>zabytków</span>?"
+        header_html: "Jaka jest różnica między <span>zabytkiem</span> a zespołem <span>zabytków</span>?"
         info: "Zabytek to pojedynczy obiekt (np. pałac). Natomiast zespół zabytków to powiązana przestrzennie grupa budynków wyodrębniona ze względu na formę architektoniczną, styl, zastosowane materiały, funkcję, czas powstania lub związek z wydarzeniami historycznymi. Np. może to być zespół fabryki, albo zespół kamienic w centrum pochodzących z jednego okresu."
         intro1: "Sprawdź czy zabytek na pewno jeszcze nie znalazł się w naszej bazie. Zacznij od wpisania nazwy miejscowości (wciśnij szukaj, a mapa ustawi się w środku wybranej miejscowości), a potem wskaż obiekt na mapie. Następnie wciśnij \"przejdź dalej\". Pokaże się lista obiektów z naszej bazy, które znajdują się we wskazanej okolicy. Sprawdź, czy obiekt, który chcesz dodać, nie znajduje się na liście. Jeśli go nie ma, możesz kontynuować dodawanie zabytku do bazy,"
         intro2: "*"

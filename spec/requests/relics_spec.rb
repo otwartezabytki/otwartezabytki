@@ -22,7 +22,7 @@ describe "Relics" do
       visit relic_path(relic.id)
 
       page.should have_content("Opis")
-      page.should have_content("Społeczność")
+      page.should have_content("Ciekawostki, legendy, anegdoty")
       page.should have_content("Linki, źródła, powiązania")
       page.should have_content("Dokumenty urzędowe")
       page.should have_content("Lokalizacja")
