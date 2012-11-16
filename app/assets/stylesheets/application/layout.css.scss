@@ -2602,7 +2602,7 @@ body.resource_home{
         display: block;
       }
     }
-    div.checked, div.filled{
+    div.checked, div.filled, div.total{
       z-index: 2;
       .help{
         position: relative;

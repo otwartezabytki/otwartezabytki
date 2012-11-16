@@ -119,3 +119,14 @@
     .total
       = t('views.pages.home.stats_info.total_html', :count => relic_stats[:total])
       = t('views.pages.home.stats_info.unchecked_html', :count => relic_stats[:unchecked])
+      .help
+        = image_tag 'ico-help.png'
+        .help-wrapper
+          = link_to t('views.relics.index.states.close'), '#', :class => 'close'
+          %h3= t('views.relics.index.states.header')
+          %ul
+            - ['unchecked'].each do |s|
+              %li
+                .tag
+                  %span{:class => s}= t("views.relics.index.states.#{s}.header")
+                .text= t("views.relics.index.states.#{s}.info")
