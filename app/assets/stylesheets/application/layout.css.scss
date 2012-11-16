@@ -1111,7 +1111,7 @@ table.relics{
       background: asset-data-url('relic-modified-big.png') no-repeat;
     }
     .tag{
-      margin-left: 77px;
+      display: inline-block;
       span{
         color: #fff;
         text-transform: uppercase;
@@ -1132,6 +1132,87 @@ table.relics{
         }
         &.filled{
           @include background(linear-gradient(#90b86e, #afd78c));
+        }
+      }      
+    }
+    .help{
+      position: relative;
+      display: inline;
+      &:hover{
+        .help-wrapper{ display: block;}
+      }
+      .help-wrapper{
+        position: absolute;
+        display: none;
+        width: 368px;
+        left: 25px;
+        top: -25px;
+        padding: 16px 0;
+        z-index: 11;
+        @include border-radius(5px);
+        border: 1px solid #acacac;
+        @include box-shadow(rgba(0,0,0,0.45) 0 3px 15px, inset #fff 0 1px 1px -1px);
+        @include background(linear-gradient(rgba(246,247,248,0.95),rgba(234,234,235,0.95)));
+        &:before{
+          content: "";
+          background: asset-data-url("bg-search-help-triangle.png") no-repeat;
+          width: 18px;
+          height: 18px;
+          display: block;
+          position: absolute;
+          left: -10px;
+          top: 22px;
+        }
+        a.close{
+          position: absolute;
+          top: 16px;
+          right: 20px;
+          z-index:10;
+          color: #af0c0c;
+          font-size: 12px;
+        }
+        h3{
+          margin-left: 18px;
+          text-align: left;
+        }
+        li{
+          @include clearfix;
+          margin: 9px 0;
+        }
+        .tag{
+          float: left;
+          text-align: right;
+          width: 126px;
+          margin-left: 0;
+          span{
+            color: #fff;
+            text-transform: uppercase;
+            display: inline-block;
+            font-size: 11px;
+            line-height: 19px;
+            padding: 0 8px;
+            font-weight: normal;
+            @include border-radius(3px);
+            @include text-shadow(rgba(0,0,0,0.3) 0 1px 1px);
+            @include box-shadow(inset rgba(0,0,0,0.4) 0 1px 3px);
+            &.unchecked{
+              @include background(linear-gradient(#a3a4a6, #c1c3c5));
+            }
+            &.checked{
+              @include background(linear-gradient(#e0a876, #fec695));
+            }
+            &.filled{
+              @include background(linear-gradient(#90b86e, #afd78c));
+            }
+          }
+        }
+        .text{
+          font-size: 13px;
+          width: 210px;
+          float: right;
+          font-weight: normal;
+          line-height: 18px;
+          margin-right: 19px;
         }
       }
     }
@@ -2642,6 +2723,7 @@ body.resource_home{
           }
           h3{
             margin-left: 18px;
+            text-align: left;
           }
           li{
             @include clearfix;
@@ -2695,6 +2777,9 @@ body.resource_home{
       }
       strong{
         font-weight: 700;
+      }
+      .help-wrapper{
+        color: #313132;
       }
     }
   }

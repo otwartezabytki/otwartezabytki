@@ -5,7 +5,6 @@
       %section.creator-step
         = render :partial => 'parent_relic', :object => @relic.parent
         %p.intro= t('views.relicbuilders.photos.intro1')
-        %p.intro= t('views.relicbuilders.photos.intro2')
       %section.edit.photos
         = semantic_form_for @relic, :url => relicbuilder_path(:id => @relic), :html => { :multipart => true }, :method => :put  do |f|
           = f.hidden_field :build_state

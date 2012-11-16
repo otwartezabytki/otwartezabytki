@@ -11,7 +11,6 @@
           %p= t('views.relicbuilders.new.info')
           %p= link_to 'Chcę jednak dodać zespół zabytków', '#', :clas => 'footlink'
         %p.intro= t('views.relicbuilders.new.intro1')
-        %p.intro= t('views.relicbuilders.new.intro2')
       %section.creator-step
         - location = LocationBuilder.new(params[:location])
         = semantic_form_for location, :as => 'location', :url => new_relicbuilder_path, :method => :get, :remote => true do |f|

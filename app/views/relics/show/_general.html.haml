@@ -9,6 +9,16 @@
       =relic.common_name
   .status
     = state_tag(relic)
+    .help
+      = image_tag 'ico-help.png'
+      .help-wrapper
+        = link_to t('views.relics.index.states.close'), '#', :class => 'close'
+        %h3= t('views.relics.index.states.header')
+        %ul
+          %li
+            .tag
+              %span{:class => relic.state}= t("views.relics.index.states.#{relic.state}.header")
+            .text= t("views.relics.index.states.#{relic.state}.info")
     %span.relic-info
       Zabytek
       %strong= t("activerecord.attributes.relic.existences.#{relic.existence}")
