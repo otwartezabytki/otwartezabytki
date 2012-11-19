@@ -30,7 +30,7 @@ module RelicsHelper
   def existence_facets
     labels = t('activerecord.attributes.relic.existences').with_indifferent_access
     relics.terms('existence', true).map do |t|
-      ["#{labels[t['term']]} <span class='box'>#{t['count']}</span>".html_safe, t['term']]
+      ["<span class='label'>#{labels[t['term']]}</span> <span class='box'>#{t['count']}</span>".html_safe, t['term']]
     end
   end
 

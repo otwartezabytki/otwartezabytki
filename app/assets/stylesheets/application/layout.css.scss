@@ -1123,7 +1123,7 @@ table.relics{
         @include border-radius(3px);
         @include text-shadow(rgba(0,0,0,0.3) 0 1px 1px);
         @include box-shadow(inset rgba(0,0,0,0.4) 0 1px 3px);
-        margin-right: 10px;
+        margin-right: 2px;
         &.unchecked{
           @include background(linear-gradient(#a3a4a6, #c1c3c5));
         }
@@ -2819,4 +2819,21 @@ body.resource_home{
 
 .resource_home #menu nav ul li.gradient #browse-list{
   top: 59px;
+}
+
+#search_existence_input{
+  .choices li.choice{
+    input{
+      float: left;
+      margin: 4px 6px 0 0;
+    }
+    label > span{
+      display: inline-block;
+      width: 184px;
+    }
+    span.label{
+      float: left;
+      width: 140px;
+    }
+  }
 }

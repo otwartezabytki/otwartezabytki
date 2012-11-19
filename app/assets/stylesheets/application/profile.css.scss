@@ -658,7 +658,7 @@ section.show.general{
         @include border-radius(3px);
         @include text-shadow(rgba(0,0,0,0.3) 0 1px 1px);
         @include box-shadow(inset rgba(0,0,0,0.4) 0 1px 3px);
-        margin-right: 10px;
+        margin-right: 4px;
         &.unchecked{
           @include background(linear-gradient(#a3a4a6, #c1c3c5));
         }
@@ -677,10 +677,14 @@ section.show.general{
       background: asset-data-url("edit-relic-ico-info.png") no-repeat;
       display: inline-block;
       line-height: 16px;
+      margin-top: 3px;
       strong{
         font-weight: 700;
       }
     }
+  }
+  .help{
+    top: 1px;
   }
   .location_name{
     background: asset-data-url("edit-relic-ico-location.png") 0 3px no-repeat;
