@@ -36,6 +36,10 @@ class RelicsController < ApplicationController
     end
   end
 
+  expose(:fancybox_root) do
+    relic_path(relic)
+  end
+
   helper_method :need_captcha
   before_filter :authenticate_user!, :only => [:edit, :update]
 
