@@ -223,6 +223,7 @@ a {
 }
 .form-advance-search{
   @include background(linear-gradient(#f5f5f5, #efefef));
+  @include filter-gradient(#f5f5f5, #efefef, vertical);
   border: 1px solid #dadada;
   border-bottom: 3px solid #486a7c;
   position: relative;
@@ -440,12 +441,15 @@ a {
             @include box-shadow(inset rgba(0,0,0,0.4) 0 1px 3px);
             &.unchecked{
               @include background(linear-gradient(#a3a4a6, #c1c3c5));
+              @include filter-gradient(#a3a4a6, #c1c3c5, vertical);
             }
             &.checked{
               @include background(linear-gradient(#e0a876, #fec695));
+              @include filter-gradient(#e0a876, #fec695, vertical);
             }
             &.filled{
               @include background(linear-gradient(#90b86e, #afd78c));
+              @include filter-gradient(#90b86e, #afd78c, vertical);
             }
           }
         }
@@ -513,6 +517,7 @@ a {
           right: 0;
           z-index: 12;
           @include background(linear-gradient(#edf0f1, #d0d6db));
+          @include filter-gradient(#edf0f1, #d0d6db, vertical);
           padding: 20px;
           @include border-radius(2px 0 2px 2px);
           @include box-shadow(0 5px 15px 0 rgba(0,0,0,0.3));
@@ -1126,12 +1131,15 @@ table.relics{
         margin-right: 2px;
         &.unchecked{
           @include background(linear-gradient(#a3a4a6, #c1c3c5));
+          @include filter-gradient(#a3a4a6, #c1c3c5, vertical);
         }
         &.checked{
           @include background(linear-gradient(#e0a876, #fec695));
+          @include filter-gradient(#e0a876, #fec695, vertical);
         }
         &.filled{
           @include background(linear-gradient(#90b86e, #afd78c));
+          @include filter-gradient(#90b86e, #afd78c, vertical);
         }
       }      
     }
@@ -1197,12 +1205,15 @@ table.relics{
             @include box-shadow(inset rgba(0,0,0,0.4) 0 1px 3px);
             &.unchecked{
               @include background(linear-gradient(#a3a4a6, #c1c3c5));
+              @include filter-gradient(#a3a4a6, #c1c3c5, vertical);
             }
             &.checked{
               @include background(linear-gradient(#e0a876, #fec695));
+              @include filter-gradient(#e0a876, #fec695, vertical);
             }
             &.filled{
               @include background(linear-gradient(#90b86e, #afd78c));
+              @include filter-gradient(#90b86e, #afd78c, vertical);
             }
           }
         }
@@ -1288,6 +1299,7 @@ p#adding-note {
         }
         .top {
           @include background(linear-gradient(#577787, #436271));
+          @include filter-gradient(#577787, #436271, vertical);
           .container{
             position: relative;
           }
@@ -1335,6 +1347,7 @@ p#adding-note {
                 font-size: 17px;
                 @include border-radius(3px);
                 @include background(linear-gradient(#f9f9f9, #cccccc));
+                @include filter-gradient(#f9f9f9, #cccccc, vertical);
                 box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);
                 -webkit-transition: all .2s ease-in;
                 -moz-transition: all .2s ease-in;
@@ -2171,6 +2184,7 @@ ul.nav li a.selected {
 
 .flash {
   @include background(linear-gradient(#f8e8c9, #efdfc0));
+  @include filter-gradient(#f8e8c9, #efdfc0, vertical);
   position: relative;
   padding: 15px 25px;
   img.flash-icon {
@@ -2221,6 +2235,7 @@ ul.nav li a.selected {
 
 .main-container > .row > .flash{
   @include background(linear-gradient(#ececec, #d5d5d5));
+  @include filter-gradient(#ececec, #d5d5d5, vertical);
 }
 
 section.edit .flash {
@@ -2305,6 +2320,7 @@ body.resource_home{
         float: right;
         margin: 0;
         @include background(linear-gradient(#4b6d7e, #436576));
+        @include filter-gradient(#4b6d7e, #436576, vertical);
         color: #fff;
         border: 0;
         font-size: 12px;
@@ -2317,9 +2333,11 @@ body.resource_home{
         cursor: pointer;
         &:hover {
           @include background(linear-gradient(#437994, #2b607b));
+          @include filter-gradient(#437994, #2b607b, vertical);
         }
         &:active {
           @include background(linear-gradient(#2b607b, #437893));
+          @include filter-gradient(#2b607b, #437893, vertical);
         }
       }
     }
@@ -2332,6 +2350,7 @@ body.resource_home{
   }
   .relic-example{
     @include background(linear-gradient(#fafbfc, #e5e5e5));
+    @include filter-gradient(#fafbfc, #e5e5e5, vertical);
     margin-top: 40px;
     float: left;
     width: 350px;
@@ -2385,12 +2404,15 @@ body.resource_home{
         @include box-shadow(inset rgba(0,0,0,0.4) 0 1px 3px);
         &.unchecked{
           @include background(linear-gradient(#a3a4a6, #c1c3c5));
+          @include filter-gradient(#a3a4a6, #c1c3c5, vertical);
         }
         &.checked{
           @include background(linear-gradient(#e0a876, #fec695));
+          @include filter-gradient(#e0a876, #fec695, vertical);
         }
         &.filled{
           @include background(linear-gradient(#90b86e, #afd78c));
+          @include filter-gradient(#90b86e, #afd78c, vertical);
         }
       }
     }
@@ -2431,6 +2453,7 @@ body.resource_home{
         font-size: 16px;
         text-shadow: 0 1px 1px #fff;
         @include background(linear-gradient(#f6f6f6, #d1d1d1));
+        @include filter-gradient(#f6f6f6, #d1d1d1, vertical);
         @include border-radius(4px);
         border: 0;
         float: left;
@@ -2438,10 +2461,12 @@ body.resource_home{
         @include box-shadow(0 1px 1px 0 rgba(0,0,0,0.5), inset 0 -1px 2px 0 rgba(0,0,0,0.3));
         &:hover{
           @include background(linear-gradient(#ffffff, #ebebeb));
+          @include filter-gradient(#fefefe, #ebebeb, vertical);
           text-decoration: none;
         }
         &:active{
           @include background(linear-gradient(#d9d9d9, #fefefe));
+          @include filter-gradient(#d9d9d9, #fefefe, vertical);
         }
       }
     }
@@ -2616,12 +2641,15 @@ body.resource_home{
                 @include box-shadow(inset rgba(0,0,0,0.4) 0 1px 3px);
                 &.filled{
                   @include background(linear-gradient(#82a663, #a1c481));
+                  @include filter-gradient(#82a663, #a1c481, vertical);
                 }
                 &.checked{
                   @include background(linear-gradient(#ca7a32, #fbab63));
+                  @include filter-gradient(#ca7a32, #fbab63, vertical);
                 }
                 &.unchecked{
                   @include background(linear-gradient(#7d7f7f, #9c9d9d));
+                  @include filter-gradient(#7d7f7f, #9c9d9d, vertical);
                 }
               }
             }
@@ -2746,12 +2774,15 @@ body.resource_home{
               @include box-shadow(inset rgba(0,0,0,0.4) 0 1px 3px);
               &.unchecked{
                 @include background(linear-gradient(#a3a4a6, #c1c3c5));
+                @include filter-gradient(#a3a4a6, #c1c3c5, vertical);
               }
               &.checked{
                 @include background(linear-gradient(#e0a876, #fec695));
+                @include filter-gradient(#e0a876, #fec695, vertical);
               }
               &.filled{
                 @include background(linear-gradient(#90b86e, #afd78c));
+                @include filter-gradient(#90b86e, #afd78c, vertical);
               }
             }
           }

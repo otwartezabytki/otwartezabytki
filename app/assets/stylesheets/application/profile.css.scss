@@ -661,12 +661,15 @@ section.show.general{
         margin-right: 4px;
         &.unchecked{
           @include background(linear-gradient(#a3a4a6, #c1c3c5));
+          @include filter-gradient(#a3a4a6, #c1c3c5, vertical);
         }
         &.checked{
           @include background(linear-gradient(#e0a876, #fec695));
+          @include filter-gradient(#e0a876, #fec695, vertical);
         }
         &.filled{
           @include background(linear-gradient(#90b86e, #afd78c));
+          @include filter-gradient(#90b86e, #afd78c, vertical);
         }
       }
     }
@@ -945,6 +948,7 @@ section.show.alerts{
     padding: 0;
     text-shadow: none;
     font-size: 12px;
+    filter: none;
     &:hover {
       background: none;
       color: red;
