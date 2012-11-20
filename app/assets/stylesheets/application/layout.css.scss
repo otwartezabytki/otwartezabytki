@@ -2766,7 +2766,7 @@ body.resource_home{
         }
       }
     }
-    .total{
+    div.total{
       text-align: right;
       color: #9a9a9a;
       margin-top: 10px;
@@ -2778,8 +2778,14 @@ body.resource_home{
       strong{
         font-weight: 700;
       }
-      .help-wrapper{
+      .help .help-wrapper{
         color: #313132;
+        left: -383px;
+        &:before{
+          content: "";
+          background: asset-data-url("bg-search-help-triangle-right.png") no-repeat;
+          left: 368px;
+        }
       }
     }
   }
