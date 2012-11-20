@@ -4,14 +4,14 @@ class RecentRevision
   class << self
     def revisions
       Rails.cache.fetch(:expires_in => 5.minutes) do
-        Version.order('id DESC').limit(100).all.map do |version| 
+        Version.order('id DESC').limit(100).all.map do |version|
           new(:version => version).to_relic_hash
         end
       end
     end
 
     def recently_modified
-      revisions.compact.uniq { |relic_hash| relic_hash[:relic_id] }.select{ |relic_hash| relic_hash[:relic_id].present? }
+      revisions.compact.uniq { |relic_hash| relic_hash[:relic_id] }.first(5)
     end
   end
 
@@ -47,7 +47,7 @@ class RecentRevision
   end
 
   def to_relic_hash
-    return {} if relic.blank? or !relic.build_finished?
+    return nil if relic.blank? or !relic.build_finished?
     {
       :relic_id => relic.id,
       :slug => relic.to_param,
