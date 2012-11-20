@@ -90,15 +90,18 @@ form{
     margin: 0;
     font-family: 'Open Sans', sans-serif;
     border-top: 1px solid #e4e4e4;
-    padding: 0px 0 0px 10px;
-    height: 36px;
+    padding: 7px 0 6px 10px;
+    font-weight: bold; 
     span {
       white-space: nowrap;
       padding-right: 24px;
     }
   }
+  .search h2{
+    padding: 8px 0 6px 10px;
+  }
   input#search_query{
-    margin: 0 0 13px 10px;
+    margin: 0 0 8px 10px;
     padding: 0 25px 0 10px;
     @include border-radius(2px);
     border: 1px solid #737373;
@@ -119,7 +122,7 @@ form{
       background: #496b7c asset-data-url("widget-zoom.png") center center no-repeat;
       @include border-radius(2px);
       right: 12px;
-      top: 5px;
+      top: 2px;
       content: '';
     }
   }

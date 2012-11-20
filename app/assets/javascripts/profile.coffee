@@ -68,3 +68,46 @@ jQuery.initializer 'section.show', ->
 jQuery ->
   $('body').on 'click', '.flash-info-permament span', ->
     $.cookie('flash_hidden', true)
+
+jQuery.initializer 'section.show.description', ->
+  if $(".show.description .content").height() > 577
+    $(".show.description .content").css
+      height: 577
+      overflow: "hidden"
+    $(".show.description").append "<span id=\"toggle-read\">więcej</span>"
+
+
+    $("#toggle-read").toggle (->
+      $(this).parents(".show.description").find(".content").css
+        height: "auto"
+        overflow: "visible"
+      
+      # Hide the [...] when expanded
+      $(this).text "mniej"
+    ), ->
+      $(this).parents(".show.description").find(".content").css
+        height: 577
+        overflow: "hidden"
+      $(this).text "więcej"
+
+jQuery.initializer 'section.show.entries', ->
+  $(".show.entries .entry .body").each ->
+    if $(this).height() > 273
+      $(this).css
+        height: 273
+        overflow: "hidden"
+
+      $(this).parent().append "<span class=\"toggle-read\">więcej</span>"
+      $(".toggle-read").toggle (->
+        $(this).parents(".show.entries .entry").find(".body").css
+          height: "auto"
+          overflow: "visible"
+
+        $(this).text "mniej"
+      ), ->
+        $(this).parents(".show.entries .entry").find(".body").css
+          height: 280
+          overflow: "hidden"
+
+        $(this).text "więcej"
+

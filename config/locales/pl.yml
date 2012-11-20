@@ -1189,7 +1189,7 @@ pl:
           source_type: "Typ żródła"
           url: URL
         location:
-          approximate_geolocation: "lokacja przybliżona"
+          approximate_geolocation: "migająca kropka – lokalizacja przybliżona (przeciągnij znacznik, aby wskazać dokładne miejsce)"
           drop_marker_html: "Przeciągnij <br/> znacznik na mapę:"
           known_address: "Znam dokładny adres"
           unknown_address: "Nie da się ustalić adresu"

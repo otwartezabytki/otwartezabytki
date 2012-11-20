@@ -74,6 +74,10 @@
       margin: 0px;
     }
 
+    p.auto_geolocated{
+      margin: 10px 0;
+    }
+
     #suggestion_latitude_input, #suggestion_longitude_input {
       label {
         text-transform: none;
@@ -1349,17 +1353,17 @@ div.fancybox-close{
       border-width: 9px;
       position: absolute;
       top: 47%;
-      left: -17px;
+      left: -18px;
     }
     &:after{
       content: ' ';
-      border-color: transparent #F6F7F8 transparent transparent;
+      border-color: transparent #f0f0f0 transparent transparent;
       border-style: solid;
       border-width: 9px;
       position: absolute;
       bottom: auto;
       top: 47%;
-      left: -16px;
+      left: -17px;
     }
     .popover-title{
       background: none;
@@ -1517,4 +1521,10 @@ section.show.subrelics{
       }
     }
   }
+}
+
+.toggle-read, #toggle-read{
+  float: right;
+  color: #044d71;
+  cursor: pointer;
 }
