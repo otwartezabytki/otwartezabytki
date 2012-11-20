@@ -5,8 +5,7 @@
     .content= sanitize relic.description
   - else
     .placeholder
-      %p Nikt nie napisał jeszcze opisu dla tego zabytku
-      %p Zrób to Ty!
+      %p Napisz 3-4 zdania zawierające najważniejsze informacje o obiekcie.
       = link_to "dodaj opis", edit_section_relic_path(relic.id, :description), :remote => true
       .example
         %a.show-example{:href => image_path('screenshot-description.jpg'), :class => "fancybox"} Pokaż przykład

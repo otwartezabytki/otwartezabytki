@@ -9,11 +9,10 @@
           .body= sanitize entry.body
   - else
     .placeholder
-      %p
-        Nie nie napisał jeszcze opisu dla tego zabytku.
+      %p 
+        Podziel się z innymi legendą, anegdotą,
         %br
-        Zrób to Ty!
-
+        ciekawą historią związaną z zabytkiem.
       = link_to "dodaj wpis", edit_section_relic_path(relic.id, :entries), :remote => true
       .example
         %a.show-example{:href => image_path('screenshot-stories.jpg'), :class => "fancybox"} Pokaż przykład

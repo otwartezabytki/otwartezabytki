@@ -19,8 +19,8 @@
           = link_to "nie dodano, uzupełnij »", edit_section_relic_path(relic.id, :categories), :remote => true
   - else
     .placeholder
-      %p Zabytek nie został jeszcze skategoryzowany.
-      %p Zrób to Ty!
+      %p Wybierz kategorie, które Twoim zdaniem pasują do opisywanego zabytku.
+      %p Dodaj tagi, które pomogą poruszać się po katalogu.
       = link_to "dodaj kategorie", edit_section_relic_path(relic.id, :categories), :remote => true
       .example
         %a.show-example{:href => image_path('screenshot-categories.jpg'), :class => "fancybox"} Pokaż przykład

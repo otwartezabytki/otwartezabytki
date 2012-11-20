@@ -17,11 +17,7 @@
               = link.name
   - else
     .placeholder
-      %p
-        Nikt jeszcze nie dodał żadnych linków.
-        %br
-        Bądź pierwszy!
-
+      %p Podaj ciekawe internetowe i papierowe źródła informacji o zabytku.
       = link_to "dodaj źródło", edit_section_relic_path(relic.id, :links), :remote => true
       .example
         %a.show-example{:href => image_path('screenshot-links.jpg'), :class => "fancybox"} Pokaż przykład

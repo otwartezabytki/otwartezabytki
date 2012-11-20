@@ -19,11 +19,7 @@
                 = event.name
   - else
     .placeholder
-      %p
-        Nikt jeszcze nie dodał żadnej historii
-        %br
-        Bądź pierwszy!
-
+      %p Wpisz najważniejsze daty z historii obiektu wraz z krótkim opisem.
       = link_to "dodaj wydarzenie", edit_section_relic_path(relic.id, :events), :remote => true
       .example
         %a.show-example{:href => image_path('screenshot-dates.jpg'), :class => "fancybox"} Pokaż przykład

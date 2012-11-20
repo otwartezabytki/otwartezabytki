@@ -20,5 +20,8 @@
       = link_to "wgraj plik", download_zip_relic_path(relic)
   - else
     .placeholder
-      %p Nikt jeszcze nie wgrał żadnego pliku. Bądź pierwszy.
+      %p 
+        Dysponujesz dokumentacją, którą możesz legalnie udostępnić innym?
+        %br
+        Załącz pliki tutaj.
       = link_to "dodaj plik", edit_section_relic_path(relic.id, :documents), :remote => true
