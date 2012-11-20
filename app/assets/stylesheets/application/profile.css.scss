@@ -1165,6 +1165,7 @@ span.block {
           }
         }
         &.entries{
+          overflow: hidden;
           span{
             background-position: 9px -466px;
           }
