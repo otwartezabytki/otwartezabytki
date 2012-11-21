@@ -24,11 +24,12 @@ SQL
 
   task :reindex => :environment do
     if Relic.index.exists?
-      puts "Reindex documents:"
+      puts "Fast reindex of documents ..."
       new_index = "#{Time.now.to_i}_relic_reindex"
       Relic.index.reindex(new_index, :mappings => Relic.tire.mapping_to_hash, :settings => Relic.tire.settings)
       Relic.index.delete
       Tire::Index.new(new_index).add_alias(Relic.index.name)
+      puts "\nDone"
     else
       print "Indexing: "
       Relic.index.delete
