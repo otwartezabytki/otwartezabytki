@@ -11,3 +11,9 @@ Tire.configure do |config|
 
   config.client(Tire::HTTP::Client::Faraday)
 end
+
+def Tire.indices
+  r = Tire::Configuration.client.get("#{Tire::Configuration.url}/_status")
+  return r.code unless r.success?
+  JSON.parse(r.body)['indices'].keys
+end

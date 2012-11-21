@@ -23,14 +23,22 @@ SQL
   end
 
   task :reindex => :environment do
-    print "Indexing: "
-    Relic.index.delete
-    Relic.index.create :mappings => Relic.tire.mapping_to_hash, :settings => Relic.tire.settings
-    Relic.created.roots.includes(:place, :commune, :district, :voivodeship).find_in_batches do |objs|
-      print "."
-      Relic.index.import objs
+    if Relic.index.exists?
+      puts "Reindex documents:"
+      new_index = "#{Time.now.to_i}_relic_reindex"
+      Relic.index.reindex(new_index, :mappings => Relic.tire.mapping_to_hash, :settings => Relic.tire.settings)
+      Relic.index.delete
+      Tire::Index.new(new_index).add_alias(Relic.index.name)
+    else
+      print "Indexing: "
+      Relic.index.delete
+      Relic.index.create :mappings => Relic.tire.mapping_to_hash, :settings => Relic.tire.settings
+      Relic.created.roots.includes(:place, :commune, :district, :voivodeship).find_in_batches do |objs|
+        print "."
+        Relic.index.import objs
+      end
+      puts "\nDone"
     end
-    puts "\nDone"
   end
 
   task :update_geolocation, [:import_csv] => :environment do |t, args|
