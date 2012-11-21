@@ -41,6 +41,9 @@
 #
 
 class ForeignRelic < Relic
+  # hack index_name doesn't inherit
+  index_name superclass.index_name
+
   before_save do
     self.place_id = self.commune_id = self.district_id = self.voivodeship_id = nil
   end
