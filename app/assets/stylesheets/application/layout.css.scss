@@ -2187,6 +2187,8 @@ ul.nav li a.selected {
   @include filter-gradient(#f8e8c9, #efdfc0, vertical);
   position: relative;
   padding: 15px 25px;
+  margin-top: 15px;
+  border-top: 1px solid #dcdcdc;
   img.flash-icon {
     display: inline-block;
     width: 35px;

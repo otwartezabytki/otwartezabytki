@@ -35,6 +35,18 @@ jQuery.initializer 'section.show.photo', ->
             break if i > photos.length
             item = photos[i - 1]
             carousel.add(i, "<a data-remote='true' href='#{Routes.relic_photo_path(item.relic_id, item.id)}' data-main='#{item.main}'><img src='#{item.file.midi.url}' alt='Zdjęcie zrobione przez #{item.author}' /></a>")
+  
+  $(document).keydown (e) ->
+    $("a.next").trigger "click"  if e.which is 39
+
+  $("a.next").click (e) ->
+    e.preventDefault()
+
+  $(document).keydown (e) ->
+    $("a.prev").trigger "click"  if e.which is 37
+
+  $("a.prev").click (e) ->
+    e.preventDefault()
 
 $('body').on "click", ".close_popover", ->
   $("##{$(this).data('popover-id')}").popover('hide')
