@@ -24,7 +24,9 @@
 
     .column.column-middle
       #map_canvas{ :style => "width: 309px; height: 309px;" }
-      %p.auto_geolocated= t('views.relics.edit.location.approximate_geolocation')
+      %p.auto_geolocated
+        = image_tag "gmap-flashing-point.png"
+        = t('views.relics.edit.location.approximate_geolocation')
     .column.column-right
       .marker-helper
         %h4= t('views.relics.edit.location.drop_marker_html')

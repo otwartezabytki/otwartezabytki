@@ -16,7 +16,9 @@
           %h2
             Wyszukaj po nazwie
             = link_to image_tag("widget-helper.png"), '#', :class => "tooltip", :"data-placement" => "right", :title => "np. cmentarz, stocznie poniemieckie, chopinowski"
-          = f.input :query, :label => false, :input_html => { :class => 'autocomplete-q'}, :placeholder => "np. cmentarz"
+          .search-input
+            = f.input :query, :label => false, :input_html => { :class => 'autocomplete-q'}, :placeholder => "np. cmentarz"
+            = f.submit :class => "submit", :value => ""
         .fluid_block
           %section.locations{ :class => (cookies['section-shown'] == 'locations' ? "maxed" : cookies['section-shown'] == 'categories' ? 'mined' : '') }
             %h2
