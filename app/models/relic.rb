@@ -45,6 +45,12 @@ class Relic < ActiveRecord::Base
   include AASM
   States = ['checked', 'unchecked', 'filled']
   Existences = ['existed', 'archived', 'social']
+  Kinds = [
+    "OZ", # part of relic group's
+    "ZZ", # nested relic group's
+    "SA", # single relic
+    "ZE"  # relic group's
+  ]
 
   has_ancestry
 
@@ -91,6 +97,8 @@ class Relic < ActiveRecord::Base
   before_validation :parse_date
 
   before_validation do
+    # temp hack set all relics as SA
+    self.kind = 'SA'
     if tags_changed? && tags.is_a?(Array)
       tmp = []
       self.tags.each do |tag|
@@ -117,6 +125,7 @@ class Relic < ActiveRecord::Base
 
   validates :state, :inclusion => { :in => States }, :if => :state_changed?
   validates :existence, :inclusion => { :in => Existences }, :if => :existence_changed?
+  validates :kind, :inclusion => { :in => Kinds }, :if => :kind_changed?
 
   # versioning
   has_paper_trail :skip => [:updated_at, :created_at, :user_id, :build_state, :kind, :date_start, :date_end,
@@ -269,6 +278,10 @@ class Relic < ActiveRecord::Base
 
   def build_finished?
     self.build_state == 'finish_step'
+  end
+
+  def is_group?
+    (is_root? && has_children?) or 'ZE' == kind
   end
 
   def to_builder
