@@ -108,18 +108,54 @@ jQuery.initializer 'section.show.entries', ->
       $(this).css
         height: 273
         overflow: "hidden"
+      sum = 0
+      $(".entry").each ->
+        sum += $(this).height() + 45
+
+      contentHeight = sum / 2
+      $(".entry").each ->
+        entryHeight = $(this).height()
+        console.log entryHeight
+        contentHeight = entryHeight  if entryHeight > contentHeight
+        contentHeight += 45
+
+      $(".show.entries .content").height contentHeight
 
       $(this).parent().append "<span class=\"toggle-read\">więcej</span>"
       $(".toggle-read").toggle (->
         $(this).parents(".show.entries .entry").find(".body").css
           height: "auto"
           overflow: "visible"
+        sum = 0
+        $(".entry").each ->
+          sum += $(this).height() + 45
+
+        contentHeight = sum / 2
+        $(".entry").each ->
+          entryHeight = $(this).height()
+          console.log entryHeight
+          contentHeight = entryHeight  if entryHeight > contentHeight
+          contentHeight += 45
+
+        $(".show.entries .content").height contentHeight
 
         $(this).text "mniej"
       ), ->
         $(this).parents(".show.entries .entry").find(".body").css
           height: 280
           overflow: "hidden"
+        sum = 0
+        $(".entry").each ->
+          sum += $(this).height() + 45
+
+        contentHeight = sum / 2
+        $(".entry").each ->
+          entryHeight = $(this).height()
+          console.log entryHeight
+          contentHeight = entryHeight  if entryHeight > contentHeight
+          contentHeight += 45
+
+        $(".show.entries .content").height contentHeight
 
         $(this).text "więcej"
 
