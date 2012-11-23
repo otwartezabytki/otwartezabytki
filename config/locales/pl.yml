@@ -82,6 +82,8 @@ pl:
         relic: Zabytek
         relic_id: "ID zabytku"
         state: "Stan zgłoszenia"
+        author: "Dane autora (imię, nazwisko)"
+        date_taken: "Data wykonania"
       document:
         description: "Krótki opis"
         file: Plik
