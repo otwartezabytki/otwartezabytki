@@ -428,7 +428,7 @@ class Search
       filter 'or', instance.range_conditions if instance.range_conditions?
       pq = PreparedQuery.new(instance.query)
       facet "autocomplitions" do
-        terms 'autocomplitions.untouched', 'size' => 20, 'script' => "term ~= regexp ? true : false", 'params' => {
+        terms 'autocomplitions.untouched', 'size' => 5, 'script' => "term ~= regexp ? true : false", 'params' => {
           'regexp' => pq.regexp
         }
       end if pq.exists?
