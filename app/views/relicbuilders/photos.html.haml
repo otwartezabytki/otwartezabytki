@@ -52,7 +52,7 @@
                     .value 0%
 
             .photo-upload
-              = file_field_tag "photo[file]", :class => 'photo_upload' + (relic.photos.length > 0 ? "" : " first"), :"data-url" => "#{relic_photos_path(@relic, :build => true)}"
+              = file_field_tag "photo[file]", :class => 'photo_upload', :"data-url" => "#{relic_photos_path(@relic, :build => true)}"
 
             = f.input :license_agreement, :input_html => { :checked => 'checked' }, :as => :boolean, :label => t('views.relics.edit.photos.statement_html')
 
