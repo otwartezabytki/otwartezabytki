@@ -48,3 +48,4 @@ cment => cmentarz, cmentarny
 bud => budynek
 kon => koniec
 poł, pol => połowa
+scheiblera, scheiblerowi, scheiblerem => scheibler
