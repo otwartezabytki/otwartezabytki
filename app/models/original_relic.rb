@@ -22,4 +22,8 @@ class OriginalRelic < ActiveRecord::Base
       []
     end
   end
+
+  def is_group?
+    'ZE' == kind or (is_root? and has_children?)
+  end
 end
