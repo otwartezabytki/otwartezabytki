@@ -283,6 +283,10 @@ a {
         margin: 5px 0;
         width: 286px;
       }
+      #search_q, #search_place_input{
+        z-index: 12;
+        position: relative;
+      }
       input[type="submit"]{
         float: right;
         @include button-bluenavy;
@@ -2312,6 +2316,7 @@ body.resource_home{
     }
     #search_q{
       @include background(asset-data-url("form-input-what-bg.png") 10px 11px no-repeat, linear-gradient(#fafafa, #ffffff));
+      z-index: 12;
     }
     #search_place{
       @include background(asset-data-url("form-input-where-bg.png") 12px 12px no-repeat, linear-gradient(#fafafa, #ffffff));
