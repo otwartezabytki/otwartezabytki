@@ -1148,8 +1148,8 @@ pl:
       parent_relic:
         complex: "Dodajesz zabytek do zespołu"
       photos:
-        intro1: "Załącz jedno lub więcej zdjęcie zabytku. Zadbaj o to, aby przeglądanie zdjęć sprawiało przyjemność innym użytkownikom - zamieszczaj wyłącznie zdjęcia dobrej jakości. "
-        intro2: "*"
+        intro1: "Napisz zwięzłą informację na temat zabytku. Pamiętaj o podaniu źródła!"
+        intro2: "Załącz jedno lub więcej zdjęcie zabytku. Zadbaj o to, aby przeglądanie zdjęć sprawiało przyjemność innym użytkownikom - zamieszczaj wyłącznie zdjęcia dobrej jakości."
         submit: "Zakończ! i zobacz dodany zabytek"
       stages:
         address: "dane adresowe"

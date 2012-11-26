@@ -204,6 +204,13 @@
 
 
   section.photos {
+    .photo-attributes{
+      .photo{
+        .column-right{
+          width: 525px;
+        }
+      }
+    }
     .photo {
       clear: both;
       margin-bottom: 16px;
