@@ -13,9 +13,9 @@
         %tr.relic
           %td.body
             .thumb
-              = link_to image_tag(relic.main_photo.file.url(:icon)), relic, :remote => true
+              = link_to image_tag(relic.main_photo.file.url(:icon)), relic
             .name
-              %h2= link_to relic.identification, relic, :remote => true
+              %h2= link_to relic.identification, relic
               - descendants = relic.descendants
               - if descendants.present?
                 .include
