@@ -7,7 +7,7 @@
         %p.intro= t('views.relicbuilders.details.intro1')
       = semantic_form_for @relic, :url => relicbuilder_path(:id => @relic) do |f|
         = f.hidden_field :build_state
-        = f.input :identification, :as => :string, :label => t('views.relicbuilders.details.name')
+        = f.input :identification, :as => :string, :label => t('views.relicbuilders.details.name'), :hint => false
         = f.input :reason, :input_html => { :class => 'redactor' }, :label => t('views.relicbuilders.details.reason')
         .actions
           = f.submit t('views.relicbuilders.next_step_html')

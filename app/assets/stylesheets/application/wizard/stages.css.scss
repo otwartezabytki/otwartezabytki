@@ -1,5 +1,5 @@
 @import '../mixins';
-
+span.r_ze { display: none; }
 ol.relic-stages{
   @include clearfix;
   background: #e3e3e3 image-url('bg-wizard-new-stage.png') repeat-x;
@@ -14,10 +14,11 @@ ol.relic-stages{
     padding: 15px 20px 15px 50px;
     position: relative;
     span{
-      color: #717272;
-      text-transform: uppercase;
-      font-size: 12px;
-
+      &.step_header {
+        color: #717272;
+        text-transform: uppercase;
+        font-size: 12px;
+      }
     }
     h3{
       text-transform: uppercase;
@@ -54,7 +55,7 @@ ol.relic-stages{
     &.active{
       background: #496b7d image-url('bg-wizard-new-stage-current.png') repeat-x;
       color: #fff;
-      span{ color: #a3b7c1;}
+      span.step_header{ color: #a3b7c1;}
       &:after{
         background: image-url('bg-wizard-new-stage-current-edge.png') no-repeat center left;
       }

@@ -1,3 +1,9 @@
+- location = LocationBuilder.new(params[:location])
+- if location.relic_group?
+  :css
+    span.r_ze { display: inline; }
+    span.r_sa { display: none; }
+
 #fancybox
 .edit_relic.new_relic
   = render :partial => "relicbuilders/stages", :locals => { :stage => 1 }
@@ -9,12 +15,12 @@
           %h3= t('views.relicbuilders.new.header_html')
 
           %p= t('views.relicbuilders.new.info')
-          %p= link_to 'Chcę jednak dodać zespół zabytków', '#', :clas => 'footlink'
-        %p.intro= t('views.relicbuilders.new.intro1')
+        %p.intro= t('views.relicbuilders.new.intro1_html')
       %section.creator-step
-        - location = LocationBuilder.new(params[:location])
         = semantic_form_for location, :as => 'location', :url => new_relicbuilder_path, :method => :get, :remote => true do |f|
           = f.input :foreign_relic, :as => :boolean, :label => t('views.relicbuilders.new.add_foreign_relic')
+          = f.input :relic_group, :as => :boolean, :label => t('views.relicbuilders.new.add_relic_group')
+
           .field.text.search.marker
             .polish-location{:style => "#{ 'display: none;' unless f.object.foreign_relic.to_i.zero?}"}
               = f.input :polish_place, :label => t('views.relicbuilders.new.place')
@@ -50,6 +56,7 @@
               %h3= t('views.relicbuilders.new.drag_marker')
               .marker-holder
                 = image_tag 'marker.png', :id => 'marker'
+          = f.hidden_field :kind
           = f.hidden_field :parent_id
           = f.hidden_field :place_id
           = f.hidden_field :latitude

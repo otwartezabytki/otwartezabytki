@@ -4,6 +4,15 @@ jQuery.initializer 'body.relicbuilders', ->
     buttons: ['bold', 'italic', 'link', 'unorderedlist']
     lang: 'pl'
 
+  this.find(".toggle_street_input").click ->
+    if $('.street_input').is(':visible')
+      $('.street_input').hide()
+      $('.street_input input').val("")
+      $(this).text("Znam dokładny adres")
+    else
+      $('.street_input').show()
+      $(this).text("Nie da się ustalić adresu")
+
 jQuery.initializer 'div.administrative-level', ->
   self = this
   this.find("#relic_voivodeship_id").select2
@@ -55,6 +64,16 @@ jQuery.initializer 'div.new_relic section.main', ->
     dropdownCssClass: 'search-order-dropdown'
     containerCssClass: 'search-order-container'
     width: '170px'
+
+  $('#location_relic_group').change ->
+    if $(this).is(':checked')
+      $('span.r_ze').show()
+      $('span.r_sa').hide()
+      $('input#relic_kind').attr('value', 'ZE')
+    else
+      $('span.r_ze').hide()
+      $('span.r_sa').show()
+      $('input#relic_kind').attr('value', 'SA')
 
   $('#location_foreign_relic').change ->
     if $(this).is(':checked')

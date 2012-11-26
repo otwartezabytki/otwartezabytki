@@ -76,6 +76,7 @@ class RelicbuildersController < ApplicationController
       end
       @relic.place      = place if place
       @relic.parent_id  = params[:parent_id]
+      @relic.kind       = params[:kind]
       @relic.street     = (geo_hash || {}).get_deep(:street) || @relic.street
       @relic.latitude   = (geo_hash || params).get_deep(:latitude)
       @relic.longitude  = (geo_hash || params).get_deep(:longitude)
@@ -120,7 +121,7 @@ class RelicbuildersController < ApplicationController
         redirect_to photos_relicbuilder_path(:id => @relic)
       when 'photos_step'
         if @relic.update_attributes :build_state => "finish_step"
-          redirect_to @relic, :notice => t('notices.new_relic_has_been_added')
+          redirect_to @relic, :notice => (@relic.is_group? ? t('notices.new_gruop_relic_has_been_added') : t('notices.new_relic_has_been_added'))
         else
           render @relic.invalid_step_view
         end
@@ -136,7 +137,7 @@ class RelicbuildersController < ApplicationController
 
   protected
     def address_params
-      (params[:relic] || params).slice(:latitude, :longitude, :place_id, :parent_id)
+      (params[:relic] || params).slice(:latitude, :longitude, :place_id, :parent_id, :kind)
     end
 
     def redirect_finished_relic
