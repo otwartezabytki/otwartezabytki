@@ -75,6 +75,9 @@
         - if relics.total.zero?
           .search-no-results
             %p= t('views.relics.index.no_results_html')
+            %p.no-results-info 
+              =image_tag "icon-info.png"
+              = t('views.relics.index.no_results2_html')
             -# - if tsearch.suggestions.present?
             -#   %p
             -#     = t('views.relics.index.suggestion')

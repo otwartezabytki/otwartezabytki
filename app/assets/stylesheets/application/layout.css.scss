@@ -1534,7 +1534,15 @@ p#adding-note {
     line-height: 30px;
     padding: 20px;
     text-align: center;
-
+    &.no-results-info{
+      padding-top: 0;
+      font-size: 14px;
+      img{
+        vertical-align: middle;
+        margin-top: -3px;
+        margin-right: 2px;
+      }
+    }
     strong {
       font-weight: bold;
     }

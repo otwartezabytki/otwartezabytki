@@ -1214,6 +1214,7 @@ pl:
         kind: Rodzaj
         loading: "Trwa ładowanie wyników proszę czekać!!!"
         no_results_html: "Żaden z zabytków w naszej bazie<br/>nie spełnia podanych kryteriów."
+        no_results2_html: "Nie znalazłeś tego, czego szukałeś? Spróbuj użyć symbolu gwiazdki, np. Scheibler*"
         order:
           az: A-Z
           score: Trafność

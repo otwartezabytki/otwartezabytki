@@ -808,6 +808,8 @@ section.show.description{
     margin: 10px 0;
     li{
       list-style-type: disc;
+      line-height: 22px;
+      font-size: 14px;
     }
   }
 }
@@ -1536,4 +1538,5 @@ section.show.subrelics{
   color: #044d71;
   cursor: pointer;
   padding-top: 10px;
+  margin: 10px 0;
 }
