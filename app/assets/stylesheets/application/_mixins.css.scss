@@ -43,3 +43,19 @@ $dark-grey: #313132;
           text-decoration: none;
           @include backgroundnavy;
 }
+
+@mixin linear-gradient($from, $to){
+
+}
+
+@mixin gradient($from, $to) {
+  @include filter-gradient($from, $to);
+  background: $from; 
+  @include background(linear-gradient($from, $to));
+  background: -ms-linear-gradient($from, $to);
+}
+
+@mixin ie-gradient($from, $to) {
+  @include filter-gradient($from, $to);
+  background: -ms-linear-gradient($from, $to);
+}

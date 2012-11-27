@@ -1,5 +1,6 @@
 @import "compass/layout";
 @import "compass/css3";
+@import "../application/mixins";
 
 /* Fancybox custome styles scoped */
 
@@ -281,12 +282,10 @@
 #oz_add_relic_widget{
   width: 300px;
   padding: 4px;
-  @include background(linear-gradient(#4b6d7e, #436576));
-  @include filter-gradient(#4b6d7e, #436576, vertical);
+  @include gradient(#4b6d7e, #436576);
   @include border-radius(2px);
   .widget-box{
-    @include background(linear-gradient(#fff, #f5f5f5));
-    @include filter-gradient(#ffffff, #f5f5f5, vertical);
+    @include gradient(#ffffff, #f5f5f5);
     @include border-radius(2px);
     padding-bottom: 16px;
     padding-top: 8px;
@@ -313,8 +312,7 @@
     margin-left: 12px;
   }
   button{
-    @include background(linear-gradient(#48b119, #2f9900));
-    @include filter-gradient(#48b119, #2f9900, vertical);
+    @include gradient(#48b119, #2f9900);
     @include border-radius(2px);
     color: #fff;
     font-size: 12px;

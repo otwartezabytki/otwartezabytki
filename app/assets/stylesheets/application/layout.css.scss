@@ -151,14 +151,7 @@ a {
   -webkit-border-radius: 2px;
   border-radius: 2px;
   border: 1px solid #727272;
-  background: #fafafa; /* Old browsers */
-  background: -moz-linear-gradient(top, #fafafa 0%, #ffffff 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fafafa), color-stop(100%, #ffffff)); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top, #fafafa 0%, #ffffff 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top, #fafafa 0%, #ffffff 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(top, #fafafa 0%, #ffffff 100%); /* IE10+ */
-  background: linear-gradient(top, #fafafa 0%, #ffffff 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#fafafa', endColorstr = '#ffffff', GradientType = 0); /* IE6-9 */
+  @include gradient(#fafafa, #ffffff);
   -webkit-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1), inset 0 1px 3px 0 rgba(0, 0, 0, 0.3);
   box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1), inset 0 1px 3px 0 rgba(0, 0, 0, 0.3);
   .control-group {
@@ -181,14 +174,7 @@ a {
   .btn {
     float: right;
     margin: 3px 3px 0 0;
-    background: #4b6d7e; /* Old browsers */
-    background: -moz-linear-gradient(top, #4b6d7e 0%, #436576 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4b6d7e), color-stop(100%, #436576)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top, #4b6d7e 0%, #436576 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top, #4b6d7e 0%, #436576 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top, #4b6d7e 0%, #436576 100%); /* IE10+ */
-    background: linear-gradient(top, #4b6d7e 0%, #436576 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#4b6d7e', endColorstr = '#436576', GradientType = 0); /* IE6-9 */
+    @include gradient(#4b6d7e, #436576);
     color: #fff;
     border: 0;
     font-size: 12px;
@@ -200,30 +186,15 @@ a {
     padding: 5px 16px 4px 19px;
     cursor: pointer;
     &:hover {
-      background: #437994; /* Old browsers */
-      background: -moz-linear-gradient(top, #437994 0%, #2b607b 100%); /* FF3.6+ */
-      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #437994), color-stop(100%, #2b607b)); /* Chrome,Safari4+ */
-      background: -webkit-linear-gradient(top, #437994 0%, #2b607b 100%); /* Chrome10+,Safari5.1+ */
-      background: -o-linear-gradient(top, #437994 0%, #2b607b 100%); /* Opera 11.10+ */
-      background: -ms-linear-gradient(top, #437994 0%, #2b607b 100%); /* IE10+ */
-      background: linear-gradient(to bottom, #437994 0%, #2b607b 100%); /* W3C */
-      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#437994', endColorstr = '#2b607b', GradientType = 0); /* IE6-9 */
+      @include gradient(#437994, #2b607b);
     }
     &:active {
-      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #2b607b), color-stop(100%, #437893));
-      background: -moz-linear-gradient(top, #2b607b 0%, #437893 100%); /* FF3.6+ */
-      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#4b6d7e', endColorstr = '#436576', GradientType = 0);
-      background: -webkit-linear-gradient(top, #2b607b 0%, #437893 100%); /* Chrome10+,Safari5.1+ */
-      background: -o-linear-gradient(top, #2b607b 0%, #437893 100%); /* Opera 11.10+ */
-      background: -ms-linear-gradient(top, #2b607b 0%, #437893 100%); /* IE10+ */
-      background: linear-gradient(to bottom, #2b607b 0%, #437893 100%); /* W3C */
-      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#2b607b', endColorstr = '#437893', GradientType = 0); /* IE6-9 */
+      @include gradient(#2b607b, #437893);
     }
   }
 }
 .form-advance-search{
-  @include background(linear-gradient(#f5f5f5, #efefef));
-  @include filter-gradient(#f5f5f5, #efefef, vertical);
+  @include gradient(#f5f5f5, #efefef);
   border: 1px solid #dadada;
   border-bottom: 3px solid #486a7c;
   position: relative;
@@ -232,7 +203,7 @@ a {
     font-size: 14px;
     padding: 9px;
     padding-left: 28px;
-    @include background-image(linear-gradient(#fafafa, #fff));
+    @include gradient(#fafafa, #ffffff);
     border: 1px solid #727272;
     @include border-radius(2px);
     @include box-shadow(0 1px 1px 0 rgba(0, 0, 0, 0.1), 0 1px 3px 0 rgba(0, 0, 0, 0.3) inset);
@@ -402,7 +373,8 @@ a {
         @include border-radius(5px);
         border: 1px solid #acacac;
         @include box-shadow(rgba(0,0,0,0.45) 0 3px 15px, inset #fff 0 1px 1px -1px);
-        @include background(linear-gradient(rgba(246,247,248,0.95),rgba(234,234,235,0.95)));
+        @include gradient(rgba(246,247,248,0.95),rgba(234,234,235,0.95));
+        @include ie-gradient(#f6f7f8, #eaeaeb);
         &:before{
           content: "";
           background: asset-data-url("bg-search-help-triangle.png") no-repeat;
@@ -444,16 +416,13 @@ a {
             @include text-shadow(rgba(0,0,0,0.3) 0 1px 1px);
             @include box-shadow(inset rgba(0,0,0,0.4) 0 1px 3px);
             &.unchecked{
-              @include background(linear-gradient(#a3a4a6, #c1c3c5));
-              @include filter-gradient(#a3a4a6, #c1c3c5, vertical);
+              @include gradient(#a3a4a6, #c1c3c5);
             }
             &.checked{
-              @include background(linear-gradient(#e0a876, #fec695));
-              @include filter-gradient(#e0a876, #fec695, vertical);
+              @include gradient(#e0a876, #fec695);
             }
             &.filled{
-              @include background(linear-gradient(#90b86e, #afd78c));
-              @include filter-gradient(#90b86e, #afd78c, vertical);
+              @include gradient(#90b86e, #afd78c);
             }
           }
         }
@@ -520,8 +489,7 @@ a {
           top: 60px;
           right: 0;
           z-index: 12;
-          @include background(linear-gradient(#edf0f1, #d0d6db));
-          @include filter-gradient(#edf0f1, #d0d6db, vertical);
+          @include gradient(#edf0f1, #d0d6db);
           padding: 20px;
           @include border-radius(2px 0 2px 2px);
           @include box-shadow(0 5px 15px 0 rgba(0,0,0,0.3));
@@ -844,14 +812,7 @@ a {
     .selected {
       border-radius: 2px;
       -webkit-border-radius: 2px;
-      background: #4b6d7e; /* Old browsers */
-      background: -moz-linear-gradient(top, #4b6d7e 0%, #436576 100%); /* FF3.6+ */
-      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4b6d7e), color-stop(100%, #436576)); /* Chrome,Safari4+ */
-      background: -webkit-linear-gradient(top, #4b6d7e 0%, #436576 100%); /* Chrome10+,Safari5.1+ */
-      background: -o-linear-gradient(top, #4b6d7e 0%, #436576 100%); /* Opera 11.10+ */
-      background: -ms-linear-gradient(top, #4b6d7e 0%, #436576 100%); /* IE10+ */
-      background: linear-gradient(top, #4b6d7e 0%, #436576 100%); /* W3C */
-      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#4b6d7e', endColorstr = '#436576', GradientType = 0); /* IE6-9 */
+      @include gradient(#4b6d7e, #436576);
       selected: #fff;
       span {
         color: #fff;
@@ -942,14 +903,7 @@ a {
 .page-header {
   position: relative;
   h1 {
-    background: #4b6d7e; /* Old browsers */
-    background: -moz-linear-gradient(top, #4b6d7e 0%, #436576 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4b6d7e), color-stop(100%, #436576)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top, #4b6d7e 0%, #436576 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top, #4b6d7e 0%, #436576 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top, #4b6d7e 0%, #436576 100%); /* IE10+ */
-    background: linear-gradient(top, #4b6d7e 0%, #436576 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#4b6d7e', endColorstr = '#436576', GradientType = 0); /* IE6-9 */
+    @include gradient(#4b6d7e, #436576);
     font-weight: 600;
     font-size: 24px;
     padding: 20px 30px 15px;
@@ -1134,16 +1088,13 @@ table.relics{
         @include box-shadow(inset rgba(0,0,0,0.4) 0 1px 3px);
         margin-right: 2px;
         &.unchecked{
-          @include background(linear-gradient(#a3a4a6, #c1c3c5));
-          @include filter-gradient(#a3a4a6, #c1c3c5, vertical);
+          @include gradient(#a3a4a6, #c1c3c5);
         }
         &.checked{
-          @include background(linear-gradient(#e0a876, #fec695));
-          @include filter-gradient(#e0a876, #fec695, vertical);
+          @include gradient(#e0a876, #fec695);
         }
         &.filled{
-          @include background(linear-gradient(#90b86e, #afd78c));
-          @include filter-gradient(#90b86e, #afd78c, vertical);
+          @include gradient(#90b86e, #afd78c);
         }
       }      
     }
@@ -1164,7 +1115,8 @@ table.relics{
         @include border-radius(5px);
         border: 1px solid #acacac;
         @include box-shadow(rgba(0,0,0,0.45) 0 3px 15px, inset #fff 0 1px 1px -1px);
-        @include background(linear-gradient(rgba(246,247,248,0.95),rgba(234,234,235,0.95)));
+        @include gradient(rgba(246,247,248,0.95),rgba(234,234,235,0.95));
+        @include ie-gradient(#f6f7f8, #eaeaeb);
         &:before{
           content: "";
           background: asset-data-url("bg-search-help-triangle.png") no-repeat;
@@ -1208,16 +1160,13 @@ table.relics{
             @include text-shadow(rgba(0,0,0,0.3) 0 1px 1px);
             @include box-shadow(inset rgba(0,0,0,0.4) 0 1px 3px);
             &.unchecked{
-              @include background(linear-gradient(#a3a4a6, #c1c3c5));
-              @include filter-gradient(#a3a4a6, #c1c3c5, vertical);
+              @include gradient(#a3a4a6, #c1c3c5);
             }
             &.checked{
-              @include background(linear-gradient(#e0a876, #fec695));
-              @include filter-gradient(#e0a876, #fec695, vertical);
+              @include gradient(#e0a876, #fec695);
             }
             &.filled{
-              @include background(linear-gradient(#90b86e, #afd78c));
-              @include filter-gradient(#90b86e, #afd78c, vertical);
+              @include gradient(#90b86e, #afd78c);
             }
           }
         }
@@ -1302,8 +1251,7 @@ p#adding-note {
           float: none;
         }
         .top {
-          @include background(linear-gradient(#577787, #436271));
-          @include filter-gradient(#577787, #436271, vertical);
+          @include gradient(#577787, #436271);
           .container{
             position: relative;
           }
@@ -1350,8 +1298,7 @@ p#adding-note {
                 text-shadow: 0 -1px 1px rgb(255, 255, 255);
                 font-size: 17px;
                 @include border-radius(3px);
-                @include background(linear-gradient(#f9f9f9, #cccccc));
-                @include filter-gradient(#f9f9f9, #cccccc, vertical);
+                @include gradient(#f9f9f9, #cccccc);
                 box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);
                 -webkit-transition: all .2s ease-in;
                 -moz-transition: all .2s ease-in;
@@ -1485,14 +1432,8 @@ p#adding-note {
 .ui-menu {
   padding: 0;
   font-family: 'Open Sans';
-  background: rgb(245, 245, 245); /* Old browsers */
-  background: -moz-linear-gradient(top, rgba(245, 245, 245, 0.9) 0%, rgba(233, 233, 233, 0.9) 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(245, 245, 245, 0.9)), color-stop(100%, rgba(233, 233, 233, 0.9))); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top, rgba(245, 245, 245, 0.9) 0%, rgba(233, 233, 233, 0.9) 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top, rgba(245, 245, 245, 0.9) 0%, rgba(233, 233, 233, 0.9) 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(top, rgba(245, 245, 245, 0.9) 0%, rgba(233, 233, 233, 0.9) 100%); /* IE10+ */
-  background: linear-gradient(to bottom, rgba(245, 245, 245, 0.9) 0%, rgba(233, 233, 233, 0.9) 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#f5f5f5', endColorstr = '#e9e9e9', GradientType = 0); /* IE6-9 */
+  @include gradient(rgba(245, 245, 245, 0.9), rgba(233, 233, 233, 0.9));
+  @include ie-gradient(#f5f5f5, #e9e9e9);
   &.ui-corner-all {
     -webkit-border-radius: 0px;
     border-radius: 0px;
@@ -1507,14 +1448,7 @@ p#adding-note {
       background: asset-data-url('autocomplete-border.png') left bottom repeat-x;
     }
     .ui-state-hover {
-      background: #4f6f80; /* Old browsers */
-      background: -moz-linear-gradient(top, #4f6f80 0%, #3c5968 100%); /* FF3.6+ */
-      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4f6f80), color-stop(100%, #3c5968)); /* Chrome,Safari4+ */
-      background: -webkit-linear-gradient(top, #4f6f80 0%, #3c5968 100%); /* Chrome10+,Safari5.1+ */
-      background: -o-linear-gradient(top, #4f6f80 0%, #3c5968 100%); /* Opera 11.10+ */
-      background: -ms-linear-gradient(top, #4f6f80 0%, #3c5968 100%); /* IE10+ */
-      background: linear-gradient(to bottom, #4f6f80 0%, #3c5968 100%); /* W3C */
-      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#4f6f80', endColorstr = '#3c5968', GradientType = 0); /* IE6-9 */
+      @include gradient(#4f6f80, #3c5968);
       -webkit-border-radius: 0px;
       border-radius: 0px;
       color: #fafafa;
@@ -1683,9 +1617,7 @@ p#adding-note {
     input[type="submit"] {
       float: left;
       margin: 16px 3px 0 0;
-      background: #4B6D7E;
-      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4B6D7E), color-stop(100%, #436576));
-      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#4b6d7e', endColorstr = '#436576', GradientType = 0);
+      @include gradient(#4b6d7e, #436576);
       color: white;
       border: 0;
       font-size: 12px;
@@ -1698,13 +1630,10 @@ p#adding-note {
       cursor: pointer;
     }
     input[type="submit"]:hover {
-      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #437893), color-stop(100%, #2c617c));
-      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#4b6d7e', endColorstr = '#436576', GradientType = 0);
+      @include gradient(#437893, #2c617c);
     }
     input[type="submit"]:active {
-      background: #FFF;
-      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #2b607b), color-stop(100%, #437893));
-      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#4b6d7e', endColorstr = '#436576', GradientType = 0);
+      @include gradient(#2b607b, #437893);
     }
     .email {
       margin-bottom: 13px;
@@ -1972,14 +1901,7 @@ p#adding-note {
     .btn {
       float: left;
       margin: 3px 3px 0 0;
-      background: #4b6d7e; /* Old browsers */
-      background: -moz-linear-gradient(top, #4b6d7e 0%, #436576 100%); /* FF3.6+ */
-      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4b6d7e), color-stop(100%, #436576)); /* Chrome,Safari4+ */
-      background: -webkit-linear-gradient(top, #4b6d7e 0%, #436576 100%); /* Chrome10+,Safari5.1+ */
-      background: -o-linear-gradient(top, #4b6d7e 0%, #436576 100%); /* Opera 11.10+ */
-      background: -ms-linear-gradient(top, #4b6d7e 0%, #436576 100%); /* IE10+ */
-      background: linear-gradient(top, #4b6d7e 0%, #436576 100%); /* W3C */
-      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#4b6d7e', endColorstr = '#436576', GradientType = 0); /* IE6-9 */
+      @include gradient(#4b6d7e, #436576);
       color: #fff;
       border: 0;
       font-size: 12px;
@@ -1991,14 +1913,7 @@ p#adding-note {
       padding: 10px 16px 9px 19px;
       cursor: pointer;
       &:hover {
-        background: #437994; /* Old browsers */
-        background: -moz-linear-gradient(top, #437994 0%, #2b607b 100%); /* FF3.6+ */
-        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #437994), color-stop(100%, #2b607b)); /* Chrome,Safari4+ */
-        background: -webkit-linear-gradient(top, #437994 0%, #2b607b 100%); /* Chrome10+,Safari5.1+ */
-        background: -o-linear-gradient(top, #437994 0%, #2b607b 100%); /* Opera 11.10+ */
-        background: -ms-linear-gradient(top, #437994 0%, #2b607b 100%); /* IE10+ */
-        background: linear-gradient(to bottom, #437994 0%, #2b607b 100%); /* W3C */
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#437994', endColorstr = '#2b607b', GradientType = 0); /* IE6-9 */
+        @include gradient(#437994, #2b607b);
       }
     }
   }
@@ -2195,8 +2110,7 @@ ul.nav li a.selected {
 }
 
 .flash {
-  @include background(linear-gradient(#f8e8c9, #efdfc0));
-  @include filter-gradient(#f8e8c9, #efdfc0, vertical);
+  @include gradient(#f8e8c9, #efdfc0);
   position: relative;
   padding: 15px 25px;
   margin-top: 15px;
@@ -2248,8 +2162,7 @@ ul.nav li a.selected {
 }
 
 .main-container > .row > .flash{
-  @include background(linear-gradient(#ececec, #d5d5d5));
-  @include filter-gradient(#ececec, #d5d5d5, vertical);
+  @include gradient(#ececec, #d5d5d5);
 }
 
 section.edit .flash {
@@ -2274,7 +2187,7 @@ body.resource_home{
     padding: 35px 35px 30px 40px;
     width: 495px;
     height: 263px;
-    @include background(linear-gradient(#ffffff, #f2f2f2));
+    @include gradient(#ffffff, #f2f2f2);
     @include box-shadow(0 2px 20px 0 rgba(0,0,0,0.3));
     position: relative;
     overflow: hidden;
@@ -2312,7 +2225,7 @@ body.resource_home{
       display: block;
     }
     input[type="text"]{
-      @include background(linear-gradient(#fafafa, #ffffff));
+      @include gradient(#fafafa, #ffffff);
       @include border-radius(2px);
       border: 1px solid #727272;
       height: 38px;
@@ -2334,8 +2247,7 @@ body.resource_home{
       input {
         float: right;
         margin: 0;
-        @include background(linear-gradient(#4b6d7e, #436576));
-        @include filter-gradient(#4b6d7e, #436576, vertical);
+        @include gradient(#4b6d7e, #436576);
         color: #fff;
         border: 0;
         font-size: 12px;
@@ -2347,12 +2259,10 @@ body.resource_home{
         padding: 10px 16px 9px 19px;
         cursor: pointer;
         &:hover {
-          @include background(linear-gradient(#437994, #2b607b));
-          @include filter-gradient(#437994, #2b607b, vertical);
+          @include gradient(#437994, #2b607b);
         }
         &:active {
-          @include background(linear-gradient(#2b607b, #437893));
-          @include filter-gradient(#2b607b, #437893, vertical);
+          @include gradient(#2b607b, #437893);
         }
       }
     }
@@ -2364,8 +2274,7 @@ body.resource_home{
     }
   }
   .relic-example{
-    @include background(linear-gradient(#fafbfc, #e5e5e5));
-    @include filter-gradient(#fafbfc, #e5e5e5, vertical);
+    @include gradient(#fafbfc, #e5e5e5);
     margin-top: 40px;
     float: left;
     width: 350px;
@@ -2418,16 +2327,13 @@ body.resource_home{
         @include text-shadow(rgba(0,0,0,0.3) 0 1px 1px);
         @include box-shadow(inset rgba(0,0,0,0.4) 0 1px 3px);
         &.unchecked{
-          @include background(linear-gradient(#a3a4a6, #c1c3c5));
-          @include filter-gradient(#a3a4a6, #c1c3c5, vertical);
+          @include gradient(#a3a4a6, #c1c3c5);
         }
         &.checked{
-          @include background(linear-gradient(#e0a876, #fec695));
-          @include filter-gradient(#e0a876, #fec695, vertical);
+          @include gradient(#e0a876, #fec695);
         }
         &.filled{
-          @include background(linear-gradient(#90b86e, #afd78c));
-          @include filter-gradient(#90b86e, #afd78c, vertical);
+          @include gradient(#90b86e, #afd78c);
         }
       }
     }
@@ -2467,21 +2373,18 @@ body.resource_home{
         color: #044d71;
         font-size: 16px;
         text-shadow: 0 1px 1px #fff;
-        @include background(linear-gradient(#f6f6f6, #d1d1d1));
-        @include filter-gradient(#f6f6f6, #d1d1d1, vertical);
+        @include gradient(#f6f6f6, #d1d1d1);
         @include border-radius(4px);
         border: 0;
         float: left;
         margin: 25px 0 30px;
         @include box-shadow(0 1px 1px 0 rgba(0,0,0,0.5), inset 0 -1px 2px 0 rgba(0,0,0,0.3));
         &:hover{
-          @include background(linear-gradient(#ffffff, #ebebeb));
-          @include filter-gradient(#fefefe, #ebebeb, vertical);
+          @include gradient(#ffffff, #ebebeb);
           text-decoration: none;
         }
         &:active{
-          @include background(linear-gradient(#d9d9d9, #fefefe));
-          @include filter-gradient(#d9d9d9, #fefefe, vertical);
+          @include gradient(#d9d9d9, #fefefe);
         }
       }
     }
@@ -2655,16 +2558,13 @@ body.resource_home{
                 @include text-shadow(rgba(0,0,0,0.3) 0 1px 1px);
                 @include box-shadow(inset rgba(0,0,0,0.4) 0 1px 3px);
                 &.filled{
-                  @include background(linear-gradient(#82a663, #a1c481));
-                  @include filter-gradient(#82a663, #a1c481, vertical);
+                  @include gradient(#82a663, #a1c481);
                 }
                 &.checked{
-                  @include background(linear-gradient(#ca7a32, #fbab63));
-                  @include filter-gradient(#ca7a32, #fbab63, vertical);
+                  @include gradient(#ca7a32, #fbab63);
                 }
                 &.unchecked{
-                  @include background(linear-gradient(#7d7f7f, #9c9d9d));
-                  @include filter-gradient(#7d7f7f, #9c9d9d, vertical);
+                  @include gradient(#7d7f7f, #9c9d9d);
                 }
               }
             }
@@ -2745,7 +2645,8 @@ body.resource_home{
           @include border-radius(5px);
           border: 1px solid #acacac;
           @include box-shadow(rgba(0,0,0,0.45) 0 3px 15px, inset #fff 0 1px 1px -1px);
-          @include background(linear-gradient(rgba(246,247,248,0.95),rgba(234,234,235,0.95)));
+          @include gradient(rgba(246,247,248,0.95),rgba(234,234,235,0.95));
+          @include ie-gradient(#f6f7f8, #eaeaeb);
           &:before{
             content: "";
             background: asset-data-url("bg-search-help-triangle.png") no-repeat;
@@ -2788,16 +2689,13 @@ body.resource_home{
               @include text-shadow(rgba(0,0,0,0.3) 0 1px 1px);
               @include box-shadow(inset rgba(0,0,0,0.4) 0 1px 3px);
               &.unchecked{
-                @include background(linear-gradient(#a3a4a6, #c1c3c5));
-                @include filter-gradient(#a3a4a6, #c1c3c5, vertical);
+                @include gradient(#a3a4a6, #c1c3c5);
               }
               &.checked{
-                @include background(linear-gradient(#e0a876, #fec695));
-                @include filter-gradient(#e0a876, #fec695, vertical);
+                @include gradient(#e0a876, #fec695);
               }
               &.filled{
-                @include background(linear-gradient(#90b86e, #afd78c));
-                @include filter-gradient(#90b86e, #afd78c, vertical);
+                @include gradient(#90b86e, #afd78c);
               }
             }
           }
