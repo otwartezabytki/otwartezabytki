@@ -54,3 +54,8 @@ bundle exec rake relic:export[public/system/relics_history.csv]
 ```
 
 Cron jobs auto-setup is also available, just run ```bundle exec whenever --update-crontab```
+
+# Updating settings.yml
+
+After editing this file you have to edit also variables.js.etc in assets.
+If you don't do that, the settings won't be applied.
