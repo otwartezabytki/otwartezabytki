@@ -63,7 +63,7 @@
     input[type="text"]{
       font-size: 14px;
       padding: 9px;
-      @include background-image(linear-gradient(#fafafa, #fff));
+      @include gradient(#fafafa, #ffffff);
       border: 1px solid #727272;
       @include border-radius(2px);
       @include box-shadow(0 1px 1px 0 rgba(0, 0, 0, 0.1), 0 1px 3px 0 rgba(0, 0, 0, 0.3) inset);
@@ -198,7 +198,7 @@
           text-align: center;
           width: 397px;
           .progress-box{
-            @include background-image(linear-gradient(#fafafa, #fff));
+            @include gradient(#fafafa, #ffffff);
             border: 1px solid #727272;
             @include border-radius(2px);
             @include box-shadow(0 1px 1px 0 rgba(0, 0, 0, 0.1), 0 1px 3px 0 rgba(0, 0, 0, 0.3) inset);
@@ -554,4 +554,11 @@ form#new_relic{
     font-weight: 700;
     margin-bottom: 10px;
   }
+}
+
+.edit.photos .relic h4{
+  font-size: 14px;
+  font-weight: 700;
+  display: block;
+  margin: 5px 0;
 }

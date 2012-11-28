@@ -1147,9 +1147,12 @@ pl:
       next_step_html: "Przejdź dalej &raquo;"
       parent_relic:
         complex: "Dodajesz zabytek do zespołu"
+        single: "Dodajesz zabytek"
+        group: "Dodajesz zespół zabytków"
       photos:
         intro1: "Napisz zwięzłą informację na temat zabytku. Pamiętaj o podaniu źródła!"
         intro2: "Załącz jedno lub więcej zdjęcie zabytku. Zadbaj o to, aby przeglądanie zdjęć sprawiało przyjemność innym użytkownikom - zamieszczaj wyłącznie zdjęcia dobrej jakości."
+        label: Zdjęcia
         submit: "Zakończ! i zobacz dodany zabytek"
       stages:
         address: "dane adresowe"

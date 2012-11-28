@@ -9,7 +9,7 @@ class RelicbuildersController < ApplicationController
   helper_method :address_params
 
   def new
-    @relic = Relic.new
+    @relic = Relic.new :kind => 'SA'
     @location = LocationBuilder.new params[:location]
     if @location.foreign_relic?
       if geo = @location.geocode_result
