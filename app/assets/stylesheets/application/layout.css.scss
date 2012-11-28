@@ -2115,7 +2115,7 @@ ul.nav li a.selected {
   padding: 15px 25px;
   margin-top: 15px;
   border-top: 1px solid #dcdcdc;
-  img.flash-icon {
+  div.icon {
     display: inline-block;
     width: 35px;
     height: 35px;
@@ -2163,6 +2163,16 @@ ul.nav li a.selected {
 
 .main-container > .row > .flash{
   @include gradient(#ececec, #d5d5d5);
+  &.flash-5a7eb09, &.flash-b2790c4{
+    .icon{
+      background: asset-data-url("icon-info-success.png") no-repeat;
+      width: 36px;
+      height: 35px;
+      .flash-icon{
+        display: none;
+      }
+    }
+  }
 }
 
 section.edit .flash {
@@ -2783,7 +2793,7 @@ body.resource_home{
     }
     span.label{
       float: left;
-      width: 140px;
+      width: 135px;
     }
   }
 }
