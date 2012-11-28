@@ -1154,6 +1154,7 @@ pl:
         intro2: "Załącz jedno lub więcej zdjęcie zabytku. Zadbaj o to, aby przeglądanie zdjęć sprawiało przyjemność innym użytkownikom - zamieszczaj wyłącznie zdjęcia dobrej jakości."
         label: Zdjęcia
         submit: "Zakończ! i zobacz dodany zabytek"
+        submit_relic_group: "Zakończ! i zobacz zespół zabytków"
       stages:
         address: "dane adresowe"
         check_existance: "sprawdź w bazie"

@@ -58,4 +58,4 @@
             = f.input :license_agreement, :input_html => { :checked => 'checked' }, :as => :boolean, :label => t('views.relics.edit.photos.statement_html')
 
           .actions
-            = f.submit t('views.relicbuilders.photos.submit')
+            = f.submit (@relic.is_group? ? t('views.relicbuilders.photos.submit_relic_group') : t('views.relicbuilders.photos.submit'))
