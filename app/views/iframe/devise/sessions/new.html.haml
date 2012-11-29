@@ -1,6 +1,7 @@
 .iframe-content
   .iframe-header
-    %a.what-about{:href => page_pl_path('o-projekcie'), :target => "_blank", :host => Settings.oz.host, :only_path => false} O co chodzi?
+    %a.what-about{:href => "#{request.protocol}#{Settings.oz.host}/strony/o-projekcie", :target => '_blank'}
+      O co chodzi?
     .widget-logo
   .form_box
     .left
@@ -20,4 +21,4 @@
       %h4 Czy konto jest mi potrzebne?
       %p Bazę można przeglądać bez konieczności logowania. Ale jeśli chcesz dodawać lub uzupełniać informacje - logowanie jest niezbędne.
       %h4 Nie masz konta?
-      %a{:href => new_user_registration_path, :target => "_blank", :host => Settings.oz.host, :only_path => false} Zarejestruj się tutaj
+      = link_to "Zarejestruj się tutaj", new_user_registration_path(:host => Settings.oz.host, :only_path => false), :target => '_blank'

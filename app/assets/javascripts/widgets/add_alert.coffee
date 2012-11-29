@@ -17,9 +17,9 @@ oz_jQuery(document).on 'click', '#oz_add_alert_widget button.create', (e) ->
       unless window.ozCom
         window.ozCom = new OZ('oz-fancybox-iframe')
         window.ozCom.api 'on_iframe_init', (params) ->
-          if oz_jQuery.fancybox.current.width != params.width
+          if oz_jQuery.fancybox.current.width != params.width || oz_jQuery.fancybox.current.height != params.height
             oz_jQuery.fancybox.current.width  = params.width
-            # oz_jQuery.fancybox.current.height = params.height
+            oz_jQuery.fancybox.current.height = params.height
             oz_jQuery.fancybox.update()
 
     afterShow: ->
