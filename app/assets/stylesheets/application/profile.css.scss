@@ -1221,6 +1221,13 @@ section.edit{
   width: 747px;
   .row {
     padding: 15px 20px;
+    textarea.redactor{
+      width: 100%;
+      @include box-shadow(inset 0 1px 3px 0 rgba(0,0,0,.3), 0 1px 1px 0 rgba(0,0,0,.1));
+      @include border-radius(2px);
+      border: 1px solid #646464;
+      margin-top: 10px;
+    }
   }
   .row + .row {
     padding-top: 0;
