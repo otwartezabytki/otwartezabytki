@@ -42,7 +42,7 @@
                 %span.unknown= t('views.relics.relics.unknown_address')
           %td.date
             .time
-              - if relic.date_start?
-                = relic.date_start
+              - if relic.dating_of_obj?
+                = relic.dating_of_obj
               - else
                 %em= t('views.relics.relics.unknown_from')
