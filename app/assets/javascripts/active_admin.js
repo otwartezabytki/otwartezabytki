@@ -8,9 +8,6 @@ $(document).ready(function(){
     $("select.select2").select2();
   }
 
-  $('#entry_body').redactor({
-    focus: false,
-    buttons: ['bold', 'italic', 'link', 'unorderedlist'],
-    lang: 'pl'
-  })
+  // In one line for easy removal using sed
+  $('#entry_body').redactor({ focus: false, buttons: ['bold', 'italic', 'link', 'unorderedlist'], lang: 'pl' })
 });

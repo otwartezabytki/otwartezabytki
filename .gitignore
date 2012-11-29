@@ -31,3 +31,4 @@ config/environments/*.local.yml
 current-relics.zip
 .tags
 .tags_sorted_by_file
+*.bak
