@@ -50,6 +50,15 @@ If you don't do that, the settings won't be applied.
   pg_dump -h localhost -cxOWU user_name db_name | gzip > db/dump/$(date +"%m_%d_%Y").sql.gz
 ```
 
+### Redactor.js license
+
+Redactor.js is proprietary software, you can disable it by issuing following commands:
+
+```bash
+rm $(find app -type f -name 'redactor*')
+sed -i '.bak' '/redactor/d' $(grep -l -E '/redactor|)\.redactor' -r app)
+```
+
 ### Troubleshooting
 
 Problem:
