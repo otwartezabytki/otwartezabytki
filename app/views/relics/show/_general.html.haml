@@ -16,9 +16,7 @@
         %h3= t('views.relics.index.states.header')
         %ul
           %li
-            .tag
-              %span{:class => relic.state}= t("views.relics.index.states.#{relic.state}.header")
-            .text= t("views.relics.index.states.#{relic.state}.info")
+            = state_hint_tag(relic.state, relic.existence == 'social')
     %span.relic-info
       Zabytek
       %strong= t("activerecord.attributes.relic.existences.#{relic.existence}")

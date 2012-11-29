@@ -1237,6 +1237,7 @@ pl:
           unchecked:
             header: Niesprawdzony
             info: "Dane zaczerpnięte wprost z rejestru zabytków NID; wymagają sprawdzenia i uzupełnienia."
+            info_social: "Dane wymagają sprawdzenia i uzupełnienia."
         suggestion: "Czy chodziło ci może o:"
       localization_facets:
         header: Lokalizacja

@@ -53,10 +53,7 @@
                     %h3= t('views.relics.index.states.header')
                     %ul
                       - ['unchecked', 'checked', 'filled'].each do |s|
-                        %li
-                          .tag
-                            %span{:class => s}= t("views.relics.index.states.#{s}.header")
-                          .text= t("views.relics.index.states.#{s}.info")
+                        %li= state_hint_tag(s)
 
               = f.input :state, :label => false, :as => :check_boxes, :collection => state_facets, :disabled => disabled(f.object, 'state')
             .column

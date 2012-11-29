@@ -91,6 +91,15 @@ module RelicsHelper
     end
   end
 
+  def state_hint_tag(state, social = false)
+    [
+      (content_tag :div, :class => "tag" do
+        content_tag(:span, t("views.relics.index.states.#{state}.header"), :class => state)
+      end),
+      content_tag(:div, t("views.relics.index.states.#{state}.info#{'_social' if social}"), :class => "text")
+    ].join.html_safe
+  end
+
   def format_localization(relic)
     a = []
     if relic.foreign_relic?
