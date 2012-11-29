@@ -364,12 +364,12 @@ class Search
       query do
         boolean(:minimum_number_should_match => 1) do
           if instance.query.present?
-            should { text "identification",               instance.query, 'operator' => 'AND', 'boost' => 10 }
-            should { text "descendants.identification",   instance.query, 'operator' => 'AND', 'boost' => 8 }
-            should { text "common_name",                  instance.query, 'operator' => 'AND', 'boost' => 6 }
-            should { text "descendants.common_name",      instance.query, 'operator' => 'AND', 'boost' => 5 }
-            should { text "tags",                         instance.query, 'operator' => 'AND', 'boost' => 3 }
-            should { text "autocomplitions",              instance.query, 'operator' => 'AND', 'boost' => 1 }
+            should { string instance.query, 'default_field' => "identification",              'default_operator' => 'AND', 'boost' => 10 }
+            should { string instance.query, 'default_field' => "descendants.identification",  'default_operator' => 'AND', 'boost' => 8 }
+            should { string instance.query, 'default_field' => "common_name",                 'default_operator' => 'AND', 'boost' => 6 }
+            should { string instance.query, 'default_field' => "descendants.common_name",     'default_operator' => 'AND', 'boost' => 5 }
+            should { string instance.query, 'default_field' => "tags",                        'default_operator' => 'AND', 'boost' => 3 }
+            should { string instance.query, 'default_field' => "autocomplitions",             'default_operator' => 'AND', 'boost' => 1 }
           end
           if instance.place.present?
             must { string instance.place, :default_operator => "AND", :fields => ["place_with_address^5", "street^3"] }
@@ -428,7 +428,7 @@ class Search
       filter 'or', instance.range_conditions if instance.range_conditions?
       pq = PreparedQuery.new(instance.query)
       facet "autocomplitions" do
-        terms 'autocomplitions.untouched', 'size' => 20, 'script' => "term ~= regexp ? true : false", 'params' => {
+        terms 'autocomplitions.untouched', 'size' => 5, 'script' => "term ~= regexp ? true : false", 'params' => {
           'regexp' => pq.regexp
         }
       end if pq.exists?

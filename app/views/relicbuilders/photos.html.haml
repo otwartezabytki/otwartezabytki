@@ -9,6 +9,8 @@
         = semantic_form_for @relic, :url => relicbuilder_path(:id => @relic), :html => { :multipart => true }, :method => :put  do |f|
           = f.hidden_field :build_state
           = f.input :description, :input_html => { :class => 'redactor' }
+          %h4= t('views.relicbuilders.photos.label')
+          %p.intro= t('views.relicbuilders.photos.intro2')
           .photo-attributes{:'data-replace' => ".photo-attributes"}
             - @relic.photos.each do |photo|
               - if photo.user_id == current_user.id
@@ -51,9 +53,9 @@
                     .value 0%
 
             .photo-upload
-              = file_field_tag "photo[file]", :class => 'photo_upload', :"data-url" => "#{relic_photos_path(@relic, :build => true)}"
+              = file_field_tag "photo[file]", :class => 'photo_upload' + (@relic.photos.length > 0 ? "" : " first"), :"data-url" => "#{relic_photos_path(@relic, :build => true)}"
 
             = f.input :license_agreement, :input_html => { :checked => 'checked' }, :as => :boolean, :label => t('views.relics.edit.photos.statement_html')
 
           .actions
-            = f.submit t('views.relicbuilders.photos.submit')
+            = f.submit (@relic.is_group? ? t('views.relicbuilders.photos.submit_relic_group') : t('views.relicbuilders.photos.submit'))

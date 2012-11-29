@@ -56,9 +56,10 @@ ajax_callback = (data, status, xhr) ->
 
           return true
         afterClose: ->
-          history.pushState { autoreload: true, path: window.before_fancybox_url }, $('title').text(), window.before_fancybox_url
-          if last_xhr.getResponseHeader('x-logged')? && $('body').data('logged')? && $('body').data('logged').toString() != last_xhr.getResponseHeader('x-logged').toString()
-            window.location.href = window.location.pathname
+          # history.pushState { autoreload: true, path: window.before_fancybox_url }, $('title').text(), window.before_fancybox_url
+          # if last_xhr.getResponseHeader('x-logged')? && $('body').data('logged')? && $('body').data('logged').toString() != last_xhr.getResponseHeader('x-logged').toString()
+          #   window.location.href = window.location.pathname
+          $.ajax(window.location.pathname).success(ajax_callback).complete(-> popping_state = false)
 
     try_to_process_replace = (node) ->
       # if node to replace is not found, redirect
@@ -79,7 +80,7 @@ ajax_callback = (data, status, xhr) ->
             show_fancybox(node)
             $(node).initialize()
       else if last_xhr.getResponseHeader('x-logged')? && $('body').data('logged')? && $('body').data('logged').toString() != last_xhr.getResponseHeader('x-logged').toString()
-          window.location.href = window.location.pathname
+        window.location.href = window.location.pathname
       else
         to_replace = $('#root').find($(node).data('replace'))
         if to_replace.length
@@ -96,9 +97,9 @@ ajax_callback = (data, status, xhr) ->
     else
       window.location.href = xhr.getResponseHeader('x-path')
 
-    unless popping_state
-      path = xhr.getResponseHeader('x-path')
-      history.pushState { autoreload: true, path: path }, $parsed_data.find('title').text(), xhr.getResponseHeader('x-path')
+    # unless popping_state
+    #   path = xhr.getResponseHeader('x-path')
+    #   history.pushState { autoreload: true, path: path }, $parsed_data.find('title').text(), xhr.getResponseHeader('x-path')
 
 $(document).on 'ajax:success', 'form[data-remote], a[data-remote]', (e, data, status, xhr) ->
   popping_state = false

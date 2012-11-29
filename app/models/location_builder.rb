@@ -4,7 +4,7 @@ class LocationBuilder
   include ActiveModel::Conversion
   extend ActiveModel::Naming
 
-  attr_accessor :polish_place, :foreign_relic, :country_code, :original_name, :polish_name
+  attr_accessor :polish_place, :foreign_relic, :relic_group, :country_code, :original_name, :polish_name
 
   def initialize(attributes = {})
     attributes.each do |name, value|
@@ -21,8 +21,12 @@ class LocationBuilder
     @polish_place.present?
   end
 
+  def relic_group?
+    @relic_group.to_i == 1
+  end
+
   def foreign_relic?
-    @foreign_relic == '1'
+    @foreign_relic.to_i == 1
   end
 
   def foreign_address

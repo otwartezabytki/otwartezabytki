@@ -592,3 +592,10 @@ disabled look for already selected choices in the results dropdown
     }
   }
 }
+
+#relic_tags_input .select2-container{
+  margin: 10px 0;
+  .select2-choices{
+    margin: 0;
+  }
+}

@@ -1,5 +1,6 @@
 @import "compass/layout";
 @import "compass/css3";
+@import '../mixins';
 
 section.new.alert {
   position: relative;
@@ -14,8 +15,7 @@ section.new.alert {
   }
 
   h2 {
-    @include background(linear-gradient(#4b6d7e, #436576));
-    @include filter-gradient(#4b6d7e, #436576);
+    @include gradient(#4b6d7e, #436576);
     padding: 0 20px;
   }
 
@@ -61,6 +61,10 @@ section.new.alert {
     border: 1px solid #646464;
     margin-top: 10px;
   }
+  div.string {
+    padding-top: 5px;
+    input { width: 424px; }
+  }
   .actions{
     border-top: 1px solid #e5e5e5;
     padding-top: 20px;
@@ -74,8 +78,7 @@ section.new.alert {
       font-style: normal;
     }
     input[type="submit"]{
-      @include background(linear-gradient(#48b119, #2f9900));
-      @include filter-gradient(#48b119, #2f9900);
+      @include gradient(#48b119, #2f9900);
       @include border-radius(2px);
       color: #fff;
       font-size: 12px;

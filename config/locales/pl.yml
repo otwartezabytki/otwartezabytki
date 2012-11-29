@@ -82,6 +82,8 @@ pl:
         relic: Zabytek
         relic_id: "ID zabytku"
         state: "Stan zgłoszenia"
+        author: "Dane autora (imię, nazwisko)"
+        date_taken: "Data wykonania"
       document:
         description: "Krótki opis"
         file: Plik
@@ -305,7 +307,7 @@ pl:
       architektura_inzynieryjna: "architektura inżynieryjna"
       budynek_gospodarczy: "budynek gospodarczy"
       cmentarny: cmentarny
-      dworski_palacowy_zamek: dworski/pałacowy/zamek
+      dworski_palacowy_zamek: dwór/pałac/zamek
       katolicki: katolicki
       lemkowski: łemkowski
       mala_architektura: "mała architektura"
@@ -862,6 +864,7 @@ pl:
     alert_added: "Alert został dodany. Dziękujemy."
     gallery_has_been_updated: "Galeria zdjęć została zaktualizowana. Dziękujemy!"
     new_relic_has_been_added: "Gratulacje dodałeś nowy zabytek"
+    new_gruop_relic_has_been_added: "Gratulacje dodałeś zespół zabytków. Dodaj podzabytki tutaj:"
     please_correct_errors: "Popraw proszę błędy wskazane poniżej."
     relic_reverted: "Objekt został przywrócony do wskazanej wersji."
     reservation_thanks: "Dziękujemy za rejestrację! Na podany adres e-mail zostało wysłane Twoje hasło. Tymczasem zachęcamy do dalszego poprawiania zabytków:"
@@ -1126,12 +1129,13 @@ pl:
         that_one: "To jest ten zabytek!"
       new:
         add_foreign_relic: "chcę dodać zabytek spoza Polski"
+        add_relic_group: "chcę dodać zespół zabytków"
         choose_html: "wybieram &raquo;"
         country_code: "W jakim kraju"
         drag_marker: "Przeciągnij znacznik na mapę"
         header_html: "Jaka jest różnica między <span>zabytkiem</span> a zespołem <span>zabytków</span>?"
         info: "Zabytek to pojedynczy obiekt (np. pałac). Natomiast zespół zabytków to powiązana przestrzennie grupa budynków wyodrębniona ze względu na formę architektoniczną, styl, zastosowane materiały, funkcję, czas powstania lub związek z wydarzeniami historycznymi. Np. może to być zespół fabryki, albo zespół kamienic w centrum pochodzących z jednego okresu."
-        intro1: "Sprawdź czy zabytek na pewno jeszcze nie znalazł się w naszej bazie. Zacznij od wpisania nazwy miejscowości (wciśnij szukaj, a mapa ustawi się w środku wybranej miejscowości), a potem wskaż obiekt na mapie. Następnie wciśnij \"przejdź dalej\". Pokaże się lista obiektów z naszej bazy, które znajdują się we wskazanej okolicy. Sprawdź, czy obiekt, który chcesz dodać, nie znajduje się na liście. Jeśli go nie ma, możesz kontynuować dodawanie zabytku do bazy,"
+        intro1_html: "Sprawdź czy <span class='r_sa'>zabytek</span><span class='r_ze'>zespół zabytków</span> na pewno jeszcze nie znalazł się w naszej bazie. Zacznij od wpisania nazwy miejscowości (wciśnij szukaj, a mapa ustawi się w środku wybranej miejscowości), a potem wskaż obiekt na mapie. Następnie wciśnij \"przejdź dalej\". Pokaże się lista obiektów z naszej bazy, które znajdują się we wskazanej okolicy. Sprawdź, czy obiekt, który chcesz dodać, nie znajduje się na liście. Jeśli go nie ma, możesz kontynuować dodawanie <span class='r_sa'>zabytku</span><span class='r_ze'>zespołu zabytków</span> do bazy,"
         intro2: "*"
         no_results: "Brak wyników"
         original_name: "Nazwa oryginalna"
@@ -1143,10 +1147,14 @@ pl:
       next_step_html: "Przejdź dalej &raquo;"
       parent_relic:
         complex: "Dodajesz zabytek do zespołu"
+        single: "Dodajesz zabytek"
+        group: "Dodajesz zespół zabytków"
       photos:
-        intro1: "Załącz jedno lub więcej zdjęcie zabytku. Zadbaj o to, aby przeglądanie zdjęć sprawiało przyjemność innym użytkownikom - zamieszczaj wyłącznie zdjęcia dobrej jakości. "
-        intro2: "*"
+        intro1: "Napisz zwięzłą informację na temat zabytku. Pamiętaj o podaniu źródła!"
+        intro2: "Załącz jedno lub więcej zdjęcie zabytku. Zadbaj o to, aby przeglądanie zdjęć sprawiało przyjemność innym użytkownikom - zamieszczaj wyłącznie zdjęcia dobrej jakości."
+        label: Zdjęcia
         submit: "Zakończ! i zobacz dodany zabytek"
+        submit_relic_group: "Zakończ! i zobacz zespół zabytków"
       stages:
         address: "dane adresowe"
         check_existance: "sprawdź w bazie"
@@ -1154,10 +1162,10 @@ pl:
         details: szczegóły
         photos: "zdjęcia i opis"
         step1: "krok 1"
-        step1_description1: "Sprawdź, czy zabytek na pewno nie jest już w naszej bazie."
-        step1_description2: "Podaj adres, pod którym znajduje się dodawany zabytek."
-        step1_description3: "Wpisz nazwę zabytku i uzasadnij, dlaczego powinien znaleźć się w naszej bazie."
-        step1_description4: "Dodaj zdjęcia i zwięzły opis zabytku."
+        step1_description1_html: "Sprawdź, czy <span class='r_sa'>zabytek</span><span class='r_ze'>zespół zabytków</span> na pewno nie jest już w naszej bazie."
+        step1_description2_html: "Podaj adres, pod którym znajduje się dodawany <span class='r_sa'>zabytek</span><span class='r_ze'>zespół zabytków</span>."
+        step1_description3_html: "Wpisz nazwę <span class='r_sa'>zabytku</span><span class='r_ze'>zespołu zabytków</span> i uzasadnij, dlaczego powinien znaleźć się w naszej bazie."
+        step1_description4_html: "Dodaj zdjęcia i zwięzły opis <span class='r_sa'>zabytku</span><span class='r_ze'>zespołu zabytków</span>."
         step2: "krok 2"
         step3: "krok 3"
         step4: "krok 4"
@@ -1210,6 +1218,7 @@ pl:
         kind: Rodzaj
         loading: "Trwa ładowanie wyników proszę czekać!!!"
         no_results_html: "Żaden z zabytków w naszej bazie<br/>nie spełnia podanych kryteriów."
+        no_results2_html: "Nie znalazłeś tego, czego szukałeś? Spróbuj użyć symbolu gwiazdki, np. Scheibler*"
         order:
           az: A-Z
           score: Trafność

@@ -1,11 +1,12 @@
 @import "compass/layout";
 @import "compass/css3";
+@import "application/mixins";
 /* stylesheet for iframe layout */
 
 .alerts .main-container { width: 460px; }
 
 .iframe-content{
-  @include background(linear-gradient(#ffffff, #f2f2f2));
+  @include gradient(#ffffff, #f2f2f2);
   width: 450px;
   border: 4px solid #4a6c7e;
   @include border-radius(4px);

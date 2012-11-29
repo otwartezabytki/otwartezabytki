@@ -73,7 +73,7 @@ class SuggesterController < ApplicationController
         :location => ['pl', obj.commune.district.voivodeship_id, obj.commune.district_id, obj.virtual_commune_id, obj.id].join('-')
       }
     end
-    render :json => navigators_json.reverse
+    render :json => navigators_json.reverse.first(5)
   end
 
 end

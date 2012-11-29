@@ -1,5 +1,6 @@
 @import "compass/layout";
 @import "compass/css3";
+@import "mixins";
 
 section.widgets{
   h1{
@@ -92,8 +93,7 @@ section.widgets{
 
 .use-widget, .edit_widget .sidebar input[type="submit"]{
   margin: 25px 0 20px;
-  @include background(linear-gradient(#4b6d7e, #436576));
-  @include filter-gradient(#4b6d7e, #436576, vertical);
+  @include gradient(#4b6d7e, #436576);
   color: #fff;
   border: 0;
   font-size: 12px;
@@ -106,14 +106,12 @@ section.widgets{
   float: left;
   font-weight: 600;
   &:hover {
-    @include background(linear-gradient(#437994, #2b607b));
-    @include filter-gradient(#437994, #2b607b, vertical);
+    @include gradient(#437994, #2b607b);
     text-decoration: none;
     color: #fff;
   }
   &:active {
-    @include background(linear-gradient(#2b607b, #437893));
-    @include filter-gradient(#2b607b, #437893, vertical);
+    @include gradient(#2b607b, #437893);
   }
 }
 
@@ -130,8 +128,7 @@ section.widgets{
   color: #044d71;
   font-size: 12px;
   text-shadow: 0 1px 1px #fff;
-  @include background(linear-gradient(#f6f6f6, #d1d1d1));
-  @include filter-gradient(#f6f6f6, #d1d1d1, vertical);
+  @include gradient(#f6f6f6, #d1d1d1);
   @include border-radius(4px);
   border: 0;
   float: right;
@@ -139,13 +136,11 @@ section.widgets{
   margin-top: 20px;
   @include box-shadow(0 1px 1px 0 rgba(0,0,0,0.5), inset 0 -1px 2px 0 rgba(0,0,0,0.3));
   &:hover{
-    @include background(linear-gradient(#ffffff, #ebebeb));
-    @include filter-gradient(#ffffff, #ebebeb, vertical);
+    @include gradient(#ffffff, #ebebeb);
     text-decoration: none;
   }
   &:active{
-    @include background(linear-gradient(#d9d9d9, #fefefe));
-    @include filter-gradient(#d9d9d9, #fefefe, vertical);
+    @include gradient(#d9d9d9, #fefefe);
   }
 }
 
@@ -157,8 +152,7 @@ section.widgets{
   input[type="text"], textarea{
     @include border-radius(2px);
     border: 1px solid #646464;
-    @include background(linear-gradient(#fafafa, #ffffff));
-    @include filter-gradient(#fafafa, #ffffff, vertical);
+    @include gradient(#fafafa, #ffffff);
     @include box-shadow(inset 0 1px 3px 0 rgba(0,0,0,.3), 0 1px 1px 0 rgba(0,0,0,.1));
     height: 30px;
     padding: 0 8px;
@@ -173,8 +167,7 @@ section.widgets{
     color: #fff;
     height: 45px;
     line-height: 45px;
-    @include background(linear-gradient(#36596b, #2f5163));
-    @include filter-gradient(#36596b, #2f5163, vertical);
+    @include gradient(#36596b, #2f5163);
     padding: 0 12px;
     span{
       font-style: italic;
@@ -310,8 +303,7 @@ section.widgets{
             background: #f5f5f5;
           }
           a{
-            @include background(linear-gradient(#4b6d7e, #436576));
-            @include filter-gradient(#4b6d7e, #436576, vertical);
+            @include gradient(#4b6d7e, #436576);
             color: #fff;
             border: 0;
             font-size: 12px;
@@ -323,14 +315,12 @@ section.widgets{
             float: right;
             font-weight: 600;
             &:hover {
-              @include background(linear-gradient(#437994, #2b607b));
-              @include filter-gradient(#437994, #2b607b, vertical);
+              @include gradient(#437994, #2b607b);
               text-decoration: none;
               color: #fff;
             }
             &:active {
-              @include background(linear-gradient(#2b607b, #437893));
-              @include filter-gradient(#2b607b, #437893, vertical);
+              @include gradient(#2b607b, #437893);
             }
           }
         }

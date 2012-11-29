@@ -70,7 +70,7 @@ class Relic < ActiveRecord::Base
                   :street, :tags, :categories, :photos_attributes, :description,
                   :documents_attributes, :documents_info, :links_attributes, :links_info,
                   :events_attributes, :entries_attributes, :license_agreement, :polish_relic,
-                  :geocoded, :build_state, :parent_id, :common_name, :as => [:default, :admin]
+                  :geocoded, :build_state, :parent_id, :common_name, :kind, :as => [:default, :admin]
 
   attr_accessible :ancestry, :register_number, :approved, :state, :existence, :as => :admin
 
@@ -97,8 +97,6 @@ class Relic < ActiveRecord::Base
   before_validation :parse_date
 
   before_validation do
-    # temp hack set all relics as SA
-    self.kind = 'SA'
     if tags_changed? && tags.is_a?(Array)
       tmp = []
       self.tags.each do |tag|
@@ -281,7 +279,8 @@ class Relic < ActiveRecord::Base
   end
 
   def is_group?
-    (is_root? && has_children?) or 'ZE' == kind
+    return 'ZE' == kind if new_record?
+    'ZE' == kind or (is_root? and has_children?)
   end
 
   def to_builder

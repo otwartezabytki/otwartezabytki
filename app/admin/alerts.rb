@@ -38,6 +38,9 @@ ActiveAdmin.register Alert do
   form do |f|
     f.inputs do
       f.input :state, :collection => I18n.t('alert_states').invert, :include_blank => false
+      f.input :description
+      f.input :author
+      f.input :date_taken
       f.buttons
     end
 
