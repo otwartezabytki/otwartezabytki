@@ -863,7 +863,7 @@ a {
         background: #dce4e8;
         color: #236282;
         float: right;
-        margin-top: -4px;
+        margin-top: -2px;
         padding: 4px 5px;
         font-size: 12px;
         @include border-radius(2px);
@@ -872,11 +872,9 @@ a {
       strong{
         display: inline-block;
         width: 167px;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        overflow: hidden;
         font-weight: normal;
         height: 15px;
+        word-wrap: break-word;
       }
     }
   }
@@ -2794,6 +2792,7 @@ body.resource_home{
     span.label{
       float: left;
       width: 135px;
+      line-height: 18px;
     }
   }
 }
