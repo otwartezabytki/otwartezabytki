@@ -3,7 +3,9 @@
 @import "application/mixins";
 /* stylesheet for iframe layout */
 
-.alerts .main-container { width: 460px; }
+.relicbuilders .main-container { width: 960px; height:795px; margin:0 auto; padding:0; background-color: #fff; }
+.alerts .main-container { width: 460px; height:600px; margin:0 auto; padding:0; background-color: #fff; }
+.sessions .main-container { width: 458px; height:380px; margin:0 auto; padding:0; background-color: #fff; }
 
 .iframe-content{
   @include gradient(#ffffff, #f2f2f2);
