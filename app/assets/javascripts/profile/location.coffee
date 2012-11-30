@@ -195,3 +195,8 @@ jQuery.initializer 'section.edit.location', ->
     location = countries_locations[$(this).val()]
     $('#map_canvas').zoom_at(location[0], location[1])
     map.setZoom(5)
+
+jQuery.initializer 'section.edit.location', ->
+  $("form.relic").submit ->
+    $("section.edit").append('<div class="opacity"></div>').append '<div class="loading"><div class="inner"><div class="loader"><img src="/assets/fancybox/fancybox_loading.gif" alt="loading..." /></div></div></div>'
+    submit = $(this).find(":submit").attr("value", "Zapisuję").css("padding", "0 31px")
