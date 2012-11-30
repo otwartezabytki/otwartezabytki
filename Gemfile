@@ -48,14 +48,13 @@ gem 'remote_table'
 
 gem 'unicode'
 gem 'gon'
-gem 'newrelic_rpm'
 gem 'rails_config', '0.2.5'
 gem 'dalli'
 gem 'will_cache'
 gem 'arrabiata' # roman letters converter
 gem 'rails-i18n'
 gem 'i18n-country-translations'
-gem 'i18n_country_select'
+gem 'i18n_country_select', '~> 1.0.14'
 
 gem 'whenever', :require => false               # cron jobs
 gem 'recaptcha', :require => 'recaptcha/rails'  # bot secrity
@@ -97,8 +96,10 @@ group :development, :test do
   gem 'annotate', ">=2.5.0" # for annotating db schema in models
   gem 'quiet_assets'
 end
-
-gem 'therubyracer', :group => :production # assets javascript compiler
+group :production do
+  gem 'therubyracer' # assets javascript compiler
+  gem 'newrelic_rpm'
+end
 
 group :test do
   # for defining tests
