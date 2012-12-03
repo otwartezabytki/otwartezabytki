@@ -3,6 +3,8 @@
   %head
     %meta(charset="utf-8")
     %meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    - if Rails.env.production?
+      %meta(name="google-site-verification" content="Spn2_vzD8aAvbTm8TAoVGIx_6jk-OM62aVNFxQ5pnR8")
     %title= content_for?(:title) ? "#{yield(:title)} - Otwarte Zabytki" : "Otwarte Zabytki"
     = favicon_link_tag  "favicon.gif", :type => 'image/gif'
     %meta{:property => "og:title", :content => t('layouts.application.og.title')}
