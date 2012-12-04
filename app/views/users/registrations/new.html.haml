@@ -2,6 +2,8 @@
 .right_txt_box= render 'devise/shared/login_info'
 .form_box
   .login_intro_txt Zarejestruj się i śledź swoje postępy
+  .fb-login
+    %a{:href => "", :class => "fb-btn"} Zarejestruj się przez Facebooka
   = semantic_form_for(user, :url => user_registration_path, :remote => true) do |f|
     = f.semantic_errors
     = f.hidden_field :registration, :value => true

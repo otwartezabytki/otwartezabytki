@@ -132,6 +132,37 @@ a {
             background: asset-data-url('icon-register-hover.png') 0 4px no-repeat;
           }
         }
+        &.fb-btn{
+          @include gradient(#4664a5, #314d92);
+          border-color: #385497 #375395 #324A86;
+          border-style: solid;
+          border-width: 1px;
+          border-radius: 2px;
+          box-shadow: inset 0 1px 0 #5E7BB4, 0 1px 3px rgba(0, 0, 0, 0.21);
+          color: #fff;
+          display: inline-block;
+          font-weight: bold;
+          line-height: 25px;
+          height: 25px;
+          padding: 0 7px 0 0;
+          text-shadow: 0 -1px 0 #38528e;
+          position: relative;
+          top: -8px;
+          &::before{
+            content: ' ';
+            display: block;
+            float: left;
+            height: 25px;
+            margin-right: 10px;
+            padding-left: 5px;
+            position: relative;
+            width: 24px;
+            background: asset-data-url("fb-btn-icon.png") top right no-repeat;
+          }
+          &:hover{
+            text-decoration: underline;
+          }
+        }
       }
     }
   }
