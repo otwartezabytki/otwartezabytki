@@ -1,6 +1,6 @@
 .row
   = semantic_form_for relic, :url => section_relic_path(relic.id, :section => :photos), :html => { :multipart => true }, :remote => true  do |f|
-    .photo-attributes{:'data-replace' => ".photo-attributes"}
+    .photo-attributes
       - relic.photos.each do |photo|
         - if photo.user_id == current_user.id
           = f.semantic_fields_for :photos, photo do |f2|

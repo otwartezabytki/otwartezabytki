@@ -158,4 +158,3 @@ jQuery.initializer 'section.show.entries', ->
         $(".show.entries .content").height contentHeight
 
         $(this).text "więcej"
-

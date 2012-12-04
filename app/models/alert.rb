@@ -17,8 +17,8 @@ class Alert < ActiveRecord::Base
   belongs_to :relic
   belongs_to :user
 
-  attr_accessible :relic_id, :user_id, :file, :description
-  attr_accessible :state, :as => :admin
+  attr_accessible :relic_id, :user_id, :file, :description, :author, :date_taken
+  attr_accessible :relic_id, :user_id, :file, :description, :author, :date_taken, :state, :as => :admin
 
   after_create :new_alert_notification
   after_create :create_wuoz_alerts

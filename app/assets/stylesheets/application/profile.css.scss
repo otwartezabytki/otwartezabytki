@@ -1219,11 +1219,49 @@ span.block {
 
 section.edit{
   width: 747px;
+  position: relative;
   .row {
     padding: 15px 20px;
+    textarea.redactor{
+      width: 100%;
+      @include box-shadow(inset 0 1px 3px 0 rgba(0,0,0,.3), 0 1px 1px 0 rgba(0,0,0,.1));
+      @include border-radius(2px);
+      border: 1px solid #646464;
+      margin-top: 10px;
+    }
   }
   .row + .row {
     padding-top: 0;
+  }
+  .opacity{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.2);
+    left: 0;
+    top: 0;
+    min-height: 360px;
+  }
+  .loading{
+    position: absolute;
+    width: 100%;
+    height: 360px;
+    left: 0;
+    top: 0;
+    display: table;
+    .inner{
+      display: table-cell;
+      vertical-align: middle;
+      text-align: center;
+      .loader{
+        width: 24px;
+        height: 24px;
+        border-radius: 4px;
+        padding: 10px;
+        background: asset-data-url("fancybox/fancybox_overlay.png");
+        margin: 0 auto;
+      }
+    }
   }
   form{
     label{

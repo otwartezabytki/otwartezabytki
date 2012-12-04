@@ -50,3 +50,22 @@ If you don't do that, the settings won't be applied.
   pg_dump -h localhost -cxOWU user_name db_name | gzip > db/dump/$(date +"%m_%d_%Y").sql.gz
 ```
 
+### Redactor.js license
+
+Redactor.js is proprietary software, you can disable it by issuing following commands:
+
+```bash
+rm $(find app -type f -name 'redactor*')
+sed -i '.bak' '/redactor/d' $(grep -l -E '/redactor|)\.redactor' -r app)
+```
+
+### Troubleshooting
+
+Problem:
+
+    500 : {"error":"SearchPhaseExecutionException[Failed to execute phase [query], total failure; shardFailures {[_na_][development-relics][0]: No active shards}{[_na_][development-relics][1]: No active shards}{[_na_][development-relics][2]: No active shards}{[_na_][development-relics][3]: No active shards}{[_na_][development-relics][4]: No active shards}]","status":500}
+
+Solution:
+
+    rm -rf /usr/local/var/elasticsearch/elasticsearch_$(whoami)/*
+    elasticsearch restart

@@ -34,23 +34,25 @@ $.fn.specialize
 
     map: -> map
 
-    zoom_at: (lat, lng) ->
+    zoom_at: (lat, lng, zoom = 17) ->
       if window.map
         window.map.setCenter(lat, lng)
+        console.log(zoom)
+        window.map.map.setZoom(zoom)
       else
         window.map = new GMaps
           div: '#map_canvas'
           width: 340
           height: 340
-          zoom: 17
+          zoom: zoom
           lat: lat
           lng: lng
           mapTypeId: google.maps.MapTypeId.HYBRID
 
-    auto_zoom: ->
+    auto_zoom: (zoom = 17) ->
       latitude = $('#relic_latitude').val().toNumber()
       longitude = $('#relic_longitude').val().toNumber()
-      this.zoom_at(latitude, longitude)
+      this.zoom_at(latitude, longitude, zoom)
       map.removeMarkers()
       this.circle_marker(latitude, longitude)
 
@@ -123,11 +125,12 @@ window.ensure_geolocation = ->
   else
     $('#relic_latitude').val 52.4118436
     $('#relic_longitude').val 19.0984013
+    $('#map_canvas').auto_zoom(6)
     try
       navigator.geolocation.getCurrentPosition (pos) ->
         $('#relic_latitude').val pos.coords.latitude
         $('#relic_longitude').val pos.coords.longitude
-        $('#map_canvas').auto_zoom()
+        $('#map_canvas').auto_zoom(17)
 
 jQuery.initializer 'section.edit.location', ->
   $('#relic_place_id').select2()
@@ -192,3 +195,8 @@ jQuery.initializer 'section.edit.location', ->
     location = countries_locations[$(this).val()]
     $('#map_canvas').zoom_at(location[0], location[1])
     map.setZoom(5)
+
+jQuery.initializer 'section.edit.location', ->
+  $("form.relic").submit ->
+    $("section.edit").append('<div class="opacity"></div>').append '<div class="loading"><div class="inner"><div class="loader"><img src="/assets/fancybox/fancybox_loading.gif" alt="loading..." /></div></div></div>'
+    submit = $(this).find(":submit").attr("value", "Zapisuję").css("padding", "0 31px")

@@ -1,0 +1,1 @@
+json.(widget, :id, :uid, :snippet)
