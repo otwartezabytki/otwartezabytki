@@ -145,6 +145,29 @@ a {
   }
 }
 
+.btn {
+  margin: 3px 3px 0 0;
+  @include gradient(#4b6d7e, #436576);
+  color: #fff;
+  border: 0;
+  font-size: 12px;
+  font-weight: 300;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
+  text-transform: uppercase;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  padding: 5px 16px 4px 19px;
+  cursor: pointer;
+  &:hover {
+    @include gradient(#437994, #2b607b);
+    color: #fff;
+  }
+  &:active {
+    @include gradient(#2b607b, #437893);
+    color: #fff;
+  }
+}
+
 .form-search {
   float: left;
   margin: 13px 0 0 15px;
@@ -156,6 +179,9 @@ a {
   box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1), inset 0 1px 3px 0 rgba(0, 0, 0, 0.3);
   .control-group {
     float: left;
+  }
+  .btn {
+    float: right;
   }
   .search-query {
     background: asset-data-url('icon-search.png') 12px 50% no-repeat;
@@ -169,27 +195,6 @@ a {
     margin: 0;
     &:focus {
       outline: 0;
-    }
-  }
-  .btn {
-    float: right;
-    margin: 3px 3px 0 0;
-    @include gradient(#4b6d7e, #436576);
-    color: #fff;
-    border: 0;
-    font-size: 12px;
-    font-weight: 300;
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
-    text-transform: uppercase;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-    padding: 5px 16px 4px 19px;
-    cursor: pointer;
-    &:hover {
-      @include gradient(#437994, #2b607b);
-    }
-    &:active {
-      @include gradient(#2b607b, #437893);
     }
   }
 }

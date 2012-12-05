@@ -1,6 +1,9 @@
 jQuery.initializer 'section.edit.events', ->
   $section = $(this)
 
+  # don't await for photo if entered second time
+  $.cookie('event_avaiting_photo', '')
+
   $('.add_event').click ->
     template = $($(this).data('template'))
     html = template.html()
@@ -11,6 +14,16 @@ jQuery.initializer 'section.edit.events', ->
     $(html).appendTo(template.parent())
     $section.find('.event-position').each (index) ->
       $(this).val(index + 1)
+    template.parent().find('li:last input:first').focus()
+    false
+
+  $(this).on 'click', '.add_photo, .edit_photo', ->
+    if match = $(this).parent('li').attr('id')?.match(/\d+/)
+      $.cookie('event_avaiting_photo', match[0])
+      $("form.relic").submit()
+    else
+      alert('Musisz najpierw zapisać to wydarzenie.')
+
     false
 
   $(this).on 'click', '.remove_event', ->

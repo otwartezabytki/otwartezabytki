@@ -18,8 +18,9 @@
 class Event < ActiveRecord::Base
   belongs_to :relic
   belongs_to :user
+  belongs_to :photo
 
-  attr_accessible :date, :name, :position, :as => [:default, :admin]
+  attr_accessible :date, :name, :position, :photo_id, :as => [:default, :admin]
   attr_accessible :user_id, :relic_id, :as => [:admin]
 
   acts_as_list :scope => :relic

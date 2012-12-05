@@ -1,7 +1,7 @@
 @import "compass/layout";
 @import "compass/css3";
 
-.events{
+.edit_relic section.events{
   p.header{
     font-size: 11px;
     text-transform: uppercase;
@@ -131,9 +131,42 @@
       }
       .string{
         .input input{
-          width: 375px;
+          width: 300px;
         }
       }
+      .add_photo {
+        padding-left: 20px;
+        color: #090;
+        font-size: 12px;
+        line-height: 25px;
+        font-weight: normal;
+        float: right;
+        margin-right: 25px;
+        position: absolute;
+        top: 10px;
+        right: 55px;
+      }
+
+      .edit_photo {
+        padding-left: 20px;
+        color: #e8da02;
+        font-size: 12px;
+        line-height: 25px;
+        font-weight: normal;
+        float: right;
+        margin-right: 25px;
+        position: absolute;
+        top: 10px;
+        right: 75px;
+      }
+
+      .event_photo {
+        position: absolute;
+        top: 10px;
+        right: 139px;
+        width: 23px;
+      }
+
       .remove_event{
         background: asset-data-url("icon-delete.png") 2px 4px no-repeat;
         padding-left: 20px;

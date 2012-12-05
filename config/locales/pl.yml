@@ -959,6 +959,9 @@ pl:
     photos:
       description: "Załącz jedno lub więcej zdjęcie zabytku. Zadbaj o to, aby przeglądanie zdjęć sprawiało przyjemność innym użytkownikom - zamieszczaj wyłącznie zdjęcia dobrej jakości."
       name: Zdjęcia
+    attachments:
+      description: "Wybierz zdjęcie, które chcesz załączyć:"
+      name: "Wybierz zdjęcie..."
   support:
     array:
       last_word_connector: " i "
@@ -1171,6 +1174,8 @@ pl:
         step4: "krok 4"
     relics:
       edit:
+        add_photo: "dodaj zdjęcie"
+        edit_photo: "zmień"
         add_and_save: "dodaj i zapisz"
         cancel: anuluj
         categories:

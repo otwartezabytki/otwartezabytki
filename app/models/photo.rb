@@ -22,6 +22,7 @@ class Photo < ActiveRecord::Base
 
   belongs_to :relic
   belongs_to :user
+  has_many :events
 
   attr_accessible :author, :file, :date_taken, :as => [:default, :admin]
   attr_accessible :relic_id, :user_id, :as => :admin

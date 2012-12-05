@@ -2,7 +2,7 @@
 @import "compass/css3";
 @import "../mixins";
 
-.edit_relic section.photos {
+.edit_relic section.attachments {
   form{
     .photo{
       border-bottom: 1px solid #bfbfbf;
@@ -26,7 +26,7 @@
         }
       }
     }
-    p{ 
+    p{
       strong{
         font-weight: 700;
         font-size: 14px;

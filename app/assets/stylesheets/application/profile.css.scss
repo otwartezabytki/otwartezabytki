@@ -10,6 +10,7 @@
  *= require ./profile/location
  *= require ./profile/photos
  *= require ./profile/alerts
+ *= require ./profile/attachments
 */
 
 @import "compass/layout";
@@ -200,139 +201,6 @@
         padding-right: 140px;
         margin: 0;
       }
-    }
-  }
-
-
-  section.photos {
-    .photo-attributes{
-      .photo{
-        .column-right{
-          width: 525px;
-        }
-      }
-    }
-    .photo {
-      clear: both;
-      margin-bottom: 16px;
-
-      &.hidden {
-        display: none;
-      }
-
-      .column-left {
-        display: inline-block;
-        margin-right: 5px;
-        text-align: center;
-        vertical-align: top;
-      }
-
-      .column-right {
-        display: inline-block;
-        vertical-align: top;
-        width: 557px;
-      }
-
-      .preview-placeholder {
-        background: #eee;
-      }
-    }
-
-    input[type="text"] {
-      width: 535px;
-    }
-
-    .progressbar {
-      position: relative;
-      height: 10px;
-      margin: 10px 0;
-      &.ui-progressbar{
-        overflow: visible;
-        .ui-widget-header{
-          @include gradient(#6a8593, #3a5663);
-          border: 0;
-          margin: 0;
-        }
-      }
-      &.ui-widget-content{
-        border: 1px solid #646464;
-      }
-    }
-
-    .progressbar .value {
-      position: absolute;
-      left: 49%;
-      top: 16px;
-      font-size: 12px;
-      font-family: 'Open Sans', sans-serif;
-    }
-
-  }
-
-  section.documents {
-    .document {
-      clear: both;
-      margin-bottom: 16px;
-
-      &.hidden {
-        display: none;
-      }
-
-      .column-left {
-        display: inline-block;
-        margin-right: 5px;
-        text-align: center;
-        vertical-align: top;
-      }
-
-      .column-right {
-        display: inline-block;
-        vertical-align: top;
-      }
-
-      .preview {
-        position: relative;
-        margin: 0 5px 0 0;
-      }
-
-      .preview-placeholder {
-        background: #eee;
-      }
-    }
-
-    input[type="text"] {
-      width: 590px;
-    }
-
-    .progressbar {
-      position: relative;
-      height: 10px;
-      margin: 10px 0;
-      &.ui-progressbar{
-        overflow: visible;
-        .ui-widget-header{
-          @include gradient(#6a8593, #3a5663);
-          border: 0;
-          margin: 0;
-        }
-      }
-      &.ui-widget-content{
-        border: 1px solid #646464;
-      }
-    }
-
-    .progressbar .value {
-      position: absolute;
-      left: 49%;
-      top: 16px;
-      font-size: 12px;
-      font-family: 'Open Sans', sans-serif;
-    }
-
-    .photo_upload {
-      display: block;
-      margin: 10px 0;
-      clear: both;
     }
   }
 }

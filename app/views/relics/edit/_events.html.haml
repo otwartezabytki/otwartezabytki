@@ -17,6 +17,12 @@
             = f2.input :name, :label => false, :hint => false, :class => "info"
             = f2.hidden_field :position, :class => "event-position"
             = f2.hidden_field :_destroy
+            - if event.photo.blank?
+              = link_to t('views.relics.edit.add_photo'), '#', :class => "add_photo"
+            - else
+              = image_tag event.photo.file.url(:icon), :class => "event_photo"
+              = link_to t('views.relics.edit.edit_photo'), '#', :class => "edit_photo"
+
             = link_to t('views.relics.edit.delete'), '#', :class => "remove_event"
 
       %script{ :type => "text/html", :id => "event_template", :"data-next-id" => relic.events.length }
@@ -26,6 +32,7 @@
             = f2.input :name, :label => false, :hint => false, :class => "info"
             = f2.hidden_field :position, :class => "event-position"
             = f2.hidden_field :_destroy
+            = link_to t('views.relics.edit.add_photo'), '#', :class => "add_photo"
             = link_to t('views.relics.edit.delete'), '#', :class => "remove_event"
 
     .add-event

@@ -68,16 +68,34 @@ class RelicsController < ApplicationController
       redirect_to relic_path(relic.id) and return
     end
 
+    if params[:photo_id].present? && cookies[:event_avaiting_photo].present?
+      relic.events_attributes = [
+        {
+          :id => cookies[:event_avaiting_photo].to_i,
+          :photo_id => params[:photo_id]
+        }
+      ]
+    end
+
     if relic.save
       if params[:entry_id]
         params[:entry_id] = nil
         render 'edit' and return
+      elsif cookies[:event_avaiting_photo].present?
+        if params[:photo_id].present?
+          cookies.delete(:event_avaiting_photo)
+          flash[:notice] = t('notices.changes_has_been_saved')
+          redirect_to edit_relic_path(relic.id, :section => params[:section])
+        else
+          redirect_to edit_relic_path(relic.id, :section => 'attachments')
+        end
       else
         if params[:section] == "photos"
           flash[:notice] = t('notices.gallery_has_been_updated')
         else
           flash[:notice] = t('notices.changes_has_been_saved')
         end
+
         redirect_to edit_relic_path(relic.id, :section => params[:section])
       end
     else
