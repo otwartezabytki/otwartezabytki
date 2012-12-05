@@ -101,5 +101,4 @@ jQuery.initializer 'div.new_relic section.main', ->
         $('#map_canvas').set_marker(marker_lat, marker_lng)
         $('form.relic .actions').show()
 
-    $('#map_canvas').auto_zoom()
     $('#map_canvas').blinking()

@@ -175,7 +175,6 @@ jQuery.initializer 'section.edit.location', ->
         marker_lng = lng + width * x_offset / $(this).width()
         $('#map_canvas').set_marker(marker_lat, marker_lng)
 
-    $('#map_canvas').auto_zoom()
     $('#map_canvas').blinking()
 
     if $('form.relic').hasClass('geocoded')
@@ -193,8 +192,7 @@ jQuery.initializer 'section.edit.location', ->
   $('#relic_country_code').select2()
   $('#relic_country_code').change ->
     location = countries_locations[$(this).val()]
-    $('#map_canvas').zoom_at(location[0], location[1])
-    map.setZoom(5)
+    $('#map_canvas').zoom_at(location[0], location[1], 5)
 
 jQuery.initializer 'section.edit.location', ->
   $("form.relic").submit ->
