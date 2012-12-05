@@ -1067,9 +1067,16 @@ pl:
             relic: "został utworzony"
             photo: "zdjęcie zostało dodane"
             link: "link został dodany"
+            document: "dokument został utworzony"
+            alert: "zgłoszono alert"
+            entry: "dodano ciekawostkę"
+            event: "dodano wydarzenie"
           destroy:
             photo: "zdjęcie zostało usunięte"
             link: "link został usunięty"
+            document: "dokument został usutnięty"
+            entry: "usunięto ciekawostkę"
+            event: "usunięto wydarzenie"
         stats_info:
           total_html: "<span>%{count}</span>wszystkich zabytków w bazie <br/> w tym"
           unchecked_html:

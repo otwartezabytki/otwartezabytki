@@ -35,6 +35,7 @@ class RecentRevision
     when 'create'
       I18n.t("views.pages.home.revision_change.create.#{version.item_type.downcase}")
     when 'destroy'
+      return nil if ['relic', 'alert'].inlcude? version.item_type.downcase
       I18n.t("views.pages.home.revision_change.destroy.#{version.item_type.downcase}")
     else
       nil
