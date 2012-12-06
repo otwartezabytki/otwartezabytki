@@ -29,7 +29,6 @@ class ApplicationController < ActionController::Base
 
   # for ajax history management
   before_filter do
-    sleep 1;
     response.headers['x-path'] = request.fullpath
   end
 

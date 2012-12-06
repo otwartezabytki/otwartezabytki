@@ -86,7 +86,7 @@ $.fn.specialize
       $('#map_canvas').zoom_at(lat, lng)
 
     blinking: ->
-      clearTimeout(map.timer) if map.timer
+      clearTimeout(map.timer) if map && map.timer
       if map && $('#map_canvas').length
         unless $('form.relic').hasClass('geocoded')
           map.counter ||= 1
@@ -157,7 +157,9 @@ jQuery.initializer 'section.edit.location', ->
     false
 
   window.ensuring_google_maps_loaded ->
-    window.ensure_geolocation
+
+    window.ensure_geolocation()
+
     $('#marker').draggable
       revert: true
 
