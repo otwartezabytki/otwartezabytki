@@ -6,3 +6,5 @@
 .row
   = link_to edit_relic_path(relic, :section => 'photos'), :class => 'btn', :remote => true do
     %strong dodaj nowe zdjęcie do zabytku
+  lub
+  = link_to 'anuluj', edit_relic_path(relic, :section => :events), :remote => true
