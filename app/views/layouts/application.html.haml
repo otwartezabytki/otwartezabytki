@@ -78,6 +78,9 @@
         #root-footer
       %footer#footer.container= render 'shared/footer'
     #fb-root
+
+    #fancybox_loader_container
+      #fancybox_loader
     != include_gon(:camel_case => true)
     != javascript_include_tag "application"
     != yield :footer_javascripts

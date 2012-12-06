@@ -26,6 +26,7 @@
  *= require vendor/colorbox
 */
 
+@import "compass/css3";
 
 .under_construction {
   border-top: 1px solid gainsboro;
@@ -89,5 +90,27 @@
   .content_more_about{
     margin-top: 0;
     font-weight: normal;
+  }
+}
+
+#fancybox_loader_container {
+  display: none;
+  z-index: 1e6;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  #fancybox_loader {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    margin-left: -50px;
+    margin-top: -50px;
+    opacity: 0.5;
+    background-color: black;
+    @include border-radius(10px);
   }
 }
