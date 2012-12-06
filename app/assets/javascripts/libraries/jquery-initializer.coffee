@@ -64,6 +64,9 @@ ajax_callback = (data, status, xhr) ->
           #   window.location.href = window.location.pathname
           $('#fancybox_loader_container').show()
           $.ajax(window.location.pathname).success(ajax_callback).complete(-> popping_state = false)
+        afterLoad: ->
+          if !float_fancybox && ($('.fancybox-wrap').position().top - 20) < $(window).scrollTop()
+            $(window).scrollTop($('.fancybox-wrap').position().top - 20)
 
     try_to_process_replace = (node) ->
       # if node to replace is not found, redirect
@@ -79,6 +82,7 @@ ajax_callback = (data, status, xhr) ->
         if to_replace.length
           to_replace.replaceWith(node)
           $(node).initialize()
+          $.fancybox.trigger('afterLoad')
         else
           if data_replace_parent && !$(node).is('[data-fancybox]')
             try_to_process_replace(data_replace_parent)

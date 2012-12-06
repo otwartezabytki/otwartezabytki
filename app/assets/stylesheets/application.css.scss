@@ -95,7 +95,7 @@
 
 #fancybox_loader_container {
   display: none;
-  z-index: 1e6;
+  z-index: 2147483600 !important;
   position: fixed;
   top: 0;
   left: 0;
