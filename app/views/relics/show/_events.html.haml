@@ -7,6 +7,8 @@
         %ul
           - relic.all_events.each do |event|
             %li
+              - if event.photo.present?
+                = image_tag event.photo.file.url(:icon)
               - if event.relic_id == relic
                 %strong= event.date
                 \-

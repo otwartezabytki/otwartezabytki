@@ -26,6 +26,11 @@ jQuery.initializer 'section.edit.events', ->
 
     false
 
+  $(this).on 'click', '.remove_photo', ->
+    $(this).parent('li').find('input[id$="photo_id"]').val('')
+    $("form.relic").submit()
+    false
+
   $(this).on 'click', '.remove_event', ->
     if confirm("Czy na pewno?")
       $(this).parents('.event:first').hide()

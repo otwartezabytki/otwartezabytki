@@ -1176,6 +1176,7 @@ pl:
       edit:
         add_photo: "dodaj zdjęcie"
         edit_photo: "zmień"
+        remove_photo: "usuń"
         add_and_save: "dodaj i zapisz"
         cancel: anuluj
         categories:
