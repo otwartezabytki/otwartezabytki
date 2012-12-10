@@ -1,0 +1,6 @@
+%section.translation-edit{ :'data-replace' => 'section.translation-edit' }
+  - if request.xhr?
+    = render 'shared/flash', :flash => flash
+  = semantic_form_for translation, :url => translation_path(:id => translation.phrase.key), :remote => true do |f|
+    = f.input :text, :input_html => {:rows => 20, :cols => 60, :value => format_i18n_text_area_value(translation.text)}
+    = f.actions

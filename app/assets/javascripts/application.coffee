@@ -22,6 +22,8 @@
 #= require_tree ./libraries
 #= require profile
 #= require_tree ./application
+#= require hamlcoffee
+#= require_tree ./templates
 
 # FIX data-dismiss
 $(document).on 'click', '[data-dismiss]', (e) ->
@@ -64,3 +66,18 @@ jQuery ->
 
   target = document.getElementById('fancybox_loader');
   spinner = new Spinner(opts).spin(target);
+
+
+$(document).on 'click', 'i18n', (e) ->
+  e.preventDefault()
+  $i18n = $(this)
+  path = Routes.edit_translation_path({id: $i18n.data('key')})
+  $.ajax(path).success(ajax_callback)
+  # $.fancybox
+  #   type: 'ajax'
+  #   href: Routes.edit_translation_path({id: $i18n.data('key')})
+  #   afterClose: ->
+  #     $.get Routes.translation_path({id: $i18n.data('key')}), $i18n.data('options')+"&t=#{+Date.now()}", (response) ->
+  #       console.log response
+  #       $("i18n[data-key='#{$i18n.data('key')}']").html(response)
+

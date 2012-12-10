@@ -1,0 +1,20 @@
+!!! 5
+%html(lang="en")
+  %head
+    %meta(charset="utf-8")
+    = csrf_meta_tags
+    /[if lt IE 9]
+      = javascript_include_tag "http://html5shim.googlecode.com/svn/trunk/html5.js"
+    = stylesheet_link_tag "application", :media => "all"
+    = stylesheet_link_tag "iframe", :media => "all"
+    /[if lt IE 9]
+      = stylesheet_link_tag "ie8", :media => "all"
+    %link{:href => "http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,600,300&subset=latin,latin-ext", :rel => "stylesheet", :type => "text/css"}
+  %body{ :class => [controller_name, action_name].join(' ') }
+    #root
+      %section#main
+        .container.main-container{ :'data-replace' => '.main-container' }
+          = render 'shared/flash', :flash => flash
+          .row= yield
+    != include_gon(:camel_case => true)
+    != javascript_include_tag "application"

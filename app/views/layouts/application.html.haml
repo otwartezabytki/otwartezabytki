@@ -30,7 +30,7 @@
             %h1
               %a(href=root_path) Otwarte Zabytki
             %section.disclaimer
-              Wciąż udoskonalamy serwis i poprawiamy błędy. Jeśli masz jakieś uwagi lub znajdziesz błąd, prosimy o informację na: 
+              Wciąż udoskonalamy serwis i poprawiamy błędy. Jeśli masz jakieś uwagi lub znajdziesz błąd, prosimy o informację na:
               %a{:href => "mailto:kontakt-oz@centrumcyfrowe.pl"} kontakt-oz@centrumcyfrowe.pl
             %nav#userNav
               %ul
@@ -69,7 +69,7 @@
                   .arrow
                   = link_to t('layouts.application.browse'), "#", :class => "browse"
                   - unless request.xhr?
-                    = render 'shared/browse'
+                    / = render 'shared/browse'
         %section#main
           .container.main-container{ :'data-replace' => '.main-container' }
             = render 'shared/flash', :flash => flash

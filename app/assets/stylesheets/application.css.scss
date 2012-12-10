@@ -28,6 +28,11 @@
 
 @import "compass/css3";
 
+i18n {
+  background-color: red !important;
+}
+#root .main-container {width: 100%; height: 100%;}
+
 .under_construction {
   border-top: 1px solid gainsboro;
   div {
