@@ -453,6 +453,12 @@ a {
   }
 }
 
+.pages.show, .relics.download{
+  #menu nav ul li.gradient #browse-list{
+    top: 59px;
+  }
+}
+
 #menu {
   .container {
     border-top: 1px solid #dcdcdc;
@@ -471,6 +477,13 @@ a {
             border-color: $blue-hover transparent transparent transparent;
           }
         }
+        &:hover > .shown + .arrow{
+          border-color: transparent transparent $dark-blue transparent;
+        }
+        &.current{
+          @include background(linear-gradient(top left, #eff1f2, #e9ecee));
+          @include box-shadow(0 5px 15px 0 rgba(0,0,0,0.3));
+        }
         &:last-child{
           width: 111px;
         }
@@ -485,6 +498,12 @@ a {
           left: 110px;
           z-index: 1;
         }
+        .shown{
+          + .arrow{
+            border-width: 0 5.5px 8px 5.5px;
+            border-color: transparent transparent #313132 transparent;
+          }
+        }
         a{
           margin-right: 0;
         }
@@ -493,7 +512,7 @@ a {
           width: 537px;
           top: 60px;
           right: 0;
-          z-index: 12;
+          z-index: 13;
           @include gradient(#edf0f1, #d0d6db);
           padding: 20px;
           @include border-radius(2px 0 2px 2px);
@@ -544,6 +563,7 @@ a {
                   -o-border-radius: 2px;
                   border-radius: 2px;
                   font-style: normal;
+                  font-weight: bold;
                 }
                 ul{
                   margin: 8px 0;
@@ -561,9 +581,9 @@ a {
           }
           h4{
             position: relative;
+            left: -12px;
             .sacral-options{
               padding-left: 13px;
-              text-decoration: underline;
               &::before{
                 content: '';
                 width: 0px;
@@ -599,6 +619,9 @@ a {
             display: inline-block;
             width: 100%;
             padding-left: 0;
+            &:hover{
+              text-decoration: underline;
+            }
             em {
               background: #DCE4E8;
               color: #236282;
@@ -612,6 +635,7 @@ a {
               -o-border-radius: 2px;
               border-radius: 2px;
               font-style: normal;
+              font-weight: bold;
             }
           }
         }

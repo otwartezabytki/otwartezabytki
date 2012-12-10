@@ -63,11 +63,11 @@
                   = link_to t('layouts.application.widgets'), widgets_path, :class => "widgets #{'current' if current_page?(widgets_path)}"
                 %li
                   = link_to t('layouts.application.addrelic'), new_relicbuilder_path, :class => "add-relic #{'current' if current_page?(new_relicbuilder_path)}"
-                %li.gradient
+                %li.gradient{:class => " #{'current' if current_page?(relics_path)}"}
                   = link_to t('layouts.application.search'), relics_path, :class => "search #{'current' if current_page?(relics_path)}"
-                %li.gradient
-                  .arrow
+                %li.gradient                
                   = link_to t('layouts.application.browse'), "#", :class => "browse"
+                  .arrow
                   - unless request.xhr?
                     = render 'shared/browse'
         %section#main
