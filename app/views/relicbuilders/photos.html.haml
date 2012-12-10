@@ -57,5 +57,6 @@
 
             = f.input :license_agreement, :input_html => { :checked => 'checked' }, :as => :boolean, :label => t('views.relics.edit.photos.statement_html')
 
-          .actions
+          .actions.relic-photos
+            = link_to t('views.relicbuilders.stages.back').html_safe, details_relicbuilder_path(:id => @relic.try(:id)), :class => "back"
             = f.submit (@relic.is_group? ? t('views.relicbuilders.photos.submit_relic_group') : t('views.relicbuilders.photos.submit'))

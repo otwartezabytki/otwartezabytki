@@ -1172,6 +1172,7 @@ pl:
         step2: "krok 2"
         step3: "krok 3"
         step4: "krok 4"
+        back: "&laquo; wróć do poprzedniego kroku"
     relics:
       edit:
         add_photo: "dodaj zdjęcie"

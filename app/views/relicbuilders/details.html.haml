@@ -9,5 +9,7 @@
         = f.hidden_field :build_state
         = f.input :identification, :as => :string, :label => t('views.relicbuilders.details.name'), :hint => false
         = f.input :reason, :input_html => { :class => 'redactor' }, :label => t('views.relicbuilders.details.reason')
-        .actions
+        .actions.relic-details
+          - p = [:id, :latitude, :longitude, :place_id, :parent_id].inject(address_params){|m, p| m[p] ||= @relic.send(p);m}
+          = link_to t('views.relicbuilders.stages.back').html_safe, address_relicbuilder_path(p), :class => "back"
           = f.submit t('views.relicbuilders.next_step_html')
