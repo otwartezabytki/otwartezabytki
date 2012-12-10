@@ -17,6 +17,8 @@ Otwartezabytki::Application.routes.draw do
   }
   resources :tags, :only => :index
 
+  resources :users, :only => [:show]
+
   resources :relics, :except => [:new, :create, :destroy] do
     member do
       match 'section/:section/edit', :to => 'relics#edit', :as => 'edit_section'

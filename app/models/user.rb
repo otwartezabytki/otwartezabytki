@@ -111,6 +111,10 @@ class User < ActiveRecord::Base
     save!
   end
 
+  def to_param
+    self.username
+  end
+
   class << self
     def reset_password_by_token(attributes={})
       recoverable = find_or_initialize_with_error_by(:reset_password_token, attributes[:reset_password_token])
@@ -125,5 +129,4 @@ class User < ActiveRecord::Base
       recoverable
     end
   end
-
 end
