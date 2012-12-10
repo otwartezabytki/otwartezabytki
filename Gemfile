@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 3.2.3'
+gem 'rails', '~> 3.2.3', github: 'sheerun/rails', branch: 'v3.2.9/multipart-fix'
 gem 'pg'
 
 # Gems used only for assets and not required
