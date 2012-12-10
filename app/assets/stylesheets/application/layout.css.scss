@@ -271,10 +271,13 @@ a {
         font-size: 15px;
         height: 35px;
         margin-top: 15px;
+        &:active {
+          @include gradient(#2b607b, #437893);
+        }
       }
       li{ list-style: none;}
       &.subject, &.place, &.time{
-        .input:before{
+        .input::before{
           content: "";
           opacity: 0.5;
           position: absolute;
@@ -282,21 +285,22 @@ a {
           height: 25px;
           left: 5px;
           bottom: 10px;
+          z-index: 13;
         }
       }
       &.subject{
-        .input:before{
+        .input::before{
           background: asset-data-url("edit-relic-ico-tags.png") no-repeat center center;
         }
       }
       &.place{
-        .input:before{
+        .input::before{
           background: asset-data-url("edit-relic-ico-location.png") no-repeat center center;
         }
       }
       &.time{
         .input{ position: relative;}
-        .input:before{
+        .input::before{
           left: 1px;
           bottom: 7px;
           background: asset-data-url("edit-relic-ico-date.png") no-repeat center center;
@@ -512,7 +516,7 @@ a {
           width: 537px;
           top: 60px;
           right: 0;
-          z-index: 13;
+          z-index: 14;
           @include gradient(#edf0f1, #d0d6db);
           padding: 20px;
           @include border-radius(2px 0 2px 2px);
@@ -2143,7 +2147,6 @@ ul.nav li a.selected {
   @include gradient(#f8e8c9, #efdfc0);
   position: relative;
   padding: 15px 25px;
-  margin-top: 15px;
   border-top: 1px solid #dcdcdc;
   div.icon {
     display: inline-block;

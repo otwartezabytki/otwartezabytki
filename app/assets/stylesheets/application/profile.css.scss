@@ -639,9 +639,11 @@ section.show.general{
 }
 
 section.show.description{
-  .content p, span{
+  .content, .content p, .content span{
     line-height: 22px;
     font-size: 14px;
+  }
+  .content p, .content span{
     margin-bottom: 15px;
     &:last-child{
       margin-bottom: 0;
@@ -815,6 +817,7 @@ section.show.alerts{
     text-shadow: none;
     font-size: 12px;
     filter: none;
+    line-height: 1.5;
     &:hover {
       background: none;
       color: red;
