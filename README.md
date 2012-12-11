@@ -59,6 +59,12 @@ rm $(find app -type f -name 'redactor*')
 sed -i '.bak' '/redactor/d' $(grep -l -E '/redactor|)\.redactor' -r app)
 ```
 
+### Translations
+
+Every new translation key add to pl.yml with default value. On deploy default values are copied to database by rake tolk:sync.
+To change translation on production use tolk or inline interface (you muse be an admin).
+To change sync local yaml file with production run script/load_production_translations this make dump on production load it to local db run sync and dump merged yml file.
+
 ### Troubleshooting
 
 Problem:
