@@ -111,6 +111,7 @@ pl:
         date_taken: "Data wykonania"
         relic: Zabytek
         relic_id: "ID zabytku"
+        description: "Opis"
       relic:
         ancestry: "W zespołach"
         approved: "Zabytek zatwierdzony"
@@ -800,6 +801,7 @@ pl:
       photo:
         author: "Podaj imię i nazwisko autora i/lub nick oraz źródło zdjęcia i nazwę licencji na której jest ono dostępne w Sieci (np. Mariusz 123, Wikipedia, CC BY-SA)."
         date_taken: "Podaj datę wykonania zdjęcia. Jeśli nie możesz jej ustalić wpisz \"nieznana\"."
+        description: "Opcjonalnie możesz opisać co znajduje się na zdjęciu:"
       relic:
         categories: "Wybierz kategorie, które Twoim zdaniem pasują do opisywanego zabytku."
         common_name: "Jeśli zabytek ma jedną lub więcej nazw zwyczajowych, wpisz je."

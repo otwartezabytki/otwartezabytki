@@ -99,7 +99,7 @@ class RelicsController < ApplicationController
         redirect_to edit_relic_path(relic.id, :section => params[:section])
       end
     else
-      flash[:error] = t('notices.please_correct_errors')
+      flash.now[:error] = t('notices.please_correct_errors')
       render 'edit' and return
     end
   end

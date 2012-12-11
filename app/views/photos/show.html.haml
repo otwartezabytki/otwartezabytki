@@ -20,6 +20,7 @@
             = t('activerecord.attributes.photo.date_taken')
             = tree_photo.date_taken
           %p= t('views.photos.show.license')
+          %p= sanitize tree_photo.description
         .info-right
           %p
             = t('views.photos.show.photo_belongs_to')
