@@ -1,8 +1,0 @@
-%h3= @key
-%form
-  %input{:value => @key}
-  %textarea{:rows => 20, :cols => 40}
-    = @value
-  %br
-  %button
-    Zapisz tłumaczenie

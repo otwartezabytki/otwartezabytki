@@ -138,8 +138,11 @@ module ApplicationHelper
   end
 
   def t(key, options = {})
-    value =  I18n.translate(scope_key_by_partial(key), options)
-    return value unless value.is_a?(String)
-    content_tag(:i18n, value, {:'data-key' => key, :'data-options' => {:options => options}.to_param}, false)
+    value = I18n.translate(scope_key_by_partial(key), options)
+    if current_user.try(:admin?) and value.is_a?(String)
+      content_tag(:i18n, value, {:'data-key' => key, :'data-options' => {:options => options}.to_param}, false)
+    else
+      value
+    end
   end
 end

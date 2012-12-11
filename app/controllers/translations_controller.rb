@@ -1,8 +1,8 @@
 # -*- encoding : utf-8 -*-
 class TranslationsController < ApplicationController
   helper Tolk::ApplicationHelper
-  include Tolk::ApplicationHelper
-  before_filter :enable_fancybox
+  before_filter :authenticate_admin!
+  before_filter :enable_fancybox, :enable_floating_fancybox
 
   expose(:translation) do
     obj = Tolk::Translation.lookup(I18n.locale, params[:id]).first
@@ -13,18 +13,14 @@ class TranslationsController < ApplicationController
     obj
   end
 
-  def show
-    options = params[:options].symbolize_keys
+  def update
+    options = (params[:options] || {}).symbolize_keys
     options[:count]   = options[:count].to_i  if options[:count]
     options[:amount]  = options[:amount].to_i if options[:amount]
 
-    render :text => I18n.translate(params[:id], options)
-  end
-
-  def update
     if translation.save
+      @text = I18n.translate(params[:id], options)
       flash.now[:notice] ='Tłumaczenie zostało zmienione'
-      render :js => '$.fancybox.close()'
     else
       flash.now[:error] = 'Wystąpiły błędy podczas zapisu'
       render 'edit'
