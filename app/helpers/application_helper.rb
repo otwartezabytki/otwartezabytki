@@ -84,7 +84,8 @@ module ApplicationHelper
   end
 
   def link_to_browse obj, deep, &block
-    name, id  = obj['term'].include?('_') ? obj['term'].split('_') : [I18n.t(obj['term'].upcase, :scope => 'countries'), obj['term']]
+    name, id  = extract_name(obj['term'])
+    Rails.logger.info "LABEL: #{[obj['term'], name]}"
     label     = "#{name} <span>#{obj['count']}</span>".html_safe
     cond      = {:search => {:location => (location_array.first(deep) << id).join('-')}}
     link      = link_to label, relics_path(cond)
@@ -98,7 +99,7 @@ module ApplicationHelper
   end
 
   def link_to_facet obj, deep, &block
-    name, id  = obj['term'].include?('_') ? obj['term'].split('_') : [I18n.t(obj['term'].upcase, :scope => 'countries'), obj['term']]
+    name, id  = extract_name(obj['term'])
     selected  = location_array[deep] == id
     label     = "#{name} <span>#{obj['count']}</span>".html_safe
     cond      = search_params({:location => (location_array.first(deep) << id).join('-')})
@@ -119,6 +120,16 @@ module ApplicationHelper
       output.join.html_safe + capture(&block)
     else
       output.join.html_safe
+    end
+  end
+
+  def extract_name term
+    if term.include?('_')
+      splt = term.split('_')
+      id = splt.pop
+      [splt.join('_'), id]
+    else
+      [I18n.t(term.upcase, :scope => 'countries'), term]
     end
   end
 
