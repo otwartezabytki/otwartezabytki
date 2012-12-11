@@ -8,7 +8,7 @@
           - relic.all_events.each do |event|
             %li
               - if event.photo.present?
-                = image_tag event.photo.file.url(:icon)
+                = link_to image_tag(event.photo.file.url(:icon)), relic_photo_path(relic.id, relic.all_photos.first.id), :remote => true
               - if event.relic_id == relic
                 %strong= event.date
                 \-

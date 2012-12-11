@@ -883,11 +883,16 @@ section.show.events{
       padding-left: 20px;
       background: asset-data-url("event-bullet.png") 5px 4px no-repeat;
       margin-bottom: 10px;
+      display: inline-block;
+      width: 265px;
       strong{
         font-weight: 700;
       }
       img{
         float: left;
+        margin-right: 10px;
+        border: 3px solid #fff;
+        box-shadow: 0 1px 2px 0 rgba(0,0,0,0.3);
       }
     }
 
@@ -1426,4 +1431,24 @@ section.show.subrelics{
   cursor: pointer;
   padding-top: 10px;
   margin: 10px 0;
+}
+
+.attachments .btn{
+  text-decoration: none;
+  strong{
+    font-weight: 700;
+  }
+}
+
+.attachment_list{
+  display: inline-block;
+  width: 710px;
+  form{
+    float: left;
+    margin: 0 10px 10px 0;
+    input[type="image"]{
+      border: 3px solid white;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+    }
+  }
 }
