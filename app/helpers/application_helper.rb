@@ -85,7 +85,6 @@ module ApplicationHelper
 
   def link_to_browse obj, deep, &block
     name, id  = extract_name(obj['term'])
-    Rails.logger.info "LABEL: #{[obj['term'], name]}"
     label     = "#{name} <span>#{obj['count']}</span>".html_safe
     cond      = {:search => {:location => (location_array.first(deep) << id).join('-')}}
     link      = link_to label, relics_path(cond)
