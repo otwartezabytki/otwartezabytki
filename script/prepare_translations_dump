@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+require 'yaml'
+RAILS_ENV = ENV['RAILS_ENV'] || 'development'
+APP_PATH = File.expand_path('../../',  __FILE__)
+db = YAML.load_file("#{APP_PATH}/config/database.yml")[RAILS_ENV]
+
+cmd = "PGPASSWORD='#{db['password']}' pg_dump -h localhost -cxOwU #{db['username']} #{db['database']} -t tolk_* | gzip > #{APP_PATH}/public/system/translations.sql.gz"
+system(cmd)

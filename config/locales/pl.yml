@@ -77,13 +77,13 @@ pl:
   activerecord:
     attributes:
       alert:
+        author: "Dane autora (imię, nazwisko)"
+        date_taken: "Data wykonania"
         description: "Opis:"
         file: "Zdjęcie:"
         relic: Zabytek
         relic_id: "ID zabytku"
         state: "Stan zgłoszenia"
-        author: "Dane autora (imię, nazwisko)"
-        date_taken: "Data wykonania"
       document:
         description: "Krótki opis"
         file: Plik
@@ -788,6 +788,7 @@ pl:
   formtastic:
     actions:
       search_html: "Szukaj &raquo;"
+    create: "Stwórz %{model}"
     hints:
       alert:
         description: "Napisz, co złego dzieje się z tym zabytkiem."
@@ -828,7 +829,6 @@ pl:
       search:
         place: gdzie
         q: co
-    create: "Stwórz %{model}"
     update: "Zaktualizuj %{model}"
   helpers:
     select:
@@ -864,15 +864,15 @@ pl:
     are_you_sure: "Czy jesteś pewien?"
   notices:
     alert_added: "Alert został dodany. Dziękujemy."
+    changes_has_been_saved: "Zmiany zostały zapisane. Dziękujemy!"
     gallery_has_been_updated: "Galeria zdjęć została zaktualizowana. Dziękujemy!"
-    new_relic_has_been_added: "Gratulacje dodałeś nowy zabytek"
     new_gruop_relic_has_been_added: "Gratulacje dodałeś zespół zabytków. Dodaj podzabytki tutaj:"
+    new_relic_has_been_added: "Gratulacje dodałeś nowy zabytek"
     please_correct_errors: "Popraw proszę błędy wskazane poniżej."
     relic_reverted: "Objekt został przywrócony do wskazanej wersji."
     reservation_thanks: "Dziękujemy za rejestrację! Na podany adres e-mail zostało wysłane Twoje hasło. Tymczasem zachęcamy do dalszego poprawiania zabytków:"
-    unpublished_photos_has_been_delete: "Ponieważ nie zgodziłeś się na opublikowanie dodanych zdjęć, zostały one usunięte."
     there_is_no_relics_in_the_area: "W naszej bazie nie ma zabytków znajdująych się w tej okolicy. Możesz kontynuować dodawanie zabytku"
-    changes_has_been_saved: "Zmiany zostały zapisane. Dziękujemy!"
+    unpublished_photos_has_been_delete: "Ponieważ nie zgodziłeś się na opublikowanie dodanych zdjęć, zostały one usunięte."
   number:
     currency:
       format:
@@ -934,6 +934,9 @@ pl:
       other: zabytków
       zero: zabytków
   relic_tabs:
+    attachments:
+      description: "Wybierz zdjęcie, które chcesz załączyć:"
+      name: "Wybierz zdjęcie..."
     categories:
       description: "Przypisz do zabytku odpowiednie tagi i kategorie. Kieruj się własnym uznaniem."
       name: "Kategorie i tagi"
@@ -1038,7 +1041,44 @@ pl:
     pages:
       home:
         revision_change:
+          ancestry: "zaktualizowano hirarchię w zespole zabytków"
+          approved: "zatewierdzono zabytek"
+          categories: "zaktualizowano kategorie"
+          common_name: "podano nazwę zwyczajową"
+          country_code: "edytowano kraj"
+          create:
+            alert: "zgłoszono alert"
+            document: "dokument został utworzony"
+            entry: "dodano ciekawostkę"
+            event: "dodano wydarzenie"
+            link: "link został dodany"
+            photo: "zdjęcie zostało dodane"
+            relic: "został utworzony"
+          dating_of_obj: "wprowadzono datę obiektu"
+          description: "zredagowano opis"
+          destroy:
+            document: "dokument został usutnięty"
+            entry: "usunięto ciekawostkę"
+            event: "usunięto wydarzenie"
+            link: "link został usunięty"
+            photo: "zdjęcie zostało usunięte"
+          documents_info: "wprowadzono informacje o dokumentach"
+          existence: "zmieniono stan"
+          fplace: "zmieniono miejscowość"
+          fprovince: "przypisano do prowincji"
+          identification: "edytowano nazwę"
+          latitude: "zaktualizowano położenie"
+          links_info: "wprowadzono informacje o odnośnikach"
+          longitude: "zaktualizowano położenie"
+          nid_id: "poprawiono numer rejestru"
+          place_id: "zmieniono miejscowość"
+          register_number: "poprawiono numer rejestru"
+          state: "zmieniono stan"
+          street: "poprawiono adres"
+          tags: "zaktualizowano tagi"
           update:
+            link: "zaktualizowano link"
+            photo: "zaktualizowano zdjęcie"
             relic:
               ancestry: "zaktualizowano hirarchię w zespole zabytków"
               approved: "zatewierdzono zabytek"
@@ -1061,43 +1101,26 @@ pl:
               state: "zmieniono stan"
               street: "poprawiono adres"
               tags: "zaktualizowano tagi"
-            photo: "zaktualizowano zdjęcie"
-            link: "zaktualizowano link"
-          create:
-            relic: "został utworzony"
-            photo: "zdjęcie zostało dodane"
-            link: "link został dodany"
-            document: "dokument został utworzony"
-            alert: "zgłoszono alert"
-            entry: "dodano ciekawostkę"
-            event: "dodano wydarzenie"
-          destroy:
-            photo: "zdjęcie zostało usunięte"
-            link: "link został usunięty"
-            document: "dokument został usutnięty"
-            entry: "usunięto ciekawostkę"
-            event: "usunięto wydarzenie"
         stats_info:
+          checked_html:
+            few: "<span>%{count}</span> zabytki sprawdzone"
+            many: "<span>%{count}</span> zabytków sprawdzonych"
+            one: "<span>%{count}</span> zabytek sprawdzony"
+            other: "<span>%{count}</span> zabytków sprawdzonych"
+            zero: "<span>%{count}</span> zabytków sprawdzonych"
+          filled_html:
+            few: "<span>%{count}</span> zabytki uzupełnione"
+            many: "<span>%{count}</span> zabytków uzupełnionych"
+            one: "<span>%{count}</span> zabytek uzupełniony"
+            other: "<span>%{count}</span> zabytków uzupełnionych"
+            zero: "<span>%{count}</span> zabytków uzupełnionych"
           total_html: "<span>%{count}</span>wszystkich zabytków w bazie <br/> w tym"
           unchecked_html:
-            zero:   "<strong>%{count}</strong> niesprawdzonych"
-            one:    "<strong>%{count}</strong> niesprawdzony"
-            few:    "<strong>%{count}</strong> niesprawdzone"
-            many:   "<strong>%{count}</strong> niesprawdzonych"
-            other:  "<strong>%{count}</strong> niesprawdzonych"
-          checked_html:
-            zero:   "<span>%{count}</span> zabytków sprawdzonych"
-            one:    "<span>%{count}</span> zabytek sprawdzony"
-            few:    "<span>%{count}</span> zabytki sprawdzone"
-            many:   "<span>%{count}</span> zabytków sprawdzonych"
-            other:  "<span>%{count}</span> zabytków sprawdzonych"
-          filled_html:
-            zero:   "<span>%{count}</span> zabytków uzupełnionych"
-            one:    "<span>%{count}</span> zabytek uzupełniony"
-            few:    "<span>%{count}</span> zabytki uzupełnione"
-            many:   "<span>%{count}</span> zabytków uzupełnionych"
-            other:  "<span>%{count}</span> zabytków uzupełnionych"
-          total:
+            few: "<strong>%{count}</strong> niesprawdzone"
+            many: "<strong>%{count}</strong> niesprawdzonych"
+            one: "<strong>%{count}</strong> niesprawdzony"
+            other: "<strong>%{count}</strong> niesprawdzonych"
+            zero: "<strong>%{count}</strong> niesprawdzonych"
     pagination:
       first: Pierwsza
       last: Ostatnia
@@ -1145,8 +1168,9 @@ pl:
         choose_html: "wybieram &raquo;"
         country_code: "W jakim kraju"
         drag_marker: "Przeciągnij znacznik na mapę"
-        header_html: "Jaka jest różnica między <span>zabytkiem</span> a zespołem <span>zabytków</span>?"
+        header_html: "Jaka jest różnica między <br/> <span>zabytkiem</span> a zespołem <span>zabytków</span>?"
         info: "Zabytek to pojedynczy obiekt (np. pałac). Natomiast zespół zabytków to powiązana przestrzennie grupa budynków wyodrębniona ze względu na formę architektoniczną, styl, zastosowane materiały, funkcję, czas powstania lub związek z wydarzeniami historycznymi. Np. może to być zespół fabryki, albo zespół kamienic w centrum pochodzących z jednego okresu."
+        intro1: "Sprawdź czy zabytek na pewno jeszcze nie znalazł się w naszej bazie. Zacznij od wpisania nazwy miejscowości (wciśnij szukaj, a mapa ustawi się w środku wybranej miejscowości), a potem wskaż obiekt na mapie. Następnie wciśnij \"przejdź dalej\". Pokaże się lista obiektów z naszej bazy, które znajdują się we wskazanej okolicy. Sprawdź, czy obiekt, który chcesz dodać, nie znajduje się na liście. Jeśli go nie ma, możesz kontynuować dodawanie zabytku do bazy,"
         intro1_html: "Sprawdź czy <span class='r_sa'>zabytek</span><span class='r_ze'>zespół zabytków</span> na pewno jeszcze nie znalazł się w naszej bazie. Zacznij od wpisania nazwy miejscowości (wciśnij szukaj, a mapa ustawi się w środku wybranej miejscowości), a potem wskaż obiekt na mapie. Następnie wciśnij \"przejdź dalej\". Pokaże się lista obiektów z naszej bazy, które znajdują się we wskazanej okolicy. Sprawdź, czy obiekt, który chcesz dodać, nie znajduje się na liście. Jeśli go nie ma, możesz kontynuować dodawanie <span class='r_sa'>zabytku</span><span class='r_ze'>zespołu zabytków</span> do bazy,"
         intro2: "*"
         no_results: "Brak wyników"
@@ -1184,10 +1208,8 @@ pl:
         back: "&laquo; wróć do poprzedniego kroku"
     relics:
       edit:
-        add_photo: "dodaj zdjęcie"
-        edit_photo: "zmień"
-        remove_photo: "usuń"
         add_and_save: "dodaj i zapisz"
+        add_photo: "dodaj zdjęcie"
         cancel: anuluj
         categories:
           name: Kategorie
@@ -1197,6 +1219,7 @@ pl:
           delete_confirm: "Czy aby na pewno?"
           delete_file: "Usuń plik"
           loading: "Trwa wgrywanie, proszę czekać..."
+        edit_photo: zmień
         events:
           action: Akcje
           add_new_one: "Dodaj kolejne wydarzenie..."
@@ -1233,8 +1256,8 @@ pl:
         filter_options: "Opcje filtrowania"
         kind: Rodzaj
         loading: "Trwa ładowanie wyników proszę czekać!!!"
-        no_results_html: "Żaden z zabytków w naszej bazie<br/>nie spełnia podanych kryteriów."
         no_results2_html: "Nie znalazłeś tego, czego szukałeś? Spróbuj użyć symbolu gwiazdki, np. Scheibler*"
+        no_results_html: "Żaden z zabytków w naszej bazie<br/>nie spełnia podanych kryteriów."
         order:
           az: A-Z
           score: Trafność

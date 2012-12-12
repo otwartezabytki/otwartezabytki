@@ -19,7 +19,7 @@ jQuery.fn.initialize = ->
 
 popping_state = false
 last_xhr = null
-ajax_callback = (data, status, xhr) ->
+window.ajax_callback = (data, status, xhr) ->
   $('#fancybox_loader_container').hide()
 
   if xhr.getResponseHeader('Content-Type').match(/text\/javascript/)
@@ -62,8 +62,10 @@ ajax_callback = (data, status, xhr) ->
           # history.pushState { autoreload: true, path: window.before_fancybox_url }, $('title').text(), window.before_fancybox_url
           # if last_xhr.getResponseHeader('x-logged')? && $('body').data('logged')? && $('body').data('logged').toString() != last_xhr.getResponseHeader('x-logged').toString()
           #   window.location.href = window.location.pathname
-          $('#fancybox_loader_container').show()
-          $.ajax(window.location.pathname).success(ajax_callback).complete(-> popping_state = false)
+          if $('#fancybox').length
+            $('#fancybox_loader_container').show()
+
+            $.ajax(window.location.pathname).success(ajax_callback).complete(-> popping_state = false)
         afterLoad: ->
           if !float_fancybox && ($('.fancybox-wrap').position().top - 20) < $(window).scrollTop()
             $(window).scrollTop($('.fancybox-wrap').position().top - 20)
@@ -76,7 +78,7 @@ ajax_callback = (data, status, xhr) ->
 
       data_replace_parent = $(node).parents('[data-replace]:first')[0]
 
-      if $('#fancybox').length && xhr.getResponseHeader('x-fancybox')
+      if xhr.getResponseHeader('x-fancybox')
         to_replace = $('.fancybox-wrap').find($(node).data('replace'))
 
         if to_replace.length

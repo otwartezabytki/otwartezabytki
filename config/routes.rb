@@ -47,6 +47,8 @@ Otwartezabytki::Application.routes.draw do
     end
   end
 
+  resources :translations, :only => [:edit, :update], :constraints => {:id => /[\w.]+/ }
+
   namespace :api do
     namespace :v1 do
 

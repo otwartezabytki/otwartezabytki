@@ -84,6 +84,11 @@ class ApplicationController < ActionController::Base
     cookies[:return_path] = request.fullpath if request.get?
   end
 
+  def authenticate_admin!
+    authenticate_user!
+    raise CanCan::AccessDenied unless current_user.try(:admin?)
+  end
+
   private
 
   def after_sign_in_path_for(resource)

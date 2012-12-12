@@ -1,0 +1,7 @@
+#!/bin/bash
+echo "# run translations dump on production"
+ssh oz-production@otwartezabytki.pl 'cd /var/www/otwartezabytki/production/current; script/prepare_translations_dump'
+echo "# load production dump to local db"
+curl http://otwartezabytki.pl/system/translations.sql.gz | gunzip -c | script/rails db
+echo "# dump and merge primary locale"
+bundle exec rake tolk:sync tolk:dump_primary_locale

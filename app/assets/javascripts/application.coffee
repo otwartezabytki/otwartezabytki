@@ -64,3 +64,24 @@ jQuery ->
 
   target = document.getElementById('fancybox_loader');
   spinner = new Spinner(opts).spin(target);
+
+  $('a.translation-mode').click (e) ->
+    e.preventDefault()
+    $el = $(this)
+    if $el.hasClass('on')
+      $el.removeClass('on')
+      $('i18n').removeClass('on')
+      $(document).off 'click', 'i18n'
+    else
+      $el.addClass('on')
+      $('i18n').addClass('on')
+      $(document).on 'click', 'i18n', (e) ->
+        e.preventDefault()
+        e.stopPropagation()
+        $i18n = $(this)
+        path = Routes.edit_translation_path({id: $i18n.data('key')})
+        $.ajax(path, data: $i18n.data('options')).success(ajax_callback)
+
+
+
+
