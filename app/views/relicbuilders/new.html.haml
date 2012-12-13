@@ -17,9 +17,10 @@
           %p= t('views.relicbuilders.new.info')
         %p.intro= t('views.relicbuilders.new.intro1_html')
       %section.creator-step
-        = semantic_form_for location, :as => 'location', :url => new_relicbuilder_path, :method => :get, :remote => true do |f|
+        = semantic_form_for location, :as => 'location', :url => new_relicbuilder_path(params), :method => :get, :remote => true do |f|
           = f.input :foreign_relic, :as => :boolean, :label => t('views.relicbuilders.new.add_foreign_relic')
-          = f.input :relic_group, :as => :boolean, :label => t('views.relicbuilders.new.add_relic_group')
+          - unless @relic.parent
+            = f.input :relic_group, :as => :boolean, :label => t('views.relicbuilders.new.add_relic_group')
 
           .field.text.search.marker
             .polish-location{:style => "#{ 'display: none;' unless f.object.foreign_relic.to_i.zero?}"}
