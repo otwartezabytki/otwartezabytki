@@ -12,7 +12,7 @@
                   = link_to t('views.relics.edit.photos.delete_photo'), relic_photo_path(relic.id, photo.id),
                     :method => :delete,
                     :remote => true,
-                    :confirm => t('views.relics.edit.photos.delete_confirm'),
+                    :confirm => t('views.relics.edit.photos.delete_confirm', :editable => false),
                     :class => "remove_photo"
               .column-right
                 = f2.input :author, :input_html => { :class => "author" }

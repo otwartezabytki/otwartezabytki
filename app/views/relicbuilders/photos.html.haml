@@ -23,7 +23,7 @@
                         = link_to t('views.relics.edit.photos.delete_photo'), relic_photo_path(@relic.id, photo.id, :build => true),
                           :method => :delete,
                           :remote => true,
-                          :confirm => t('views.relics.edit.photos.delete_confirm'),
+                          :confirm => t('views.relics.edit.photos.delete_confirm', :editable => false),
                           :class => "remove_photo"
 
                     .column-right
@@ -59,4 +59,4 @@
 
           .actions.relic-photos
             = link_to t('views.relicbuilders.stages.back').html_safe, details_relicbuilder_path(:id => @relic.try(:id)), :class => "back"
-            = f.submit (@relic.is_group? ? t('views.relicbuilders.photos.submit_relic_group') : t('views.relicbuilders.photos.submit'))
+            %button= (@relic.is_group? ? t('views.relicbuilders.photos.submit_relic_group') : t('views.relicbuilders.photos.submit'))

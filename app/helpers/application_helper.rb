@@ -148,8 +148,10 @@ module ApplicationHelper
   end
 
   def t(key, options = {})
+    options.symbolize_keys!
+    options[:editable] = true if options[:editable].nil?
     value = I18n.translate(scope_key_by_partial(key), options)
-    if current_user.try(:admin?) and value.is_a?(String)
+    if options[:editable] && current_user.try(:admin?) && value.is_a?(String)
       content_tag(:i18n, value, {:'data-key' => key, :'data-options' => {:options => options}.to_param}, false)
     else
       value

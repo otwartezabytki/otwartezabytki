@@ -150,7 +150,7 @@
         width: 500px;
         padding-left: 30px;
       }
-      input[type="submit"], a.back{
+      input[type="submit"], button, a.back{
         float: right;
         @include button-bluenavy;
         font-size: 14px;
@@ -393,12 +393,12 @@
       width: 670px;
       &.photos .actions{
         &.relic-photos{
-          input[type="submit"]{
+          input[type="submit"], button{
             height: 37px;
             float: right;
           }
         }
-        input[type="submit"]{
+        input[type="submit"], button{
           float: left;
           padding: 0 26px;
         }

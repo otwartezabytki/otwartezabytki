@@ -31,7 +31,8 @@
               = f.input :original_name, :label => t('views.relicbuilders.new.original_name')
               = f.input :polish_name, :label => t('views.relicbuilders.new.polish_name')
           .actions
-            = f.submit t('views.relicbuilders.new.search_html'), :class => 'btn'
+            %button{:class => 'btn'}
+              = t('views.relicbuilders.new.search_html')
       .polish-location{:style => "#{ 'display: none;' unless location.foreign_relic.to_i.zero?}"}
         - if defined? @places
           - if @places.blank?
@@ -63,4 +64,4 @@
           = f.hidden_field :longitude
           .column.full_width
             .actions{:style => 'display:none;'}
-              = f.submit t('views.relicbuilders.next_step_html')
+              %button= t('views.relicbuilders.next_step_html')
