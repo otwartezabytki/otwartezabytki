@@ -843,7 +843,7 @@ pl:
       addrelic: "Dodaj zabytek"
       browse: Przeglądaj
       contact: Kontakt
-      disclaimer: "W pierwszej części cyfrowego czynu społecznego można wziąć udział do 7 sierpnia. Pod koniec sierpnia na otwartezabytki.pl udostępnimy aplikację z nowymi funkcjonalnościami."
+      disclaimer: "Wciąż udoskonalamy serwis i poprawiamy błędy. Jeśli masz jakieś uwagi lub znajdziesz błąd, prosimy o informację na:"
       download_data: "Pobierz dane"
       footer:
         about_project_html: "<p>Otwarte Zabytki to projekt prowadzony przez Centrum Cyfrowe Projekt: Polska.</p><p>Centrum Cyfrowe Projekt: Polska, ul. Andersa 29, 00-159 Warszawa</p><p>Projekt finansowany ze środków Ministra Kultury i Dziedzictwa Narodowego w ramach konkursu Patriotyzm Jutra, ze środków finansowych otrzymanych od Ministerstwa Spraw Zagranicznych w ramach konkursu na realizację zadania „Współpraca z Polonią i Polakami” za granicą oraz ze środków CEE Trust.</p>"
@@ -1040,6 +1040,15 @@ pl:
           submit: "Zaloguj się"
     pages:
       home:
+        header: "Wyszukaj i uzupełnij..."
+        how_it_works:
+          title: "Jak działa wyszukiwarka?"
+          what: "Co?"
+          what_content: "Wyszukuje po całych nazwach, słowach występujących w nazwach oraz tagach."
+          where: "Gdzie?"
+          where_content: "Wyszukuje ulice, nazwy miejscowości, województw, powiatów."
+        soon_header: "... a wkrótce będziemy mogli oglądać zabytki tak:"
+        vote: "Zagłosuj na nas w konkursie na e-wolontariat &raquo;"
         revision_change:
           ancestry: "zaktualizowano hirarchię w zespole zabytków"
           approved: "zatewierdzono zabytek"
@@ -1267,7 +1276,6 @@ pl:
           checked:
             header: Sprawdzony
             info: "Dane częściowo zweryfikowane; wymagają dopracowania."
-          close: zamknij
           filled:
             header: Uzupełniony
             info: "Opis prawie doskonały :)"
@@ -1305,6 +1313,8 @@ pl:
       description: "Dzięki tej aplikacji możesz zobaczyć zabytki z naszej bazy na mapie. Możesz zawęzić listę wyświetlanych zabytków w oparciu o położenie i kategorie (np. tylko cmentarze w Zamościu lub wszystkie pałace i kamienice w województwie śląskim)."
       thumb: widget-image-example.jpg
       title: "Widżet Mapowy"
+  common:
+    close: 'zamknij'
   wuoz:
     wuoz-w-bialymstoku: "Wojewódzki Urząd Ochrony Zabytków w Białymstoku"
     wuoz-w-gdansku: "Wojewódzki Urząd Ochrony Zabytków w Gdańsku"

@@ -33,7 +33,7 @@
             %h1
               %a(href=root_path) Otwarte Zabytki
             %section.disclaimer
-              Wciąż udoskonalamy serwis i poprawiamy błędy. Jeśli masz jakieś uwagi lub znajdziesz błąd, prosimy o informację na:
+              = t('layouts.application.disclaimer')
               %a{:href => "mailto:kontakt-oz@centrumcyfrowe.pl"} kontakt-oz@centrumcyfrowe.pl
             %nav#userNav
               %ul
@@ -68,7 +68,7 @@
                   = link_to t('layouts.application.addrelic'), new_relicbuilder_path, :class => "add-relic #{'current' if current_page?(new_relicbuilder_path)}"
                 %li.gradient{:class => " #{'current' if current_page?(relics_path)}"}
                   = link_to t('layouts.application.search'), relics_path, :class => "search #{'current' if current_page?(relics_path)}"
-                %li.gradient                
+                %li.gradient
                   = link_to t('layouts.application.browse'), "#", :class => "browse"
                   .arrow
                   - unless request.xhr?

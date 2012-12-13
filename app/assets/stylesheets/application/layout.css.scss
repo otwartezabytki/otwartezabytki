@@ -263,7 +263,7 @@ a {
         z-index: 12;
         position: relative;
       }
-      input[type="submit"]{
+      input[type="submit"], button{
         float: right;
         @include button-bluenavy;
         width: 126px;
@@ -1130,7 +1130,7 @@ table.relics{
         &.filled{
           @include gradient(#90b86e, #afd78c);
         }
-      }      
+      }
     }
     .help{
       position: relative;
