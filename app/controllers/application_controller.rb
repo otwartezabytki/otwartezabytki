@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
       cookies[:locale] = params[:locale]
       I18n.cache_store.clear
     end
-    I18n.locale = (cookies[:locale] || I18n.default_locale).to_sym
+    I18n.locale = (cookies[:locale] || current_user.try(:default_locale) || I18n.default_locale).to_sym
   end
 
   # disabling because it doesn't work with history back when page is retrieved from cache
