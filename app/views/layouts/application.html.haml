@@ -26,11 +26,6 @@
       #root
         %header#header
           .container
-            - if current_user.try(:admin?)
-              %select#lang.select2
-                - Settings.oz.locale.available.each do |l|
-                  %option{:name => l, :selected => ('selected' if (cookies[:locale] || I18n.default_locale).to_s == l.to_s)}
-                    = t("common.lang.#{l}")
             %a.btn.btn-navbar(data-target=".nav-collapse" data-toggle="collapse")
               %span.icon-bar
               %span.icon-bar
@@ -41,6 +36,11 @@
               = t('layouts.application.disclaimer')
               %a{:href => "mailto:kontakt-oz@centrumcyfrowe.pl"} kontakt-oz@centrumcyfrowe.pl
             %nav#userNav
+              - if current_user.try(:admin?)
+                %select#lang.select2
+                  - Settings.oz.locale.available.each do |l|
+                    %option{:name => l, :selected => ('selected' if (cookies[:locale] || I18n.default_locale).to_s == l.to_s)}
+                      = t("common.lang.#{l}")
               %ul
                 - if current_user && current_user.registered? && current_user.errors.size == 0
                   %li= t('layouts.application.hello', :username => (current_user.username || current_user.email))
