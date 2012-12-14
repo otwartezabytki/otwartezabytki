@@ -11,7 +11,6 @@ class ApplicationController < ActionController::Base
     # set locale
     if params[:locale] and Settings.oz.locale.available.include?(params[:locale].to_sym)
       cookies[:locale] = params[:locale]
-      I18n.cache_store.clear
     end
     I18n.locale = (cookies[:locale] || current_user.try(:default_locale) || I18n.default_locale).to_sym
   end

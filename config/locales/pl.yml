@@ -986,8 +986,14 @@ pl:
       very_short: "%H:%M"
     pm: "po południu"
   translation:
-    en: "Tłumaczenie angielskie"
-    pl: "Tłumaczenie polskie"
+    by: "j. białoruski"
+    en: "j. angielski"
+    fr: "j. francuski"
+    lt: "j. litewski"
+    pl: "j. polski"
+    ru: "j. rosyjski"
+    se: "j. hiszpański"
+    ua: "j. ukraiński"
   version:
     event:
       create: stworzył

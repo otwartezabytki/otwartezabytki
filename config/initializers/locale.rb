@@ -14,6 +14,8 @@ I18n.backend = I18n::Backend::Chain.new(I18n::Backend::ActiveRecord.new, I18n.ba
 # clear cache after transaltaion update
 Tolk::Translation.instance_eval do
   after_save do
+    # do not remove logger line !!!
+    Rails.logger.error "clean i18n cache store"
     I18n.cache_store.clear
   end
 end

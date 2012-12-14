@@ -154,7 +154,7 @@ module ApplicationHelper
     if options[:editable] && current_user.try(:admin?) && value.is_a?(String)
       content_tag(:i18n, value, {:'data-key' => key, :'data-options' => {:options => options}.to_param}, false)
     else
-      value.html_safe
+      value.respond_to?(:html_safe) ? value.html_safe : value
     end
   end
 end
