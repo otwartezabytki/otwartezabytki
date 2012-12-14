@@ -26,6 +26,11 @@
       #root
         %header#header
           .container
+            - if current_user.try(:admin?)
+              %select#lang.select2
+                - Settings.oz.locale.available.each do |l|
+                  %option{:name => l, :selected => ('selected' if (cookies[:locale] || I18n.default_locale).to_s == l.to_s)}
+                    = t("common.lang.#{l}")
             %a.btn.btn-navbar(data-target=".nav-collapse" data-toggle="collapse")
               %span.icon-bar
               %span.icon-bar

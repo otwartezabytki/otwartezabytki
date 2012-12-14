@@ -5,3 +5,16 @@ oz:
   email_sender: kontakt-oz@centrumcyfrowe.pl
   host: otwartezabytki.dev
   index_env: development
+  locale:
+    available:
+      - :by
+      - :en
+      - :fr
+      - :lt
+      - :pl
+      - :ru
+      - :se
+      - :ua
+    enabled:
+      - :en
+      - :pl

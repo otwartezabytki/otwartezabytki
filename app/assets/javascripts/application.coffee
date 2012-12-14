@@ -82,6 +82,18 @@ jQuery ->
         path = Routes.edit_translation_path({id: $i18n.data('key')})
         $.ajax(path, data: $i18n.data('options')).success(ajax_callback)
 
+  $('select#lang').select2()
+  $('select#lang').change (e) ->
+    e.preventDefault()
+    name = $(this).find('option:selected').attr('name')
+    search = window.location.search
+    window.location.search = if /\?/.test(search)
+      if /locale/.test(search)
+        search.replace(/locale=[a-z]{2}/, "locale=#{name}")
+      else
+        search += "&locale=#{name}"
+    else
+      "locale=#{name}"
 
 
 

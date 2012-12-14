@@ -7,6 +7,15 @@ class ApplicationController < ActionController::Base
     prepend_view_path("app/views/iframe") if Subdomain.matches?(request)
   end
 
+  before_filter do
+    # set locale
+    if params[:locale] and Settings.oz.locale.available.include?(params[:locale].to_sym)
+      cookies[:locale] = params[:locale]
+      I18n.cache_store.clear
+    end
+    I18n.locale = (cookies[:locale] || I18n.default_locale).to_sym
+  end
+
   # disabling because it doesn't work with history back when page is retrieved from cache
   layout :resolve_layout
   def resolve_layout

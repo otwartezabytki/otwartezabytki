@@ -1315,6 +1315,15 @@ pl:
       title: "Widżet Mapowy"
   common:
     close: 'zamknij'
+    lang:
+      by: białoruski
+      en: angielski
+      fr: francuski
+      lt: litewski
+      pl: polski
+      ru: rosyjski
+      se: hiszpański
+      ua: ukraiński
   wuoz:
     wuoz-w-bialymstoku: "Wojewódzki Urząd Ochrony Zabytków w Białymstoku"
     wuoz-w-gdansku: "Wojewódzki Urząd Ochrony Zabytków w Gdańsku"

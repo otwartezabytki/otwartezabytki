@@ -5,7 +5,10 @@ class TranslationsController < ApplicationController
   before_filter :enable_fancybox, :enable_floating_fancybox
 
   expose(:translation) do
-    obj = Tolk::Translation.lookup(I18n.locale, params[:id]).first
+    locale = Tolk::Locale.find_or_create_by_name(I18n.locale.to_s)
+    phrase = Tolk::Phrase.find_or_create_by_key(params[:id])
+
+    obj = phrase.translations.for(locale) || phrase.translations.create(:locale => locale, :text => '~')
     if params[:translation]
       obj.attributes = params[:translation]
       obj.text = YAML.load(obj.text.strip)
@@ -17,7 +20,6 @@ class TranslationsController < ApplicationController
     options = (params[:options] || {}).symbolize_keys
     options[:count]   = options[:count].to_i  if options[:count]
     options[:amount]  = options[:amount].to_i if options[:amount]
-
     if translation.save
       @text = I18n.translate(params[:id], options)
       flash.now[:notice] ='Tłumaczenie zostało zmienione'
