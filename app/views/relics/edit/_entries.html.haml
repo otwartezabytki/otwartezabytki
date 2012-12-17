@@ -3,6 +3,8 @@
     = f.semantic_fields_for :entries, relic.entries.find(&:new_record?) do |f2|
       = f2.input :title
       = f2.input :body, :input_html => { :class => "redactor" }
+    .reminder
+      =t('views.relics.edit.reminder')
     .actions
       = f.submit t('views.relics.edit.add_and_save')
       = t('views.relics.edit.or')
