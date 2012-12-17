@@ -1050,6 +1050,11 @@ pl:
           login_intro: "Zaloguj się do serwisu"
           register_here: "Zarejestruj się tutaj"
           submit: "Zaloguj się"
+          iframe_sidebar: |-
+            <h4>Czy konto jest mi potrzebne?</h4>
+            <p>Bazę można przeglądać bez konieczności logowania. Ale jeśli chcesz dodawać lub uzupełniać informacje - logowanie jest niezbędne.</p>
+            <h4>Nie masz konta?</h4>
+
     pages:
       home:
         header: "Wyszukaj i uzupełnij..."

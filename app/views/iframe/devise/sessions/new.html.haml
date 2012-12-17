@@ -18,7 +18,5 @@
         .actions
           = f.submit t('.submit', :scope => 'views')
     .right
-      %h4 Czy konto jest mi potrzebne?
-      %p Bazę można przeglądać bez konieczności logowania. Ale jeśli chcesz dodawać lub uzupełniać informacje - logowanie jest niezbędne.
-      %h4 Nie masz konta?
-      = link_to "Zarejestruj się tutaj", new_user_registration_path(:host => Settings.oz.host, :only_path => false), :target => '_blank'
+      = t('.iframe_sidebar', :scope => 'views')
+      = link_to t('.register_here', :scope => 'views'), new_user_registration_path(:host => Settings.oz.host, :only_path => false), :target => '_blank'
