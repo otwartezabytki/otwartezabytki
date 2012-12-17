@@ -40,46 +40,42 @@
         .line
         %a.competition-link{:href => "http://www.e-wolontariat.pl/glosowanie", :target => "_blank"}= t('views.pages.home.vote')
     .welcome
-      %h3 Zapraszamy do współtworzenia katalogu Otwartych Zabytków
-      .left
-        Wybierz dowolny zabytek z naszej bazy.
-        %br
-        Wyszukaj informacje i uzupełnij jego profil.
-        %br
-        Jeśli Twojego zabytku nie ma w bazie - dodaj go.
+      %h3= t('views.pages.home.welcome.header')
+      .left= t('views.pages.home.welcome.text')
+
       .right
         %ul
-          %li Czym jest zabytek?
-          %li Czym jest otwarty zabytek?
-          %li Jak możesz się włączyć?
-          = link_to "Dowiedz się więcej &raquo;".html_safe, page_pl_path('o-projekcie'), :class => 'btn'
+          %li= t('views.pages.home.welcome.li1')
+          %li= t('views.pages.home.welcome.li2')
+          %li= t('views.pages.home.welcome.li3')
+          = link_to t('views.pages.home.welcome.more'), page_pl_path('o-projekcie'), :class => 'btn'
 .widgets-intro
   %ul
     %li.first
       %a{:href => widgets_path}
-        %span.title Widżety »
-        %span.paragraph Udostępniamy kilka przykładowych aplikacji, dzięki którym łatwiej będzie wykorzystać dane o otwartych zabytkach na innych stronach internetowych.
+        %span.title= t('views.pages.home.widgets_intro.widget.title')
+        %span.paragraph= t('views.pages.home.widgets_intro.widget.par')
     %li.alerts
       = link_to widgets_add_alerts_path, :method => :post do
-        %span.title Alerty:
-        %span.paragraph Jeśli wiesz, że jakiś zabytek jest w złym stanie - zaalarmuj. Dołącz zdjęcie i opis.
+        %span.title= t('views.pages.home.widgets_intro.alert.title')
+        %span.paragraph= t('views.pages.home.widgets_intro.alert.par')
     %li.map-search
       = link_to widgets_map_searches_path, :method => :post do
-        %span.title Mapa:
-        %span.paragraph Wyszukaj zabytki na mapie. Zobacz, jakie zabytki znajdują się w Twojej okolicy.
+        %span.title= t('views.pages.home.widgets_intro.map.title')
+        %span.paragraph= t('views.pages.home.widgets_intro.map.par')
     %li.add
       = link_to widgets_add_relics_path, :method => :post do
-        %span.title Dodaj:
-        %span.paragraph Znasz zabytki, których brakuje w naszej bazie? Dodaj je i podziel się swoją wiedzą z innymi.
+        %span.title= t('views.pages.home.widgets_intro.add.title')
+        %span.paragraph= t('views.pages.home.widgets_intro.add.par')
 
 .stats
-  %h2 Jak wygląda nasza baza zabytków?
+  %h2= t('views.pages.home.stats_info.header1')
   .left
-    %h3 Gdzie mamy najwięcej zabytków
+    %h3= t('views.pages.home.stats_info.header2')
     = render 'polish_map'
   .right
     - cache "recently-modified" do
-      %h3 Ostatnio edytowane
+      %h3= t('views.pages.home.recently_modified')
       %ul.latest
         - RecentRevision.recently_modified.each do |hash|
           %li
@@ -89,7 +85,7 @@
               %p.title= hash[:identification]
               .change.added
                 = hash[:changes]
-              = link_to "Przejdź do profilu zabytku", relic_path(hash[:slug])
+              = link_to t('views.pages.home.go_to_relic_profile'), relic_path(hash[:slug])
   .progress-bar
     .bg
       .color{:style => "width: #{relic_stats[:checked] * 100 / relic_stats[:total].to_f}%"}

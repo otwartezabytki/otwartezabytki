@@ -3,7 +3,7 @@
     - Voivodeship.all.each_with_index do |v, i|
       %li{:class => "pl#{i+1}", :redirect => relics_path(:search => {:location => "pl-#{v.id}"})}
         %a{:href => "##{v.name.parameterize}", :rel => "nofollow"}
-          %h3= "woj. #{v.name}"
+          %h3= t('views.pages.home.stats_info.voivodeship_header', :name => v.name)
           - group = Relic.where(:voivodeship_id => v.id).group(:state).count
           %table
             %tr.numbers
@@ -11,6 +11,6 @@
               %td= group['checked']   || 0
               %td= group['unchecked'] || 0
             %tr
-              %td uzupełnione
-              %td sprawdzone
-              %td niesprawdzone
+              %td= t('activerecord.attributes.relic.states.filled')
+              %td= t('activerecord.attributes.relic.states.checked')
+              %td= t('activerecord.attributes.relic.states.unchecked')

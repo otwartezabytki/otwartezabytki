@@ -1055,6 +1055,28 @@ pl:
           where_content: "Wyszukuje ulice, nazwy miejscowości, województw, powiatów."
         soon_header: "... a wkrótce będziemy mogli oglądać zabytki tak:"
         vote: "Zagłosuj na nas w konkursie na e-wolontariat &raquo;"
+        welcome:
+          header: Zapraszamy do współtworzenia katalogu Otwartych Zabytków
+          text: "Wybierz dowolny zabytek z naszej bazy. <br/>Wyszukaj informacje i uzupełnij jego profil.<br/>Jeśli Twojego zabytku nie ma w bazie - dodaj go."
+          li1: Czym jest zabytek?
+          li2: Czym jest otwarty zabytek?
+          li3: Jak możesz się włączyć?
+          more: "Dowiedz się więcej &raquo;"
+        widgets_intro:
+          widget:
+            title: "Widżety »"
+            par: "Udostępniamy kilka przykładowych aplikacji, dzięki którym łatwiej będzie wykorzystać dane o otwartych zabytkach na innych stronach internetowych."
+          alert:
+            title: "Alerty:"
+            par: "Jeśli wiesz, że jakiś zabytek jest w złym stanie - zaalarmuj. Dołącz zdjęcie i opis."
+          map:
+            title: "Mapa:"
+            par: "Wyszukaj zabytki na mapie. Zobacz, jakie zabytki znajdują się w Twojej okolicy."
+          add:
+            title: "Dodaj:"
+            par: "Znasz zabytki, których brakuje w naszej bazie? Dodaj je i podziel się swoją wiedzą z innymi."
+        recently_modified: "Ostatnio edytowane"
+        go_to_relic_profile: "Przejdź do profilu zabytku"
         revision_change:
           ancestry: "zaktualizowano hirarchię w zespole zabytków"
           approved: "zatewierdzono zabytek"
@@ -1117,6 +1139,10 @@ pl:
               street: "poprawiono adres"
               tags: "zaktualizowano tagi"
         stats_info:
+          header1: "Jak wygląda nasza baza zabytków?"
+          header2: "Gdzie mamy najwięcej zabytków"
+          voivodeship_header: "woj. %{name}"
+          unchecked:
           checked_html:
             few: "<span>%{count}</span> zabytki sprawdzone"
             many: "<span>%{count}</span> zabytków sprawdzonych"
