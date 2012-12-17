@@ -1,22 +1,20 @@
 %h1
-  #{widget.class.title}
-  %a.back{:href => widgets_path} &laquo; wróć do katalogu widżetów
+  = t("widget.#{widget.class.partial_name}.title")
+  %a.back{:href => widgets_path}= t('views.widgets.edit.back')
 - if widget.valid?
   .content
-    %h2 Wybierz ustawienia widżetu
-    %span.block Jeśli chcesz na przykład wyświetlić na swojej stronie mapkę z cmentarzami żydowskimi z województwa dolnośląskiego, wybierz województwo dolnośląskie z lokalizacji oraz kategorie „cmentarz” i „żydowski”. Następnie skopiuj kod do wstawienia na stronę.
+    %h2= t('views.widgets.edit.map_search.header')
+    %span.block= t('views.widgets.edit.map_search.settings_info')
     .preview
       = raw(widget.snippet)
     .sidebar
       = semantic_form_for widget, :url => self.send("widgets_#{widget.class.partial_name}_path", widget), :remote => true do |f|
-        = f.input :width, :label => "Szerokość widgeta", :required => false
-        = f.input :height, :label => "Wysokość widgeta", :required => false
-        = f.input :hide_sidebar, :as => :boolean, :label => "Ukryj pasek boczny", :required => false
-        = f.input :api_params, :as => :text,
-                     :label => "Parametry do <a href='/api_doc/'>API</a>".html_safe,
-                     :hint => "Ustawisz je poruszając mapką podglądową po prawej stronie.",
-                     :input_html => { :readonly => "readonly" }
-    %h2 Wygenerowany kod do wstawienia na stronę
+        = f.input :width, :label => t('views.widgets.edit.map_search.width'), :required => false
+        = f.input :height, :label => t('views.widgets.edit.map_search.height'), :required => false
+        = f.input :hide_sidebar, :as => :boolean, :label => t('views.widgets.edit.map_search.hide_sidebar'), :required => false
+        = f.input :api_params, :as => :text, :label => t('views.widgets.edit.map_search.params_label'), :hint => t('views.widgets.edit.map_search.params_hint'), :input_html => { :readonly => "readonly" }
+    %h2= t('views.widgets.edit.generated')
     %div
-      %span.block To jest gotowy kod do wstawienia na stronę, wygenerowany zgodnie z wybranymi przez Ciebie ustawieniami. Wystarczy go skopiować i umieścić w odpowiednim miejscu na Twojej stronie.
-      %textarea#snippet{:cols => "20", :rows => "3"}= widget.snippet
+      %span.block= t('views.widgets.edit.code_help')
+      %textarea{:cols => "20", :rows => "3"}= widget.snippet
+

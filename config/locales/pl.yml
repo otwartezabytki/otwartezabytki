@@ -847,6 +847,11 @@ pl:
       download_data: "Pobierz dane"
       footer:
         about_project_html: "<p>Otwarte Zabytki to projekt prowadzony przez Centrum Cyfrowe Projekt: Polska.</p><p>Centrum Cyfrowe Projekt: Polska, ul. Andersa 29, 00-159 Warszawa</p><p>Projekt finansowany ze środków Ministra Kultury i Dziedzictwa Narodowego w ramach konkursu Patriotyzm Jutra, ze środków finansowych otrzymanych od Ministerstwa Spraw Zagranicznych w ramach konkursu na realizację zadania „Współpraca z Polonią i Polakami” za granicą oraz ze środków CEE Trust.</p>"
+        partner_h1: Patron
+        partner_h2: Patroni medialni
+        partner_h3: Partner merytoryczny
+        partner_h4: Grantodawcy
+        license: "Treści zamieszczone w serwisie udostępniamy na licencji <br/> <a href ='http://creativecommons.org/licenses/by/3.0/pl'>Creative Commons Uznanie autorstwa - Na tych samych warunkach 3.0 Polska</a>"
       hello: "Witaj, %{username}"
       help: Pomoc
       homepage: "Strona główna"
@@ -860,6 +865,7 @@ pl:
       relics_count: "Liczba Twoich zabytków: %{count}"
       search: Szukaj
       widgets: Widżety
+
   messages:
     are_you_sure: "Czy jesteś pewien?"
   notices:
@@ -1330,6 +1336,54 @@ pl:
         unknown_address: "Adres niedostępny"
         unknown_from: Nieznana
       show: ~
+    widgets:
+      index:
+        about: "Widżety:"
+        description: |-
+            <h3>Czym są widżety?</h3>
+            <p>Otwarte dane o zabytkach mogą Wam się przydać!</p>
+            <p>Udostępniamy kilka przykładowych aplikacji, dzięki którym łatwiej będzie wykorzystać dane o otwartych zabytkach na innych stronach internetowych.</p>
+            <h3>Jak użyć widżet?</h3>
+            <p>Aby skorzystać z prezentowanych aplikacji, wystarczy zagnieździć kawałek kodu na dowolnej stronie internetowej.</p>
+            <h3>Masz pomysł na widżet?</h3>
+            <p>Jeśli masz pomysł na funkcjonalną aplikację wykorzystującą dane o Otwartych Zabytkach, podziel się nim z nami, a być może uda nam się go zrealizować (%{email})!</p>
+        use: Przetestuj
+      edit:
+        back: "&laquo; wróć do katalogu widżetów"
+        preview: "Podgląd wygenerowanego widżetu"
+        generated: "Wygenerowany kod do wstawienia na stronę"
+        code_help: "To jest gotowy kod do wstawienia na stronę, wygenerowany dla wybranego przez Ciebie zabytku. Wystarczy go skopiować i umieścić w odpowiednim miejscu na Twojej stronie."
+        add_alert:
+          hint: "Wyszukaj zabytek"
+          search: "Szukaj"
+          which_one: "O który zabytek dokładnie Ci chodziło"
+        map_search:
+          header: "Wybierz ustawienia widżetu"
+          settings_info: "Jeśli chcesz na przykład wyświetlić na swojej stronie mapkę z cmentarzami żydowskimi z województwa dolnośląskiego, wybierz województwo dolnośląskie z lokalizacji oraz kategorie „cmentarz” i „żydowski”. Następnie skopiuj kod do wstawienia na stronę."
+          width: "Szerokość widgeta"
+          height: "Wysokość widgeta"
+          hide_sidebar: "Ukryj pasek boczny"
+          params_label: "Parametry do <a href='/api_doc/'>API</a>"
+          params_hint: "Ustawisz je poruszając mapką podglądową po prawej stronie."
+      show:
+        about: "O co chodzi?"
+        add_alert:
+          header: "Znalazłeś zabytek w złym stanie zaalarmuj!"
+          empty: "Brak Alertów"
+          alerts: "Zobacz Alerty"
+          create: "Zgłoś Alert"
+        add_relic:
+          header: "Znasz zabytek, którego nie ma w naszej bazie?"
+          create: "Dodaj nowy zabytek"
+        map_search:
+          categories: Kategorie
+          categories_hint: "tu możesz zawęzić wyszukiwanie zabytków wg. ich kategorii"
+          location_hint: "tu możesz zawęzić wyszukiwanie zabytków wg. ich lokalizacji"
+          show_more: 'pokaż więcej...'
+          show_less: 'pokaż mniej...'
+          advanced_search: 'wyszukiwanie<br />zaawansowane »'
+          search_by_name: Wyszukaj po nazwie
+          query_placeholder: "np. cmentarz"
   widget:
     add_alert:
       description: |-

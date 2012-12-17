@@ -91,7 +91,7 @@ section.widgets{
   }
 }
 
-.use-widget, .edit_widget .sidebar input[type="submit"]{
+.use-widget, .edit_widget .sidebar input[type="submit"], .edit_widget .sidebar button{
   margin: 25px 0 20px;
   @include gradient(#4b6d7e, #436576);
   color: #fff;
