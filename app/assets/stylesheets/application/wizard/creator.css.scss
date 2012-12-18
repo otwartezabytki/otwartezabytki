@@ -35,10 +35,16 @@
         font-weight: bold;
         line-height: 32px;
       }
+      > h3{
+        font-size: 16px;
+      }
       aside h3{
         line-height: 20px;
       }
       label.main{ display: block;}
+      .clear{
+        margin-bottom: 20px;
+      }
     }
     aside{
       position: absolute;
@@ -536,8 +542,46 @@ body.relics.new #colorbox {
   }
 }
 
-#location_foreign_relic_input, #location_relic_group_input{
-  padding-left: 66%;
+#location_foreign_relic_input, #location_relic_group_input, #location_existence_input{
+  display: inline-block;
+  .inputs-list{
+    div{
+      display: inline-block;
+    }
+    label{
+      display: block;
+      position: relative;
+      overflow: hidden;
+    }
+    li:not(#foo) input[type='checkbox'] {
+      padding: 0;
+      margin: 0;
+      height: 16px;
+      width: 18px;
+      float: left;
+      position: absolute;
+      left: 0;
+      opacity: 0;
+      + span {
+        margin: 0;
+        clear: none;
+        padding: 5px 0 4px 24px;
+        line-height: 18px;
+        cursor: pointer;
+        background: asset-data-url("checkbox.png") 0 6px no-repeat;
+      }
+      &:checked + span {
+        background: asset-data-url("checkbox-checked.png") 0 6px no-repeat;
+      }
+    }
+  }
+}
+
+#new_location .boolean{
+  margin-left: 30px;
+  &#location_relic_group_input{
+    margin-left: 0;
+  }
 }
 
 .error{
@@ -599,4 +643,51 @@ form#new_relic{
   font-weight: 700;
   display: block;
   margin: 5px 0;
+}
+
+.info-tooltip{
+  position: relative;
+  display: inline;
+  margin-left: 10px;
+  &:hover{
+    .info-wrapper{ display: block;}
+  }
+  .info-wrapper{
+    position: absolute;
+    display: none;
+    width: 590px;
+    left: -100px;
+    bottom: 40px;
+    padding: 16px 0;
+    z-index: 11;
+    @include border-radius(5px);
+    border: 1px solid #acacac;
+    @include box-shadow(rgba(0,0,0,0.45) 0 3px 15px, inset #fff 0 1px 1px -1px);
+    @include gradient(rgba(246,247,248,0.95),rgba(234,234,235,0.95));
+    @include ie-gradient(#f6f7f8, #eaeaeb);
+    a.close{
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      z-index:10;
+      color: #af0c0c;
+      font-size: 12px;
+    }
+    h3{
+      margin: 0px 18px 10px;
+      text-align: left;
+      color: #42738c;
+      font-size: 14px;
+    }
+    .text{
+      font-size: 13px;
+      font-weight: normal;
+      line-height: 18px;
+      margin: 0 18px;
+    }
+  }
+}
+
+.new_relic .creator section.creator-step .info h3{
+  line-height: 1;
 }
