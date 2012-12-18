@@ -18,6 +18,7 @@
         %p.intro= t('views.relicbuilders.new.intro1_html')
       %section.creator-step
         = semantic_form_for location, :as => 'location', :url => new_relicbuilder_path(params), :method => :get, :remote => true do |f|
+          = f.input :existence, :as => :boolean, :label => t('views.relicbuilders.new.non_existed')
           = f.input :foreign_relic, :as => :boolean, :label => t('views.relicbuilders.new.add_foreign_relic')
           - unless @relic.parent
             = f.input :relic_group, :as => :boolean, :label => t('views.relicbuilders.new.add_relic_group')
@@ -58,6 +59,7 @@
               %h3= t('views.relicbuilders.new.drag_marker')
               .marker-holder
                 = image_tag 'marker.png', :id => 'marker'
+          = f.hidden_field :existence
           = f.hidden_field :kind
           = f.hidden_field :parent_id
           = f.hidden_field :place_id

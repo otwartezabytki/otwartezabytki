@@ -81,6 +81,12 @@ jQuery.initializer 'div.new_relic section.main', ->
       $('.foreign-location').hide()
       $('.polish-location').show()
 
+  $('#location_existence').change ->
+    if $(this).is(':checked')
+      $('input#relic_existence').attr('value', 'archived')
+    else
+      $('input#relic_existence').attr('value', 'social')
+
   window.ensuring_google_maps_loaded ->
     do window.ensure_geolocation
     $('#marker').draggable

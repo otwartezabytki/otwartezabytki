@@ -1178,6 +1178,7 @@ pl:
         not_found_html: "Nie ma go na liście &raquo;"
         that_one: "To jest ten zabytek!"
       new:
+        non_existed: "Nieistniejący zabytek"
         add_foreign_relic: "chcę dodać zabytek spoza Polski"
         add_relic_group: "chcę dodać zespół zabytków"
         choose_html: "wybieram &raquo;"
