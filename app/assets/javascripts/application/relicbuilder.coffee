@@ -81,6 +81,12 @@ jQuery.initializer 'div.new_relic section.main', ->
       $('.foreign-location').hide()
       $('.polish-location').show()
 
+  $('#location_existence').change ->
+    if $(this).is(':checked')
+      $('input#relic_existence').attr('value', 'archived')
+    else
+      $('input#relic_existence').attr('value', 'social')
+
   window.ensuring_google_maps_loaded ->
     do window.ensure_geolocation
     $('#marker').draggable
@@ -102,3 +108,10 @@ jQuery.initializer 'div.new_relic section.main', ->
         $('form.relic .actions').show()
 
     $('#map_canvas').blinking()
+
+jQuery.initializer '.main-container div.new_relic .creator-step', ->
+  this.find('a.js-popover').popover
+    title: -> $("##{$(this).data("title-id")}").html()
+    content: -> $("##{$(this).data("content-id")}").html()
+    delay: 100000
+    placement: 'top'

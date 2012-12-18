@@ -9,7 +9,7 @@ class RelicbuildersController < ApplicationController
   helper_method :address_params
 
   def new
-    @relic = Relic.new :kind => 'SA'
+    @relic = Relic.new :kind => 'SA', :existence => 'social'
     @location = LocationBuilder.new params[:location]
     if @location.foreign_relic?
       if geo = @location.geocode_result
@@ -77,6 +77,7 @@ class RelicbuildersController < ApplicationController
       @relic.place      = place if place
       @relic.parent_id  = params[:parent_id]
       @relic.kind       = params[:kind]
+      @relic.existence  = params[:existence]
       @relic.street     = (geo_hash || {}).get_deep(:street) || @relic.street
       @relic.latitude   = (geo_hash || params).get_deep(:latitude)
       @relic.longitude  = (geo_hash || params).get_deep(:longitude)
@@ -137,7 +138,7 @@ class RelicbuildersController < ApplicationController
 
   protected
     def address_params
-      (params[:relic] || params).slice(:latitude, :longitude, :place_id, :parent_id, :kind)
+      (params[:relic] || params).slice(:latitude, :longitude, :place_id, :parent_id, :kind, :existence)
     end
 
     def redirect_finished_relic

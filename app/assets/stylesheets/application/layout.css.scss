@@ -2882,3 +2882,16 @@ body.resource_home{
     }
   }
 }
+
+body .popover-inner{
+  width: auto;
+  .relic-text{
+    width: 555px;
+    display: block;
+    line-height: 1.5;
+  }
+  .text{
+    width: 280px;
+    display: block;
+  }
+}

@@ -7,6 +7,7 @@
         %p.intro= t('views.relicbuilders.address.intro1')
       = semantic_form_for @relic, :url => relicbuilder_path(:id => @relic.try(:id)) do |f|
         = f.hidden_field :kind
+        = f.hidden_field :existence
         = f.hidden_field :build_state
         = f.hidden_field :parent_id
         = f.hidden_field :latitude
