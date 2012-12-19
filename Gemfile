@@ -39,6 +39,7 @@ gem 'paper_trail', '~> 2' # versioning
 gem 'activeadmin',    '~> 0.4.4'
 gem 'meta_search',    '>= 1.1.0.pre'
 gem 'devise'
+gem 'omniauth-facebook'
 gem 'cancan'
 gem 'activeadmin-cancan'
 

@@ -54,6 +54,8 @@
                   %li
                     %a{:href => new_user_registration_path, :class => 'register'}
                       = t('layouts.application.register')
+                  %li
+                    = link_to t('layouts.application.facebook_sign_in'), user_omniauth_authorize_path(:facebook), :class => "fb-btn"
             %a{:href => 'http://centrumcyfrowe.pl/', :target => '_blank', :class => 'cc_logo'}
         %section#menu
           .container

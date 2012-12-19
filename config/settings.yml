@@ -18,3 +18,6 @@ oz:
     enabled:
       - :en
       - :pl
+  facebook:
+    api_id: "179800448818038"
+    api_secret: "1e6336767d27ed394094a740dc836996"

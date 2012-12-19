@@ -1,3 +1,7 @@
+@import "compass/layout";
+@import "compass/css3";
+@import "mixins";
+
 .sessions, .registrations, .passwords, .fancybox-inner {
 
   .login_title {
@@ -121,6 +125,41 @@
       background: #FFF;
       background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #2b607b), color-stop(100%, #437893));
       filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#4b6d7e', endColorstr = '#436576', GradientType = 0);
+    }
+    .fb-login, .fb-register{
+      padding-bottom: 15px;
+      margin-bottom: 15px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+      .fb-btn{
+        @include gradient(#4664a5, #314d92);
+        border-color: #385497 #375395 #324A86;
+        border-style: solid;
+        border-width: 1px;
+        border-radius: 2px;
+        box-shadow: inset 0 1px 0 #5E7BB4, 0 1px 3px rgba(0, 0, 0, 0.21);
+        color: #fff;
+        display: inline-block;
+        font-weight: bold;
+        line-height: 25px;
+        height: 25px;
+        padding: 0 7px 0 0;
+        text-shadow: 0 -1px 0 #38528e;
+        &::before{
+          content: ' ';
+          display: block;
+          float: left;
+          height: 25px;
+          margin-right: 10px;
+          padding-left: 5px;
+          position: relative;
+          width: 24px;
+          background: asset-data-url("fb-btn-icon.png") top right no-repeat;
+        }
+        &:hover{
+          text-decoration: underline;
+        }
+      }
     }
   }
 
