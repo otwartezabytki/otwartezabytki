@@ -28,7 +28,7 @@
             %h1
               %a(href=root_path) Otwarte Zabytki
             %section.disclaimer
-              Wciąż udoskonalamy serwis i poprawiamy błędy. Jeśli masz jakieś uwagi lub znajdziesz błąd, prosimy o informację na: 
+              Wciąż udoskonalamy serwis i poprawiamy błędy. Jeśli masz jakieś uwagi lub znajdziesz błąd, prosimy o informację na:
               %a{:href => "mailto:kontakt-oz@centrumcyfrowe.pl"} kontakt-oz@centrumcyfrowe.pl
             %nav#userNav
               %ul
@@ -45,7 +45,7 @@
                     %a{:href => new_user_registration_path, :class => 'register'}
                       = t('layouts.application.register')
                   %li
-                    %a{:href => "#", :class => "fb-btn"} Zaloguj przez Facebooka
+                    = link_to t('layouts.application.facebook_sign_in'), user_omniauth_authorize_path(:facebook), :class => "fb-btn"
             %a{:href => 'http://centrumcyfrowe.pl/', :target => '_blank', :class => 'cc_logo'}
         %section#menu
           .container

@@ -4,7 +4,7 @@
 .form_box
   .login_intro_txt= t('.login_intro', :scope => 'views')
   .fb-login
-    %a{:href => "", :class => "fb-btn"} Zaloguj się przez Facebooka
+    = link_to t('layouts.application.facebook_sign_in'), user_omniauth_authorize_path(:facebook), :class => "fb-btn"
   - if flash[:alert]
     .alert.alert-error= flash[:alert]
   = semantic_form_for(resource, :as => resource_name, :url => session_path(resource_name), :remote => request.xhr?) do |f|

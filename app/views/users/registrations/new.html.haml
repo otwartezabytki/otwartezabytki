@@ -3,7 +3,8 @@
 .form_box
   .login_intro_txt Zarejestruj się i śledź swoje postępy
   .fb-login
-    %a{:href => "", :class => "fb-btn"} Zarejestruj się przez Facebooka
+    = link_to t('layouts.application.facebook_sign_up'), user_omniauth_authorize_path(:facebook), :class => "fb-btn"
+
   = semantic_form_for(user, :url => user_registration_path, :remote => true) do |f|
     = f.semantic_errors
     = f.hidden_field :registration, :value => true

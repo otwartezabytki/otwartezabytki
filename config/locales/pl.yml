@@ -837,6 +837,8 @@ pl:
       update: "Zaktualizuj %{model}"
   layouts:
     application:
+      facebook_sign_in: "Zaloguj się przez Facebooka"
+      facebook_sign_up: "Zarejestruj się przez Facebooka"
       about: "O projekcie"
       addrelic: "Dodaj zabytek"
       browse: Przeglądaj

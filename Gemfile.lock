@@ -215,6 +215,7 @@ GEM
     has_scope (0.5.1)
     hash_digest (1.0.0)
       activesupport
+    hashie (1.2.0)
     hashr (0.0.22)
     hike (1.2.1)
     htmldiff (0.0.1)
@@ -286,6 +287,14 @@ GEM
       jwt (~> 0.1.4)
       multi_json (~> 1.0)
       rack (~> 1.2)
+    omniauth (1.1.1)
+      hashie (~> 1.2)
+      rack
+    omniauth-facebook (1.4.1)
+      omniauth-oauth2 (~> 1.1.0)
+    omniauth-oauth2 (1.1.1)
+      oauth2 (~> 0.8.0)
+      omniauth (~> 1.0)
     orm_adapter (0.4.0)
     paper_trail (2.6.3)
       activerecord (~> 3.0)
@@ -532,6 +541,7 @@ DEPENDENCIES
   mini_magick!
   multi_json (= 1.3.7)
   newrelic_rpm
+  omniauth-facebook
   paper_trail (~> 2)
   pg
   pry-doc
