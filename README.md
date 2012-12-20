@@ -1,16 +1,24 @@
 # Otwarte Zabytki
 
-### Application setup
+### Requirements (for OS X)
+Your machine should be equipt with:
+  - homebrew
+  - ruby 1.9.2 or higher (we recommend to use rbenv)
+  - git
+  - bundle
+  - web browser e.g. chrome or safari
+
+### Application setup (for OS X)
 
 ```bash
-brew update
-brew install elasticsearch postgresql graphicsmagick aspell --lang=pl
-cp config/database.yml.example config/database.yml
-# create database and database users for dev and testing
-bundle install
-gunzip -c db/dump/%m_%d_%Y.sql.gz | script/rails db
-bundle exec rake db:migrate
-bundle exec rake db:seed
+  brew update
+  brew install elasticsearch memcached postgresql imagemagick aspell --lang=pl
+  cp config/database.yml.example config/database.yml
+  # create database and database users for dev and testing
+  bundle install
+  gunzip -c db/dump/%m_%d_%Y.sql.gz | script/rails db
+  bundle exec rake db:migrate
+  bundle exec rake db:seed
 ```
 
 Set up elastic search:
@@ -19,27 +27,11 @@ Set up elastic search:
  - install Morfologik (Polish) Analysis for ElasticSearch from: https://github.com/chytreg/elasticsearch-analysis-morfologik
  - index the data:
 
- ```bash:
+```bash:
   bundle exec rake relic:reindex
- ```
-
-#### Production only:
-
-To enable periodical dump of `relics.csv` ou need to create initial dump of relics:
-
-```bash
-bundle exec rake relic:export_init[public/system/relics_history.csv]
 ```
-
-Then, you can incrementially export users' suggestions by executing following command periodically:
-
-```bash
-bundle exec rake relic:export[public/system/relics_history.csv]
-```
-
-Cron jobs auto-setup is also available, just run ```bundle exec whenever --update-crontab```
-
-### Updating settings.yml
+ 
+### [Attention] Updating settings.yml
 
 After editing this file you have to edit also variables.js.etc in assets.
 If you don't do that, the settings won't be applied.
@@ -55,15 +47,18 @@ If you don't do that, the settings won't be applied.
 Redactor.js is proprietary software, you can disable it by issuing following commands:
 
 ```bash
-rm $(find app -type f -name 'redactor*')
-sed -i '.bak' '/redactor/d' $(grep -l -E '/redactor|)\.redactor' -r app)
+  rm $(find app -type f -name 'redactor*')
+  sed -i '.bak' '/redactor/d' $(grep -l -E '/redactor|)\.redactor' -r app)
 ```
 
-### Translations
+### I18n translations
 
-Every new translation key add to pl.yml with default value. On deploy default values are copied to database by rake tolk:sync.
-To change translation on production use tolk or inline interface (you muse be an admin).
-To change sync local yaml file with production run script/load_production_translations this make dump on production load it to local db run sync and dump merged yml file.
+  - Every new translation key add to pl.yml with default value. 
+  - On deploy default values are copied to database via ```bash rake tolk:sync```.
+  - To change translation on production use tolk or inline interface (you muse be an admin).
+  - To change sync local yaml file with production run:
+  ```bash script/load_production_translations ```
+  this make dump on production load it to local db run sync and dump merged yml file.
 
 ### Troubleshooting
 
@@ -78,12 +73,15 @@ Solution:
 
 ### Code documentation
 ```bash
-gem install yard redcarpet
+  gem install yard redcarpet
 ```
 in application directory run
 ```ruby
-yard -o public/system/doc
+  yard -o public/system/doc
 ```
 current code documentation is available on http://otwartezabytki.pl/system/doc/index.html
+
+### API documentation
+is available on http://otwartezabytki.pl/apidoc/index.html
 
 
