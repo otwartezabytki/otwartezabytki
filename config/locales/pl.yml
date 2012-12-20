@@ -1304,7 +1304,7 @@ pl:
           delete_confirm: "Czy aby na pewno?"
           delete_photo: "usuń zdjęcie"
           loading: "Trwa wgrywanie, proszę czekać..."
-          statement_html: "Oświadczam, że posiadam prawa do zdjęć, które publikuję na stronie otwartezabytki.pl. Zdjęcia te udostępniam na licencji <a href=\"http://creativecommons.org/licenses/by-sa/3.0/pl/\" target=\"_blank\">Creative Commons Uznanie Autorstwa-Na Tych Samych Warunkach 3.0 Polska</a> <em class=\"icons\"></em>"
+          statement_html: "Oświadczam, że posiadam prawa do zdjęć, które publikuję na stronie otwartezabytki.pl lub że są one dostępne na jednej z wolnych licencji (Creative Commons Uznanie autorstwa lub Creative Commons Uznanie autorsta-Na tych samych warunkach). Zdjęcia te udostępniam na licencji Creative Commons Uznanie Autorstwa-Na Tych Samych Warunkach 3.0 Polska <br/><br/> <span class='small'>Creative Commons Uznanie autorstwa (ang. CC BY) <br/><a href='http://creativecommons.org/licenses/by-sa/3.0/pl/' target='_blank'>Creative Commons Uznanie autorstwa-Na tych samych warunkach (ang. CC BY SA)</a></span><em class='icons'></em>"
         reminder: "Pamiętaj o podaniu źródła!"
         save: "zapisz zmiany"
         update: aktualizuj
