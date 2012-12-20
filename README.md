@@ -39,7 +39,7 @@ bundle exec rake relic:export[public/system/relics_history.csv]
 
 Cron jobs auto-setup is also available, just run ```bundle exec whenever --update-crontab```
 
-# Updating settings.yml
+### Updating settings.yml
 
 After editing this file you have to edit also variables.js.etc in assets.
 If you don't do that, the settings won't be applied.
@@ -75,3 +75,15 @@ Solution:
 
     rm -rf /usr/local/var/elasticsearch/elasticsearch_$(whoami)/*
     elasticsearch restart
+
+### Code documentation
+```bash
+gem install yard redcarpet
+```
+in application directory run
+```ruby
+yard -o public/system/doc
+```
+current code documentation is available on http://otwartezabytki.pl/system/doc/index.html
+
+
