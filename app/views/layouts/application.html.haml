@@ -7,9 +7,12 @@
       %meta(name="google-site-verification" content="Spn2_vzD8aAvbTm8TAoVGIx_6jk-OM62aVNFxQ5pnR8")
     %title= content_for?(:title) ? "#{yield(:title)} - Otwarte Zabytki" : "Otwarte Zabytki"
     = favicon_link_tag  "favicon.gif", :type => 'image/gif'
-    %meta{:property => "og:title", :content => t('layouts.application.og.title')}
-    %meta{:property => "og:description", :content => t('layouts.application.og.description')}
-    %meta{:property => "og:image", :content => t('layouts.application.og.image')}
+    - if content_for?(:facebook_meta)
+      = yield :facebook_meta
+    - else
+      %meta{:property => "og:title", :content => t('layouts.application.og.title')}
+      %meta{:property => "og:description", :content => t('layouts.application.og.description')}
+      %meta{:property => "og:image", :content => t('layouts.application.og.image')}
     = csrf_meta_tags
     / Le HTML5 shim, for IE6-8 support of HTML elements
     /[if lt IE 9]
@@ -96,7 +99,6 @@
               = yield
         #root-footer
       %footer#footer.container= render 'shared/footer'
-    #fb-root
 
     #fancybox_loader_container
       #fancybox_loader
