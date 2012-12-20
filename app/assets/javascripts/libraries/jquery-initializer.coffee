@@ -85,12 +85,14 @@ window.ajax_callback = (data, status, xhr) ->
           to_replace.replaceWith(node)
           $(node).initialize()
           $.fancybox.trigger('afterLoad')
+          $('.fancybox-overlay').height($(document).height())
         else
           if data_replace_parent && !$(node).is('[data-fancybox]')
             try_to_process_replace(data_replace_parent)
           else
             show_fancybox(node)
             $(node).initialize()
+            $('.fancybox-overlay').height($(document).height())
       else if last_xhr.getResponseHeader('x-logged')? && $('body').data('logged')? && $('body').data('logged').toString() != last_xhr.getResponseHeader('x-logged').toString()
         $('#fancybox_loader_container').show()
         window.location.href = window.location.pathname
