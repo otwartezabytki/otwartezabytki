@@ -1,7 +1,5 @@
 # -*- encoding : utf-8 -*-
 class AlertsController < ApplicationController
-  before_filter :save_return_path
-
   before_filter :authenticate_user!, :only => [:new, :create]
 
   before_filter :enable_fancybox, :unless => lambda {|c| Subdomain.matches?(c.request) }

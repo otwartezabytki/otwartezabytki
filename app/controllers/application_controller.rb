@@ -15,6 +15,8 @@ class ApplicationController < ActionController::Base
     I18n.locale = (cookies[:locale] || current_user.try(:default_locale) || I18n.default_locale).to_sym
   end
 
+  before_filter :save_return_path
+
   # disabling because it doesn't work with history back when page is retrieved from cache
   layout :resolve_layout
   def resolve_layout
@@ -101,16 +103,11 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     cookies.delete(:return_path) if Subdomain.matches?(request)
-    stored_location_for(resource) || cookies[:return_path] || relics_path
+    cookies[:return_path] || relics_path
   end
 
-  # Overwriting the sign_out redirect path method
   def after_sign_out_path_for(resource)
-    cookies.delete(:last_relic_id) if Subdomain.matches?(request)
-    if relic_id = cookies.delete(:last_relic_id)
-      relic_path(relic_id)
-    else
-      relics_path
-    end
+    cookies.delete(:return_path) if Subdomain.matches?(request)
+    cookies[:return_path] || relics_path
   end
 end
