@@ -113,12 +113,13 @@ window.ajax_callback = (data, status, xhr) ->
       $('#fancybox_loader_container').show()
       window.location.href = xhr.getResponseHeader('x-path')
 
-    # unless popping_state
-    #   path = xhr.getResponseHeader('x-path')
-    #   history.pushState { autoreload: true, path: path }, $parsed_data.find('title').text(), xhr.getResponseHeader('x-path')
+    # enable only for search
+    if window.location.pathname == '/relics' and !popping_state
+      path = xhr.getResponseHeader('x-path')
+      history.pushState { autoreload: true, path: path }, $parsed_data.find('title').text(), xhr.getResponseHeader('x-path')
 
 $(document).on 'ajax:beforeSend', 'form[data-remote], a[data-remote]', ->
-  $('#fancybox_loader_container').show()
+  $('#fancybox_loader_container').show() unless window.location.pathname == '/relics'
 
 $(document).on 'ajax:success', 'form[data-remote], a[data-remote]', (e, data, status, xhr) ->
   $('#fancybox_loader_container').hide()

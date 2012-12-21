@@ -42,12 +42,12 @@ jQuery.initializer 'body.relics.index .main-container', ->
     $("html, body").animate({ scrollTop: 0 }, 600);
 
   this.on 'ajax:beforeSend', 'form[data-remote], a[data-remote]', (e, data, status, xhr) ->
-    if status.url.match(/^\/relics\?/)
+    if window.location.pathname == '/relics'
       new Spinner(search_spinner_opts).spin(document.getElementById('spin'))
       $('form section.results .loading').show()
 
   this.on 'ajax:complete', 'form[data-remote], a[data-remote]', (e, data, status, xhr) ->
-    if status.url.match(/^\/relics\?/)
+    if window.location.pathname == '/relics'
       $('form section.results .loading').hide()
 
   this.find("input.autocomplete-q").autocomplete
