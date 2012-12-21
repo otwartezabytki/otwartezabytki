@@ -87,6 +87,10 @@ gem 'tolk', :git => "git://github.com/monterail/tolk.git", :branch => "oz-custom
 
 gem 'foreman'
 
+# documentation
+gem 'yard'
+gem 'redcarpet'
+
 group :development, :test do
   gem 'interactive_editor'
   gem 'ruby-debug19'        # for debugging

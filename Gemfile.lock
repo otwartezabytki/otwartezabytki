@@ -356,6 +356,7 @@ GEM
     rdoc (3.12)
       json (~> 1.4)
     recaptcha (0.3.4)
+    redcarpet (2.2.2)
     remote_table (2.0.2)
       activesupport (>= 2.3.4)
       fastercsv (>= 1.5.0)
@@ -559,6 +560,7 @@ DEPENDENCIES
   rails_config (= 0.2.5)
   rb-fsevent
   recaptcha
+  redcarpet
   remote_table
   rocket_tag
   rspec-rails (~> 2.0)
@@ -582,3 +584,4 @@ DEPENDENCIES
   wicked
   will_cache
   yajl-ruby (= 1.1.0)
+  yard
