@@ -16,6 +16,7 @@ class OriginalRelic < ActiveRecord::Base
   def state;            'unchecked' end
   def polish_relic;     true        end
   def has_photos?;      false       end
+  def main_photo;       nil         end
 
   [:entries, :all_links, :categories, :tags, :alerts, :all_events, :all_documents].each do |attr|
     define_method attr do
