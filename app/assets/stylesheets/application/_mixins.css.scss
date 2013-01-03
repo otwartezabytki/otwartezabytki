@@ -31,7 +31,7 @@ $dark-grey: #313132;
   }
 }
 @mixin button-bluenavy{
-  
+
           color: #fff;
           border: 0;
           font-size: 12px;
@@ -50,7 +50,7 @@ $dark-grey: #313132;
 
 @mixin gradient($from, $to) {
   @include filter-gradient($from, $to);
-  background: $from; 
+  background: $from;
   @include background(linear-gradient($from, $to));
   background: -ms-linear-gradient($from, $to);
 }
@@ -59,3 +59,16 @@ $dark-grey: #313132;
   @include filter-gradient($from, $to);
   background: -ms-linear-gradient($from, $to);
 }
+
+@mixin image-sprite($url, $x, $y) {
+  background-image: image-url($url);
+  background-repeat: no-repeat;
+  background-position: (-1 * $x) (-1 * $y);
+}
+
+@mixin elipsis() {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+

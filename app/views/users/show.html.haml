@@ -1,5 +1,22 @@
-%strong
-  path:
-  = __FILE__
-%h2 Cześć #{user.username}
-%p Twój email to: #{user.email}
+%section.user-profile
+  .user-profile-column-left
+
+    .nav-tabs-container
+      .nav-tabs-outer
+        %ul.nav-tabs
+          %li.nav-tab
+            %a.nav-tab-link.type-followed.active{:href => '#'}> Obserwowane
+          %li.nav-tab
+            %a.nav-tab-link.type-checked{:href => '#'}> Sprawdzone przeze mnie
+          %li.nav-tab
+            %a.nav-tab-link.type-settings{:href => '#'}> Ustawienia
+
+    = render 'feed'
+
+  .user-profile-column-right
+    %figure.user-avatar
+      %img.user-avatar-image{:alt => user.username, :src => asset_path('dummy-avatar.jpg'), :width => 320, :height => 320}
+      %figcaption.user-avatar-caption-outer
+        %span.user-avatar-caption= user.username
+
+    .user-profile-content Hello, #{user.username}

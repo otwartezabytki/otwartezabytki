@@ -1,0 +1,254 @@
+@import '../mixins';
+
+/* Variables */
+
+$content-border-color: #dadada;
+$content-icon-color:   #e5e5e5;
+$dimmed-text-color:    #a7a7a7;
+$separator-color:      #527283;
+$avatar-size:          320px;
+
+/* Mixins */
+
+@mixin user-profile-sprite($x, $y) {
+  @include image-sprite('user-profile-sprite.png', $x, $y);
+}
+
+@mixin tiny-dimmed-text() {
+  color: $dimmed-text-color;
+  font-size: 12px;
+}
+
+@mixin tab-icon($x) {
+  &:before {
+    @include user-profile-sprite($x, 20px);
+    float: left;
+    content: '';
+    width: 16px;
+    height: 17px;
+    margin: 1px 5px 0 -1px;
+  }
+
+  &:not(.active):hover:before {
+    background-position: (-1 * $x) -40px;
+  }
+}
+
+@mixin feed-icon($x) {
+  &:before {
+    @include user-profile-sprite($x, 0);
+    position: absolute;
+    content: '';
+    width: 16px;
+    height: 16px;
+    margin: 0 0 0 -39px;
+  }
+}
+
+/* Layout */
+
+.user-profile {
+  display: table;
+
+  .user-profile-column-left,
+  .user-profile-column-right {
+    display: table-cell;
+    vertical-align: top;
+  }
+}
+
+.user-profile-column-left {
+  width: 640px;
+  background: #fff;
+  border: 1px solid $content-border-color;
+}
+
+.user-profile-column-right {
+  width: 320px;
+  border-top: 1px solid $content-border-color;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.user-profile-content {
+  padding: 20px;
+  line-height: 1.3;
+}
+
+.nav-tabs-container {
+  display: block;
+  background: $separator-color;
+  padding: 0 0 3px;
+  margin: -1px -1px 17px;
+  overflow: hidden;
+}
+
+/* Tabs */
+
+.nav-tabs-outer {
+  @include gradient(#f5f5f5, #eee);
+  border: 1px solid $content-border-color;
+}
+
+.nav-tabs {
+  @include clearfix();
+  padding: 30px 0 0 0;
+  margin-bottom: -4px;
+  border-top: 1px solid #fafafa;
+}
+
+.nav-tab {
+  float: left;
+  padding-left: 20px;
+}
+
+.nav-tab-link {
+  display: block;
+  padding: 10px 0 7px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &, &.active:hover {
+    color: $dark-grey;
+  }
+
+  &.active {
+    padding-right: 20px;
+    padding-left: 20px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    background: #fff;
+    box-shadow: 0 1px 5px rgba($dark-grey, 0.1);
+  }
+
+  &.type-followed {
+    @include tab-icon(320px);
+  }
+
+  &.type-checked {
+    @include tab-icon(340px);
+  }
+
+  &.type-settings {
+    @include tab-icon(400px);
+  }
+}
+
+/* Avatar */
+
+.user-avatar,
+.user-avatar-image,
+.user-avatar-caption-outer {
+  height: $avatar-size;
+  width: $avatar-size;
+}
+
+.user-avatar {
+  border-bottom: 3px solid $separator-color;
+  overflow: hidden;
+}
+
+.user-avatar-image {
+  position: absolute;
+}
+
+.user-avatar-caption-outer {
+  @include user-profile-sprite(0, 0);
+  position: relative;
+}
+
+.user-avatar-caption {
+  @include elipsis();
+  display: block;
+  line-height: 30px;
+  font-size: 24px;
+  font-weight: 300;
+  color: #fff;
+  padding: ($avatar-size - 35px) 10px 0.25em;
+  text-align: right;
+  text-shadow:
+    0 1px  5px $dark-grey,
+    0 1px 10px $dark-grey,
+    0 1px 15px $dark-grey;
+}
+
+/* Feed */
+
+.user-feed {
+  margin-top: 2em;
+
+  a, b {
+    font-weight: 600;
+  }
+
+  img {
+    display: block;
+  }
+
+  .thumb {
+    float: left;
+    width: 56px;
+    padding: 3px;
+    border: 1px solid #d4d4d4;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+
+    &:empty {
+      display: none;
+    }
+  }
+}
+
+.user-feed-description {
+  @include tiny-dimmed-text();
+  padding: 0 10px;
+}
+
+.user-feed-item {
+  @include clearfix();
+  padding: 10px 20px 10px 140px;
+  border-top: 1px solid $content-icon-color;
+
+  &:first-child {
+    border-top: none;
+  }
+}
+
+.user-feed-image {
+  margin-left: -130px;
+}
+
+.user-feed-date {
+  @include tiny-dimmed-text();
+  padding-top: 4px;
+}
+
+.user-feed-message {
+  padding-top: 5px;
+
+  &.type-followed {
+    @include feed-icon(320px);
+  }
+
+  &.type-marked {
+    @include feed-icon(340px);
+  }
+
+  &.type-modified {
+    @include feed-icon(360px);
+  }
+
+  &.type-added {
+    @include feed-icon(380px);
+  }
+
+  &.type-last {
+    @include tiny-dimmed-text();
+  }
+}
