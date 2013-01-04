@@ -1916,6 +1916,18 @@ p#adding-note {
         margin-right: 15px;
       }
     }
+    .footer-language {
+      margin: 2px 0 0 425px;
+
+      .select2 {
+        min-width: 100px;
+        opacity: 0.6;
+
+        &.select2-container-active {
+          opacity: 1;
+        }
+      }
+    }
   }
 }
 
@@ -2907,7 +2919,7 @@ body.resource_home{
   .select2-choice{
     height: 20px;
     line-height: 20px;
-    background: #f5f5f5;  
+    background: #f5f5f5;
     div b{
       background-position: 0 -2px;
     }
