@@ -1,9 +1,9 @@
 # Otwarte Zabytki
 
 ### Requirements (for OS X)
-Your machine should be equipt with:
+Your machine should be equipped with:
   - homebrew
-  - ruby 1.9.2 or higher (we recommend to use rbenv)
+  - ruby 1.9.2 or higher (we recommend using rbenv)
   - git
   - bundle
   - web browser e.g. chrome or safari
@@ -30,7 +30,7 @@ Set up elastic search:
 ```bash:
   bundle exec rake relic:reindex
 ```
- 
+
 ### [Attention] Updating settings.yml
 
 After editing this file you have to edit also variables.js.etc in assets.
@@ -53,7 +53,7 @@ Redactor.js is proprietary software, you can disable it by issuing following com
 
 ### I18n translations
 
-  - Every new translation key add to pl.yml with default value. 
+  - Every new translation key add to pl.yml with default value.
   - On deploy default values are copied to database via ```bash rake tolk:sync```.
   - To change translation on production use tolk or inline interface (you muse be an admin).
   - To change sync local yaml file with production run:
