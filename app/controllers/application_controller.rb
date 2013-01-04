@@ -9,10 +9,13 @@ class ApplicationController < ActionController::Base
 
   before_filter do
     # set locale
-    if params[:locale] and Settings.oz.locale.available.include?(params[:locale].to_sym)
-      cookies[:locale] = params[:locale]
-    end
-    I18n.locale = (cookies[:locale] || current_user.try(:default_locale) || I18n.default_locale).to_sym
+    locale = params[:locale] if params[:locale] and Settings.oz.locale.available.include?(params[:locale].to_sym)
+    I18n.locale = (
+      locale ||
+      current_user.try(:default_locale) ||
+      http_accept_language.compatible_language_from(Settings.oz.locale.available) ||
+      I18n.default_locale
+    ).to_sym
   end
 
   before_filter :save_return_path
@@ -56,6 +59,8 @@ class ApplicationController < ActionController::Base
   end
 
   def page_pl_path(path)
+    # TODO refactor when changing page cms
+    return "/strony/#{path}?locale=#{params[:locale]}" if params[:locale]
     "/strony/#{path}"
   end
 
@@ -86,6 +91,10 @@ class ApplicationController < ActionController::Base
       format.html { render :file => "#{Rails.root}/public/404.html", :layout => false, :status => :not_found }
       format.any  { head :not_found }
     end
+  end
+
+  def default_url_options(options = {})
+    { :locale => I18n.locale }
   end
 
   protected
