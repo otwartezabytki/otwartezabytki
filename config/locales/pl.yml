@@ -1347,7 +1347,81 @@ pl:
         name: Zabytek
         unknown_address: "Adres niedostępny"
         unknown_from: Nieznana
-      show: ~
+      show:
+        view_current_version: "&#171; zobacz wersję obecną"
+        original_version: Przeglądasz wersję oryginalną
+        original_version_info: "Oznacza to, że istnieje również wersja z naniesionymi przez Ciebie poprawkami."
+        flash_content_html: |-
+            <h3>O co chodzi?</h3>
+            <p> Wyszukaj informacje i uzupełnij wybrane pola.</p>
+            <p> Skorzystaj z własnej wiedzy, poszukaj w książkach lub w internecie.</p>
+            <p> Sprawdź, czy informacje już uzupełnione są poprawne.</p>
+            <p> Pamiętaj o podaniu źródeł.</p>
+        flash_hide: ukryj
+        alerts:
+          header: "Alerty"
+          create: "zgłoś alert"
+          not_fixed: Zgłoszone alerty nienaprawione
+          fixed: Zgłoszone alerty poprawione
+          non_existent: "zgłoś, że zabytek nie istnieje"
+          placeholder: "Wiesz, że obiekt wymaga opieki?<br/>Zaalarmuj!"
+        categories:
+          header: "Tagi, kategorie"
+          not_added: "nie dodano, uzupełnij »"
+          content_title_cat: "Kategorie:"
+          content_title_tag: Tagi
+          add_category: "dodaj kategorie"
+          placeholder: |-
+              <p>Wybierz kategorie, które Twoim zdaniem pasują do opisywanego zabytku.</p>
+              <p>Dodaj tagi, które pomogą poruszać się po katalogu.</p>
+        description:
+          header: Opis
+          add: "dodaj opis"
+          placeholder: <p>Napisz 3-4 zdania zawierające najważniejsze informacje o obiekcie.</p>
+        documents:
+          header: Dokumenty urzędowe
+          where_to_find: Gdzie szukać?
+          add_file: dodaj plik
+          added: "dodado:"
+          size: rozmiar
+          upload: wgraj plik
+          add_file: dodaj plik
+          placeholder: |-
+              <p>Dysponujesz dokumentacją, którą możesz legalnie udostępnić innym? <br/> Załącz pliki tutaj.</p>
+        entries:
+          header: "Ciekawostki, legendy, anegdoty"
+          add: dodaj wpis
+          placeholder: |-
+              <p>Podziel się z innymi legendą, anegdotą,<br/>ciekawą historią związaną z zabytkiem.</p>
+        events:
+          header: Ważne daty
+          add: dodaj wydarzenie
+          placeholder: <p>Wpisz najważniejsze daty z historii obiektu wraz z krótkim opisem.</p>
+        general:
+          add: dodaj
+          fill_in: uzupełnij
+          show_example: pokaż przykład
+          common_name: "Nazwa zwyczajowa"
+          show_on_map: "pokaż na mapie »"
+          close: zamknij
+          relic: Zabytek
+          no_data_fill_in: "brak danych, uzupełnij »"
+          original: wersja oryginalna
+          register_number: "Numer w rejestrze:"
+          dating_of_obj: "Data powstania:"
+          location: "Lokalizacja:"
+          polish_location: "%{place}, powiat %{district}, gmina %{commune}"
+        links:
+          header: "Linki, źródła, powiązania"
+          placeholder: <p>Podaj ciekawe internetowe i papierowe źródła informacji o zabytku.</p>
+        location:
+          header: Lokalizacja
+        photos:
+          add: dodaj zdjęcia
+          show: "zobacz galerię (%{amount})"
+        subrelics:
+          header1: "Oglądasz właśnie profil zabytku, który posiada pewne podzabytki."
+          header2: "Oglądasz właśnie profil zabytku, będący częścią zespołu zabytków."
     widgets:
       index:
         about: "Widżety:"

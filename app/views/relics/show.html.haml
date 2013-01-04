@@ -7,23 +7,19 @@
 
 - if relic.id.zero?
   .original-version
-    %a{:href => relic_path(params[:id]), :class => "btn"} &#171; zobacz wersję obecną
+    %a{:href => relic_path(params[:id]), :class => "btn"}= t('views.relics.show.view_current_version')
     .content
-      %h3 Przeglądasz wersję oryginalną
-      %p Oznacza to, że istnieje również wersja z naniesionymi przez Ciebie poprawkami.
+      %h3= t('views.relics.show.original_version')
+      %p= t('views.relics.show.original_version_info')
 #fancybox
 - unless cookies[:flash_hidden]
   .row
     .flash.flash-info.flash-info-permament
-      %span{:class => "close", :"data-dismiss" => 'flash-info-permament'} ukryj
+      %span{:class => "close", :"data-dismiss" => 'flash-info-permament'}=t('views.relics.show.flash_hide')
       = image_tag 'notice-icon-info.png', :class => 'flash-icon'
       = image_tag 'notice-separator.png', :class => 'flash-separator'
       .flash-content
-        %h3 O co chodzi?
-        %p Wyszukaj informacje i uzupełnij wybrane pola.
-        %p Skorzystaj z własnej wiedzy, poszukaj w książkach lub w internecie.
-        %p Sprawdź, czy informacje już uzupełnione są poprawne.
-        %p Pamiętaj o podaniu źródeł.
+        = t('views.relics.show.flash_content_html')
 .row.first-row
   = render :partial => "relics/show/general"
   = render :partial => "relics/show/photos"

@@ -6,4 +6,4 @@
       = content_tag :ul do
         - if subrelics.length > 0
           = render 'shared/tree', :node => subrelics
-        %li.add= link_to 'dodaj', new_relicbuilder_path(:parent_id => rel.id),:class => "add_relic"
+        %li.add= link_to t('views.relics.show.general.add'), new_relicbuilder_path(:parent_id => rel.id),:class => "add_relic"
