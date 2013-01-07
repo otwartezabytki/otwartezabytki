@@ -10,7 +10,9 @@
       %dd.feed-date
         %time{:datetime => Time.now.xmlschema, :title => Time.now} 3 godziny temu
       %dt.feed-message.type-marked
-        <a href="#">Most Grunwaldzki</a> został oznaczony jako <b>sprawdzony</b>
+        %a{:href => '#'} Most Grunwaldzki
+        został oznaczony jako
+        %b.status.checked sprawdzony
 
     %dl.feed-item
       %dd.feed-image.thumb
