@@ -94,14 +94,14 @@
           %h3= t('views.relics.index.states.header')
           %ul
             %li=state_hint_tag('checked')
-    .filled{:style => "left: #{(relic_stats[:filled] * 900 / relic_stats[:total].to_f) + 16}px"}
-      = t('views.pages.home.stats_info.filled_html', :count => relic_stats[:filled])
-      .help
-        = image_tag 'ico-help.png'
-        .help-wrapper
-          %h3= t('views.relics.index.states.header')
-          %ul
-            %li=state_hint_tag('filled')
+    - #.filled{:style => "left: #{(relic_stats[:filled] * 900 / relic_stats[:total].to_f) + 16}px"}
+    - #  = t('views.pages.home.stats_info.filled_html', :count => relic_stats[:filled])
+    - #  .help
+    - #    = image_tag 'ico-help.png'
+    - #    .help-wrapper
+    - #      %h3= t('views.relics.index.states.header')
+    - #      %ul
+    - #        %li=state_hint_tag('filled')
     .total
       = t('views.pages.home.stats_info.total_html', :count => relic_stats[:total])
       = t('views.pages.home.stats_info.unchecked_html', :count => relic_stats[:unchecked])

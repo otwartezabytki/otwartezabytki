@@ -7,10 +7,10 @@
           - group = Relic.where(:voivodeship_id => v.id).group(:state).count
           %table
             %tr.numbers
-              %td= group['filled']    || 0
+              - #%td= group['filled']    || 0
               %td= group['checked']   || 0
               %td= group['unchecked'] || 0
             %tr
-              %td= t('activerecord.attributes.relic.states.filled')
+              - #%td= t('activerecord.attributes.relic.states.filled')
               %td= t('activerecord.attributes.relic.states.checked')
               %td= t('activerecord.attributes.relic.states.unchecked')
