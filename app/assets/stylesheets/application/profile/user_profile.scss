@@ -103,12 +103,12 @@ $avatar-size:          320px;
 }
 
 .nav-tab-link {
+  @include text-shadow(0 1px 0 rgba(255, 255, 255, 0.7));
   display: block;
   padding: 10px 0 7px;
   font-size: 14px;
   line-height: 20px;
   font-weight: 600;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
 
   &:hover {
     text-decoration: none;
@@ -119,12 +119,12 @@ $avatar-size:          320px;
   }
 
   &.active {
+    @include box-shadow(0 1px 5px rgba($dark-grey, 0.1));
     padding-right: 20px;
     padding-left: 20px;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
     background: #fff;
-    box-shadow: 0 1px 5px rgba($dark-grey, 0.1);
   }
 
   &.type-followed {
@@ -165,6 +165,7 @@ $avatar-size:          320px;
 
 .user-avatar-caption {
   @include elipsis();
+  @include text-shadow(0 1px  5px $dark-grey, 0 1px 10px $dark-grey, 0 1px 15px $dark-grey);
   display: block;
   line-height: 30px;
   font-size: 24px;
@@ -172,10 +173,6 @@ $avatar-size:          320px;
   color: #fff;
   padding: ($avatar-size - 35px) 10px 0.25em;
   text-align: right;
-  text-shadow:
-    0 1px  5px $dark-grey,
-    0 1px 10px $dark-grey,
-    0 1px 15px $dark-grey;
 }
 
 /* Feed */
@@ -192,12 +189,12 @@ $avatar-size:          320px;
   }
 
   .thumb {
+    @include box-shadow(0 1px 3px rgba(0, 0, 0, 0.3));
+    @include border-radius(3px);
     float: left;
     width: 56px;
     padding: 3px;
     border: 1px solid #d4d4d4;
-    border-radius: 3px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
     background: #fff;
 
     &:empty {
@@ -209,9 +206,9 @@ $avatar-size:          320px;
     @include gradient(#a3a4a6, #c1c3c5);
     @include text-shadow(rgba(0, 0, 0, 0.3) 0 1px 1px);
     @include box-shadow(inset rgba(0, 0, 0, 0.4) 0 1px 3px);
+    @include border-radius(3px);
     display: inline-block;
     padding: 0 8px;
-    border-radius: 3px;
     line-height: 19px;
     font-size: 11px;
     font-weight: normal;
@@ -250,9 +247,9 @@ $avatar-size:          320px;
   }
 
   .badge {
+    @include border-radius(2px);
     display: inline-block;
     padding: 4px 6px;
-    border-radius: 2px;
     margin-left: 5px;
     position: relative;
     top: -1px;
