@@ -4,17 +4,21 @@
     = link_to t('views.relics.show.general.fill_in'), edit_section_relic_path(relic.id, :links), :remote => true, :class => "edit-relic-link"
     .content
       %ul
-        - relic.all_links.each do |link|
-          - if link.url?
-            %li
-              = link_to link.shortened_url, link.url
-              \-
-              = link.name
-          - elsif link.paper?
-            %li
-              %strong= link.formal_name
-              \-
-              = link.name
+        - grouped_links = relic.all_links.group_by(&:relic_id)
+        - grouped_links.each do |relic_id, links|
+          - if grouped_links.size > 1
+            %h3= Relic.find(relic_id).identification
+          - links.each do |link|
+            - if link.url?
+              %li
+                = link_to link.shortened_url, link.url
+                \-
+                = link.name
+            - elsif link.paper?
+              %li
+                %strong= link.formal_name
+                \-
+                = link.name
   - else
     .placeholder
       = t('views.relics.show.links.placeholder')
