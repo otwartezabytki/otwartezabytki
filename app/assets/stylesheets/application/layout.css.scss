@@ -2605,6 +2605,10 @@ body.resource_home{
         li{
           padding: 20px 15px;
           border-top: 1px solid #e5e5e5;
+          overflow: hidden;
+          &.to-show { 
+            display: none;
+          }
           .image{
             float: left;
             width: 56px;
@@ -2657,8 +2661,12 @@ body.resource_home{
                 }
               }
             }
-            a{
+            p {
               display: inline-block;
+              width: 100%;
+            }
+            a{
+              
               width: 100%;
               color: #1a1a1a;
               text-decoration: underline;

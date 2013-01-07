@@ -6,12 +6,8 @@ class RecentRevision
       Rails.cache.fetch(:expires_in => 5.minutes) do
         Version.order('id DESC').limit(100).all.map do |version|
           new(:version => version).to_relic_hash
-        end
-      end
-    end
-
-    def recently_modified
-      revisions.compact.uniq { |relic_hash| relic_hash[:relic_id] }.first(5)
+        end.compact.uniq { |relic_hash| relic_hash[:relic_id] }
+      end.first(10)
     end
   end
 
@@ -54,7 +50,8 @@ class RecentRevision
       :slug => relic.to_param,
       :identification => relic.identification,
       :image_url => relic.main_photo.file.url(:icon),
-      :changes => changes
+      :changes => changes,
+      :created_at => self.version.created_at
     }
   end
 
