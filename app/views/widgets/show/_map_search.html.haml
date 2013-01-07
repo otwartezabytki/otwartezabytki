@@ -27,14 +27,15 @@
               %span= "⟩&nbsp;".html_safe + widget_search.location_object.full_name
               = link_to image_tag("widget-helper.png"), '#', :class => "tooltip", :"data-placement" => "right", :title => t('views.widgets.show.map_search.location_hint', :editable => false)
             .antiscroll-wrap.locations_tree
-              .antiscroll-inner
-                - if relics.polish_facets_tree.length > 0
-                  %ul
-                    = render 'shared/locations_tree', :node => relics.polish_facets_tree
-                - else
-                  %ul
-                    - relics.each do |relic|
-                      %li= link_to relic.identification, "#", :class => "point-relic", :"data-id" => relic.id
+              .box
+                .antiscroll-inner
+                  - if relics.polish_facets_tree.length > 0
+                    %ul
+                      = render 'shared/locations_tree', :node => relics.polish_facets_tree
+                  - else
+                    %ul
+                      - relics.each do |relic|
+                        %li= link_to relic.identification, "#", :class => "point-relic", :"data-id" => relic.id
             = link_to t('views.widgets.show.map_search.show_more'), '#', :class => "", :class => "show-more"
             = link_to t('views.widgets.show.map_search.show_less'), '#', :class => "", :class => "show-less"
           %section.categories{ :class => (cookies['section-shown'] == 'categories' ? "maxed" : cookies['section-shown'] == 'locations' ? 'mined' : '') }
@@ -42,23 +43,27 @@
               = t('views.widgets.show.map_search.categories')
               = link_to image_tag("widget-helper.png"), '#', :class => "tooltip", :"data-placement" => "right", :title => t('views.widgets.show.map_search.categories_hint', :editable => false)
             .antiscroll-wrap
-              .antiscroll-inner
-                .inputs-list.choices-group
-                  - Category.roots.sort_by(&:name).each do |c|
-                    - if c.name_key == 'sakralny'
-                      - hidden_sacral = !f.object.categories.include?('sakralny')
-                      = f.label :categories, :value => c.name_key do
-                        = f.check_box :categories, {:multiple => true, :class => 'sacral-options'}, c.name_key, nil
-                        %span
-                          = c.name
-                          %em= relics.count('sacral')
-                      .sacral-categories{:style => ('display:none;' if hidden_sacral)}
-                        - c.children.sort_by(&:name).each do |child|
-                          - next unless categoires_facets_hash.keys.include?(child.name_key)
-                          = render :partial => 'shared/category_checkbox', :locals => {:f => f, :category => child}
-                    - else
-                      - next unless categoires_facets_hash.keys.include?(c.name_key)
-                      = render :partial => 'shared/category_checkbox', :locals => {:f => f, :category => c}
+              .box
+                .antiscroll-inner
+                  .inputs-list.choices-group
+                    - Category.roots.sort_by(&:name).each do |c|
+                      - if c.name_key == 'sakralny'
+                        - hidden_sacral = !f.object.categories.include?('sakralny')
+                        = f.label :categories, :value => c.name_key do
+                          = f.check_box :categories, {:multiple => true, :class => 'sacral-options'}, c.name_key, nil
+                          %span
+                            = c.name
+                            %em
+                              (
+                              = relics.count('sacral')
+                              )
+                        .sacral-categories{:style => ('display:none;' if hidden_sacral)}
+                          - c.children.sort_by(&:name).each do |child|
+                            - next unless categoires_facets_hash.keys.include?(child.name_key)
+                            = render :partial => 'shared/category_checkbox', :locals => {:f => f, :category => child}
+                      - else
+                        - next unless categoires_facets_hash.keys.include?(c.name_key)
+                        = render :partial => 'shared/category_checkbox', :locals => {:f => f, :category => c}
 
             = link_to t('views.widgets.show.map_search.show_more'), '#', :class => "", :class => "show-more"
             = link_to t('views.widgets.show.map_search.show_less'), '#', :class => "", :class => "show-less"
