@@ -61,16 +61,23 @@
         margin-top: 3px;
         line-height: 1.5;
       }
-      span.small{
+      .small{
         font-size: 11px;
         font-weight: normal;
       }
-      em.icons{
-        width: 58px;
-        height: 16px;
-        background: asset-data-url("cc-icons.png") no-repeat;
+      em{
         display: inline-block;
         margin-left: 5px;
+        height: 16px;
+      }
+      em.icons{
+        width: 58px;
+        background: asset-data-url("cc-icons.png") no-repeat;
+        
+      }
+      em.icons-by{
+        width: 37px;
+        background: asset-data-url("cc-icons-by.png") no-repeat;
       }
     }
   }
