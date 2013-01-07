@@ -53,10 +53,7 @@
                           = f.check_box :categories, {:multiple => true, :class => 'sacral-options'}, c.name_key, nil
                           %span
                             = c.name
-                            %em
-                              (
-                              = relics.count('sacral')
-                              )
+                            %em= relics.count('sacral')
                         .sacral-categories{:style => ('display:none;' if hidden_sacral)}
                           - c.children.sort_by(&:name).each do |child|
                             - next unless categoires_facets_hash.keys.include?(child.name_key)
