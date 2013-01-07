@@ -712,6 +712,10 @@ section.show.entries{
 }
 
 section.show.links{
+  h3 {
+    margin-top: 5px;
+    font-weight: bold;
+  }
   ul li{
     padding-left: 20px;
     background: asset-data-url("edit-relic-ico-link.png") 0 3px no-repeat;

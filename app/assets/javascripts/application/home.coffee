@@ -20,3 +20,11 @@ jQuery.initializer 'body.show.resource_home', ->
     select: (event, ui) ->
       $('form input#search_location').val(ui.item.location)
       $('form').submit()
+
+  showNextChange = ->
+    if $('ul.latest li.to-show').length > 0
+      $('ul.latest li.to-show:last').slideDown(1000).removeClass('to-show')
+      $('ul.latest li:visible:last').slideUp(1000)
+      setTimeout(showNextChange, 5000 + Math.random() * 5000)
+
+  setTimeout(showNextChange, 5000 + Math.random() * 5000)

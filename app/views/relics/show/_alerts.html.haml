@@ -1,11 +1,11 @@
 %section.show.alerts#anchor-alerts
-  %h2 Alerty
+  %h2=t('views.relics.show.alerts.header')
   - if relic.alerts.count > 0
-    = link_to image_tag('edit-relic-ico-alert.png') + "zgłoś alert", new_relic_alert_path(relic), :remote => true, :title => "dodaj alert do zabytku", :class => "edit-relic-link"
+    = link_to image_tag('edit-relic-ico-alert.png') + t('views.relics.show.alerts.create'), new_relic_alert_path(relic), :remote => true, :class => "edit-relic-link"
     .content
       - if relic.alerts.not_fixed.count > 0
         .not-fixed
-          %h4 Zgłoszone alerty nienaprawione
+          %h4=t('views.relics.show.alerts.not_fixed')
           %ul
             - relic.alerts.not_fixed.each do |alert|
               %li
@@ -14,7 +14,7 @@
                 = simple_format alert.description
       - if relic.alerts.fixed.count > 0
         .fixed
-          %h4 Zgłoszone alerty poprawione
+          %h4=t('views.relics.show.alerts.fixed')
           %ul
             - relic.alerts.fixed.each do |alert|
               %li
@@ -23,14 +23,11 @@
                 = simple_format alert.description
       - unless relic.existence == "archived"
         = link_to new_relic_alert_path(relic, :non_existent => true), :class => "alert-link" do
-          zgłoś, że zabytek nie istnieje
+          = t('views.relics.show.alerts.non_existent')
   - else
     .placeholder
-      %p
-        Wiesz, że obiekt wymaga opieki?
-        %br
-        Zaalarmuj!
-      = link_to image_tag('edit-relic-ico-alert.png') + "zgłoś alert", new_relic_alert_path(relic), :remote => true
+      %p= t('views.relics.show.alerts.placeholder')
+      = link_to image_tag('edit-relic-ico-alert.png') + t('views.relics.show.alerts.create'), new_relic_alert_path(relic), :remote => true
       - unless relic.existence == "archived"
         = link_to new_relic_alert_path(relic.id,  :non_existent => true), :class => "alert-link" do
-          zgłoś, że zabytek nie istnieje
+          = t('views.relics.show.alerts.non_existent')

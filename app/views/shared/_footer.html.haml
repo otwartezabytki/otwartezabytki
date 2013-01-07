@@ -48,9 +48,8 @@
   -#   %a{ :class => "footer-regulamin", :href => "/strony/regulamin"} Regulamin
   -#   %a{ :class => "footer-prywatnosc", :href => "/strony/prywatnosc"} Prywatność
 
-  - if current_user.try(:admin?)
-    .footer-language
-      %select#lang.select2
-        - Settings.oz.locale.available.each do |l|
-          %option{:name => l, :selected => ('selected' if (cookies[:locale] || I18n.default_locale).to_s == l.to_s)}
-            = t("common.lang.#{l}")
+  .footer-language
+    %select#lang.select2
+      - enabled_locales.each do |l|
+        %option{:name => l, :selected => ('selected' if (params[:locale] || I18n.locale).to_s == l.to_s)}
+          = t("common.lang.#{l}")

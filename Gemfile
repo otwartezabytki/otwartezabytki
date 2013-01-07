@@ -71,6 +71,7 @@ gem 'js-routes'           # rails routes in javascirpt
 gem 'acts_as_list'        # sorting links and relic events
 gem 'rubyzip'             # download documents as zip
 gem 'aasm'                # state machine
+gem 'http_accept_language', :git => "git://github.com/zzet/http_accept_language.git"
 
 # api
 gem "jbuilder"

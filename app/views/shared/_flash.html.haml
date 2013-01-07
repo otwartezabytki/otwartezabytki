@@ -2,7 +2,7 @@
   .row
     - if flash[:error]
       .flash.flash-error
-        = link_to 'ukryj', '#', :class => "close", :"data-dismiss" => 'flash'
+        = link_to t('views.relics.show.flash_hide'), '#', :class => "close", :"data-dismiss" => 'flash'
         = image_tag 'notice-icon-info.png', :class => 'flash-icon'
         = image_tag 'notice-separator.png', :class => 'flash-separator'
         .flash-content
@@ -10,7 +10,7 @@
 
     - elsif flash[:notice]
       .flash{:class => "flash-info flash-#{Digest::MD5.hexdigest(flash[:notice])[0..6]}"}
-        = link_to 'ukryj', '#', :class => "close", :"data-dismiss" => 'flash'
+        = link_to t('views.relics.show.flash_hide'), '#', :class => "close", :"data-dismiss" => 'flash'
         .icon
           = image_tag 'notice-icon-info.png', :class => "flash-icon"
         = image_tag 'notice-separator.png', :class => 'flash-separator'

@@ -1,11 +1,11 @@
 %section.show.general
-  = link_to 'uzupełnij', edit_section_relic_path(relic.id, :general), :title => 'edytuj ogólne dane zabytku', :remote => true, :class => "edit-relic-link"
+  = link_to t('views.relics.show.general.fill_in'), edit_section_relic_path(relic.id, :general), :remote => true, :class => "edit-relic-link"
   - if relic.parent.present?
     %h2= link_to relic.parent.identification, relic_path(relic.parent_id), :remote => true
   %h1= relic.identification
   - if relic.common_name.present?
     %p
-      %strong Nazwa zwyczajowa:
+      %strong= t('views.relics.show.general.common_name')
       =relic.common_name
   .fb-like{"data-href" => "http://#{request.host+request.fullpath}", "data-layout" => "button_count", "data-send" => "false", "data-show-faces" => "false", "data-width" => "200"}
   .status
@@ -19,38 +19,38 @@
           %li
             = state_hint_tag(relic.state, relic.existence == 'social')
     %span.relic-info
-      Zabytek
+      = t('views.relics.show.general.relic')
       %strong= t("activerecord.attributes.relic.existences.#{relic.existence}")
   .location_name
-    = link_to 'uzupełnij', edit_section_relic_path(relic.id, :location), :title => 'edytuj ogólne dane zabytku', :remote => true, :class => "edit-relic-link"
-    %strong Lokalizacja:
+    = link_to t('views.relics.show.general.fill_in'), edit_section_relic_path(relic.id, :location), :remote => true, :class => "edit-relic-link"
+    %strong= t('views.relics.show.general.location')
     - if relic.polish_relic and relic.place_id?
-      %p= "#{relic.place.name}, powiat #{relic.district.name}, gmina #{relic.commune.name}"
+      %p= t('views.relics.show.general.polish_location', :place => relic.place.name, :district => relic.district.name, :commune => relic.commune.name)
     - elsif !relic.polish_relic
       %p= [I18n.t(relic.country_code, :scope => :countries), relic.fprovince, relic.fplace].select(&:present?).join(', ')
     %p= relic.street
     - if relic.latitude.present? && relic.longitude.present?
-      %p= link_to "pokaż na mapie »", '#', :id => "relic_location_popover", :class => "js-popover",
+      %p= link_to t('views.relics.show.general.fill_in'), '#', :id => "relic_location_popover", :class => "js-popover",
         :"data-content-id" => "location_body", :"data-title-id" => "location_title"
       %script(type="text/html" id="location_title")
         %p= relic.latitude.round(6).to_s + ", " + relic.longitude.round(6).to_s
-        %p.close= link_to "zamknij", "#", :class => "close_popover", :"data-popover-id" => "relic_location_popover"
+        %p.close= link_to t('views.relics.show.general.close'), "#", :class => "close_popover", :"data-popover-id" => "relic_location_popover"
       %script(type="text/html" id="location_body")
         = link_to "https://maps.google.com/?q=#{relic.latitude.to_f},#{relic.longitude.to_f}&t=h", :target => :_blank do
           %img{ src: "http://maps.googleapis.com/maps/api/staticmap?center=#{relic.latitude.to_f},#{relic.longitude.to_f}&zoom=17&size=260x160&sensor=false&markers=#{relic.latitude.to_f},#{relic.longitude.to_f}&maptype=hybrid", width: 260, height: 160 }
   .dating
     - if relic.dating_of_obj.present?
-      = link_to 'uzupełnij', edit_section_relic_path(relic.id, :events), :title => 'edytuj datowanie zabytku', :remote => true, :class => "edit-relic-link"
-    %strong Data powstania:
+      = link_to t('views.relics.show.general.fill_in'), edit_section_relic_path(relic.id, :events), :remote => true, :class => "edit-relic-link"
+    %strong= t('views.relics.show.general.dating_of_obj')
     - if relic.dating_of_obj.present?
       %span.content= relic.dating_of_obj
     - else
-      %span.placeholder= link_to "brak danych, uzupełnij »", edit_section_relic_path(relic.id, :events), :remote => true
+      %span.placeholder= link_to t('views.relics.show.general.no_data_fill_in'), edit_section_relic_path(relic.id, :events), :remote => true
   - if relic.register_number.present?
     .register_number
-      %strong Numer w rejestrze:
+      %strong= t('views.relics.show.general.register_number')
       %p= relic.register_number
   - if !relic.id.zero? and relic.original_relic.present?
-    = link_to content_tag(:span, 'wersja oryginalna'), relic_path(relic.id, :original => true), :class => "original"
+    = link_to content_tag(:span, t('views.relics.show.general.original')), relic_path(relic.id, :original => true), :class => "original"
   - else
     %div{:style => 'display:block; height: 50px;'}

@@ -2384,10 +2384,8 @@ body.resource_home{
     margin-top: 40px;
     float: left;
     width: 350px;
-    height: 205px;
-    padding: 15px 20px 90px;
-    position: relative;
-    overflow: hidden;
+    height: 280px;
+    padding: 15px 20px;
     h3{
       font-size: 18px;
       font-weight: 600;
@@ -2624,6 +2622,10 @@ body.resource_home{
         li{
           padding: 20px 15px;
           border-top: 1px solid #e5e5e5;
+          overflow: hidden;
+          &.to-show { 
+            display: none;
+          }
           .image{
             float: left;
             width: 56px;
@@ -2676,8 +2678,12 @@ body.resource_home{
                 }
               }
             }
-            a{
+            p {
               display: inline-block;
+              width: 100%;
+            }
+            a{
+              
               width: 100%;
               color: #1a1a1a;
               text-decoration: underline;
@@ -2886,46 +2892,13 @@ body.resource_home{
       margin: 4px 6px 0 0;
     }
     label > span{
-      display: inline-block;
-      width: 184px;
+      float: left;
+      width: 175px;
     }
     span.label{
       float: left;
       width: 135px;
       line-height: 18px;
-    }
-  }
-}
-
-.competition-wrapper{
-  position: absolute;
-  left: 0;
-  bottom: 39px;
-  width: 100%;
-  text-align: center;
-  .line{
-    margin: 0 auto;
-    width: 350px;
-    height: 1px;
-    background: #d7d7d7;
-  }
-  .competition-link{
-    display: inline-block;
-    padding: 10px 26px;
-    color: #fff;
-    @include border-radius(4px);
-    @include gradient(#F6EAD4,#EFDAB4);
-    color: #524D49;
-    margin-top:15px;
-    border: 1px solid #F6E3D0;
-    @include box-shadow(0 1px 2px 0 rgba(0,0,0,0.3));
-    font-weight: 700;
-    &:hover{
-      @include gradient(#fdd96d,#f3cf63);
-      text-decoration: none;
-    }
-    &:active{
-      @include gradient(#EFDAB4,#F6EAD4);
     }
   }
 }

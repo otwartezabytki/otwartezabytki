@@ -78,6 +78,12 @@ GIT
       rdoc (~> 3.4)
       thor (>= 0.14.6, < 2.0)
 
+GIT
+  remote: git://github.com/zzet/http_accept_language.git
+  revision: 18c0cc10d4869bd8ccae562c2d9ed29569d50eb5
+  specs:
+    http_accept_language (2.0.1.pre)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -343,7 +349,7 @@ GEM
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
-    rails-i18n (0.6.5)
+    rails-i18n (0.7.2)
       i18n (~> 0.5)
     rails_config (0.2.5)
       activesupport (>= 3.0)
@@ -537,6 +543,7 @@ DEPENDENCIES
   guard-spork
   haml-rails
   htmldiff
+  http_accept_language!
   i18n-country-translations
   i18n_country_select (~> 1.0.14)
   interactive_editor
