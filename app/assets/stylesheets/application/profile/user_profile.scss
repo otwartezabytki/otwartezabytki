@@ -180,7 +180,7 @@ $avatar-size:          320px;
 
 /* Feed */
 
-.user-feed {
+.feed {
   margin-top: 2em;
 
   a, b {
@@ -198,6 +198,7 @@ $avatar-size:          320px;
     border: 1px solid #d4d4d4;
     border-radius: 3px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    background: #fff;
 
     &:empty {
       display: none;
@@ -205,31 +206,70 @@ $avatar-size:          320px;
   }
 }
 
-.user-feed-description {
+.feed-description {
   @include tiny-dimmed-text();
   padding: 0 10px;
 }
 
-.user-feed-item {
+.feed-title {
+  font-size: 18px;
+  font-weight: 600;
+  padding: 5px 20px 5px 10px;
+  border-bottom: 1px solid $content-icon-color;
+
+  .user-added-feed & {
+    border-color: $content-border-color;
+    padding-bottom: 10px;
+    padding-left: 20px;
+
+    .user-avatar + & {
+      padding-top: 25px;
+    }
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 4px 6px;
+    border-radius: 2px;
+    margin-left: 5px;
+    position: relative;
+    top: -1px;
+    background: #dce4e8;
+    color: $blue-hover;
+    font-size: 13px;
+    font-weight: 600;
+  }
+}
+
+.feed-item {
   @include clearfix();
   padding: 10px 20px 10px 140px;
   border-top: 1px solid $content-icon-color;
 
-  &:first-child {
+  &:first-of-type {
     border-top: none;
+  }
+
+  .user-added-feed & {
+    border-color: $content-border-color;
+    padding-left: 100px;
   }
 }
 
-.user-feed-image {
+.feed-image {
   margin-left: -130px;
+
+  .user-added-feed & {
+    margin-left: -80px;
+  }
 }
 
-.user-feed-date {
+.feed-date {
   @include tiny-dimmed-text();
   padding-top: 4px;
 }
 
-.user-feed-message {
+.feed-message {
   padding-top: 5px;
 
   &.type-followed {
@@ -246,6 +286,13 @@ $avatar-size:          320px;
 
   &.type-added {
     @include feed-icon(380px);
+  }
+
+  &.type-followed,
+  &.type-modified {
+    &:before {
+      margin-top: -1px;
+    }
   }
 
   &.type-last {

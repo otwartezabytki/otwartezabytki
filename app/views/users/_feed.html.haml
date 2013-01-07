@@ -1,63 +1,65 @@
 .user-profile-content
-  %p.user-feed-description Zmiany wprowadzone w profilach zabytków dodanych i adoptowanych przez Ciebie:
-  .user-feed
+  %p.feed-description Zmiany wprowadzone w profilach zabytków dodanych i adoptowanych przez Ciebie:
 
-    %dl.user-feed-item
-      %dd.user-feed-image.thumb
+  %section.feed
+    %h1.feed-title.hidden Aktywność
+
+    %dl.feed-item
+      %dd.feed-image.thumb
         %img{:alt => 'Zabytek', :src => asset_path('homepage-image-example.png'), :width => 56, :height => 56}
-      %dd.user-feed-date
+      %dd.feed-date
         %time{:datetime => Time.now.xmlschema, :title => Time.now} 3 godziny temu
-      %dt.user-feed-message.type-marked
+      %dt.feed-message.type-marked
         <a href="#">Most Grunwaldzki</a> został oznaczony jako <b>sprawdzony</b>
 
-    %dl.user-feed-item
-      %dd.user-feed-image.thumb
+    %dl.feed-item
+      %dd.feed-image.thumb
         %img{:alt => 'Zabytek', :src => asset_path('homepage-image-example.png'), :width => 56, :height => 56}
-      %dd.user-feed-date
+      %dd.feed-date
         %time{:datetime => Time.now.xmlschema, :title => Time.now} wczoraj
-      %dt.user-feed-message.type-modified
+      %dt.feed-message.type-modified
         <a href="#">Most Grunwaldzki</a> został zmodyfikowany przez: <b>szymon</b>
 
-    %dl.user-feed-item
-      %dd.user-feed-image.thumb
+    %dl.feed-item
+      %dd.feed-image.thumb
         %img{:alt => 'Zabytek', :src => asset_path('fallback/photo_icon_default.png'), :width => 56, :height => 56}
-      %dd.user-feed-date
+      %dd.feed-date
         %time{:datetime => Time.now.xmlschema, :title => Time.now} 2 dni temu
-      %dt.user-feed-message.type-modified
+      %dt.feed-message.type-modified
         <a href="#">Most Grunwaldzki</a> został zmodyfikowany przez: <b>katarzyna</b>
 
-    %dl.user-feed-item
-      %dd.user-feed-image.thumb
+    %dl.feed-item
+      %dd.feed-image.thumb
         %img{:alt => 'Zabytek', :src => asset_path('alert-example-image.png'), :width => 56, :height => 56}
-      %dd.user-feed-date
+      %dd.feed-date
         %time{:datetime => Time.now.xmlschema, :title => Time.now} tydzień temu
-      %dt.user-feed-message.type-followed
+      %dt.feed-message.type-followed
         Adoptowano <a href="#">Urząd Wojewódzki we Wrocławiu</a>
 
-    %dl.user-feed-item
-      %dd.user-feed-image.thumb
+    %dl.feed-item
+      %dd.feed-image.thumb
         %img{:alt => 'Zabytek', :src => asset_path('fallback/photo_icon_default.png'), :width => 56, :height => 56}
-      %dd.user-feed-date
+      %dd.feed-date
         %time{:datetime => Time.now.xmlschema, :title => Time.now} 2 tygodnie temu
-      %dt.user-feed-message.type-modified
+      %dt.feed-message.type-modified
         <a href="#">Most Grunwaldzki</a> został zmodyfikowany przez: <b>katarzyna</b>
 
-    %dl.user-feed-item
-      %dd.user-feed-image.thumb
+    %dl.feed-item
+      %dd.feed-image.thumb
         %img{:alt => 'Zabytek', :src => asset_path('fallback/photo_icon_default.png'), :width => 56, :height => 56}
-      %dd.user-feed-date
+      %dd.feed-date
         %time{:datetime => Time.now.xmlschema, :title => Time.now} miesiąc temu
-      %dt.user-feed-message.type-modified
+      %dt.feed-message.type-modified
         Zmodyfikowano <a href="#">Most Grunwaldzki</a>
 
-    %dl.user-feed-item
-      %dd.user-feed-image.thumb
+    %dl.feed-item
+      %dd.feed-image.thumb
         %img{:alt => 'Zabytek', :src => asset_path('fallback/photo_icon_default.png'), :width => 56, :height => 56}
-      %dd.user-feed-date
+      %dd.feed-date
         %time{:datetime => Time.now.xmlschema, :title => Time.now} 6. października
-      %dt.user-feed-message.type-added
+      %dt.feed-message.type-added
         Dodano <a href="#">Most Grunwaldzki</a>
 
-    .user-feed-item
-      .user-feed-message.type-last
+    .feed-item
+      .feed-message.type-last
         Nie masz już więcej powiadomień.

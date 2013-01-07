@@ -19,4 +19,19 @@
       %figcaption.user-avatar-caption-outer
         %span.user-avatar-caption= user.username
 
-    .user-profile-content Hello, #{user.username}
+
+    %section.feed.user-added-feed
+      - added_items_count = 4
+
+      %h1.feed-title
+        Dodane zabytki
+        %span.badge= added_items_count
+
+      - (0...added_items_count).each do |item|
+        %dl.feed-item
+          %dd.feed-image.thumb
+            %img{:alt => 'Zabytek', :src => asset_path('fallback/photo_icon_default.png'), :width => 56, :height => 56}
+          %dt.feed-message
+            %a{:href => '#'}> Most Grunwaldzki
+          %dd.feed-message
+            %b> sprawdzony
