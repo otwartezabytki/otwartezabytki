@@ -6,6 +6,8 @@
   .form_box
     .left
       %h2= t('.header', :scope => 'views')
+      .fb-login
+        = link_to t('layouts.application.facebook_sign_in'), user_omniauth_authorize_path(:facebook), :class => "fb-btn"
       - if flash[:alert]
         .alert.alert-error= flash[:alert]
       = semantic_form_for(resource, :as => resource_name, :url => session_path(resource_name), :remote => request.xhr?) do |f|
