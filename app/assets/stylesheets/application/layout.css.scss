@@ -43,21 +43,38 @@ a {
 /* footer sticker */
 @include sticky-footer(14px, "#root", "#root-footer", "#footer");
 
+.page-logo,
+.page-logo-link,
+.page-logo-tagline {
+  width: 349px;
+}
+
+.page-logo {
+  float: left;
+  height: 86px;
+  background: image-url('logo.png') no-repeat;
+  margin-top: 20px;
+}
+
+.page-logo-link {
+  display: block;
+  height: 65px;
+  text-indent: -9999px;
+  overflow: hidden;
+}
+
+.page-logo-tagline {
+  padding-top: 10px;
+  max-height: 21px;
+  font-size: 13px;
+  line-height: 11px;
+  text-transform: uppercase;
+  text-align: center;
+  overflow: visible;
+}
+
 #header {
   height: 118px;
-  h1 {
-    float: left;
-    text-indent: -9999px;
-    width: 349px;
-    height: 86px;
-    background: image-url('logo-new.png') no-repeat;
-    margin-top: 20px;
-    a {
-      display: block;
-      width: 100%;
-      height: 100%;
-    }
-  }
   section.disclaimer {
     position: absolute;
     font-size: 12px;
