@@ -11,7 +11,7 @@ class AlertsController < ApplicationController
   def new
     if params[:non_existent].present?
       relic.update_attributes(:existence => "archived")
-      redirect_to relic_path(relic), :notice => "Zabytek został zarchiwizowany." and return
+      redirect_to relic_path(relic), :notice => t('notices.relic_was_archived') and return
     end
   end
 
@@ -19,7 +19,10 @@ class AlertsController < ApplicationController
     authorize! :create, Alert
     alert.user_id = current_user.try(:id)
     if alert.save
-      render 'created' and return if Subdomain.matches?(request)
+      if Subdomain.matches?(request)
+        path = relic_path(relic, :host => Settings.oz.host, :only_path => false, :anchor => 'anchor-alerts', :notice =>'notices.alert_added')
+        render :js => "window.top.location = '#{path}';" and return
+      end
       redirect_to relic, :notice => t('notices.alert_added')
     else
       render 'new'

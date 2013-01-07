@@ -25,16 +25,15 @@ class Widgets::MapSearchesController < WidgetsController
     if widget_map_search.save
       redirect_to edit_widgets_map_search_path(widget_map_search.id)
     else
-      flash[:error] = "Nie udało się stworzyć widgeta. Zgłoś błąd administracji."
-      redirect_to widgets_path
+      redirect_to widgets_path :error => t('notices.widget_error')
     end
   end
 
   def update
     if widget_map_search.save
-      redirect_to edit_widgets_map_search_path(widget_map_search.id), :notice => "Widget został zaktualizowany"
+      redirect_to edit_widgets_map_search_path(widget_map_search.id), :notice => t('notices.widget_has_been_updated')
     else
-      flash[:error] = "Nie udało się zaktualizować widgeta. Popraw błędy poniżej."
+      flash[:error] = t('notices.widget_error_and_correct')
       render :edit
     end
   end

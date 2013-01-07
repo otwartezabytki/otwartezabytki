@@ -43,6 +43,7 @@ class RelicsController < ApplicationController
   before_filter :authenticate_user!, :only => [:edit, :update]
 
   def show
+    flash.now[:notice] = t(params[:notice]) if params[:notice]
     relic.present? # raise ActiveRecord::RecordNotFound before entering template
     cookies[:last_relic_id] = relic.id
     if params[:section].present?

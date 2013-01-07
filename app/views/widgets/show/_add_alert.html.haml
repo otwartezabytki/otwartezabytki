@@ -8,10 +8,10 @@
   .actions
     - if widget.relic.alerts.count.zero?
       %button.none
-        = t('views.widgets.show.add_alert.header')
+        = t('views.widgets.show.add_alert.empty')
     - else
       %button.show{:src => "http://#{Settings.oz.host}/relics/#{widget.relic.to_param}#anchor-alerts"}
-        = t('views.widgets.show.add_alert.empty')
+        = t('views.widgets.show.add_alert.show')
         %span= widget.relic.alerts.count
 
     %button.create{:src => "http://iframe.#{Settings.oz.host}/relics/#{widget.relic_id}/alerts/new"}

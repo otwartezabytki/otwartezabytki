@@ -109,9 +109,9 @@ pl:
       photo:
         author: "Dane autora (imię, nazwisko)"
         date_taken: "Data wykonania"
+        description: Opis
         relic: Zabytek
         relic_id: "ID zabytku"
-        description: "Opis"
       relic:
         ancestry: "W zespołach"
         approved: "Zabytek zatwierdzony"
@@ -850,14 +850,14 @@ pl:
       update: "Zaktualizuj %{model}"
   layouts:
     application:
-      facebook_sign_in: "Zaloguj się przez Facebooka"
-      facebook_sign_up: "Zarejestruj się przez Facebooka"
       about: "O projekcie"
       addrelic: "Dodaj zabytek"
       browse: Przeglądaj
       contact: Kontakt
       disclaimer: "Wciąż udoskonalamy serwis i poprawiamy błędy. Jeśli masz jakieś uwagi lub znajdziesz błąd, prosimy o informację na:"
       download_data: "Pobierz dane"
+      facebook_sign_in: "Zaloguj się przez Facebooka"
+      facebook_sign_up: "Zarejestruj się przez Facebooka"
       footer:
         about_project_html: "<p>Otwarte Zabytki to projekt prowadzony przez Centrum Cyfrowe Projekt: Polska.</p><p>Centrum Cyfrowe Projekt: Polska, ul. Andersa 29, 00-159 Warszawa</p><p>Projekt finansowany ze środków Ministra Kultury i Dziedzictwa Narodowego w ramach konkursu Patriotyzm Jutra, ze środków finansowych otrzymanych od Ministerstwa Spraw Zagranicznych w ramach konkursu na realizację zadania „Współpraca z Polonią i Polakami” za granicą oraz ze środków CEE Trust.</p>"
         license: "Treści zamieszczone w serwisie udostępniamy na licencji <br/> <a href ='http://creativecommons.org/licenses/by/3.0/pl'>Creative Commons Uznanie autorstwa - Na tych samych warunkach 3.0 Polska</a>"
@@ -888,9 +888,13 @@ pl:
     new_relic_has_been_added: "Gratulacje dodałeś nowy zabytek"
     please_correct_errors: "Popraw proszę błędy wskazane poniżej."
     relic_reverted: "Objekt został przywrócony do wskazanej wersji."
+    relic_was_archived: "Zabytek został zarchiwizowany."
     reservation_thanks: "Dziękujemy za rejestrację! Na podany adres e-mail zostało wysłane Twoje hasło. Tymczasem zachęcamy do dalszego poprawiania zabytków:"
     there_is_no_relics_in_the_area: "W naszej bazie nie ma zabytków znajdująych się w tej okolicy. Możesz kontynuować dodawanie zabytku"
     unpublished_photos_has_been_delete: "Ponieważ nie zgodziłeś się na opublikowanie dodanych zdjęć, zostały one usunięte."
+    widget_error: "Nie udało się stworzyć widgeta. Zgłoś błąd administracji."
+    widget_error_and_correct: "Nie udało się zaktualizować widgeta. Popraw błędy poniżej."
+    widget_has_been_updated: "Widget został zaktualizowany"
   number:
     currency:
       format:
@@ -982,9 +986,6 @@ pl:
     photos:
       description: "Załącz jedno lub więcej zdjęcie zabytku (dopuszczalne formaty: JPG i PNG; maksymalny rozmiar jednego zdjęcia: 2 MB). Zadbaj o to, aby przeglądanie zdjęć sprawiało przyjemność innym użytkownikom - zamieszczaj wyłącznie zdjęcia dobrej jakości."
       name: Zdjęcia
-    attachments:
-      description: "Wybierz zdjęcie, które chcesz załączyć:"
-      name: "Wybierz zdjęcie..."
   support:
     array:
       last_word_connector: " i "
@@ -1226,9 +1227,8 @@ pl:
         not_found_html: "Nie ma go na liście &raquo;"
         that_one: "To jest ten zabytek!"
       new:
-        non_existed: "Nieistniejący zabytek"
-        add_foreign_relic: "Zabytek spoza Polski"
-        add_relic_group: "Zespół zabytków"
+        add_foreign_relic: "chcę dodać zabytek spoza Polski"
+        add_relic_group: "chcę dodać zespół zabytków"
         choose_html: "wybieram &raquo;"
         country_code: "W jakim kraju"
         drag_marker: "Przeciągnij znacznik na mapę"
@@ -1239,9 +1239,10 @@ pl:
         info_nonexisted_relic: "W bazie Otwartych Zabytków gromadzimy też dane na temat zabytków, które już nie istnieją (np. zostały zniszczone w czasie wojny i nie zostały odbudowane). Jeśli masz informacje, zdjęcia, dokumenty dotyczące takich obiektów, dodaj je."
         info_relic_group: "Zabytek to pojedynczy obiekt (np. pałac). Natomiast zespół zabytków to powiązana przestrzennie grupa budynków wyodrębniona ze względu na formę architektoniczną, styl, zastosowane materiały, funkcję, czas powstania lub związek z wydarzeniami historycznymi. Np. może to być zespół fabryki, albo zespół kamienic w centrum pochodzących z jednego okresu."
         intro1: "Sprawdź czy zabytek na pewno jeszcze nie znalazł się w naszej bazie. Zacznij od wpisania nazwy miejscowości (wciśnij szukaj, a mapa ustawi się w środku wybranej miejscowości), a potem wskaż obiekt na mapie. Następnie wciśnij \"przejdź dalej\". Pokaże się lista obiektów z naszej bazy, które znajdują się we wskazanej okolicy. Sprawdź, czy obiekt, który chcesz dodać, nie znajduje się na liście. Jeśli go nie ma, możesz kontynuować dodawanie zabytku do bazy,"
-        intro1_html: "Jaki rodzaj zabytku chcesz dodać?"
+        intro1_html: "Sprawdź czy <span class='r_sa'>zabytek</span><span class='r_ze'>zespół zabytków</span> na pewno jeszcze nie znalazł się w naszej bazie. Zacznij od wpisania nazwy miejscowości (wciśnij szukaj, a mapa ustawi się w środku wybranej miejscowości), a potem wskaż obiekt na mapie. Następnie wciśnij \"przejdź dalej\". Pokaże się lista obiektów z naszej bazy, które znajdują się we wskazanej okolicy. Sprawdź, czy obiekt, który chcesz dodać, nie znajduje się na liście. Jeśli go nie ma, możesz kontynuować dodawanie <span class='r_sa'>zabytku</span><span class='r_ze'>zespołu zabytków</span> do bazy,"
         intro2: "*"
         no_results: "Brak wyników"
+        non_existed: "Nieistniejący zabytek"
         original_name: "Nazwa oryginalna"
         place: Miejscowość
         polish_name: "Nazwa spolszczona"
@@ -1462,6 +1463,7 @@ pl:
           create: "Zgłoś Alert"
           empty: "Brak Alertów"
           header: "Znalazłeś zabytek w złym stanie zaalarmuj!"
+          show: "Zobacz Alerty"
         add_relic:
           create: "Dodaj nowy zabytek"
           header: "Znasz zabytek, którego nie ma w naszej bazie?"

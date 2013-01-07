@@ -11,16 +11,14 @@ class Widgets::AddAlertsController < WidgetsController
     if widget_add_alert.save
       redirect_to edit_widgets_add_alert_path(widget_add_alert)
     else
-      flash[:error] = "Nie udało się stworzyć widżeta. Zgłoś błąd administracji."
-      redirect_to widgets_path
+      redirect_to widgets_path :error => t('notices.widget_error')
     end
   end
 
   def update
     if widget.relic_id != widget_add_alert.relic_id and widget_add_alert.save
-      redirect_to edit_widgets_add_alert_path(widget_add_alert), :notice => "Widget został zaktualizowany"
+      redirect_to edit_widgets_add_alert_path(widget_add_alert), :notice => t('notices.widget_has_been_updated')
     else
-      # flash[:error] = "Nie udało się zaktualizować widżeta. Popraw błędy poniżej."
       render :edit
     end
   end
