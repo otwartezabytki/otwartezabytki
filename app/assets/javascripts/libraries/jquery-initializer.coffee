@@ -51,6 +51,7 @@ window.ajax_callback = (data, status, xhr) ->
           #$('#fancybox_loader_container').hide()
           $.fancybox.wrap.bind 'onReset', (e) ->
             $('body > .main-container:last').remove()
+          $('.fancybox-overlay').height($(document).height())
         beforeClose: ->
           $form = $('.fancybox-wrap form:first')
           if serialized_data = $form.data('serialized')
@@ -92,7 +93,6 @@ window.ajax_callback = (data, status, xhr) ->
           else
             show_fancybox(node)
             $(node).initialize()
-            $('.fancybox-overlay').height($(document).height())
       else if last_xhr.getResponseHeader('x-logged')? && $('body').data('logged')? && $('body').data('logged').toString() != last_xhr.getResponseHeader('x-logged').toString()
         $('#fancybox_loader_container').show()
         window.location.href = window.location.pathname
