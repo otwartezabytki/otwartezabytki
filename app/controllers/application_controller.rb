@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  helper_method :page_pl_path, :search_params, :tsearch
+  helper_method :page_pl_path, :search_params, :tsearch, :enabled_locales
   # iframe views path
   before_filter do
     prepend_view_path("app/views/iframe") if Subdomain.matches?(request)
@@ -9,11 +9,11 @@ class ApplicationController < ActionController::Base
 
   before_filter do
     # set locale
-    locale = params[:locale] if params[:locale] and Settings.oz.locale.available.include?(params[:locale].to_sym)
+    locale = params[:locale] if params[:locale] and enabled_locales.include?(params[:locale].to_sym)
     I18n.locale = (
       locale ||
       current_user.try(:default_locale) ||
-      http_accept_language.compatible_language_from(Settings.oz.locale.available) ||
+      http_accept_language.compatible_language_from(enabled_locales) ||
       I18n.default_locale
     ).to_sym
   end
@@ -95,6 +95,10 @@ class ApplicationController < ActionController::Base
 
   def default_url_options(options = {})
     { :locale => I18n.locale }
+  end
+
+  def enabled_locales
+    Settings.oz.locale.to_hash[(current_user.try(:admin?) ? :available : :enabled)]
   end
 
   protected
