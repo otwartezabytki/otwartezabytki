@@ -1227,8 +1227,8 @@ pl:
         not_found_html: "Nie ma go na liście &raquo;"
         that_one: "To jest ten zabytek!"
       new:
-        add_foreign_relic: "chcę dodać zabytek spoza Polski"
-        add_relic_group: "chcę dodać zespół zabytków"
+        add_foreign_relic: "Polski zabytek zagranicą"
+        add_relic_group: "Zespół zabytków"
         choose_html: "wybieram &raquo;"
         country_code: "W jakim kraju"
         drag_marker: "Przeciągnij znacznik na mapę"
