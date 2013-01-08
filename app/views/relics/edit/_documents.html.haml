@@ -42,6 +42,6 @@
 
     = f.input :documents_info
     .actions
-      = f.submit t('views.relics.edit.save')
+      %button= t('views.relics.edit.save')
       = t('views.relics.edit.or')
       = link_to t('views.relics.edit.cancel'), relic_path(relic.id), :remote => true, :class => "cancel"

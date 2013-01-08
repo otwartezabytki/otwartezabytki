@@ -1205,7 +1205,7 @@ section.edit{
         color: #d50000;
         font-style: normal;
       }
-      input[type="submit"]{
+      input[type="submit"], button{
         @include gradient(#48b119, #2f9900);
         @include border-radius(2px);
         color: #fff;

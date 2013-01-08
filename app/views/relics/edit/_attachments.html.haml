@@ -5,6 +5,6 @@
       = submit_tag 'choose', :type => "image", :src => photo.file.url(:midi)
 .row
   = link_to edit_relic_path(relic, :section => 'photos'), :class => 'btn', :remote => true do
-    %strong dodaj nowe zdjęcie do zabytku
-  lub
-  = link_to 'anuluj', edit_relic_path(relic, :section => :events), :remote => true
+    %strong= t('views.relic.edit.add_attachement')
+  = t('views.relics.edit.or')
+  = link_to t('views.relics.edit.cancel'), edit_relic_path(relic, :section => :events), :remote => true

@@ -6,7 +6,7 @@
     .reminder
       =t('views.relics.edit.reminder')
     .actions
-      = f.submit t('views.relics.edit.add_and_save')
+      %button= t('views.relics.edit.add_and_save')
       = t('views.relics.edit.or')
       = link_to t('views.relics.edit.cancel'), relic_path(relic.id), :remote => true, :class => "cancel"
 
