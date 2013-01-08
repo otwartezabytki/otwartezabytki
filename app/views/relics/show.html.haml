@@ -3,7 +3,7 @@
 - content_for :facebook_meta do
   %meta{:property => "og:title", :content => relic.identification}
   %meta{:property => "og:description", :content => strip_tags(relic.description)}
-  %meta{:property => "og:image", :content => relic.main_photo.present? ? (URI.parse(root_url) + relic.main_photo.file.icon.url).to_s : t('layouts.application.og.image')}
+  %meta{:property => "og:image", :content => relic.has_photos? ? (URI.parse(root_url) + image_path(relic.main_photo.file.icon.url)).to_s : t('layouts.application.og.image')}
 
 - if relic.id.zero?
   .original-version
