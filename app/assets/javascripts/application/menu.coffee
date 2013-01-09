@@ -10,16 +10,17 @@ do ($ = jQuery) ->
     areAllItemsOnTheSameLine = ->
       firstItem.offset().top is lastItem.offset().top
 
-    ajustFontSize = ->
-      classNames = ['smaller-14', 'smaller-13', 'smaller-12', 'smaller-11']
-      classNamesString = classNames.join(' ')
+    unless areAllItemsOnTheSameLine()
+      ajustFontSize = ->
+        classNames = ['smaller-14', 'smaller-13', 'smaller-12', 'smaller-11']
+        classNamesString = classNames.join(' ')
 
-      for className in classNames
-        if areAllItemsOnTheSameLine()
-          break
+        for className in classNames
+          if areAllItemsOnTheSameLine()
+            break
 
-        menu.removeClass(classNamesString)
-        menu.addClass(className)
+          menu.removeClass(classNamesString)
+          menu.addClass(className)
 
-    ajustFontSize()
-    (window).load ajustFontSize
+      ajustFontSize()
+      $(window).load ajustFontSize
