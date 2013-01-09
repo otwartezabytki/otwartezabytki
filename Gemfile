@@ -87,6 +87,7 @@ gem 'ffi-aspell', :require => 'ffi/aspell', :git => 'git://github.com/chytreg/ff
 gem 'tolk', :git => "git://github.com/monterail/tolk.git", :branch => "oz-custom"
 
 gem 'foreman'
+gem 'twitter_cldr'
 
 # documentation
 gem 'yard'

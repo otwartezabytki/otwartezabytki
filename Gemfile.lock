@@ -476,6 +476,8 @@ GEM
       less-rails (~> 2.2.2)
       railties (>= 3.1)
       therubyracer (= 0.10.1)
+    twitter_cldr (2.0.2)
+      json (>= 1.1.9)
     tzinfo (0.3.35)
     uglifier (1.2.4)
       execjs (>= 0.3.0)
@@ -585,6 +587,7 @@ DEPENDENCIES
   tolk!
   turbo-sprockets-rails3
   twitter-bootstrap-rails
+  twitter_cldr
   uglifier (>= 1.0.3)
   unicode
   whenever
