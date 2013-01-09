@@ -599,7 +599,7 @@
 					fireInitialState();
 				}
 			} else {
-				addEvent( event, listener, capture, aWantsUntrusted );
+				addEvent( event, listener, capture, true );
 			}
 		}
 
