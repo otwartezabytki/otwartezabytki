@@ -17,7 +17,10 @@ Otwartezabytki::Application.routes.draw do
   }
   resources :tags, :only => :index
 
-  resources :users, :only => [:show]
+  resources :users, :only => [:show] do
+    get :checked_relics
+    get :settings
+  end
 
   resources :relics, :except => [:new, :create, :destroy] do
     member do

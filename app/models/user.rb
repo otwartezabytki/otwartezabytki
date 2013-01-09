@@ -111,9 +111,9 @@ class User < ActiveRecord::Base
     save!
   end
 
-  def to_param
-    self.username
-  end
+  # def to_param
+  #   self.username
+  # end
 
   class << self
     def reset_password_by_token(attributes={})

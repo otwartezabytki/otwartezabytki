@@ -1,0 +1,66 @@
+%p.feed-description Zmiany wprowadzone w profilach zabytków dodanych i adoptowanych przez Ciebie:
+
+%section.feed
+  %h1.feed-title.hidden Aktywność
+
+  %dl.feed-item
+    %dd.feed-image.thumb
+      %img{:alt => 'Zabytek', :src => asset_path('homepage-image-example.png'), :width => 56, :height => 56}
+    %dd.feed-date
+      %time{:datetime => Time.now.xmlschema, :title => Time.now} 3 godziny temu
+    %dt.feed-message.type-marked
+      %a{:href => '#'} Most Grunwaldzki
+      został oznaczony jako
+      %b.status.checked sprawdzony
+
+  %dl.feed-item
+    %dd.feed-image.thumb
+      %img{:alt => 'Zabytek', :src => asset_path('homepage-image-example.png'), :width => 56, :height => 56}
+    %dd.feed-date
+      %time{:datetime => Time.now.xmlschema, :title => Time.now} wczoraj
+    %dt.feed-message.type-modified
+      <a href="#">Most Grunwaldzki</a> został zmodyfikowany przez: <b>szymon</b>
+
+  %dl.feed-item
+    %dd.feed-image.thumb
+      %img{:alt => 'Zabytek', :src => asset_path('fallback/photo_icon_default.png'), :width => 56, :height => 56}
+    %dd.feed-date
+      %time{:datetime => Time.now.xmlschema, :title => Time.now} 2 dni temu
+    %dt.feed-message.type-modified
+      <a href="#">Most Grunwaldzki</a> został zmodyfikowany przez: <b>katarzyna</b>
+
+  %dl.feed-item
+    %dd.feed-image.thumb
+      %img{:alt => 'Zabytek', :src => asset_path('alert-example-image.png'), :width => 56, :height => 56}
+    %dd.feed-date
+      %time{:datetime => Time.now.xmlschema, :title => Time.now} tydzień temu
+    %dt.feed-message.type-followed
+      Adoptowano <a href="#">Urząd Wojewódzki we Wrocławiu</a>
+
+  %dl.feed-item
+    %dd.feed-image.thumb
+      %img{:alt => 'Zabytek', :src => asset_path('fallback/photo_icon_default.png'), :width => 56, :height => 56}
+    %dd.feed-date
+      %time{:datetime => Time.now.xmlschema, :title => Time.now} 2 tygodnie temu
+    %dt.feed-message.type-modified
+      <a href="#">Most Grunwaldzki</a> został zmodyfikowany przez: <b>katarzyna</b>
+
+  %dl.feed-item
+    %dd.feed-image.thumb
+      %img{:alt => 'Zabytek', :src => asset_path('fallback/photo_icon_default.png'), :width => 56, :height => 56}
+    %dd.feed-date
+      %time{:datetime => Time.now.xmlschema, :title => Time.now} miesiąc temu
+    %dt.feed-message.type-modified
+      Zmodyfikowano <a href="#">Most Grunwaldzki</a>
+
+  %dl.feed-item
+    %dd.feed-image.thumb
+      %img{:alt => 'Zabytek', :src => asset_path('fallback/photo_icon_default.png'), :width => 56, :height => 56}
+    %dd.feed-date
+      %time{:datetime => Time.now.xmlschema, :title => Time.now} 6. października
+    %dt.feed-message.type-added
+      Dodano <a href="#">Most Grunwaldzki</a>
+
+  .feed-item
+    .feed-message.type-last
+      Nie masz już więcej powiadomień.
