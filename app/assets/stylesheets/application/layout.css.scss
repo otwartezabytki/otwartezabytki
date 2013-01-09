@@ -519,6 +519,12 @@ a {
     border-top: 1px solid #dcdcdc;
     min-height: 59px;
   }
+
+  .smaller-14 > li > a { font-size: 14px !important; }
+  .smaller-13 > li > a { font-size: 13px !important; }
+  .smaller-12 > li > a { font-size: 12px !important; }
+  .smaller-11 > li > a { font-size: 11px !important; }
+
   nav {
     ul li {
       float: left;
