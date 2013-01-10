@@ -52,6 +52,8 @@ jQuery.initializer 'div.new_relic section.main', ->
     lat = $(this).data('coordinates').split(',')[0]
     lng = $(this).data('coordinates').split(',')[1]
 
+    $(window).scrollTop $(".creator-step.location").offset().top
+
     $('#map_canvas').zoom_at(lat, lng)
     map.removeMarkers()
     $('#map_canvas').circle_marker(lat, lng)
@@ -110,8 +112,15 @@ jQuery.initializer 'div.new_relic section.main', ->
     $('#map_canvas').blinking()
 
 jQuery.initializer '.main-container div.new_relic .creator-step', ->
-  this.find('a.js-popover').popover
+  this.find('a.js-popover.relic-group').popover
     title: -> $("##{$(this).data("title-id")}").html()
     content: -> $("##{$(this).data("content-id")}").html()
     delay: 100000
     placement: 'top'
+
+jQuery.initializer '.main-container div.new_relic .creator-step', ->
+  this.find('a.js-popover.non-existed').popover
+    title: -> $("##{$(this).data("title-id")}").html()
+    content: -> $("##{$(this).data("content-id")}").html()
+    delay: 100000
+    placement: 'bottom'
