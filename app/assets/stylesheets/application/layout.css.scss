@@ -2264,6 +2264,8 @@ ul.nav li a.selected {
 
 .main-container > .row > .flash{
   @include gradient(#ececec, #d5d5d5);
+  width: 910px;
+  margin: 0 auto;
   &.flash-5a7eb09, &.flash-b2790c4{
     .icon{
       background: asset-data-url("icon-info-success.png") no-repeat;
