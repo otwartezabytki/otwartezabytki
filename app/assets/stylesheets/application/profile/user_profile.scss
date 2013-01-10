@@ -238,7 +238,7 @@ $checked-item-width:   299px;
   padding: 5px 20px 5px 10px;
   border-bottom: 1px solid $content-icon-color;
 
-  .user-added-feed & {
+  .type-user-added & {
     border-color: $content-border-color;
     padding-bottom: 10px;
     padding-left: 20px;
@@ -262,7 +262,7 @@ $checked-item-width:   299px;
   }
 }
 
-.user-checked-feed {
+.type-user-checked {
   @include clearfix();
 }
 
@@ -272,16 +272,16 @@ $checked-item-width:   299px;
   border-top: 1px solid $content-icon-color;
 
   &:first-of-type,
-  .user-checked-feed &:nth-of-type(2) {
+  .type-user-checked &:nth-of-type(2) {
     border-top: none;
   }
 
-  .user-added-feed & {
+  .type-user-added & {
     border-color: $content-border-color;
     padding-left: 100px;
   }
 
-  .user-checked-feed & {
+  .type-user-checked & {
     @include box-sizing(border-box);
     padding-left: 90px;
     width: $checked-item-width;
@@ -299,11 +299,10 @@ $checked-item-width:   299px;
 }
 
 .feed-image {
-  margin-left: -130px;
+  margin-left: -80px;
 
-  .user-added-feed &,
-  .user-checked-feed & {
-    margin-left: -80px;
+  .type-activity & {
+    margin-left: -130px;
   }
 }
 
@@ -315,30 +314,30 @@ $checked-item-width:   299px;
 .feed-message {
   padding-top: 5px;
 
-  &.type-followed {
+  .type-activity > .type-followed & {
     @include feed-icon(320px);
   }
 
-  &.type-marked {
+  .type-activity > .type-marked & {
     @include feed-icon(340px);
   }
 
-  &.type-modified {
+  .type-activity > .type-modified & {
     @include feed-icon(360px);
   }
 
-  &.type-added {
+  .type-activity > .type-added & {
     @include feed-icon(380px);
   }
 
-  &.type-followed,
-  &.type-modified {
+  .type-activity > .type-followed &,
+  .type-activity > .type-modified & {
     &:before {
       margin-top: -1px;
     }
   }
 
-  &.type-last {
+  .type-activity > .type-last & {
     @include tiny-dimmed-text();
   }
 }
