@@ -92,14 +92,15 @@ $avatar-size:          320px;
 
 .nav-tabs {
   @include clearfix();
-  padding: 30px 0 0 0;
-  margin-bottom: -4px;
+  padding: 25px 0 0 0;
   border-top: 1px solid #fafafa;
 }
 
 .nav-tab {
   float: left;
   padding-left: 20px;
+  position: relative;
+  bottom: -4px;
 }
 
 .nav-tab-link {
