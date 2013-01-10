@@ -8,6 +8,7 @@ $dimmed-text-color:    #a7a7a7;
 $separator-color:      #527283;
 $avatar-size:          320px;
 $checked-item-width:   299px;
+$unread-badge-size:    10px;
 
 /* Mixins */
 
@@ -264,6 +265,7 @@ $checked-item-width:   299px;
 
 .type-user-checked {
   @include clearfix();
+  padding-bottom: 1em;
 }
 
 .feed-item {
@@ -289,11 +291,26 @@ $checked-item-width:   299px;
 
     &:nth-of-type(odd) {
       clear: both;
-    }
 
-    &:nth-of-type(odd):nth-last-child(1) {
-      padding-right: 20px + $checked-item-width;
-      width: 2 * $checked-item-width;
+      &:nth-last-child(1) {
+        padding-right: 20px + $checked-item-width;
+        width: 2 * $checked-item-width;
+      }
+    }
+  }
+
+  .type-user-checked > &.type-modified {
+    &:before {
+      @include border-radius($unread-badge-size / 2 + 2);
+      @include box-shadow(0 1px 4px rgba($dark-grey, 0.4));
+      content: '';
+      position: absolute;
+      margin: -4px 0 0 -85px;
+      border: 2px solid #fff;
+      height: $unread-badge-size;
+      width: $unread-badge-size;
+      background: $separator-color;
+      -webkit-background-clip: padding-box;
     }
   }
 }
