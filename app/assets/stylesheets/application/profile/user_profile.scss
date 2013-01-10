@@ -7,6 +7,7 @@ $content-icon-color:   #e5e5e5;
 $dimmed-text-color:    #a7a7a7;
 $separator-color:      #527283;
 $avatar-size:          320px;
+$checked-item-width:   299px;
 
 /* Mixins */
 
@@ -261,12 +262,17 @@ $avatar-size:          320px;
   }
 }
 
+.user-checked-feed {
+  @include clearfix();
+}
+
 .feed-item {
   @include clearfix();
   padding: 10px 20px 10px 140px;
   border-top: 1px solid $content-icon-color;
 
-  &:first-of-type {
+  &:first-of-type,
+  .user-checked-feed &:nth-of-type(2) {
     border-top: none;
   }
 
@@ -274,12 +280,29 @@ $avatar-size:          320px;
     border-color: $content-border-color;
     padding-left: 100px;
   }
+
+  .user-checked-feed & {
+    @include box-sizing(border-box);
+    padding-left: 90px;
+    width: $checked-item-width;
+    float: left;
+
+    &:nth-of-type(odd) {
+      clear: both;
+    }
+
+    &:nth-of-type(odd):nth-last-child(1) {
+      padding-right: 20px + $checked-item-width;
+      width: 2 * $checked-item-width;
+    }
+  }
 }
 
 .feed-image {
   margin-left: -130px;
 
-  .user-added-feed & {
+  .user-added-feed &,
+  .user-checked-feed & {
     margin-left: -80px;
   }
 }

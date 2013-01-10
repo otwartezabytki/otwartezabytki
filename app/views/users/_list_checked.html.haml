@@ -1,3 +1,14 @@
 %p.feed-description Lista zabytków sprawdzonych przez Ciebie:
 
-TODO
+%section.feed.user-checked-feed
+  %h1.feed-title.hidden Sprawdzone zabytki
+  - items = ['Zabytek 1', 'Zabytek 2', 'Zabytek 3 z za długą nazwą żeby zmieścić się w jednej lub dwóch liniach', 'Zabytek 4', 'Zabytek 5', 'Zabytek 6', 'Zabytek 7', 'Zabytek 8 z za długą nazwą żeby zmieścić się w jednej lub dwóch liniach', 'Zabytek 9', 'Zabytek 10', 'Zabytek 11', 'Zabytek 12', 'Zabytek 13', 'Zabytek 14', 'Zabytek 15', 'Zabytek 16', 'Zabytek 17', 'Zabytek 18', 'Zabytek 19 z za długą nazwą żeby zmieścić się w jednej lub dwóch liniach, który przy okazji jest nieparzysty']
+
+  - items.each do |name|
+    %dl.feed-item
+      %dd.feed-image.thumb
+        %img{:alt => 'Zabytek', :src => asset_path('fallback/photo_icon_default.png'), :width => 56, :height => 56}
+      %dt.feed-message
+        %a{:href => '#'}>= name
+      %dd.feed-message
+        %b.status.unchecked> Niesprawdzony
