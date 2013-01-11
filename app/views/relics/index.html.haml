@@ -4,7 +4,6 @@
     = render 'localization_facets'
     .sidebar-categories
       %h3= t('views.relics.index.categories')
-      -# categories
       .inputs-list.choices-group
         - Category.roots.sort_by(&:name).each do |c|
           - if c.name_key == 'sakralny'
@@ -28,7 +27,6 @@
         %section.main-search
           .field.subject
             = f.input :q, :input_html => { :class => 'autocomplete-q'}
-
           .field.place
             = f.input :place, :input_html => { :class => 'autocomplete-place'}
           .field.time
@@ -72,7 +70,7 @@
         - if relics.total.zero?
           .search-no-results
             %p= t('views.relics.index.no_results_html')
-            %p.no-results-info 
+            %p.no-results-info
               =image_tag "icon-info.png"
               = t('views.relics.index.no_results2_html')
             -# - if tsearch.suggestions.present?

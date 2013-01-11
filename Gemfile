@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 3.2.3'
+gem 'rails', '~> 3.2.3', git: 'git://github.com/sheerun/rails.git', branch: 'v3.2.11/multipart-fix'
 gem 'pg'
 
 # Gems used only for assets and not required
@@ -39,6 +39,7 @@ gem 'paper_trail', '~> 2' # versioning
 gem 'activeadmin',    '~> 0.4.4'
 gem 'meta_search',    '>= 1.1.0.pre'
 gem 'devise'
+gem 'omniauth-facebook'
 gem 'cancan'
 gem 'activeadmin-cancan'
 
@@ -70,6 +71,7 @@ gem 'js-routes'           # rails routes in javascirpt
 gem 'acts_as_list'        # sorting links and relic events
 gem 'rubyzip'             # download documents as zip
 gem 'aasm'                # state machine
+gem 'http_accept_language', :git => "git://github.com/zzet/http_accept_language.git"
 
 # api
 gem "jbuilder"
@@ -85,6 +87,11 @@ gem 'ffi-aspell', :require => 'ffi/aspell', :git => 'git://github.com/chytreg/ff
 gem 'tolk', :git => "git://github.com/monterail/tolk.git", :branch => "oz-custom"
 
 gem 'foreman'
+gem 'twitter_cldr'
+
+# documentation
+gem 'yard'
+gem 'redcarpet'
 
 group :development, :test do
   gem 'interactive_editor'

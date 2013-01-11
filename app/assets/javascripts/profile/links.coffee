@@ -13,6 +13,7 @@ jQuery.initializer 'section.edit.links', ->
       $(this).val(index + 1)
     template.parents('.links_container:first').show()
     next_id += 1
+    $('.fancybox-overlay').height($(document).height())
     false
 
   $section.on 'click', '.remove_link', ->
@@ -30,7 +31,3 @@ jQuery.initializer 'section.edit.links', ->
       $section.find('.link-position').each (index) ->
         $(this).val(index + 1)
   .data('sortable')
-
-  $("form.relic").submit ->
-    $("section.edit").append('<div class="opacity"></div>').append '<div class="loading"><div class="inner"><div class="loader"><img src="/assets/fancybox/fancybox_loading.gif" alt="loading..." /></div></div></div>'
-    submit = $(this).find(":submit").attr("value", "Zapisuję").css("padding", "0 31px")

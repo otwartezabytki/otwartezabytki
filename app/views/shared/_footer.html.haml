@@ -5,19 +5,19 @@
       <iframe src="//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fotwartezabytki&amp;width=270&amp;height=62&amp;colorscheme=light&amp;show_faces=false&amp;border_color&amp;stream=false&amp;header=false" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:270px; height:62px;" allowTransparency="true"></iframe>
 .partners
   .partner-big
-    %h2 Patron
+    %h2= t('layouts.application.footer.partner_h1')
     .partner-bg
       .partner-slider-1
         = link_to image_tag( 'partner-nid.png', :alt => 'Narodowy Instytut Dziedzictwa'), 'http://www.nid.pl/idm,160,rejestr-zabytkow.html'
         = link_to image_tag( 'partner-dws.png', :alt => 'Dojrz@łość w sieci'), 'http://dojrzaloscwsieci.pl/'
   .partner-small
-    %h2 Patroni medialni
+    %h2= t('layouts.application.footer.partner_h2')
     .partner-bg
       .partner-slider-2
         = link_to image_tag( 'partner-histmag.png', :alt => 'Histmag'), 'http://www.histmag.pl'
         = link_to image_tag( 'partner-szkolazklasa.png', :alt => 'Szkoła z klasą 2.0'), 'http://www.ceo.org.pl/pl/szkolazklasa2zero'
   .partner-small
-    %h2 Partner merytoryczny
+    %h2= t('layouts.application.footer.partner_h3')
     .partner-bg
       .partner-slider-3
         = link_to image_tag( 'partner-tit.png', :alt => 'Towarzystwo Inicjatyw Twórczych'), 'http://www.e.org.pl'
@@ -31,7 +31,7 @@
         = link_to image_tag( 'partner-historia.png', :alt => 'HISTORIA.org.pl'), 'http://www.historia.org.pl/'
         = link_to image_tag( 'partner-pttk2.png', :alt => 'Polskie Towarzystwo Turystyczno-Krajoznawcze'), 'http://www.pttk.pl/'
   .partner-small.last
-    %h2 Grantodawcy
+    %h2= t('layouts.application.footer.partner_h4')
     .partner-bg
       .partner-slider-4
         = link_to image_tag( 'partner-mhp.png', :alt => 'Muzeum Historii Polski'), 'http://www.muzhp.pl'
@@ -40,15 +40,16 @@
         = link_to image_tag( 'partner-cee.png', :alt => 'CEE TRUST - Trust for Civil Society in Central and Eastern Europe'), 'http://www.ceetrust.org'
         = link_to image_tag( 'partner-mpips.png', :alt => 'Ministerstwo Pracy i Polityki Społecznej'), 'http://www.mpips.gov.pl/'
 .footer-bottom
+  %a.footer-logo{:href => "http://www.monterail.com", :title => "Aplikacje internetowe w Ruby on Rails"} Monterail
+
   .footer-copyright
-    %p
-      Treści zamieszczone w serwisie udostępniamy na licencji
-      %br
-      = link_to "Creative Commons Uznanie autorstwa - Na tych samych warunkach 3.0 Polska", "http://creativecommons.org/licenses/by/3.0/pl"
+    %p= t('layouts.application.footer.license')
   -# .footer-links
   -#   %a{ :class => "footer-regulamin", :href => "/strony/regulamin"} Regulamin
   -#   %a{ :class => "footer-prywatnosc", :href => "/strony/prywatnosc"} Prywatność
 
-
-  %a{ :class => "footer-logo", :href => "http://www.monterail.com", :title => "Aplikacje internetowe w Ruby on Rails"} Monterail
-
+  .footer-language
+    %select#lang.select2
+      - enabled_locales.each do |l|
+        %option{:name => l, :selected => ('selected' if (params[:locale] || I18n.locale).to_s == l.to_s)}
+          = t("common.lang.#{l}")

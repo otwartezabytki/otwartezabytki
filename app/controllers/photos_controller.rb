@@ -15,6 +15,7 @@ class PhotosController < ApplicationController
   expose(:tree_photo)
 
   def create
+    photo
     authorize! :create, photo
     photo.user = current_user
     if photo.save

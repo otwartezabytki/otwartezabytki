@@ -86,7 +86,7 @@ $.fn.specialize
       $('#map_canvas').zoom_at(lat, lng)
 
     blinking: ->
-      clearTimeout(map.timer) if map.timer
+      clearTimeout(map.timer) if map && map.timer
       if map && $('#map_canvas').length
         unless $('form.relic').hasClass('geocoded')
           map.counter ||= 1
@@ -157,7 +157,9 @@ jQuery.initializer 'section.edit.location', ->
     false
 
   window.ensuring_google_maps_loaded ->
-    window.ensure_geolocation
+
+    window.ensure_geolocation()
+
     $('#marker').draggable
       revert: true
 
@@ -175,7 +177,6 @@ jQuery.initializer 'section.edit.location', ->
         marker_lng = lng + width * x_offset / $(this).width()
         $('#map_canvas').set_marker(marker_lat, marker_lng)
 
-    $('#map_canvas').auto_zoom()
     $('#map_canvas').blinking()
 
     if $('form.relic').hasClass('geocoded')
@@ -193,10 +194,4 @@ jQuery.initializer 'section.edit.location', ->
   $('#relic_country_code').select2()
   $('#relic_country_code').change ->
     location = countries_locations[$(this).val()]
-    $('#map_canvas').zoom_at(location[0], location[1])
-    map.setZoom(5)
-
-jQuery.initializer 'section.edit.location', ->
-  $("form.relic").submit ->
-    $("section.edit").append('<div class="opacity"></div>').append '<div class="loading"><div class="inner"><div class="loader"><img src="/assets/fancybox/fancybox_loading.gif" alt="loading..." /></div></div></div>'
-    submit = $(this).find(":submit").attr("value", "Zapisuję").css("padding", "0 31px")
+    $('#map_canvas').zoom_at(location[0], location[1], 5)

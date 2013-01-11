@@ -52,6 +52,8 @@ jQuery.initializer 'div.new_relic section.main', ->
     lat = $(this).data('coordinates').split(',')[0]
     lng = $(this).data('coordinates').split(',')[1]
 
+    $(window).scrollTop $(".creator-step.location").offset().top
+
     $('#map_canvas').zoom_at(lat, lng)
     map.removeMarkers()
     $('#map_canvas').circle_marker(lat, lng)
@@ -81,6 +83,12 @@ jQuery.initializer 'div.new_relic section.main', ->
       $('.foreign-location').hide()
       $('.polish-location').show()
 
+  $('#location_existence').change ->
+    if $(this).is(':checked')
+      $('input#relic_existence').attr('value', 'archived')
+    else
+      $('input#relic_existence').attr('value', 'social')
+
   window.ensuring_google_maps_loaded ->
     do window.ensure_geolocation
     $('#marker').draggable
@@ -101,5 +109,18 @@ jQuery.initializer 'div.new_relic section.main', ->
         $('#map_canvas').set_marker(marker_lat, marker_lng)
         $('form.relic .actions').show()
 
-    $('#map_canvas').auto_zoom()
     $('#map_canvas').blinking()
+
+jQuery.initializer '.main-container div.new_relic .creator-step', ->
+  this.find('a.js-popover.relic-group').popover
+    title: -> $("##{$(this).data("title-id")}").html()
+    content: -> $("##{$(this).data("content-id")}").html()
+    delay: 100000
+    placement: 'top'
+
+jQuery.initializer '.main-container div.new_relic .creator-step', ->
+  this.find('a.js-popover.non-existed').popover
+    title: -> $("##{$(this).data("title-id")}").html()
+    content: -> $("##{$(this).data("content-id")}").html()
+    delay: 100000
+    placement: 'bottom'

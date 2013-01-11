@@ -2,7 +2,7 @@
   - relics =  Search.new.perform
   #browse-list{:style => ('display:none;')}
     .categories-list
-      %h3 Kategorie:
+      %h3= t('views.relics.index.categories')
       - categories_hash = categoires_facets_hash(relics)
       - Category.roots.sort_by(&:name).each do |c|
         - if c.name_key == 'sakralny'

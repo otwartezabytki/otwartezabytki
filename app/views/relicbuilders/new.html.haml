@@ -12,14 +12,30 @@
       %section.creator-step
         = render :partial => 'parent_relic', :object => @relic.parent
         %aside
-          %h3= t('views.relicbuilders.new.header_html')
-
-          %p= t('views.relicbuilders.new.info')
-        %p.intro= t('views.relicbuilders.new.intro1_html')
+        %h3.intro= t('views.relicbuilders.new.intro1_html')
       %section.creator-step
-        = semantic_form_for location, :as => 'location', :url => new_relicbuilder_path, :method => :get, :remote => true do |f|
+        = semantic_form_for location, :as => 'location', :url => new_relicbuilder_path(params), :method => :get, :remote => true do |f|
+          - unless @relic.parent
+            = f.input :relic_group, :as => :boolean, :label => t('views.relicbuilders.new.add_relic_group')
+            %p.info-tooltip= link_to((image_tag 'icon-info.png'), '#', :id => "relic_group_popover", :class => "js-popover relic-group", :"data-content-id" => "group_body", :"data-title-id" => "group_title")
+          %script(type="text/html" id="group_title")
+            %p= t('views.relicbuilders.new.info_header_relic_group')
+            %p.close= link_to "zamknij", "#", :class => "close_popover", :"data-popover-id" => "relic_group_popover"
+          %script(type="text/html" id="group_body")
+            %span.relic-text
+              = t('views.relicbuilders.new.info_relic_group')
           = f.input :foreign_relic, :as => :boolean, :label => t('views.relicbuilders.new.add_foreign_relic')
-          = f.input :relic_group, :as => :boolean, :label => t('views.relicbuilders.new.add_relic_group')
+          = f.input :existence, :as => :boolean, :label => t('views.relicbuilders.new.non_existed')
+          %p.info-tooltip= link_to((image_tag 'icon-info.png'), '#', :id => "nonexisted_relic_popover", :class => "js-popover non-existed", :"data-content-id" => "nonexisted_body", :"data-title-id" => "nonexisted_title")
+          %script(type="text/html" id="nonexisted_title")
+            %p= t('views.relicbuilders.new.info_header_nonexisted_relic')
+            %p.close= link_to "zamknij", "#", :class => "close_popover", :"data-popover-id" => "nonexisted_relic_popover"
+          %script(type="text/html" id="nonexisted_body")
+            %span.relic-text
+              = t('views.relicbuilders.new.info_nonexisted_relic')
+          
+          .clear
+          
 
           .field.text.search.marker
             .polish-location{:style => "#{ 'display: none;' unless f.object.foreign_relic.to_i.zero?}"}
@@ -31,7 +47,8 @@
               = f.input :original_name, :label => t('views.relicbuilders.new.original_name')
               = f.input :polish_name, :label => t('views.relicbuilders.new.polish_name')
           .actions
-            = f.submit t('views.relicbuilders.new.search_html'), :class => 'btn'
+            %button{:class => 'btn'}
+              = t('views.relicbuilders.new.search_html')
       .polish-location{:style => "#{ 'display: none;' unless location.foreign_relic.to_i.zero?}"}
         - if defined? @places
           - if @places.blank?
@@ -56,11 +73,12 @@
               %h3= t('views.relicbuilders.new.drag_marker')
               .marker-holder
                 = image_tag 'marker.png', :id => 'marker'
+            .actions{:style => 'display:none;'}
+              %button= t('views.relicbuilders.next_step_html')
+          = f.hidden_field :existence
           = f.hidden_field :kind
           = f.hidden_field :parent_id
           = f.hidden_field :place_id
           = f.hidden_field :latitude
           = f.hidden_field :longitude
-          .column.full_width
-            .actions{:style => 'display:none;'}
-              = f.submit t('views.relicbuilders.next_step_html')
+          

@@ -23,30 +23,71 @@ GIT
 
 GIT
   remote: git://github.com/monterail/tolk.git
-  revision: a86158afa2711fb34df61d1d6d502e90bcaa5704
+  revision: ff521f765a45242d298cbfe989807f62ed2f0d90
   branch: oz-custom
   specs:
     tolk (1.3.3)
       kaminari
       ya2yaml (~> 0.26)
 
-GEM
-  remote: https://rubygems.org/
+GIT
+  remote: git://github.com/sheerun/rails.git
+  revision: cba8c3657aa03b7f47d490ff0c7ce36af2c112b1
+  branch: v3.2.11/multipart-fix
   specs:
-    aasm (3.0.8)
-    actionmailer (3.2.7)
-      actionpack (= 3.2.7)
+    actionmailer (3.2.11)
+      actionpack (= 3.2.11)
       mail (~> 2.4.4)
-    actionpack (3.2.7)
-      activemodel (= 3.2.7)
-      activesupport (= 3.2.7)
+    actionpack (3.2.11)
+      activemodel (= 3.2.11)
+      activesupport (= 3.2.11)
       builder (~> 3.0.0)
       erubis (~> 2.7.0)
       journey (~> 1.0.4)
       rack (~> 1.4.0)
       rack-cache (~> 1.2)
       rack-test (~> 0.6.1)
-      sprockets (~> 2.1.3)
+      sprockets (~> 2.2.1)
+    activemodel (3.2.11)
+      activesupport (= 3.2.11)
+      builder (~> 3.0.0)
+    activerecord (3.2.11)
+      activemodel (= 3.2.11)
+      activesupport (= 3.2.11)
+      arel (~> 3.0.2)
+      tzinfo (~> 0.3.29)
+    activeresource (3.2.11)
+      activemodel (= 3.2.11)
+      activesupport (= 3.2.11)
+    activesupport (3.2.11)
+      i18n (~> 0.6)
+      multi_json (~> 1.0)
+    rails (3.2.11)
+      actionmailer (= 3.2.11)
+      actionpack (= 3.2.11)
+      activerecord (= 3.2.11)
+      activeresource (= 3.2.11)
+      activesupport (= 3.2.11)
+      bundler (~> 1.0)
+      railties (= 3.2.11)
+    railties (3.2.11)
+      actionpack (= 3.2.11)
+      activesupport (= 3.2.11)
+      rack-ssl (~> 1.3.2)
+      rake (>= 0.8.7)
+      rdoc (~> 3.4)
+      thor (>= 0.14.6, < 2.0)
+
+GIT
+  remote: git://github.com/zzet/http_accept_language.git
+  revision: 18c0cc10d4869bd8ccae562c2d9ed29569d50eb5
+  specs:
+    http_accept_language (2.0.1.pre)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    aasm (3.0.8)
     activeadmin (0.4.4)
       bourbon (>= 1.0.0)
       devise (>= 1.1.2)
@@ -62,20 +103,6 @@ GEM
       activeadmin (>= 0.4.0)
       cancan (>= 1.6.2)
       rails (>= 3.0)
-    activemodel (3.2.7)
-      activesupport (= 3.2.7)
-      builder (~> 3.0.0)
-    activerecord (3.2.7)
-      activemodel (= 3.2.7)
-      activesupport (= 3.2.7)
-      arel (~> 3.0.2)
-      tzinfo (~> 0.3.29)
-    activeresource (3.2.7)
-      activemodel (= 3.2.7)
-      activesupport (= 3.2.7)
-    activesupport (3.2.7)
-      i18n (~> 0.6)
-      multi_json (~> 1.0)
     acts_as_list (0.1.8)
     addressable (2.2.8)
     airbrake (3.1.2)
@@ -175,7 +202,7 @@ GEM
     formtastic-bootstrap (1.1.1)
       formtastic
       rails (~> 3.1)
-    friendly_id (4.0.8)
+    friendly_id (4.0.9)
     fssm (0.2.9)
     geocoder (1.1.2)
     gherkin (2.11.1)
@@ -215,6 +242,7 @@ GEM
     has_scope (0.5.1)
     hash_digest (1.0.0)
       activesupport
+    hashie (1.2.0)
     hashr (0.0.22)
     hike (1.2.1)
     htmldiff (0.0.1)
@@ -286,6 +314,14 @@ GEM
       jwt (~> 0.1.4)
       multi_json (~> 1.0)
       rack (~> 1.2)
+    omniauth (1.1.1)
+      hashie (~> 1.2)
+      rack
+    omniauth-facebook (1.4.1)
+      omniauth-oauth2 (~> 1.1.0)
+    omniauth-oauth2 (1.1.1)
+      oauth2 (~> 0.8.0)
+      omniauth (~> 1.0)
     orm_adapter (0.4.0)
     paper_trail (2.6.3)
       activerecord (~> 3.0)
@@ -313,25 +349,10 @@ GEM
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
-    rails (3.2.7)
-      actionmailer (= 3.2.7)
-      actionpack (= 3.2.7)
-      activerecord (= 3.2.7)
-      activeresource (= 3.2.7)
-      activesupport (= 3.2.7)
-      bundler (~> 1.0)
-      railties (= 3.2.7)
     rails-i18n (0.6.5)
       i18n (~> 0.5)
     rails_config (0.2.5)
       activesupport (>= 3.0)
-    railties (3.2.7)
-      actionpack (= 3.2.7)
-      activesupport (= 3.2.7)
-      rack-ssl (~> 1.3.2)
-      rake (>= 0.8.7)
-      rdoc (~> 3.4)
-      thor (>= 0.14.6, < 2.0)
     rake (10.0.2)
     rb-fchange (0.0.5)
       ffi
@@ -341,6 +362,7 @@ GEM
     rdoc (3.12)
       json (~> 1.4)
     recaptcha (0.3.4)
+    redcarpet (2.2.2)
     remote_table (2.0.2)
       activesupport (>= 2.3.4)
       fastercsv (>= 1.5.0)
@@ -417,8 +439,9 @@ GEM
       spork (>= 1.0rc0)
     spreadsheet (0.7.3)
       ruby-ole (>= 1.0)
-    sprockets (2.1.3)
+    sprockets (2.2.2)
       hike (~> 1.2)
+      multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
     squeel (1.0.9)
@@ -442,18 +465,20 @@ GEM
       tire
     todonotes (0.1.0)
       log4r
-    treetop (1.4.10)
+    treetop (1.4.12)
       polyglot
       polyglot (>= 0.3.1)
-    turbo-sprockets-rails3 (0.1.7)
-      railties (>= 3.1.0)
+    turbo-sprockets-rails3 (0.3.4)
+      railties (> 3.2.8, < 4.0.0)
       sprockets (>= 2.0.0)
     twitter-bootstrap-rails (2.1.1)
       actionpack (>= 3.1)
       less-rails (~> 2.2.2)
       railties (>= 3.1)
       therubyracer (= 0.10.1)
-    tzinfo (0.3.33)
+    twitter_cldr (2.0.2)
+      json (>= 1.1.9)
+    tzinfo (0.3.35)
     uglifier (1.2.4)
       execjs (>= 0.3.0)
       multi_json (>= 1.0.2)
@@ -520,6 +545,7 @@ DEPENDENCIES
   guard-spork
   haml-rails
   htmldiff
+  http_accept_language!
   i18n-country-translations
   i18n_country_select (~> 1.0.14)
   interactive_editor
@@ -532,16 +558,18 @@ DEPENDENCIES
   mini_magick!
   multi_json (= 1.3.7)
   newrelic_rpm
+  omniauth-facebook
   paper_trail (~> 2)
   pg
   pry-doc
   pry-rails
   quiet_assets
-  rails (~> 3.2.3)
+  rails (~> 3.2.3)!
   rails-i18n
   rails_config (= 0.2.5)
   rb-fsevent
   recaptcha
+  redcarpet
   remote_table
   rocket_tag
   rspec-rails (~> 2.0)
@@ -559,9 +587,11 @@ DEPENDENCIES
   tolk!
   turbo-sprockets-rails3
   twitter-bootstrap-rails
+  twitter_cldr
   uglifier (>= 1.0.3)
   unicode
   whenever
   wicked
   will_cache
   yajl-ruby (= 1.1.0)
+  yard

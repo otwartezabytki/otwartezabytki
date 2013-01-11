@@ -1,7 +1,7 @@
 %section.show.entries
-  %h2 Ciekawostki, legendy, anegdoty
+  %h2= t('views.relics.show.entries.header')
   - if relic.entries.count > 0
-    = link_to 'uzupełnij', edit_section_relic_path(relic.id, :entries), :title => 'edytuj wpisu użytkowników o zabytku', :remote => true, :class => "edit-relic-link"
+    = link_to t('views.relics.show.general.fill_in'), edit_section_relic_path(relic.id, :entries), :remote => true, :class => "edit-relic-link"
     .content
       - relic.entries.each do |entry|
         %article.entry
@@ -9,10 +9,8 @@
           .body= sanitize entry.body
   - else
     .placeholder
-      %p 
-        Podziel się z innymi legendą, anegdotą,
-        %br
-        ciekawą historią związaną z zabytkiem.
-      = link_to "dodaj wpis", edit_section_relic_path(relic.id, :entries), :remote => true
+      = t('views.relics.show.entries.placeholder')
+      = link_to t('views.relics.show.entries.add'), edit_section_relic_path(relic.id, :entries), :remote => true
       .example
-        %a.show-example{:href => image_path('screenshot-stories.jpg'), :class => "fancybox"} Pokaż przykład
+        %a.show-example{:href => image_path('screenshot-stories.jpg'), :class => "fancybox"}
+          = t('views.relics.show.general.show_example')

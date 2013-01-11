@@ -13,8 +13,10 @@ Otwartezabytki::Application.routes.draw do
   }, :controllers => {
     :registrations => "users/registrations",
     :sessions => "users/sessions",
-    :passwords => "users/passwords"
+    :passwords => "users/passwords",
+    :omniauth_callbacks => "users/omniauth_callbacks"
   }
+
   resources :tags, :only => :index
 
   resources :relics, :except => [:new, :create, :destroy] do
@@ -46,6 +48,8 @@ Otwartezabytki::Application.routes.draw do
       w.resources :add_alerts, :path => "/add_alerts"
     end
   end
+
+  resources :translations, :only => [:edit, :update], :constraints => {:id => /[\w.]+/ }
 
   namespace :api do
     namespace :v1 do

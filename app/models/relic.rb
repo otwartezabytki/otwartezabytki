@@ -118,7 +118,7 @@ class Relic < ActiveRecord::Base
 
   # mark new created relics as social added
   before_create do
-    self.existence = 'social'
+    self.existence = 'social' unless ['social', 'archived'].include?(self.existence)
   end
 
   validates :state, :inclusion => { :in => States }, :if => :state_changed?

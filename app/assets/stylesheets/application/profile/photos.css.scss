@@ -1,7 +1,8 @@
 @import "compass/layout";
 @import "compass/css3";
+@import "../mixins";
 
-.photos{
+.edit_relic section.photos {
   form{
     .photo{
       border-bottom: 1px solid #bfbfbf;
@@ -52,19 +53,101 @@
       #relic_license_agreement{
         width: auto;
         height: auto;
-        margin: 0 5px 5px 0;
+        margin: 0 5px 0 0;
       }
       span{
         color: #d00;
         font-size: 12px;
         margin-top: 3px;
+        line-height: 1.5;
+      }
+      .small{
+        font-size: 11px;
+        font-weight: normal;
+      }
+      em{
+        display: inline-block;
+        margin-left: 5px;
+        height: 16px;
       }
       em.icons{
         width: 58px;
-        height: 16px;
         background: asset-data-url("cc-icons.png") no-repeat;
-        display: inline-block;
+        
+      }
+      em.icons-by{
+        width: 37px;
+        background: asset-data-url("cc-icons-by.png") no-repeat;
       }
     }
+  }
+
+  .photo-attributes{
+    .photo{
+      .column-right{
+        width: 525px;
+      }
+    }
+  }
+  .photo {
+    clear: both;
+    margin-bottom: 16px;
+
+    &.hidden {
+      display: none;
+    }
+
+    .column-left {
+      display: inline-block;
+      margin-right: 5px;
+      text-align: center;
+      vertical-align: top;
+    }
+
+    .column-right {
+      display: inline-block;
+      vertical-align: top;
+      width: 557px;
+    }
+
+    .preview-placeholder {
+      background: #eee;
+    }
+  }
+
+  input[type="text"] {
+    width: 535px;
+  }
+
+  .progressbar {
+    position: relative;
+    height: 10px;
+    margin: 10px 0;
+    &.ui-progressbar{
+      overflow: visible;
+      .ui-widget-header{
+        @include gradient(#6a8593, #3a5663);
+        border: 0;
+        margin: 0;
+      }
+    }
+    &.ui-widget-content{
+      border: 1px solid #646464;
+    }
+  }
+
+  .progressbar .value {
+    position: absolute;
+    left: 49%;
+    top: 16px;
+    font-size: 12px;
+    font-family: 'Open Sans', sans-serif;
+  }
+}
+
+.fancybox-inner .edit_relic section.photos .photo-attributes .photo .column-right{
+  width: 557px;
+  .redactor_box{
+    margin-top: 10px;
   }
 }

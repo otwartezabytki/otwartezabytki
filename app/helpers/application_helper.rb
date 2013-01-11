@@ -84,7 +84,7 @@ module ApplicationHelper
   end
 
   def link_to_browse obj, deep, &block
-    name, id  = obj['term'].include?('_') ? obj['term'].split('_') : [I18n.t(obj['term'].upcase, :scope => 'countries'), obj['term']]
+    name, id  = extract_name(obj['term'])
     label     = "#{name} <span>#{obj['count']}</span>".html_safe
     cond      = {:search => {:location => (location_array.first(deep) << id).join('-')}}
     link      = link_to label, relics_path(cond)
@@ -98,7 +98,7 @@ module ApplicationHelper
   end
 
   def link_to_facet obj, deep, &block
-    name, id  = obj['term'].include?('_') ? obj['term'].split('_') : [I18n.t(obj['term'].upcase, :scope => 'countries'), obj['term']]
+    name, id  = extract_name(obj['term'])
     selected  = location_array[deep] == id
     label     = "#{name} <span>#{obj['count']}</span>".html_safe
     cond      = search_params({:location => (location_array.first(deep) << id).join('-')})
@@ -122,6 +122,16 @@ module ApplicationHelper
     end
   end
 
+  def extract_name term
+    if term.include?('_')
+      splt = term.split('_')
+      id = splt.pop
+      [splt.join('_'), id]
+    else
+      [I18n.t(term.upcase, :scope => 'countries'), term]
+    end
+  end
+
   def location_breadcrumbs
     return @location_breadcrumbs if defined? @location_breadcrumbs
     @location_breadcrumbs = [ {:path => relics_path(search_params(:location => nil)), :label => 'Cała Polska'} ]
@@ -135,5 +145,17 @@ module ApplicationHelper
       @location_breadcrumbs << {:path => relics_path(cond), :label => l.name }
     end if location_array.present?
     @location_breadcrumbs
+  end
+
+  def t(key, options = {})
+    options.symbolize_keys!
+    options[:editable] = true if options[:editable].nil?
+    # raise options
+    value = I18n.translate(scope_key_by_partial(key), options)
+    if options[:editable] && current_user.try(:admin?) && value.is_a?(String)
+      content_tag(:i18n, value, {:'data-key' => key, :'data-options' => {:options => options, :locale => I18n.locale}.to_param}, false)
+    else
+      value.respond_to?(:html_safe) ? value.html_safe : value
+    end
   end
 end

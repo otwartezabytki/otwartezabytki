@@ -1,6 +1,5 @@
 # -*- encoding : utf-8 -*-
 class RelicsController < ApplicationController
-  before_filter :save_return_path
   before_filter :enable_fancybox, :only => [:edit, :update]
   before_filter :no_original_version, :only => [:show]
   before_filter :uncomplete_relic_redirect,  :only => [:show, :edit, :update]
@@ -44,6 +43,7 @@ class RelicsController < ApplicationController
   before_filter :authenticate_user!, :only => [:edit, :update]
 
   def show
+    flash.now[:notice] = t(params[:notice]) if params[:notice]
     relic.present? # raise ActiveRecord::RecordNotFound before entering template
     cookies[:last_relic_id] = relic.id
     if params[:section].present?
@@ -68,20 +68,38 @@ class RelicsController < ApplicationController
       redirect_to relic_path(relic.id) and return
     end
 
+    if params[:photo_id].present? && cookies[:event_avaiting_photo].present?
+      relic.events_attributes = [
+        {
+          :id => cookies[:event_avaiting_photo].to_i,
+          :photo_id => params[:photo_id]
+        }
+      ]
+    end
+
     if relic.save
       if params[:entry_id]
         params[:entry_id] = nil
         render 'edit' and return
+      elsif cookies[:event_avaiting_photo].present?
+        if params[:photo_id].present?
+          cookies.delete(:event_avaiting_photo)
+          flash[:notice] = t('notices.changes_has_been_saved')
+          redirect_to edit_relic_path(relic.id, :section => params[:section])
+        else
+          redirect_to edit_relic_path(relic.id, :section => 'attachments')
+        end
       else
         if params[:section] == "photos"
           flash[:notice] = t('notices.gallery_has_been_updated')
         else
           flash[:notice] = t('notices.changes_has_been_saved')
         end
+
         redirect_to edit_relic_path(relic.id, :section => params[:section])
       end
     else
-      flash[:error] = t('notices.please_correct_errors')
+      flash.now[:error] = t('notices.please_correct_errors')
       render 'edit' and return
     end
   end

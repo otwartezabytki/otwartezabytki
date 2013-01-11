@@ -277,6 +277,7 @@ var RLANG = {
 						'<a href="javascript:void(null);" class="redactor_tabs_act">URL</a>' +
 						'<a href="javascript:void(null);">Email</a>' +
 						'<a href="javascript:void(null);">' + RLANG.anchor + '</a>' +
+            '<a href="javascript:void(null);">Podzabytek</a>' +
 					'</div>' +
 					'<input type="hidden" id="redactor_tab_selected" value="1" />' +
 					'<div class="redactor_tab" id="redactor_tab1">' +
@@ -292,6 +293,12 @@ var RLANG = {
 						'<label>' + RLANG.anchor + '</label><input type="text" class="redactor_input" id="redactor_link_anchor"  />' +
 						'<label>' + RLANG.text + '</label><input type="text" class="redactor_input redactor_link_text" id="redactor_link_anchor_text" />' +
 					'</div>' +
+          '<div class="redactor_tab" id="redactor_tab4" style="display: none;">' +
+            '<label>Podzabytek: </label><select id="redactor_link_subrelic">' +
+              $('.subrelics-tree .leaf a[href^="/relics/"]').map(function() { return '<option value="' + $(this).attr('href') + '">' + $(this).text() + '</option>' }).toArray().join("\n") +
+            '</select>' +
+            '<label>' + RLANG.text + '</label><input type="text" class="redactor_input redactor_link_text" id="redactor_link_subrelic_text" />' +
+          '</div>' +
 				'</form>' +
 				'</div>' +
 				'<div id="redactor_modal_footer">' +
@@ -3415,6 +3422,13 @@ var RLANG = {
 					$('#redactor_tab_selected').val(3);
 					$('#redactor_link_anchor').val(turl.replace(/^#/gi, ''));
 				}
+        else if (url.search('/relics/') === 0)
+        {
+          this.setModalTab(4);
+
+          $('#redactor_tab_selected').val(4);
+          $('#redactor_link_subrelic').val(turl);
+        }
 				else
 				{
 					$('#redactor_link_url').val(turl);
@@ -3435,7 +3449,7 @@ var RLANG = {
 			}, this);
 
 			this.modalInit(RLANG.link, this.opts.modal_link, 460, callback);
-
+      $('select#redactor_link_url').prop('selectedIndex', -1);
 		},
 		insertLink: function()
 		{
@@ -3471,6 +3485,11 @@ var RLANG = {
 				link = '#' + $('#redactor_link_anchor').val();
 				text = $('#redactor_link_anchor_text').val();
 			}
+      else if (tab_selected === '4') // subrelic
+      {
+        link = $('#redactor_link_subrelic').val();
+        text = $('#redactor_link_subrelic_text').val();
+      }
 
 			this._insertLink('<a href="' + link + '"' + target + '>' +  text + '</a>', $.trim(text), link, target);
 
@@ -3551,6 +3570,7 @@ var RLANG = {
 			}, this);
 
 			this.modalInit(RLANG.file, this.opts.modal_file, 500, callback);
+      $('#redactor_')
 		},
 		fileUploadCallback: function(json)
 		{

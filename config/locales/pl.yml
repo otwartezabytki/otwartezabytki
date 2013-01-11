@@ -77,13 +77,13 @@ pl:
   activerecord:
     attributes:
       alert:
+        author: "Dane autora (imię, nazwisko)"
+        date_taken: "Data wykonania"
         description: "Opis:"
         file: "Zdjęcie:"
         relic: Zabytek
         relic_id: "ID zabytku"
         state: "Stan zgłoszenia"
-        author: "Dane autora (imię, nazwisko)"
-        date_taken: "Data wykonania"
       document:
         description: "Krótki opis"
         file: Plik
@@ -109,6 +109,7 @@ pl:
       photo:
         author: "Dane autora (imię, nazwisko)"
         date_taken: "Data wykonania"
+        description: Opis
         relic: Zabytek
         relic_id: "ID zabytku"
       relic:
@@ -307,7 +308,7 @@ pl:
       architektura_inzynieryjna: "architektura inżynieryjna"
       budynek_gospodarczy: "budynek gospodarczy"
       cmentarny: cmentarny
-      dworski_palacowy_zamek: dwór/pałac/zamek
+      dworski_palacowy_zamek: dworski/pałacowy/zamek
       katolicki: katolicki
       lemkowski: łemkowski
       mala_architektura: "mała architektura"
@@ -324,6 +325,17 @@ pl:
       unicki: unicki
       uzytecznosci_publicznej: "użyteczności publicznej"
       zydowski: żydowski
+  common:
+    close: zamknij
+    lang:
+      by: białoruski
+      en: angielski
+      fr: francuski
+      lt: litewski
+      pl: polski
+      ru: rosyjski
+      se: hiszpański
+      ua: ukraiński
   countries:
     AC: "Wyspa Wniebowstąpienia"
     AD: Andora
@@ -787,6 +799,7 @@ pl:
   formtastic:
     actions:
       search_html: "Szukaj &raquo;"
+    create: "Stwórz %{model}"
     hints:
       alert:
         description: "Napisz, co złego dzieje się z tym zabytkiem."
@@ -800,6 +813,7 @@ pl:
       photo:
         author: "Podaj imię i nazwisko autora i/lub nick oraz źródło zdjęcia i nazwę licencji na której jest ono dostępne w Sieci (np. Mariusz 123, Wikipedia, CC BY-SA)."
         date_taken: "Podaj datę wykonania zdjęcia. Jeśli nie możesz jej ustalić wpisz \"nieznana\"."
+        description: "Opcjonalnie możesz opisać co znajduje się na zdjęciu:"
       relic:
         categories: "Wybierz kategorie, które Twoim zdaniem pasują do opisywanego zabytku."
         common_name: "Jeśli zabytek ma jedną lub więcej nazw zwyczajowych, wpisz je."
@@ -826,7 +840,6 @@ pl:
       search:
         place: gdzie
         q: co
-    create: "Stwórz %{model}"
     update: "Zaktualizuj %{model}"
   helpers:
     select:
@@ -841,10 +854,17 @@ pl:
       addrelic: "Dodaj zabytek"
       browse: Przeglądaj
       contact: Kontakt
-      disclaimer: "W pierwszej części cyfrowego czynu społecznego można wziąć udział do 7 sierpnia. Pod koniec sierpnia na otwartezabytki.pl udostępnimy aplikację z nowymi funkcjonalnościami."
+      disclaimer: "Wciąż udoskonalamy serwis i poprawiamy błędy. Jeśli masz jakieś uwagi lub znajdziesz błąd, prosimy o informację na:"
       download_data: "Pobierz dane"
+      facebook_sign_in: "Zaloguj się przez Facebooka"
+      facebook_sign_up: "Zarejestruj się przez Facebooka"
       footer:
         about_project_html: "<p>Otwarte Zabytki to projekt prowadzony przez Centrum Cyfrowe Projekt: Polska.</p><p>Centrum Cyfrowe Projekt: Polska, ul. Andersa 29, 00-159 Warszawa</p><p>Projekt finansowany ze środków Ministra Kultury i Dziedzictwa Narodowego w ramach konkursu Patriotyzm Jutra, ze środków finansowych otrzymanych od Ministerstwa Spraw Zagranicznych w ramach konkursu na realizację zadania „Współpraca z Polonią i Polakami” za granicą oraz ze środków CEE Trust.</p>"
+        license: "Treści zamieszczone w serwisie udostępniamy na licencji <br/> <a href ='http://creativecommons.org/licenses/by/3.0/pl'>Creative Commons Uznanie autorstwa - Na tych samych warunkach 3.0 Polska</a>"
+        partner_h1: Patron
+        partner_h2: "Patroni medialni"
+        partner_h3: "Partner merytoryczny"
+        partner_h4: Grantodawcy
       hello: "Witaj, %{username}"
       help: Pomoc
       homepage: "Strona główna"
@@ -857,20 +877,25 @@ pl:
       register: Zarejestruj
       relics_count: "Liczba Twoich zabytków: %{count}"
       search: Szukaj
+      tagline: Twórz z nami obywatelski katalog zabytków
       widgets: Widżety
   messages:
     are_you_sure: "Czy jesteś pewien?"
   notices:
     alert_added: "Alert został dodany. Dziękujemy."
+    changes_has_been_saved: "Zmiany zostały zapisane. Dziękujemy!"
     gallery_has_been_updated: "Galeria zdjęć została zaktualizowana. Dziękujemy!"
-    new_relic_has_been_added: "Gratulacje dodałeś nowy zabytek"
     new_gruop_relic_has_been_added: "Gratulacje dodałeś zespół zabytków. Dodaj podzabytki tutaj:"
+    new_relic_has_been_added: "Gratulacje dodałeś nowy zabytek"
     please_correct_errors: "Popraw proszę błędy wskazane poniżej."
     relic_reverted: "Objekt został przywrócony do wskazanej wersji."
+    relic_was_archived: "Zabytek został zarchiwizowany."
     reservation_thanks: "Dziękujemy za rejestrację! Na podany adres e-mail zostało wysłane Twoje hasło. Tymczasem zachęcamy do dalszego poprawiania zabytków:"
-    unpublished_photos_has_been_delete: "Ponieważ nie zgodziłeś się na opublikowanie dodanych zdjęć, zostały one usunięte."
     there_is_no_relics_in_the_area: "W naszej bazie nie ma zabytków znajdująych się w tej okolicy. Możesz kontynuować dodawanie zabytku"
-    changes_has_been_saved: "Zmiany zostały zapisane. Dziękujemy!"
+    unpublished_photos_has_been_delete: "Ponieważ nie zgodziłeś się na opublikowanie dodanych zdjęć, zostały one usunięte."
+    widget_error: "Nie udało się stworzyć widgeta. Zgłoś błąd administracji."
+    widget_error_and_correct: "Nie udało się zaktualizować widgeta. Popraw błędy poniżej."
+    widget_has_been_updated: "Widget został zaktualizowany"
   number:
     currency:
       format:
@@ -932,6 +957,9 @@ pl:
       other: zabytków
       zero: zabytków
   relic_tabs:
+    attachments:
+      description: "Wybierz zdjęcie, które chcesz załączyć:"
+      name: "Wybierz zdjęcie..."
     categories:
       description: "Przypisz do zabytku odpowiednie tagi i kategorie. Kieruj się własnym uznaniem."
       name: "Kategorie i tagi"
@@ -943,7 +971,7 @@ pl:
       name: "Dokumenty urzędowe"
     entries:
       description: "Tu wpisz ciekawą anegdotę, historię lub legendę związaną z zabytkiem."
-      name: "Ciekawostki, legendy, anegdoty"
+      name: Społeczność
     events:
       description: "Wpisz najważniejsze daty z historii obiektu, dodaj krótki opis. np. 1536 - zamek spłonął podczas pożaru miasta"
       name: "Ważne daty"
@@ -957,7 +985,7 @@ pl:
       description: "Sprawdź, czy adres jest poprawny. Czy zabytek zaznaczony jest na mapie we właściwym miejscu?"
       name: Lokalizacja
     photos:
-      description: "Załącz jedno lub więcej zdjęcie zabytku. Zadbaj o to, aby przeglądanie zdjęć sprawiało przyjemność innym użytkownikom - zamieszczaj wyłącznie zdjęcia dobrej jakości."
+      description: "Załącz jedno lub więcej zdjęcie zabytku (dopuszczalne formaty: JPG i PNG; maksymalny rozmiar jednego zdjęcia: 2 MB). Zadbaj o to, aby przeglądanie zdjęć sprawiało przyjemność innym użytkownikom - zamieszczaj wyłącznie zdjęcia dobrej jakości."
       name: Zdjęcia
   support:
     array:
@@ -978,8 +1006,14 @@ pl:
       very_short: "%H:%M"
     pm: "po południu"
   translation:
-    en: "Tłumaczenie angielskie"
-    pl: "Tłumaczenie polskie"
+    by: "j. białoruski"
+    en: "j. angielski"
+    fr: "j. francuski"
+    lt: "j. litewski"
+    pl: "j. polski"
+    ru: "j. rosyjski"
+    se: "j. hiszpański"
+    ua: "j. ukraiński"
   version:
     event:
       create: stworzył
@@ -1027,13 +1061,63 @@ pl:
           ask_account3: "Czy konto jest mi potrzebne?"
           forgot_password: "Nie otrzymałeś lub nie pamiętasz hasła?"
           header: "Zaloguj się"
+          iframe_sidebar: |-
+              <h4>Czy konto jest mi potrzebne?</h4>
+              <p>Bazę można przeglądać bez konieczności logowania. Ale jeśli chcesz dodawać lub uzupełniać informacje - logowanie jest niezbędne.</p>
+              <h4>Nie masz konta?</h4>
           login_intro: "Zaloguj się do serwisu"
           register_here: "Zarejestruj się tutaj"
           submit: "Zaloguj się"
     pages:
       home:
+        go_to_relic_profile: "Przejdź do profilu zabytku"
+        header: "Wyszukaj i uzupełnij..."
+        how_it_works:
+          title: "Jak działa wyszukiwarka?"
+          what: Co?
+          what_content: "Wyszukuje po całych nazwach, słowach występujących w nazwach oraz tagach."
+          where: Gdzie?
+          where_content: "Wyszukuje ulice, nazwy miejscowości, województw, powiatów."
+        recently_modified: "Ostatnio edytowane"
         revision_change:
+          ancestry: "zaktualizowano hirarchię w zespole zabytków"
+          approved: "zatewierdzono zabytek"
+          categories: "zaktualizowano kategorie"
+          common_name: "podano nazwę zwyczajową"
+          country_code: "edytowano kraj"
+          create:
+            alert: "zgłoszono alert"
+            document: "dokument został utworzony"
+            entry: "dodano ciekawostkę"
+            event: "dodano wydarzenie"
+            link: "link został dodany"
+            photo: "zdjęcie zostało dodane"
+            relic: "został utworzony"
+          dating_of_obj: "wprowadzono datę obiektu"
+          description: "zredagowano opis"
+          destroy:
+            document: "dokument został usutnięty"
+            entry: "usunięto ciekawostkę"
+            event: "usunięto wydarzenie"
+            link: "link został usunięty"
+            photo: "zdjęcie zostało usunięte"
+          documents_info: "wprowadzono informacje o dokumentach"
+          existence: "zmieniono stan"
+          fplace: "zmieniono miejscowość"
+          fprovince: "przypisano do prowincji"
+          identification: "edytowano nazwę"
+          latitude: "zaktualizowano położenie"
+          links_info: "wprowadzono informacje o odnośnikach"
+          longitude: "zaktualizowano położenie"
+          nid_id: "poprawiono numer rejestru"
+          place_id: "zmieniono miejscowość"
+          register_number: "poprawiono numer rejestru"
+          state: "zmieniono stan"
+          street: "poprawiono adres"
+          tags: "zaktualizowano tagi"
           update:
+            link: "zaktualizowano link"
+            photo: "zaktualizowano zdjęcie"
             relic:
               ancestry: "zaktualizowano hirarchię w zespole zabytków"
               approved: "zatewierdzono zabytek"
@@ -1056,43 +1140,52 @@ pl:
               state: "zmieniono stan"
               street: "poprawiono adres"
               tags: "zaktualizowano tagi"
-            photo: "zaktualizowano zdjęcie"
-            link: "zaktualizowano link"
-          create:
-            relic: "został utworzony"
-            photo: "zdjęcie zostało dodane"
-            link: "link został dodany"
-            document: "dokument został utworzony"
-            alert: "zgłoszono alert"
-            entry: "dodadno ciekawostkę"
-            event: "dodano wydarzenie"
-          destroy:
-            photo: "zdjęcie zostało usunięte"
-            link: "link został usunięty"
-            document: "dokument został usutnięty"
-            entry: "usunięto ciekawostkę"
-            event: "usunięto wydarzenie"
+        soon_header: "... a wkrótce będziemy mogli oglądać zabytki tak:"
         stats_info:
-          total_html: "<span>%{count}</span>wszystkich zabytków w bazie <br/> w tym"
-          unchecked_html:
-            zero:   "<strong>%{count}</strong> niesprawdzonych"
-            one:    "<strong>%{count}</strong> niesprawdzony"
-            few:    "<strong>%{count}</strong> niesprawdzone"
-            many:   "<strong>%{count}</strong> niesprawdzonych"
-            other:  "<strong>%{count}</strong> niesprawdzonych"
           checked_html:
-            zero:   "<span>%{count}</span> zabytków sprawdzonych"
-            one:    "<span>%{count}</span> zabytek sprawdzony"
-            few:    "<span>%{count}</span> zabytki sprawdzone"
-            many:   "<span>%{count}</span> zabytków sprawdzonych"
-            other:  "<span>%{count}</span> zabytków sprawdzonych"
+            few: "<span>%{count}</span> zabytki sprawdzone"
+            many: "<span>%{count}</span> zabytków sprawdzonych"
+            one: "<span>%{count}</span> zabytek sprawdzony"
+            other: "<span>%{count}</span> zabytków sprawdzonych"
+            zero: "<span>%{count}</span> zabytków sprawdzonych"
           filled_html:
-            zero:   "<span>%{count}</span> zabytków uzupełnionych"
-            one:    "<span>%{count}</span> zabytek uzupełniony"
-            few:    "<span>%{count}</span> zabytki uzupełnione"
-            many:   "<span>%{count}</span> zabytków uzupełnionych"
-            other:  "<span>%{count}</span> zabytków uzupełnionych"
-          total:
+            few: "<span>%{count}</span> zabytki uzupełnione"
+            many: "<span>%{count}</span> zabytków uzupełnionych"
+            one: "<span>%{count}</span> zabytek uzupełniony"
+            other: "<span>%{count}</span> zabytków uzupełnionych"
+            zero: "<span>%{count}</span> zabytków uzupełnionych"
+          header1: "Jak wygląda nasza baza zabytków?"
+          header2: "Gdzie mamy najwięcej zabytków"
+          total_html: "<span>%{count}</span>wszystkich zabytków w bazie <br/> w tym"
+          unchecked: ~
+          unchecked_html:
+            few: "<strong>%{count}</strong> niesprawdzone"
+            many: "<strong>%{count}</strong> niesprawdzonych"
+            one: "<strong>%{count}</strong> niesprawdzony"
+            other: "<strong>%{count}</strong> niesprawdzonych"
+            zero: "<strong>%{count}</strong> niesprawdzonych"
+          voivodeship_header: "woj. %{name}"
+        vote: "Zagłosuj na nas w konkursie na e-wolontariat &raquo;"
+        welcome:
+          header: "Zapraszamy do współtworzenia katalogu Otwartych Zabytków"
+          li1: "Czym jest zabytek?"
+          li2: "Czym jest otwarty zabytek?"
+          li3: "Jak możesz się włączyć?"
+          more: "Dowiedz się więcej &raquo;"
+          text: "Wybierz dowolny zabytek z naszej bazy. <br/>Wyszukaj informacje i uzupełnij jego profil.<br/>Jeśli Twojego zabytku nie ma w bazie - dodaj go."
+        widgets_intro:
+          add:
+            par: "Znasz zabytki, których brakuje w naszej bazie? Dodaj je i podziel się swoją wiedzą z innymi."
+            title: "Dodaj:"
+          alert:
+            par: "Jeśli wiesz, że jakiś zabytek jest w złym stanie - zaalarmuj. Dołącz zdjęcie i opis."
+            title: "Alerty:"
+          map:
+            par: "Wyszukaj zabytki na mapie. Zobacz, jakie zabytki znajdują się w Twojej okolicy."
+            title: "Mapa:"
+          widget:
+            par: "Udostępniamy kilka przykładowych aplikacji, dzięki którym łatwiej będzie wykorzystać dane o otwartych zabytkach na innych stronach internetowych."
+            title: "Widżety »"
     pagination:
       first: Pierwsza
       last: Ostatnia
@@ -1135,16 +1228,22 @@ pl:
         not_found_html: "Nie ma go na liście &raquo;"
         that_one: "To jest ten zabytek!"
       new:
-        add_foreign_relic: "chcę dodać zabytek spoza Polski"
-        add_relic_group: "chcę dodać zespół zabytków"
+        add_foreign_relic: "Polski zabytek zagranicą"
+        add_relic_group: "Zespół zabytków"
         choose_html: "wybieram &raquo;"
         country_code: "W jakim kraju"
         drag_marker: "Przeciągnij znacznik na mapę"
-        header_html: "Jaka jest różnica między <span>zabytkiem</span> a zespołem <span>zabytków</span>?"
+        header_html: "Jaka jest różnica między <br/> <span>zabytkiem</span> a zespołem <span>zabytków</span>?"
         info: "Zabytek to pojedynczy obiekt (np. pałac). Natomiast zespół zabytków to powiązana przestrzennie grupa budynków wyodrębniona ze względu na formę architektoniczną, styl, zastosowane materiały, funkcję, czas powstania lub związek z wydarzeniami historycznymi. Np. może to być zespół fabryki, albo zespół kamienic w centrum pochodzących z jednego okresu."
+        info_header_nonexisted_relic: "Co to jest nieistniejący zabytek?"
+        info_header_relic_group: "Jaka jest różnica między zabytkiem a zespołem zabytków"
+        info_nonexisted_relic: "W bazie Otwartych Zabytków gromadzimy też dane na temat zabytków, które już nie istnieją (np. zostały zniszczone w czasie wojny i nie zostały odbudowane). Jeśli masz informacje, zdjęcia, dokumenty dotyczące takich obiektów, dodaj je."
+        info_relic_group: "Zabytek to pojedynczy obiekt (np. pałac). Natomiast zespół zabytków to powiązana przestrzennie grupa budynków wyodrębniona ze względu na formę architektoniczną, styl, zastosowane materiały, funkcję, czas powstania lub związek z wydarzeniami historycznymi. Np. może to być zespół fabryki, albo zespół kamienic w centrum pochodzących z jednego okresu."
+        intro1: "Sprawdź czy zabytek na pewno jeszcze nie znalazł się w naszej bazie. Zacznij od wpisania nazwy miejscowości (wciśnij szukaj, a mapa ustawi się w środku wybranej miejscowości), a potem wskaż obiekt na mapie. Następnie wciśnij \"przejdź dalej\". Pokaże się lista obiektów z naszej bazy, które znajdują się we wskazanej okolicy. Sprawdź, czy obiekt, który chcesz dodać, nie znajduje się na liście. Jeśli go nie ma, możesz kontynuować dodawanie zabytku do bazy,"
         intro1_html: "Sprawdź czy <span class='r_sa'>zabytek</span><span class='r_ze'>zespół zabytków</span> na pewno jeszcze nie znalazł się w naszej bazie. Zacznij od wpisania nazwy miejscowości (wciśnij szukaj, a mapa ustawi się w środku wybranej miejscowości), a potem wskaż obiekt na mapie. Następnie wciśnij \"przejdź dalej\". Pokaże się lista obiektów z naszej bazy, które znajdują się we wskazanej okolicy. Sprawdź, czy obiekt, który chcesz dodać, nie znajduje się na liście. Jeśli go nie ma, możesz kontynuować dodawanie <span class='r_sa'>zabytku</span><span class='r_ze'>zespołu zabytków</span> do bazy,"
         intro2: "*"
         no_results: "Brak wyników"
+        non_existed: "Nieistniejący zabytek"
         original_name: "Nazwa oryginalna"
         place: Miejscowość
         polish_name: "Nazwa spolszczona"
@@ -1154,31 +1253,38 @@ pl:
       next_step_html: "Przejdź dalej &raquo;"
       parent_relic:
         complex: "Dodajesz zabytek do zespołu"
-        single: "Dodajesz zabytek"
         group: "Dodajesz zespół zabytków"
+        single: "Dodajesz zabytek"
       photos:
-        intro1: "Napisz zwięzłą informację na temat zabytku. Pamiętaj o podaniu źródła!"
-        intro2: "Załącz jedno lub więcej zdjęcie zabytku. Zadbaj o to, aby przeglądanie zdjęć sprawiało przyjemność innym użytkownikom - zamieszczaj wyłącznie zdjęcia dobrej jakości."
+        intro1: "Załącz jedno lub więcej zdjęcie zabytku (dopuszczalne formaty: JPG i PNG; maksymalny rozmiar jednego zdjęcia: 2 MB). Zadbaj o to, aby przeglądanie zdjęć sprawiało przyjemność innym użytkownikom - zamieszczaj wyłącznie zdjęcia dobrej jakości. "
+        intro2: "*"
         label: Zdjęcia
         submit: "Zakończ! i zobacz dodany zabytek"
         submit_relic_group: "Zakończ! i zobacz zespół zabytków"
       stages:
         address: "dane adresowe"
+        back: "&laquo; wróć do poprzedniego kroku"
         check_existance: "sprawdź w bazie"
         check_existance_confirm: "Uwaga utracisz wprowadzone dane, rozpoczniesz process dodawania zabytku jeszcze raz. Jesteś pewien?"
         details: szczegóły
         photos: "zdjęcia i opis"
         step1: "krok 1"
+        step1_description1: "Sprawdź, czy zabytek na pewno nie jest już w naszej bazie."
         step1_description1_html: "Sprawdź, czy <span class='r_sa'>zabytek</span><span class='r_ze'>zespół zabytków</span> na pewno nie jest już w naszej bazie."
+        step1_description2: "Podaj adres, pod którym znajduje się dodawany zabytek."
         step1_description2_html: "Podaj adres, pod którym znajduje się dodawany <span class='r_sa'>zabytek</span><span class='r_ze'>zespół zabytków</span>."
+        step1_description3: "Wpisz nazwę zabytku i uzasadnij, dlaczego powinien znaleźć się w naszej bazie."
         step1_description3_html: "Wpisz nazwę <span class='r_sa'>zabytku</span><span class='r_ze'>zespołu zabytków</span> i uzasadnij, dlaczego powinien znaleźć się w naszej bazie."
+        step1_description4: "Dodaj zdjęcia i zwięzły opis zabytku."
         step1_description4_html: "Dodaj zdjęcia i zwięzły opis <span class='r_sa'>zabytku</span><span class='r_ze'>zespołu zabytków</span>."
         step2: "krok 2"
         step3: "krok 3"
         step4: "krok 4"
     relics:
       edit:
+        add_attachement: "dodaj nowe zdjęcie do zabytku"
         add_and_save: "dodaj i zapisz"
+        add_photo: "dodaj zdjęcie"
         cancel: anuluj
         categories:
           name: Kategorie
@@ -1188,6 +1294,7 @@ pl:
           delete_confirm: "Czy aby na pewno?"
           delete_file: "Usuń plik"
           loading: "Trwa wgrywanie, proszę czekać..."
+        edit_photo: zmień
         events:
           action: Akcje
           add_new_one: "Dodaj kolejne wydarzenie..."
@@ -1195,6 +1302,7 @@ pl:
           date: "Data / Okres"
           info: Opis
           number: l.p.
+        header: "Edycja zabytku"
         links:
           action: Akcje
           add_internet_source: "Dodaj źródło internetowe (link)..."
@@ -1204,7 +1312,7 @@ pl:
           source_type: "Typ żródła"
           url: URL
         location:
-          approximate_geolocation: " – lokalizacja przybliżona (przeciągnij znacznik, aby wskazać dokładne miejsce)"
+          approximate_geolocation: "lokacja przybliżona"
           drop_marker_html: "Przeciągnij <br/> znacznik na mapę:"
           known_address: "Znam dokładny adres"
           unknown_address: "Nie da się ustalić adresu"
@@ -1213,7 +1321,8 @@ pl:
           delete_confirm: "Czy aby na pewno?"
           delete_photo: "usuń zdjęcie"
           loading: "Trwa wgrywanie, proszę czekać..."
-          statement_html: "Oświadczam, że posiadam prawa do zdjęć, które publikuję na stronie otwartezabytki.pl. Zdjęcia te udostępniam na licencji <a href=\"http://creativecommons.org/licenses/by-sa/3.0/pl/\" target=\"_blank\">Creative Commons Uznanie Autorstwa-Na Tych Samych Warunkach 3.0 Polska</a> <em class=\"icons\"></em>"
+          statement_html: "Oświadczam, że posiadam prawa do zdjęć, które publikuję na stronie otwartezabytki.pl. Jeśli nie jestem autorem/autorką zdjęć, oświadczam, że mam prawo ich publikacji na licencji <a href=\"http://creativecommons.org/licenses/by-sa/3.0/pl/\" target=\"_blank\">Creative Commons Uznanie Autorstwa-Na Tych Samych Warunkach 3.0 Polska</a> <em class=\"icons\"></em>"
+        reminder: "Pamiętaj o podaniu źródła!"
         save: "zapisz zmiany"
         update: aktualizuj
       index:
@@ -1224,8 +1333,8 @@ pl:
         filter_options: "Opcje filtrowania"
         kind: Rodzaj
         loading: "Trwa ładowanie wyników proszę czekać!!!"
-        no_results_html: "Żaden z zabytków w naszej bazie<br/>nie spełnia podanych kryteriów."
         no_results2_html: "Nie znalazłeś tego, czego szukałeś? Spróbuj użyć symbolu gwiazdki, np. Scheibler*"
+        no_results_html: "Żaden z zabytków w naszej bazie<br/>nie spełnia podanych kryteriów."
         order:
           az: A-Z
           score: Trafność
@@ -1249,14 +1358,127 @@ pl:
       localization_facets:
         header: Lokalizacja
         show_voivodeships: "Pokaż wojewewództwa"
-        world_relics: "Zabytki poza Polską"
+        world_relics: "Zabytki znajdujące się poza Polską"
       relics:
         create_date: "Data powstania"
         location: Lokalizacja
         name: Zabytek
         unknown_address: "Adres niedostępny"
         unknown_from: Nieznana
-      show: ~
+      show:
+        alerts:
+          create: "zgłoś alert"
+          fixed: "Zgłoszone alerty poprawione"
+          header: Alerty
+          non_existent: "zgłoś, że zabytek nie istnieje"
+          not_fixed: "Zgłoszone alerty nienaprawione"
+          placeholder: "Wiesz, że obiekt wymaga opieki?<br/>Zaalarmuj!"
+        categories:
+          add_category: "dodaj kategorie"
+          content_title_cat: "Kategorie:"
+          content_title_tag: Tagi
+          header: "Tagi, kategorie"
+          not_added: "nie dodano, uzupełnij »"
+          placeholder: |-
+              <p>Wybierz kategorie, które Twoim zdaniem pasują do opisywanego zabytku.</p>
+              <p>Dodaj tagi, które pomogą poruszać się po katalogu.</p>
+        description:
+          add: "dodaj opis"
+          header: Opis
+          placeholder: "<p>Napisz 3-4 zdania zawierające najważniejsze informacje o obiekcie.</p>"
+        documents:
+          add_file: "dodaj plik"
+          added: "dodado:"
+          header: "Dokumenty urzędowe"
+          placeholder: "<p>Dysponujesz dokumentacją, którą możesz legalnie udostępnić innym? <br/> Załącz pliki tutaj.</p>"
+          size: rozmiar
+          upload: "wgraj plik"
+          where_to_find: "Gdzie szukać?"
+        entries:
+          add: "dodaj wpis"
+          header: "Ciekawostki, legendy, anegdoty"
+          placeholder: "<p>Podziel się z innymi legendą, anegdotą,<br/>ciekawą historią związaną z zabytkiem.</p>"
+        events:
+          add: "dodaj wydarzenie"
+          header: "Ważne daty"
+          placeholder: "<p>Wpisz najważniejsze daty z historii obiektu wraz z krótkim opisem.</p>"
+        flash_content_html: |-
+            <h3>O co chodzi?</h3>
+            <p> Wyszukaj informacje i uzupełnij wybrane pola.</p>
+            <p> Skorzystaj z własnej wiedzy, poszukaj w książkach lub w internecie.</p>
+            <p> Sprawdź, czy informacje już uzupełnione są poprawne.</p>
+            <p> Pamiętaj o podaniu źródeł.</p>
+        flash_hide: ukryj
+        general:
+          add: dodaj
+          close: zamknij
+          common_name: "Nazwa zwyczajowa"
+          dating_of_obj: "Data powstania:"
+          fill_in: uzupełnij
+          location: "Lokalizacja:"
+          no_data_fill_in: "brak danych, uzupełnij »"
+          original: "wersja oryginalna"
+          polish_location: "%{place}, powiat %{district}, gmina %{commune}"
+          register_number: "Numer w rejestrze:"
+          relic: Zabytek
+          show_example: "pokaż przykład"
+          show_on_map: "pokaż na mapie »"
+        links:
+          header: "Linki, źródła, powiązania"
+          placeholder: "<p>Podaj ciekawe internetowe i papierowe źródła informacji o zabytku.</p>"
+        location:
+          header: Lokalizacja
+        original_version: "Przeglądasz wersję oryginalną"
+        original_version_info: "Oznacza to, że istnieje również wersja z naniesionymi przez Ciebie poprawkami."
+        photos:
+          add: "dodaj zdjęcia"
+          show: "zobacz galerię (%{amount})"
+        subrelics:
+          header1: "Oglądasz właśnie profil zabytku, który posiada pewne podzabytki."
+          header2: "Oglądasz właśnie profil zabytku, będący częścią zespołu zabytków."
+        view_current_version: "&#171; zobacz wersję obecną"
+    widgets:
+      edit:
+        add_alert:
+          hint: "Wyszukaj zabytek"
+          search: Szukaj
+          which_one: "O który zabytek dokładnie Ci chodziło"
+        back: "&laquo; wróć do katalogu widżetów"
+        code_help: "To jest gotowy kod do wstawienia na stronę, wygenerowany dla wybranego przez Ciebie zabytku. Wystarczy go skopiować i umieścić w odpowiednim miejscu na Twojej stronie."
+        generated: "Wygenerowany kod do wstawienia na stronę"
+        map_search:
+          header: "Wybierz ustawienia widżetu"
+          height: "Wysokość widgeta"
+          hide_sidebar: "Ukryj pasek boczny"
+          params_hint: "Ustawisz je poruszając mapką podglądową po prawej stronie."
+          params_label: "Parametry do <a href='/api_doc/'>API</a>"
+          settings_info: "Jeśli chcesz na przykład wyświetlić na swojej stronie mapkę z cmentarzami żydowskimi z województwa dolnośląskiego, wybierz województwo dolnośląskie z lokalizacji oraz kategorie „cmentarz” i „żydowski”. Następnie skopiuj kod do wstawienia na stronę."
+          width: "Szerokość widgeta"
+        preview: "Podgląd wygenerowanego widżetu"
+      index:
+        about: "Widżety:"
+        description: "<h3>Czym są widżety?</h3> <p>Otwarte dane o zabytkach mogą Wam się przydać!</p> <p>Udostępniamy kilka przykładowych aplikacji, dzięki którym łatwiej będzie wykorzystać dane o otwartych zabytkach na innych stronach internetowych.</p> <h3>Jak użyć widżet?</h3> <p>Aby skorzystać z prezentowanych aplikacji, wystarczy zagnieździć kawałek kodu na dowolnej stronie internetowej.</p> <h3>Masz pomysł na widżet?</h3> <p>Jeśli masz pomysł na funkcjonalną aplikację wykorzystującą dane o Otwartych Zabytkach, podziel się nim z nami, a być może uda nam się go zrealizować (%{email})!</p>"
+        use: Przetestuj
+      show:
+        about: "O co chodzi?"
+        add_alert:
+          alerts: "Zobacz Alerty"
+          create: "Zgłoś Alert"
+          empty: "Brak Alertów"
+          header: "Znalazłeś zabytek w złym stanie zaalarmuj!"
+          show: "Zobacz Alerty"
+        add_relic:
+          create: "Dodaj nowy zabytek"
+          header: "Znasz zabytek, którego nie ma w naszej bazie?"
+        map_search:
+          advanced_search: "wyszukiwanie<br />zaawansowane »"
+          categories: Kategorie
+          categories_hint: "tu możesz zawęzić wyszukiwanie zabytków wg. ich kategorii"
+          location_hint: "tu możesz zawęzić wyszukiwanie zabytków wg. ich lokalizacji"
+          query_placeholder: "np. cmentarz"
+          search_by_name: "Wyszukaj po nazwie"
+          show_less: "pokaż mniej..."
+          show_more: "pokaż więcej..."
   widget:
     add_alert:
       description: |-
