@@ -375,6 +375,10 @@ $unread-badge-size:    10px;
     &:first-of-type {
       margin: 0;
     }
+
+    a {
+      text-decoration: underline;
+    }
   }
 
   .fields-title {
@@ -406,6 +410,10 @@ $unread-badge-size:    10px;
     padding: 7px 30px 0 0;
   }
 
+  .field-label-image {
+    margin-top: -7px;
+  }
+
   .field {
     @include box-sizing(border-box);
     @include border-radius(2px);
@@ -425,11 +433,21 @@ $unread-badge-size:    10px;
     }
   }
 
+  .field-layout {
+    @include clearfix();
+    margin-left: 210px;
+  }
+
   .field-explanation {
     @include tiny-dimmed-text();
+    width: 180px;
+    padding: 10px 10px 0 0;
+  }
+
+  :not(.field-layout) > .field-explanation {
     float: right;
+    padding: 0 20px 0 0;
     width: 160px;
-    padding-right: 20px;
   }
 
   .field-row-submit {
@@ -438,6 +456,7 @@ $unread-badge-size:    10px;
     text-align: center;
   }
 
+  .button,
   .field-submit {
     @include gradient(#4b6d7e, #436576);
     @include border-radius(3px);

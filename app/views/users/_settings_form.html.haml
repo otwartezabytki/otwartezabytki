@@ -12,6 +12,18 @@
 
   %fieldset.fields
     %legend.fields-title
+      %span.fields-title-inner Zdjęcie profilowe
+
+    .field-row.type-file
+      %label.field-label
+        %img.field-label-image{:alt => user.username, :src => asset_path('dummy-avatar.jpg'), :width => 64, :height => 64}
+      .field-layout
+        %input.field-file{:type => 'file'}
+        %p.field-explanation
+          Możesz <a href="#">usunąć swoje zdjęcie</a>, jeśli tego sobie życzysz.
+
+  %fieldset.fields
+    %legend.fields-title
       %span.fields-title-inner Dane użytkownika
 
     .field-row
