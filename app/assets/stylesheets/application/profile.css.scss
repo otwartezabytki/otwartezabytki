@@ -320,6 +320,15 @@ section.show.photos{
       float: right;
       text-align: right;
     }
+    .info-left, .info-right{
+      p{
+        line-height: 18px;
+      }
+      strong{
+        font-weight: bold;
+        display: block;
+      }
+    }
     .jcarousel-skin-midi{
       background: #eee;
       border-top: 1px solid #ccc;
