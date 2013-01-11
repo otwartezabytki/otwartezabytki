@@ -8,7 +8,7 @@ module I18nCountrySelect
       country_translations = country_translations = COUNTRY_CODES.uniq.map do |code|
         translation = I18n.t(code, :scope => :countries, :default => 'missing')
         translation == 'missing' ? nil : [translation, code]
-      end.compact.sort_by{|t| t.first.parameterize }
+      end.compact.sort_by{|t| I18n.collator.get_sort_key(t.first)}
 
       countries = ""
 

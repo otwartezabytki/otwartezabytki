@@ -877,6 +877,7 @@ pl:
       register: Zarejestruj
       relics_count: "Liczba Twoich zabytków: %{count}"
       search: Szukaj
+      tagline: Twórz z nami obywatelski katalog zabytków
       widgets: Widżety
   messages:
     are_you_sure: "Czy jesteś pewien?"
@@ -1281,6 +1282,7 @@ pl:
         step4: "krok 4"
     relics:
       edit:
+        add_attachement: "dodaj nowe zdjęcie do zabytku"
         add_and_save: "dodaj i zapisz"
         add_photo: "dodaj zdjęcie"
         cancel: anuluj
@@ -1300,6 +1302,7 @@ pl:
           date: "Data / Okres"
           info: Opis
           number: l.p.
+        header: "Edycja zabytku"
         links:
           action: Akcje
           add_internet_source: "Dodaj źródło internetowe (link)..."

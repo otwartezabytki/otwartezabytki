@@ -519,6 +519,12 @@ a {
     border-top: 1px solid #dcdcdc;
     min-height: 59px;
   }
+
+  .smaller-14 > li > a { font-size: 14px !important; }
+  .smaller-13 > li > a { font-size: 13px !important; }
+  .smaller-12 > li > a { font-size: 12px !important; }
+  .smaller-11 > li > a { font-size: 11px !important; }
+
   nav {
     ul li {
       float: left;
@@ -1937,7 +1943,6 @@ p#adding-note {
       margin: 2px 0 0 425px;
 
       .select2 {
-        min-width: 100px;
         opacity: 0.6;
 
         &.select2-container-active {
@@ -2259,8 +2264,8 @@ ul.nav li a.selected {
 
 .main-container > .row > .flash{
   @include gradient(#ececec, #d5d5d5);
+  width: 910px;
   margin: 0 auto;
-  width: 930px;
   &.flash-5a7eb09, &.flash-b2790c4{
     .icon{
       background: asset-data-url("icon-info-success.png") no-repeat;
@@ -2625,7 +2630,7 @@ body.resource_home{
           padding: 20px 15px;
           border-top: 1px solid #e5e5e5;
           overflow: hidden;
-          &.to-show { 
+          &.to-show {
             display: none;
           }
           .image{
@@ -2685,7 +2690,7 @@ body.resource_home{
               width: 100%;
             }
             a{
-              
+
               width: 100%;
               color: #1a1a1a;
               text-decoration: underline;

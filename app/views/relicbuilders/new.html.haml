@@ -17,7 +17,7 @@
         = semantic_form_for location, :as => 'location', :url => new_relicbuilder_path(params), :method => :get, :remote => true do |f|
           - unless @relic.parent
             = f.input :relic_group, :as => :boolean, :label => t('views.relicbuilders.new.add_relic_group')
-            %p.info-tooltip= link_to((image_tag 'icon-info.png'), '#', :id => "relic_group_popover", :class => "js-popover", :"data-content-id" => "group_body", :"data-title-id" => "group_title")
+            %p.info-tooltip= link_to((image_tag 'icon-info.png'), '#', :id => "relic_group_popover", :class => "js-popover relic-group", :"data-content-id" => "group_body", :"data-title-id" => "group_title")
           %script(type="text/html" id="group_title")
             %p= t('views.relicbuilders.new.info_header_relic_group')
             %p.close= link_to "zamknij", "#", :class => "close_popover", :"data-popover-id" => "relic_group_popover"
@@ -26,7 +26,7 @@
               = t('views.relicbuilders.new.info_relic_group')
           = f.input :foreign_relic, :as => :boolean, :label => t('views.relicbuilders.new.add_foreign_relic')
           = f.input :existence, :as => :boolean, :label => t('views.relicbuilders.new.non_existed')
-          %p.info-tooltip= link_to((image_tag 'icon-info.png'), '#', :id => "nonexisted_relic_popover", :class => "js-popover", :"data-content-id" => "nonexisted_body", :"data-title-id" => "nonexisted_title")
+          %p.info-tooltip= link_to((image_tag 'icon-info.png'), '#', :id => "nonexisted_relic_popover", :class => "js-popover non-existed", :"data-content-id" => "nonexisted_body", :"data-title-id" => "nonexisted_title")
           %script(type="text/html" id="nonexisted_title")
             %p= t('views.relicbuilders.new.info_header_nonexisted_relic')
             %p.close= link_to "zamknij", "#", :class => "close_popover", :"data-popover-id" => "nonexisted_relic_popover"
@@ -73,12 +73,12 @@
               %h3= t('views.relicbuilders.new.drag_marker')
               .marker-holder
                 = image_tag 'marker.png', :id => 'marker'
+            .actions{:style => 'display:none;'}
+              %button= t('views.relicbuilders.next_step_html')
           = f.hidden_field :existence
           = f.hidden_field :kind
           = f.hidden_field :parent_id
           = f.hidden_field :place_id
           = f.hidden_field :latitude
           = f.hidden_field :longitude
-          .column.full_width
-            .actions{:style => 'display:none;'}
-              %button= t('views.relicbuilders.next_step_html')
+          

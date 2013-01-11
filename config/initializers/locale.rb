@@ -19,3 +19,20 @@ Tolk::Translation.instance_eval do
     I18n.cache_store.clear
   end
 end
+
+# define I18n collator method
+module I18n
+  class << self
+    def twitter_cldr_supported_locale
+      TwitterCldr.supported_locale?(I18n.locale) ? I18n.locale : :pl
+    end
+    def collator
+      TwitterCldr::Collation::Collator.new(twitter_cldr_supported_locale)
+    end
+  end
+end
+
+# setting up default locale form I18n casue that "string".localize will get proper localization
+def TwitterCldr.get_locale
+  I18n.twitter_cldr_supported_locale.to_sym
+end

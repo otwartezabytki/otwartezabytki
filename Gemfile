@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 3.2.3', git: 'git://github.com/sheerun/rails.git', branch: 'v3.2.9/multipart-fix'
+gem 'rails', '~> 3.2.3', git: 'git://github.com/sheerun/rails.git', branch: 'v3.2.11/multipart-fix'
 gem 'pg'
 
 # Gems used only for assets and not required
@@ -87,6 +87,7 @@ gem 'ffi-aspell', :require => 'ffi/aspell', :git => 'git://github.com/chytreg/ff
 gem 'tolk', :git => "git://github.com/monterail/tolk.git", :branch => "oz-custom"
 
 gem 'foreman'
+gem 'twitter_cldr'
 
 # documentation
 gem 'yard'

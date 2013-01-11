@@ -47,6 +47,6 @@
 
       = f.input :license_agreement, :input_html => { :checked => 'checked' }, :as => :boolean, :label => t('views.relics.edit.photos.statement_html')
     .actions
-      = f.submit t('views.relics.edit.save')
+      %button= t('views.relics.edit.save')
       = t('views.relics.edit.or')
       = link_to t('views.relics.edit.cancel'), relic_path(relic.id), :remote => true, :class => "cancel"
