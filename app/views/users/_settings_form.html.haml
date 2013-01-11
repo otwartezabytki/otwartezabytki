@@ -1,0 +1,45 @@
+%form.form-settings.user-profile-content
+
+  %fieldset.fields
+    %legend.fields-title
+      %span.fields-title-inner Ustawienia języka
+
+    .field-row.type-select
+      %label.field-label Język serwisu
+      %select.field
+        %option polski
+        %option angielski
+
+  %fieldset.fields
+    %legend.fields-title
+      %span.fields-title-inner Dane użytkownika
+
+    .field-row
+      %label.field-label Nazwa użytkownika
+      %input.field{:type => 'text', :value => user.username}
+
+    .field-row
+      %label.field-label E-mail
+      %input.field{:type => 'text', :value => user.email}
+
+  %fieldset.fields
+    %legend.fields-title
+      %span.fields-title-inner Zmiana hasła
+
+    .field-row.type-separated
+      %label.field-label Aktualne hasło
+      %input.field{:type => 'password'}
+      %p.field-explanation
+        Aby zmienić hasło, musisz podać swoje aktualne.
+
+    .field-row
+      %label.field-label Nowe hasło
+      %input.field{:type => 'password'}
+
+    .field-row
+      %label.field-label Powtórz nowe hasło
+      %input.field{:type => 'password'}
+
+  .field-row-submit
+    %input.field-submit{:type => 'submit', :value => 'Zapisz zmiany'}
+
