@@ -2391,8 +2391,10 @@ body.resource_home{
     margin-top: 40px;
     float: left;
     width: 350px;
-    height: 280px;
-    padding: 15px 20px;
+    height: 205px;
+    padding: 15px 20px 90px;
+    position: relative;
+    overflow: hidden;
     h3{
       font-size: 18px;
       font-weight: 600;
