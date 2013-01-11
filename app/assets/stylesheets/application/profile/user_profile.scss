@@ -171,18 +171,45 @@ $unread-badge-size:    10px;
 .user-avatar-caption-outer {
   @include user-profile-sprite(0, 0);
   position: relative;
+  text-align: right;
 }
 
 .user-avatar-caption {
   @include elipsis();
-  @include text-shadow(0 1px  5px $dark-grey, 0 1px 10px $dark-grey, 0 1px 15px $dark-grey);
   display: block;
+  padding: ($avatar-size - 35px) 10px 0.25em;
   line-height: 30px;
   font-size: 24px;
   font-weight: 300;
+}
+
+.user-avatar-caption,
+.user-avatar-change-link {
+  @include text-shadow(0 1px  5px $dark-grey, 0 1px 10px $dark-grey, 0 1px 15px $dark-grey);
   color: #fff;
-  padding: ($avatar-size - 35px) 10px 0.25em;
-  text-align: right;
+}
+
+.user-avatar-change {
+  @include transition(opacity 0.2s ease-out);
+  position: absolute;
+  width: $avatar-size;
+  font-size: 11px;
+  opacity: 0;
+
+  .user-avatar:hover & {
+    opacity: 1;
+  }
+}
+
+.user-avatar-change-link {
+  display: inline-block;
+  padding: 10px;
+  color: rgba(255, 255, 255, 0.9);
+
+  &:hover {
+    color: #fff;
+    text-decoration: none;
+  }
 }
 
 /* Feed */
