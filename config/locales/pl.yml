@@ -1195,7 +1195,7 @@ pl:
     photos:
       show:
         header: "Galeria %{count}"
-        license: "Creative Commons 3.0"
+        license: "CC BY-SA 3.0"
         photo_belongs_to: "Zdjęcie należy do obiektu"
         relic_parent: "należącego do zespołu zabytków"
     places:

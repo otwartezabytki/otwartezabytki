@@ -2894,6 +2894,7 @@ body.resource_home{
 
 #search_existence_input{
   .choices li.choice{
+    display: inline-block;
     input{
       float: left;
       margin: 4px 6px 0 0;
@@ -2904,7 +2905,7 @@ body.resource_home{
     }
     span.label{
       float: left;
-      width: 135px;
+      width: 125px;
       line-height: 18px;
     }
   }
