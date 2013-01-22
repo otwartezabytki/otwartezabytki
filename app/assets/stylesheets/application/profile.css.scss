@@ -699,8 +699,19 @@ section.show.entries{
     column-gap: 20px;
     column-fill: auto;
     .entry{
-      width: 242px;
+      width: 240px;
+      box-shadow: 0 1px 3px 0 rgba(0,0,0,.3);
+      padding: 20px;
+      margin: 1px 0 20px 2px;
+      line-height: 20px;
+      font-size: 14px;
+      h3{
+        font-weight: bold;
+        font-size: 16px;
+        margin-bottom: 7px;
+      }
       p{
+        font-family: Georgia, serif;
         b{
           font-weight: bold;
         }
@@ -713,7 +724,7 @@ section.show.entries{
         margin: 10px 0;
         li{
           list-style-type: disc;
-          font-family: Georgia, Arial, sans-serif;
+          font-family: Georgia, serif;
         }
       }
     }
@@ -1533,11 +1544,20 @@ section.show.subrelics{
 }
 
 .toggle-read, #toggle-read{
-  float: right;
   color: #044d71;
   cursor: pointer;
   padding-top: 10px;
   margin: 10px 0;
+}
+
+#toggle-read{
+  float: right;
+}
+
+.toggle-read{
+  display: block;
+  text-align: right;
+  font-size: 12px;
 }
 
 .attachments .btn{
