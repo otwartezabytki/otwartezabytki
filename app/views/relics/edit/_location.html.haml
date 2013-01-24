@@ -3,9 +3,7 @@
     .column.column-left
       = f.input :polish_relic, :as => :boolean
       .polish-location{ :style => (relic.polish_relic ? "" : "display: none;") }
-        = f.input :place_id, :as => :select,
-          :collection => polish_places(relic), :selected => f.object.place_id, :label => t('activerecord.attributes.relic.fplace'),
-          :include_blank => false, :input_html => { :style => "width: 234px;" }, :hint => t('formtastic.hints.relic.place')
+        = render :partial => 'relicbuilders/administrative_level'
       .foreign-location{ :style => (relic.polish_relic ? "display: none;" : "") }
         %script(type="application/json" id="countries_location")
           != Country.coordinates.to_json

@@ -50,7 +50,7 @@ class RelicbuildersController < ApplicationController
     @district = @commune.district if @commune
     @voivodeship = @district.voivodeship if @district
 
-    render :partial => 'administrative_level', :layout => false
+    render :partial => 'administrative_level', :layout => false, :locals => {:relic => nil}
   end
 
   def address

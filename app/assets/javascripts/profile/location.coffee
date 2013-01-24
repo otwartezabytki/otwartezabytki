@@ -2,7 +2,7 @@
 
 window.map = undefined
 
-geocode_location = (callback) ->
+window.geocode_location = (callback) ->
   return unless callback?
   if $('#relic_polish_relic').is(':checked')
     voivodeship = $('form.relic').data('voivodeship')
@@ -16,7 +16,7 @@ geocode_location = (callback) ->
     jQuery.get geocoder_search_path, {place_id}, (result) ->
       if result.length > 0
         callback(result[0].latitude.round(7), result[0].longitude.round(7))
-    , 'json'
+    , 'json' if place_id
   else
     country_code = $('#relic_country_code').val()
     province = $('#relic_fprovince').val()
@@ -37,7 +37,6 @@ $.fn.specialize
     zoom_at: (lat, lng, zoom = 17) ->
       if window.map
         window.map.setCenter(lat, lng)
-        console.log(zoom)
         window.map.map.setZoom(zoom)
       else
         window.map = new GMaps
@@ -182,7 +181,7 @@ jQuery.initializer 'section.edit.location', ->
     if $('form.relic').hasClass('geocoded')
       $('#map_canvas').set_marker($('#relic_latitude').val().toNumber(), $('#relic_longitude').val().toNumber())
 
-    $('form.relic').on 'change',  '.column-left input, form .column-left select', ->
+    $('form.relic').on 'change',  '.foreign-location select, .foreign-location input, .street_input input, #relic_polish_relic', ->
       geocode_location (lat, lng) ->
         $('#map_canvas').zoom_at(lat, lng)
         map.removeMarkers()
