@@ -1,12 +1,15 @@
-- if relic.is_group?
-  %section.show.subrelics
-    %h2= t('views.relics.show.subrelics.header1')
-    .content
-      %ul.subrelics-tree
-        = render 'shared/tree', :node => relic.subtree.arrange
-- elsif root = relic.ancestor_ids.first
-  %section.show.subrelics
-    %h2= t('views.relics.show.subrelics.header2')
-    .content
-      %ul.subrelics-tree
-        = render 'shared/tree', :node => Relic.find(root).subtree.arrange
+%section.show.subrelics
+  %h2= relic.is_group? ? t('views.relics.show.subrelics.header1') : t('views.relics.show.subrelics.header2')
+  .content
+    %ul.subrelics-tree
+      - root = relic.root
+      = content_tag :li, :class => ("node " + (root == relic ? "current " : "") ).strip do
+        %span.line
+        = link_to root.identification, [root], :remote => true
+        -# all descendants
+        = content_tag :ul do
+          - relic.root.descendants.each do |rel|
+            = content_tag :li, :class => ("leaf " + (rel == relic ? "current  " : "") ).strip do
+              %span.line
+              = link_to rel.identification, [rel], :remote => true
+      %li.add= link_to t('views.relics.show.general.add'), new_relicbuilder_path(:parent_id => root.id),:class => "add_relic"
