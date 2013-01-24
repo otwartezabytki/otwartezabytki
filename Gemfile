@@ -99,7 +99,6 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-doc'
   gem 'sextant'             # for routes in /rails/routes
-  gem 'guard-cucumber'
   gem 'annotate', ">=2.5.0" # for annotating db schema in models
   gem 'quiet_assets'
   gem 'zeus'
@@ -113,7 +112,6 @@ end
 
 group :test do
   # for defining tests
-  gem 'cucumber-rails', :require => false
   gem 'rspec-rails',  '~> 2.0'
   gem 'factory_girl_rails'
   gem 'forgery', '0.5.0'
