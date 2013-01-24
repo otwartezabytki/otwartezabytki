@@ -22,8 +22,19 @@ ActiveAdmin.register Relic, {:sort_order => :id} do
     default_actions
   end
 
+   member_action :make_me_ordinary, :method => :put do
+      relic = Relic.find(params[:id])
+      relic.descendants.map &:destroy
+      relic.update_attribute :kind, "SA"
+      redirect_to({:action => :show}, :notice => "Wszystkie podzabytki zostały usunięte. Od teraz jest to zwykły zabytek.")
+    end
+
   action_item :only => [:show, :edit] do
     link_to 'Profil zabytku', relic_path(relic), :target => "_blank"
+  end
+
+  action_item :only => [:show, :edit] do
+    link_to 'Zamień na zwykły zabytek', [:make_me_ordinary,:admin, relic], :method => 'put', :confirm => 'Uwaga, wszystkie podzabytki tego zabytku zostaną usunięte. Czy chcesz to zrobić?' if relic.is_group?
   end
 
   form do |f|
