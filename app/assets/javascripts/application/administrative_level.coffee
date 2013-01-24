@@ -38,12 +38,10 @@ jQuery.initializer 'div.administrative-level', ->
   this.on 'change', 'select', (e) ->
     params = "#{$(this).attr('name')}=#{$(this).find('option:selected').val()}"
     if params.match(/place_id/)
-      console.log 'place_id changed'
       geocode_polish_location()
     else
       $.get '/relicbuilder/administrative_level', params, (data, status, xhr) ->
         self.replaceWith(data)
         $('div.administrative-level').initialize()
-        console.log 'some select changed'
         geocode_polish_location()
          # $('form.relic').on 'change',  '.column-left input, form .column-left select', ->

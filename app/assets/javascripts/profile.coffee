@@ -115,7 +115,6 @@ jQuery.initializer 'section.show.entries', ->
       contentHeight = sum / 2
       $(".entry").each ->
         entryHeight = $(this).height()
-        # console.log entryHeight
         contentHeight = entryHeight  if entryHeight > contentHeight
         contentHeight += 45
 
@@ -133,7 +132,6 @@ jQuery.initializer 'section.show.entries', ->
         contentHeight = sum / 2
         $(".entry").each ->
           entryHeight = $(this).height()
-          # console.log entryHeight
           contentHeight = entryHeight  if entryHeight > contentHeight
           contentHeight += 45
 
@@ -151,7 +149,6 @@ jQuery.initializer 'section.show.entries', ->
         contentHeight = sum / 2
         $(".entry").each ->
           entryHeight = $(this).height()
-          # console.log entryHeight
           contentHeight = entryHeight  if entryHeight > contentHeight
           contentHeight += 45
 

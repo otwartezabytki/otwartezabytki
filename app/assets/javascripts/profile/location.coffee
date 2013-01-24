@@ -37,7 +37,6 @@ $.fn.specialize
     zoom_at: (lat, lng, zoom = 17) ->
       if window.map
         window.map.setCenter(lat, lng)
-        # console.log(zoom)
         window.map.map.setZoom(zoom)
       else
         window.map = new GMaps
