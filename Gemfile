@@ -93,7 +93,7 @@ gem 'twitter_cldr'
 gem 'yard'
 gem 'redcarpet'
 
-group :ievelopment, :test do
+group :development, :test do
   gem 'interactive_editor'
   gem 'ruby-debug19'        # for debugging
   gem 'pry-rails'
@@ -103,6 +103,7 @@ group :ievelopment, :test do
   gem 'annotate', ">=2.5.0" # for annotating db schema in models
   gem 'quiet_assets'
   gem 'zeus'
+  gem 'guard-ctags-bundler'
 end
 
 group :production do
