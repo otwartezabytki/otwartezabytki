@@ -18,7 +18,7 @@
   - if @commune
     .row
       = label_tag 'relic[place_id]', t('views.relicbuilders.administrative_level.city')
-      = select 'relic', 'place_id', options_from_collection_for_select(@commune.places.order(:name), "id", "name"), {:selected => relic.place_id}
+      = select 'relic', 'place_id', options_from_collection_for_select(@commune.places.order(:name), "id", "name", relic.place_id)
   - if relic and relic.errors[:place] and relic.place_id.blank?
     .error
       = t('views.relicbuilders.administrative_level.error')

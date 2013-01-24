@@ -182,7 +182,7 @@ jQuery.initializer 'section.edit.location', ->
     if $('form.relic').hasClass('geocoded')
       $('#map_canvas').set_marker($('#relic_latitude').val().toNumber(), $('#relic_longitude').val().toNumber())
 
-    $('form.relic').on 'change',  '.foreign-location select, .foreign-location input, .street_input input', ->
+    $('form.relic').on 'change',  '.foreign-location select, .foreign-location input, .street_input input, #relic_polish_relic', ->
       geocode_location (lat, lng) ->
         $('#map_canvas').zoom_at(lat, lng)
         map.removeMarkers()
