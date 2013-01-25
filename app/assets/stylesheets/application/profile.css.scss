@@ -655,7 +655,15 @@ section.show.general{
       padding: 9px 12px 6px 29px;
       display: block;
       font-weight: 600;
-      background: asset-data-url("edit-relic-ico-original.png") 10px 10px no-repeat;
+      background: asset-data-url("edit-relic-ico-alert.png") 10px 6px no-repeat;
+    }
+  }
+
+  .adopt {
+    @extend .original;
+
+    span {
+      background: asset-data-url("edit-relic-ico-adopt.png") 10px 9px no-repeat;
     }
   }
 }

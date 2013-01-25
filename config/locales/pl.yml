@@ -1411,6 +1411,7 @@ pl:
         flash_hide: ukryj
         general:
           add: dodaj
+          adopt: "Adoptuj zabytek"
           close: zamknij
           common_name: "Nazwa zwyczajowa"
           dating_of_obj: "Data powstania:"
