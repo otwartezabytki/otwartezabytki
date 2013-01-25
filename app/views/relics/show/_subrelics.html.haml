@@ -5,6 +5,7 @@
   .subrelics-tree
     = content_tag :h1, :class => ('subrelic type-root ' + (relic.root == relic ? 'type-current ' : '')).strip do
       = link_to relic.root.identification, [relic.root], :remote => true
+    %p.subrelics-info= t('views.relics.show.subrelics.subheader')
 
     %ul.subrelics-list
       - relic.root.descendants.each do |rel|
