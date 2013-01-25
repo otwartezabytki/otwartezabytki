@@ -1575,6 +1575,7 @@ $subrelics-background-hover: #24353d;
 
 $subrelics-button-color: #399a1b;
 $subrelics-button-shadow: 0 1px 2px rgba($dark-grey, 0.4);
+$subrelics-parent-color: #fbf4e9;
 
 .subrelics-add-button {
   @include border-radius(2px);
@@ -1595,6 +1596,28 @@ $subrelics-button-shadow: 0 1px 2px rgba($dark-grey, 0.4);
     @include box-shadow($subrelics-button-shadow, inset 0 1px 10px rgba($dark-grey, 0.5));
     padding-top: 9px;
     padding-bottom: 7px;
+  }
+}
+
+.subrelic-parent-info {
+  @include border-radius(2px);
+  @include text-shadow(0 1px 0 lighten($subrelics-parent-color, 2%));
+  padding: 20px 20px 19px 58px;
+  margin: 10px;
+  color: rgba($dark-grey, 0.8);
+  background-color: $subrelics-parent-color;
+  background-image: asset-data-url("stack-icon-light.png");
+  background-position: 25px 19px;
+  background-repeat: no-repeat;
+  font-weight: 500;
+
+  .show.general > &:first-child {
+    border-top: 1px solid lighten($subrelics-parent-color, 2%);
+    margin: -18px -20px 10px -26px;
+  }
+
+  a {
+    font-weight: 600;
   }
 }
 
