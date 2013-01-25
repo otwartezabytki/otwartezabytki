@@ -13,3 +13,6 @@
             %dd.subrelic-image
               %img.thumb.type-tiny{:alt => 'Zabytek', :src => asset_path('fallback/photo_tiny_default.png'), :width => 24, :height => 24}
             %dt.subrelic-name= rel.identification
+
+    %footer.subrelics-add
+      = link_to t('views.relics.show.subrelics.add_new'), new_relicbuilder_path(:parent_id => relic.root.id), :class => 'subrelics-add-button'

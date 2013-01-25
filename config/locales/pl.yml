@@ -1436,6 +1436,7 @@ pl:
         subrelics:
           header1: "Oglądasz właśnie profil zabytku, który posiada pewne podzabytki."
           header2: "Oglądasz właśnie profil zabytku, będący częścią zespołu zabytków."
+          add_new: "Dodaj element zespołu"
         view_current_version: "&#171; zobacz wersję obecną"
     widgets:
       edit:
