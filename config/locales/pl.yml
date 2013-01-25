@@ -1281,6 +1281,9 @@ pl:
         step3: "krok 3"
         step4: "krok 4"
     relics:
+      adoption:
+        header: Adopcja
+        explanation: "…"
       edit:
         add_attachement: "dodaj nowe zdjęcie do zabytku"
         add_and_save: "dodaj i zapisz"

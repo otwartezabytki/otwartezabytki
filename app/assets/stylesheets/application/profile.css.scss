@@ -665,6 +665,17 @@ section.show.general{
     span {
       background: asset-data-url("edit-relic-ico-adopt.png") 10px 9px no-repeat;
     }
+
+    & + .help {
+      position: relative;
+      top: 11px;
+      left: 1px;
+
+      p {
+        line-height: 1.2;
+        padding: 1em 19px 0;
+      }
+    }
   }
 }
 
