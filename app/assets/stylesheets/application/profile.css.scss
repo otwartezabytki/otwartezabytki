@@ -1527,7 +1527,7 @@ $subrelics-background-hover: #24353d;
     background-color: darken($subrelics-background, 5%);
   }
 
-  .subrelics-list &.type-current {
+  &.type-current {
     &, &:hover {
       @include box-shadow(inset 0 1px 2px rgba($dark-grey, 1));
       background-color: $subrelics-background-hover;
@@ -1561,8 +1561,12 @@ $subrelics-background-hover: #24353d;
   font-weight: 500;
   color: rgba(#fff, 0.5);
 
-  .subrelic.type-root + & {
+  .type-root + & {
     margin-top: -0.5em;
+  }
+
+  .type-root.type-current + & {
+    margin-top: 5px;
   }
 }
 
