@@ -12,8 +12,7 @@
         = link_to [rel], :remote => true do
           = content_tag :dl, :class => ('subrelic ' + (rel == relic ? 'type-current ' : '')).strip do
             %dd.subrelic-image
-              -# fix me: `rel.main_photo` always returns true
-              = image_tag(rel.main_photo ? rel.main_photo.file.url(:icon) : 'fallback/photo_tiny_default.png', :size => '24x24', :class => 'thumb type-tiny', :alt => rel.identification)
+              = image_tag(rel.photos.count > 0 ? rel.main_photo.file.url(:icon) : 'fallback/photo_tiny_default.png', :size => '24x24', :class => 'thumb type-tiny', :alt => rel.identification)
             %dt.subrelic-name= rel.identification
 
     %footer.subrelics-add
