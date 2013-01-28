@@ -119,10 +119,8 @@ group :test do
   gem 'capybara'
 
   # for running tests
-  gem 'spork-rails'
   gem 'guard'
   gem 'guard-rspec'
-  gem 'guard-spork'
   gem 'growl'
   gem 'rb-fsevent'
 
