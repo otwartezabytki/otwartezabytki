@@ -1,7 +1,7 @@
 %section.show.general
   - if relic.parent.present?
     .subrelic-parent-info
-      %p Ten zabytek wchodzi w skład zespołu: #{link_to relic.parent.identification, relic_path(relic.parent_id), :remote => true}
+      %p= t('views.relics.show.subrelics.parent_info', :parent => link_to(relic.parent.identification, relic_path(relic.parent_id), :remote => true))
   = link_to t('views.relics.show.general.fill_in'), edit_section_relic_path(relic.id, :general), :remote => true, :class => "edit-relic-link"
   %h1= relic.identification
   - if relic.common_name.present?
