@@ -102,7 +102,10 @@ group :development, :test do
   gem 'annotate', ">=2.5.0" # for annotating db schema in models
   gem 'quiet_assets'
   gem 'zeus'
+  gem 'guard'
+  gem 'guard-rspec'
   gem 'guard-ctags-bundler'
+  gem 'guard-zeus'
 end
 
 group :production do
@@ -119,11 +122,10 @@ group :test do
   gem 'capybara'
 
   # for running tests
-  gem 'guard'
-  gem 'guard-rspec'
   gem 'growl'
   gem 'rb-fsevent'
 
   gem 'shoulda-matchers'
   gem 'simplecov', :require => false
 end
+
