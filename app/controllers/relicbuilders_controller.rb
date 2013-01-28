@@ -27,6 +27,7 @@ class RelicbuildersController < ApplicationController
       end
       @relic.place = @places.first if @places.size == 1
     end
+    @relic.kind = 'ZE' if @location.relic_group?
     @relic.parent_id = params[:parent_id]
   end
 
