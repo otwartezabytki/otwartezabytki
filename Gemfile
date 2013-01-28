@@ -16,7 +16,7 @@ group :assets do
   gem 'bootstrap-sass', '~> 2.0.4.0'
 end
 
-gem 'jquery-rails'
+gem 'jquery-rails', '2.0.3'
 gem 'haml-rails'
 gem 'coffee-filter'
 gem 'sugar-rails'
