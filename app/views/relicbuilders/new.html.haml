@@ -33,10 +33,7 @@
           %script(type="text/html" id="nonexisted_body")
             %span.relic-text
               = t('views.relicbuilders.new.info_nonexisted_relic')
-          
           .clear
-          
-
           .field.text.search.marker
             .polish-location{:style => "#{ 'display: none;' unless f.object.foreign_relic.to_i.zero?}"}
               = f.input :polish_place, :label => t('views.relicbuilders.new.place')
@@ -81,4 +78,3 @@
           = f.hidden_field :place_id
           = f.hidden_field :latitude
           = f.hidden_field :longitude
-          
