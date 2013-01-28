@@ -332,21 +332,6 @@ $unread-badge-size:    10px;
       }
     }
   }
-
-  .type-user-checked > &.type-modified {
-    &:before {
-      @include border-radius($unread-badge-size / 2 + 2);
-      @include box-shadow(0 1px 4px rgba($dark-grey, 0.4));
-      content: '';
-      position: absolute;
-      margin: -4px 0 0 -85px;
-      border: 2px solid #fff;
-      height: $unread-badge-size;
-      width: $unread-badge-size;
-      background: $separator-color;
-      -webkit-background-clip: padding-box;
-    }
-  }
 }
 
 .feed-image {
