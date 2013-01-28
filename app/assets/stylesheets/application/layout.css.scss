@@ -813,28 +813,29 @@ a {
       }
     }
   }
-  .text {
-    float: right;
-    .plus {
-      float: left;
-      width: 25px;
-      height: 15px;
-      background: asset-data-url('icon-text-plus.png') no-repeat;
-      margin-top: 23px;
-      cursor: pointer;
-    }
-    .minus {
-      float: left;
-      width: 19px;
-      height: 12px;
-      background: asset-data-url('icon-text-minus.png') no-repeat;
-      margin: 24px 0 0 15px;
-      cursor: pointer;
-    }
-    .disabled {
-      opacity: 0.5;
-      cursor: default;
-    }
+}
+
+#userNav .text {
+  float: left;
+  margin-top: -2px;
+  .plus {
+    float: left;
+    width: 25px;
+    height: 15px;
+    background: asset-data-url('icon-text-plus.png') no-repeat;
+    cursor: pointer;
+  }
+  .minus {
+    float: left;
+    width: 19px;
+    height: 12px;
+    background: asset-data-url('icon-text-minus.png') no-repeat;
+    margin: 1px 0 0 15px;
+    cursor: pointer;
+  }
+  .disabled {
+    opacity: 0.5;
+    cursor: default;
   }
 }
 
@@ -2631,6 +2632,10 @@ body.resource_home{
         li{
           padding: 20px 15px;
           border-top: 1px solid #e5e5e5;
+          overflow: hidden;
+          &.to-show {
+            display: none;
+          }
           .image{
             float: left;
             width: 56px;
@@ -2683,8 +2688,12 @@ body.resource_home{
                 }
               }
             }
-            a{
+            p {
               display: inline-block;
+              width: 100%;
+            }
+            a{
+
               width: 100%;
               color: #1a1a1a;
               text-decoration: underline;
@@ -2888,6 +2897,7 @@ body.resource_home{
 
 #search_existence_input{
   .choices li.choice{
+    display: inline-block;
     input{
       float: left;
       margin: 4px 6px 0 0;
@@ -2898,7 +2908,7 @@ body.resource_home{
     }
     span.label{
       float: left;
-      width: 135px;
+      width: 125px;
       line-height: 18px;
     }
   }

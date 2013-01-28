@@ -56,6 +56,9 @@
   }
 
   section.location {
+    .administrative-level .row {
+      padding: 0;
+    }
 
     .input {
       margin: 2px 0 0;
@@ -319,6 +322,15 @@ section.show.photos{
     .info-right{
       float: right;
       text-align: right;
+    }
+    .info-left, .info-right{
+      p{
+        line-height: 18px;
+      }
+      strong{
+        font-weight: bold;
+        display: block;
+      }
     }
     .jcarousel-skin-midi{
       background: #eee;
@@ -690,8 +702,19 @@ section.show.entries{
     column-gap: 20px;
     column-fill: auto;
     .entry{
-      width: 242px;
+      width: 240px;
+      box-shadow: 0 1px 3px 0 rgba(0,0,0,.3);
+      padding: 20px;
+      margin: 1px 0 20px 2px;
+      line-height: 20px;
+      font-size: 14px;
+      h3{
+        font-weight: bold;
+        font-size: 16px;
+        margin-bottom: 7px;
+      }
       p{
+        font-family: Georgia, serif;
         b{
           font-weight: bold;
         }
@@ -704,7 +727,7 @@ section.show.entries{
         margin: 10px 0;
         li{
           list-style-type: disc;
-          font-family: Georgia, Arial, sans-serif;
+          font-family: Georgia, serif;
         }
       }
     }
@@ -712,6 +735,10 @@ section.show.entries{
 }
 
 section.show.links{
+  h3 {
+    margin-top: 5px;
+    font-weight: bold;
+  }
   ul li{
     padding-left: 20px;
     background: asset-data-url("edit-relic-ico-link.png") 0 3px no-repeat;
@@ -1524,11 +1551,20 @@ section.show.subrelics{
 }
 
 .toggle-read, #toggle-read{
-  float: right;
   color: #044d71;
   cursor: pointer;
   padding-top: 10px;
   margin: 10px 0;
+}
+
+#toggle-read{
+  float: right;
+}
+
+.toggle-read{
+  display: block;
+  text-align: right;
+  font-size: 12px;
 }
 
 .attachments .btn{

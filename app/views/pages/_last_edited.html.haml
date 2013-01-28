@@ -1,0 +1,9 @@
+%li{ :class => ('to-show' if (defined?(hidden) && hidden)) }
+  .image
+    = image_tag revision[:image_url]
+  .relic-content
+    %p.title= revision[:identification]
+    .change.added
+      = revision[:changes]
+    %p= time_ago_in_words(revision[:created_at]) + ' temu'
+    %p= link_to t('views.pages.home.go_to_relic_profile'), relic_path(revision[:slug])

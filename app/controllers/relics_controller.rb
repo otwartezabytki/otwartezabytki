@@ -26,7 +26,7 @@ class RelicsController < ApplicationController
           end
         end
 
-        r.attributes = params[:relic] unless request.get?
+        r.attributes = (params[:relic] || {}).except(:voivodeship_id, :district_id, :commune_id) unless request.get?
         r.user_id = current_user.id if request.put? || request.post?
         r
       end
@@ -57,6 +57,17 @@ class RelicsController < ApplicationController
 
   def edit
     relic.entries.build
+  end
+
+  def administrative_level
+    @voivodeship = Voivodeship.find_by_id params.get_deep('relic', 'voivodeship_id')
+    @district = District.find_by_id params.get_deep('relic', 'district_id')
+    @commune = Commune.find_by_id params.get_deep('relic', 'commune_id')
+
+    @district = @commune.district if @commune
+    @voivodeship = @district.voivodeship if @district
+
+    render :partial => 'administrative_level', :layout => false
   end
 
   def update

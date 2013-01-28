@@ -35,7 +35,7 @@ jQuery.initializer 'section.show.photo', ->
             break if i > photos.length
             item = photos[i - 1]
             carousel.add(i, "<a data-remote='true' href='#{Routes.relic_photo_path(item.relic_id, item.id)}' data-main='#{item.main}'><img src='#{item.file.midi.url}' alt='Zdjęcie zrobione przez #{item.author}' /></a>")
-  
+
   $(document).keydown (e) ->
     $("a.next").trigger "click"  if e.which is 39
 
@@ -93,7 +93,7 @@ jQuery.initializer 'section.show.description', ->
       $(this).parents(".show.description").find(".content").css
         height: "auto"
         overflow: "visible"
-      
+
       # Hide the [...] when expanded
       $(this).text "mniej"
     ), ->
@@ -104,20 +104,19 @@ jQuery.initializer 'section.show.description', ->
 
 jQuery.initializer 'section.show.entries', ->
   $(".show.entries .entry .body").each ->
-    if $(this).height() > 273
+    if $(this).height() > 280
       $(this).css
-        height: 273
+        height: 280
         overflow: "hidden"
       sum = 0
       $(".entry").each ->
-        sum += $(this).height() + 45
+        sum += $(this).height() + 60
 
       contentHeight = sum / 2
       $(".entry").each ->
         entryHeight = $(this).height()
-        console.log entryHeight
         contentHeight = entryHeight  if entryHeight > contentHeight
-        contentHeight += 45
+        contentHeight += 60
 
       $(".show.entries .content").height contentHeight
 
@@ -128,14 +127,13 @@ jQuery.initializer 'section.show.entries', ->
           overflow: "visible"
         sum = 0
         $(".entry").each ->
-          sum += $(this).height() + 45
+          sum += $(this).height() + 60
 
         contentHeight = sum / 2
         $(".entry").each ->
           entryHeight = $(this).height()
-          console.log entryHeight
           contentHeight = entryHeight  if entryHeight > contentHeight
-          contentHeight += 45
+          contentHeight += 60
 
         $(".show.entries .content").height contentHeight
 
@@ -146,14 +144,13 @@ jQuery.initializer 'section.show.entries', ->
           overflow: "hidden"
         sum = 0
         $(".entry").each ->
-          sum += $(this).height() + 45
+          sum += $(this).height() + 60
 
         contentHeight = sum / 2
         $(".entry").each ->
           entryHeight = $(this).height()
-          console.log entryHeight
           contentHeight = entryHeight  if entryHeight > contentHeight
-          contentHeight += 45
+          contentHeight += 60
 
         $(".show.entries .content").height contentHeight
 

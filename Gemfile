@@ -99,18 +99,19 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-doc'
   gem 'sextant'             # for routes in /rails/routes
-  gem 'guard-cucumber'
   gem 'annotate', ">=2.5.0" # for annotating db schema in models
   gem 'quiet_assets'
+  gem 'zeus'
+  gem 'guard-ctags-bundler'
 end
+
 group :production do
   gem 'therubyracer' # assets javascript compiler
-  gem 'newrelic_rpm'
+  gem 'newrelic_rpm', '~> 3.5.5.38'
 end
 
 group :test do
   # for defining tests
-  gem 'cucumber-rails', :require => false
   gem 'rspec-rails',  '~> 2.0'
   gem 'factory_girl_rails'
   gem 'forgery', '0.5.0'
@@ -118,10 +119,8 @@ group :test do
   gem 'capybara'
 
   # for running tests
-  gem 'spork-rails'
   gem 'guard'
   gem 'guard-rspec'
-  gem 'guard-spork'
   gem 'growl'
   gem 'rb-fsevent'
 
