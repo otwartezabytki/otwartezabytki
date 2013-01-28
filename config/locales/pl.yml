@@ -1438,7 +1438,8 @@ pl:
           header2: "Oglądasz właśnie profil zabytku, będący częścią zespołu zabytków."
           subheader: "W skład tego zespołu wchodzą:"
           add_new: "Dodaj element zespołu"
-          parent_info: "Ten zabytek wchodzi w skład zespołu: %{parent}"
+          group_info: "Ten zabytek posiada pewne podzabytki."
+          parent_info: "Ten zabytek wchodzi w skład zespołu: %{parent}."
         view_current_version: "&#171; zobacz wersję obecną"
     widgets:
       edit:
