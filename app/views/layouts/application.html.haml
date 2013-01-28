@@ -46,6 +46,9 @@
               = t('layouts.application.disclaimer')
               %a{:href => "mailto:kontakt-oz@centrumcyfrowe.pl"} kontakt-oz@centrumcyfrowe.pl
             %nav#userNav
+              .text
+                %span.plus
+                %span.minus
               %ul
                 - if current_user && current_user.registered? && current_user.errors.size == 0
                   %li= t('layouts.application.hello', :username => (current_user.username || current_user.email))

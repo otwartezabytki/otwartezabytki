@@ -813,28 +813,29 @@ a {
       }
     }
   }
-  .text {
-    float: right;
-    .plus {
-      float: left;
-      width: 25px;
-      height: 15px;
-      background: asset-data-url('icon-text-plus.png') no-repeat;
-      margin-top: 23px;
-      cursor: pointer;
-    }
-    .minus {
-      float: left;
-      width: 19px;
-      height: 12px;
-      background: asset-data-url('icon-text-minus.png') no-repeat;
-      margin: 24px 0 0 15px;
-      cursor: pointer;
-    }
-    .disabled {
-      opacity: 0.5;
-      cursor: default;
-    }
+}
+
+.text {
+  float: left;
+  margin-top: -2px;
+  .plus {
+    float: left;
+    width: 25px;
+    height: 15px;
+    background: asset-data-url('icon-text-plus.png') no-repeat;
+    cursor: pointer;
+  }
+  .minus {
+    float: left;
+    width: 19px;
+    height: 12px;
+    background: asset-data-url('icon-text-minus.png') no-repeat;
+    margin: 1px 0 0 15px;
+    cursor: pointer;
+  }
+  .disabled {
+    opacity: 0.5;
+    cursor: default;
   }
 }
 
