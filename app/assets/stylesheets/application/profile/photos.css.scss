@@ -79,6 +79,14 @@
         width: 37px;
         background: asset-data-url("cc-icons-by.png") no-repeat;
       }
+      .cc-search{
+        display: block;
+        background: asset-data-url("edit-relic-ico-info.png") no-repeat;
+        padding-left: 20px;
+        &.small{
+          color: #323232;
+        }
+      }
     }
   }
 
