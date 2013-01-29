@@ -2,7 +2,7 @@
   - if relic.parent.present?
     .subrelic-parent-info
       %p= t('views.relics.show.subrelics.parent_info', :parent => link_to(relic.parent.identification, relic_path(relic.parent_id), :remote => true))
-  - if relic.is_group?
+  - if relic.is_group? && relic.root.descendants.count > 0
     .subrelic-parent-info
       %p= t('views.relics.show.subrelics.group_info')
   = link_to t('views.relics.show.general.fill_in'), edit_section_relic_path(relic.id, :general), :remote => true, :class => "edit-relic-link"

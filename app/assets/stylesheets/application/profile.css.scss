@@ -1581,6 +1581,13 @@ $subrelics-background-hover: #24353d;
   margin-top: 20px;
   font-size: 12px;
   font-weight: 400;
+
+  &.type-empty {
+    @include border-radius(5px);
+    border: 2px dashed darken($subrelics-background, 10%);
+    padding: 24px 0 26px;
+    margin: 10px 25px 0;
+  }
 }
 
 $subrelics-button-color: #399a1b;

@@ -6,15 +6,22 @@
     .subrelics-tree
       = content_tag :h1, :class => ('subrelic type-root ' + (relic.root == relic ? 'type-current ' : '')).strip do
         = link_to relic.root.identification, [relic.root], :remote => true
-      %p.subrelics-info= t('views.relics.show.subrelics.subheader')
 
-      %ul.subrelics-list
-        - relic.root.descendants.each do |rel|
-          = link_to [rel], :remote => true do
-            = content_tag :dl, :class => ('subrelic ' + (rel == relic ? 'type-current ' : '')).strip do
-              %dd.subrelic-image
-                = image_tag(rel.photos.count > 0 ? rel.main_photo.file.url(:icon) : 'fallback/photo_tiny_default.png', :size => '24x24', :class => 'thumb type-tiny', :alt => rel.identification)
-              %dt.subrelic-name= rel.identification
+      - if relic.root.descendants.count > 0
+        %p.subrelics-info= t('views.relics.show.subrelics.subheader')
 
-      %footer.subrelics-add
-        = link_to t('views.relics.show.subrelics.add_new'), new_relicbuilder_path(:parent_id => relic.root.id), :class => 'subrelics-add-button'
+        %ul.subrelics-list
+          - relic.root.descendants.each do |rel|
+            = link_to [rel], :remote => true do
+              = content_tag :dl, :class => ('subrelic ' + (rel == relic ? 'type-current ' : '')).strip do
+                %dd.subrelic-image
+                  = image_tag(rel.photos.count > 0 ? rel.main_photo.file.url(:icon) : 'fallback/photo_tiny_default.png', :size => '24x24', :class => 'thumb type-tiny', :alt => rel.identification)
+                %dt.subrelic-name= rel.identification
+
+        %footer.subrelics-add
+          = link_to t('views.relics.show.subrelics.add_new'), new_relicbuilder_path(:parent_id => relic.root.id), :class => 'subrelics-add-button'
+      - else
+        %p.subrelics-info= t('views.relics.show.subrelics.subheader_empty')
+
+        %footer.subrelics-add.type-empty
+          = link_to t('views.relics.show.subrelics.add_new'), new_relicbuilder_path(:parent_id => relic.root.id), :class => 'subrelics-add-button'
