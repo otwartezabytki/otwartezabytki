@@ -1,7 +1,11 @@
 %section.show.general
-  = link_to t('views.relics.show.general.fill_in'), edit_section_relic_path(relic.id, :general), :remote => true, :class => "edit-relic-link"
   - if relic.parent.present?
-    %h2= link_to relic.parent.identification, relic_path(relic.parent_id), :remote => true
+    .subrelic-parent-info
+      %p= t('views.relics.show.subrelics.parent_info', :parent => link_to(relic.parent.identification, relic_path(relic.parent_id), :remote => true))
+  - if relic.is_group?
+    .subrelic-parent-info
+      %p= t('views.relics.show.subrelics.group_info')
+  = link_to t('views.relics.show.general.fill_in'), edit_section_relic_path(relic.id, :general), :remote => true, :class => "edit-relic-link"
   %h1= relic.identification
   - if relic.common_name.present?
     %p
