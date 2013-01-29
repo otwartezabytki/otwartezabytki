@@ -102,56 +102,56 @@ jQuery.initializer 'section.show.description', ->
         overflow: "hidden"
       $(this).text "więcej"
 
-jQuery.initializer 'section.show.entries', ->
-  $(".show.entries .entry .body").each ->
-    if $(this).height() > 280
-      $(this).css
-        height: 280
-        overflow: "hidden"
-      sum = 0
-      $(".entry").each ->
-        sum += $(this).height() + 60
+# jQuery.initializer 'section.show.entries', ->
+#   $(".show.entries .entry .body").each ->
+#     if $(this).height() > 100
+#       $(this).css
+#         height: 280
+#         overflow: "hidden"
+#       sum = 0
+#       $(".entry").each ->
+#         sum += $(this).height() + 60
 
-      contentHeight = sum / 2
-      $(".entry").each ->
-        entryHeight = $(this).height()
-        contentHeight = entryHeight  if entryHeight > contentHeight
-        contentHeight += 60
+#       contentHeight = sum / 2
+#       $(".entry").each ->
+#         entryHeight = $(this).height()
+#         contentHeight = entryHeight  if entryHeight > contentHeight
+#         contentHeight += 60
 
-      $(".show.entries .content").height contentHeight
+#       $(".show.entries .content").height contentHeight
 
-      $(this).parent().append "<span class=\"toggle-read\">więcej</span>"
-      $(".toggle-read").toggle (->
-        $(this).parents(".show.entries .entry").find(".body").css
-          height: "auto"
-          overflow: "visible"
-        sum = 0
-        $(".entry").each ->
-          sum += $(this).height() + 60
+#       $(this).parent().append "<span class=\"toggle-read\">więcej</span>"
+#       $(".toggle-read").toggle (->
+#         $(this).parents(".show.entries .entry").find(".body").css
+#           height: "auto"
+#           overflow: "visible"
+#         sum = 0
+#         $(".entry").each ->
+#           sum += $(this).height() + 60
 
-        contentHeight = sum / 2
-        $(".entry").each ->
-          entryHeight = $(this).height()
-          contentHeight = entryHeight  if entryHeight > contentHeight
-          contentHeight += 60
+#         contentHeight = sum / 2
+#         $(".entry").each ->
+#           entryHeight = $(this).height()
+#           contentHeight = entryHeight  if entryHeight > contentHeight
+#           contentHeight += 60
 
-        $(".show.entries .content").height contentHeight
+#         $(".show.entries .content").height contentHeight
 
-        $(this).text "mniej"
-      ), ->
-        $(this).parents(".show.entries .entry").find(".body").css
-          height: 280
-          overflow: "hidden"
-        sum = 0
-        $(".entry").each ->
-          sum += $(this).height() + 60
+#         $(this).text "mniej"
+#       ), ->
+#         $(this).parents(".show.entries .entry").find(".body").css
+#           height: 280
+#           overflow: "hidden"
+#         sum = 0
+#         $(".entry").each ->
+#           sum += $(this).height() + 60
 
-        contentHeight = sum / 2
-        $(".entry").each ->
-          entryHeight = $(this).height()
-          contentHeight = entryHeight  if entryHeight > contentHeight
-          contentHeight += 60
+#         contentHeight = sum / 2
+#         $(".entry").each ->
+#           entryHeight = $(this).height()
+#           contentHeight = entryHeight  if entryHeight > contentHeight
+#           contentHeight += 60
 
-        $(".show.entries .content").height contentHeight
+#         $(".show.entries .content").height contentHeight
 
-        $(this).text "więcej"
+#         $(this).text "więcej"

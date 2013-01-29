@@ -704,15 +704,6 @@ section.show.description{
 
 section.show.entries{
   .content{
-    -moz-column-count: 2;
-    -moz-column-gap: 20px;
-    -moz-column-fill: auto;
-    -webkit-column-count: 2;
-    -webkit-column-gap: 20px;
-    -webkit-column-fill: auto;
-    column-count: 2;
-    column-gap: 20px;
-    column-fill: auto;
     .entry{
       width: 240px;
       box-shadow: 0 1px 3px 0 rgba(0,0,0,.3);
