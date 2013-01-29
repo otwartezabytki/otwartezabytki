@@ -13,26 +13,24 @@
           .full-photo= image_tag(tree_photo.file.full.url)
 
         .info-left
-          %p
+          %p.info-row
             %strong= t('activerecord.attributes.photo.author')
             = tree_photo.author
-          %p
+          %p.info-row
             %strong= t('activerecord.attributes.photo.date_taken')
             = tree_photo.date_taken
-          
-          %p
-            %strong= t('activerecord.attributes.photo.description')
-            = sanitize tree_photo.description
         .info-right
-          %p
+          %p.info-row
             = t('views.photos.show.photo_belongs_to')
             = link_to relic.identification, [relic]
 
-          - if relic.parent
-            %p
+            - if relic.parent
               = t('views.photos.show.relic_parent')
               = link_to relic.parent.identification, [relic.parent]
 
-          %p= t('views.photos.show.license')
+          %p.info-row= t('views.photos.show.license')
+        %p.description
+          %strong= t('activerecord.attributes.photo.description')
+          = sanitize tree_photo.description
 
     %ul#slider_midi.jcarousel-skin-midi{ :"data-photos" => tree_photos.all.to_json }

@@ -147,6 +147,12 @@
 
 .fancybox-inner .edit_relic section.photos .photo-attributes .photo .column-right{
   width: 557px;
+  p, label{
+    line-height: 18px;
+  }
+  p{
+    margin-bottom: 10px;
+  }
   .redactor_box{
     margin-top: 10px;
   }
