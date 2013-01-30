@@ -95,7 +95,6 @@ gem 'redcarpet'
 
 group :development, :test do
   gem 'interactive_editor'
-  gem 'ruby-debug19'        # for debugging
   gem 'pry-rails'
   gem 'pry-doc'
   gem 'sextant'             # for routes in /rails/routes
@@ -103,9 +102,11 @@ group :development, :test do
   gem 'quiet_assets'
   gem 'zeus'
   gem 'guard'
+  gem 'guard-rails'
   gem 'guard-rspec'
   gem 'guard-ctags-bundler'
   gem 'guard-zeus'
+  gem 'debugger'
 end
 
 group :production do
