@@ -57,7 +57,6 @@
       = image_tag 'ico-help.png'
       .help-wrapper
         = link_to t('views.relics.show.general.close'), '#', :class => 'close'
-        %h3= t('views.relics.adoption.header')
-        %p= t('views.relics.adoption.explanation')
+        = t('views.relics.adoption.explanation')
   - else
     %div{:style => 'display:block; height: 50px;'}

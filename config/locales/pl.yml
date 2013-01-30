@@ -1283,7 +1283,9 @@ pl:
     relics:
       adoption:
         header: Adopcja
-        explanation: "…"
+        explanation: |-
+          <p>Gdy zaadoptujesz zabytek, wszelkie informacje o zmianach na jego stronie będą pojawiały się w Twoim profilu.</p>
+          <p>W każdej chwili możesz zrezygnować z adopcji i otrzymywanych powiadomień.</p>
       edit:
         add_attachement: "dodaj nowe zdjęcie do zabytku"
         add_and_save: "dodaj i zapisz"
