@@ -1,0 +1,7 @@
+%section.translation-edit{ :'data-replace' => 'section.translation-edit' }
+  - if request.xhr?
+    = render 'shared/flash', :flash => flash
+  = link_to "zobacz w TOLK", "/admin/tolk/search?#{{:locale => I18n.locale, :scope => 'origin', :k => translation.phrase.key}.to_param}", :target => '_blank'
+  = semantic_form_for translation, :url => translation_path(:id => translation.phrase.key, :options => params[:options]), :remote => true do |f|
+    = f.input :text, :input_html => {:rows => 20, :cols => 50, :value => format_i18n_text_area_value(translation.text)}, :label => false
+    = f.action :submit, :button_html => { :value => 'Zapisz' }

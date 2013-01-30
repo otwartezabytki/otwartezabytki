@@ -1,11 +1,24 @@
 # -*- encoding : utf-8 -*-
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  helper_method :page_pl_path, :search_params, :tsearch
+  helper_method :page_pl_path, :search_params, :tsearch, :enabled_locales
   # iframe views path
   before_filter do
     prepend_view_path("app/views/iframe") if Subdomain.matches?(request)
   end
+
+  before_filter do
+    # set locale
+    locale = params[:locale] if params[:locale] and enabled_locales.include?(params[:locale].to_sym)
+    I18n.locale = (
+      locale ||
+      current_user.try(:default_locale) ||
+      http_accept_language.compatible_language_from(enabled_locales) ||
+      I18n.default_locale
+    ).to_sym
+  end
+
+  before_filter :save_return_path
 
   # disabling because it doesn't work with history back when page is retrieved from cache
   layout :resolve_layout
@@ -46,6 +59,8 @@ class ApplicationController < ActionController::Base
   end
 
   def page_pl_path(path)
+    # TODO refactor when changing page cms
+    return "/strony/#{path}?locale=#{params[:locale]}" if params[:locale]
     "/strony/#{path}"
   end
 
@@ -78,26 +93,34 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def default_url_options(options = {})
+    { :locale => I18n.locale }
+  end
+
+  def enabled_locales
+    Settings.oz.locale.to_hash[(current_user.try(:admin?) ? :available : :enabled)]
+  end
+
   protected
 
   def save_return_path
     cookies[:return_path] = request.fullpath if request.get?
   end
 
+  def authenticate_admin!
+    authenticate_user!
+    raise CanCan::AccessDenied unless current_user.try(:admin?)
+  end
+
   private
 
   def after_sign_in_path_for(resource)
     cookies.delete(:return_path) if Subdomain.matches?(request)
-    stored_location_for(resource) || cookies[:return_path] || relics_path
+    cookies[:return_path] || relics_path
   end
 
-  # Overwriting the sign_out redirect path method
   def after_sign_out_path_for(resource)
-    cookies.delete(:last_relic_id) if Subdomain.matches?(request)
-    if relic_id = cookies.delete(:last_relic_id)
-      relic_path(relic_id)
-    else
-      relics_path
-    end
+    cookies.delete(:return_path) if Subdomain.matches?(request)
+    cookies[:return_path] || relics_path
   end
 end

@@ -19,7 +19,7 @@ jQuery.fn.initialize = ->
 
 popping_state = false
 last_xhr = null
-ajax_callback = (data, status, xhr) ->
+window.ajax_callback = (data, status, xhr) ->
   $('#fancybox_loader_container').hide()
 
   if xhr.getResponseHeader('Content-Type').match(/text\/javascript/)
@@ -51,6 +51,7 @@ ajax_callback = (data, status, xhr) ->
           #$('#fancybox_loader_container').hide()
           $.fancybox.wrap.bind 'onReset', (e) ->
             $('body > .main-container:last').remove()
+          $('.fancybox-overlay').height($(document).height())
         beforeClose: ->
           $form = $('.fancybox-wrap form:first')
           if serialized_data = $form.data('serialized')
@@ -62,8 +63,10 @@ ajax_callback = (data, status, xhr) ->
           # history.pushState { autoreload: true, path: window.before_fancybox_url }, $('title').text(), window.before_fancybox_url
           # if last_xhr.getResponseHeader('x-logged')? && $('body').data('logged')? && $('body').data('logged').toString() != last_xhr.getResponseHeader('x-logged').toString()
           #   window.location.href = window.location.pathname
-          $('#fancybox_loader_container').show()
-          $.ajax(window.location.pathname).success(ajax_callback).complete(-> popping_state = false)
+          if $('#fancybox').length
+            $('#fancybox_loader_container').show()
+
+            $.ajax(window.location.pathname).success(ajax_callback).complete(-> popping_state = false)
         afterLoad: ->
           if !float_fancybox && ($('.fancybox-wrap').position().top - 20) < $(window).scrollTop()
             $(window).scrollTop($('.fancybox-wrap').position().top - 20)
@@ -76,13 +79,14 @@ ajax_callback = (data, status, xhr) ->
 
       data_replace_parent = $(node).parents('[data-replace]:first')[0]
 
-      if $('#fancybox').length && xhr.getResponseHeader('x-fancybox')
+      if xhr.getResponseHeader('x-fancybox')
         to_replace = $('.fancybox-wrap').find($(node).data('replace'))
 
         if to_replace.length
           to_replace.replaceWith(node)
           $(node).initialize()
           $.fancybox.trigger('afterLoad')
+          $('.fancybox-overlay').height($(document).height())
         else
           if data_replace_parent && !$(node).is('[data-fancybox]')
             try_to_process_replace(data_replace_parent)
@@ -109,12 +113,13 @@ ajax_callback = (data, status, xhr) ->
       $('#fancybox_loader_container').show()
       window.location.href = xhr.getResponseHeader('x-path')
 
-    # unless popping_state
-    #   path = xhr.getResponseHeader('x-path')
-    #   history.pushState { autoreload: true, path: path }, $parsed_data.find('title').text(), xhr.getResponseHeader('x-path')
+    # enable only for search
+    if window.location.pathname == '/relics' and !popping_state
+      path = xhr.getResponseHeader('x-path')
+      history.pushState { autoreload: true, path: path }, $parsed_data.find('title').text(), xhr.getResponseHeader('x-path')
 
 $(document).on 'ajax:beforeSend', 'form[data-remote], a[data-remote]', ->
-  $('#fancybox_loader_container').show()
+  $('#fancybox_loader_container').show() unless window.location.pathname == '/relics'
 
 $(document).on 'ajax:success', 'form[data-remote], a[data-remote]', (e, data, status, xhr) ->
   $('#fancybox_loader_container').hide()

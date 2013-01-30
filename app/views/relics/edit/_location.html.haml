@@ -3,9 +3,7 @@
     .column.column-left
       = f.input :polish_relic, :as => :boolean
       .polish-location{ :style => (relic.polish_relic ? "" : "display: none;") }
-        = f.input :place_id, :as => :select,
-          :collection => polish_places(relic), :selected => f.object.place_id, :label => t('activerecord.attributes.relic.fplace'),
-          :include_blank => false, :input_html => { :style => "width: 234px;" }, :hint => t('formtastic.hints.relic.place')
+        = render :partial => 'relicbuilders/administrative_level'
       .foreign-location{ :style => (relic.polish_relic ? "display: none;" : "") }
         %script(type="application/json" id="countries_location")
           != Country.coordinates.to_json
@@ -18,7 +16,7 @@
         = f.input :street
       = link_to (relic.street.blank? ? t('views.relics.edit.location.known_address') : t('views.relics.edit.location.unknown_address')), '#', :class => "toggle_street_input"
       .actions
-        = f.submit t('views.relics.edit.save')
+        %button= t('views.relics.edit.save')
         = t('views.relics.edit.or')
         = link_to t('views.relics.edit.cancel'), relic_path(relic.id), :remote => true, :class => "cancel"
 

@@ -22,7 +22,7 @@ module Tire
 
       def terms name, unicode_order = false, load = false
         ((self.facets || {}).get_deep(name, 'terms') || []).tap do |terms|
-          terms.sort_by!{ |t| Unicode.downcase(t['term']) } if unicode_order
+          terms.sort_by!{ |t| I18n.collator.get_sort_key(t['term']) } if unicode_order
           terms.map! do |t|
             id = t['term'].split('_').last
             name = 'place' if name == 'streets'

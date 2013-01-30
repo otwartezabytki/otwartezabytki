@@ -23,7 +23,7 @@
                         = link_to t('views.relics.edit.photos.delete_photo'), relic_photo_path(@relic.id, photo.id, :build => true),
                           :method => :delete,
                           :remote => true,
-                          :confirm => t('views.relics.edit.photos.delete_confirm'),
+                          :confirm => t('views.relics.edit.photos.delete_confirm', :editable => false),
                           :class => "remove_photo"
 
                     .column-right
@@ -57,5 +57,6 @@
 
             = f.input :license_agreement, :input_html => { :checked => 'checked' }, :as => :boolean, :label => t('views.relics.edit.photos.statement_html')
 
-          .actions
-            = f.submit (@relic.is_group? ? t('views.relicbuilders.photos.submit_relic_group') : t('views.relicbuilders.photos.submit'))
+          .actions.relic-photos
+            = link_to t('views.relicbuilders.stages.back').html_safe, details_relicbuilder_path(:id => @relic.try(:id)), :class => "back"
+            %button= (@relic.is_group? ? t('views.relicbuilders.photos.submit_relic_group') : t('views.relicbuilders.photos.submit'))

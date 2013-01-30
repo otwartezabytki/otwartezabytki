@@ -11,39 +11,6 @@ jQuery.initializer 'body.relicbuilders', ->
       $('.street_input').show()
       $(this).text("Nie da się ustalić adresu")
 
-jQuery.initializer 'div.administrative-level', ->
-  self = this
-  this.find("#relic_voivodeship_id").select2
-    minimumResultsForSearch: 20
-    dropdownCssClass: 'search-order-dropdown'
-    containerCssClass: 'search-order-container'
-    width: '175px'
-
-  this.find("#relic_district_id").select2
-    minimumResultsForSearch: 50
-    dropdownCssClass: 'search-order-dropdown'
-    containerCssClass: 'search-order-container'
-    width: '175px'
-
-  this.find("#relic_commune_id").select2
-    minimumResultsForSearch: 50
-    dropdownCssClass: 'search-order-dropdown'
-    containerCssClass: 'search-order-container'
-    width: '175px'
-
-  this.find("#relic_place_id").select2
-    minimumResultsForSearch: 20
-    dropdownCssClass: 'search-order-dropdown'
-    containerCssClass: 'search-order-container'
-    width: '555px'
-
-  this.on 'change', 'select', (e) ->
-    params = "#{$(this).attr('name')}=#{$(this).find('option:selected').val()}"
-    unless params.match(/place_id/)
-      $.get '/relicbuilder/administrative_level', params, (data, status, xhr) ->
-        self.replaceWith(data)
-        $('div.administrative-level').initialize()
-
 jQuery.initializer 'div.new_relic section.main', ->
   this.on 'click', 'div.places-wrapper ul li a', (e) ->
     e.preventDefault()
@@ -51,6 +18,8 @@ jQuery.initializer 'div.new_relic section.main', ->
     $('#relic_place_id').val $(this).data('place_id')
     lat = $(this).data('coordinates').split(',')[0]
     lng = $(this).data('coordinates').split(',')[1]
+
+    $(window).scrollTop $(".creator-step.location").offset().top
 
     $('#map_canvas').zoom_at(lat, lng)
     map.removeMarkers()
@@ -81,6 +50,12 @@ jQuery.initializer 'div.new_relic section.main', ->
       $('.foreign-location').hide()
       $('.polish-location').show()
 
+  $('#location_existence').change ->
+    if $(this).is(':checked')
+      $('input#relic_existence').attr('value', 'archived')
+    else
+      $('input#relic_existence').attr('value', 'social')
+
   window.ensuring_google_maps_loaded ->
     do window.ensure_geolocation
     $('#marker').draggable
@@ -102,3 +77,17 @@ jQuery.initializer 'div.new_relic section.main', ->
         $('form.relic .actions').show()
 
     $('#map_canvas').blinking()
+
+jQuery.initializer '.main-container div.new_relic .creator-step', ->
+  this.find('a.js-popover.relic-group').popover
+    title: -> $("##{$(this).data("title-id")}").html()
+    content: -> $("##{$(this).data("content-id")}").html()
+    delay: 100000
+    placement: 'top'
+
+jQuery.initializer '.main-container div.new_relic .creator-step', ->
+  this.find('a.js-popover.non-existed').popover
+    title: -> $("##{$(this).data("title-id")}").html()
+    content: -> $("##{$(this).data("content-id")}").html()
+    delay: 100000
+    placement: 'bottom'

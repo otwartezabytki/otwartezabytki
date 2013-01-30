@@ -1,7 +1,7 @@
 :ruby
-  @voivodeship ||= @relic.try(:voivodeship)
-  @district    ||= @relic.try(:district) || @voivodeship.try(:districts).try(:first)
-  @commune     ||= @relic.try(:commune) || @district.try(:communes).try(:first)
+  @voivodeship ||= relic.try(:voivodeship)
+  @district    ||= relic.try(:district) || @voivodeship.try(:districts).try(:first)
+  @commune     ||= relic.try(:commune) || @district.try(:communes).try(:first)
 
 .administrative-level{'data-replace'=> 'div.administrative-level'}
   .one-third
@@ -18,7 +18,7 @@
   - if @commune
     .row
       = label_tag 'relic[place_id]', t('views.relicbuilders.administrative_level.city')
-      = select 'relic', 'place_id', options_from_collection_for_select(@commune.places.order(:name), "id", "name")
-  - if @relic and @relic.errors[:place] and @relic.place_id.blank?
+      = select 'relic', 'place_id', options_from_collection_for_select(@commune.places.order(:name), "id", "name", relic.try(:place_id))
+  - if relic and relic.errors[:place] and relic.place_id.blank?
     .error
       = t('views.relicbuilders.administrative_level.error')

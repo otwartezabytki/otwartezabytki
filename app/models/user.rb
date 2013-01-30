@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
   has_many :seen_relics
   has_many :widgets
 
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable, :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
@@ -60,10 +60,7 @@ class User < ActiveRecord::Base
       :length => { :maximum => 30, :minimum => 3 }
 
     model.before_save do
-      generated_password = [0..9, 'a'..'z', 'A'..'Z'].map(&:to_a).reduce(:+).sample(8).join
-      self.password = generated_password
-      self.password_confirmation = generated_password
-
+      self.password = self.password_confirmation = Devise.friendly_token[0,20]
       # Generate API key
       self.generate_api_key!
     end
@@ -127,6 +124,16 @@ class User < ActiveRecord::Base
         end
       end
       recoverable
+    end
+
+    def find_for_facebook_oauth(auth, signed_in_resource=nil)
+      User.where(["email = ? OR (provider = ? AND uid = ?)", auth.info.email, auth.provider, auth.uid]).first_or_create do |user|
+        user.username  ||= auth.extra.raw_info.name
+        user.password  ||= Devise.friendly_token[0,20]
+        user.provider  = auth.provider
+        user.uid       = auth.uid
+        user.email     = auth.info.email
+      end
     end
   end
 end

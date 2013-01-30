@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 3.2.3', git: 'git://github.com/sheerun/rails.git', branch: 'v3.2.9/multipart-fix'
+gem 'rails', '~> 3.2.3', git: 'git://github.com/sheerun/rails.git', branch: 'v3.2.11/multipart-fix'
 gem 'pg'
 
 # Gems used only for assets and not required
@@ -16,7 +16,7 @@ group :assets do
   gem 'bootstrap-sass', '~> 2.0.4.0'
 end
 
-gem 'jquery-rails'
+gem 'jquery-rails', '2.0.3'
 gem 'haml-rails'
 gem 'coffee-filter'
 gem 'sugar-rails'
@@ -39,6 +39,7 @@ gem 'paper_trail', '~> 2' # versioning
 gem 'activeadmin',    '~> 0.4.4'
 gem 'meta_search',    '>= 1.1.0.pre'
 gem 'devise'
+gem 'omniauth-facebook'
 gem 'cancan'
 gem 'activeadmin-cancan'
 
@@ -70,6 +71,7 @@ gem 'js-routes'           # rails routes in javascirpt
 gem 'acts_as_list'        # sorting links and relic events
 gem 'rubyzip'             # download documents as zip
 gem 'aasm'                # state machine
+gem 'http_accept_language', :git => "git://github.com/zzet/http_accept_language.git"
 
 # api
 gem "jbuilder"
@@ -85,25 +87,35 @@ gem 'ffi-aspell', :require => 'ffi/aspell', :git => 'git://github.com/chytreg/ff
 gem 'tolk', :git => "git://github.com/monterail/tolk.git", :branch => "oz-custom"
 
 gem 'foreman'
+gem 'twitter_cldr'
+
+# documentation
+gem 'yard'
+gem 'redcarpet'
 
 group :development, :test do
   gem 'interactive_editor'
-  gem 'ruby-debug19'        # for debugging
   gem 'pry-rails'
   gem 'pry-doc'
   gem 'sextant'             # for routes in /rails/routes
-  gem 'guard-cucumber'
   gem 'annotate', ">=2.5.0" # for annotating db schema in models
   gem 'quiet_assets'
+  gem 'zeus'
+  gem 'guard'
+  gem 'guard-rails'
+  gem 'guard-rspec'
+  gem 'guard-ctags-bundler'
+  gem 'guard-zeus'
+  gem 'debugger'
 end
+
 group :production do
   gem 'therubyracer' # assets javascript compiler
-  gem 'newrelic_rpm'
+  gem 'newrelic_rpm', '~> 3.5.5.38'
 end
 
 group :test do
   # for defining tests
-  gem 'cucumber-rails', :require => false
   gem 'rspec-rails',  '~> 2.0'
   gem 'factory_girl_rails'
   gem 'forgery', '0.5.0'
@@ -111,13 +123,10 @@ group :test do
   gem 'capybara'
 
   # for running tests
-  gem 'spork-rails'
-  gem 'guard'
-  gem 'guard-rspec'
-  gem 'guard-spork'
   gem 'growl'
   gem 'rb-fsevent'
 
   gem 'shoulda-matchers'
   gem 'simplecov', :require => false
 end
+

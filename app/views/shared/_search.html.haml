@@ -1,4 +1,0 @@
-- if !(controller_name == 'relics' and action_name == 'index')
-  = semantic_form_for tsearch, :url => relics_path, :html => { :class => 'well form-search' }, :method => :get do |f|
-    = f.text_field :q, :class => 'autocomplete-q search-query'
-    = f.submit 'Szukaj &raquo;'.html_safe, :name => nil, :class => 'btn'

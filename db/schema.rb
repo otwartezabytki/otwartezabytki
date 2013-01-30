@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121205174210) do
+ActiveRecord::Schema.define(:version => 20130104172538) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string    "resource_id",                :null => false
@@ -189,6 +189,7 @@ ActiveRecord::Schema.define(:version => 20121205174210) do
     t.string    "date_taken"
     t.integer   "file_full_width"
     t.integer   "file_full_height"
+    t.text      "description"
   end
 
   create_table "places", :force => true do |t|
@@ -352,6 +353,9 @@ ActiveRecord::Schema.define(:version => 20121205174210) do
     t.string    "seen_relic_order",                    :default => "asc"
     t.string    "api_key"
     t.string    "api_secret"
+    t.string    "default_locale"
+    t.string    "provider"
+    t.string    "uid"
   end
 
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true

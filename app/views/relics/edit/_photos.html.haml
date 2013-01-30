@@ -12,11 +12,12 @@
                   = link_to t('views.relics.edit.photos.delete_photo'), relic_photo_path(relic.id, photo.id),
                     :method => :delete,
                     :remote => true,
-                    :confirm => t('views.relics.edit.photos.delete_confirm'),
+                    :confirm => t('views.relics.edit.photos.delete_confirm', :editable => false),
                     :class => "remove_photo"
               .column-right
                 = f2.input :author, :input_html => { :class => "author" }
                 = f2.input :date_taken, :input_html => { :class => "date_taken" }
+                = f2.input :description, :input_html => { :class => "description redactor" }
         - else
           .photo
             .column-left
@@ -27,7 +28,8 @@
               %p= photo.author
               %label= t('activerecord.attributes.photo.date_taken')
               %p= photo.date_taken
-
+              %label= t('activerecord.attributes.photo.description')
+              %p= photo.description
       .photo.hidden
         .column-left
           .preview.preview-placeholder
@@ -45,6 +47,6 @@
 
       = f.input :license_agreement, :input_html => { :checked => 'checked' }, :as => :boolean, :label => t('views.relics.edit.photos.statement_html')
     .actions
-      = f.submit t('views.relics.edit.save')
+      %button= t('views.relics.edit.save')
       = t('views.relics.edit.or')
       = link_to t('views.relics.edit.cancel'), relic_path(relic.id), :remote => true, :class => "cancel"

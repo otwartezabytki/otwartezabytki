@@ -3,7 +3,7 @@
     %span.step_header= t('views.relicbuilders.stages.step1')
     %h3
       - if stage > 1
-        = link_to t('views.relicbuilders.stages.check_existance'), new_relicbuilder_path(:parent_id => @relic.parent_id), 'data-confirm' => t('views.relicbuilders.stages.check_existance_confirm')
+        = link_to t('views.relicbuilders.stages.check_existance'), new_relicbuilder_path(:parent_id => @relic.parent_id), 'data-confirm' => t('views.relicbuilders.stages.check_existance_confirm', :editable => false)
       - else
         = t('views.relicbuilders.stages.check_existance')
     %p= t('views.relicbuilders.stages.step1_description1_html')

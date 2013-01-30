@@ -15,6 +15,7 @@ jQuery.initializer 'section.edit.events', ->
     $section.find('.event-position').each (index) ->
       $(this).val(index + 1)
     template.parent().find('li:last input:first').focus()
+    $('.fancybox-overlay').height($(document).height())
     false
 
   $(this).on 'click', '.add_photo, .edit_photo', ->

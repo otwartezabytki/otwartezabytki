@@ -1,6 +1,5 @@
 # -*- encoding : utf-8 -*-
 class RelicsController < ApplicationController
-  before_filter :save_return_path
   before_filter :enable_fancybox, :only => [:edit, :update]
   before_filter :no_original_version, :only => [:show]
   before_filter :uncomplete_relic_redirect,  :only => [:show, :edit, :update]
@@ -27,7 +26,7 @@ class RelicsController < ApplicationController
           end
         end
 
-        r.attributes = params[:relic] unless request.get?
+        r.attributes = (params[:relic] || {}).except(:voivodeship_id, :district_id, :commune_id) unless request.get?
         r.user_id = current_user.id if request.put? || request.post?
         r
       end
@@ -44,6 +43,7 @@ class RelicsController < ApplicationController
   before_filter :authenticate_user!, :only => [:edit, :update]
 
   def show
+    flash.now[:notice] = t(params[:notice]) if params[:notice]
     relic.present? # raise ActiveRecord::RecordNotFound before entering template
     cookies[:last_relic_id] = relic.id
     if params[:section].present?
@@ -57,6 +57,17 @@ class RelicsController < ApplicationController
 
   def edit
     relic.entries.build
+  end
+
+  def administrative_level
+    @voivodeship = Voivodeship.find_by_id params.get_deep('relic', 'voivodeship_id')
+    @district = District.find_by_id params.get_deep('relic', 'district_id')
+    @commune = Commune.find_by_id params.get_deep('relic', 'commune_id')
+
+    @district = @commune.district if @commune
+    @voivodeship = @district.voivodeship if @district
+
+    render :partial => 'administrative_level', :layout => false
   end
 
   def update
@@ -99,7 +110,7 @@ class RelicsController < ApplicationController
         redirect_to edit_relic_path(relic.id, :section => params[:section])
       end
     else
-      flash[:error] = t('notices.please_correct_errors')
+      flash.now[:error] = t('notices.please_correct_errors')
       render 'edit' and return
     end
   end

@@ -13,6 +13,7 @@ jQuery.initializer 'section.edit.links', ->
       $(this).val(index + 1)
     template.parents('.links_container:first').show()
     next_id += 1
+    $('.fancybox-overlay').height($(document).height())
     false
 
   $section.on 'click', '.remove_link', ->

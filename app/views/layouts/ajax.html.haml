@@ -8,7 +8,6 @@
         window.location.reload()
       }
   %body
-    = render 'shared/search'
     .container.main-container{ :'data-replace' => '.main-container' }
       - unless response.headers['x-fancybox'] == 'true'
         = render 'shared/flash', :flash => flash
