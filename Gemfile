@@ -107,11 +107,7 @@ group :development, :test do
   gem 'guard-ctags-bundler'
   gem 'guard-zeus'
   gem 'debugger'
-end
-
-group :production do
-  gem 'therubyracer' # assets javascript compiler
-  gem 'newrelic_rpm', '~> 3.5.5.38'
+  gem 'commands'
 end
 
 group :test do
@@ -130,3 +126,7 @@ group :test do
   gem 'simplecov', :require => false
 end
 
+group :production do
+  gem 'therubyracer' # assets javascript compiler
+  gem 'newrelic_rpm', '~> 3.5.5.38'
+end
