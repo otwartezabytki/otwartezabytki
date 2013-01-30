@@ -1398,6 +1398,9 @@ pl:
           add: "dodaj wpis"
           header: "Ciekawostki, legendy, anegdoty"
           placeholder: "<p>Podziel się z innymi legendą, anegdotą,<br/>ciekawą historią związaną z zabytkiem.</p>"
+          togglable:
+            less: "Mniej"
+            more: "Więcej…"
         events:
           add: "dodaj wydarzenie"
           header: "Ważne daty"
