@@ -158,6 +158,8 @@ GEM
       execjs
     coffee-script-source (1.4.0)
     columnize (0.3.6)
+    commands (0.2.1)
+      rails (>= 3.2.0)
     compass (0.12.2)
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
@@ -183,10 +185,10 @@ GEM
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
-    factory_girl (4.2.0)
+    factory_girl (4.1.0)
       activesupport (>= 3.0.0)
-    factory_girl_rails (4.2.0)
-      factory_girl (~> 4.2.0)
+    factory_girl_rails (4.1.0)
+      factory_girl (~> 4.1.0)
       railties (>= 3.0.0)
     faraday (0.8.4)
       multipart-post (~> 1.1)
@@ -504,13 +506,14 @@ DEPENDENCIES
   chosen-rails
   coffee-filter
   coffee-rails (~> 3.2.1)
+  commands
   compass-rails
   dalli
   database_cleaner
   debugger
   decent_exposure
   devise
-  factory_girl_rails
+  factory_girl_rails (~> 4.1.0)
   ffi-aspell!
   foreman
   forgery (= 0.5.0)
