@@ -782,17 +782,15 @@ section.show.entries {
         &.less {
           .body {
             overflow: hidden;
-            max-height: 200px;
+            max-height: 190px;
           }
 
-          .toggle {
-            @include background(linear-gradient(top, rgba(255, 255, 255, 0), #fff 80%));
-            padding-top: 115px;
-            margin-top: -115px;
-
-            &:hover {
-              @include background(linear-gradient(top, rgba(255, 255, 255, 0) 30%, #fff 80%));
-            }
+          .toggle:before {
+            @include gradient(rgba(255, 255, 255, 0), #fff);
+            display: block;
+            content: '';
+            height: 100px;
+            margin-top: -100px;
           }
         }
       }
