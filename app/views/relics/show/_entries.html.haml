@@ -4,9 +4,10 @@
     = link_to t('views.relics.show.general.fill_in'), edit_section_relic_path(relic.id, :entries), :remote => true, :class => "edit-relic-link"
     .content
       - relic.entries.each do |entry|
-        %article.entry
-          %h3= entry.title
-          .body= sanitize entry.body
+        .entry-container
+          %article.entry
+            %h3= entry.title
+            .body= sanitize entry.body
   - else
     .placeholder
       = t('views.relics.show.entries.placeholder')

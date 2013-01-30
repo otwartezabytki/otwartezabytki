@@ -702,36 +702,61 @@ section.show.description{
   }
 }
 
-section.show.entries{
-  .content{
-    .entry{
-      width: 240px;
-      box-shadow: 0 1px 3px 0 rgba(0,0,0,.3);
+section.show.entries {
+  .content {
+    @include clearfix();
+    margin: -10px;
+
+    .entry-container {
+      @include box-sizing(border-box);
+      width: 50%;
+      padding: 10px;
+      float: left;
+    }
+
+    .entry {
+      @include border-radius(2px);
+      @include box-shadow(0 1px 4px 0 rgba($dark-grey, 0.3));
       padding: 20px;
-      margin: 1px 0 20px 2px;
-      line-height: 20px;
       font-size: 14px;
-      h3{
+      line-height: 1.45;
+
+      h3 {
         font-weight: bold;
         font-size: 16px;
         margin-bottom: 7px;
       }
-      p{
-        font-family: Georgia, serif;
-        b{
-          font-weight: bold;
-        }
-        i{
-          font-style: italic;
+
+      p, ul, ol {
+        font-family: Georgia, Times New Roman, Times, serif;
+
+        &:not(:empty) {
+          & + p,
+          & + ul,
+          & + ol {
+            padding-top: 0.5em;
+          }
         }
       }
-      ul{
+
+      b {
+        font-weight: bold;
+      }
+
+      i {
+        font-style: italic;
+      }
+
+      ul {
         padding-left: 20px;
-        margin: 10px 0;
-        li{
-          list-style-type: disc;
-          font-family: Georgia, serif;
-        }
+      }
+
+      li {
+        list-style-type: disc;
+      }
+
+      :empty {
+        display: none;
       }
     }
   }
