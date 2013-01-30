@@ -36,7 +36,7 @@
               = f.input :from
               = f.input :to
           .field
-            = f.action :submit, :label => t('formtastic.actions.search_html'), :button_html => { :name => nil }
+            = f.action :submit, :label => t('formtastic.actions.search_html', :editable => false), :button_html => { :name => nil }
           - hidden_filter = [f.object.state, f.object.has_photos, f.object.has_description, f.object.existence].flatten.compact.blank?
           = link_to t('views.relics.index.filter_options'), '#', :class => ('filter-options ' + (hidden_filter ? '' : 'shown'))
         %section.second-search{:style => ('display:none;' if hidden_filter)}
@@ -68,18 +68,14 @@
           #spin
           %h3= t('views.relics.index.loading')
         - if relics.total.zero?
-          .search-no-results
+          %section.search-no-results
             %p= t('views.relics.index.no_results_html')
             %p.no-results-info
               =image_tag "icon-info.png"
               = t('views.relics.index.no_results2_html')
-            -# - if tsearch.suggestions.present?
-            -#   %p
-            -#     = t('views.relics.index.suggestion')
-            -#     - tsearch.suggestions.each do |s|
-            -#       = link_to relics_path(search_params(:q => s.name)), :remote => true do
-            -#         %strong= "#{s.name},"
-
+            %footer.no-results-add
+              %p.no-results-info= t('views.relics.index.no_results_add_header')
+              = link_to t('views.relics.index.no_results_add'), new_relicbuilder_path(), :class => 'basic-button type-add'
         - elsif relics.present?
           %div.relic-header.search
             %h2= t('views.relics.index.search_results', :count => relics.total)

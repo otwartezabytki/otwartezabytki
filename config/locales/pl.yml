@@ -1335,6 +1335,8 @@ pl:
         loading: "Trwa ładowanie wyników, proszę czekać"
         no_results2_html: "Nie znalazłeś tego, czego szukałeś? Spróbuj użyć symbolu gwiazdki, np. Scheibler*"
         no_results_html: "Żaden z zabytków w naszej bazie<br/>nie spełnia podanych kryteriów."
+        no_results_add_header: "Jesteś pewien, że taki zabytek istnieje?"
+        no_results_add: "Dodaj zabytek do bazy"
         order:
           az: A-Z
           score: Trafność
