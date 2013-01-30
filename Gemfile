@@ -117,7 +117,7 @@ end
 group :test do
   # for defining tests
   gem 'rspec-rails',  '~> 2.0'
-  gem 'factory_girl_rails'
+  gem 'factory_girl_rails', '~> 4.1.0'
   gem 'forgery', '0.5.0'
   gem 'database_cleaner'
   gem 'capybara'
