@@ -56,5 +56,11 @@
       %p= relic.register_number
   - if !relic.id.zero? and relic.original_relic.present?
     = link_to content_tag(:span, t('views.relics.show.general.original')), relic_path(relic.id, :original => true), :class => "original"
+    = link_to content_tag(:span, t('views.relics.show.general.adopt')), relic_path(relic.id), :class => "adopt"
+    .help
+      = image_tag 'ico-help.png'
+      .help-wrapper
+        = link_to t('views.relics.show.general.close'), '#', :class => 'close'
+        = t('views.relics.adoption.explanation')
   - else
     %div{:style => 'display:block; height: 50px;'}
