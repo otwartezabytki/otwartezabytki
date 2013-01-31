@@ -56,7 +56,10 @@
       %p= relic.register_number
   - if !relic.id.zero? and relic.original_relic.present?
     = link_to content_tag(:span, t('views.relics.show.general.original')), relic_path(relic.id, :original => true), :class => "original"
-    = link_to content_tag(:span, t('views.relics.show.general.adopt')), relic_path(relic.id), :class => "adopt"
+    - if current_user.present? && current_user.adopted?(relic)
+      = link_to content_tag(:span, t('views.relics.show.general.unadopt')), unadopt_relic_path(relic.id), :class => "adopt", :method => :post, :remote => true
+    - else
+      = link_to content_tag(:span, t('views.relics.show.general.adopt')), adopt_relic_path(relic.id), :class => "adopt", :method => :post, :remote => true
     .help
       = image_tag 'ico-help.png'
       .help-wrapper

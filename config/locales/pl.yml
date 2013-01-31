@@ -896,6 +896,8 @@ pl:
     widget_error: "Nie udało się stworzyć widgeta. Zgłoś błąd administracji."
     widget_error_and_correct: "Nie udało się zaktualizować widgeta. Popraw błędy poniżej."
     widget_has_been_updated: "Widget został zaktualizowany"
+    relic_adopted: "Adoptowałeś zabytek. Od teraz będziesz otrzymywał powiadomienia o jego zmianach."
+    relic_unadopted: "Odadoptowałeś zabytek. Już nie będziesz otrzymywał powiadomień o jego zmianach."
   number:
     currency:
       format:
@@ -1433,6 +1435,7 @@ pl:
         general:
           add: dodaj
           adopt: "Adoptuj zabytek"
+          unadopt: "Odadoptuj zabytek"
           close: zamknij
           common_name: "Nazwa zwyczajowa"
           dating_of_obj: "Data powstania:"

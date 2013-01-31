@@ -30,6 +30,8 @@ Otwartezabytki::Application.routes.draw do
       match 'section/:section', :to => 'relics#show', :as => 'section', :via => :get
       match 'section/:section', :to => 'relics#update', :as => 'section', :via => :put
       get :download_zip
+      post :adopt
+      post :unadopt
     end
 
     resources :photos, :documents, :entries, :links, :events

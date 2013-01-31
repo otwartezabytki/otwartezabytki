@@ -28,6 +28,9 @@ class User < ActiveRecord::Base
   has_many :seen_relics
   has_many :widgets
 
+  has_many :user_relics
+  has_many :relics, :through => :user_relics
+
   devise :database_authenticatable, :registerable, :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable
 
@@ -106,6 +109,10 @@ class User < ActiveRecord::Base
     generate_api_key!     unless api_key?
     generate_api_secret!  unless api_secret?
     save!
+  end
+
+  def adopted?(id)
+    relics.exists?(id)
   end
 
   # def to_param

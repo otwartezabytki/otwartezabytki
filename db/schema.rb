@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130104172538) do
+ActiveRecord::Schema.define(:version => 20130131143502) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string    "resource_id",                :null => false
@@ -206,6 +206,13 @@ ActiveRecord::Schema.define(:version => 20130104172538) do
     t.string    "viewport"
   end
 
+  create_table "relic_adoptions", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "relic_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "relics", :force => true do |t|
     t.integer   "place_id"
     t.text      "identification"
@@ -334,6 +341,13 @@ ActiveRecord::Schema.define(:version => 20130104172538) do
   end
 
   add_index "tolk_translations", ["phrase_id", "locale_id"], :name => "index_tolk_translations_on_phrase_id_and_locale_id", :unique => true
+
+  create_table "user_relics", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "relic_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string    "email",                               :default => "",     :null => false
