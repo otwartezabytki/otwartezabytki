@@ -908,10 +908,7 @@ section.show.alerts{
       }
     }
   }
-  .alert-link-container {
-    @include clearfix();
-  }
-  .alert-link {
+  .alert-link{
     background: none;
     text-transform: none;
     color: #f00;
