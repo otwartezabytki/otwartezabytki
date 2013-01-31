@@ -1,5 +1,5 @@
 %section.show.alerts.add-alert-widget#widgets
-  %h2 Widżety dla zabytku
+  %h2= t('views.relics.show.widgets.header')
   .placeholder
-    %p Stwórz widżet „Dodaj alert” dla&nbsp;tego zabytku:
-    %a.add-alert-widget-button{:href => '#widgets'} Stwórz widżet
+    %p= t('views.relics.show.widgets.create_alert')
+    %a.add-alert-widget-button{:href => '#widgets'}= t('views.relics.show.widgets.create_button')
