@@ -14,8 +14,8 @@
 @import "compass/layout";
 @import "compass/css3";
 
-body { 
-  background-color: #fff; 
+body {
+  background-color: #fff;
   margin: 0;
   font-family: 'Open Sans', sans-serif;
   font-size: 12px;
@@ -44,14 +44,14 @@ div.tooltip {
   bottom: 45px;
   width: 179px;
   z-index: 0;
-  border-right: 1px solid #868584;
+  border-right: 1px solid #e4e4e4;
   overflow: hidden;
 }
 
 .advanced_search {
   position: absolute;
-  border-right: 1px solid #868584;
-  border-top: 1px solid #d3d3d3;
+  border-right: 1px solid #e4e4e4;
+  border-top: 1px solid #e4e4e4;
   bottom: 0;
   left: 0;
   width: 155px;
@@ -92,7 +92,7 @@ form{
     font-family: 'Open Sans', sans-serif;
     border-top: 1px solid #e4e4e4;
     padding: 7px 0 6px 10px;
-    font-weight: bold; 
+    font-weight: bold;
     span {
       white-space: nowrap;
       padding-right: 24px;
@@ -192,7 +192,7 @@ form{
     li{
       list-style-type: none;
       font-size: 12px;
-      color: #343434; 
+      color: #343434;
     }
   }
   .antiscroll-wrap {
@@ -294,4 +294,20 @@ p{
 
 #search_query_input{
   position: relative;
+}
+
+#map_canvas {
+  width: 100%;
+  height: 100%;
+}
+
+#timeline_controls {
+  @include box-sizing(border-box);
+  height: 100px;
+}
+
+#timeline_canvas {
+  display: block;
+  width: 100%;
+  height: 50px;
 }

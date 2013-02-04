@@ -7,6 +7,7 @@
 #= require_tree ../libraries
 #= require vendor/antiscroll
 #= require vendor/debounce.jquery
+#= require ./timeline_canvas
 
 window.gmap = null
 
@@ -139,6 +140,15 @@ initialize_gmap = ->
     google.maps.event.addListener gmap, 'idle', init
 
 jQuery.initializer '#timeline_widget', ->
+  $controls = $('#timeline_controls')
+  $map_canvas = $('#map_canvas')
+
+  set_map_height = ->
+    map_height = parseInt $(document).height() - $controls.height(), 10
+    $map_canvas.height map_height
+
+  set_map_height()
+  timelineDraw()
 
   $sidebar = $(this)
   $$ = $sidebar.find.bind($sidebar)
@@ -151,6 +161,8 @@ jQuery.initializer '#timeline_widget', ->
   $(window).resize ->
     location_scroller.refresh()
     categories_scroller.refresh()
+    set_map_height()
+    timelineDraw()
 
   $('.categories input[type="checkbox"]').change ->
     if $(this).hasClass('sacral-options')

@@ -73,7 +73,9 @@
   %script(type="application/json" id="group_markers")
     != leafs_of(relics.polish_facets_tree).map{ |f| facet_to_marker(f) }.to_json
 .map{ :class => widget.hide_sidebar ? "full" : "" }
-  #map_canvas{ :style => "width: 100%; height: 100%;" }
+  #timeline_controls
+    %canvas#timeline_canvas
+  #map_canvas
 :javascript
   config = #{widget.config.to_json};
 = content_for :stylesheets do
