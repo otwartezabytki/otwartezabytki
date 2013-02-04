@@ -1,4 +1,4 @@
-#map_widget{ :"data-replace" => "#map_widget", :"data-boundingbox" => widget_search.location_object.try(:bounding_box).try(:to_json) }
+#timeline_widget{ :"data-replace" => "#timeline_widget", :"data-boundingbox" => widget_search.location_object.try(:bounding_box).try(:to_json) }
   - if widget.hide_sidebar == true
     = semantic_form_for widget_search, :url => widgets_timeline_path(widget.uid), :method => :get, :remote => true do |f|
       = f.hidden_field :location, :value => params[:search].try(:[], "location")
