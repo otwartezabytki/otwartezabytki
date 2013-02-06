@@ -1,78 +1,22 @@
-#direction_widget{ :"data-replace" => "#direction_widget", :"data-boundingbox" => widget_search.location_object.try(:bounding_box).try(:to_json) }
-  - if widget.hide_sidebar == true
-    = semantic_form_for widget_search, :url => widgets_direction_path(widget.uid), :method => :get, :remote => true do |f|
-      = f.hidden_field :location, :value => params[:search].try(:[], "location")
+#direction_widget{ :"data-replace" => "#direction_widget" }
+  .sidebar
+    = link_to '/', :target => :_top do
+      %h1.logo
+    = semantic_form_for widget_search, :url => widgets_direction_path(widget.uid), :method => :get do |f|
       = f.hidden_field :bounding_box, :value => params[:search].try(:[], "bounding_box")
-      = f.hidden_field :query, :value => params[:search].try(:[], "query")
-      = f.hidden_field :categories, :value => params[:search].try(:[], "categories")
-  - else
-    .sidebar
-      = link_to '/', :target => :_top do
-        %h1.logo
-      = semantic_form_for widget_search, :url => widgets_direction_path(widget.uid), :method => :get, :remote => true do |f|
-        = f.hidden_field :location, :value => params[:search].try(:[], "location")
-        = f.hidden_field :bounding_box, :value => params[:search].try(:[], "bounding_box")
-        %section.search
-          %h2
-            = t('views.widgets.show.direction.search_by_name')
-            = link_to image_tag("widget-helper.png"), '#', :class => "tooltip", :"data-placement" => "right", :title => t('formtastic.hints.search.place', :editable => false)
-          .search-input
-            = f.input :query, :label => false, :input_html => { :class => 'autocomplete-q'}, :placeholder => t('views.widgets.show.direction.query_placeholder', :editable => false)
-            = f.submit :class => "submit", :value => ""
-        .fluid_block
-          %section.locations{ :class => (cookies['section-shown'] == 'locations' ? "maxed" : cookies['section-shown'] == 'categories' ? 'mined' : '') }
-            %h2
-              - if up = widget_search.location_object.up
-                = link_to up.full_name, widgets_direction_path(widget.id, :search => params[:search].merge(:bounding_box => nil, :"location" => "#{up.class.name.underscore}:#{up.id}")), :remote => true
-              %span= "⟩&nbsp;".html_safe + widget_search.location_object.full_name
-              = link_to image_tag("widget-helper.png"), '#', :class => "tooltip", :"data-placement" => "right", :title => t('views.widgets.show.direction.location_hint', :editable => false)
-            .antiscroll-wrap.locations_tree
-              .box
-                .antiscroll-inner
-                  - if relics.polish_facets_tree.length > 0
-                    %ul
-                      = render 'shared/locations_tree', :node => relics.polish_facets_tree
-                  - else
-                    %ul
-                      - relics.each do |relic|
-                        %li= link_to relic.identification, "#", :class => "point-relic", :"data-id" => relic.id
-            = link_to t('views.widgets.show.direction.show_more'), '#', :class => "", :class => "show-more"
-            = link_to t('views.widgets.show.direction.show_less'), '#', :class => "", :class => "show-less"
-          %section.categories{ :class => (cookies['section-shown'] == 'categories' ? "maxed" : cookies['section-shown'] == 'locations' ? 'mined' : '') }
-            %h2
-              = t('views.widgets.show.direction.categories')
-              = link_to image_tag("widget-helper.png"), '#', :class => "tooltip", :"data-placement" => "right", :title => t('views.widgets.show.direction.categories_hint', :editable => false)
-            .antiscroll-wrap
-              .box
-                .antiscroll-inner
-                  .inputs-list.choices-group
-                    - Category.roots.sort_by(&:name).each do |c|
-                      - if c.name_key == 'sakralny'
-                        - hidden_sacral = !f.object.categories.include?('sakralny')
-                        = f.label :categories, :value => c.name_key do
-                          = f.check_box :categories, {:multiple => true, :class => 'sacral-options'}, c.name_key, nil
-                          %span
-                            = c.name
-                            %em= relics.count('sacral')
-                        .sacral-categories{:style => ('display:none;' if hidden_sacral)}
-                          - c.children.sort_by(&:name).each do |child|
-                            - next unless categoires_facets_hash.keys.include?(child.name_key)
-                            = render :partial => 'shared/category_checkbox', :locals => {:f => f, :category => child}
-                      - else
-                        - next unless categoires_facets_hash.keys.include?(c.name_key)
-                        = render :partial => 'shared/category_checkbox', :locals => {:f => f, :category => c}
-
-            = link_to t('views.widgets.show.direction.show_more'), '#', :class => "", :class => "show-more"
-            = link_to t('views.widgets.show.direction.show_less'), '#', :class => "", :class => "show-less"
-    = link_to t('views.widgets.show.direction.advanced_search'), relics_path(params), :target => :_top, :class => "advanced_search"
-  %script(type="application/json" id="search_params")
-    != params[:search].to_json
-  - if relics.polish_facets_tree.empty?
-    %script(type="application/json" id="search_results")
-      != relics.map{ |relic| relic_to_widget_data(relic) }.to_json
-  %script(type="application/json" id="group_markers")
-    != leafs_of(relics.polish_facets_tree).map{ |f| facet_to_marker(f) }.to_json
-.map{ :class => widget.hide_sidebar ? "full" : "" }
+      %section.search
+        %h2
+          = t('views.widgets.show.direction.relics_on_path')
+          = link_to image_tag("widget-helper.png"), '#', :class => "tooltip", :"data-placement" => "right", :title => t('formtastic.hints.search.place', :editable => false)
+        .search-input
+          = f.input :start
+          = f.input :end
+          .string.clearfix.optional.stringish
+            %p W promieniu od zabytku:
+            = f.text_field :radius
+            km 
+          = f.submit :class => "submit", :value => "Pokaż"
+.map
   #map_canvas{ :style => "width: 100%; height: 100%;" }
 :javascript
   config = #{widget.config.to_json};

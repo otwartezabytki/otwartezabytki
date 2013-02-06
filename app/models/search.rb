@@ -6,7 +6,7 @@ class Search
 
   attr_accessor :q, :query, :place, :from, :to, :categories, :state, :existence, :location, :order, :lat, :lon, :load
   attr_accessor :conditions, :range_conditions, :per_page, :page, :has_photos, :has_description, :facets, :zoom, :widget
-  attr_accessor :bounding_box
+  attr_accessor :bounding_box, :start, :end, :radius
 
   def initialize(attributes = {})
     attributes.each do |name, value|
@@ -44,6 +44,10 @@ class Search
       variable = variable.split(',') if variable.kind_of?(String)
       variable.reject(&:blank?)
     end
+  end
+
+  def radius
+    (@radius || 5).to_i
   end
 
   def categories

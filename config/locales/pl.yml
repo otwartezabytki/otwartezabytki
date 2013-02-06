@@ -836,6 +836,9 @@ pl:
         place: "Gdzie:"
         q: "Co:"
         to: "do:"
+        start: 'Od:'
+        end: 'Do:'
+        radius: 'W promieniu od trasy:'
     placeholders:
       search:
         place: gdzie
@@ -1489,6 +1492,7 @@ pl:
           create: "Dodaj nowy zabytek"
           header: "Znasz zabytek, którego nie ma w naszej bazie?"
         direction:
+          relics_on_path: "Zabytki na trasie:"
           advanced_search: "wyszukiwanie<br />zaawansowane »"
           categories: Kategorie
           categories_hint: "tu możesz zawęzić wyszukiwanie zabytków wg. ich kategorii"
@@ -1497,6 +1501,7 @@ pl:
           search_by_name: "Wyszukaj po nazwie"
           show_less: "pokaż mniej..."
           show_more: "pokaż więcej..."
+          submit: "Pokaż"
         map_search:
           advanced_search: "wyszukiwanie<br />zaawansowane »"
           categories: Kategorie

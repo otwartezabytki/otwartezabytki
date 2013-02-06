@@ -41,7 +41,7 @@ div.tooltip {
   position: absolute;
   left: 0;
   top: 0;
-  bottom: 45px;
+  bottom: 0;
   width: 179px;
   z-index: 0;
   border-right: 1px solid #868584;
@@ -101,7 +101,7 @@ form{
   .search h2{
     padding: 8px 0 6px 10px;
   }
-  input#search_query{
+  input[type="text"] {
     margin: 0 0 8px 10px;
     padding: 0 25px 0 10px;
     @include border-radius(2px);
@@ -114,22 +114,14 @@ form{
     color: #313132;
     width: 122px;
   }
-  #search_query_input .input{
-    position: relative;
+
+  .submit {
+    float: right;
+    margin-right: 10px;
   }
-  .search-input{
-    position: relative;
-    .submit{
-      position: absolute;
-      width: 22px;
-      height: 22px;
-      background: #496b7c asset-data-url("widget-zoom.png") center center no-repeat;
-      @include border-radius(2px);
-      right: 12px;
-      top: 2px;
-      border: 0;
-      cursor: pointer;
-    }
+
+  #search_radius {
+    width: 20px;
   }
 }
 

@@ -348,3 +348,10 @@ section.widgets{
     width: 890px;
   }
 }
+
+.direction.edit_widget {
+  .optional.stringish {
+    float: left;
+    margin-right: 50px;
+  }
+}

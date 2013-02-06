@@ -106,7 +106,6 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'guard-ctags-bundler'
   gem 'guard-zeus'
-  gem 'debugger'
   gem 'commands'
 end
 
