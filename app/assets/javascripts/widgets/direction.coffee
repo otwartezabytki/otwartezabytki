@@ -349,7 +349,7 @@ $.fn.serializeObject = ->
 drawRoute = (route, callback) ->
 
 searchRoute = (search_params, callback) ->
-  return callback(FOUND_ROUTE) if FOUND_ROUTE
+  return callback(FOUND_ROUTE) if FOUND_ROUTE?
   
   request =
     origin: search_params.start
@@ -376,10 +376,8 @@ searchRelics = (callback) ->
   window.parent.postMessage(JSON.stringify(
     event: "on_params_changed", params: search_params
   ), "*")
-  
 
   searchRoute search_params, (route) ->
-    console.log(gmap.getLatLngBounds().toString())
     search_params.bounding_box = gmap.getLatLngBounds().toString()
     $.ajax
       url: Routes.api_v1_relics_path(search_params)
@@ -392,10 +390,9 @@ searchRelics = (callback) ->
   false
 
 jQuery ->
-
   $('a.tooltip').tooltip()
   $('#new_search').submit(searchRelics)
-
+  $('#search_begin, #search_end').change(-> FOUND_ROUTE = null)
   window.ensuring_google_maps_loaded ->
     do extend_google_maps
     do construct_relic_marker
