@@ -6,152 +6,10 @@
 #= require twitter/bootstrap/bootstrap-tooltip
 #= require_tree ../libraries
 #= require vendor/antiscroll
-#= require vendor/debounce.jquery
 #= require sugar
 
 window.gmap = null
-
-window.default_options =
-
-window.load_google_maps = ->
-  script = document.createElement("script")
-  script.type = "text/javascript"
-  script.src = "http://maps.googleapis.com/maps/api/js?key=#{window.google_maps_key}&sensor=false&callback=google_maps_loaded"
-  document.body.appendChild(script)
-
-window.google_maps_loaded = ->
-  window.is_google_maps_loaded = true
-  do window.google_maps_loaded_callback if window.google_maps_loaded_callback
-
-window.ensuring_google_maps_loaded = (callback) ->
-  if window.is_google_maps_loaded
-    do callback
-  else
-    window.google_maps_loaded_callback = callback
-    do window.load_google_maps
-
-one_time = (callback) ->
-  unless window.did_it
-    window.did_it = true
-    do callback
-
-extend_google_maps = ->
-  google.maps.Map::markers = []
-  google.maps.Map::overlays = []
-  google.maps.Map::getMarkers = -> @markers
-  google.maps.Map::getOverlays = -> @overlays
-
-  google.maps.Map::clearMarkers = ->
-    marker.setMap null for marker in @markers
-    @markers = []
-
-  google.maps.Map::clearOverlays = ->
-    overlay.setMap null for overlay in @overlays
-    @overlays = []
-
-  google.maps.Marker::_setMap = google.maps.Marker::setMap
-  google.maps.Marker::setMap = (map) ->
-    map.markers[map.markers.length] = this  if map
-    @_setMap map
-
-  google.maps.OverlayView::_setMap = google.maps.OverlayView::setMap
-  google.maps.OverlayView::setMap = (map) ->
-    map.overlays[map.overlays.length] = this if map
-    @_setMap map
-
-  google.maps.LatLngBounds.prototype.toString = ->
-    this.toUrlValue().split(',').inGroupsOf(2).map((e) -> e.join(',')).join(';')
-
-construct_relic_marker = ->
-  class google.maps.RelicMarker extends google.maps.OverlayView
-    constructor: (@latlng, @number, @map, @click) ->
-      this.setMap(map)
-
-    draw: ->
-      image_url = gmap_circles[@number.toString().length - 1]
-      image_size = [55, 59, 75, 85, 105][@number.toString().length - 1]
-      font_size = [14, 14, 17, 17, 17][@number.toString().length - 1]
-
-      # cache drawn image
-      @div ||= do =>
-        marker = $("<div>#{@number}</div>").css
-          position: "absolute"
-          cursor: "pointer"
-          textAlign: 'center'
-          height: image_size
-          width: image_size
-          lineHeight: "#{image_size}px"
-          fontWeight: "800"
-          fontSize: font_size
-          color: "#507283"
-          backgroundImage: "url(#{image_url})"
-          zIndex: 10000
-
-        $(@getPanes().overlayImage).append(marker)
-
-        google.maps.event.addDomListener marker[0], 'click', (e) =>
-          @click() if @click?
-          false
-
-        marker
-
-      if point = @getProjection().fromLatLngToDivPixel(@latlng)
-        @div.css(left: point.x - image_size/2, top: point.y - image_size/2)
-
-    remove: ->
-      @div.remove() if @div
-
 FOUND_ROUTE = null
-ON_IDLE_EVENT = null
-
-waitForMapMovement = (callback) ->
-  ON_IDLE_EVENT = callback
-
-initialize_gmap = ->
-  if !window.gmap
-    window.gmap = new google.maps.Map document.getElementById('map_canvas'),
-      mapTypeId: google.maps.MapTypeId.HYBRID
-      
-    gmap.directions = new google.maps.DirectionsService
-    gmap.directions.renderer = new google.maps.DirectionsRenderer
-      map: gmap
-
-    gmap.getLatLngBounds = ->
-      bounds = gmap.getBounds()
-      if bounds
-        north_east = bounds.getNorthEast()
-        south_west = bounds.getSouthWest()
-        bounds = new google.maps.LatLngBounds(
-          new google.maps.LatLng(north_east.lat(), south_west.lng())
-          new google.maps.LatLng(south_west.lat(), north_east.lng())
-        )
-        
-    # prevent first on idle event
-    ON_IDLE_EVENT = ->
-    fitting_bounds = false
-
-    old_set_zoom = google.maps.Map.prototype.setZoom
-    google.maps.Map.prototype.setZoom = (zoom) ->
-      zoom += 1 if fitting_bounds
-      old_set_zoom.call(this, zoom)
-      fitting_bounds = false
-
-    old_fit_bounds = google.maps.Map.prototype.fitBounds
-    google.maps.Map.prototype.fitBounds = (bounds) ->
-      fitting_bounds = true
-      old_fit_bounds.call(this, bounds)
-
-    idle = $.throttle ->
-      if ON_IDLE_EVENT?
-        idle_event = ON_IDLE_EVENT
-        ON_IDLE_EVENT = null
-        do idle_event
-      else
-        $('#search_bounding_box').val(gmap.getLatLngBounds().toString())
-        searchRelics()
-    , 3000
-
-    google.maps.event.addListener gmap, 'idle', idle
 
 show_content_window = (marker, content) ->
   if marker.info_window
@@ -184,10 +42,12 @@ renderResults = (search_groups, search_results) ->
     latlng = new google.maps.LatLng(@latitude, @longitude)
 
     if @facet_count > 1
-      new google.maps.RelicMarker latlng, @facet_count, gmap, =>
+      marker = new google.maps.RelicMarker latlng, @facet_count, =>
         $('#search_location').val("#{@type}:#{@id}")
         $('#search_bounding_box').val("")
         $('#new_search').submit()
+
+      marker.setMap(gmap)
     else
       marker = new google.maps.Marker
         map: gmap
@@ -229,7 +89,7 @@ renderResults = (search_groups, search_results) ->
 
 
 # Distance from a point to a line or segment.
-
+#
 # @param {number} x point's x coord
 # @param {number} y point's y coord
 # @param {number} x0 x coord of the line's A point
@@ -346,8 +206,6 @@ $.fn.serializeObject = ->
 
   return json
 
-drawRoute = (route, callback) ->
-
 searchRoute = (search_params, callback) ->
   return callback(FOUND_ROUTE) if FOUND_ROUTE?
   
@@ -362,11 +220,10 @@ searchRoute = (search_params, callback) ->
       route.path = route.overview_path.map (o) ->
         latitude: o.Ya, longitude: o.Za
        
-      gmap.directions.renderer.setDirections(result)
-      waitForMapMovement -> callback(route)
+      gmap.directionsRenderer.setDirections(result)
+      gmap.onNextMovement -> callback(route)
     else
       alert('Nie znaleziono trasy! Spróbuj ponownie.')
-
 
 searchRelics = (callback) ->
   search_params = $('#new_search').serializeObject().search
@@ -376,7 +233,7 @@ searchRelics = (callback) ->
   window.parent.postMessage(JSON.stringify(
     event: "on_params_changed", params: search_params
   ), "*")
-
+  
   searchRoute search_params, (route) ->
     search_params.bounding_box = gmap.getLatLngBounds().toString()
     $.ajax
@@ -384,6 +241,7 @@ searchRelics = (callback) ->
       dataType: 'json'
       success: (result) ->
         process(search_params, result.clusters, result.relics, route.path)
+        do callback if typeof callback == 'function'
       error: ->
         alert('Nastąpił błąd podczas wyszukiwania zabytków.')
 
@@ -393,7 +251,11 @@ jQuery ->
   $('a.tooltip').tooltip()
   $('#new_search').submit(searchRelics)
   $('#search_begin, #search_end').change(-> FOUND_ROUTE = null)
-  window.ensuring_google_maps_loaded ->
-    do extend_google_maps
-    do construct_relic_marker
-    do initialize_gmap
+  gmaps.load google_maps_key, ->
+    window.gmap = new google.maps.Map $('#map_canvas')[0],
+      mapTypeId: google.maps.MapTypeId.HYBRID
+
+    gmap.onMovement ->
+      if bounds = gmap.getLatLngBounds()
+        $('#search_bounding_box').val(bounds.toString())
+        searchRelics()
