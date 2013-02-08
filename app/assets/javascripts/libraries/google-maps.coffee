@@ -107,7 +107,7 @@ window.gmaps =
           super
 
           google.maps.event.addListener this, 'idle',
-            jQuery.throttle ->
+            jQuery.debounce ->
               if @onNextMovementCallback?
                 idle_event = @onNextMovementCallback
                 @onNextMovementCallback = undefined
@@ -121,6 +121,8 @@ window.gmaps =
 
           @directionsRenderer = new google.maps.DirectionsRenderer
             map: this
+            draggable: true
+            suppressMarkers: false
 
         setZoom: (zoom) ->
           zoom += 1 if @fittingBounds

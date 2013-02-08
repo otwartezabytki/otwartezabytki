@@ -234,7 +234,7 @@ performSearch = (search_params, callback) ->
     error: ->
       alert('Nastąpił błąd podczas wyszukiwania zabytków.')
 
-searchRelics = ->
+debouncedSearchRelics = jQuery.debounce ->
   search_params = $('#new_search').serializeObject().search
   search_params.api_key = "oz"
   search_params.per_page = 1000
@@ -245,13 +245,17 @@ searchRelics = ->
 
   if search_params.start.length && search_params.end.length
     searchRoute search_params, (route) ->
-      search_params.bounding_box = gmap.getLatLngBounds().toString()
       performSearch search_params, (result) ->
         process(search_params, result.clusters, result.relics, route.path)
   else
     performSearch search_params, (result) ->
       renderResults(result.clusters, result.relics)
 
+  false
+, 3000
+
+searchRelics = ->
+  debouncedSearchRelics()
   false
 
 jQuery ->
@@ -266,6 +270,10 @@ jQuery ->
       if bounds = gmap.getLatLngBounds()
         $('#search_bounding_box').val(bounds.toString())
         searchRelics()
+
+     google.maps.event.addListener gmap.directionsRenderer,
+       'directions_changed',
+       searchRelics
 
     gmap.onNextMovement ->
     gmap.setCenter(new google.maps.LatLng(52, 20))
