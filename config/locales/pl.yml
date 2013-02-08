@@ -885,7 +885,7 @@ pl:
     alert_added: "Alert został dodany. Dziękujemy."
     changes_has_been_saved: "Zmiany zostały zapisane. Dziękujemy!"
     gallery_has_been_updated: "Galeria zdjęć została zaktualizowana. Dziękujemy!"
-    new_gruop_relic_has_been_added: "Gratulacje dodałeś zespół zabytków. Dodaj podzabytki poniżej."
+    new_group_relic_has_been_added: "Gratulacje dodałeś zespół zabytków. Dodaj podzabytki poniżej."
     new_relic_has_been_added: "Gratulacje dodałeś nowy zabytek"
     please_correct_errors: "Popraw proszę błędy wskazane poniżej."
     relic_reverted: "Objekt został przywrócony do wskazanej wersji."
