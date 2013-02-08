@@ -9,13 +9,13 @@
         .search-input
           = f.input :start
           = f.input :end
-        %h2 Zabytki w promieniu:
+        %h2= t('views.widgets.show.direction.relics_within_radius')
         .search-input
           .string.clearfix.optional.stringish
             = f.text_field :radius
-            %span.suffix km od trasy
+            %span.suffix= t('views.widgets.show.direction.km_within_range')
         .search-submit
-          = f.submit :class => "submit", :value => "Pokaż trasę"
+          = f.submit :class => "submit", :value => t('views.widgets.show.direction.submit')
 .map
   #map_canvas{ :style => "width: 100%; height: 100%;" }
 :javascript

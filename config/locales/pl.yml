@@ -1493,6 +1493,8 @@ pl:
           header: "Znasz zabytek, którego nie ma w naszej bazie?"
         direction:
           relics_on_path: "Zabytki na trasie:"
+          relics_within_radius: "Zabytki w promieniu:"
+          km_within_range: "km od trasy"
           advanced_search: "wyszukiwanie<br />zaawansowane »"
           categories: Kategorie
           categories_hint: "tu możesz zawęzić wyszukiwanie zabytków wg. ich kategorii"
@@ -1501,7 +1503,7 @@ pl:
           search_by_name: "Wyszukaj po nazwie"
           show_less: "pokaż mniej..."
           show_more: "pokaż więcej..."
-          submit: "Pokaż"
+          submit: "Pokaż trasę"
         map_search:
           advanced_search: "wyszukiwanie<br />zaawansowane »"
           categories: Kategorie
