@@ -5,17 +5,17 @@
     = semantic_form_for widget_search, :url => widgets_direction_path(widget.uid), :method => :get do |f|
       = f.hidden_field :bounding_box, :value => params[:search].try(:[], "bounding_box")
       %section.search
-        %h2
-          = t('views.widgets.show.direction.relics_on_path')
-          = link_to image_tag("widget-helper.png"), '#', :class => "tooltip", :"data-placement" => "right", :title => t('formtastic.hints.search.place', :editable => false)
+        %h2= t('views.widgets.show.direction.relics_on_path')
         .search-input
           = f.input :start
           = f.input :end
+        %h2 Zabytki w promieniu:
+        .search-input
           .string.clearfix.optional.stringish
-            %p W promieniu od zabytku:
             = f.text_field :radius
-            km 
-          = f.submit :class => "submit", :value => "Pokaż"
+            %span.suffix km od trasy
+        .search-submit
+          = f.submit :class => "submit", :value => "Pokaż trasę"
 .map
   #map_canvas{ :style => "width: 100%; height: 100%;" }
 :javascript
