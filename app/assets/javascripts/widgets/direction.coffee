@@ -225,7 +225,16 @@ searchRoute = (search_params, callback) ->
     else
       alert('Nie znaleziono trasy! Spróbuj ponownie.')
 
-searchRelics = (callback) ->
+performSearch = (search_params, callback) ->
+  $.ajax
+    url: Routes.api_v1_relics_path(search_params)
+    dataType: 'json'
+    success: (result) ->
+      callback(result)
+    error: ->
+      alert('Nastąpił błąd podczas wyszukiwania zabytków.')
+
+searchRelics = ->
   search_params = $('#new_search').serializeObject().search
   search_params.api_key = "oz"
   search_params.per_page = 1000
@@ -233,17 +242,15 @@ searchRelics = (callback) ->
   window.parent.postMessage(JSON.stringify(
     event: "on_params_changed", params: search_params
   ), "*")
-  
-  searchRoute search_params, (route) ->
-    search_params.bounding_box = gmap.getLatLngBounds().toString()
-    $.ajax
-      url: Routes.api_v1_relics_path(search_params)
-      dataType: 'json'
-      success: (result) ->
+
+  if search_params.start.length && search_params.end.length
+    searchRoute search_params, (route) ->
+      search_params.bounding_box = gmap.getLatLngBounds().toString()
+      performSearch search_params, (result) ->
         process(search_params, result.clusters, result.relics, route.path)
-        do callback if typeof callback == 'function'
-      error: ->
-        alert('Nastąpił błąd podczas wyszukiwania zabytków.')
+  else
+    performSearch search_params, (result) ->
+      renderResults(result.clusters, result.relics)
 
   false
 
@@ -259,3 +266,8 @@ jQuery ->
       if bounds = gmap.getLatLngBounds()
         $('#search_bounding_box').val(bounds.toString())
         searchRelics()
+
+    gmap.onNextMovement ->
+    gmap.setCenter(new google.maps.LatLng(52, 20))
+    gmap.setZoom(6)
+    searchRelics()
