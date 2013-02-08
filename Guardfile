@@ -6,7 +6,7 @@ guard 'ctags-bundler', :src_path => ["app", "lib", "spec/support"] do
   watch('Gemfile.lock')
 end
 
-guard 'rails', :debugger => true do
+guard 'rails' do
   watch('Gemfile.lock')
   watch(%r{^(config|lib)/.*})
 end
