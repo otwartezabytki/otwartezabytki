@@ -27,13 +27,15 @@ class Link < ActiveRecord::Base
 
   acts_as_list :scope => :relic
 
+
+  validates_format_of :url, :with => URI::regexp(%w(http https ftp)), :if => :url_changed?
+
   validates :kind, :presence => true, :inclusion => { :in => ["url", "paper"] }
 
   validates :category, :presence => true, :inclusion => { :in => UrlCategories }, :if => :url?
   validates :category, :presence => true, :inclusion => { :in => PaperCategories }, :if => :paper?
 
   validates :url, :name, :length => { :maximum => 255 }
-  validates :url, :uri => {:format => URI::regexp(%w(http https ftp)) }, :if => :url_changed?
 
   validates :relic, :user, :url, :name, :presence => true, :if => :url?
   validates :relic, :user, :formal_name, :name, :presence => true, :if => :paper?
