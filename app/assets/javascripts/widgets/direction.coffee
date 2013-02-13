@@ -208,18 +208,19 @@ $.fn.serializeObject = ->
 
 searchRoute = (search_params, callback) ->
   return callback(FOUND_ROUTE) if FOUND_ROUTE?
-  
+
   request =
-    origin: search_params.start
-    destination: search_params.end
+    origin: search_params.start + ", Polska"
+    destination: search_params.end + ", Polska"
     travelMode: google.maps.TravelMode.WALKING
+    region: 'pl'
 
   gmap.directions.route request, (result, status) ->
     if status == google.maps.DirectionsStatus.OK
       FOUND_ROUTE = route = result.routes[0]
       route.path = route.overview_path.map (o) ->
         latitude: o.Ya, longitude: o.Za
-       
+
       gmap.directionsRenderer.setDirections(result)
       gmap.onNextMovement -> callback(route)
     else
