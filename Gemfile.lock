@@ -104,7 +104,7 @@ GEM
       cancan (>= 1.6.2)
       rails (>= 3.0)
     acts_as_list (0.1.9)
-    airbrake (3.1.7)
+    airbrake (3.1.8)
       activesupport
       builder
       json
@@ -419,6 +419,8 @@ GEM
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
+    sprockets-commonjs (0.0.5)
+      sprockets (~> 2.1)
     squeel (1.0.15)
       activerecord (~> 3.0)
       activesupport (~> 3.0)
@@ -487,7 +489,7 @@ DEPENDENCIES
   activeadmin-cancan
   activeadmin-globalize3-inputs!
   acts_as_list
-  airbrake
+  airbrake (>= 3.1.8)
   ancestry
   annotate (>= 2.5.0)
   arrabiata
@@ -558,6 +560,7 @@ DEPENDENCIES
   sextant
   shoulda-matchers
   simplecov
+  sprockets-commonjs
   sugar-rails
   therubyracer
   tire (= 0.4.3)

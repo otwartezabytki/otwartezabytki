@@ -31,7 +31,7 @@ gem 'ancestry'
 gem 'tire', '0.4.3'
 gem 'tire-contrib'
 gem 'rocket_tag'
-gem 'airbrake'
+gem 'airbrake', '>= 3.1.8'
 
 gem 'paper_trail', '~> 2' # versioning
 
@@ -94,6 +94,7 @@ gem 'yard'
 gem 'redcarpet'
 
 gem 'clipper'
+gem 'sprockets-commonjs'
 
 group :development, :test do
   gem 'interactive_editor'
