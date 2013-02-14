@@ -1,9 +1,12 @@
+- content_for :before_javascripts do
+  = javascript_include_tag "http://maps.googleapis.com/maps/api/js?key=#{Settings.oz.gm_key}&sensor=false"
 #direction_widget{ :"data-replace" => "#direction_widget" }
   .sidebar
     = link_to '/', :target => :_top do
       %h1.logo
     = semantic_form_for widget_search, :url => widgets_direction_path(widget.uid), :method => :get do |f|
-      = f.hidden_field :bounding_box, :value => params[:search].try(:[], "bounding_box")
+      = f.hidden_field :bounding_box
+      = f.hidden_field :path
       %section.search
         %h2= t('views.widgets.show.direction.relics_on_path')
         .search-input

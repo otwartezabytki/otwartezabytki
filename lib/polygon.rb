@@ -2,7 +2,6 @@ class Polygon
   def self.expand(path, radius)
     radius = radius.to_f
     radius45 = 0.7 * radius
-    path = path.map{ |k, v| v.map(&:to_f) }
     boundaries = [
       translate(path, [0, radius]) + translate(path.reverse, [radius, 0]),
       translate(path, [radius, 0]) + translate(path.reverse, [0, -radius]),

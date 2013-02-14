@@ -4,11 +4,15 @@
 #= require js-routes
 #= require vendor/jquery.cookie
 #= require twitter/bootstrap/bootstrap-tooltip
-#= require_tree ../libraries
 #= require vendor/antiscroll
 #= require sugar
+#= require_tree ../libraries
+#= require gmaps/marker-clusterer
+#= require gmaps/context-menu
+#= require gmaps/extras
 
 window.gmap = null
+window.marker_clusterer = null
 FOUND_ROUTE = null
 
 show_content_window = (marker, content) ->
@@ -33,21 +37,36 @@ render_relic_info = (relic) ->
   link = "<a href='#{Routes.relic_path(relic.id)}' target='_blank'>więcej »</a>"
   "<div class='relic-info'>#{photo}<div class='relic-info-content'><h3>#{relic.identification}</h3><div>#{relic.street}</div><div>#{link}</div></div></div>"
 
+markers = []
+overlays = []
+
+clearMarkers = ->
+  marker_clusterer.clearMarkers() if marker_clusterer
+  gmap.clearOverlays()
+  for marker in gmap.markers
+    marker.setMap(null) unless marker.getDraggable()
+  marker.setMap(null) for marker in markers
+  markers = []
+  overlays = []
 
 renderResults = (search_groups, search_results) ->
-  gmap.clearMarkers()
-  gmap.clearOverlays()
- 
+  do clearMarkers
   $.each search_groups, ->
     latlng = new google.maps.LatLng(@latitude, @longitude)
 
     if @facet_count > 1
-      marker = new google.maps.RelicMarker latlng, @facet_count, =>
+      overlay = new google.maps.RelicMarker latlng, @facet_count, =>
+        southWest = new google.maps.LatLng(@bounding_box[0].lat, @bounding_box[0].lng)
+        northEast = new google.maps.LatLng(@bounding_box[1].lat, @bounding_box[1].lng)
+        bounds = new google.maps.LatLngBounds(southWest, northEast)
+        gmap.fitBounds(bounds, true)
         $('#search_location').val("#{@type}:#{@id}")
-        $('#search_bounding_box').val("")
+        $('#search_bounding_box').val(bounds.toString()) unless FOUND_ROUTE?
         $('#new_search').submit()
 
-      marker.setMap(gmap)
+      overlay.setMap(gmap)
+
+      overlays.push(overlay)
     else
       marker = new google.maps.Marker
         map: gmap
@@ -67,7 +86,6 @@ renderResults = (search_groups, search_results) ->
         load_relic_info (content) ->
           show_content_window(marker, content)
 
-  markers = []
   $.each search_results, ->
     latlng = new google.maps.LatLng(@latitude, @longitude)
 
@@ -77,90 +95,31 @@ renderResults = (search_groups, search_results) ->
       position: latlng
       clickable: true
 
-    markers[@id] = marker
+    markers.push marker
 
     google.maps.event.addListener marker, 'click', =>
       content = render_relic_info(this)
       show_content_window(marker, content)
 
+  image_urls = gmap_circles
+  image_sizes = [55, 59, 75, 85, 105]
+  font_sizes = [14, 14, 17, 17, 17]
+
+  styles = image_urls.map (image, index) ->
+    url: image,
+    textSize: font_sizes[index]
+    width: image_sizes[index]
+    height: image_sizes[index]
+    textColor: '#507283'
+
+  marker_clusterer.clearMarkers() if marker_clusterer?
+  marker_clusterer = new MarkerClusterer gmap, markers,
+    maxZoom: 10
+    styles: styles
+
   $('a.point-relic').click ->
     google.maps.event.trigger(markers[$(this).data('id')], 'click')
     false
-
-
-# Distance from a point to a line or segment.
-#
-# @param {number} x point's x coord
-# @param {number} y point's y coord
-# @param {number} x0 x coord of the line's A point
-# @param {number} y0 y coord of the line's A point
-# @param {number} x1 x coord of the line's B point
-# @param {number} y1 y coord of the line's B point
-# @param {boolean} overLine specifies if the distance should respect the limits
-# of the segment (overLine = true) or if it should consider the segment as an
-# infinite line (overLine = false), if false returns the distance from the point to
-# the line, otherwise the distance from the point to the segment.
-dotLineLength = (x, y, x0, y0, x1, y1, o) ->
-  lineLength = (x, y, x0, y0) ->
-    Math.sqrt (x -= x0) * x + (y -= y0) * y
-  d = (x, y, x0, y0, x1, y1) ->
-    unless x1 - x0
-      return (
-        x: x0
-        y: y
-      )
-    else unless y1 - y0
-      return (
-        x: x
-        y: y0
-      )
-    left = undefined
-    tg = -1 / ((y1 - y0) / (x1 - x0))
-    x: left = (x1 * (x * tg - y + y0) + x0 * (x * -tg + y - y1)) / (tg * (x1 - x0) + y0 - y1)
-    y: tg * left - tg * x + y
-
-  o = d(x, y, x0, y0, x1, y1)
-  unless o.x >= Math.min(x0, x1) and o.x <= Math.max(x0, x1) and o.y >= Math.min(y0, y1) and o.y <= Math.max(y0, y1)
-    l1 = lineLength(x, y, x0, y0)
-    l2 = lineLength(x, y, x1, y1)
-    (if l1 > l2 then l2 else l1)
-  else
-    a = y0 - y1
-    b = x1 - x0
-    c = x0 * y1 - y0 * x1
-    Math.abs(a * x + b * y + c) / Math.sqrt(a * a + b * b)
-
-distanceToLine = (point, begin, end) ->
- dotLineLength(
-   point.latitude, point.longitude,
-   begin.latitude, begin.longitude,
-   end.latitude, end.longitude
- )
-
-distanceInKm = (distance) ->
-  R = 6371
-  rad = distance.toRad()
-  a = Math.sin(rad) * Math.sin(rad)
-  c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
-  d = R * c
-
-distanceToPath = (point, path) ->
-  distances = for i in [0...path.length - 1]
-    distanceToLine(point, path[i], path[i + 1])
-
-  distanceInKm(distances.min())
- 
-if typeof (Number::toRad) is "undefined"
-  Number::toRad = -> this * Math.PI / 180
-
-process = (params, groups, results, path) ->
-  results = results.filter (result) ->
-    distanceToPath(result, path) <= parseInt(params.radius, 10)
-
-  groups = groups.filter (group) ->
-    distanceToPath(group, path) <= parseInt(params.radius, 10)
-
-  renderResults(groups, results)
 
 # Serialize form to JSON
 $.fn.serializeObject = ->
@@ -207,11 +166,14 @@ $.fn.serializeObject = ->
   return json
 
 searchRoute = (search_params, callback) ->
+  do clearMarkers
   return callback(FOUND_ROUTE) if FOUND_ROUTE?
 
+
+
   request =
-    origin: search_params.start + ", Polska"
-    destination: search_params.end + ", Polska"
+    origin: search_params.start + if search_params.start.match(/[0-9\.,]+/) then "" else ", Polska"
+    destination: search_params.end + if search_params.start.match(/[0-9\.,]+/) then "" else ", Polska"
     travelMode: google.maps.TravelMode.WALKING
     region: 'pl'
 
@@ -249,9 +211,10 @@ debouncedSearchRelics = jQuery.debounce ->
 
   if search_params.start.length && search_params.end.length
     searchRoute search_params, (route) ->
-      search_params.path = route.path.map((e) -> [e.latitude, e.longitude])
+      search_params.path = route.path.map((e) -> "#{e.latitude},#{e.longitude}").join(";")
+      $('#search_path').val(search_params.path)
       performSearch search_params, (result) ->
-        process(search_params, result.clusters, result.relics, route.path)
+        renderResults([], result.relics)
   else
     performSearch search_params, (result) ->
       renderResults(result.clusters, result.relics)
@@ -266,21 +229,31 @@ searchRelics = ->
 jQuery ->
   $('a.tooltip').tooltip()
   $('#new_search').submit(searchRelics)
-  $('#search_begin, #search_end').change(-> FOUND_ROUTE = null)
-  gmaps.load google_maps_key, ->
-    window.gmap = new google.maps.Map $('#map_canvas')[0],
-      mapTypeId: google.maps.MapTypeId.HYBRID
+  $('#search_start, #search_end').change(-> FOUND_ROUTE = null)
 
-    gmap.onMovement ->
-      if bounds = gmap.getLatLngBounds()
-        $('#search_bounding_box').val(bounds.toString())
-        searchRelics()
+  window.gmap = new google.maps.Map $('#map_canvas')[0],
+    mapTypeId: google.maps.MapTypeId.HYBRID
 
-     google.maps.event.addListener gmap.directionsRenderer,
-       'directions_changed',
-       searchRelics
+  gmap.menu = new contextMenu(map: window.gmap)
 
-    gmap.onNextMovement ->
-    gmap.setCenter(new google.maps.LatLng(52, 20))
-    gmap.setZoom(6)
+  gmap.menu.addItem 'Start route here', (map, latlng) ->
+    $('#search_start').val("#{latlng.lat().toFixed(6)},#{latlng.lng().toFixed(6)}")
     searchRelics()
+
+  gmap.menu.addItem 'End route here', (map, latlng) ->
+    $('#search_end').val("#{latlng.lat().toFixed(6)},#{latlng.lng().toFixed(6)}")
+    searchRelics()
+
+  gmap.onMovement ->
+    if bounds = gmap.getLatLngBounds()
+      $('#search_bounding_box').val(bounds.toString())
+      searchRelics()
+
+    google.maps.event.addListener gmap.directionsRenderer,
+      'directions_changed',
+      searchRelics
+
+  gmap.onNextMovement ->
+  gmap.setCenter(new google.maps.LatLng(52, 20))
+  gmap.setZoom(6)
+  searchRelics()

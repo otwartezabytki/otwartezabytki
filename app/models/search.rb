@@ -23,8 +23,20 @@ class Search
     !!@load
   end
 
+  def radius=(value)
+    @radius = value
+  end
+
   def radius
     @radius || 5
+  end
+
+  def path=(value)
+    @path = value.split(";").map{ |vertex| vertex.split(',').map(&:to_f) }
+  end
+
+  def path
+    @path
   end
 
   def widget=(value)
@@ -52,8 +64,9 @@ class Search
 
   def boundary
     return nil if @path.nil? || @radius.nil?
-    @boundary ||= Polygon.expand(path, 5)
+    @boundary ||= Polygon.expand(path, @radius.to_f)
   end
+
   def categories
     return @cached_categories if defined? @cached_categories
     if @categories.blank?
