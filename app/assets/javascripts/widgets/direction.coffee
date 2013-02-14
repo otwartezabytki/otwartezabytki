@@ -227,8 +227,11 @@ searchRoute = (search_params, callback) ->
       alert('Nie znaleziono trasy! Spróbuj ponownie.')
 
 performSearch = (search_params, callback) ->
+  search_params._method = 'get'
   $.ajax
-    url: Routes.api_v1_relics_path(search_params)
+    url: '/api/v1/relics'
+    type: 'post'
+    data: search_params
     dataType: 'json'
     success: (result) ->
       callback(result)
@@ -246,6 +249,7 @@ debouncedSearchRelics = jQuery.debounce ->
 
   if search_params.start.length && search_params.end.length
     searchRoute search_params, (route) ->
+      search_params.path = route.path.map((e) -> [e.latitude, e.longitude])
       performSearch search_params, (result) ->
         process(search_params, result.clusters, result.relics, route.path)
   else

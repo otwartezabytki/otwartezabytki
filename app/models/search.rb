@@ -6,7 +6,7 @@ class Search
 
   attr_accessor :q, :query, :place, :from, :to, :categories, :state, :existence, :location, :order, :lat, :lon, :load
   attr_accessor :conditions, :range_conditions, :per_page, :page, :has_photos, :has_description, :facets, :zoom, :widget
-  attr_accessor :bounding_box, :start, :end, :radius
+  attr_accessor :bounding_box, :start, :end, :radius, :path
 
   def initialize(attributes = {})
     attributes.each do |name, value|
@@ -21,6 +21,10 @@ class Search
 
   def load100
     !!@load
+  end
+
+  def radius
+    @radius || 5
   end
 
   def widget=(value)
@@ -46,10 +50,10 @@ class Search
     end
   end
 
-  def radius
-    (@radius || 5).to_i
+  def boundary
+    return nil if @path.nil? || @radius.nil?
+    @boundary ||= Polygon.expand(path, 5)
   end
-
   def categories
     return @cached_categories if defined? @cached_categories
     if @categories.blank?
@@ -318,6 +322,15 @@ class Search
           'coordinates' => {
             "top_left" => @top_left,
             "bottom_right" => @bottom_right
+          }
+        }
+      }
+    end
+    if boundary.present?
+      terms_cond << {
+        'geo_polygon' => {
+          'coordinates' => {
+            'points' => boundary.map { |vertex| "#{vertex.first}, #{vertex.last}" }
           }
         }
       }

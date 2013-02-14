@@ -93,6 +93,8 @@ gem 'twitter_cldr'
 gem 'yard'
 gem 'redcarpet'
 
+gem 'clipper'
+
 group :development, :test do
   gem 'interactive_editor'
   gem 'pry-rails'

@@ -137,4 +137,8 @@ module RelicsHelper
       Place.not_custom.limit(100)
     end
   end
+
+  def path_to_polygon(path)
+    path
+  end
 end
