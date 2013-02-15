@@ -1,5 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Page < ActiveRecord::Base
+  attr_accessible :name, :body, :title, :translations_attributes, as: :admin
+
   translates :body, :title
   accepts_nested_attributes_for :translations
   validates :name, :presence => true, :uniqueness => true
