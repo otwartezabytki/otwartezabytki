@@ -1,7 +1,6 @@
-//= require active_admin/base
+//= require jquery.ui.tabs
 //= require vendor/select2
 //= require vendor/redactor
-// require jquery.ui.tabs
 
 $(document).ready(function(){
   if($("select.select2").length) {

@@ -53,6 +53,8 @@ class RecentRevision
       :changes => changes,
       :created_at => self.version.created_at
     }
+  rescue ArgumentError => e
+    nil
   end
 
 end
