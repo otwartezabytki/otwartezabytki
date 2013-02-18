@@ -1,57 +1,40 @@
-%form.form-settings.user-profile-content
-
+= simple_form_for user, class: 'form-settings user-profile-content' do |form|
   %fieldset.fields
     %legend.fields-title
-      %span.fields-title-inner Ustawienia języka
+      %span.fields-title-inner= t '.language_settings'
 
     .field-row.type-select
-      %label.field-label Język serwisu
-      %select.field
-        %option polski
-        %option angielski
+      = form.input :language, as: :select, collection: { Polski: 'pl', English: 'en' }, include_blank: false
 
   %fieldset#change-avatar.fields
     %legend.fields-title
-      %span.fields-title-inner Zdjęcie profilowe
+      %span.fields-title-inner= t '.avatar'
 
     .field-row.type-file
       %label.field-label
-        %img.field-label-image{:alt => user.username, :src => asset_path('dummy-avatar.jpg'), :width => 64, :height => 64}
+        %img.field-label-image{ alt: user.username, src: user.avatar.midi.url, width: 64, height: 64 }
       .field-layout
-        %input.field-file{:type => 'file'}
-        %p.field-explanation
-          Możesz <a href="#">usunąć swoje zdjęcie</a>, jeśli tego sobie życzysz.
+        = form.input :avatar, as: :file, class: 'field-file', label: false
+        - if user.avatar?
+          %p.field-explanation
+            = t('views.pages.profile.you_can_if_you_want',
+              { remove_avatar: link_to(t('views.pages.profile.remove_avatar'), user_remove_avatar_path(user), method: :delete)})
 
   %fieldset.fields
     %legend.fields-title
-      %span.fields-title-inner Dane użytkownika
+      %span.fields-title-inner= t('.user_data')
 
-    .field-row
-      %label.field-label Nazwa użytkownika
-      %input.field{:type => 'text', :value => user.username}
-
-    .field-row
-      %label.field-label E-mail
-      %input.field{:type => 'text', :value => user.email}
+    = form.input :username
+    = form.input :email
 
   %fieldset.fields
     %legend.fields-title
       %span.fields-title-inner Zmiana hasła
 
-    .field-row.type-separated
-      %label.field-label Aktualne hasło
-      %input.field{:type => 'password'}
-      %p.field-explanation
-        Aby zmienić hasło, musisz podać swoje aktualne.
-
-    .field-row
-      %label.field-label Nowe hasło
-      %input.field{:type => 'password'}
-
-    .field-row
-      %label.field-label Powtórz nowe hasło
-      %input.field{:type => 'password'}
+    = form.input :current_password, :as => :password
+    = form.input :password, :as => :password
+    = form.input :password_confirmation, :as => :password
 
   .field-row-submit
-    %input.field-submit{:type => 'submit', :value => 'Zapisz zmiany'}
+    = form.submit
 

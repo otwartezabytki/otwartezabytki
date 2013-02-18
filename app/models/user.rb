@@ -39,7 +39,12 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :role, :as => :admin
   attr_accessor :force_password_required
 
+  attr_accessible :avatar, :language, :current_password
+
+  mount_uploader :avatar, AvatarUploader
+
   validates :role, :inclusion => { :in => ["admin", "user"] }
+  validates :language, :inclusion => { :in => Settings.oz.locale.available }
 
   def admin?
     role == 'admin'

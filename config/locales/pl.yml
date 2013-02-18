@@ -157,8 +157,10 @@ pl:
       user:
         created_at: "Założenie konta"
         email: "Adres e-mail"
-        password: Hasło
-        role: Rola
+        current_password: "Bieżące hasło"
+        password: "Hasło"
+        password_confirmation: "Powtórz hasło"
+        role: "Rola"
         updated_at: "Zaktualizowanie danych"
         username: "Nazwa użytkownika"
       version:
@@ -829,6 +831,9 @@ pl:
       search:
         place: "np. Małkinia, ul. Grodzka w Krakowie"
         q: "np. cmentarz, stocznie poniemieckie, chopinowski"
+
+      user:
+        current_password: "Musisz podać swoje bieżące hasło, żeby je zmienić."
     labels:
       search:
         from: "od:"
@@ -1072,6 +1077,9 @@ pl:
           register_here: "Zarejestruj się tutaj"
           submit: "Zaloguj się"
     pages:
+      profile:
+        you_can_if_you_want: "Możesz %{remove_avatar}, jeśli tego sobie życzysz."
+        remove_avatar: "usunąć swoje zdjęcie"
       home:
         go_to_relic_profile: "Przejdź do profilu zabytku"
         header: "Wyszukaj i uzupełnij..."
@@ -1205,6 +1213,7 @@ pl:
           widget:
             par: "Udostępniamy kilka przykładowych aplikacji, dzięki którym łatwiej będzie wykorzystać dane o otwartych zabytkach na innych stronach internetowych."
             title: "Widżety »"
+        relic_has_been_updated_by: "%{relic} został zaktualizowany przez %{user}"
     pagination:
       first: Pierwsza
       last: Ostatnia
@@ -1548,3 +1557,11 @@ pl:
     wuoz-w-warszawie: "Wojewódzki Urząd Ochrony Zabytków w Warszawie"
     wuoz-w-zielonej-gorze: "Wojewódzki Urząd Ochrony Zabytków w Zielonej Górze"
     wuoz-we-wroclawiu: "Wojewódzki Urząd Ochrony Zabytków we Wrocławiu"
+
+  users:
+    settings_form:
+      language_settings: "Ustawienia językowe"
+      avatar: "Zdjęcie profilowe"
+      user_data: "Dane użytkownika"
+    list_added:
+      added_relics: "Dodane zabytki"

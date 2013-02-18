@@ -101,6 +101,7 @@
       #fancybox_loader
     != include_gon(:camel_case => true)
     != javascript_include_tag "application"
+    = timeago_script_tag
     != yield :footer_javascripts
     - if Rails.env.production?
       :javascript

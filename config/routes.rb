@@ -19,9 +19,9 @@ Otwartezabytki::Application.routes.draw do
 
   resources :tags, :only => :index
 
-  resources :users, :only => [:show] do
+  resources :users, :only => [:show, :edit, :update] do
     get :checked_relics
-    get :settings
+    delete :remove_avatar
   end
 
   resources :relics, :except => [:new, :create, :destroy] do
