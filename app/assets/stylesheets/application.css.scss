@@ -132,3 +132,17 @@ i18n.on {
     @include border-radius(10px);
   }
 }
+
+#how_it_works {
+  & + .popover {
+    & > * {
+      position: relative;
+      top: -13px;
+      left: 3px;
+    }
+
+    .popover-content p:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
