@@ -80,7 +80,7 @@ gem 'htmldiff'                # diff changes in admin panel
 gem 'friendly_id'             # friendly id for widgets
 gem 'turbo-sprockets-rails3'  # faster asset precompiling
 
-gem 'globalize3', github: 'sheerun/globalize3', branch: 'fix/accessible'
+gem 'globalize3', :git => 'https://github.com/sheerun/globalize3.git', :branch => 'fix/accessible'
 gem 'activeadmin-globalize3-inputs', :git => 'git://github.com/chytreg/activeadmin-globalize3-inputs.git'
 
 gem 'ffi-aspell', :require => 'ffi/aspell', :git => 'git://github.com/chytreg/ffi-aspell.git'

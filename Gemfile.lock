@@ -31,16 +31,6 @@ GIT
       ya2yaml (~> 0.26)
 
 GIT
-  remote: git://github.com/sheerun/globalize3.git
-  revision: ef91130fb07db4aab579b36f68bab7c893a1fe20
-  branch: fix/accessible
-  specs:
-    globalize3 (0.3.0)
-      activemodel (>= 3.0.0)
-      activerecord (>= 3.0.0)
-      paper_trail (~> 2)
-
-GIT
   remote: git://github.com/sheerun/rails.git
   revision: cba8c3657aa03b7f47d490ff0c7ce36af2c112b1
   branch: v3.2.11/multipart-fix
@@ -93,6 +83,16 @@ GIT
   revision: b06cf2a35658702e54a54c16eee62aa19e729e9b
   specs:
     http_accept_language (2.0.1.pre)
+
+GIT
+  remote: https://github.com/sheerun/globalize3.git
+  revision: ef91130fb07db4aab579b36f68bab7c893a1fe20
+  branch: fix/accessible
+  specs:
+    globalize3 (0.3.0)
+      activemodel (>= 3.0.0)
+      activerecord (>= 3.0.0)
+      paper_trail (~> 2)
 
 GEM
   remote: https://rubygems.org/
@@ -217,13 +217,6 @@ GEM
     friendly_id (4.0.9)
     fssm (0.2.10)
     geocoder (1.1.6)
-    girl_friday (0.11.2)
-      connection_pool (~> 1.0)
-      rubinius-actor
-    globalize3 (0.3.0)
-      activemodel (>= 3.0.0)
-      activerecord (>= 3.0.0)
-      paper_trail (~> 2)
     gon (4.0.2)
       actionpack (>= 2.3.0)
       json
