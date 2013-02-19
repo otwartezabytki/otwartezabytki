@@ -99,15 +99,8 @@ jQuery ->
 
   $('select#lang').change (e) ->
     e.preventDefault()
-    name = $(this).find('option:selected').attr('name')
-    search = window.location.search
-    window.location.search = if /\?/.test(search)
-      if /locale/.test(search)
-        search.replace(/locale=[a-z]{2}/, "locale=#{name}")
-      else
-        search += "&locale=#{name}"
-    else
-      "locale=#{name}"
+    window.location = $(this).find('option:selected').attr('rel')
+
 
 
 

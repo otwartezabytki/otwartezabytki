@@ -51,5 +51,5 @@
   .footer-language
     %select#lang.select2
       - enabled_locales.each do |l|
-        %option{:name => l, :selected => ('selected' if (params[:locale] || I18n.locale).to_s == l.to_s)}
+        %option{:rel => "#{url_for(:locale => l)}", :name => l, :selected => ('selected' if (params[:locale] || I18n.locale).to_s == l.to_s)}
           = t("common.lang.#{l}")

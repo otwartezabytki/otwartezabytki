@@ -72,11 +72,11 @@
                 %li
                   = link_to t('layouts.application.homepage'), root_path, :class => "home #{'current' if current_page?(root_path)}"
                 %li
-                  = link_to t('layouts.application.about'), page_pl_path('o-projekcie'), :class => "about #{'current' if current_page?(about_path)}"
+                  = link_to t('layouts.application.about'), about_page_path, :class => "about #{'current' if current_page?(about_page_path)}"
                 %li
-                  = link_to t('layouts.application.download_data'), page_pl_path('pobierz-dane'), :class => "download #{'current' if current_page?(download_path)}"
+                  = link_to t('layouts.application.download_data'), download_path, :class => "download #{'current' if current_page?(download_path)}"
                 %li
-                  = link_to t('layouts.application.contact'), page_pl_path('kontakt'), :class => "contact  #{'current' if current_page?(strony_kontakt_path)}"
+                  = link_to t('layouts.application.contact'), contact_page_path, :class => "contact  #{'current' if current_page?(contact_page_path)}"
                 %li
                   = link_to t('layouts.application.widgets'), widgets_path, :class => "widgets #{'current' if current_page?(widgets_path)}"
                 %li
