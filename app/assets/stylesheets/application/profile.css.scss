@@ -1580,8 +1580,12 @@ $subrelics-background-hover: #24353d;
     background-image: asset-data-url("stack-icon-dark.png");
     background-position: 24px 13px;
     background-repeat: no-repeat;
-    padding-left: 63px;
-    line-height: 32px;
+    padding: 11px 20px 11px 63px;
+    line-height: 18px;
+
+    a {
+      display: block;
+    }
   }
 
   &.type-current,
