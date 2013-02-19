@@ -19,15 +19,16 @@ class Page < ActiveRecord::Base
       # Initialize an ActionView::Template object based on the record found.
       def initialize_template(record)
         source = record.body
-        identifier = "DbPageTemplate - pages/#{record.name}"
+        identifier = "DbPageTemplate - pages/#{I18n.locale}_#{record.name}"
         handler = ActionView::Template.registered_template_handler('erb')
         details = {
           :format => Mime['html'],
           :updated_at => record.updated_at,
-          :virtual_path => "pages/#{record.name}"
+          :virtual_path => "pages/#{I18n.locale}_#{record.name}"
         }
         ActionView::Template.new(source, identifier, handler, details)
       end
   end
 
+  after_save { self.touch }
 end
