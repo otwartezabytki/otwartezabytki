@@ -375,6 +375,8 @@ GEM
       rubyzip (>= 0.9.4)
       spreadsheet (> 0.6.4)
       todonotes (>= 0.1.0)
+    routing-filter (0.3.1)
+      actionpack
     rspec (2.12.0)
       rspec-core (~> 2.12.0)
       rspec-expectations (~> 2.12.0)
@@ -564,6 +566,7 @@ DEPENDENCIES
   redcarpet
   remote_table
   rocket_tag
+  routing-filter
   rspec-rails (~> 2.0)
   ruby-debug19
   rubyzip

@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  helper_method :page_pl_path, :search_params, :tsearch, :enabled_locales
+  helper_method :search_params, :tsearch, :enabled_locales
   # iframe views path
   before_filter do
     prepend_view_path("app/views/iframe") if Subdomain.matches?(request)
@@ -56,12 +56,6 @@ class ApplicationController < ActionController::Base
     else
       redirect_to new_user_session_path, :notice => exception.message
     end
-  end
-
-  def page_pl_path(path)
-    # TODO refactor when changing page cms
-    return "/strony/#{path}?locale=#{params[:locale]}" if params[:locale]
-    "/strony/#{path}"
   end
 
   def tsearch
