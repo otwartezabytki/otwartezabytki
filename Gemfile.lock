@@ -23,7 +23,7 @@ GIT
 
 GIT
   remote: git://github.com/monterail/tolk.git
-  revision: ff521f765a45242d298cbfe989807f62ed2f0d90
+  revision: 38dd769df3a59461ee247ea5f5b8861f54ca6e02
   branch: oz-custom
   specs:
     tolk (1.3.3)
