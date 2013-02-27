@@ -2,10 +2,10 @@
   %h2= t('views.photos.show.header', :count => tree_photos.count)
   .content
     .photo_content(data-replace="section.show.photo .photo_content")
-      - if tree_photos.one_before(photo.id).present?
-        = link_to "«", relic_photo_path(relic.id, tree_photos.one_before(photo.id)), :remote => true, :class => "prev"
-      - if tree_photos.one_after(photo.id).present?
-        = link_to "»", relic_photo_path(relic.id, tree_photos.one_after(photo.id)), :remote => true, :class => "next"
+      - if tree_photos.one_before(tree_photo.id).present?
+        = link_to "«", relic_photo_path(relic.id, tree_photos.one_before(tree_photo.id)), :remote => true, :class => "prev"
+      - if tree_photos.one_after(tree_photo.id).present?
+        = link_to "»", relic_photo_path(relic.id, tree_photos.one_after(tree_photo.id)), :remote => true, :class => "next"
       .photo_center{ :style => "width: #{tree_photo.file_full_width || 800}px; margin: 0 auto;" }
         - if tree_photo.file_full_height.present?
           .full-photo= image_tag(tree_photo.file.full.url, :width => tree_photo.file_full_width, :height => tree_photo.file_full_height)
