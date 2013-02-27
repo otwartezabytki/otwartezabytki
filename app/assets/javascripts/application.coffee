@@ -31,17 +31,28 @@ $(document).on 'click', '[data-dismiss]', (e) ->
 
 # bootstrap-like popovers
 jQuery.initializer '.main-container', ->
-  this.find('a.js-popover').popover
-    title: -> $("##{$(this).data("title-id")}").html()
-    content: -> $("##{$(this).data("content-id")}").html()
-    delay: 100000
+  this.find('a.js-popover').each (index, element) ->
+    $el = $(element)
 
-  this.on "click", "a.close_popover", ->
-    $("##{$(this).data('popover-id')}").popover('hide')
+    unless $el.attr('id') is 'how_it_works'
+      $el.popover
+        title: -> $('#' + $el.data 'title-id').html()
+        content: -> $('#' + $el.data 'content-id').html()
+        delay: 100000
+    else
+      $el.popover
+        title: $('#' + $el.data 'title-id').html()
+        content: $('#' + $el.data 'content-id').html()
+        html: true
+
+  this.on 'click', 'a.close_popover', (event) ->
+    event.preventDefault()
+    $('#' + $(this).data 'popover-id').popover('hide')
     false
 
-  this.on "click", "a.js-popover", ->
-    $(this).popover('toggle')
+  this.on 'click', 'a.js-popover', (event) ->
+    event.preventDefault()
+    $(this).popover 'toggle'
     false
 
 jQuery ->

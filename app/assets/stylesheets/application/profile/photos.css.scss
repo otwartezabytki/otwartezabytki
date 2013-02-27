@@ -79,6 +79,14 @@
         width: 37px;
         background: asset-data-url("cc-icons-by.png") no-repeat;
       }
+      .cc-search{
+        display: block;
+        background: asset-data-url("edit-relic-ico-info.png") no-repeat;
+        padding-left: 20px;
+        &.small{
+          color: #323232;
+        }
+      }
     }
   }
 
@@ -147,6 +155,12 @@
 
 .fancybox-inner .edit_relic section.photos .photo-attributes .photo .column-right{
   width: 557px;
+  p, label{
+    line-height: 18px;
+  }
+  p{
+    margin-bottom: 10px;
+  }
   .redactor_box{
     margin-top: 10px;
   }

@@ -81,7 +81,7 @@ gem 'htmldiff'                # diff changes in admin panel
 gem 'friendly_id'             # friendly id for widgets
 gem 'turbo-sprockets-rails3'  # faster asset precompiling
 
-gem 'globalize3', github: 'sheerun/globalize3', branch: 'fix/accessible'
+gem 'globalize3', :git => 'https://github.com/sheerun/globalize3.git', :branch => 'fix/accessible'
 gem 'activeadmin-globalize3-inputs', :git => 'git://github.com/chytreg/activeadmin-globalize3-inputs.git'
 
 gem 'ffi-aspell', :require => 'ffi/aspell', :git => 'git://github.com/chytreg/ffi-aspell.git'
@@ -96,35 +96,38 @@ gem 'redcarpet'
 
 group :development, :test do
   gem 'interactive_editor'
-  gem 'ruby-debug19'        # for debugging
   gem 'pry-rails'
   gem 'pry-doc'
   gem 'sextant'             # for routes in /rails/routes
   gem 'annotate', ">=2.5.0" # for annotating db schema in models
   gem 'quiet_assets'
   gem 'zeus'
+  gem 'guard'
+  gem 'guard-rails'
+  gem 'guard-rspec'
   gem 'guard-ctags-bundler'
-end
-
-group :production do
-  gem 'therubyracer' # assets javascript compiler
-  gem 'newrelic_rpm', '~> 3.5.5.38'
+  gem 'guard-zeus'
+  gem 'debugger'
+  gem 'commands'
 end
 
 group :test do
   # for defining tests
   gem 'rspec-rails',  '~> 2.0'
-  gem 'factory_girl_rails'
+  gem 'factory_girl_rails', '~> 4.1.0'
   gem 'forgery', '0.5.0'
   gem 'database_cleaner'
   gem 'capybara'
 
   # for running tests
-  gem 'guard'
-  gem 'guard-rspec'
   gem 'growl'
   gem 'rb-fsevent'
 
   gem 'shoulda-matchers'
   gem 'simplecov', :require => false
+end
+
+group :production do
+  gem 'therubyracer' # assets javascript compiler
+  gem 'newrelic_rpm', '~> 3.5.5.38'
 end

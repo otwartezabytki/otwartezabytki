@@ -31,16 +31,6 @@ GIT
       ya2yaml (~> 0.26)
 
 GIT
-  remote: git://github.com/sheerun/globalize3.git
-  revision: ef91130fb07db4aab579b36f68bab7c893a1fe20
-  branch: fix/accessible
-  specs:
-    globalize3 (0.3.0)
-      activemodel (>= 3.0.0)
-      activerecord (>= 3.0.0)
-      paper_trail (~> 2)
-
-GIT
   remote: git://github.com/sheerun/rails.git
   revision: cba8c3657aa03b7f47d490ff0c7ce36af2c112b1
   branch: v3.2.11/multipart-fix
@@ -94,6 +84,16 @@ GIT
   specs:
     http_accept_language (2.0.1.pre)
 
+GIT
+  remote: https://github.com/sheerun/globalize3.git
+  revision: ef91130fb07db4aab579b36f68bab7c893a1fe20
+  branch: fix/accessible
+  specs:
+    globalize3 (0.3.0)
+      activemodel (>= 3.0.0)
+      activerecord (>= 3.0.0)
+      paper_trail (~> 2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -114,14 +114,14 @@ GEM
       cancan (>= 1.6.2)
       rails (>= 3.0)
     acts_as_list (0.1.9)
-    airbrake (3.1.6)
+    airbrake (3.1.7)
+      activesupport
       builder
-      girl_friday
+      json
     ancestry (1.3.0)
       activerecord (>= 2.3.14)
     annotate (2.5.0)
       rake
-    archive-tar-minitar (0.5.2)
     arel (3.0.2)
     arrabiata (0.4.0)
     bcrypt-ruby (3.0.1)
@@ -157,7 +157,7 @@ GEM
     chronic (0.9.0)
     chunky_png (1.2.7)
     coderay (1.0.8)
-    coffee-filter (0.1.1)
+    coffee-filter (0.1.2)
       coffee-script (>= 2.2.0)
       haml (>= 3.0.18)
     coffee-rails (3.2.2)
@@ -168,17 +168,25 @@ GEM
       execjs
     coffee-script-source (1.4.0)
     columnize (0.3.6)
+    commands (0.2.1)
+      rails (>= 3.2.0)
     compass (0.12.2)
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
       sass (~> 3.1)
     compass-rails (1.0.3)
       compass (>= 0.12.2, < 0.14)
-    connection_pool (1.0.0)
-    dalli (2.6.0)
+    dalli (2.6.2)
     database_cleaner (0.9.1)
+    debugger (1.3.0)
+      columnize (>= 0.3.1)
+      debugger-linecache (~> 1.1.1)
+      debugger-ruby_core_source (~> 1.1.7)
+    debugger-linecache (1.1.2)
+      debugger-ruby_core_source (>= 1.1.1)
+    debugger-ruby_core_source (1.1.7)
     decent_exposure (2.0.1)
-    devise (2.2.2)
+    devise (2.2.3)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
       railties (~> 3.1)
@@ -207,11 +215,8 @@ GEM
       formtastic
       rails (~> 3.1)
     friendly_id (4.0.9)
-    fssm (0.2.9)
+    fssm (0.2.10)
     geocoder (1.1.6)
-    girl_friday (0.11.2)
-      connection_pool (~> 1.0)
-      rubinius-actor
     gon (4.0.2)
       actionpack (>= 2.3.0)
       json
@@ -223,16 +228,22 @@ GEM
       oauth2 (>= 0.5.0)
     gravatar_image_tag (1.1.3)
     growl (1.0.3)
-    guard (1.6.1)
+    guard (1.6.2)
       listen (>= 0.6.0)
       lumberjack (>= 1.0.2)
       pry (>= 0.9.10)
+      terminal-table (>= 1.4.3)
       thor (>= 0.14.6)
     guard-ctags-bundler (0.1.6)
       guard (>= 1.1)
+    guard-rails (0.2.1)
+      guard (>= 0.2.2)
     guard-rspec (2.4.0)
       guard (>= 1.1)
       rspec (~> 2.11)
+    guard-zeus (0.0.1)
+      guard
+      zeus
     haml (3.1.7)
     haml-rails (0.3.5)
       actionpack (>= 3.1, < 4.1)
@@ -251,7 +262,7 @@ GEM
     i18n-country-translations (0.0.9)
       i18n (~> 0.5)
       railties (>= 3.0.0)
-    i18n_country_select (1.0.14)
+    i18n_country_select (1.0.15)
       i18n (~> 0.5)
       i18n-country-translations (>= 0.0.9)
       sort_alphabetical (>= 0.1.3)
@@ -269,7 +280,7 @@ GEM
     jquery-ui-rails (3.0.1)
       jquery-rails
       railties (>= 3.1.0)
-    js-routes (0.8.5)
+    js-routes (0.8.6)
       rails (>= 3.2)
     json (1.7.7)
     jwt (0.1.5)
@@ -278,8 +289,6 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     libv8 (3.11.8.13)
-    linecache19 (0.5.12)
-      ruby_core_source (>= 0.1.4)
     listen (0.7.2)
     log4r (1.1.10)
     lumberjack (1.0.2)
@@ -384,7 +393,7 @@ GEM
     rspec-core (2.12.2)
     rspec-expectations (2.12.1)
       diff-lcs (~> 1.1.3)
-    rspec-mocks (2.12.1)
+    rspec-mocks (2.12.2)
     rspec-rails (2.12.2)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
@@ -392,20 +401,7 @@ GEM
       rspec-core (~> 2.12.0)
       rspec-expectations (~> 2.12.0)
       rspec-mocks (~> 2.12.0)
-    rubinius-actor (0.0.2)
-      rubinius-core-api
-    rubinius-core-api (0.0.1)
-    ruby-debug-base19 (0.11.25)
-      columnize (>= 0.3.1)
-      linecache19 (>= 0.5.11)
-      ruby_core_source (>= 0.1.4)
-    ruby-debug19 (0.11.6)
-      columnize (>= 0.3.1)
-      linecache19 (>= 0.5.11)
-      ruby-debug-base19 (>= 0.11.19)
     ruby-ole (1.2.11.6)
-    ruby_core_source (0.1.5)
-      archive-tar-minitar (>= 0.5.2)
     rubyzip (0.9.9)
     sass (3.2.5)
     sass-rails (3.2.6)
@@ -445,6 +441,7 @@ GEM
     subexec (0.2.2)
     sugar-rails (1.3.7)
       railties (>= 3.0.0)
+    terminal-table (1.4.5)
     therubyracer (0.11.3)
       libv8 (~> 3.11.8.12)
       ref
@@ -480,11 +477,11 @@ GEM
     unix_utils (0.0.15)
     warden (1.2.1)
       rack (>= 1.0)
-    websocket (1.0.6)
+    websocket (1.0.7)
     whenever (0.8.2)
       activesupport (>= 2.3.4)
       chronic (>= 0.6.3)
-    wicked (0.4.0)
+    wicked (0.5.0)
       activesupport (>= 3.0.7)
       rails (>= 3.0.7)
     will_cache (0.0.9)
@@ -517,12 +514,14 @@ DEPENDENCIES
   chosen-rails
   coffee-filter
   coffee-rails (~> 3.2.1)
+  commands
   compass-rails
   dalli
   database_cleaner
+  debugger
   decent_exposure
   devise
-  factory_girl_rails
+  factory_girl_rails (~> 4.1.0)
   ffi-aspell!
   foreman
   forgery (= 0.5.0)
@@ -536,7 +535,9 @@ DEPENDENCIES
   growl
   guard
   guard-ctags-bundler
+  guard-rails
   guard-rspec
+  guard-zeus
   haml-rails
   htmldiff
   http_accept_language!
@@ -568,7 +569,6 @@ DEPENDENCIES
   rocket_tag
   routing-filter
   rspec-rails (~> 2.0)
-  ruby-debug19
   rubyzip
   sass-rails (~> 3.2.3)
   sextant

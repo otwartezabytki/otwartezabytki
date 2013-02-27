@@ -102,6 +102,10 @@ window.ajax_callback = (data, status, xhr) ->
           to_replace.replaceWith(node)
           $.fancybox.close() if $.fancybox
           $(node).initialize()
+
+          unless popping_state
+            path = xhr.getResponseHeader('x-path')
+            history.pushState { autoreload: true, path: path }, $parsed_data.find('title').text(), xhr.getResponseHeader('x-path')
         else
           try_to_process_replace(data_replace_parent)
 
@@ -112,11 +116,6 @@ window.ajax_callback = (data, status, xhr) ->
     else
       $('#fancybox_loader_container').show()
       window.location.href = xhr.getResponseHeader('x-path')
-
-    # enable only for search
-    if window.location.pathname == '/relics' and !popping_state
-      path = xhr.getResponseHeader('x-path')
-      history.pushState { autoreload: true, path: path }, $parsed_data.find('title').text(), xhr.getResponseHeader('x-path')
 
 $(document).on 'ajax:beforeSend', 'form[data-remote], a[data-remote]', ->
   $('#fancybox_loader_container').show() unless window.location.pathname == '/relics'

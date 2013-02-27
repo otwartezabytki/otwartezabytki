@@ -811,7 +811,7 @@ pl:
         body: "Pamiętaj o podaniu źródła!"
         title: "Nadaj tytuł. Np. Legenda o powstaniu zamku"
       photo:
-        author: "Podaj imię i nazwisko autora i/lub nick oraz źródło zdjęcia i nazwę licencji na której jest ono dostępne w Sieci (np. Mariusz 123, Wikipedia, CC BY-SA)."
+        author: "Podaj imię i nazwisko autora i/lub nick oraz źródło zdjęcia (np. Mariusz 123, Wikipedia)."
         date_taken: "Podaj datę wykonania zdjęcia. Jeśli nie możesz jej ustalić wpisz \"nieznana\"."
         description: "Opcjonalnie możesz opisać co znajduje się na zdjęciu:"
       relic:
@@ -877,7 +877,7 @@ pl:
       register: Zarejestruj
       relics_count: "Liczba Twoich zabytków: %{count}"
       search: Szukaj
-      tagline: Twórz z nami obywatelski katalog zabytków
+      tagline: "Twórz z nami obywatelski katalog zabytków"
       widgets: Widżety
   messages:
     are_you_sure: "Czy jesteś pewien?"
@@ -885,6 +885,7 @@ pl:
     alert_added: "Alert został dodany. Dziękujemy."
     changes_has_been_saved: "Zmiany zostały zapisane. Dziękujemy!"
     gallery_has_been_updated: "Galeria zdjęć została zaktualizowana. Dziękujemy!"
+    new_group_relic_has_been_added: "Gratulacje dodałeś zespół zabytków. Dodaj podzabytki poniżej."
     new_gruop_relic_has_been_added: "Gratulacje dodałeś zespół zabytków. Dodaj podzabytki tutaj:"
     new_relic_has_been_added: "Gratulacje dodałeś nowy zabytek"
     please_correct_errors: "Popraw proszę błędy wskazane poniżej."
@@ -1195,7 +1196,7 @@ pl:
     photos:
       show:
         header: "Galeria %{count}"
-        license: "CC BY-SA 3.0"
+        license: "Creative Commons 3.0"
         photo_belongs_to: "Zdjęcie należy do obiektu"
         relic_parent: "należącego do zespołu zabytków"
     places:
@@ -1228,8 +1229,8 @@ pl:
         not_found_html: "Nie ma go na liście &raquo;"
         that_one: "To jest ten zabytek!"
       new:
-        add_foreign_relic: "Polski zabytek zagranicą"
-        add_relic_group: "Zespół zabytków"
+        add_foreign_relic: "chcę dodać zabytek spoza Polski"
+        add_relic_group: "chcę dodać zespół zabytków"
         choose_html: "wybieram &raquo;"
         country_code: "W jakim kraju"
         drag_marker: "Przeciągnij znacznik na mapę"
@@ -1282,8 +1283,8 @@ pl:
         step4: "krok 4"
     relics:
       edit:
-        add_attachement: "dodaj nowe zdjęcie do zabytku"
         add_and_save: "dodaj i zapisz"
+        add_attachement: "dodaj nowe zdjęcie do zabytku"
         add_photo: "dodaj zdjęcie"
         cancel: anuluj
         categories:
@@ -1332,8 +1333,10 @@ pl:
         content: "Zawartość:"
         filter_options: "Opcje filtrowania"
         kind: Rodzaj
-        loading: "Trwa ładowanie wyników, proszę czekać"
+        loading: "Trwa ładowanie wyników proszę czekać"
         no_results2_html: "Nie znalazłeś tego, czego szukałeś? Spróbuj użyć symbolu gwiazdki, np. Scheibler*"
+        no_results_add: "Dodaj zabytek do bazy"
+        no_results_add_header: "Jesteś pewien, że taki zabytek istnieje?"
         no_results_html: "Żaden z zabytków w naszej bazie<br/>nie spełnia podanych kryteriów."
         order:
           az: A-Z
@@ -1398,6 +1401,9 @@ pl:
           add: "dodaj wpis"
           header: "Ciekawostki, legendy, anegdoty"
           placeholder: "<p>Podziel się z innymi legendą, anegdotą,<br/>ciekawą historią związaną z zabytkiem.</p>"
+          togglable:
+            less: "Mniej"
+            more: "Więcej…"
         events:
           add: "dodaj wydarzenie"
           header: "Ważne daty"
@@ -1436,6 +1442,11 @@ pl:
         subrelics:
           header1: "Oglądasz właśnie profil zabytku, który posiada pewne podzabytki."
           header2: "Oglądasz właśnie profil zabytku, będący częścią zespołu zabytków."
+          subheader: "W skład tego zespołu wchodzą:"
+          subheader_empty: "Uzupełnij skład tego zespołu:"
+          add_new: "Dodaj element zespołu"
+          group_info: "Ten zabytek posiada pewne podzabytki."
+          parent_info: "Ten zabytek wchodzi w skład zespołu: %{parent}."
         view_current_version: "&#171; zobacz wersję obecną"
     widgets:
       edit:

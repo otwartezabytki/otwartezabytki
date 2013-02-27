@@ -1,12 +1,28 @@
-- if relic.is_group?
-  %section.show.subrelics
-    %h2= t('views.relics.show.subrelics.header1')
-    .content
-      %ul.subrelics-tree
-        = render 'shared/tree', :node => relic.subtree.arrange
-- elsif root = relic.ancestor_ids.first
-  %section.show.subrelics
-    %h2= t('views.relics.show.subrelics.header2')
-    .content
-      %ul.subrelics-tree
-        = render 'shared/tree', :node => Relic.find(root).subtree.arrange
+- if relic.is_group? || relic.parent.present?
+  %aside.subrelics
+
+    %p.subrelics-description= relic.is_group? ? t('views.relics.show.subrelics.header1') : t('views.relics.show.subrelics.header2')
+
+    .subrelics-tree
+      = content_tag :h1, :class => ('subrelic type-root ' + (relic.root == relic ? 'type-current ' : '')).strip do
+        = link_to relic.root.identification, [relic.root], :remote => true
+
+      - if relic.root.descendants.count > 0
+        %p.subrelics-info= t('views.relics.show.subrelics.subheader')
+
+        %ul.subrelics-list
+          - sorted_subrelics = relic.root.descendants.sort_by { |r| r.identification }
+          - sorted_subrelics.each do |rel|
+            = link_to [rel], :remote => true do
+              = content_tag :dl, :class => ('subrelic ' + (rel == relic ? 'type-current ' : '')).strip do
+                %dd.subrelic-image
+                  = image_tag(rel.photos.count > 0 ? rel.main_photo.file.url(:icon) : 'fallback/photo_tiny_default.png', :size => '24x24', :class => 'thumb type-tiny', :alt => rel.identification)
+                %dt.subrelic-name= rel.identification
+
+        %footer.subrelics-add
+          = link_to t('views.relics.show.subrelics.add_new'), new_relicbuilder_path(:parent_id => relic.root.id), :class => 'subrelics-add-button'
+      - else
+        %p.subrelics-info= t('views.relics.show.subrelics.subheader_empty')
+
+        %footer.subrelics-add.type-empty
+          = link_to t('views.relics.show.subrelics.add_new'), new_relicbuilder_path(:parent_id => relic.root.id), :class => 'subrelics-add-button'

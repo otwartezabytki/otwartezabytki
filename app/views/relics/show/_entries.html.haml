@@ -2,11 +2,13 @@
   %h2= t('views.relics.show.entries.header')
   - if relic.entries.count > 0
     = link_to t('views.relics.show.general.fill_in'), edit_section_relic_path(relic.id, :entries), :remote => true, :class => "edit-relic-link"
-    .content
+    .content{:'data-togglable-less' => t('views.relics.show.entries.togglable.less', :editable => false),
+             :'data-togglable-more' => t('views.relics.show.entries.togglable.more', :editable => false)}
       - relic.entries.each do |entry|
-        %article.entry
-          %h3= entry.title
-          .body= sanitize entry.body
+        .entry-container
+          %article.entry
+            %h3= entry.title
+            .body= sanitize entry.body
   - else
     .placeholder
       = t('views.relics.show.entries.placeholder')

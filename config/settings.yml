@@ -1,6 +1,6 @@
 debug_assets: true
 oz:
-  gm_key: 'Your Google Maps key'
+  gm_key: 'AIzaSyCIvKKcWv1L2FrfLe5rNpnsah5OXm6gJMA'
   ga_key: 'Your Google Analytics key'
   email_sender: kontakt-oz@centrumcyfrowe.pl
   host: otwartezabytki.dev
