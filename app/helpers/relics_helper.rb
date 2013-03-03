@@ -16,8 +16,13 @@ module RelicsHelper
     ].sample
   end
 
-  def categoires_facets_hash relics = relics
+  def categories_facets_hash_for(relics = relics)
     relics.terms('categories', true).inject({}) {|m, t| m[t['term']] = t['count']; m}
+  end
+
+  def categories_facets_hash
+    return @categories_facets_hash if defined? @categories_facets_hash
+    @categories_facets_hash = categories_facets_hash_for(relics)
   end
 
   def state_facets
@@ -49,7 +54,10 @@ module RelicsHelper
   end
 
   def disabled search, name
-    relics.terms(name).inject([]) { |r, t|
+    key = "#{search.object_id}_#{name}"
+    return @disabled if @disabled && @disabled[key]
+    @disabled ||= {}
+    @disabled[key] ||= relics.terms(name).inject([]) { |r, t|
       r <<  t['term'] if  t['count'].zero?
       r
     } - search.send(name)
