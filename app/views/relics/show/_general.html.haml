@@ -1,11 +1,11 @@
 %section.show.general
   - if relic.parent.present?
     .subrelic-parent-info
-      %p= t('views.relics.show.subrelics.parent_info', :parent => link_to(relic.parent.identification, relic_path(relic.parent_id), :remote => true))
+      %p= t('views.relics.show.subrelics.parent_info', :parent => link_to(relic.parent.identification, [relic.parent], :remote => true))
   - if relic.is_group? && relic.root.descendants.count > 0
     .subrelic-parent-info
       %p= t('views.relics.show.subrelics.group_info')
-  = link_to t('views.relics.show.general.fill_in'), edit_section_relic_path(relic.id, :general), :remote => true, :class => "edit-relic-link"
+  = link_to t('views.relics.show.general.fill_in'), edit_section_relic_path(relic.to_param, :general), :remote => true, :class => "edit-relic-link"
   %h1= relic.identification
   - if relic.common_name.present?
     %p
@@ -26,7 +26,7 @@
       = t('views.relics.show.general.relic')
       %strong= t("activerecord.attributes.relic.existences.#{relic.existence}")
   .location_name
-    = link_to t('views.relics.show.general.fill_in'), edit_section_relic_path(relic.id, :location), :remote => true, :class => "edit-relic-link"
+    = link_to t('views.relics.show.general.fill_in'), edit_section_relic_path(relic.to_param, :location), :remote => true, :class => "edit-relic-link"
     %strong= t('views.relics.show.general.location')
     - if relic.polish_relic and relic.place_id?
       %p= t('views.relics.show.general.polish_location', :place => relic.place.name, :district => relic.district.name, :commune => relic.commune.name)
@@ -44,17 +44,17 @@
           %img{ src: "http://maps.googleapis.com/maps/api/staticmap?center=#{relic.latitude.to_f},#{relic.longitude.to_f}&zoom=17&size=260x160&sensor=false&markers=#{relic.latitude.to_f},#{relic.longitude.to_f}&maptype=hybrid", width: 260, height: 160 }
   .dating
     - if relic.dating_of_obj.present?
-      = link_to t('views.relics.show.general.fill_in'), edit_section_relic_path(relic.id, :events), :remote => true, :class => "edit-relic-link"
+      = link_to t('views.relics.show.general.fill_in'), edit_section_relic_path(relic.to_param, :events), :remote => true, :class => "edit-relic-link"
     %strong= t('views.relics.show.general.dating_of_obj')
     - if relic.dating_of_obj.present?
       %span.content= relic.dating_of_obj
     - else
-      %span.placeholder= link_to t('views.relics.show.general.no_data_fill_in'), edit_section_relic_path(relic.id, :events), :remote => true
+      %span.placeholder= link_to t('views.relics.show.general.no_data_fill_in'), edit_section_relic_path(relic.to_param, :events), :remote => true
   - if relic.register_number.present?
     .register_number
       %strong= t('views.relics.show.general.register_number')
       %p= relic.register_number
-  - if !relic.id.zero? and relic.original_relic.present?
-    = link_to content_tag(:span, t('views.relics.show.general.original')), relic_path(relic.id, :original => true), :class => "original"
+  - if relic.is_a?(Relic) and relic.original_relic.present?
+    = link_to content_tag(:span, t('views.relics.show.general.original')), relic_path(relic.to_param, :original => true), :class => "original"
   - else
     %div{:style => 'display:block; height: 50px;'}

@@ -2,7 +2,7 @@
   %section.show.photos
     .content
       .actions
-        = link_to t('views.relics.show.photos.show', :amount => relic.all_photos.count), relic_photo_path(relic.id, relic.all_photos.first.id), :class => "show-photos", :remote => true
+        = link_to t('views.relics.show.photos.show', :amount => relic.all_photos.count), relic_photo_path(relic.to_param, relic.all_photos.first.id), :class => "show-photos", :remote => true
         = link_to t('views.relics.show.photos.add'), edit_section_relic_path(relic, :section => :photos), :class => "edit-photos", :remote => true
       = link_to image_tag(relic.main_photo.file.maxi.url, :width => 300, :height => 300) + content_tag(:span, relic.main_photo.author), relic_photo_path(relic, relic.main_photo.id), :class => "main-photo", :remote => true
       - if relic.photos.count > 1
@@ -11,4 +11,4 @@
   %section.show.photos.placeholder
     .content
       .ico
-      = link_to t('views.relics.show.photos.add'), edit_section_relic_path(relic.id, :section => :photos), :class => "edit-photos", :remote => true
+      = link_to t('views.relics.show.photos.add'), edit_section_relic_path(relic.to_param, :section => :photos), :class => "edit-photos", :remote => true
