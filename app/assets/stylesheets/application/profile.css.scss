@@ -722,6 +722,11 @@ section.show.entries {
       font-size: 14px;
       line-height: 1.45;
 
+      .body {
+        @include word-break();
+        font-family: Georgia, Times New Roman, Times, serif;
+      }
+
       h3 {
         font-weight: bold;
         font-size: 16px;
@@ -729,8 +734,6 @@ section.show.entries {
       }
 
       p, ul, ol {
-        font-family: Georgia, Times New Roman, Times, serif;
-
         &:not(:empty) {
           & + p,
           & + ul,
