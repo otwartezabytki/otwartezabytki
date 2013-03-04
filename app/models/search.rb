@@ -232,7 +232,7 @@ class Search
   def sacral_facet_conditions
     # get sacral categories names
     sacral_categories = Category.sacral.pluck(:name_key)
-    # choose only selected sacral categories from categoires attribute
+    # choose only selected sacral categories from categories attribute
     filter_categories_array = categories.select {|s| sacral_categories.include?(s)}
     # when no category selected we should choose everything
     filter_categories_array = sacral_categories if filter_categories_array.empty?
