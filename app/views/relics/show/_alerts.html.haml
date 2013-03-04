@@ -29,5 +29,5 @@
       %p= t('views.relics.show.alerts.placeholder')
       = link_to image_tag('edit-relic-ico-alert.png') + t('views.relics.show.alerts.create'), new_relic_alert_path(relic), :remote => true
       - unless relic.existence == "archived"
-        = link_to new_relic_alert_path(relic.id,  :non_existent => true), :class => "alert-link" do
+        = link_to new_relic_alert_path(relic.to_param,  :non_existent => true), :class => "alert-link" do
           = t('views.relics.show.alerts.non_existent')

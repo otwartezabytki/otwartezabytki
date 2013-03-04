@@ -145,4 +145,8 @@ module RelicsHelper
       Place.not_custom.limit(100)
     end
   end
+
+  def original_relic_path(relic)
+    relic_path(relic.id, :original => true)
+  end
 end

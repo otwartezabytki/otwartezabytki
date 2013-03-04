@@ -18,11 +18,11 @@
                 %dd.subrelic-image
                   = image_tag(rel.photos.count > 0 ? rel.main_photo.file.url(:icon) : 'fallback/photo_tiny_default.png', :size => '24x24', :class => 'thumb type-tiny', :alt => rel.identification)
                 %dt.subrelic-name= rel.identification
-
-        %footer.subrelics-add
-          = link_to t('views.relics.show.subrelics.add_new'), new_relicbuilder_path(:parent_id => relic.root.id), :class => 'subrelics-add-button'
+        - if relic.is_a?(Relic)
+          %footer.subrelics-add
+            = link_to t('views.relics.show.subrelics.add_new'), new_relicbuilder_path(:parent_id => relic.root.to_param), :class => 'subrelics-add-button'
       - else
         %p.subrelics-info= t('views.relics.show.subrelics.subheader_empty')
-
-        %footer.subrelics-add.type-empty
-          = link_to t('views.relics.show.subrelics.add_new'), new_relicbuilder_path(:parent_id => relic.root.id), :class => 'subrelics-add-button'
+        - if relic.is_a?(Relic)
+          %footer.subrelics-add.type-empty
+            = link_to t('views.relics.show.subrelics.add_new'), new_relicbuilder_path(:parent_id => relic.root.to_param), :class => 'subrelics-add-button'
