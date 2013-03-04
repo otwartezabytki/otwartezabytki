@@ -12,6 +12,7 @@ end
 
 require 'tire/rails/logger'
 require 'zip/zip'
+require 'yajl/json_gem'
 
 module Otwartezabytki
   class Application < Rails::Application

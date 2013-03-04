@@ -56,10 +56,10 @@
                             %em= relics.count('sacral')
                         .sacral-categories{:style => ('display:none;' if hidden_sacral)}
                           - c.children.sort_by(&:name).each do |child|
-                            - next unless categoires_facets_hash.keys.include?(child.name_key)
+                            - next unless categories_facets_hash.keys.include?(child.name_key)
                             = render :partial => 'shared/category_checkbox', :locals => {:f => f, :category => child}
                       - else
-                        - next unless categoires_facets_hash.keys.include?(c.name_key)
+                        - next unless categories_facets_hash.keys.include?(c.name_key)
                         = render :partial => 'shared/category_checkbox', :locals => {:f => f, :category => c}
 
             = link_to t('views.widgets.show.map_search.show_more'), '#', :class => "", :class => "show-more"

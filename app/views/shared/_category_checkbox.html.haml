@@ -2,4 +2,4 @@
   = f.check_box :categories, {:multiple => true, :disabled => disabled(f.object, 'categories').include?(category.name_key)}, category.name_key, nil
   %span
     = category.name
-    %em (#{categoires_facets_hash[category.name_key]})
+    %em (#{categories_facets_hash[category.name_key]})
