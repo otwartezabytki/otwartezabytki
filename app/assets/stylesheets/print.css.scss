@@ -2,6 +2,7 @@
 @import 'application/reset';
 
 body {
+  @include word-break();
   padding: 1cm;
   background: fff;
   color: #000;
