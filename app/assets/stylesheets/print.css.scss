@@ -1,3 +1,4 @@
+@import 'application/mixins';
 @import 'application/reset';
 
 body {
@@ -19,6 +20,10 @@ b, strong {
 
 i, em {
   font-style: italic;
+}
+
+.Hidden {
+  @include visually-hidden();
 }
 
 .MainContent {
