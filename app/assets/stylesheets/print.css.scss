@@ -1,7 +1,32 @@
-//@import 'application/reset';
+@import 'application/reset';
+
+body {
+  padding: 1cm;
+  background: fff;
+  color: #000;
+  font: 11pt/1.4 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 300;
+
+  @media print {
+    font-size: 9pt;
+    padding: 0;
+  }
+}
+
+b, strong {
+  font-weight: 600;
+}
+
+i, em {
+  font-style: italic;
+}
+
+.MainContent {
+  font-size: 1.1rem;
+}
 
 .Definition {
-
+  margin: 0.5em 0;
 }
 
 .Definition--inline {
@@ -13,7 +38,7 @@
 }
 
 .Definition-Header {
-  font-weight: bold;
+  font-weight: 600;
 
   &:after {
     content: ': ';
@@ -21,7 +46,11 @@
 }
 
 .Definition-Content {
+  margin: 0.1em 0;
+
   .Definition--inline & {
+    margin: 0;
+
     li {
       &:after {
         content: ', ';
@@ -35,13 +64,34 @@
 }
 
 .Description {
+  @extend .Definition;
+  padding: 2em 0;
 
+  & + & {
+    border-top: 1px solid #000;
+  }
 }
 
 .Description-Header {
-  font-weight: bold;
+  margin: 0.5em 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+
+  .Description > &:first-child {
+    margin-top: 0;
+  }
 }
 
 .Description-Content {
 
+}
+
+.Description-Content-Header {
+  margin: 1em 0 0.5em;
+  font-size: 1.2rem;
+  font-weight: 600;
+
+  .Description-Header + .Description-Content > &:first-child {
+    margin-top: 0;
+  }
 }
