@@ -1,18 +1,23 @@
 @import 'application/mixins';
 @import 'application/reset';
 
-body {
-  @include word-break();
-  padding: 1cm;
-  background: fff;
-  color: #000;
-  font: 11pt/1.4 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-weight: 300;
+html {
+  padding: 2em 20%;
+  font-size: 10pt;
 
   @media print {
+    padding: 0.5cm 0;
     font-size: 9pt;
-    padding: 0;
   }
+}
+
+body {
+  @include word-break();
+  background: fff;
+  color: #000;
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  line-height: 1.4;
 }
 
 img {
@@ -35,7 +40,14 @@ i, em {
 }
 
 .MainContent {
-  font-size: 1.1rem;
+  font-size: 1.1em;
+}
+
+.Sidebar {
+  float: right;
+  clear: right;
+  width: 250px;
+  padding: 0 0 0.25cm 0.5cm;
 }
 
 .Logo {
