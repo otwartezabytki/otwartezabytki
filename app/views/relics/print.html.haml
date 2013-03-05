@@ -5,9 +5,10 @@
   %meta{:property => 'og:image', :content => relic.has_photos? ? (URI.parse(root_url) + image_path(relic.main_photo.file.icon.url)).to_s : t('layouts.application.og.image', :editable => false)}
 
 %header
-  %h1
-    %span Karta z przewodnika:
-    %b Otwarte Zabytki
+  %h1.Logo
+    %span.Logo-Header Karta z przewodnika:
+    %b.Hidden Otwarte Zabytki
+    = image_tag 'logo.png', :alt => 'Logo', :class => 'Logo-Image'
 %article
   %header
     %h1= relic.identification

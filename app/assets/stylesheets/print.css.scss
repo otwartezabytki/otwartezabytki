@@ -15,6 +15,13 @@ body {
   }
 }
 
+img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+}
+
 b, strong {
   font-weight: 600;
 }
@@ -29,6 +36,20 @@ i, em {
 
 .MainContent {
   font-size: 1.1rem;
+}
+
+.Logo {
+  text-align: center;
+}
+
+.Logo-Header {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+}
+
+.Logo-Image {
+  margin: 0.5rem auto 0;
 }
 
 .Definition {
