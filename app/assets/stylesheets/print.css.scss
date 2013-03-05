@@ -45,11 +45,24 @@ i, em {
 .Logo-Header {
   font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.05rem;
+  letter-spacing: 0.1rem;
 }
 
 .Logo-Image {
   margin: 0.5rem auto 0;
+}
+
+.Title {
+  padding-bottom: 2em;
+}
+
+.Title-Header {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.Title-Content {
+
 }
 
 .Definition {
