@@ -1,0 +1,44 @@
+!!! 5
+%html{lang: 'en'}
+  %head
+    %meta{charset: 'utf-8'}
+    %title= content_for?(:title) ? "#{yield(:title)} - Otwarte Zabytki" : 'Otwarte Zabytki'
+
+    - if content_for?(:facebook_meta)
+      = yield :facebook_meta
+    - else
+      %meta{:property => "og:title", :content => t('layouts.application.og.title', :editable => false)}
+      %meta{:property => "og:description", :content => t('layouts.application.og.description', :editable => false)}
+      %meta{:property => "og:image", :content => t('layouts.application.og.image', :editable => false)}
+    - if Rails.env.production?
+      %meta{name: 'google-site-verification', content: 'Spn2_vzD8aAvbTm8TAoVGIx_6jk-OM62aVNFxQ5pnR8'}
+    = csrf_meta_tags
+
+    /[if lt IE 9]
+      = javascript_include_tag 'http://html5shim.googlecode.com/svn/trunk/html5.js'
+
+    %link{:href => 'http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,600,300&subset=latin,latin-ext', :rel => 'stylesheet', :type => 'text/css'}
+    = stylesheet_link_tag 'print'
+    = favicon_link_tag  'favicon.gif', :type => 'image/gif'
+  %body
+    = yield
+
+    - if Rails.env.production?
+      :javascript
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', '#{Settings.oz.ga_key}']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+      :javascript
+        var pkBaseURL = (('https:' == document.location.protocol) ?  'https://centrumcyfrowe.pl/piwik/' : 'http://centrumcyfrowe.pl/piwik/');
+        document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+      :javascript
+        try {
+        var piwikTracker = Piwik.getTracker(pkBaseURL + 'piwik.php', 2);
+        piwikTracker.trackPageView();
+        piwikTracker.enableLinkTracking();
+        } catch( err ) {}

@@ -148,7 +148,7 @@ class RelicsController < ApplicationController
   end
 
   def print
-    render :print, :layout => false
+    render :print, :layout => 'print'
   end
 
   protected
