@@ -1,1 +1,65 @@
-Hello, I’m #{relic.identification}
+- content_for :title, relic.identification
+- content_for :facebook_meta do
+  %meta{:property => 'og:title', :content => relic.identification}
+  %meta{:property => 'og:description', :content => strip_tags(relic.description)}
+  %meta{:property => 'og:image', :content => relic.has_photos? ? (URI.parse(root_url) + image_path(relic.main_photo.file.icon.url)).to_s : t('layouts.application.og.image', :editable => false)}
+
+%header
+  %h1
+    %span Karta z przewodnika:
+    %b Otwarte Zabytki
+%article
+  %header
+    %h1= relic.identification
+    %dl.Definition--inline
+      %dt.Definition-Header Nazwa zwyczajowa
+      %dd.Definition-Content Lorem ipsum dolor sit amet
+  %article
+    %h1.hidden Informacje ogólne
+    .Definition
+      %h2.Definition-Header Lokalizacja
+      .Definition-Content
+        Lorem ipsum dolor sit amet
+    .Definition--inline
+      %h2.Definition-Header Data powstania
+      .Definition-Content
+        2013
+    .Definition--inline
+      %h2.Definition-Header Numer w rejestrze
+      .Definition-Content
+        2013
+    .Definition--inline
+      %h2.Definition-Header Kategorie
+      %ul.Definition-Content
+        %li katolicki
+        %li protestancki
+    .Definition--inline
+      %h2.Definition-Header Tagi
+      %ul.Definition-Content
+        %li katolicki
+        %li protestancki
+    .Definition
+      %p.Definition-Content Zabytek wpisany jest do Rejestru zabytków
+  %article.Definition
+    %h1.Definition-Header Ważne daty
+    %ul.Definition-Content
+      %li 2012 — katolicki
+      %li 2013 — protestancki
+  %article.Description
+    %h1.Description-Header Opis
+    .Description-Content
+      %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sodales suscipit luctus. Duis purus dolor, vehicula eget ornare elementum, commodo id ante. Morbi et ligula augue. Pellentesque ut sapien ligula. Pellentesque ante tellus, ullamcorper vitae fringilla eget, elementum id ligula. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse dictum dictum libero, sed congue tortor fringilla in. Vivamus non eros enim. Maecenas in sapien eu massa pharetra pretium.
+  %section.Description
+    %h1.Description-Header Ciekawostki, legendy, anegdoty
+    %article.Description-Content
+      %h1.Description-Content-Header Lorem
+      %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sodales suscipit luctus. Duis purus dolor, vehicula eget ornare elementum, commodo id ante. Morbi et ligula augue. Pellentesque ut sapien ligula. Pellentesque ante tellus, ullamcorper vitae fringilla eget, elementum id ligula. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse dictum dictum libero, sed congue tortor fringilla in. Vivamus non eros enim. Maecenas in sapien eu massa pharetra pretium.
+    %article.Description-Content
+      %h1.Description-Content-Header Ipsum
+      %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sodales suscipit luctus. Duis purus dolor, vehicula eget ornare elementum, commodo id ante. Morbi et ligula augue. Pellentesque ut sapien ligula. Pellentesque ante tellus, ullamcorper vitae fringilla eget, elementum id ligula. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse dictum dictum libero, sed congue tortor fringilla in. Vivamus non eros enim. Maecenas in sapien eu massa pharetra pretium.
+    %article.Description-Content
+      %h1.Description-Content-Header Dolor
+      %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sodales suscipit luctus. Duis purus dolor, vehicula eget ornare elementum, commodo id ante. Morbi et ligula augue. Pellentesque ut sapien ligula. Pellentesque ante tellus, ullamcorper vitae fringilla eget, elementum id ligula. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse dictum dictum libero, sed congue tortor fringilla in. Vivamus non eros enim. Maecenas in sapien eu massa pharetra pretium.
+    %article.Description-Content
+      %h1.Description-Content-Header Sit Amet
+      %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sodales suscipit luctus. Duis purus dolor, vehicula eget ornare elementum, commodo id ante. Morbi et ligula augue. Pellentesque ut sapien ligula. Pellentesque ante tellus, ullamcorper vitae fringilla eget, elementum id ligula. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse dictum dictum libero, sed congue tortor fringilla in. Vivamus non eros enim. Maecenas in sapien eu massa pharetra pretium.

@@ -1,0 +1,47 @@
+//@import 'application/reset';
+
+.Definition {
+
+}
+
+.Definition--inline {
+  @extend .Definition;
+
+  * {
+    display: inline;
+  }
+}
+
+.Definition-Header {
+  font-weight: bold;
+
+  &:after {
+    content: ': ';
+  }
+}
+
+.Definition-Content {
+  .Definition--inline & {
+    li {
+      &:after {
+        content: ', ';
+      }
+
+      &:last-child:after {
+        content: '';
+      }
+    }
+  }
+}
+
+.Description {
+
+}
+
+.Description-Header {
+  font-weight: bold;
+}
+
+.Description-Content {
+
+}
