@@ -2,12 +2,17 @@
 @import 'application/reset';
 
 html {
-  padding: 2em 20%;
-  font-size: 10pt;
+  font-size: 14px;
+
+  @media screen {
+    padding: 2em;
+    width: 800px;
+    margin: 0 auto;
+  }
 
   @media print {
     padding: 0.5cm 0;
-    font-size: 9pt;
+    -webkit-print-color-adjust: exact;
   }
 }
 
@@ -17,7 +22,7 @@ body {
   color: #000;
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 300;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
 img {
@@ -33,6 +38,14 @@ b, strong {
 
 i, em {
   font-style: italic;
+}
+
+li {
+  margin: 0.1em 0 0 0;
+
+  ul & {
+    list-style: square;
+  }
 }
 
 .Hidden {
@@ -145,5 +158,68 @@ i, em {
 
   .Description-Header + .Description-Content > &:first-child {
     margin-top: 0;
+  }
+}
+
+/*
+  Sections
+  -------- */
+
+@mixin section-icon($asset) {
+  padding-left: 25px;
+  list-style: none;
+
+  &:before {
+    content: '';
+    position: absolute;
+    width: 16px;
+    min-height: 14px;
+    height: 1em;
+    margin: 3px 0 0 -25px;
+    background: asset-data-url($asset) center center no-repeat;
+  }
+}
+
+.SectionPhoto {
+
+}
+
+.SectionLocation {
+  @include section-icon('edit-relic-ico-location.png');
+}
+
+.SectionDate,
+.SectionDates li {
+  @include section-icon('edit-relic-ico-date.png');
+}
+
+.SectionRegistryNumber {
+  @include section-icon('edit-relic-ico-list.png');
+}
+
+.SectionsCategories {
+  @include section-icon('edit-relic-ico-folder.png');
+}
+
+.SectionTags {
+  @include section-icon('edit-relic-ico-tags.png');
+}
+
+.SectionRegistry {
+  @include section-icon('edit-relic-ico-info.png');
+  font-weight: 600;
+}
+
+.SectionDates {
+  clear: left;
+}
+
+.SectionMap {
+  margin-bottom: 0.5em;
+}
+
+.SectionGroup:not(.Definition--inline) {
+  ul {
+    padding-left: 1.25em;
   }
 }

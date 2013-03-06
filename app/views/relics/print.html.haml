@@ -18,42 +18,43 @@
   %article
     %h1.Hidden Informacje ogólne
     .Sidebar
-      %img{:src => 'http://maps.google.com/maps/api/staticmap?center=37.386052,-122.083851&zoom=13&markers=color:white|37.386052,-122.083851&size=250x250&sensor=false', :width => 250, :height => 250, :alt => 'Mapa'}
-      .Definition
+      .SectionMap
+        %img{:src => 'http://maps.google.com/maps/api/staticmap?center=37.386052,-122.083851&zoom=13&markers=color:white|37.386052,-122.083851&size=250x150&sensor=false', :width => 250, :height => 150, :alt => 'Mapa'}
+      .Definition.SectionGroup
         %h2.Definition-Header Elementy należące do tego zespołu zabytków
         %ul.Defintion-Content
           - ([relic.identification] * 5).each_with_index do |subrelic, i|
             %li #{subrelic} #{i + 1}
 
-    .Definition
+    .Definition.SectionLocation
       %h2.Definition-Header Lokalizacja
       .Definition-Content
         Lorem ipsum dolor sit amet
-    .Definition--inline
+    .Definition--inline.SectionDate
       %h2.Definition-Header Data powstania
       .Definition-Content
         2013
-    .Definition--inline
+    .Definition--inline.SectionRegistryNumber
       %h2.Definition-Header Numer w rejestrze
       .Definition-Content
         2013
-    .Definition--inline
+    .Definition--inline.SectionsCategories
       %h2.Definition-Header Kategorie
       %ul.Definition-Content
         %li katolicki
         %li protestancki
-    .Definition--inline
+    .Definition--inline.SectionTags
       %h2.Definition-Header Tagi
       %ul.Definition-Content
         %li katolicki
         %li protestancki
-    .Definition
+    .Definition.SectionRegistry
       %p.Definition-Content Zabytek wpisany jest do Rejestru zabytków
-  %article.Definition
-    %h1.Definition-Header Ważne daty
-    %ul.Definition-Content
-      %li 2012 — katolicki
-      %li 2013 — protestancki
+    .Definition.SectionDates
+      %h2.Definition-Header Ważne daty
+      %ul.Definition-Content
+        %li 2012 — katolicki
+        %li 2013 — protestancki
   %article.Description
     %h1.Description-Header Opis
     .MainContent.Description-Content
