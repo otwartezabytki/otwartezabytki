@@ -6,7 +6,7 @@ html {
 
   @media screen {
     padding: 2em;
-    width: 800px;
+    width: 50em;
     margin: 0 auto;
   }
 
@@ -180,8 +180,9 @@ li {
   }
 }
 
-.SectionPhoto {
-
+.SectionPhoto,
+.SectionMap {
+  margin-bottom: 0.5em;
 }
 
 .SectionLocation {
@@ -211,11 +212,8 @@ li {
 }
 
 .SectionDates {
+  margin-top: 1em;
   clear: left;
-}
-
-.SectionMap {
-  margin-bottom: 0.5em;
 }
 
 .SectionGroup:not(.Definition--inline) {

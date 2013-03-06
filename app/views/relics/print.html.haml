@@ -18,13 +18,14 @@
   %article
     %h1.Hidden Informacje ogólne
     .Sidebar
-      .SectionMap
-        %img{:src => 'http://maps.google.com/maps/api/staticmap?center=37.386052,-122.083851&zoom=13&markers=color:white|37.386052,-122.083851&size=250x150&sensor=false', :width => 250, :height => 150, :alt => 'Mapa'}
+      %img.SectionMap{:src => 'http://maps.google.com/maps/api/staticmap?center=37.386052,-122.083851&zoom=13&markers=color:white|37.386052,-122.083851&size=250x150&sensor=false', :width => 250, :height => 150, :alt => 'Mapa'}
       .Definition.SectionGroup
         %h2.Definition-Header Elementy należące do tego zespołu zabytków
         %ul.Defintion-Content
           - ([relic.identification] * 5).each_with_index do |subrelic, i|
             %li #{subrelic} #{i + 1}
+
+    %img.SectionPhoto{:src => 'http://placehold.it/200x150', :width => 200, :height => 150, :alt => 'Zdjęcie zabytku'}
 
     .Definition.SectionLocation
       %h2.Definition-Header Lokalizacja
