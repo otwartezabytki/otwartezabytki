@@ -40,6 +40,10 @@ i, em {
   font-style: italic;
 }
 
+p + p {
+  margin-top: 0.5em;
+}
+
 li {
   margin: 0.1em 0 0 0;
 
@@ -60,7 +64,7 @@ li {
   float: right;
   clear: right;
   width: 250px;
-  padding: 0 0 0.25cm 0.5cm;
+  padding: 0 0 0.5rem 2rem;
 }
 
 .Logo {
@@ -79,6 +83,10 @@ li {
 
 .Title {
   padding-bottom: 2em;
+
+  & + * {
+    clear: both;
+  }
 }
 
 .Title-Header {
@@ -133,6 +141,7 @@ li {
   padding: 2em 0;
 
   & + & {
+    clear: both;
     border-top: 1px solid #000;
   }
 }
@@ -148,7 +157,9 @@ li {
 }
 
 .Description-Content {
-
+  :empty {
+    display: none;
+  }
 }
 
 .Description-Content-Header {
@@ -180,9 +191,14 @@ li {
   }
 }
 
+.SectionPhoto {
+  padding-bottom: 0.5rem;
+}
+
 .SectionPhoto,
 .SectionMap {
-  margin-bottom: 0.5em;
+  max-height: 150px !important;
+  width: auto;
 }
 
 .SectionLocation {
@@ -192,6 +208,11 @@ li {
 .SectionDate,
 .SectionDates li {
   @include section-icon('edit-relic-ico-date.png');
+}
+
+.SectionDates {
+  margin-top: 1em;
+  clear: left;
 }
 
 .SectionRegistryNumber {
@@ -208,16 +229,13 @@ li {
 
 .SectionRegistry {
   @include section-icon('edit-relic-ico-info.png');
-  font-weight: 600;
 }
 
-.SectionDates {
-  margin-top: 1em;
-  clear: left;
-}
+.SectionGroup:not(.Definition--inline) li {
+  @include section-icon('event-bullet.png');
+  padding-left: 20px;
 
-.SectionGroup:not(.Definition--inline) {
-  ul {
-    padding-left: 1.25em;
+  &:before {
+    margin: 4px 0 0 -20px;
   }
 }
