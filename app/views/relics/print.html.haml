@@ -21,6 +21,7 @@
 
     - if relic.register_number.present?
       .Definition.SectionRegistry
+        .Icon= image_tag 'edit-relic-ico-info.png', :alt => ''
         %p.Definition-Content Zabytek wpisany jest do rejestru zabytków
 
   %article
@@ -42,6 +43,7 @@
       = image_tag relic.main_photo.file.maxi.url, :class => 'SectionPhoto', :alt => 'Zdjęcie zabytku'
 
     .Definition.SectionLocation
+      .Icon= image_tag 'edit-relic-ico-location.png', :alt => ''
       %h2.Definition-Header Lokalizacja
       .Definition-Content
         - if relic.polish_relic and relic.place_id?
@@ -53,16 +55,19 @@
 
     - if relic.dating_of_obj.present?
       .Definition--inline.SectionDate
+        .Icon= image_tag 'edit-relic-ico-date.png', :alt => ''
         %h2.Definition-Header Data powstania
         .Definition-Content= relic.dating_of_obj
 
     - if relic.register_number.present?
       .Definition--inline.SectionRegistryNumber
+        .Icon= image_tag 'edit-relic-ico-list.png', :alt => ''
         %h2.Definition-Header Numer w rejestrze
         .Definition-Content= relic.register_number
 
     - if relic.categories.count > 0
       .Definition--inline.SectionsCategories
+        .Icon= image_tag 'edit-relic-ico-folder.png', :alt => ''
         %h2.Definition-Header Kategorie
         %ul.Definition-Content
           - relic.categories.each do |category|
@@ -70,6 +75,7 @@
 
     - if relic.tags.count > 0
       .Definition--inline.SectionTags
+        .Icon= image_tag 'edit-relic-ico-tags.png', :alt => ''
         %h2.Definition-Header Tagi
         %ul.Definition-Content
           - relic.tags.each do |tag|
@@ -80,7 +86,9 @@
         %h2.Definition-Header Ważne daty
         %ul.Definition-Content
           - relic.all_events.each do |event|
-            %li #{event.date} — #{event.name}
+            %li
+              .Icon= image_tag 'edit-relic-ico-date.png', :alt => ''
+              #{event.date} — #{event.name}
 
   - if relic.description.present?
     %article.Description
