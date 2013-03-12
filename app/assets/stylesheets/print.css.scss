@@ -1,17 +1,24 @@
 @import 'application/mixins';
 @import 'application/reset';
 
+@media print {
+  * {
+    background: transparent !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+}
+
 html {
+  width: 50em;
+  padding: 2em;
+  margin: 0 auto;
   font-size: 14px;
 
-  @media screen {
-    padding: 2em;
-    width: 50em;
-    margin: 0 auto;
-  }
-
   @media print {
+    width: auto;
     padding: 0.5cm 0;
+    margin: 0;
     -webkit-print-color-adjust: exact;
   }
 }
@@ -51,8 +58,10 @@ p + p {
 a {
   color: inherit;
 
-  &:after {
-    content: ''
+  @media print {
+    &[href^='http']:after {
+      content: " (" attr(href) ")";
+    }
   }
 }
 
@@ -73,6 +82,7 @@ li {
 }
 
 .Sidebar {
+  page-break-inside: avoid;
   float: right;
   clear: right;
   width: 250px;
@@ -80,6 +90,7 @@ li {
 }
 
 .Logo {
+  page-break-inside: avoid;
   text-align: center;
 }
 
@@ -102,13 +113,10 @@ li {
 }
 
 .Title-Header {
+  page-break-after: avoid;
   font-size: 2rem;
   line-height: 1.2;
   font-weight: 600;
-}
-
-.Title-Content {
-
 }
 
 .Definition {
@@ -124,6 +132,7 @@ li {
 }
 
 .Definition-Header {
+  page-break-after: avoid;
   font-weight: 600;
 
   &:after {
@@ -160,6 +169,7 @@ li {
 }
 
 .Description-Header {
+  page-break-after: avoid;
   margin: 0.5em 0;
   font-size: 1.5rem;
   font-weight: 600;
@@ -176,6 +186,7 @@ li {
 }
 
 .Description-Content-Header {
+  page-break-after: avoid;
   margin: 1em 0 0.5em;
   font-size: 1.2rem;
   font-weight: 600;
@@ -190,6 +201,7 @@ li {
   -------- */
 
 .Icon {
+  page-break-after: avoid;
   position: absolute;
   width: 16px;
   min-height: 14px;
@@ -201,10 +213,6 @@ li {
     display: inline-block !important;
     vertical-align: bottom;
   }
-
-  // .Definition--inline & {
-  //   margin-top: 0;
-  // }
 }
 
 .SectionLocation,
@@ -214,6 +222,7 @@ li {
 .SectionsCategories,
 .SectionTags,
 .SectionRegistry {
+  page-break-inside: avoid;
   padding-left: 25px;
   list-style: none;
 }
