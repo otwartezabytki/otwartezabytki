@@ -6,9 +6,9 @@
 
 %header.Sidebar
   %h1.Logo
-    %span.Logo-Header Karta z przewodnika
+    %span.Logo-Header= t('views.relics.guide.title')
     %b.Hidden Otwarte Zabytki
-    = image_tag 'logo.png', :alt => 'Logo', :class => 'Logo-Image'
+    = image_tag 'logo.png', :alt => t('views.relics.guide.logo'), :class => 'Logo-Image'
 
 %article
   %header.Title
@@ -16,24 +16,24 @@
 
     - if relic.common_name.present?
       %dl.Title-Content.Definition--inline
-        %dt.Definition-Header Nazwa zwyczajowa
+        %dt.Definition-Header= t('views.relics.show.general.common_name')
         %dd.Definition-Content= relic.common_name
 
     - if relic.register_number.present?
       .Definition.SectionRegistry
         .Icon= image_tag 'edit-relic-ico-info.png', :alt => ''
-        %p.Definition-Content Zabytek wpisany jest do rejestru zabytków
+        %p.Definition-Content= t('views.relics.guide.registry')
 
   %article
-    %h1.Hidden Informacje ogólne
+    %h1.Hidden= t('views.relics.guide.general')
 
     - if relic.latitude.present? and relic.longitude.present?
       .Sidebar
-        %img.SectionMap{:src => "http://maps.google.com/maps/api/staticmap?center=#{relic.latitude.to_f},#{relic.longitude.to_f}&zoom=13&markers=color:white|#{relic.latitude.to_f},#{relic.longitude.to_f}&size=250x150&sensor=false", :alt => 'Mapa'}
+        %img.SectionMap{:src => "http://maps.google.com/maps/api/staticmap?center=#{relic.latitude.to_f},#{relic.longitude.to_f}&zoom=13&markers=color:white|#{relic.latitude.to_f},#{relic.longitude.to_f}&size=250x150&sensor=false", :alt => t('views.relics.guide.map')}
 
     - if (relic.is_group? or relic.parent.present?) and relic.root.descendants.created.count > 0
       .Sidebar.Definition.SectionGroup
-        %h2.Definition-Header Pozostałe elementy należące do&nbsp;tego zespołu zabytków
+        %h2.Definition-Header= t('views.relics.guide.other_subrelics')
         %ul.Defintion-Content
           - relic.root.descendants.created.order('identification').each do |rel|
             - unless rel == relic
@@ -44,7 +44,7 @@
 
     .Definition.SectionLocation
       .Icon= image_tag 'edit-relic-ico-location.png', :alt => ''
-      %h2.Definition-Header Lokalizacja
+      %h2.Definition-Header= t('views.relics.relics.location')
       .Definition-Content
         - if relic.polish_relic and relic.place_id?
           %p= t('views.relics.show.general.polish_location', :place => relic.place.name, :district => relic.district.name, :commune => relic.commune.name)
@@ -56,19 +56,19 @@
     - if relic.dating_of_obj.present?
       .Definition--inline.SectionDate
         .Icon= image_tag 'edit-relic-ico-date.png', :alt => ''
-        %h2.Definition-Header Data powstania
+        %h2.Definition-Header= t('views.relics.relics.create_date')
         .Definition-Content= relic.dating_of_obj
 
     - if relic.register_number.present?
       .Definition--inline.SectionRegistryNumber
         .Icon= image_tag 'edit-relic-ico-list.png', :alt => ''
-        %h2.Definition-Header Numer w rejestrze
+        %h2.Definition-Header= t('views.relics.guide.registry_number')
         .Definition-Content= relic.register_number
 
     - if relic.categories.count > 0
       .Definition--inline.SectionsCategories
         .Icon= image_tag 'edit-relic-ico-folder.png', :alt => ''
-        %h2.Definition-Header Kategorie
+        %h2.Definition-Header= t('views.relics.edit.categories.name')
         %ul.Definition-Content
           - relic.categories.each do |category|
             %li= Category.to_hash[category]
@@ -76,14 +76,14 @@
     - if relic.tags.count > 0
       .Definition--inline.SectionTags
         .Icon= image_tag 'edit-relic-ico-tags.png', :alt => ''
-        %h2.Definition-Header Tagi
+        %h2.Definition-Header= t('views.relics.show.categories.content_title_tag')
         %ul.Definition-Content
           - relic.tags.each do |tag|
             %li= tag
 
     - if relic.all_events.count > 0
       .Definition.SectionDates
-        %h2.Definition-Header Ważne daty
+        %h2.Definition-Header= t('views.relics.show.events.header')
         %ul.Definition-Content
           - relic.all_events.each do |event|
             %li
@@ -92,12 +92,12 @@
 
   - if relic.description.present?
     %article.Description
-      %h1.Description-Header Opis
+      %h1.Description-Header= t('views.relics.show.description.header')
       .MainContent.Description-Content= relic.description.html_safe
 
   - if relic.entries.count > 0
     %section.Description
-      %h1.Description-Header Ciekawostki, legendy, anegdoty
+      %h1.Description-Header= t('views.relics.show.entries.header')
       - relic.entries.each do |entry|
         %article
           %h1.Description-Content-Header= entry.title
@@ -106,5 +106,5 @@
 %footer.Footer
   .Sidebar
     %h1 www.otwartezabytki.pl
-    Data wygenerowania: #{Time.now.strftime('%Y-%m-%d')}
+    #{t('views.relics.guide.date')}: #{Time.now.strftime('%Y-%m-%d')}
   = image_tag 'cc_logo.png', :alt => 'Centrum Cyfrowe'
