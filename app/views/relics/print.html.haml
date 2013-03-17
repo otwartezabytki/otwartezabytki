@@ -6,7 +6,7 @@
 
 %header.Sidebar
   %h1.Logo
-    %span.Logo-Header Karta z przewodnika:
+    %span.Logo-Header Karta z przewodnika
     %b.Hidden Otwarte Zabytki
     = image_tag 'logo.png', :alt => 'Logo', :class => 'Logo-Image'
 
@@ -102,3 +102,9 @@
         %article
           %h1.Description-Content-Header= entry.title
           .Description-Content= sanitize entry.body
+
+%footer.Footer
+  .Sidebar
+    %h1 www.otwartezabytki.pl
+    Data wygenerowania: #{Time.now.strftime('%Y-%m-%d')}
+  = image_tag 'cc_logo.png', :alt => 'Centrum Cyfrowe'

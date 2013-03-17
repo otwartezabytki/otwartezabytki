@@ -1,6 +1,8 @@
 @import 'application/mixins';
 @import 'application/reset';
 
+$border-color: lightgray;
+
 @media print {
   * {
     background: transparent !important;
@@ -164,7 +166,7 @@ li {
 
   & + & {
     clear: both;
-    border-top: 1px solid #000;
+    border-top: 1px solid $border-color;
   }
 }
 
@@ -193,6 +195,20 @@ li {
 
   .Description-Header + .Description-Content > &:first-child {
     margin-top: 0;
+  }
+}
+
+.Footer {
+  border-top: 1px solid $border-color;
+  padding-top: 2em;
+  margin-top: 1em;
+
+  h1 {
+    font-weight: 600;
+  }
+
+  .Sidebar {
+    text-align: right;
   }
 }
 
