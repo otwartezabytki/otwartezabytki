@@ -25,6 +25,7 @@ Otwartezabytki::Application.routes.draw do
       match 'section/:section', :to => 'relics#show', :as => 'section', :via => :get
       match 'section/:section', :to => 'relics#update', :as => 'section', :via => :put
       get :download_zip
+      get :print
     end
 
     resources :photos, :documents, :entries, :links, :events
