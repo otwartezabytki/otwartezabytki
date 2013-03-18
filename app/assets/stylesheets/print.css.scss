@@ -200,6 +200,7 @@ li {
 
 .Footer {
   page-break-inside: avoid;
+  clear: both;
   border-top: 1px solid $border-color;
   padding-top: 2em;
   margin-top: 1em;
