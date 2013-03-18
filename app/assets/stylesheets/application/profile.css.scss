@@ -670,6 +670,15 @@ section.show.general{
       background: asset-data-url("edit-relic-ico-original.png") 10px 10px no-repeat;
     }
   }
+
+  .print-guide {
+    @extend .original;
+
+    span {
+      padding-left: 30px;
+      background: asset-data-url("edit-relic-ico-print.png") 10px 8px no-repeat;
+    }
+  }
 }
 
 section.show.description{

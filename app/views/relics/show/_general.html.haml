@@ -54,6 +54,7 @@
     .register_number
       %strong= t('views.relics.show.general.register_number')
       %p= relic.register_number
+  = link_to content_tag(:span, t('views.relics.guide.print_guide')), print_relic_path(relic.to_param), :class => "print-guide", :target => '_blank'
   - if relic.is_a?(Relic) and relic.original_relic.present?
     = link_to content_tag(:span, t('views.relics.show.general.original')), relic_path(relic.to_param, :original => true), :class => "original"
   - else

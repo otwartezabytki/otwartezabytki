@@ -1454,6 +1454,7 @@ pl:
         logo: "Logo"
         map: "Mapa"
         other_subrelics: "Pozostałe elementy należące do&nbsp;tego zespołu zabytków"
+        print_guide: "Mini-przewodnik"
         registry: "Zabytek wpisany jest do rejestru zabytków"
         registry_number: "Numer w rejestrze"
         title: "Karta z przewodnika"
