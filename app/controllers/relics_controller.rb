@@ -159,6 +159,10 @@ class RelicsController < ApplicationController
     redirect_to relic_path(relic), :notice => t('notices.relic_unadopted')
   end
 
+  def print
+    render :print, :layout => 'print'
+  end
+
   protected
     def no_original_version
       return true unless params[:original]

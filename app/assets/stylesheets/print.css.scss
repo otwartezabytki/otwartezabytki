@@ -1,0 +1,267 @@
+@import 'application/mixins';
+@import 'application/reset';
+
+$border-color: lightgray;
+
+@media print {
+  * {
+    background: transparent !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+}
+
+html {
+  width: 50em;
+  padding: 2em;
+  margin: 0 auto;
+  font-size: 14px;
+
+  @media print {
+    width: auto;
+    padding: 0.5cm 0;
+    margin: 0;
+    -webkit-print-color-adjust: exact;
+  }
+}
+
+body {
+  @include word-break();
+  background: fff;
+  color: #000;
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+}
+
+b, strong {
+  font-weight: 600;
+}
+
+i, em {
+  font-style: italic;
+}
+
+p + p {
+  margin-top: 0.5em;
+
+  .Definition-Content & {
+    margin-top: 0;
+  }
+}
+
+a {
+  color: inherit;
+
+  @media print {
+    &[href^='http']:after {
+      content: " (" attr(href) ")";
+    }
+  }
+}
+
+li {
+  margin: 0.1em 0 0 0;
+
+  ul & {
+    list-style: square;
+  }
+}
+
+.Hidden {
+  @include visually-hidden();
+}
+
+.MainContent {
+  font-size: 1.1em;
+}
+
+.Sidebar {
+  page-break-inside: avoid;
+  float: right;
+  clear: right;
+  width: 250px;
+  padding: 0 0 0.5rem 2rem;
+}
+
+.Logo {
+  page-break-inside: avoid;
+  text-align: center;
+}
+
+.Logo-Header {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+}
+
+.Logo-Image {
+  margin: 0.5rem auto 0;
+}
+
+.Title {
+  padding-bottom: 2em;
+
+  & + * {
+    clear: both;
+  }
+}
+
+.Title-Header {
+  page-break-after: avoid;
+  font-size: 2rem;
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+.Definition {
+  margin: 0.5em 0;
+}
+
+.Definition--inline {
+  @extend .Definition;
+
+  * {
+    display: inline;
+  }
+}
+
+.Definition-Header {
+  page-break-after: avoid;
+  font-weight: 600;
+
+  &:after {
+    content: ': ';
+  }
+}
+
+.Definition-Content {
+  margin: 0.1em 0;
+
+  .Definition--inline & {
+    margin: 0;
+
+    li {
+      &:after {
+        content: ', ';
+      }
+
+      &:last-child:after {
+        content: '';
+      }
+    }
+  }
+}
+
+.Description {
+  @extend .Definition;
+  padding: 2em 0;
+
+  & + & {
+    clear: both;
+    border-top: 1px solid $border-color;
+  }
+}
+
+.Description-Header {
+  page-break-after: avoid;
+  margin: 0.5em 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+
+  .Description > &:first-child {
+    margin-top: 0;
+  }
+}
+
+.Description-Content {
+  :empty {
+    display: none;
+  }
+}
+
+.Description-Content-Header {
+  page-break-after: avoid;
+  margin: 1em 0 0.5em;
+  font-size: 1.2rem;
+  font-weight: 600;
+
+  .Description-Header + .Description-Content > &:first-child {
+    margin-top: 0;
+  }
+}
+
+.Footer {
+  page-break-inside: avoid;
+  clear: both;
+  border-top: 1px solid $border-color;
+  padding-top: 2em;
+  margin-top: 1em;
+
+  h1 {
+    font-weight: 600;
+  }
+
+  .Sidebar {
+    text-align: right;
+  }
+}
+
+/*
+  Sections
+  -------- */
+
+.Icon {
+  page-break-after: avoid;
+  position: absolute;
+  width: 16px;
+  min-height: 14px;
+  line-height: inherit;
+  margin: -4px 0 0 -25px;
+  text-align: center;
+
+  img {
+    display: inline-block !important;
+    vertical-align: bottom;
+  }
+}
+
+.SectionLocation,
+.SectionDate,
+.SectionDates li,
+.SectionRegistryNumber,
+.SectionsCategories,
+.SectionTags,
+.SectionRegistry {
+  page-break-inside: avoid;
+  padding-left: 25px;
+  list-style: none;
+}
+
+.SectionDates {
+  margin-top: 1em;
+  clear: left;
+}
+
+.SectionPhoto {
+  padding-bottom: 0.5rem;
+}
+
+.SectionPhoto,
+.SectionMap {
+  max-height: 150px !important;
+  width: auto;
+}
+
+.SectionGroup {
+  ul, ol {
+    padding-left: 20px;
+  }
+}

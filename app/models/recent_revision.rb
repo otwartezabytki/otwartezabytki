@@ -3,8 +3,8 @@ class RecentRevision
 
   class << self
     def revisions
-      Rails.cache.fetch(:expires_in => 5.minutes) do
-        Version.order('id DESC').limit(100).all.map do |version|
+      Rails.cache.fetch("recent_revisions_#{I18n.locale}", :expires_in => 5.minutes) do
+        Version.order('id DESC').limit(100).includes(:item).map do |version|
           new(:version => version).to_relic_hash
         end.compact.uniq { |relic_hash| relic_hash[:relic_id] }
       end.first(10)

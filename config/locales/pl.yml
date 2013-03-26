@@ -1482,6 +1482,16 @@ pl:
           group_info: "Ten zabytek posiada pewne podzabytki."
           parent_info: "Ten zabytek wchodzi w skład zespołu: %{parent}."
         view_current_version: "&#171; zobacz wersję obecną"
+      guide:
+        general: "Informacje ogólne"
+        date: "Data wygenerowania"
+        logo: "Logo"
+        map: "Mapa"
+        other_subrelics: "Pozostałe elementy należące do&nbsp;tego zespołu zabytków"
+        print_guide: "Mini-przewodnik"
+        registry: "Zabytek wpisany jest do rejestru zabytków"
+        registry_number: "Numer w rejestrze"
+        title: "Karta z przewodnika"
     widgets:
       edit:
         add_alert:

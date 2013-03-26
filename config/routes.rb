@@ -1,10 +1,10 @@
 # -*- encoding : utf-8 -*-
+RoutingFilter::Locale.include_default_locale = false
 Otwartezabytki::Application.routes.draw do
   # under construction
   # match '*path' => 'pages#show', :id => 'under_construction'
   # root :to      => 'pages#show', :id => 'under_construction'
-
-
+  filter :locale,    :exclude => /^\/admin/
   mount Tolk::Engine => '/admin/tolk', :as => 'tolk'
   ActiveAdmin.routes(self)
 
@@ -32,6 +32,7 @@ Otwartezabytki::Application.routes.draw do
       get :download_zip
       post :adopt
       post :unadopt
+      get :print
     end
 
     resources :photos, :documents, :entries, :links, :events
@@ -88,16 +89,15 @@ Otwartezabytki::Application.routes.draw do
 
   get 'geocoder/search'
 
-  match "/strony/pobierz-dane"    => 'relics#download', :as => 'download'
-
-  match "/strony/o-projekcie"     => 'pages#show', :id => 'about', :as => 'about'
-  match "/strony/kontakt"         => 'pages#show', :id => 'contact'
-  match "/strony/pomoc"           => 'pages#show', :id => 'help'
-  match "/strony/dowiedz-sie-wiecej" => 'pages#show', :id => 'more'
-  match "/strony/regulamin" => 'pages#show', :id => 'terms'
-  match "/strony/prywatnosc" => 'pages#show', :id => 'privacy'
-  match "/facebook/share_close" => 'pages#show', :id => 'share_close'
-  match "/hello"                  => 'pages#hello', :id => 'hello', :as => :hello
+  match "/strony/pobierz-dane"        => 'relics#download',                 :as => 'download'
+  match "/strony/o-projekcie"         => 'pages#show', :id => 'about',      :as => 'about_page'
+  match "/strony/kontakt"             => 'pages#show', :id => 'contact',    :as => 'contact_page'
+  match "/strony/pomoc"               => 'pages#show', :id => 'help',       :as => 'help_page'
+  match "/strony/dowiedz-sie-wiecej"  => 'pages#show', :id => 'more',       :as => 'more_page'
+  match "/strony/regulamin"           => 'pages#show', :id => 'terms',      :as => 'terms_page'
+  match "/strony/prywatnosc"          => 'pages#show', :id => 'privacy',    :as => 'privacy_page'
+  match "/facebook/share_close"       => 'pages#show', :id => 'share_close'
+  match "/hello"                      => 'pages#hello', :id => 'hello', :as => :hello
 
   root :to => 'pages#show', :id => 'home'
 end

@@ -23,22 +23,12 @@ GIT
 
 GIT
   remote: git://github.com/monterail/tolk.git
-  revision: ff521f765a45242d298cbfe989807f62ed2f0d90
+  revision: 38dd769df3a59461ee247ea5f5b8861f54ca6e02
   branch: oz-custom
   specs:
     tolk (1.3.3)
       kaminari
       ya2yaml (~> 0.26)
-
-GIT
-  remote: git://github.com/sheerun/globalize3.git
-  revision: ef91130fb07db4aab579b36f68bab7c893a1fe20
-  branch: fix/accessible
-  specs:
-    globalize3 (0.3.0)
-      activemodel (>= 3.0.0)
-      activerecord (>= 3.0.0)
-      paper_trail (~> 2)
 
 GIT
   remote: git://github.com/sheerun/rails.git
@@ -94,6 +84,16 @@ GIT
   specs:
     http_accept_language (2.0.1.pre)
 
+GIT
+  remote: https://github.com/sheerun/globalize3.git
+  revision: ef91130fb07db4aab579b36f68bab7c893a1fe20
+  branch: fix/accessible
+  specs:
+    globalize3 (0.3.0)
+      activemodel (>= 3.0.0)
+      activerecord (>= 3.0.0)
+      paper_trail (~> 2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -125,6 +125,11 @@ GEM
     arel (3.0.2)
     arrabiata (0.4.0)
     bcrypt-ruby (3.0.1)
+    better_errors (0.5.0)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
+    binding_of_caller (0.7.1)
+      debug_inspector (>= 0.0.1)
     bootstrap-sass (2.0.4.2)
     bourbon (3.0.1)
       sass (>= 3.2.0)
@@ -177,6 +182,7 @@ GEM
       compass (>= 0.12.2, < 0.14)
     dalli (2.6.2)
     database_cleaner (0.9.1)
+    debug_inspector (0.0.2)
     decent_exposure (2.0.1)
     devise (2.2.3)
       bcrypt-ruby (~> 3.0)
@@ -382,6 +388,8 @@ GEM
       rubyzip (>= 0.9.4)
       spreadsheet (> 0.6.4)
       todonotes (>= 0.1.0)
+    routing-filter (0.3.1)
+      actionpack
     rspec (2.12.0)
       rspec-core (~> 2.12.0)
       rspec-expectations (~> 2.12.0)
@@ -505,6 +513,8 @@ DEPENDENCIES
   ancestry
   annotate (>= 2.5.0)
   arrabiata
+  better_errors
+  binding_of_caller
   bootstrap-sass (~> 2.0.4.0)
   cancan
   capybara
@@ -567,6 +577,7 @@ DEPENDENCIES
   redcarpet
   remote_table
   rocket_tag
+  routing-filter
   rspec-rails (~> 2.0)
   rubyzip
   sass-rails (~> 3.2.3)

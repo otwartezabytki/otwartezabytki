@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(:version => 20130215223048) do
     t.string   "ancestry"
   end
 
+  add_index "categories", ["ancestry"], :name => "categories_ancestry_trgm_idx"
   add_index "categories", ["ancestry"], :name => "index_categories_on_ancestry"
 
   create_table "communes", :force => true do |t|
@@ -151,6 +152,7 @@ ActiveRecord::Schema.define(:version => 20130215223048) do
   end
 
   add_index "original_relics", ["ancestry"], :name => "index_original_relics_on_ancestry"
+  add_index "original_relics", ["ancestry"], :name => "original_relics_ancestry_trgm_idx"
   add_index "original_relics", ["commune_id"], :name => "index_original_relics_on_commune_id"
   add_index "original_relics", ["district_id"], :name => "index_original_relics_on_district_id"
   add_index "original_relics", ["place_id"], :name => "index_original_relics_on_place_id"
@@ -242,10 +244,16 @@ ActiveRecord::Schema.define(:version => 20130215223048) do
     t.string   "common_name",     :default => ""
   end
 
+  add_index "relics", ["ancestry"], :name => "index_relics_on_ancestry"
+  add_index "relics", ["ancestry"], :name => "relics_ancestry_trgm_idx"
+  add_index "relics", ["commune_id"], :name => "index_relics_on_commune_id"
+  add_index "relics", ["district_id"], :name => "index_relics_on_district_id"
   add_index "relics", ["existence"], :name => "index_relics_on_existence"
+  add_index "relics", ["place_id"], :name => "index_relics_on_place_id"
   add_index "relics", ["state"], :name => "index_relics_on_state"
   add_index "relics", ["type"], :name => "index_relics_on_type"
   add_index "relics", ["voivodeship_id", "state"], :name => "index_relics_on_voivodeship_id_and_state"
+  add_index "relics", ["voivodeship_id"], :name => "index_relics_on_voivodeship_id"
 
   create_table "search_terms", :force => true do |t|
     t.string   "keyword"

@@ -8,7 +8,7 @@ class PhotosController < ApplicationController
 
   expose(:relic) { Relic.find(params[:relic_id]) }
 
-  expose(:photos) { relic.photos }
+  expose(:photos, ancestor: :relic)
   expose(:photo)
 
   expose(:tree_photos) { relic.all_photos }
