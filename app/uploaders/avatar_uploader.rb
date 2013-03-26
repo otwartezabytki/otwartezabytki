@@ -41,6 +41,6 @@ class AvatarUploader < CarrierWave::Uploader::Base
 
   # fallback
   def default_url
-    "fallback/" + ["avatar", version_name, "default.png"].compact.join('_')
+    "/assets/fallback/" + ["avatar", version_name, "default.png"].compact.join('_')
   end
 end

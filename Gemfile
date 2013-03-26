@@ -29,6 +29,7 @@ gem 'formtastic-bootstrap'
 gem 'localized_language_select'
 
 gem 'decent_exposure'
+gem 'strong_parameters'
 gem 'kaminari'
 gem 'ancestry'
 gem 'tire', '0.4.3'

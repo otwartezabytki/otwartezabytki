@@ -37,14 +37,15 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :username, :registration
   attr_accessible :email, :password, :password_confirmation, :role, :as => :admin
-  attr_accessor :force_password_required
+  attr_accessor :force_password_required, :current_password
 
   attr_accessible :avatar, :language, :current_password
 
   mount_uploader :avatar, AvatarUploader
 
   validates :role, :inclusion => { :in => ["admin", "user"] }
-  validates :language, :inclusion => { :in => Settings.oz.locale.available }
+  validates :language, :inclusion => { :in => Settings.oz.locale.available.map(&:to_s) }
+  validates :username, :email, :uniqueness => { :message => I18n.t('activemodel.errors.messages.already_taken') }
 
   def admin?
     role == 'admin'
@@ -85,7 +86,7 @@ class User < ActiveRecord::Base
     sr.touch
     if seen_relic_ids.first == relic_id
       self.seen_relic_order = (self.seen_relic_order == 'asc' ? 'desc' : 'asc')
-      self.update_attribue(:seen_relic_order, self.seen_relic_order) if self.seen_relic_order_changed?
+      self.update_attribute(:seen_relic_order, self.seen_relic_order) if self.seen_relic_order_changed?
     end
   end
 

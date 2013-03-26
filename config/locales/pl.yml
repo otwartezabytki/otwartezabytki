@@ -49,6 +49,7 @@ pl:
       format: "%{attribute} %{message}"
       messages:
         accepted: "musi zostać zaakceptowane"
+        already_taken: "jest już zajęta"
         blank: "nie może być puste"
         confirmation: "nie zgadza się z potwierdzeniem"
         empty: "nie może być puste"
@@ -163,6 +164,7 @@ pl:
         role: "Rola"
         updated_at: "Zaktualizowanie danych"
         username: "Nazwa użytkownika"
+        language: "Język"
       version:
         item: Zasób
         item_type: Rodzaj
@@ -904,6 +906,8 @@ pl:
     widget_has_been_updated: "Widget został zaktualizowany"
     relic_adopted: "Adoptowałeś zabytek. Od teraz będziesz otrzymywał powiadomienia o jego zmianach."
     relic_unadopted: "Odadoptowałeś zabytek. Już nie będziesz otrzymywał powiadomień o jego zmianach."
+    profile_updated: "Twój profil został zaktualizowany."
+    profile_not_updated: "Formularz został źle wypełniony."
   number:
     currency:
       format:
@@ -1573,5 +1577,6 @@ pl:
       language_settings: "Ustawienia językowe"
       avatar: "Zdjęcie profilowe"
       user_data: "Dane użytkownika"
+      save: "Zapisz"
     list_added:
       added_relics: "Dodane zabytki"
