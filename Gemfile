@@ -31,7 +31,7 @@ gem 'ancestry'
 gem 'tire', '0.4.3'
 gem 'tire-contrib'
 gem 'rocket_tag'
-gem 'airbrake'
+gem 'sentry-raven'
 
 gem 'paper_trail', '~> 2' # versioning
 
