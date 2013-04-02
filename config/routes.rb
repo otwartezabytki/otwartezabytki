@@ -3,7 +3,9 @@ RoutingFilter::Locale.include_default_locale = false
 Otwartezabytki::Application.routes.draw do
   filter :locale,    :exclude => /^\/(admin|users\/auth)/
   mount Tolk::Engine => '/admin/tolk', :as => 'tolk'
-  ActiveAdmin.routes(self)
+
+  # Active Admin can cause migrations to fail...
+  ActiveAdmin.routes(self) rescue nil
 
   devise_for :users, :path_names => {
     :sign_in => 'login', :sign_out => 'logout',
