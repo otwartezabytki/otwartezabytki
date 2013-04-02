@@ -553,6 +553,7 @@ DEPENDENCIES
   mini_magick!
   multi_json (= 1.3.7)
   newrelic_rpm (~> 3.5.5.38)
+  omniauth
   omniauth-facebook
   paper_trail (~> 2)
   pg
