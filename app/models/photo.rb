@@ -35,7 +35,7 @@ class Photo < ActiveRecord::Base
 
 
 
-  has_paper_trail :skip => [:created_at, :updated_at]
+  has_paper_trail :skip => [:created_at, :updated_at, :versions]
 
   def self.one_after(photo_id)
     where('id > ?', photo_id).order('id ASC').limit(1).first

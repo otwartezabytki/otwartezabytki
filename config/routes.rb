@@ -17,6 +17,10 @@ Otwartezabytki::Application.routes.draw do
     :omniauth_callbacks => "users/omniauth_callbacks"
   }
 
+  devise_scope :user do
+    get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'
+  end
+
   resources :tags, :only => :index
 
   resources :relics, :except => [:new, :create, :destroy] do
