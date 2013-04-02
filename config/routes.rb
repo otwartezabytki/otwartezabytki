@@ -1,10 +1,7 @@
 # -*- encoding : utf-8 -*-
 RoutingFilter::Locale.include_default_locale = false
 Otwartezabytki::Application.routes.draw do
-  # under construction
-  # match '*path' => 'pages#show', :id => 'under_construction'
-  # root :to      => 'pages#show', :id => 'under_construction'
-  filter :locale,    :exclude => /^\/admin/
+  filter :locale,    :exclude => /^\/(admin|users\/auth)/
   mount Tolk::Engine => '/admin/tolk', :as => 'tolk'
   ActiveAdmin.routes(self)
 
@@ -16,10 +13,6 @@ Otwartezabytki::Application.routes.draw do
     :passwords => "users/passwords",
     :omniauth_callbacks => "users/omniauth_callbacks"
   }
-
-  devise_scope :user do
-    get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'
-  end
 
   resources :tags, :only => :index
 
