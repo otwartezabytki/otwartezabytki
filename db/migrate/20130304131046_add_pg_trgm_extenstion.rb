@@ -7,8 +7,8 @@ class AddPgTrgmExtenstion < ActiveRecord::Migration
   end
 
   def down
-    drop_index "relics_ancestry_trgm_idx"
-    drop_index "categories_ancestry_trgm_idx"
-    drop_index "original_relics_ancestry_trgm_idx"
+    remove_index "relics_ancestry_trgm_idx"
+    remove_index "categories_ancestry_trgm_idx"
+    remove_index "original_relics_ancestry_trgm_idx"
   end
 end
