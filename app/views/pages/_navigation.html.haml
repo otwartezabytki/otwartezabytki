@@ -1,0 +1,8 @@
+%li
+  = link_to t("layouts.application.#{page.name}"), page,
+    class: "#{page.name} #{'current' if current_page?(page)} dropdown dropdown-tip"
+  - if page.has_children?
+    %ul.dropdown-menu
+      - page.children.each do |subpage|
+        = link_to t("layouts.application.#{subpage.name}"), subpage,
+          class: "#{subpage.name} #{'current' if current_page?(subpage)}"

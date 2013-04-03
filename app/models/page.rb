@@ -1,10 +1,13 @@
 # -*- encoding : utf-8 -*-
 class Page < ActiveRecord::Base
-  attr_accessible :name, :body, :title, :translations_attributes, as: :admin
+  attr_accessible :name, :body, :title, :translations_attributes,
+    :parent_id, as: :admin
 
   translates :body, :title
   accepts_nested_attributes_for :translations
   validates :name, :presence => true, :uniqueness => true
+
+  has_ancestry
 
   class Resolver < ActionView::Resolver
     self.caching = false
@@ -28,6 +31,14 @@ class Page < ActiveRecord::Base
         }
         ActionView::Template.new(source, identifier, handler, details)
       end
+  end
+
+  def parent_id=(value)
+    if value.present?
+      self.parent = Page.find(value)
+    else
+      self.parent = nil
+    end
   end
 
   after_save { self.touch }

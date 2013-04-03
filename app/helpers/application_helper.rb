@@ -158,4 +158,8 @@ module ApplicationHelper
       value.respond_to?(:html_safe) ? value.html_safe : value
     end
   end
+
+  def page_path(page)
+    send("#{page.name}_page_path")
+  end
 end

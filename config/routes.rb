@@ -81,7 +81,7 @@ Otwartezabytki::Application.routes.draw do
 
   get 'geocoder/search'
 
-  match "/strony/pobierz-dane"        => 'relics#download',                 :as => 'download'
+  match "/strony/pobierz-dane"        => 'relics#download',                 :as => 'download_page'
   match "/strony/o-projekcie"         => 'pages#show', :id => 'about',      :as => 'about_page'
   match "/strony/kontakt"             => 'pages#show', :id => 'contact',    :as => 'contact_page'
   match "/strony/pomoc"               => 'pages#show', :id => 'help',       :as => 'help_page'
