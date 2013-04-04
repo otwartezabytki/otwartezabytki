@@ -3,8 +3,6 @@
 ActiveAdmin.register Entry do
   menu :label => "Wpisy", :parent => "Zasoby"
 
-  controller.authorize_resource
-
   index do
     column :id
     column :relic do |e|

@@ -1,10 +1,6 @@
 # -*- encoding : utf-8 -*-
+
 ActiveAdmin::Dashboards.build do
-
-  ActiveAdmin::Dashboards::DashboardController.class_eval do |controller|
-    controller.authorize_resource
-  end
-
   # Define your dashboard sections here. Each block will be
   # rendered on the dashboard in the context of the view. So just
   # return the content which you would like to display.
@@ -45,8 +41,4 @@ ActiveAdmin::Dashboards.build do
   #
   # section "Membership Summary", :if => :memberships_enabled?
   # section "Membership Summary", :if => Proc.new { current_admin_user.account.memberships.any? }
-
-  def current_ability
-    @current_ability ||= AdminAbility.new(current_user)
-  end
 end

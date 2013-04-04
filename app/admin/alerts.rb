@@ -3,8 +3,6 @@
 ActiveAdmin.register Alert do
   menu :label => "Zarządzanie", :parent => "Alerty", :priority => 1
 
-  controller.authorize_resource
-
   index do
     column :id
 
