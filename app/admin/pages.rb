@@ -3,7 +3,6 @@
 ActiveAdmin.register Page do
   menu :label => "Strony statyczne"
   actions :index, :edit, :update, :new, :create
-  controller.authorize_resource
 
   index do
     column :name
