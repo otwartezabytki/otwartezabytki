@@ -7,7 +7,7 @@
             .photo
               .column-left
                 .preview
-                  = image_tag photo.file.midi.url
+                  = image_tag photo.file.midi.url, :alt => photo.alternate_text
                 - if photo.user_id == current_user.id
                   = link_to t('views.relics.edit.photos.delete_photo'), relic_photo_path(relic.id, photo.id),
                     :method => :delete,
@@ -17,6 +17,7 @@
               .column-right
                 = f2.input :author, :input_html => { :class => "author" }
                 = f2.input :date_taken, :input_html => { :class => "date_taken" }
+                = f2.input :alternate_text, :input_html => { :class => "alternate_text" }
                 = f2.input :description, :input_html => { :class => "description redactor" }
         - else
           .photo

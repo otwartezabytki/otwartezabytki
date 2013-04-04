@@ -112,6 +112,7 @@ pl:
         description: Opis
         relic: Zabytek
         relic_id: "ID zabytku"
+        alternate_text: "Tekst alternatywny"
       relic:
         ancestry: "W zespołach"
         approved: "Zabytek zatwierdzony"
