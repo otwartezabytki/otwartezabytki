@@ -117,12 +117,14 @@ class RelicsController < ApplicationController
 
   def download
     append_view_path Page::Resolver.new
-    file_path = Rails.root.join('public', 'history', 'current-relics.zip')
+    dir_path = Rails.root.join('public', 'history', '2*-relics.zip')
 
-    if File.exists?(file_path)
-      @export_url = '/history/current-relics.zip'
-      @export_date = File.atime(file_path)
-      @export_size = (File.size(file_path) / 1024.0 / 1024.0).round(2)
+    @export_files = []
+    Dir.glob(dir_path).sort.reverse.first(3).each do |file_path|
+      @export_files << {
+        :url => "/history/#{File.basename(file_path)}",
+        :date => File.atime(file_path),
+        :size => (File.size(file_path) / 1024.0 / 1024.0).round(2) }
     end
   end
 
