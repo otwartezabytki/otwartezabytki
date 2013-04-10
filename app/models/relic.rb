@@ -283,6 +283,10 @@ class Relic < ActiveRecord::Base
     'ZE' == kind or (is_root? and has_children?)
   end
 
+  def revisions
+    versions.reorder('created_at DESC').limit(3)
+  end
+
   def to_builder
     json = Jbuilder.new
     json.(self,
@@ -306,8 +310,19 @@ class Relic < ActiveRecord::Base
     )
     json.main_photo self.main_photo if self.has_photos?
 
-    json.descendants do |json|
+    json.descendants do
       json.array! self.descendants.map {|d| d.to_builder.attributes! }
+    end
+
+    json.revisions do
+      json.array! self.revisions.map do |r|
+        json.(r, :event, :created_at)
+        if r.object_changes.present?
+          json.changes YAML.load(r.object_changes)
+        else
+          json.changes nil
+        end
+      end
     end
 
     json.place_id self.place.id
