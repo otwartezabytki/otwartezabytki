@@ -1,18 +1,15 @@
-/*
- *= require_self
- *= require ./profile/categories
- *= require ./profile/description
- *= require ./profile/documents
- *= require ./profile/entries
- *= require ./profile/events
- *= require ./profile/general
- *= require ./profile/links
- *= require ./profile/location
- *= require ./profile/photos
- *= require ./profile/alerts
- *= require ./profile/attachments
- *= require ./profile/user_profile
-*/
+@import "profile/categories";
+@import "profile/description";
+@import "profile/documents";
+@import "profile/entries";
+@import "profile/events";
+@import "profile/general";
+@import "profile/links";
+@import "profile/location";
+@import "profile/photos";
+@import "profile/alerts";
+@import "profile/attachments";
+@import "profile/user_profile";
 
 @import "compass/layout";
 @import "compass/css3";
