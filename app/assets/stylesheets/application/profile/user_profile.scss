@@ -503,6 +503,36 @@ $unread-badge-size:    10px;
   select.field {
     margin-top: 4px;
   }
+
+  .tag {
+    float: left;
+
+    span {
+      color: #fff;
+      text-transform: uppercase;
+      display: inline-block;
+      font-size: 11px;
+      line-height: 19px;
+      padding: 0 8px;
+      font-weight: normal;
+      @include border-radius(3px);
+      @include text-shadow(rgba(0,0,0,0.3) 0 1px 1px);
+      @include box-shadow(inset rgba(0,0,0,0.4) 0 1px 3px);
+      margin-right: 4px;
+
+      &.unchecked {
+        @include gradient(#a3a4a6, #c1c3c5);
+      }
+
+      &.checked{
+        @include gradient(#e0a876, #fec695);
+      }
+
+      &.filled {
+        @include gradient(#90b86e, #afd78c);
+      }
+    }
+  }
 }
 
 @-moz-document url-prefix() {
