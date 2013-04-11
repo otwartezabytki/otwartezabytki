@@ -1,7 +1,7 @@
-%p.feed-description Zmiany wprowadzone w profilach zabytków dodanych i adoptowanych przez Ciebie:
+%p.feed-description= t '.description'
 
 %section.feed.type-activity
-  %h1.feed-title.hidden Aktywność
+  %h1.feed-title.hidden= t '.activity'
   - Version.relics.adopted_by(user).each do |version|
     %dl.feed-item{ class: "type-#{version.event}" }
       %dd.feed-image.thumb
@@ -14,4 +14,4 @@
         .changes= RecentRevision.new(:version => version).changes
   .feed-item.type-last
     .feed-message
-      Nie masz już więcej powiadomień.
+      = t '.no_notifications'

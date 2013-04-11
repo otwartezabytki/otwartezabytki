@@ -1573,6 +1573,8 @@ pl:
     wuoz-we-wroclawiu: "Wojewódzki Urząd Ochrony Zabytków we Wrocławiu"
 
   users:
+    user_avatar:
+      change_photo: "Zmień zdjęcie"
     settings_form:
       language_settings: "Ustawienia językowe"
       password_change: "Zmiana hasła"
@@ -1581,3 +1583,10 @@ pl:
       save: "Zapisz"
     list_added:
       added_relics: "Dodane zabytki"
+    list_checked:
+      checked_relics: "Sprawdzone zabytki"
+      description: "Lista zabytków sprawdzonych przez Ciebie:"
+    list_watched:
+      activity: "Aktywność"
+      description: "Zmiany wprowadzone w profilach zabytków dodanych i adoptowanych przez Ciebie:"
+      no_notifications: "Nie masz już więcej powiadomień."

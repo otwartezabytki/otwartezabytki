@@ -3,5 +3,5 @@
   %figcaption.user-avatar-caption-outer
     - unless current_page?(edit_user_path(user))
       .user-avatar-change
-        = link_to 'Zmień zdjęcie', edit_user_path(user, anchor: 'change-avatar'), class: 'user-avatar-change-link'
+        = link_to t('.change_photo'), edit_user_path(user, anchor: 'change-avatar'), class: 'user-avatar-change-link'
     %span.user-avatar-caption= user.username

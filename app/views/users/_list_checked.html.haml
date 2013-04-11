@@ -1,7 +1,7 @@
-%p.feed-description Lista zabytków sprawdzonych przez Ciebie:
+%p.feed-description= t '.description'
 
 %section.feed.type-user-checked
-  %h1.feed-title.hidden Sprawdzone zabytki
+  %h1.feed-title.hidden= t '.checked_relics'
   - checked_relics.each do |relic|
     %dl.feed-item
       %dd.feed-image.thumb
