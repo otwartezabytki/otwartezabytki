@@ -1575,6 +1575,7 @@ pl:
   users:
     settings_form:
       language_settings: "Ustawienia językowe"
+      password_change: "Zmiana hasła"
       avatar: "Zdjęcie profilowe"
       user_data: "Dane użytkownika"
       save: "Zapisz"
