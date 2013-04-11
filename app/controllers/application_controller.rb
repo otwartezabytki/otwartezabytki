@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
     locale = params[:locale] if params[:locale] and enabled_locales.include?(params[:locale].to_sym)
     I18n.locale = (
       locale ||
-      current_user.try(:default_locale) ||
+      current_user.try(:language) ||
       http_accept_language.compatible_language_from(enabled_locales) ||
       I18n.default_locale
     ).to_sym
