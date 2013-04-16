@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-RoutingFilter::Locale.include_default_locale = false
+RoutingFilter::Locale.include_default_locale = true
 Otwartezabytki::Application.routes.draw do
   filter :locale,    :exclude => /^\/(admin|users\/auth)/
   mount Tolk::Engine => '/admin/tolk', :as => 'tolk'
