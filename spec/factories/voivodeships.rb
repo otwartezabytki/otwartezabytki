@@ -2,20 +2,19 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :voivodeship do
+  factory :voivodeship do |f|
+    f.name "voivodeship"
 
-    name "voivodeship"
-
-    factory :voivodeship_dolnoslaskie do
-      name "dolnośląskie"
+    factory :voivodeship_dolnoslaskie do |f|
+      f.name "dolnośląskie"
     end
 
-    factory :voivodeship_mazowieckie do
-      name "mazowieckie"
+    factory :voivodeship_mazowieckie do |f|
+      f.name "mazowieckie"
     end
 
-    factory :voivodeship_podlaskie do
-      name "podlaskie"
+    factory :voivodeship_podlaskie do |f|
+      f.name "podlaskie"
     end
 
   end

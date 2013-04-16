@@ -191,7 +191,7 @@ class Relic < ActiveRecord::Base
 
   def main_photo
     return @main_photo if defined? @main_photo
-    @main_photo = (self.all_photos.order('CASE(photos.main) WHEN TRUE THEN 0 ELSE 1 END').first || self.photos.new)
+    @main_photo = (self.all_photos.order('CASE(photos.main) WHEN TRUE THEN 0 ELSE 1 END').first || Photo.new)
   end
 
   # @return photos for relic and it's descendants
@@ -281,42 +281,6 @@ class Relic < ActiveRecord::Base
   def is_group?
     return 'ZE' == kind if new_record?
     'ZE' == kind or (is_root? and has_children?)
-  end
-
-  def to_builder
-    json = Jbuilder.new
-    json.(self,
-      :id,
-      :nid_id,
-      :identification,
-      :description,
-      :categories,
-      :state,
-      :register_number,
-      :dating_of_obj,
-      :street,
-      :latitude,
-      :longitude,
-      :tags,
-      :country_code,
-      :fprovince,
-      :fplace,
-      :documents_info,
-      :links_info,
-    )
-    json.main_photo self.main_photo if self.has_photos?
-
-    json.descendants do |json|
-      json.array! self.descendants.map {|d| d.to_builder.attributes! }
-    end
-
-    json.place_id self.place.id
-    json.place_name self.place.name
-    json.commune_name self.place.commune.name
-    json.district_name self.place.commune.district.voivodeship.name
-    json.voivodeship_name self.place.commune.district.voivodeship.name
-
-    json
   end
 
 end

@@ -57,9 +57,12 @@ Otwartezabytki::Application.routes.draw do
       resource :info do
         get :relics
         get :places
+        get :relic_photos
       end
 
-      resources :relics
+      resources :relics do
+        resources :photos
+      end
 
       # resources :voivodeships, :only => [:index, :show]
       # resources :districts, :only => [:index, :show]

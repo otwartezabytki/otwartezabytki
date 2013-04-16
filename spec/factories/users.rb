@@ -2,30 +2,23 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :user do
-    role "user"
+  factory :user do |f|
+    f.role "user"
 
-    trait :with_credentials do
-      sequence(:email) { Forgery(:internet).email_address }
-      sequence(:username) { Forgery(:internet).user_name }
-      password "password"
-      password_confirmation { |u| u.password }
-    end
+    factory :registered_user do |f|
+      f.sequence(:email) { Forgery(:internet).email_address }
+      f.sequence(:username) { Forgery(:internet).user_name }
+      f.password "password"
+      f.password_confirmation { |u| u.password }
 
-    trait :admin do
-      sequence(:email) {|n| "user#{n}@example.com" }
-      role "admin"
-      password "password"
-      password_confirmation { |u| u.password }
-    end
+      factory :admin_user do |f|
+        f.role "admin"
+      end
 
-    factory :registered_user do
-      with_credentials
-    end
-
-    factory :admin_user do
-      with_credentials
-      admin
+      factory :api_user do |f|
+        f.api_key "test_key"
+        f.api_secret "sample api secret"
+      end
     end
   end
 end

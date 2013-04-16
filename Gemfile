@@ -91,6 +91,11 @@ gem 'tolk', :git => "git://github.com/monterail/tolk.git", :branch => "oz-custom
 gem 'foreman'
 gem 'twitter_cldr'
 
+# We need support for passing Rack::Test::UploadedFile
+gem 'strong_parameters',
+  :git => 'https://github.com/rails/strong_parameters.git',
+  :branch => '5e351d231748028a3db66cab2ab911b866a240ca'
+
 # documentation
 gem 'yard'
 gem 'redcarpet'
