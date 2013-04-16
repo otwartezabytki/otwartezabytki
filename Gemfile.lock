@@ -79,6 +79,14 @@ GIT
       thor (>= 0.14.6, < 2.0)
 
 GIT
+  remote: git://github.com/svenfuchs/routing-filter.git
+  revision: 6270eba04ee30e03500c8f977efe1189ede3f248
+  ref: 6270eba04e
+  specs:
+    routing-filter (0.3.1)
+      actionpack
+
+GIT
   remote: git://github.com/zzet/http_accept_language.git
   revision: b06cf2a35658702e54a54c16eee62aa19e729e9b
   specs:
@@ -378,8 +386,6 @@ GEM
       rubyzip (>= 0.9.4)
       spreadsheet (> 0.6.4)
       todonotes (>= 0.1.0)
-    routing-filter (0.3.1)
-      actionpack
     rspec (2.12.0)
       rspec-core (~> 2.12.0)
       rspec-expectations (~> 2.12.0)
@@ -568,7 +574,7 @@ DEPENDENCIES
   redcarpet
   remote_table
   rocket_tag
-  routing-filter
+  routing-filter!
   rspec-rails (~> 2.0)
   rubyzip
   sass-rails (~> 3.2.3)
