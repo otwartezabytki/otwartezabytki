@@ -3,20 +3,9 @@ module Api
   module V1
     class RelicsController < ApiController
 
-      resource_description do
-        formats ['json']
-        param :api_key, String
-        param :api_secret, String
-        error 404, "Resource is missing"
-        error 500, "Server crashed for some reason"
-      end
-
       before_filter :api_authenticate
       before_filter :api_authorize, :only => [:create, :update]
 
-      api :GET, '/v1/relics', "Search relics"
-      param :query, String, "Search for relics connected this value."
-      example 'muzeum'
       def index
         p = params.slice(:query, :place, :from, :to, :categories, :state, :existence, :location, :has_photos, :has_description, :order)
 
