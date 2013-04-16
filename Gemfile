@@ -57,7 +57,7 @@ gem 'arrabiata' # roman letters converter
 gem 'rails-i18n'
 gem 'i18n-country-translations'
 gem 'i18n_country_select', '~> 1.0.14'
-gem 'routing-filter'
+gem 'routing-filter', :git => 'git://github.com/svenfuchs/routing-filter.git', :ref => '6270eba04e'
 
 gem 'whenever', :require => false               # cron jobs
 gem 'recaptcha', :require => 'recaptcha/rails'  # bot secrity
