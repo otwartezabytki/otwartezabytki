@@ -317,11 +317,7 @@ class Relic < ActiveRecord::Base
     json.revisions do
       json.array! self.revisions.map do |r|
         json.(r, :event, :created_at)
-        if r.object_changes.present?
-          json.changes YAML.load(r.object_changes)
-        else
-          json.changes nil
-        end
+        json.changes r.changeset
       end
     end
 
