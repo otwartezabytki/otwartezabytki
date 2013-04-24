@@ -121,6 +121,15 @@ class Relic < ActiveRecord::Base
     self.existence = 'social' unless ['social', 'archived'].include?(self.existence)
   end
 
+  # prevents from keeping track of blank changes
+  before_save do
+    [:common_name, :description, :documents_info, :links_info].each do |a|
+      if changed.include?(a.to_s)
+        read_attribute(a).present? || write_attribute(a, nil)
+      end
+    end
+  end
+
   validates :state, :inclusion => { :in => States }, :if => :state_changed?
   validates :existence, :inclusion => { :in => Existences }, :if => :existence_changed?
   validates :kind, :inclusion => { :in => Kinds }, :if => :kind_changed?
