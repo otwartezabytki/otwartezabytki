@@ -1590,6 +1590,6 @@ pl:
     list_watched:
       activity: "Aktywność"
       adopted_relics_list: "Lista zabytków adoptowanych przez Ciebie:"
-      no_adopted_relics: "Nie adotowałeś jeszcze żadnego zabytku"
+      no_adopted_relics: "Nie adoptowałeś jeszcze żadnego zabytku"
       updated_relics_list: "Zmiany wprowadzone w profilach zabytków dodanych i adoptowanych przez Ciebie:"
       no_notifications: "Nie masz już więcej powiadomień."
