@@ -8,7 +8,7 @@
       %dd.feed-image.thumb
         = image_tag relic.main_photo.file.url(:icon), :width => 56, :height => 56
       %dd.feed-date
-        = timeago_tag relic.created_at
+        = timeago_tag user_relic.created_at
       %dt.feed-message
         = link_to(relic.identification, relic_path(relic))
   .feed-item.type-last
