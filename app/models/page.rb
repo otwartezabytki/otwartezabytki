@@ -1,11 +1,10 @@
 # -*- encoding : utf-8 -*-
 class Page < ActiveRecord::Base
-  attr_accessible :name, :body, :title, :translations_attributes,
-    :parent_id, as: :admin
+  attr_accessible :name, :body, :title, :translations_attributes, :parent_id, :permalink
 
-  translates :body, :title
+  translates :body, :title, :permalink
   accepts_nested_attributes_for :translations
-  validates :name, :presence => true, :uniqueness => true
+  validates :name, :permalink, :presence => true, :uniqueness => true
 
   has_ancestry
 
@@ -14,7 +13,7 @@ class Page < ActiveRecord::Base
 
     protected
       def find_templates(name, prefix, partial, details)
-        ::Page.where(:name => name).map do |record|
+        (::Page.find_all_by_permalink(name).presence || ::Page.where(:name => name)).map do |record|
           initialize_template(record)
         end
       end
@@ -42,4 +41,12 @@ class Page < ActiveRecord::Base
   end
 
   after_save { self.touch }
+
+  before_validation do
+    self.permalink = if self.permalink.blank? and self.new_record?
+      self.name.parameterize
+    else
+      self.permalink.parameterize
+    end
+  end
 end

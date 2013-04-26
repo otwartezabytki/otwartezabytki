@@ -2,10 +2,11 @@
 
 ActiveAdmin.register Page do
   menu :label => "Strony statyczne"
-  actions :index, :edit, :update, :new, :create
+  actions :index, :edit, :update, :new, :create, :destroy
 
   index do
     column :name
+    column :permalink
     column :parent_id do |page|
       page.parent ? page.parent.name : "-"
     end
@@ -13,13 +14,19 @@ ActiveAdmin.register Page do
   end
 
   form do |f|
+    if resource.errors[:permalink].any?
+      resource.errors[:permalink].each do |error|
+      f.form_buffers.last << f.template.content_tag(:p, "Permalink: #{error}", class: 'errors')
+      end
+    end
     f.inputs do
       f.input :name
-      f.input :parent_id, :as => :select, :label => "Strona należy do", :collection => Page.all, :selected => f.object.parent_id
+      f.input :parent_id, :as => :select, :label => "Strona należy do", :collection => Page.roots, :selected => f.object.parent_id
     end
     f.globalize_inputs :translations do |lf|
       lf.inputs do
         # lf.input :title
+        lf.input :permalink
         lf.input :body
         lf.input :locale, :as => :hidden
       end

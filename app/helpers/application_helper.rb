@@ -160,6 +160,6 @@ module ApplicationHelper
   end
 
   def page_path(page)
-    send("#{page.name}_page_path")
+    eval("#{I18n.locale.to_s.underscore}_page_path('#{h page.permalink}')")
   end
 end
