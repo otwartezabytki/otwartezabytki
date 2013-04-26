@@ -1,4 +1,21 @@
-%p.feed-description= t '.description'
+%p.feed-description= t '.adopted_relics_list'
+
+%section.feed.type-activity
+  %h1.feed-title.hidden= t '.activity'
+  - user.user_relics.each do |user_relic|
+    - relic = user_relic.relic
+    %dl.feed-item
+      %dd.feed-image.thumb
+        = image_tag relic.main_photo.file.url(:icon), :width => 56, :height => 56
+      %dd.feed-date
+        = timeago_tag relic.created_at
+      %dt.feed-message
+        = link_to(relic.identification, relic_path(relic))
+  .feed-item.type-last
+    .feed-message
+      = t '.no_adopted_relics' unless user.user_relics.any?
+
+%p.feed-description= t '.updated_relics_list'
 
 %section.feed.type-activity
   %h1.feed-title.hidden= t '.activity'
@@ -9,8 +26,8 @@
       %dd.feed-date
         = timeago_tag version.created_at
       %dt.feed-message
-        - params = { relic: link_to(version.relic.identification, relic_path(version.relic)), user: link_to(version.user.username, user_path(version.user.id)) }
-        != t("views.pages.home.relic_has_been_updated_by", params)
+        - params = { relic: link_to(version.relic.identification, relic_path(version.relic)) }
+        != t("views.pages.home.relic_has_been_updated", params)
         .changes= RecentRevision.new(:version => version).changes
   .feed-item.type-last
     .feed-message

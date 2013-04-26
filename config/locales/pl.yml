@@ -1218,6 +1218,7 @@ pl:
             par: "Udostępniamy kilka przykładowych aplikacji, dzięki którym łatwiej będzie wykorzystać dane o otwartych zabytkach na innych stronach internetowych."
             title: "Widżety »"
         relic_has_been_updated_by: "%{relic} został zaktualizowany przez %{user}"
+        relic_has_been_updated: "%{relic} został zaktualizowany"
     pagination:
       first: Pierwsza
       last: Ostatnia
@@ -1588,5 +1589,7 @@ pl:
       description: "Lista zabytków sprawdzonych przez Ciebie:"
     list_watched:
       activity: "Aktywność"
-      description: "Zmiany wprowadzone w profilach zabytków dodanych i adoptowanych przez Ciebie:"
+      adopted_relics_list: "Lista zabytków adoptowanych przez Ciebie:"
+      no_adopted_relics: "Nie adotowałeś jeszcze żadnego zabytku"
+      updated_relics_list: "Zmiany wprowadzone w profilach zabytków dodanych i adoptowanych przez Ciebie:"
       no_notifications: "Nie masz już więcej powiadomień."
