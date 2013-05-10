@@ -2294,6 +2294,17 @@ section.edit .flash {
   z-index: 11;
 }
 
+body.relics {
+  #new_search {
+    &>.span3 {
+      width: 240px;
+    }
+    &>.span9 {
+      width: 720px;
+    }
+  }
+}
+
 body.resource_home{
   #new_search{
     margin-top: 33px;
