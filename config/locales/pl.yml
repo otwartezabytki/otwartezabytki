@@ -1421,6 +1421,7 @@ pl:
           common_name: "Nazwa zwyczajowa"
           dating_of_obj: "Data powstania:"
           fill_in: uzupełnij
+          see: zobacz
           location: "Lokalizacja:"
           no_data_fill_in: "brak danych, uzupełnij »"
           original: "wersja oryginalna"
