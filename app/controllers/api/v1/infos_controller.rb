@@ -352,7 +352,15 @@ module Api
                 :name => "photo",
                 :paramType => "body",
                 :required => true,
-                :defaultValue => "{ author: '', date_taken: '', file: UPLOADED_FILE }"
+                :defaultValue => <<-EOS
+{
+  "photo": {
+    "author": "John Doe",
+    "date_taken": "2012-01-01",
+    "file": UPLOADED_FILE
+  }
+}
+                EOS
               },{
                 :allowMultiple => false,
                 :dataType => "string",
@@ -416,7 +424,15 @@ module Api
                 :name => "photo",
                 :paramType => "body",
                 :required => true,
-                :defaultValue => "{ author: '', date_taken: '', file: UPLOADED_FILE }"
+                :defaultValue => <<-EOS
+{
+  "photo": {
+    "author": "John Doe",
+    "date_taken": "2012-01-01",
+    "file": UPLOADED_FILE
+  }
+}
+                EOS
               },{
                 :allowMultiple => false,
                 :dataType => "string",
