@@ -1347,10 +1347,12 @@ pl:
           checked:
             header: Sprawdzony
             info: "Dane częściowo zweryfikowane; wymagają dopracowania."
+            info_social: "Dane częściowo zweryfikowane; wymagają dopracowania."
           close: zamknij
           filled:
             header: Uzupełniony
             info: "Opis prawie doskonały :)"
+            info_social: "Opis prawie doskonały :)"
           header: "Oznaczenie stanu"
           label: "Stan:"
           unchecked:
