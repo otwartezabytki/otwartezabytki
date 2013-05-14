@@ -150,12 +150,12 @@ $.fn.serializeObject = ->
 
     while (k = keys.pop()) isnt undefined
 
-      if patterns.push.test k 
+      if patterns.push.test k
         re = new RegExp("\\[#{k}\\]$")
         reverse_key = reverse_key.replace re, ''
         merge = @build [], @push_counter(reverse_key), merge
 
-      else if patterns.fixed.test k 
+      else if patterns.fixed.test k
         merge = @build [], k, merge
 
       else if patterns.named.test k
@@ -181,7 +181,7 @@ searchRoute = (search_params, callback) ->
     if status == google.maps.DirectionsStatus.OK
       FOUND_ROUTE = route = result.routes[0]
       route.path = route.overview_path.map (o) ->
-        latitude: o.Ya, longitude: o.Za
+        latitude: o.kb, longitude: o.lb
 
       gmap.directionsRenderer.setDirections(result)
       gmap.onNextMovement -> callback(route)
