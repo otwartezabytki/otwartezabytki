@@ -2,11 +2,12 @@
   %head
     %meta(charset="utf-8")
     %title= content_for?(:title) ? yield(:title) : "Otwarte Zabytki"
-    / Prevent showing bare page on history back
-    :javascript
-      window.onload = function() {
-        window.location.reload()
-      }
+    - unless iframe_transport?
+      / Prevent showing bare page on history back
+      :javascript
+        window.onload = function() {
+          window.location.reload()
+        }
   %body
     .container.main-container{ :'data-replace' => '.main-container' }
       - unless response.headers['x-fancybox'] == 'true'
