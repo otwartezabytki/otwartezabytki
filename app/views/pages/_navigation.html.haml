@@ -5,5 +5,5 @@
   - if page.has_children?
     %ul.dropdown-menu
       - page.children.each do |subpage|
-        = link_to t("layouts.application.#{subpage.name}"), subpage,
+        %li= link_to subpage.title || subpage.name.titleize, subpage,
           class: "#{subpage.name} #{'current' if current_page?(subpage)}"

@@ -6,6 +6,7 @@ ActiveAdmin.register Page do
 
   index do
     column :name
+    column :title
     column :permalink
     column :parent_id do |page|
       page.parent ? page.parent.name : "-"
@@ -16,7 +17,12 @@ ActiveAdmin.register Page do
   form do |f|
     if resource.errors[:permalink].any?
       resource.errors[:permalink].each do |error|
-      f.form_buffers.last << f.template.content_tag(:p, "Permalink: #{error}", class: 'errors')
+        f.form_buffers.last << f.template.content_tag(:p, "Permalink: #{error}", class: 'errors')
+      end
+    end
+    if resource.errors[:title].any?
+      resource.errors[:title].each do |error|
+        f.form_buffers.last << f.template.content_tag(:p, "Title: #{error}", class: 'errors')
       end
     end
     f.inputs do
@@ -25,7 +31,7 @@ ActiveAdmin.register Page do
     end
     f.globalize_inputs :translations do |lf|
       lf.inputs do
-        # lf.input :title
+        lf.input :title
         lf.input :permalink
         lf.input :body
         lf.input :locale, :as => :hidden

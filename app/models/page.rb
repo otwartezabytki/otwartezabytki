@@ -5,6 +5,7 @@ class Page < ActiveRecord::Base
   translates :body, :title, :permalink
   accepts_nested_attributes_for :translations
   validates :name, :permalink, :presence => true, :uniqueness => true
+  validates_presence_of :title
 
   has_ancestry
 
@@ -43,6 +44,7 @@ class Page < ActiveRecord::Base
   after_save { self.touch }
 
   before_validation do
+    self.title = self.name if self.title.blank? and self.new_record?
     self.permalink = if self.permalink.blank? and self.new_record?
       self.name.parameterize
     else
