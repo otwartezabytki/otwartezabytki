@@ -48,5 +48,6 @@ class Page < ActiveRecord::Base
     else
       self.permalink.parameterize
     end
+    self.name = self.name.parameterize.underscore
   end
 end
