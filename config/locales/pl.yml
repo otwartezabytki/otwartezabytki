@@ -811,7 +811,7 @@ pl:
         body: "Pamiętaj o podaniu źródła!"
         title: "Nadaj tytuł. Np. Legenda o powstaniu zamku"
       photo:
-        author: "Podaj imię i nazwisko autora i/lub nick oraz źródło zdjęcia i nazwę licencji na której jest ono dostępne w Sieci (np. Mariusz 123, Wikipedia, CC BY-SA)."
+        author: "Podaj imię i nazwisko autora i/lub nick oraz źródło zdjęcia (np. Mariusz 123, Wikipedia)."
         date_taken: "Podaj datę wykonania zdjęcia. Jeśli nie możesz jej ustalić wpisz \"nieznana\"."
         description: "Opcjonalnie możesz opisać co znajduje się na zdjęciu:"
       relic:
@@ -880,7 +880,7 @@ pl:
       register: Zarejestruj
       relics_count: "Liczba Twoich zabytków: %{count}"
       search: Szukaj
-      tagline: Twórz z nami obywatelski katalog zabytków
+      tagline: "Twórz z nami obywatelski katalog zabytków"
       widgets: Widżety
   messages:
     are_you_sure: "Czy jesteś pewien?"
@@ -888,7 +888,8 @@ pl:
     alert_added: "Alert został dodany. Dziękujemy."
     changes_has_been_saved: "Zmiany zostały zapisane. Dziękujemy!"
     gallery_has_been_updated: "Galeria zdjęć została zaktualizowana. Dziękujemy!"
-    new_gruop_relic_has_been_added: "Gratulacje dodałeś zespół zabytków. Dodaj podzabytki poniżej."
+    new_group_relic_has_been_added: "Gratulacje dodałeś zespół zabytków. Dodaj podzabytki poniżej."
+    new_gruop_relic_has_been_added: "Gratulacje dodałeś zespół zabytków. Dodaj podzabytki tutaj:"
     new_relic_has_been_added: "Gratulacje dodałeś nowy zabytek"
     please_correct_errors: "Popraw proszę błędy wskazane poniżej."
     relic_reverted: "Objekt został przywrócony do wskazanej wersji."
@@ -1198,7 +1199,7 @@ pl:
     photos:
       show:
         header: "Galeria %{count}"
-        license: "CC BY-SA 3.0"
+        license: "Creative Commons 3.0"
         photo_belongs_to: "Zdjęcie należy do obiektu"
         relic_parent: "należącego do zespołu zabytków"
     places:
@@ -1231,8 +1232,8 @@ pl:
         not_found_html: "Nie ma go na liście &raquo;"
         that_one: "To jest ten zabytek!"
       new:
-        add_foreign_relic: "Polski zabytek zagranicą"
-        add_relic_group: "Zespół zabytków"
+        add_foreign_relic: "chcę dodać zabytek spoza Polski"
+        add_relic_group: "chcę dodać zespół zabytków"
         choose_html: "wybieram &raquo;"
         country_code: "W jakim kraju"
         drag_marker: "Przeciągnij znacznik na mapę"
@@ -1285,8 +1286,8 @@ pl:
         step4: "krok 4"
     relics:
       edit:
-        add_attachement: "dodaj nowe zdjęcie do zabytku"
         add_and_save: "dodaj i zapisz"
+        add_attachement: "dodaj nowe zdjęcie do zabytku"
         add_photo: "dodaj zdjęcie"
         cancel: anuluj
         categories:
@@ -1324,7 +1325,7 @@ pl:
           delete_confirm: "Czy aby na pewno?"
           delete_photo: "usuń zdjęcie"
           loading: "Trwa wgrywanie, proszę czekać..."
-          statement_html: 'Oświadczam, że posiadam prawa do zdjęć, które publikuję na stronie otwartezabytki.pl lub że są one dostępne na jednej z wolnych licencji (Creative Commons Uznanie autorstwa lub Creative Commons Uznanie autorsta-Na tych samych warunkach). Zdjęcia te udostępniam na licencji Creative Commons Uznanie Autorstwa-Na Tych Samych Warunkach 3.0 Polska <br/><a href="http://creativecommons.org/licenses/by/3.0/pl/" target="_blank" class="small">Creative Commons Uznanie autorstwa (ang. CC BY)</a><em class="icons-by"></em> <br/><a href="http://creativecommons.org/licenses/by-sa/3.0/pl/" target="_blank" class="small">Creative Commons Uznanie autorstwa-Na tych samych warunkach (ang. CC BY SA)</a><em class="icons"></em><span class="small cc-search">Zdjęcia na CC możesz znaleźć na <a href="http://search.creativecommons.org/?lang=pl" target="_blank">search.creativecommons.org</a>'
+          statement_html: "Oświadczam, że posiadam prawa do zdjęć, które publikuję na stronie otwartezabytki.pl. Jeśli nie jestem autorem/autorką zdjęć, oświadczam, że mam prawo ich publikacji na licencji <a href=\"http://creativecommons.org/licenses/by-sa/3.0/pl/\" target=\"_blank\">Creative Commons Uznanie Autorstwa-Na Tych Samych Warunkach 3.0 Polska</a> <em class=\"icons\"></em>"
         reminder: "Pamiętaj o podaniu źródła!"
         save: "zapisz zmiany"
         update: aktualizuj
@@ -1335,11 +1336,11 @@ pl:
         content: "Zawartość:"
         filter_options: "Opcje filtrowania"
         kind: Rodzaj
-        loading: "Trwa ładowanie wyników, proszę czekać"
+        loading: "Trwa ładowanie wyników proszę czekać"
         no_results2_html: "Nie znalazłeś tego, czego szukałeś? Spróbuj użyć symbolu gwiazdki, np. Scheibler*"
-        no_results_html: "Żaden z zabytków w naszej bazie<br/>nie spełnia podanych kryteriów."
-        no_results_add_header: "Jesteś pewien, że taki zabytek istnieje?"
         no_results_add: "Dodaj zabytek do bazy"
+        no_results_add_header: "Jesteś pewien, że taki zabytek istnieje?"
+        no_results_html: "Żaden z zabytków w naszej bazie<br/>nie spełnia podanych kryteriów."
         order:
           az: A-Z
           score: Trafność
@@ -1450,6 +1451,16 @@ pl:
           group_info: "Ten zabytek posiada pewne podzabytki."
           parent_info: "Ten zabytek wchodzi w skład zespołu: %{parent}."
         view_current_version: "&#171; zobacz wersję obecną"
+      guide:
+        general: "Informacje ogólne"
+        date: "Data wygenerowania"
+        logo: "Logo"
+        map: "Mapa"
+        other_subrelics: "Pozostałe elementy należące do&nbsp;tego zespołu zabytków"
+        print_guide: "Mini-przewodnik"
+        registry: "Zabytek wpisany jest do rejestru zabytków"
+        registry_number: "Numer w rejestrze"
+        title: "Karta z przewodnika"
     widgets:
       edit:
         add_alert:

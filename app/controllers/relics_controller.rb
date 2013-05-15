@@ -147,6 +147,10 @@ class RelicsController < ApplicationController
     end
   end
 
+  def print
+    render :print, :layout => 'print'
+  end
+
   protected
     def no_original_version
       return true unless params[:original]

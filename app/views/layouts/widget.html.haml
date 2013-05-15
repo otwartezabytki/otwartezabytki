@@ -1,5 +1,5 @@
 !!! 5
-%html(lang="en")
+%html{lang: I18n.locale}
   %head
     %meta(charset="utf-8")
     = csrf_meta_tags
@@ -15,22 +15,4 @@
     != include_gon(:camel_case => true)
     = yield :before_javascripts
     = yield :javascripts
-    - if Rails.env.production?
-      :javascript
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', '#{Settings.oz.ga_key}']);
-        _gaq.push(['_trackPageview']);
-        (function() {
-          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-        })();
-      :javascript
-        var pkBaseURL = (("https:" == document.location.protocol) ?  "https://centrumcyfrowe.pl/piwik/" : "http://centrumcyfrowe.pl/piwik/");
-        document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
-      :javascript
-        try {
-        var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 2);
-        piwikTracker.trackPageView();
-        piwikTracker.enableLinkTracking();
-        } catch( err ) {}
+    = render 'shared/analytics'

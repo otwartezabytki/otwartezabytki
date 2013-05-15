@@ -10,7 +10,7 @@
         = f.input :dating_of_obj, :label => false, :hint => false
         .name= t('views.relics.edit.events.create_date')
     %ol.sortable{ :start => "2" }
-      - relic.events.each do |event|
+      - relic.events.includes(:relic, :photo).each do |event|
         = f.semantic_fields_for :events, event do |f2|
           = content_tag_for :li, event, :style => (event.marked_for_destruction? ? "display: none" : "") do
             = f2.input :date, :label => false, :hint => false, :class => "date"

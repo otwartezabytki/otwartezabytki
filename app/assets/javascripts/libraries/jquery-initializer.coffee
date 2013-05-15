@@ -63,10 +63,10 @@ window.ajax_callback = (data, status, xhr) ->
           # history.pushState { autoreload: true, path: window.before_fancybox_url }, $('title').text(), window.before_fancybox_url
           # if last_xhr.getResponseHeader('x-logged')? && $('body').data('logged')? && $('body').data('logged').toString() != last_xhr.getResponseHeader('x-logged').toString()
           #   window.location.href = window.location.pathname
-          if $('#fancybox').length
-            $('#fancybox_loader_container').show()
 
-            $.ajax(window.location.pathname).success(ajax_callback).complete(-> popping_state = false)
+          if $('#fancybox').length && !$('a.translation-mode.on').length
+            $('#fancybox_loader_container').show()
+            $.ajax(window.location.href).success(ajax_callback).complete(-> popping_state = false)
         afterLoad: ->
           if !float_fancybox && ($('.fancybox-wrap').position().top - 20) < $(window).scrollTop()
             $(window).scrollTop($('.fancybox-wrap').position().top - 20)
@@ -95,7 +95,7 @@ window.ajax_callback = (data, status, xhr) ->
             $(node).initialize()
       else if last_xhr.getResponseHeader('x-logged')? && $('body').data('logged')? && $('body').data('logged').toString() != last_xhr.getResponseHeader('x-logged').toString()
         $('#fancybox_loader_container').show()
-        window.location.href = window.location.pathname
+        window.location.reload()
       else
         to_replace = $('#root').find($(node).data('replace'))
         if to_replace.length
@@ -118,7 +118,7 @@ window.ajax_callback = (data, status, xhr) ->
       window.location.href = xhr.getResponseHeader('x-path')
 
 $(document).on 'ajax:beforeSend', 'form[data-remote], a[data-remote]', ->
-  $('#fancybox_loader_container').show() unless window.location.pathname == '/relics'
+  $('#fancybox_loader_container').show() unless window.location.pathname.match(/^(\/[a-z]{2})?\/relics/)
 
 $(document).on 'ajax:success', 'form[data-remote], a[data-remote]', (e, data, status, xhr) ->
   $('#fancybox_loader_container').hide()

@@ -1,0 +1,137 @@
+---
+se:
+  activerecord:
+    attributes:
+      user:
+        email: "Dirección e-mail"
+        password: Contraseña
+  layouts:
+    application:
+      about: "Sobre el proyecto"
+      addrelic: "Añade un monumento"
+      browse: Catálogo
+      contact: Contacto
+      download_data: "Baja los datos"
+      homepage: "Página principal"
+      register: Registrarse
+      search: Busca
+      widgets: Vidgets
+  relic_tabs:
+    categories:
+      name: "Categorías y tags"
+    description:
+      name: Descripción
+    documents:
+      name: "Documentos oficiales"
+    entries:
+      name: "Curiosidades, leyendas, anécdotas"
+    events:
+      name: "Fechas importantes"
+    general:
+      name: "Nombre del sitio"
+    links:
+      name: "Enlaces, fuentes"
+    location:
+      name: Localización
+    photos:
+      name: Fotos
+  views:
+    devise:
+      passwords:
+        new:
+          ask_account: "Qué hacer si no tengo la contraseña?"
+          password_has_been_sent: "La contraseña fue enviada al momento de la registración. Si no llegas a encontrarla, la enviaremos otra vez."
+          submit: "Envía un enlace para recuperar la contraseña"
+      sessions:
+        new:
+          ask_account1: "No tienes cuenta?"
+          ask_account3: "Para qué necesito una cuenta?"
+          forgot_password: "No recibiste o no recuerdas la contraseña? "
+          header: Conectarse
+          iframe_sidebar: |-
+              <h4>Para qué necesito una cuenta?</h4>\n\
+              <p>Tienes acceso a la base sin conectarte. Pero si quieres añadir o completar informaciones – hace falta conectarse.</p>↵\n\
+              <h4>No tienes cuenta?</h4>
+          login_intro: "Conectarse al servicio"
+          register_here: "Registrarse aquí."
+          submit: Conectarse
+    pages:
+      home:
+        header: "Busca y completa..."
+        how_it_works:
+          title: "Cómo funciona el buscador?"
+          what: Qué?
+          what_content: "Busca por nombres enteros, palabras contenidas en los nombres y los tags."
+          where: Dónde?
+          where_content: "Busca las calles, pueblos, regiones, departamentos."
+        soon_header: "... pronto podremos ver los monumentos así:"
+        widgets_intro:
+          add:
+            par: "Adición de un monumento"
+            title: Adición
+          alert:
+            par: "Has visto un monumento en mala condición? Avierta!"
+            title: Alarma
+          map:
+            par: ~
+            title: Mapa
+          widget:
+            par: "Los datos abiertos sobre los monumentos os pueden ser útiles!"
+            title: Vidgets
+    relics:
+      show:
+        flash_content_html: "<h3>De qué se trata?</h3> <p> Busca las informaciones y completa los campos elegidos.</p> <p>Disfruta de tus conocimientos, busca en libros o en el internet.</p> <p>Comprueba si las informaciones ya completadas son correctas.</p> <p>Recuerda poner las fuentes.</p> </h3>"
+        original_version: "Estás viendo la versión original"
+        original_version_info: "Esto significa que existe también una versión con tus cambios."
+        view_current_version: "&#171; Ve la versión actual"
+        alerts:
+          create: "Notifica una alarma"
+          header: Alarmas
+          non_existent: "Notifica que el monumento no existe"
+          placeholder: "Sabes que el sitio necesita ayuda?<br/>Alarma!"
+        categories:
+          add_category: "Añade las categorías"
+          content_title_cat: "Categorías:"
+          content_title_tag: Tags
+          header: "Tags, categorías"
+          placeholder: "<p>Elige categorías que en tu opinión van bien con el monumento descrito.</p> <p>Añade los tags que te ayudarán a moverte por el catálogo. </p>"
+        description:
+          add: "Añade la descripción"
+          header: Descripción
+          placeholder: "<p>Escribe 3-4 frases con las informaciones más importantes sobre el sitio.</p>"
+        documents:
+          header: "Documentos oficiales"
+        entries:
+          add: "Añade un registro"
+          header: "Curiosidades, leyendas, anécdotas"
+          placeholder: "<p>Comparte con los demás las leyendas, las anécdotas,<br/>las historias curiosas relacionadas con el monumento.</p>"
+        events:
+          add: "Añade un acontecimiento"
+          header: "Fechas importantes"
+          placeholder: "<p>Introduce las fechas más importantes de la historia del sitio y una descripción breve</p>"
+        flash_content_html: "<h3>O co chodzi?</h3> <p> Wyszukaj informacje i uzupełnij wybrane pola.</p> <p>Skorzystaj z własnej wiedzy, poszukaj w książkach lub w internecie.</p> <p>Sprawdź, czy informacje już uzupełnione są poprawne. </p> <p>Pamiętaj o podaniu źródeł.</p>"
+        flash_hide: esconde
+        general:
+          fill_in: COMPLETA
+          original: "VERSION ORIGINAL"
+          polish_location: "%{place}, powiat %{district}, gmina %{commune}"
+          show_example: "Muestra un ejemplo"
+        links:
+          header: "Enlaces, fuentes"
+          placeholder: "<p>Comunica las interesantes fuentes tradicionales o del internet de informaciones sobre el monumento.</p>"
+        photos:
+          add: "ANADE LAS FOTOS"
+      edit:
+        cancel: cancela
+        header: "Edición del perfil"
+        or: "o"
+        save: "CONSERVA LOS CAMBIOS"
+    widgets:
+      index:
+        about: "Vidgets:"
+        description: |-
+            <p>Los datos abiertos sobre los monumentos os pueden ser útiles!</p> <p>Para empezar ponemos a vuestra disposición unas pocas aplicaciones de ejemplo gracias a las que la base de los datos pueda ser una fuente de conocimientos práctica.
+            Para utilizalos es suficiente poner un trozo del codigo en cualquier página internet.</p> <p>Si tienes una idea de una aplicación funcional que utilize los datos sobre los Monumentos Abiertos, compartela, puede ser que la realizemos (%{email})!</p>
+  widget:
+    map_search:
+      title: Mapa

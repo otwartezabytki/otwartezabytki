@@ -1,5 +1,5 @@
 !!! 5
-%html(lang="en")
+%html{lang: I18n.locale}
   %head
     %meta(charset="utf-8")
     %meta(name="viewport" content="width=device-width, initial-scale=1.0")
@@ -72,11 +72,11 @@
                 %li
                   = link_to t('layouts.application.homepage'), root_path, :class => "home #{'current' if current_page?(root_path)}"
                 %li
-                  = link_to t('layouts.application.about'), page_pl_path('o-projekcie'), :class => "about #{'current' if current_page?(about_path)}"
+                  = link_to t('layouts.application.about'), about_page_path, :class => "about #{'current' if current_page?(about_page_path)}"
                 %li
-                  = link_to t('layouts.application.download_data'), page_pl_path('pobierz-dane'), :class => "download #{'current' if current_page?(download_path)}"
+                  = link_to t('layouts.application.download_data'), download_path, :class => "download #{'current' if current_page?(download_path)}"
                 %li
-                  = link_to t('layouts.application.contact'), page_pl_path('kontakt'), :class => "contact  #{'current' if current_page?(strony_kontakt_path)}"
+                  = link_to t('layouts.application.contact'), contact_page_path, :class => "contact  #{'current' if current_page?(contact_page_path)}"
                 %li
                   = link_to t('layouts.application.widgets'), widgets_path, :class => "widgets #{'current' if current_page?(widgets_path)}"
                 %li
@@ -101,22 +101,4 @@
     != include_gon(:camel_case => true)
     != javascript_include_tag "application"
     != yield :footer_javascripts
-    - if Rails.env.production?
-      :javascript
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', '#{Settings.oz.ga_key}']);
-        _gaq.push(['_trackPageview']);
-        (function() {
-          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-        })();
-      :javascript
-        var pkBaseURL = (("https:" == document.location.protocol) ?  "https://centrumcyfrowe.pl/piwik/" : "http://centrumcyfrowe.pl/piwik/");
-        document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
-      :javascript
-        try {
-        var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 2);
-        piwikTracker.trackPageView();
-        piwikTracker.enableLinkTracking();
-        } catch( err ) {}
+    = render 'shared/analytics'

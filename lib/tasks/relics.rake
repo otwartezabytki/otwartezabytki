@@ -79,11 +79,7 @@ SQL
                 z.put_next_entry("relics/#{r.id}.json")
                 z.print Yajl::Encoder.encode(r.to_builder.attributes!, :pretty => true, :indent => "  ")
               rescue => ex
-                Airbrake.notify(
-                  :error_class   => "Relic JSON error",
-                  :error_message => "Relic JSON error: #{ex.message}",
-                  :parameters    => { :relic => r.inspect }
-                )
+                Raven.capture_exception(ex)
               end
             end
           end

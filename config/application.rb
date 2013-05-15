@@ -12,6 +12,7 @@ end
 
 require 'tire/rails/logger'
 require 'zip/zip'
+require 'yajl/json_gem'
 
 module Otwartezabytki
   class Application < Rails::Application
@@ -20,7 +21,7 @@ module Otwartezabytki
     # -- all .rb files in that directory are automatically loaded.
 
     # Custom directories with classes and modules you want to be autoloadable.
-    config.autoload_paths += %W(#{config.root}/lib)
+    config.autoload_paths += %W(#{config.root}/lib #{config.root}/app/strategies)
     ActiveSupport::Dependencies.explicitly_unloadable_constants << 'Polygon'
 
     # Only load the plugins named here, in the order given (default is alphabetical).
@@ -72,7 +73,7 @@ module Otwartezabytki
     end
     unless ['test', 'development'].include?(Rails.env)
       # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-      config.assets.precompile += %w( active_admin.js ie8.css iframe.css widgets/* )
+      config.assets.precompile += %w( active_admin.js ie8.css iframe.css print.css widgets/* )
       config.cache_store = :dalli_store, { :namespace => "otwartezabytki-#{Rails.env}", :expires_in => 1.day, :compress => true }
     end
 

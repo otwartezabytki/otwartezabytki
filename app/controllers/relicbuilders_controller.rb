@@ -122,7 +122,7 @@ class RelicbuildersController < ApplicationController
         redirect_to photos_relicbuilder_path(:id => @relic)
       when 'photos_step'
         if @relic.update_attributes :build_state => "finish_step"
-          redirect_to @relic, :notice => (@relic.is_group? ? t('notices.new_gruop_relic_has_been_added') : t('notices.new_relic_has_been_added'))
+          redirect_to @relic, :notice => (@relic.is_group? ? t('notices.new_group_relic_has_been_added') : t('notices.new_relic_has_been_added'))
         else
           render @relic.invalid_step_view
         end

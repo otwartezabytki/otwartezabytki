@@ -29,6 +29,7 @@ else
   json.descendants relic.descendant_ids
 end
 
+json.photos relic.photos
 json.place_id relic.place.id
 json.place_name relic.place.name
 json.commune_name relic.place.commune.name

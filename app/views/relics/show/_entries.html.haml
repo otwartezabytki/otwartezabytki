@@ -1,7 +1,7 @@
 %section.show.entries
   %h2= t('views.relics.show.entries.header')
   - if relic.entries.count > 0
-    = link_to t('views.relics.show.general.fill_in'), edit_section_relic_path(relic.id, :entries), :remote => true, :class => "edit-relic-link"
+    = link_to t('views.relics.show.general.fill_in'), edit_section_relic_path(relic.to_param, :entries), :remote => true, :class => "edit-relic-link"
     .content{:'data-togglable-less' => t('views.relics.show.entries.togglable.less', :editable => false),
              :'data-togglable-more' => t('views.relics.show.entries.togglable.more', :editable => false)}
       - relic.entries.each do |entry|
@@ -12,7 +12,7 @@
   - else
     .placeholder
       = t('views.relics.show.entries.placeholder')
-      = link_to t('views.relics.show.entries.add'), edit_section_relic_path(relic.id, :entries), :remote => true
+      = link_to t('views.relics.show.entries.add'), edit_section_relic_path(relic.to_param, :entries), :remote => true
       .example
         %a.show-example{:href => image_path('screenshot-stories.jpg'), :class => "fancybox"}
           = t('views.relics.show.general.show_example')
