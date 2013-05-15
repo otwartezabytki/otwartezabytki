@@ -2,7 +2,7 @@
 class Page < ActiveRecord::Base
   attr_accessible :name, :body, :title, :translations_attributes, :parent_id, :permalink
 
-  translates :body, :title, :permalink
+  translates :body, :title, :permalink, :fallbacks_for_empty_translations => true
   accepts_nested_attributes_for :translations
   validates :name, :permalink, :presence => true, :uniqueness => true
   validates_presence_of :title
@@ -21,7 +21,7 @@ class Page < ActiveRecord::Base
 
       # Initialize an ActionView::Template object based on the record found.
       def initialize_template(record)
-        source = record.body
+        source = record.body || ""
         identifier = "DbPageTemplate - pages/#{I18n.locale}_#{record.name}"
         handler = ActionView::Template.registered_template_handler('erb')
         details = {
@@ -38,6 +38,17 @@ class Page < ActiveRecord::Base
       self.parent = Page.find(value)
     else
       self.parent = nil
+    end
+  end
+
+  def self.find_all_by_permalink(permalink)
+    found = super(permalink).first
+    found = includes(:translations).where(:translations => { :permalink => permalink }).first unless found
+    if found
+      found.translations.reload
+      [found]
+    else
+      []
     end
   end
 
