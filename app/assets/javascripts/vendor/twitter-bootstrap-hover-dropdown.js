@@ -35,11 +35,13 @@
         return this.each(function() {
             var $this = $(this).parent(),
                 defaults = {
-                    delay: 500,
+                    delayIn: 500,
+                    delayOut: 500,
                     instantlyCloseOthers: true
                 },
                 data = {
-                    delay: $(this).data('delay'),
+                    delayIn: $(this).data('delay-in'),
+                    delayOut: $(this).data('delay-out'),
                     instantlyCloseOthers: $(this).data('close-others')
                 },
                 settings = $.extend(true, {}, defaults, options, data),
@@ -51,13 +53,15 @@
                         $allDropdowns.removeClass('open');
 
                     window.clearTimeout(timeout);
-                    $(this).addClass('open');
+                    timeout = window.setTimeout(function() {
+                        $this.addClass('open');
+                    }, settings.delayIn);
                 }
             }, function() {
                 if(shouldHover()) {
                     timeout = window.setTimeout(function() {
                         $this.removeClass('open');
-                    }, settings.delay);
+                    }, settings.delayOut);
                 }
             });
         });
