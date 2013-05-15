@@ -518,6 +518,12 @@ a {
   .container {
     border-top: 1px solid #dcdcdc;
     min-height: 59px;
+    ul.dropdown-menu {
+      margin-top: -1em;
+      a:hover {
+        background-color: #577787;
+      }
+    }
   }
 
   .smaller-14 > li > a { font-size: 14px !important; }
