@@ -8,6 +8,7 @@ ActiveAdmin.register Page do
     column :name
     column :title
     column :permalink
+    column :weight
     column :parent_id do |page|
       page.parent ? page.parent.name : "-"
     end
@@ -27,6 +28,7 @@ ActiveAdmin.register Page do
     end
     f.inputs do
       f.input :name
+      f.input :weight
       f.input :parent_id, :as => :select, :label => "Strona należy do", :collection => Page.roots, :selected => f.object.parent_id
     end
     f.globalize_inputs :translations do |lf|

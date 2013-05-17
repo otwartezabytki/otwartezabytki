@@ -1,11 +1,13 @@
 # -*- encoding : utf-8 -*-
 class Page < ActiveRecord::Base
-  attr_accessible :name, :body, :title, :translations_attributes, :parent_id, :permalink
+  attr_accessible :name, :body, :title, :translations_attributes, :parent_id, :permalink, :weight
 
   translates :body, :title, :permalink, :fallbacks_for_empty_translations => true
   accepts_nested_attributes_for :translations
   validates :name, :permalink, :presence => true, :uniqueness => true
   validates_presence_of :title
+
+  scope :by_weight, order('weight ASC')
 
   has_ancestry
 
