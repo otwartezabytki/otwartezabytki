@@ -2,7 +2,7 @@
 class Page < ActiveRecord::Base
   attr_accessible :name, :body, :title, :translations_attributes, :parent_id, :permalink, :weight
 
-  translates :body, :title, :permalink, :fallbacks_for_empty_translations => true
+  translates :body, :title, :permalink
   accepts_nested_attributes_for :translations
   validates :name, :permalink, :presence => true, :uniqueness => true
   validates_presence_of :title
@@ -52,6 +52,14 @@ class Page < ActiveRecord::Base
     else
       []
     end
+  end
+
+  def subpages
+    self.children.by_weight.delete_if { |page| page.permalink.blank? }
+  end
+
+  def has_subpages?
+    self.subpages.present?
   end
 
   after_save { self.touch }
