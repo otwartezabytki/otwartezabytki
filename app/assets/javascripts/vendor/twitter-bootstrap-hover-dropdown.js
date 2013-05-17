@@ -59,6 +59,7 @@
                 }
             }, function() {
                 if(shouldHover()) {
+                    window.clearTimeout(timeout);
                     timeout = window.setTimeout(function() {
                         $this.removeClass('open');
                     }, settings.delayOut);
