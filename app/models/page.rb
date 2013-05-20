@@ -73,4 +73,16 @@ class Page < ActiveRecord::Base
     end
     self.name = self.name.parameterize.underscore
   end
+
+  class Translation
+    after_initialize do
+      if self.new_record? and self.locale == I18n.default_locale
+        self.body ||= <<-EOS
+<div class='content_more'>
+  Treść strony
+</div>
+EOS
+      end
+    end
+  end
 end
