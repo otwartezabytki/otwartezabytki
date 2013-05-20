@@ -181,7 +181,7 @@ searchRoute = (search_params, callback) ->
     if status == google.maps.DirectionsStatus.OK
       FOUND_ROUTE = route = result.routes[0]
       route.path = route.overview_path.map (o) ->
-        latitude: o.kb, longitude: o.lb
+        latitude: o.lat(), longitude: o.lng()
 
       gmap.directionsRenderer.setDirections(result)
       gmap.onNextMovement -> callback(route)
