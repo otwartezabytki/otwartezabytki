@@ -815,6 +815,7 @@ pl:
         author: "Podaj imię i nazwisko autora i/lub nick oraz źródło zdjęcia (np. Mariusz 123, Wikipedia)."
         date_taken: "Podaj datę wykonania zdjęcia. Jeśli nie możesz jej ustalić wpisz \"nieznana\"."
         description: "Opcjonalnie możesz opisać co znajduje się na zdjęciu:"
+        alternate_text: "Opcjonalnie możesz podać tekst alternatywny, jest on pomocny osobom niewidomym. Napisz, co znajduje się na zdjęciu np. widok budynku z przodu"
       relic:
         categories: "Wybierz kategorie, które Twoim zdaniem pasują do opisywanego zabytku."
         common_name: "Jeśli zabytek ma jedną lub więcej nazw zwyczajowych, wpisz je."
