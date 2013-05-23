@@ -287,7 +287,7 @@ class Relic < ActiveRecord::Base
     versions.reorder('created_at DESC').limit(3)
   end
 
-  def to_builder
+  def to_builder(with_revisions = false)
     json = Jbuilder.new
     json.(self,
       :id,
@@ -311,7 +311,7 @@ class Relic < ActiveRecord::Base
     json.main_photo self.main_photo if self.has_photos?
 
     json.descendants do
-      json.array! self.descendants.map {|d| d.to_builder.attributes! }
+      json.array! self.descendants.map {|d| d.to_builder(with_revisions).attributes! }
     end
 
     json.revisions do
@@ -319,7 +319,7 @@ class Relic < ActiveRecord::Base
         json.(r, :event, :created_at)
         json.changes r.changeset
       end
-    end
+    end if with_revisions
 
     json.place_id self.place.id
     json.place_name self.place.name

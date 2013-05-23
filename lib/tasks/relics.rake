@@ -61,14 +61,20 @@ SQL
     end
   end
 
-  task :export => :environment do
-    new_zip_path = "#{Rails.root}/public/history/#{Date.today.to_s(:db)}-relics.zip"
+  def export_relics(with_revisions = false)
+    suffix = if with_revisions
+      "relics-with-revisions"
+    else
+      "relics"
+    end
+    new_zip_path = "#{Rails.root}/public/history/#{Date.today.to_s(:db)}-#{suffix}.zip"
     if File.exists?(new_zip_path)
       puts "Nothing to do file (#{new_zip_path}) has been already generated."
     else
+      puts "Exporting relics to file (#{new_zip_path})"
       total   = Relic.created.roots.count
       counter = 0
-      tmpfile = Tempfile.new(['relics', '.zip'])
+      tmpfile = Tempfile.new([suffix, '.zip'])
       begin
         Zip::ZipOutputStream.open(tmpfile.path) do |z|
           Relic.created.roots.includes(:place, :commune, :district, :voivodeship).find_in_batches do |objs|
@@ -76,8 +82,8 @@ SQL
             counter += 1
             objs.each do |r|
               begin
-                z.put_next_entry("relics/#{r.id}.json")
-                z.print Yajl::Encoder.encode(r.to_builder.attributes!, :pretty => true, :indent => "  ")
+                z.put_next_entry("#{suffix}/#{r.id}.json")
+                z.print Yajl::Encoder.encode(r.to_builder(with_revisions).attributes!, :pretty => true, :indent => "  ")
               rescue => ex
                 Raven.capture_exception(ex)
               end
@@ -87,11 +93,16 @@ SQL
         puts "Progress 100 of 100%"
         FileUtils.cp tmpfile.path, new_zip_path
         FileUtils.chmod 'go+r', new_zip_path
-        FileUtils.ln_s new_zip_path, "#{Rails.root}/public/history/current-relics.zip", :force => true
+        FileUtils.ln_s new_zip_path, "#{Rails.root}/public/history/current-#{suffix}.zip", :force => true
       ensure
         tmpfile.close
       end
     end
+  end
+
+  task :export => :environment do
+    export_relics
+    export_relics true # with revisions
   end
 
   task :export_users, [:export_csv] => :environment do |t, args |

@@ -13,8 +13,20 @@
       <a href="http://creativecommons.org/licenses/by-sa/3.0/pl/" target="_blank">Creative Commons Uznanie Autorstwa-Na Tych Samych Warunkach 3.0 Polska</a>
       <em class="icons"></em>
     </p>
-    <% if @export_files and @export_files.present? %>
+    <% if @export_files.present? %>
       <% @export_files.each do |file| %>
+        <p class="small">
+          <%= link_to raw("Pobierz dane <span class=\"size\">(#{file[:size]} MiB)</span><br><span class=\"date\">#{l file[:date]}</span>"), file[:url], :class => 'download' %>
+        </p>
+      <% end %>
+    <% else %>
+      <strong>pliki obecnie są niedostępne</strong>
+    <% end %>
+    <p class="small">
+      Poniżej możesz pobrać plik zawierający również listę ostatnich zmian (rewizji)
+    </p>
+    <% if @export_files_with_revisions.present? %>
+      <% @export_files_with_revisions.each do |file| %>
         <p class="small">
           <%= link_to raw("Pobierz dane <span class=\"size\">(#{file[:size]} MiB)</span><br><span class=\"date\">#{l file[:date]}</span>"), file[:url], :class => 'download' %>
         </p>

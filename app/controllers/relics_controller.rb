@@ -123,7 +123,17 @@ class RelicsController < ApplicationController
     Dir.glob(dir_path).sort.reverse.first(3).each do |file_path|
       @export_files << {
         :url => "/history/#{File.basename(file_path)}",
-        :date => File.atime(file_path),
+        :date => File.mtime(file_path),
+        :size => (File.size(file_path) / 1024.0 / 1024.0).round(2) }
+    end
+
+    dir_path = Rails.root.join('public', 'history', '2*-relics-with-revisions.zip')
+
+    @export_files_with_revisions = []
+    Dir.glob(dir_path).sort.reverse.first(3).each do |file_path|
+      @export_files_with_revisions << {
+        :url => "/history/#{File.basename(file_path)}",
+        :date => File.mtime(file_path),
         :size => (File.size(file_path) / 1024.0 / 1024.0).round(2) }
     end
   end
