@@ -48,6 +48,8 @@ class Link < ActiveRecord::Base
     shortened_path = URI::decode(uri.path)
     shortened_path = shortened_path[1..20].to_s + "..." if shortened_path.length > 20
     "#{uri.host}/#{shortened_path}".gsub(/\/*$/, '')
+  rescue
+    "link"
   end
 
   def url?
