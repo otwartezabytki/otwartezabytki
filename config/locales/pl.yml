@@ -69,6 +69,7 @@ pl:
         too_long: "jest za długie (maksymalnie %{count} znaków)"
         too_short: "jest za krótkie (przynajmniej %{count} znaków)"
         wrong_length: "ma nieprawidłową długość (powinna wynosić %{count} znaków)"
+        not_a_url: "niepoprawny adres URL"
       template:
         body: "Błędy dotyczą następujących pól:"
         header:

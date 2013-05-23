@@ -36,6 +36,7 @@ class Link < ActiveRecord::Base
   validates :category, :presence => true, :inclusion => { :in => PaperCategories }, :if => :paper?
 
   validates :url, :name, :length => { :maximum => 255 }
+  validates :url, :url => true
 
   validates :relic, :user, :url, :name, :presence => true, :if => :url?
   validates :relic, :user, :formal_name, :name, :presence => true, :if => :paper?
