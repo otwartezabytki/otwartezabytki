@@ -61,9 +61,9 @@ SQL
     end
   end
 
-  def export_relics(with_revisions = false)
-    suffix = if with_revisions
-      "relics-with-revisions"
+  def export_relics(register_data = false)
+    suffix = if register_data
+      "relics-register"
     else
       "relics"
     end
@@ -77,13 +77,13 @@ SQL
       tmpfile = Tempfile.new([suffix, '.zip'])
       begin
         Zip::ZipOutputStream.open(tmpfile.path) do |z|
-          Relic.created.roots.includes(:place, :commune, :district, :voivodeship).find_in_batches do |objs|
+          Relic.created.roots.includes(:place, :commune, :district, :voivodeship) do |objs|
             puts "Progress #{counter * 1000 * 100 / total} of 100%"
             counter += 1
             objs.each do |r|
               begin
                 z.put_next_entry("#{suffix}/#{r.id}.json")
-                z.print Yajl::Encoder.encode(r.to_builder(with_revisions).attributes!, :pretty => true, :indent => "  ")
+                z.print Yajl::Encoder.encode(r.to_builder(register_data).attributes!, :pretty => true, :indent => "  ")
               rescue => ex
                 Raven.capture_exception(ex)
               end

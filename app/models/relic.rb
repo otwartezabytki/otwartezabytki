@@ -287,39 +287,50 @@ class Relic < ActiveRecord::Base
     versions.reorder('created_at DESC').limit(3)
   end
 
-  def to_builder(with_revisions = false)
+  def to_builder(register_data = false)
     json = Jbuilder.new
-    json.(self,
-      :id,
-      :nid_id,
-      :identification,
-      :description,
-      :categories,
-      :state,
-      :register_number,
-      :dating_of_obj,
-      :street,
-      :latitude,
-      :longitude,
-      :tags,
-      :country_code,
-      :fprovince,
-      :fplace,
-      :documents_info,
-      :links_info,
-    )
-    json.main_photo self.main_photo if self.has_photos?
 
-    json.descendants do
-      json.array! self.descendants.map {|d| d.to_builder(with_revisions).attributes! }
+    if register_data
+      json.(self,
+        :id,
+        :nid_id,
+        :identification,
+        :state,
+        :register_number,
+        :dating_of_obj,
+        :street,
+        :latitude,
+        :longitude,
+        :country_code,
+        :fprovince,
+        :fplace
+      )
+    else
+      json.(self,
+        :id,
+        :nid_id,
+        :identification,
+        :description,
+        :categories,
+        :state,
+        :register_number,
+        :dating_of_obj,
+        :street,
+        :latitude,
+        :longitude,
+        :tags,
+        :country_code,
+        :fprovince,
+        :fplace,
+        :documents_info,
+        :links_info,
+      )
+      json.main_photo self.main_photo if self.has_photos?
     end
 
-    json.revisions do
-      json.array! self.revisions.map do |r|
-        json.(r, :event, :created_at)
-        json.changes r.changeset
-      end
-    end if with_revisions
+    json.descendants do
+      json.array! self.descendants.map {|d| d.to_builder(register_data).attributes! }
+    end
 
     json.place_id self.place.id
     json.place_name self.place.name

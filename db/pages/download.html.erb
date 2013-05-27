@@ -16,19 +16,19 @@
     <% if @export_files.present? %>
       <% @export_files.each do |file| %>
         <p class="small">
-          <%= link_to raw("Pobierz dane <span class=\"size\">(#{file[:size]} MiB)</span><br><span class=\"date\">#{l file[:date]}</span>"), file[:url], :class => 'download' %>
+          <%= link_to raw("Pobierz dane <span class=\"size\">(#{file[:size]} MiB)</span><br><span class=\"date\">#{file[:date]}</span>"), file[:url], :class => 'download' %>
         </p>
       <% end %>
     <% else %>
       <strong>pliki obecnie są niedostępne</strong>
     <% end %>
     <p class="small">
-      Poniżej możesz pobrać plik zawierający również listę ostatnich zmian (rewizji)
+      Poniżej możesz pobrać pliki zawierające tylko dane z rejestru
     </p>
-    <% if @export_files_with_revisions.present? %>
-      <% @export_files_with_revisions.each do |file| %>
+    <% if @export_files_register.present? %>
+      <% @export_files_register.each do |file| %>
         <p class="small">
-          <%= link_to raw("Pobierz dane <span class=\"size\">(#{file[:size]} MiB)</span><br><span class=\"date\">#{l file[:date]}</span>"), file[:url], :class => 'download' %>
+          <%= link_to raw("Pobierz dane <span class=\"size\">(#{file[:size]} MiB)</span><br><span class=\"date\">#{file[:date]}</span>"), file[:url], :class => 'download' %>
         </p>
       <% end %>
     <% else %>
