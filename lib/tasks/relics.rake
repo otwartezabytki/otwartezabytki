@@ -77,7 +77,7 @@ SQL
       tmpfile = Tempfile.new([suffix, '.zip'])
       begin
         Zip::ZipOutputStream.open(tmpfile.path) do |z|
-          Relic.created.roots.includes(:place, :commune, :district, :voivodeship) do |objs|
+          Relic.created.roots.includes(:place, :commune, :district, :voivodeship).find_in_batches do |objs|
             puts "Progress #{counter * 1000 * 100 / total} of 100%"
             counter += 1
             objs.each do |r|
