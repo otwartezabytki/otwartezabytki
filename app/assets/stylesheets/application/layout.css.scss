@@ -949,26 +949,26 @@ a {
       display: block;
       cursor: pointer;
     }
-    div span strong{
-      width: 157px;
-    }
     span {
-      em{
+      input {
+        vertical-align: bottom;
+      }
+      em {
         background: #dce4e8;
         color: #236282;
         float: right;
-        margin-top: -2px;
         padding: 4px 5px;
         font-size: 12px;
         @include border-radius(2px);
         font-style: normal;
       }
-      strong{
-        display: inline-block;
-        width: 167px;
-        font-weight: normal;
+      .name {
+        width: 150px;
         height: 15px;
-        word-wrap: break-word;
+        display: inline-block;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
       }
     }
   }

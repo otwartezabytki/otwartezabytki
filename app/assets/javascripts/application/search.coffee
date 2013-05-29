@@ -86,3 +86,10 @@ jQuery.initializer 'body.relics.index .main-container', ->
   if relics_results.length > 0 and gon.highlightedTags
     for tag in gon.highlightedTags
       relics_results.highlight(tag)
+
+  this.find('.sidebar-categories .choices-group label').on 'mouseenter', ->
+    $name = $(@).find('.name')
+    name = $name[0]
+    if name.offsetWidth < name.scrollWidth
+      $(@).attr 'title', $name.text()
+      $(@).tooltip('show')
