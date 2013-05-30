@@ -1,32 +1,25 @@
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the top of the
- * compiled file, but it's generally better to create a new file per style scope.
- *
- *= require application/reset
- *
+ *= require_self
  *= require jquery.ui.all
  *= require vendor/jquery.fancybox
- *= require application/bootstrap
- *= require application/layout
- *= require application/static
- *= require application/user
- *= require application/profile
- *= require application/widgets
- *= require application/wizard
  *= require vendor/redactor
  *= require vendor/select2
  *= require vendor/jcarousel-mini
  *= require vendor/jcarousel-midi
  *= require vendor/colorbox
+ *= require vendor/cssmap-poland
 */
 
-@import "compass/css3";
+@import "compass";
+@import "application/reset";
+@import "application/mixins";
+@import "application/bootstrap";
+@import "application/layout";
+@import "application/static";
+@import "application/user";
+@import "application/profile";
+@import "application/widgets";
+@import "application/wizard";
 
 i18n.on {
   background-color: red !important;

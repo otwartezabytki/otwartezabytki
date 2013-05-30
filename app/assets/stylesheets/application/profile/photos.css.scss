@@ -1,7 +1,3 @@
-@import "compass/layout";
-@import "compass/css3";
-@import "../mixins";
-
 .edit_relic section.photos {
   form{
     .photo{
@@ -9,7 +5,7 @@
       padding-bottom: 20px;
       .column-left{
         .preview{
-          @include box-shadow(0 1px 3px 0 rgba(0,0,0,.3));
+          box-shadow: 0 1px 3px 0 rgba(0,0,0,.3);
           width: 125px;
           height: 125px;
           border: 5px solid #fff;
@@ -26,7 +22,7 @@
         }
       }
     }
-    p{ 
+    p{
       strong{
         font-weight: 700;
         font-size: 14px;
@@ -73,7 +69,7 @@
       em.icons{
         width: 58px;
         background: asset-data-url("cc-icons.png") no-repeat;
-        
+
       }
       em.icons-by{
         width: 37px;
