@@ -18,7 +18,7 @@ $dark-grey: #313132;
 }
 
 @mixin gradient($from, $to) {
-  background-color: mix($from, $to);
+  background-color: mix($from, $to, 60%);
   background-image: linear-gradient(to bottom, $from, $to);
 }
 

@@ -52,7 +52,6 @@
       font-size: 14px;
       border: 0px;
       border-radius: 2px;
-      -webkit-border-radius: 2px;
       box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 0 5px 1px rgba(30, 93, 125, 0.3);
       display: block;
       width: 100%;
@@ -636,7 +635,6 @@ section.show.general{
     font-weight: 300;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
     text-transform: uppercase;
-    -webkit-border-radius: 2px;
     border-radius: 2px;
     cursor: pointer;
     &:hover {
@@ -1497,7 +1495,6 @@ div.fancybox-close{
     font-weight: 600;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
     text-transform: uppercase;
-    -webkit-border-radius: 2px;
     border-radius: 2px;
     cursor: pointer;
     padding: 9px 12px 6px;

@@ -54,10 +54,6 @@ body.relics.edit, body.relics.new {
     background: #e8eef1;
     .actions *, .help-content, h1, h2, h3, h4, .column * {
       -webkit-touch-callout: none;
-      -webkit-user-select: none;
-      -khtml-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
       user-select: none;
     }
   }
