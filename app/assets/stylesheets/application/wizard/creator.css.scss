@@ -673,7 +673,6 @@ form#new_relic{
     border: 1px solid #acacac;
     @include box-shadow(rgba(0,0,0,0.45) 0 3px 15px, inset #fff 0 1px 1px -1px);
     @include gradient(rgba(246,247,248,0.95),rgba(234,234,235,0.95));
-    @include ie-gradient(#f6f7f8, #eaeaeb);
     a.close{
       position: absolute;
       top: 16px;

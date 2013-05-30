@@ -732,7 +732,7 @@ section.show.entries {
       line-height: 1.45;
 
       .body {
-        @include word-break();
+        @extend %word-break;
         font-family: Georgia, Times New Roman, Times, serif;
       }
 
@@ -1500,7 +1500,6 @@ div.fancybox-close{
   width: 100%;
   position: fixed;
   @include gradient(rgba(242,242,242,0.9), rgba(229,229,229,0.9));
-  @include ie-gradient(#f2f2f2, #e5e5e5);
   @include box-shadow(0 1px 1px 0 rgba(0,0,0,0.4));
   min-height: 83px;
   top: 0;
