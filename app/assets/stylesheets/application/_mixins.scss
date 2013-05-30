@@ -29,7 +29,7 @@ $dark-grey: #313132;
 
 // Legacy
 @mixin button-bluenavy {
-  @extend %button-navy-blue;
+  @extend %button-navy;
 }
 
 
@@ -59,17 +59,17 @@ $dark-grey: #313132;
   width: 1px;
 }
 
-%background-navy {
-  @include gradient(#4b6d7e, #436576);
-}
-
 %word-break {
   word-break: break-word;
   word-wrap: break-word;
 }
 
-%button-navy-blue {
-  @include backgroundnavy;
+%background-navy {
+  @include gradient(#4b6d7e, #436576);
+}
+
+%button-navy {
+  @extend %background-navy;
   color: #fff;
   border: 0;
   border-radius: 2px;
