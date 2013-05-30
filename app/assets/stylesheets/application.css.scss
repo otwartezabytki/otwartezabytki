@@ -10,7 +10,6 @@
  *= require vendor/cssmap-poland
 */
 
-@import "compass";
 @import "application/reset";
 @import "application/mixins";
 @import "application/bootstrap";
@@ -133,7 +132,7 @@ section.translation-edit {
     margin-top: -50px;
     opacity: 0.5;
     background-color: black;
-    @include border-radius(10px);
+    border-radius: 10px;
   }
 }
 

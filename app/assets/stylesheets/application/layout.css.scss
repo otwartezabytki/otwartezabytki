@@ -257,7 +257,7 @@ a {
     padding-left: 28px;
     @include gradient(#fafafa, #ffffff);
     border: 1px solid #727272;
-    @include border-radius(2px);
+    border-radius: 2px;
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1), inset 0 1px 3px 0 rgba(0, 0, 0, 0.3);
   }
   label{
@@ -276,7 +276,7 @@ a {
       float: right;
       color: #5f879b;
       background: #d7dfe3;
-      @include border-radius(3px);
+      border-radius: 3px;
       line-height: 19px;
       padding: 0 6px;
     }
@@ -426,7 +426,7 @@ a {
         top: -25px;
         padding: 16px 0;
         z-index: 11;
-        @include border-radius(5px);
+        border-radius: 5px;
         border: 1px solid #acacac;
         box-shadow: rgba(0,0,0,0.45) 0 3px 15px, inset #fff 0 1px 1px -1px;
         @include gradient(rgba(246,247,248,0.95),rgba(234,234,235,0.95));
@@ -467,8 +467,8 @@ a {
             line-height: 19px;
             padding: 0 8px;
             font-weight: normal;
-            @include border-radius(3px);
-            @include text-shadow(rgba(0,0,0,0.3) 0 1px 1px);
+            border-radius: 3px;
+            text-shadow: rgba(0,0,0,0.3) 0 1px 1px;
             box-shadow: inset rgba(0,0,0,0.4) 0 1px 3px;
             &.unchecked{
               @include gradient(#a3a4a6, #c1c3c5);
@@ -537,7 +537,7 @@ a {
           border-color: transparent transparent $dark-blue transparent;
         }
         &.current{
-          @include background(linear-gradient(top left, #eff1f2, #e9ecee));
+          @include gradient(#eff1f2, #e9ecee);
           box-shadow: 0 5px 15px 0 rgba(0,0,0,0.3);
         }
         &:last-child{
@@ -571,7 +571,7 @@ a {
           z-index: 14;
           @include gradient(#edf0f1, #d0d6db);
           padding: 20px;
-          @include border-radius(2px 0 2px 2px);
+          border-radius: 2px 0 2px 2px;
           box-shadow: 0 5px 15px 0 rgba(0,0,0,0.3);
           h3{
             padding-left: 28px;
@@ -796,7 +796,7 @@ a {
             background: asset-data-url('icon-menu-browse-current.png') 0 23px no-repeat;
           }
           &.shown{
-            @include background(asset-data-url('icon-menu-browse.png') 9px 23px no-repeat, linear-gradient(top left, #eff1f2, #e9ecee));
+            background: asset-data-url('icon-menu-browse.png') 9px 23px no-repeat, linear-gradient(to bottom, #eff1f2, #e9ecee);
             position: absolute;
             height: 60px;
             width: 81px;
@@ -954,7 +954,7 @@ a {
         float: right;
         padding: 4px 5px;
         font-size: 12px;
-        @include border-radius(2px);
+        border-radius: 2px;
         font-style: normal;
       }
       .name {
@@ -1144,7 +1144,7 @@ table.relics{
       width: 56px;
       padding: 3px;
       margin-right: 13px;
-      @include border-radius(3px);
+      border-radius: 3px;
       border: 1px solid #d4d4d4;
       box-shadow: 0 1px 3px rgba(0,0,0,0.3);
       img{ display: block;}
@@ -1170,8 +1170,8 @@ table.relics{
         line-height: 19px;
         padding: 0 8px;
         font-weight: normal;
-        @include border-radius(3px);
-        @include text-shadow(rgba(0,0,0,0.3) 0 1px 1px);
+        border-radius: 3px;
+        text-shadow: rgba(0,0,0,0.3) 0 1px 1px;
         box-shadow: inset rgba(0,0,0,0.4) 0 1px 3px;
         margin-right: 2px;
         &.unchecked{
@@ -1199,7 +1199,7 @@ table.relics{
         top: -25px;
         padding: 16px 0;
         z-index: 11;
-        @include border-radius(5px);
+        border-radius: 5px;
         border: 1px solid #acacac;
         box-shadow: rgba(0,0,0,0.45) 0 3px 15px, inset #fff 0 1px 1px -1px;
         @include gradient(rgba(246,247,248,0.95),rgba(234,234,235,0.95));
@@ -1242,8 +1242,8 @@ table.relics{
             line-height: 19px;
             padding: 0 8px;
             font-weight: normal;
-            @include border-radius(3px);
-            @include text-shadow(rgba(0,0,0,0.3) 0 1px 1px);
+            border-radius: 3px;
+            text-shadow: 0 1px 1px rgba(0,0,0,0.3);
             box-shadow: inset rgba(0,0,0,0.4) 0 1px 3px;
             &.unchecked{
               @include gradient(#a3a4a6, #c1c3c5);
@@ -1383,7 +1383,7 @@ p#adding-note {
                 text-align: center;
                 text-shadow: 0 -1px 1px rgb(255, 255, 255);
                 font-size: 17px;
-                @include border-radius(3px);
+                border-radius: 3px;
                 @include gradient(#f9f9f9, #cccccc);
                 box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);
                 -webkit-transition: all .2s ease-in;
@@ -1696,7 +1696,7 @@ p#adding-note {
       height: auto;
       padding: 8px 0 8px 35px;
       border: 1px solid #646464;
-      @include border-radius(2px);
+      border-radius: 2px;
       margin: 5px 5px 0 0;
     }
     input[type="submit"] {
@@ -2343,7 +2343,7 @@ body.resource_home{
     }
     input[type="text"]{
       @include gradient(#fafafa, #ffffff);
-      @include border-radius(2px);
+      border-radius: 2px;
       border: 1px solid #727272;
       height: 38px;
       position: relative;
@@ -2353,11 +2353,11 @@ body.resource_home{
       width: 448px;
     }
     #search_q{
-      @include background(asset-data-url("form-input-what-bg.png") 10px 11px no-repeat, linear-gradient(#fafafa, #ffffff));
+      background: asset-data-url("form-input-what-bg.png") 10px 11px no-repeat, linear-gradient(to bottom, #fafafa, #ffffff);
       z-index: 12;
     }
     #search_place{
-      @include background(asset-data-url("form-input-where-bg.png") 12px 12px no-repeat, linear-gradient(#fafafa, #ffffff));
+      background: asset-data-url("form-input-where-bg.png") 12px 12px no-repeat, linear-gradient(to bottom, #fafafa, #ffffff);
     }
     .action{
       list-style-type: none;
@@ -2410,7 +2410,7 @@ body.resource_home{
       height: 56px;
       border: 3px solid #fff;
       box-shadow: 0 1px 3px 0 rgba(0,0,0,0.5);
-      @include border-radius(2px);
+      border-radius: 2px;
     }
     .relic-content{
       margin-left: 75px;
@@ -2442,8 +2442,8 @@ body.resource_home{
         line-height: 19px;
         padding: 0 8px;
         font-weight: normal;
-        @include border-radius(3px);
-        @include text-shadow(rgba(0,0,0,0.3) 0 1px 1px);
+        border-radius: 3px;
+        text-shadow: rgba(0,0,0,0.3) 0 1px 1px;
         box-shadow: inset rgba(0,0,0,0.4) 0 1px 3px;
         &.unchecked{
           @include gradient(#a3a4a6, #c1c3c5);
@@ -2493,7 +2493,7 @@ body.resource_home{
         font-size: 16px;
         text-shadow: 0 1px 1px #fff;
         @include gradient(#f6f6f6, #d1d1d1);
-        @include border-radius(4px);
+        border-radius: 4px;
         border: 0;
         float: left;
         margin: 25px 0 30px;
@@ -2645,7 +2645,7 @@ body.resource_home{
             height: 56px;
             border: 3px solid #fff;
             box-shadow: 0 1px 3px 0 rgba(0,0,0,0.5);
-            @include border-radius(2px);
+            border-radius: 2px;
           }
           .relic-content{
             margin-left: 75px;
@@ -2677,8 +2677,8 @@ body.resource_home{
                 line-height: 19px;
                 padding: 0 8px;
                 font-weight: normal;
-                @include border-radius(3px);
-                @include text-shadow(rgba(0,0,0,0.3) 0 1px 1px);
+                border-radius: 3px;
+                text-shadow: rgba(0,0,0,0.3) 0 1px 1px;
                 box-shadow: inset rgba(0,0,0,0.4) 0 1px 3px;
                 &.filled{
                   @include gradient(#82a663, #a1c481);
@@ -2769,7 +2769,7 @@ body.resource_home{
           top: -25px;
           padding: 16px 0;
           z-index: 11;
-          @include border-radius(5px);
+          border-radius: 5px;
           border: 1px solid #acacac;
           box-shadow: rgba(0,0,0,0.45) 0 3px 15px, inset #fff 0 1px 1px -1px;
           @include gradient(rgba(246,247,248,0.95),rgba(234,234,235,0.95));
@@ -2811,8 +2811,8 @@ body.resource_home{
               line-height: 19px;
               padding: 0 8px;
               font-weight: normal;
-              @include border-radius(3px);
-              @include text-shadow(rgba(0,0,0,0.3) 0 1px 1px);
+              border-radius: 3px;
+              text-shadow: 0 1px 1px rgba(0,0,0,0.3);
               box-shadow: inset rgba(0,0,0,0.4) 0 1px 3px;
               &.unchecked{
                 @include gradient(#a3a4a6, #c1c3c5);
