@@ -1,6 +1,6 @@
 section.widgets{
   h1{
-    background: asset-data-url("icon-download.png") no-repeat, #546f7d linear-gradient(to bottom, #546f7d, #436576);
+    background: image-url("icon-download.png") no-repeat, #546f7d linear-gradient(to bottom, #546f7d, #436576);
     background-position: 30px;
     margin: 0;
     height: 55px;
@@ -106,7 +106,7 @@ section.widgets{
   line-height: 75px;
   height: 75px;
   font-size: 28px;
-  background: asset-data-url("icon-widgets-mapsearch.png") 27px 21px no-repeat, linear-gradient(to bottom, #36596b, #2f5163);
+  background: image-url("icon-widgets-mapsearch.png") 27px 21px no-repeat, linear-gradient(to bottom, #36596b, #2f5163);
   padding-left: 70px;
 }
 
@@ -230,7 +230,7 @@ section.widgets{
     line-height: 75px;
     height: 75px;
     font-size: 28px;
-    background: asset-data-url("icon-widgets-mapsearch.png") 27px 21px no-repeat, linear-gradient(to bottom, #36596b, #2f5163);
+    background: image-url("icon-widgets-mapsearch.png") 27px 21px no-repeat, linear-gradient(to bottom, #36596b, #2f5163);
     padding-left: 70px;
   }
   .sidebar{
@@ -325,7 +325,7 @@ section.widgets{
     }
   }
   h1{
-    background: asset-data-url("icon-widgets-addalert.png") 27px 21px no-repeat, linear-gradient(to bottom, #36596b, #2f5163);
+    background: image-url("icon-widgets-addalert.png") 27px 21px no-repeat, linear-gradient(to bottom, #36596b, #2f5163);
   }
 }
 

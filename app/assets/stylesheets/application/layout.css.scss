@@ -775,7 +775,7 @@ a {
             background: asset-data-url('icon-menu-browse-current.png') 0 23px no-repeat;
           }
           &.shown{
-            background: asset-data-url('icon-menu-browse.png') 9px 23px no-repeat, linear-gradient(to bottom, #eff1f2, #e9ecee);
+            background: image-url('icon-menu-browse.png') 9px 23px no-repeat, linear-gradient(to bottom, #eff1f2, #e9ecee);
             position: absolute;
             height: 60px;
             width: 81px;
@@ -2312,11 +2312,11 @@ body.resource_home{
       width: 448px;
     }
     #search_q{
-      background: asset-data-url("form-input-what-bg.png") 10px 11px no-repeat, linear-gradient(to bottom, #fafafa, #ffffff);
+      background: image-url("form-input-what-bg.png") 10px 11px no-repeat, linear-gradient(to bottom, #fafafa, #ffffff);
       z-index: 12;
     }
     #search_place{
-      background: asset-data-url("form-input-where-bg.png") 12px 12px no-repeat, linear-gradient(to bottom, #fafafa, #ffffff);
+      background: image-url("form-input-where-bg.png") 12px 12px no-repeat, linear-gradient(to bottom, #fafafa, #ffffff);
     }
     .action{
       list-style-type: none;
