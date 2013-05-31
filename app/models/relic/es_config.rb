@@ -106,82 +106,80 @@ module Relic::EsConfig
     end
   end
 
-  module InstanceMethods
-    def sample_json
-      dp = DateParser.new ['1 cw XX', '1916', '1907-1909'].sample
-      dating_hash = Hash[[:from, :to, :has_round_date].zip(dp.results << dp.rounded?)]
-      {
-        :id               => id,
-        :slug             => to_param,
-        :type             => 'relic',
-        :identification   => identification,
-        :common_name      => common_name,
-        :street           => street,
-        :place_full_name  => place_full_name,
-        :descendants      => self.descendants.map(&:to_descendant_hash),
+  def sample_json
+    dp = DateParser.new ['1 cw XX', '1916', '1907-1909'].sample
+    dating_hash = Hash[[:from, :to, :has_round_date].zip(dp.results << dp.rounded?)]
+    {
+      :id               => id,
+      :slug             => to_param,
+      :type             => 'relic',
+      :identification   => identification,
+      :common_name      => common_name,
+      :street           => street,
+      :place_full_name  => place_full_name,
+      :descendants      => self.descendants.map(&:to_descendant_hash),
 
-        :voivodeship      => { :id => self.voivodeship_id,            :name => self.voivodeship.name },
-        :district         => { :id => self.district_id,               :name => self.district.name },
-        :commune          => { :id => self.commune_id,                :name => self.commune.name },
-        :virtual_commune_id => self.place.virtual_commune_id,
-        :place            => { :id => self.place_id,                  :name => self.place.name },
-        # new search fields
-        :categories       => (Category.to_hash.keys - ['sakralny']).sample(3),
-        :has_photos       => [true, false].sample,
-        :state            => state,
-        :existence        => existence,
-        :country          => ['pl', 'de', 'gb'].sample,
-        :tags             => ['WaWel', 'ZameK', 'zespół pałacowy', 'zamek królewski'].shuffle.first(rand(2) + 1).shuffle.first(rand(4) + 1),
-        :autocomplitions  => ['puchatka', 'szlachciatka', 'chata polska', 'chata mazurska', 'chata wielkopolska'].shuffle.first(rand(4) + 1),
-        # Lat Lon As Array Format in [lon, lat]
-        :coordinates       => [longitude, latitude]
-      }.merge(dating_hash)
-    end
+      :voivodeship      => { :id => self.voivodeship_id,            :name => self.voivodeship.name },
+      :district         => { :id => self.district_id,               :name => self.district.name },
+      :commune          => { :id => self.commune_id,                :name => self.commune.name },
+      :virtual_commune_id => self.place.virtual_commune_id,
+      :place            => { :id => self.place_id,                  :name => self.place.name },
+      # new search fields
+      :categories       => (Category.to_hash.keys - ['sakralny']).sample(3),
+      :has_photos       => [true, false].sample,
+      :state            => state,
+      :existence        => existence,
+      :country          => ['pl', 'de', 'gb'].sample,
+      :tags             => ['WaWel', 'ZameK', 'zespół pałacowy', 'zamek królewski'].shuffle.first(rand(2) + 1).shuffle.first(rand(4) + 1),
+      :autocomplitions  => ['puchatka', 'szlachciatka', 'chata polska', 'chata mazurska', 'chata wielkopolska'].shuffle.first(rand(4) + 1),
+      # Lat Lon As Array Format in [lon, lat]
+      :coordinates       => [longitude, latitude]
+    }.merge(dating_hash)
+  end
 
-    def to_indexed_hash
-      dp = DateParser.new dating_of_obj
-      dating_hash = Hash[[:from, :to, :has_round_date].zip(dp.results << dp.rounded?)]
-      {
-        :id                   => id,
-        :slug                 => to_param,
-        :type                 => 'relic',
-        :identification       => identification,
-        :common_name          => common_name,
-        :street               => street,
-        :street_normalized    => street(true),
-        :place_full_name      => place_full_name,
-        :place_with_address   => place_with_address(true),
-        :descendants          => self.descendants.map(&:to_descendant_hash),
-        :voivodeship          => { :id => self.voivodeship_id,   :name => self.voivodeship.name },
-        :district             => { :id => self.district_id,      :name => self.district.name },
-        :commune              => { :id => self.commune_id,       :name => self.commune.name },
-        :virtual_commune_id   => self.place.virtual_commune_id,
-        :place                => { :id => self.place_id,         :name => self.place.name },
-        # new fields
-        :description          => description,
-        :has_description      => description?,
-        :categories           => categories,
-        :has_photos           => has_photos?,
-        :state                => state,
-        :existence            => existence,
-        :country              => country_code.downcase,
-        :tags                 => tags,
-        # Lat Lon As Array Format in [lon, lat]
-        :coordinates          => [longitude, latitude]
-      }.merge(dating_hash)
-    end
+  def to_indexed_hash
+    dp = DateParser.new dating_of_obj
+    dating_hash = Hash[[:from, :to, :has_round_date].zip(dp.results << dp.rounded?)]
+    {
+      :id                   => id,
+      :slug                 => to_param,
+      :type                 => 'relic',
+      :identification       => identification,
+      :common_name          => common_name,
+      :street               => street,
+      :street_normalized    => street(true),
+      :place_full_name      => place_full_name,
+      :place_with_address   => place_with_address(true),
+      :descendants          => self.descendants.map(&:to_descendant_hash),
+      :voivodeship          => { :id => self.voivodeship_id,   :name => self.voivodeship.name },
+      :district             => { :id => self.district_id,      :name => self.district.name },
+      :commune              => { :id => self.commune_id,       :name => self.commune.name },
+      :virtual_commune_id   => self.place.virtual_commune_id,
+      :place                => { :id => self.place_id,         :name => self.place.name },
+      # new fields
+      :description          => description,
+      :has_description      => description?,
+      :categories           => categories,
+      :has_photos           => has_photos?,
+      :state                => state,
+      :existence            => existence,
+      :country              => country_code.downcase,
+      :tags                 => tags,
+      # Lat Lon As Array Format in [lon, lat]
+      :coordinates          => [longitude, latitude]
+    }.merge(dating_hash)
+  end
 
-    def to_indexed_json
-      to_indexed_hash.to_json
-    end
+  def to_indexed_json
+    to_indexed_hash.to_json
+  end
 
-    def to_descendant_hash
-      {
-        :id               => id,
-        :identification   => identification,
-        :common_name      => common_name,
-        :street           => street,
-      }
-    end
+  def to_descendant_hash
+    {
+      :id               => id,
+      :identification   => identification,
+      :common_name      => common_name,
+      :street           => street,
+    }
   end
 end

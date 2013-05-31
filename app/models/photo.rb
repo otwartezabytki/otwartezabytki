@@ -18,8 +18,6 @@
 #
 
 class Photo < ActiveRecord::Base
-  include Rails.application.routes.url_helpers
-
   belongs_to :relic
   belongs_to :user
   has_many :events
@@ -27,15 +25,12 @@ class Photo < ActiveRecord::Base
   attr_accessible :author, :file, :date_taken, :description, :as => [:default, :admin]
   attr_accessible :relic_id, :user_id, :as => :admin
 
-  mount_uploader :file, PhotoUploader
-
   validates :file, :relic, :user, :presence => true
   validates :file, :file_size => { :maximum => 3.megabytes.to_i }
   validates :author, :date_taken, :presence => true, :unless => :new_record?
 
-
-
-  has_paper_trail :skip => [:created_at, :updated_at]
+  mount_uploader :file, PhotoUploader
+  has_paper_trail :skip => [:created_at, :updated_at, :versions]
 
   def self.one_after(photo_id)
     where('id > ?', photo_id).order('id ASC').limit(1).first

@@ -1,5 +1,5 @@
 = f.label :categories, :value => category.name_key do
   = f.check_box :categories, {:multiple => true, :disabled => disabled(f.object, 'categories').include?(category.name_key)}, category.name_key, nil
   %span
-    = category.name
+    .name= category.name
     %em (#{categories_facets_hash[category.name_key]})

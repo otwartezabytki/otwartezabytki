@@ -1,12 +1,11 @@
 # -*- encoding : utf-8 -*-
-RoutingFilter::Locale.include_default_locale = false
+RoutingFilter::Locale.include_default_locale = true
 Otwartezabytki::Application.routes.draw do
-  # under construction
-  # match '*path' => 'pages#show', :id => 'under_construction'
-  # root :to      => 'pages#show', :id => 'under_construction'
-  filter :locale,    :exclude => /^\/admin/
+  filter :locale,    :exclude => /^\/(admin|users\/auth)/
   mount Tolk::Engine => '/admin/tolk', :as => 'tolk'
-  ActiveAdmin.routes(self)
+
+  # Active Admin can cause migrations to fail...
+  ActiveAdmin.routes(self) rescue nil
 
   devise_for :users, :path_names => {
     :sign_in => 'login', :sign_out => 'logout',
@@ -65,9 +64,12 @@ Otwartezabytki::Application.routes.draw do
       resource :info do
         get :relics
         get :places
+        get :relic_photos
       end
 
-      resources :relics
+      resources :relics do
+        resources :photos
+      end
 
       # resources :voivodeships, :only => [:index, :show]
       # resources :districts, :only => [:index, :show]

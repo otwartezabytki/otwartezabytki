@@ -17,8 +17,12 @@ class RecentRevision
     end
   end
 
+  def significant_changeset
+    self.version.changeset.reject { |_, v| v.try(:length) == 2 and v[1].blank? }
+  end
+
   def changes
-    changed_fields = version.changeset.keys
+    changed_fields = significant_changeset.keys
     case version.event
     when 'update'
       if version.item_type.downcase == 'relic'
@@ -44,7 +48,7 @@ class RecentRevision
   end
 
   def to_relic_hash
-    return nil if relic.blank? or !relic.build_finished?
+    return nil if relic.blank? or !relic.build_finished? or significant_changeset.blank?
     {
       :relic_id => relic.id,
       :slug => relic.to_param,

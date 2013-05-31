@@ -29,13 +29,12 @@ gem 'formtastic-bootstrap'
 gem 'localized_language_select'
 
 gem 'decent_exposure'
-gem 'strong_parameters'
 gem 'kaminari'
 gem 'ancestry'
 gem 'tire', '0.4.3'
 gem 'tire-contrib'
 gem 'rocket_tag'
-gem 'airbrake'
+gem 'sentry-raven'
 
 gem 'paper_trail', '~> 2' # versioning
 
@@ -43,6 +42,7 @@ gem 'paper_trail', '~> 2' # versioning
 gem 'activeadmin',    '~> 0.4.4'
 gem 'meta_search',    '>= 1.1.0.pre'
 gem 'devise'
+gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'cancan'
 gem 'activeadmin-cancan'
@@ -60,7 +60,7 @@ gem 'arrabiata' # roman letters converter
 gem 'rails-i18n'
 gem 'i18n-country-translations'
 gem 'i18n_country_select', '~> 1.0.14'
-gem 'routing-filter'
+gem 'routing-filter', :git => 'git://github.com/svenfuchs/routing-filter.git', :ref => '6270eba04e'
 
 gem 'whenever', :require => false               # cron jobs
 gem 'recaptcha', :require => 'recaptcha/rails'  # bot secrity
@@ -93,6 +93,11 @@ gem 'tolk', :git => "git://github.com/monterail/tolk.git", :branch => "oz-custom
 
 gem 'foreman'
 gem 'twitter_cldr'
+
+# We need support for passing Rack::Test::UploadedFile
+gem 'strong_parameters',
+  :git => 'https://github.com/rails/strong_parameters.git',
+  :branch => '5e351d231748028a3db66cab2ab911b866a240ca'
 
 # documentation
 gem 'yard'

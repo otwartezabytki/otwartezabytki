@@ -70,6 +70,7 @@ pl:
         too_long: "jest za długie (maksymalnie %{count} znaków)"
         too_short: "jest za krótkie (przynajmniej %{count} znaków)"
         wrong_length: "ma nieprawidłową długość (powinna wynosić %{count} znaków)"
+        not_a_url: "niepoprawny adres URL"
       template:
         body: "Błędy dotyczą następujących pól:"
         header:
@@ -1384,10 +1385,12 @@ pl:
           checked:
             header: Sprawdzony
             info: "Dane częściowo zweryfikowane; wymagają dopracowania."
+            info_social: "Dane częściowo zweryfikowane; wymagają dopracowania."
           close: zamknij
           filled:
             header: Uzupełniony
             info: "Opis prawie doskonały :)"
+            info_social: "Opis prawie doskonały :)"
           header: "Oznaczenie stanu"
           label: "Stan:"
           unchecked:
@@ -1460,6 +1463,7 @@ pl:
           common_name: "Nazwa zwyczajowa"
           dating_of_obj: "Data powstania:"
           fill_in: uzupełnij
+          see: zobacz
           location: "Lokalizacja:"
           no_data_fill_in: "brak danych, uzupełnij »"
           original: "wersja oryginalna"

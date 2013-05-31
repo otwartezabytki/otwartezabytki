@@ -12,5 +12,7 @@ class Version < ActiveRecord::Base
     @preview ||= self.reify ||
     Version.where("item_type = ? AND id > ?", self.item_type, self.id).first.try(:reify) ||
     Kernel.const_get(self.item_type).where(:id => self.item_id).first
+  rescue
+    Kernel.const_get(self.item_type).where(:id => self.item_id).first
   end
 end

@@ -2,6 +2,11 @@
 //= require vendor/select2
 //= require vendor/redactor
 
+// ActiveAdmin
+//= require jquery.ui.datepicker
+//= require jquery_ujs
+//= require active_admin/application
+
 $(document).ready(function(){
   if($("select.select2").length) {
     $("select.select2").select2();

@@ -41,6 +41,7 @@ jQuery.initializer '.main-container', ->
         title: -> $('#' + $el.data 'title-id').html()
         content: -> $('#' + $el.data 'content-id').html()
         delay: 100000
+        html: true
     else
       $el.popover
         title: $('#' + $el.data 'title-id').html()
