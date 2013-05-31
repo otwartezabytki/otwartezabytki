@@ -233,6 +233,10 @@
       background: linear-gradient(to bottom, #2b607b 0%, #437893 100%); /* W3C */
       filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#2b607b', endColorstr = '#437893', GradientType = 0); /* IE6-9 */
     }
+    .size, .date {
+      text-transform: none;
+      font-size: 0.9em;
+    }
   }
 }
 

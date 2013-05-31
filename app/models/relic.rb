@@ -292,4 +292,61 @@ class Relic < ActiveRecord::Base
     'ZE' == kind or (is_root? and has_children?)
   end
 
+  def revisions
+    versions.reorder('created_at DESC').limit(3)
+  end
+
+  def to_builder(register_data = false)
+    json = Jbuilder.new
+
+    if register_data
+      json.(self,
+        :id,
+        :nid_id,
+        :identification,
+        :state,
+        :register_number,
+        :dating_of_obj,
+        :street,
+        :latitude,
+        :longitude,
+        :country_code,
+        :fprovince,
+        :fplace
+      )
+    else
+      json.(self,
+        :id,
+        :nid_id,
+        :identification,
+        :description,
+        :categories,
+        :state,
+        :register_number,
+        :dating_of_obj,
+        :street,
+        :latitude,
+        :longitude,
+        :tags,
+        :country_code,
+        :fprovince,
+        :fplace,
+        :documents_info,
+        :links_info,
+      )
+      json.main_photo self.main_photo if self.has_photos?
+    end
+
+    json.descendants do
+      json.array! self.descendants.map {|d| d.to_builder(register_data).attributes! }
+    end
+
+    json.place_id self.place.id
+    json.place_name self.place.name
+    json.commune_name self.place.commune.name
+    json.district_name self.place.commune.district.voivodeship.name
+    json.voivodeship_name self.place.commune.district.voivodeship.name
+
+    json
+  end
 end
