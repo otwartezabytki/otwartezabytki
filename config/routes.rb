@@ -84,7 +84,7 @@ Otwartezabytki::Application.routes.draw do
 
   get 'geocoder/search'
 
-  match "/strony/pobierz-dane"        => 'relics#download',                 :as => 'download'
+  match "/strony/pobierz-dane"        => 'relics#download',                 :as => 'download_page'
   match "/strony/o-projekcie"         => 'pages#show', :id => 'about',      :as => 'about_page'
   match "/strony/kontakt"             => 'pages#show', :id => 'contact',    :as => 'contact_page'
   match "/strony/pomoc"               => 'pages#show', :id => 'help',       :as => 'help_page'
@@ -93,6 +93,10 @@ Otwartezabytki::Application.routes.draw do
   match "/strony/prywatnosc"          => 'pages#show', :id => 'privacy',    :as => 'privacy_page'
   match "/facebook/share_close"       => 'pages#show', :id => 'share_close'
   match "/hello"                      => 'pages#hello', :id => 'hello', :as => :hello
+
+  I18n.available_locales.each do |locale|
+    match "#{I18n.t('routes.pages', :locale => locale)}/:id" => 'pages#show', :as => :"#{locale.to_s.underscore}_page"
+  end
 
   root :to => 'pages#show', :id => 'home'
 end

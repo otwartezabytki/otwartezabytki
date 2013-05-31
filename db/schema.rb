@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130304131046) do
+ActiveRecord::Schema.define(:version => 20130403094027) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -132,7 +132,6 @@ ActiveRecord::Schema.define(:version => 20130304131046) do
   end
 
   create_table "original_relics", :force => true do |t|
-    t.integer  "relic_id"
     t.integer  "place_id"
     t.text     "identification"
     t.string   "dating_of_obj"
@@ -141,17 +140,23 @@ ActiveRecord::Schema.define(:version => 20130304131046) do
     t.string   "nid_id"
     t.float    "latitude"
     t.float    "longitude"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
     t.string   "ancestry"
     t.integer  "commune_id"
     t.integer  "district_id"
     t.integer  "voivodeship_id"
     t.string   "kind"
     t.text     "description",     :default => ""
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.integer  "relic_id"
   end
 
+  add_index "original_relics", ["ancestry"], :name => "index_original_relics_on_ancestry"
   add_index "original_relics", ["ancestry"], :name => "original_relics_ancestry_trgm_idx"
+  add_index "original_relics", ["commune_id"], :name => "index_original_relics_on_commune_id"
+  add_index "original_relics", ["district_id"], :name => "index_original_relics_on_district_id"
+  add_index "original_relics", ["place_id"], :name => "index_original_relics_on_place_id"
+  add_index "original_relics", ["voivodeship_id"], :name => "index_original_relics_on_voivodeship_id"
 
   create_table "page_translations", :force => true do |t|
     t.integer  "page_id"
@@ -171,7 +176,10 @@ ActiveRecord::Schema.define(:version => 20130304131046) do
     t.text     "body"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "ancestry"
   end
+
+  add_index "pages", ["ancestry"], :name => "index_pages_on_ancestry"
 
   create_table "photos", :force => true do |t|
     t.integer  "relic_id"
@@ -239,16 +247,11 @@ ActiveRecord::Schema.define(:version => 20130304131046) do
     t.string   "common_name",     :default => ""
   end
 
-  add_index "relics", ["ancestry"], :name => "index_relics_on_ancestry"
   add_index "relics", ["ancestry"], :name => "relics_ancestry_trgm_idx"
-  add_index "relics", ["commune_id"], :name => "index_relics_on_commune_id"
-  add_index "relics", ["district_id"], :name => "index_relics_on_district_id"
   add_index "relics", ["existence"], :name => "index_relics_on_existence"
-  add_index "relics", ["place_id"], :name => "index_relics_on_place_id"
   add_index "relics", ["state"], :name => "index_relics_on_state"
   add_index "relics", ["type"], :name => "index_relics_on_type"
   add_index "relics", ["voivodeship_id", "state"], :name => "index_relics_on_voivodeship_id_and_state"
-  add_index "relics", ["voivodeship_id"], :name => "index_relics_on_voivodeship_id"
 
   create_table "search_terms", :force => true do |t|
     t.string   "keyword"
@@ -304,6 +307,12 @@ ActiveRecord::Schema.define(:version => 20130304131046) do
   add_index "suggestions", ["dating_of_obj_action"], :name => "index_suggestions_on_dating_of_obj_action"
   add_index "suggestions", ["identification_action"], :name => "index_suggestions_on_identification_action"
   add_index "suggestions", ["place_id_action"], :name => "index_suggestions_on_place_id_action"
+
+  create_table "tags", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "tolk_locales", :force => true do |t|
     t.string   "name"

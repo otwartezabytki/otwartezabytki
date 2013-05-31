@@ -1,0 +1,13 @@
+- if page.has_subpages?
+  %li.dropdown
+    = link_to t("layouts.application.#{page.name}"), '#',
+      class: "#{page.name} #{'current' if current_page?(page)} dropdown dropdown-tip",
+      'data-hover' => 'dropdown', 'data-delay-in' => 400, 'data-delay-out' => 200
+    %ul.dropdown-menu
+      - page.subpages.each do |subpage|
+        %li= link_to subpage.title.presence || subpage.name.titleize, subpage,
+          class: "#{subpage.name} #{'current' if current_page?(subpage)}"
+- else
+  %li
+    = link_to t("layouts.application.#{page.name}"), page,
+      class: "#{page.name} #{'current' if current_page?(page)}"
