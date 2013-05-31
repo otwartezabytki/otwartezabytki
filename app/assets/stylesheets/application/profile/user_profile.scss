@@ -215,7 +215,7 @@ $unread-badge-size:    10px;
 /* Feed */
 
 .feed {
-  margin-top: 2em;
+  margin: 2em 0;
 
   a, b {
     font-weight: 600;
@@ -376,6 +376,14 @@ $unread-badge-size:    10px;
   .type-activity > .type-last & {
     @include tiny-dimmed-text();
   }
+}
+
+.feed-placeholder {
+  border-radius: 4px;
+  border: 1px dashed #8f8f8f;
+  text-align: center;
+  padding: 40px 20px;
+  color: #8f8f8f;
 }
 
 .user-profile {

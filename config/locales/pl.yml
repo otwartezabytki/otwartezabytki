@@ -1594,6 +1594,7 @@ pl:
     list_watched:
       activity: "Aktywność"
       adopted_relics_list: "Lista zabytków adoptowanych przez Ciebie:"
-      no_adopted_relics: "Nie adoptowałeś jeszcze żadnego zabytku"
+      no_adopted_relics: "Nie adoptowałeś jeszcze żadnych zabytków. Możesz to zrobić na profilu każdego zabytku. Adopcja pozwala śledzić zmiany jakie są dokonywane w zabytkach, które Cię interesują"
       updated_relics_list: "Zmiany wprowadzone w profilach zabytków dodanych i adoptowanych przez Ciebie:"
+      no_updated_relics: "Nikt nie wprowadził żadnych zmian w zabytkach które obserwujesz"
       no_notifications: "Nie masz już więcej powiadomień."
