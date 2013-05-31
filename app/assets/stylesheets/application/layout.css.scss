@@ -518,6 +518,9 @@ a {
   .container {
     border-top: 1px solid #dcdcdc;
     min-height: 59px;
+    a.dropdown {
+      cursor: default;
+    }
     ul.dropdown-menu {
       margin-top: -1em;
       a:hover {
