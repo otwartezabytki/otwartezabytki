@@ -93,16 +93,6 @@ GIT
     http_accept_language (2.0.1.pre)
 
 GIT
-  remote: https://github.com/rails/strong_parameters.git
-  revision: 5e351d231748028a3db66cab2ab911b866a240ca
-  branch: 5e351d231748028a3db66cab2ab911b866a240ca
-  specs:
-    strong_parameters (0.2.0)
-      actionpack (~> 3.0)
-      activemodel (~> 3.0)
-      railties (~> 3.0)
-
-GIT
   remote: https://github.com/sheerun/globalize3.git
   revision: ef91130fb07db4aab579b36f68bab7c893a1fe20
   branch: fix/accessible
@@ -462,7 +452,7 @@ GEM
       activerecord (~> 3.0)
       activesupport (~> 3.0)
       polyamorous (~> 0.5.0)
-    strong_parameters (0.2.0)
+    strong_parameters (0.2.1)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
       railties (~> 3.0)
@@ -608,7 +598,7 @@ DEPENDENCIES
   shoulda-matchers
   simple_form
   simplecov
-  strong_parameters!
+  strong_parameters (~> 0.2.1)
   sugar-rails
   therubyracer
   tire (= 0.4.3)
