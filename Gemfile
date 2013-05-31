@@ -22,8 +22,11 @@ gem 'coffee-filter'
 gem 'sugar-rails'
 
 gem 'geocoder'
+
+gem 'simple_form'
 gem 'formtastic'
 gem 'formtastic-bootstrap'
+gem 'localized_language_select'
 
 gem 'decent_exposure'
 gem 'kaminari'
@@ -92,13 +95,13 @@ gem 'foreman'
 gem 'twitter_cldr'
 
 # We need support for passing Rack::Test::UploadedFile
-gem 'strong_parameters',
-  :git => 'https://github.com/rails/strong_parameters.git',
-  :branch => '5e351d231748028a3db66cab2ab911b866a240ca'
+gem 'strong_parameters', '~> 0.2.1'
 
 # documentation
 gem 'yard'
 gem 'redcarpet'
+
+gem 'rails-timeago', '~> 2.0'
 
 group :development, :test do
   gem 'interactive_editor'
@@ -113,7 +116,6 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'guard-ctags-bundler'
   gem 'guard-zeus'
-  # gem 'debugger'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'commands'

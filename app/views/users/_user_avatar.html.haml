@@ -1,0 +1,7 @@
+%figure.user-avatar
+  = image_tag user.avatar.maxi.url, alt: user.username, width: 320, height: 320, class: 'user-avatar-image'
+  %figcaption.user-avatar-caption-outer
+    - unless current_page?(edit_user_path(user))
+      .user-avatar-change
+        = link_to t('.change_photo'), edit_user_path(user, anchor: 'change-avatar'), class: 'user-avatar-change-link'
+    %span.user-avatar-caption= user.username

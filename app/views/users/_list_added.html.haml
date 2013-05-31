@@ -1,0 +1,14 @@
+%section.feed.type-user-added
+  %h1.feed-title
+    = t('.added_relics')
+    %span.badge= added_relics.count
+  - added_relics.each do |relic|
+    %dl.feed-item
+      %dd.feed-image.thumb
+        = image_tag relic.main_photo.file.url(:icon),
+          :width => 56, :height => 56,
+          :alt => relic.identification
+      %dt.feed-message
+        = link_to relic.identification, relic
+      %dd.feed-message
+        = state_tag(relic)

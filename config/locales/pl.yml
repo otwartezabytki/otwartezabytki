@@ -49,6 +49,7 @@ pl:
       format: "%{attribute} %{message}"
       messages:
         accepted: "musi zostać zaakceptowane"
+        already_taken: "jest już zajęta"
         blank: "nie może być puste"
         confirmation: "nie zgadza się z potwierdzeniem"
         empty: "nie może być puste"
@@ -159,10 +160,13 @@ pl:
       user:
         created_at: "Założenie konta"
         email: "Adres e-mail"
-        password: Hasło
-        role: Rola
+        current_password: "Bieżące hasło"
+        password: "Hasło"
+        password_confirmation: "Powtórz hasło"
+        role: "Rola"
         updated_at: "Zaktualizowanie danych"
         username: "Nazwa użytkownika"
+        language: "Język"
       version:
         item: Zasób
         item_type: Rodzaj
@@ -832,6 +836,9 @@ pl:
       search:
         place: "np. Małkinia, ul. Grodzka w Krakowie"
         q: "np. cmentarz, stocznie poniemieckie, chopinowski"
+
+      user:
+        current_password: "Musisz podać swoje bieżące hasło, żeby je zmienić."
     labels:
       search:
         from: "od:"
@@ -900,6 +907,10 @@ pl:
     widget_error: "Nie udało się stworzyć widgeta. Zgłoś błąd administracji."
     widget_error_and_correct: "Nie udało się zaktualizować widgeta. Popraw błędy poniżej."
     widget_has_been_updated: "Widget został zaktualizowany"
+    relic_adopted: "Adoptowałeś zabytek. Od teraz będziesz otrzymywał powiadomienia o jego zmianach."
+    relic_unadopted: "Odadoptowałeś zabytek. Już nie będziesz otrzymywał powiadomień o jego zmianach."
+    profile_updated: "Twój profil został zaktualizowany."
+    profile_not_updated: "Formularz został źle wypełniony."
   number:
     currency:
       format:
@@ -1073,6 +1084,9 @@ pl:
           register_here: "Zarejestruj się tutaj"
           submit: "Zaloguj się"
     pages:
+      profile:
+        you_can_if_you_want: "Możesz %{remove_avatar}, jeśli tego sobie życzysz."
+        remove_avatar: "usunąć swoje zdjęcie"
       home:
         go_to_relic_profile: "Przejdź do profilu zabytku"
         header: "Wyszukaj i uzupełnij..."
@@ -1144,6 +1158,22 @@ pl:
               state: "zmieniono stan"
               street: "poprawiono adres"
               tags: "zaktualizowano tagi"
+            photo: "zaktualizowano zdjęcie"
+            link: "zaktualizowano link"
+          create:
+            relic: "został utworzony"
+            photo: "zdjęcie zostało dodane"
+            link: "link został dodany"
+            document: "dokument został utworzony"
+            alert: "zgłoszono alert"
+            entry: "dodano ciekawostkę"
+            event: "dodano wydarzenie"
+          destroy:
+            photo: "zdjęcie zostało usunięte"
+            link: "link został usunięty"
+            document: "dokument został usutnięty"
+            entry: "usunięto ciekawostkę"
+            event: "usunięto wydarzenie"
         soon_header: "... a wkrótce będziemy mogli oglądać zabytki tak:"
         stats_info:
           checked_html:
@@ -1190,6 +1220,8 @@ pl:
           widget:
             par: "Udostępniamy kilka przykładowych aplikacji, dzięki którym łatwiej będzie wykorzystać dane o otwartych zabytkach na innych stronach internetowych."
             title: "Widżety »"
+        relic_has_been_updated_by: "%{relic} został zaktualizowany przez %{user}"
+        relic_has_been_updated: "%{relic} został zaktualizowany"
     pagination:
       first: Pierwsza
       last: Ostatnia
@@ -1285,6 +1317,11 @@ pl:
         step3: "krok 3"
         step4: "krok 4"
     relics:
+      adoption:
+        header: Adopcja
+        explanation: |-
+          <p>Gdy zaadoptujesz zabytek, wszelkie informacje o zmianach na jego stronie będą pojawiały się w Twoim profilu.</p>
+          <p>W każdej chwili możesz zrezygnować z adopcji i otrzymywanych powiadomień.</p>
       edit:
         add_and_save: "dodaj i zapisz"
         add_attachement: "dodaj nowe zdjęcie do zabytku"
@@ -1422,6 +1459,8 @@ pl:
         flash_hide: ukryj
         general:
           add: dodaj
+          adopt: "Adoptuj zabytek"
+          unadopt: "Odadoptuj zabytek"
           close: zamknij
           common_name: "Nazwa zwyczajowa"
           dating_of_obj: "Data powstania:"
@@ -1541,3 +1580,24 @@ pl:
     wuoz-we-wroclawiu: "Wojewódzki Urząd Ochrony Zabytków we Wrocławiu"
   routes:
     pages: "strony"
+  users:
+    user_avatar:
+      change_photo: "Zmień zdjęcie"
+    settings_form:
+      language_settings: "Ustawienia językowe"
+      password_change: "Zmiana hasła"
+      avatar: "Zdjęcie profilowe"
+      user_data: "Dane użytkownika"
+      save: "Zapisz"
+    list_added:
+      added_relics: "Dodane zabytki"
+    list_checked:
+      checked_relics: "Sprawdzone zabytki"
+      description: "Lista zabytków sprawdzonych przez Ciebie:"
+    list_watched:
+      activity: "Aktywność"
+      adopted_relics_list: "Lista zabytków adoptowanych przez Ciebie:"
+      no_adopted_relics: "Nie adoptowałeś jeszcze żadnych zabytków. Możesz to zrobić na profilu każdego zabytku. Adopcja pozwala śledzić zmiany jakie są dokonywane w zabytkach, które Cię interesują"
+      updated_relics_list: "Zmiany wprowadzone w profilach zabytków dodanych i adoptowanych przez Ciebie:"
+      no_updated_relics: "Nikt nie wprowadził żadnych zmian w zabytkach które obserwujesz"
+      no_notifications: "Nie masz już więcej powiadomień."

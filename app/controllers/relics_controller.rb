@@ -40,7 +40,7 @@ class RelicsController < ApplicationController
   end
 
   helper_method :need_captcha
-  before_filter :authenticate_user!, :only => [:edit, :update]
+  before_filter :authenticate_user!, :only => [:edit, :update, :adopt, :unadopt]
 
   def show
     flash.now[:notice] = t(params[:notice]) if params[:notice]
@@ -159,6 +159,18 @@ class RelicsController < ApplicationController
 
       t.close
     end
+  end
+
+  def adopt
+    current_user.relics << relic
+
+    redirect_to relic_path(relic), :notice => t('notices.relic_adopted')
+  end
+
+  def unadopt
+    current_user.relics.delete(relic)
+
+    redirect_to relic_path(relic), :notice => t('notices.relic_unadopted')
   end
 
   def print

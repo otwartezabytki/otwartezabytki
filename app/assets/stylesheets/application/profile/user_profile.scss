@@ -1,0 +1,550 @@
+@import '../mixins';
+
+/* Variables */
+
+$content-border-color: #dadada;
+$content-icon-color:   #e5e5e5;
+$dimmed-text-color:    #a7a7a7;
+$separator-color:      #527283;
+$avatar-size:          320px;
+$checked-item-width:   299px;
+$unread-badge-size:    10px;
+
+/* Mixins */
+
+@mixin user-profile-sprite($x, $y) {
+  @include image-sprite('user-profile-sprite.png', $x, $y);
+}
+
+@mixin tiny-dimmed-text() {
+  color: $dimmed-text-color;
+  font-size: 12px;
+}
+
+@mixin tiny-uppercase-text() {
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+@mixin tab-icon($x) {
+  &:before {
+    @include user-profile-sprite($x, 20px);
+    float: left;
+    content: '';
+    width: 16px;
+    height: 17px;
+    margin: 1px 5px 0 -1px;
+  }
+
+  &:not(.active):hover:before {
+    background-position: (-1 * $x) -40px;
+  }
+}
+
+@mixin feed-icon($x) {
+  &:before {
+    @include user-profile-sprite($x, 0);
+    position: absolute;
+    content: '';
+    width: 16px;
+    height: 16px;
+    margin: 0 0 0 -39px;
+  }
+}
+
+/* Layout */
+
+.user-profile {
+  display: table;
+
+  .user-profile-column-left,
+  .user-profile-column-right {
+    display: table-cell;
+    vertical-align: top;
+  }
+}
+
+.user-profile-column-left {
+  width: 640px;
+  background: #fff;
+  border: 1px solid $content-border-color;
+}
+
+.user-profile-column-right {
+  width: 320px;
+  border-top: 1px solid $content-border-color;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.user-profile-content {
+  padding: 20px;
+  line-height: 1.3;
+}
+
+.nav-tabs-container {
+  display: block;
+  background: $separator-color;
+  padding: 0 0 3px;
+  margin: -1px -1px 17px;
+  overflow: hidden;
+}
+
+/* Tabs */
+
+.nav-tabs-outer {
+  @include gradient(#f5f5f5, #eee);
+  border: 1px solid $content-border-color;
+}
+
+.nav-tabs {
+  @include clearfix();
+  padding: 25px 0 0 0;
+  border-top: 1px solid #fafafa;
+}
+
+.nav-tab {
+  float: left;
+  padding-left: 20px;
+  position: relative;
+  bottom: -4px;
+}
+
+.nav-tab-link {
+  @include text-shadow(0 1px 0 rgba(255, 255, 255, 0.7));
+  display: block;
+  padding: 10px 0 7px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &, &.active:hover {
+    color: $dark-grey;
+  }
+
+  &.active {
+    @include box-shadow(0 1px 5px rgba($dark-grey, 0.1));
+    padding-right: 20px;
+    padding-left: 20px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    background: #fff;
+  }
+
+  &.type-followed {
+    @include tab-icon(320px);
+  }
+
+  &.type-checked {
+    @include tab-icon(340px);
+  }
+
+  &.type-settings {
+    @include tab-icon(400px);
+  }
+}
+
+/* Avatar */
+
+.user-avatar,
+.user-avatar-image,
+.user-avatar-caption-outer {
+  height: $avatar-size;
+  width: $avatar-size;
+}
+
+.user-avatar {
+  border-bottom: 3px solid $separator-color;
+  overflow: hidden;
+}
+
+.user-avatar-image {
+  position: absolute;
+}
+
+.user-avatar-caption-outer {
+  @include user-profile-sprite(0, 0);
+  position: relative;
+  text-align: right;
+}
+
+.user-avatar-caption {
+  @include elipsis();
+  display: block;
+  padding: ($avatar-size - 35px) 10px 0.25em;
+  line-height: 30px;
+  font-size: 24px;
+  font-weight: 300;
+}
+
+.user-avatar-caption,
+.user-avatar-change-link {
+  @include text-shadow(0 1px  5px $dark-grey, 0 1px 10px $dark-grey, 0 1px 15px $dark-grey);
+  color: #fff;
+}
+
+.user-avatar-change {
+  @include transition(opacity 0.2s ease-out);
+  position: absolute;
+  width: $avatar-size;
+  font-size: 11px;
+  opacity: 0;
+
+  .user-avatar:hover & {
+    opacity: 1;
+  }
+}
+
+.user-avatar-change-link {
+  display: inline-block;
+  padding: 10px;
+  color: rgba(255, 255, 255, 0.9);
+
+  &:hover {
+    color: #fff;
+    text-decoration: none;
+  }
+}
+
+/* Feed */
+
+.feed {
+  margin: 2em 0;
+
+  a, b {
+    font-weight: 600;
+  }
+
+  img {
+    display: block;
+  }
+
+  .thumb {
+    @include box-shadow(0 1px 3px rgba(0, 0, 0, 0.3));
+    @include border-radius(3px);
+    float: left;
+    width: 56px;
+    padding: 3px;
+    border: 1px solid #d4d4d4;
+    background: #fff;
+
+    &:empty {
+      display: none;
+    }
+  }
+
+  .status {
+    @include gradient(#a3a4a6, #c1c3c5);
+    @include text-shadow(rgba(0, 0, 0, 0.3) 0 1px 1px);
+    @include box-shadow(inset rgba(0, 0, 0, 0.4) 0 1px 3px);
+    @include border-radius(3px);
+    display: inline-block;
+    padding: 0 8px;
+    line-height: 19px;
+    font-size: 11px;
+    font-weight: normal;
+    text-transform: uppercase;
+    color: #fff;
+
+    &.checked {
+      @include gradient(#e0a876, #fec695);
+    }
+
+    &.filled {
+      @include gradient(#90b86e, #afd78c);
+    }
+  }
+}
+
+.feed-description {
+  @include tiny-dimmed-text();
+  padding: 0 10px;
+}
+
+.feed-title {
+  font-size: 18px;
+  font-weight: 600;
+  padding: 5px 20px 5px 10px;
+  border-bottom: 1px solid $content-icon-color;
+
+  .type-user-added & {
+    border-color: $content-border-color;
+    padding-bottom: 10px;
+    padding-left: 20px;
+
+    .user-avatar + & {
+      padding-top: 25px;
+    }
+  }
+
+  .badge {
+    @include border-radius(2px);
+    display: inline-block;
+    padding: 4px 6px;
+    margin-left: 5px;
+    position: relative;
+    top: -1px;
+    background: #dce4e8;
+    color: $blue-hover;
+    font-size: 13px;
+    font-weight: 600;
+  }
+}
+
+.type-user-checked {
+  @include clearfix();
+  padding-bottom: 1em;
+}
+
+.feed-item {
+  @include clearfix();
+  padding: 10px 20px 10px 140px;
+  border-top: 1px solid $content-icon-color;
+
+  &:first-of-type,
+  .type-user-checked &:nth-of-type(2) {
+    border-top: none;
+  }
+
+  .type-user-added & {
+    border-color: $content-border-color;
+    padding-left: 100px;
+  }
+
+  .type-user-checked & {
+    @include box-sizing(border-box);
+    padding-left: 90px;
+    width: $checked-item-width;
+    float: left;
+
+    &:nth-of-type(odd) {
+      clear: both;
+
+      &:nth-last-child(1) {
+        padding-right: 20px + $checked-item-width;
+        width: 2 * $checked-item-width;
+      }
+    }
+  }
+}
+
+.feed-image {
+  margin-left: -80px;
+
+  .type-activity & {
+    margin-left: -130px;
+  }
+}
+
+.feed-date {
+  @include tiny-dimmed-text();
+  padding-top: 4px;
+}
+
+.feed-message {
+  padding-top: 5px;
+
+  .type-activity > .type-followed & {
+    @include feed-icon(320px);
+  }
+
+  .type-activity > .type-marked & {
+    @include feed-icon(340px);
+  }
+
+  .type-activity > .type-modified & {
+    @include feed-icon(360px);
+  }
+
+  .type-activity > .type-added & {
+    @include feed-icon(380px);
+  }
+
+  .type-activity > .type-followed &,
+  .type-activity > .type-modified & {
+    &:before {
+      margin-top: -1px;
+    }
+  }
+
+  .type-activity > .type-last & {
+    @include tiny-dimmed-text();
+  }
+}
+
+.feed-placeholder {
+  border-radius: 4px;
+  border: 1px dashed #8f8f8f;
+  text-align: center;
+  padding: 40px 20px;
+  color: #8f8f8f;
+}
+
+.user-profile {
+  .fields {
+    border-top: 1px solid $content-icon-color;
+    padding-top: 1em;
+    margin-top: 3em;
+
+    &:first-of-type {
+      margin: 0;
+    }
+
+    a {
+      text-decoration: underline;
+    }
+  }
+
+  .fields-title {
+    @include tiny-uppercase-text();
+    color: darken($content-icon-color, 20%);
+  }
+
+  .fields-title-inner {
+    position: absolute;
+    margin: -6px 0 0 200px;
+    background: #fff;
+    padding: 0 10px;
+    line-height: 1;
+  }
+
+  .field-row {
+    @include clearfix();
+    padding-top: 10px;
+
+    &.type-separated {
+      margin-bottom: 20px;
+    }
+  }
+
+  .control-group {
+    margin: 8px 0;
+  }
+
+  .field-label,
+  .control-label {
+    float: left;
+    width: 180px;
+    text-align: right;
+    padding: 7px 30px 0 0;
+  }
+
+  .field-label-image {
+    margin-top: -7px;
+  }
+
+  .field,
+  .controls > .string,
+  .controls > .password,
+  .controls > .select {
+    @include box-sizing(border-box);
+    @include border-radius(2px);
+    @include box-shadow(inset 0 1px 3px $content-icon-color);
+    background-color: #fff;
+    display: inline-block;
+    width: 300px;
+    margin: 0;
+    padding: 5px 7px;
+    border: 1px solid $content-border-color;
+    font: inherit;
+    color: lighten($dark-grey, 20%);
+
+    &:not(select):focus {
+      color: inherit;
+      border-color: lighten($separator-color, 20%);
+    }
+  }
+
+  .field-layout {
+    @include clearfix();
+    margin-left: 210px;
+  }
+
+  .field-explanation {
+    @include tiny-dimmed-text();
+    width: 180px;
+    padding: 10px 10px 0 0;
+  }
+
+  :not(.field-layout) > .field-explanation {
+    float: right;
+    padding: 0 20px 0 0;
+    width: 160px;
+  }
+
+  .field-row-submit {
+    clear: both;
+    padding: 4em 0 1.5em;
+    text-align: center;
+  }
+
+  .button,
+  .field-submit {
+    @include gradient(#4b6d7e, #436576);
+    @include border-radius(3px);
+    @include text-shadow(0 -1px 1px $dark-grey);
+    @include tiny-uppercase-text();
+    display: inline-block;
+    padding: 10px 20px;
+    border: 0;
+    margin: 0;
+    font-family: inherit;
+    color: #fff;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+      @include gradient(#437893, #2c617c);
+    }
+
+    &:active {
+      @include gradient(#2b607b, #437893);
+    }
+  }
+
+  select.field {
+    margin-top: 4px;
+  }
+
+  .tag {
+    float: left;
+
+    span {
+      color: #fff;
+      text-transform: uppercase;
+      display: inline-block;
+      font-size: 11px;
+      line-height: 19px;
+      padding: 0 8px;
+      font-weight: normal;
+      @include border-radius(3px);
+      @include text-shadow(rgba(0,0,0,0.3) 0 1px 1px);
+      @include box-shadow(inset rgba(0,0,0,0.4) 0 1px 3px);
+      margin-right: 4px;
+
+      &.unchecked {
+        @include gradient(#a3a4a6, #c1c3c5);
+      }
+
+      &.checked{
+        @include gradient(#e0a876, #fec695);
+      }
+
+      &.filled {
+        @include gradient(#90b86e, #afd78c);
+      }
+    }
+  }
+}
+
+@-moz-document url-prefix() {
+  .user-profile select.field {
+    margin-top: -1px;
+  }
+}
