@@ -13,7 +13,7 @@
         %dt.feed-message
           = link_to(relic.identification, relic_path(relic))
         %dt.feed-unadopt
-          = link_to content_tag(:span, t('views.relics.show.general.unadopt')), unadopt_relic_path(relic.id), :class => "adopt", :method => :post, :remote => true
+          = link_to content_tag(:span, t('views.relics.show.general.unadopt')), unadopt_relic_path(relic.id, :user => true), :class => "adopt", :method => :post, :remote => true
 
   %p.feed-description= t '.updated_relics_list'
 
