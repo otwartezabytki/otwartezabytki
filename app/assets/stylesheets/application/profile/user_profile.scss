@@ -378,6 +378,13 @@ $unread-badge-size:    10px;
   }
 }
 
+.feed-unadopt {
+  text-align: right;
+  a {
+    font-weight: normal;
+  }
+}
+
 .feed-placeholder {
   border-radius: 4px;
   border: 1px dashed #8f8f8f;
