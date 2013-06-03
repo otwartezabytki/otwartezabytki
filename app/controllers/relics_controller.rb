@@ -155,8 +155,12 @@ class RelicsController < ApplicationController
 
   def unadopt
     current_user.relics.delete(relic)
-
-    redirect_to relic_path(relic), :notice => t('notices.relic_unadopted')
+    path = if params[:user]
+      user_path(current_user)
+    else
+      relic_path(relic)
+    end
+    redirect_to path, :notice => t('notices.relic_unadopted')
   end
 
   def print
