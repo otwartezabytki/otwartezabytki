@@ -856,7 +856,7 @@ pl:
       browse: Przeglądaj
       contact: Kontakt
       disclaimer: "Wciąż udoskonalamy serwis i poprawiamy błędy. Jeśli masz jakieś uwagi lub znajdziesz błąd, prosimy o informację na:"
-      download_data: "Pobierz dane"
+      download: "Pobierz dane"
       facebook_sign_in: "Zaloguj się przez Facebooka"
       facebook_sign_up: "Zarejestruj się przez Facebooka"
       footer:
@@ -1537,3 +1537,5 @@ pl:
     wuoz-w-warszawie: "Wojewódzki Urząd Ochrony Zabytków w Warszawie"
     wuoz-w-zielonej-gorze: "Wojewódzki Urząd Ochrony Zabytków w Zielonej Górze"
     wuoz-we-wroclawiu: "Wojewódzki Urząd Ochrony Zabytków we Wrocławiu"
+  routes:
+    pages: "strony"

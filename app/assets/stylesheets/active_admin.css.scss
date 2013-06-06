@@ -20,3 +20,15 @@ nav ul {
     display: inline;
   }
 }
+
+p.errors {
+  color: #932419;
+  font-weight: bold;
+  margin: 1em 0;
+  padding: 1em;
+  border: 1px solid #d2adaa;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background-color: #fdf9f9;
+}

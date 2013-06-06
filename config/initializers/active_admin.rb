@@ -6,6 +6,7 @@ ActiveAdmin.setup do |config|
   config.current_user_method = :current_user
   config.logout_link_path = :destroy_user_session_path
   config.logout_link_method = :delete
+  config.before_filter :check_user_role
 
   # == Controller Filters
   #
@@ -32,12 +33,8 @@ ActiveAdmin.setup do |config|
 
   module ActiveAdmin
     class BaseController
-      def role_given?
-        current_user.role == 'admin'
-      end
-
-      def as_role
-        { as: current_user.role.downcase.to_sym }
+      def check_user_role
+        raise(CanCan::AccessDenied) unless current_user.admin?
       end
     end
   end
