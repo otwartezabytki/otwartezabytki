@@ -3,7 +3,7 @@
   @district    ||= relic.try(:district) || @voivodeship.try(:districts).try(:first)
   @commune     ||= relic.try(:commune) || @district.try(:communes).try(:first)
 
-.administrative-level{'data-replace'=> 'div.administrative-level'}
+.administrative-level
   .one-third
     = label_tag 'relic[voivodeship_id]', t('views.relicbuilders.administrative_level.voivodeship')
     = select 'relic', 'voivodeship_id', options_from_collection_for_select(Voivodeship.order(:name), "id", "name", @voivodeship.try(:id))
