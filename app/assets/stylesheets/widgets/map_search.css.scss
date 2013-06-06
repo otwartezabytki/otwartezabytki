@@ -147,13 +147,25 @@ form{
       &:before{
         content: '» ';
       }
-      a{
+      a {
         font-weight: 600;
-        span.relic_count{
+        &:hover {
+          text-decoration: none;
+        }
+        span.name {
+          width: 110px;
+          height: 15px;
+          display: inline-block;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+        }
+        span.relic_count {
           font-weight: normal;
           font-size: 10px;
           color: #4a4a4a;
         }
+
       }
     }
   }
@@ -183,10 +195,18 @@ form{
   position: relative;
   overflow: hidden;
   .inputs-list{
-    span{
+    span {
       font-weight: 600;
       font-size: 11px;
-      em{
+      .name {
+        width: 105px;
+        height: 15px;
+        display: inline-block;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+      em {
         font-weight: normal;
         font-size: 10px;
         color: #4a4a4a;

@@ -1,7 +1,7 @@
 - node.each do |facet, subfacets|
   = content_tag :li do
     = link_to widgets_map_search_path(widget.uid, :search => params[:search].merge(:bounding_box => nil, :location => "#{facet.class.name.underscore}:#{facet.respond_to?(:virtual_id) ? facet.virtual_id : facet.id}")), :remote => true do
-      %span.facet_name= facet.full_name
+      %span.facet_name.name= facet.full_name
       %span.relic_count (#{facet.facet_count})
     - if subfacets && subfacets.length > 0
       = content_tag :ul do
