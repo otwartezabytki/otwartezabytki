@@ -5,18 +5,21 @@ window.map = undefined
 window.geocode_location = (callback) ->
   return unless callback?
   if $('#relic_polish_relic').is(':checked')
-    voivodeship = $('form.relic').data('voivodeship')
-    district = $('form.relic').data('district')
-    commune = $('form.relic').data('commune')
-    city = $('.select2-choice').text().trim()
-    street = $('#relic_street').val().trim()
+    if $('#relic_street').is(':visible')
+      voivodeship = $('#relic_voivodeship_id option:selected').text().trim()
+      district = $('#relic_district_id option:selected').text().trim()
+      commune = $('#relic_commune_id option:selected').text().trim()
+      city = $('#relic_place_id option:selected').text().trim()
+      street = $('#relic_street').val().trim()
+      query = {voivodeship, district, commune, city, street}
+    else
+      place_id = $('#relic_place_id').val()
+      query = {place_id} if place_id
 
-    place_id = $('#relic_place_id').val()
-
-    jQuery.get geocoder_search_path, {place_id}, (result) ->
+    jQuery.get geocoder_search_path, query, (result) ->
       if result.length > 0
         callback(result[0].latitude.round(7), result[0].longitude.round(7))
-    , 'json' if place_id
+    , 'json' if query
   else
     country_code = $('#relic_country_code').val()
     province = $('#relic_fprovince').val()
@@ -182,15 +185,29 @@ jQuery.initializer 'section.edit.location', ->
       $('#map_canvas').set_marker($('#relic_latitude').val().toNumber(), $('#relic_longitude').val().toNumber())
 
     $('form.relic').on 'change',  '.foreign-location select, .foreign-location input, .street_input input, #relic_polish_relic', ->
+      $(this).addClass('wait')
       geocode_location (lat, lng) ->
-        $('#map_canvas').zoom_at(lat, lng)
-        map.removeMarkers()
-        $('#map_canvas').circle_marker(lat, lng)
-        $('form.relic').removeClass('geocoded')
-        $('#relic_geocoded').val("f")
+        $('#map_canvas').set_marker(lat, lng)
+        $form = $('form.relic')
+        $form.removeClass('wait')
+        $form.submit() if $form.hasClass('submit')
 
   countries_locations = jQuery.parseJSON($('#countries_location').html())
   $('#relic_country_code').select2()
   $('#relic_country_code').change ->
     location = countries_locations[$(this).val()]
     $('#map_canvas').zoom_at(location[0], location[1], 5)
+
+  $('form.relic').on 'ajax:before', ->
+
+    # Wait for lat/lng
+    if $(this).hasClass('wait')
+      $(this).addClass('submit')
+      return false
+
+    unless $(this).hasClass('geocoded')
+      alert("Podaj dokładny adres lub przeciągnij znacznik na mapę.")
+      return false
+
+  $('.administrative-level select').on 'change', ->
+    $('#relic_street').val('')

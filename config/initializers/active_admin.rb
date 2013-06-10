@@ -36,6 +36,14 @@ ActiveAdmin.setup do |config|
       def check_user_role
         raise(CanCan::AccessDenied) unless current_user.admin?
       end
+
+      def role_given?
+        true
+      end
+
+      def as_role
+        { as: current_user.role.to_sym }
+      end
     end
   end
 

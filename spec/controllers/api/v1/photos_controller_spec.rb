@@ -59,7 +59,6 @@ module Api
         end
 
         it 'should not create new photo' do
-          # require'pry';binding.pry
           expect do
             post :create, {
               relic_id: relic.id,
@@ -78,7 +77,6 @@ module Api
         invalid_photo_attributes = { author: '' }
 
         it 'updates photo' do
-          # require'pry';binding.pry
           put :update, {
             relic_id: photo.relic_id,
             id: photo.id,
@@ -93,7 +91,6 @@ module Api
         end
 
         it 'should not update photo ' do
-          # require'pry';binding.pry
           prev_updated_at = photo.updated_at.dup
           put :update,
             relic_id: photo.relic_id,
