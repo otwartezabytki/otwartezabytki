@@ -71,11 +71,11 @@ class Page < ActiveRecord::Base
   before_validation do
     self.title = self.name if self.title.blank? and self.new_record?
     self.permalink = if self.permalink.blank? and self.new_record?
-      self.name.parameterize
+      self.name.try(:parameterize)
     else
       self.permalink.parameterize
     end
-    self.name = self.name.parameterize.underscore
+    self.name = self.name.try(:parameterize).try(:underscore)
   end
 
   class Translation
