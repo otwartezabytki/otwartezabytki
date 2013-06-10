@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class Page < ActiveRecord::Base
-  attr_accessible :name, :body, :title, :translations_attributes, :parent_id, :permalink, :weight
+  attr_accessible :name, :body, :title, :translations_attributes, :parent_id, :permalink, :weight, as: :admin
 
   translates :body, :title, :permalink
   accepts_nested_attributes_for :translations
@@ -10,6 +10,10 @@ class Page < ActiveRecord::Base
   scope :by_weight, order('weight ASC')
 
   has_ancestry
+
+  class Translation
+    attr_accessible :body, :title, :permalink, as: :admin
+  end
 
   class Resolver < ActionView::Resolver
     self.caching = false
@@ -67,11 +71,11 @@ class Page < ActiveRecord::Base
   before_validation do
     self.title = self.name if self.title.blank? and self.new_record?
     self.permalink = if self.permalink.blank? and self.new_record?
-      self.name.parameterize
+      self.name.try(:parameterize)
     else
       self.permalink.parameterize
     end
-    self.name = self.name.parameterize.underscore
+    self.name = self.name.try(:parameterize).try(:underscore)
   end
 
   class Translation
