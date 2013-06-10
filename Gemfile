@@ -36,7 +36,7 @@ gem 'tire-contrib'
 gem 'rocket_tag'
 gem 'sentry-raven'
 
-gem 'paper_trail', '~> 2' # versioning
+gem 'paper_trail', '~> 2.7.2' # versioning
 
 # admin panel
 gem 'activeadmin',    '~> 0.4.4'

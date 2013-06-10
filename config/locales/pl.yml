@@ -92,6 +92,8 @@ pl:
         name: Nazwa
         relic: Zabytek
         relic_id: "ID zabytku"
+        size: "Rozmiar"
+        mime: "Typ MIME"
       entry:
         body: Opis
         relic: Zabytek
@@ -115,6 +117,10 @@ pl:
         relic: Zabytek
         relic_id: "ID zabytku"
         alternate_text: "Tekst alternatywny"
+        file: "Plik"
+        file_full_width: "Pełna szerokość"
+        file_full_height: "Pełna wysokość"
+        mime: "Typ MIME"
       relic:
         ancestry: "W zespołach"
         approved: "Zabytek zatwierdzony"

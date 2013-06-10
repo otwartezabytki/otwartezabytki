@@ -65,7 +65,23 @@ ActiveAdmin.register Version, :sort_order => 'id_desc' do
             dt t("activerecord.attributes.#{e.item_type.downcase}.#{key}")
 
             if after.class == String
-              dd sanitize(HTMLDiff::DiffBuilder.new(before || "", after || "").build)
+              if key == 'file' and e.item_type == 'Document'
+                dd do
+                  store_dir = "/system/uploads/document/file/%d/%s"
+                  span link_to("dokument", store_dir % [e.item_id, before])
+                  span "=>"
+                  span link_to("dokument", store_dir % [e.item_id, after])
+                end
+              elsif key == 'file' and e.item_type == 'Photo'
+                dd do
+                  store_dir = "/system/uploads/photo/file/%d/midi_%s"
+                  span image_tag(store_dir % [e.item_id, before])
+                  span "=>"
+                  span image_tag(store_dir % [e.item_id, after])
+                end
+              else
+                dd sanitize(HTMLDiff::DiffBuilder.new(before || "", after || "").build)
+              end
             elsif after.class == Array
               dd do
                 ((after || []) - (before || [])).each do |e|
