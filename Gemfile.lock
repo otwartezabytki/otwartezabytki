@@ -257,7 +257,7 @@ GEM
       activesupport
     hashie (1.2.0)
     hashr (0.0.22)
-    hike (1.2.1)
+    hike (1.2.3)
     htmldiff (0.0.1)
     httpauth (0.2.0)
     i18n (0.6.4)
@@ -284,7 +284,7 @@ GEM
       railties (>= 3.1.0)
     js-routes (0.8.6)
       rails (>= 3.2)
-    json (1.7.7)
+    json (1.8.0)
     jwt (0.1.5)
       multi_json (>= 1.0)
     kaminari (0.14.1)
@@ -328,7 +328,7 @@ GEM
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
     orm_adapter (0.4.0)
-    paper_trail (2.7.0)
+    paper_trail (2.7.2)
       activerecord (~> 3.0)
       railties (~> 3.0)
     pg (0.14.1)
@@ -455,7 +455,7 @@ GEM
       libv8 (~> 3.11.8.12)
       ref
     thor (0.18.1)
-    tilt (1.3.6)
+    tilt (1.4.1)
     tire (0.4.3)
       activemodel (>= 3.0)
       hashr (~> 0.0.19)
@@ -478,7 +478,7 @@ GEM
       railties (>= 3.1)
     twitter_cldr (2.0.2)
       json (>= 1.1.9)
-    tzinfo (0.3.35)
+    tzinfo (0.3.37)
     uglifier (1.3.0)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
@@ -565,7 +565,7 @@ DEPENDENCIES
   newrelic_rpm (~> 3.5.5.38)
   omniauth
   omniauth-facebook
-  paper_trail (~> 2)
+  paper_trail (~> 2.7.2)
   pg
   pry-doc
   pry-rails
