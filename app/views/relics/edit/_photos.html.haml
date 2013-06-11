@@ -17,8 +17,8 @@
               .column-right
                 = f2.input :author, :input_html => { :class => "author" }
                 = f2.input :date_taken, :input_html => { :class => "date_taken" }
-                = f2.input :alternate_text, :input_html => { :class => "alternate_text" }
                 = f2.input :description, :input_html => { :class => "description redactor" }
+                = f2.input :alternate_text, :input_html => { :class => "alternate_text" }
         - else
           .photo
             .column-left
@@ -29,10 +29,10 @@
               %p= photo.author
               %label= t('activerecord.attributes.photo.date_taken')
               %p= photo.date_taken
-              %label= t('activerecord.attributes.photo.alternate_text')
-              %p= photo.alternate_text
               %label= t('activerecord.attributes.photo.description')
               %p= photo.description
+              %label= t('activerecord.attributes.photo.alternate_text')
+              %p= photo.alternate_text
       .photo.hidden
         .column-left
           .preview.preview-placeholder
