@@ -185,7 +185,7 @@ jQuery.initializer 'section.edit.location', ->
       $('#map_canvas').set_marker($('#relic_latitude').val().toNumber(), $('#relic_longitude').val().toNumber())
 
     $('form.relic').on 'change',  '.foreign-location select, .foreign-location input, .street_input input, #relic_polish_relic', ->
-      $(this).addClass('wait')
+      $('form.relic').addClass('wait')
       geocode_location (lat, lng) ->
         $('#map_canvas').set_marker(lat, lng)
         $form = $('form.relic')
