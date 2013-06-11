@@ -306,6 +306,7 @@ class Relic < ActiveRecord::Base
         :id,
         :nid_id,
         :identification,
+        :common_name,
         :state,
         :register_number,
         :dating_of_obj,
@@ -321,6 +322,7 @@ class Relic < ActiveRecord::Base
         :id,
         :nid_id,
         :identification,
+        :common_name,
         :description,
         :categories,
         :state,
@@ -337,6 +339,29 @@ class Relic < ActiveRecord::Base
         :links_info,
       )
       json.main_photo self.main_photo if self.has_photos?
+      json.events self.events do |e|
+        json.id e.id
+        json.date e.date
+        json.name e.name
+        json.photo_id e.photo_id
+      end
+      json.entries self.entries, :id, :title, :body
+      json.links self.links, :id, :name, :url, :category, :kind
+      json.documents self.documents do |d|
+        json.id d.id
+        json.name d.name
+        json.description d.description
+        json.url d.file.try(:url)
+      end
+      json.photos self.photos
+      json.alerts self.alerts do |a|
+        json.id a.id
+        json.url a.file.try(:url)
+        json.author a.author
+        json.date_taken a.date_taken
+        json.description a.description
+        json.state a.state
+      end
     end
 
     json.descendants do
@@ -346,7 +371,7 @@ class Relic < ActiveRecord::Base
     json.place_id self.place.id
     json.place_name self.place.name
     json.commune_name self.place.commune.name
-    json.district_name self.place.commune.district.voivodeship.name
+    json.district_name self.place.commune.district.name
     json.voivodeship_name self.place.commune.district.voivodeship.name
 
     json
