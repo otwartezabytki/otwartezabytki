@@ -138,7 +138,7 @@ GEM
       rake
     arel (3.0.2)
     arrabiata (0.4.0)
-    autoprefixer-rails (0.4.20130528)
+    autoprefixer-rails (0.5.20130617)
       execjs
     bcrypt-ruby (3.0.1)
     better_errors (0.5.0)
