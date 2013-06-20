@@ -23,7 +23,7 @@ GIT
 
 GIT
   remote: git://github.com/monterail/tolk.git
-  revision: ff521f765a45242d298cbfe989807f62ed2f0d90
+  revision: 38dd769df3a59461ee247ea5f5b8861f54ca6e02
   branch: oz-custom
   specs:
     tolk (1.3.3)
@@ -79,10 +79,38 @@ GIT
       thor (>= 0.14.6, < 2.0)
 
 GIT
+  remote: git://github.com/svenfuchs/routing-filter.git
+  revision: 6270eba04ee30e03500c8f977efe1189ede3f248
+  ref: 6270eba04e
+  specs:
+    routing-filter (0.3.1)
+      actionpack
+
+GIT
   remote: git://github.com/zzet/http_accept_language.git
   revision: b06cf2a35658702e54a54c16eee62aa19e729e9b
   specs:
     http_accept_language (2.0.1.pre)
+
+GIT
+  remote: https://github.com/rails/strong_parameters.git
+  revision: 5e351d231748028a3db66cab2ab911b866a240ca
+  branch: 5e351d231748028a3db66cab2ab911b866a240ca
+  specs:
+    strong_parameters (0.2.0)
+      actionpack (~> 3.0)
+      activemodel (~> 3.0)
+      railties (~> 3.0)
+
+GIT
+  remote: https://github.com/sheerun/globalize3.git
+  revision: ef91130fb07db4aab579b36f68bab7c893a1fe20
+  branch: fix/accessible
+  specs:
+    globalize3 (0.3.0)
+      activemodel (>= 3.0.0)
+      activerecord (>= 3.0.0)
+      paper_trail (~> 2)
 
 GEM
   remote: https://rubygems.org/
@@ -104,10 +132,6 @@ GEM
       cancan (>= 1.6.2)
       rails (>= 3.0)
     acts_as_list (0.1.9)
-    airbrake (3.1.7)
-      activesupport
-      builder
-      json
     ancestry (1.3.0)
       activerecord (>= 2.3.14)
     annotate (2.5.0)
@@ -115,6 +139,11 @@ GEM
     arel (3.0.2)
     arrabiata (0.4.0)
     bcrypt-ruby (3.0.1)
+    better_errors (0.5.0)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
+    binding_of_caller (0.7.1)
+      debug_inspector (>= 0.0.1)
     bootstrap-sass (2.0.4.2)
     bourbon (3.0.1)
       sass (>= 3.2.0)
@@ -157,7 +186,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.4.0)
-    columnize (0.3.6)
     commands (0.2.1)
       rails (>= 3.2.0)
     compass (0.12.2)
@@ -168,13 +196,7 @@ GEM
       compass (>= 0.12.2, < 0.14)
     dalli (2.6.2)
     database_cleaner (0.9.1)
-    debugger (1.3.0)
-      columnize (>= 0.3.1)
-      debugger-linecache (~> 1.1.1)
-      debugger-ruby_core_source (~> 1.1.7)
-    debugger-linecache (1.1.2)
-      debugger-ruby_core_source (>= 1.1.1)
-    debugger-ruby_core_source (1.1.7)
+    debug_inspector (0.0.2)
     decent_exposure (2.0.1)
     devise (2.2.3)
       bcrypt-ruby (~> 3.0)
@@ -207,10 +229,6 @@ GEM
     friendly_id (4.0.9)
     fssm (0.2.10)
     geocoder (1.1.6)
-    globalize3 (0.3.0)
-      activemodel (>= 3.0.0)
-      activerecord (>= 3.0.0)
-      paper_trail (~> 2)
     gon (4.0.2)
       actionpack (>= 2.3.0)
       json
@@ -252,7 +270,7 @@ GEM
     hike (1.2.1)
     htmldiff (0.0.1)
     httpauth (0.2.0)
-    i18n (0.6.1)
+    i18n (0.6.4)
     i18n-country-translations (0.0.9)
       i18n (~> 0.5)
       railties (>= 3.0.0)
@@ -276,7 +294,7 @@ GEM
       railties (>= 3.1.0)
     js-routes (0.8.6)
       rails (>= 3.2)
-    json (1.7.6)
+    json (1.7.7)
     jwt (0.1.5)
       multi_json (>= 1.0)
     kaminari (0.14.1)
@@ -338,7 +356,7 @@ GEM
       pry (>= 0.9.10)
     quiet_assets (1.0.1)
       railties (~> 3.1)
-    rack (1.4.4)
+    rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
     rack-ssl (1.3.3)
@@ -349,9 +367,9 @@ GEM
       i18n (~> 0.5)
     rails_config (0.2.5)
       activesupport (>= 3.0)
-    rake (10.0.3)
+    rake (10.0.4)
     rb-fsevent (0.9.3)
-    rdoc (3.12)
+    rdoc (3.12.2)
       json (~> 1.4)
     recaptcha (0.3.4)
     redcarpet (2.2.2)
@@ -405,6 +423,11 @@ GEM
       multi_json (~> 1.0)
       rubyzip
       websocket (~> 1.0.4)
+    sentry-raven (0.4.5)
+      faraday (>= 0.7.6)
+      hashie
+      multi_json (~> 1.0)
+      uuidtools
     sextant (0.2.3)
       activesupport (>= 3.2)
       rails (>= 3.2)
@@ -437,8 +460,8 @@ GEM
     therubyracer (0.11.3)
       libv8 (~> 3.11.8.12)
       ref
-    thor (0.17.0)
-    tilt (1.3.3)
+    thor (0.18.1)
+    tilt (1.3.6)
     tire (0.4.3)
       activemodel (>= 3.0)
       hashr (~> 0.0.19)
@@ -467,6 +490,7 @@ GEM
       multi_json (~> 1.0, >= 1.0.2)
     unicode (0.4.3.1)
     unix_utils (0.0.15)
+    uuidtools (2.1.3)
     warden (1.2.1)
       rack (>= 1.0)
     websocket (1.0.7)
@@ -494,10 +518,11 @@ DEPENDENCIES
   activeadmin-cancan
   activeadmin-globalize3-inputs!
   acts_as_list
-  airbrake
   ancestry
   annotate (>= 2.5.0)
   arrabiata
+  better_errors
+  binding_of_caller
   bootstrap-sass (~> 2.0.4.0)
   cancan
   capybara
@@ -510,7 +535,6 @@ DEPENDENCIES
   compass-rails
   dalli
   database_cleaner
-  debugger
   decent_exposure
   devise
   factory_girl_rails (~> 4.1.0)
@@ -521,7 +545,7 @@ DEPENDENCIES
   formtastic-bootstrap
   friendly_id
   geocoder
-  globalize3
+  globalize3!
   gon
   gravatar_image_tag
   growl
@@ -545,6 +569,7 @@ DEPENDENCIES
   mini_magick!
   multi_json (= 1.3.7)
   newrelic_rpm (~> 3.5.5.38)
+  omniauth
   omniauth-facebook
   paper_trail (~> 2)
   pg
@@ -559,12 +584,15 @@ DEPENDENCIES
   redcarpet
   remote_table
   rocket_tag
+  routing-filter!
   rspec-rails (~> 2.0)
   rubyzip
   sass-rails (~> 3.2.3)
+  sentry-raven
   sextant
   shoulda-matchers
   simplecov
+  strong_parameters!
   sugar-rails
   therubyracer
   tire (= 0.4.3)

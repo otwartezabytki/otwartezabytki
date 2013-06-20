@@ -8,7 +8,7 @@ class PhotosController < ApplicationController
 
   expose(:relic) { Relic.find(params[:relic_id]) }
 
-  expose(:photos) { relic.photos }
+  expose(:photos, ancestor: :relic)
   expose(:photo)
 
   expose(:tree_photos) { relic.all_photos }
@@ -43,7 +43,7 @@ class PhotosController < ApplicationController
       path = if !!params[:build]
         photos_relicbuilder_path(:id => relic.id)
       else
-        edit_section_relic_path(relic.id, :photos)
+        edit_section_relic_path(relic.id, :photos, iframe_url_options)
       end
       redirect_to path
     end

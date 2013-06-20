@@ -1,4 +1,6 @@
 debug_assets: true
+secret_token: fallback_token_for_development
+raven_dsn: fallback_dsn_for_development
 oz:
   gm_key: 'AIzaSyCIvKKcWv1L2FrfLe5rNpnsah5OXm6gJMA'
   ga_key: 'Your Google Analytics key'

@@ -949,26 +949,26 @@ a {
       display: block;
       cursor: pointer;
     }
-    div span strong{
-      width: 157px;
-    }
     span {
-      em{
+      input {
+        vertical-align: bottom;
+      }
+      em {
         background: #dce4e8;
         color: #236282;
         float: right;
-        margin-top: -2px;
         padding: 4px 5px;
         font-size: 12px;
         @include border-radius(2px);
         font-style: normal;
       }
-      strong{
-        display: inline-block;
-        width: 167px;
-        font-weight: normal;
+      .name {
+        width: 150px;
         height: 15px;
-        word-wrap: break-word;
+        display: inline-block;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
       }
     }
   }
@@ -2294,6 +2294,17 @@ section.edit .flash {
   z-index: 11;
 }
 
+body.relics {
+  #new_search {
+    &>.span3 {
+      width: 240px;
+    }
+    &>.span9 {
+      width: 720px;
+    }
+  }
+}
+
 body.resource_home{
   #new_search{
     margin-top: 33px;
@@ -2304,7 +2315,6 @@ body.resource_home{
     @include gradient(#ffffff, #f2f2f2);
     @include box-shadow(0 2px 20px 0 rgba(0,0,0,0.3));
     position: relative;
-    overflow: hidden;
     &::after{
       content: '';
       position: absolute;

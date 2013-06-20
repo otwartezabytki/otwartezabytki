@@ -32,6 +32,17 @@
 i18n.on {
   background-color: red !important;
 }
+section.translation-edit {
+  ul {
+    display: block;
+    overflow: hidden;
+    li {
+      line-height: 20px;
+      float: left; margin-left: 5px;
+      &.red {color: red; font-size: 16px;}
+    }
+  }
+}
 .fancybox-inner .main-container {width: 100%; height: 100%;}
 .translation-mode {
   z-index: 10000;
@@ -146,6 +157,20 @@ i18n.on {
     &:first-child {
       padding-left: 0;
       padding-right: 18px;
+    }
+  }
+}
+
+#how_it_works {
+  & + .popover {
+    & > * {
+      position: relative;
+      top: -13px;
+      left: 3px;
+    }
+
+    .popover-content p:last-child {
+      margin-bottom: 0;
     }
   }
 }

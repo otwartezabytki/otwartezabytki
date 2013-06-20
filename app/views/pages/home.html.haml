@@ -45,7 +45,7 @@
           %li= t('views.pages.home.welcome.li1')
           %li= t('views.pages.home.welcome.li2')
           %li= t('views.pages.home.welcome.li3')
-          = link_to t('views.pages.home.welcome.more'), page_pl_path('o-projekcie'), :class => 'btn'
+          = link_to t('views.pages.home.welcome.more'), about_page_path, :class => 'btn'
 .widgets-intro
   %ul
     %li.first
@@ -75,9 +75,9 @@
       %h3= t('views.pages.home.recently_modified')
       %ul.latest
         - RecentRevision.revisions[0...-3].each do |revision|
-          = render partial: 'last_edited', locals: { revision: revision, hidden: true } 
+          = render partial: 'last_edited', locals: { revision: revision, hidden: true }
         - RecentRevision.revisions.last(3).each do |revision|
-          = render partial: 'last_edited', locals: { revision: revision, hidden: false } 
+          = render partial: 'last_edited', locals: { revision: revision, hidden: false }
   .progress-bar
     .bg
       .color{:style => "width: #{relic_stats[:checked] * 100 / relic_stats[:total].to_f}%"}

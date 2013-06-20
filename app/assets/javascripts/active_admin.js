@@ -1,7 +1,11 @@
-//= require active_admin/base
+//= require jquery.ui.tabs
 //= require vendor/select2
 //= require vendor/redactor
-// require jquery.ui.tabs
+
+// ActiveAdmin
+//= require jquery.ui.datepicker
+//= require jquery_ujs
+//= require active_admin/application
 
 $(document).ready(function(){
   if($("select.select2").length) {

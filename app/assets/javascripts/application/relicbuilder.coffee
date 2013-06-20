@@ -84,6 +84,7 @@ jQuery.initializer '.main-container div.new_relic .creator-step', ->
     content: -> $("##{$(this).data("content-id")}").html()
     delay: 100000
     placement: 'top'
+    html: true
 
 jQuery.initializer '.main-container div.new_relic .creator-step', ->
   this.find('a.js-popover.non-existed').popover
@@ -91,3 +92,4 @@ jQuery.initializer '.main-container div.new_relic .creator-step', ->
     content: -> $("##{$(this).data("content-id")}").html()
     delay: 100000
     placement: 'bottom'
+    html: true

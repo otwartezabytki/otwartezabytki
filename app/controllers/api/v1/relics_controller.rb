@@ -2,6 +2,7 @@
 module Api
   module V1
     class RelicsController < ApiController
+
       before_filter :api_authenticate
       before_filter :api_authorize, :only => [:create, :update]
 

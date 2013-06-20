@@ -11,6 +11,10 @@ module Api
               :path => "/relics.{format}"
             },
             {
+              :description => "Relics' photos",
+              :path => "/relic_photos.{format}"
+            },
+            {
               :description => "Places",
               :path => "/places.{format}"
             }
@@ -290,6 +294,182 @@ module Api
               :summary => "Search places"
             }],
             :path => "/places.{format}"
+          }],
+          :models => {
+            "Place" => {
+              :id => "Place",
+              :properties => {
+                :id => { :type => "long" },
+                :name => { :type => "string" }
+              }
+            }
+          }
+        })
+      end
+
+      def relic_photos
+        respond_with({
+          :apiVersion => "1.0",
+          :basePath => "http://#{Settings.oz.host}/api/v1",
+          :resourcePath => "/relics/{id}/photos",
+          :swaggerVersion => "1.1",
+          :apis => [{
+            :description => "Operations on relic photos",
+            :operations => [{
+              :httpMethod => "GET",
+              :nickname => "GetRelicPhotos",
+              :notes => "Returns a relic photos",
+              :summary => "Get relic's photos",
+              :parameters => [{
+                :allowMultiple => false,
+                :dataType => "int",
+                :description => "Relic ID",
+                :name => "relic_id",
+                :paramType => "path",
+                :required => true
+              }],
+              :responseClass => "Relic",
+              :errorResponses => [{
+                :code => 404,
+                :reason => "The relic cannot be found"
+              }]
+            },{
+              :httpMethod => "POST",
+              :nickname => "CreatePhoto",
+              :notes => "Add relic's photo. You have to use multipart form data.",
+              :summary => "Add relic's photo",
+              :parameters => [{
+                :allowMultiple => false,
+                :dataType => "int",
+                :description => "Relic ID",
+                :name => "relic_id",
+                :paramType => "path",
+                :required => true
+              },{
+                :allowMultiple => false,
+                :dataType => "Photo",
+                :description => "Photo data",
+                :name => "photo",
+                :paramType => "body",
+                :required => true,
+                :defaultValue => <<-EOS
+{
+  "photo": {
+    "author": "John Doe",
+    "date_taken": "2012-01-01",
+    "file": UPLOADED_FILE
+  }
+}
+                EOS
+              },{
+                :allowMultiple => false,
+                :dataType => "string",
+                :description => "API Secret",
+                :name => "api_secret",
+                :paramType => "query",
+                :required => true
+              }]
+            }],
+            :path => "/relics/{relic_id}/photos.{format}"
+          },{
+            :description => "Operations on relic photos",
+            :operations => [{
+              :httpMethod => "GET",
+              :nickname => "GetRelicPhotoByID",
+              :notes => "Returns a relic photo based on ID",
+              :summary => "Get relic's photo by ID",
+              :parameters => [{
+                :allowMultiple => false,
+                :dataType => "int",
+                :description => "Relic ID",
+                :name => "relic_id",
+                :paramType => "path",
+                :required => true
+              },{
+                :allowMultiple => false,
+                :dataType => "int",
+                :description => "Relic Photo's ID",
+                :name => "id",
+                :paramType => "path",
+                :required => true
+              }],
+              :responseClass => "Relic",
+              :errorResponses => [{
+                :code => 404,
+                :reason => "The relic photo cannot be found"
+              }]
+            },{
+              :httpMethod => "PUT",
+              :nickname => "UpdatePhoto",
+              :notes => "Update relic's photo. You have to use multipart form data.",
+              :summary => "Update relic's photo",
+              :parameters => [{
+                :allowMultiple => false,
+                :dataType => "int",
+                :description => "Relic ID",
+                :name => "relic_id",
+                :paramType => "path",
+                :required => true
+              },{
+                :allowMultiple => false,
+                :dataType => "int",
+                :description => "Relic Photo's ID",
+                :name => "id",
+                :paramType => "path",
+                :required => true
+              },{
+                :allowMultiple => false,
+                :dataType => "Photo",
+                :description => "Photo data",
+                :name => "photo",
+                :paramType => "body",
+                :required => true,
+                :defaultValue => <<-EOS
+{
+  "photo": {
+    "author": "John Doe",
+    "date_taken": "2012-01-01",
+    "file": UPLOADED_FILE
+  }
+}
+                EOS
+              },{
+                :allowMultiple => false,
+                :dataType => "string",
+                :description => "API Secret",
+                :name => "api_secret",
+                :paramType => "query",
+                :required => true
+              }]
+            },{
+            :httpMethod => "DELETE",
+            :nickname => "DeletePhoto",
+            :notes => "Remove relic's photo. User can only remove photos he added.",
+            :summary => "Remove relic's photo",
+            :parameters => [{
+                :allowMultiple => false,
+                :dataType => "int",
+                :description => "Relic ID",
+                :name => "relic_id",
+                :paramType => "path",
+                :required => true
+              },{
+                :allowMultiple => false,
+                :dataType => "int",
+                :description => "Relic Photo's ID",
+                :name => "id",
+                :paramType => "path",
+                :required => true
+              },{
+              :allowMultiple => false,
+              :dataType => "string",
+              :description => "API Secret",
+              :name => "api_secret",
+              :paramType => "query",
+              :required => true
+            }]
+          }],
+            :path => "/relics/{relic_id}/photos/{id}.{format}"
           }],
           :models => {
             "Place" => {

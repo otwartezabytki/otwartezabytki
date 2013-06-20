@@ -1,0 +1,29 @@
+!!! 5
+%html{lang: I18n.locale}
+  %head
+    %meta{charset: 'utf-8'}
+    %title= content_for?(:title) ? "#{yield(:title)} - Otwarte Zabytki" : 'Otwarte Zabytki'
+
+    - if content_for?(:facebook_meta)
+      = yield :facebook_meta
+    - else
+      %meta{:property => "og:title", :content => t('layouts.application.og.title', :editable => false)}
+      %meta{:property => "og:description", :content => t('layouts.application.og.description', :editable => false)}
+      %meta{:property => "og:image", :content => t('layouts.application.og.image', :editable => false)}
+    - if Rails.env.production?
+      %meta{name: 'google-site-verification', content: 'Spn2_vzD8aAvbTm8TAoVGIx_6jk-OM62aVNFxQ5pnR8'}
+    = csrf_meta_tags
+
+    /[if lt IE 9]
+      = javascript_include_tag 'http://html5shim.googlecode.com/svn/trunk/html5.js'
+
+    %link{:href => 'http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,600,300&subset=latin,latin-ext', :rel => 'stylesheet', :type => 'text/css', :media => 'all'}
+    = stylesheet_link_tag 'print', :media => 'all'
+    = favicon_link_tag  'favicon.gif', :type => 'image/gif'
+
+    :coffeescript
+      window.addEventListener? 'load', (-> window.print?()), false
+
+  %body
+    = yield
+    = render 'shared/analytics'

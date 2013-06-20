@@ -669,6 +669,15 @@ section.show.general{
       background: asset-data-url("edit-relic-ico-original.png") 10px 10px no-repeat;
     }
   }
+
+  .print-guide {
+    @extend .original;
+
+    span {
+      padding-left: 30px;
+      background: asset-data-url("edit-relic-ico-print.png") 10px 8px no-repeat;
+    }
+  }
 }
 
 section.show.description{
@@ -721,6 +730,11 @@ section.show.entries {
       font-size: 14px;
       line-height: 1.45;
 
+      .body {
+        @include word-break();
+        font-family: Georgia, Times New Roman, Times, serif;
+      }
+
       h3 {
         font-weight: bold;
         font-size: 16px;
@@ -728,8 +742,6 @@ section.show.entries {
       }
 
       p, ul, ol {
-        font-family: Georgia, Times New Roman, Times, serif;
-
         &:not(:empty) {
           & + p,
           & + ul,
@@ -1460,6 +1472,7 @@ div.fancybox-close{
     position: relative;
     overflow: visible;
     .popover-title{
+      @include clearfix();
       background: none;
       border: 0;
       p{
@@ -1475,6 +1488,7 @@ div.fancybox-close{
       }
     }
     .popover-content{
+      padding-top: 0;
       background: none;
     }
   }
@@ -1579,8 +1593,12 @@ $subrelics-background-hover: #24353d;
     background-image: asset-data-url("stack-icon-dark.png");
     background-position: 24px 13px;
     background-repeat: no-repeat;
-    padding-left: 63px;
-    line-height: 32px;
+    padding: 11px 20px 11px 63px;
+    line-height: 18px;
+
+    a {
+      display: block;
+    }
   }
 
   &.type-current,

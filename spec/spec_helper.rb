@@ -4,7 +4,6 @@ require 'database_cleaner'
 require 'factory_girl'
 require 'capybara/rspec'
 
-require 'simplecov'
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'

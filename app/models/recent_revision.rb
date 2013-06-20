@@ -3,8 +3,8 @@ class RecentRevision
 
   class << self
     def revisions
-      Rails.cache.fetch(:expires_in => 5.minutes) do
-        Version.order('id DESC').limit(100).all.map do |version|
+      Rails.cache.fetch("recent_revisions_#{I18n.locale}", :expires_in => 5.minutes) do
+        Version.order('id DESC').limit(100).includes(:item).map do |version|
           new(:version => version).to_relic_hash
         end.compact.uniq { |relic_hash| relic_hash[:relic_id] }
       end.first(10)
@@ -17,8 +17,12 @@ class RecentRevision
     end
   end
 
+  def significant_changeset
+    self.version.changeset.reject { |_, v| v.try(:length) == 2 and v[1].blank? }
+  end
+
   def changes
-    changed_fields = version.changeset.keys
+    changed_fields = significant_changeset.keys
     case version.event
     when 'update'
       if version.item_type.downcase == 'relic'
@@ -44,7 +48,7 @@ class RecentRevision
   end
 
   def to_relic_hash
-    return nil if relic.blank? or !relic.build_finished?
+    return nil if relic.blank? or !relic.build_finished? or significant_changeset.blank?
     {
       :relic_id => relic.id,
       :slug => relic.to_param,
@@ -53,6 +57,8 @@ class RecentRevision
       :changes => changes,
       :created_at => self.version.created_at
     }
+  rescue ArgumentError => e
+    nil
   end
 
 end

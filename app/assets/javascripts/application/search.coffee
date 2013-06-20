@@ -42,12 +42,12 @@ jQuery.initializer 'body.relics.index .main-container', ->
     $("html, body").animate({ scrollTop: 0 }, 600);
 
   this.on 'ajax:beforeSend', 'form[data-remote], a[data-remote]', (e, data, status, xhr) ->
-    if window.location.pathname == '/relics'
+    if window.location.pathname.match(/^(\/[a-z]{2})?\/relics/)
       new Spinner(search_spinner_opts).spin(document.getElementById('spin'))
       $('form section.results .loading').show()
 
   this.on 'ajax:complete', 'form[data-remote], a[data-remote]', (e, data, status, xhr) ->
-    if window.location.pathname == '/relics'
+    if window.location.pathname.match(/^(\/[a-z]{2})?\/relics/)
       $('form section.results .loading').hide()
 
   this.find("input.autocomplete-q").autocomplete
@@ -86,3 +86,10 @@ jQuery.initializer 'body.relics.index .main-container', ->
   if relics_results.length > 0 and gon.highlightedTags
     for tag in gon.highlightedTags
       relics_results.highlight(tag)
+
+  this.find('.sidebar-categories .choices-group label').on 'mouseenter', ->
+    $name = $(@).find('.name')
+    name = $name[0]
+    if name.offsetWidth < name.scrollWidth
+      $(@).attr 'title', $name.text()
+      $(@).tooltip('show')

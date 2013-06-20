@@ -14,8 +14,8 @@
 @import "compass/layout";
 @import "compass/css3";
 
-body { 
-  background-color: #fff; 
+body {
+  background-color: #fff;
   margin: 0;
   font-family: 'Open Sans', sans-serif;
   font-size: 12px;
@@ -92,7 +92,7 @@ form{
     font-family: 'Open Sans', sans-serif;
     border-top: 1px solid #e4e4e4;
     padding: 7px 0 6px 10px;
-    font-weight: bold; 
+    font-weight: bold;
     span {
       white-space: nowrap;
       padding-right: 24px;
@@ -162,8 +162,16 @@ form{
     position: absolute;
     top: 37px;
     bottom: 28px;
-    .box, .antiscroll-inner {
+    .box {
       width: 180px;
+      height: 100%;
+    }
+    .box-inner {
+      width: 165px;
+      padding-right: 15px;
+    }
+    .antiscroll-inner {
+      width: 200px;
       height: 100%;
     }
   }
@@ -192,21 +200,30 @@ form{
     li{
       list-style-type: none;
       font-size: 12px;
-      color: #343434; 
+      color: #343434;
     }
   }
   .antiscroll-wrap {
     position: absolute;
     top: 37px;
     bottom: 28px;
-    .box, .antiscroll-inner {
+    .box {
       width: 180px;
       height: 100%;
     }
+    .box-inner {
+      width: 165px;
+      padding-right: 15px;
+    }
     .antiscroll-inner {
+      width: 200px;
+      height: 100%;
       .choices-group{
         label{
           display: block;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
       }
     }
