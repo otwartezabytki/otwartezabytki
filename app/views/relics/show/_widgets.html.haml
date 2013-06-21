@@ -1,5 +1,14 @@
-%section.show.alerts.add-alert-widget#widgets
+- widget_embed_code = render('shared/add_alert_anonymous_snippet.txt', :id => relic.id)
+- widget_source = render('shared/empty_frame_source.txt', :content => widget_embed_code)
+
+%section#add-widget-alert.show.alerts.add-alert-widget
   %h2= t('views.relics.show.widgets.header')
   .placeholder
     %p= t('views.relics.show.widgets.create_alert')
-    %a.add-alert-widget-button{:href => '#widgets'}= t('views.relics.show.widgets.create_button')
+    %a.add-alert-widget-button{:href => '#add-widget-alert', :'data-widget-source' => widget_source}
+      = t('views.relics.show.widgets.create_button')
+
+  .add-alert-widget-output
+    .add-alert-widget-content
+    .add-alert-widget-code
+      %textarea= widget_embed_code.strip
