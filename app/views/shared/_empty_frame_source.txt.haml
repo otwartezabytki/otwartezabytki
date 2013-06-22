@@ -5,5 +5,9 @@
     %title
     = stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,600,300&subset=latin,latin-ext', media: 'all'
     = stylesheet_link_tag 'application'
+    :css
+      html, body {
+        background: transparent !important;
+      }
 
   %body= content unless local_assigns[:content].nil?
