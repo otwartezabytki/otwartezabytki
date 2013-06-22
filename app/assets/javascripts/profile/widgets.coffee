@@ -1,21 +1,26 @@
 # Add widget alert
 # ----------------
 
-$container = $('#add-widget-alert')
-$widget_output = $container.find('.add-alert-widget-output').first().hide()
 widget_container_id = 'add-alert-widget-content'
 animation_duration = 1000
 
-$new = (tag) ->
-  $(document.createElement tag)
+$container = $('#add-widget-alert')
+$widget_container = $('.' + widget_container_id).first()
+$widget_output = $container.find('.add-alert-widget-output').first()
+$widget_trigger = $container.find('.add-alert-widget-button')
+
+$widget_loading_information = $container.find('.add-alert-widget-information--loading')
+$widget_error_information = $container.find('.add-alert-widget-information--error').hide()
+
+showError = ->
+  $widget_error_information.show(animation_duration)
 
 createDynamicFrame = (contentText, $parent, callback) ->
   try
-    $iframe = $new('iframe').attr(
+    $iframe = $(document.createElement 'iframe').attr(
       src: 'about:blank'
-      class: widget_container_id
       id: widget_container_id
-    ).prependTo($parent)
+    ).hide().appendTo($parent).on 'error', showError
 
     if typeof callback is 'function'
       $iframe.on 'load', callback
@@ -30,19 +35,19 @@ createDynamicFrame = (contentText, $parent, callback) ->
   true
 
 handleFrameLoaded = ($event) ->
-  $widget_output.show(animation_duration)
-  console.log $event
+  $widget_loading_information.hide(animation_duration)
+  $($event.target).show(animation_duration)
 
-$.initializer $container.find('.add-alert-widget-button'), ->
+$.initializer $widget_trigger, ->
   @on 'click', ($event) ->
     $event.preventDefault()
-    return unless $widget_output.length and !$('#' + widget_container_id).length
+    $widget_output.show(animation_duration)
+    return showError() unless $widget_output.length and !$('#' + widget_container_id).length
 
     $element = $($event.target)
     $placeholder = $element.parent '.placeholder'
     $placeholder.hide(animation_duration) if $placeholder
 
     source = $element.data('widget-source').trim()
-    return unless source
-
-    createDynamicFrame source, $widget_output, handleFrameLoaded
+    unless source and createDynamicFrame(source, $widget_container, handleFrameLoaded)
+      showError()

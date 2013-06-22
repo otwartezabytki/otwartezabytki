@@ -8,7 +8,14 @@
     %a.add-alert-widget-button{:href => '#add-widget-alert', :'data-widget-source' => widget_source}
       = t('views.relics.show.widgets.create_button')
 
-  .add-alert-widget-output
+  %article.add-alert-widget-output
+    %h1.add-alert-widget-header= t('views.widgets.edit.preview')
     .add-alert-widget-content
-    .add-alert-widget-code
-      %textarea= widget_embed_code.strip
+      .add-alert-widget-information--loading
+        Ładuję podgląd widgetu…
+      .add-alert-widget-information--error
+        Wystąpił błąd podczas ładowania poglądu.
+    %h1.add-alert-widget-header= t('views.widgets.edit.generated')
+    %p.add-alert-widget-information= t('views.widgets.edit.code_help')
+    %textarea.add-alert-widget-code.selectable-code{disabled: ''}
+      = widget_embed_code.strip
