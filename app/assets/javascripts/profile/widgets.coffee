@@ -23,7 +23,8 @@ createDynamicFrame = (contentText, $parent, callback) ->
     ).hide().appendTo($parent).on 'error', showError
 
     if typeof callback is 'function'
-      $iframe.on 'load', callback
+      $iframe.on 'load', ($event) ->
+        setTimeout (-> callback $event), 2000
 
     iframe_document = $iframe.get(0).contentWindow.document
     iframe_document.open 'text/html', 'replace'
