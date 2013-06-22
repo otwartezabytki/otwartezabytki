@@ -4,6 +4,13 @@
 .add-alert-widget-output {
   display: none;
   line-height: 1.4;
+  @include transition(opacity 1s ease-out);
+  opacity: 0;
+
+  &.visible {
+    display: block;
+    opacity: 1;
+  }
 
   iframe {
     overflow: hidden;

@@ -2,7 +2,6 @@
 # ----------------
 
 widget_container_id = 'add-alert-widget-content'
-animation_duration = 1000
 
 $container = $('#add-widget-alert')
 $widget_container = $('.' + widget_container_id).first()
@@ -13,7 +12,8 @@ $widget_loading_information = $container.find('.add-alert-widget-information--lo
 $widget_error_information = $container.find('.add-alert-widget-information--error').hide()
 
 showError = ->
-  $widget_error_information.show(animation_duration)
+  $widget_loading_information.hide()
+  $widget_error_information.show(0)
 
 createDynamicFrame = (contentText, $parent, callback) ->
   try
@@ -35,18 +35,19 @@ createDynamicFrame = (contentText, $parent, callback) ->
   true
 
 handleFrameLoaded = ($event) ->
-  $widget_loading_information.hide(animation_duration)
-  $($event.target).show(animation_duration)
+  $widget_loading_information.hide()
+  $($event.target).show(1000)
 
 $.initializer $widget_trigger, ->
   @on 'click', ($event) ->
     $event.preventDefault()
-    $widget_output.show(animation_duration)
+    $widget_output.show(0).addClass 'visible'
+
     return showError() unless $widget_output.length and !$('#' + widget_container_id).length
 
     $element = $($event.target)
     $placeholder = $element.parent '.placeholder'
-    $placeholder.hide(animation_duration) if $placeholder
+    $placeholder.hide() if $placeholder
 
     source = $element.data('widget-source').trim()
     unless source and createDynamicFrame(source, $widget_container, handleFrameLoaded)
