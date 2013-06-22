@@ -52,3 +52,10 @@ $.initializer $widget_trigger, ->
     source = $element.data('widget-source').trim()
     unless source and createDynamicFrame(source, $widget_container, handleFrameLoaded)
       showError()
+
+    # Handle selectable code
+    $widget_output.find('.selectable-code').each ->
+      $(this).on 'click', ($event) ->
+        element = $event.target
+        element.focus()
+        element.select()

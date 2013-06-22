@@ -15,5 +15,4 @@
       .add-alert-widget-information--error= t('views.relics.show.widgets.error')
     %h1.add-alert-widget-header= t('views.widgets.edit.generated')
     %p.add-alert-widget-information= t('views.widgets.edit.code_help')
-    %textarea.add-alert-widget-code.selectable-code{disabled: ''}
-      = widget_embed_code.strip
+    %textarea.add-alert-widget-code.selectable-code= widget_embed_code.strip
