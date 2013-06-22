@@ -50,7 +50,7 @@ $.initializer $widget_trigger, ->
     $placeholder = $element.parent '.placeholder'
     $placeholder.hide() if $placeholder
 
-    source = $element.data('widget-source').trim()
+    source = $element.data('widget-source')
     unless source and createDynamicFrame(source, $widget_container, handleFrameLoaded)
       showError()
 
