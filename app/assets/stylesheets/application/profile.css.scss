@@ -11,6 +11,7 @@
  *= require ./profile/photos
  *= require ./profile/alerts
  *= require ./profile/attachments
+ *= require ./profile/widgets
 */
 
 @import "compass/layout";
@@ -414,7 +415,6 @@ section.show.photos{
     font-weight: normal;
     border-bottom: 2px solid #8499a4;
     padding-bottom: 15px;
-    padding-right: 70px;
     margin-bottom: 20px;
   }
   .placeholder{

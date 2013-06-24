@@ -47,6 +47,8 @@ Otwartezabytki::Application.routes.draw do
       w.resources :add_relics, :path => "/add_relics"
       w.resources :add_alerts, :path => "/add_alerts"
     end
+
+    resource :add_alert, :path => "/add_alert"
   end
 
   resources :translations, :only => [:edit, :update], :constraints => {:id => /[\w.]+/ }
