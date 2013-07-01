@@ -147,6 +147,10 @@ module ApplicationHelper
     @location_breadcrumbs
   end
 
+  def enabled_locales_collection
+    enabled_locales.map { |l| [I18n.t("common.lang.#{l}"), l.to_s] }
+  end
+
   def t(key, options = {})
     options.symbolize_keys!
     options[:editable] = true if options[:editable].nil?

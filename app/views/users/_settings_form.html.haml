@@ -4,7 +4,7 @@
       %span.fields-title-inner= t '.language_settings'
 
     .field-row.type-select
-      = form.input :language, as: :select, collection: { Polski: 'pl', English: 'en' }, include_blank: false
+      = form.input :language, as: :select, collection: enabled_locales_collection, include_blank: false
 
   %fieldset#change-avatar.fields
     %legend.fields-title
