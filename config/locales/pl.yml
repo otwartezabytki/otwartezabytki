@@ -1123,6 +1123,8 @@ pl:
             link: "zaktualizowano link"
             photo: "zaktualizowano zdjęcie"
             document: "zaktualizowano dokument"
+            event: "zaktualizowano wydarzenie"
+            entry: "zaktualizowano ciekawostkę"
             relic:
               ancestry: "zaktualizowano hirarchię w zespole zabytków"
               approved: "zatewierdzono zabytek"
