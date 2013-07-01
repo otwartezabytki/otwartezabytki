@@ -1122,6 +1122,7 @@ pl:
           update:
             link: "zaktualizowano link"
             photo: "zaktualizowano zdjęcie"
+            document: "zaktualizowano dokument"
             relic:
               ancestry: "zaktualizowano hirarchię w zespole zabytków"
               approved: "zatewierdzono zabytek"
