@@ -720,6 +720,7 @@ pl:
       month: Miesiąc
       second: Sekundy
       year: Rok
+    ago: "temu"
   devise:
     confirmations:
       confirmed: "Konto zostało poprawnie aktywowane. Zostałeś automatycznie zalogowany."
