@@ -127,6 +127,20 @@ module Api
                 :name => "page",
                 :paramType => "query",
                 :required => false
+              },{
+                :allowMultiple => false,
+                :dataType => "float",
+                :description => "Latitude",
+                :name => "latitude",
+                :paramType => "query",
+                :required => false
+              },{
+                :allowMultiple => false,
+                :dataType => "float",
+                :description => "Longitude",
+                :name => "longitude",
+                :paramType => "query",
+                :required => false
               }],
               :responseClass => "Relic",
               :summary => "Search relics"

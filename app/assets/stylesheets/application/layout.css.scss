@@ -518,6 +518,15 @@ a {
   .container {
     border-top: 1px solid #dcdcdc;
     min-height: 59px;
+    a.dropdown {
+      cursor: default;
+    }
+    ul.dropdown-menu {
+      margin-top: -1em;
+      a:hover {
+        background-color: #577787;
+      }
+    }
   }
 
   .smaller-14 > li > a { font-size: 14px !important; }
@@ -526,7 +535,7 @@ a {
   .smaller-11 > li > a { font-size: 11px !important; }
 
   nav {
-    ul li {
+    > ul > li {
       float: left;
       &.gradient{
         background: asset-data-url("menu-gradient.png") repeat-x;
@@ -701,7 +710,7 @@ a {
           }
         }
       }
-      a{
+      > a{
         color: #313132;
         font-weight: 600;
         font-size: 14px;

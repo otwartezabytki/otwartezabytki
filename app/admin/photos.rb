@@ -10,6 +10,7 @@ ActiveAdmin.register Photo do
     end
     column :author
     column :date_taken
+    column :alternate_text
     column :photo do |e|
       image_tag e.file.midi.url
     end
@@ -21,6 +22,8 @@ ActiveAdmin.register Photo do
       f.input :relic_id
       f.input :author
       f.input :date_taken
+      f.input :alternate_text
+      f.input :description
       f.input :file
       f.buttons
     end
@@ -37,6 +40,8 @@ ActiveAdmin.register Photo do
       end
 
       row :date_taken
+      row :alternate_text
+      row :description
       row :updated_at
       row :created_at
     end
@@ -48,4 +53,5 @@ ActiveAdmin.register Photo do
   filter :relic_id, :as => :numeric
   filter :author
   filter :date_taken
+  filter :alternate_text
 end

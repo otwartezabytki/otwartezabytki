@@ -88,8 +88,8 @@ jQuery.initializer 'body.relics.index .main-container', ->
       relics_results.highlight(tag)
 
   this.find('.sidebar-categories .choices-group label').on 'mouseenter', ->
-    $name = $(@).find('.name')
+    $name = $(this).find('.name')
     name = $name[0]
     if name.offsetWidth < name.scrollWidth
-      $(@).attr 'title', $name.text()
-      $(@).tooltip('show')
+      $(this).attr 'title', $name.text()
+      $(this).tooltip('show')

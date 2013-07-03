@@ -72,12 +72,8 @@
               %ul#page-menu
                 %li
                   = link_to t('layouts.application.homepage'), root_path, :class => "home #{'current' if current_page?(root_path)}"
-                %li
-                  = link_to t('layouts.application.about'), about_page_path, :class => "about #{'current' if current_page?(about_page_path)}"
-                %li
-                  = link_to t('layouts.application.download_data'), download_path, :class => "download #{'current' if current_page?(download_path)}"
-                %li
-                  = link_to t('layouts.application.contact'), contact_page_path, :class => "contact  #{'current' if current_page?(contact_page_path)}"
+                - Page.where(name: ['about', 'download', 'contact']).each do |page|
+                  = render 'pages/navigation', page: page
                 %li
                   = link_to t('layouts.application.widgets'), widgets_path, :class => "widgets #{'current' if current_page?(widgets_path)}"
                 %li
