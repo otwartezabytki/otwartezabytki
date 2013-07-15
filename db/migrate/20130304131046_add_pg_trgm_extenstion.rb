@@ -1,6 +1,10 @@
 class AddPgTrgmExtenstion < ActiveRecord::Migration
   def up
-    execute "create extension pg_trgm;"
+    begin
+      execute "create extension pg_trgm;"
+    rescue
+      puts "pg_trgm extension already installed"
+    end
     execute "CREATE INDEX relics_ancestry_trgm_idx ON relics USING gin (ancestry gin_trgm_ops);"
     execute "CREATE INDEX categories_ancestry_trgm_idx ON categories USING gin (ancestry gin_trgm_ops);"
     execute "CREATE INDEX original_relics_ancestry_trgm_idx ON original_relics USING gin (ancestry gin_trgm_ops);"

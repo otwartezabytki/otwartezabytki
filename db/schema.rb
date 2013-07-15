@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130403094027) do
+ActiveRecord::Schema.define(:version => 20130517145441) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -165,6 +165,7 @@ ActiveRecord::Schema.define(:version => 20130403094027) do
     t.text     "body"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "permalink"
   end
 
   add_index "page_translations", ["locale"], :name => "index_page_translations_on_locale"
@@ -174,12 +175,15 @@ ActiveRecord::Schema.define(:version => 20130403094027) do
     t.string   "name"
     t.string   "title"
     t.text     "body"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
     t.string   "ancestry"
+    t.string   "permalink"
+    t.integer  "weight",     :default => 0
   end
 
   add_index "pages", ["ancestry"], :name => "index_pages_on_ancestry"
+  add_index "pages", ["permalink"], :name => "index_pages_on_permalink"
 
   create_table "photos", :force => true do |t|
     t.integer  "relic_id"
@@ -194,6 +198,7 @@ ActiveRecord::Schema.define(:version => 20130403094027) do
     t.integer  "file_full_width"
     t.integer  "file_full_height"
     t.text     "description"
+    t.string   "alternate_text"
   end
 
   create_table "places", :force => true do |t|
