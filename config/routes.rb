@@ -63,6 +63,9 @@ Otwartezabytki::Application.routes.draw do
 
       resources :relics do
         resources :photos
+        collection do
+          get :clusters
+        end
       end
 
       # resources :voivodeships, :only => [:index, :show]
