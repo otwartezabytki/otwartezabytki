@@ -203,7 +203,7 @@ performSearch = (search_params, callback) ->
 debouncedSearchRelics = jQuery.debounce ->
   search_params = $('#new_search').serializeObject().search
   search_params.api_key = "oz"
-  search_params.per_page = 1000
+  search_params.per_page = 100
 
   window.parent.postMessage(JSON.stringify(
     event: "on_params_changed", params: search_params
