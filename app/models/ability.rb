@@ -4,36 +4,22 @@ class Ability
 
   def initialize(user)
 
-    if user && user.admin?
-      can :index, Dashboard
-
-      can :manage, User
-      can :generate_api_secret, User
-      can :manage, Relic
-      can :manage, SuggestedType
-      can :manage, Document
-      can :manage, Photo
-      can :manage, Entry
-      can :manage, Alert
-      can :manage, WuozAgency
-      can :manage, Autocomplition
-      can :manage, Page
-
-      can :index, Version
-      can :show, Version
-      can :revert, Version
-    end
-
     if user
-      can :update, Relic
-      can :create, Photo
-      can :manage, Photo, :user_id => user.id
-      can :create, Document
-      can :manage, Document, :user_id => user.id
-      can :manage, Link
-      can :manage, Entry
-      can :manage, Event
-      can :create, Alert
+      if user.admin?
+        can :manage, :all
+      else
+        can :update, Relic
+        can :create, Photo
+        can :manage, Photo, :user_id => user.id
+        can :create, Document
+        can :manage, Document, :user_id => user.id
+        can :manage, Link
+        can :manage, Entry
+        can :manage, Event
+        can :create, Alert
+        can [:update, :remove_avatar], User, :id => user.id
+        can [:read, :added_relics, :checked_relics], User
+      end
     end
 
     can :create, User

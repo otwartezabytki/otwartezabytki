@@ -4,7 +4,6 @@ ActiveAdmin.register WuozAgency do
   menu :label => "Wysyłka", :parent => "Alerty"
 
   actions :index, :show
-  controller.authorize_resource
 
   index do
     column :wuoz_name

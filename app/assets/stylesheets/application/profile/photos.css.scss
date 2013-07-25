@@ -26,7 +26,7 @@
         }
       }
     }
-    p{ 
+    p{
       strong{
         font-weight: 700;
         font-size: 14px;
@@ -73,7 +73,7 @@
       em.icons{
         width: 58px;
         background: asset-data-url("cc-icons.png") no-repeat;
-        
+
       }
       em.icons-by{
         width: 37px;
@@ -161,7 +161,10 @@
   p{
     margin-bottom: 10px;
   }
-  .redactor_box{
-    margin-top: 10px;
+  .redactor_box {
+    margin: 10px 0;
+  }
+  .alternate_text {
+    margin-bottom: 0;
   }
 }

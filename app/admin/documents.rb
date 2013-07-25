@@ -3,8 +3,6 @@
 ActiveAdmin.register Document do
   menu :label => "Dokumenty", :parent => "Zasoby"
 
-  controller.authorize_resource
-
   index do
     column :id
     column :relic do |e|

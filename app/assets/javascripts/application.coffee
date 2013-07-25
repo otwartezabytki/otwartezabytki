@@ -39,6 +39,7 @@ jQuery.initializer '.main-container', ->
         title: -> $('#' + $el.data 'title-id').html()
         content: -> $('#' + $el.data 'content-id').html()
         delay: 100000
+        html: true
     else
       $el.popover
         title: $('#' + $el.data 'title-id').html()
@@ -100,6 +101,9 @@ jQuery ->
   $('select#lang').change (e) ->
     e.preventDefault()
     window.location = $(this).find('option:selected').attr('rel')
+
+  $('body').on 'click', 'a[data-hover=dropdown]', (e) ->
+    e.preventDefault()
 
 
 

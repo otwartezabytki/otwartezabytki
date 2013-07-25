@@ -3,8 +3,6 @@
 ActiveAdmin.register Event do
   menu :label => "Wydarzenia", :parent => "Zasoby"
 
-  controller.authorize_resource
-
   index do
     column :id
     column :relic do |e|

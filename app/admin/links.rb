@@ -3,8 +3,6 @@
 ActiveAdmin.register Link do
   menu :label => "Linki", :parent => "Zasoby"
 
-  controller.authorize_resource
-
   index do
     column :id
     column :relic do |e|

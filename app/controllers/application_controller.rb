@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  helper_method :search_params, :tsearch, :enabled_locales
+  helper_method :search_params, :tsearch, :enabled_locales, :iframe_transport?
   # iframe views path
   before_filter do
     prepend_view_path("app/views/iframe") if Subdomain.matches?(request)
@@ -12,10 +12,13 @@ class ApplicationController < ActionController::Base
     locale = params[:locale] if params[:locale] and enabled_locales.include?(params[:locale].to_sym)
     I18n.locale = (
       locale ||
+      cookies[:locale] ||
       current_user.try(:default_locale) ||
-      http_accept_language.compatible_language_from(enabled_locales) ||
+      # disable for now
+      # http_accept_language.compatible_language_from(enabled_locales) ||
       I18n.default_locale
     ).to_sym
+    cookies[:locale] = I18n.locale
   end
 
   before_filter :save_return_path
@@ -23,7 +26,7 @@ class ApplicationController < ActionController::Base
   # disabling because it doesn't work with history back when page is retrieved from cache
   layout :resolve_layout
   def resolve_layout
-    if request.xhr?
+    if request.xhr? or iframe_transport?
       'ajax'
     elsif Subdomain.matches?(request)
       'iframe'
@@ -69,7 +72,7 @@ class ApplicationController < ActionController::Base
   end
 
   def enable_fancybox
-    if request.xhr?
+    if request.xhr? or iframe_transport?
       response.headers['x-fancybox'] = 'true'
     elsif respond_to?('fancybox_root')
       redirect_to(fancybox_root, :anchor => request.fullpath)
@@ -93,6 +96,14 @@ class ApplicationController < ActionController::Base
 
   def enabled_locales
     Settings.oz.locale.to_hash[(current_user.try(:admin?) ? :available : :enabled)]
+  end
+
+  def iframe_transport?
+    request.params['X-Requested-With'] == 'IFrame'
+  end
+
+  def iframe_url_options
+    { 'X-Requested-With' => 'IFrame' } if iframe_transport?
   end
 
   protected

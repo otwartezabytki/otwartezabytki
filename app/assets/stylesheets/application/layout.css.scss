@@ -518,6 +518,15 @@ a {
   .container {
     border-top: 1px solid #dcdcdc;
     min-height: 59px;
+    a.dropdown {
+      cursor: default;
+    }
+    ul.dropdown-menu {
+      margin-top: -1em;
+      a:hover {
+        background-color: #577787;
+      }
+    }
   }
 
   .smaller-14 > li > a { font-size: 14px !important; }
@@ -526,7 +535,7 @@ a {
   .smaller-11 > li > a { font-size: 11px !important; }
 
   nav {
-    ul li {
+    > ul > li {
       float: left;
       &.gradient{
         background: asset-data-url("menu-gradient.png") repeat-x;
@@ -701,7 +710,7 @@ a {
           }
         }
       }
-      a{
+      > a{
         color: #313132;
         font-weight: 600;
         font-size: 14px;
@@ -949,26 +958,26 @@ a {
       display: block;
       cursor: pointer;
     }
-    div span strong{
-      width: 157px;
-    }
     span {
-      em{
+      input {
+        vertical-align: bottom;
+      }
+      em {
         background: #dce4e8;
         color: #236282;
         float: right;
-        margin-top: -2px;
         padding: 4px 5px;
         font-size: 12px;
         @include border-radius(2px);
         font-style: normal;
       }
-      strong{
-        display: inline-block;
-        width: 167px;
-        font-weight: normal;
+      .name {
+        width: 150px;
         height: 15px;
-        word-wrap: break-word;
+        display: inline-block;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
       }
     }
   }
@@ -2292,6 +2301,17 @@ section.edit .flash {
   background: #fff;
   position: relative;
   z-index: 11;
+}
+
+body.relics {
+  #new_search {
+    &>.span3 {
+      width: 240px;
+    }
+    &>.span9 {
+      width: 720px;
+    }
+  }
 }
 
 body.resource_home{

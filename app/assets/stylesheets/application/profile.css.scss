@@ -1473,6 +1473,7 @@ div.fancybox-close{
     position: relative;
     overflow: visible;
     .popover-title{
+      @include clearfix();
       background: none;
       border: 0;
       p{
@@ -1488,6 +1489,7 @@ div.fancybox-close{
       }
     }
     .popover-content{
+      padding-top: 0;
       background: none;
     }
   }

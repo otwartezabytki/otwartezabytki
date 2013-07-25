@@ -158,4 +158,8 @@ module ApplicationHelper
       value.respond_to?(:html_safe) ? value.html_safe : value
     end
   end
+
+  def page_path(page)
+    eval("#{I18n.locale.to_s.underscore}_page_path('#{h page.permalink}')")
+  end
 end

@@ -24,6 +24,9 @@ jQuery.initializer 'section.edit.documents', ->
   document_xhr = $(".document_upload").fileupload
     type: "POST"
     dataType: "html"
+    formData: [
+      { name: 'authenticity_token', value: $form.find('input[name="authenticity_token"]').val() }
+    ]
 
     add: (e, data) ->
       $document_hidden.removeClass('hidden')
@@ -31,7 +34,6 @@ jQuery.initializer 'section.edit.documents', ->
       data.submit()
 
     submit: (e, data) ->
-      data.formData = {}
 
     progressall: (e, data) ->
       progress = parseInt(data.loaded / data.total * 100, 10)

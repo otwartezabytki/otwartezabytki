@@ -6,7 +6,7 @@ include Rake::DSL
 FactoryGirl.define do
   factory :photo do |f|
     f.relic
-    f.user :factory => :registered_user
+    f.user :factory => :api_user
     f.sequence(:date_taken) { |n| "2012-06-1#{n}" }
     f.sequence(:author) { |n| "John Smith #{n}" }
     f.file { File.open(Rails.root.join("spec/fixtures/files/photo.jpg")) }
