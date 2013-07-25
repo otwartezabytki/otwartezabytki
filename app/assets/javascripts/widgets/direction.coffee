@@ -215,10 +215,10 @@ debouncedSearchRelics = jQuery.debounce ->
       search_params.path = route.path.map((e) -> "#{e.latitude},#{e.longitude}").join(";")
       $('#search_path').val(search_params.path)
       performSearch search_params, (result) ->
-        renderResults(result.clusters, result.relics)
+        renderResults(result.clusters, [])
   else
     performSearch search_params, (result) ->
-      renderResults(result.clusters, result.relics)
+      renderResults(result.clusters, [])
 
   false
 , 3000
