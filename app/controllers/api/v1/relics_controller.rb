@@ -7,7 +7,7 @@ module Api
       before_filter :api_authorize, :only => [:create, :update]
 
       def index
-        p = params.slice(:query, :place, :from, :to, :categories, :state, :existence, :location, :has_photos, :has_description, :order, :latitude, :longitude, :bounding_box, :path, :radius)
+        p = params.slice(:query, :place, :from, :to, :categories, :state, :existence, :location, :has_photos, :has_description, :order, :latitude, :longitude, :bounding_box, :path, :radius, :per_page)
 
         [:state, :existence].each do |key|
           if p[key] && !p[key].is_a?(Array)
