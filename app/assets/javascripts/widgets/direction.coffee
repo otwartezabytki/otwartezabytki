@@ -204,6 +204,7 @@ debouncedSearchRelics = jQuery.debounce ->
   search_params = $('#new_search').serializeObject().search
   search_params.api_key = "oz"
   search_params.per_page = 100
+  search_params.widget = 1
 
   window.parent.postMessage(JSON.stringify(
     event: "on_params_changed", params: search_params
