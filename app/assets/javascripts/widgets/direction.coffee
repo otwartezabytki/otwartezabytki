@@ -191,7 +191,7 @@ searchRoute = (search_params, callback) ->
 performSearch = (search_params, callback) ->
   search_params._method = 'get'
   $.ajax
-    url: '/api/v1/relics'
+    url: '/api/v1/relics/clusters'
     type: 'post'
     data: search_params
     dataType: 'json'
@@ -214,11 +214,9 @@ debouncedSearchRelics = jQuery.debounce ->
     searchRoute search_params, (route) ->
       search_params.path = route.path.map((e) -> "#{e.latitude},#{e.longitude}").join(";")
       $('#search_path').val(search_params.path)
-      performSearch search_params, (result) ->
-        renderResults(result.clusters, [])
-  else
-    performSearch search_params, (result) ->
-      renderResults(result.clusters, [])
+
+  performSearch search_params, (result) ->
+    renderResults(result.clusters, result.relics)
 
   false
 , 3000
