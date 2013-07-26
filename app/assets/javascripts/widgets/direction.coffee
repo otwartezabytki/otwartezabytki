@@ -73,6 +73,7 @@ renderResults = (search_groups, search_results) ->
         icon: gmap_marker
         position: latlng
         clickable: true
+        optimized: false
 
       load_relic_info = (callback) =>
         search_params
@@ -94,6 +95,7 @@ renderResults = (search_groups, search_results) ->
       icon: gmap_marker
       position: latlng
       clickable: true
+      optimized: false
 
     markers.push marker
 
