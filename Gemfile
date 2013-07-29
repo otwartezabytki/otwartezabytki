@@ -14,7 +14,7 @@ group :assets do
   gem 'jquery-ui-rails'
   gem 'twitter-bootstrap-rails'
   gem 'bootstrap-sass', '~> 2.0.4.0'
-  gem 'jsts-rails'
+  gem 'jsts-rails', '~> 0.2.0'
 end
 
 gem 'jquery-rails', '2.0.3'
