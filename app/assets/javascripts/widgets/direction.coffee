@@ -10,7 +10,6 @@
 #= require gmaps/marker-clusterer
 #= require gmaps/context-menu
 #= require gmaps/extras
-#= require jsts
 
 window.gmap = null
 window.marker_clusterer = null
