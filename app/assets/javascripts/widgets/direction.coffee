@@ -10,6 +10,7 @@
 #= require gmaps/marker-clusterer
 #= require gmaps/context-menu
 #= require gmaps/extras
+#= require jsts
 
 window.gmap = null
 window.marker_clusterer = null
@@ -181,12 +182,26 @@ searchRoute = (search_params, callback) ->
 
   gmap.directions.route request, (result, status) ->
     if status == google.maps.DirectionsStatus.OK
-      FOUND_ROUTE = route = result.routes[0]
+      route      = result.routes[0]
+      distance   = $('#search_radius').val()
       route.path = route.overview_path.map (o) ->
-        latitude: o.lat(), longitude: o.lng()
+        latitude: o.lat().toFixed(6), longitude: o.lng().toFixed(6)
+
+      factory = new jsts.geom.GeometryFactory()
+
+      coordinates = route.path.map (p) ->
+        new jsts.geom.Coordinate p.latitude, p.longitude
+
+      line_string = factory.createLineString coordinates
+      buffer = line_string.buffer 0.1 # TODO: Calculate buffer from distance
+
+      paths = buffer.shell.points.map (p) ->
+        new google.maps.LatLng p.x, p.y
+
+      FOUND_ROUTE = polygon = paths.map (p) -> p.toUrlValue()
 
       gmap.directionsRenderer.setDirections(result)
-      gmap.onNextMovement -> callback(route)
+      gmap.onNextMovement -> callback(polygon)
     else
       alert('Nie znaleziono trasy! Spróbuj ponownie.')
 
@@ -213,9 +228,11 @@ debouncedSearchRelics = jQuery.debounce ->
   ), "*")
 
   if search_params.start.length && search_params.end.length
-    searchRoute search_params, (route) ->
-      search_params.path = route.path.map((e) -> "#{e.latitude},#{e.longitude}").join(";")
-      $('#search_path').val(search_params.path)
+    searchRoute search_params, (polygon) ->
+      search_params.polygon = polygon.join(';')
+      $('#search_polygon').val(search_params.polygon)
+      # search_params.path = route.path.map((e) -> "#{e.latitude},#{e.longitude}").join(";")
+      # $('#search_path').val(search_params.path)
 
   performSearch search_params, (result) ->
     renderResults(result.clusters, result.relics)
@@ -230,7 +247,7 @@ searchRelics = ->
 jQuery ->
   $('a.tooltip').tooltip()
   $('#new_search').submit(searchRelics)
-  $('#search_start, #search_end').change(-> FOUND_ROUTE = null)
+  $('#search_start, #search_end, #search_radius').change(-> FOUND_ROUTE = null)
 
   window.gmap = new google.maps.Map $('#map_canvas')[0],
     mapTypeId: google.maps.MapTypeId.HYBRID

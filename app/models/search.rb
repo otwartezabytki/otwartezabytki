@@ -6,7 +6,7 @@ class Search
 
   attr_accessor :q, :query, :place, :from, :to, :categories, :state, :existence, :location, :order, :lat, :lon, :load
   attr_accessor :conditions, :range_conditions, :per_page, :page, :has_photos, :has_description, :facets, :zoom, :widget
-  attr_accessor :bounding_box, :start, :end, :radius, :path
+  attr_accessor :bounding_box, :start, :end, :radius, :path, :polygon
 
   def initialize(attributes = {})
     attributes.each do |name, value|
@@ -92,6 +92,17 @@ class Search
     @location_object
   end
 
+  def polygon=(value)
+    @polygon = value.split(';')
+  end
+
+  def polygon
+    @polygon
+  end
+
+  def polygon?
+    @polygon.present?
+  end
 
   def location=(value)
     _, location_type, location_ids = value.match('^(world|country|voivodeship|district|commune|place):(.*)$').to_a
@@ -348,6 +359,15 @@ class Search
         }
       }
     end
+    if polygon?
+      terms_cond << {
+        'geo_polygon' => {
+          'coordinates' => {
+            'points' => polygon
+          }
+        }
+      }
+     end
     terms_cond
   end
 

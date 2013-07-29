@@ -286,6 +286,7 @@ GEM
     js-routes (0.8.6)
       rails (>= 3.2)
     json (1.8.0)
+    jsts-rails (0.1.0)
     jwt (0.1.5)
       multi_json (>= 1.0)
     kaminari (0.14.1)
@@ -562,6 +563,7 @@ DEPENDENCIES
   jquery-rails (= 2.0.3)
   jquery-ui-rails
   js-routes
+  jsts-rails
   kaminari
   meta_search (>= 1.1.0.pre)
   mini_magick!
