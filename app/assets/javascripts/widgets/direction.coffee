@@ -191,8 +191,17 @@ searchRoute = (search_params, callback) ->
       coordinates = route.path.map (p) ->
         new jsts.geom.Coordinate p.latitude, p.longitude
 
+      centerLat = route.bounds.getCenter().lat()
+      centerLng = route.bounds.getCenter().lng()
+      # in km
+      degreeInKm = haversineDistance \
+        Math.round(centerLat) - 0.5,
+        centerLng,
+        Math.round(centerLat) + 0.5,
+        centerLng
+
       line_string = factory.createLineString coordinates
-      buffer = line_string.buffer 0.1 # TODO: Calculate buffer from distance
+      buffer = line_string.buffer distance / degreeInKm
 
       paths = buffer.shell.points.map (p) ->
         new google.maps.LatLng p.x, p.y
@@ -238,6 +247,18 @@ debouncedSearchRelics = jQuery.debounce ->
 
   false
 , 3000
+
+
+haversineDistance = (lat1, lon1, lat2, lon2) ->
+  R = 6371 # km
+  dlat = (lat2 - lat1) * Math.PI / 180.0
+  dlon = (lon2 - lon1) * Math.PI / 180.0
+  lat1 = lat1 * Math.PI / 180.0
+  lat2 = lat2 * Math.PI / 180.0
+  a = Math.sin(dlat / 2) * Math.sin(dlat/2) +
+      Math.sin(dlon / 2) * Math.sin(dlon/2) * Math.cos(lat1) * Math.cos(lat2)
+  c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
+  R * c
 
 searchRelics = ->
   debouncedSearchRelics()
