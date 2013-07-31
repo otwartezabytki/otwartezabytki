@@ -11,8 +11,11 @@
       %section.search
         %h2= t('views.widgets.show.direction.relics_on_path')
         .search-input
-          = f.input :start
-          = f.input :end
+          = f.input :start, label: false
+          = f.input :end, label: false
+        #waypoints
+          .search-input
+          = link_to t('views.widgets.show.direction.add_place'), '#', class: 'add-place'
         %h2= t('views.widgets.show.direction.relics_within_radius')
         .search-input
           .string.clearfix.optional.stringish

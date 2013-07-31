@@ -1525,6 +1525,7 @@ pl:
           show_less: "pokaż mniej..."
           show_more: "pokaż więcej..."
           submit: "Pokaż trasę"
+          add_place: "Dodaj kolejne miejsce"
         map_search:
           advanced_search: "wyszukiwanie<br />zaawansowane »"
           categories: Kategorie

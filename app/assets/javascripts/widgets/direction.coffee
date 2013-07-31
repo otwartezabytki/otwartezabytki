@@ -167,17 +167,22 @@ $.fn.serializeObject = ->
 
   return json
 
+String.prototype.appendCountry = ->
+  this + if this.match(/[0-9\.,]+/) then "" else ", Polska"
+
 searchRoute = (search_params, callback) ->
   do clearMarkers
   return callback(FOUND_ROUTE) if FOUND_ROUTE?
 
-
+  waypoints = $('#waypoints .waypoint').map ->
+    location: $(this).val().appendCountry()
 
   request =
-    origin: search_params.start + if search_params.start.match(/[0-9\.,]+/) then "" else ", Polska"
-    destination: search_params.end + if search_params.start.match(/[0-9\.,]+/) then "" else ", Polska"
+    origin: search_params.start.appendCountry()
+    destination: search_params.end.appendCountry()
     travelMode: google.maps.TravelMode.WALKING
     region: 'pl'
+    waypoints: waypoints
 
   gmap.directions.route request, (result, status) ->
     if status == google.maps.DirectionsStatus.OK
@@ -265,9 +270,34 @@ searchRelics = ->
   false
 
 jQuery ->
+  $search = $('#new_search')
+
   $('a.tooltip').tooltip()
-  $('#new_search').submit(searchRelics)
-  $('#search_start, #search_end, #search_radius').change(-> FOUND_ROUTE = null)
+  $search.submit(searchRelics)
+
+  $search.on 'params:changed', ->
+    FOUND_ROUTE = null
+
+  $('body').on 'change', '#search_start, #search_end, #search_radius, #waypoints .waypoint', ->
+    $search.trigger 'params:changed'
+
+  $('#waypoints a.add-place').on 'click', (e) ->
+    e.preventDefault()
+    count = $('#waypoints .waypoint').length
+    markup = """
+      <div class="string clearfix optional stringish" id="search_waypoints_#{count}_input">
+        <div class="input">
+          <input id="search_waypoints_#{count}" name="search[waypoints[]]" type="text" value="" class="waypoint">
+          <span class="remove suffix">&times;</span>
+        </div>
+      </div>
+      """
+    $('#waypoints .search-input').append markup
+    $('#waypoints .waypoint:last').trigger 'focus'
+
+  $('body').on 'click', '#waypoints .remove', ->
+    $(this).parents('.string').remove()
+    $search.trigger 'params:changed'
 
   window.gmap = new google.maps.Map $('#map_canvas')[0],
     mapTypeId: google.maps.MapTypeId.HYBRID
