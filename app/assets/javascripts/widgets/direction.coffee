@@ -179,10 +179,18 @@ searchRoute = (search_params, callback) ->
       not $(this).val().isBlank()
     .map ->
       location: $(this).val().appendCountry()
+    .get()
+
+  destination = search_params.end.appendCountry()
+
+  unless waypoints.isEmpty()
+    # preserve order of the route
+    waypoints.add location: destination, 0
+    destination = waypoints.pop().location
 
   request =
     origin: search_params.start.appendCountry()
-    destination: search_params.end.appendCountry()
+    destination: destination
     travelMode: google.maps.TravelMode.WALKING
     region: 'pl'
     waypoints: waypoints
