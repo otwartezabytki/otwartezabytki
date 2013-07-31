@@ -174,8 +174,11 @@ searchRoute = (search_params, callback) ->
   do clearMarkers
   return callback(FOUND_ROUTE) if FOUND_ROUTE?
 
-  waypoints = $('#waypoints .waypoint').map ->
-    location: $(this).val().appendCountry()
+  waypoints = $('#waypoints .waypoint')
+    .filter ->
+      not $(this).val().isBlank()
+    .map ->
+      location: $(this).val().appendCountry()
 
   request =
     origin: search_params.start.appendCountry()
