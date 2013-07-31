@@ -6,7 +6,7 @@ class Search
 
   attr_accessor :q, :query, :place, :from, :to, :categories, :state, :existence, :location, :order, :lat, :lon, :load
   attr_accessor :conditions, :range_conditions, :per_page, :page, :has_photos, :has_description, :facets, :zoom, :widget
-  attr_accessor :bounding_box, :start, :end, :radius, :path, :polygon, :waypoints
+  attr_accessor :bounding_box, :start, :end, :radius, :path, :polygon, :waypoints, :route_type
 
   def initialize(attributes = {})
     attributes.each do |name, value|

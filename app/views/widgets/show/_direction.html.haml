@@ -9,6 +9,9 @@
       = f.hidden_field :path
       = f.hidden_field :polygon
       %section.search
+        %h2= t('views.widgets.show.direction.route_type')
+        .search-input
+          = f.input :route_type, collection: route_type_collection, label: false, include_blank: false
         %h2= t('views.widgets.show.direction.relics_on_path')
         .search-input
           = f.input :start, label: false

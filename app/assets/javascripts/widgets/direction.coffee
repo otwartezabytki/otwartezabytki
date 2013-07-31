@@ -170,6 +170,15 @@ $.fn.serializeObject = ->
 String.prototype.appendCountry = ->
   this + if this.match(/[0-9\.,]+/) then "" else ", Polska"
 
+getTravelMode = ->
+  switch $('#search_route_type :selected').val()
+    when 'bicycling'
+      google.maps.TravelMode.BICYCLING
+    when 'driving'
+      google.maps.TravelMode.DRIVING
+    else
+      google.maps.TravelMode.WALKING
+
 searchRoute = (search_params, callback) ->
   do clearMarkers
   return callback(FOUND_ROUTE) if FOUND_ROUTE?
@@ -191,7 +200,7 @@ searchRoute = (search_params, callback) ->
   request =
     origin: search_params.start.appendCountry()
     destination: destination
-    travelMode: google.maps.TravelMode.WALKING
+    travelMode: getTravelMode()
     region: 'pl'
     waypoints: waypoints
 
@@ -289,7 +298,7 @@ jQuery ->
   $search.on 'params:changed', ->
     FOUND_ROUTE = null
 
-  $('body').on 'change', '#search_start, #search_end, #search_radius, #waypoints .waypoint', ->
+  $('body').on 'change', '#search_start, #search_end, #search_radius, #waypoints .waypoint, #search_route_type', ->
     $search.trigger 'params:changed'
 
   $('#waypoints a.add-place').on 'click', (e) ->

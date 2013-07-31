@@ -1526,6 +1526,7 @@ pl:
           show_more: "pokaż więcej..."
           submit: "Pokaż trasę"
           add_place: "Dodaj kolejne miejsce"
+          route_type: "Typ trasy"
         map_search:
           advanced_search: "wyszukiwanie<br />zaawansowane »"
           categories: Kategorie
@@ -1535,6 +1536,10 @@ pl:
           search_by_name: "Wyszukaj po nazwie"
           show_less: "pokaż mniej..."
           show_more: "pokaż więcej..."
+      route_types:
+        bicycling: "Trasa rowerowa"
+        walking: "Trasa piesza"
+        driving: "Trasa samochodowa"
   widget:
     add_alert:
       description: |-
