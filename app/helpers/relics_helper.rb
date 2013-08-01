@@ -146,6 +146,10 @@ module RelicsHelper
     end
   end
 
+  def path_to_polygon(path)
+    path
+  end
+
   def original_relic_path(relic)
     relic_path(relic.id, :original => true)
   end

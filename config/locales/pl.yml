@@ -730,6 +730,7 @@ pl:
       month: Miesiąc
       second: Sekundy
       year: Rok
+    ago: "temu"
   devise:
     confirmations:
       confirmed: "Konto zostało poprawnie aktywowane. Zostałeś automatycznie zalogowany."
@@ -852,6 +853,9 @@ pl:
         place: "Gdzie:"
         q: "Co:"
         to: "do:"
+        start: 'Od:'
+        end: 'Do:'
+        radius: 'W promieniu od trasy:'
     placeholders:
       search:
         place: gdzie
@@ -1142,6 +1146,9 @@ pl:
           update:
             link: "zaktualizowano link"
             photo: "zaktualizowano zdjęcie"
+            document: "zaktualizowano dokument"
+            event: "zaktualizowano wydarzenie"
+            entry: "zaktualizowano ciekawostkę"
             relic:
               ancestry: "zaktualizowano hirarchię w zespole zabytków"
               approved: "zatewierdzono zabytek"
@@ -1526,6 +1533,14 @@ pl:
           params_label: "Parametry do <a href='/api_doc/'>API</a>"
           settings_info: "Jeśli chcesz na przykład wyświetlić na swojej stronie mapkę z cmentarzami żydowskimi z województwa dolnośląskiego, wybierz województwo dolnośląskie z lokalizacji oraz kategorie „cmentarz” i „żydowski”. Następnie skopiuj kod do wstawienia na stronę."
           width: "Szerokość widgeta"
+        direction:
+          header: "Wybierz ustawienia widżetu"
+          height: "Wysokość widgeta"
+          hide_sidebar: "Ukryj pasek boczny"
+          params_hint: "Ustawisz je poruszając mapką podglądową po prawej stronie."
+          params_label: "Parametry do <a href='/api_doc/'>API</a>"
+          settings_info: "Jeśli chcesz na przykład wyświetlić na swojej stronie mapkę z cmentarzami żydowskimi z województwa dolnośląskiego, wybierz województwo dolnośląskie z lokalizacji oraz kategorie „cmentarz” i „żydowski”. Następnie skopiuj kod do wstawienia na stronę."
+          width: "Szerokość widgeta"
         preview: "Podgląd wygenerowanego widżetu"
       index:
         about: "Widżety:"
@@ -1542,6 +1557,21 @@ pl:
         add_relic:
           create: "Dodaj nowy zabytek"
           header: "Znasz zabytek, którego nie ma w naszej bazie?"
+        direction:
+          relics_on_path: "Zabytki na trasie:"
+          relics_within_radius: "Zabytki w promieniu:"
+          km_within_range: "km od trasy"
+          advanced_search: "wyszukiwanie<br />zaawansowane »"
+          categories: Kategorie
+          categories_hint: "tu możesz zawęzić wyszukiwanie zabytków wg. ich kategorii"
+          location_hint: "tu możesz zawęzić wyszukiwanie zabytków wg. ich lokalizacji"
+          query_placeholder: "np. cmentarz"
+          search_by_name: "Wyszukaj po nazwie"
+          show_less: "pokaż mniej..."
+          show_more: "pokaż więcej..."
+          submit: "Pokaż trasę"
+          add_place: "Dodaj kolejne miejsce"
+          route_type: "Typ trasy"
         map_search:
           advanced_search: "wyszukiwanie<br />zaawansowane »"
           categories: Kategorie
@@ -1551,6 +1581,10 @@ pl:
           search_by_name: "Wyszukaj po nazwie"
           show_less: "pokaż mniej..."
           show_more: "pokaż więcej..."
+      route_types:
+        bicycling: "Trasa rowerowa"
+        walking: "Trasa piesza"
+        driving: "Trasa samochodowa"
   widget:
     add_alert:
       description: |-
@@ -1563,6 +1597,10 @@ pl:
           Ta aplikacja umożliwi dodanie go w każdej chwili, wraz z opisem i zestawem zdjęć. "
       thumb: widget-image-example.jpg
       title: "Widżet \"Dodaj zabytek\""
+    direction:
+      description: "Lorem ipsum dolor sit amet."
+      thumb: widget-image-example.jpg
+      title: "Widżet Direction"
     map_search:
       description: "Dzięki tej aplikacji możesz zobaczyć zabytki z naszej bazy na mapie. Możesz zawęzić listę wyświetlanych zabytków w oparciu o położenie i kategorie (np. tylko cmentarze w Zamościu lub wszystkie pałace i kamienice w województwie śląskim)."
       thumb: widget-image-example.jpg

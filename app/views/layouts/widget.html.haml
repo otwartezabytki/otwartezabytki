@@ -13,5 +13,6 @@
         .container.main-container{ :'data-replace' => '.main-container' }
           = yield
     != include_gon(:camel_case => true)
+    = yield :before_javascripts
     = yield :javascripts
     = render 'shared/analytics'

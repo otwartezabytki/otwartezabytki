@@ -1,0 +1,37 @@
+- content_for :before_javascripts do
+  = javascript_include_tag "http://maps.googleapis.com/maps/api/js?key=#{Settings.oz.gm_key}&sensor=false&libraries=places"
+#direction_widget{ :"data-replace" => "#direction_widget" }
+  .sidebar
+    = link_to '/', :target => :_top do
+      %h1.logo
+    = semantic_form_for widget_search, :url => widgets_direction_path(widget.uid), :method => :get do |f|
+      = f.hidden_field :bounding_box
+      = f.hidden_field :path
+      = f.hidden_field :polygon
+      %section.search
+        %h2= t('views.widgets.show.direction.route_type')
+        .search-input
+          = f.input :route_type, collection: route_type_collection, label: false, include_blank: false
+        %h2= t('views.widgets.show.direction.relics_on_path')
+        .search-input
+          = f.input :start, label: false
+          = f.input :end, label: false
+        #waypoints
+          .search-input
+          = link_to t('views.widgets.show.direction.add_place'), '#', class: 'add-place'
+        %h2= t('views.widgets.show.direction.relics_within_radius')
+        .search-input
+          .string.clearfix.optional.stringish
+            = f.text_field :radius
+            %span.suffix= t('views.widgets.show.direction.km_within_range')
+        .search-submit
+          = f.submit :class => "submit", :value => "Pokaż trasę"
+.map
+  #map_canvas{ :style => "width: 100%; height: 100%;" }
+:javascript
+  config = #{widget.config.to_json};
+= content_for :stylesheets do
+  = stylesheet_link_tag "widgets/direction"
+= content_for :javascripts do
+  = javascript_include_tag "jsts", debug: false
+  = javascript_include_tag "widgets/direction"

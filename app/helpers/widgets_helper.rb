@@ -26,4 +26,10 @@ module WidgetsHelper
       :main_photo => relic.main_photo
     }
   end
+
+  def route_type_collection
+    ['walking', 'bicycling', 'driving'].map do |type|
+      [I18n.t("views.widgets.route_types.#{type}"), type]
+    end
+  end
 end

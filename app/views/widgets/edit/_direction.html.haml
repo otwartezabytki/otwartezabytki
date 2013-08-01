@@ -1,0 +1,16 @@
+%h1
+  = t("widget.#{widget.class.partial_name}.title")
+  %a.back{:href => widgets_path}= t('views.widgets.edit.back')
+.content
+  %h2= t('views.widgets.edit.direction.header')
+  %span.block= t('views.widgets.edit.direction.settings_info')
+  .preview
+    = raw(widget.snippet)
+  .sidebar
+    = semantic_form_for widget, :url => self.send("widgets_#{widget.class.partial_name}_path", widget), :remote => true do |f|
+      = f.input :width, :label => t('views.widgets.edit.direction.width'), :required => false
+      = f.input :height, :label => t('views.widgets.edit.direction.height'), :required => false
+  %h2= t('views.widgets.edit.generated')
+  %div
+    %span.block= t('views.widgets.edit.code_help')
+    %textarea#snippet{:cols => "20", :rows => "3"}= widget.snippet

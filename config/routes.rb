@@ -51,6 +51,7 @@ Otwartezabytki::Application.routes.draw do
   namespace :widgets do
     with_options :only => [:show, :edit, :create, :update] do |w|
       w.resources :map_searches, :path => "/map_search"
+      w.resources :directions, :path => "/direction"
       w.resources :add_relics, :path => "/add_relics"
       w.resources :add_alerts, :path => "/add_alerts"
     end
@@ -69,6 +70,9 @@ Otwartezabytki::Application.routes.draw do
 
       resources :relics do
         resources :photos
+        collection do
+          get :clusters
+        end
       end
 
       # resources :voivodeships, :only => [:index, :show]

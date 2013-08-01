@@ -14,6 +14,7 @@ group :assets do
   gem 'jquery-ui-rails'
   gem 'twitter-bootstrap-rails'
   gem 'bootstrap-sass', '~> 2.0.4.0'
+  gem 'jsts-rails', '~> 0.2.0'
 end
 
 gem 'jquery-rails', '2.0.3'
@@ -102,6 +103,8 @@ gem 'yard'
 gem 'redcarpet'
 
 gem 'rails-timeago', '~> 2.0'
+gem 'clipper'
+gem 'sprockets-commonjs'
 
 group :development, :test do
   gem 'interactive_editor'

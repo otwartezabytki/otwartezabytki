@@ -17,6 +17,7 @@ require 'yajl/json_gem'
 module Otwartezabytki
   class Application < Rails::Application
     config.autoload_paths += %W(#{config.root}/lib #{config.root}/app/strategies)
+    ActiveSupport::Dependencies.explicitly_unloadable_constants << 'Polygon'
 
     config.time_zone = 'Warsaw'
 
@@ -53,7 +54,7 @@ module Otwartezabytki
     end
     unless ['test', 'development'].include?(Rails.env)
       # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-      config.assets.precompile += %w( active_admin.js ie8.css iframe.css print.css widgets/* )
+      config.assets.precompile += %w( active_admin.js ie8.css iframe.css print.css widgets/* jsts.js )
       config.cache_store = :dalli_store, { :namespace => "otwartezabytki-#{Rails.env}", :expires_in => 1.day, :compress => true }
     end
 

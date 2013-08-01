@@ -10,3 +10,5 @@ json.relics do |json|
     json.partial! "api/v1/relics/relic", :relic => relic
   end
 end
+
+json.clusters leafs_of(@relics.polish_facets_tree).map{ |f| facet_to_marker(f) }

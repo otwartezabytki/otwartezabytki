@@ -6,7 +6,7 @@ class Search
 
   attr_accessor :q, :query, :place, :from, :to, :categories, :state, :existence, :location, :order, :lat, :lon, :load
   attr_accessor :conditions, :range_conditions, :per_page, :page, :has_photos, :has_description, :facets, :zoom, :widget
-  attr_accessor :bounding_box
+  attr_accessor :bounding_box, :start, :end, :radius, :path, :polygon, :waypoints, :route_type
 
   def initialize(attributes = {})
     attributes.each do |name, value|
@@ -21,6 +21,22 @@ class Search
 
   def load100
     !!@load
+  end
+
+  def radius=(value)
+    @radius = value
+  end
+
+  def radius
+    @radius || 5
+  end
+
+  def path=(value)
+    @path = value.split(";").map{ |vertex| vertex.split(',').map(&:to_f) }
+  end
+
+  def path
+    @path
   end
 
   def widget=(value)
@@ -44,6 +60,11 @@ class Search
       variable = variable.split(',') if variable.kind_of?(String)
       variable.reject(&:blank?)
     end
+  end
+
+  def boundary
+    return nil if @path.nil? || @radius.nil?
+    @boundary ||= Polygon.expand(path, @radius.to_f)
   end
 
   def categories
@@ -71,6 +92,17 @@ class Search
     @location_object
   end
 
+  def polygon=(value)
+    @polygon = value.split(';')
+  end
+
+  def polygon
+    @polygon
+  end
+
+  def polygon?
+    @polygon.present?
+  end
 
   def location=(value)
     _, location_type, location_ids = value.match('^(world|country|voivodeship|district|commune|place):(.*)$').to_a
@@ -318,6 +350,24 @@ class Search
         }
       }
     end
+    if boundary.present?
+      terms_cond << {
+        'geo_polygon' => {
+          'coordinates' => {
+            'points' => boundary.map { |vertex| "#{vertex.first}, #{vertex.last}" }
+          }
+        }
+      }
+    end
+    if polygon?
+      terms_cond << {
+        'geo_polygon' => {
+          'coordinates' => {
+            'points' => polygon
+          }
+        }
+      }
+     end
     terms_cond
   end
 

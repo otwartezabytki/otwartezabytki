@@ -42,7 +42,7 @@ ActiveAdmin.register Version, :sort_order => 'id_desc' do
         when "Document"
           link_to name, admin_document_path(e.item_id), :title => object.name
         when "Photo"
-          link_to name, admin_photo_path(e.item_id), :title => "zabytku #{object.relic.identification}"
+          link_to name, admin_photo_path(e.item_id), :title => "zabytku #{object.relic.try(:identification)}"
         when "Entry"
           link_to name, admin_entry_path(e.item_id), :title => object.title
         when "Event"

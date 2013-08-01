@@ -82,8 +82,15 @@ SQL
             counter += 1
             objs.each do |r|
               begin
-                z.put_next_entry("#{suffix}/#{r.id}.json")
-                z.print Yajl::Encoder.encode(r.to_builder(register_data).attributes!, :pretty => true, :indent => "  ")
+                view = ActionController::Base.new
+                view.request = ActionDispatch::Request.new('rack.input' => [])
+                view.response = ActionDispatch::Response.new
+                view.class_eval do
+                  include ApplicationHelper
+                  include Rails.application.routes.url_helpers
+                end
+                z.put_next_entry("relics/#{r.id}.json")
+                z.print view.render(template: 'api/v1/relics/_relic.json.jbuilder', locals: { relic: r })
               rescue => ex
                 Raven.capture_exception(ex)
               end

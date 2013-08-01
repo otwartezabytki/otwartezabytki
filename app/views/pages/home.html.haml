@@ -71,7 +71,7 @@
     %h3= t('views.pages.home.stats_info.header2')
     = render 'polish_map'
   .right
-    - cache "recently-modified" do
+    - cache [I18n.locale, "recently-modified"] do
       %h3= t('views.pages.home.recently_modified')
       %ul.latest
         - RecentRevision.revisions[0...-3].each do |revision|

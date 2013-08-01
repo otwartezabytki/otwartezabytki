@@ -115,12 +115,15 @@ section.widgets{
   }
 }
 
-.edit_widget.map_search h1{
-  line-height: 75px;
-  height: 75px;
-  font-size: 28px;
-  @include background(asset-data-url("icon-widgets-mapsearch.png") 27px 21px no-repeat, linear-gradient(#36596b, #2f5163));
-  padding-left: 70px;
+.map_search,
+.direction {
+  &.edit_widget h1{
+    line-height: 75px;
+    height: 75px;
+    font-size: 28px;
+    @include background(asset-data-url("icon-widgets-mapsearch.png") 27px 21px no-repeat, linear-gradient(#36596b, #2f5163));
+    padding-left: 70px;
+  }
 }
 
 .back{
@@ -177,17 +180,23 @@ section.widgets{
     float: left;
     width: 920px;
     padding: 20px 15px;
-    .widget_map_search{
+
+    .widget_map_search,
+    .widget_direction {
       div{
         float: left;
         margin-right: 10px;
         width: 210px;
-        &#widget_map_search_api_params_input{
+
+        &#widget_map_search_api_params_input,
+        &#widget_direction_api_params_input {
           display: none;
         }
       }
     }
-    #widget_map_search_api_params{
+
+    #widget_map_search_api_params,
+    #widget_direction_api_params {
       max-width: 245px;
       width: 245px;
     }
@@ -346,5 +355,12 @@ section.widgets{
 .map_search.edit_widget{
   .sidebar{
     width: 890px;
+  }
+}
+
+.direction.edit_widget {
+  .optional.stringish {
+    float: left;
+    margin-right: 50px;
   }
 }
