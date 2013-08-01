@@ -298,6 +298,13 @@ jQuery ->
   $search.on 'params:changed', ->
     FOUND_ROUTE = null
 
+  placesAutocomplete = (input) ->
+    options = componentRestrictions: country: 'pl'
+    autocomplete = new google.maps.places.Autocomplete input[0], options
+
+    google.maps.event.addListener autocomplete, 'place_changed', ->
+      $search.trigger 'params:changed'
+
   $('body').on 'change', '#search_start, #search_end, #search_radius, #waypoints .waypoint, #search_route_type', ->
     $search.trigger 'params:changed'
 
@@ -313,11 +320,16 @@ jQuery ->
       </div>
       """
     $('#waypoints .search-input').append markup
-    $('#waypoints .waypoint:last').trigger 'focus'
+    $input = $('#waypoints .waypoint:last')
+    $input.trigger 'focus'
+    placesAutocomplete $input
 
   $('body').on 'click', '#waypoints .remove', ->
     $(this).parents('.string').remove()
     $search.trigger 'params:changed'
+
+  placesAutocomplete $('#search_start')
+  placesAutocomplete $('#search_end')
 
   window.gmap = new google.maps.Map $('#map_canvas')[0],
     mapTypeId: google.maps.MapTypeId.HYBRID

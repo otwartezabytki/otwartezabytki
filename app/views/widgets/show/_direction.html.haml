@@ -1,5 +1,5 @@
 - content_for :before_javascripts do
-  = javascript_include_tag "http://maps.googleapis.com/maps/api/js?key=#{Settings.oz.gm_key}&sensor=false"
+  = javascript_include_tag "http://maps.googleapis.com/maps/api/js?key=#{Settings.oz.gm_key}&sensor=false&libraries=places"
 #direction_widget{ :"data-replace" => "#direction_widget" }
   .sidebar
     = link_to '/', :target => :_top do
