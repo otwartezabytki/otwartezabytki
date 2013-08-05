@@ -13,7 +13,8 @@
 
 window.gmap = null
 window.marker_clusterer = null
-FOUND_ROUTE = null
+ROUTE = null
+POLYGON = null
 
 show_content_window = (marker, content) ->
   if marker.info_window
@@ -61,7 +62,7 @@ renderResults = (search_groups, search_results) ->
         bounds = new google.maps.LatLngBounds(southWest, northEast)
         gmap.fitBounds(bounds, true)
         $('#search_location').val("#{@type}:#{@id}")
-        $('#search_bounding_box').val(bounds.toString()) unless FOUND_ROUTE?
+        $('#search_bounding_box').val(bounds.toString()) unless ROUTE?
         $('#new_search').submit()
 
       overlay.setMap(gmap)
@@ -179,9 +180,38 @@ getTravelMode = ->
     else
       google.maps.TravelMode.WALKING
 
+routeToPolygon = (route) ->
+  return POLYGON if POLYGON?
+
+  distance   = $('#search_radius').val()
+  route.path = route.overview_path.map (o) ->
+    latitude: o.lat().toFixed(6), longitude: o.lng().toFixed(6)
+
+  factory = new jsts.geom.GeometryFactory()
+
+  coordinates = route.path.map (p) ->
+    new jsts.geom.Coordinate p.latitude, p.longitude
+
+  centerLat = route.bounds.getCenter().lat()
+  centerLng = route.bounds.getCenter().lng()
+  # in km
+  degreeInKm = haversineDistance \
+    Math.round(centerLat) - 0.5,
+    centerLng,
+    Math.round(centerLat) + 0.5,
+    centerLng
+
+  line_string = factory.createLineString coordinates
+  buffer = line_string.buffer distance / degreeInKm
+
+  paths = buffer.shell.points.map (p) ->
+    new google.maps.LatLng p.x, p.y
+
+  POLYGON = paths.map (p) -> p.toUrlValue()
+
 searchRoute = (search_params, callback) ->
   do clearMarkers
-  return callback(FOUND_ROUTE) if FOUND_ROUTE?
+  return callback(routeToPolygon(ROUTE)) if ROUTE?
 
   waypoints = $('#waypoints .waypoint')
     .filter ->
@@ -206,32 +236,8 @@ searchRoute = (search_params, callback) ->
 
   gmap.directions.route request, (result, status) ->
     if status == google.maps.DirectionsStatus.OK
-      route      = result.routes[0]
-      distance   = $('#search_radius').val()
-      route.path = route.overview_path.map (o) ->
-        latitude: o.lat().toFixed(6), longitude: o.lng().toFixed(6)
-
-      factory = new jsts.geom.GeometryFactory()
-
-      coordinates = route.path.map (p) ->
-        new jsts.geom.Coordinate p.latitude, p.longitude
-
-      centerLat = route.bounds.getCenter().lat()
-      centerLng = route.bounds.getCenter().lng()
-      # in km
-      degreeInKm = haversineDistance \
-        Math.round(centerLat) - 0.5,
-        centerLng,
-        Math.round(centerLat) + 0.5,
-        centerLng
-
-      line_string = factory.createLineString coordinates
-      buffer = line_string.buffer distance / degreeInKm
-
-      paths = buffer.shell.points.map (p) ->
-        new google.maps.LatLng p.x, p.y
-
-      FOUND_ROUTE = polygon = paths.map (p) -> p.toUrlValue()
+      ROUTE = route = result.routes[0]
+      polygon = routeToPolygon route
 
       gmap.directionsRenderer.setDirections(result)
       gmap.onNextMovement -> callback(polygon)
@@ -302,7 +308,7 @@ jQuery ->
   $search.submit(searchRelics)
 
   $search.on 'params:changed', ->
-    FOUND_ROUTE = null
+    ROUTE = POLYGON = null
 
   placesAutocomplete = (input) ->
     options = componentRestrictions: country: 'pl'
@@ -355,9 +361,10 @@ jQuery ->
       $('#search_bounding_box').val(bounds.toString())
       searchRelics()
 
-    google.maps.event.addListener gmap.directionsRenderer,
-      'directions_changed',
-      searchRelics
+    google.maps.event.addListener gmap.directionsRenderer, 'directions_changed', ->
+      ROUTE = gmap.directionsRenderer.getDirections().routes[0]
+      POLYGON = null
+      searchRelics()
 
   gmap.onNextMovement ->
   gmap.setCenter(new google.maps.LatLng(52, 20))
