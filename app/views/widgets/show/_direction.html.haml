@@ -13,11 +13,12 @@
         .search-input
           = f.input :route_type, collection: route_type_collection, label: false, include_blank: false
         %h2= t('views.widgets.show.direction.relics_on_path')
-        .search-input
-          = f.input :start, label: false
-          = f.input :end, label: false
         #waypoints
           .search-input
+            #search_waypoints_0_input.string.clearfix.optional.stringish
+              .input= text_field_tag 'search[waypoints[]]', '', id: 'search_waypoints_0', class: 'waypoint'
+            #search_waypoints_1_input.string.clearfix.optional.stringish
+              .input= text_field_tag 'search[waypoints[]]', '', id: 'search_waypoints_1', class: 'waypoint'
           = link_to t('views.widgets.show.direction.add_place'), '#', class: 'add-place'
         %h2= t('views.widgets.show.direction.relics_within_radius')
         .search-input
