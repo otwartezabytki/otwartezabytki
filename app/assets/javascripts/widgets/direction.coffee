@@ -209,26 +209,24 @@ routeToPolygon = (route) ->
 
   POLYGON = paths.map (p) -> p.toUrlValue()
 
+getWaypoints = ->
+  $('#waypoints .waypoint')
+    .filter ->
+      not $(this).val().isBlank()
+    .map ->
+      $(this).val().appendCountry()
+    .get()
+
 searchRoute = (search_params, callback) ->
   do clearMarkers
   return callback(routeToPolygon(ROUTE)) if ROUTE?
 
-  waypoints = $('#waypoints .waypoint')
-    .filter ->
-      not $(this).val().isBlank()
-    .map ->
-      location: $(this).val().appendCountry()
-    .get()
-
-  destination = search_params.end.appendCountry()
-
-  unless waypoints.isEmpty()
-    # preserve order of the route
-    waypoints.add location: destination, 0
-    destination = waypoints.pop().location
+  origin      = search_params.waypoints.first()
+  destination = search_params.waypoints.last()
+  waypoints   = search_params.waypoints.slice(1, -1).map (wp) -> location: wp
 
   request =
-    origin: search_params.start.appendCountry()
+    origin: origin
     destination: destination
     travelMode: getTravelMode()
     region: 'pl'
@@ -261,12 +259,13 @@ debouncedSearchRelics = jQuery.debounce ->
   search_params.api_key = "oz"
   search_params.per_page = 100
   search_params.widget = 1
+  search_params.waypoints = getWaypoints()
 
   window.parent.postMessage(JSON.stringify(
     event: "on_params_changed", params: search_params
   ), "*")
 
-  if search_params.start.length && search_params.end.length
+  if not search_params.waypoints.isEmpty()
     searchRoute search_params, (polygon) ->
       search_params.polygon = polygon.join(';')
       $('#search_polygon').val(search_params.polygon)
@@ -301,47 +300,71 @@ searchRelics = ->
   debouncedSearchRelics()
   false
 
+getWaypointsFromRoute = (route) ->
+  waypoints = []
+  route.legs.each (leg, index) ->
+    waypoints.add leg.start_address if index is 0
+    leg.via_waypoints.each (wp) ->
+      waypoints.add wp.toUrlValue()
+    waypoints.add leg.end_address
+  waypoints
+
+updateWaypointInputs = (route, callback) ->
+  waypoints = getWaypointsFromRoute route
+  waypoints.each (wp, index) ->
+    $input = $("#waypoints .waypoint:eq(#{index})")
+    if $input.length
+      $input.val(wp)
+    else
+      appendWaypointInput wp
+
+  do callback
+
+appendWaypointInput = (value = '') ->
+  count = $('#waypoints .waypoint').length
+  markup = """
+    <div class="string clearfix optional stringish" id="search_waypoints_#{count}_input">
+      <div class="input">
+        <input id="search_waypoints_#{count}" name="search[waypoints[]]" type="text" value="#{value}" class="waypoint">
+        <span class="remove suffix">&times;</span>
+      </div>
+    </div>
+    """
+  $('#waypoints .search-input').append markup
+  $input = $('#waypoints .waypoint:last')
+  placesAutocomplete $input
+  $input
+
+placesAutocomplete = (input) ->
+  options = componentRestrictions: country: 'pl'
+  autocomplete = new google.maps.places.Autocomplete input[0], options
+
+  google.maps.event.addListener autocomplete, 'place_changed', ->
+    $(document).trigger 'params:changed'
+
 jQuery ->
   $search = $('#new_search')
 
   $('a.tooltip').tooltip()
   $search.submit(searchRelics)
 
-  $search.on 'params:changed', ->
+  $(document).on 'params:changed', ->
     ROUTE = POLYGON = null
 
-  placesAutocomplete = (input) ->
-    options = componentRestrictions: country: 'pl'
-    autocomplete = new google.maps.places.Autocomplete input[0], options
-
-    google.maps.event.addListener autocomplete, 'place_changed', ->
-      $search.trigger 'params:changed'
-
-  $('body').on 'change', '#search_start, #search_end, #search_radius, #waypoints .waypoint, #search_route_type', ->
-    $search.trigger 'params:changed'
+  $('body').on 'change', '#search_radius, #waypoints .waypoint, #search_route_type', ->
+    $(document).trigger 'params:changed'
 
   $('#waypoints a.add-place').on 'click', (e) ->
     e.preventDefault()
-    count = $('#waypoints .waypoint').length
-    markup = """
-      <div class="string clearfix optional stringish" id="search_waypoints_#{count}_input">
-        <div class="input">
-          <input id="search_waypoints_#{count}" name="search[waypoints[]]" type="text" value="" class="waypoint">
-          <span class="remove suffix">&times;</span>
-        </div>
-      </div>
-      """
-    $('#waypoints .search-input').append markup
-    $input = $('#waypoints .waypoint:last')
+    $input = appendWaypointInput()
     $input.trigger 'focus'
-    placesAutocomplete $input
 
   $('body').on 'click', '#waypoints .remove', ->
     $(this).parents('.string').remove()
-    $search.trigger 'params:changed'
+    $(document).trigger 'params:changed'
 
-  placesAutocomplete $('#search_start')
-  placesAutocomplete $('#search_end')
+  $('#waypoints .waypoint').each ->
+    placesAutocomplete $(this)
 
   window.gmap = new google.maps.Map $('#map_canvas')[0],
     mapTypeId: google.maps.MapTypeId.HYBRID
@@ -349,11 +372,11 @@ jQuery ->
   gmap.menu = new contextMenu(map: window.gmap)
 
   gmap.menu.addItem 'Start route here', (map, latlng) ->
-    $('#search_start').val("#{latlng.lat().toFixed(6)},#{latlng.lng().toFixed(6)}")
+    $('#waypoints .waypoint:first').val("#{latlng.lat().toFixed(6)},#{latlng.lng().toFixed(6)}")
     searchRelics()
 
   gmap.menu.addItem 'End route here', (map, latlng) ->
-    $('#search_end').val("#{latlng.lat().toFixed(6)},#{latlng.lng().toFixed(6)}")
+    $('#waypoints .waypoint:last').val("#{latlng.lat().toFixed(6)},#{latlng.lng().toFixed(6)}")
     searchRelics()
 
   gmap.onMovement ->
@@ -361,10 +384,11 @@ jQuery ->
       $('#search_bounding_box').val(bounds.toString())
       searchRelics()
 
-    google.maps.event.addListener gmap.directionsRenderer, 'directions_changed', ->
-      ROUTE = gmap.directionsRenderer.getDirections().routes[0]
-      POLYGON = null
-      searchRelics()
+  google.maps.event.addListener gmap.directionsRenderer, 'directions_changed', ->
+    ROUTE = gmap.directionsRenderer.getDirections().routes[0]
+    POLYGON = null
+    if ROUTE?
+      updateWaypointInputs ROUTE, -> searchRelics()
 
   gmap.onNextMovement ->
   gmap.setCenter(new google.maps.LatLng(52, 20))
