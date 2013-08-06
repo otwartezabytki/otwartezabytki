@@ -366,6 +366,17 @@ jQuery ->
   $('#waypoints .waypoint').each ->
     placesAutocomplete $(this)
 
+  $('.categories input[type="checkbox"]').change ->
+    if $(this).hasClass('sacral-options')
+      filter = $(".categories div.sacral-categories")
+      if $(this).is(':checked')
+        filter.find('input[type=checkbox]').attr('checked', 'checked')
+        filter.slideDown()
+      else
+        filter.find('input[type=checkbox]').removeAttr('checked')
+        filter.slideUp()
+    $(document).trigger 'params:changed'
+
   window.gmap = new google.maps.Map $('#map_canvas')[0],
     mapTypeId: google.maps.MapTypeId.HYBRID
 

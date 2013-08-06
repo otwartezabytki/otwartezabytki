@@ -15,9 +15,9 @@
 
 class Widget::Direction < Widget
 
-  serialized_attr_accessor :width => 920, :height => 500
+  serialized_attr_accessor :width => 920, :height => 1000
 
-  validates :width, :height, :presence => true, 
+  validates :width, :height, :presence => true,
     :numericality => { :greater_than_or_equal_to => 500, :less_than_or_equal_to => 1600 }
 
   def snippet

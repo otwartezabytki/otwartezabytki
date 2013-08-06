@@ -25,6 +25,26 @@
           .string.clearfix.optional.stringish
             = f.text_field :radius
             %span.suffix= t('views.widgets.show.direction.km_within_range')
+        %section.categories
+          %h2= t('views.widgets.show.direction.relics_from_categories')
+          .search-input
+            - Category.roots.sort_by(&:name).each do |category|
+              - if category.name_key == 'sakralny'
+                .category
+                  = f.label :categories, value: category.name_key do
+                    = f.check_box :categories, { multiple: true, class: 'sacral-options' }, category.name_key, nil
+                    %span.name= category.name
+                .sacral-categories{ style: 'display: none;' }
+                  - category.children.sort_by(&:name).each do |child|
+                    .category
+                      = f.label :categories, value: child.name_key do
+                        = f.check_box :categories, { multiple: true }, child.name_key, nil
+                        %span.name= child.name
+              - else
+                .category
+                  = f.label :categories, value: category.name_key do
+                    = f.check_box :categories, { multiple: true }, category.name_key, nil
+                    %span.name= category.name
         .search-submit
           = f.submit :class => "submit", :value => "Pokaż trasę"
 .map
