@@ -261,8 +261,13 @@ debouncedSearchRelics = jQuery.debounce ->
   search_params.widget = 1
   search_params.waypoints = getWaypoints()
 
+  store_params = ->
+    params = Object.clone search_params
+    delete params.polygon
+    params
+
   window.parent.postMessage(JSON.stringify(
-    event: "on_params_changed", params: search_params
+    event: "on_params_changed", params: store_params()
   ), "*")
 
   if not search_params.waypoints.isEmpty()
