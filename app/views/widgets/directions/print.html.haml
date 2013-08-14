@@ -1,0 +1,38 @@
+- content_for :before_javascripts do
+  = javascript_include_tag "http://maps.googleapis.com/maps/api/js?key=#{Settings.oz.gm_key}&sensor=false&libraries=places"
+
+.map{ :style => "width: 50em; height: 50em" }
+  #map_canvas{ :style => "width: 100%; height: 100%;" }
+
+.sidebar
+  %section.waypoints
+    %h2 Zabytki na trasie
+    %ul
+      - widget_params.try(:[], 'waypoints').try :each do |waypoint|
+        %li= waypoint
+    %strong w promieniu #{widget_params.try(:[], 'radius')} km
+
+  %section.categories
+    %h2 Zabytki z kategorii
+    %ul
+      - Category.roots.sort_by(&:name).each do |category|
+        - if categories.include?(category.name_key)
+          %li= category.name_key
+          - if category.name_key == 'sakralny'
+            - category.children.sort_by(&:name).each do |child|
+              - if categories.include?(child.name_key)
+                %li= child.name_key
+
+.relics
+  %h1 Lista zabytków
+  #relics-container
+
+:javascript
+  var renderOnly = printAction = true;
+%script{ type: 'application/json', id: 'search_params' }
+  != widget_params.to_json
+= content_for :stylesheets do
+  = stylesheet_link_tag "widgets/direction"
+= content_for :javascripts do
+  = javascript_include_tag "jsts", debug: false
+  = javascript_include_tag "widgets/direction"
