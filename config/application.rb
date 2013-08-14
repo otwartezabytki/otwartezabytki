@@ -54,7 +54,7 @@ module Otwartezabytki
     end
     unless ['test', 'development'].include?(Rails.env)
       # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-      config.assets.precompile += %w( active_admin.js ie8.css iframe.css print.css widgets/* jsts.js )
+      config.assets.precompile += %w( active_admin.js ie8.css iframe.css print.css widgets/* jsts.js widgets/print.css )
       config.cache_store = :dalli_store, { :namespace => "otwartezabytki-#{Rails.env}", :expires_in => 1.day, :compress => true }
     end
 
