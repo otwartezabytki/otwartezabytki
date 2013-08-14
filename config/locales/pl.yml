@@ -1541,6 +1541,8 @@ pl:
           params_label: "Parametry do <a href='/api_doc/'>API</a>"
           settings_info: "Jeśli chcesz na przykład wyświetlić na swojej stronie mapkę z cmentarzami żydowskimi z województwa dolnośląskiego, wybierz województwo dolnośląskie z lokalizacji oraz kategorie „cmentarz” i „żydowski”. Następnie skopiuj kod do wstawienia na stronę."
           width: "Szerokość widgeta"
+          save: "Zapisz trasę"
+          print: "Drukuj trasę"
         preview: "Podgląd wygenerowanego widżetu"
       index:
         about: "Widżety:"
@@ -1572,6 +1574,7 @@ pl:
           submit: "Pokaż trasę"
           add_place: "Dodaj kolejne miejsce"
           route_type: "Typ trasy"
+          relics_from_categories: "Zabytki z kategorii"
         map_search:
           advanced_search: "wyszukiwanie<br />zaawansowane »"
           categories: Kategorie

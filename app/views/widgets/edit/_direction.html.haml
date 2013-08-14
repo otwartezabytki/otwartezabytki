@@ -10,6 +10,9 @@
     = semantic_form_for widget, :url => self.send("widgets_#{widget.class.partial_name}_path", widget), :remote => true do |f|
       = f.input :width, :label => t('views.widgets.edit.direction.width'), :required => false
       = f.input :height, :label => t('views.widgets.edit.direction.height'), :required => false
+      = f.input :params, :as => :hidden, label: false
+      = f.button t('views.widgets.edit.direction.save'), name: 'manual_save'
+      = link_to t('views.widgets.edit.direction.print'), print_widgets_direction_path
   %h2= t('views.widgets.edit.generated')
   %div
     %span.block= t('views.widgets.edit.code_help')

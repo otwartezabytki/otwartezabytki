@@ -51,7 +51,11 @@ Otwartezabytki::Application.routes.draw do
   namespace :widgets do
     with_options :only => [:show, :edit, :create, :update] do |w|
       w.resources :map_searches, :path => "/map_search"
-      w.resources :directions, :path => "/direction"
+      w.resources :directions, :path => "/direction" do
+        member do
+          get :print
+        end
+      end
       w.resources :add_relics, :path => "/add_relics"
       w.resources :add_alerts, :path => "/add_alerts"
     end
