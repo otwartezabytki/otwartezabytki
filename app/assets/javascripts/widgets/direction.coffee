@@ -171,8 +171,8 @@ $.fn.serializeObject = ->
 String.prototype.appendCountry = ->
   this + if this.match(/[0-9\.,]+/) then "" else ", Polska"
 
-getTravelMode = ->
-  switch $('#search_route_type :selected').val()
+getTravelMode = (type) ->
+  switch type
     when 'bicycling'
       google.maps.TravelMode.BICYCLING
     when 'driving'
@@ -180,10 +180,9 @@ getTravelMode = ->
     else
       google.maps.TravelMode.WALKING
 
-routeToPolygon = (route) ->
+routeToPolygon = (route, distance) ->
   return POLYGON if POLYGON?
 
-  distance   = $('#search_radius').val()
   route.path = route.overview_path.map (o) ->
     latitude: o.lat().toFixed(6), longitude: o.lng().toFixed(6)
 
@@ -219,7 +218,7 @@ getWaypoints = ->
 
 searchRoute = (search_params, callback) ->
   do clearMarkers
-  return callback(routeToPolygon(ROUTE)) if ROUTE?
+  return callback(routeToPolygon(ROUTE, search_params.radius)) if ROUTE?
 
   origin      = search_params.waypoints.first()
   destination = search_params.waypoints.last()
@@ -228,19 +227,46 @@ searchRoute = (search_params, callback) ->
   request =
     origin: origin
     destination: destination
-    travelMode: getTravelMode()
+    travelMode: getTravelMode search_params.route_type
     region: 'pl'
     waypoints: waypoints
 
   gmap.directions.route request, (result, status) ->
     if status == google.maps.DirectionsStatus.OK
       ROUTE = route = result.routes[0]
-      polygon = routeToPolygon route
+      polygon = routeToPolygon route, search_params.radius
 
       gmap.directionsRenderer.setDirections(result)
       gmap.onNextMovement -> callback(polygon)
     else
       alert('Nie znaleziono trasy! Spróbuj ponownie.')
+
+printLoadRelics = (search_params, callback) ->
+  search_params._method = 'get'
+  $.ajax
+    url: '/api/v1/relics'
+    type: 'post'
+    data: search_params
+    dataType: 'json'
+    success: (result) ->
+      callback(result)
+    error: ->
+      alert('Nastąpił błąd podczas wyszukiwania zabytków.')
+
+printAppendRelic = (relic) ->
+  markup = """
+    <div class="relic">
+      <h3 class="name">#{relic.identification}</h3>
+      <p class="street">#{relic.street}</p>
+    </div>
+    """
+  $('#relics-container').append markup
+
+printRenderRelics = (relics) ->
+  relics.each (relic) ->
+    printAppendRelic relic
+
+  window.print()
 
 performSearch = (search_params, callback) ->
   search_params._method = 'get'
@@ -255,11 +281,17 @@ performSearch = (search_params, callback) ->
       alert('Nastąpił błąd podczas wyszukiwania zabytków.')
 
 debouncedSearchRelics = jQuery.debounce ->
-  search_params = $('#new_search').serializeObject().search
+  if $('#search_params').length > 0
+    search_params            = $.parseJSON $('#search_params').html()
+  else
+    search_params            = $('#new_search').serializeObject().search
+    search_params.waypoints  = getWaypoints()
+    search_params.route_type = $('#search_route_type :selected').val()
+    search_params.radius     = $('#search_radius').val()
+
   search_params.api_key = "oz"
   search_params.per_page = 100
   search_params.widget = 1
-  search_params.waypoints = getWaypoints()
 
   store_params = ->
     params = Object.clone search_params
@@ -282,6 +314,10 @@ debouncedSearchRelics = jQuery.debounce ->
 
       performSearch search_params, (result) ->
         renderResults(result.clusters, result.relics)
+
+        if printAction?
+          printLoadRelics search_params, (result) ->
+            printRenderRelics result.relics
   else
     performSearch search_params, (result) ->
       renderResults(result.clusters, [])
@@ -348,6 +384,18 @@ placesAutocomplete = (input) ->
     $(document).trigger 'params:changed'
 
 jQuery ->
+
+  if printAction?
+    window.gmap = new google.maps.Map $('#map_canvas')[0],
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+  else
+    window.gmap = new google.maps.Map $('#map_canvas')[0],
+      mapTypeId: google.maps.MapTypeId.HYBRID
+
+  if renderOnly?
+    do searchRelics
+    return
+
   $search = $('#new_search')
 
   $('a.tooltip').tooltip()
@@ -381,9 +429,6 @@ jQuery ->
         filter.find('input[type=checkbox]').removeAttr('checked')
         filter.slideUp()
     $(document).trigger 'params:changed'
-
-  window.gmap = new google.maps.Map $('#map_canvas')[0],
-    mapTypeId: google.maps.MapTypeId.HYBRID
 
   gmap.menu = new contextMenu(map: window.gmap)
 
