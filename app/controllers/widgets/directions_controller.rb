@@ -51,4 +51,8 @@ class Widgets::DirectionsController < WidgetsController
     render :print, :layout => 'widgets/print'
   end
 
+  def preview
+    render :preview, :layout => 'widget'
+  end
+
 end

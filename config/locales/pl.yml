@@ -1588,6 +1588,12 @@ pl:
         bicycling: "Trasa rowerowa"
         walking: "Trasa piesza"
         driving: "Trasa samochodowa"
+      preview:
+        direction:
+          relics_on_route: "Zabytki na trasie"
+          relics_from_categories: "Zabytki z kategorii"
+          within_radius: "w promieniu"
+          relics_list: "Lista zabytków"
   widget:
     add_alert:
       description: |-
