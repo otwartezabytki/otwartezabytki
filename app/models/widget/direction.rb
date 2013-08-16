@@ -22,7 +22,7 @@ class Widget::Direction < Widget
     :numericality => { :greater_than_or_equal_to => 500, :less_than_or_equal_to => 1600 }
 
   def snippet
-    widget_url = Rails.application.routes.url_helpers.widgets_direction_url(uid, :host => Settings.oz.host)
+    widget_url = Rails.application.routes.url_helpers.preview_widgets_direction_url(uid, :host => Settings.oz.host)
     "<iframe id='oz_direction' src='#{widget_url}' width='#{width}' height='#{height}'></iframe>"
   end
 
