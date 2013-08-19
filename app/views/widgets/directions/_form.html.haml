@@ -44,8 +44,6 @@
                 = f.label :categories, value: category.name_key do
                   = f.check_box :categories, { multiple: true, checked: categories.include?(category.name_key) }, category.name_key, nil
                   %span.name= category.name
-      .search-submit
-        = f.submit :class => "submit", :value => "Pokaż trasę"
 .map
   #map_canvas{ :style => "width: 100%; height: 100%;" }
 .clearfix
