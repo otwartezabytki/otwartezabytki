@@ -1,0 +1,56 @@
+.sidebar
+  = link_to '/', :target => :_top do
+    %h1.logo
+  = semantic_form_for widget_search, :url => widgets_directions_path, :method => :get do |f|
+    = f.hidden_field :bounding_box, value: widget_params.try(:[], 'bounding_box')
+    = f.hidden_field :path, value: widget_params.try(:[], 'path')
+    = f.hidden_field :polygon, value: widget_params.try(:[], 'polygon')
+    %section.search
+      %h2= t('views.widgets.show.direction.route_type')
+      .search-input
+        = f.input :route_type, collection: route_type_collection, label: false, include_blank: false, selected: widget_params.try(:[], 'route_type')
+      %h2= t('views.widgets.show.direction.relics_on_path')
+      #waypoints
+        .search-input
+          - widget_params.try(:[], 'waypoints').try :each_with_index do |waypoint, index|
+            .string.clearfix.optional.stringish{ id: "search_waypoints_#{index}_input" }
+              .input
+                = text_field_tag 'search[waypoints[]]', waypoint, id: "search_waypoints_#{index}", class: 'waypoint'
+                - if index > 1
+                  %span.remove.suffix &times;
+        = link_to t('views.widgets.show.direction.add_place'), '#', class: 'add-place'
+      %h2= t('views.widgets.show.direction.relics_within_radius')
+      .search-input
+        .string.clearfix.optional.stringish
+          = f.text_field :radius, value: widget_params.try(:[], 'radius') || 5
+          %span.suffix= t('views.widgets.show.direction.km_within_range')
+      %section.categories
+        %h2= t('views.widgets.show.direction.relics_from_categories')
+        .search-input
+          - Category.roots.sort_by(&:name).each do |category|
+            - if category.name_key == 'sakralny'
+              .category
+                = f.label :categories, value: category.name_key do
+                  = f.check_box :categories, { multiple: true, class: 'sacral-options', checked: categories.include?(category.name_key) }, category.name_key, nil
+                  %span.name= category.name
+              .sacral-categories{ style: 'display: none;' }
+                - category.children.sort_by(&:name).each do |child|
+                  .category
+                    = f.label :categories, value: child.name_key do
+                      = f.check_box :categories, { multiple: true, checked: categories.include?(category.name_key) }, child.name_key, nil
+                      %span.name= child.name
+            - else
+              .category
+                = f.label :categories, value: category.name_key do
+                  = f.check_box :categories, { multiple: true, checked: categories.include?(category.name_key) }, category.name_key, nil
+                  %span.name= category.name
+      .search-submit
+        = f.submit :class => "submit", :value => "Pokaż trasę"
+.map
+  #map_canvas{ :style => "width: 100%; height: 100%;" }
+.clearfix
+- content_for :before_javascripts do
+  = javascript_include_tag "http://maps.googleapis.com/maps/api/js?key=#{Settings.oz.gm_key}&sensor=false&libraries=places"
+= content_for :javascripts do
+  = javascript_include_tag "jsts", debug: false
+  = javascript_include_tag "widgets/direction"

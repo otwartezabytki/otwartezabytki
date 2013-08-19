@@ -95,6 +95,8 @@
     #fancybox_loader_container
       #fancybox_loader
     != include_gon(:camel_case => true)
+    = yield :before_javascripts
     != javascript_include_tag "application"
+    = yield :javascripts
     != yield :footer_javascripts
     = render 'shared/analytics'

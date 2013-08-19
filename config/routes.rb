@@ -47,7 +47,6 @@ Otwartezabytki::Application.routes.draw do
       w.resources :directions, :path => "/direction" do
         member do
           get :print
-          get :preview
         end
       end
       w.resources :add_relics, :path => "/add_relics"

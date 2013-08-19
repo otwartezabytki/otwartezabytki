@@ -4,9 +4,8 @@
 .content
   %h2= t('views.widgets.edit.direction.header')
   %span.block= t('views.widgets.edit.direction.settings_info')
-  .preview
-    %iframe#oz_direction{ width: 920, height: 1000, src: widgets_direction_url(widget) }
-  .sidebar
+  = render 'form'
+  .widget-settings
     = semantic_form_for widget, :url => self.send("widgets_#{widget.class.partial_name}_path", widget), :remote => true do |f|
       = f.input :width, :label => t('views.widgets.edit.direction.width'), :required => false
       = f.input :height, :label => t('views.widgets.edit.direction.height'), :required => false

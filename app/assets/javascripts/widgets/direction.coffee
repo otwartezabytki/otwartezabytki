@@ -1,12 +1,3 @@
-#= require ../variables
-#= require jquery
-#= require jquery_ujs
-#= require js-routes
-#= require vendor/jquery.cookie
-#= require twitter/bootstrap/bootstrap-tooltip
-#= require vendor/antiscroll
-#= require sugar
-#= require_tree ../libraries
 #= require gmaps/marker-clusterer
 #= require gmaps/context-menu
 #= require gmaps/extras
@@ -280,6 +271,13 @@ performSearch = (search_params, callback) ->
     error: ->
       alert('Nastąpił błąd podczas wyszukiwania zabytków.')
 
+updateWidget = (params) ->
+  $('#widget_direction_params').val JSON.stringify params
+  $form = $('form.widget_direction')
+  $.post $form.attr('action'), $form.serialize(), (data) ->
+    $('textarea#snippet').val data.snippet
+  , "json"
+
 debouncedSearchRelics = jQuery.debounce ->
   if $('#search_params').length > 0
     search_params            = $.parseJSON $('#search_params').html()
@@ -298,9 +296,7 @@ debouncedSearchRelics = jQuery.debounce ->
     delete params.polygon
     params
 
-  window.parent.postMessage(JSON.stringify(
-    event: "on_params_changed", params: store_params()
-  ), "*")
+  updateWidget store_params()
 
   if not search_params.waypoints.isEmpty()
     searchRoute search_params, (polygon) ->
