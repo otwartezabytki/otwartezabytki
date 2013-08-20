@@ -4,32 +4,12 @@
 .map
   #map_canvas{ :style => "width: 100%; height: 100%;" }
 
-.sidebar
-  %section.waypoints
-    %h2= t('views.widgets.preview.direction.relics_on_route')
-    %ul
-      - widget_params.try(:[], 'waypoints').try :each do |waypoint|
-        %li= waypoint
-    %strong= "#{t('views.widgets.preview.direction.within_radius')} #{widget_params.try(:[], 'radius')} km"
-
-  - if categories.present?
-    %section.categories
-      %h2= t('views.widgets.preview.direction.relics_from_categories')
-      %ul
-        - Category.roots.sort_by(&:name).each do |category|
-          - if categories.include?(category.name_key)
-            %li= category.name_key
-            - if category.name_key == 'sakralny'
-              - category.children.sort_by(&:name).each do |child|
-                - if categories.include?(child.name_key)
-                  %li= child.name_key
-
 :javascript
   var renderOnly = true;
 %script{ type: 'application/json', id: 'search_params' }
   != widget_params.to_json
 = content_for :stylesheets do
-  = stylesheet_link_tag "widgets/direction"
+  = stylesheet_link_tag "widgets/direction/widget"
 = content_for :javascripts do
   = javascript_include_tag "jsts", debug: false
   = javascript_include_tag "widgets/direction_iframe"
