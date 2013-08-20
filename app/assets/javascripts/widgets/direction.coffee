@@ -272,11 +272,17 @@ performSearch = (search_params, callback) ->
       alert('Nastąpił błąd podczas wyszukiwania zabytków.')
 
 updateWidget = (params) ->
-  $('#widget_direction_params').val JSON.stringify params
   $form = $('form.widget_direction')
+  return unless $form.length > 0
+  $('#widget_direction_params').val JSON.stringify params
   $.post $form.attr('action'), $form.serialize(), (data) ->
     $('textarea#snippet').val data.snippet
   , "json"
+
+atLeastTwoWaypoints = (waypoints) ->
+  waypoints.filter (waypoint) ->
+    not waypoint.isBlank()
+  .length > 1
 
 debouncedSearchRelics = jQuery.debounce ->
   if $('#search_params').length > 0
@@ -298,7 +304,7 @@ debouncedSearchRelics = jQuery.debounce ->
 
   updateWidget store_params()
 
-  if not search_params.waypoints.isEmpty()
+  if atLeastTwoWaypoints search_params.waypoints
     searchRoute search_params, (polygon) ->
       search_params.polygon = polygon.join(';')
       $('#search_polygon').val(search_params.polygon)
@@ -387,6 +393,9 @@ jQuery ->
   else
     window.gmap = new google.maps.Map $('#map_canvas')[0],
       mapTypeId: google.maps.MapTypeId.HYBRID
+
+  gmap.setCenter(new google.maps.LatLng(52, 20))
+  gmap.setZoom(6)
 
   if renderOnly?
     do searchRelics
