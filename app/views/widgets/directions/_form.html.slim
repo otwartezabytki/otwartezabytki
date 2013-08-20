@@ -1,13 +1,22 @@
-.sidebar
+h2.widget-editor__header Konfiguracja
+
+.widget-editor__box
   = semantic_form_for widget_search, :url => widgets_directions_path, :method => :get do |f|
     = f.hidden_field :bounding_box, value: widget_params.try(:[], 'bounding_box')
     = f.hidden_field :path, value: widget_params.try(:[], 'path')
     = f.hidden_field :polygon, value: widget_params.try(:[], 'polygon')
-    section.search
-      h2= t('views.widgets.show.direction.route_type')
+
+    .widget-editor__segment
+      h2.widget-editor__subheader
+        = t('views.widgets.show.direction.route_type', :editable => false).gsub(':', '')
+        span
+          | : <b>rowerowa</b>
       .search-input
         = f.input :route_type, collection: route_type_collection, label: false, include_blank: false, selected: widget_params.try(:[], 'route_type')
-      h2= t('views.widgets.show.direction.relics_on_path')
+
+    .widget-editor__segment
+      h2.widget-editor__subheader
+        = t('views.widgets.show.direction.relics_on_path', :editable => false).gsub(':', '')
       #waypoints
         .search-input
           - widget_params.try(:[], 'waypoints').try :each_with_index do |waypoint, index|
@@ -17,30 +26,32 @@
                 - if index > 1
                   span.remove.suffix &times;
         = link_to t('views.widgets.show.direction.add_place'), '#', class: 'add-place'
-      h2= t('views.widgets.show.direction.relics_within_radius')
-      .search-input
-        .string.clearfix.optional.stringish
-          = f.text_field :radius, value: widget_params.try(:[], 'radius') || 5
-          span.suffix= t('views.widgets.show.direction.km_within_range')
-      section.categories
-        h2= t('views.widgets.show.direction.relics_from_categories')
-        .search-input
-          - Category.roots.sort_by(&:name).each do |category|
-            - if category.name_key == 'sakralny'
-              .category
-                = f.label :categories, value: category.name_key do
-                  = f.check_box :categories, { multiple: true, class: 'sacral-options', checked: categories.include?(category.name_key) }, category.name_key, nil
-                  span.name= category.name
-              .sacral-categories style="display:none"
-                - category.children.sort_by(&:name).each do |child|
-                  .category
-                    = f.label :categories, value: child.name_key do
-                      = f.check_box :categories, { multiple: true, checked: categories.include?(category.name_key) }, child.name_key, nil
-                      span.name= child.name
-            - else
-              .category
-                = f.label :categories, value: category.name_key do
-                  = f.check_box :categories, { multiple: true, checked: categories.include?(category.name_key) }, category.name_key, nil
-                  span.name= category.name
 
-= render 'widgets/show/direction'
+    .widget-editor__segment
+      h2.widget-editor__subheader
+        = t('views.widgets.show.direction.relics_within_radius', :editable => false).gsub(':', '')
+
+      = f.text_field :radius, value: widget_params.try(:[], 'radius') || 5
+      span.suffix= t('views.widgets.show.direction.km_within_range')
+
+    .widget-editor__segment
+      h2.widget-editor__subheader
+        = t('views.widgets.show.direction.relics_from_categories', :editable => false).gsub(':', '')
+
+      - Category.roots.sort_by(&:name).each do |category|
+        - if category.name_key == 'sakralny'
+          .category
+            = f.label :categories, value: category.name_key do
+              = f.check_box :categories, { multiple: true, class: 'sacral-options', checked: categories.include?(category.name_key) }, category.name_key, nil
+              span.name= category.name
+          .sacral-categories style="display:none"
+            - category.children.sort_by(&:name).each do |child|
+              .category
+                = f.label :categories, value: child.name_key do
+                  = f.check_box :categories, { multiple: true, checked: categories.include?(category.name_key) }, child.name_key, nil
+                  span.name= child.name.gsub('/', ', ')
+        - else
+          .category
+            = f.label :categories, value: category.name_key do
+              = f.check_box :categories, { multiple: true, checked: categories.include?(category.name_key) }, category.name_key, nil
+              span.name= category.name.gsub('/', ', ')

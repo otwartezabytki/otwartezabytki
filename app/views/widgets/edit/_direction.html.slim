@@ -1,10 +1,13 @@
-%h1
+h1
   = t("widget.#{widget.class.partial_name}.title")
-  %a.back{:href => widgets_path}= t('views.widgets.edit.back')
-.content
-  %h2= t('views.widgets.edit.direction.header')
-  %span.block= t('views.widgets.edit.direction.settings_info')
-  = render 'form'
+  a.back href=widgets_path
+    = t('views.widgets.edit.back')
+
+.widget-editor
+  .grid
+    .grid__cell.unit-1-4= render 'widgets/directions/form'
+    .grid__cell.unit-3-4= render 'widgets/show/direction'
+
   .widget-settings
     = semantic_form_for widget, :url => self.send("widgets_#{widget.class.partial_name}_path", widget), :remote => true do |f|
       = f.input :width, :label => t('views.widgets.edit.direction.width'), :required => false
@@ -12,7 +15,8 @@
       = f.input :params, :as => :hidden, label: false
       = f.button t('views.widgets.edit.direction.save'), name: 'manual_save'
       = link_to t('views.widgets.edit.direction.print'), print_widgets_direction_path
-  %h2= t('views.widgets.edit.generated')
-  %div
-    %span.block= t('views.widgets.edit.code_help')
-    %textarea#snippet{:cols => "20", :rows => "3"}= widget.snippet
+  h2= t('views.widgets.edit.generated')
+  div
+    span.block= t('views.widgets.edit.code_help')
+    textarea#snippet cols="20" rows="3"
+      = widget.snippet
