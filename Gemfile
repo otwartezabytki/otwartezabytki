@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+source 'http://rails-assets.org'
 
 gem 'rails', '~> 3.2.3', git: 'git://github.com/sheerun/rails.git', branch: 'v3.2.11/multipart-fix'
 gem 'pg'
@@ -15,10 +16,14 @@ group :assets do
   gem 'twitter-bootstrap-rails'
   gem 'bootstrap-sass', '~> 2.0.4.0'
   gem 'jsts-rails', '~> 0.2.0'
+
+  # Use `rails-assets-griddle` if it should fail one day
+  gem 'rails-assets-griddle-patched'
 end
 
 gem 'jquery-rails', '2.0.3'
 gem 'haml-rails'
+gem 'slim'
 gem 'coffee-filter'
 gem 'sugar-rails'
 
