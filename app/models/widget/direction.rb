@@ -36,4 +36,13 @@ class Widget::Direction < Widget
     p
   end
 
+  def has_valid_waypoints?
+    waypoints = widget_params.try(:[], 'waypoints')
+    if waypoints
+      waypoints.delete_if(&:empty?).count > 1
+    else
+      false
+    end
+  end
+
 end
