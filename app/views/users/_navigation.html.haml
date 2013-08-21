@@ -2,8 +2,8 @@
   .nav-tabs-outer
     %ul.nav-tabs
       %li.nav-tab
-        = link_to "Obserwowane", user, class: "nav-tab-link type-followed #{'active' if current_page?(user)}"
+        = link_to t('.watched'), user, class: "nav-tab-link type-followed #{'active' if current_page?(user)}"
+      -#%li.nav-tab
+        = link_to t('.checked_by_me'), [user, :edited_relics], class: "nav-tab-link type-edited #{'active' if current_page?(user_edited_relics_path(user))}"
       %li.nav-tab
-        = link_to "Sprawdzone przeze mnie", [user, :checked_relics], class: "nav-tab-link type-checked #{'active' if current_page?(user_checked_relics_path(user))}"
-      %li.nav-tab
-        = link_to "Ustawienia", edit_user_path(user), class: "nav-tab-link type-checked #{'active' if current_page?(edit_user_path(user))}"
+        = link_to t('.settings'), edit_user_path(user), class: "nav-tab-link type-checked #{'active' if current_page?(edit_user_path(user))}"

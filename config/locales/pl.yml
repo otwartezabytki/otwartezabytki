@@ -1604,5 +1604,9 @@ pl:
       updated_relics_list: "Zmiany wprowadzone w profilach zabytków dodanych i adoptowanych przez Ciebie:"
       no_updated_relics: "Nikt nie wprowadził żadnych zmian w zabytkach które obserwujesz"
       no_notifications: "Nie masz już więcej powiadomień."
+    navigation:
+      watched: "Obserwowane"
+      checked_by_me: "Sprawdzone przeze mnie"
+      settings: "Ustawienia"
   routes:
     pages: "strony"
