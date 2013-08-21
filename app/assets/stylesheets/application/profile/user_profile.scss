@@ -555,3 +555,20 @@ $unread-badge-size:    10px;
     margin-top: -1px;
   }
 }
+
+.type-routes .feed-message {
+  span {
+    color: $dimmed-text-color;
+  }
+
+  &.feed-links {
+    float: right;
+
+    a {
+      position: relative;
+      top: -1px;
+      color: $dimmed-text-color;
+      font-size: 0.8em;
+    }
+  }
+}

@@ -11,7 +11,10 @@
       = f.input :width, :label => t('views.widgets.edit.direction.width'), :required => false
       = f.input :height, :label => t('views.widgets.edit.direction.height'), :required => false
       = f.input :params, :as => :hidden, label: false
-      = link_to t('views.widgets.edit.direction.save_and_print'), print_widgets_direction_path, :class => 'button'
+      - if current_user.present?
+        = link_to t('views.widgets.edit.direction.save_and_print'), print_widgets_direction_path, :class => 'button'
+      - else
+        = link_to t('views.widgets.edit.direction.print_'), print_widgets_direction_path, :class => 'button'
       = f.button t('views.widgets.edit.direction.save'), name: 'manual_save'
   %h2= t('views.widgets.edit.generated')
   %div
