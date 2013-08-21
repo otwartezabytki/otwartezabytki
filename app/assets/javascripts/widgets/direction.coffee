@@ -412,6 +412,7 @@ jQuery ->
 
   $(document).on 'params:changed', ->
     ROUTE = POLYGON = null
+    do searchRelics
 
   $('body').on 'change', '#search_radius, #waypoints .waypoint, #search_route_type', ->
     $(document).trigger 'params:changed'
