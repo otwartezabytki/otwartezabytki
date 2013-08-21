@@ -422,13 +422,22 @@ jQuery ->
   $('body').on 'change', '#search_radius, #waypoints .waypoint, #search_route_type', ->
     $(document).trigger 'params:changed'
 
+  toggleRemoveButtons = ->
+    if $('#waypoints .waypoint').length < 3
+      $('#waypoints .remove').hide()
+    else
+      $('#waypoints .remove').each ->
+        $(this).css display: ''
+
   $('#waypoints a.add-place').on 'click', (e) ->
     e.preventDefault()
     $input = appendWaypointInput()
+    do toggleRemoveButtons
     $input.trigger 'focus'
 
   $('body').on 'click', '#waypoints .remove', ->
     $(this).parents('.string').remove()
+    do toggleRemoveButtons
     $(document).trigger 'params:changed'
 
   $('#waypoints .waypoint').each ->

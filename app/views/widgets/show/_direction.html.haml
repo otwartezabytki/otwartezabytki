@@ -18,8 +18,10 @@
               .string.clearfix.optional.stringish{ id: "search_waypoints_#{index}_input" }
                 .input
                   = text_field_tag 'search[waypoints[]]', waypoint, id: "search_waypoints_#{index}", class: 'waypoint'
-                  - if index > 1
+                  - if index > 1 || widget_params['waypoints'].count > 2
                     %span.remove.suffix &times;
+                  - else
+                    %span.remove.suffix{ style: 'display: none;' } &times;
           = link_to t('views.widgets.show.direction.add_place'), '#', class: 'add-place'
         %h2= t('views.widgets.show.direction.relics_within_radius', editable: false).gsub(':', '')
         .search-input
