@@ -1497,7 +1497,8 @@ pl:
           settings_info: "Jeśli chcesz na przykład wyświetlić na swojej stronie mapkę z cmentarzami żydowskimi z województwa dolnośląskiego, wybierz województwo dolnośląskie z lokalizacji oraz kategorie „cmentarz” i „żydowski”. Następnie skopiuj kod do wstawienia na stronę."
           width: "Szerokość widgeta"
           save: "Zapisz trasę"
-          print: "Drukuj trasę"
+          print: "Wydrukuj trasę"
+          save_and_print: "Zapisz i wydrukuj trasę"
         preview: "Podgląd wygenerowanego widżetu"
       index:
         about: "Widżety:"
