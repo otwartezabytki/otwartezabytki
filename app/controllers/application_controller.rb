@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
     I18n.locale = (
       locale ||
       cookies[:locale] ||
-      current_user.try(:default_locale) ||
+      current_user.try(:language) ||
       # disable for now
       # http_accept_language.compatible_language_from(enabled_locales) ||
       I18n.default_locale

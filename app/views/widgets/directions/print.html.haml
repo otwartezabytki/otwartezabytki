@@ -14,7 +14,7 @@
 
   - if categories.present?
     %section.categories
-      %h2 Zabytki z kategorii
+      %h2= t('views.widgets.preview.direction.relics_from_categories')
       %ul
         - Category.roots.sort_by(&:name).each do |category|
           - if categories.include?(category.name_key)

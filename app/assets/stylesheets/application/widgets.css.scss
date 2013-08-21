@@ -91,25 +91,31 @@ section.widgets{
   }
 }
 
-.use-widget, .edit_widget .sidebar input[type="submit"], .edit_widget .sidebar button{
-  margin: 25px 0 20px;
+.use-widget,
+.edit_widget input[type="submit"],
+.edit_widget button,
+.edit_widget .button {
   @include gradient(#4b6d7e, #436576);
+  margin: 25px 10px 20px 0;
   color: #fff;
   border: 0;
   font-size: 12px;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
   text-transform: uppercase;
-  -webkit-border-radius: 2px;
+  line-height: 15px;
   border-radius: 2px;
   padding: 7px 20px;
   cursor: pointer;
   float: left;
-  font-weight: 600;
+  font: inherit;
+  font-weight: 600 !important;
+
   &:hover {
     @include gradient(#437994, #2b607b);
     text-decoration: none;
     color: #fff;
   }
+
   &:active {
     @include gradient(#2b607b, #437893);
   }

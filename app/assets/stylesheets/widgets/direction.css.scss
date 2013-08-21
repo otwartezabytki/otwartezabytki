@@ -327,3 +327,14 @@ p{
 input + .suffix {
   padding-left: 2px;
 }
+
+.category {
+  label {
+    padding: 0 10px 0 29px;
+  }
+
+  input {
+    position: absolute;
+    margin-left: -18px;
+  }
+}

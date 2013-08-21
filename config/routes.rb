@@ -20,6 +20,7 @@ Otwartezabytki::Application.routes.draw do
 
   resources :users, :only => [:show, :edit, :update] do
     get :checked_relics
+    get :my_routes
     delete :remove_avatar
   end
 
