@@ -1,8 +1,8 @@
 %p.feed-description= t('.description') + ":"
 
 %section.feed.type-user-my-route
-  %h1.feed-title.hidden= t '.checked_relics'
   - my_routes.each do |route|
+    - next unless route.has_valid_waypoints?
     %dl.feed-item
       %dt.feed-message
         %b= t('.relics_on_route') + ":"

@@ -6,11 +6,14 @@
 
 .sidebar
   %section.waypoints
-    %h2= t('views.widgets.preview.direction.relics_on_route')
-    %ul
-      - widget_params.try(:[], 'waypoints').try :each do |waypoint|
-        %li= waypoint
-    %strong= "#{t('views.widgets.preview.direction.within_radius')} #{widget_params.try(:[], 'radius')} km"
+    - if widget.has_valid_waypoints?
+      %h2= t('views.widgets.preview.direction.relics_on_route')
+      %ul
+        - widget_params.try(:[], 'waypoints').try :each do |waypoint|
+          %li= waypoint
+      %strong= "#{t('views.widgets.preview.direction.within_radius', editable: false)} #{widget_params.try(:[], 'radius')} km"
+    - else
+      %h2= t('views.widgets.preview.direction.no_route')
 
   - if categories.present?
     %section.categories

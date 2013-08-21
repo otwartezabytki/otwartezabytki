@@ -280,6 +280,11 @@ performSearch = (search_params, callback) ->
     error: ->
       alert('Nastąpił błąd podczas wyszukiwania zabytków.')
 
+hasValidWaypoints = (waypoints) ->
+  waypoints.filter (waypoint) ->
+    not waypoint.isBlank()
+  .length > 1
+
 debouncedSearchRelics = jQuery.debounce ->
   if $('#search_params').length > 0
     search_params            = $.parseJSON $('#search_params').html()
@@ -302,7 +307,7 @@ debouncedSearchRelics = jQuery.debounce ->
     event: "on_params_changed", params: store_params()
   ), "*")
 
-  if not search_params.waypoints.isEmpty()
+  if hasValidWaypoints search_params.waypoints
     searchRoute search_params, (polygon) ->
       search_params.polygon = polygon.join(';')
       $('#search_polygon').val(search_params.polygon)
@@ -392,6 +397,10 @@ jQuery ->
     window.gmap = new google.maps.Map $('#map_canvas')[0],
       mapTypeId: google.maps.MapTypeId.HYBRID
 
+  gmap.onNextMovement ->
+  gmap.setCenter(new google.maps.LatLng(52, 20))
+  gmap.setZoom(6)
+
   if renderOnly?
     do searchRelics
     return
@@ -403,6 +412,7 @@ jQuery ->
 
   $(document).on 'params:changed', ->
     ROUTE = POLYGON = null
+    do searchRelics
 
   $('body').on 'change', '#search_radius, #waypoints .waypoint, #search_route_type', ->
     $(document).trigger 'params:changed'
@@ -451,7 +461,4 @@ jQuery ->
     if ROUTE?
       updateWaypointInputs ROUTE, -> searchRelics()
 
-  gmap.onNextMovement ->
-  gmap.setCenter(new google.maps.LatLng(52, 20))
-  gmap.setZoom(6)
   searchRelics()

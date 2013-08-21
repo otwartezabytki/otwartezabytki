@@ -1595,6 +1595,7 @@ pl:
           relics_from_categories: "Zabytki z kategorii"
           within_radius: "w promieniu"
           relics_list: "Lista zabytków"
+          no_route: "Nie wybrano trasy"
   widget:
     add_alert:
       description: |-
