@@ -9,25 +9,27 @@
       = f.hidden_field :path, value: widget_params.try(:[], 'path')
       = f.hidden_field :polygon, value: widget_params.try(:[], 'polygon')
       %section.search
-        %h2= t('views.widgets.show.direction.route_type').gsub(':', '')
+        %h2= t('views.widgets.show.direction.route_type', editable: false).gsub(':', '')
         = f.input :route_type, as: :route_type_choice, collection: route_type_collection, selected: widget_params.try(:[], 'route_type')
-        %h2= t('views.widgets.show.direction.relics_on_path').gsub(':', '')
+        %h2= t('views.widgets.show.direction.relics_on_path', editable: false).gsub(':', '')
         #waypoints
           .search-input
             - widget_params.try(:[], 'waypoints').try :each_with_index do |waypoint, index|
               .string.clearfix.optional.stringish{ id: "search_waypoints_#{index}_input" }
                 .input
                   = text_field_tag 'search[waypoints[]]', waypoint, id: "search_waypoints_#{index}", class: 'waypoint'
-                  - if index > 1
+                  - if index > 1 || widget_params['waypoints'].count > 2
                     %span.remove.suffix &times;
+                  - else
+                    %span.remove.suffix{ style: 'display: none;' } &times;
           = link_to t('views.widgets.show.direction.add_place'), '#', class: 'add-place'
-        %h2= t('views.widgets.show.direction.relics_within_radius').gsub(':', '')
+        %h2= t('views.widgets.show.direction.relics_within_radius', editable: false).gsub(':', '')
         .search-input
           .string.clearfix.optional.stringish
-            = f.text_field :radius, value: widget_params.try(:[], 'radius') || 5
+            = f.text_field :radius, value: widget_params.try(:[], 'radius') || 2
             %span.suffix= t('views.widgets.show.direction.km_within_range')
         %section.categories
-          %h2= t('views.widgets.show.direction.relics_from_categories').gsub(':', '')
+          %h2= t('views.widgets.show.direction.relics_from_categories', editable: false).gsub(':', '')
           .search-input
             - Category.roots.sort_by(&:name).each do |category|
               - if category.name_key == 'sakralny'

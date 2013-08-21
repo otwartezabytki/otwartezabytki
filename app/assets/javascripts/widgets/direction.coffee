@@ -397,6 +397,11 @@ jQuery ->
     window.gmap = new google.maps.Map $('#map_canvas')[0],
       mapTypeId: google.maps.MapTypeId.HYBRID
 
+  gmap.onMovement ->
+    if bounds = gmap.getLatLngBounds()
+      $('#search_bounding_box').val(bounds.toString())
+      searchRelics()
+
   gmap.onNextMovement ->
   gmap.setCenter(new google.maps.LatLng(52, 20))
   gmap.setZoom(6)
@@ -417,13 +422,22 @@ jQuery ->
   $('body').on 'change', '#search_radius, #waypoints .waypoint, #search_route_type', ->
     $(document).trigger 'params:changed'
 
+  toggleRemoveButtons = ->
+    if $('#waypoints .waypoint').length < 3
+      $('#waypoints .remove').hide()
+    else
+      $('#waypoints .remove').each ->
+        $(this).css display: ''
+
   $('#waypoints a.add-place').on 'click', (e) ->
     e.preventDefault()
     $input = appendWaypointInput()
+    do toggleRemoveButtons
     $input.trigger 'focus'
 
   $('body').on 'click', '#waypoints .remove', ->
     $(this).parents('.string').remove()
+    do toggleRemoveButtons
     $(document).trigger 'params:changed'
 
   $('#waypoints .waypoint').each ->
@@ -449,11 +463,6 @@ jQuery ->
   gmap.menu.addItem 'End route here', (map, latlng) ->
     $('#waypoints .waypoint:last').val("#{latlng.lat().toFixed(6)},#{latlng.lng().toFixed(6)}")
     searchRelics()
-
-  gmap.onMovement ->
-    if bounds = gmap.getLatLngBounds()
-      $('#search_bounding_box').val(bounds.toString())
-      searchRelics()
 
   google.maps.event.addListener gmap.directionsRenderer, 'directions_changed', ->
     ROUTE = gmap.directionsRenderer.getDirections().routes[0]
