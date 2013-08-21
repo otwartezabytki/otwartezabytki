@@ -1,16 +1,19 @@
 %p.feed-description= t('.description') + ":"
 
-%section.feed.type-user-my-route
-  - my_routes.each do |route|
-    - next unless route.has_valid_waypoints?
-    %dl.feed-item
-      %dt.feed-message
-        %b= t('.relics_on_route') + ":"
-        %ul
-          - route.widget_params.try(:[], 'waypoints').try :each do |waypoint|
-            %li= waypoint
-      %dd.feed-links
-        = link_to t('.print'), print_widgets_direction_path(route)
-        = link_to t('.edit'), edit_widgets_direction_path(route)
-        = link_to t('.preview'), preview_widgets_direction_path(route)
+%section.feed.type-routes
+  - unless my_routes.any?
+    .feed-placeholder
+      = t('.no_routes')
+      = link_to t('.no_routes_make_one'), widgets_directions_path, :method => :post
+  - else
+    - my_routes.each do |route|
+      %dl.feed-item
+        %dt.feed-message
+          %b= t('.relics_on_route') + ":"
+          %ul
+            - route.widget_params.try(:[], 'waypoints').try :each do |waypoint|
+              %li= waypoint
+        %dd.feed-links
+          = link_to t('.print'), print_widgets_direction_path(route)
+          = link_to t('.edit'), edit_widgets_direction_path(route)
 

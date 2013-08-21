@@ -1650,6 +1650,8 @@ pl:
       no_updated_relics: "Nikt nie wprowadził żadnych zmian w zabytkach które obserwujesz"
       no_notifications: "Nie masz już więcej powiadomień."
     list_routes:
+      no_routes: "Nie posiadasz jeszcze żadnych tras."
+      no_routes_make_one: "Stwórz swoją pierwszą!"
       description: "Lista tras dodanych przez Ciebie"
       relics_on_route: "Zabytki na trasie"
       print: "Wydrukuj"
