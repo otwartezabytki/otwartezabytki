@@ -24,7 +24,7 @@
         %h2= t('views.widgets.show.direction.relics_within_radius').gsub(':', '')
         .search-input
           .string.clearfix.optional.stringish
-            = f.text_field :radius, value: widget_params.try(:[], 'radius') || 5
+            = f.text_field :radius, value: widget_params.try(:[], 'radius') || 2
             %span.suffix= t('views.widgets.show.direction.km_within_range')
         %section.categories
           %h2= t('views.widgets.show.direction.relics_from_categories').gsub(':', '')
