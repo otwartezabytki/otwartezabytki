@@ -41,12 +41,12 @@
                     .category
                       = f.label :categories, value: child.name_key do
                         = f.check_box :categories, { multiple: true, checked: categories.include?(category.name_key) }, child.name_key, nil
-                        %span.name= child.name
+                        %span.name= child.name.gsub('/', ', ')
               - else
                 .category
                   = f.label :categories, value: category.name_key do
                     = f.check_box :categories, { multiple: true, checked: categories.include?(category.name_key) }, category.name_key, nil
-                    %span.name= category.name
+                    %span.name= category.name.gsub('/', ', ')
         .search-submit
           = f.submit :class => "submit", :value => "Pokaż trasę"
 .map
