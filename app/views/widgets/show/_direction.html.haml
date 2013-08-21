@@ -9,9 +9,9 @@
       = f.hidden_field :path, value: widget_params.try(:[], 'path')
       = f.hidden_field :polygon, value: widget_params.try(:[], 'polygon')
       %section.search
-        %h2= t('views.widgets.show.direction.route_type')
+        %h2= t('views.widgets.show.direction.route_type').gsub(':', '')
         = f.input :route_type, as: :route_type_choice, collection: route_type_collection, selected: widget_params.try(:[], 'route_type')
-        %h2= t('views.widgets.show.direction.relics_on_path')
+        %h2= t('views.widgets.show.direction.relics_on_path').gsub(':', '')
         #waypoints
           .search-input
             - widget_params.try(:[], 'waypoints').try :each_with_index do |waypoint, index|
@@ -21,13 +21,13 @@
                   - if index > 1
                     %span.remove.suffix &times;
           = link_to t('views.widgets.show.direction.add_place'), '#', class: 'add-place'
-        %h2= t('views.widgets.show.direction.relics_within_radius')
+        %h2= t('views.widgets.show.direction.relics_within_radius').gsub(':', '')
         .search-input
           .string.clearfix.optional.stringish
             = f.text_field :radius, value: widget_params.try(:[], 'radius') || 5
             %span.suffix= t('views.widgets.show.direction.km_within_range')
         %section.categories
-          %h2= t('views.widgets.show.direction.relics_from_categories')
+          %h2= t('views.widgets.show.direction.relics_from_categories').gsub(':', '')
           .search-input
             - Category.roots.sort_by(&:name).each do |category|
               - if category.name_key == 'sakralny'
