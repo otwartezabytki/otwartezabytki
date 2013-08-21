@@ -322,10 +322,34 @@ p{
     padding-left: 10px;
     margin-bottom: 5px;
   }
+
+  & + .add-place {
+    display: block;
+    padding-left: 10px;
+  }
+}
+
+#waypoints input {
+  width: 110px;
 }
 
 input + .suffix {
   padding-left: 2px;
+
+  &.remove {
+    position: absolute;
+    margin: 1px 0 0 3px;
+    padding: 2px;
+    color: #bbb;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+
+    &:hover,
+    &:active {
+      color: #63697a;
+    }
+  }
 }
 
 .category {
