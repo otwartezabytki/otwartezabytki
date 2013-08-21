@@ -6,4 +6,6 @@
       -#%li.nav-tab
         = link_to t('.checked_by_me'), [user, :edited_relics], class: "nav-tab-link type-edited #{'active' if current_page?(user_edited_relics_path(user))}"
       %li.nav-tab
+        = link_to t('.my_routes'), [user, :my_routes], class: "nav-tab-link type-my-routes #{'active' if current_page?(user_my_routes_path(user))}"
+      %li.nav-tab
         = link_to t('.settings'), edit_user_path(user), class: "nav-tab-link type-checked #{'active' if current_page?(edit_user_path(user))}"

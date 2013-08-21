@@ -1,0 +1,16 @@
+%p.feed-description= t('.description') + ":"
+
+%section.feed.type-user-my-route
+  %h1.feed-title.hidden= t '.checked_relics'
+  - my_routes.each do |route|
+    %dl.feed-item
+      %dt.feed-message
+        %b= t('.relics_on_route') + ":"
+        %ul
+          - route.widget_params.try(:[], 'waypoints').try :each do |waypoint|
+            %li= waypoint
+      %dd.feed-links
+        = link_to t('.print'), print_widgets_direction_path(route)
+        = link_to t('.edit'), edit_widgets_direction_path(route)
+        = link_to t('.preview'), preview_widgets_direction_path(route)
+

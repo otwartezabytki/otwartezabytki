@@ -13,6 +13,10 @@ class UsersController < ApplicationController
     Relic.where(:id => Suggestion.select(:id).where(:user_id => user.id).map(&:relic_id))
   end
 
+  expose(:my_routes) do
+    Widget::Direction.where(user_id: user.id)
+  end
+
   def update
     successfully_updated = if needs_password?(user, params)
       user.update_with_password(user_params(true))
