@@ -8,12 +8,15 @@
   - else
     - my_routes.each do |route|
       %dl.feed-item
-        %dt.feed-message
-          %b= t('.relics_on_route') + ":"
-          %ul
-            - route.widget_params.try(:[], 'waypoints').try :each do |waypoint|
-              %li= waypoint
-        %dd.feed-links
+        - waypoints = route.widget_params.try(:[], 'waypoints').map { |w| w.split(',').first.strip }
+        %dd.feed-image.thumb
+          = image_tag 'widgets/map_search.png', :width => 56, :height => 56, :alt => ''
+        %dd.feed-message.feed-links
           = link_to t('.print'), print_widgets_direction_path(route)
-          = link_to t('.edit'), edit_widgets_direction_path(route)
+        %dd.feed-message
+          = t('.relics_within_radius', radius: route.widget_params.try(:[], 'radius')) + ":"
+        %dt.feed-message
+          = link_to "#{waypoints.first} – #{waypoints.last}", edit_widgets_direction_path(route)
+          - if waypoints.length > 2
+            %span (#{t('.route_points', count: waypoints.length)})
 

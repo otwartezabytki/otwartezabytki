@@ -1654,6 +1654,8 @@ pl:
       no_routes_make_one: "Stwórz swoją pierwszą!"
       description: "Lista tras dodanych przez Ciebie"
       relics_on_route: "Zabytki na trasie"
+      relics_within_radius: "Zabytki w promieniu %{radius} km od trasy"
+      route_points: "punktów na trasie: %{count}"
       print: "Wydrukuj"
       edit: "Edytuj"
       preview: "Podgląd"
