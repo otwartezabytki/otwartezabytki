@@ -23,8 +23,11 @@ gem 'coffee-filter'
 gem 'sugar-rails'
 
 gem 'geocoder'
+
+gem 'simple_form'
 gem 'formtastic'
 gem 'formtastic-bootstrap'
+gem 'localized_language_select'
 
 gem 'decent_exposure'
 gem 'kaminari'
@@ -101,6 +104,7 @@ gem 'redcarpet'
 
 gem 'clipper'
 gem 'sprockets-commonjs'
+gem 'rails-timeago', '~> 2.0'
 
 group :development, :test do
   gem 'interactive_editor'
@@ -115,7 +119,6 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'guard-ctags-bundler'
   gem 'guard-zeus'
-  # gem 'debugger'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'commands'

@@ -1,3 +1,5 @@
+
+
 jQuery.initializer 'section.edit', ->
   $section = this
   $nav = this.parent().children('nav')

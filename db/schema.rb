@@ -345,6 +345,13 @@ ActiveRecord::Schema.define(:version => 20130517145441) do
 
   add_index "tolk_translations", ["phrase_id", "locale_id"], :name => "index_tolk_translations_on_phrase_id_and_locale_id", :unique => true
 
+  create_table "user_relics", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "relic_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",     :null => false
     t.string   "encrypted_password",     :default => "",     :null => false
@@ -366,6 +373,8 @@ ActiveRecord::Schema.define(:version => 20130517145441) do
     t.string   "default_locale"
     t.string   "provider"
     t.string   "uid"
+    t.string   "avatar"
+    t.string   "language",               :default => "pl"
   end
 
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true

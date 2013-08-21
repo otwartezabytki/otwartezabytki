@@ -1,17 +1,15 @@
-/*
- *= require_self
- *= require ./profile/categories
- *= require ./profile/description
- *= require ./profile/documents
- *= require ./profile/entries
- *= require ./profile/events
- *= require ./profile/general
- *= require ./profile/links
- *= require ./profile/location
- *= require ./profile/photos
- *= require ./profile/alerts
- *= require ./profile/attachments
-*/
+@import "profile/categories";
+@import "profile/description";
+@import "profile/documents";
+@import "profile/entries";
+@import "profile/events";
+@import "profile/general";
+@import "profile/links";
+@import "profile/location";
+@import "profile/photos";
+@import "profile/alerts";
+@import "profile/attachments";
+@import "profile/user_profile";
 
 @import "compass/layout";
 @import "compass/css3";
@@ -667,7 +665,26 @@ section.show.general{
       padding: 9px 12px 6px 29px;
       display: block;
       font-weight: 600;
-      background: asset-data-url("edit-relic-ico-original.png") 10px 10px no-repeat;
+      background: asset-data-url("edit-relic-ico-alert.png") 10px 6px no-repeat;
+    }
+  }
+
+  .adopt {
+    @extend .original;
+
+    span {
+      background: asset-data-url("edit-relic-ico-adopt.png") 10px 9px no-repeat;
+    }
+
+    & + .help {
+      position: relative;
+      top: 11px;
+      left: 1px;
+
+      p {
+        line-height: 1.2;
+        padding: 1em 19px 0;
+      }
     }
   }
 

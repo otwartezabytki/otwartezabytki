@@ -18,12 +18,19 @@ Otwartezabytki::Application.routes.draw do
 
   resources :tags, :only => :index
 
+  resources :users, :only => [:show, :edit, :update] do
+    get :checked_relics
+    delete :remove_avatar
+  end
+
   resources :relics, :except => [:new, :create, :destroy] do
     member do
       match 'section/:section/edit', :to => 'relics#edit', :as => 'edit_section'
       match 'section/:section', :to => 'relics#show', :as => 'section', :via => :get
       match 'section/:section', :to => 'relics#update', :as => 'section', :via => :put
       get :download_zip
+      post :adopt
+      post :unadopt
       get :print
     end
 

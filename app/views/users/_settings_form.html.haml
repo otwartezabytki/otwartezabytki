@@ -1,0 +1,40 @@
+= simple_form_for user, class: 'form-settings user-profile-content' do |form|
+  %fieldset.fields
+    %legend.fields-title
+      %span.fields-title-inner= t '.language_settings'
+
+    .field-row.type-select
+      = form.input :language, as: :select, collection: enabled_locales_collection, include_blank: false
+
+  %fieldset#change-avatar.fields
+    %legend.fields-title
+      %span.fields-title-inner= t '.avatar'
+
+    .field-row.type-file
+      %label.field-label
+        %img.field-label-image{ alt: user.username, src: user.avatar.midi.url, width: 64, height: 64 }
+      .field-layout
+        = form.input :avatar, as: :file, class: 'field-file', label: false
+        - if user.avatar?
+          %p.field-explanation
+            = t('views.pages.profile.you_can_if_you_want',
+              { remove_avatar: link_to(t('views.pages.profile.remove_avatar'), user_remove_avatar_path(user), method: :delete)})
+
+  %fieldset.fields
+    %legend.fields-title
+      %span.fields-title-inner= t('.user_data')
+
+    = form.input :username
+    = form.input :email
+
+  %fieldset.fields
+    %legend.fields-title
+      %span.fields-title-inner= t '.password_change'
+
+    = form.input :current_password, :as => :password
+    = form.input :password, :as => :password
+    = form.input :password_confirmation, :as => :password
+
+  .field-row-submit
+    = form.submit t('.save'), :class => 'button'
+

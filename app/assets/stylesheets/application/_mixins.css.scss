@@ -59,6 +59,18 @@ $dark-grey: #313132;
   background: -ms-linear-gradient($from, $to);
 }
 
+@mixin image-sprite($url, $x, $y) {
+  background-image: image-url($url);
+  background-repeat: no-repeat;
+  background-position: (-1 * $x) (-1 * $y);
+}
+
+@mixin elipsis() {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 @mixin word-break() {
   word-break: break-word;
   word-wrap: break-word;

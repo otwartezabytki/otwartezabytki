@@ -21,6 +21,8 @@
 #= require variables
 #= require_tree ./libraries
 #= require profile
+#= require rails-timeago
+#= require locales/jquery.timeago.pl.js
 #= require_tree ./application
 
 # FIX data-dismiss

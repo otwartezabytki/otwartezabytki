@@ -1,0 +1,41 @@
+%p.feed-description= t '.adopted_relics_list'
+
+- if user.user_relics.any?
+  %section.feed.type-activity
+    %h1.feed-title.hidden= t '.activity'
+    - user.user_relics.each do |user_relic|
+      - relic = user_relic.relic
+      %dl.feed-item
+        %dd.feed-image.thumb
+          = image_tag relic.main_photo.file.url(:icon), :width => 56, :height => 56
+        %dd.feed-date
+          = timeago_tag user_relic.created_at
+        %dt.feed-message
+          = link_to(relic.identification, relic_path(relic))
+        %dt.feed-unadopt
+          = link_to content_tag(:span, t('views.relics.show.general.unadopt')), unadopt_relic_path(relic.id, :user => true), :class => "adopt", :method => :post, :remote => true
+
+  %p.feed-description= t '.updated_relics_list'
+
+  - if Version.relics.adopted_by(user).any?
+    %section.feed.type-activity
+      %h1.feed-title.hidden= t '.activity'
+      - Version.relics.adopted_by(user).each do |version|
+        %dl.feed-item{ class: "type-#{version.event}" }
+          %dd.feed-image.thumb
+            = image_tag version.relic.main_photo.file.url(:icon), :width => 56, :height => 56
+          %dd.feed-date
+            = timeago_tag version.created_at
+          %dt.feed-message
+            - params = { relic: link_to(version.relic.identification, relic_path(version.relic)) }
+            != t("views.pages.home.relic_has_been_updated", params)
+            .changes= RecentRevision.new(:version => version).changes
+      .feed-item.type-last
+        .feed-message
+          = t '.no_notifications'
+  - else
+    %section.feed
+      .feed-placeholder= t '.no_updated_relics'
+- else
+  %section.feed
+    .feed-placeholder= t '.no_adopted_relics'
