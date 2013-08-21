@@ -12,8 +12,8 @@
               = image_tag widget_template.thumb, :width => "200", :height => "180"
           %span.widget_content
             %span.title{:class => widget_template.partial_name}
-              = t("widget.#{widget_template.partial_name}.title")
+              = t("widget.#{widget_template.partial_name}.title", default: t("widget.#{widget_template.partial_name}.title_"))
             %span.paragraph
-              = t("widget.#{widget_template.partial_name}.description")
+              = t("widget.#{widget_template.partial_name}.description", default: t("widget.#{widget_template.partial_name}.description_"))
             %span.actions
               %span.use-widget= t('views.widgets.index.use')
