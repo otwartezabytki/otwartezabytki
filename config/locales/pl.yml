@@ -1533,7 +1533,7 @@ pl:
           hide_sidebar: "Ukryj pasek boczny"
           params_hint: "Ustawisz je poruszając mapką podglądową po prawej stronie."
           params_label: "Parametry do <a href='/api_doc/'>API</a>"
-          settings_info: "Jeśli chcesz na przykład wyświetlić na swojej stronie mapkę z cmentarzami żydowskimi z województwa dolnośląskiego, wybierz województwo dolnośląskie z lokalizacji oraz kategorie „cmentarz” i „żydowski”. Następnie skopiuj kod do wstawienia na stronę."
+          settings_info: "Jeśli chcesz na przykład wyświetlić na swojej stronie mapkę z trasą przebiegającą przez 2 lub więcej miast z zaznaczonymi zabytkami w jej promieniu, znajdź te miasta i wybierz interesujące cię kategorie oraz promień, a następnie skopiuj kod do wstawienia na stronę."
           width: "Szerokość widgeta"
           save: "Zapisz trasę"
           print: "Wydrukuj trasę"
@@ -1603,9 +1603,9 @@ pl:
       thumb: widget-image-example.jpg
       title: "Widżet \"Dodaj zabytek\""
     direction:
-      description: "Lorem ipsum dolor sit amet."
+      description: "Dzięki tej aplikacji możesz zobaczyć zabytki z naszej bazy na konkretnej trasie. Listę wyświetlanych zabytków możesz zawęzić w oparciu kategorie i położenie w promeniu trasy (np. tylko cmentarze w promieniu 2 km od trasy z Warszawy do Wrocławia)."
       thumb: widget-image-example.jpg
-      title: "Widżet Direction"
+      title: "Widżet Trasa"
     map_search:
       description: "Dzięki tej aplikacji możesz zobaczyć zabytki z naszej bazy na mapie. Możesz zawęzić listę wyświetlanych zabytków w oparciu o położenie i kategorie (np. tylko cmentarze w Zamościu lub wszystkie pałace i kamienice w województwie śląskim)."
       thumb: widget-image-example.jpg

@@ -66,13 +66,20 @@ section.widgets{
           padding-left: 35px;
           display: block;
           color: #313132;
-          &.add_relics{
+
+          &.add_relic {
             background: asset-data-url("icon-widgetlist-add.png") no-repeat;
           }
-          &.map_searches{
+
+          &.map_search {
             background: asset-data-url("icon-widgetlist-map.png") no-repeat;
           }
-          &.add_alerts{
+
+          &.direction {
+            background: asset-data-url("icon-widgetlist-direction.png") no-repeat;
+          }
+
+          &.add_alert {
             background: asset-data-url("icon-widgetlist-alerts.png") no-repeat;
           }
         }
@@ -127,9 +134,13 @@ section.widgets{
     line-height: 75px;
     height: 75px;
     font-size: 28px;
-    @include background(asset-data-url("icon-widgets-mapsearch.png") 27px 21px no-repeat, linear-gradient(#36596b, #2f5163));
+    @include background(image-url("icon-widgets-mapsearch.png") 27px 21px no-repeat, linear-gradient(#36596b, #2f5163));
     padding-left: 70px;
   }
+}
+
+.direction.edit_widget h1 {
+  @include background(image-url("icon-widgets-direction.png") 27px 23px no-repeat, linear-gradient(#36596b, #2f5163));
 }
 
 .back{

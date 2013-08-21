@@ -11,7 +11,7 @@
             %span.image
               = image_tag widget_template.thumb, :width => "200", :height => "180"
           %span.widget_content
-            %span.title{:class => widget_template.partial_name.pluralize}
+            %span.title{:class => widget_template.partial_name}
               = t("widget.#{widget_template.partial_name}.title")
             %span.paragraph
               = t("widget.#{widget_template.partial_name}.description")
