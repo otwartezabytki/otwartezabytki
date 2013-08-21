@@ -291,7 +291,7 @@ debouncedSearchRelics = jQuery.debounce ->
   else
     search_params            = $('#new_search').serializeObject().search
     search_params.waypoints  = getWaypoints()
-    search_params.route_type = $('#search_route_type :selected').val()
+    search_params.route_type = $('input[name="search[route_type]"]:checked').val()
     search_params.radius     = $('#search_radius').val()
 
   search_params.api_key = "oz"
@@ -419,7 +419,7 @@ jQuery ->
     ROUTE = POLYGON = null
     do searchRelics
 
-  $('body').on 'change', '#search_radius, #waypoints .waypoint, #search_route_type', ->
+  $('body').on 'change', '#search_radius, #waypoints .waypoint, input[name="search[route_type]"]', ->
     $(document).trigger 'params:changed'
 
   toggleRemoveButtons = ->
