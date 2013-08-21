@@ -338,3 +338,56 @@ input + .suffix {
     margin-left: -18px;
   }
 }
+
+.route-type {
+  @include clearfix;
+
+  .search & {
+    padding-left: 10px;
+  }
+}
+
+.route-type__choice {
+  float: left;
+  width: 38px;
+
+  & + & {
+    padding-left: 3px;
+  }
+
+  span {
+    display: block;
+    width: auto;
+    height: 26px;
+    background: #f0f0f0;
+    border: 1px solid #737373;
+    border-radius: 3px;
+    @include box-shadow(inset 0 1px 1px #fff);
+    overflow: hidden;
+    cursor: pointer;
+
+    &:before {
+      content: "";
+      display: inherit;
+      width: inherit;
+      height: inherit;
+      background: center center no-repeat;
+    }
+  }
+
+  input {
+    @extend %hidden;
+
+    &:checked + span {
+      background: #ddd;
+      @include box-shadow(inset 0 1px 5px rgba(#000, 0.3));
+      cursor: default;
+    }
+  }
+}
+
+@each $type in walking bicycling driving {
+  .route-type__choice--#{$type} span:before {
+    background-image: image-url("route-type-icon--#{$type}.png");
+  }
+}

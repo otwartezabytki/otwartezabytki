@@ -10,8 +10,7 @@
       = f.hidden_field :polygon, value: widget_params.try(:[], 'polygon')
       %section.search
         %h2= t('views.widgets.show.direction.route_type')
-        .search-input
-          = f.input :route_type, collection: route_type_collection, label: false, include_blank: false, selected: widget_params.try(:[], 'route_type')
+        = f.input :route_type, as: :route_type_choice, collection: route_type_collection, selected: widget_params.try(:[], 'route_type')
         %h2= t('views.widgets.show.direction.relics_on_path')
         #waypoints
           .search-input
