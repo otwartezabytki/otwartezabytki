@@ -16,6 +16,8 @@ window.marker_clusterer = null
 ROUTE = null
 POLYGON = null
 
+print_has_prompted = false
+
 show_content_window = (marker, content) ->
   if marker.info_window
     marker.info_window.close(gmap, marker)
@@ -263,7 +265,9 @@ printRenderRelics = (relics) ->
   relics.each (relic) ->
     printAppendRelic relic
 
-  window.print()
+  unless print_has_prompted
+    window.print()
+    print_has_prompted = true
 
 performSearch = (search_params, callback) ->
   search_params._method = 'get'
