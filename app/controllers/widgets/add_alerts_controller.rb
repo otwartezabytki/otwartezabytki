@@ -4,7 +4,15 @@ class Widgets::AddAlertsController < WidgetsController
 
   expose(:widget_add_alerts) { Widget::AddAlert.scoped }
   expose(:widget_add_alert)
-  expose(:widget) { widget_add_alerts.find(params[:id]) }
+
+  expose(:widget) do
+    if params[:id].present?
+      widget_add_alerts.find(params[:id]) 
+    else
+      Widget::AddAlert.new(:relic_id => params[:relic_id])
+    end
+  end
+
   helper_method :searched_relics
 
   def create

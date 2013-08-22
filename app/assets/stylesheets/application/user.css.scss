@@ -1,9 +1,6 @@
-@import "compass/layout";
-@import "compass/css3";
 @import "mixins";
 
 .sessions, .registrations, .passwords, .fancybox-inner {
-
   .login_title {
     width: 880px;
     height: 50px;
@@ -103,28 +100,22 @@
     input[type="submit"] {
       float: left;
       margin: 16px 3px 0 0;
-      background: #4B6D7E;
-      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4B6D7E), color-stop(100%, #436576));
-      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#4b6d7e', endColorstr = '#436576', GradientType = 0);
-      color: white;
+      @include gradient(#4B6D7E, #436576);
+      color: #fff;
       border: 0;
       font-size: 12px;
       font-weight: 400;
       text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
       text-transform: uppercase;
-      -webkit-border-radius: 2px;
       border-radius: 2px;
       padding: 5px 16px 4px 19px;
       cursor: pointer;
     }
     input[type="submit"]:hover {
-      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #437893), color-stop(100%, #2c617c));
-      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#4b6d7e', endColorstr = '#436576', GradientType = 0);
+      @include gradient(#437893, #2c617c);
     }
     input[type="submit"]:active {
-      background: #FFF;
-      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #2b607b), color-stop(100%, #437893));
-      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#4b6d7e', endColorstr = '#436576', GradientType = 0);
+      @include gradient(#2b607b, #437893);
     }
     .fb-login, .fb-register{
       padding-bottom: 15px;
@@ -186,28 +177,22 @@
     input[type="submit"] {
       float: left;
       margin: 16px 3px 0 0;
-      background: #4B6D7E;
-      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4B6D7E), color-stop(100%, #436576));
-      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#4b6d7e', endColorstr = '#436576', GradientType = 0);
-      color: white;
+      @include gradient(#4B6D7E, #436576);
+      color: #fff;
       border: 0;
       font-size: 12px;
       font-weight: 400;
       text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
       text-transform: uppercase;
-      -webkit-border-radius: 2px;
       border-radius: 2px;
       padding: 5px 16px 4px 19px;
       cursor: pointer;
     }
     input[type="submit"]:hover {
-      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #437893), color-stop(100%, #2c617c));
-      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#4b6d7e', endColorstr = '#436576', GradientType = 0);
+      @include gradient(#437893, #2c617c);
     }
     input[type="submit"]:active {
-      background: #FFF;
-      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #2b607b), color-stop(100%, #437893));
-      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#4b6d7e', endColorstr = '#436576', GradientType = 0);
+      @include gradient(#2b607b, #437893);
     }
 
     .alert {

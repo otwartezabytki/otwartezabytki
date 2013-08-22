@@ -1,9 +1,8 @@
 @import "../mixins";
-@import "button_states";
 
 .step {
   clear: both;
-  @include border-radius(3px);
+  border-radius: 3px;
   border: 3px solid #fff;
   background: #eee;
   padding: 25px 25px 40px 25px;
@@ -22,19 +21,12 @@
     color: #1e5d7d;
     font-size: 14px;
     border: 1px solid #346d8a;
-    @include border-radius(2px);
+    border-radius: 2px;
     box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 0 5px 1px rgba(30, 93, 125, 0.3);
     height: 32px;
     padding: 0 70px 0 10px;
     margin: 10px 0 15px;
-    background: #fafafa; /* Old browsers */
-    background: -moz-linear-gradient(top, #fafafa 0%, #ffffff 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fafafa), color-stop(100%, #ffffff)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top, #fafafa 0%, #ffffff 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top, #fafafa 0%, #ffffff 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top, #fafafa 0%, #ffffff 100%); /* IE10+ */
-    background: linear-gradient(top, #fafafa 0%, #ffffff 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#fafafa', endColorstr = '#ffffff', GradientType = 0); /* IE6-9 */
+    @include gradient(#fafafa, #fff);
     width: 370px;
     &:focus {
       outline: 0;
@@ -154,7 +146,7 @@
   }
 
   .action-edit a, .action-confirm a {
-    @include button_general;
+    @extend %wizard-button-general;
   }
 
   .action-back {
@@ -168,36 +160,36 @@
 }
 
 .step-edited, .step-edit {
-  .action-confirm a { @include button_blurred; }
-  .action-edit a { @include button_pushed; }
+  .action-confirm a { @extend %wizard-button-blurred; }
+  .action-edit a { @extend %wizard-button-pushed; }
 }
 
 .step-current.step-view {
   .action-skip a { cursor: pointer; }
   .action-edit, .action-confirm {
     a { cursor: pointer; }
-    a:hover { @include button_hover; }
-    a:active { @include button_active; }
+    a:hover { @extend %wizard-button-hover; }
+    a:active { @extend %wizard-button-active; }
   }
 }
 
 .step-edited {
-  .action-edit a { @include button_pushed; }
-  .action-confirm a { @include button_blurred; }
+  .action-edit a { @extend %wizard-button-pushed; }
+  .action-confirm a { @extend %wizard-button-blurred; }
 }
 
 .step-confirmed {
-  .action-edit a { @include button_blurred; }
-  .action-confirm a { @include button_pushed; }
+  .action-edit a { @extend %wizard-button-blurred; }
+  .action-confirm a { @extend %wizard-button-pushed; }
 }
 
 .step-skipped {
   .action-skip a {
-    @include button_general;
-    @include button_pushed;
+    @extend %wizard-button-general;
+    @extend %wizard-button-pushed;
   }
   .action-edit a, .action-confirm a {
-    @include button_blurred;
+    @extend %wizard-button-blurred;
   }
 }
 

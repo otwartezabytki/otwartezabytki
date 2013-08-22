@@ -1,4 +1,4 @@
-@import '../mixins';
+@import "../mixins";
 
 /* Variables */
 
@@ -113,7 +113,7 @@ $unread-badge-size:    10px;
 }
 
 .nav-tab-link {
-  @include text-shadow(0 1px 0 rgba(255, 255, 255, 0.7));
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
   display: block;
   padding: 10px 0 7px;
   font-size: 14px;
@@ -129,7 +129,7 @@ $unread-badge-size:    10px;
   }
 
   &.active {
-    @include box-shadow(0 1px 5px rgba($dark-grey, 0.1));
+    box-shadow: 0 1px 5px rgba($dark-grey, 0.1);
     padding-right: 20px;
     padding-left: 20px;
     border-top-left-radius: 3px;
@@ -185,12 +185,12 @@ $unread-badge-size:    10px;
 
 .user-avatar-caption,
 .user-avatar-change-link {
-  @include text-shadow(0 1px  5px $dark-grey, 0 1px 10px $dark-grey, 0 1px 15px $dark-grey);
+  text-shadow: 0 1px  5px $dark-grey, 0 1px 10px $dark-grey, 0 1px 15px $dark-grey;
   color: #fff;
 }
 
 .user-avatar-change {
-  @include transition(opacity 0.2s ease-out);
+  transition: opacity 0.2s ease-out;
   position: absolute;
   width: $avatar-size;
   font-size: 11px;
@@ -226,13 +226,13 @@ $unread-badge-size:    10px;
   }
 
   .thumb {
-    @include box-shadow(0 1px 3px rgba(0, 0, 0, 0.3));
-    @include border-radius(3px);
     float: left;
     width: 56px;
     padding: 3px;
     border: 1px solid #d4d4d4;
+    border-radius: 3px;
     background: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 
     &:empty {
       display: none;
@@ -241,16 +241,16 @@ $unread-badge-size:    10px;
 
   .status {
     @include gradient(#a3a4a6, #c1c3c5);
-    @include text-shadow(rgba(0, 0, 0, 0.3) 0 1px 1px);
-    @include box-shadow(inset rgba(0, 0, 0, 0.4) 0 1px 3px);
-    @include border-radius(3px);
     display: inline-block;
     padding: 0 8px;
+    border-radius: 3px;
     line-height: 19px;
     font-size: 11px;
     font-weight: normal;
     text-transform: uppercase;
+    text-shadow: rgba(0, 0, 0, 0.3) 0 1px 1px;
     color: #fff;
+    box-shadow: inset rgba(0, 0, 0, 0.4) 0 1px 3px;
 
     &.checked {
       @include gradient(#e0a876, #fec695);
@@ -284,7 +284,7 @@ $unread-badge-size:    10px;
   }
 
   .badge {
-    @include border-radius(2px);
+    border-radius: 2px;
     display: inline-block;
     padding: 4px 6px;
     margin-left: 5px;
@@ -318,7 +318,7 @@ $unread-badge-size:    10px;
   }
 
   .type-user-checked & {
-    @include box-sizing(border-box);
+    box-sizing: border-box;
     padding-left: 90px;
     width: $checked-item-width;
     float: left;
@@ -450,17 +450,17 @@ $unread-badge-size:    10px;
   .controls > .string,
   .controls > .password,
   .controls > .select {
-    @include box-sizing(border-box);
-    @include border-radius(2px);
-    @include box-shadow(inset 0 1px 3px $content-icon-color);
+    box-sizing: border-box;
     background-color: #fff;
     display: inline-block;
     width: 300px;
     margin: 0;
     padding: 5px 7px;
     border: 1px solid $content-border-color;
+    border-radius: 2px;
     font: inherit;
     color: lighten($dark-grey, 20%);
+    box-shadow: inset 0 1px 3px $content-icon-color;
 
     &:not(select):focus {
       color: inherit;
@@ -494,15 +494,15 @@ $unread-badge-size:    10px;
   .button,
   .field-submit {
     @include gradient(#4b6d7e, #436576);
-    @include border-radius(3px);
-    @include text-shadow(0 -1px 1px $dark-grey);
     @include tiny-uppercase-text();
     display: inline-block;
     padding: 10px 20px;
     border: 0;
+    border-radius: 3px;
     margin: 0;
     font-family: inherit;
     color: #fff;
+    text-shadow: 0 -1px 1px $dark-grey;
     cursor: pointer;
 
     &:hover,
@@ -530,9 +530,9 @@ $unread-badge-size:    10px;
       line-height: 19px;
       padding: 0 8px;
       font-weight: normal;
-      @include border-radius(3px);
-      @include text-shadow(rgba(0,0,0,0.3) 0 1px 1px);
-      @include box-shadow(inset rgba(0,0,0,0.4) 0 1px 3px);
+      border-radius: 3px;
+      text-shadow: rgba(0,0,0,0.3) 0 1px 1px;
+      box-shadow: inset rgba(0,0,0,0.4) 0 1px 3px;
       margin-right: 4px;
 
       &.unchecked {

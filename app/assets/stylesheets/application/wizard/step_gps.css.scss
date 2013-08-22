@@ -1,4 +1,4 @@
-@import 'button_states';
+@import "../mixins";
 
 .step-gps {
   #map_canvas {
@@ -14,7 +14,6 @@
     font-size: 14px;
     border: 0px;
     border-radius: 2px;
-    -webkit-border-radius: 2px;
     box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 0 5px 1px rgba(30, 93, 125, 0.3);
     display: block;
     width: 100%;
@@ -161,10 +160,10 @@
     .action-submit {
       padding: 34px 0;
       a {
-        @include button_general;
+        @extend %wizard-button-general;
         margin: 18px;
-        &:hover { @include button_hover; }
-        &:active { @include button_active; }
+        &:hover { @extend %wizard-button-hover; }
+        &:active { @extend %wizard-button-active; }
       }
     }
 
