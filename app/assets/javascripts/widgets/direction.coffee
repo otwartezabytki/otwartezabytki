@@ -248,18 +248,6 @@ searchRoute = (search_params, callback) ->
     else
       alert('Nie znaleziono trasy! Spróbuj ponownie.')
 
-printLoadRelics = (search_params, callback) ->
-  search_params._method = 'get'
-  $.ajax
-    url: '/api/v1/relics'
-    type: 'post'
-    data: search_params
-    dataType: 'json'
-    success: (result) ->
-      callback(result)
-    error: ->
-      alert('Nastąpił błąd podczas wyszukiwania zabytków.')
-
 printAppendRelic = (relic) ->
   markup = """
     <div class="relic">
@@ -328,8 +316,7 @@ debouncedSearchRelics = jQuery.debounce ->
         renderResults(result.clusters, result.relics)
 
         if printAction?
-          printLoadRelics search_params, (result) ->
-            printRenderRelics result.relics
+          printRenderRelics result.relics
   else
     performSearch search_params, (result) ->
       renderResults(result.clusters, [])
