@@ -52,6 +52,12 @@ clearMarkers = ->
 
 renderResults = (search_groups, search_results) ->
   do clearMarkers
+
+  if gmap.getZoom() > 11
+    search_groups = []
+  else
+    search_results = []
+
   $.each search_groups, ->
     latlng = new google.maps.LatLng(@latitude, @longitude)
 
@@ -104,21 +110,22 @@ renderResults = (search_groups, search_results) ->
       content = render_relic_info(this)
       show_content_window(marker, content)
 
-  image_urls = gmap_circles
-  image_sizes = [55, 59, 75, 85, 105]
-  font_sizes = [14, 14, 17, 17, 17]
+  if gmap.getZoom() > 11
+    image_urls = gmap_circles
+    image_sizes = [55, 59, 75, 85, 105]
+    font_sizes = [14, 14, 17, 17, 17]
 
-  styles = image_urls.map (image, index) ->
-    url: image,
-    textSize: font_sizes[index]
-    width: image_sizes[index]
-    height: image_sizes[index]
-    textColor: '#507283'
+    styles = image_urls.map (image, index) ->
+      url: image,
+      textSize: font_sizes[index]
+      width: image_sizes[index]
+      height: image_sizes[index]
+      textColor: '#507283'
 
-  marker_clusterer.clearMarkers() if marker_clusterer?
-  marker_clusterer = new MarkerClusterer gmap, markers,
-    maxZoom: 10
-    styles: styles
+    marker_clusterer.clearMarkers() if marker_clusterer?
+    marker_clusterer = new MarkerClusterer gmap, markers,
+      maxZoom: 14
+      styles: styles
 
   $('a.point-relic').click ->
     google.maps.event.trigger(markers[$(this).data('id')], 'click')
@@ -217,8 +224,8 @@ getWaypoints = ->
     .get()
 
 searchRoute = (search_params, callback) ->
-  do clearMarkers
   return callback(routeToPolygon(ROUTE, search_params.radius)) if ROUTE?
+  do clearMarkers
 
   origin      = search_params.waypoints.first()
   destination = search_params.waypoints.last()
@@ -240,18 +247,6 @@ searchRoute = (search_params, callback) ->
       gmap.onNextMovement -> callback(polygon)
     else
       alert('Nie znaleziono trasy! Spróbuj ponownie.')
-
-printLoadRelics = (search_params, callback) ->
-  search_params._method = 'get'
-  $.ajax
-    url: '/api/v1/relics'
-    type: 'post'
-    data: search_params
-    dataType: 'json'
-    success: (result) ->
-      callback(result)
-    error: ->
-      alert('Nastąpił błąd podczas wyszukiwania zabytków.')
 
 printAppendRelic = (relic) ->
   markup = """
@@ -321,8 +316,7 @@ debouncedSearchRelics = jQuery.debounce ->
         renderResults(result.clusters, result.relics)
 
         if printAction?
-          printLoadRelics search_params, (result) ->
-            printRenderRelics result.relics
+          printRenderRelics result.relics
   else
     performSearch search_params, (result) ->
       renderResults(result.clusters, [])

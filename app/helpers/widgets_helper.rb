@@ -17,14 +17,16 @@ module WidgetsHelper
   # Converts Relic object to Hash
   # containing data relevant to map search widget
   def relic_to_widget_data(relic)
-    {
-      :id => relic.id,
-      :latitude => relic.latitude,
-      :longitude => relic.longitude,
-      :identification => relic.identification,
-      :street => relic.street,
-      :main_photo => relic.main_photo
-    }
+    Rails.cache.fetch("relic_to_widget_data_#{relic.id}", expires_in: 1.hour) do
+      {
+        :id => relic.id,
+        :latitude => relic.latitude,
+        :longitude => relic.longitude,
+        :identification => relic.identification,
+        :street => relic.street,
+        :main_photo => relic.main_photo
+      }
+    end
   end
 
   def route_type_collection
