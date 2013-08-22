@@ -1576,6 +1576,7 @@ pl:
           add_place: "Dodaj kolejne miejsce"
           route_type: "Typ trasy"
           relics_from_categories: "Zabytki z kategorii"
+          edit_route: "Edytuj trasę"
         map_search:
           advanced_search: "wyszukiwanie<br />zaawansowane »"
           categories: Kategorie

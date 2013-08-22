@@ -1,73 +1,55 @@
 - content_for :before_javascripts do
   = javascript_include_tag "http://maps.googleapis.com/maps/api/js?key=#{Settings.oz.gm_key}&sensor=false&libraries=places"
-#direction_widget{ :"data-replace" => "#direction_widget" }
-  .sidebar
-    = link_to '/', :target => :_top do
-      %h1.logo
-    = semantic_form_for widget_search, :url => widgets_direction_path(widget.uid), :method => :get do |f|
-      = f.hidden_field :bounding_box, value: widget_params.try(:[], 'bounding_box')
-      = f.hidden_field :path, value: widget_params.try(:[], 'path')
-      = f.hidden_field :polygon, value: widget_params.try(:[], 'polygon')
-      %section.search
-        %h2= t('views.widgets.show.direction.route_type', editable: false).gsub(':', '')
-        = f.input :route_type, as: :route_type_choice, collection: route_type_collection, selected: widget_params.try(:[], 'route_type')
-        -# Hackish:
-        :javascript
-          var selected_value = '#{widget_params.try(:[], 'route_type')}';
-          var choices = document.querySelectorAll('.route-type__choice input');
-          (function() {
-            if ( !selected_value.length ) {
-              return choices[0];
-            }
-            var index = choices.length;
-            while ( index-- ) {
-              if ( choices[index].value === selected_value ) {
-                return choices[index];
-              }
-            }
-          })().setAttribute('checked', '');
 
-        %h2= t('views.widgets.show.direction.relics_on_path', editable: false).gsub(':', '')
-        #waypoints
-          .search-input
-            - widget_params.try(:[], 'waypoints').try :each_with_index do |waypoint, index|
-              .string.clearfix.optional.stringish{ id: "search_waypoints_#{index}_input" }
-                .input
-                  = text_field_tag 'search[waypoints[]]', waypoint, id: "search_waypoints_#{index}", class: 'waypoint'
-                  - if index > 1 || widget_params['waypoints'].count > 2
-                    %span.remove.suffix &times;
-                  - else
-                    %span.remove.suffix{ style: 'display: none;' } &times;
-          = link_to t('views.widgets.show.direction.add_place'), '#', class: 'add-place'
-        %h2= t('views.widgets.show.direction.relics_within_radius', editable: false).gsub(':', '')
-        .search-input
-          .string.clearfix.optional.stringish
-            = f.text_field :radius, value: widget_params.try(:[], 'radius') || 2
-            %span.suffix= t('views.widgets.show.direction.km_within_range')
-        %section.categories
-          %h2= t('views.widgets.show.direction.relics_from_categories', editable: false).gsub(':', '')
-          .search-input
-            - Category.roots.sort_by(&:name).each do |category|
-              - if category.name_key == 'sakralny'
-                .category
-                  = f.label :categories, value: category.name_key do
-                    = f.check_box :categories, { multiple: true, class: 'sacral-options', checked: categories.include?(category.name_key) }, category.name_key, nil
-                    %span.name= category.name
-                .sacral-categories{ style: 'display: none;' }
-                  - category.children.sort_by(&:name).each do |child|
-                    .category
-                      = f.label :categories, value: child.name_key do
-                        = f.check_box :categories, { multiple: true, checked: categories.include?(category.name_key) }, child.name_key, nil
-                        %span.name= child.name.gsub('/', ', ')
-              - else
-                .category
-                  = f.label :categories, value: category.name_key do
-                    = f.check_box :categories, { multiple: true, checked: categories.include?(category.name_key) }, category.name_key, nil
-                    %span.name= category.name.gsub('/', ', ')
 .map
   #map_canvas{ :style => "width: 100%; height: 100%;" }
+
+.sidebar.preview
+  = link_to '/', :target => :_top do
+    %h1.logo
+  .preview__section
+    - route_type = widget_params.try(:[], 'route_type')
+    %h2.preview__header{ :class => "preview__header--#{route_type}", :title => t("views.widgets.route_types.#{route_type}", editable: false) }
+      = t('views.widgets.show.direction.route_type', editable: false).gsub(':', '')
+    %p.hidden
+      = t("views.widgets.route_types.#{route_type}")
+
+  .preview__section
+    - unless widget.has_valid_waypoints?
+      %h2.preview__header= t('views.widgets.preview.direction.no_route')
+    - else
+      %h2.preview__header= t('views.widgets.preview.direction.relics_on_route')
+      %ul.preview__content
+        - widget_params.try(:[], 'waypoints').try :each do |waypoint|
+          %li= waypoint
+
+  - if categories.present?
+    .preview__section
+      %h2.preview__header= t('views.widgets.preview.direction.relics_from_categories')
+      %ul.preview__content
+        - Category.roots.sort_by(&:name).each do |category|
+          - if category.name_key == 'sakralny'
+            - category.children.sort_by(&:name).each do |child|
+              - if categories.include?(child.name_key)
+                %li= category.name.gsub('/', ', ')
+          - elsif categories.include?(category.name_key)
+            %li= category.name.gsub('/', ', ')
+
+  .preview__section
+    %h2.preview__header= t('views.widgets.show.direction.relics_within_radius', editable: false).gsub(':', '')
+    %p.preview__content
+      = widget_params.try(:[], 'radius')
+      = t('views.widgets.show.direction.km_within_range')
+
+  - if current_user and widget.user_id == current_user.id
+    .preview__section
+      %p.preview__content
+        = link_to t('views.widgets.show.direction.edit_route'), edit_widgets_direction_path(widget), :target => :_top
+
 :javascript
-  config = #{widget.config.to_json};
+  var renderOnly = true;
+%script{ type: 'application/json', id: 'search_params' }
+  != widget_params.to_json
 = content_for :stylesheets do
   = stylesheet_link_tag "widgets/direction"
 = content_for :javascripts do

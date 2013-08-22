@@ -12,11 +12,12 @@
         %dd.feed-image.thumb
           = image_tag 'widgets/map_search.png', :width => 56, :height => 56, :alt => ''
         %dd.feed-message.feed-links
+          = link_to t('views.widgets.show.direction.edit_route'), edit_widgets_direction_path(route)
           = link_to t('.print'), print_widgets_direction_path(route)
         %dd.feed-message
           = t('.relics_within_radius', radius: route.widget_params.try(:[], 'radius')) + ":"
         %dt.feed-message
-          = link_to "#{waypoints.first} – #{waypoints.last}", edit_widgets_direction_path(route)
+          = link_to "#{waypoints.first} – #{waypoints.last}", preview_widgets_direction_path(route)
           - if waypoints.length > 2
             %span (#{t('.route_points', count: waypoints.length)})
 

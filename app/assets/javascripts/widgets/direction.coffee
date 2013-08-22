@@ -50,7 +50,7 @@ clearMarkers = ->
   markers = []
   overlays = []
 
-renderResults = (search_groups, search_results) ->
+renderResults = (search_groups, search_results, callback) ->
   do clearMarkers
 
   if gmap.getZoom() > 11
@@ -130,6 +130,8 @@ renderResults = (search_groups, search_results) ->
   $('a.point-relic').click ->
     google.maps.event.trigger(markers[$(this).data('id')], 'click')
     false
+
+  do callback if callback?
 
 # Serialize form to JSON
 $.fn.serializeObject = ->
@@ -298,9 +300,10 @@ debouncedSearchRelics = jQuery.debounce ->
     delete params.polygon
     params
 
-  window.parent.postMessage(JSON.stringify(
-    event: "on_params_changed", params: store_params()
-  ), "*")
+  unless renderOnly?
+    window.parent.postMessage(JSON.stringify(
+      event: "on_params_changed", params: store_params()
+    ), "*")
 
   if hasValidWaypoints search_params.waypoints
     searchRoute search_params, (polygon) ->
@@ -313,10 +316,8 @@ debouncedSearchRelics = jQuery.debounce ->
         search_params.bounding_box = bounds.toString()
 
       performSearch search_params, (result) ->
-        renderResults(result.clusters, result.relics)
-
-        if printAction?
-          printRenderRelics result.relics
+        renderResults result.clusters, result.relics, ->
+          printRenderRelics result.relics if printAction?
   else
     performSearch search_params, (result) ->
       renderResults(result.clusters, [])

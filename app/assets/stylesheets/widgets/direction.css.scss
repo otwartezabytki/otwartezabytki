@@ -400,7 +400,7 @@ input + .suffix {
   }
 
   input {
-    @extend %hidden;
+    @extend .hidden;
 
     &:checked + span {
       background: #ddd;
@@ -411,7 +411,45 @@ input + .suffix {
 }
 
 @each $type in walking bicycling driving {
-  .route-type__choice--#{$type} span:before {
-    background-image: image-url("route-type-icon--#{$type}.png");
+  .route-type__choice--#{$type} span:before,
+  .preview__header--#{$type} {
+    background-image: asset-data-url("route-type-icon--#{$type}.png");
+  }
+}
+
+.preview {
+  color: #343434;
+  font-size: 12px;
+}
+
+.preview__section {
+  padding: 10px;
+
+  & + & {
+    border-top: 1px solid #e4e4e4;
+  }
+}
+
+.preview__header {
+  margin: 0;
+  font-size: inherit;
+  background-repeat: no-repeat;
+  background-position: right bottom;
+}
+
+.preview__content {
+  margin: 0;
+  padding: 0;
+
+  .preview__header + & {
+    padding-top: 6px;
+  }
+
+  li {
+    margin: 0 0 0 20px;
+
+    & + li {
+      padding-top: 2px;
+    }
   }
 }

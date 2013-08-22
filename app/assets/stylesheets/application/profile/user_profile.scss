@@ -570,5 +570,9 @@ $unread-badge-size:    10px;
       color: $dimmed-text-color;
       font-size: 0.8em;
     }
+
+    a + a {
+      margin-left: 3px;
+    }
   }
 }
