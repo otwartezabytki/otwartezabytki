@@ -248,7 +248,7 @@ searchRoute = (search_params, callback) ->
       gmap.directionsRenderer.setDirections(result)
       gmap.onNextMovement -> callback(polygon)
     else
-      alert('Nie znaleziono trasy! Spróbuj ponownie.')
+      <%= Rails.env.development? ? 'console.log' : 'window.alert' %>('Nie znaleziono trasy! Spróbuj ponownie.')
 
 printAppendRelic = (relic) ->
   markup = """
@@ -275,7 +275,7 @@ performSearch = (search_params, callback) ->
     success: (result) ->
       callback(result)
     error: ->
-      alert('Nastąpił błąd podczas wyszukiwania zabytków.')
+      <%= Rails.env.development? ? 'console.log' : 'window.alert' %>('Nastąpił błąd podczas wyszukiwania zabytków.')
 
 hasValidWaypoints = (waypoints) ->
   waypoints.filter (waypoint) ->
