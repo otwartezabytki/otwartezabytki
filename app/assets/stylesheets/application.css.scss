@@ -10,8 +10,8 @@
  *= require vendor/cssmap-poland
 */
 
-@import "application/reset";
 @import "application/mixins";
+@import "application/reset";
 @import "application/bootstrap";
 @import "application/layout";
 @import "application/static";

@@ -1,3 +1,4 @@
+@import "mixins";
 @import "profile/*";
 
 .edit_relic {
@@ -698,7 +699,7 @@ section.show.entries {
     margin: -10px;
 
     .entry-container {
-      @include box-sizing(border-box);
+      box-sizing: border-box;
       width: 50%;
       padding: 10px;
       float: left;

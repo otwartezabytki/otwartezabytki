@@ -1,3 +1,5 @@
+@import "../mixins";
+
 span.r_ze { display: none; }
 ol.relic-stages{
   @include clearfix;
