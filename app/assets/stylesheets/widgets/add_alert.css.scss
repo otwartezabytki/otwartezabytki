@@ -5,7 +5,7 @@
 
 #oz_add_alert_widget{
   @include gradient(#4b6d7e, #436576);
-  width: 300px;
+  max-width: 300px;
   padding: 4px;
   @include border-radius(2px);
   .widget-box{
@@ -43,7 +43,7 @@
     margin-left: 12px;
   }
   button{
-    
+
     @include border-radius(2px);
     color: #fff;
     font-size: 12px;
@@ -59,13 +59,13 @@
       margin-right: 10px;
     }
     &.show{
-      @include gradient(#f22729, #de1f09); 
+      @include gradient(#f22729, #de1f09);
       @include text-shadow( 0 -1px 0 rgba(0,0,0,0.3));
       padding-right: 8px;
       @include box-shadow(rgba(255,0,0,0.3) 0 0 5px);
       margin-right: 10px;
       span{
-        @include gradient(#c91e1d, #bc1908);  
+        @include gradient(#c91e1d, #bc1908);
         display: inline-block;
         @include border-radius(2px);
         line-height: 18px;

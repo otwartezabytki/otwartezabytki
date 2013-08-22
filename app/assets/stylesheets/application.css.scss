@@ -27,6 +27,7 @@
 */
 
 @import "compass/css3";
+@import "application/mixins";
 
 i18n.on {
   background-color: red !important;
@@ -141,6 +142,22 @@ div {
     opacity: 0.5;
     background-color: black;
     @include border-radius(10px);
+  }
+}
+
+.columns-2 {
+  @include clearfix();
+
+  & > .column-1-of-2 {
+    @include box-sizing(border-box);
+    float: left;
+    width: 50%;
+    padding-left: 17px;
+
+    &:first-child {
+      padding-left: 0;
+      padding-right: 18px;
+    }
   }
 }
 

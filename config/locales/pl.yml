@@ -1424,6 +1424,12 @@ pl:
             <p> Sprawdź, czy informacje już uzupełnione są poprawne.</p>
             <p> Pamiętaj o podaniu źródeł.</p>
         flash_hide: ukryj
+        widgets:
+          header: "Widżety dla zabytku"
+          create_alert: "Stwórz widżet „Dodaj alert” dla&nbsp;tego zabytku:"
+          create_button: "Stwórz widżet"
+          loading: "Ładuję podgląd widgetu…"
+          error: "Wystąpił błąd podczas ładowania poglądu."
         general:
           add: dodaj
           close: zamknij
