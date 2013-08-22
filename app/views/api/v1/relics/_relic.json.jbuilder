@@ -2,6 +2,7 @@ json.(relic,
   :id,
   :nid_id,
   :identification,
+  :common_name,
   :description,
   :categories,
   :state,
@@ -18,6 +19,32 @@ json.(relic,
   :links_info,
   :main_photo
 )
+
+json.events relic.events do |e|
+  json.id e.id
+  json.date e.date
+  json.name e.name
+  json.photo_id e.photo_id
+end
+
+json.entries relic.entries, :id, :title, :body
+json.links relic.links, :id, :name, :url, :category, :kind
+
+json.documents relic.documents do |d|
+  json.id d.id
+  json.name d.name
+  json.description d.description
+  json.url d.file.try(:url)
+end
+
+json.alerts relic.alerts do |a|
+  json.id a.id
+  json.url a.file.try(:url)
+  json.author a.author
+  json.date_taken a.date_taken
+  json.description a.description
+  json.state a.state
+end
 
 if params[:include_descendants]
   json.descendants do |json|
