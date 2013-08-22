@@ -300,9 +300,10 @@ debouncedSearchRelics = jQuery.debounce ->
     delete params.polygon
     params
 
-  window.parent.postMessage(JSON.stringify(
-    event: "on_params_changed", params: store_params()
-  ), "*")
+  unless renderOnly?
+    window.parent.postMessage(JSON.stringify(
+      event: "on_params_changed", params: store_params()
+    ), "*")
 
   if hasValidWaypoints search_params.waypoints
     searchRoute search_params, (polygon) ->
