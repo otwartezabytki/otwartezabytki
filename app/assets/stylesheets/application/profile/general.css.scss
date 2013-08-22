@@ -1,4 +1,4 @@
-@import '../mixins';
+@import "../mixins";
 
 .edit_relic section.edit.general{
   .row{
@@ -6,7 +6,7 @@
   }
   .row.general{
     display: none;
-  }  
+  }
 }
 
 .help{
@@ -23,11 +23,10 @@
     top: -25px;
     padding: 16px 0;
     z-index: 11;
-    @include border-radius(5px);
+    border-radius: 5px;
     border: 1px solid #acacac;
-    @include box-shadow(rgba(0,0,0,0.45) 0 3px 15px, inset #fff 0 1px 1px -1px);
+    box-shadow: rgba(0,0,0,0.45) 0 3px 15px, inset #fff 0 1px 1px -1px;
     @include gradient(rgba(246,247,248,0.95),rgba(234,234,235,0.95));
-    @include ie-gradient(#f6f7f8, #eaeaeb);
 
     &:before{
       content: "";
@@ -67,17 +66,17 @@
         line-height: 19px;
         padding: 0 8px;
         font-weight: normal;
-        @include border-radius(3px);
-        @include text-shadow(rgba(0,0,0,0.3) 0 1px 1px);
-        @include box-shadow(inset rgba(0,0,0,0.4) 0 1px 3px);
+        border-radius: 3px;
+        text-shadow: rgba(0,0,0,0.3) 0 1px 1px;
+        box-shadow: inset rgba(0,0,0,0.4) 0 1px 3px;
         &.unchecked{
-          @include background(linear-gradient(#a3a4a6, #c1c3c5));
+          @include gradient(#a3a4a6, #c1c3c5);
         }
         &.checked{
-          @include background(linear-gradient(#e0a876, #fec695));
+          @include gradient(#e0a876, #fec695);
         }
         &.filled{
-          @include background(linear-gradient(#90b86e, #afd78c));
+          @include gradient(#90b86e, #afd78c);
         }
       }
     }

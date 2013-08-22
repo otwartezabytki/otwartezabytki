@@ -1,0 +1,98 @@
+/*
+ * Reusable variables
+ *--------------------------------------------------------------------------- */
+
+$blue: #044d71;
+$blue-hover: #006699;
+$dark-blue: #4c6c7c;
+$dark-grey: #313132;
+
+
+/*
+ * Mixins
+ *--------------------------------------------------------------------------- */
+
+// Legacy
+@mixin clearfix {
+  @extend %clearfix;
+}
+
+@mixin gradient($from, $to) {
+  background-color: mix($from, $to, 60%);
+  background-image: linear-gradient(to bottom, $from, $to);
+}
+
+// Legacy
+@mixin backgroundnavy {
+  @extend %background-navy;
+}
+
+// Legacy
+@mixin button-bluenavy {
+  @extend %button-navy;
+}
+
+@mixin image-sprite($url, $x, $y) {
+  background-image: image-url($url);
+  background-repeat: no-repeat;
+  background-position: (-1 * $x) (-1 * $y);
+}
+
+@mixin elipsis() {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/*
+ * Extendable placeholders
+ *--------------------------------------------------------------------------- */
+
+%clearfix {
+  &:before, &:after {
+    content: "";
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+%visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+// Legacy
+.hidden {
+  @extend %visually-hidden;
+}
+
+%word-break {
+  word-break: break-word;
+  word-wrap: break-word;
+}
+
+%background-navy {
+  @include gradient(#4b6d7e, #436576);
+}
+
+%button-navy {
+  @extend %background-navy;
+  color: #fff;
+  border: 0;
+  border-radius: 2px;
+  font-size: 12px;
+  font-weight: 600;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
+  text-decoration: none;
+  cursor: pointer;
+}

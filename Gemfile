@@ -8,7 +8,6 @@ gem 'pg'
 # in production environments by default.
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
-  gem 'compass-rails'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
   gem 'chosen-rails'
@@ -16,6 +15,7 @@ group :assets do
   gem 'twitter-bootstrap-rails'
   gem 'bootstrap-sass', '~> 2.0.4.0'
   gem 'jsts-rails', '~> 0.2.0'
+  gem 'autoprefixer-rails'
   gem 'rails-assets-handlebars'
 end
 

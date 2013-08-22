@@ -84,7 +84,7 @@ SQL
                   include Rails.application.routes.url_helpers
                 end
                 z.put_next_entry("relics/#{r.id}.json")
-                z.print view.render(template: 'api/v1/relics/_relic.json.jbuilder', locals: { relic: r })
+                z.print view.render(template: 'api/v1/relics/_relic.json.jbuilder', locals: { relic: r, params: { include_descendants: true }})
               rescue => ex
                 Raven.capture_exception(ex)
               end

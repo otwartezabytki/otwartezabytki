@@ -1,0 +1,18 @@
+- widget_embed_code = render('shared/add_alert_anonymous_snippet.txt', :id => relic.id)
+- widget_source = render('shared/empty_frame_source.txt', :content => widget_embed_code)
+
+%section#add-widget-alert.show.alerts.add-alert-widget
+  %h2= t('views.relics.show.widgets.header')
+  .placeholder
+    %p= t('views.relics.show.widgets.create_alert')
+    %a.add-alert-widget-button{:href => '#add-widget-alert', :'data-widget-source' => widget_source}
+      = t('views.relics.show.widgets.create_button')
+
+  %article.add-alert-widget-output
+    %h1.add-alert-widget-header= t('views.widgets.edit.preview')
+    .add-alert-widget-content
+      .add-alert-widget-information--loading= t('views.relics.show.widgets.loading')
+      .add-alert-widget-information--error= t('views.relics.show.widgets.error')
+    %h1.add-alert-widget-header= t('views.widgets.edit.generated')
+    %p.add-alert-widget-information= t('views.widgets.edit.code_help')
+    %textarea.add-alert-widget-code.selectable-code= widget_embed_code.strip

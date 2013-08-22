@@ -13,6 +13,7 @@ Your machine should be equipped with:
 ```bash
   brew update
   brew install elasticsearch memcached postgresql imagemagick aspell --lang=pl
+  brew pin elasticsearch postgresql
   cp config/database.yml.example config/database.yml
   # create database and database users for dev and testing
   bundle install
