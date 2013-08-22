@@ -22,6 +22,11 @@
       = stylesheet_link_tag "ie8", :media => "all"
     %link{:href => "http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,600,300&subset=latin,latin-ext", :rel => "stylesheet", :type => "text/css"}
   %body{ :class => [cookies["font-size"].to_s, controller_name, action_name, ("resource_#{params[:id]}" if params[:id])].join(' '), :data => { :logged => warden.authenticated?.to_s } }
+    %div#cookies
+      %ul.cooks
+        %li Ta strona używa ciasteczek
+        %li= link_to t('layouts.application.accept'), "#", class: "btn", id: "accept_cookies"
+        %li= link_to t('layouts.application.learn_more'), cookies_page_path
     #fb-root
     :javascript
       (function(d, s, id) {

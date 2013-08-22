@@ -109,6 +109,7 @@ Otwartezabytki::Application.routes.draw do
   match "/strony/dowiedz-sie-wiecej"  => 'pages#show', :id => 'more',       :as => 'more_page'
   match "/strony/regulamin"           => 'pages#show', :id => 'terms',      :as => 'terms_page'
   match "/strony/prywatnosc"          => 'pages#show', :id => 'privacy',    :as => 'privacy_page'
+  match "/strony/cookie-policy"       => 'pages#show', :id => 'cookies',    :as => 'cookies_page'
   match "/facebook/share_close"       => 'pages#show', :id => 'share_close'
   match "/hello"                      => 'pages#hello', :id => 'hello', :as => :hello
 

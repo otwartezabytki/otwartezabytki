@@ -15,6 +15,12 @@ jQuery ->
     toggleFontResizeButtons()
     false
 
+  if sessionStorage.getItem("accept_cookies") == null 
+    $("#cookies").css('display', 'block')
+  $("#accept_cookies").click ->
+    sessionStorage.setItem("accept_cookies", "true")
+    $("#cookies").hide('slow')
+
   $("span.minus").click ->
     size = if $.cookie("font-size") == "bigger" then "big" else null
     $.cookie("font-size", size)
