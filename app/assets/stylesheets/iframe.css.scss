@@ -1,7 +1,4 @@
-@import "compass/layout";
-@import "compass/css3";
 @import "application/mixins";
-/* stylesheet for iframe layout */
 
 .relicbuilders .main-container { width: 960px; height:795px; margin:0 auto; padding:0; background-color: #fff; }
 .alerts .main-container { width: 460px; height:600px; margin:0 auto; padding:0; background-color: #fff; }
@@ -11,7 +8,7 @@
   @include gradient(#ffffff, #f2f2f2);
   width: 450px;
   border: 4px solid #4a6c7e;
-  @include border-radius(4px);
+  border-radius: 4px;
   .widget-logo{
     background: asset-data-url("logo-widget.png") no-repeat;
     width: 157px;

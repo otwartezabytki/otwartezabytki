@@ -4,7 +4,6 @@
 #= require js-routes
 #= require vendor/jquery.cookie
 #= require twitter/bootstrap/bootstrap-tooltip
-#= require vendor/antiscroll
 #= require sugar
 #= require_tree ../libraries
 #= require gmaps/marker-clusterer
@@ -15,6 +14,8 @@ window.gmap = null
 window.marker_clusterer = null
 ROUTE = null
 POLYGON = null
+
+print_has_prompted = false
 
 show_content_window = (marker, content) ->
   if marker.info_window
@@ -248,7 +249,7 @@ searchRoute = (search_params, callback) ->
       gmap.directionsRenderer.setDirections(result)
       gmap.onNextMovement -> callback(polygon)
     else
-      alert('Nie znaleziono trasy! Spróbuj ponownie.')
+      <%= Rails.env.development? ? 'console.log' : 'window.alert' %>('Nie znaleziono trasy! Spróbuj ponownie.')
 
 printAppendRelic = (relic) ->
   markup = """
@@ -263,7 +264,9 @@ printRenderRelics = (relics) ->
   relics.each (relic) ->
     printAppendRelic relic
 
-  window.print()
+  unless print_has_prompted
+    window.print()
+    print_has_prompted = true
 
 performSearch = (search_params, callback) ->
   search_params._method = 'get'
@@ -275,7 +278,7 @@ performSearch = (search_params, callback) ->
     success: (result) ->
       callback(result)
     error: ->
-      alert('Nastąpił błąd podczas wyszukiwania zabytków.')
+      <%= Rails.env.development? ? 'console.log' : 'window.alert' %>('Nastąpił błąd podczas wyszukiwania zabytków.')
 
 hasValidWaypoints = (waypoints) ->
   waypoints.filter (waypoint) ->

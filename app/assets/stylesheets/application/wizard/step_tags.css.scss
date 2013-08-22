@@ -1,4 +1,4 @@
-@import 'button_states';
+@import "../mixins";
 
 .step-tags {
   .check_boxes ul {
@@ -71,23 +71,23 @@
   .action-submit { display: inline-block; }
 
   .action-submit a {
-    @include button_general;
+    @extend %wizard-button-general;
   }
 
   &.step-view .action-submit a {
-    @include button_blurred;
+    @extend %wizard-button-blurred;
   }
 
   &.step-edited .action-submit a {
-    @include button_pushed;
+    @extend %wizard-button-pushed;
   }
 
   &.step-skipped {
     .action-submit a {
-      @include button_blurred;
+      @extend %wizard-button-blurred;
     }
     .action-skip a {
-      @include button_pushed;
+      @extend %wizard-button-pushed;
     }
   }
 }

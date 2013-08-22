@@ -1,4 +1,4 @@
-@import "compass/layout";
+@import "application/mixins";
 
 .steps {
   input[type="text"] {
@@ -37,6 +37,6 @@
 }
 
 #more-button a {
-  @include filter-gradient(#f9f9f9, #cccccc);
+  @include gradient(#f9f9f9, #cccccc);
 }
 

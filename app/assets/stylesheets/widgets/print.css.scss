@@ -1,5 +1,5 @@
-@import 'application/mixins';
-@import 'application/reset';
+@import "../application/mixins";
+@import "../application/reset";
 
 html {
   width: 50em;
@@ -16,7 +16,7 @@ html {
 }
 
 body {
-  @include word-break();
+  @extend %word-break;
   background: #fff;
   color: #000;
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
