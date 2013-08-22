@@ -1,6 +1,7 @@
-%h1
-  = t("widget.direction.title_")
-  %a.back{:href => widgets_path}= t('views.widgets.edit.back')
-.content
-  .preview
-    = raw widget.snippet
+.direction.edit_widget
+  %h1
+    = t("widget.direction.title_")
+    %a.back{:href => widgets_path}= t('views.widgets.edit.back')
+  .content
+    .preview
+      = raw widget.snippet

@@ -4,28 +4,47 @@
 .map
   #map_canvas{ :style => "width: 100%; height: 100%;" }
 
-.sidebar
-  %section.waypoints
-    - if widget.has_valid_waypoints?
-      %h2= t('views.widgets.preview.direction.relics_on_route')
-      %ul
+.sidebar.preview
+  = link_to '/', :target => :_top do
+    %h1.logo
+  .preview__section
+    - route_type = widget_params.try(:[], 'route_type')
+    %h2.preview__header{ :class => "preview__header--#{route_type}", :title => t("views.widgets.route_types.#{route_type}", editable: false) }
+      = t('views.widgets.show.direction.route_type', editable: false).gsub(':', '')
+    %p.hidden
+      = t("views.widgets.route_types.#{route_type}")
+
+  .preview__section
+    - unless widget.has_valid_waypoints?
+      %h2.preview__header= t('views.widgets.preview.direction.no_route')
+    - else
+      %h2.preview__header= t('views.widgets.preview.direction.relics_on_route')
+      %ul.preview__content
         - widget_params.try(:[], 'waypoints').try :each do |waypoint|
           %li= waypoint
-      %strong= "#{t('views.widgets.preview.direction.within_radius', editable: false)} #{widget_params.try(:[], 'radius')} km"
-    - else
-      %h2= t('views.widgets.preview.direction.no_route')
 
   - if categories.present?
-    %section.categories
-      %h2= t('views.widgets.preview.direction.relics_from_categories')
-      %ul
+    .preview__section
+      %h2.preview__header= t('views.widgets.preview.direction.relics_from_categories')
+      %ul.preview__content
         - Category.roots.sort_by(&:name).each do |category|
-          - if categories.include?(category.name_key)
-            %li= category.name_key
-            - if category.name_key == 'sakralny'
-              - category.children.sort_by(&:name).each do |child|
-                - if categories.include?(child.name_key)
-                  %li= child.name_key
+          - if category.name_key == 'sakralny'
+            - category.children.sort_by(&:name).each do |child|
+              - if categories.include?(child.name_key)
+                %li= category.name.gsub('/', ', ')
+          - elsif categories.include?(category.name_key)
+            %li= category.name.gsub('/', ', ')
+
+  .preview__section
+    %h2.preview__header= t('views.widgets.show.direction.relics_within_radius', editable: false).gsub(':', '')
+    %p.preview__content
+      = widget_params.try(:[], 'radius')
+      = t('views.widgets.show.direction.km_within_range')
+
+  - if current_user and widget.user_id == current_user.id
+    .preview__section
+      %p.preview__content
+        = link_to t('views.widgets.show.direction.edit_route'), edit_widgets_direction_path(widget), :target => :_top
 
 :javascript
   var renderOnly = true;

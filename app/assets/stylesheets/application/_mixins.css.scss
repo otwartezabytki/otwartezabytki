@@ -87,6 +87,6 @@ $dark-grey: #313132;
   width: 1px;
 }
 
-%hidden {
+.hidden {
   @include visually-hidden();
 }
