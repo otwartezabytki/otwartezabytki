@@ -1,6 +1,7 @@
 # -*- encoding : utf-8 -*-
 
 class Widgets::DirectionsController < WidgetsController
+  layout :resolve_widget_layout, :only => [:show, :configure]
 
   expose(:widget_directions) { Widget::Direction.scoped }
   expose(:widget_direction)
@@ -52,7 +53,9 @@ class Widgets::DirectionsController < WidgetsController
   end
 
   def preview
-    render :preview, :layout => 'widget'
+  end
+
+  def configure
   end
 
 end

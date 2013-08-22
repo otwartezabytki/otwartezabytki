@@ -55,6 +55,7 @@ Otwartezabytki::Application.routes.draw do
       w.resources :directions, :path => "/direction" do
         member do
           get :print
+          get :configure
           get :preview
         end
       end
