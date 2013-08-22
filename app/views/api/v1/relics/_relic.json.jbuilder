@@ -22,7 +22,7 @@ json.(relic,
 if params[:include_descendants]
   json.descendants do |json|
     json.array!(relic.descendants) do |json, r|
-      json.partial! "api/v1/relics/relic", :relic => r
+      json.partial! "api/v1/relics/relic", relic: r, params: { include_descendants: true }
     end
   end
 else
