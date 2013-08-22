@@ -62,10 +62,10 @@ SQL
   end
 
   def export_relics(register_data = false)
-    suffix = if register_data
-      "relics-register"
+    suffix, template = if register_data
+      ["relics-register", "api/v1/relics/_relic_register.json.jbuilder"]
     else
-      "relics"
+      ["relics", "api/v1/relics/_relic.json.jbuilder"]
     end
     new_zip_path = "#{Rails.root}/public/history/#{Date.today.to_s(:db)}-#{suffix}.zip"
     if File.exists?(new_zip_path)
@@ -89,8 +89,8 @@ SQL
                   include ApplicationHelper
                   include Rails.application.routes.url_helpers
                 end
-                z.put_next_entry("relics/#{r.id}.json")
-                z.print view.render(template: 'api/v1/relics/_relic.json.jbuilder', locals: { relic: r })
+                z.put_next_entry("#{suffix}/#{r.id}.json")
+                z.print view.render(template: template, locals: { relic: r, params: { include_descendants: true }})
               rescue => ex
                 Raven.capture_exception(ex)
               end
