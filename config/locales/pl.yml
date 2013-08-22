@@ -113,6 +113,7 @@ pl:
         description: Opis
         relic: Zabytek
         relic_id: "ID zabytku"
+        alternate_text: "Tekst alternatywny"
       relic:
         ancestry: "W zespołach"
         approved: "Zabytek zatwierdzony"
@@ -719,6 +720,7 @@ pl:
       month: Miesiąc
       second: Sekundy
       year: Rok
+    ago: "temu"
   devise:
     confirmations:
       confirmed: "Konto zostało poprawnie aktywowane. Zostałeś automatycznie zalogowany."
@@ -815,6 +817,7 @@ pl:
         author: "Podaj imię i nazwisko autora i/lub nick oraz źródło zdjęcia (np. Mariusz 123, Wikipedia)."
         date_taken: "Podaj datę wykonania zdjęcia. Jeśli nie możesz jej ustalić wpisz \"nieznana\"."
         description: "Opcjonalnie możesz opisać co znajduje się na zdjęciu:"
+        alternate_text: "Opcjonalnie możesz podać tekst alternatywny, jest on pomocny osobom niewidomym. Napisz, co znajduje się na zdjęciu np. widok budynku z przodu"
       relic:
         categories: "Wybierz kategorie, które Twoim zdaniem pasują do opisywanego zabytku."
         common_name: "Jeśli zabytek ma jedną lub więcej nazw zwyczajowych, wpisz je."
@@ -856,7 +859,7 @@ pl:
       browse: Przeglądaj
       contact: Kontakt
       disclaimer: "Wciąż udoskonalamy serwis i poprawiamy błędy. Jeśli masz jakieś uwagi lub znajdziesz błąd, prosimy o informację na:"
-      download_data: "Pobierz dane"
+      download: "Pobierz dane"
       facebook_sign_in: "Zaloguj się przez Facebooka"
       facebook_sign_up: "Zarejestruj się przez Facebooka"
       footer:
@@ -1120,6 +1123,9 @@ pl:
           update:
             link: "zaktualizowano link"
             photo: "zaktualizowano zdjęcie"
+            document: "zaktualizowano dokument"
+            event: "zaktualizowano wydarzenie"
+            entry: "zaktualizowano ciekawostkę"
             relic:
               ancestry: "zaktualizowano hirarchię w zespole zabytków"
               approved: "zatewierdzono zabytek"
@@ -1418,6 +1424,12 @@ pl:
             <p> Sprawdź, czy informacje już uzupełnione są poprawne.</p>
             <p> Pamiętaj o podaniu źródeł.</p>
         flash_hide: ukryj
+        widgets:
+          header: "Widżety dla zabytku"
+          create_alert: "Stwórz widżet „Dodaj alert” dla&nbsp;tego zabytku:"
+          create_button: "Stwórz widżet"
+          loading: "Ładuję podgląd widgetu…"
+          error: "Wystąpił błąd podczas ładowania poglądu."
         general:
           add: dodaj
           close: zamknij
@@ -1537,3 +1549,5 @@ pl:
     wuoz-w-warszawie: "Wojewódzki Urząd Ochrony Zabytków w Warszawie"
     wuoz-w-zielonej-gorze: "Wojewódzki Urząd Ochrony Zabytków w Zielonej Górze"
     wuoz-we-wroclawiu: "Wojewódzki Urząd Ochrony Zabytków we Wrocławiu"
+  routes:
+    pages: "strony"

@@ -51,11 +51,11 @@ section.translation-edit {
 
 .under_construction {
   border-top: 1px solid gainsboro;
-  div {
-    line-height: 22px;
-    margin: 20px 0;
-    font-size: 15px;
-    font-weight: 600;
+div {
+  line-height: 22px;
+  margin: 20px 0;
+  font-size: 15px;
+  font-weight: 600;
     &.news{
       text-align: center;
       margin: 40px 0;
@@ -132,6 +132,22 @@ section.translation-edit {
     opacity: 0.5;
     background-color: black;
     border-radius: 10px;
+  }
+}
+
+.columns-2 {
+  @include clearfix();
+
+  & > .column-1-of-2 {
+    box-sizing: border-box;
+    float: left;
+    width: 50%;
+    padding-left: 17px;
+
+    &:first-child {
+      padding-left: 0;
+      padding-right: 18px;
+    }
   }
 }
 

@@ -5,18 +5,21 @@ window.map = undefined
 window.geocode_location = (callback) ->
   return unless callback?
   if $('#relic_polish_relic').is(':checked')
-    voivodeship = $('form.relic').data('voivodeship')
-    district = $('form.relic').data('district')
-    commune = $('form.relic').data('commune')
-    city = $('.select2-choice').text().trim()
-    street = $('#relic_street').val().trim()
+    if $('#relic_street').is(':visible')
+      voivodeship = $('#relic_voivodeship_id option:selected').text().trim()
+      district = $('#relic_district_id option:selected').text().trim()
+      commune = $('#relic_commune_id option:selected').text().trim()
+      city = $('#relic_place_id option:selected').text().trim()
+      street = $('#relic_street').val().trim()
+      query = {voivodeship, district, commune, city, street}
+    else
+      place_id = $('#relic_place_id').val()
+      query = {place_id} if place_id
 
-    place_id = $('#relic_place_id').val()
-
-    jQuery.get geocoder_search_path, {place_id}, (result) ->
+    jQuery.get geocoder_search_path, query, (result) ->
       if result.length > 0
         callback(result[0].latitude.round(7), result[0].longitude.round(7))
-    , 'json' if place_id
+    , 'json' if query
   else
     country_code = $('#relic_country_code').val()
     province = $('#relic_fprovince').val()

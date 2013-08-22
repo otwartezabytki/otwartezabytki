@@ -12,10 +12,13 @@ class ApplicationController < ActionController::Base
     locale = params[:locale] if params[:locale] and enabled_locales.include?(params[:locale].to_sym)
     I18n.locale = (
       locale ||
+      cookies[:locale] ||
       current_user.try(:default_locale) ||
-      http_accept_language.compatible_language_from(enabled_locales) ||
+      # disable for now
+      # http_accept_language.compatible_language_from(enabled_locales) ||
       I18n.default_locale
     ).to_sym
+    cookies[:locale] = I18n.locale
   end
 
   before_filter :save_return_path

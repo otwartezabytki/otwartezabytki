@@ -27,16 +27,13 @@ class Link < ActiveRecord::Base
 
   acts_as_list :scope => :relic
 
-
-  validates_format_of :url, :with => URI::regexp(%w(http https ftp)), :if => :url_changed?
-
   validates :kind, :presence => true, :inclusion => { :in => ["url", "paper"] }
 
   validates :category, :presence => true, :inclusion => { :in => UrlCategories }, :if => :url?
   validates :category, :presence => true, :inclusion => { :in => PaperCategories }, :if => :paper?
 
   validates :url, :name, :length => { :maximum => 255 }
-  validates :url, :url => true
+  validates :url, :url => true, :if => :url_changed?
 
   validates :relic, :user, :url, :name, :presence => true, :if => :url?
   validates :relic, :user, :formal_name, :name, :presence => true, :if => :paper?
@@ -48,7 +45,7 @@ class Link < ActiveRecord::Base
     shortened_path = URI::decode(uri.path)
     shortened_path = shortened_path[1..20].to_s + "..." if shortened_path.length > 20
     "#{uri.host}/#{shortened_path}".gsub(/\/*$/, '')
-  rescue
+  rescue URI::InvalidURIError
     "link"
   end
 

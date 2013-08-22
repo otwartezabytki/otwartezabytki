@@ -3,8 +3,6 @@
 ActiveAdmin.register Relic, {:sort_order => :id} do
   menu :label => "Zabytki", :parent => "Zasoby", :priority => 1
 
-  controller.authorize_resource
-
   filter :id
   filter :identification
 

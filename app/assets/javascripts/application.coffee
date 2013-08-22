@@ -102,6 +102,9 @@ jQuery ->
     e.preventDefault()
     window.location = $(this).find('option:selected').attr('rel')
 
+  $('body').on 'click', 'a[data-hover=dropdown]', (e) ->
+    e.preventDefault()
+
 
 
 
