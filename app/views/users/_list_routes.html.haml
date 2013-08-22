@@ -17,7 +17,7 @@
         %dd.feed-message
           = t('.relics_within_radius', radius: route.widget_params.try(:[], 'radius')) + ":"
         %dt.feed-message
-          = link_to "#{waypoints.first} – #{waypoints.last}", widgets_direction_path(route)
+          = link_to "#{waypoints.first} – #{waypoints.last}", preview_widgets_direction_path(route)
           - if waypoints.length > 2
             %span (#{t('.route_points', count: waypoints.length)})
 

@@ -5,3 +5,8 @@
   .content
     .preview
       = raw widget.snippet
+
+    %h2= t('views.widgets.edit.generated')
+    %div
+      %span.block= t('views.widgets.edit.code_help')
+      %textarea#snippet{:cols => "20", :rows => "3"}= widget.snippet
