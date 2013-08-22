@@ -34,6 +34,9 @@ jQuery.initializer 'div.photo-attributes', ->
   photo_xhr = $(".photo_upload").fileupload
     type: "POST"
     dataType: "html"
+    formData: [
+      { name: 'authenticity_token', value: $form.find('input[name="authenticity_token"]').val() }
+    ]
 
     add: (e, data) ->
       $photo_hidden.removeClass('hidden')
@@ -42,7 +45,6 @@ jQuery.initializer 'div.photo-attributes', ->
 
     submit: (e, data) ->
       do serialize_form
-      data.formData = {}
 
     progressall: (e, data) ->
       progress = parseInt(data.loaded / data.total * 100, 10)

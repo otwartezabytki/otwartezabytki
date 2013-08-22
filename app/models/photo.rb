@@ -15,26 +15,23 @@
 #  date_taken       :string(255)
 #  file_full_width  :integer
 #  file_full_height :integer
+#  description      :text
+#  alternate_text   :string(255)
 #
 
 class Photo < ActiveRecord::Base
-  include Rails.application.routes.url_helpers
-
   belongs_to :relic
   belongs_to :user
   has_many :events
 
-  attr_accessible :author, :file, :date_taken, :description, :as => [:default, :admin]
+  attr_accessible :author, :file, :date_taken, :description, :alternate_text, :as => [:default, :admin]
   attr_accessible :relic_id, :user_id, :as => :admin
-
-  mount_uploader :file, PhotoUploader
 
   validates :file, :relic, :user, :presence => true
   validates :file, :file_size => { :maximum => 3.megabytes.to_i }
   validates :author, :date_taken, :presence => true, :unless => :new_record?
 
-
-
+  mount_uploader :file, PhotoUploader
   has_paper_trail :skip => [:created_at, :updated_at, :versions]
 
   def self.one_after(photo_id)
@@ -51,6 +48,7 @@ class Photo < ActiveRecord::Base
       :relic_id => relic_id,
       :author => author,
       :date_taken => date_taken,
+      :alternate_text => alternate_text,
       :file => file.as_json(options)[:file],
       :file_full_width => file_full_width,
       :file_full_width => file_full_width,

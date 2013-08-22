@@ -27,7 +27,7 @@ class GeocoderController < ApplicationController
 
     #head :bad_request and return unless voivodeship.present? && district.present? && commune.present?
     query = "#{voivodeship}, #{district}, #{commune}, #{city}"
-    street.present? ? query + ", #{street}" : query
+    query += ", #{street}" if street.present?
 
     results = fetch_results(query)
     results = fetch_results("#{voivodeship}, #{district}, #{commune}, #{city}") if results.size == 0

@@ -1,4 +1,4 @@
-- cache "browse-list" do
+- cache [I18n.locale, "browse-list"] do
   - relics =  Search.new(:per_page => 1, :load => false).perform
   #browse-list{:style => ('display:none;')}
     .categories-list

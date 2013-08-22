@@ -33,7 +33,7 @@ gem 'tire-contrib'
 gem 'rocket_tag'
 gem 'sentry-raven'
 
-gem 'paper_trail', '~> 2' # versioning
+gem 'paper_trail', '~> 2.7.2' # versioning
 
 # admin panel
 gem 'activeadmin',    '~> 0.4.4'
@@ -57,7 +57,7 @@ gem 'arrabiata' # roman letters converter
 gem 'rails-i18n'
 gem 'i18n-country-translations'
 gem 'i18n_country_select', '~> 1.0.14'
-gem 'routing-filter'
+gem 'routing-filter', :git => 'git://github.com/svenfuchs/routing-filter.git', :ref => '6270eba04e'
 
 gem 'whenever', :require => false               # cron jobs
 gem 'recaptcha', :require => 'recaptcha/rails'  # bot secrity
@@ -90,6 +90,9 @@ gem 'tolk', :git => "git://github.com/monterail/tolk.git", :branch => "oz-custom
 
 gem 'foreman'
 gem 'twitter_cldr'
+
+# We need support for passing Rack::Test::UploadedFile
+gem 'strong_parameters', '~> 0.2.1'
 
 # documentation
 gem 'yard'

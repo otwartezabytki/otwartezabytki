@@ -9,7 +9,7 @@
             %li
               - if event.photo.present?
                 = link_to image_tag(event.photo.file.url(:icon)), relic_photo_path(relic.to_param, relic.all_photos.first.id), :remote => true
-              - if event.relic_id == relic
+              - if event.relic_id == relic.id
                 %strong= event.date
                 \-
                 = event.name

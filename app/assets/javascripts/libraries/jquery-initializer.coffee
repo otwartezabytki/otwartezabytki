@@ -118,7 +118,7 @@ window.ajax_callback = (data, status, xhr) ->
       window.location.href = xhr.getResponseHeader('x-path')
 
 $(document).on 'ajax:beforeSend', 'form[data-remote], a[data-remote]', ->
-  $('#fancybox_loader_container').show() unless window.location.pathname == '/relics'
+  $('#fancybox_loader_container').show() unless window.location.pathname.match(/^(\/[a-z]{2})?\/relics/)
 
 $(document).on 'ajax:success', 'form[data-remote], a[data-remote]', (e, data, status, xhr) ->
   $('#fancybox_loader_container').hide()

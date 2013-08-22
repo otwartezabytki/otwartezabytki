@@ -2,24 +2,24 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :place do
+  factory :place do |f|
 
-    commune
-    name "place"
+    f.commune
+    f.name "place"
 
-    factory :place_bardo do
-      name "Bardo"
-      commune :factory => :commune_bardo
+    factory :place_bardo do |f|
+      f.name "Bardo"
+      f.commune :factory => :commune_bardo
     end
 
-    factory :place_leszno do
-      name "Leszno"
-      commune :factory => :commune_leszno
+    factory :place_leszno do |f|
+      f.name "Leszno"
+      f.commune :factory => :commune_leszno
     end
 
-    factory :place_magdalenowo do
-      name "Magdalenowo"
-      commune :factory => :commune_suwalki
+    factory :place_magdalenowo do |f|
+      f.name "Magdalenowo"
+      f.commune :factory => :commune_suwalki
     end
 
   end

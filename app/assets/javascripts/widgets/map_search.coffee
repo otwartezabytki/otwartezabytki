@@ -294,3 +294,10 @@ jQuery.initializer '#map_widget', ->
     $('a.point-relic').click ->
       google.maps.event.trigger(markers[$(this).data('id')], 'click')
       false
+
+  $sidebar.find('.categories .choices-group label, .locations .locations_tree li').on 'mouseenter', ->
+    $name = $(this).find('.name')
+    name = $name[0]
+    if name.offsetWidth < name.scrollWidth
+      $(this).attr('title', $name.text())
+      $(this).tooltip('show')

@@ -43,7 +43,7 @@ class PhotosController < ApplicationController
       path = if !!params[:build]
         photos_relicbuilder_path(:id => relic.id)
       else
-        edit_section_relic_path(relic.id, :photos)
+        edit_section_relic_path(relic.id, :photos, iframe_url_options)
       end
       redirect_to path
     end

@@ -29,8 +29,12 @@ else
   json.descendants relic.descendant_ids
 end
 
-json.place_id relic.place.id
-json.place_name relic.place.name
-json.commune_name relic.place.commune.name
-json.district_name relic.place.commune.district.voivodeship.name
-json.voivodeship_name relic.place.commune.district.voivodeship.name
+json.photos relic.photos
+
+if relic.place
+  json.place_id relic.place.id
+  json.place_name relic.place.name
+  json.commune_name relic.place.commune.name
+  json.district_name relic.place.commune.district.name
+  json.voivodeship_name relic.place.commune.district.voivodeship.name
+end

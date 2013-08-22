@@ -29,13 +29,14 @@
             .antiscroll-wrap.locations_tree
               .box
                 .antiscroll-inner
-                  - if relics.polish_facets_tree.length > 0
-                    %ul
-                      = render 'shared/locations_tree', :node => relics.polish_facets_tree
-                  - else
-                    %ul
-                      - relics.each do |relic|
-                        %li= link_to relic.identification, "#", :class => "point-relic", :"data-id" => relic.id
+                  .box-inner
+                    - if relics.polish_facets_tree.length > 0
+                      %ul
+                        = render 'shared/locations_tree', :node => relics.polish_facets_tree
+                    - else
+                      %ul
+                        - relics.each do |relic|
+                          %li= link_to relic.identification, "#", :class => "point-relic", :"data-id" => relic.id
             = link_to t('views.widgets.show.map_search.show_more'), '#', :class => "", :class => "show-more"
             = link_to t('views.widgets.show.map_search.show_less'), '#', :class => "", :class => "show-less"
           %section.categories{ :class => (cookies['section-shown'] == 'categories' ? "maxed" : cookies['section-shown'] == 'locations' ? 'mined' : '') }
@@ -45,14 +46,14 @@
             .antiscroll-wrap
               .box
                 .antiscroll-inner
-                  .inputs-list.choices-group
+                  .box-inner.inputs-list.choices-group
                     - Category.roots.sort_by(&:name).each do |c|
                       - if c.name_key == 'sakralny'
                         - hidden_sacral = !f.object.categories.include?('sakralny')
                         = f.label :categories, :value => c.name_key do
                           = f.check_box :categories, {:multiple => true, :class => 'sacral-options'}, c.name_key, nil
                           %span
-                            = c.name
+                            .name= c.name
                             %em= relics.count('sacral')
                         .sacral-categories{:style => ('display:none;' if hidden_sacral)}
                           - c.children.sort_by(&:name).each do |child|

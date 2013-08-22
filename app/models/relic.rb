@@ -121,6 +121,15 @@ class Relic < ActiveRecord::Base
     self.existence = 'social' unless ['social', 'archived'].include?(self.existence)
   end
 
+  # prevents from keeping track of blank changes
+  before_save do
+    [:common_name, :description, :documents_info, :links_info].each do |a|
+      if changed.include?(a.to_s)
+        read_attribute(a).present? || write_attribute(a, nil)
+      end
+    end
+  end
+
   validates :state, :inclusion => { :in => States }, :if => :state_changed?
   validates :existence, :inclusion => { :in => Existences }, :if => :existence_changed?
   validates :kind, :inclusion => { :in => Kinds }, :if => :kind_changed?
@@ -191,7 +200,7 @@ class Relic < ActiveRecord::Base
 
   def main_photo
     return @main_photo if defined? @main_photo
-    @main_photo = (self.all_photos.order('CASE(photos.main) WHEN TRUE THEN 0 ELSE 1 END').first || self.photos.new)
+    @main_photo = (self.all_photos.order('CASE(photos.main) WHEN TRUE THEN 0 ELSE 1 END').first || Photo.new)
   end
 
   # @return photos for relic and it's descendants

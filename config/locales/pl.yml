@@ -69,6 +69,7 @@ pl:
         too_long: "jest za długie (maksymalnie %{count} znaków)"
         too_short: "jest za krótkie (przynajmniej %{count} znaków)"
         wrong_length: "ma nieprawidłową długość (powinna wynosić %{count} znaków)"
+        not_a_url: "niepoprawny adres URL"
       template:
         body: "Błędy dotyczą następujących pól:"
         header:
@@ -112,6 +113,7 @@ pl:
         description: Opis
         relic: Zabytek
         relic_id: "ID zabytku"
+        alternate_text: "Tekst alternatywny"
       relic:
         ancestry: "W zespołach"
         approved: "Zabytek zatwierdzony"
@@ -718,6 +720,7 @@ pl:
       month: Miesiąc
       second: Sekundy
       year: Rok
+    ago: "temu"
   devise:
     confirmations:
       confirmed: "Konto zostało poprawnie aktywowane. Zostałeś automatycznie zalogowany."
@@ -814,6 +817,7 @@ pl:
         author: "Podaj imię i nazwisko autora i/lub nick oraz źródło zdjęcia (np. Mariusz 123, Wikipedia)."
         date_taken: "Podaj datę wykonania zdjęcia. Jeśli nie możesz jej ustalić wpisz \"nieznana\"."
         description: "Opcjonalnie możesz opisać co znajduje się na zdjęciu:"
+        alternate_text: "Opcjonalnie możesz podać tekst alternatywny, jest on pomocny osobom niewidomym. Napisz, co znajduje się na zdjęciu np. widok budynku z przodu"
       relic:
         categories: "Wybierz kategorie, które Twoim zdaniem pasują do opisywanego zabytku."
         common_name: "Jeśli zabytek ma jedną lub więcej nazw zwyczajowych, wpisz je."
@@ -855,7 +859,7 @@ pl:
       browse: Przeglądaj
       contact: Kontakt
       disclaimer: "Wciąż udoskonalamy serwis i poprawiamy błędy. Jeśli masz jakieś uwagi lub znajdziesz błąd, prosimy o informację na:"
-      download_data: "Pobierz dane"
+      download: "Pobierz dane"
       facebook_sign_in: "Zaloguj się przez Facebooka"
       facebook_sign_up: "Zarejestruj się przez Facebooka"
       footer:
@@ -1119,6 +1123,9 @@ pl:
           update:
             link: "zaktualizowano link"
             photo: "zaktualizowano zdjęcie"
+            document: "zaktualizowano dokument"
+            event: "zaktualizowano wydarzenie"
+            entry: "zaktualizowano ciekawostkę"
             relic:
               ancestry: "zaktualizowano hirarchię w zespole zabytków"
               approved: "zatewierdzono zabytek"
@@ -1347,10 +1354,12 @@ pl:
           checked:
             header: Sprawdzony
             info: "Dane częściowo zweryfikowane; wymagają dopracowania."
+            info_social: "Dane częściowo zweryfikowane; wymagają dopracowania."
           close: zamknij
           filled:
             header: Uzupełniony
             info: "Opis prawie doskonały :)"
+            info_social: "Opis prawie doskonały :)"
           header: "Oznaczenie stanu"
           label: "Stan:"
           unchecked:
@@ -1421,6 +1430,7 @@ pl:
           common_name: "Nazwa zwyczajowa"
           dating_of_obj: "Data powstania:"
           fill_in: uzupełnij
+          see: zobacz
           location: "Lokalizacja:"
           no_data_fill_in: "brak danych, uzupełnij »"
           original: "wersja oryginalna"
@@ -1533,3 +1543,5 @@ pl:
     wuoz-w-warszawie: "Wojewódzki Urząd Ochrony Zabytków w Warszawie"
     wuoz-w-zielonej-gorze: "Wojewódzki Urząd Ochrony Zabytków w Zielonej Górze"
     wuoz-we-wroclawiu: "Wojewódzki Urząd Ochrony Zabytków we Wrocławiu"
+  routes:
+    pages: "strony"
