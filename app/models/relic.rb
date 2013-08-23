@@ -295,7 +295,7 @@ class Relic < ActiveRecord::Base
 
   def is_group?
     return 'ZE' == kind if new_record?
-    'ZE' == kind or (is_root? and has_children?)
+    'ZE' == kind || (is_root? and has_children?)
   end
 
   def revisions
