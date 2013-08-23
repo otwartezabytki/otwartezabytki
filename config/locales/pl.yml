@@ -1667,6 +1667,7 @@ pl:
       print: "Wydrukuj"
       edit: "Edytuj"
       preview: "Podgląd"
+      relic_unknown_address: "dokładny adres nieznany"
     navigation:
       watched: "Obserwowane"
       checked_by_me: "Sprawdzone przeze mnie"
