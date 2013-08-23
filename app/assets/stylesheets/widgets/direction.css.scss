@@ -43,7 +43,6 @@ div.tooltip {
   width: 179px;
   z-index: 0;
   border-right: 1px solid #868584;
-  overflow: hidden;
 }
 
 .advanced_search {
@@ -238,12 +237,15 @@ form{
   width: 179px;
 }
 
-a.tooltip{
+a.tooltip,
+span.tooltip {
   position: absolute;
+  z-index: 1000000;
+  top: 5px;
   right: 0;
   padding: 4px;
-  top: 5px;
-  img{
+
+  img {
     border: 0;
   }
 }

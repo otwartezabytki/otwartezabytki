@@ -3,7 +3,6 @@
 #= require jquery_ujs
 #= require js-routes
 #= require vendor/jquery.cookie
-#= require twitter/bootstrap/bootstrap-tooltip
 #= require sugar
 #= require handlebars/handlebars
 #= require_tree ../libraries
@@ -422,8 +421,6 @@ jQuery ->
     return
 
   $search = $('#new_search')
-
-  $('a.tooltip').tooltip()
   $search.submit(searchRelics)
 
   $(document).on 'params:changed', ->
