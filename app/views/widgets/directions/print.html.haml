@@ -1,6 +1,11 @@
 - content_for :before_javascripts do
   = javascript_include_tag "http://maps.googleapis.com/maps/api/js?key=#{Settings.oz.gm_key}&sensor=false&libraries=places"
 
+%script#relic-template{ type: 'text/x-handlebars-template' }
+  %li.relic
+    %h3.relic__tile {{identification}}
+    %p.relic__data {{street}}
+
 .map{ :style => "width: 50em; height: 50em" }
   #map_canvas{ :style => "width: 100%; height: 100%;" }
 
@@ -30,7 +35,7 @@
 
 .relics
   %h1= t('views.widgets.preview.direction.relics_list')
-  #relics-container
+  %ol#relics-container.relic__list
 
 :javascript
   var renderOnly = printAction = true;
