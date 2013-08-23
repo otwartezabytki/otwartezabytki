@@ -254,6 +254,8 @@ searchRoute = (search_params, callback) ->
       <%= Rails.env.development? ? 'console.log' : 'window.alert' %>('Nie znaleziono trasy! Spróbuj ponownie.')
 
 printAppendRelic = (relic) ->
+  return if $("#relic-#{relic.id}").length
+
   template ||= Handlebars.compile $('#relic-template').html()
   $('#relics-container').append template(relic)
 

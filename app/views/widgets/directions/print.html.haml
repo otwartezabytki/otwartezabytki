@@ -2,7 +2,7 @@
   = javascript_include_tag "http://maps.googleapis.com/maps/api/js?key=#{Settings.oz.gm_key}&sensor=false&libraries=places"
 
 %script#relic-template{ type: 'text/x-handlebars-template' }
-  %li.Definition-Container
+  %li.Definition-Container{ id: 'relic-{{id}}' }
     %dl.Definition--inline
       %dt.Definition-Header {{identification}}
       %dd.Definition-Content {{street}}
