@@ -143,10 +143,11 @@ form{
       @include gradient(#2b607b, #437893);
     }
   }
+}
 
-  #search_radius {
-    width: 20px;
-  }
+#search_radius {
+  width: 40px;
+  padding-right: 0;
 }
 
 .locations{
