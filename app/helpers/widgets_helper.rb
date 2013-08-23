@@ -24,6 +24,7 @@ module WidgetsHelper
         :longitude => relic.longitude,
         :identification => relic.identification,
         :street => relic.street,
+        :place => relic.place.name,
         :main_photo => relic.main_photo
       }
     end

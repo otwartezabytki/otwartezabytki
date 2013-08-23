@@ -6,9 +6,8 @@
     %dl.Definition
       %dt.Definition-Header--without-colon {{identification}}
       %dd.Definition-Content--small
-        {{#if street}} {{street}}
-        {{else}} #{t('users.list_routes.relic_unknown_address', editable: false).capitalize}
-        {{/if}}
+        {{#if place}} {{place}}, {{/if}}
+        {{#if street}} {{street}} {{else}} #{t('users.list_routes.relic_unknown_address', editable: false)} {{/if}}
 
 %header.Sidebar
   %h1.Logo
