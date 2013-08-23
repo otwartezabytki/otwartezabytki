@@ -184,6 +184,10 @@ class Relic < ActiveRecord::Base
     end
   end
 
+  def place_full_name_with_street
+    self.street.present? ? [place_full_name, self.street].join(", ") : place_full_name 
+  end
+
   def corrected_by?(user)
     user.suggestions.where(:relic_id => self.id).count > 0
   end
@@ -291,7 +295,7 @@ class Relic < ActiveRecord::Base
 
   def is_group?
     return 'ZE' == kind if new_record?
-    'ZE' == kind or (is_root? and has_children?)
+    'ZE' == kind || (is_root? and has_children?)
   end
 
   def revisions

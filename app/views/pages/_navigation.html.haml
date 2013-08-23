@@ -7,6 +7,8 @@
       - page.subpages.each do |subpage|
         %li= link_to subpage.title.presence || subpage.name.titleize, subpage,
           class: "#{subpage.name} #{'current' if current_page?(subpage)}"
+      - if page.name == "about"
+        %li= link_to t('layouts.application.blog'), "http://blog.otwartezabytki.pl/"
 - else
   %li
     = link_to t("layouts.application.#{page.name}"), page,

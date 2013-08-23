@@ -32,6 +32,30 @@ a {
   }
 }
 
+#cookies {
+  display: none;
+  width: 100%;
+  background: #f6ead4; /* Old browsers */
+  background: -moz-linear-gradient(top, #f6ead4 88%, #efdab4 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(88%, #f6ead4), color-stop(100%, #efdab4)); /* Chrome,Safari4+*/
+  background: -webkit-linear-gradient(top, #f6ead4 88%, #efdab4 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #f6ead4 88%, #efdab4 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #f6ead4 88%, #efdab4 100%); /* IE10+ */
+  background: linear-gradient(to bottom, #f6ead4 88%, #efdab4 100%); /* W3C */
+  color: #524d49;
+  padding: 10px 25px;
+  font-size: 14px;
+}
+
+#cookies ul {
+  list-decoration-style: none;
+}
+
+#cookies ul li {
+  display: inline-block;
+  margin-right: 15px;
+}
+
 .container {
   margin: 0 auto;
   width: 960px;

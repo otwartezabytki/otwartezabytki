@@ -870,6 +870,9 @@ pl:
       update: "Zaktualizuj %{model}"
   layouts:
     application:
+      blog: "Blog"
+      accept: "Akceptuj"
+      learn_more: "Dowiedz się więcej"
       about: "O projekcie"
       addrelic: "Dodaj zabytek"
       browse: Przeglądaj
