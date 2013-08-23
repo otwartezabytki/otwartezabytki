@@ -1544,6 +1544,7 @@ pl:
           save: "Zapisz trasę"
           print_: "Wydrukuj trasę"
           save_and_print: "Zapisz i wydrukuj trasę"
+          loading_relics: "Ładuję listę zabytków"
         preview: "Podgląd wygenerowanego widżetu"
       index:
         about: "Widżety:"

@@ -263,6 +263,8 @@ printRenderRelics = (relics) ->
   relics.each (relic) ->
     printAppendRelic relic
 
+  $('#relics-loading-info').remove()
+
   unless print_has_prompted
     <%=
       if Rails.env.development?
