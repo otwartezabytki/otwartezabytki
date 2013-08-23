@@ -1544,6 +1544,7 @@ pl:
           save: "Zapisz trasę"
           print_: "Wydrukuj trasę"
           save_and_print: "Zapisz i wydrukuj trasę"
+          loading_relics: "Ładuję listę zabytków"
         preview: "Podgląd wygenerowanego widżetu"
       index:
         about: "Widżety:"
@@ -1666,6 +1667,7 @@ pl:
       print: "Wydrukuj"
       edit: "Edytuj"
       preview: "Podgląd"
+      relic_unknown_address: "dokładny adres nieznany"
     navigation:
       watched: "Obserwowane"
       checked_by_me: "Sprawdzone przeze mnie"

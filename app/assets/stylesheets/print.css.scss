@@ -61,7 +61,7 @@ a {
   color: inherit;
 
   @media print {
-    &[href^='http']:after {
+    &[href^='http']:not(#map_canvas a):after {
       content: " (" attr(href) ")";
     }
   }
@@ -72,6 +72,14 @@ li {
 
   ul & {
     list-style: square;
+  }
+
+  ol & {
+    list-style: decimal;
+
+    &.Definition-Container {
+      margin-left: 3em;
+    }
   }
 }
 
@@ -121,6 +129,11 @@ li {
   font-weight: 600;
 }
 
+.Title-Header--padded-bottom {
+  @extend .Title-Header;
+  margin-bottom: 0.5em;
+}
+
 .Definition {
   margin: 0.5em 0;
 }
@@ -142,6 +155,14 @@ li {
   }
 }
 
+.Definition-Header--without-colon {
+  @extend .Definition-Header;
+
+  &:after {
+    display: none;
+  }
+}
+
 .Definition-Content {
   margin: 0.1em 0;
 
@@ -158,6 +179,11 @@ li {
       }
     }
   }
+}
+
+.Definition-Content--small {
+  @extend .Definition-Content;
+  font-size: 0.8em;
 }
 
 .Description {
@@ -214,6 +240,11 @@ li {
   }
 }
 
+.Footer--padded-top {
+  @extend .Footer;
+  margin-top: 2em;
+}
+
 /*
   Sections
   -------- */
@@ -264,4 +295,15 @@ li {
   ul, ol {
     padding-left: 20px;
   }
+}
+
+/*
+  Widget Direction
+  ---------------- */
+
+.Map {
+  width: 50em;
+  height: 50em;
+  margin-bottom: 2em;
+  page-break-after: always;
 }

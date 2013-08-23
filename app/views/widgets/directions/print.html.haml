@@ -1,43 +1,53 @@
 - content_for :before_javascripts do
   = javascript_include_tag "http://maps.googleapis.com/maps/api/js?key=#{Settings.oz.gm_key}&sensor=false&libraries=places"
 
-.map{ :style => "width: 50em; height: 50em" }
-  #map_canvas{ :style => "width: 100%; height: 100%;" }
+%script#relic-template{ type: 'text/x-handlebars-template' }
+  %li.Definition-Container{ id: 'relic-{{id}}' }
+    %dl.Definition
+      %dt.Definition-Header--without-colon {{identification}}
+      %dd.Definition-Content--small
+        {{#if place}} {{place}}, {{/if}}
+        {{#if street}} {{street}} {{else}} #{t('users.list_routes.relic_unknown_address', editable: false)} {{/if}}
 
-.sidebar
-  %section.waypoints
-    - if widget.has_valid_waypoints?
-      %h2= t('views.widgets.preview.direction.relics_on_route')
-      %ul
-        - widget_params.try(:[], 'waypoints').try :each do |waypoint|
-          %li= waypoint
-      %strong= "#{t('views.widgets.preview.direction.within_radius', editable: false)} #{widget_params.try(:[], 'radius')} km"
-    - else
-      %h2= t('views.widgets.preview.direction.no_route')
+%header.Sidebar
+  %h1.Logo
+    %span.Logo-Header= t('views.relics.guide.title')
+    %b.Hidden Otwarte Zabytki
+    = image_tag 'logo.png', :alt => t('views.relics.guide.logo', editable: false), :class => 'Logo-Image'
 
+%header.Title
+  %h1.Title-Header= t("views.widgets.route_types.#{widget_params.try(:[], 'route_type')}")
+  %dl.Title-Content.Definition
+    %dt.Definition-Header= t('users.list_routes.relics_within_radius', radius: widget_params.try(:[], 'radius'))
+    - waypoints = widget_params.try(:[], 'waypoints').map { |w| w.split(',').first.strip }
+    %dd.Definition-Content
+      #{waypoints.first} – #{waypoints.last}
+      - if waypoints.length > 2
+        %span (#{t('users.list_routes.route_points', count: waypoints.length)})
 
-  - if categories.present?
-    %section.categories
-      %h2= t('views.widgets.preview.direction.relics_from_categories')
-      %ul
-        - Category.roots.sort_by(&:name).each do |category|
-          - if categories.include?(category.name_key)
-            %li= category.name_key
-            - if category.name_key == 'sakralny'
-              - category.children.sort_by(&:name).each do |child|
-                - if categories.include?(child.name_key)
-                  %li= child.name_key
+.Map
+  #map_canvas{ :style => 'width: 100%; height: 100%;' }
 
-.relics
-  %h1= t('views.widgets.preview.direction.relics_list')
-  #relics-container
+.Sidebar
+  .Logo
+    %b.Hidden Otwarte Zabytki
+    = image_tag 'logo.png', :alt => t('views.relics.guide.logo', editable: false), :class => 'Logo-Image'
+
+%section
+  %h1.Title-Header--padded-bottom= t('users.list_routes.relics_on_route')
+  %p#relics-loading-info #{t('views.widgets.edit.direction.loading_relics')}…
+  %ol.MainContent#relics-container
+
+%footer.Footer--padded-top
+  .Sidebar
+    %h1 www.otwartezabytki.pl
+    #{t('views.relics.guide.date')}: #{Time.now.strftime('%Y-%m-%d')}
+  = image_tag 'cc_logo.png', :alt => 'Centrum Cyfrowe'
 
 :javascript
   var renderOnly = printAction = true;
 %script{ type: 'application/json', id: 'search_params' }
   != widget_params.to_json
-= content_for :stylesheets do
-  = stylesheet_link_tag "widgets/direction"
 = content_for :javascripts do
   = javascript_include_tag "jsts", debug: false
   = javascript_include_tag "widgets/direction"
