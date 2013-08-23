@@ -240,6 +240,11 @@ li {
   }
 }
 
+.Footer--padded-top {
+  @extend .Footer;
+  margin-top: 2em;
+}
+
 /*
   Sections
   -------- */

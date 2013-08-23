@@ -28,10 +28,21 @@
 .Map
   #map_canvas{ :style => 'width: 100%; height: 100%;' }
 
+.Sidebar
+  .Logo
+    %b.Hidden Otwarte Zabytki
+    = image_tag 'logo.png', :alt => t('views.relics.guide.logo', editable: false), :class => 'Logo-Image'
+
 %section
   %h1.Title-Header--padded-bottom= t('users.list_routes.relics_on_route')
   %p#relics-loading-info #{t('views.widgets.edit.direction.loading_relics')}…
   %ol.MainContent#relics-container
+
+%footer.Footer--padded-top
+  .Sidebar
+    %h1 www.otwartezabytki.pl
+    #{t('views.relics.guide.date')}: #{Time.now.strftime('%Y-%m-%d')}
+  = image_tag 'cc_logo.png', :alt => 'Centrum Cyfrowe'
 
 :javascript
   var renderOnly = printAction = true;
