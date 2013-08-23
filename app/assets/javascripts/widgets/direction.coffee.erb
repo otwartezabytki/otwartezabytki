@@ -292,6 +292,12 @@ hasValidWaypoints = (waypoints) ->
     not waypoint.isBlank()
   .length > 1
 
+parseRadius = (value) ->
+  Math.min(1000, Math.max(1, parseInt(value, 10) || 0))
+
+$('#search_radius').on 'change', ->
+  this.value = parseRadius $(this).val()
+
 debouncedSearchRelics = jQuery.debounce ->
   if $('#search_params').length > 0
     search_params            = $.parseJSON $('#search_params').html()
@@ -299,7 +305,7 @@ debouncedSearchRelics = jQuery.debounce ->
     search_params            = $('#new_search').serializeObject().search
     search_params.waypoints  = getWaypoints()
     search_params.route_type = $('input[name="search[route_type]"]:checked').val()
-    search_params.radius     = $('#search_radius').val()
+    search_params.radius     = parseRadius $('#search_radius').val()
 
   search_params.api_key = "oz"
   search_params.per_page = 100
