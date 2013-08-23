@@ -27,7 +27,10 @@
             }
           })().setAttribute('checked', '');
 
-        %h2= t('views.widgets.show.direction.relics_on_path', editable: false).gsub(':', '')
+        %h2
+          = t('views.widgets.show.direction.relics_on_path', editable: false).gsub(':', '')
+          %span.tooltip{ title: t('views.widgets.edit.direction.map_help', editable: false)}
+            = image_tag("widget-helper.png")
         #waypoints
           .search-input
             - widget_params.try(:[], 'waypoints').try :each_with_index do |waypoint, index|

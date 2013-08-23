@@ -1550,6 +1550,7 @@ pl:
           params_label: "Parametry do <a href='/api_doc/'>API</a>"
           settings_info_: "Jeśli chcesz na przykład wyświetlić na swojej stronie mapkę z trasą przebiegającą przez 2 lub więcej miast z zaznaczonymi zabytkami w jej promieniu, znajdź te miasta i wybierz interesujące cię kategorie oraz promień, a następnie skopiuj kod do wstawienia na stronę."
           width: "Szerokość widgeta"
+          map_help: "Wpisz nazwę dowolnego miejsca (np. miasto, ulica) lub własnoręcznie ustaw znacznik na mapie. Wygenerowaną trasę możesz przeciągać i dostosowywać do swoich potrzeb."
           save: "Zapisz trasę"
           print_: "Wydrukuj trasę"
           save_and_print: "Zapisz i wydrukuj trasę"
