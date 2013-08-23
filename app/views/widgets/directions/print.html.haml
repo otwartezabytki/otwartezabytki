@@ -2,47 +2,38 @@
   = javascript_include_tag "http://maps.googleapis.com/maps/api/js?key=#{Settings.oz.gm_key}&sensor=false&libraries=places"
 
 %script#relic-template{ type: 'text/x-handlebars-template' }
-  %li.relic
-    %h3.relic__tile {{identification}}
-    %p.relic__data {{street}}
+  %li.Definition-Container
+    %dl.Definition--inline
+      %dt.Definition-Header {{identification}}
+      %dd.Definition-Content {{street}}
 
-.map{ :style => "width: 50em; height: 50em" }
-  #map_canvas{ :style => "width: 100%; height: 100%;" }
+%header.Sidebar
+  %h1.Logo
+    %span.Logo-Header= t('views.relics.guide.title')
+    %b.Hidden Otwarte Zabytki
+    = image_tag 'logo.png', :alt => t('views.relics.guide.logo', editable: false), :class => 'Logo-Image'
 
-.sidebar
-  %section.waypoints
-    - if widget.has_valid_waypoints?
-      %h2= t('views.widgets.preview.direction.relics_on_route')
-      %ul
-        - widget_params.try(:[], 'waypoints').try :each do |waypoint|
-          %li= waypoint
-      %strong= "#{t('views.widgets.preview.direction.within_radius', editable: false)} #{widget_params.try(:[], 'radius')} km"
-    - else
-      %h2= t('views.widgets.preview.direction.no_route')
+%header.Title
+  %h1.Title-Header= t("views.widgets.route_types.#{widget_params.try(:[], 'route_type')}")
+  %dl.Title-Content.Definition
+    %dt.Definition-Header= t('users.list_routes.relics_within_radius', radius: widget_params.try(:[], 'radius'))
+    - waypoints = widget_params.try(:[], 'waypoints').map { |w| w.split(',').first.strip }
+    %dd.Definition-Content
+      #{waypoints.first} – #{waypoints.last}
+      - if waypoints.length > 2
+        %span (#{t('users.list_routes.route_points', count: waypoints.length)})
 
+.Map
+  #map_canvas{ :style => 'width: 100%; height: 100%;' }
 
-  - if categories.present?
-    %section.categories
-      %h2= t('views.widgets.preview.direction.relics_from_categories')
-      %ul
-        - Category.roots.sort_by(&:name).each do |category|
-          - if categories.include?(category.name_key)
-            %li= category.name_key
-            - if category.name_key == 'sakralny'
-              - category.children.sort_by(&:name).each do |child|
-                - if categories.include?(child.name_key)
-                  %li= child.name_key
-
-.relics
-  %h1= t('views.widgets.preview.direction.relics_list')
-  %ol#relics-container.relic__list
+%section
+  %h1.Title-Header--padded-bottom= t('users.list_routes.relics_on_route')
+  %ol.MainContent#relics-container
 
 :javascript
   var renderOnly = printAction = true;
 %script{ type: 'application/json', id: 'search_params' }
   != widget_params.to_json
-= content_for :stylesheets do
-  = stylesheet_link_tag "widgets/direction"
 = content_for :javascripts do
   = javascript_include_tag "jsts", debug: false
   = javascript_include_tag "widgets/direction"

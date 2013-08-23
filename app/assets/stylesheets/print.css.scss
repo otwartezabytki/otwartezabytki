@@ -61,7 +61,7 @@ a {
   color: inherit;
 
   @media print {
-    &[href^='http']:after {
+    &[href^='http']:not(#map_canvas a):after {
       content: " (" attr(href) ")";
     }
   }
@@ -72,6 +72,14 @@ li {
 
   ul & {
     list-style: square;
+  }
+
+  ol & {
+    list-style: decimal;
+
+    &.Definition-Container {
+      margin-left: 3em;
+    }
   }
 }
 
@@ -119,6 +127,11 @@ li {
   font-size: 2rem;
   line-height: 1.2;
   font-weight: 600;
+}
+
+.Title-Header--padded-bottom {
+  @extend .Title-Header;
+  margin-bottom: 0.5em;
 }
 
 .Definition {
@@ -264,4 +277,15 @@ li {
   ul, ol {
     padding-left: 20px;
   }
+}
+
+/*
+  Widget Direction
+  ---------------- */
+
+.Map {
+  width: 50em;
+  height: 50em;
+  margin-bottom: 2em;
+  page-break-after: always;
 }
