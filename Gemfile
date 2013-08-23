@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+source 'http://rails-assets.org'
 
 gem 'rails', '~> 3.2.3', git: 'git://github.com/sheerun/rails.git', branch: 'v3.2.11/multipart-fix'
 gem 'pg'
@@ -15,6 +16,7 @@ group :assets do
   gem 'bootstrap-sass', '~> 2.0.4.0'
   gem 'jsts-rails', '~> 0.2.0'
   gem 'autoprefixer-rails'
+  gem 'rails-assets-handlebars'
 end
 
 gem 'jquery-rails', '2.0.3'

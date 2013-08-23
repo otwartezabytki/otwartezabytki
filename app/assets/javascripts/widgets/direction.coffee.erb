@@ -5,6 +5,7 @@
 #= require vendor/jquery.cookie
 #= require twitter/bootstrap/bootstrap-tooltip
 #= require sugar
+#= require handlebars/handlebars
 #= require_tree ../libraries
 #= require gmaps/marker-clusterer
 #= require gmaps/context-menu
@@ -16,6 +17,7 @@ ROUTE = null
 POLYGON = null
 
 print_has_prompted = false
+template = false
 
 show_content_window = (marker, content) ->
   if marker.info_window
@@ -252,20 +254,25 @@ searchRoute = (search_params, callback) ->
       <%= Rails.env.development? ? 'console.log' : 'window.alert' %>('Nie znaleziono trasy! Spróbuj ponownie.')
 
 printAppendRelic = (relic) ->
-  markup = """
-    <div class="relic">
-      <h3 class="name">#{relic.identification}</h3>
-      <p class="street">#{relic.street}</p>
-    </div>
-    """
-  $('#relics-container').append markup
+  return if $("#relic-#{relic.id}").length
+
+  template ||= Handlebars.compile $('#relic-template').html()
+  $('#relics-container').append template(relic)
 
 printRenderRelics = (relics) ->
   relics.each (relic) ->
     printAppendRelic relic
 
+  $('#relics-loading-info').remove()
+
   unless print_has_prompted
-    window.print()
+    <%=
+      if Rails.env.development?
+        "console.log('`window.print()` doesn’t prompt during development')"
+      else
+        'window.print()'
+      end
+    %>
     print_has_prompted = true
 
 performSearch = (search_params, callback) ->
