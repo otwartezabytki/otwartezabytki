@@ -15,7 +15,7 @@ jQuery.initializer '.edit_widget.direction', ->
   $form = $('form.widget_direction')
   oz.api 'on_params_changed', (params) ->
     $('#widget_direction_params').val(JSON.stringify(params))
-    $.post $form.attr('action'), $form.serialize(), (data) ->
+    $.post $form.attr('action') + '.json', $form.serialize(), (data) ->
       $('textarea#snippet').val(data.snippet)
     , "json"
 
