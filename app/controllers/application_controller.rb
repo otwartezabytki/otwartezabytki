@@ -109,7 +109,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def save_return_path
-    cookies[:return_path] = request.fullpath if request.get?
+    cookies[:return_path] = request.fullpath if request.get? and request.format != 'json' and !params[:iframe]
   end
 
   def authenticate_admin!
