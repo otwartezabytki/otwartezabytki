@@ -1,3 +1,4 @@
+[![Stories in Ready](http://badge.waffle.io/monterail/otwartezabytki.png)](http://waffle.io/monterail/otwartezabytki)  
 # Otwarte Zabytki
 
 ### Requirements (for OS X)
