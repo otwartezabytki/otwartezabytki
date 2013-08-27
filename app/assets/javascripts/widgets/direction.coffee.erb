@@ -484,13 +484,11 @@ jQuery ->
 
   gmap.menu = new contextMenu(map: window.gmap)
 
-  gmap.menu.addItem 'Start route here', (map, latlng) ->
-    $('#waypoints .waypoint:first').val("#{latlng.lat().toFixed(6)},#{latlng.lng().toFixed(6)}")
-    searchRelics()
+  gmap.menu.addItem 'Rozpocznij trasę tutaj', (map, latlng) ->
+    $('#waypoints .waypoint:first').val("#{latlng.lat().toFixed(6)},#{latlng.lng().toFixed(6)}").change()
 
-  gmap.menu.addItem 'End route here', (map, latlng) ->
-    $('#waypoints .waypoint:last').val("#{latlng.lat().toFixed(6)},#{latlng.lng().toFixed(6)}")
-    searchRelics()
+  gmap.menu.addItem 'Zakończ trasę tutaj', (map, latlng) ->
+    $('#waypoints .waypoint:last').val("#{latlng.lat().toFixed(6)},#{latlng.lng().toFixed(6)}").change()
 
   google.maps.event.addListener gmap.directionsRenderer, 'directions_changed', ->
     ROUTE = gmap.directionsRenderer.getDirections().routes[0]
