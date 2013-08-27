@@ -13,6 +13,7 @@
           = image_tag 'widgets/map_search.png', :width => 56, :height => 56, :alt => ''
         %dd.feed-message.feed-links
           = link_to t('views.widgets.show.direction.edit_route'), edit_widgets_direction_path(route)
+          = link_to t('.delete'), widgets_direction_path(route), 'data-method' => :delete, class: 'delete', confirm: t('.delete_confirmation', editable: false)
           = link_to t('.print'), print_widgets_direction_path(route)
         %dd.feed-message
           = t('.relics_within_radius', radius: route.widget_params.try(:[], 'radius')) + ":"

@@ -64,4 +64,10 @@ class Widgets::DirectionsController < WidgetsController
   def configure
   end
 
+  def destroy
+    authorize! :destroy, widget_direction
+    widget_direction.destroy
+    redirect_to user_my_routes_path(current_user.id), :notice => t('notices.route_has_been_removed')
+  end
+
 end
