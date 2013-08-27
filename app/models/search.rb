@@ -40,10 +40,6 @@ class Search
   end
 
   def widget=(value)
-    if value
-      @per_page = 100
-    end
-
     @widget = value
   end
 
@@ -172,6 +168,10 @@ class Search
 
   def per_page
     @per_page || 30
+  end
+
+  def per_page=(value)
+    @per_page = value
   end
 
   def enable_highlight
