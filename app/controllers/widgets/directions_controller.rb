@@ -43,6 +43,8 @@ class Widgets::DirectionsController < WidgetsController
     if widget_direction.save
       if params[:save_and_print]
         redirect_to print_widgets_direction_path(widget_direction)
+      elsif params[:save]
+        redirect_to user_my_routes_path(current_user.id)
       else
         redirect_to edit_widgets_direction_path(widget_direction), :notice => t('notices.widget_has_been_updated')
       end
@@ -60,6 +62,12 @@ class Widgets::DirectionsController < WidgetsController
   end
 
   def configure
+  end
+
+  def destroy
+    authorize! :destroy, widget_direction
+    widget_direction.destroy
+    redirect_to user_my_routes_path(current_user.id), :notice => t('notices.route_has_been_removed')
   end
 
 end

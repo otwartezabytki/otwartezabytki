@@ -924,6 +924,7 @@ pl:
     relic_unadopted: "Odadoptowałeś zabytek. Już nie będziesz otrzymywał powiadomień o jego zmianach."
     profile_updated: "Twój profil został zaktualizowany."
     profile_not_updated: "Formularz został źle wypełniony."
+    route_has_been_removed: "Trasa została usunięta."
   number:
     currency:
       format:
@@ -1679,6 +1680,8 @@ pl:
       edit: "Edytuj"
       preview: "Podgląd"
       relic_unknown_address: "dokładny adres nieznany"
+      delete: "Usuń trasę"
+      delete_confirmation: "Usunąć trasę?"
     navigation:
       watched: "Obserwowane"
       checked_by_me: "Sprawdzone przeze mnie"

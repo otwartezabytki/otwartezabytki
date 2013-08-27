@@ -244,8 +244,8 @@ getWaypoints = ->
     .get()
 
 searchRoute = (search_params, callback) ->
-  return callback(routeToPolygon(ROUTE, search_params.radius)) if ROUTE?
   do clearMarkers
+  return callback(routeToPolygon(ROUTE, search_params.radius)) if ROUTE?
 
   origin      = search_params.waypoints.first()
   destination = search_params.waypoints.last()
@@ -330,9 +330,14 @@ $('#search_radius').on 'change', ->
   this.value = parseRadius $(this).val()
 
 saveWidget = ->
+  storeParams = ->
+    params = Object.clone getSearchParams()
+    delete params.polygon
+    params
+
   unless renderOnly?
     window.parent.postMessage(JSON.stringify(
-      event: "on_params_changed", params: getSearchParams()
+      event: "on_params_changed", params: storeParams()
     ), "*")
 
 debouncedSearchRelics = jQuery.debounce ->
@@ -496,4 +501,4 @@ jQuery ->
     if ROUTE?
       updateWaypointInputs ROUTE, -> searchRelics()
 
-  searchRelics()
+  $(document).trigger 'params:changed'

@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   end
 
   expose(:my_routes) do
-    Widget::Direction.where(user_id: user.id).keep_if { |route| route.has_valid_waypoints? }
+    Widget::Direction.where(user_id: user.id).reorder('updated_at DESC').keep_if { |route| route.has_valid_waypoints? }
   end
 
   def update
