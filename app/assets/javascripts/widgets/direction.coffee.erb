@@ -244,8 +244,8 @@ getWaypoints = ->
     .get()
 
 searchRoute = (search_params, callback) ->
-  return callback(routeToPolygon(ROUTE, search_params.radius)) if ROUTE?
   do clearMarkers
+  return callback(routeToPolygon(ROUTE, search_params.radius)) if ROUTE?
 
   origin      = search_params.waypoints.first()
   destination = search_params.waypoints.last()
