@@ -141,6 +141,27 @@ module Api
                 :name => "longitude",
                 :paramType => "query",
                 :required => false
+              },{
+                :allowMultiple => false,
+                :dataType => "float",
+                :description => "Distance in km",
+                :name => "distance",
+                :paramType => "query",
+                :required => false
+              },{
+                :allowMultiple => false,
+                :dataType => "string",
+                :description => "Bounding box e.g. 'lat,lng;lat,lng', '52.583886,20.77408;50.883137,22.80655'",
+                :name => "bounding_box",
+                :paramType => "query",
+                :required => false
+              },{
+                :allowMultiple => false,
+                :dataType => "string",
+                :description => "Polygon e.g. 'lat,lng;lat,lng;lat,lng;...lat,lng', '51.229871,22.56075;51.228612,22.565849;51.229077,22.573169;...51.229871,22.56075'",
+                :name => "polygon",
+                :paramType => "query",
+                :required => false
               }],
               :responseClass => "Relic",
               :summary => "Search relics"

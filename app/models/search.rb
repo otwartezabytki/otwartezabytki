@@ -6,7 +6,7 @@ class Search
 
   attr_accessor :q, :query, :place, :from, :to, :categories, :state, :existence, :location, :order, :lat, :lon, :load
   attr_accessor :conditions, :range_conditions, :per_page, :page, :has_photos, :has_description, :facets, :zoom, :widget
-  attr_accessor :bounding_box
+  attr_accessor :bounding_box, :polygon, :distance
 
   def initialize(attributes = {})
     attributes.each do |name, value|
@@ -71,6 +71,26 @@ class Search
     @location_object
   end
 
+  def polygon=(value)
+    @polygon = value.split(';')
+  end
+
+  def polygon
+    @polygon
+  end
+
+  def polygon?
+    @polygon.present?
+  end
+
+  def distance=(value)
+    value = value.try(:gsub, ',', '.').try(:to_f) || 0
+    @distance = [value, 0.2].max
+  end
+
+  def distance
+    @distance || 0.2
+  end
 
   def location=(value)
     _, location_type, location_ids = value.match('^(world|country|voivodeship|district|commune|place):(.*)$').to_a
@@ -303,7 +323,7 @@ class Search
     if [@lat, @lon].all?(&:present?)
       terms_cond << {
         'geo_distance' => {
-          'distance' => '0.2km',
+          'distance' => "#{distance}km",
           'coordinates' => [@lon, @lat]
         }
       }
@@ -314,6 +334,15 @@ class Search
           'coordinates' => {
             "top_left" => @top_left,
             "bottom_right" => @bottom_right
+          }
+        }
+      }
+    end
+    if polygon?
+      terms_cond << {
+        'geo_polygon' => {
+          'coordinates' => {
+            'points' => polygon
           }
         }
       }
