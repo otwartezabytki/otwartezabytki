@@ -308,7 +308,8 @@ hasValidWaypoints = (waypoints) ->
   .length > 1
 
 parseRadius = (value) ->
-  Math.min(1000.0, Math.max(0.1, parseFloat(value.replace(',', '.'), 10) || 0))
+  value = parseFloat(('' + value).replace(/[^0-9]+/, '.').replace(/[^0-9\.]/g, '')) || 0
+  Math.min(1000, Math.max(0.1, parseFloat(value, 10)))
 
 getSearchParams = ->
   return SEARCH_PARAMS if SEARCH_PARAMS?
