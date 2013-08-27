@@ -14,6 +14,7 @@ window.gmap = null
 window.marker_clusterer = null
 ROUTE = null
 POLYGON = null
+SEARCH_PARAMS = null
 
 print_has_prompted = false
 template = false
@@ -36,9 +37,8 @@ show_content_window = (marker, content) ->
     marker.info_window.open(gmap, marker)
 
 render_relic_info = (relic) ->
-  photo = if relic.main_photo then "<div class='photo-wrapper'><img src='#{relic.main_photo.file.midi.url}' width='50' height='50'></div>" else ""
   link = "<a href='#{Routes.relic_path(relic.id)}' target='_blank'>więcej »</a>"
-  "<div class='relic-info'>#{photo}<div class='relic-info-content'><h3>#{relic.identification}</h3><div>#{relic.street}</div><div>#{link}</div></div></div>"
+  "<div class='relic-info'><div class='relic-info-content'><h3>#{relic.identification}</h3><div>#{relic.street}</div><div>#{link}</div></div></div>"
 
 markers = []
 overlays = []
@@ -191,6 +191,20 @@ getTravelMode = (type) ->
     else
       google.maps.TravelMode.WALKING
 
+simplifyPolygon = (polygon) ->
+  return polygon if polygon.length < 100
+
+  simplifyBy = Math.max(1, parseInt(polygon.length / Math.max(100, polygon.length * 0.3)))
+
+  return polygon if simplifyBy is 1
+
+  simplified = (p for p in polygon by simplifyBy)
+
+  # Make sure that polygon is closed
+  simplified.pop()
+  simplified.add simplified.first()
+  simplified
+
 routeToPolygon = (route, distance) ->
   return POLYGON if POLYGON?
 
@@ -214,7 +228,9 @@ routeToPolygon = (route, distance) ->
   line_string = factory.createLineString coordinates
   buffer = line_string.buffer distance / degreeInKm
 
-  paths = buffer.shell.points.map (p) ->
+  bufferCoordinates = simplifyPolygon buffer.getCoordinates()
+
+  paths = bufferCoordinates.map (p) ->
     new google.maps.LatLng p.x, p.y
 
   POLYGON = paths.map (p) -> p.toUrlValue()
@@ -294,10 +310,9 @@ hasValidWaypoints = (waypoints) ->
 parseRadius = (value) ->
   Math.min(1000, Math.max(1, parseInt(value, 10) || 0))
 
-$('#search_radius').on 'change', ->
-  this.value = parseRadius $(this).val()
+getSearchParams = ->
+  return SEARCH_PARAMS if SEARCH_PARAMS?
 
-debouncedSearchRelics = jQuery.debounce ->
   if $('#search_params').length > 0
     search_params            = $.parseJSON $('#search_params').html()
   else
@@ -309,16 +324,20 @@ debouncedSearchRelics = jQuery.debounce ->
   search_params.api_key = "oz"
   search_params.per_page = 100
   search_params.widget = 1
+  SEARCH_PARAMS = search_params
 
-  store_params = ->
-    params = Object.clone search_params
-    delete params.polygon
-    params
+$('#search_radius').on 'change', ->
+  this.value = parseRadius $(this).val()
 
+saveWidget = ->
   unless renderOnly?
     window.parent.postMessage(JSON.stringify(
-      event: "on_params_changed", params: store_params()
+      event: "on_params_changed", params: getSearchParams()
     ), "*")
+
+debouncedSearchRelics = jQuery.debounce ->
+
+  search_params = getSearchParams()
 
   if hasValidWaypoints search_params.waypoints
     searchRoute search_params, (polygon) ->
@@ -338,7 +357,7 @@ debouncedSearchRelics = jQuery.debounce ->
       renderResults(result.clusters, [])
 
   false
-, 500
+, 50
 
 
 haversineDistance = (lat1, lon1, lat2, lon2) ->
@@ -424,8 +443,9 @@ jQuery ->
   $search.submit(searchRelics)
 
   $(document).on 'params:changed', ->
-    ROUTE = POLYGON = null
+    ROUTE = POLYGON = SEARCH_PARAMS = null
     do searchRelics
+    do saveWidget
 
   $('body').on 'change', '#search_radius, #waypoints .waypoint, input[name="search[route_type]"]', ->
     $(document).trigger 'params:changed'
@@ -464,13 +484,11 @@ jQuery ->
 
   gmap.menu = new contextMenu(map: window.gmap)
 
-  gmap.menu.addItem 'Start route here', (map, latlng) ->
-    $('#waypoints .waypoint:first').val("#{latlng.lat().toFixed(6)},#{latlng.lng().toFixed(6)}")
-    searchRelics()
+  gmap.menu.addItem 'Rozpocznij trasę tutaj', (map, latlng) ->
+    $('#waypoints .waypoint:first').val("#{latlng.lat().toFixed(6)},#{latlng.lng().toFixed(6)}").change()
 
-  gmap.menu.addItem 'End route here', (map, latlng) ->
-    $('#waypoints .waypoint:last').val("#{latlng.lat().toFixed(6)},#{latlng.lng().toFixed(6)}")
-    searchRelics()
+  gmap.menu.addItem 'Zakończ trasę tutaj', (map, latlng) ->
+    $('#waypoints .waypoint:last').val("#{latlng.lat().toFixed(6)},#{latlng.lng().toFixed(6)}").change()
 
   google.maps.event.addListener gmap.directionsRenderer, 'directions_changed', ->
     ROUTE = gmap.directionsRenderer.getDirections().routes[0]
