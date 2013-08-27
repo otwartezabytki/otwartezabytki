@@ -83,6 +83,11 @@ li {
   }
 }
 
+.Definition-Container--unbreakable {
+  @extend .Definition-Container;
+  page-break-inside: avoid;
+}
+
 .Hidden {
   @extend %visually-hidden;
 }
