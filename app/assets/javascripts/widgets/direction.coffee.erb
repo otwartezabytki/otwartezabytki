@@ -264,7 +264,6 @@ searchRoute = (search_params, callback) ->
       polygon = routeToPolygon route, search_params.radius
 
       gmap.directionsRenderer.setDirections(result)
-      gmap.onNextMovement -> callback(polygon)
     else
       <%= Rails.env.development? ? 'console.log' : 'window.alert' %>('Nie znaleziono trasy! Spróbuj ponownie.')
 
