@@ -355,6 +355,8 @@ debouncedSearchRelics = jQuery.debounce ->
       if bounds = gmap.getLatLngBounds()
         search_params.bounding_box = bounds.toString()
 
+      search_params.widget = 'direction'
+
       performSearch search_params, (result) ->
         renderResults result.clusters, result.relics, ->
           printRenderRelics result.relics if printAction?
