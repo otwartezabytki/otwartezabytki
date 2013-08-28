@@ -67,7 +67,7 @@ class Relic < ActiveRecord::Base
 
   attr_accessor :license_agreement, :polish_relic, :created_via_api
   attr_accessible :identification, :place_id, :dating_of_obj, :latitude, :longitude,
-                  :street, :tags, :categories, :photos_attributes, :description,
+                  :street, :tags, :categories, :auto_categories, :photos_attributes, :description,
                   :documents_attributes, :documents_info, :links_attributes, :links_info,
                   :events_attributes, :entries_attributes, :license_agreement, :polish_relic,
                   :geocoded, :build_state, :parent_id, :common_name, :kind, :as => [:default, :admin]
@@ -83,6 +83,7 @@ class Relic < ActiveRecord::Base
   serialize :source
   serialize :tags, Array
   serialize :categories, Array
+  serialize :auto_categories, Array
 
   scope :created, where(:build_state => 'finish_step')
 

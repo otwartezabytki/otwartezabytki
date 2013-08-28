@@ -10,3 +10,12 @@ jQuery.initializer 'section.edit.categories', ->
     multiple: true
     createSearchChoice: (search) ->
       { id: search, text: search }
+
+  autoCategories = $.parseJSON $('#auto_categories').html()
+  markup         = $('#auto_categories_markup').html()
+  autoCategories.each (category) ->
+    $("input[value='#{category}']:checkbox").parent('label').append markup
+  $('.auto_categories').tooltip()
+
+jQuery.initializer 'section.show.categories', ->
+  $('.auto_categories').tooltip()

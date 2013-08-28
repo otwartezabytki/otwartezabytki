@@ -118,6 +118,7 @@ pl:
         ancestry: "W zespołach"
         approved: "Zabytek zatwierdzony"
         categories: Kategorie
+        auto_categories: "Kategorie automatyczne"
         common_name: "Nazwa zwyczajowa"
         commune: Gmina
         country_code: Kraj
@@ -1394,6 +1395,7 @@ pl:
           placeholder: |-
               <p>Wybierz kategorie, które Twoim zdaniem pasują do opisywanego zabytku.</p>
               <p>Dodaj tagi, które pomogą poruszać się po katalogu.</p>
+          assigned_automatically: "przypisane automatycznie"
         description:
           add: "dodaj opis"
           header: Opis

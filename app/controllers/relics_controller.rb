@@ -88,6 +88,10 @@ class RelicsController < ApplicationController
       ]
     end
 
+    if params[:section] == 'categories'
+      relic.auto_categories = []
+    end
+
     if relic.save
       if params[:entry_id]
         params[:entry_id] = nil

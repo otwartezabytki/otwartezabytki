@@ -1,0 +1,55 @@
+name;kategoria;count
+zespół;;1048
+kościół;sakralny;1004
+cmentarz;cmentarny;481
+park;park_ogrod;423
+budynek;;362
+pałac;dworski_palacowy_zamek;293
+kościoła;sakralny;266
+kaplica;sakralny;218
+rzym-kat;sakralny, katolicki;216
+kamienica;mieszkalny;209
+ogrodzenie;mala_architektura;169
+dwór;dworski_palacowy_zamek;162
+dzwonnica;sakralny;159
+dworski;dworski_palacowy_zamek;152
+willa;mieszkalny;147
+pałacowy;dworski_palacowy_zamek;140
+ewangelicki;sakralny, ewangelicki;118
+klasztorny;sakralny, mieszkalny;112
+klasztor;sakralny, mieszkalny;112
+oficyna;mieszkalny;112
+brama;mala_architektura;101
+mieszkalny;mieszkalny;96
+ogród;park_ogrod;96
+zamek;dworski_palacowy_zamek;93
+jana;;92
+matki;;92
+plebania;mieszkalny, sakralny;88
+cerkiew;sakralny;87
+parafialny;sakralny;84
+mikołaja;sakralny;83
+boskiej;sakralny;79
+ratusz;uzytecznosci_publicznej;75
+żydowski;sakralny, zydowski;74
+zamku;dworski_palacowy_zamek;74
+muzeum;sportowy_kulturalny_edukacyjny;73
+wieża;;72
+szkoła;sportowy_kulturalny_edukacyjny;71
+ruiny;;71
+wniebowzięcia;sakralny;68
+krzyża;sakralny;66
+gospodarczy;budynek_gospodarczy;63
+trójcy;sakralny;62
+cmentarza;cmentarny;62
+fort;militarny;59
+michała;;59
+narodzenia;sakralny;59
+stajnia;budynek_gospodarczy;58
+pawilon;;58
+światowej;militarny;57
+marii;;57
+wojny;militarny;56
+gr-kat;sakralny, unicki;55
+synagoga;sakralny, zydowski;55
+dom;mieszkalny;
