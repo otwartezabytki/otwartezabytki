@@ -143,7 +143,11 @@ class Search
   end
 
   def facets
-    available_facets = ["countries", "voivodeships", "districts", "communes", "places"]
+    available_facets = if widget == 'direction'
+      ["countries", "districts", "communes", "places"]
+    else
+      ["countries", "voivodeships", "districts", "communes", "places"]
+    end
     navbar_facets = available_facets.drop(location.length)
 
     if bounding_box?

@@ -308,7 +308,8 @@ hasValidWaypoints = (waypoints) ->
   .length > 1
 
 parseRadius = (value) ->
-  Math.min(1000.0, Math.max(0.1, parseFloat(value.replace(',', '.'), 10) || 0))
+  value = parseFloat(('' + value).replace(/[^0-9]+/, '.').replace(/[^0-9\.]/g, '')) || 0
+  Math.min(1000, Math.max(0.1, parseFloat(value, 10)))
 
 getSearchParams = ->
   return SEARCH_PARAMS if SEARCH_PARAMS?
@@ -353,6 +354,8 @@ debouncedSearchRelics = jQuery.debounce ->
 
       if bounds = gmap.getLatLngBounds()
         search_params.bounding_box = bounds.toString()
+
+      search_params.widget = 'direction'
 
       performSearch search_params, (result) ->
         renderResults result.clusters, result.relics, ->
