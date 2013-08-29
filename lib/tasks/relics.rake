@@ -61,14 +61,20 @@ SQL
     end
   end
 
-  task :export => :environment do
-    new_zip_path = "#{Rails.root}/public/history/#{Date.today.to_s(:db)}-relics.zip"
+  def export_relics(register_data = false)
+    suffix, template = if register_data
+      ["relics-register", "api/v1/relics/_relic_register.json.jbuilder"]
+    else
+      ["relics", "api/v1/relics/_relic.json.jbuilder"]
+    end
+    new_zip_path = "#{Rails.root}/public/history/#{Date.today.to_s(:db)}-#{suffix}.zip"
     if File.exists?(new_zip_path)
       puts "Nothing to do file (#{new_zip_path}) has been already generated."
     else
+      puts "Exporting relics to file (#{new_zip_path})"
       total   = Relic.created.roots.count
       counter = 0
-      tmpfile = Tempfile.new(['relics', '.zip'])
+      tmpfile = Tempfile.new([suffix, '.zip'])
       begin
         Zip::ZipOutputStream.open(tmpfile.path) do |z|
           Relic.created.roots.includes(:place, :commune, :district, :voivodeship).find_in_batches do |objs|
@@ -83,8 +89,8 @@ SQL
                   include ApplicationHelper
                   include Rails.application.routes.url_helpers
                 end
-                z.put_next_entry("relics/#{r.id}.json")
-                z.print view.render(template: 'api/v1/relics/_relic.json.jbuilder', locals: { relic: r, params: { include_descendants: true }})
+                z.put_next_entry("#{suffix}/#{r.id}.json")
+                z.print view.render(template: template, locals: { relic: r, params: { include_descendants: true }})
               rescue => ex
                 Raven.capture_exception(ex)
               end
@@ -93,12 +99,17 @@ SQL
         end
         puts "Progress 100 of 100%"
         FileUtils.cp tmpfile.path, new_zip_path
-        FileUtils.chmod 'go+r', new_zip_path
-        FileUtils.ln_s new_zip_path, "#{Rails.root}/public/history/current-relics.zip", :force => true
+        FileUtils.chmod 0644, new_zip_path
+        FileUtils.ln_s new_zip_path, "#{Rails.root}/public/history/current-#{suffix}.zip", :force => true
       ensure
         tmpfile.close
       end
     end
+  end
+
+  task :export => :environment do
+    export_relics
+    export_relics true # with revisions
   end
 
   task :export_users, [:export_csv] => :environment do |t, args |

@@ -293,4 +293,8 @@ class Relic < ActiveRecord::Base
     'ZE' == kind or (is_root? and has_children?)
   end
 
+  def revisions
+    versions.reorder('created_at DESC').limit(3)
+  end
+
 end
