@@ -159,15 +159,16 @@ SQL
 
       Relic.paper_trail_off
 
-      Relic.where("LOWER(identification) LIKE ? OR LOWER(common_name) LIKE ? OR LOWER(description) LIKE ?", keyword, keyword, keyword).each do |relic|
-        auto_categories = categories - relic.categories
-        next if auto_categories.blank?
+      Relic.where("LOWER(identification) LIKE ? OR LOWER(common_name) LIKE ? OR LOWER(description) LIKE ?", keyword, keyword, keyword).find_in_batches do |relics|
+        relics.each do |relic|
+          auto_categories = categories - relic.categories
+          next if auto_categories.blank?
 
-        relic.record_timestamps = false
-        relic.categories = (relic.categories + auto_categories).uniq
-        relic.auto_categories = (relic.auto_categories + auto_categories).uniq
-        relic.save!
-
+          relic.record_timestamps = false
+          relic.categories = (relic.categories + auto_categories).uniq
+          relic.auto_categories = (relic.auto_categories + auto_categories).uniq
+          relic.save!
+        end
       end
     end
   end
