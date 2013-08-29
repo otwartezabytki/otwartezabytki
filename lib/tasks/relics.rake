@@ -157,10 +157,13 @@ SQL
       categories.select! { |c| Category.find_by_name_key(c) }
       next if categories.blank?
 
+      Relic.paper_trail_off
+
       Relic.where("LOWER(identification) LIKE ? OR LOWER(common_name) LIKE ? OR LOWER(description) LIKE ?", keyword, keyword, keyword).each do |relic|
         auto_categories = categories - relic.categories
         next if auto_categories.blank?
 
+        relic.record_timestamps = false
         relic.categories = (relic.categories + auto_categories).uniq
         relic.auto_categories = (relic.auto_categories + auto_categories).uniq
         relic.save!
