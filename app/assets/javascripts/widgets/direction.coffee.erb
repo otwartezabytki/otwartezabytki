@@ -55,7 +55,7 @@ clearMarkers = ->
 renderResults = (search_groups, search_results, callback) ->
   do clearMarkers
 
-  if gmap.getZoom() > 11
+  if gmap.getZoom() > 11 and POLYGON?
     search_groups = []
   else
     search_results = []
@@ -112,7 +112,7 @@ renderResults = (search_groups, search_results, callback) ->
       content = render_relic_info(this)
       show_content_window(marker, content)
 
-  if gmap.getZoom() > 11
+  if gmap.getZoom() > 11 and POLYGON?
     image_urls = gmap_circles
     image_sizes = [55, 59, 75, 85, 105]
     font_sizes = [14, 14, 17, 17, 17]
@@ -344,15 +344,15 @@ debouncedSearchRelics = jQuery.debounce ->
 
   search_params = getSearchParams()
 
+  if bounds = gmap.getLatLngBounds()
+    search_params.bounding_box = bounds.toString()
+
   if hasValidWaypoints search_params.waypoints
     searchRoute search_params, (polygon) ->
       search_params.polygon = polygon.join(';')
       $('#search_polygon').val(search_params.polygon)
       # search_params.path = route.path.map((e) -> "#{e.latitude},#{e.longitude}").join(";")
       # $('#search_path').val(search_params.path)
-
-      if bounds = gmap.getLatLngBounds()
-        search_params.bounding_box = bounds.toString()
 
       search_params.widget = 'direction'
 
