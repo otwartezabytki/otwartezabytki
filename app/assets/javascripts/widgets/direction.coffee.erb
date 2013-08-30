@@ -17,6 +17,7 @@ POLYGON = null
 SEARCH_PARAMS = null
 
 print_has_prompted = false
+ready_to_print = false
 template = false
 
 show_content_window = (marker, content) ->
@@ -278,21 +279,34 @@ printAppendRelic = (relic) ->
   template ||= Handlebars.compile $('#relic-template').html()
   $('#relics-container').append template(relic)
 
-printRenderRelics = (relics) ->
+printClearRelics = ->
+  $('#relics-container').html ''
+  $('#relics-loading-info').show()
+
+printRenderRelics = (relics, last) ->
   relics.each (relic) ->
     printAppendRelic relic
 
-  $('#relics-loading-info').remove()
+  if last
+    $('#relics-loading-info').hide()
+    do windowPrint
 
-  unless print_has_prompted
-    <%=
-      if Rails.env.development?
-        "console.log('`window.print()` doesn’t prompt during development')"
-      else
-        'window.print()'
-      end
-    %>
-    print_has_prompted = true
+windowPrint = ->
+  return if print_has_prompted
+
+  if ready_to_print
+    ( ->
+      print_has_prompted = true
+      <%=
+        if !Rails.env.development?
+          "console.log('`window.print()` doesn’t prompt during development')"
+        else
+          'window.print()'
+        end
+      %>
+    ).delay 1000
+  else
+    ready_to_print = true
 
 performSearch = (search_params, callback) ->
   search_params._method = 'get'
@@ -361,9 +375,28 @@ debouncedSearchRelics = jQuery.debounce ->
 
       search_params.widget = 'direction'
 
-      performSearch search_params, (result) ->
-        renderResults result.clusters, result.relics, ->
-          printRenderRelics result.relics if printAction?
+      if printAction?
+        do printClearRelics
+
+        loadRelics = (search_params) ->
+          performSearch search_params, (result) ->
+            current_page = parseInt result.meta.current_page
+            total_pages  = parseInt result.meta.total_pages
+
+            if current_page is 1
+              renderResults result.clusters, result.relics, ->
+                do windowPrint
+
+            printRenderRelics result.relics, current_page == total_pages
+
+            if current_page < total_pages
+              search_params.page = current_page + 1
+              loadRelics search_params
+
+        loadRelics Object.clone(search_params)
+      else
+        performSearch search_params, (result) ->
+          renderResults result.clusters, result.relics
   else
     performSearch search_params, (result) ->
       renderResults(result.clusters, [])
