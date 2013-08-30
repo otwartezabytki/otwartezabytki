@@ -7,21 +7,22 @@
 .sidebar.preview
   = link_to '/', :target => :_top do
     %h1.logo
-  .preview__section
-    - route_type = widget_params.try(:[], 'route_type')
-    %h2.preview__header{ :class => "preview__header--#{route_type}", :title => t("views.widgets.route_types.#{route_type}", editable: false) }
-      = t('views.widgets.show.direction.route_type', editable: false).gsub(':', '')
-    %p.hidden
-      = t("views.widgets.route_types.#{route_type}")
+  - if widget.has_valid_waypoints?
+    .preview__section
+      - route_type = widget_params.try(:[], 'route_type')
+      %h2.preview__header{ :class => "preview__header--#{route_type}", :title => t("views.widgets.route_types.#{route_type}", editable: false) }
+        = t('views.widgets.show.direction.route_type', editable: false).gsub(':', '')
+      %p.hidden
+        = t("views.widgets.route_types.#{route_type}")
 
-  .preview__section
-    - unless widget.has_valid_waypoints?
-      %h2.preview__header= t('views.widgets.preview.direction.no_route')
-    - else
+    .preview__section
       %h2.preview__header= t('views.widgets.preview.direction.relics_on_route')
       %ul.preview__content
         - widget_params.try(:[], 'waypoints').try :each do |waypoint|
           %li= waypoint
+  - else
+    .preview__section
+      %h2.preview__header= t('views.widgets.preview.direction.no_route')
 
   - if categories.present?
     .preview__section
@@ -35,11 +36,12 @@
           - elsif categories.include?(category.name_key)
             %li= category.name.gsub('/', ', ')
 
-  .preview__section
-    %h2.preview__header= t('views.widgets.show.direction.relics_within_radius', editable: false).gsub(':', '')
-    %p.preview__content
-      = widget_params.try(:[], 'radius')
-      = t('views.widgets.show.direction.km_within_range')
+  - if widget.has_valid_waypoints?
+    .preview__section
+      %h2.preview__header= t('views.widgets.show.direction.relics_within_radius', editable: false).gsub(':', '')
+      %p.preview__content
+        = widget_params.try(:[], 'radius')
+        = t('views.widgets.show.direction.km_within_range')
 
   - if current_user and widget.user_id == current_user.id
     .preview__section
