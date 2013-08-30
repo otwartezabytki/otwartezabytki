@@ -298,7 +298,7 @@ windowPrint = ->
     ( ->
       print_has_prompted = true
       <%=
-        if !Rails.env.development?
+        if Rails.env.development?
           "console.log('`window.print()` doesn’t prompt during development')"
         else
           'window.print()'
