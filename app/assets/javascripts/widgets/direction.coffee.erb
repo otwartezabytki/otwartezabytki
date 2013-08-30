@@ -36,9 +36,22 @@ show_content_window = (marker, content) ->
 
     marker.info_window.open(gmap, marker)
 
-render_relic_info = (relic) ->
+renderRelicInfo = (relic) ->
+  photo = if relic.main_photo then "<div class='photo-wrapper'><img src='#{relic.main_photo.file.midi.url}' width='50' height='50'></div>" else ""
   link = "<a href='#{Routes.relic_path(relic.id)}' target='_blank'>więcej »</a>"
-  "<div class='relic-info'><div class='relic-info-content'><h3>#{relic.identification}</h3><div>#{relic.street}</div><div>#{link}</div></div></div>"
+  "<div class='relic-info'>#{photo}<div class='relic-info-content'><h3>#{relic.identification}</h3><div>#{relic.street}</div><div>#{link}</div></div></div>"
+
+loadRelicInfo = (location, callback) ->
+  gmap.onNextMovement ->
+  search_params = {}
+  if bounds = gmap.getLatLngBounds()
+    search_params.bounding_box = bounds.toString()
+  search_params.api_key = "oz"
+  search_params.per_page = 1
+  search_params.location = location
+  $.get Routes.api_v1_relics_path(search_params), (result) ->
+    callback(renderRelicInfo(result.relics[0]))
+  , "json"
 
 markers = []
 overlays = []
@@ -55,7 +68,7 @@ clearMarkers = ->
 renderResults = (search_groups, search_results, callback) ->
   do clearMarkers
 
-  if gmap.getZoom() > 11
+  if gmap.getZoom() > 11 and POLYGON?
     search_groups = []
   else
     search_results = []
@@ -84,16 +97,8 @@ renderResults = (search_groups, search_results, callback) ->
         clickable: true
         optimized: false
 
-      load_relic_info = (callback) =>
-        search_params
-        search_params.api_key = "oz"
-        search_params.location = "#{@type}:#{@id}"
-        $.get Routes.api_v1_relics_path(search_params), (result) ->
-          callback(render_relic_info(result.relics[0]))
-        , "json"
-
-      google.maps.event.addListener marker, 'click', ->
-        load_relic_info (content) ->
+      google.maps.event.addListener marker, 'click', =>
+        loadRelicInfo "#{@type}:#{@id}", (content) ->
           show_content_window(marker, content)
 
   $.each search_results, ->
@@ -109,10 +114,10 @@ renderResults = (search_groups, search_results, callback) ->
     markers.push marker
 
     google.maps.event.addListener marker, 'click', =>
-      content = render_relic_info(this)
-      show_content_window(marker, content)
+      loadRelicInfo "relic:#{@id}", (content) ->
+        show_content_window(marker, content)
 
-  if gmap.getZoom() > 11
+  if gmap.getZoom() > 11 and POLYGON?
     image_urls = gmap_circles
     image_sizes = [55, 59, 75, 85, 105]
     font_sizes = [14, 14, 17, 17, 17]
@@ -344,15 +349,15 @@ debouncedSearchRelics = jQuery.debounce ->
 
   search_params = getSearchParams()
 
+  if bounds = gmap.getLatLngBounds()
+    search_params.bounding_box = bounds.toString()
+
   if hasValidWaypoints search_params.waypoints
     searchRoute search_params, (polygon) ->
       search_params.polygon = polygon.join(';')
       $('#search_polygon').val(search_params.polygon)
       # search_params.path = route.path.map((e) -> "#{e.latitude},#{e.longitude}").join(";")
       # $('#search_path').val(search_params.path)
-
-      if bounds = gmap.getLatLngBounds()
-        search_params.bounding_box = bounds.toString()
 
       search_params.widget = 'direction'
 
