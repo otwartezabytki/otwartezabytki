@@ -40,12 +40,13 @@
       margin-top: 16px;
       position: relative;
       @include clearfix;
-      h3, label.main, strong.label{
+      label.main, strong.label{
         font-weight: bold;
         line-height: 32px;
       }
       > h3{
-        font-size: 16px;
+        font-size: 14px;
+        line-height: 24px;
       }
       aside h3{
         line-height: 20px;
@@ -698,5 +699,6 @@ form#new_relic{
 }
 
 .new_relic .creator section.creator-step .info h3{
+
   line-height: 1;
 }
