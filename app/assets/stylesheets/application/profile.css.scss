@@ -729,11 +729,10 @@ section.show.entries {
       background: #fff;
       padding: 20px;
       font-size: 14px;
-      line-height: 1.45;
+      line-height: 22px;
 
       .body {
         @include word-break();
-        font-family: Georgia, Times New Roman, Times, serif;
       }
 
       h3 {
