@@ -7,7 +7,7 @@
         %strong= t('views.relics.show.categories.content_title_cat')
         - if relic.categories.length > 0
           %span.content
-            = relic.categories.map { |c| link_to(Category.to_hash[c], relics_path(:search => {:categories => [c]})) }.join(', ').html_safe
+            = relic.categories.map { |c| link_to(Category.to_hash[c], relics_path(:search => {:categories => [c]})) + (raw(' <span class="auto_categories" title="' + t('views.relics.show.categories.assigned_automatically', editable: false) + '">*</span>') if relic.auto_categories.include?(c)) }.join(', ').html_safe
         - else
           = link_to t('views.relics.show.categories.not_added'), edit_section_relic_path(relic.to_param, :categories), :remote => true
       .tags

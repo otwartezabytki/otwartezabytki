@@ -729,11 +729,10 @@ section.show.entries {
       background: #fff;
       padding: 20px;
       font-size: 14px;
-      line-height: 1.45;
+      line-height: 22px;
 
       .body {
         @extend %word-break;
-        font-family: Georgia, Times New Roman, Times, serif;
       }
 
       h3 {
@@ -1037,7 +1036,7 @@ section.show.documents{
     &.pdf{
       background: asset-data-url("file_extension_pdf.png") top left no-repeat;
     }
-    &.msword, .vnd-openxmlformats-officedocument-wordprocessingml-document, .vnd-oasis-opendocument-text{
+    &.msword, .vnd-openxmlformats-officedocumedprocessingml-document, .vnd-oasis-opendocument-text{
       background: asset-data-url("file_extension_doc.png") top left no-repeat;
     }
     &.vnd-ms-excel, .vnd-openxmlformats-officedocument-spreadsheetml-sheet{

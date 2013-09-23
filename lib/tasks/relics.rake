@@ -159,4 +159,33 @@ SQL
       end
     end
   end
+
+  task :auto_categories => :environment do
+    puts "Updating relics categories..."
+    counter = 0
+    CSV.foreach "#{Rails.root}/db/csv/keywords_with_categories.csv", {col_sep: ';', headers: true} do |row|
+      next if row[0].blank? or row[1].blank?
+      keyword    = "%#{row[0].strip.downcase}%"
+      categories = row[1].split(',').map(&:strip)
+      categories.select! { |c| Category.find_by_name_key(c) }
+      next if categories.blank?
+
+      Relic.paper_trail_off
+
+      Relic.where("LOWER(identification) LIKE ? OR LOWER(common_name) LIKE ? OR LOWER(description) LIKE ?", keyword, keyword, keyword).find_in_batches do |relics|
+        relics.each do |relic|
+          auto_categories = categories - relic.categories
+          next if auto_categories.blank?
+
+          relic.record_timestamps = false
+          relic.categories = (relic.categories + auto_categories).uniq
+          relic.auto_categories = (relic.auto_categories + auto_categories).uniq
+          relic.save!
+          counter += 1
+        end
+        puts "Progress: #{counter} relics updated"
+      end
+    end
+    puts "Done"
+  end
 end

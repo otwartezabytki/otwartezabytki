@@ -6,7 +6,7 @@ class Search
 
   attr_accessor :q, :query, :place, :from, :to, :categories, :state, :existence, :location, :order, :lat, :lon, :load
   attr_accessor :conditions, :range_conditions, :per_page, :page, :has_photos, :has_description, :facets, :zoom, :widget
-  attr_accessor :bounding_box, :radius, :path, :polygon, :waypoints, :route_type
+  attr_accessor :bounding_box, :radius, :path, :polygon, :waypoints, :route_type, :distance
 
   def initialize(attributes = {})
     attributes.each do |name, value|
@@ -98,6 +98,15 @@ class Search
 
   def polygon?
     @polygon.present?
+  end
+
+  def distance=(value)
+    value = value.try(:gsub, ',', '.').try(:to_f) || 0
+    @distance = [value, 0.2].max
+  end
+
+  def distance
+    @distance || 0.2
   end
 
   def location=(value)
@@ -339,7 +348,7 @@ class Search
     if [@lat, @lon].all?(&:present?)
       terms_cond << {
         'geo_distance' => {
-          'distance' => '0.2km',
+          'distance' => "#{distance}km",
           'coordinates' => [@lon, @lat]
         }
       }
@@ -371,7 +380,7 @@ class Search
           }
         }
       }
-     end
+    end
     terms_cond
   end
 
