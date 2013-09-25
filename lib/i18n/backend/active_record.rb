@@ -28,8 +28,11 @@ module I18n
       protected
 
         def lookup(locale, key, scope = [], options = {})
-          key = normalize_flat_keys(locale, key, scope, options[:separator])
-          results = Tolk::Translation.lookup(locale, key).all
+          separator = options[:separator] || I18n.default_separator
+          key = normalize_flat_keys(locale, key, scope, separator)
+          results = Rails.cache.fetch("i18n-#{[locale, key].join(separator)}".gsub(/\s/, "_")) do
+            Tolk::Translation.lookup(locale, key)
+          end
           return nil if results.empty?
 
           translation = if results.first.phrase.key == key
@@ -56,4 +59,3 @@ module I18n
     end
   end
 end
-
