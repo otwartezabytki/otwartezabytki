@@ -248,7 +248,13 @@ class Relic < ActiveRecord::Base
   end
 
   def place_with_address(norm = false)
-    [place_full_name, street(norm)].reject(&:blank?) * ", "
+    [
+      "woj. #{voivodeship.name}",
+      "pow. #{district.name}",
+      "gm. #{commune.name}",
+      place.name,
+      street(norm)
+    ].reject(&:blank?).join(", ")
   end
 
   def parse_date

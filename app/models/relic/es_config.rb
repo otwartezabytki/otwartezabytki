@@ -180,6 +180,7 @@ module Relic::EsConfig
       :identification   => identification,
       :common_name      => common_name,
       :street           => street,
+      :place_with_address  => place_with_address(true)
     }
   end
 end

@@ -1,5 +1,8 @@
 require 'i18n/backend/base'
 require 'tolk/engine'
+require 'tolk/locale'
+require 'tolk/phrase'
+require 'tolk/translation'
 
 module I18n
   module Backend
