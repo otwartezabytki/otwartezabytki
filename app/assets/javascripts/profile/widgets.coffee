@@ -6,7 +6,6 @@ widget_container_id = 'add-alert-widget-content'
 $container = $('#add-widget-alert')
 $widget_container = $('.' + widget_container_id).first()
 $widget_output = $container.find('.add-alert-widget-output').first()
-$widget_trigger = $container.find('.add-alert-widget-button')
 
 $widget_loading_information = $container.find('.add-alert-widget-information--loading')
 $widget_error_information = $container.find('.add-alert-widget-information--error').hide()
@@ -39,14 +38,14 @@ handleFrameLoaded = ($event) ->
   $widget_loading_information.hide()
   $($event.target).show(1000)
 
-$.initializer $widget_trigger, ->
+jQuery.initializer '#add-widget-alert .add-alert-widget-button', ->
   @on 'click', ($event) ->
     $event.preventDefault()
     $widget_output.show(0).addClass 'visible'
 
     return showError() unless $widget_output.length and !$('#' + widget_container_id).length
 
-    $element = $($event.target)
+    $element = $(this)
     $placeholder = $element.parent '.placeholder'
     $placeholder.hide() if $placeholder
 
