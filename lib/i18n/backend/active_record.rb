@@ -1,4 +1,6 @@
 require 'i18n/backend/base'
+require 'tolk/phrase'
+require 'tolk/translation'
 
 module I18n
   module Backend
@@ -31,7 +33,7 @@ module I18n
           separator = options[:separator] || I18n.default_separator
           key = normalize_flat_keys(locale, key, scope, separator)
           results = Rails.cache.fetch("i18n-#{[locale, key].join(separator)}".gsub(/\s/, "_")) do
-            Tolk::Translation.lookup(locale, key)
+            Tolk::Translation.lookup(locale, key).all
           end
           return nil if results.empty?
 
