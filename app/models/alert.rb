@@ -47,9 +47,10 @@ class Alert < ActiveRecord::Base
   end
 
   def create_wuoz_alert
-    region = WuozRegion.where(:district_id => self.relic.district_id).first
-    if region
-      wuoz_alerts.find_or_create_by_wuoz_agency_id(region.wuoz_agency_id)
+    region = WuozRegion.where(:district_id => relic.district_id).first
+    wuoz_agency_id = region.try(:wuoz_agency_id) || WuozAgency.where(:main => true, :voivodeship_id => relic.voivodeship_id).first.try(:id)
+    if wuoz_agency_id
+      wuoz_alerts.find_or_create_by_wuoz_agency_id(wuoz_agency_id)
     else
       logger.error "#{Time.now}: alert_id(#{id}) relic_id(#{relic.id} district_id(#{relic.district_id})"
     end

@@ -20,8 +20,9 @@ namespace :import do
     hash = JSON.parse(File.open("#{Rails.root}/db/json/wuoz-agencies.json").read)
     hash.each do |key, obj|
       voivodeship = Voivodeship.where(:name => obj['voivodeship']).first!
-      obj['agencies'].each do |attrs|
-        agency = WuozAgency.create attrs.merge('wuoz_key' => key)
+      obj['agencies'].each_with_index do |attrs, index|
+        attrs.merge!('main' => true) if index.zero?
+        agency = WuozAgency.create attrs.merge('wuoz_key' => key, 'voivodeship_id' => voivodeship.id)
         agency.district_names.split(',').map do |name|
           results = voivodeship.districts.where(['name = ?', name.strip])
           Rails.logger.error "Cant find #{agency.id}: #{name}" if results.blank?
@@ -31,5 +32,7 @@ namespace :import do
         end
       end
     end
+    # assgin alerts
+    Alert.find_each(&:create_wuoz_alert)
   end
 end
