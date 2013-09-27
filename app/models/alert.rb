@@ -20,9 +20,10 @@ class Alert < ActiveRecord::Base
   attr_accessible :relic_id, :user_id, :file, :description, :author, :date_taken
   attr_accessible :relic_id, :user_id, :file, :description, :author, :date_taken, :state, :as => :admin
 
+  has_many :wuoz_alerts, :dependent => :destroy
+
   after_create :new_alert_notification
-  after_create :create_wuoz_alerts
-  after_destroy :destroy_wuoz_alerts
+  after_create :create_wuoz_alert
 
   validates :description, :presence => true
 
@@ -30,6 +31,12 @@ class Alert < ActiveRecord::Base
   scope :not_fixed, where("state != ? or state is null", "fixed")
 
   mount_uploader :file, AlertUploader
+
+  class << self
+    def logger
+      @logger ||= Logger.new("#{Rails.root}/log/cant_find_wuoz_region.log")
+    end
+  end
 
   def state
     self[:state] || "new"
@@ -39,16 +46,12 @@ class Alert < ActiveRecord::Base
     AlertMailer.notify_oz(self).deliver
   end
 
-  def create_wuoz_alerts
-    WuozRegion.where(:district_id => self.relic.district_id).all.each do |region|
-      WuozAlert.find_or_create_by_wuoz_agency_id_and_alert_id(region.wuoz_agency_id, self.id)
-    end
-    true
-  end
-
-  def destroy_wuoz_alerts
-    WuozRegion.where(:district_id => self.relic.district_id).all.each do |region|
-      WuozAlert.where(:wuoz_agency_id => region.wuoz_agency_id, :alert_id => self.id).destroy_all
+  def create_wuoz_alert
+    region = WuozRegion.where(:district_id => self.relic.district_id).first
+    if region
+      wuoz_alerts.find_or_create_by_wuoz_agency_id(region.wuoz_agency_id)
+    else
+      logger.error "#{Time.now}: alert_id(#{id}) relic_id(#{relic.id} district_id(#{relic.district_id})"
     end
     true
   end
