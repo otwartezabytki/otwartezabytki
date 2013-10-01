@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 3.2.3', git: 'git://github.com/sheerun/rails.git', branch: 'v3.2.11/multipart-fix'
+gem 'rails', '~> 3.2.3', git: 'git://github.com/otwartezabytki/rails.git', branch: 'v3.2.11/multipart-fix'
 gem 'pg'
 
 # Gems used only for assets and not required
@@ -82,11 +82,11 @@ gem 'htmldiff'                # diff changes in admin panel
 gem 'friendly_id'             # friendly id for widgets
 gem 'turbo-sprockets-rails3'  # faster asset precompiling
 
-gem 'globalize3', :git => 'https://github.com/sheerun/globalize3.git', :branch => 'fix/accessible'
-gem 'activeadmin-globalize3-inputs', :git => 'git://github.com/chytreg/activeadmin-globalize3-inputs.git'
+gem 'globalize3', :git => 'https://github.com/otwartezabytki/globalize3.git', :branch => 'fix/accessible'
+gem 'activeadmin-globalize3-inputs', :git => 'git://github.com/otwartezabytki/activeadmin-globalize3-inputs.git'
 
-gem 'ffi-aspell', :require => 'ffi/aspell', :git => 'git://github.com/chytreg/ffi-aspell.git'
-gem 'tolk', :git => "git://github.com/monterail/tolk.git", :branch => "oz-custom"
+gem 'ffi-aspell', :require => 'ffi/aspell', :git => 'git://github.com/otwartezabytki/ffi-aspell.git'
+gem 'tolk', :git => "git://github.com/otwartezabytki/tolk.git", :branch => "oz-custom"
 
 gem 'foreman'
 gem 'twitter_cldr'
