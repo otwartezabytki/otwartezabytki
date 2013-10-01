@@ -20,6 +20,11 @@
       }
     }
     section.location{
+      .select-on-map {
+        margin: 20px 0;
+        font-size: 14px;
+        font-weight: 700;
+      }
       .column{
         display: inline-block;
         &.full_width{
