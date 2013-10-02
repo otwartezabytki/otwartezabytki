@@ -9,10 +9,9 @@ class RelicsController < ApplicationController
   end
 
   expose(:sub_ids) do
-    if params[:section] == "events" && !request.get?
-      binding.pry
+    if (params[:section] == "events" || params[:section] == "links") && !request.get?
       sub_ids = []
-      params[:relic][:events_attributes].each_pair { |k, v| sub_ids << v if v["relic_id"].present? }
+      params[:relic]["#{params[:section]}_attributes"].each_pair { |k, v| sub_ids << v if v["relic_id"].present? }
       sub_ids
     end
   end
@@ -33,7 +32,17 @@ class RelicsController < ApplicationController
             r = Relic.find(r.id)
           end
         end
-        params[:relic][:events_attributes].delete_if { |k, v| sub_ids.include?(v) } if params[:relic] && params[:relic][:events_attributes]
+        if params[:relic] && params[:relic]["#{params[:section]}_attributes"]
+          params[:relic]["#{params[:section]}_attributes"].delete_if { |k, v| sub_ids.include?(v) }
+          params[:relic]["#{params[:section]}_attributes"].each_pair { |k,v| 
+            v["relic_id"] = r.id 
+            if v["id"]
+              item = Object.const_get(params[:section].singularize.capitalize).find(v["id"])
+              item.update_attributes(v.except(:_destroy))
+              params[:relic]["#{params[:section]}_attributes"].delete(k)
+            end
+          }
+        end
         r.attributes = (params[:relic] || {}).except(:voivodeship_id, :district_id, :commune_id) unless request.get?
         r.user_id = current_user.id if request.put? || request.post?
         r
@@ -102,14 +111,13 @@ class RelicsController < ApplicationController
 
     if relic.save
       if !sub_ids.empty?
-        binding.pry
         sub_ids.each { |sr| 
           if sr[:id]
-            subrelic_event = Event.find(sr[:id])
-            sr[:_destroy] == "1" ? subrelic_event.destroy : subrelic_event.update_attributes(sr.except(:id, :_destroy))
+            subrelic_item = Object.const_get(params[:section].singularize.capitalize).find(sr[:id])
+            sr[:_destroy] == "1" ? subrelic_item.destroy : subrelic_item.update_attributes(sr.except(:id, :_destroy))
           else
             subrelic = Relic.find(sr[:relic_id])
-            se = subrelic.events.build(sr.except(:_destroy))
+            se = params[:section] == "events" ? subrelic.events.build(sr.except(:_destroy)) : subrelic.links.build(sr.except(:_destroy))
             se.save
           end
         }
