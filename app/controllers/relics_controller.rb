@@ -8,10 +8,18 @@ class RelicsController < ApplicationController
     tsearch.perform
   end
 
+  expose(:sub_ids) do
+    if params[:section] == "events" && !request.get?
+      binding.pry
+      sub_ids = []
+      params[:relic][:events_attributes].each_pair { |k, v| sub_ids << v if v["relic_id"].present? }
+      sub_ids
+    end
+  end
+
   expose(:relic) do
     if id = params[:relic_id] || params[:id]
       r = Relic.find(id)
-
       if params[:original].present? && request.get?
         r.original_relic
       else
@@ -25,7 +33,7 @@ class RelicsController < ApplicationController
             r = Relic.find(r.id)
           end
         end
-
+        params[:relic][:events_attributes].delete_if { |k, v| sub_ids.include?(v) } if params[:relic] && params[:relic][:events_attributes]
         r.attributes = (params[:relic] || {}).except(:voivodeship_id, :district_id, :commune_id) unless request.get?
         r.user_id = current_user.id if request.put? || request.post?
         r
@@ -93,6 +101,19 @@ class RelicsController < ApplicationController
     end
 
     if relic.save
+      if !sub_ids.empty?
+        binding.pry
+        sub_ids.each { |sr| 
+          if sr[:id]
+            subrelic_event = Event.find(sr[:id])
+            sr[:_destroy] == "1" ? subrelic_event.destroy : subrelic_event.update_attributes(sr.except(:id, :_destroy))
+          else
+            subrelic = Relic.find(sr[:relic_id])
+            se = subrelic.events.build(sr.except(:_destroy))
+            se.save
+          end
+        }
+      end
       if params[:entry_id]
         params[:entry_id] = nil
         render 'edit' and return

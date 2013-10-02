@@ -7,7 +7,7 @@ jQuery.initializer 'section.edit.events', ->
   $('.add_event').click ->
     template = $($(this).data('template'))
     html = template.html()
-    next_id = parseInt(template.data('next-id'))
+    next_id = parseInt($('.sortable').children('li').length)#template.data('next-id'))
     template.data('next-id', next_id + 1)
     html = html.replace(/\[\d+\]/g, "[#{next_id}]")
     html = html.replace(/_\d+_/g, "_#{next_id}_")
