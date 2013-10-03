@@ -39,7 +39,7 @@ class RelicsController < ApplicationController
             if v["id"]
               item = Object.const_get(params[:section].singularize.capitalize).find(v["id"])
               item.update_attributes(v.except(:_destroy))
-              params[:relic]["#{params[:section]}_attributes"].delete(k)
+              params[:relic]["#{params[:section]}_attributes"].delete(k) unless v[:_destroy] == "1"
             end
           }
         end
@@ -143,7 +143,7 @@ class RelicsController < ApplicationController
         redirect_to edit_relic_path(relic.id, :section => params[:section])
       end
     else
-      flash.now[:error] = t('notices.please_correct_errors')
+      flash.now[:error] = [t('notices.please_correct_errors'), relic.errors.full_messages.join(", ")].join(" ")
       render 'edit' and return
     end
   end

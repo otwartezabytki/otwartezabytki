@@ -37,3 +37,16 @@ jQuery.initializer 'section.edit.events', ->
       $(this).parents('.event:first').hide()
       $(this).parents('.event:first').find('input[name*="_destroy"]').val("1")
     false
+
+  $(this).on 'click', '.save_item', (event) ->
+    required = []
+    $('.required').children().children().each ->
+      if $(this).val() == ""
+        required.push($(this)) 
+      else if $(this).attr("id").split("_").last() == "date"
+        console.log typeof(parseInt($(this).val()))
+        required.push($(this)) if typeof(parseInt($(this).val())) != "number" || $(this).val().length < 4
+    if required.length > 0
+      event.preventDefault() 
+      required.first().css('border-color', 'red')
+      required.first().attr('placeholder', 'uzupełnij pole')

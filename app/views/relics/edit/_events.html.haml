@@ -14,7 +14,9 @@
         = f.semantic_fields_for :events, event do |f2|
           = content_tag_for :li, event, :style => (event.marked_for_destruction? ? "display: none" : "") do
             = f2.input :date, :label => false, :hint => false, :class => "date"
-            = f2.input :relic_id, as: :select, label: "dotyczy", required: false, collection: Hash[relic.root.descendants.map {|d| [d.identification, d.id] }]
+            = f2.input :name, :label => false, :hint => false, :class => "info"
+            - if relic.is_group?
+              = f2.input :relic_id, as: :select, include_blank: false, label: "dotyczy", required: false, collection: Hash[relic.root.descendants.map {|d| [d.identification, d.id] }.insert(0, ['całego zespołu zabytków', relic.id])]
             = f2.hidden_field :position, :class => "event-position"
             = f2.hidden_field :photo_id
             = f2.hidden_field :_destroy
@@ -33,7 +35,7 @@
             = f2.input :date, :label => false, :hint => false, :class => "date"
             = f2.input :name, :label => false, :hint => false, :class => "info"
             - if relic.is_group?
-              = f2.input :relic_id, as: :select, label: "dotyczy", required: false, collection: Hash[relic.root.descendants.map {|d| [d.identification, d.id] }]
+              = f2.input :relic_id, as: :select, include_blank: false, label: "dotyczy", required: false, collection: Hash[relic.root.descendants.map {|d| [d.identification, d.id] }.insert(0, ['całego zespołu zabytków', relic.id])]
             = f2.hidden_field :position, :class => "event-position"
             = f2.hidden_field :photo_id
             = f2.hidden_field :_destroy
@@ -43,6 +45,6 @@
     .add-event
       = link_to t('views.relics.edit.events.add_new_one'), '#', :class => "add_event", :"data-template" => "#event_template"
     .actions
-      %button= t('views.relics.edit.save')
+      %button.save_item= t('views.relics.edit.save')
       = t('views.relics.edit.or')
       = link_to t('views.relics.edit.cancel'), relic_path(relic.id), :remote => true, :class => "cancel"
