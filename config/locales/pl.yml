@@ -1402,12 +1402,12 @@ pl:
           placeholder: "<p>Napisz 3-4 zdania zawierające najważniejsze informacje o obiekcie.</p>"
         documents:
           add_file: "dodaj plik"
-          added: "dodado:"
+          added: "dodano:"
           header: "Dokumenty urzędowe"
           placeholder: "<p>Dysponujesz dokumentacją, którą możesz legalnie udostępnić innym? <br/> Załącz pliki tutaj.</p>"
           size: rozmiar
           upload: "wgraj plik"
-          download: "zapisz plik na komputerze"
+          download: "Pobierz wszystkie pliki"
           where_to_find: "Gdzie szukać?"
         entries:
           add: "dodaj wpis"

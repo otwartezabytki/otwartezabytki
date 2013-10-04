@@ -40,6 +40,11 @@ class Document < ActiveRecord::Base
 
   before_save :update_file_attributes
 
+  def ellipsisize
+    name = file.to_s.split("/").last
+    name[0..20] + "..." + name[-3..-1]
+  end
+
   private
 
   def update_file_attributes
