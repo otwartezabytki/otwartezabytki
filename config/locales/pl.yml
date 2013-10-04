@@ -1407,6 +1407,7 @@ pl:
           placeholder: "<p>Dysponujesz dokumentacją, którą możesz legalnie udostępnić innym? <br/> Załącz pliki tutaj.</p>"
           size: rozmiar
           upload: "wgraj plik"
+          download: "zapisz plik na komputerze"
           where_to_find: "Gdzie szukać?"
         entries:
           add: "dodaj wpis"

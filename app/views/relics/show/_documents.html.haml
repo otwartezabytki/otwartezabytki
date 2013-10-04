@@ -17,7 +17,7 @@
             = t('views.relics.show.documents.size')
             = (document.size / 1024.0 / 1024.0).round(1)
             MB
-      = link_to t('views.relics.show.documents.upload'), download_zip_relic_path(relic)
+      = link_to t('views.relics.show.documents.download'), download_zip_relic_path(relic)
   - else
     .placeholder
       = t('views.relics.show.documents.placeholder')
