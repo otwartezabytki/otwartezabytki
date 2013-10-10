@@ -1,8 +1,8 @@
 # Otwarte Zabytki
 
-### license:
+### License
 
-The project is licensed under a 3-clause BSD license; you can find the whole text of the license in the file LICENSE"
+The project is licensed under a 3-clause BSD license. You can find the whole text of the license [here](https://github.com/otwartezabytki/otwartezabytki/blob/master/LICENSE).
 
 ### Requirements (for OS X)
 Your machine should be equipped with:
