@@ -20,12 +20,9 @@
     %link{:href => 'http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,600,300&subset=latin,latin-ext', :rel => 'stylesheet', :type => 'text/css', :media => 'all'}
     = stylesheet_link_tag 'print', :media => 'all'
     = favicon_link_tag  'favicon.gif', :type => 'image/gif'
-    :javascript
-      if(window.addEventListener) {
-        window.addEventListener('load', (function() {
-          if(window.print) window.print()
-        }), false)
-      }
+
+    :coffeescript
+      window.addEventListener? 'load', (-> window.print?()), false
 
   %body
     = yield

@@ -18,12 +18,6 @@
     != include_gon(:camel_case => true)
     != javascript_include_tag "application"
     = yield :footer_javascripts
-    :javascript
-      window.parent.postMessage(JSON.stringify({
-        event: "on_iframe_init",
-        params: {
-          width: $('div.main-container').width(),
-          height: $('div.main-container').height()
-        }
-      }), "*")
+    :coffeescript
+      window.parent.postMessage(JSON.stringify(event: "on_iframe_init", params: {width: $('div.main-container').width(), height: $('div.main-container').height() }), "*")
     = render 'shared/analytics'

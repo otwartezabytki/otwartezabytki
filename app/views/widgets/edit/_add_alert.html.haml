@@ -25,8 +25,7 @@
       %textarea{:cols => "20", :rows => "3"}= widget.snippet
 
 - content_for(:footer_javascripts) do
-  :javascript
-    jQuery("a[data-relic_id]").click(function(e) {
-      $('#widget_add_alert_relic_id').val($(this).data('relic_id'))
+  :coffeescript
+    jQuery("a[data-relic_id]").click (e) ->
+      $('#widget_add_alert_relic_id').val $(this).data('relic_id')
       $(this).parents('form').submit()
-    })
