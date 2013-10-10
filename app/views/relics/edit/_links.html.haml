@@ -24,13 +24,11 @@
         %script{ :type => "text/html", :id => "link_template", :"data-container" => "#links" }
           = f.semantic_fields_for :links, relic.links.build do |f2|
             %li.link.move
-
               = f2.input :category, :label => false, :collection => Link::UrlCategories
               = f2.input :url, :label => false, :hint => false, :class => "url"
               = f2.input :name, :label => false, :hint => false, :class => "info"
               - if relic.is_group?
-                .apply-to
-                  = f2.input :relic_id, as: :select, label: "Dotyczy", required: false, collection: Hash[relic.root.descendants.map {|d| [
+                = f2.input :relic_id, as: :select, label: "dotyczy", required: false, collection: Hash[relic.root.descendants.map {|d| [d.identification, d.id] }.insert(0, ['całego zespołu zabytków', relic.id])]
               = f2.hidden_field :position, :class => "link-position"
               = f2.hidden_field :_destroy
               = f2.hidden_field :kind, :value => "url"
