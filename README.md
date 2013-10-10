@@ -1,5 +1,9 @@
 # Otwarte Zabytki
 
+### license:
+
+The project is licensed under a 3-clause BSD license; you can find the whole text of the license in the file LICENSE"
+
 ### Requirements (for OS X)
 Your machine should be equipped with:
   - homebrew
