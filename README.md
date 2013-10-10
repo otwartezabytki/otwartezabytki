@@ -1,5 +1,9 @@
 # Otwarte Zabytki
 
+### License
+
+The project is licensed under a 3-clause BSD license. You can find the whole text of the license [here](https://github.com/otwartezabytki/otwartezabytki/blob/master/LICENSE).
+
 ### Requirements (for OS X)
 Your machine should be equipped with:
   - homebrew

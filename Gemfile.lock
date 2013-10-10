@@ -1,19 +1,4 @@
 GIT
-  remote: git://github.com/chytreg/activeadmin-globalize3-inputs.git
-  revision: 5d0d109b905e7db0471f0aaeb88ea326cfb77b93
-  specs:
-    activeadmin-globalize3-inputs (0.0.1)
-      activeadmin
-      globalize3
-
-GIT
-  remote: git://github.com/chytreg/ffi-aspell.git
-  revision: 04196c5cf86da5774f0b4d504d68f4042e82e292
-  specs:
-    ffi-aspell (0.0.3)
-      ffi (>= 1.0.11)
-
-GIT
   remote: git://github.com/gmanley/mini_magick.git
   revision: 3560260f8efe582d1b3e66cd645bea70aac87ea1
   branch: graphicsmagick-fix
@@ -22,16 +7,22 @@ GIT
       subexec (~> 0.2.1)
 
 GIT
-  remote: git://github.com/monterail/tolk.git
-  revision: 38dd769df3a59461ee247ea5f5b8861f54ca6e02
-  branch: oz-custom
+  remote: git://github.com/otwartezabytki/activeadmin-globalize3-inputs.git
+  revision: 5d0d109b905e7db0471f0aaeb88ea326cfb77b93
   specs:
-    tolk (1.3.3)
-      kaminari
-      ya2yaml (~> 0.26)
+    activeadmin-globalize3-inputs (0.0.1)
+      activeadmin
+      globalize3
 
 GIT
-  remote: git://github.com/sheerun/rails.git
+  remote: git://github.com/otwartezabytki/ffi-aspell.git
+  revision: 04196c5cf86da5774f0b4d504d68f4042e82e292
+  specs:
+    ffi-aspell (0.0.3)
+      ffi (>= 1.0.11)
+
+GIT
+  remote: git://github.com/otwartezabytki/rails.git
   revision: cba8c3657aa03b7f47d490ff0c7ce36af2c112b1
   branch: v3.2.11/multipart-fix
   specs:
@@ -79,6 +70,15 @@ GIT
       thor (>= 0.14.6, < 2.0)
 
 GIT
+  remote: git://github.com/otwartezabytki/tolk.git
+  revision: a1e8aae6143d4ae5729bccfd122ee0265fd5a75d
+  branch: oz-custom
+  specs:
+    tolk (1.3.3)
+      kaminari
+      ya2yaml (~> 0.26)
+
+GIT
   remote: git://github.com/svenfuchs/routing-filter.git
   revision: 6270eba04ee30e03500c8f977efe1189ede3f248
   ref: 6270eba04e
@@ -93,7 +93,7 @@ GIT
     http_accept_language (2.0.1.pre)
 
 GIT
-  remote: https://github.com/sheerun/globalize3.git
+  remote: https://github.com/otwartezabytki/globalize3.git
   revision: ef91130fb07db4aab579b36f68bab7c893a1fe20
   branch: fix/accessible
   specs:
@@ -256,7 +256,7 @@ GEM
     hike (1.2.3)
     htmldiff (0.0.1)
     httpauth (0.2.0)
-    i18n (0.6.4)
+    i18n (0.6.5)
     i18n-country-translations (0.0.9)
       i18n (~> 0.5)
       railties (>= 3.0.0)
@@ -475,7 +475,7 @@ GEM
       tire
     todonotes (0.1.1)
       log4r
-    treetop (1.4.12)
+    treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
     turbo-sprockets-rails3 (0.3.6)

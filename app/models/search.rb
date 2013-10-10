@@ -435,7 +435,7 @@ class Search
             should { string instance.query, 'default_field' => "autocomplitions",             'default_operator' => 'AND', 'boost' => 1 }
           end
           if instance.place.present?
-            must { string instance.place, :default_operator => "AND", :fields => ["place_with_address^5", "street^3"] }
+            must { string instance.place, :default_operator => "AND", :fields => ["place_with_address^5", "descendants.place_with_address^5", "street^3", "descendants.street^2"] }
           end
         end
       end if [instance.query, instance.place].any? &:present?

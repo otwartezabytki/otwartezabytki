@@ -14,21 +14,22 @@
           %td.body
             .thumb
               = link_to image_tag(relic.main_photo.file.url(:icon)), relic
-            .name
-              %h2= link_to relic.identification, relic
-              - descendants = relic.descendants
-              - if descendants.present?
-                .include
-                  %span
-                  = descendants.map(&:identification).join('; ')
-            = state_tag(relic)
-            .help
-              = image_tag 'ico-help.png'
-              .help-wrapper
-                = link_to t('views.relics.index.states.close'), '#', :class => 'close'
-                %h3= t('views.relics.index.states.header')
-                %ul
-                  %li= state_hint_tag(relic.state, relic.existence == 'social')
+            .relic__relic-content
+              .name
+                %h2= link_to relic.identification, relic
+                - descendants = relic.descendants
+                - if descendants.present?
+                  .include
+                    %span
+                    = descendants.map(&:identification).join('; ')
+              = state_tag(relic)
+              .help
+                = image_tag 'ico-help.png'
+                .help-wrapper
+                  = link_to t('views.relics.index.states.close'), '#', :class => 'close'
+                  %h3= t('views.relics.index.states.header')
+                  %ul
+                    %li= state_hint_tag(relic.state, relic.existence == 'social')
           %td.location
             .pathway
               = relic.place_full_name

@@ -1,6 +1,7 @@
 {
   "wuoz-w-bialymstoku": {
     "name": "Wojewódzki Urząd Ochrony Zabytków w Białymstoku",
+    "voivodeship": "podlaskie",
     "agencies": [
       {
         "city": "Białystok",
@@ -27,6 +28,7 @@
   },
   "wuoz-w-gdansku": {
     "name": "Wojewódzki Urząd Ochrony Zabytków w Gdańsku",
+    "voivodeship": "pomorskie",
     "agencies": [
       {
         "city": "Gdańsk",
@@ -46,6 +48,7 @@
   },
   "wuoz-w-katowicach": {
     "name": "Wojewódzki Urząd Ochrony Zabytków w Katowicach",
+    "voivodeship": "śląskie",
     "agencies": [
       {
         "city": "Katowice",
@@ -72,6 +75,7 @@
   },
   "wuoz-w-kielcach": {
     "name": "Wojewódzki Urząd Ochrony Zabytków w Kielcach",
+    "voivodeship": "świętokrzyskie",
     "agencies": [
       {
         "city": "Kielce",
@@ -91,6 +95,7 @@
   },
   "wuoz-w-krakowie": {
     "name": "Wojewódzki Urząd Ochrony Zabytków w Krakowie",
+    "voivodeship": "małopolskie",
     "agencies": [
       {
         "city": "Kraków",
@@ -124,6 +129,7 @@
   },
   "wuoz-w-lublinie": {
     "name": "Wojewódzki Urząd Ochrony Zabytków w Lublinie",
+    "voivodeship": "lubelskie",
     "agencies": [
       {
         "city": "Lublin",
@@ -157,6 +163,7 @@
   },
   "wuoz-w-olsztynie": {
     "name": "Wojewódzki Urząd Ochrony Zabytków w Olsztynie",
+    "voivodeship": "warmińsko-mazurskie",
     "agencies": [
       {
         "city": "Olsztyn",
@@ -183,6 +190,7 @@
   },
   "wuoz-w-opolu": {
     "name": "Wojewódzki Urząd Ochrony Zabytków w Opolu",
+    "voivodeship": "opolskie",
     "agencies": [
       {
         "city": "Opole",
@@ -195,6 +203,7 @@
   },
   "wuoz-w-poznaniu": {
     "name": "Wojewódzki Urząd Ochrony Zabytków w Poznaniu",
+    "voivodeship": "wielkopolskie",
     "agencies": [
       {
         "city": "Poznań",
@@ -235,6 +244,7 @@
   },
   "wuoz-w-przemyslu": {
     "name": "Wojewódzki Urząd Ochrony Zabytków w Przemyślu",
+    "voivodeship": "podkarpackie",
     "agencies": [
       {
         "city": "Przemyśl",
@@ -268,6 +278,7 @@
   },
   "wuoz-w-szczecinie": {
     "name": "Wojewódzki Urząd Ochrony Zabytków w Szczecinie",
+    "voivodeship": "zachodniopomorskie",
     "agencies": [
       {
         "city": "Szczecin",
@@ -287,6 +298,7 @@
   },
   "wuoz-w-toruniu": {
     "name": "Wojewódzki Urząd Ochrony Zabytków w Toruniu",
+    "voivodeship": "kujawsko-pomorskie",
     "agencies": [
       {
         "city": "Toruń",
@@ -313,6 +325,7 @@
   },
   "wuoz-w-warszawie": {
     "name": "Wojewódzki Urząd Ochrony Zabytków w Warszawie",
+    "voivodeship": "mazowieckie",
     "agencies": [
       {
         "city": "Warszawa",
@@ -360,6 +373,7 @@
   },
   "wuoz-w-zielonej-gorze": {
     "name": "Wojewódzki Urząd Ochrony Zabytków w Zielonej Górze",
+    "voivodeship": "lubuskie",
     "agencies": [
       {
         "city": "Zielona Góra",
@@ -379,6 +393,7 @@
   },
   "wuoz-w-lodzi": {
     "name": "Wojewódzki Urząd Ochrony Zabytków w Łodzi",
+    "voivodeship": "łódzkie",
     "agencies": [
       {
         "city": "Łódź",
@@ -412,6 +427,7 @@
   },
   "wuoz-we-wroclawiu": {
     "name": "Wojewódzki Urząd Ochrony Zabytków we Wrocławiu",
+    "voivodeship": "dolnośląskie",
     "agencies": [
       {
         "city": "Wrocław",

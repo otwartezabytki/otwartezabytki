@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130517145441) do
+ActiveRecord::Schema.define(:version => 20130927130918) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -250,13 +250,20 @@ ActiveRecord::Schema.define(:version => 20130517145441) do
     t.string   "state",           :default => "unchecked"
     t.string   "existence",       :default => "existed"
     t.string   "common_name",     :default => ""
+    t.string   "auto_categories"
   end
 
+  add_index "relics", ["ancestry"], :name => "relics_ancestry_gin_trgm_idx"
+  add_index "relics", ["ancestry"], :name => "relics_ancestry_text_pattern_ops_idx"
   add_index "relics", ["ancestry"], :name => "relics_ancestry_trgm_idx"
+  add_index "relics", ["commune_id"], :name => "index_relics_on_commune_id"
+  add_index "relics", ["district_id"], :name => "index_relics_on_district_id"
   add_index "relics", ["existence"], :name => "index_relics_on_existence"
+  add_index "relics", ["place_id"], :name => "index_relics_on_place_id"
   add_index "relics", ["state"], :name => "index_relics_on_state"
   add_index "relics", ["type"], :name => "index_relics_on_type"
   add_index "relics", ["voivodeship_id", "state"], :name => "index_relics_on_voivodeship_id_and_state"
+  add_index "relics", ["voivodeship_id"], :name => "index_relics_on_voivodeship_id"
 
   create_table "search_terms", :force => true do |t|
     t.string   "keyword"
@@ -420,8 +427,10 @@ ActiveRecord::Schema.define(:version => 20130517145441) do
     t.string   "address"
     t.string   "district_names"
     t.string   "wuoz_key"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+    t.boolean  "main",           :default => false
+    t.integer  "voivodeship_id"
   end
 
   create_table "wuoz_alerts", :force => true do |t|

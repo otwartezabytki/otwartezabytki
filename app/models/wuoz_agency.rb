@@ -1,11 +1,11 @@
 # -*- encoding : utf-8 -*-
 class WuozAgency < ActiveRecord::Base
-  attr_accessible :city, :director, :email, :address, :district_names, :wuoz_key
-  has_many :wuoz_regions
+  attr_accessible :city, :director, :email, :address, :district_names, :wuoz_key, :main, :voivodeship_id
+  has_many :wuoz_regions, :dependent => :destroy
   has_many :districts, :through => :wuoz_regions
-  has_many :wuoz_alerts
+  has_many :wuoz_alerts, :dependent => :destroy
   has_many :alerts, :through => :wuoz_alerts
-  has_many :wuoz_notifications
+  has_many :wuoz_notifications, :dependent => :destroy
 
   scope :only_with_alerts, where(:id => WuozAlert.not_sent.group('wuoz_agency_id').having('COUNT(alert_id) > 0').select(:wuoz_agency_id))
 

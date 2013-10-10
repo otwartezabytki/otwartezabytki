@@ -1152,6 +1152,9 @@ table.relics{
         }
       }
     }
+    .relic__relic-content {
+      display: inherit;
+    }
     .thumb{
       float: left;
       width: 56px;
