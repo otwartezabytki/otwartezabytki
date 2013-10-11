@@ -9,9 +9,11 @@ class RelicsController < ApplicationController
   end
 
   expose(:sub_ids) do
-    if (params[:section] == "events" || params[:section] == "links") && !request.get?
+    if !request.get?
       sub_ids = []
-      params[:relic]["#{params[:section]}_attributes"].each_pair { |k, v| sub_ids << v if v["relic_id"].present? }
+      if (params[:section] == "events" || params[:section] == "links") && params[:relic]
+        params[:relic]["#{params[:section]}_attributes"].each_pair { |k, v| sub_ids << v if v["relic_id"].present? }
+      end
       sub_ids
     end
   end
@@ -32,8 +34,8 @@ class RelicsController < ApplicationController
             r = Relic.find(r.id)
           end
         end
-        if params[:relic] && params[:relic]["#{params[:section]}_attributes"]
-          params[:relic]["#{params[:section]}_attributes"].delete_if { |k, v| sub_ids.include?(v) }
+        if (params[:section] == "events" || params[:section] == "links") && params[:relic] && params[:relic]["#{params[:section]}_attributes"]
+          params[:relic]["#{params[:section]}_attributes"].delete_if { |k, v| sub_ids && sub_ids.include?(v) }
           params[:relic]["#{params[:section]}_attributes"].each_pair { |k,v| 
             v["relic_id"] = r.id 
             if v["id"]
