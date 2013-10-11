@@ -29,7 +29,7 @@
     = link_to t('views.relics.show.general.fill_in'), edit_section_relic_path(relic.to_param, :location), :remote => true, :class => "edit-relic-link"
     %strong= t('views.relics.show.general.location')
     - if relic.polish_relic and relic.place_id?
-      %p= t('views.relics.show.general.polish_location', :place => relic.place.name, :district => relic.district.name, :commune => relic.commune.name)
+      %p= format_localization(relic, 'reverse')
     - elsif !relic.polish_relic
       %p= [I18n.t(relic.country_code, :scope => :countries), relic.fprovince, relic.fplace].select(&:present?).join(', ')
     %p= relic.street

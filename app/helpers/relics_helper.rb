@@ -108,17 +108,24 @@ module RelicsHelper
     ].join.html_safe
   end
 
-  def format_localization(relic)
+  def format_localization(relic, reverse=nil)
     a = []
     if relic.foreign_relic?
       a = [relic.country, relic.fprovince, relic.fplace, relic.street]
     else
-      a << relic.voivodeship.name
-      a << "pow. #{relic.district.name}"
-      a << "gm. #{relic.commune.name}"
-      a << [relic.place.name, relic.street].compact.join(' ')
+      if reverse.nil? 
+        a << relic.voivodeship.name
+        a << "pow. #{relic.district.name}"
+        a << "gm. #{relic.commune.name}"
+        a << [relic.place.name, relic.street].compact.join(' ')
+      else
+        a << "województwo #{relic.voivodeship.name}"
+        a << "powiat #{relic.district.name}"
+        a << "gmina #{relic.commune.name}"
+        a << relic.place.name
+      end
     end
-    a.reject(&:blank?).join(' » ')
+    reverse.nil? ? a.reject(&:blank?).join(' » ') : a.reject(&:blank?).reverse.join(", ")
   end
 
   def kind_of_change(revision)
