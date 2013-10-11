@@ -8,10 +8,17 @@ class RelicsController < ApplicationController
     tsearch.perform
   end
 
+  expose(:sub_ids) do
+    if (params[:section] == "events" || params[:section] == "links") && !request.get?
+      sub_ids = []
+      params[:relic]["#{params[:section]}_attributes"].each_pair { |k, v| sub_ids << v if v["relic_id"].present? }
+      sub_ids
+    end
+  end
+
   expose(:relic) do
     if id = params[:relic_id] || params[:id]
       r = Relic.find(id)
-
       if params[:original].present? && request.get?
         r.original_relic
       else
@@ -25,7 +32,17 @@ class RelicsController < ApplicationController
             r = Relic.find(r.id)
           end
         end
-
+        if params[:relic] && params[:relic]["#{params[:section]}_attributes"]
+          params[:relic]["#{params[:section]}_attributes"].delete_if { |k, v| sub_ids.include?(v) }
+          params[:relic]["#{params[:section]}_attributes"].each_pair { |k,v| 
+            v["relic_id"] = r.id 
+            if v["id"]
+              item = Object.const_get(params[:section].singularize.capitalize).find(v["id"])
+              item.update_attributes(v.except(:_destroy))
+              params[:relic]["#{params[:section]}_attributes"].delete(k) unless v[:_destroy] == "1"
+            end
+          }
+        end
         r.attributes = (params[:relic] || {}).except(:voivodeship_id, :district_id, :commune_id) unless request.get?
         r.user_id = current_user.id if request.put? || request.post?
         r
@@ -93,6 +110,18 @@ class RelicsController < ApplicationController
     end
 
     if relic.save
+      if !sub_ids.empty?
+        sub_ids.each { |sr| 
+          if sr[:id]
+            subrelic_item = Object.const_get(params[:section].singularize.capitalize).find(sr[:id])
+            sr[:_destroy] == "1" ? subrelic_item.destroy : subrelic_item.update_attributes(sr.except(:id, :_destroy))
+          else
+            subrelic = Relic.find(sr[:relic_id])
+            se = params[:section] == "events" ? subrelic.events.build(sr.except(:_destroy)) : subrelic.links.build(sr.except(:_destroy))
+            se.save
+          end
+        }
+      end
       if params[:entry_id]
         params[:entry_id] = nil
         render 'edit' and return
@@ -114,7 +143,7 @@ class RelicsController < ApplicationController
         redirect_to edit_relic_path(relic.id, :section => params[:section])
       end
     else
-      flash.now[:error] = t('notices.please_correct_errors')
+      flash.now[:error] = [t('notices.please_correct_errors'), relic.errors.full_messages.join(", ")].join(" ")
       render 'edit' and return
     end
   end
