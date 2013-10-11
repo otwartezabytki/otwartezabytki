@@ -7,11 +7,7 @@
             .column-left
               .preview{ :class => document.mime_class }
               - if document.user_id == current_user.id
-                = link_to t('views.relics.edit.documents.delete_file'), relic_document_path(relic.id, document.id),
-                  :method => :delete,
-                  :remote => true,
-                  :confirm => t('views.relics.edit.documents.delete_confirm'),
-                  :class => "remove_document"
+                = link_to t('views.relics.edit.documents.delete_file'), relic_document_path(relic.id, document.id), :class => "remove_document", :method => :delete, :remote => true, :confirm => t('views.relics.edit.documents.delete_confirm')
             .column-right
               = f2.input :name, :input_html => { :class => "name" }
               = f2.input :description, :input_html => { :class => "description" }
@@ -32,8 +28,8 @@
 
       .column-right
         %p
-          %strong= t('views.relics.documents.loading')
-          = link_to t('views.relics.documents.cancel'), '#', :class => "cancel_upload"
+          %strong= t('views.relics.edit.documents.loading')
+          = link_to t('views.relics.edit.documents.cancel'), '#', :class => "cancel_upload"
         %p
           .progressbar
             .value 0%
