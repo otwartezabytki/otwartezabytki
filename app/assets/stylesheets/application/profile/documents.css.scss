@@ -83,6 +83,17 @@ edit_relic section.documents {
     border-bottom: 1px solid #bfbfbf;
     margin-bottom: 20px;
   }
+
+  .file-input-wrapper {
+      width: 134px;
+      height: 25px;
+    & > .btn-file-input {
+      width: 134px;
+      height: 25px;
+      background: image-url("file-upload.png") 0 0 no-repeat;
+    }
+  }
+
   .input{
     textarea#relic_documents_info{
       width: 680px;

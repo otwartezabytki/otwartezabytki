@@ -3,6 +3,7 @@ require 'tire/http/clients/faraday'
 
 Tire.configure do |config|
   logger  'log/elasticsearch.log'
+  url     (ENV['BOXEN_ELASTICSEARCH_URL'] || 'http://localhost:9200/')
 
   # Unless specified, tire will use Faraday.default_adapter and no middleware
   Tire::HTTP::Client::Faraday.faraday_middleware = Proc.new do |builder|

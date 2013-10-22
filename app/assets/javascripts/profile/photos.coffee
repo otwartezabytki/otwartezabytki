@@ -85,10 +85,3 @@ jQuery.initializer 'div.photo-attributes', ->
   do unserialize_form
 
   $(this).find('textarea.redactor').redactor focus: false, buttons: ['bold', 'italic', 'link', 'unorderedlist'], lang: 'pl'
-
-  image = if $('#photo_file').hasClass('first') then first_photo_upload else photo_upload
-  $("#photo_file").filestyle
-    image: image
-    imageheight: 25
-    imagewidth: 154
-    width: 154
