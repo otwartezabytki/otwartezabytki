@@ -18,8 +18,8 @@
       - else
         .document
           .column-left
-            .preview
-              = image_tag document.midi.url
+            = link_to document.file.url do
+              .preview{ :class => document.mime_class }
           .column-right
             %label= t('activerecord.attributes.document.name')
             %p= document.name
