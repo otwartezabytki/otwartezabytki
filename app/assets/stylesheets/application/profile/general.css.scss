@@ -6,7 +6,7 @@
   }
   .row.general{
     display: none;
-  }  
+  }
 }
 
 .help{
@@ -95,3 +95,31 @@
 .fb-like{
   margin-top: 15px;
 }
+
+// pretty file inputs
+// https://coderwall.com/p/4etjja && http://jsfiddle.net/supershabam/b3WXe/
+.file-input-wrapper {
+  width: 100px;
+  height: 25px;
+  overflow: hidden;
+  position: relative;
+}
+
+.file-input-wrapper > input[type="file"] {
+  font-size: 200px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.file-input-wrapper > .btn-file-input {
+  display: inline-block;
+  width: 100px;
+  height: 25px;
+  border: 0px;
+  cursor: pointer;
+}
+
+.file-input-wrapper:hover > .btn-file-input { }

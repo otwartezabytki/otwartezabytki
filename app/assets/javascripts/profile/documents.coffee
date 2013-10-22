@@ -56,9 +56,3 @@ jQuery.initializer 'section.edit.documents', ->
 
   $section.find('input.name, input.description').each ->
     $(this).val($.cookie($(this).attr('id'))) if $(this).val().length == 0 && $.cookie($(this).attr('id'))
-
-  $("#document_file").filestyle
-    image: "/assets/file-upload.png"
-    imageheight: 25
-    imagewidth: 134
-    width: 134

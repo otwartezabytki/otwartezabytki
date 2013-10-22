@@ -57,7 +57,7 @@
         background: asset-data-url("file_extension_pps.png") center center no-repeat;
       }
     }
-    p{ 
+    p{
       strong{
         font-weight: 700;
         font-size: 14px;
@@ -86,6 +86,17 @@
     border-bottom: 1px solid #bfbfbf;
     margin-bottom: 20px;
   }
+
+  .file-input-wrapper {
+      width: 134px;
+      height: 25px;
+    & > .btn-file-input {
+      width: 134px;
+      height: 25px;
+      background: image-url("file-upload.png") 0 0 no-repeat;
+    }
+  }
+
   .input{
     textarea#relic_documents_info{
       width: 680px;

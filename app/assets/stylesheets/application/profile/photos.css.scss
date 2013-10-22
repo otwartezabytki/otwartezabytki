@@ -49,6 +49,20 @@
         padding-bottom: 7px !important;
       }
     }
+
+    .file-input-wrapper {
+        width: 154px;
+        height: 25px;
+      & > .btn-file-input {
+        width: 154px;
+        height: 25px;
+        background: image-url("photo-upload.png") 0 0 no-repeat;
+        &.first {
+          background: image-url("first-photo-upload.png") 0 0 no-repeat;
+        }
+      }
+    }
+
     #relic_license_agreement_input{
       #relic_license_agreement{
         width: auto;

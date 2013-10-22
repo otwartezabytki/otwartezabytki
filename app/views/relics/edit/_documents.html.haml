@@ -10,7 +10,7 @@
                 = link_to t('views.relics.edit.documents.delete_file'), relic_document_path(relic.id, document.id),
                   :method => :delete,
                   :remote => true,
-                  :confirm => t('views.relics.edit.documents.delete_confirm'),
+                  :confirm => t('views.relics.edit.documents.delete_confirm', :editable => false),
                   :class => "remove_document"
             .column-right
               = f2.input :name, :input_html => { :class => "name" }
@@ -38,7 +38,9 @@
           .progressbar
             .value 0%
     .file-upload
-      = file_field_tag "document[file]", :class => 'document_upload', :"data-url" => "#{relic_documents_path(relic.id)}"
+      .file-input-wrapper
+        %button.btn-file-input
+        = file_field_tag "document[file]", :class => 'document_upload', :"data-url" => "#{relic_documents_path(relic.id)}"
 
     = f.input :documents_info
     .actions
