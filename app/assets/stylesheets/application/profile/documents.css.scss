@@ -1,6 +1,6 @@
 @import "../mixins";
 
-edit_relic section.documents {
+.edit_relic section.documents {
   .document{
     border-bottom: 1px solid #bfbfbf;
     padding-bottom: 20px;
@@ -85,8 +85,8 @@ edit_relic section.documents {
   }
 
   .file-input-wrapper {
-      width: 134px;
-      height: 25px;
+    width: 134px;
+    height: 25px;
     & > .btn-file-input {
       width: 134px;
       height: 25px;
