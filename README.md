@@ -77,14 +77,18 @@ Solution:
     elasticsearch restart
 
 ### Code documentation
+
 ```bash
   gem install yard redcarpet
 ```
+
 in application directory run
+
 ```ruby
   yard -o public/system/doc
 ```
-current code documentation is available on http://otwartezabytki.pl/system/doc/index.html
+
+current code documentation is available on http://rubydoc.info/github/otwartezabytki/otwartezabytki/master/frames
 
 ### API documentation
 is available on http://otwartezabytki.pl/apidoc/index.html
