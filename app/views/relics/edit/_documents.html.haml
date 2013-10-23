@@ -37,7 +37,7 @@
         %p
           .progressbar
             .value 0%
-    .file-upload
+    .document-upload
       .file-input-wrapper
         %button.btn-file-input
         = file_field_tag "document[file]", :class => 'document_upload', :"data-url" => "#{relic_documents_path(relic.id)}"

@@ -3,7 +3,7 @@ jQuery.initializer 'div.photo-attributes', ->
   $preview_placeholder = $section.find('.preview-placeholder')
   $progressbar = $section.find('.progressbar')
   $photo_hidden = $section.find('.photo.hidden')
-  $photo_upload = $section.find(".photo_upload")
+  $photo_upload = $section.find(".photo-upload")
   $form = $section.parents('form.relic')
   $cancel_upload = $section.find('.cancel_upload')
   $remove_photo = $section.find('.remove_photo')
@@ -19,8 +19,8 @@ jQuery.initializer 'div.photo-attributes', ->
       $.cookie(serialized_cookie, null)
 
   upload_spinner_opts = {
-  lines: 8, length: 0, width: 6, radius: 10, rotate: 0, color: '#555', speed: 0.8, trail: 55,
-  shadow: false, hwaccel: false, className: 'spinner', zIndex: 2e9, top: 46, left: 46
+    lines: 8, length: 0, width: 6, radius: 10, rotate: 0, color: '#555', speed: 0.8, trail: 55,
+    shadow: false, hwaccel: false, className: 'spinner', zIndex: 2e9, top: 46, left: 46
   }
 
   if $preview_placeholder.length

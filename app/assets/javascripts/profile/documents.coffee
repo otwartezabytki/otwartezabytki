@@ -3,14 +3,14 @@ jQuery.initializer 'section.edit.documents', ->
   $preview_placeholder = $section.find('.preview-placeholder')
   $progressbar = $section.find('.progressbar')
   $document_hidden = $section.find('.document.hidden')
-  $document_upload = $section.find(".document_upload")
+  $document_upload = $section.find(".document-upload")
   $form = $section.find('form.relic')
   $cancel_upload = $section.find('.cancel_upload')
   $remove_document = $section.find('.remove_document')
 
   upload_spinner_opts = {
-  lines: 8, length: 0, width: 6, radius: 10, rotate: 0, color: '#555', speed: 0.8, trail: 55,
-  shadow: false, hwaccel: false, className: 'spinner', zIndex: 2e9, top: 16, left: 16
+    lines: 8, length: 0, width: 6, radius: 10, rotate: 0, color: '#555', speed: 0.8, trail: 55,
+    shadow: false, hwaccel: false, className: 'spinner', zIndex: 2e9, top: 16, left: 16
   }
 
   if $preview_placeholder.length
