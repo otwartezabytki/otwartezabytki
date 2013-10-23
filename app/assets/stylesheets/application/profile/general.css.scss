@@ -98,27 +98,36 @@
 // pretty file inputs
 // https://coderwall.com/p/4etjja && http://jsfiddle.net/supershabam/b3WXe/
 .file-input-wrapper {
-  width: 100px;
+  width: 100%;
   height: 25px;
   overflow: hidden;
   position: relative;
+  & > input[type="file"] {
+    font-size: 200px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+  & > .btn-file-input {
+    display: inline-block;
+    height: 25px;
+    @include gradient(#4b6d7e, #436576);
+    color: #fff;
+    border: 0;
+    font-size: 11px;
+    font-weight: 300;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
+    text-transform: none;
+    border-radius: 2px;
+    padding: 0 10px;
+  }
+  &:hover > .btn-file-input {
+    @include gradient(#437994, #2b607b);
+    text-decoration: none;
+  }
+  &:active > .btn-file-input {
+    @include gradient(#2b607b, #437993);
+  }
 }
-
-.file-input-wrapper > input[type="file"] {
-  font-size: 200px;
-  position: absolute;
-  top: 0;
-  right: 0;
-  opacity: 0;
-  cursor: pointer;
-}
-
-.file-input-wrapper > .btn-file-input {
-  display: inline-block;
-  width: 100px;
-  height: 25px;
-  border: 0px;
-  cursor: pointer;
-}
-
-.file-input-wrapper:hover > .btn-file-input { }

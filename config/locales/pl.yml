@@ -1353,6 +1353,8 @@ pl:
           delete_confirm: "Czy aby na pewno?"
           delete_file: "Usuń plik"
           loading: "Trwa wgrywanie, proszę czekać..."
+          upload_first: "wgraj plik"
+          upload: "wgraj kolejny plik"
         edit_photo: zmień
         events:
           action: Akcje
@@ -1381,6 +1383,8 @@ pl:
           delete_photo: "usuń zdjęcie"
           loading: "Trwa wgrywanie, proszę czekać..."
           statement_html: "Oświadczam, że posiadam prawa do zdjęć, które publikuję na stronie otwartezabytki.pl. Jeśli nie jestem autorem/autorką zdjęć, oświadczam, że mam prawo ich publikacji na licencji <a href=\"http://creativecommons.org/licenses/by-sa/3.0/pl/\" target=\"_blank\">Creative Commons Uznanie Autorstwa-Na Tych Samych Warunkach 3.0 Polska</a> <em class=\"icons\"></em>"
+          upload_first: "wgraj zdjęcie"
+          upload: "wgraj kolejne zdjęcie"
         reminder: "Pamiętaj o podaniu źródła!"
         save: "zapisz zmiany"
         update: aktualizuj

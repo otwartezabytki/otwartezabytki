@@ -40,6 +40,10 @@
     .document-upload
       .file-input-wrapper
         %button.btn-file-input
+          - if relic.documents.length.zero?
+            = t('views.relics.edit.documents.upload_first')
+          - else
+            = t('views.relics.edit.documents.upload')
         = file_field_tag "document[file]", :class => 'document_upload', :"data-url" => "#{relic_documents_path(relic.id)}"
 
     = f.input :documents_info
