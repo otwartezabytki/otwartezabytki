@@ -17,6 +17,8 @@
 #
 
 class Document < ActiveRecord::Base
+  default_scope { order('documents.id ASC') }
+
   belongs_to :relic
   belongs_to :user
 
