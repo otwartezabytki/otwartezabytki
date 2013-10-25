@@ -4,7 +4,7 @@
       - relic.photos.each do |photo|
         - if photo.user_id == current_user.id
           = f.semantic_fields_for :photos, photo do |f2|
-            .photo
+            .photo[f2.object]
               .column-left
                 .preview
                   = image_tag photo.file.midi.url, :alt => photo.alternate_text

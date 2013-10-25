@@ -47,12 +47,16 @@ jQuery.initializer 'section.edit.documents', ->
   $cancel_upload.click ->
     document_xhr.abort() if document_xhr?
 
-  $remove_document.click ->
-    $(this).parents('.document:first').find('input[type="text"]').each ->
-      $.cookie($(this).attr('id'), '')
+  # fix for serialization problem
+  ['name', 'description'].each (attrClass) ->
+    find_object_id = (el) ->
+      $(el).parents('.document:first').attr('id')
 
-  $section.on 'change', 'input.name, input.description', ->
-    $.cookie($(this).attr('id'), $(this).val())
+    $section.on 'change', "input.#{attrClass}", ->
+      object_id = find_object_id(this)
+      $.cookie("#{object_id}_#{attrClass}", $(this).val())
 
-  $section.find('input.name, input.description').each ->
-    $(this).val($.cookie($(this).attr('id'))) if $(this).val().length == 0 && $.cookie($(this).attr('id'))
+    $section.find("input.#{attrClass}").each ->
+      object_id = find_object_id(this)
+      value_from_cookie = $.cookie("#{object_id}_#{attrClass}")
+      $(this).val(value_from_cookie) if $(this).val().length == 0 && value_from_cookie
