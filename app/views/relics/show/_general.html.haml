@@ -56,10 +56,11 @@
       %p= relic.register_number
   - if relic.is_a?(Relic) and relic.original_relic.present?
     = link_to content_tag(:span, t('views.relics.show.general.original')), relic_path(relic.to_param, :original => true), :class => "original"
-    - if current_user.present? && current_user.adopted?(relic)
-      = link_to content_tag(:span, t('views.relics.show.general.unadopt')), unadopt_relic_path(relic.id), :class => "adopt", :method => :post, :remote => true
-    - else
-      = link_to content_tag(:span, t('views.relics.show.general.adopt')), adopt_relic_path(relic.id), :class => "adopt", :method => :post, :remote => true
+    - # Profile:
+    - # - if current_user.present? && current_user.adopted?(relic)
+    - #   = link_to content_tag(:span, t('views.relics.show.general.unadopt')), unadopt_relic_path(relic.id), :class => "adopt", :method => :post, :remote => true
+    - # - else
+    - #   = link_to content_tag(:span, t('views.relics.show.general.adopt')), adopt_relic_path(relic.id), :class => "adopt", :method => :post, :remote => true
   - else
     %div{:style => 'display:block; height: 50px;'}
   = link_to content_tag(:span, t('views.relics.guide.print_guide')), print_relic_path(relic.to_param), :class => "print-guide", :target => '_blank'
