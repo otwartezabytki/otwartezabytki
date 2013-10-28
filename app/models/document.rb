@@ -17,6 +17,8 @@
 #
 
 class Document < ActiveRecord::Base
+  default_scope { order('documents.id ASC') }
+
   belongs_to :relic
   belongs_to :user
 
@@ -39,6 +41,11 @@ class Document < ActiveRecord::Base
   end
 
   before_save :update_file_attributes
+
+  def ellipsisize
+    name = file.to_s.split("/").last
+    name[0..20] + "..." + name[-3..-1]
+  end
 
   private
 

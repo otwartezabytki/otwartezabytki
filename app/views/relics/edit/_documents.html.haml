@@ -3,14 +3,14 @@
     - relic.documents.each do |document|
       - if document.user_id == current_user.id
         = f.semantic_fields_for :documents, document do |f2|
-          .document
+          .document[f2.object]
             .column-left
               .preview{ :class => document.mime_class }
               - if document.user_id == current_user.id
                 = link_to t('views.relics.edit.documents.delete_file'), relic_document_path(relic.id, document.id),
                   :method => :delete,
                   :remote => true,
-                  :confirm => t('views.relics.edit.documents.delete_confirm'),
+                  :confirm => t('views.relics.edit.documents.delete_confirm', :editable => false),
                   :class => "remove_document"
             .column-right
               = f2.input :name, :input_html => { :class => "name" }
@@ -18,8 +18,8 @@
       - else
         .document
           .column-left
-            .preview
-              = image_tag document.midi.url
+            = link_to document.file.url do
+              .preview{ :class => document.mime_class }
           .column-right
             %label= t('activerecord.attributes.document.name')
             %p= document.name
@@ -32,13 +32,19 @@
 
       .column-right
         %p
-          %strong= t('views.relics.documents.loading')
-          = link_to t('views.relics.documents.cancel'), '#', :class => "cancel_upload"
+          %strong= t('views.relics.edit.documents.loading')
+          = link_to t('views.relics.edit.documents.cancel'), '#', :class => "cancel_upload"
         %p
           .progressbar
             .value 0%
-    .file-upload
-      = file_field_tag "document[file]", :class => 'document_upload', :"data-url" => "#{relic_documents_path(relic.id)}"
+    .document-upload
+      .file-input-wrapper
+        %button.btn-file-input
+          - if relic.documents.length.zero?
+            = t('views.relics.edit.documents.upload_first')
+          - else
+            = t('views.relics.edit.documents.upload')
+        = file_field_tag "document[file]", :class => 'document_upload', :"data-url" => "#{relic_documents_path(relic.id)}"
 
     = f.input :documents_info
     .actions

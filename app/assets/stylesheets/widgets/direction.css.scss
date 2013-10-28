@@ -1,0 +1,455 @@
+//= require ../vendor/antiscroll
+//= require ../vendor/context-menu
+@import "../application/mixins";
+
+.antiscroll-scrollbar-vertical {
+  width: 5px;
+  margin-right: 3px;
+}
+
+.antiscroll-scrollbar {
+  color: lightgray;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+body {
+  background-color: #fff;
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
+}
+
+a{
+  color: #47697a;
+  text-decoration: none;
+  font-weight: 600;
+  &:hover{
+    text-decoration: underline;
+  }
+}
+
+div.tooltip {
+  position: absolute;
+  padding: 5px;
+  background-color: black;
+  color: white;
+}
+
+.sidebar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 179px;
+  z-index: 0;
+  border-right: 1px solid #868584;
+}
+
+.advanced_search {
+  position: absolute;
+  border-right: 1px solid #868584;
+  border-top: 1px solid #d3d3d3;
+  bottom: 0;
+  left: 0;
+  width: 155px;
+  height: 35px;
+  background-color: #fff;
+  padding: 5px 12px;
+}
+
+.map  {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  left: 180px;
+  &.full {
+    left: 0px;
+  }
+}
+
+h1{
+  width: 157px;
+  height: 31px;
+  background: asset-data-url("logo-widget.png") 10px 10px no-repeat;
+  text-indent: -9999px;
+  margin: 0;
+  padding: 10px 10px 12px 12px;
+  float: left;
+}
+
+form{
+  display: inline-block;
+  width: 179px;
+  h2{
+    position: relative;
+    color: #343434;
+    font-size: 12px;
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    border-top: 1px solid #e4e4e4;
+    padding: 7px 0 6px 10px;
+    font-weight: bold;
+    span {
+      white-space: nowrap;
+      padding-right: 24px;
+    }
+  }
+  .search h2{
+    padding: 8px 0 6px 10px;
+
+    & ~ h2 {
+      margin-top: 10px;
+    }
+  }
+  input[type="text"] {
+    margin: 0 0 8px 10px;
+    padding: 0 25px 0 10px;
+    border-radius: 2px;
+    border: 1px solid #737373;
+    @include gradient(#fafafa, #ffffff);
+    box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+    height: 24px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    color: #313132;
+    width: 122px;
+  }
+
+  .search-submit {
+    padding: 10px 10px 0;
+  }
+
+  .submit {
+    @include gradient(#4b6d7e, #436576);
+    border-radius: 2px;
+    box-sizing: border-box;
+    width: 100%;
+    color: #fff;
+    border: 0;
+    font-size: 12px;
+    font-weight: 500;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
+    text-transform: uppercase;
+    padding: 10px 16px 9px 19px;
+    cursor: pointer;
+
+    &:hover {
+      @include gradient(#437994, #2b607b);
+    }
+
+    &:active {
+      @include gradient(#2b607b, #437893);
+    }
+  }
+}
+
+#search_radius {
+  width: 40px;
+  padding-right: 0;
+}
+
+.locations{
+  background-color: #fff;
+  position: relative;
+  height: 60%;
+  overflow: hidden;
+  ul{
+    padding-left: 10px;
+    margin: 5px 0;
+    li{
+      list-style-type: none;
+      font-size: 12px;
+      &:before{
+        content: '» ';
+      }
+      a{
+        font-weight: 600;
+        span.relic_count{
+          font-weight: normal;
+          font-size: 10px;
+          color: #4a4a4a;
+        }
+      }
+    }
+  }
+
+  .antiscroll-wrap {
+    position: absolute;
+    top: 37px;
+    bottom: 28px;
+    .box, .antiscroll-inner {
+      width: 180px;
+      height: 100%;
+    }
+  }
+}
+
+.categories{
+  background-color: #fff;
+  height: 40%;
+  position: relative;
+  overflow: hidden;
+  .inputs-list{
+    span{
+      font-weight: 600;
+      font-size: 11px;
+      em{
+        font-weight: normal;
+        font-size: 10px;
+        color: #4a4a4a;
+        font-style: normal;
+      }
+    }
+  }
+  ul{
+    padding-left: 10px;
+    margin: 5px 0;
+    li{
+      list-style-type: none;
+      font-size: 12px;
+      color: #343434;
+    }
+  }
+  .antiscroll-wrap {
+    position: absolute;
+    top: 37px;
+    bottom: 28px;
+    .box, .antiscroll-inner {
+      width: 180px;
+      height: 100%;
+    }
+    .antiscroll-inner {
+      .choices-group{
+        label{
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+.fluid_block {
+  position: absolute;
+  bottom: 0;
+  top: 129px;
+  left: 0px;
+  width: 179px;
+}
+
+a.tooltip,
+span.tooltip {
+  position: absolute;
+  z-index: 1000000;
+  top: 5px;
+  right: 0;
+  padding: 4px;
+
+  img {
+    border: 0;
+  }
+}
+
+.show-more, .show-less {
+  display: block;
+  position: absolute;
+  padding: 5px 10px;
+  bottom: 0;
+  left: 0;
+  width: 180px;
+  background-color: #fff;
+}
+
+.show-less {
+  display: none;
+}
+
+.maxed {
+  height: 100%;
+  .show-less {
+    display: block;
+  }
+  .show-more {
+    display: none;
+  }
+}
+
+.mined {
+  height: 0%;
+  .show-more, .show-less {
+    display: none;
+  }
+}
+
+
+.relic-info {
+  position: relative;
+  width: 300px;
+  min-height: 60px;
+  .photo-wrapper {
+    margin-right: 4px;
+    img {
+      width: 50px;
+      height: 50px;
+      margin: 3px;
+    }
+    position: absolute;
+    left: 0;
+  }
+  .relic-info-content {
+    h3 {
+      margin: 0;
+    }
+  }
+
+  .photo-wrapper + .relic-info-content {
+    margin-left: 60px;
+  }
+}
+
+p{
+  line-height: 1.5;
+}
+
+#search_query_input{
+  position: relative;
+}
+
+.search-input {
+  label {
+    @include clearfix();
+    display: block;
+    padding-left: 10px;
+    margin-bottom: 5px;
+  }
+
+  & + .add-place {
+    display: block;
+    padding-left: 10px;
+  }
+}
+
+#waypoints input {
+  width: 110px;
+}
+
+input + .suffix {
+  padding-left: 2px;
+
+  &.remove {
+    position: absolute;
+    margin: 1px 0 0 3px;
+    padding: 2px;
+    color: #bbb;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+
+    &:hover,
+    &:active {
+      color: #63697a;
+    }
+  }
+}
+
+.category {
+  label {
+    padding: 0 10px 0 29px;
+  }
+
+  input {
+    position: absolute;
+    margin-left: -18px;
+  }
+}
+
+.route-type {
+  @include clearfix;
+
+  .search & {
+    padding-left: 10px;
+  }
+}
+
+.route-type__choice {
+  float: left;
+  width: 38px;
+
+  & + & {
+    padding-left: 3px;
+  }
+
+  span {
+    display: block;
+    width: auto;
+    height: 26px;
+    background: #f0f0f0;
+    border: 1px solid #737373;
+    border-radius: 3px;
+    box-shadow: inset 0 1px 1px #fff;
+    overflow: hidden;
+    cursor: pointer;
+
+    &:before {
+      content: "";
+      display: inherit;
+      width: inherit;
+      height: inherit;
+      background: center center no-repeat;
+    }
+  }
+
+  input {
+    @extend .hidden;
+
+    &:checked + span {
+      background: #ddd;
+      box-shadow: inset 0 1px 5px rgba(#000, 0.3);
+      cursor: default;
+    }
+  }
+}
+
+@each $type in walking bicycling driving {
+  .route-type__choice--#{$type} span:before,
+  .preview__header--#{$type} {
+    background-image: asset-data-url("route-type-icon--#{$type}.png");
+  }
+}
+
+.preview {
+  color: #343434;
+  font-size: 12px;
+}
+
+.preview__section {
+  padding: 10px;
+
+  & + & {
+    border-top: 1px solid #e4e4e4;
+  }
+}
+
+.preview__header {
+  margin: 0;
+  font-size: inherit;
+  background-repeat: no-repeat;
+  background-position: right bottom;
+}
+
+.preview__content {
+  margin: 0;
+  padding: 0;
+
+  .preview__header + & {
+    padding-top: 6px;
+  }
+
+  li {
+    margin: 0 0 0 20px;
+
+    & + li {
+      padding-top: 2px;
+    }
+  }
+}

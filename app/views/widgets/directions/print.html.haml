@@ -1,0 +1,57 @@
+- content_for :before_javascripts do
+  = javascript_include_tag "http://maps.googleapis.com/maps/api/js?key=#{Settings.oz.gm_key}&sensor=false&libraries=places"
+
+%script#relic-template{ type: 'text/x-handlebars-template' }
+  %li.Definition-Container--unbreakable{ id: 'relic-{{id}}' }
+    %dl.Definition
+      %dt.Definition-Header--without-colon {{identification}}
+      %dd.Definition-Content--small
+        {{#if place}} {{place}}, {{/if}}
+        {{#if street}} {{street}} {{else}} #{t('users.list_routes.relic_unknown_address', editable: false)} {{/if}}
+
+%header.Sidebar
+  %h1.Logo
+    %b.Hidden Otwarte Zabytki
+    = image_tag 'logo.png', :alt => t('views.relics.guide.logo', editable: false), :class => 'Logo-Image'
+
+%header.Title
+  - if widget.has_valid_waypoints?
+    - if (route_type = widget_params.try(:[], 'route_type')).present?
+      %h1.Title-Header= t("views.widgets.route_types.#{route_type}", editable: false)
+    %dl.Title-Content.Definition
+      %dt.Definition-Header= t('users.list_routes.relics_within_radius', radius: widget_params.try(:[], 'radius'))
+      - waypoints = widget_params.try(:[], 'waypoints').map { |w| w.split(',').first.try(:strip) }
+      %dd.Definition-Content
+        #{waypoints.first} – #{waypoints.last}
+        - if waypoints.length > 2
+          %span (#{t('users.list_routes.route_points', count: waypoints.length)})
+  - else
+    %h2= t('views.widgets.preview.direction.no_route')
+
+.Map
+  #map_canvas{ :style => 'width: 100%; height: 100%;' }
+
+- if widget.has_valid_waypoints?
+  .Sidebar
+    .Logo
+      %b.Hidden Otwarte Zabytki
+      = image_tag 'logo.png', :alt => t('views.relics.guide.logo', editable: false), :class => 'Logo-Image'
+
+  %section
+    %h1.Title-Header--padded-bottom= t('users.list_routes.relics_on_route')
+    %p#relics-loading-info #{t('views.widgets.edit.direction.loading_relics')}…
+    %ol.MainContent#relics-container
+
+%footer.Footer--padded-top
+  .Sidebar
+    %h1 www.otwartezabytki.pl
+    #{t('views.relics.guide.date')}: #{Time.now.strftime('%Y-%m-%d')}
+  = image_tag 'cc_logo.png', :alt => 'Centrum Cyfrowe'
+
+:javascript
+  var renderOnly = printAction = true;
+%script{ type: 'application/json', id: 'search_params' }
+  != widget_params.to_json
+= content_for :javascripts do
+  = javascript_include_tag "jsts", debug: false
+  = javascript_include_tag "widgets/direction"

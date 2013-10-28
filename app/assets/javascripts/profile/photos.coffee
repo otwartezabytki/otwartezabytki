@@ -3,24 +3,14 @@ jQuery.initializer 'div.photo-attributes', ->
   $preview_placeholder = $section.find('.preview-placeholder')
   $progressbar = $section.find('.progressbar')
   $photo_hidden = $section.find('.photo.hidden')
-  $photo_upload = $section.find(".photo_upload")
+  $photo_upload = $section.find(".photo-upload")
   $form = $section.parents('form.relic')
   $cancel_upload = $section.find('.cancel_upload')
   $remove_photo = $section.find('.remove_photo')
 
-  serialized_cookie = "photos_form_#{location.href.match(/relics\/(\d+)/)[1]}"
-
-  serialize_form = ->
-    $.cookie(serialized_cookie, $('form.relic').serialize())
-
-  unserialize_form = ->
-    if $.cookie(serialized_cookie)?
-      $('form.relic').unserialize($.cookie(serialized_cookie), 'override-values': true)
-      $.cookie(serialized_cookie, null)
-
   upload_spinner_opts = {
-  lines: 8, length: 0, width: 6, radius: 10, rotate: 0, color: '#555', speed: 0.8, trail: 55,
-  shadow: false, hwaccel: false, className: 'spinner', zIndex: 2e9, top: 46, left: 46
+    lines: 8, length: 0, width: 6, radius: 10, rotate: 0, color: '#555', speed: 0.8, trail: 55,
+    shadow: false, hwaccel: false, className: 'spinner', zIndex: 2e9, top: 46, left: 46
   }
 
   if $preview_placeholder.length
@@ -44,7 +34,6 @@ jQuery.initializer 'div.photo-attributes', ->
       data.submit()
 
     submit: (e, data) ->
-      do serialize_form
 
     progressall: (e, data) ->
       progress = parseInt(data.loaded / data.total * 100, 10)
@@ -57,8 +46,6 @@ jQuery.initializer 'div.photo-attributes', ->
 
   $cancel_upload.click ->
     photo_xhr.abort() if photo_xhr?
-
-  $remove_photo.click serialize_form
 
   $form.submit ->
     if $section.find('#relic_license_agreement:checked').length == 0
@@ -82,13 +69,21 @@ jQuery.initializer 'div.photo-attributes', ->
         $(this).val($input.val()).addClass('connected')
         $(this).trigger('change')
 
-  do unserialize_form
-
   $(this).find('textarea.redactor').redactor focus: false, buttons: ['bold', 'italic', 'link', 'unorderedlist'], lang: 'pl'
+  # fix redactor to trigger change event on textarea
+  $section.on 'input keydown', '.redactor_editor', ->
+    $(this).siblings('textarea').trigger('change')
 
-  image = if $('#photo_file').hasClass('first') then first_photo_upload else photo_upload
-  $("#photo_file").filestyle
-    image: image
-    imageheight: 25
-    imagewidth: 154
-    width: 154
+  # fix for serialization problem
+  ['author', 'date_taken', 'description', 'alternate_text'].each (attrClass) ->
+    find_photo_id = (el) ->
+      $(el).parents('.photo:first').attr('id')
+
+    $section.on 'change', "input.#{attrClass}, textarea.#{attrClass}", ->
+      photo_id = find_photo_id(this)
+      $.cookie("#{photo_id}_#{attrClass}", $(this).val())
+
+    $section.find("input.#{attrClass}, textarea.#{attrClass}").each ->
+      photo_id = find_photo_id(this)
+      value_from_cookie = $.cookie("#{photo_id}_#{attrClass}")
+      $(this).val(value_from_cookie) if $(this).val().length == 0 && value_from_cookie

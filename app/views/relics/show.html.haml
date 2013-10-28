@@ -27,14 +27,11 @@
   .column-left
     = render :partial => "relics/show/description"
     = render :partial => "relics/show/entries"
-    .columns-2
-      .column-1-of-2
-        = render :partial => "relics/show/events"
-      .column-1-of-2
-        = render :partial => "relics/show/documents"
     = render :partial => "relics/show/links"
+    = render :partial => "relics/show/widgets"
   .column-right
     = render :partial => "relics/show/subrelics"
     = render :partial => "relics/show/categories"
     = render :partial => "relics/show/alerts"
-    = render :partial => "relics/show/widgets"
+    = render :partial => "relics/show/events"
+    = render :partial => "relics/show/documents"

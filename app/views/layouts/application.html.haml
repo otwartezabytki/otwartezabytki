@@ -22,6 +22,11 @@
       = stylesheet_link_tag "ie8", :media => "all"
     %link{:href => "http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,600,300&subset=latin,latin-ext", :rel => "stylesheet", :type => "text/css"}
   %body{ :class => [cookies["font-size"].to_s, controller_name, action_name, ("resource_#{params[:id]}" if params[:id])].join(' '), :data => { :logged => warden.authenticated?.to_s } }
+    %div#cookies
+      %ul.cooks
+        %li Ta strona używa ciasteczek
+        %li= link_to t('layouts.application.accept'), "#", class: "btn", id: "accept_cookies"
+        %li= link_to t('layouts.application.learn_more'), cookies_page_path
     #fb-root
     :javascript
       (function(d, s, id) {
@@ -51,11 +56,12 @@
                 %span.minus
               %ul
                 - if current_user && current_user.registered? && current_user.errors.size == 0
-                  %li= t('layouts.application.hello', :username => (current_user.username || current_user.email))
-                  -# %li= t('layouts.application.relics_count', :count => current_user.earn_points)
+                  %li
+                    - # Profile:
+                    - # = link_to t('layouts.application.hello', :username => (current_user.username || current_user.email)), current_user
+                    = t('layouts.application.hello', :username => (current_user.username || current_user.email))
                   %li= link_to t('layouts.application.logout'), destroy_user_session_path, :method => :delete, :class => 'logout'
                 - else
-                  -# %li= t('layouts.application.relics_count', :count => current_user.try(:earn_points) || 0)
                   %li
                     %a{:href => new_user_session_path, :class => 'login'}
                       = t('layouts.application.login')
@@ -96,5 +102,6 @@
       #fancybox_loader
     != include_gon(:camel_case => true)
     != javascript_include_tag "application"
+    = timeago_script_tag
     != yield :footer_javascripts
     = render 'shared/analytics'

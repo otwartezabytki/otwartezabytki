@@ -1,0 +1,544 @@
+#= require ../variables
+#= require jquery
+#= require jquery_ujs
+#= require js-routes
+#= require vendor/jquery.cookie
+#= require sugar
+#= require handlebars/handlebars
+#= require_tree ../libraries
+#= require gmaps/marker-clusterer
+#= require gmaps/context-menu
+#= require gmaps/extras
+
+window.gmap = null
+window.marker_clusterer = null
+ROUTE = null
+POLYGON = null
+SEARCH_PARAMS = null
+
+print_has_prompted = false
+ready_to_print = false
+template = false
+
+show_content_window = (marker, content) ->
+  if marker.info_window
+    marker.info_window.close(gmap, marker)
+    marker.info_window = null
+  else
+    if gmap.info_window
+      gmap.info_window.close(gmap, gmap.info_window.marker)
+      gmap.info_window.marker.info_window = null
+      gmap.info_window = null
+
+    gmap.info_window = marker.info_window = new google.maps.InfoWindow
+      content: content
+
+    marker.info_window.marker = marker
+
+    marker.info_window.open(gmap, marker)
+
+renderRelicInfo = (relic) ->
+  photo = if relic.main_photo then "<div class='photo-wrapper'><img src='#{relic.main_photo.file.midi.url}' width='50' height='50'></div>" else ""
+  link = "<a href='#{Routes.relic_path(relic.id)}' target='_blank'>więcej »</a>"
+  "<div class='relic-info'>#{photo}<div class='relic-info-content'><h3>#{relic.identification}</h3><div>#{relic.street}</div><div>#{link}</div></div></div>"
+
+loadRelicInfo = (location, callback) ->
+  gmap.onNextMovement ->
+  search_params = {}
+  if bounds = gmap.getLatLngBounds()
+    search_params.bounding_box = bounds.toString()
+  search_params.api_key = "oz"
+  search_params.per_page = 1
+  search_params.location = location
+  $.get Routes.api_v1_relics_path(search_params), (result) ->
+    callback(renderRelicInfo(result.relics[0]))
+  , "json"
+
+markers = []
+overlays = []
+
+clearMarkers = ->
+  marker_clusterer.clearMarkers() if marker_clusterer
+  gmap.clearOverlays()
+  for marker in gmap.markers
+    marker.setMap(null) unless marker.getDraggable()
+  marker.setMap(null) for marker in markers
+  markers = []
+  overlays = []
+
+renderResults = (search_groups, search_results, callback) ->
+  do clearMarkers
+
+  if gmap.getZoom() > 11 and POLYGON?
+    search_groups = []
+  else
+    search_results = []
+
+  $.each search_groups, ->
+    latlng = new google.maps.LatLng(@latitude, @longitude)
+
+    if @facet_count > 1
+      overlay = new google.maps.RelicMarker latlng, @facet_count, =>
+        southWest = new google.maps.LatLng(@bounding_box[0].lat, @bounding_box[0].lng)
+        northEast = new google.maps.LatLng(@bounding_box[1].lat, @bounding_box[1].lng)
+        bounds = new google.maps.LatLngBounds(southWest, northEast)
+        gmap.fitBounds(bounds, true)
+        $('#search_location').val("#{@type}:#{@id}")
+        $('#search_bounding_box').val(bounds.toString()) unless ROUTE?
+        $('#new_search').submit()
+
+      overlay.setMap(gmap)
+
+      overlays.push(overlay)
+    else
+      marker = new google.maps.Marker
+        map: gmap
+        icon: gmap_marker
+        position: latlng
+        clickable: true
+        optimized: false
+
+      google.maps.event.addListener marker, 'click', =>
+        loadRelicInfo "#{@type}:#{@id}", (content) ->
+          show_content_window(marker, content)
+
+  $.each search_results, ->
+    latlng = new google.maps.LatLng(@latitude, @longitude)
+
+    marker = new google.maps.Marker
+      map: gmap
+      icon: gmap_marker
+      position: latlng
+      clickable: true
+      optimized: false
+
+    markers.push marker
+
+    google.maps.event.addListener marker, 'click', =>
+      loadRelicInfo "relic:#{@id}", (content) ->
+        show_content_window(marker, content)
+
+  if gmap.getZoom() > 11 and POLYGON?
+    image_urls = gmap_circles
+    image_sizes = [55, 59, 75, 85, 105]
+    font_sizes = [14, 14, 17, 17, 17]
+
+    styles = image_urls.map (image, index) ->
+      url: image,
+      textSize: font_sizes[index]
+      width: image_sizes[index]
+      height: image_sizes[index]
+      textColor: '#507283'
+
+    marker_clusterer.clearMarkers() if marker_clusterer?
+    marker_clusterer = new MarkerClusterer gmap, markers,
+      maxZoom: 14
+      styles: styles
+
+  $('a.point-relic').click ->
+    google.maps.event.trigger(markers[$(this).data('id')], 'click')
+    false
+
+  do callback if callback?
+
+# Serialize form to JSON
+$.fn.serializeObject = ->
+
+  json = {}
+  push_counters = {}
+  patterns =
+    validate  : /^[a-zA-Z][a-zA-Z0-9_]*(?:\[(?:\d*|[a-zA-Z0-9_]+)\])*$/,
+    key       : /[a-zA-Z0-9_]+|(?=\[\])/g,
+    push      : /^$/,
+    fixed     : /^\d+$/,
+    named     : /^[a-zA-Z0-9_]+$/
+
+  @build = (base, key, value) ->
+    base[key] = value
+    base
+
+  @push_counter = (key) ->
+    push_counters[key] = 0 if push_counters[key] is undefined
+    push_counters[key]++
+
+  $.each $(@).serializeArray(), (i, elem) =>
+    return unless patterns.validate.test(elem.name)
+
+    keys = elem.name.match patterns.key
+    merge = elem.value
+    reverse_key = elem.name
+
+    while (k = keys.pop()) isnt undefined
+
+      if patterns.push.test k
+        re = new RegExp("\\[#{k}\\]$")
+        reverse_key = reverse_key.replace re, ''
+        merge = @build [], @push_counter(reverse_key), merge
+
+      else if patterns.fixed.test k
+        merge = @build [], k, merge
+
+      else if patterns.named.test k
+        merge = @build {}, k, merge
+
+    json = $.extend true, json, merge
+
+  return json
+
+String.prototype.appendCountry = ->
+  this + if this.match(/[0-9\.,]+/) then "" else ", Polska"
+
+getTravelMode = (type) ->
+  switch type
+    when 'bicycling'
+      google.maps.TravelMode.BICYCLING
+    when 'driving'
+      google.maps.TravelMode.DRIVING
+    else
+      google.maps.TravelMode.WALKING
+
+simplifyPolygon = (polygon) ->
+  return polygon if polygon.length < 100
+
+  simplifyBy = Math.max(1, parseInt(polygon.length / Math.max(100, polygon.length * 0.3)))
+
+  return polygon if simplifyBy is 1
+
+  simplified = (p for p in polygon by simplifyBy)
+
+  # Make sure that polygon is closed
+  simplified.pop()
+  simplified.add simplified.first()
+  simplified
+
+routeToPolygon = (route, distance) ->
+  return POLYGON if POLYGON?
+
+  route.path = route.overview_path.map (o) ->
+    latitude: o.lat().toFixed(6), longitude: o.lng().toFixed(6)
+
+  factory = new jsts.geom.GeometryFactory()
+
+  coordinates = route.path.map (p) ->
+    new jsts.geom.Coordinate p.latitude, p.longitude
+
+  centerLat = route.bounds.getCenter().lat()
+  centerLng = route.bounds.getCenter().lng()
+  # in km
+  degreeInKm = haversineDistance \
+    Math.round(centerLat) - 0.5,
+    centerLng,
+    Math.round(centerLat) + 0.5,
+    centerLng
+
+  line_string = factory.createLineString coordinates
+  buffer = line_string.buffer distance / degreeInKm
+
+  bufferCoordinates = simplifyPolygon buffer.getCoordinates()
+
+  paths = bufferCoordinates.map (p) ->
+    new google.maps.LatLng p.x, p.y
+
+  POLYGON = paths.map (p) -> p.toUrlValue()
+
+getWaypoints = ->
+  $('#waypoints .waypoint')
+    .filter ->
+      not $(this).val().isBlank()
+    .map ->
+      $(this).val().appendCountry()
+    .get()
+
+searchRoute = (search_params, callback) ->
+  do clearMarkers
+  return callback(routeToPolygon(ROUTE, search_params.radius)) if ROUTE?
+
+  origin      = search_params.waypoints.first()
+  destination = search_params.waypoints.last()
+  waypoints   = search_params.waypoints.slice(1, -1).map (wp) -> location: wp
+
+  request =
+    origin: origin
+    destination: destination
+    travelMode: getTravelMode search_params.route_type
+    region: 'pl'
+    waypoints: waypoints
+
+  gmap.directions.route request, (result, status) ->
+    if status == google.maps.DirectionsStatus.OK
+      ROUTE = route = result.routes[0]
+      polygon = routeToPolygon route, search_params.radius
+
+      gmap.directionsRenderer.setDirections(result)
+    else
+      <%= Rails.env.development? ? 'console.log' : 'window.alert' %>('Nie znaleziono trasy! Spróbuj ponownie.')
+
+printAppendRelic = (relic) ->
+  return if $("#relic-#{relic.id}").length
+
+  template ||= Handlebars.compile $('#relic-template').html()
+  $('#relics-container').append template(relic)
+
+printClearRelics = ->
+  $('#relics-container').html ''
+  $('#relics-loading-info').show()
+
+printRenderRelics = (relics, last) ->
+  relics.each (relic) ->
+    printAppendRelic relic
+
+  if last
+    $('#relics-loading-info').hide()
+    do windowPrint
+
+windowPrint = ->
+  return if print_has_prompted
+
+  if ready_to_print
+    ( ->
+      print_has_prompted = true
+      <%=
+        if Rails.env.development?
+          "console.log('`window.print()` doesn’t prompt during development')"
+        else
+          'window.print()'
+        end
+      %>
+    ).delay 1000
+  else
+    ready_to_print = true
+
+performSearch = (search_params, callback) ->
+  search_params._method = 'get'
+  $.ajax
+    url: '/api/v1/relics/clusters'
+    type: 'post'
+    data: search_params
+    dataType: 'json'
+    success: (result) ->
+      callback(result)
+    error: ->
+      <%= Rails.env.development? ? 'console.log' : 'window.alert' %>('Nastąpił błąd podczas wyszukiwania zabytków.')
+
+hasValidWaypoints = (waypoints) ->
+  waypoints.filter (waypoint) ->
+    not waypoint.isBlank()
+  .length > 1
+
+parseRadius = (value) ->
+  value = parseFloat(('' + value).replace(/[^0-9]+/, '.').replace(/[^0-9\.]/g, '')) || 0
+  Math.min(1000, Math.max(0.1, parseFloat(value, 10)))
+
+getSearchParams = ->
+  return SEARCH_PARAMS if SEARCH_PARAMS?
+
+  if $('#search_params').length > 0
+    search_params            = $.parseJSON $('#search_params').html()
+  else
+    search_params            = $('#new_search').serializeObject().search
+    search_params.waypoints  = getWaypoints()
+    search_params.route_type = $('input[name="search[route_type]"]:checked').val()
+    search_params.radius     = parseRadius $('#search_radius').val()
+
+  search_params.api_key = "oz"
+  search_params.per_page = 300
+  search_params.widget = 1
+  SEARCH_PARAMS = search_params
+
+$('#search_radius').on 'change', ->
+  this.value = parseRadius $(this).val()
+
+saveWidget = ->
+  storeParams = ->
+    params = Object.clone getSearchParams()
+    delete params.polygon
+    params
+
+  unless renderOnly?
+    window.parent.postMessage(JSON.stringify(
+      event: "on_params_changed", params: storeParams()
+    ), "*")
+
+debouncedSearchRelics = jQuery.debounce ->
+
+  search_params = getSearchParams()
+
+  if bounds = gmap.getLatLngBounds()
+    search_params.bounding_box = bounds.toString()
+
+  if hasValidWaypoints search_params.waypoints
+    searchRoute search_params, (polygon) ->
+      search_params.polygon = polygon.join(';')
+      $('#search_polygon').val(search_params.polygon)
+      # search_params.path = route.path.map((e) -> "#{e.latitude},#{e.longitude}").join(";")
+      # $('#search_path').val(search_params.path)
+
+      search_params.widget = 'direction'
+
+      if printAction?
+        do printClearRelics
+
+        loadRelics = (search_params) ->
+          performSearch search_params, (result) ->
+            current_page = parseInt result.meta.current_page
+            total_pages  = parseInt result.meta.total_pages
+
+            if current_page is 1
+              renderResults result.clusters, result.relics, ->
+                do windowPrint
+
+            printRenderRelics result.relics, current_page == total_pages
+
+            if current_page < total_pages
+              search_params.page = current_page + 1
+              loadRelics search_params
+
+        loadRelics Object.clone(search_params)
+      else
+        performSearch search_params, (result) ->
+          renderResults result.clusters, result.relics
+  else
+    performSearch search_params, (result) ->
+      renderResults(result.clusters, [])
+
+  false
+, 50
+
+
+haversineDistance = (lat1, lon1, lat2, lon2) ->
+  R = 6371 # km
+  dlat = (lat2 - lat1) * Math.PI / 180.0
+  dlon = (lon2 - lon1) * Math.PI / 180.0
+  lat1 = lat1 * Math.PI / 180.0
+  lat2 = lat2 * Math.PI / 180.0
+  a = Math.sin(dlat / 2) * Math.sin(dlat/2) +
+      Math.sin(dlon / 2) * Math.sin(dlon/2) * Math.cos(lat1) * Math.cos(lat2)
+  c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
+  R * c
+
+searchRelics = ->
+  debouncedSearchRelics()
+  false
+
+getWaypointsFromRoute = (route) ->
+  waypoints = []
+  route.legs.each (leg, index) ->
+    waypoints.add leg.start_address if index is 0
+    leg.via_waypoints.each (wp) ->
+      waypoints.add wp.toUrlValue()
+    waypoints.add leg.end_address
+  waypoints
+
+updateWaypointInputs = (route, callback) ->
+  waypoints = getWaypointsFromRoute route
+  waypoints.each (wp, index) ->
+    $input = $("#waypoints .waypoint:eq(#{index})")
+    if $input.length
+      $input.val(wp)
+    else
+      appendWaypointInput wp
+
+  do callback
+
+appendWaypointInput = (value = '') ->
+  count = $('#waypoints .waypoint').length
+  markup = """
+    <div class="string clearfix optional stringish" id="search_waypoints_#{count}_input">
+      <div class="input">
+        <input id="search_waypoints_#{count}" name="search[waypoints[]]" type="text" value="#{value}" class="waypoint">
+        <span class="remove suffix">&times;</span>
+      </div>
+    </div>
+    """
+  $('#waypoints .search-input').append markup
+  $input = $('#waypoints .waypoint:last')
+  placesAutocomplete $input
+  $input
+
+placesAutocomplete = (input) ->
+  options = componentRestrictions: country: 'pl'
+  autocomplete = new google.maps.places.Autocomplete input[0], options
+
+  google.maps.event.addListener autocomplete, 'place_changed', ->
+    $(document).trigger 'params:changed'
+
+jQuery ->
+
+  if printAction?
+    window.gmap = new google.maps.Map $('#map_canvas')[0],
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+  else
+    window.gmap = new google.maps.Map $('#map_canvas')[0],
+      mapTypeId: google.maps.MapTypeId.HYBRID
+
+  gmap.onMovement ->
+    if bounds = gmap.getLatLngBounds()
+      $('#search_bounding_box').val(bounds.toString())
+      searchRelics()
+
+  gmap.onNextMovement ->
+  gmap.setCenter(new google.maps.LatLng(52, 20))
+  gmap.setZoom(6)
+
+  if renderOnly?
+    do searchRelics
+    return
+
+  $search = $('#new_search')
+  $search.submit(searchRelics)
+
+  $(document).on 'params:changed', ->
+    ROUTE = POLYGON = SEARCH_PARAMS = null
+    do searchRelics
+    do saveWidget
+
+  $('body').on 'change', '#search_radius, #waypoints .waypoint, input[name="search[route_type]"]', ->
+    $(document).trigger 'params:changed'
+
+  toggleRemoveButtons = ->
+    if $('#waypoints .waypoint').length < 3
+      $('#waypoints .remove').hide()
+    else
+      $('#waypoints .remove').each ->
+        $(this).css display: ''
+
+  $('#waypoints a.add-place').on 'click', (e) ->
+    e.preventDefault()
+    $input = appendWaypointInput()
+    do toggleRemoveButtons
+    $input.trigger 'focus'
+
+  $('body').on 'click', '#waypoints .remove', ->
+    $(this).parents('.string').remove()
+    do toggleRemoveButtons
+    $(document).trigger 'params:changed'
+
+  $('#waypoints .waypoint').each ->
+    placesAutocomplete $(this)
+
+  $('.categories input[type="checkbox"]').change ->
+    if $(this).hasClass('sacral-options')
+      filter = $(".categories div.sacral-categories")
+      if $(this).is(':checked')
+        filter.find('input[type=checkbox]').attr('checked', 'checked')
+        filter.slideDown()
+      else
+        filter.find('input[type=checkbox]').removeAttr('checked')
+        filter.slideUp()
+    $(document).trigger 'params:changed'
+
+  gmap.menu = new contextMenu(map: window.gmap)
+
+  gmap.menu.addItem 'Rozpocznij trasę tutaj', (map, latlng) ->
+    $('#waypoints .waypoint:first').val("#{latlng.lat().toFixed(6)},#{latlng.lng().toFixed(6)}").change()
+
+  gmap.menu.addItem 'Zakończ trasę tutaj', (map, latlng) ->
+    $('#waypoints .waypoint:last').val("#{latlng.lat().toFixed(6)},#{latlng.lng().toFixed(6)}").change()
+
+  google.maps.event.addListener gmap.directionsRenderer, 'directions_changed', ->
+    ROUTE = gmap.directionsRenderer.getDirections().routes[0]
+    POLYGON = null
+    if ROUTE?
+      updateWaypointInputs ROUTE, -> searchRelics()
+
+  $(document).trigger 'params:changed'

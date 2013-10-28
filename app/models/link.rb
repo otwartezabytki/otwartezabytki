@@ -22,7 +22,7 @@ class Link < ActiveRecord::Base
   belongs_to :relic
   belongs_to :user
 
-  attr_accessible :name, :url, :position, :kind, :category, :formal_name, :as => [:default, :admin]
+  attr_accessible :name, :url, :position, :kind, :category, :formal_name, :relic_id, :as => [:default, :admin]
   attr_accessible :relic_id, :user_id, :as => :admin
 
   acts_as_list :scope => :relic

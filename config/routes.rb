@@ -17,6 +17,12 @@ Otwartezabytki::Application.routes.draw do
   }
 
   resources :tags, :only => :index
+  # Profile:
+  # resources :users, :only => [:show, :edit, :update] do
+  #   get :checked_relics
+  #   get :my_routes
+  #   delete :remove_avatar
+  # end
 
   resources :relics, :except => [:new, :create, :destroy] do
     member do
@@ -24,6 +30,9 @@ Otwartezabytki::Application.routes.draw do
       match 'section/:section', :to => 'relics#show', :as => 'section', :via => :get
       match 'section/:section', :to => 'relics#update', :as => 'section', :via => :put
       get :download_zip
+      # Profile:
+      # post :adopt
+      # post :unadopt
       get :print
     end
 
@@ -47,6 +56,14 @@ Otwartezabytki::Application.routes.draw do
       w.resources :add_relics, :path => "/add_relics"
       w.resources :add_alerts, :path => "/add_alerts"
     end
+    # Profile:
+    # resources :directions, :path => "/direction", except: [:index] do
+    #   member do
+    #     get :print
+    #     get :configure
+    #     get :preview
+    #   end
+    # end
 
     resource :add_alert, :path => "/add_alert"
   end
@@ -64,6 +81,9 @@ Otwartezabytki::Application.routes.draw do
 
       resources :relics do
         resources :photos
+        collection do
+          get :clusters
+        end
       end
 
       # resources :voivodeships, :only => [:index, :show]
@@ -93,6 +113,7 @@ Otwartezabytki::Application.routes.draw do
   match "/strony/dowiedz-sie-wiecej"  => 'pages#show', :id => 'more',       :as => 'more_page'
   match "/strony/regulamin"           => 'pages#show', :id => 'terms',      :as => 'terms_page'
   match "/strony/prywatnosc"          => 'pages#show', :id => 'privacy',    :as => 'privacy_page'
+  match "/strony/cookie-policy"       => 'pages#show', :id => 'cookies',    :as => 'cookies_page'
   match "/facebook/share_close"       => 'pages#show', :id => 'share_close'
   match "/hello"                      => 'pages#hello', :id => 'hello', :as => :hello
 

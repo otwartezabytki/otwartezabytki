@@ -1,15 +1,12 @@
-@import "compass/layout";
-@import "compass/css3";
-@import '../mixins';
+@import "../mixins";
 
 .edit_relic section.documents {
-
   .document{
     border-bottom: 1px solid #bfbfbf;
     padding-bottom: 20px;
     .column-left{
       .preview{
-        @include box-shadow(0 1px 3px 0 rgba(0,0,0,.3));
+        box-shadow: 0 1px 3px 0 rgba(0,0,0,.3);
         width: 75px;
         height: 75px;
         background: asset-data-url("file_extension_tmp.png") center center no-repeat;
@@ -57,7 +54,7 @@
         background: asset-data-url("file_extension_pps.png") center center no-repeat;
       }
     }
-    p{ 
+    p{
       strong{
         font-weight: 700;
         font-size: 14px;
@@ -70,7 +67,7 @@
     .error{
       input, textarea{
         border: 1px solid #d10000;
-        @include box-shadow(0 0 5px 0 rgba(154,0,0,.3));
+        box-shadow: 0 0 5px 0 rgba(154,0,0,.3);
       }
       .help-inline{
         font-size: 12px;
@@ -81,11 +78,12 @@
       }
     }
   }
-  .file-upload{
+  .document-upload{
     padding-bottom: 15px;
     border-bottom: 1px solid #bfbfbf;
     margin-bottom: 20px;
   }
+
   .input{
     textarea#relic_documents_info{
       width: 680px;
@@ -93,8 +91,8 @@
       padding: 10px;
       max-height: 1000px;
       max-width: 680px;
-      @include box-shadow(inset 0 1px 3px 0 rgba(0,0,0,.3), 0 1px 1px 0 rgba(0,0,0,.1));
-      @include border-radius(2px);
+      box-shadow: inset 0 1px 3px 0 rgba(0,0,0,.3), 0 1px 1px 0 rgba(0,0,0,.1);
+      border-radius: 2px;
       border: 1px solid #646464;
       margin-top: 10px;
     }

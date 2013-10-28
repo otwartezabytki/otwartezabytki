@@ -253,17 +253,11 @@ ActiveRecord::Schema.define(:version => 20130927130918) do
     t.string   "auto_categories"
   end
 
-  add_index "relics", ["ancestry"], :name => "relics_ancestry_gin_trgm_idx"
-  add_index "relics", ["ancestry"], :name => "relics_ancestry_text_pattern_ops_idx"
   add_index "relics", ["ancestry"], :name => "relics_ancestry_trgm_idx"
-  add_index "relics", ["commune_id"], :name => "index_relics_on_commune_id"
-  add_index "relics", ["district_id"], :name => "index_relics_on_district_id"
   add_index "relics", ["existence"], :name => "index_relics_on_existence"
-  add_index "relics", ["place_id"], :name => "index_relics_on_place_id"
   add_index "relics", ["state"], :name => "index_relics_on_state"
   add_index "relics", ["type"], :name => "index_relics_on_type"
   add_index "relics", ["voivodeship_id", "state"], :name => "index_relics_on_voivodeship_id_and_state"
-  add_index "relics", ["voivodeship_id"], :name => "index_relics_on_voivodeship_id"
 
   create_table "search_terms", :force => true do |t|
     t.string   "keyword"
@@ -352,6 +346,13 @@ ActiveRecord::Schema.define(:version => 20130927130918) do
 
   add_index "tolk_translations", ["phrase_id", "locale_id"], :name => "index_tolk_translations_on_phrase_id_and_locale_id", :unique => true
 
+  create_table "user_relics", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "relic_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",     :null => false
     t.string   "encrypted_password",     :default => "",     :null => false
@@ -373,6 +374,8 @@ ActiveRecord::Schema.define(:version => 20130927130918) do
     t.string   "default_locale"
     t.string   "provider"
     t.string   "uid"
+    t.string   "avatar"
+    t.string   "language",               :default => "pl"
   end
 
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true

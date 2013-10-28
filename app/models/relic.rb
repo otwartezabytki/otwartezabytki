@@ -55,7 +55,6 @@ class Relic < ActiveRecord::Base
   has_ancestry
 
   has_one    :original_relic
-  belongs_to :user
   belongs_to :place
 
   has_many :documents, :dependent => :destroy
@@ -64,6 +63,9 @@ class Relic < ActiveRecord::Base
   has_many :entries, :dependent => :destroy
   has_many :links, :order => 'position', :dependent => :destroy
   has_many :events, :order => 'date_start', :dependent => :destroy
+
+  has_many :user_relics
+  has_many :users, :through => :user_relics
 
   attr_accessor :license_agreement, :polish_relic, :created_via_api
   attr_accessible :identification, :place_id, :dating_of_obj, :latitude, :longitude,
@@ -183,6 +185,10 @@ class Relic < ActiveRecord::Base
     end
   end
 
+  def place_full_name_with_street
+    self.street.present? ? [place_full_name, self.street].join(", ") : place_full_name 
+  end
+
   def corrected_by?(user)
     user.suggestions.where(:relic_id => self.id).count > 0
   end
@@ -296,7 +302,7 @@ class Relic < ActiveRecord::Base
 
   def is_group?
     return 'ZE' == kind if new_record?
-    'ZE' == kind or (is_root? and has_children?)
+    'ZE' == kind || (is_root? and has_children?)
   end
 
   def revisions

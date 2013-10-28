@@ -20,6 +20,8 @@
 #
 
 class Photo < ActiveRecord::Base
+  default_scope { order('photos.id ASC') }
+
   belongs_to :relic
   belongs_to :user
   has_many :events

@@ -1,0 +1,12 @@
+.direction.edit_widget
+  %h1
+    = t("widget.direction.title_")
+    %a.back{:href => widgets_path}= t('views.widgets.edit.back')
+  .content
+    .preview
+      = raw widget.snippet
+
+    %h2= t('views.widgets.edit.generated')
+    %div
+      %span.block= t('views.widgets.edit.code_help')
+      %textarea#snippet{:cols => "20", :rows => "3"}= widget.snippet

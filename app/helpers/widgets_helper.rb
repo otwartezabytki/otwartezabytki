@@ -16,14 +16,22 @@ module WidgetsHelper
 
   # Converts Relic object to Hash
   # containing data relevant to map search widget
-  def relic_to_widget_data(relic)
-    {
+  def relic_to_widget_data(relic, with_photo = true)
+    data = {
       :id => relic.id,
       :latitude => relic.latitude,
       :longitude => relic.longitude,
       :identification => relic.identification,
       :street => relic.street,
-      :main_photo => relic.main_photo
+      :place => relic.place.name
     }
+    data[:main_photo] = relic.main_photo if with_photo
+    data
+  end
+
+  def route_type_collection
+    ['walking', 'bicycling', 'driving'].map do |type|
+      [I18n.t("views.widgets.route_types.#{type}"), type]
+    end
   end
 end

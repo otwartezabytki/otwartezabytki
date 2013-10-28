@@ -7,10 +7,7 @@ module Api
       before_filter :set_json_as_default_format
 
       def set_json_as_default_format
-        if(request.headers["HTTP_ACCEPT"].nil? &&
-          params[:format].nil?)
-          request.format = "json"
-        end
+        request.format = "json"
       end
 
       def current_ability

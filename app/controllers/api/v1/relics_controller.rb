@@ -7,21 +7,11 @@ module Api
       before_filter :api_authorize, :only => [:create, :update]
 
       def index
-        p = params.slice(:query, :place, :from, :to, :categories, :state, :existence, :location, :has_photos, :has_description, :order, :latitude, :longitude, :bounding_box, :polygon, :distance)
+        collection
+      end
 
-        [:state, :existence].each do |key|
-          if p[key] && !p[key].is_a?(Array)
-            p[key] = p.delete(key).split(",")
-          end
-        end
-
-        p[:lat] = p.delete(:latitude) if p[:latitude]
-        p[:lon] = p.delete(:longitude) if p[:longitude]
-
-        params[:search] = p.merge(:q => p.delete(:query))
-
-        tsearch.load = true
-        @relics = tsearch.perform
+      def clusters
+        collection
       end
 
       def show
@@ -58,6 +48,26 @@ module Api
         else
           render :json => {:errors => @relic.errors}, :status => :unprocessable_entity
         end
+      end
+
+      private
+
+      def collection
+        p = params.slice(:query, :place, :from, :to, :categories, :state, :existence, :location, :has_photos, :has_description, :order, :latitude, :longitude, :bounding_box, :path, :radius, :per_page, :widget, :polygon, :distance)
+
+        [:state, :existence].each do |key|
+          if p[key] && !p[key].is_a?(Array)
+            p[key] = p.delete(key).split(",")
+          end
+        end
+
+        p[:lat] = p.delete(:latitude) if p[:latitude]
+        p[:lon] = p.delete(:longitude) if p[:longitude]
+
+        params[:search] = p.merge(:q => p.delete(:query))
+
+        tsearch.load = true
+        @relics = tsearch.perform
       end
 
     end

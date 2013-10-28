@@ -185,15 +185,29 @@ jQuery.initializer 'section.edit.location', ->
       $('#map_canvas').set_marker($('#relic_latitude').val().toNumber(), $('#relic_longitude').val().toNumber())
 
     $('form.relic').on 'change',  '.foreign-location select, .foreign-location input, .street_input input, #relic_polish_relic', ->
+      $('form.relic').addClass('wait')
       geocode_location (lat, lng) ->
-        $('#map_canvas').zoom_at(lat, lng)
-        map.removeMarkers()
-        $('#map_canvas').circle_marker(lat, lng)
-        $('form.relic').removeClass('geocoded')
-        $('#relic_geocoded').val("f")
+        $('#map_canvas').set_marker(lat, lng)
+        $form = $('form.relic')
+        $form.removeClass('wait')
+        $form.submit() if $form.hasClass('submit')
 
   countries_locations = jQuery.parseJSON($('#countries_location').html())
   $('#relic_country_code').select2()
   $('#relic_country_code').change ->
     location = countries_locations[$(this).val()]
     $('#map_canvas').zoom_at(location[0], location[1], 5)
+
+  $('form.relic').on 'ajax:before', ->
+
+    # Wait for lat/lng
+    if $(this).hasClass('wait')
+      $(this).addClass('submit')
+      return false
+
+    unless $(this).hasClass('geocoded')
+      alert("Podaj dokładny adres lub przeciągnij znacznik na mapę.")
+      return false
+
+  $('.administrative-level select').on 'change', ->
+    $('#relic_street').val('')

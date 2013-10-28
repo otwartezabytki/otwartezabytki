@@ -49,6 +49,7 @@ pl:
       format: "%{attribute} %{message}"
       messages:
         accepted: "musi zostać zaakceptowane"
+        already_taken: "jest już zajęta"
         blank: "nie może być puste"
         confirmation: "nie zgadza się z potwierdzeniem"
         empty: "nie może być puste"
@@ -91,6 +92,8 @@ pl:
         name: Nazwa
         relic: Zabytek
         relic_id: "ID zabytku"
+        size: "Rozmiar"
+        mime: "Typ MIME"
       entry:
         body: Opis
         relic: Zabytek
@@ -114,6 +117,10 @@ pl:
         relic: Zabytek
         relic_id: "ID zabytku"
         alternate_text: "Tekst alternatywny"
+        file: "Plik"
+        file_full_width: "Pełna szerokość"
+        file_full_height: "Pełna wysokość"
+        mime: "Typ MIME"
       relic:
         ancestry: "W zespołach"
         approved: "Zabytek zatwierdzony"
@@ -160,10 +167,13 @@ pl:
       user:
         created_at: "Założenie konta"
         email: "Adres e-mail"
-        password: Hasło
-        role: Rola
+        current_password: "Bieżące hasło"
+        password: "Hasło"
+        password_confirmation: "Powtórz hasło"
+        role: "Rola"
         updated_at: "Zaktualizowanie danych"
         username: "Nazwa użytkownika"
+        language: "Język"
       version:
         item: Zasób
         item_type: Rodzaj
@@ -834,6 +844,9 @@ pl:
       search:
         place: "np. Małkinia, ul. Grodzka w Krakowie"
         q: "np. cmentarz, stocznie poniemieckie, chopinowski"
+
+      user:
+        current_password: "Musisz podać swoje bieżące hasło, żeby je zmienić."
     labels:
       search:
         from: "od:"
@@ -841,6 +854,9 @@ pl:
         place: "Gdzie:"
         q: "Co:"
         to: "do:"
+        start: 'Od:'
+        end: 'Do:'
+        radius: 'W promieniu od trasy:'
     placeholders:
       search:
         place: gdzie
@@ -855,6 +871,9 @@ pl:
       update: "Zaktualizuj %{model}"
   layouts:
     application:
+      blog: "Blog"
+      accept: "Akceptuj"
+      learn_more: "Dowiedz się więcej"
       about: "O projekcie"
       addrelic: "Dodaj zabytek"
       browse: Przeglądaj
@@ -902,6 +921,11 @@ pl:
     widget_error: "Nie udało się stworzyć widgeta. Zgłoś błąd administracji."
     widget_error_and_correct: "Nie udało się zaktualizować widgeta. Popraw błędy poniżej."
     widget_has_been_updated: "Widget został zaktualizowany"
+    relic_adopted: "Adoptowałeś zabytek. Od teraz będziesz otrzymywał powiadomienia o jego zmianach."
+    relic_unadopted: "Odadoptowałeś zabytek. Już nie będziesz otrzymywał powiadomień o jego zmianach."
+    profile_updated: "Twój profil został zaktualizowany."
+    profile_not_updated: "Formularz został źle wypełniony."
+    route_has_been_removed: "Trasa została usunięta."
   number:
     currency:
       format:
@@ -1075,6 +1099,9 @@ pl:
           register_here: "Zarejestruj się tutaj"
           submit: "Zaloguj się"
     pages:
+      profile:
+        you_can_if_you_want: "Możesz %{remove_avatar}, jeśli tego sobie życzysz."
+        remove_avatar: "usunąć swoje zdjęcie"
       home:
         go_to_relic_profile: "Przejdź do profilu zabytku"
         header: "Wyszukaj i uzupełnij..."
@@ -1149,6 +1176,22 @@ pl:
               state: "zmieniono stan"
               street: "poprawiono adres"
               tags: "zaktualizowano tagi"
+            photo: "zaktualizowano zdjęcie"
+            link: "zaktualizowano link"
+          create:
+            relic: "został utworzony"
+            photo: "zdjęcie zostało dodane"
+            link: "link został dodany"
+            document: "dokument został utworzony"
+            alert: "zgłoszono alert"
+            entry: "dodano ciekawostkę"
+            event: "dodano wydarzenie"
+          destroy:
+            photo: "zdjęcie zostało usunięte"
+            link: "link został usunięty"
+            document: "dokument został usutnięty"
+            entry: "usunięto ciekawostkę"
+            event: "usunięto wydarzenie"
         soon_header: "... a wkrótce będziemy mogli oglądać zabytki tak:"
         stats_info:
           checked_html:
@@ -1195,6 +1238,8 @@ pl:
           widget:
             par: "Udostępniamy kilka przykładowych aplikacji, dzięki którym łatwiej będzie wykorzystać dane o otwartych zabytkach na innych stronach internetowych."
             title: "Widżety »"
+        relic_has_been_updated_by: "%{relic} został zaktualizowany przez %{user}"
+        relic_has_been_updated: "%{relic} został zaktualizowany"
     pagination:
       first: Pierwsza
       last: Ostatnia
@@ -1290,6 +1335,11 @@ pl:
         step3: "krok 3"
         step4: "krok 4"
     relics:
+      adoption:
+        header: Adopcja
+        explanation: |-
+          <p>Gdy zaadoptujesz zabytek, wszelkie informacje o zmianach na jego stronie będą pojawiały się w Twoim profilu.</p>
+          <p>W każdej chwili możesz zrezygnować z adopcji i otrzymywanych powiadomień.</p>
       edit:
         add_and_save: "dodaj i zapisz"
         add_attachement: "dodaj nowe zdjęcie do zabytku"
@@ -1303,6 +1353,8 @@ pl:
           delete_confirm: "Czy aby na pewno?"
           delete_file: "Usuń plik"
           loading: "Trwa wgrywanie, proszę czekać..."
+          upload_first: "wgraj plik"
+          upload: "wgraj kolejny plik"
         edit_photo: zmień
         events:
           action: Akcje
@@ -1331,6 +1383,8 @@ pl:
           delete_photo: "usuń zdjęcie"
           loading: "Trwa wgrywanie, proszę czekać..."
           statement_html: "Oświadczam, że posiadam prawa do zdjęć, które publikuję na stronie otwartezabytki.pl. Jeśli nie jestem autorem/autorką zdjęć, oświadczam, że mam prawo ich publikacji na licencji <a href=\"http://creativecommons.org/licenses/by-sa/3.0/pl/\" target=\"_blank\">Creative Commons Uznanie Autorstwa-Na Tych Samych Warunkach 3.0 Polska</a> <em class=\"icons\"></em>"
+          upload_first: "wgraj zdjęcie"
+          upload: "wgraj kolejne zdjęcie"
         reminder: "Pamiętaj o podaniu źródła!"
         save: "zapisz zmiany"
         update: aktualizuj
@@ -1402,11 +1456,12 @@ pl:
           placeholder: "<p>Napisz 3-4 zdania zawierające najważniejsze informacje o obiekcie.</p>"
         documents:
           add_file: "dodaj plik"
-          added: "dodado:"
+          added: "dodano:"
           header: "Dokumenty urzędowe"
           placeholder: "<p>Dysponujesz dokumentacją, którą możesz legalnie udostępnić innym? <br/> Załącz pliki tutaj.</p>"
           size: rozmiar
           upload: "wgraj plik"
+          download: "Pobierz wszystkie pliki"
           where_to_find: "Gdzie szukać?"
         entries:
           add: "dodaj wpis"
@@ -1434,6 +1489,8 @@ pl:
           error: "Wystąpił błąd podczas ładowania poglądu."
         general:
           add: dodaj
+          adopt: "Adoptuj zabytek"
+          unadopt: "Odadoptuj zabytek"
           close: zamknij
           common_name: "Nazwa zwyczajowa"
           dating_of_obj: "Data powstania:"
@@ -1493,6 +1550,19 @@ pl:
           params_label: "Parametry do <a href='/api_doc/'>API</a>"
           settings_info: "Jeśli chcesz na przykład wyświetlić na swojej stronie mapkę z cmentarzami żydowskimi z województwa dolnośląskiego, wybierz województwo dolnośląskie z lokalizacji oraz kategorie „cmentarz” i „żydowski”. Następnie skopiuj kod do wstawienia na stronę."
           width: "Szerokość widgeta"
+        direction:
+          header: "Wybierz ustawienia widżetu"
+          height: "Wysokość widgeta"
+          hide_sidebar: "Ukryj pasek boczny"
+          params_hint: "Ustawisz je poruszając mapką podglądową po prawej stronie."
+          params_label: "Parametry do <a href='/api_doc/'>API</a>"
+          settings_info_: "Jeśli chcesz na przykład wyświetlić na swojej stronie mapkę z trasą przebiegającą przez 2 lub więcej miast z zaznaczonymi zabytkami w jej promieniu, znajdź te miasta i wybierz interesujące cię kategorie oraz promień, a następnie skopiuj kod do wstawienia na stronę."
+          width: "Szerokość widgeta"
+          map_help: "Wpisz nazwę dowolnego miejsca (np. miasto, ulica) lub własnoręcznie ustaw znacznik na mapie. Wygenerowaną trasę możesz przeciągać i dostosowywać do swoich potrzeb."
+          save: "Zapisz trasę"
+          print_: "Wydrukuj trasę"
+          save_and_print: "Zapisz i wydrukuj trasę"
+          loading_relics: "Ładuję listę zabytków"
         preview: "Podgląd wygenerowanego widżetu"
       index:
         about: "Widżety:"
@@ -1509,6 +1579,23 @@ pl:
         add_relic:
           create: "Dodaj nowy zabytek"
           header: "Znasz zabytek, którego nie ma w naszej bazie?"
+        direction:
+          relics_on_path: "Zabytki na trasie:"
+          relics_within_radius: "Zabytki w promieniu:"
+          km_within_range: "km od trasy"
+          advanced_search: "wyszukiwanie<br />zaawansowane »"
+          categories: Kategorie
+          categories_hint: "tu możesz zawęzić wyszukiwanie zabytków wg. ich kategorii"
+          location_hint: "tu możesz zawęzić wyszukiwanie zabytków wg. ich lokalizacji"
+          query_placeholder: "np. cmentarz"
+          search_by_name: "Wyszukaj po nazwie"
+          show_less: "pokaż mniej..."
+          show_more: "pokaż więcej..."
+          submit: "Pokaż trasę"
+          add_place: "Dodaj kolejne miejsce"
+          route_type: "Typ trasy"
+          relics_from_categories: "Zabytki z kategorii"
+          edit_route: "Edytuj trasę"
         map_search:
           advanced_search: "wyszukiwanie<br />zaawansowane »"
           categories: Kategorie
@@ -1518,6 +1605,17 @@ pl:
           search_by_name: "Wyszukaj po nazwie"
           show_less: "pokaż mniej..."
           show_more: "pokaż więcej..."
+      route_types:
+        bicycling: "Trasa rowerowa"
+        walking: "Trasa piesza"
+        driving: "Trasa samochodowa"
+      preview:
+        direction:
+          relics_on_route: "Zabytki na trasie"
+          relics_from_categories: "Zabytki z kategorii"
+          within_radius: "w promieniu"
+          relics_list: "Lista zabytków"
+          no_route: "Nie wybrano trasy"
   widget:
     add_alert:
       description: |-
@@ -1530,6 +1628,10 @@ pl:
           Ta aplikacja umożliwi dodanie go w każdej chwili, wraz z opisem i zestawem zdjęć. "
       thumb: widget-image-example.jpg
       title: "Widżet \"Dodaj zabytek\""
+    direction:
+      description_: "Dzięki tej aplikacji możesz zobaczyć zabytki z naszej bazy na konkretnej trasie. Listę wyświetlanych zabytków możesz zawęzić w oparciu kategorie i położenie w promeniu trasy (np. tylko cmentarze w promieniu 2 km od trasy z Warszawy do Wrocławia)."
+      thumb: widget-image-example.jpg
+      title_: "Widżet Trasa"
     map_search:
       description: "Dzięki tej aplikacji możesz zobaczyć zabytki z naszej bazy na mapie. Możesz zawęzić listę wyświetlanych zabytków w oparciu o położenie i kategorie (np. tylko cmentarze w Zamościu lub wszystkie pałace i kamienice w województwie śląskim)."
       thumb: widget-image-example.jpg
@@ -1551,5 +1653,46 @@ pl:
     wuoz-w-warszawie: "Wojewódzki Urząd Ochrony Zabytków w Warszawie"
     wuoz-w-zielonej-gorze: "Wojewódzki Urząd Ochrony Zabytków w Zielonej Górze"
     wuoz-we-wroclawiu: "Wojewódzki Urząd Ochrony Zabytków we Wrocławiu"
+  routes:
+    pages: "strony"
+  users:
+    user_avatar:
+      change_photo: "Zmień zdjęcie"
+    settings_form:
+      language_settings: "Ustawienia językowe"
+      password_change: "Zmiana hasła"
+      avatar: "Zdjęcie profilowe"
+      user_data: "Dane użytkownika"
+      save: "Zapisz"
+    list_added:
+      added_relics: "Dodane zabytki"
+    list_checked:
+      checked_relics: "Sprawdzone zabytki"
+      description: "Lista zabytków sprawdzonych przez Ciebie:"
+    list_watched:
+      activity: "Aktywność"
+      adopted_relics_list: "Lista zabytków adoptowanych przez Ciebie:"
+      no_adopted_relics: "Nie adoptowałeś jeszcze żadnych zabytków. Możesz to zrobić na profilu każdego zabytku. Adopcja pozwala śledzić zmiany jakie są dokonywane w zabytkach, które Cię interesują"
+      updated_relics_list: "Zmiany wprowadzone w profilach zabytków dodanych i adoptowanych przez Ciebie:"
+      no_updated_relics: "Nikt nie wprowadził żadnych zmian w zabytkach które obserwujesz"
+      no_notifications: "Nie masz już więcej powiadomień."
+    list_routes:
+      no_routes: "Nie posiadasz jeszcze żadnych tras."
+      no_routes_make_one: "Stwórz swoją pierwszą!"
+      description: "Lista tras dodanych przez Ciebie"
+      relics_on_route: "Zabytki na trasie"
+      relics_within_radius: "Zabytki w promieniu %{radius} km od trasy"
+      route_points: "punktów na trasie: %{count}"
+      print: "Wydrukuj"
+      edit: "Edytuj"
+      preview: "Podgląd"
+      relic_unknown_address: "dokładny adres nieznany"
+      delete: "Usuń trasę"
+      delete_confirmation: "Usunąć trasę?"
+    navigation:
+      watched: "Obserwowane"
+      checked_by_me: "Sprawdzone przeze mnie"
+      settings: "Ustawienia"
+      my_routes: "Moje trasy"
   routes:
     pages: "strony"

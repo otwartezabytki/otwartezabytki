@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+source 'http://rails-assets.org'
 
 gem 'rails', '~> 3.2.3', git: 'git://github.com/otwartezabytki/rails.git', branch: 'v3.2.11/multipart-fix'
 gem 'pg'
@@ -7,13 +8,15 @@ gem 'pg'
 # in production environments by default.
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
-  gem 'compass-rails'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
   gem 'chosen-rails'
   gem 'jquery-ui-rails'
   gem 'twitter-bootstrap-rails'
   gem 'bootstrap-sass', '~> 2.0.4.0'
+  gem 'jsts-rails', '~> 0.2.0'
+  gem 'autoprefixer-rails'
+  gem 'rails-assets-handlebars'
 end
 
 gem 'jquery-rails', '2.0.3'
@@ -22,8 +25,11 @@ gem 'coffee-filter'
 gem 'sugar-rails'
 
 gem 'geocoder'
+
+gem 'simple_form'
 gem 'formtastic'
 gem 'formtastic-bootstrap'
+gem 'localized_language_select'
 
 gem 'decent_exposure'
 gem 'kaminari'
@@ -98,6 +104,10 @@ gem 'strong_parameters', '~> 0.2.1'
 gem 'yard'
 gem 'redcarpet'
 
+gem 'rails-timeago', '~> 2.0'
+gem 'clipper'
+gem 'sprockets-commonjs'
+
 group :development, :test do
   gem 'interactive_editor'
   gem 'pry-rails'
@@ -111,7 +121,6 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'guard-ctags-bundler'
   gem 'guard-zeus'
-  # gem 'debugger'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'commands'

@@ -1,10 +1,10 @@
-@import '../mixins';
-@import 'button_states';
+@import "../mixins";
 
 .new_relic{
   .creator{
     background: #fff;
-    @include single-box-shadow(rgba(0,0,0,0.15), 0, 0, 3px);
+    box-shadow: 0 0 3px rgba(0,0,0,0.15);
+
     section.main{
       @include clearfix;
       width: 671px;
@@ -20,6 +20,11 @@
       }
     }
     section.location{
+      .select-on-map {
+        margin: 20px 0;
+        font-size: 14px;
+        font-weight: 700;
+      }
       .column{
         display: inline-block;
         &.full_width{
@@ -81,8 +86,8 @@
       padding: 9px;
       @include gradient(#fafafa, #ffffff);
       border: 1px solid #727272;
-      @include border-radius(2px);
-      @include box-shadow(0 1px 1px 0 rgba(0, 0, 0, 0.1), 0 1px 3px 0 rgba(0, 0, 0, 0.3) inset);
+      border-radius: 2px;
+      box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1), 0 1px 3px 0 rgba(0, 0, 0, 0.3) inset;
     }
     .field {
       position: relative;
@@ -111,9 +116,9 @@
     }
     #relic_reason_input, #relic_description_input{
       textarea{
-        @include box-shadow(inset 0 1px 3px 0 rgba(0,0,0,.3), 0 1px 1px 0 rgba(0,0,0,.1));
-        @include border-radius(2px);
+        box-shadow: inset 0 1px 3px 0 rgba(0,0,0,.3), 0 1px 1px 0 rgba(0,0,0,.1);
         border: 1px solid #646464;
+        border-radius: 2px;
       }
     }
     #new_location{
@@ -214,7 +219,7 @@
         float: left;
         width: 125px;
         padding: 5px;
-        @include single-box-shadow(rgba(0,0,0,0.35), 0, 1px, 3px);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.35);
         .thumb{
           width: 125px;
           height: 125px;
@@ -248,13 +253,13 @@
           .progress-box{
             @include gradient(#fafafa, #ffffff);
             border: 1px solid #727272;
-            @include border-radius(2px);
-            @include box-shadow(0 1px 1px 0 rgba(0, 0, 0, 0.1), 0 1px 3px 0 rgba(0, 0, 0, 0.3) inset);
+            border-radius: 2px;
+            box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1), 0 1px 3px 0 rgba(0, 0, 0, 0.3) inset;
             overflow: hidden;
             height: 10px;
             .progress-line{
-              @include border-radius(1px);
-              @include background-image(linear-gradient(#6a8593, #3a5663));
+              border-radius: 1px;
+              @include gradient(#6a8593, #3a5663);
               height: 10px;
             }
           }
@@ -286,8 +291,8 @@
     .places-wrapper{
       overflow: hidden;
       border: 1px solid #c1c1c1;
+      border-radius: 3px;
       background: #e5e5e5;
-      @include border-radius(3px);
     }
     ul.places{
       margin: 4px;
@@ -470,7 +475,7 @@
     img{
       display: block;
       float: left;
-      @include border-radius(4px);
+      border-radius: 4px;
     }
     .description{
       width: 580px;
@@ -509,7 +514,7 @@
             font-size: 12px;
             font-weight: 600;
             text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
-            @include border-radius(2px);
+            border-radius: 2px;
             cursor: pointer;
             text-decoration: none;
             line-height: 26px;
@@ -538,7 +543,7 @@
 body.relics.new #colorbox {
   #cboxLoadedContent{
     border: 3px solid rgba(0,0,0,0.1);
-    @include border-radius(4px);
+    border-radius: 4px;
     overflow: hidden;
     #cboxContent{
       margin-top: 0;
@@ -598,7 +603,7 @@ body.relics.new #colorbox {
   .input{
     input.error, textarea.error, .redactor_box{
       border: 1px solid #d10000;
-      @include box-shadow(0 0 5px 0 rgba(154,0,0,.3));
+      box-shadow: 0 0 5px 0 rgba(154,0,0,.3);
     }
     .help-inline{
       font-size: 12px;
@@ -670,11 +675,10 @@ form#new_relic{
     bottom: 40px;
     padding: 16px 0;
     z-index: 11;
-    @include border-radius(5px);
+    border-radius: 5px;
     border: 1px solid #acacac;
-    @include box-shadow(rgba(0,0,0,0.45) 0 3px 15px, inset #fff 0 1px 1px -1px);
+    box-shadow: rgba(0,0,0,0.45) 0 3px 15px, inset #fff 0 1px 1px -1px;
     @include gradient(rgba(246,247,248,0.95),rgba(234,234,235,0.95));
-    @include ie-gradient(#f6f7f8, #eaeaeb);
     a.close{
       position: absolute;
       top: 16px;

@@ -8,7 +8,7 @@ class Widgets::MapSearchesController < WidgetsController
 
   expose(:widget_search) do
     params[:search] ||= { :location => 'country:pl' }
-    Search.new(params[:search].merge(:widget => "1"))
+    Search.new(params[:search].merge(:widget => "1", :per_page => 100))
   end
 
   expose(:relics) do

@@ -62,7 +62,7 @@
 
       %section.creator-step.location
         = semantic_form_for @relic, :url => geodistance_relicbuilder_path, :method => :get, :remote => true do |f|
-          %h3= t('views.relicbuilders.new.select_on_map')
+          %h3.select-on-map= t('views.relicbuilders.new.select_on_map')
           .column
             #map_canvas{ :style => "width: 515px; height: 380px;" }
           .column

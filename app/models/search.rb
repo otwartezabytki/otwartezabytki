@@ -6,7 +6,7 @@ class Search
 
   attr_accessor :q, :query, :place, :from, :to, :categories, :state, :existence, :location, :order, :lat, :lon, :load
   attr_accessor :conditions, :range_conditions, :per_page, :page, :has_photos, :has_description, :facets, :zoom, :widget
-  attr_accessor :bounding_box, :polygon, :distance
+  attr_accessor :bounding_box, :radius, :path, :polygon, :waypoints, :route_type, :distance
 
   def initialize(attributes = {})
     attributes.each do |name, value|
@@ -23,11 +23,23 @@ class Search
     !!@load
   end
 
-  def widget=(value)
-    if value
-      @per_page = 100
-    end
+  def radius=(value)
+    @radius = value
+  end
 
+  def radius
+    @radius || 5
+  end
+
+  def path=(value)
+    @path = value.split(";").map{ |vertex| vertex.split(',').map(&:to_f) }
+  end
+
+  def path
+    @path
+  end
+
+  def widget=(value)
     @widget = value
   end
 
@@ -44,6 +56,11 @@ class Search
       variable = variable.split(',') if variable.kind_of?(String)
       variable.reject(&:blank?)
     end
+  end
+
+  def boundary
+    return nil if @path.nil? || @radius.nil?
+    @boundary ||= Polygon.expand(path, @radius.to_f)
   end
 
   def categories
@@ -135,7 +152,11 @@ class Search
   end
 
   def facets
-    available_facets = ["countries", "voivodeships", "districts", "communes", "places"]
+    available_facets = if widget == 'direction'
+      ["countries", "districts", "communes", "places"]
+    else
+      ["countries", "voivodeships", "districts", "communes", "places"]
+    end
     navbar_facets = available_facets.drop(location.length)
 
     if bounding_box?
@@ -160,6 +181,10 @@ class Search
 
   def per_page
     @per_page || 30
+  end
+
+  def per_page=(value)
+    @per_page = value
   end
 
   def enable_highlight
@@ -334,6 +359,15 @@ class Search
           'coordinates' => {
             "top_left" => @top_left,
             "bottom_right" => @bottom_right
+          }
+        }
+      }
+    end
+    if boundary.present?
+      terms_cond << {
+        'geo_polygon' => {
+          'coordinates' => {
+            'points' => boundary.map { |vertex| "#{vertex.first}, #{vertex.last}" }
           }
         }
       }

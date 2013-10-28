@@ -1,22 +1,5 @@
-/*
- *= require_self
- *= require ./profile/categories
- *= require ./profile/description
- *= require ./profile/documents
- *= require ./profile/entries
- *= require ./profile/events
- *= require ./profile/general
- *= require ./profile/links
- *= require ./profile/location
- *= require ./profile/photos
- *= require ./profile/alerts
- *= require ./profile/attachments
- *= require ./profile/widgets
-*/
-
-@import "compass/layout";
-@import "compass/css3";
 @import "mixins";
+@import "profile/*";
 
 .edit_relic {
 
@@ -70,7 +53,6 @@
       font-size: 14px;
       border: 0px;
       border-radius: 2px;
-      -webkit-border-radius: 2px;
       box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 0 5px 1px rgba(30, 93, 125, 0.3);
       display: block;
       width: 100%;
@@ -228,7 +210,7 @@ section.show.photos{
   background: #fff;
   &.placeholder{
     @include gradient(#e9e9e9, #dfdfdf);
-    @include box-shadow(inset 0 0 40px 0 rgba(0,0,0,0.2));
+    box-shadow: inset 0 0 40px 0 rgba(0,0,0,0.2);
     text-align: center;
     .ico{
       position: absolute;
@@ -246,7 +228,7 @@ section.show.photos{
       font-size: 12px;
       padding: 8px 10px;
       @include gradient(#41a223, #399a1b);
-      @include border-radius(2px);
+      border-radius: 2px;
       display: inline-block;
       margin: 190px 0 0;
       &:hover{
@@ -262,7 +244,7 @@ section.show.photos{
       font-weight: 600;
       color: #fff;
       text-transform: uppercase;
-      @include border-radius(2px);
+      border-radius: 2px;
       &.show-photos{
         @include gradient(#4b6d7e, #436576);
       }
@@ -319,11 +301,11 @@ section.show.photos{
         text-shadow: 0 1px 0 rgba(0,0,0,0.6);
         &.next{
           right: 0px;
-          @include border-radius(2px 0px 0px 2px);
+          border-radius: 2px 0 0 2px;
         }
         &.prev{
           left: 0px;
-          @include border-radius(0px 2px 2px 0px);
+          border-radius: 0 2px 2px 0;
         }
       }
     }
@@ -355,7 +337,7 @@ section.show.photos{
         display: inline-block;
       }
       .jcarousel-item{
-        @include box-shadow(0 1px 3px 0 rgba(0,0,0,0.3));
+        box-shadow: 0 1px 3px 0 rgba(0,0,0,0.3);
       }
       .jcarousel-prev-horizontal, .jcarousel-next-horizontal{
         width: 37px;
@@ -418,7 +400,7 @@ section.show.photos{
     margin-bottom: 20px;
   }
   .placeholder{
-    @include border-radius(4px);
+    border-radius: 4px;
     border: 2px dashed #8f8f8f;
     text-align: center;
     padding: 40px 20px;
@@ -436,7 +418,7 @@ section.show.photos{
       font-size: 12px;
       padding: 8px 10px;
       @include gradient(#41a223, #399a1b);
-      @include border-radius(2px);
+      border-radius: 2px;
       display: inline-block;
       margin: 10px 0;
       &:hover{
@@ -498,7 +480,7 @@ section.show.photos {
       font-weight: 600;
       color: #fff;
       text-transform: uppercase;
-      @include border-radius(2px);
+      border-radius: 2px;
       &.show-photos{
         @include gradient(#4b6d7e, #436576);
       }
@@ -559,9 +541,9 @@ section.show.general{
         line-height: 19px;
         padding: 0 8px;
         font-weight: normal;
-        @include border-radius(3px);
-        @include text-shadow(rgba(0,0,0,0.3) 0 1px 1px);
-        @include box-shadow(inset rgba(0,0,0,0.4) 0 1px 3px);
+        border-radius: 3px;
+        text-shadow: rgba(0,0,0,0.3) 0 1px 1px;
+        box-shadow: inset rgba(0,0,0,0.4) 0 1px 3px;
         margin-right: 4px;
         &.unchecked{
           @include gradient(#a3a4a6, #c1c3c5);
@@ -653,7 +635,6 @@ section.show.general{
     font-weight: 300;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
     text-transform: uppercase;
-    -webkit-border-radius: 2px;
     border-radius: 2px;
     cursor: pointer;
     &:hover {
@@ -667,7 +648,26 @@ section.show.general{
       padding: 9px 12px 6px 29px;
       display: block;
       font-weight: 600;
-      background: asset-data-url("edit-relic-ico-original.png") 10px 10px no-repeat;
+      background: asset-data-url("edit-relic-ico-alert.png") 10px 6px no-repeat;
+    }
+  }
+
+  .adopt {
+    @extend .original;
+
+    span {
+      background: asset-data-url("edit-relic-ico-adopt.png") 10px 9px no-repeat;
+    }
+
+    & + .help {
+      position: relative;
+      top: 11px;
+      left: 1px;
+
+      p {
+        line-height: 1.2;
+        padding: 1em 19px 0;
+      }
     }
   }
 
@@ -717,22 +717,22 @@ section.show.entries {
     margin: -10px;
 
     .entry-container {
-      @include box-sizing(border-box);
+      box-sizing: border-box;
       width: 50%;
       padding: 10px;
       float: left;
     }
 
     .entry {
-      @include border-radius(2px);
-      @include box-shadow(0 1px 4px 0 rgba($dark-grey, 0.3));
+      border-radius: 2px;
+      box-shadow: 0 1px 4px 0 rgba($dark-grey, 0.3);
       background: #fff;
       padding: 20px;
       font-size: 14px;
       line-height: 22px;
 
       .body {
-        @include word-break();
+        @extend %word-break;
       }
 
       h3 {
@@ -871,7 +871,7 @@ section.show.alerts{
       position: relative;
       .image{
         padding: 3px;
-        @include box-shadow(0 1px 2px 0 rgba(0,0,0,0.3));
+        box-shadow: 0 1px 2px 0 rgba(0,0,0,0.3);
         position: absolute;
         left: 0;
       }
@@ -901,7 +901,7 @@ section.show.alerts{
       position: relative;
       .image {
         padding: 3px;
-        @include box-shadow(0 1px 2px 0 rgba(0,0,0,0.3));
+        box-shadow: 0 1px 2px 0 rgba(0,0,0,0.3);
         position: absolute;
         left: 0;
       }
@@ -945,7 +945,7 @@ section.show.alerts{
 .edit-relic-link{
   float: right;
   @include gradient(#eb8308, #e37b00);
-  @include border-radius(2px);
+  border-radius: 2px;
   font-size: 12px;
   color: #fff;
   font-weight: 600;
@@ -970,10 +970,10 @@ section.show.events{
     .thumb {
       .end {
         background-color: #7f7f7f;
-        @include border-radius(2px);
+        border-radius: 2px;
       }
       background-color: #7f7f7f;
-      @include border-radius(2px);
+      border-radius: 2px;
     }
     .thumb {
       height: 20px;
@@ -1035,7 +1035,7 @@ section.show.documents{
     &.pdf{
       background: asset-data-url("file_extension_pdf.png") top left no-repeat;
     }
-    &.msword, .vnd-openxmlformats-officedocument-wordprocessingml-document, .vnd-oasis-opendocument-text{
+    &.msword, .vnd-openxmlformats-officedocumedprocessingml-document, .vnd-oasis-opendocument-text{
       background: asset-data-url("file_extension_doc.png") top left no-repeat;
     }
     &.vnd-ms-excel, .vnd-openxmlformats-officedocument-spreadsheetml-sheet{
@@ -1214,8 +1214,8 @@ section.edit{
     padding: 15px 20px;
     textarea.redactor{
       width: 100%;
-      @include box-shadow(inset 0 1px 3px 0 rgba(0,0,0,.3), 0 1px 1px 0 rgba(0,0,0,.1));
-      @include border-radius(2px);
+      box-shadow: inset 0 1px 3px 0 rgba(0,0,0,.3), 0 1px 1px 0 rgba(0,0,0,.1);
+      border-radius: 2px;
       border: 1px solid #646464;
       margin-top: 10px;
     }
@@ -1277,8 +1277,8 @@ section.edit{
       input {
         display: block;
         border: 1px solid #646464;
-        @include box-shadow(0 1px 1px 0 rgba(0,0,0,.1), inset 0 1px 3px 0 rgba(0,0,0,.3));
-        @include border-radius(2px);
+        box-shadow: 0 1px 1px 0 rgba(0,0,0,.1), inset 0 1px 3px 0 rgba(0,0,0,.3);
+        border-radius: 2px;
         height: 34px;
         padding: 0 10px;
         font-size: 14px;
@@ -1289,7 +1289,7 @@ section.edit{
       }
       &.error input{
         border: 1px solid #d10000;
-        @include box-shadow(0 0 5px 0 rgba(154,0,0,.3));
+        box-shadow: 0 0 5px 0 rgba(154,0,0,.3);
       }
     }
     .boolean span {
@@ -1308,7 +1308,7 @@ section.edit{
       }
       input[type="submit"], button{
         @include gradient(#48b119, #2f9900);
-        @include border-radius(2px);
+        border-radius: 2px;
         color: #fff;
         font-size: 12px;
         text-shadow: 0 1px 0 rgba(0,0,0,.5);
@@ -1336,7 +1336,7 @@ div.fancybox-close{
   .input{
     input.error, textarea.error, .redactor_box{
       border: 1px solid #d10000;
-      @include box-shadow(0 0 5px 0 rgba(154,0,0,.3));
+      box-shadow: 0 0 5px 0 rgba(154,0,0,.3);
     }
     .help-inline{
       font-size: 12px;
@@ -1498,8 +1498,7 @@ div.fancybox-close{
   width: 100%;
   position: fixed;
   @include gradient(rgba(242,242,242,0.9), rgba(229,229,229,0.9));
-  @include ie-gradient(#f2f2f2, #e5e5e5);
-  @include box-shadow(0 1px 1px 0 rgba(0,0,0,0.4));
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,0.4);
   min-height: 83px;
   top: 0;
   left: 0;
@@ -1513,7 +1512,6 @@ div.fancybox-close{
     font-weight: 600;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
     text-transform: uppercase;
-    -webkit-border-radius: 2px;
     border-radius: 2px;
     cursor: pointer;
     padding: 9px 12px 6px;
@@ -1549,7 +1547,7 @@ $subrelics-background: #476c7e;
 $subrelics-background-hover: #24353d;
 
 .subrelics {
-  @include border-bottom-left-radius(3px);
+  border-bottom-left-radius: 3px;
   overflow: hidden;
   margin: -25px -25px 70px 0;
   background: $subrelics-background;
@@ -1566,7 +1564,7 @@ $subrelics-background-hover: #24353d;
 }
 
 .subrelics-description {
-  @include text-shadow(0 1px 1px rgba(0, 0, 0, 0.3));
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
   margin: 0;
   padding: 20px 20px 20px 63px;
   line-height: 18px;
@@ -1602,7 +1600,7 @@ $subrelics-background-hover: #24353d;
 
   &.type-current,
   &.type-root {
-    @include text-shadow(0 1px 1px rgba(0, 0, 0, 0.3));
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
     font-weight: 500;
   }
 
@@ -1612,7 +1610,7 @@ $subrelics-background-hover: #24353d;
 
   &.type-current {
     &, &:hover {
-      @include box-shadow(inset 0 1px 2px rgba($dark-grey, 1));
+      box-shadow: inset 0 1px 2px rgba($dark-grey, 1);
       background-color: $subrelics-background-hover;
     }
   }
@@ -1620,8 +1618,8 @@ $subrelics-background-hover: #24353d;
 
 .subrelic-image {
   .thumb {
-    @include box-shadow(0 1px 5px rgba($dark-grey, 0.7));
-    @include border-radius(3px);
+    box-shadow: 0 1px 5px rgba($dark-grey, 0.7);
+    border-radius: 3px;
     float: left;
     padding: 3px;
     border: 1px solid #d4d4d4;
@@ -1638,7 +1636,7 @@ $subrelics-background-hover: #24353d;
 }
 
 .subrelics-info {
-  @include text-shadow(0 1px 1px rgba(0, 0, 0, 0.3));
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
   padding: 0 0 1em 63px;
   font-size: 11px;
   font-weight: 500;
@@ -1660,7 +1658,7 @@ $subrelics-background-hover: #24353d;
   font-weight: 400;
 
   &.type-empty {
-    @include border-radius(5px);
+    border-radius: 5px;
     border: 2px dashed darken($subrelics-background, 10%);
     padding: 24px 0 26px;
     margin: 10px 25px 0;
@@ -1673,9 +1671,9 @@ $subrelics-parent-color: #fbf4e9;
 
 .basic-button,
 .subrelics-add-button {
-  @include border-radius(2px);
-  @include text-shadow(0 1px 0 rgba(30, 110, 6, 0.5));
-  @include box-shadow($subrelics-button-shadow);
+  border-radius: 2px;
+  text-shadow: 0 1px 0 rgba(30, 110, 6, 0.5);
+  box-shadow: $subrelics-button-shadow;
   display: inline-block;
   background: $subrelics-button-color;
   padding: 8px 25px;
@@ -1688,7 +1686,7 @@ $subrelics-parent-color: #fbf4e9;
   }
 
   &:active {
-    @include box-shadow($subrelics-button-shadow, inset 0 1px 10px rgba($dark-grey, 0.5));
+    box-shadow: $subrelics-button-shadow, inset 0 1px 10px rgba($dark-grey, 0.5);
     padding-top: 9px;
     padding-bottom: 7px;
   }
@@ -1713,8 +1711,8 @@ $subrelics-parent-color: #fbf4e9;
 }
 
 .subrelic-parent-info {
-  @include border-radius(2px);
-  @include text-shadow(0 1px 0 lighten($subrelics-parent-color, 2%));
+  border-radius: 2px;
+  text-shadow: 0 1px 0 lighten($subrelics-parent-color, 2%);
   padding: 20px 20px 19px 58px;
   margin: 10px;
   color: rgba($dark-grey, 0.8);

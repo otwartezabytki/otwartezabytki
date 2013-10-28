@@ -9,7 +9,7 @@
     .content
       - relic.all_documents.each do |document|
         .document{ :class => document.mime_class }
-          %h3= link_to document.name, document.file.url
+          %h3= link_to document.name.nil? ? document.ellipsisize : document.name, document.file.url
           %p
             = t('views.relics.show.documents.added')
             = l document.created_at.to_date, :format => :short
@@ -17,7 +17,7 @@
             = t('views.relics.show.documents.size')
             = (document.size / 1024.0 / 1024.0).round(1)
             MB
-      = link_to t('views.relics.show.documents.upload'), download_zip_relic_path(relic)
+      = link_to t('views.relics.show.documents.download'), download_zip_relic_path(relic)
   - else
     .placeholder
       = t('views.relics.show.documents.placeholder')
