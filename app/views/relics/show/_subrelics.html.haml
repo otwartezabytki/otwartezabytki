@@ -13,7 +13,7 @@
         %ul.subrelics-list
           - sorted_subrelics = relic.root.descendants.created.order('identification')
           - sorted_subrelics.each do |rel|
-            = link_to [rel], :remote => true do
+            = link_to [rel], :class => 'subrelic-link', :remote => true do
               = content_tag :dl, :class => ('subrelic ' + (rel == relic ? 'type-current ' : '')).strip do
                 %dd.subrelic-image
                   = image_tag(rel.photos.count > 0 ? rel.main_photo.file.url(:icon) : 'fallback/photo_tiny_default.png', :size => '24x24', :class => 'thumb type-tiny', :alt => rel.identification)

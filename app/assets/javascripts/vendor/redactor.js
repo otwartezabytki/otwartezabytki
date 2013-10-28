@@ -277,7 +277,7 @@ var RLANG = {
 						'<a href="javascript:void(null);" class="redactor_tabs_act">URL</a>' +
 						'<a href="javascript:void(null);">Email</a>' +
 						'<a href="javascript:void(null);">' + RLANG.anchor + '</a>' +
-            '<a href="javascript:void(null);">Podzabytek</a>' +
+            '<a href="javascript:void(null);">Element zespołu</a>' +
 					'</div>' +
 					'<input type="hidden" id="redactor_tab_selected" value="1" />' +
 					'<div class="redactor_tab" id="redactor_tab1">' +
@@ -295,7 +295,7 @@ var RLANG = {
 					'</div>' +
           '<div class="redactor_tab" id="redactor_tab4" style="display: none;">' +
             '<label>Podzabytek: </label><select id="redactor_link_subrelic">' +
-              $('.subrelics-tree .leaf a[href^="/relics/"]').map(function() { return '<option value="' + $(this).attr('href') + '">' + $(this).text() + '</option>' }).toArray().join("\n") +
+              $('.subrelics-tree a.subrelic-link').map(function() { return '<option value="' + $(this).attr('href') + '">' + $(this).text().trim() + '</option>' }).toArray().join("\n") +
             '</select>' +
             '<label>' + RLANG.text + '</label><input type="text" class="redactor_input redactor_link_text" id="redactor_link_subrelic_text" />' +
           '</div>' +
