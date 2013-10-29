@@ -988,7 +988,7 @@ pl:
       zero: zabytków
   relic_tabs:
     attachments:
-      description: "Wybierz zdjęcie, które chcesz załączyć:"
+      description: "Kliknij na zdjęcie, które chcesz załączyć:"
       name: "Wybierz zdjęcie..."
     categories:
       description: "Przypisz do zabytku odpowiednie tagi i kategorie. Kieruj się własnym uznaniem."
