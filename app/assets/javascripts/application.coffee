@@ -96,7 +96,7 @@ jQuery ->
         path = Routes.edit_translation_path({id: $i18n.data('key')})
         $.ajax(path, data: $i18n.data('options')).success(ajax_callback)
 
-  if $('select#lang').length > 0
+  if $('select#lang').length > 0 && $.fn.select2?
     $('select#lang').select2
       minimumResultsForSearch: 20
       width: '100px'

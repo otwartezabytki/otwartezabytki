@@ -4,12 +4,14 @@
 .content
   %h2= t('views.widgets.edit.direction.header')
   %span.block= t('views.widgets.edit.direction.settings_info_')
+  - if current_user.blank?
+    %span.block= t('views.widgets.edit.direction.sign_in_before_save')
   .preview
     %iframe#oz_direction{ width: 920, height: 1000, src: configure_widgets_direction_url(widget, iframe: true) }
   .sidebar
     = semantic_form_for widget, :url => self.send("widgets_#{widget.class.partial_name}_path", widget, format: 'json'), :remote => true do |f|
-      = f.input :width, :label => t('views.widgets.edit.direction.width'), :required => false
-      = f.input :height, :label => t('views.widgets.edit.direction.height'), :required => false
+      = f.input :width, :label => t('views.widgets.edit.direction.width') + ' (500..1600)', :required => false
+      = f.input :height, :label => t('views.widgets.edit.direction.height') + ' (500..1600)', :required => false
       = f.input :params, :as => :hidden, label: false
       - if current_user.present?
       = f.button t('views.widgets.edit.direction.save_and_print'), name: 'save_and_print'
