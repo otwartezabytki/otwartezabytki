@@ -113,6 +113,7 @@ class RelicsController < ApplicationController
 
     if relic.save
       if !sub_ids.empty?
+        errors = []
         sub_ids.each { |sr| 
           if sr[:id]
             subrelic_item = Object.const_get(params[:section].singularize.capitalize).find(sr[:id])
@@ -121,6 +122,7 @@ class RelicsController < ApplicationController
             subrelic = Relic.find(sr[:relic_id])
             se = params[:section] == "events" ? subrelic.events.build(sr.except(:_destroy)) : subrelic.links.build(sr.except(:_destroy))
             se.save
+            errors << se.errors.full_messages.join(", ")
           end
         }
       end
@@ -139,13 +141,17 @@ class RelicsController < ApplicationController
         if params[:section] == "photos"
           flash[:notice] = t('notices.gallery_has_been_updated')
         else
-          flash[:notice] = t('notices.changes_has_been_saved')
+          if errors.any?
+            flash[:error] = [t('notices.please_correct_errors'), errors.join(", ")].join("\n")
+          else
+            flash[:notice] = t('notices.changes_has_been_saved')
+          end
         end
 
         redirect_to edit_relic_path(relic.id, :section => params[:section])
       end
     else
-      flash.now[:error] = [t('notices.please_correct_errors'), relic.errors.full_messages.join(", ")].join(" ")
+      flash.now[:error] = [t('notices.please_correct_errors'), relic.errors.full_messages.join(", ")].join("\n")
       render 'edit' and return
     end
   end
