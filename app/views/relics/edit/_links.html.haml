@@ -7,7 +7,7 @@
         %span.info= t('views.relics.edit.links.url')
         %span.action= t('views.relics.edit.links.action')
       %ol.sortable
-        - relic.all_links.select(&:url?).sort_by{ |e| e.position || 1000 }.each do |link|
+        - @urls.each do |link|
           = f.semantic_fields_for :links, link do |f2|
             = content_tag_for :li, link, :class => "move" do
               = f2.input :category, :label => false, :collection => Link::UrlCategories
@@ -47,7 +47,7 @@
         %span.info= t('views.relics.edit.links.info')
         %span.action= t('views.relics.edit.links.action')
       %ol.sortable
-        - relic.all_links.select(&:paper?).sort_by{ |e| e.position || 1000 }.each do |link|
+        - @papers.each do |link|
           = f.semantic_fields_for :links, link do |f2|
             = content_tag_for :li, link, :class => "move" do
               = f2.input :category, :label => false, :collection => Link::PaperCategories
