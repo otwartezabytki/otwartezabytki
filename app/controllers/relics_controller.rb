@@ -149,12 +149,12 @@ class RelicsController < ApplicationController
         if params[:section] == "photos"
           flash[:notice] = t('notices.gallery_has_been_updated')
         else
-          if errors.any?
-            if params[:section] == "links" && builds.any?
+          if errors && errors.any?
+            if params[:section] == "links" && builds && builds.any?
               extra_urls = builds.select { |b| b.kind == 'url' }
-              @urls = @urls + extra_urls if extra_urls.any?
+              @urls = @urls + extra_urls if extra_urls && extra_urls.any?
               extra_papers = builds.select { |b| b.kind == 'paper' }
-              @papers = @papers + extra_papers if extra_papers.any?
+              @papers = @papers + extra_papers if extra_papers && extra_papers.any?
             end
             flash[:error] = [t('notices.please_correct_errors'), errors.join(", ")].join("\n")
             render 'edit' and return
