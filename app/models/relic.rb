@@ -220,7 +220,15 @@ class Relic < ActiveRecord::Base
   end
 
   def all_documents
-    Document.where(:relic_id => [id] + descendant_ids).order("relic_id ASC")
+    Document.where(:relic_id => [id] + descendant_ids).order("relic_id ASC").select {|d| d.valid? }
+  end
+
+  def valid_documents
+    documents.select {|d| d.valid? }
+  end
+
+  def not_valid_documents
+    documents - valid_documents
   end
 
   def all_links
