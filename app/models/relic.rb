@@ -224,11 +224,15 @@ class Relic < ActiveRecord::Base
   end
 
   def valid_documents
-    documents.select {|d| d.valid? }
+    all_documents.select {|d| d.valid? }
   end
 
   def not_valid_documents
-    documents - valid_documents
+    all_documents - valid_documents
+  end
+
+  def valid_photos
+    all_photos.select { |p| p.valid? }
   end
 
   def all_links
