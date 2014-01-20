@@ -40,17 +40,20 @@ class Widgets::DirectionsController < WidgetsController
   def update
     authorize! :update, widget_direction if widget_direction.user_id or params[:save] or params[:save_and_print]
     widget_direction.user_id ||= current_user.try :id
-    if widget_direction.save
-      if params[:save_and_print]
-        redirect_to print_widgets_direction_path(widget_direction)
-      elsif params[:save]
-        redirect_to user_my_routes_path(current_user.id)
+    if widget_direction.has_valid_waypoints?
+      if widget_direction.save
+        if params[:save_and_print]
+          redirect_to print_widgets_direction_path(widget_direction)
+        else
+          redirect_to edit_widgets_direction_path(widget_direction), :notice => t('widget.direction.save')
+        end
       else
-        redirect_to edit_widgets_direction_path(widget_direction), :notice => t('notices.widget_has_been_updated')
+        flash[:error] = t('notices.widget_error_and_correct')
+        render :edit
       end
     else
-      flash[:error] = t('notices.widget_error_and_correct')
-      render :edit
+      flash[:error] = t('widget.direction.no_route')
+      redirect_to edit_widgets_direction_path(widget_direction)
     end
   end
 

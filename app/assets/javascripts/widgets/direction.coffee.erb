@@ -43,16 +43,23 @@ renderRelicInfo = (relic) ->
   "<div class='relic-info'>#{photo}<div class='relic-info-content'><h3>#{relic.identification}</h3><div>#{relic.street}</div><div>#{link}</div></div></div>"
 
 loadRelicInfo = (location, callback) ->
+  relicId = location.match(/^relic:(\d+)/)[1]
   gmap.onNextMovement ->
   search_params = {}
   if bounds = gmap.getLatLngBounds()
     search_params.bounding_box = bounds.toString()
   search_params.api_key = "oz"
-  search_params.per_page = 1
-  search_params.location = location
-  $.get Routes.api_v1_relics_path(search_params), (result) ->
-    callback(renderRelicInfo(result.relics[0]))
-  , "json"
+  if relicId
+    search_params.id = relicId
+    $.get Routes.api_v1_relic_path(search_params), (result) ->
+      callback(renderRelicInfo(result))
+    , "json"
+  else
+    search_params.per_page = 1
+    search_params.location = location
+    $.get Routes.api_v1_relics_path(search_params), (result) ->
+      callback(renderRelicInfo(result.relics[0]))
+    , "json"
 
 markers = []
 overlays = []
