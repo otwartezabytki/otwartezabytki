@@ -22,11 +22,11 @@
             = f2.hidden_field :photo_id
             = f2.hidden_field :_destroy
             - if event.photo.blank?
-              = link_to t('views.relics.edit.add_photo'), '#', :class => "add_photo"
+              = link_to t('views.relics.edit.add_photo'), '#', :class => "add_photo" if event.relic == relic
             - else
               = image_tag event.photo.file.url(:icon), :class => "event_photo"
-              = link_to t('views.relics.edit.edit_photo'), '#', :class => "edit_photo"
-              = link_to t('views.relics.edit.delete'), '#', :class => "remove_photo"
+              = link_to t('views.relics.edit.edit_photo'), '#', :class => "edit_photo" if event.relic == relic
+              = link_to t('views.relics.edit.delete'), '#', :class => "remove_photo" if event.relic == relic
 
             = link_to t('views.relics.edit.delete'), '#', :class => "remove_event"
 
