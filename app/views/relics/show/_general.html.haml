@@ -6,12 +6,14 @@
     .subrelic-parent-info
       %p= t('views.relics.show.subrelics.group_info')
   = link_to t('views.relics.show.general.fill_in'), edit_section_relic_path(relic.to_param, :general), :remote => true, :class => "edit-relic-link"
-  %h1= relic.identification
+  %h1
+    = relic.identification
+    .fb-like{"data-href" => "http://#{request.host+request.fullpath}", "data-layout" => "button_count", "data-send" => "false", "data-show-faces" => "false", "data-width" => "200"}
   - if relic.common_name.present?
     %p
       %strong= t('views.relics.show.general.common_name')
       =relic.common_name
-  .fb-like{"data-href" => "http://#{request.host+request.fullpath}", "data-layout" => "button_count", "data-send" => "false", "data-show-faces" => "false", "data-width" => "200"}
+
   .status
     = state_tag(relic)
     .help
