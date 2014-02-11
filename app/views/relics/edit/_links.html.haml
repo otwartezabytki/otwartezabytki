@@ -10,9 +10,9 @@
         - @urls.each do |link|
           = f.semantic_fields_for :links, link do |f2|
             = content_tag_for :li, link, :class => "move" do
-              = f2.input :category, :label => false, :collection => Link::UrlCategories
-              = f2.input :url, :label => false, :hint => false, :class => "url"
-              = f2.input :name, :label => false, :hint => false, :class => "info"
+              = f2.input :category, :label => false, :collection => Link::UrlCategories, required: true, include_blank: false
+              = f2.input :url, :label => false, :hint => false, :class => "url", required: true
+              = f2.input :name, :label => false, :hint => false, :class => "info", required: true
               - if relic.is_group?
                 = f2.input :relic_id, as: :select, label: "dotyczy", include_blank: false, required: false, collection: Hash[relic.root.descendants.map {|d| [d.identification, d.id] }.insert(0, ['całego zespołu zabytków', relic.id])]
               = f2.hidden_field :position, :class => "link-position"
@@ -24,9 +24,9 @@
         %script{ :type => "text/html", :id => "link_template", :"data-container" => "#links" }
           = f.semantic_fields_for :links, relic.links.build do |f2|
             %li.link.move
-              = f2.input :category, :label => false, :collection => Link::UrlCategories
-              = f2.input :url, :label => false, :hint => false, :class => "url"
-              = f2.input :name, :label => false, :hint => false, :class => "info"
+              = f2.input :category, :label => false, :collection => Link::UrlCategories, required: true, include_blank: false
+              = f2.input :url, :label => false, :hint => false, :class => "url", required: true
+              = f2.input :name, :label => false, :hint => false, :class => "info", required: true
               - if relic.is_group?
                 = f2.input :relic_id, as: :select, label: "dotyczy", required: false, collection: Hash[relic.root.descendants.map {|d| [d.identification, d.id] }.insert(0, ['całego zespołu zabytków', relic.id])]
               = f2.hidden_field :position, :class => "link-position"
@@ -50,9 +50,9 @@
         - @papers.each do |link|
           = f.semantic_fields_for :links, link do |f2|
             = content_tag_for :li, link, :class => "move" do
-              = f2.input :category, :label => false, :collection => Link::PaperCategories
-              = f2.input :formal_name, :label => false, :hint => false, :class => "url"
-              = f2.input :name, :label => false, :hint => false, :class => "info"
+              = f2.input :category, :label => false, :collection => Link::PaperCategories, required: true, include_blank: false
+              = f2.input :formal_name, :label => false, :hint => false, :class => "url", required: true
+              = f2.input :name, :label => false, :hint => false, :class => "info", required: true
               - if relic.is_group?
                 = f2.input :relic_id, as: :select, label: "dotyczy", include_blank: false, required: false, collection: Hash[relic.root.descendants.map {|d| [d.identification, d.id] }.insert(0, ['całego zespołu zabytków', relic.id])]
               = f2.hidden_field :position, :class => "link-position"
@@ -64,9 +64,9 @@
         %script{ :type => "text/html", :id => "print_template", :"data-container" => "#papers" }
           = f.semantic_fields_for :links, relic.links.build do |f2|
             %li.link.move
-              = f2.input :category, :label => false, :collection => Link::PaperCategories
-              = f2.input :formal_name, :label => false, :hint => false, :class => "formal_name"
-              = f2.input :name, :label => false, :hint => false, :class => "info"
+              = f2.input :category, :label => false, :collection => Link::PaperCategories, required: true, include_blank: false
+              = f2.input :formal_name, :label => false, :hint => false, :class => "formal_name", required: true
+              = f2.input :name, :label => false, :hint => false, :class => "info", required: true
               - if relic.is_group?
                 = f2.input :relic_id, as: :select, label: "dotyczy", include_blank: false, required: false, collection: Hash[relic.root.descendants.map {|d| [d.identification, d.id] }.insert(0, ['całego zespołu zabytków', relic.id])]
               = f2.hidden_field :position, :class => "link-position"
@@ -82,6 +82,6 @@
 
     = f.input :links_info
     .actions
-      %button= t('views.relics.edit.save')
+      %button.save_item= t('views.relics.edit.save')
       = t('views.relics.edit.or')
       = link_to t('views.relics.edit.cancel'), relic_path(relic.id), :remote => true, :class => "cancel"
