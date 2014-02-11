@@ -23,6 +23,7 @@
 #= require profile
 #= require rails-timeago
 #= require locales/jquery.timeago.pl.js
+#= require angular
 #= require_tree ./application
 
 # FIX data-dismiss
