@@ -156,7 +156,7 @@ class RelicsController < ApplicationController
               extra_papers = builds.select { |b| b.kind == 'paper' }
               @papers = @papers + extra_papers if extra_papers && extra_papers.any?
             end
-            flash[:error] = [t('notices.please_correct_errors'), errors.join(", ")].join("\n")
+            flash[:error] = t('notices.please_correct_errors')
             render 'edit' and return
           else
             flash[:notice] = t('notices.changes_has_been_saved')
@@ -166,7 +166,7 @@ class RelicsController < ApplicationController
         redirect_to edit_relic_path(relic.id, :section => params[:section])
       end
     else
-      flash.now[:error] = [t('notices.please_correct_errors'), relic.errors.full_messages.join(", ")].join("\n")
+      flash.now[:error] = t('notices.please_correct_errors')
       render 'edit' and return
     end
   end
