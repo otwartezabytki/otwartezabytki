@@ -44,7 +44,6 @@ jQuery.initializer 'section.edit.events', ->
       if $(this).val() == ""
         required.push($(this)) 
       else if $(this).attr("id").split("_").last() == "date"
-        console.log typeof(parseInt($(this).val()))
         required.push($(this)) if typeof(parseInt($(this).val())) != "number" || $(this).val().length < 4
     if required.length > 0
       event.preventDefault() 
