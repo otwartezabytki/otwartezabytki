@@ -186,7 +186,7 @@ class Relic < ActiveRecord::Base
   end
 
   def place_full_name_with_street
-    self.street.present? ? [place_full_name, self.street].join(", ") : place_full_name 
+    self.street.present? ? [place_full_name, self.street].join(", ") : place_full_name
   end
 
   def corrected_by?(user)
@@ -216,7 +216,7 @@ class Relic < ActiveRecord::Base
   end
 
   def has_photos?
-    all_photos.exists?
+    valid_photos.present?
   end
 
   def all_documents
