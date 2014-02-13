@@ -104,7 +104,7 @@ GIT
 
 GEM
   remote: https://rubygems.org/
-  remote: http://rails-assets.org/
+  remote: https://rails-assets.org/
   specs:
     aasm (3.0.16)
     activeadmin (0.4.4)

@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-source 'http://rails-assets.org'
+source 'https://rails-assets.org'
 
 gem 'rails', '~> 3.2.3', git: 'git://github.com/otwartezabytki/rails.git', branch: 'v3.2.11/multipart-fix'
 gem 'pg'
