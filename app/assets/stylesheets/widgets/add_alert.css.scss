@@ -49,12 +49,13 @@
     color: #fff;
     font-size: 12px;
     border: 0;
+    outline: 0;
     height: 30px;
     padding: 0 12px;
     cursor: pointer;
     text-transform: uppercase;
     &.none{
-      cursor: normal;
+      cursor: default;
       @include gradient(#d8d8d8, #c4c4c4);
       text-shadow: 0 -1px 0 rgba(0,0,0,0.3);
       margin-right: 10px;
