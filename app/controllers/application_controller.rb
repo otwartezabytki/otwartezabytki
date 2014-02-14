@@ -109,7 +109,8 @@ class ApplicationController < ActionController::Base
   protected
 
   def save_return_path
-    cookies[:return_path] = request.fullpath if request.get? and request.format != 'json' and !params[:iframe]
+    return false if devise_controller? or request.format == 'json' or params[:iframe]
+    cookies[:return_path] = request.fullpath if request.get?
   end
 
   def authenticate_admin!
@@ -120,12 +121,11 @@ class ApplicationController < ActionController::Base
   private
 
   def after_sign_in_path_for(resource)
-    cookies.delete(:return_path) if Subdomain.matches?(request)
-    cookies[:return_path] || relics_path
+    cookies.delete(:return_path) || relics_path
   end
 
   def after_sign_out_path_for(resource)
     cookies.delete(:return_path) if Subdomain.matches?(request)
-    cookies[:return_path] || relics_path
+    cookies.delete(:return_path) || root_path
   end
 end
