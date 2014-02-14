@@ -14,16 +14,17 @@ Your machine should be equipped with:
 
 ### Application setup (for OS X)
 
-```bash
-  brew update
-  brew install elasticsearch memcached postgresql imagemagick aspell --lang=pl
-  brew pin elasticsearch postgresql
-  cp config/database.yml.example config/database.yml
-  # create database and database users for dev and testing
-  bundle install
-  gunzip -c db/dump/%m_%d_%Y.sql.gz | script/rails db
-  bundle exec rake db:migrate
-  bundle exec rake db:seed
+```
+brew update
+brew install elasticsearch memcached postgresql imagemagick aspell --lang=pl
+brew pin elasticsearch postgresql
+cp config/database.yml.example config/database.yml
+# create database and database users for dev and testing
+bundle install
+# load database dump if you have
+gunzip -c %m_%d_%Y.sql.gz | script/rails db 
+bundle exec rake db:migrate
+bundle exec rake db:seed
 ```
 
 Set up elastic search:
@@ -32,8 +33,8 @@ Set up elastic search:
  - install Morfologik (Polish) Analysis for ElasticSearch from: https://github.com/chytreg/elasticsearch-analysis-morfologik
  - index the data:
 
-```bash:
-  bundle exec rake relic:reindex
+```
+bundle exec rake relic:reindex
 ```
 
 ### [Attention] Updating settings.yml
@@ -43,33 +44,32 @@ If you don't do that, the settings won't be applied.
 
 ### Dumping database
 
-```bash:
-  pg_dump -h localhost -cxOWU user_name db_name | gzip > db/dump/$(date +"%m_%d_%Y").sql.gz
+```
+pg_dump -h localhost -cxOWU user_name db_name | gzip > (date +"%m_%d_%Y").sql.gz
 ```
 
 ### Redactor.js license
 
 Redactor.js is proprietary software, you can disable it by issuing following commands:
 
-```bash
-  rm $(find app -type f -name 'redactor*')
-  sed -i '.bak' '/redactor/d' $(grep -l -E '/redactor|)\.redactor' -r app)
+```
+rm $(find app -type f -name 'redactor*')
+sed -i '.bak' '/redactor/d' $(grep -l -E '/redactor|)\.redactor' -r app)
 ```
 
 ### I18n translations
 
   - Every new translation key add to pl.yml with default value.
-  - On deploy default values are copied to database via ```bash rake tolk:sync```.
-  - To change translation on production use tolk or inline interface (you muse be an admin).
-  - To change sync local yaml file with production run:
-  ```bash script/load_production_translations ```
-  this make dump on production load it to local db run sync and dump merged yml file.
+  - On deploy default values are copied to database via `bash rake tolk:sync`.
+  - To change already added translation key use tolk or inline interface (you must be an admin).
+  - From time to time you want to pull production translations and save in pl.yml `bash script/load_production_translations` command make dump on production load it to local db run sync and dump merged yml file.
 
 ### Troubleshooting
 
 Problem:
-
-    500 : {"error":"SearchPhaseExecutionException[Failed to execute phase [query], total failure; shardFailures {[_na_][development-relics][0]: No active shards}{[_na_][development-relics][1]: No active shards}{[_na_][development-relics][2]: No active shards}{[_na_][development-relics][3]: No active shards}{[_na_][development-relics][4]: No active shards}]","status":500}
+```
+500 : {"error":"SearchPhaseExecutionException[Failed to execute phase [query], total failure; shardFailures {[_na_][development-relics][0]: No active shards}{[_na_][development-relics][1]: No active shards}{[_na_][development-relics][2]: No active shards}{[_na_][development-relics][3]: No active shards}{[_na_][development-relics][4]: No active shards}]","status":500}
+```
 
 Solution:
 
@@ -78,7 +78,7 @@ Solution:
 
 ### Code documentation
 
-```bash
+```
   gem install yard redcarpet
 ```
 
