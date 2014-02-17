@@ -1,4 +1,4 @@
-%section.new.alert{ :"data-fancybox" => true, :"data-replace" => "section.new.alert" }
+%section.new.alert
   %h2= t('views.alerts.new.header')
   - if request.xhr?
     = render 'shared/flash', :flash => flash
