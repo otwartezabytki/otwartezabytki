@@ -11,6 +11,6 @@
       = f.input :author
       = f.input :date_taken
       .actions
-        = f.submit t('views.alerts.new.submit')
+        = f.button t('views.alerts.new.submit')
         lub
         = link_to t('views.alerts.new.cancel'), relic_path(relic.id), :remote => true
