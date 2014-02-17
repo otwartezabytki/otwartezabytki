@@ -7,7 +7,7 @@ The project is licensed under a 3-clause BSD license. You can find the whole tex
 ### Requirements (for OS X)
 Your machine should be equipped with:
   - homebrew
-  - ruby 1.9.2 or higher (we recommend using rbenv)
+  - ruby 1.9.2 or 1.9.3, below than 2.0.0 (we recommend using rbenv)
   - git
   - bundle
   - web browser e.g. chrome or safari
