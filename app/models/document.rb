@@ -17,6 +17,7 @@
 #
 
 class Document < ActiveRecord::Base
+  include StateExt
   default_scope { order('documents.id ASC') }
 
   belongs_to :relic
@@ -28,7 +29,7 @@ class Document < ActiveRecord::Base
   mount_uploader :file, DocumentUploader
 
   validates :file, :relic, :user, :presence => true
-  validates :name, :description, :presence => true, :unless => :new_record?
+  validates :name, :description, :presence => true, :unless => :initialized?
 
   has_paper_trail :skip => [:created_at, :updated_at]
 

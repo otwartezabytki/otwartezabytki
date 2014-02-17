@@ -212,27 +212,15 @@ class Relic < ActiveRecord::Base
 
   # @return photos for relic and it's descendants
   def all_photos
-    Photo.where(:relic_id => [id] + descendant_ids)
+    Photo.state(:saved).where(:relic_id => [id] + descendant_ids)
   end
 
   def has_photos?
-    valid_photos.present?
+    all_photos.exists?
   end
 
   def all_documents
-    Document.where(:relic_id => [id] + descendant_ids).order("relic_id ASC").select {|d| d.valid? }
-  end
-
-  def valid_documents
-    all_documents.select {|d| d.valid? }
-  end
-
-  def not_valid_documents
-    all_documents - valid_documents
-  end
-
-  def valid_photos
-    all_photos.select { |p| p.valid? }
+    Document.state(:saved).where(:relic_id => [id] + descendant_ids).order("relic_id ASC")
   end
 
   def all_links
