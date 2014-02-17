@@ -18,13 +18,12 @@ Your machine should be equipped with:
 brew update
 brew install elasticsearch memcached postgresql imagemagick aspell --lang=pl
 brew pin elasticsearch postgresql
-cp config/database.yml.example config/database.yml
+cp config/database.sample.yml config/database.yml
 # create database and database users for dev and testing
 bundle install
+bundle exec rake db:migrate rake db:seed
 # load database dump if you have
-gunzip -c %m_%d_%Y.sql.gz | script/rails db 
-bundle exec rake db:migrate
-bundle exec rake db:seed
+gunzip -c %m_%d_%Y.sql.gz | script/rails db
 ```
 
 Set up elastic search:
