@@ -1,8 +1,7 @@
 jQuery.initializer 'section.edit.links', ->
   $section = $(this)
 
-  next_id = parseInt($('.sortable').children('li').length)+1#$section.find('form.relic').data('next-id'))
-
+  next_id = parseInt($('.sortable').children('li').length)+1
   $section.on 'click', '.add_link', ->
     template = $($(this).data('template'))
     html = template.html()

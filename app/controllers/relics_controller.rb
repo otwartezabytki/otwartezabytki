@@ -197,13 +197,13 @@ class RelicsController < ApplicationController
   end
 
   def download_zip
-    if relic.documents.count >  0
-
+    if relic.all_documents.exists?
+      
       file_name = "dokumenty-zabytku-#{relic.id}-#{relic.identification.parameterize.to_s}.zip"
       t = Tempfile.new("my-temp-filename-#{Time.now}")
 
       ::Zip::ZipOutputStream.open(t.path) do |zip|
-        relic.documents.each do |document|
+        relic.all_documents.each do |document|
           zip.put_next_entry(document.file.identifier)
           zip.print IO.read(document.file.file.to_file)
         end
@@ -214,6 +214,8 @@ class RelicsController < ApplicationController
         :filename => file_name
 
       t.close
+    else
+      render404       
     end
   end
 

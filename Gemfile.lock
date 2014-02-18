@@ -184,7 +184,7 @@ GEM
     dalli (2.6.2)
     database_cleaner (0.9.1)
     debug_inspector (0.0.2)
-    decent_exposure (2.0.1)
+    decent_exposure (2.3.1)
     devise (2.2.3)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)

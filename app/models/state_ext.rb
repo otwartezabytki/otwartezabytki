@@ -9,6 +9,10 @@ module StateExt
     before_create do
       self.state = 'uploaded'
     end
+
+    before_update do
+      self.state = 'saved'
+    end
   end
 
   [:initialized, :uploaded, :saved].each do |name|
