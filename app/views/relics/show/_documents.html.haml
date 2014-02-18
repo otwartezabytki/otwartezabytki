@@ -9,7 +9,7 @@
     .content
       - relic.all_documents.each do |document|
         .document{ :class => document.mime_class }
-          %h3= link_to document.name? ? document.ellipsisize : document.name, document.file.url
+          %h3= link_to document.name.blank? ? document.ellipsisize : document.name, document.file.url
           %p
             = t('views.relics.show.documents.added')
             = l document.created_at.to_date, :format => :short
