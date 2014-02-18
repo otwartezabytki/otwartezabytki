@@ -2,8 +2,8 @@
 #= require_self
 #= require_tree ./profile
 
-@.Profile ?= {}
-@.Profile.highlight_invalid_fields = (elem) ->
+@Profile ?= {}
+@Profile.highlight_invalid_fields = (elem) ->
   elem.on 'click', '.save_item', (event) ->
     required = []
     $('.required').children().children().each ->
