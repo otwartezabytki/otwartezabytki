@@ -40,5 +40,6 @@ jQuery.initializer 'section.edit.links', ->
         required.push($(this)) if typeof(parseInt($(this).val())) != "number" || $(this).val().length < 4
     if required.length > 0
       event.preventDefault() 
-      required.first().css('border-color', 'red')
-      required.first().attr('placeholder', 'pole nie może być puste')
+      required.each (element, index) ->
+        element.css('border-color', 'red')
+        element.attr('placeholder', 'pole nie może być puste')
