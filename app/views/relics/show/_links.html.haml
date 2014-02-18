@@ -11,7 +11,7 @@
           - links.each do |link|
             - if link.url?
               %li
-                = link_to link.shortened_url, link.url
+                = link_to link.shortened_url, link.url, target: "_blank"
                 \-
                 = link.name
             - elsif link.paper?
