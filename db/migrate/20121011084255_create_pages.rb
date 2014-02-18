@@ -4,11 +4,13 @@ class CreatePages < ActiveRecord::Migration
     create_table :pages do |t|
       t.string :name
       t.string :title
+      t.string :permalink
       t.text :body
 
       t.timestamps
     end
-    Page.create_translation_table! :title => :string, :body => :text
+    add_index :pages, :permalink
+    Page.create_translation_table! :title => :string, :body => :text, :permalink => :string
   end
 
   def self.down

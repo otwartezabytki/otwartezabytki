@@ -104,7 +104,7 @@ GIT
 
 GEM
   remote: https://rubygems.org/
-  remote: http://rails-assets.org/
+  remote: https://rails-assets.org/
   specs:
     aasm (3.0.16)
     activeadmin (0.4.4)
@@ -167,7 +167,7 @@ GEM
       railties (>= 3.0)
       sass-rails (>= 3.2)
     chronic (0.9.0)
-    clipper (2.9.0)
+    clipper (2.9.1)
     coderay (1.0.8)
     coffee-filter (0.1.2)
       coffee-script (>= 2.2.0)
@@ -279,14 +279,14 @@ GEM
       railties (>= 3.1.0)
     js-routes (0.8.6)
       rails (>= 3.2)
-    json (1.8.0)
+    json (1.8.1)
     jsts-rails (0.2.0)
     jwt (0.1.5)
       multi_json (>= 1.0)
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
-    libv8 (3.11.8.13)
+    libv8 (3.16.14.3)
     listen (0.7.2)
     localized_language_select (0.2.0)
       rails (>= 2.3.5)
@@ -368,7 +368,7 @@ GEM
       json (~> 1.4)
     recaptcha (0.3.4)
     redcarpet (2.2.2)
-    ref (1.0.2)
+    ref (1.0.5)
     remote_table (2.1.0)
       activesupport (>= 2.3.4)
       fastercsv (>= 1.5.0)
@@ -461,8 +461,8 @@ GEM
     sugar-rails (1.3.7)
       railties (>= 3.0.0)
     terminal-table (1.4.5)
-    therubyracer (0.11.3)
-      libv8 (~> 3.11.8.12)
+    therubyracer (0.12.1)
+      libv8 (~> 3.16.14.0)
       ref
     thor (0.18.1)
     tilt (1.4.1)
@@ -534,7 +534,7 @@ DEPENDENCIES
   carrierwave
   carrierwave-meta
   chosen-rails
-  clipper
+  clipper (~> 2.9.1)
   coffee-filter
   coffee-rails (~> 3.2.1)
   commands
@@ -569,6 +569,7 @@ DEPENDENCIES
   jquery-rails (= 2.0.3)
   jquery-ui-rails
   js-routes
+  json (~> 1.8.1)
   jsts-rails (~> 0.2.0)
   kaminari
   localized_language_select
@@ -606,7 +607,7 @@ DEPENDENCIES
   sprockets-commonjs
   strong_parameters (~> 0.2.1)
   sugar-rails
-  therubyracer
+  therubyracer (~> 0.12.1)
   tire (= 0.4.3)
   tire-contrib
   tolk!

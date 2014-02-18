@@ -86,6 +86,7 @@ window.ajax_callback = (data, status, xhr) ->
           to_replace.replaceWith(node)
           $(node).initialize()
           $.fancybox.trigger('afterLoad')
+          $.fancybox.update()
           $('.fancybox-overlay').height($(document).height())
         else
           if data_replace_parent && !$(node).is('[data-fancybox]')

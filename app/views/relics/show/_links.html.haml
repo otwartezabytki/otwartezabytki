@@ -6,7 +6,7 @@
       %ul
         - grouped_links = relic.all_links.group_by(&:relic_id)
         - grouped_links.each do |relic_id, links|
-          - if grouped_links.size > 1
+          - if grouped_links.size > 0
             %h3= Relic.find(relic_id).identification
           - links.each do |link|
             - if link.url?

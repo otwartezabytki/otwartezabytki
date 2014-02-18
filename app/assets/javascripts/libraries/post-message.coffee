@@ -75,7 +75,7 @@ class window.OZ
 
   constructor: (id, callback) ->
     @callbacks = { ready: callback }
-    @iframe = document.getElementById(id)
+    @iframeId = id
     XD.receiveMessage(messageReceived.bind(this))
 
   api: (event, valueOrCallback) ->
@@ -85,4 +85,4 @@ class window.OZ
     if callback
       @callbacks[event] = callback
 
-    XD.postMessage({ event: event, params: params }, @iframe.src, @iframe.contentWindow)
+    XD.postMessage({ event: event, params: params }, document.getElementById(@iframeId).src, document.getElementById(@iframeId).contentWindow)

@@ -3,9 +3,10 @@
   %a.back{:href => widgets_path}= t('views.widgets.edit.back')
 .sidebar
   = semantic_form_for widget_add_alert, :url => self.send("widgets_#{widget.class.partial_name}_path", widget) do |f|
-    = f.input :q, :label => false, :hint => t('views.widgets.edit.add_alert.hint')
-    = f.submit t('views.widgets.edit.add_alert.search'), :class => "use-widget"
     = f.input :relic_id, :as => :hidden, :label => false
+    = f.input :q, :label => false, :hint => t('views.widgets.edit.add_alert.hint')
+    = f.button t('views.widgets.edit.add_alert.search'), :class => 'use-widget'
+    .clearfix
     - if searched_relics.present?
       %h3=t('views.widgets.edit.add_alert.which_one')
       .relics-wrapper

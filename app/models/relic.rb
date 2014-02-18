@@ -186,7 +186,7 @@ class Relic < ActiveRecord::Base
   end
 
   def place_full_name_with_street
-    self.street.present? ? [place_full_name, self.street].join(", ") : place_full_name 
+    self.street.present? ? [place_full_name, self.street].join(", ") : place_full_name
   end
 
   def corrected_by?(user)
@@ -212,7 +212,7 @@ class Relic < ActiveRecord::Base
 
   # @return photos for relic and it's descendants
   def all_photos
-    Photo.where(:relic_id => [id] + descendant_ids)
+    Photo.state(:saved).where(:relic_id => [id] + descendant_ids)
   end
 
   def has_photos?
@@ -220,7 +220,7 @@ class Relic < ActiveRecord::Base
   end
 
   def all_documents
-    Document.where(:relic_id => [id] + descendant_ids).order("relic_id ASC")
+    Document.state(:saved).where(:relic_id => [id] + descendant_ids).order("relic_id ASC")
   end
 
   def all_links

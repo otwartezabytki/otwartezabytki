@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-source 'http://rails-assets.org'
+source 'https://rails-assets.org'
 
 gem 'rails', '~> 3.2.3', git: 'git://github.com/otwartezabytki/rails.git', branch: 'v3.2.11/multipart-fix'
 gem 'pg'
@@ -51,6 +51,7 @@ gem 'cancan'
 gem 'activeadmin-cancan'
 
 gem 'yajl-ruby',    '1.1.0',  :require => 'yajl'
+gem 'json',         '~> 1.8.1'
 gem 'multi_json',   '1.3.7'
 gem 'remote_table'
 
@@ -105,7 +106,7 @@ gem 'yard'
 gem 'redcarpet'
 
 gem 'rails-timeago', '~> 2.0'
-gem 'clipper'
+gem 'clipper', '~> 2.9.1'
 gem 'sprockets-commonjs'
 gem 'rack-mini-profiler'
 
@@ -144,6 +145,7 @@ group :test do
 end
 
 group :production do
-  gem 'therubyracer' # assets javascript compiler
+  # assets javascript compiler
+  gem 'therubyracer', '~> 0.12.1'
   gem 'newrelic_rpm', '~> 3.5.5.38'
 end

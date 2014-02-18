@@ -34,6 +34,11 @@ class RelicsController < ApplicationController
             r = Relic.find(r.id)
           end
         end
+        if params[:section] == "links"
+          @urls = r.all_links.select(&:url?).sort_by{ |e| e.position || 1000 }
+          @papers = r.all_links.select(&:paper?).sort_by{ |e| e.position || 1000 }
+        end
+
         if (params[:section] == "events" || params[:section] == "links") && params[:relic] && params[:relic]["#{params[:section]}_attributes"]
           params[:relic]["#{params[:section]}_attributes"].delete_if { |k, v| sub_ids && sub_ids.include?(v) }
           params[:relic]["#{params[:section]}_attributes"].each_pair { |k,v| 
@@ -113,6 +118,7 @@ class RelicsController < ApplicationController
 
     if relic.save
       if !sub_ids.empty?
+        errors, builds = [], []
         sub_ids.each { |sr| 
           if sr[:id]
             subrelic_item = Object.const_get(params[:section].singularize.capitalize).find(sr[:id])
@@ -121,6 +127,10 @@ class RelicsController < ApplicationController
             subrelic = Relic.find(sr[:relic_id])
             se = params[:section] == "events" ? subrelic.events.build(sr.except(:_destroy)) : subrelic.links.build(sr.except(:_destroy))
             se.save
+            if se.errors.full_messages.any?
+              errors << se.errors.full_messages.join(", ") 
+              builds << se
+            end
           end
         }
       end
@@ -139,13 +149,24 @@ class RelicsController < ApplicationController
         if params[:section] == "photos"
           flash[:notice] = t('notices.gallery_has_been_updated')
         else
-          flash[:notice] = t('notices.changes_has_been_saved')
+          if errors && errors.any?
+            if params[:section] == "links" && builds && builds.any?
+              extra_urls = builds.select { |b| b.kind == 'url' }
+              @urls = @urls + extra_urls if extra_urls && extra_urls.any?
+              extra_papers = builds.select { |b| b.kind == 'paper' }
+              @papers = @papers + extra_papers if extra_papers && extra_papers.any?
+            end
+            flash[:error] = t('notices.please_correct_errors')
+            render 'edit' and return
+          else
+            flash[:notice] = t('notices.changes_has_been_saved')
+          end
         end
 
         redirect_to edit_relic_path(relic.id, :section => params[:section])
       end
     else
-      flash.now[:error] = [t('notices.please_correct_errors'), relic.errors.full_messages.join(", ")].join(" ")
+      flash.now[:error] = t('notices.please_correct_errors')
       render 'edit' and return
     end
   end
