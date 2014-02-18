@@ -31,15 +31,4 @@ jQuery.initializer 'section.edit.links', ->
         $(this).val(index + 1)
   .data('sortable')
 
-  $(this).on 'click', '.save_item', (event) ->
-    required = []
-    $('.required').children().children().each ->
-      if $(this).val() == ""
-        required.push($(this)) 
-      else if $(this).attr("id").split("_").last() == "date"
-        required.push($(this)) if typeof(parseInt($(this).val())) != "number" || $(this).val().length < 4
-    if required.length > 0
-      event.preventDefault() 
-      required.each (element, index) ->
-        element.css('border-color', 'red')
-        element.attr('placeholder', 'pole nie może być puste')
+  Profile.highlight_invalid_fields($(this))
