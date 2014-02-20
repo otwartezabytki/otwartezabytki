@@ -37,6 +37,7 @@
     padding: 8px 12px;
     font-family: 'Open Sans',​sans-serif;
     margin-bottom: 0;
+    border: none;
   }
   .widget-logo{
     background: asset-data-url("logo-widget.png") no-repeat;
@@ -54,6 +55,8 @@
     padding: 0 12px;
     cursor: pointer;
     text-transform: uppercase;
+    float: none;
+    margin: 0;
     &.none{
       cursor: default;
       @include gradient(#d8d8d8, #c4c4c4);
