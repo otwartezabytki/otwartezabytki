@@ -2,8 +2,8 @@
 
 class Widgets::MapSearchesController < WidgetsController
 
-  expose(:widget_map_searches) { Widget::MapSearch.scoped }
-  expose(:widget_map_search)
+  expose(:widget_map_searches, model: Widget::MapSearch)
+  expose(:widget_map_search,   model: Widget::MapSearch)
   expose(:widget) { widget_map_searches.find(params[:id]) }
 
   expose(:widget_search) do

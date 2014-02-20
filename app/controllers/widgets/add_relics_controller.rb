@@ -2,8 +2,8 @@
 
 class Widgets::AddRelicsController < WidgetsController
 
-  expose(:widget_add_relics) { Widget::AddRelic.scoped }
-  expose(:widget_add_relic)
+  expose(:widget_add_relics, model: Widget::AddRelic)
+  expose(:widget_add_relic,  model: Widget::AddRelic)
   expose(:widget) { widget_add_relics.find(params[:id]) }
 
   def create

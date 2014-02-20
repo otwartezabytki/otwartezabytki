@@ -3,8 +3,8 @@
 class Widgets::DirectionsController < WidgetsController
   layout :resolve_widget_layout, :only => [:show, :configure]
 
-  expose(:widget_directions) { Widget::Direction.scoped }
-  expose(:widget_direction)
+  expose(:widget_directions, model: Widget::Direction)
+  expose(:widget_direction,  model: Widget::Direction)
   expose(:widget) { widget_directions.find(params[:id]) }
   expose(:widget_params) { widget.widget_params }
   expose(:categories) { widget.widget_params.try(:[], 'categories') || [] }
