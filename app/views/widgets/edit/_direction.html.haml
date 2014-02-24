@@ -1,5 +1,6 @@
 %h1
   = t("widget.direction.title_")
+  = link_to t('views.widgets.edit.direction.create_new_widget'), widgets_directions_path, :method => :post, :class => 'back'
   %a.back{:href => widgets_path}= t('views.widgets.edit.back')
 .content
   %h2= t('views.widgets.edit.direction.header')

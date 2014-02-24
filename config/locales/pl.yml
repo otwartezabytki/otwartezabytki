@@ -1277,7 +1277,7 @@ pl:
         categories: "Kategorie:"
         choose_html: "Chcę go uzupełnić &raquo;"
         dating: "Data powstania:"
-        header: 
+        header:
           one: "Znaleźliśmy %{count} zabytek w tej okolicy!"
           few: "Znaleźliśmy %{count} zabytki w tej okolicy!"
           many: "Znaleźliśmy %{count} zabytków w tej okolicy!"
@@ -1568,6 +1568,7 @@ pl:
           print_: "Wydrukuj trasę"
           save_and_print: "Zapisz i wydrukuj trasę"
           loading_relics: "Ładuję listę zabytków"
+          create_new_widget: "Stwórz kolejną trasę"
         preview: "Podgląd wygenerowanego widżetu"
       index:
         about: "Widżety:"
