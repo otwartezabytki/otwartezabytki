@@ -311,7 +311,7 @@ addRelicsToSort = (relics) ->
 getSortedRelics = ->
   sorted = []
   compare = (a, b) ->
-    return a.distance - b.distance
+    a.distance - b.distance
   Object.keys(SORTED_RELICS).each (key) ->
     sorted.add SORTED_RELICS[key].sort(compare).map (a) -> a.relic
   sorted
