@@ -340,6 +340,7 @@ pl:
       zydowski: żydowski
   common:
     close: zamknij
+    apply_to: dotyczy
     lang:
       by: białoruski
       en: angielski

@@ -14,7 +14,8 @@
               = f2.input :url, :label => false, :hint => false, :class => "url", required: true
               = f2.input :name, :label => false, :hint => false, :class => "info", required: true
               - if relic.is_group?
-                = descentants_select(relic, f2)
+                .apply-to
+                  = descendants_select(relic, f2)
               = f2.hidden_field :position, :class => "link-position"
               = f2.hidden_field :_destroy
               = f2.hidden_field :kind, :value => "url"
@@ -28,7 +29,8 @@
               = f2.input :url, :label => false, :hint => false, :class => "url", required: true
               = f2.input :name, :label => false, :hint => false, :class => "info", required: true
               - if relic.is_group?
-                = descentants_select(relic, f2)
+                .apply-to
+                  = descendants_select(relic, f2)
               = f2.hidden_field :position, :class => "link-position"
               = f2.hidden_field :_destroy
               = f2.hidden_field :kind, :value => "url"
@@ -54,7 +56,8 @@
               = f2.input :formal_name, :label => false, :hint => false, :class => "url", required: true
               = f2.input :name, :label => false, :hint => false, :class => "info", required: true
               - if relic.is_group?
-                = descentants_select(relic, f2)
+                .apply-to
+                  = descendants_select(relic, f2)
               = f2.hidden_field :position, :class => "link-position"
               = f2.hidden_field :_destroy
               = f2.hidden_field :kind, :value => "paper"
@@ -68,7 +71,8 @@
               = f2.input :formal_name, :label => false, :hint => false, :class => "formal_name", required: true
               = f2.input :name, :label => false, :hint => false, :class => "info", required: true
               - if relic.is_group?
-                = descentants_select(relic, f2)
+                .apply-to
+                  = descendants_select(relic, f2)
               = f2.hidden_field :position, :class => "link-position"
               = f2.hidden_field :_destroy
               = f2.hidden_field :kind, :value => "paper"
