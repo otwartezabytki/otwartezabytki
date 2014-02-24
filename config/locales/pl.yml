@@ -1277,7 +1277,11 @@ pl:
         categories: "Kategorie:"
         choose_html: "Chcę go uzupełnić &raquo;"
         dating: "Data powstania:"
-        header: "Znaleźliśmy %{count} zabytki w tej okolicy!"
+        header: 
+          one: "Znaleźliśmy %{count} zabytek w tej okolicy!"
+          few: "Znaleźliśmy %{count} zabytki w tej okolicy!"
+          many: "Znaleźliśmy %{count} zabytków w tej okolicy!"
+          other: "Znaleźliśmy %{count} zabytków w tej okolicy!"
         info_html: "Dokładnie w tej okolicy znaleźliśmy <strong>%{count}</strong>, które już istnieją w naszej bazie danych."
         not_found_html: "Nie ma go na liście &raquo;"
         that_one: "To jest ten zabytek!"

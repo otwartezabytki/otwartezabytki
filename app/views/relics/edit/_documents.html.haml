@@ -3,7 +3,7 @@
     - relic.documents.each do |document|
       - if document.user_id == current_user.id
         = f.semantic_fields_for :documents, document do |f2|
-          .document
+          .document[f2.object]
             .column-left
               .preview{ :class => document.mime_class }
               - if document.user_id == current_user.id

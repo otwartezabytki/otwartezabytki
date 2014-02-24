@@ -27,7 +27,8 @@
         .image
           = image_tag example_relic.main_photo.file.url(:icon)
         .relic-content
-          = link_to example_relic.identification, example_relic
+          .relic-heading
+            = link_to example_relic.identification, example_relic
           .status{:class => example_relic.state }= example_relic.state_name
           .location_name
             %strong= t('views.relics.relics.location')

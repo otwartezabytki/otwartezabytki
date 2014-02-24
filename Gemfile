@@ -107,6 +107,7 @@ gem 'redcarpet'
 gem 'rails-timeago', '~> 2.0'
 gem 'clipper'
 gem 'sprockets-commonjs'
+gem 'rack-mini-profiler'
 
 group :development, :test do
   gem 'interactive_editor'

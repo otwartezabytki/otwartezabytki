@@ -5,7 +5,8 @@
     .description
       = t('views.widgets.index.description', :email => mail_to(Settings.oz.email_sender))
     .widgets
-      - [Widget::Direction, Widget::MapSearch, Widget::AddRelic, Widget::AddAlert].each do |widget_template|
+      - # Profile: -> Widget::Direction
+      - [Widget::MapSearch, Widget::AddRelic, Widget::AddAlert].each do |widget_template|
         = link_to method(:"widgets_#{widget_template.partial_name.pluralize}_path").call(), :class => "widget", :method => :post do
           - if widget_template.thumb
             %span.image
