@@ -15,6 +15,7 @@ window.marker_clusterer = null
 ROUTE = null
 POLYGON = null
 SEARCH_PARAMS = null
+SORTED_RELICS = null
 
 print_has_prompted = false
 ready_to_print = false
@@ -290,11 +291,37 @@ printClearRelics = ->
   $('#relics-container').html ''
   $('#relics-loading-info').show()
 
-printRenderRelics = (relics, last) ->
+closestRoutePoint = (relic) ->
+  a = Infinity
+  position = 0
+  distance = google.maps.geometry.spherical.computeDistanceBetween
+  relicPoint = new google.maps.LatLng(relic.latitude, relic.longitude)
+  ROUTE.overview_path.each (point, index) ->
+    if a > (b = distance(point, relicPoint))
+      position = index
+      a = b
+  {position, distance: a}
+
+addRelicsToSort = (relics) ->
   relics.each (relic) ->
-    printAppendRelic relic
+    closest = closestRoutePoint(relic)
+    SORTED_RELICS[closest.position] ||= []
+    SORTED_RELICS[closest.position].add({distance: closest.distance, relic})
+
+getSortedRelics = ->
+  sorted = []
+  compare = (a, b) ->
+    return a.distance - b.distance
+  Object.keys(SORTED_RELICS).each (key) ->
+    sorted.add SORTED_RELICS[key].sort(compare).map (a) -> a.relic
+  sorted
+
+printRenderRelics = (relics, last) ->
+  addRelicsToSort(relics)
 
   if last
+    getSortedRelics().each (relic) ->
+      printAppendRelic(relic)
     $('#relics-loading-info').hide()
     do windowPrint
 
@@ -383,6 +410,7 @@ debouncedSearchRelics = jQuery.debounce ->
       search_params.widget = 'direction'
 
       if printAction?
+        SORTED_RELICS = {}
         do printClearRelics
 
         loadRelics = (search_params) ->
