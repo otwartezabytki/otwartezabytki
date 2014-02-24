@@ -43,7 +43,7 @@ renderRelicInfo = (relic) ->
   "<div class='relic-info'>#{photo}<div class='relic-info-content'><h3>#{relic.identification}</h3><div>#{relic.street}</div><div>#{link}</div></div></div>"
 
 loadRelicInfo = (location, callback) ->
-  relicId = location.match(/^relic:(\d+)/)[1]
+  relicId = location.match(/^relic:(\d+)/)?[1]
   gmap.onNextMovement ->
   search_params = {}
   if bounds = gmap.getLatLngBounds()
