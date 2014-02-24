@@ -25,7 +25,8 @@ class Alert < ActiveRecord::Base
   after_create :new_alert_notification
   after_create :create_wuoz_alert
 
-  validates :description, :presence => true
+  validates :relic_id, :user_id, :description, :presence => true
+  validates :author, :date_taken, :presence => true, :if => :file?
 
   scope :fixed, where("state = ?", "fixed")
   scope :not_fixed, where("state != ? or state is null", "fixed")

@@ -2,6 +2,7 @@
 
 ActiveAdmin.register Alert do
   menu :label => "Zarządzanie", :parent => "Alerty", :priority => 1
+  actions :all, except: [:show]
 
   index do
     column :id
@@ -23,7 +24,11 @@ ActiveAdmin.register Alert do
     end
 
     column "Plik" do |e|
-      link_to 'pobierz', e.file.url
+      if e.file?
+        link_to image_tag(e.file.mini.url), e.file.url, :target => '_blank'
+      else
+        'brak'
+      end
     end
 
     column :state do |e|

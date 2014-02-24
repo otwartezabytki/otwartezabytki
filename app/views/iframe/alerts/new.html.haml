@@ -3,7 +3,7 @@
   - if request.xhr?
     = render 'shared/flash', :flash => flash
   .row
-    = semantic_form_for [relic, alert], :remote => true do |f|
+    = semantic_form_for [relic, alert] do |f|
       %p.description= t('views.alerts.new.description')
       = f.input :description, :as => :text, :input_html => { :value => params[:description] }
       = f.input :file, :as => :file
