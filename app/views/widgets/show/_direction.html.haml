@@ -32,7 +32,7 @@
           - if category.name_key == 'sakralny'
             - category.children.sort_by(&:name).each do |child|
               - if categories.include?(child.name_key)
-                %li= category.name.gsub('/', ', ')
+                %li= child.name.gsub('/', ', ')
           - elsif categories.include?(category.name_key)
             %li= category.name.gsub('/', ', ')
 
