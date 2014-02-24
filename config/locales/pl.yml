@@ -79,7 +79,7 @@ pl:
   activerecord:
     attributes:
       alert:
-        author: "Dane autora (imię, nazwisko)"
+        author: "Dane autora (imię, nazwisko/nick)"
         date_taken: "Data wykonania"
         description: "Opis:"
         file: "Zdjęcie:"
@@ -112,7 +112,7 @@ pl:
         url: "Adres URL"
       photo:
         alternate_text: "Tekst alternatywny"
-        author: "Dane autora (imię, nazwisko)"
+        author: "Dane autora (imię, nazwisko/nick)"
         date_taken: "Data wykonania"
         description: Opis
         file: Plik
@@ -153,8 +153,8 @@ pl:
           T: "ze zdjęciem"
         place_id: Miejsce
         polish_relic: "Zabytek znajduje się w Polsce"
-        relic_group: "całego zespołu zabytków"
         register_number: "Aktualny numer rejestru"
+        relic_group: "całego zespołu zabytków"
         state: status
         states:
           checked: sprawdzony
@@ -340,8 +340,8 @@ pl:
       uzytecznosci_publicznej: "użyteczności publicznej"
       zydowski: żydowski
   common:
-    close: zamknij
     apply_to: dotyczy
+    close: zamknij
     lang:
       by: białoruski
       en: angielski
@@ -1619,7 +1619,7 @@ pl:
           alerts: "Zobacz Alerty"
           create: "Zgłoś Alert"
           empty: "Brak Alertów"
-          header: "Znalazłeś zabytek w złym stanie zaalarmuj!"
+          header: "Znalazłeś zabytek w złym stanie? Zaalarmuj!"
           show: "Zobacz Alerty"
         add_relic:
           create: "Dodaj nowy zabytek"
