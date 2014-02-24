@@ -153,6 +153,7 @@ pl:
           T: "ze zdjęciem"
         place_id: Miejsce
         polish_relic: "Zabytek znajduje się w Polsce"
+        relic_group: "całego zespołu zabytków"
         register_number: "Aktualny numer rejestru"
         state: status
         states:
