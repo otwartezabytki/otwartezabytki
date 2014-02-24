@@ -474,6 +474,7 @@ jQuery ->
   if printAction?
     window.gmap = new google.maps.Map $('#map_canvas')[0],
       mapTypeId: google.maps.MapTypeId.ROADMAP
+      disableDefaultUI: true
   else
     window.gmap = new google.maps.Map $('#map_canvas')[0],
       mapTypeId: google.maps.MapTypeId.HYBRID
