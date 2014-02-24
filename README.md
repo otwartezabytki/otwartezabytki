@@ -22,13 +22,12 @@ cp config/database.yml.example config/database.yml
 # create database and database users for dev and testing
 bundle install
 # load database dump if you have
-gunzip -c %m_%d_%Y.sql.gz | script/rails db 
+gunzip -c %m_%d_%Y.sql.gz | script/rails db
 bundle exec rake db:migrate
 bundle exec rake db:seed
 ```
 
-Set up elastic search:
-
+Setup ElasticSearch (we use 0.20.2)
  - install according to this: https://github.com/karmi/tire#installation
  - install Morfologik (Polish) Analysis for ElasticSearch from: https://github.com/chytreg/elasticsearch-analysis-morfologik
  - index the data:
