@@ -18,6 +18,3 @@ jQuery.initializer '.edit_widget.direction', ->
     $.post $form.attr('action'), $form.serialize(), (data) ->
       $('textarea#snippet').val(data.snippet)
     , "json"
-
-  this.on 'change', 'input[type="checkbox"], input[type="text"]', ->
-    $form.submit()

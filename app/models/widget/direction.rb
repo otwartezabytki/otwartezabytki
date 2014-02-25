@@ -21,6 +21,15 @@ class Widget::Direction < Widget
   validates :width, :height, :presence => true,
     :numericality => { :greater_than_or_equal_to => 500, :less_than_or_equal_to => 1600 }
 
+  before_validation do
+    self.width  = clamp(width)
+    self.height = clamp(height)
+  end
+
+  def clamp(size)
+    [[size, 500].max, 1600].min
+  end
+
   def snippet
     widget_url = Rails.application.routes.url_helpers.widgets_direction_url(uid, :host => Settings.oz.host)
     "<iframe id='oz_direction' src='#{widget_url}' width='#{width}' height='#{height}'></iframe>"
