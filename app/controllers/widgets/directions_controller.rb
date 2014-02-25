@@ -45,14 +45,14 @@ class Widgets::DirectionsController < WidgetsController
         if params[:save_and_print]
           redirect_to print_widgets_direction_path(widget_direction)
         else
-          redirect_to edit_widgets_direction_path(widget_direction), :notice => t('widget.direction.save')
+          redirect_to edit_widgets_direction_path(widget_direction), :notice => (t('widget.direction.save') if current_user)
         end
       else
-        flash[:error] = t('notices.widget_error_and_correct')
+        flash[:error] = t('notices.widget_error_and_correct') if current_user
         render :edit
       end
     else
-      flash[:error] = t('widget.direction.no_route')
+      flash[:error] = t('widget.direction.no_route') if current_user
       redirect_to edit_widgets_direction_path(widget_direction)
     end
   end
