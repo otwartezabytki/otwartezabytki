@@ -5,7 +5,6 @@
     = link_to '/', :target => :_top do
       %h1.logo
     = semantic_form_for widget_search, :url => widgets_direction_path(widget.uid), :method => :get do |f|
-      = f.hidden_field :bounding_box, value: widget_params.try(:[], 'bounding_box')
       = f.hidden_field :path, value: widget_params.try(:[], 'path')
       = f.hidden_field :polygon, value: widget_params.try(:[], 'polygon')
       %section.search

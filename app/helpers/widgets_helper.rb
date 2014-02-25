@@ -29,6 +29,10 @@ module WidgetsHelper
     data
   end
 
+  def relic_to_widget_data_short(relic)
+    [relic.id, relic.latitude, relic.longitude]
+  end
+
   def route_type_collection
     ['walking', 'bicycling', 'driving'].map do |type|
       [I18n.t("views.widgets.route_types.#{type}"), type]
