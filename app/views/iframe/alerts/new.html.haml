@@ -8,7 +8,7 @@
       = f.input :description, :as => :text, :input_html => { :value => params[:description] }
       = f.input :file, :as => :file
       %p.description= t('views.relics.edit.photos.statement_html')
-      = f.input :author
-      = f.input :date_taken
+      = f.input :author, :required => true
+      = f.input :date_taken, :required => true
       .actions
         = f.button t('views.alerts.new.submit')
