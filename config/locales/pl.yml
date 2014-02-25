@@ -1103,10 +1103,8 @@ pl:
       Relic: zabytek
   views:
     alerts:
-      iframe:
-        created:
-          header: "Dzięki za Alerta!"
-          show_alert: "Zobacz ALERTA"
+      created:
+        open_in_otwartezabytki: "Jeśli chcesz zobaczyć profil zabytku na otwartezabytki.pl, kliknij:"
       new:
         cancel: Anuluj
         description: "Znalazłeś zabytek w złym stanie? Zaalarmuj!"

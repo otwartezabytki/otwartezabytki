@@ -1,6 +1,6 @@
 @import "../mixins";
 
-section.new.alert {
+section.new.alert, section.created.alert {
   position: relative;
   width: 460px;
 

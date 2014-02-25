@@ -1,2 +1,6 @@
-:javascript
-  window.top.location = '#{@new_alert_added_url}';
+%section.created.alert
+  %h2= t('notices.alert_added')
+  .row
+    %p.description= t('views.alerts.created.open_in_otwartezabytki')
+    %p.description
+      = link_to @new_alert_added_url, target: '_blank'
