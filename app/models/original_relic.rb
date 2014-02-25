@@ -24,7 +24,9 @@ class OriginalRelic < ActiveRecord::Base
 
   [:entries, :all_links, :categories, :tags, :photos, :alerts, :all_events, :all_documents].each do |attr|
     define_method attr do
-      []
+      ary = []
+      def ary.exists?; false; end
+      ary
     end
   end
 
