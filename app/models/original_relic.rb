@@ -17,14 +17,16 @@ class OriginalRelic < ActiveRecord::Base
   def state;            'unchecked' end
   def polish_relic;     true        end
   def has_photos?;      false       end
-  def main_photo;       nil         end
+  def main_photo;       Photo.new   end
   def to_param;         0           end
   def foreign_relic?;   false       end
 
 
   [:entries, :all_links, :categories, :tags, :photos, :alerts, :all_events, :all_documents].each do |attr|
     define_method attr do
-      []
+      ary = []
+      def ary.exists?; false; end
+      ary
     end
   end
 
