@@ -82,6 +82,8 @@ pl:
         id: Identyfikator
         url: Adres zdjęcia
         author: "Dane autora (imię, nazwisko)"
+        id: Identyfikator
+        url: Adres zdjęcia
         date_taken: "Data wykonania"
         description: "Opis:"
         file: "Zdjęcie:"
