@@ -309,4 +309,65 @@ class Relic < ActiveRecord::Base
     versions.reorder('created_at DESC').limit(3)
   end
 
+  def relic_to_csv
+    file_name = [Rails.root, "public", "history", "#{self.id}.csv"].join('/')
+    puts file_name
+    relic = Relic.includes(:place, :commune, :district, :voivodeship).find(self.id)
+    puts relic
+    CSV.open(file_name, "wb", {col_sep: ";", encoding: "UTF-8"}) do |csv|
+      csv << [I18n.t("activerecord.models.relic.one")]
+      relic.append_csv(csv)
+
+      csv << []
+      csv << [I18n.t("activerecord.models.subrelic.one").capitalize]
+      relic.descendants.each do |subrelic|
+        subrelic.append_csv(csv)
+      end
+    end
+  end
+
+  def append_csv(csv)
+    csv << ['id', 'nid_id', 'identification', 'common_name', 'description',
+      'categories', 'state', 'register_number', 'dating_of_obj', 'street',
+      'latitude', 'longitude', 'tags', 'country_code', 'fprovince', 'fplace', 
+      'documents_info', 'links_info', 'main_photo',
+    ].map { |elem| I18n.t("activerecord.attributes.relic.#{elem}")}
+
+    csv << [ self.id, self.nid_id, self.identification, self.common_name, self.description,
+      self.categories, self.state, self.register_number, self.dating_of_obj, self.street,
+      self.latitude, self.longitude, self.tags, self.country_code, self.fprovince, self.fplace, 
+      self.documents_info, self.links_info, self.main_photo,
+    ]
+    csv << []
+    csv << [I18n.t("activerecord.models.event.one").capitalize]
+    csv << ['id', 'date', 'name', 'photo_id'].map { |elem| I18n.t("activerecord.attributes.event.#{elem}") }
+    self.events.each do |event|
+      csv << [event.id, event.date, event.name, event.photo_id]
+    end
+    csv << []
+    csv << [I18n.t("activerecord.models.entry.one").capitalize]
+    csv << ['id', 'title', 'body'].map { |elem| I18n.t("activerecord.attributes.entry.#{elem}") }
+    self.entries.each do |entry|
+      csv << [entry.id, entry.title, entry.body]
+    end
+    csv << []
+    csv << [I18n.t("activerecord.models.links.one").capitalize]
+    csv << ['id', 'name', 'url', 'category', 'kind'].map { |elem| I18n.t("activerecord.attributes.link.#{elem}") }
+    self.links.each do |link|
+      csv << [link.id, link.name, link.url, link.category, link.kind]
+    end
+    csv << []
+    csv << [I18n.t("activerecord.models.document.one").capitalize]
+    csv << ['id', 'name', 'description', 'url'].map { |elem| I18n.t("activerecord.attributes.document.#{elem}") }
+    self.documents.each do |document|
+      csv << [document.id, document.name, document.description, document.file.try(:url)]
+    end
+    csv << []
+    csv << [I18n.t("activerecord.models.alert.one").capitalize]
+    csv << ['id', 'url', 'author', 'date_taken', 'description', 'state'].map { |elem| I18n.t("activerecord.attributes.alert.#{elem}") }
+    self.alerts.each do |alert|
+      csv << [alert.id, alert.file.try(:url), alert.author, alert.date_taken, alert.description, alert.state]
+    end
+  end
+
 end

@@ -79,6 +79,8 @@ pl:
   activerecord:
     attributes:
       alert:
+        id: Identyfikator
+        url: Adres zdjęcia
         author: "Dane autora (imię, nazwisko)"
         date_taken: "Data wykonania"
         description: "Opis:"
@@ -87,6 +89,8 @@ pl:
         relic_id: "ID zabytku"
         state: "Stan zgłoszenia"
       document:
+        id: Identyfikator
+        url: "Adres"
         description: "Krótki opis"
         file: Plik
         mime: "Typ MIME"
@@ -95,18 +99,25 @@ pl:
         relic_id: "ID zabytku"
         size: Rozmiar
       entry:
+        id: Identyfikator
         body: Opis
         relic: Zabytek
         relic_id: "ID zabytku"
         title: Tytuł
       event:
+        id: "Identyfikator"
         name: "Nazwa wydarzenia"
         position: Kolejność
+        date: Data
         relic: Zabytek
         relic_id: "ID zabytku"
+        photo_id: "Identyfikator zdjęcia"
       link:
+        id: Identyfikator
         name: "Nazwa linku"
         position: Kolejność
+        category: Kategoria
+        kind: Rodzaj
         relic: Zabytek
         relic_id: "ID zabytku"
         url: "Adres URL"
@@ -122,6 +133,9 @@ pl:
         relic: Zabytek
         relic_id: "ID zabytku"
       relic:
+        id: "Identyfikator"
+        nid_id: "Identyfikator w NID"
+        main_photo: "Zdjęcie główne"
         ancestry: "W zespołach"
         approved: "Zabytek zatwierdzony"
         auto_categories: "Kategorie automatyczne"
@@ -232,6 +246,18 @@ pl:
           one: "1 błąd uniemożliwił zapisanie %{model}"
           other: "%{count} błędów uniemożliwiło zapisanie %{model}"
     models:
+      subrelic:
+        one: podzabytek
+        few: podzabytki
+        many: podzabytków
+        zero: podzabytków
+        other: podzabytków
+      alert:
+        few: alerty
+        one: alert
+        many: alertów
+        zero: alertów
+        other: alertów
       commune:
         few: Gminy
         many: Gminy
