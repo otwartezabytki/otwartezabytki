@@ -217,7 +217,6 @@ getWaypoints = ->
     .get()
 
 searchRoute = (search_params, callback) ->
-  do clearMarkers
   return callback(routeToPolygon(ROUTE, search_params.radius)) if ROUTE?
 
   origin      = search_params.waypoints.first()
@@ -353,7 +352,15 @@ saveWidget = ->
       event: "on_params_changed", params: storeParams()
     ), "*")
 
+reset = ->
+  ROUTE = POLYGON = SEARCH_PARAMS = null
+  clearMarkers()
+
 searchRelics = ->
+  debouncedSearchRelics()
+  false
+
+debouncedSearchRelics = jQuery.debounce ->
   search_params = getSearchParams()
 
   if hasValidWaypoints search_params.waypoints
@@ -388,6 +395,7 @@ searchRelics = ->
       loadRelics Object.clone(search_params)
 
   false
+, 50
 
 haversineDistance = (lat1, lon1, lat2, lon2) ->
   latLng1 = new google.maps.LatLng(lat1, lon1)
@@ -429,12 +437,20 @@ appendWaypointInput = (value = '') ->
   placesAutocomplete $input
   $input
 
-placesAutocomplete = (input) ->
+debounceWaypointsChanged = jQuery.debounce ->
+  # HACK: 'place_changed' event is triggered ~360ms after jQuery 'change' event...
+  $(document).trigger 'params:changed'
+, 500
+
+placesAutocomplete = ($input) ->
   options = componentRestrictions: country: 'pl'
-  autocomplete = new google.maps.places.Autocomplete input[0], options
+  autocomplete = new google.maps.places.Autocomplete $input[0], options
 
   google.maps.event.addListener autocomplete, 'place_changed', ->
-    $(document).trigger 'params:changed'
+    debounceWaypointsChanged()
+
+  $input.on 'change', ->
+    debounceWaypointsChanged()
 
 jQuery ->
 
@@ -451,18 +467,18 @@ jQuery ->
   gmap.setZoom(6)
 
   if renderOnly?
-    do searchRelics
+    searchRelics()
     return
 
   $search = $('#new_search')
   $search.submit(searchRelics)
 
   $(document).on 'params:changed', ->
-    ROUTE = POLYGON = SEARCH_PARAMS = null
-    do searchRelics
-    do saveWidget
+    reset()
+    searchRelics()
+    saveWidget()
 
-  $('body').on 'change', '#search_radius, #waypoints .waypoint, input[name="search[route_type]"]', ->
+  $('body').on 'change', '#search_radius, input[name="search[route_type]"]', ->
     $(document).trigger 'params:changed'
 
   toggleRemoveButtons = ->
