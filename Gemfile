@@ -17,6 +17,7 @@ group :assets do
   gem 'jsts-rails', '~> 0.2.0'
   gem 'autoprefixer-rails'
   gem 'rails-assets-handlebars'
+  gem 'rails-assets-jquery-form'
 end
 
 gem 'jquery-rails', '2.0.3'
