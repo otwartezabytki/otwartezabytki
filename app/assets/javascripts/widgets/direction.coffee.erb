@@ -440,7 +440,7 @@ appendWaypointInput = (value = '') ->
 debounceWaypointsChanged = jQuery.debounce ->
   # HACK: 'place_changed' event is triggered ~360ms after jQuery 'change' event...
   $(document).trigger 'params:changed'
-, 500
+, 400
 
 placesAutocomplete = ($input) ->
   options = componentRestrictions: country: 'pl'
