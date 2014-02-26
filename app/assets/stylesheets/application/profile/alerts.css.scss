@@ -4,6 +4,16 @@ section.new.alert, section.created.alert {
   position: relative;
   width: 460px;
 
+  .cached-img {
+    float: left;
+    padding: 20px 15px 20px 0;
+  }
+
+  .cached-file-input {
+    float:left;
+    width: 370px;
+  }
+
   h2 {
     font-weight: 600;
     font-size: 16px;
