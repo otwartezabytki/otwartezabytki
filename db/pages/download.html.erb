@@ -4,8 +4,11 @@
   </div>
   <div class="content_more_about">
     <p class="small">
-      Tu możesz pobrać skompresowany (metodą zip) plik z aktualną zawartością bazy danych (katalogu zabytków) w formacie JSON.
-      Ze względu na wielkość bazy danych zabytków plik jest aktualizowany co tydzień.
+      Tu możesz pobrać skompresowany (metodą zip) plik z aktualną zawartością bazy danych (katalogu zabytków) w formacie JSON i CSV. Ze względu na wielkość bazy danych zabytków plik jest aktualizowany co tydzień.
+    </p>
+    <p class="small">
+      Dokumentacja oraz kod serwisu dostępne są na
+      <a href="https://github.com/otwartezabytki/otwartezabytki">Githubie</a>
     </p>
     <p class="small">
       Baza dostępna jest na licencji
@@ -16,19 +19,30 @@
     <% if @export_files.present? %>
       <% @export_files.each do |file| %>
         <p class="small">
-          <%= link_to raw("Pobierz dane <span class=\"size\">(#{file[:size]} MiB)</span><br><span class=\"date\">#{file[:date]}</span>"), file[:url], :class => 'download' %>
+          <%= link_to raw("Pobierz dane JSON <span class=\"size\">(#{file[:size]} MiB)</span><br><span class=\"date\">#{file[:date]}</span>"), file[:url], :class => 'download' %>
+        </p>
+      <% end %>
+      <% @export_csv_files.each do |file| %>
+        <p class="small">
+          <%= link_to raw("Pobierz dane CSV <span class=\"size\">(#{file[:size]} MiB)</span><br><span class=\"date\">#{file[:date]}</span>"), file[:url], :class => 'download' %>
         </p>
       <% end %>
     <% else %>
       <strong>pliki obecnie są niedostępne</strong>
     <% end %>
     <p class="small">
-      Poniżej możesz pobrać pliki zawierające tylko dane z rejestru
+      Poniżej możesz pobrać pliki zawierające tylko dane pochodzące z rejestru zabytków (na bieżąco modyfikowane w ramach projektu). Baza należy do 
+      <a href="http://domenapubliczna.org/co-to-jest-domena-publiczna/"> Domeny Publicznej
     </p>
     <% if @export_files_register.present? %>
       <% @export_files_register.each do |file| %>
         <p class="small">
-          <%= link_to raw("Pobierz dane <span class=\"size\">(#{file[:size]} MiB)</span><br><span class=\"date\">#{file[:date]}</span>"), file[:url], :class => 'download' %>
+          <%= link_to raw("Pobierz dane JSON <span class=\"size\">(#{file[:size]} MiB)</span><br><span class=\"date\">#{file[:date]}</span>"), file[:url], :class => 'download' %>
+        </p>
+      <% end %>
+      <% @export_csv_files_register.each do |file| %>
+        <p class="small">
+          <%= link_to raw("Pobierz dane CSV <span class=\"size\">(#{file[:size]} MiB)</span><br><span class=\"date\">#{file[:date]}</span>"), file[:url], :class => 'download' %>
         </p>
       <% end %>
     <% else %>

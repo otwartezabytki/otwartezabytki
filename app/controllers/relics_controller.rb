@@ -163,27 +163,15 @@ class RelicsController < ApplicationController
 
   def download
     append_view_path Page::Resolver.new
-    dir_path = Rails.root.join('public', 'history', '2*-relics.zip')
+    main_path = Rails.root.join('public', 'history')
 
-    @export_files = []
-    Dir.glob(dir_path).sort.reverse.first(3).each do |file_path|
-      file_name = File.basename(file_path)
-      @export_files << {
-        :url => "/history/#{file_name}",
-        :date => file_name[0..9],
-        :size => (File.size(file_path) / 1024.0 / 1024.0).round(2) }
-    end
+    @export_files = prepare_download(main_path.join('2*-relics-json.zip'))
 
-    dir_path = Rails.root.join('public', 'history', '2*-relics-register.zip')
+    @export_csv_files = prepare_download(main_path.join('2*-relics-csv.zip'))
 
-    @export_files_register = []
-    Dir.glob(dir_path).sort.reverse.first(3).each do |file_path|
-      file_name = File.basename(file_path)
-      @export_files_register << {
-        :url => "/history/#{file_name}",
-        :date => file_name[0..9],
-        :size => (File.size(file_path) / 1024.0 / 1024.0).round(2) }
-    end
+    @export_files_register = prepare_download(main_path.join('2*-relics-register-json.zip'))
+
+    @export_csv_files_register = prepare_download(main_path.join('2*-relics-register-csv.zip'))
   end
 
   def download_zip
@@ -237,6 +225,18 @@ class RelicsController < ApplicationController
     if current_relic.existence == 'social' or relic.blank?
       redirect_to current_relic, :notice => "Zabytek nie posiada wersji oryginalnej." and return
     end
+  end
+
+  def prepare_download(dir_path)
+    export_files = []
+    Dir.glob(dir_path).sort.reverse.first(3).each do |file_path|
+      file_name = File.basename(file_path)
+      export_files << {
+        :url => "/history/#{file_name}",
+        :date => file_name[0..9],
+        :size => (File.size(file_path) / 1024.0 / 1024.0).round(2) }
+    end
+    export_files
   end
 
   def uncomplete_relic_redirect
