@@ -11,8 +11,8 @@ class PhotosController < ApplicationController
   expose(:photos, ancestor: :relic)
   expose(:photo)
 
-  expose(:tree_photos) { relic.all_photos }
-  expose(:tree_photo)
+  expose(:tree_photos, model: :photo) { relic.all_photos }
+  expose(:tree_photo,  model: :photo)
 
   def create
     photo

@@ -1,8 +1,18 @@
 @import "../mixins";
 
-section.new.alert {
+section.new.alert, section.created.alert {
   position: relative;
   width: 460px;
+
+  .cached-img {
+    float: left;
+    padding: 20px 15px 20px 0;
+  }
+
+  .cached-file-input {
+    float:left;
+    width: 370px;
+  }
 
   h2 {
     font-weight: 600;
@@ -128,7 +138,7 @@ section.new.alert {
       color: #d50000;
       font-style: normal;
     }
-    input[type="submit"]{
+    input[type="submit"], button{
       @include gradient(#48b119, #2f9900);
       border-radius: 2px;
       color: #fff;

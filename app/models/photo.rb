@@ -20,6 +20,7 @@
 #
 
 class Photo < ActiveRecord::Base
+  include StateExt
   default_scope { order('photos.id ASC') }
 
   belongs_to :relic
@@ -31,7 +32,7 @@ class Photo < ActiveRecord::Base
 
   validates :file, :relic, :user, :presence => true
   validates :file, :file_size => { :maximum => 3.megabytes.to_i }
-  validates :author, :date_taken, :presence => true, :unless => :new_record?
+  validates :author, :date_taken, :presence => true, :unless => :initialized?
 
   mount_uploader :file, PhotoUploader
   has_paper_trail :skip => [:created_at, :updated_at, :versions]

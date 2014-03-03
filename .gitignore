@@ -35,3 +35,4 @@ current-relics.zip
 *.bak
 .yardoc/
 doc/
+.ruby-version

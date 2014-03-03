@@ -1,10 +1,6 @@
 # -*- encoding : utf-8 -*-
 class Users::PasswordsController < Devise::PasswordsController
-
-  skip_before_filter :save_return_path
-
   before_filter :enable_fancybox
-
   skip_before_filter :require_no_authentication
 
   # PUT /resource/password

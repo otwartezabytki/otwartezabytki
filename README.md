@@ -7,7 +7,7 @@ The project is licensed under a 3-clause BSD license. You can find the whole tex
 ### Requirements (for OS X)
 Your machine should be equipped with:
   - homebrew
-  - ruby 1.9.2 or higher (we recommend using rbenv)
+  - ruby 1.9.2 or 1.9.3, below than 2.0.0 (we recommend using rbenv)
   - git
   - bundle
   - web browser e.g. chrome or safari
@@ -22,13 +22,12 @@ cp config/database.yml.example config/database.yml
 # create database and database users for dev and testing
 bundle install
 # load database dump if you have
-gunzip -c %m_%d_%Y.sql.gz | script/rails db 
+gunzip -c %m_%d_%Y.sql.gz | script/rails db
 bundle exec rake db:migrate
 bundle exec rake db:seed
 ```
 
-Set up elastic search:
-
+Setup ElasticSearch (we use 0.20.2)
  - install according to this: https://github.com/karmi/tire#installation
  - install Morfologik (Polish) Analysis for ElasticSearch from: https://github.com/chytreg/elasticsearch-analysis-morfologik
  - index the data:

@@ -5,12 +5,13 @@
   %h2= t('views.relics.show.widgets.header')
   .placeholder
     %p= t('views.relics.show.widgets.create_alert')
-    %a.add-alert-widget-button{:href => '#add-widget-alert', :'data-widget-source' => widget_source}
+    %a.add-alert-widget-button{:href => '#add-widget-alert', :'data-widget-src' => "//#{Settings.oz.host}/widgets/add_alert.js?relic_id=#{relic.id}"}
       = t('views.relics.show.widgets.create_button')
 
   %article.add-alert-widget-output
     %h1.add-alert-widget-header= t('views.widgets.edit.preview')
     .add-alert-widget-content
+      #oz_add_alert_widget
       .add-alert-widget-information--loading= t('views.relics.show.widgets.loading')
       .add-alert-widget-information--error= t('views.relics.show.widgets.error')
     %h1.add-alert-widget-header= t('views.widgets.edit.generated')

@@ -5,7 +5,7 @@ class AlertsController < ApplicationController
   before_filter :enable_fancybox, :unless => lambda {|c| Subdomain.matches?(c.request) }
 
   expose(:relic) { Relic.find(params[:relic_id]) }
-  expose(:alerts) { relic.alerts }
+  expose(:alerts, ancestor: :relic)
   expose(:alert)
 
   def new
@@ -20,10 +20,11 @@ class AlertsController < ApplicationController
     alert.user_id = current_user.try(:id)
     if alert.save
       if Subdomain.matches?(request)
-        path = relic_path(relic, :host => Settings.oz.host, :only_path => false, :notice =>'notices.alert_added')
-        render :js => "window.top.location = '#{path}';" and return
+        @new_alert_added_url = relic_path(relic, :host => Settings.oz.host, :only_path => false, :anchor => 'anchor-alerts')
+        render :created
+      else
+        redirect_to relic, :notice => t('notices.alert_added'), :anchor => 'anchor-alerts'
       end
-      redirect_to relic, :notice => t('notices.alert_added')
     else
       render 'new'
     end

@@ -2,12 +2,12 @@
 
 class Widgets::AddAlertsController < WidgetsController
 
-  expose(:widget_add_alerts) { Widget::AddAlert.scoped }
-  expose(:widget_add_alert)
+  expose(:widget_add_alerts, model: Widget::AddAlert)
+  expose(:widget_add_alert,  model: Widget::AddAlert)
 
   expose(:widget) do
     if params[:id].present?
-      widget_add_alerts.find(params[:id]) 
+      widget_add_alerts.find(params[:id])
     else
       Widget::AddAlert.new(:relic_id => params[:relic_id])
     end

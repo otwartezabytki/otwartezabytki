@@ -191,7 +191,9 @@
 			afterShow    : $.noop, // After opening
 			beforeChange : $.noop, // Before changing gallery item
 			beforeClose  : $.noop, // Before closing
-			afterClose   : $.noop  // After closing
+			afterClose   : $.noop,  // After closing
+			onIframeLoading : $.noop  // On iframe loading
+
 		},
 
 		//Current state
@@ -1018,7 +1020,8 @@
 			}
 
 			coming.content = iframe.appendTo( coming.inner );
-
+			// custom callback
+			F.trigger('onIframeLoading');
 			if (!coming.iframe.preload) {
 				F._afterLoad();
 			}

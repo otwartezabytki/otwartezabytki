@@ -25,6 +25,12 @@ module RelicsHelper
     @categories_facets_hash = categories_facets_hash_for(relics)
   end
 
+  def descendants_select(relic, form)
+    form.input :relic_id, as: :select, label: t('common.apply_to'), include_blank: false, required: false, collection: 
+    relic.descendants.map {|d| [d.identification, d.id] }.insert(0, [t('activerecord.attributes.relic.relic_group'), relic.id]).
+    sort()
+  end
+
   def state_facets
     labels = t('activerecord.attributes.relic.states').with_indifferent_access
     relics.terms('state', true).map do |t|

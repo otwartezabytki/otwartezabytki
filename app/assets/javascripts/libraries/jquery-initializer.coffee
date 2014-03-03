@@ -86,6 +86,7 @@ window.ajax_callback = (data, status, xhr) ->
           to_replace.replaceWith(node)
           $(node).initialize()
           $.fancybox.trigger('afterLoad')
+          $.fancybox.update()
           $('.fancybox-overlay').height($(document).height())
         else
           if data_replace_parent && !$(node).is('[data-fancybox]')
@@ -117,16 +118,23 @@ window.ajax_callback = (data, status, xhr) ->
       $('#fancybox_loader_container').show()
       window.location.href = xhr.getResponseHeader('x-path')
 
-$(document).on 'ajax:beforeSend', 'form[data-remote], a[data-remote]', ->
+jQuery.initializer "form[data-ajax-form]", ->
+  $form = $(this)
+  $form.ajaxForm
+    beforeSubmit: (obj...) -> $form.trigger('ajax:beforeSend', obj)
+    success:      (obj...) -> $form.trigger('ajax:success', obj)
+    error:        (obj...) -> $form.trigger('ajax:error', obj)
+
+$(document).on 'ajax:beforeSend', 'form[data-ajax-form], form[data-remote], a[data-remote]', ->
   $('#fancybox_loader_container').show() unless window.location.pathname.match(/^(\/[a-z]{2})?\/relics/)
 
-$(document).on 'ajax:success', 'form[data-remote], a[data-remote]', (e, data, status, xhr) ->
+$(document).on 'ajax:success', 'form[data-ajax-form], form[data-remote], a[data-remote]', (e, data, status, xhr) ->
   $('#fancybox_loader_container').hide()
   popping_state = false
   ajax_callback.call(this, data, status, xhr)
   e.stopPropagation()
 
-$(document).on 'ajax:error', 'form[data-remote], a[data-remote]', (e, xhr, status, error) ->
+$(document).on 'ajax:error', 'form[data-ajax-form], form[data-remote], a[data-remote]', (e, xhr, status, error) ->
   popping_state = false
   if error == "Unauthorized"
     window.location.href = Routes.new_user_session_path()

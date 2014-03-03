@@ -18,7 +18,7 @@ class RecentRevision
   end
 
   def significant_changeset
-    self.version.changeset.reject { |_, v| v.try(:length) == 2 and v[1].blank? }
+    version.changeset.reject { |_, v| v.try(:length) == 2 and v[1].blank? }
   end
 
   def changes
@@ -44,18 +44,19 @@ class RecentRevision
 
   def relic
     return @relic if defined? @relic
-    @relic = (self.version.item.is_a?(Relic) ? self.version.item : self.version.item.try(:relic))
+    @relic = (version.item.is_a?(Relic) ? version.item : version.item.try(:relic))
   end
 
   def to_relic_hash
     return nil if relic.blank? or !relic.build_finished? or significant_changeset.blank?
+    return nil if version.item.respond_to?(:saved?) and !version.item.saved?
     {
       :relic_id => relic.id,
       :slug => relic.to_param,
       :identification => relic.identification,
       :image_url => relic.main_photo.file.url(:icon),
       :changes => changes,
-      :created_at => self.version.created_at
+      :created_at => version.created_at
     }
   rescue ArgumentError => e
     nil

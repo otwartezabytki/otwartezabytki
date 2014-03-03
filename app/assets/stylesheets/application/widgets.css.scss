@@ -89,7 +89,6 @@ section.widgets{
 }
 
 .use-widget,
-.edit_widget input[type="submit"],
 .edit_widget button,
 .edit_widget .button {
   @include gradient(#4b6d7e, #436576);
@@ -212,7 +211,7 @@ section.widgets{
       font-size: 14px;
       display: block;
     }
-    input[type="submit"]{
+    button {
       float: right;
       padding: 7px 15px;
       margin: 0;
@@ -224,6 +223,7 @@ section.widgets{
   .content{
     padding: 20px;
     .preview {
+      overflow: hidden;
       margin: 20px 0;
     }
     h2{

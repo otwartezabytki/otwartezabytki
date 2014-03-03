@@ -9,3 +9,8 @@ set :output, "log/cron.log"
 every :monday, :at => '2am' do
   rake "relic:export"
 end
+
+# Misunderstanding between dev and project owner.
+# every :day, :at => '1am' do
+#   rake "uploads:remove_not_saved"
+# end

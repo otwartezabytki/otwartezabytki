@@ -1,12 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Users::RegistrationsController < ApplicationController
-
-  skip_before_filter :save_return_path
-
-  before_filter :enable_fancybox
-
   respond_to :html
-
+  before_filter :enable_fancybox
   expose(:user)
 
   def new

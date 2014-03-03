@@ -7,7 +7,7 @@
         .not-fixed
           %h4=t('views.relics.show.alerts.not_fixed')
           %ul
-            - relic.alerts.not_fixed.each do |alert|
+            - relic.alerts.order('created_at DESC').not_fixed.each do |alert|
               %li
                 - if alert.file?
                   .image= image_tag alert.file.midi.url, :width => 80, :height => 80
@@ -16,7 +16,7 @@
         .fixed
           %h4=t('views.relics.show.alerts.fixed')
           %ul
-            - relic.alerts.fixed.each do |alert|
+            - relic.alerts.order('created_at DESC').fixed.each do |alert|
               %li
                 - if alert.file?
                   .image= image_tag alert.file.mini.url, :width => 45, :height => 45
