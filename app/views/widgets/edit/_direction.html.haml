@@ -16,9 +16,10 @@
       = f.input :params, :as => :hidden, label: false
       - if current_user.present?
         = f.button t('views.widgets.edit.direction.save_and_print'), name: 'save_and_print'
+        = f.button t('views.widgets.edit.direction.save'), name: 'save'
       - else
         = link_to t('views.widgets.edit.direction.print_'), print_widgets_direction_path, :class => 'button'
-      = f.button t('views.widgets.edit.direction.save'), name: 'save'
+        = link_to t('views.widgets.edit.direction.sign_in'), new_user_session_path, class: 'button'
   %h2= t('views.widgets.edit.generated')
   %div
     %span.block= t('views.widgets.edit.code_help')
