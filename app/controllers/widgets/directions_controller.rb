@@ -42,10 +42,15 @@ class Widgets::DirectionsController < WidgetsController
     widget_direction.user_id ||= current_user.try :id
     if widget_direction.has_valid_waypoints?
       if widget_direction.save
-        if params[:save_and_print]
-          redirect_to print_widgets_direction_path(widget_direction)
-        else
-          redirect_to edit_widgets_direction_path(widget_direction), :notice => (t('widget.direction.save') if current_user)
+        respond_to do |format|
+          format.json { head :ok }
+          format.html do
+            if params[:save_and_print]
+              redirect_to print_widgets_direction_path(widget_direction)
+            else
+              redirect_to edit_widgets_direction_path(widget_direction), :notice => (t('widget.direction.save') if current_user)
+            end
+          end
         end
       else
         flash[:error] = t('notices.widget_error_and_correct') if current_user

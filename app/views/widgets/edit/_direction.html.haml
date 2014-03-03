@@ -10,7 +10,7 @@
   .preview
     %iframe#oz_direction{ width: [widget.width, 920].min, height: widget.height, src: configure_widgets_direction_url(widget, iframe: true), scrolling: 'auto' }
   .sidebar
-    = semantic_form_for widget, :url => self.send("widgets_#{widget.class.partial_name}_path", widget, format: 'json') do |f|
+    = semantic_form_for widget, :url => self.send("widgets_#{widget.class.partial_name}_path", widget) do |f|
       = f.input :width, :label => t('views.widgets.edit.direction.width'), :required => false
       = f.input :height, :label => t('views.widgets.edit.direction.height'), :required => false
       = f.input :params, :as => :hidden, label: false
