@@ -238,7 +238,7 @@ searchRoute = (search_params, callback) ->
       gmap.directionsRenderer.setDirections(result)
     else
       msg = 'Nie znaleziono trasy! Spróbuj ponownie.'
-      if envConfig.development?
+      if envConfig.development
         console.log(msg)
       else
         window.alert(msg)
@@ -294,7 +294,7 @@ windowPrint = ->
   if ready_to_print
     ( ->
       print_has_prompted = true
-      if envConfig.development?
+      if envConfig.development
         console.log('`window.print()` doesn’t prompt during development')
       else
         window.print()
@@ -313,7 +313,7 @@ performSearch = (search_params, callback) ->
       callback(result)
     error: ->
       msg = 'Nastąpił błąd podczas wyszukiwania zabytków.'
-      if envConfig.development?
+      if envConfig.development
         console.log(msg)
       else
         window.alert(msg)
