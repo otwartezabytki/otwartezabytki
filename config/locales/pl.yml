@@ -1117,6 +1117,11 @@ pl:
       user_data: "Dane użytkownika"
     user_avatar:
       change_photo: "Zmień zdjęcie"
+    registrations:
+      new:
+        header: Rejestracja do Otwartych Zabytków
+        signup_intro: "Zarejestruj się"
+        submit: Zarejestruj się       
   version:
     event:
       create: stworzył
