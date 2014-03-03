@@ -19,7 +19,7 @@
         = f.button t('views.widgets.edit.direction.save'), name: 'save'
       - else
         = link_to t('views.widgets.edit.direction.print_'), print_widgets_direction_path, :class => 'button'
-        = link_to t('views.widgets.edit.direction.sign_in'), new_user_session_path, class: 'button'
+        = link_to t('views.widgets.edit.direction.sign_in'), new_user_session_path(return_path: edit_widgets_direction_path(widget)), class: 'button'
   %h2= t('views.widgets.edit.generated')
   %div
     %span.block= t('views.widgets.edit.code_help')

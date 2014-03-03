@@ -107,7 +107,7 @@ class ApplicationController < ActionController::Base
   end
 
   def js_env_data
-    data = {
+    {
       development: Rails.env.development?
     }.to_json
   end
@@ -127,7 +127,9 @@ class ApplicationController < ActionController::Base
   protected
 
   def save_return_path
-    cookies[:return_path] = request.fullpath if request.get? and request.format != 'json' and !params[:iframe]
+    if request.get? and request.format != 'json' and !params[:iframe]
+      cookies[:return_path] = params[:return_path].presence || request.fullpath
+    end
   end
 
   def authenticate_admin!

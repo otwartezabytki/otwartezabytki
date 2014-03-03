@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Users::SessionsController < Devise::SessionsController
 
-  skip_before_filter :save_return_path
+  skip_before_filter :save_return_path, if: Proc.new { params[:return_path].blank? }
 
   before_filter :enable_fancybox
 
