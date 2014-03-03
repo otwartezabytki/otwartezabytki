@@ -50,6 +50,8 @@
 
 :javascript
   var renderOnly = true;
+%script
+  != js_env
 %script{ type: 'application/json', id: 'search_params' }
   != widget_params.to_json
 = content_for :stylesheets do

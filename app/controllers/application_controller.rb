@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  helper_method :search_params, :tsearch, :enabled_locales, :iframe_transport?
+  helper_method :search_params, :tsearch, :enabled_locales, :iframe_transport?, :js_env, :angular_js_env
   # iframe views path
   before_filter do
     prepend_view_path("app/views/iframe") if Subdomain.matches?(request)
@@ -104,6 +104,24 @@ class ApplicationController < ActionController::Base
 
   def iframe_url_options
     { 'X-Requested-With' => 'IFrame' } if iframe_transport?
+  end
+
+  def js_env_data
+    data = {
+      development: Rails.env.development?
+    }.to_json
+  end
+
+  def js_env
+    <<-EOS
+    var envConfig = #{js_env_data}
+    EOS
+  end
+
+  def angular_js_env
+    <<-EOS
+    this.app.constant("envConfig", #{js_env_data})
+    EOS
   end
 
   protected

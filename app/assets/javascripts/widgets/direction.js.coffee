@@ -237,7 +237,11 @@ searchRoute = (search_params, callback) ->
 
       gmap.directionsRenderer.setDirections(result)
     else
-      <%= Rails.env.development? ? 'console.log' : 'window.alert' %>('Nie znaleziono trasy! Spróbuj ponownie.')
+      msg = 'Nie znaleziono trasy! Spróbuj ponownie.'
+      if envConfig.development?
+        console.log(msg)
+      else
+        window.alert(msg)
 
 printAppendRelic = (relic) ->
   return if $("#relic-#{relic.id}").length
@@ -290,13 +294,10 @@ windowPrint = ->
   if ready_to_print
     ( ->
       print_has_prompted = true
-      <%=
-        if Rails.env.development?
-          "console.log('`window.print()` doesn’t prompt during development')"
-        else
-          'window.print()'
-        end
-      %>
+      if envConfig.development?
+        console.log('`window.print()` doesn’t prompt during development')
+      else
+        window.print()
     ).delay 1000
   else
     ready_to_print = true
@@ -311,7 +312,11 @@ performSearch = (search_params, callback) ->
     success: (result) ->
       callback(result)
     error: ->
-      <%= Rails.env.development? ? 'console.log' : 'window.alert' %>('Nastąpił błąd podczas wyszukiwania zabytków.')
+      msg = 'Nastąpił błąd podczas wyszukiwania zabytków.'
+      if envConfig.development?
+        console.log(msg)
+      else
+        window.alert(msg)
 
 hasValidWaypoints = (waypoints) ->
   waypoints.filter (waypoint) ->
