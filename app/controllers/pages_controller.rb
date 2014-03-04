@@ -5,7 +5,7 @@ class PagesController < ApplicationController
   append_view_path Page::Resolver.new
 
   def show
-    init_download if params[:id] == "pobierz-dane"
+    init_download if is_download_page?(params[:id])
     render params[:id]
   end
 
@@ -37,5 +37,11 @@ class PagesController < ApplicationController
         :size => (File.size(file_path) / 1024.0 / 1024.0).round(2) }
     end
     export_files
+  end
+
+  def is_download_page?(name)
+    Page.includes(:translations).
+      where("(page_translations.permalink = :name OR pages.name = :name) AND pages.name = 'download'", name: name).
+      exists?
   end
 end
