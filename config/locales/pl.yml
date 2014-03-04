@@ -82,6 +82,8 @@ pl:
         id: Identyfikator
         url: Adres zdjęcia
         author: "Dane autora (imię, nazwisko)"
+        id: Identyfikator
+        url: Adres zdjęcia
         date_taken: "Data wykonania"
         description: "Opis:"
         file: "Zdjęcie:"
@@ -1115,6 +1117,11 @@ pl:
       user_data: "Dane użytkownika"
     user_avatar:
       change_photo: "Zmień zdjęcie"
+    registrations:
+      new:
+        header: Rejestracja do Otwartych Zabytków
+        signup_intro: "Zarejestruj się"
+        submit: Zarejestruj się       
   version:
     event:
       create: stworzył

@@ -163,7 +163,8 @@ module ApplicationHelper
     end
   end
 
-  def page_path(page)
-    eval("#{I18n.locale.to_s.underscore}_page_path('#{h page.permalink}')")
+  def page_path(page_or_permalink)
+    id = page_or_permalink.is_a?(Page) ? page_or_permalink.permalink : page_or_permalink
+    eval("#{I18n.locale.to_s.underscore}_page_path('#{h id}')")
   end
 end
