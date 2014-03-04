@@ -409,11 +409,25 @@ haversineDistance = (lat1, lon1, lat2, lon2) ->
 
 getWaypointsFromRoute = (route) ->
   waypoints = []
+  currentWaypoints = getWaypoints()
+
+  exists = (waypoint) ->
+    currentWaypoints.any (current) ->
+      reg = new RegExp(current, 'i')
+      current == waypoint || reg.test(waypoint)
+
   route.legs.each (leg, index) ->
-    waypoints.add leg.start_address if index is 0
+    if index == 0
+      waypoints.add if exists(leg.start_address)
+        leg.start_address
+      else
+        leg.start_location.toUrlValue()
     leg.via_waypoints.each (wp) ->
       waypoints.add wp.toUrlValue()
-    waypoints.add leg.end_address
+    waypoints.add if exists(leg.end_address)
+      leg.end_address
+    else
+      leg.end_location.toUrlValue()
   waypoints
 
 updateWaypointInputs = (route, callback) ->
@@ -529,9 +543,8 @@ jQuery ->
   google.maps.event.addListener gmap.directionsRenderer, 'directions_changed', ->
     newRoute = gmap.directionsRenderer.getDirections().routes[0]
     return if newRoute == ROUTE
-    ROUTE   = newRoute
-    POLYGON = null
-    if ROUTE?
-      updateWaypointInputs ROUTE, -> searchRelics()
+    if newRoute
+      updateWaypointInputs newRoute, ->
+        $(document).trigger 'params:changed'
 
   $(document).trigger 'params:changed'
