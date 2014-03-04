@@ -36,7 +36,7 @@
     <% end %>
     <p class="small">
       Poniżej możesz pobrać pliki zawierające tylko dane pochodzące z rejestru zabytków (na bieżąco modyfikowane w ramach projektu). Baza należy do 
-      <a href="http://domenapubliczna.org/co-to-jest-domena-publiczna/"> Domeny Publicznej
+      <a href="http://domenapubliczna.org/co-to-jest-domena-publiczna/"> Domeny Publicznej.
     </p>
     <% if @export_files_register.present? %>
       <div class='downloads_left'>
@@ -58,7 +58,7 @@
     <% end %>
     <% if @export_original_csv.present? %>
       <p class="small">
-        Poniżej możesz pobrać pliki zawierające tylko oryginalne dane pochodzące z rejestru zabytków.
+        Poniżej możesz pobrać pliki zawierające dane pochodzące z rejestru zabytków w wersji, jaką otrzymaliśmy od NID. Baza należy do <a href="http://domenapubliczna.org/co-to-jest-domena-publiczna/"> Domeny Publicznej.
       </p>
       <div class='downloads_left'>
         <% @export_original_json.each do |file| %>
