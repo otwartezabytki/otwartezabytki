@@ -17,16 +17,20 @@
       <em class="icons"></em>
     </p>
     <% if @export_files.present? %>
-      <% @export_files.each do |file| %>
-        <p class="small">
-          <%= link_to raw("Pobierz dane JSON <span class=\"size\">(#{file[:size]} MiB)</span><br><span class=\"date\">#{file[:date]}</span>"), file[:url], :class => 'download' %>
-        </p>
-      <% end %>
-      <% @export_csv_files.each do |file| %>
-        <p class="small">
-          <%= link_to raw("Pobierz dane CSV <span class=\"size\">(#{file[:size]} MiB)</span><br><span class=\"date\">#{file[:date]}</span>"), file[:url], :class => 'download' %>
-        </p>
-      <% end %>
+      <div class='downloads_left'>
+        <% @export_files.each do |file| %>
+          <p class="small">
+            <%= link_to raw("Pobierz dane JSON <span class=\"size\">(#{file[:size]} MiB)</span><br><span class=\"date\">#{file[:date]}</span>"), file[:url], :class => 'download' %>
+          </p>
+        <% end %>
+      </div>
+      <div class='downloads_right'>
+        <% @export_csv_files.each do |file| %>
+          <p class="small">
+            <%= link_to raw("Pobierz dane CSV <span class=\"size\">(#{file[:size]} MiB)</span><br><span class=\"date\">#{file[:date]}</span>"), file[:url], :class => 'download' %>
+          </p>
+        <% end %>
+      </div>
     <% else %>
       <strong>pliki obecnie są niedostępne</strong>
     <% end %>
@@ -35,18 +39,42 @@
       <a href="http://domenapubliczna.org/co-to-jest-domena-publiczna/"> Domeny Publicznej
     </p>
     <% if @export_files_register.present? %>
-      <% @export_files_register.each do |file| %>
-        <p class="small">
-          <%= link_to raw("Pobierz dane JSON <span class=\"size\">(#{file[:size]} MiB)</span><br><span class=\"date\">#{file[:date]}</span>"), file[:url], :class => 'download' %>
-        </p>
-      <% end %>
-      <% @export_csv_files_register.each do |file| %>
-        <p class="small">
-          <%= link_to raw("Pobierz dane CSV <span class=\"size\">(#{file[:size]} MiB)</span><br><span class=\"date\">#{file[:date]}</span>"), file[:url], :class => 'download' %>
-        </p>
-      <% end %>
+      <div class='downloads_left'>
+        <% @export_files_register.each do |file| %>
+          <p class="small">
+            <%= link_to raw("Pobierz dane JSON <span class=\"size\">(#{file[:size]} MiB)</span><br><span class=\"date\">#{file[:date]}</span>"), file[:url], :class => 'download' %>
+          </p>
+        <% end %>
+      </div>
+      <div class='downloads_right'>
+        <% @export_csv_files_register.each do |file| %>
+          <p class="small">
+            <%= link_to raw("Pobierz dane CSV <span class=\"size\">(#{file[:size]} MiB)</span><br><span class=\"date\">#{file[:date]}</span>"), file[:url], :class => 'download' %>
+          </p>
+        <% end %>
+      </div>
     <% else %>
       <strong>pliki obecnie są niedostępne</strong>
     <% end %>
+    <% if @export_original_csv.present? %>
+      <p class="small">
+        Poniżej możesz pobrać pliki zawierające tylko oryginalne dane pochodzące z rejestru zabytków.
+      </p>
+      <div class='downloads_left'>
+        <% @export_original_json.each do |file| %>
+          <p class="small">
+            <%= link_to raw("Pobierz dane JSON <span class=\"size\">(#{file[:size]} MiB)</span><br><span class=\"date\">#{file[:date]}</span>"), file[:url], :class => 'download' %>
+          </p>
+        <% end %>
+      </div>
+      <div class='downloads_right'>
+        <% @export_original_csv.each do |file| %>
+          <p class="small">
+            <%= link_to raw("Pobierz dane CSV <span class=\"size\">(#{file[:size]} MiB)</span><br><span class=\"date\">#{file[:date]}</span>"), file[:url], :class => 'download' %>
+          </p>
+        <% end %>
+      </div>
+    <% end %>
+   <div class='downloads_clear'></div>
   </div>
 </div>

@@ -167,3 +167,17 @@ div {
     }
   }
 }
+
+.downloads_left {
+  width: 50%;
+  float: left;
+}
+
+.downloads_right {
+  width: 50%;
+  float: right;
+}
+
+.downloads_clear {
+  clear: both;
+}

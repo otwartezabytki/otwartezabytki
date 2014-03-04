@@ -1,20 +1,23 @@
 class DownloadGenerator
   include ActiveModel::AttributeMethods
 
-  attr_accessor :name, :file_type, :suffix, :template, :model
+  attr_accessor :name, :file_type, :suffix, :template, :klass, :only_register
 
-  def initialize model, file_type, only_register
-    self.model = model
+  def initialize klass, file_type, only_register
+    self.klass = klass
     self.file_type = file_type
-    self.name, self.suffix, self.template = prepare_name(file_type, only_register)
+    self.name, self.suffix, self.template = 
+      self.klass == Relic ? prepare_name(file_type, only_register) : prepare_name(file_type, only_register, true)
+    self.only_register = only_register
   end
 
-  def prepare_name file_type, only_register
+  def prepare_name file_type, only_register, original = false
     suffix, template = if only_register
       ["relics-register", "api/v1/relics/_relic_register.json.jbuilder"]
     else
       ["relics", "api/v1/relics/_relic.json.jbuilder"]
     end
+    suffix = "relics-original" if original
     new_zip_path = "#{Rails.root}/public/history/#{Date.today.to_s(:db)}-#{suffix}-#{file_type}.zip"
     return new_zip_path, suffix, template
   end
@@ -25,21 +28,20 @@ class DownloadGenerator
     FileUtils.ln_s self.name, "#{Rails.root}/public/history/current-#{self.suffix}-#{self.file_type}.zip", :force => true
   end
 
-  def pack_zip
+  def generate_zipfile
     if File.exists? self.name
       puts "Nothing to do file #{self.name} has been already generated."
     else
       puts "Exporting relics to file #{self.name}"
-      total = @model.created.roots.count
+      total = @klass.created.roots.count
       counter = 0
       tmpfile = Tempfile.new([self.suffix, '.zip'])
       begin
         Zip::ZipOutputStream.open(tmpfile.path) do |zip|
-          @model.created.roots.includes(:place, :commune, :district, :voivodeship).limit(3).each do |objs|
+          @klass.created.roots.includes(:place, :commune, :district, :voivodeship).find_in_batches do |objs|
             puts "Progress #{counter * 1000 * 100 / total} of 100%"
             counter += 1
-            relic = objs
-            #objs.each do |relic|
+            objs.each do |relic|
               begin
                 if self.file_type == "json"
                   generate_json_file(zip, relic)
@@ -49,7 +51,7 @@ class DownloadGenerator
               rescue => ex
                 Raven.capture_exception(ex)
               end
-            #end
+            end
           end
         end
         puts "Progress 100 of 100%"
@@ -80,12 +82,12 @@ class DownloadGenerator
   def relic_to_csv relic
     CSV.generate do |csv|
       csv << [I18n.t("activerecord.models.relic.one")]
-      append_csv(csv, relic)
+      self.only_register ? original_relic_csv(relic, csv) : append_csv(csv, relic)
 
       csv << []
       csv << [I18n.t("activerecord.models.subrelic.one").capitalize]
       relic.descendants.each do |subrelic|
-        append_csv(csv, self)
+        relic.class == OriginalRelic ? original_relic_csv(subrelic, csv) : append_csv(csv, subrelic)
         csv << []
       end
     end
@@ -137,6 +139,10 @@ class DownloadGenerator
       end
     end
 
+    place_data(csv, relic)
+  end
+
+  def place_data csv, relic
     if relic.place 
       commune = relic.place.commune
       commune_nm = commune.name if commune
@@ -148,8 +154,20 @@ class DownloadGenerator
       csv << ['place_id', 'commune', 'district', 'voivodeship'].map { |elem| I18n.t("activerecord.attributes.relic.#{elem}") }
       csv << [relic.place.name, commune_nm, district_nm, voivodeship_nm]
     end
+  end
 
-    return csv
+  def original_relic_csv relic, csv
+    csv << ['id', 'nid_id', 'identification', 'common_name', 
+      'state', 'register_number', 'dating_of_obj', 'street',
+      'latitude', 'longitude', 
+    ].map { |elem| I18n.t("activerecord.attributes.relic.#{elem}")}
+
+    csv << [ relic.id, relic.nid_id, relic.identification, relic.common_name, relic.description,
+      relic.categories, relic.state, relic.register_number, relic.dating_of_obj, relic.street,
+      relic.latitude, relic.longitude, relic.tags, 
+    ]
+
+    place_data(csv, relic)
   end
 
 end

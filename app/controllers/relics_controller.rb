@@ -182,6 +182,10 @@ class RelicsController < ApplicationController
     @export_files_register = prepare_download(main_path.join('2*-relics-register-json.zip'))
 
     @export_csv_files_register = prepare_download(main_path.join('2*-relics-register-csv.zip'))
+
+    @export_original_csv = prepare_download(main_path.join('2*-relics-original-csv.zip'))
+
+    @export_original_json = prepare_download(main_path.join('2*-relics-original-json.zip'))
   end
 
   def download_zip
