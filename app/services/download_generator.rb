@@ -1,40 +1,37 @@
 class DownloadGenerator
   include ActiveModel::AttributeMethods
 
-  attr_accessor :name, :file_type, :suffix, :template, :klass, :only_register
-
   def initialize klass, file_type, only_register
-    self.klass = klass
-    self.file_type = file_type
-    self.name, self.suffix, self.template = prepare_name(file_type, only_register)
-    self.only_register = only_register
+    @klass = klass
+    @file_type = file_type
+    @only_register = only_register
+    prepare_name
   end
 
-  def prepare_name file_type, only_register
-    suffix, template = if only_register
+  def prepare_name
+    @suffix, @template = if @only_register
       ["relics-register", "api/v1/relics/_relic_register.json.jbuilder"]
     else
       ["relics", "api/v1/relics/_relic.json.jbuilder"]
     end
-    suffix = "relics-original" if self.klass.eql?(OriginalRelic)
-    new_zip_path = "#{Rails.root}/public/history/#{Date.today.to_s(:db)}-#{suffix}-#{file_type}.zip"
-    return new_zip_path, suffix, template
+    @suffix = "relics-original" if @klass.eql?(OriginalRelic)
+    @name = "#{Rails.root}/public/history/#{Date.today.to_s(:db)}-#{@suffix}-#{@file_type}.zip"
   end
 
   def manage_tmpfile tmpfile
-    FileUtils.cp tmpfile.path, self.name
-    FileUtils.chmod 0644, self.name
-    FileUtils.ln_s self.name, "#{Rails.root}/public/history/current-#{self.suffix}-#{self.file_type}.zip", :force => true
+    FileUtils.cp tmpfile.path, @name
+    FileUtils.chmod 0644, @name
+    FileUtils.ln_s @name, "#{Rails.root}/public/history/current-#{@suffix}-#{@file_type}.zip", :force => true
   end
 
   def generate_zipfile
-    if File.exists? self.name
-      puts "Nothing to do file #{self.name} has been already generated."
+    if File.exists? @name
+      puts "Nothing to do file #{@name} has been already generated."
     else
-      puts "Exporting relics to file #{self.name}"
-      total = self.klass.created.roots.count
+      puts "Exporting relics to file #{@name}"
+      total = @klass.created.roots.count
       counter = 0
-      tmpfile = Tempfile.new([self.suffix, '.zip'])
+      tmpfile = Tempfile.new([@suffix, '.zip'])
       begin
         Zip::ZipOutputStream.open(tmpfile.path) do |zip|
           @klass.created.roots.includes(:place, :commune, :district, :voivodeship).find_in_batches do |objs|
@@ -42,7 +39,7 @@ class DownloadGenerator
             counter += 1
             objs.each do |relic|
               begin
-                if self.file_type == "json"
+                if @file_type == "json"
                   generate_json_file(zip, relic)
                 else
                   generate_csv_file(zip, relic)
@@ -69,19 +66,19 @@ class DownloadGenerator
       include ApplicationHelper
       include Rails.application.routes.url_helpers
     end
-    zipstream.put_next_entry("#{self.suffix}-json/#{relic.id}.json")
-    zipstream.print view.render(template: self.template, locals: { relic: relic, params: { include_descendants: true }})
+    zipstream.put_next_entry("#{@suffix}-json/#{relic.id}.json")
+    zipstream.print view.render(template: @template, locals: { relic: relic, params: { include_descendants: true }})
   end
 
   def generate_csv_file zipstream, relic 
-    zipstream.put_next_entry("#{self.suffix}-csv/#{relic.id}.csv")
+    zipstream.put_next_entry("#{@suffix}-csv/#{relic.id}.csv")
     zipstream.print relic_to_csv(relic)
   end
 
   def relic_to_csv relic
     CSV.generate do |csv|
       csv << [I18n.t("activerecord.models.relic.one")]
-      self.only_register ? original_relic_csv(relic, csv) : append_csv(csv, relic)
+      @only_register ? original_relic_csv(relic, csv) : append_csv(csv, relic)
 
       csv << []
       csv << [I18n.t("activerecord.models.subrelic.one").capitalize]
@@ -105,7 +102,7 @@ class DownloadGenerator
       relic.documents_info, relic.links_info, 
     ]
 
-    unless self.only_register
+    unless @only_register
       csv << []
       csv << [I18n.t("activerecord.models.event.one").capitalize]
       csv << ['id', 'date', 'name', 'photo_id'].map { |elem| I18n.t("activerecord.attributes.event.#{elem}") }
