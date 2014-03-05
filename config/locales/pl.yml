@@ -124,6 +124,8 @@ pl:
         relic_id: "ID zabytku"
         url: "Adres URL"
       photo:
+        id: Identyfikator
+        url: Link do zdjęcia
         alternate_text: "Tekst alternatywny"
         author: "Dane autora (imię, nazwisko/nick)"
         date_taken: "Data wykonania"

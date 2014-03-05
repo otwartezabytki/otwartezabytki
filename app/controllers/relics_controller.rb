@@ -172,7 +172,6 @@ class RelicsController < ApplicationController
     end
   end
 
-
   def download_zip
     if relic.all_documents.exists?
 

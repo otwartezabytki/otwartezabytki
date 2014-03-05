@@ -61,19 +61,16 @@ SQL
     end
   end
 
-  def export_relics(register_data = false)
-    suffix, template = if register_data
-      ["relics-register", "api/v1/relics/_relic_register.json.jbuilder"]
-    else
-      ["relics", "api/v1/relics/_relic.json.jbuilder"]
-    end
-      generate_zip(register_data, true, suffix)
-      generate_zip(register_data, false, suffix)
-  end
-
+  desc "Generate zipfiles with relics csvs/jsons"
   task :export => :environment do
-    export_relics
-    export_relics true # with revisions
+    # generating json for all relics
+    DownloadGenerator.new(Relic, 'json', false).generate_zipfile
+    # generating json for registered relics
+    DownloadGenerator.new(Relic, 'json', true).generate_zipfile
+    # generating csv for all relics
+    DownloadGenerator.new(Relic, 'csv', false).generate_zipfile
+    # generating csv for registered relics
+    DownloadGenerator.new(Relic, 'csv', true).generate_zipfile
   end
 
   task :export_users, [:export_csv] => :environment do |t, args |
@@ -129,50 +126,4 @@ SQL
     puts "Done"
   end
 
-  def generate_zip(register_data, json, suffix)
-    file_type = json ? 'json' : 'csv'
-    new_zip_path = "#{Rails.root}/public/history/#{Date.today.to_s(:db)}-#{suffix}-#{file_type}.zip"
-    if File.exists?(new_zip_path)
-      puts "Nothing to do file (#{new_zip_path}) has been already generated."
-    else
-      puts "Exporting relics to file (#{new_zip_path})"
-      total   = Relic.created.roots.count
-      counter = 0
-      tmpfile = Tempfile.new([suffix, '.zip'])
-      begin
-        Zip::ZipOutputStream.open(tmpfile.path) do |z|
-          Relic.created.roots.includes(:place, :commune, :district, :voivodeship).find_in_batches do |objs|
-            puts "Progress #{counter * 1000 * 100 / total} of 100%"
-            counter += 1
-            objs.each do |r|
-              begin
-                if json
-                  view = ActionController::Base.new
-                  view.request = ActionDispatch::Request.new('rack.input' => [])
-                  view.response = ActionDispatch::Response.new
-                  view.class_eval do
-                    include ApplicationHelper
-                    include Rails.application.routes.url_helpers
-                  end
-                  z.put_next_entry("#{suffix}-json/#{r.id}.json")
-                  z.print view.render(template: template, locals: { relic: r, params: { include_descendants: true }})
-                else
-                  z.put_next_entry("#{suffix}-csv/#{r.id}.csv")
-                  z.print r.relic_to_csv(register_data)
-                end
-              rescue => ex
-                Raven.capture_exception(ex)
-              end
-            end
-          end
-        end
-        puts "Progress 100 of 100%"
-        FileUtils.cp tmpfile.path, new_zip_path
-        FileUtils.chmod 0644, new_zip_path
-        FileUtils.ln_s new_zip_path, "#{Rails.root}/public/history/current-#{suffix}-#{file_type}.zip", :force => true
-      ensure
-        tmpfile.close
-      end
-    end
-  end
 end
