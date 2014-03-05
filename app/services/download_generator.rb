@@ -93,13 +93,13 @@ class DownloadGenerator
     csv << ['id', 'nid_id', 'identification', 'common_name', 'description',
       'categories', 'state', 'register_number', 'dating_of_obj', 'street',
       'latitude', 'longitude', 'tags', 'country_code', 'fprovince', 'fplace', 
-      'documents_info', 'links_info',
+      'documents_info', 'links_info', 'main_photo',
     ].map { |elem| I18n.t("activerecord.attributes.relic.#{elem}")}
 
     csv << [ relic.id, relic.nid_id, relic.identification, relic.common_name, relic.description,
       relic.categories, relic.state, relic.register_number, relic.dating_of_obj, relic.street,
       relic.latitude, relic.longitude, relic.tags, relic.country_code, relic.fprovince, relic.fplace, 
-      relic.documents_info, relic.links_info, 
+      relic.documents_info, relic.links_info, relic.main_photo.try(:file_url)
     ]
 
     unless @only_register
@@ -132,6 +132,12 @@ class DownloadGenerator
       csv << ['id', 'url', 'author', 'date_taken', 'description', 'state'].map { |elem| I18n.t("activerecord.attributes.alert.#{elem}") }
       relic.alerts.each do |alert|
         csv << [alert.id, alert.file.try(:url), alert.author, alert.date_taken, alert.description, alert.state]
+      end
+      csv << []
+      csv << [I18n.t("activerecord.models.photo.one").capitalize]
+      csv << ['id', 'url'].map { |elem| I18n.t("activerecord.attributes.photo.#{elem}") }
+      relic.photos.each do |photo|
+        csv << [photo.id, photo.try(:file_url)]
       end
     end
 
