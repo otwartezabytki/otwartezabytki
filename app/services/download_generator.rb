@@ -6,18 +6,17 @@ class DownloadGenerator
   def initialize klass, file_type, only_register
     self.klass = klass
     self.file_type = file_type
-    self.name, self.suffix, self.template = 
-      self.klass == Relic ? prepare_name(file_type, only_register) : prepare_name(file_type, only_register, true)
+    self.name, self.suffix, self.template = prepare_name(file_type, only_register)
     self.only_register = only_register
   end
 
-  def prepare_name file_type, only_register, original = false
+  def prepare_name file_type, only_register
     suffix, template = if only_register
       ["relics-register", "api/v1/relics/_relic_register.json.jbuilder"]
     else
       ["relics", "api/v1/relics/_relic.json.jbuilder"]
     end
-    suffix = "relics-original" if original
+    suffix = "relics-original" if self.klass.eql?(OriginalRelic)
     new_zip_path = "#{Rails.root}/public/history/#{Date.today.to_s(:db)}-#{suffix}-#{file_type}.zip"
     return new_zip_path, suffix, template
   end
@@ -33,7 +32,7 @@ class DownloadGenerator
       puts "Nothing to do file #{self.name} has been already generated."
     else
       puts "Exporting relics to file #{self.name}"
-      total = @klass.created.roots.count
+      total = self.klass.created.roots.count
       counter = 0
       tmpfile = Tempfile.new([self.suffix, '.zip'])
       begin

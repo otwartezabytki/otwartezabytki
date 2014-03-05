@@ -63,9 +63,13 @@ SQL
 
   desc "Generate zipfiles with relics csvs/jsons"
   task :export => :environment do
+    # generating json for all relics
     DownloadGenerator.new(Relic, 'json', false).generate_zipfile
+    # generating json for registered relics
     DownloadGenerator.new(Relic, 'json', true).generate_zipfile
+    # generating csv for all relics
     DownloadGenerator.new(Relic, 'csv', false).generate_zipfile
+    # generating csv for registered relics
     DownloadGenerator.new(Relic, 'csv', true).generate_zipfile
   end
 

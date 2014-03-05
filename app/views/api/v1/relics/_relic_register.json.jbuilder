@@ -1,33 +1,10 @@
-if relic.respond_to?(:country_code)
-  json.(relic,
-    :id,
-    :nid_id,
-    :identification,
-    :common_name,
-    :state,
-    :register_number,
-    :dating_of_obj,
-    :street,
-    :latitude,
-    :longitude,
-    :country_code,
-    :fprovince,
-    :fplace
-  )
-else
-  json.(relic,
-    :id,
-    :nid_id,
-    :identification,
-    :common_name,
-    :state,
-    :register_number,
-    :dating_of_obj,
-    :street,
-    :latitude,
-    :longitude,
-  )
-end
+
+needed_attributes = [:id, :nid_id, :identification, :common_name, :state,
+    :register_number, :dating_of_obj, :street, :latitude, :longitude,]
+    
+needed_attributes += [:country_code, :fprovince, :fplace] if relic.respond_to?(:country_code)
+
+json.(relic, *needed_attributes)    
 
 if params[:include_descendants]
   json.descendants do |json|
