@@ -8,17 +8,6 @@ class RelicsController < ApplicationController
     tsearch.perform
   end
 
-  expose(:subrelic_ids) do
-    if !request.get? && %w(events links).include?(params[:section]) && params[:relic]
-      params[:relic].fetch(section_attrs_key, {}).inject([]) do |result, (k, v)|
-        result << v if v["relic_id"].present?
-        result
-      end
-    else
-      []
-    end
-  end
-
   expose(:relic) do
     if id = params[:relic_id] || params[:id]
       r = Relic.find(id)
@@ -274,5 +263,18 @@ class RelicsController < ApplicationController
 
   def section_attrs_key
     "#{params[:section]}_attributes"
+  end
+
+  def subrelic_ids
+    # TODO it won't work without memoization!!!
+    return @subrelic_ids if defined?(@subrelic_ids)
+    @subrelic_ids = if request.get? && %w(events links).include?(params[:section]) && params[:relic]
+      params[:relic].fetch(section_attrs_key, {}).inject([]) do |result, (k, v)|
+        result << v if v["relic_id"].present?
+        result
+      end
+    else
+      []
+    end
   end
 end
