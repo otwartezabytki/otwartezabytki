@@ -54,7 +54,6 @@ Otwartezabytki::Application.routes.draw do
     with_options :only => [:show, :edit, :create, :update] do |w|
       w.resources :map_searches, :path => "/map_search"
       w.resources :add_relics, :path => "/add_relics"
-      w.resources :add_alerts, :path => "/add_alerts"
     end
     # Profile:
     # resources :directions, :path => "/direction", except: [:index] do
@@ -65,7 +64,7 @@ Otwartezabytki::Application.routes.draw do
     #   end
     # end
 
-    resource :add_alert, :path => "/add_alert"
+    resource :add_alert, only: :show, path: "/add_alert"
   end
 
   resources :translations, :only => [:edit, :update], :constraints => {:id => /[\w.]+/ }
