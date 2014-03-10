@@ -38,6 +38,8 @@ jQuery.initializer 'section.edit.documents', ->
     progressall: (e, data) ->
       progress = parseInt(data.loaded / data.total * 100, 10)
       $progressbar.progressbar("value", progress)
+      if data.loaded == data.total
+        $cancel_upload.hide()
 
     done: (e, data) ->
       $new_section = $(data.result).find('section.edit')
