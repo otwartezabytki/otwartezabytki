@@ -27,7 +27,7 @@ module RelicsHelper
 
   def descendants_select(relic, form)
     form.input :relic_id, as: :select, label: t('common.apply_to'), include_blank: false, required: false, collection: 
-    relic.descendants.map {|d| [d.identification, d.id] }.insert(0, [t('activerecord.attributes.relic.relic_group'), relic.id]).
+    relic.descendants.order('identification').map {|d| [d.identification, d.id] }.insert(0, [t('activerecord.attributes.relic.relic_group'), relic.id]).
     sort()
   end
 
