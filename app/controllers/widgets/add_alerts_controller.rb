@@ -15,6 +15,10 @@ class Widgets::AddAlertsController < WidgetsController
 
   helper_method :searched_relics
 
+  def show
+    render(partial: "/widgets/show/add_alert", layout: false) if params[:raw]
+  end
+
   def create
     if widget_add_alert.save
       redirect_to edit_widgets_add_alert_path(widget_add_alert)
