@@ -682,6 +682,12 @@ section.show.general{
 }
 
 section.show.description{
+  .content a{
+    @include elipsis();
+    line-height: 16px;
+    max-width: 570px;
+    display: inline-block;
+  }
   .content, .content p, .content span{
     line-height: 22px;
     font-size: 14px;
