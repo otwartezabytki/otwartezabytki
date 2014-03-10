@@ -26,9 +26,10 @@ module RelicsHelper
   end
 
   def descendants_select(relic, form)
-    form.input :relic_id, as: :select, label: t('common.apply_to'), include_blank: false, required: false, collection: 
-    relic.descendants.order('identification').map {|d| [d.identification, d.id] }.insert(0, [t('activerecord.attributes.relic.relic_group'), relic.id]).
-    sort()
+    form.input :relic_id, as: :select, label: t('common.apply_to'), include_blank: false, required: false, 
+      collection: relic.root.descendants.created.order('identification').
+        map {|d| [d.identification, d.id] }.
+        insert(0, [t('activerecord.attributes.relic.relic_group'), relic.id])
   end
 
   def state_facets
