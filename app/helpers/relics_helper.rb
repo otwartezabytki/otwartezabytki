@@ -1,21 +1,5 @@
 # -*- encoding : utf-8 -*-
 module RelicsHelper
-  def thank_you_note
-    [
-      "Dzięki Tobie Cyfrowy Czyn Społeczny działa :)",
-      "Zabytki są Ci wdzięczne :)",
-      "Cieszymy się, że otwierasz z nami zabytki :)",
-      "Zabytki lubią być otwarte. Dziękujemy! :)",
-      "Jesteś naszym zabytkowym aniołem :)",
-      "Od zabytków głowa nie boli :) Dziękujemy!",
-      "Każdy sprawdzony zabytek to krok do sukcesu akcji. Dziękujemy :)",
-      "Miło, że poświęcasz swój czas na otwieranie zabytków :)",
-      "Zabytki leżą nam na sercu :) Doceniamy, że bierzesz udział w akcji.",
-      "Kolejny sprawdzony zabytek :) Ale fajnie!",
-      "Dziękujemy! Im nas więcej, tym lepiej :)"
-    ].sample
-  end
-
   def categories_facets_hash_for(relics = relics)
     relics.terms('categories', true).inject({}) {|m, t| m[t['term']] = t['count']; m}
   end
@@ -26,10 +10,18 @@ module RelicsHelper
   end
 
   def descendants_select(relic, form)
-    form.input :relic_id, as: :select, label: t('common.apply_to'), include_blank: false, required: false, 
-      collection: relic.root.descendants.created.order('identification').
-        map {|d| [d.identification, d.id] }.
-        insert(0, [t('activerecord.attributes.relic.relic_group'), relic.id])
+    collection = relic.root.descendants.created.
+      order('identification').
+      map {|d| [d.identification, d.id] }.
+      insert(0, [t('activerecord.attributes.relic.relic_group'), relic.id])
+
+    form.input(:relic_id, {
+      as: :select,
+      label: t('common.apply_to'),
+      include_blank: false,
+      required: false,
+      collection: collection
+    })
   end
 
   def state_facets
@@ -115,31 +107,22 @@ module RelicsHelper
     ].join.html_safe
   end
 
-  def format_localization(relic, reverse=nil)
+  def format_localization(relic, reverse = nil)
     a = []
     if relic.foreign_relic?
       a = [relic.country, relic.fprovince, relic.fplace, relic.street]
+    elsif reverse
+      a << "województwo #{relic.voivodeship.name}"
+      a << "powiat #{relic.district.name}"
+      a << "gmina #{relic.commune.name}"
+      a << relic.place.name
     else
-      if reverse.nil? 
-        a << relic.voivodeship.name
-        a << "pow. #{relic.district.name}"
-        a << "gm. #{relic.commune.name}"
-        a << [relic.place.name, relic.street].compact.join(' ')
-      else
-        a << "województwo #{relic.voivodeship.name}"
-        a << "powiat #{relic.district.name}"
-        a << "gmina #{relic.commune.name}"
-        a << relic.place.name
-      end
+      a << relic.voivodeship.name
+      a << "pow. #{relic.district.name}"
+      a << "gm. #{relic.commune.name}"
+      a << [relic.place.name, relic.street].compact.join(' ')
     end
-    reverse.nil? ? a.reject(&:blank?).join(' » ') : a.reject(&:blank?).reverse.join(", ")
-  end
-
-  def kind_of_change(revision)
-    changed_fields = revision.changeset.keys
-    changed_fields.map do |k|
-      t("views.pages.home.revision_change.#{k}")
-    end.compact.join(', ')
+    reverse ? a.reject(&:blank?).reverse.join(", ") : a.reject(&:blank?).join(' » ')
   end
 
   def relic_stats
@@ -150,21 +133,5 @@ module RelicsHelper
       :filled     => Relic.created.where(:state => 'filled').count,
       :total      => Relic.created.count
     }
-  end
-
-  def polish_places(relic)
-    if relic.try(:commune)
-      relic.commune.places.not_custom
-    else
-      Place.not_custom.limit(100)
-    end
-  end
-
-  def path_to_polygon(path)
-    path
-  end
-
-  def original_relic_path(relic)
-    relic_path(relic.id, :original => true)
   end
 end
