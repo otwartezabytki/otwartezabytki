@@ -73,17 +73,6 @@ class RelicsController < ApplicationController
     relic.entries.build
   end
 
-  def administrative_level
-    @voivodeship = Voivodeship.find_by_id params.get_deep('relic', 'voivodeship_id')
-    @district = District.find_by_id params.get_deep('relic', 'district_id')
-    @commune = Commune.find_by_id params.get_deep('relic', 'commune_id')
-
-    @district = @commune.district if @commune
-    @voivodeship = @district.voivodeship if @district
-
-    render :partial => 'administrative_level', :layout => false
-  end
-
   def update
     authorize! :update, relic
 
