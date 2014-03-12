@@ -43,4 +43,4 @@ Dir.glob("#{Rails.root}/db/pages/*.erb").each do |path|
   page.save
 end
 
-Rake::Task["import:wuoz_agencies"].invoke
+Rake::Task["import:wuoz_agencies"].invoke unless Voivodeship.count.zero?

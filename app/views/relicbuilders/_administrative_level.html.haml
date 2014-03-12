@@ -6,19 +6,19 @@
 .administrative-level
   .one-third
     = label_tag 'relic[voivodeship_id]', t('views.relicbuilders.administrative_level.voivodeship')
-    = select 'relic', 'voivodeship_id', options_from_collection_for_select(Voivodeship.order(:name), "id", "name", @voivodeship.try(:id))
+    = select 'relic', 'voivodeship_id',  voivodeship_collection, selected: @voivodeship.try(:id).to_s
   - if @voivodeship
     .one-third
       = label_tag 'relic[district_id]', t('views.relicbuilders.administrative_level.district')
-      = select 'relic', 'district_id', options_from_collection_for_select(@voivodeship.districts.order(:name), "id", "name", @district.try(:id))
+      = select 'relic', 'district_id', district_collection, selected: @district.try(:id).to_s
   - if @district
     .one-third
       = label_tag 'relic[commune_id]', t('views.relicbuilders.administrative_level.commune')
-      = select 'relic', 'commune_id', options_from_collection_for_select(@district.communes.order(:name), "id", "name", @commune.try(:id))
+      = select 'relic', 'commune_id', commune_collection, selected: @commune.try(:virtual_id).to_s
   - if @commune
     .row
       = label_tag 'relic[place_id]', t('views.relicbuilders.administrative_level.city')
-      = select 'relic', 'place_id', options_from_collection_for_select(@commune.places.order(:name), "id", "name", relic.try(:place_id))
-  - if relic and relic.errors[:place] and relic.place_id.blank?
+      = select 'relic', 'place_id',  place_collection, selected: relic.try(:place_id).to_s
+  - if relic && relic.errors[:place] && relic.place_id.blank?
     .error
       = t('views.relicbuilders.administrative_level.error')

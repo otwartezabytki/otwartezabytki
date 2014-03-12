@@ -1,57 +1,39 @@
+# ----------------
 # Add widget alert
 # ----------------
 
-widget_container_id = 'add-alert-widget-content'
-
-$container = $('#add-widget-alert')
-$widget_container = $('.' + widget_container_id).first()
-$widget_output = $container.find('.add-alert-widget-output').first()
-
-$widget_loading_information = $container.find('.add-alert-widget-information--loading')
-$widget_error_information = $container.find('.add-alert-widget-information--error').hide()
-
-showError = ->
-  $widget_loading_information.hide()
-  $widget_error_information.show(0)
-
-createDynamicFrame = (contentText, $parent, callback) ->
-  try
-    $iframe = $(document.createElement 'iframe').attr(
-      src: 'about:blank'
-      id: widget_container_id
-    ).hide().appendTo($parent).on 'error', showError
-
-    if typeof callback is 'function'
-      $iframe.on 'load', ($event) ->
-        setTimeout (-> callback $event), 2000
-
-    iframe_document = $iframe.get(0).contentWindow.document
-    iframe_document.open 'text/html', 'replace'
-    iframe_document.write contentText
-    iframe_document.close()
-  catch exception
-    console.log exception
-    return false
-  true
-
-handleFrameLoaded = ($event) ->
-  $widget_loading_information.hide()
-  $($event.target).show(1000)
-
 jQuery.initializer '#add-widget-alert .add-alert-widget-button', ->
+  widget_container_id = 'add-alert-widget-content'
+
+  $container         = $('#add-widget-alert')
+  $widget_container  = $('.' + widget_container_id).first()
+  $widget_output     = $container.find('.add-alert-widget-output').first()
+
+  $widget_loading_information = $container.find('.add-alert-widget-information--loading')
+  $widget_error_information   = $container.find('.add-alert-widget-information--error').hide()
+  $widget_generated_content   = $container.find('#oz_add_alert_widget').hide()
+
   @on 'click', ($event) ->
     $event.preventDefault()
     $widget_output.show(0).addClass 'visible'
-
-    return showError() unless $widget_output.length and !$('#' + widget_container_id).length
-
     $element = $(this)
+
+    # Generate widget
+    s        = document.createElement('script')
+    s.type   = 'text/javascript'
+    s.async  = true
+    s.src    = $(this).data('widget-src')
+    s.onload = ($event) ->
+      setTimeout ->
+        $widget_loading_information.hide()
+        $widget_generated_content.show(1000)
+      , 1000
+
+    x = document.getElementsByTagName('script')[0]
+    x.parentNode.insertBefore(s, x)
+
     $placeholder = $element.parent '.placeholder'
     $placeholder.hide() if $placeholder
-
-    source = $element.data('widget-source')
-    unless source and createDynamicFrame(source, $widget_container, handleFrameLoaded)
-      showError()
 
     # Handle selectable code
     $widget_output.find('.selectable-code').each ->

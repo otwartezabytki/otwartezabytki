@@ -1,8 +1,7 @@
 jQuery.initializer 'section.edit.links', ->
   $section = $(this)
 
-  next_id = parseInt($('.sortable').children('li').length)#$section.find('form.relic').data('next-id'))
-
+  next_id = parseInt($('.sortable').children('li').length)+1
   $section.on 'click', '.add_link', ->
     template = $($(this).data('template'))
     html = template.html()
@@ -31,3 +30,5 @@ jQuery.initializer 'section.edit.links', ->
       $section.find('.link-position').each (index) ->
         $(this).val(index + 1)
   .data('sortable')
+
+  Profile.highlight_invalid_fields($(this))

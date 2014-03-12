@@ -19,5 +19,8 @@
     != javascript_include_tag "application"
     = yield :footer_javascripts
     :coffeescript
-      window.parent.postMessage(JSON.stringify(event: "on_iframe_init", params: {width: $('div.main-container').width(), height: $('div.main-container').height() }), "*")
+      if window.parent
+        setTimeout ->
+          window.parent.postMessage(JSON.stringify(event: "on_iframe_init", params: {width: $('div.main-container').outerWidth(), height: $('div.main-container').outerHeight() }), "*")
+        , 10
     = render 'shared/analytics'

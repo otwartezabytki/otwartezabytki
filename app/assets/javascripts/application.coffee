@@ -14,6 +14,7 @@
 #= require jquery.ui.tabs
 #= require jquery.ui.progressbar
 #= require jquery.ui.sortable
+#= require jquery-form
 #= require_tree ./vendor
 #= require js-routes
 #= require twitter/bootstrap/bootstrap-tooltip

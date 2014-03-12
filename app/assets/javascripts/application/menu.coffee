@@ -3,6 +3,7 @@
 do ($ = jQuery) ->
   $ ->
     menu  = $('#page-menu')
+    return false unless $('#page-menu').length
     items = menu.children()
     firstItem = items.first()
     lastItem  = items.last()

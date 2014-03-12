@@ -135,7 +135,7 @@ class Search
           [['pl'], voivodeship_ids, district_ids, location_ids]
         when 'place'
           @location_object = Place.find(location_ids.first)
-          commune_ids = Place.where(:id => location_ids).map{ |p| p.commune.virtual_id.split(',') }.flatten.uniq.map(&:to_s)
+          commune_ids = Place.where(:id => location_ids).map{ |p| p.commune.virtual_ids }.flatten.uniq.map(&:to_s)
           district_ids = Commune.where(:id => commune_ids).map(&:district_id).uniq.map(&:to_s)
           voivodeship_ids = District.where(:id => district_ids).map(&:voivodeship_id).uniq.map(&:to_s)
           [['pl'], voivodeship_ids, district_ids, commune_ids, location_ids]

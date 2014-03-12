@@ -15,3 +15,8 @@
       .row
         = yield
     != include_gon(:camel_case => true)
+    :coffeescript
+      if window.parent
+        setTimeout ->
+          window.parent.postMessage(JSON.stringify(event: "on_iframe_init", params: {width: $('div.main-container').outerWidth(), height: $('div.main-container').outerHeight() }), "*")
+        , 10

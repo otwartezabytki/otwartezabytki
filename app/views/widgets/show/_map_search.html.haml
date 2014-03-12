@@ -68,7 +68,7 @@
     = link_to t('views.widgets.show.map_search.advanced_search'), relics_path(params), :target => :_top, :class => "advanced_search"
   %script(type="application/json" id="search_params")
     != params[:search].to_json
-  - if relics.polish_facets_tree.empty?
+  - if relics.polish_facets_tree.size < 2
     %script(type="application/json" id="search_results")
       != relics.map{ |relic| relic_to_widget_data(relic) }.to_json
   %script(type="application/json" id="group_markers")

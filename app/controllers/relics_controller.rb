@@ -8,16 +8,6 @@ class RelicsController < ApplicationController
     tsearch.perform
   end
 
-  expose(:sub_ids) do
-    if !request.get?
-      sub_ids = []
-      if (params[:section] == "events" || params[:section] == "links") && params[:relic]
-        params[:relic]["#{params[:section]}_attributes"].each_pair { |k, v| sub_ids << v if v["relic_id"].present? }
-      end
-      sub_ids
-    end
-  end
-
   expose(:relic) do
     if id = params[:relic_id] || params[:id]
       r = Relic.find(id)
@@ -34,19 +24,24 @@ class RelicsController < ApplicationController
             r = Relic.find(r.id)
           end
         end
-        if (params[:section] == "events" || params[:section] == "links") && params[:relic] && params[:relic]["#{params[:section]}_attributes"]
-          params[:relic]["#{params[:section]}_attributes"].delete_if { |k, v| sub_ids && sub_ids.include?(v) }
-          params[:relic]["#{params[:section]}_attributes"].each_pair { |k,v| 
-            v["relic_id"] = r.id 
+        if params[:section] == "links"
+          @urls = r.all_links.select(&:url?).sort_by{ |e| e.position || 1000 }
+          @papers = r.all_links.select(&:paper?).sort_by{ |e| e.position || 1000 }
+        end
+
+        if %w(events links).include?(params[:section]) && params[:relic] && params[:relic][section_attrs_key]
+          params[:relic][section_attrs_key].delete_if { |k, v| subrelic_ids.include?(v) }
+          params[:relic][section_attrs_key].each_pair { |k,v|
+            v["relic_id"] = r.id
             if v["id"]
               item = Object.const_get(params[:section].singularize.capitalize).find(v["id"])
               item.update_attributes(v.except(:_destroy))
-              params[:relic]["#{params[:section]}_attributes"].delete(k) unless v[:_destroy] == "1"
+              params[:relic][section_attrs_key].delete(k) unless v[:_destroy] == "1"
             end
           }
         end
-        r.attributes = (params[:relic] || {}).except(:voivodeship_id, :district_id, :commune_id) unless request.get?
-        r.user_id = current_user.id if request.put? || request.post?
+        r.attributes = params.fetch(:relic, {}).except(:voivodeship_id, :district_id, :commune_id) unless request.get?
+        r.user_id    = current_user.id if request.put? || request.post?
         r
       end
     else
@@ -58,7 +53,6 @@ class RelicsController < ApplicationController
     relic_path(relic)
   end
 
-  helper_method :need_captcha
   before_filter :authenticate_user!, :only => [:edit, :update, :adopt, :unadopt]
 
   def show
@@ -76,17 +70,6 @@ class RelicsController < ApplicationController
 
   def edit
     relic.entries.build
-  end
-
-  def administrative_level
-    @voivodeship = Voivodeship.find_by_id params.get_deep('relic', 'voivodeship_id')
-    @district = District.find_by_id params.get_deep('relic', 'district_id')
-    @commune = Commune.find_by_id params.get_deep('relic', 'commune_id')
-
-    @district = @commune.district if @commune
-    @voivodeship = @district.voivodeship if @district
-
-    render :partial => 'administrative_level', :layout => false
   end
 
   def update
@@ -112,8 +95,9 @@ class RelicsController < ApplicationController
     end
 
     if relic.save
-      if !sub_ids.empty?
-        sub_ids.each { |sr| 
+      if subrelic_ids.present?
+        errors, builds = [], []
+        subrelic_ids.each { |sr|
           if sr[:id]
             subrelic_item = Object.const_get(params[:section].singularize.capitalize).find(sr[:id])
             sr[:_destroy] == "1" ? subrelic_item.destroy : subrelic_item.update_attributes(sr.except(:id, :_destroy))
@@ -121,6 +105,10 @@ class RelicsController < ApplicationController
             subrelic = Relic.find(sr[:relic_id])
             se = params[:section] == "events" ? subrelic.events.build(sr.except(:_destroy)) : subrelic.links.build(sr.except(:_destroy))
             se.save
+            if se.errors.full_messages.any?
+              errors << se.errors.full_messages.join(", ")
+              builds << se
+            end
           end
         }
       end
@@ -139,50 +127,36 @@ class RelicsController < ApplicationController
         if params[:section] == "photos"
           flash[:notice] = t('notices.gallery_has_been_updated')
         else
-          flash[:notice] = t('notices.changes_has_been_saved')
+          if errors && errors.any?
+            if params[:section] == "links" && builds && builds.any?
+              extra_urls = builds.select { |b| b.kind == 'url' }
+              @urls = @urls + extra_urls if extra_urls && extra_urls.any?
+              extra_papers = builds.select { |b| b.kind == 'paper' }
+              @papers = @papers + extra_papers if extra_papers && extra_papers.any?
+            end
+            flash[:error] = t('notices.please_correct_errors')
+            render 'edit' and return
+          else
+            flash[:notice] = t('notices.changes_has_been_saved')
+          end
         end
 
         redirect_to edit_relic_path(relic.id, :section => params[:section])
       end
     else
-      flash.now[:error] = [t('notices.please_correct_errors'), relic.errors.full_messages.join(", ")].join(" ")
+      flash.now[:error] = t('notices.please_correct_errors')
       render 'edit' and return
     end
   end
 
-  def download
-    append_view_path Page::Resolver.new
-    dir_path = Rails.root.join('public', 'history', '2*-relics.zip')
-
-    @export_files = []
-    Dir.glob(dir_path).sort.reverse.first(3).each do |file_path|
-      file_name = File.basename(file_path)
-      @export_files << {
-        :url => "/history/#{file_name}",
-        :date => file_name[0..9],
-        :size => (File.size(file_path) / 1024.0 / 1024.0).round(2) }
-    end
-
-    dir_path = Rails.root.join('public', 'history', '2*-relics-register.zip')
-
-    @export_files_register = []
-    Dir.glob(dir_path).sort.reverse.first(3).each do |file_path|
-      file_name = File.basename(file_path)
-      @export_files_register << {
-        :url => "/history/#{file_name}",
-        :date => file_name[0..9],
-        :size => (File.size(file_path) / 1024.0 / 1024.0).round(2) }
-    end
-  end
-
   def download_zip
-    if relic.documents.count >  0
+    if relic.all_documents.exists?
 
       file_name = "dokumenty-zabytku-#{relic.id}-#{relic.identification.parameterize.to_s}.zip"
       t = Tempfile.new("my-temp-filename-#{Time.now}")
 
       ::Zip::ZipOutputStream.open(t.path) do |zip|
-        relic.documents.each do |document|
+        relic.all_documents.each do |document|
           zip.put_next_entry(document.file.identifier)
           zip.print IO.read(document.file.file.to_file)
         end
@@ -193,6 +167,8 @@ class RelicsController < ApplicationController
         :filename => file_name
 
       t.close
+    else
+      render404
     end
   end
 
@@ -217,58 +193,37 @@ class RelicsController < ApplicationController
   end
 
   protected
-    def no_original_version
-      return true unless params[:original]
-      current_relic = (relic || Relic.find(params[:id]))
-      if current_relic.existence == 'social' or relic.blank?
-        redirect_to current_relic, :notice => "Zabytek nie posiada wersji oryginalnej." and return
-      end
+
+  def no_original_version
+    return true unless params[:original]
+    current_relic = (relic || Relic.find(params[:id]))
+    if current_relic.existence == 'social' or relic.blank?
+      redirect_to current_relic, :notice => "Zabytek nie posiada wersji oryginalnej." and return
     end
+  end
 
-    def uncomplete_relic_redirect
-      if relic and !relic.build_finished?
-        relic.build_state = 'details_step'
-        relic.valid?
-        redirect_to method("#{relic.invalid_step_view}_relicbuilder_path").call({:id => relic}), :notice => "Twój zabytek nie jest jeszcze ukończony." and return
-      end
+  def uncomplete_relic_redirect
+    if relic and !relic.build_finished?
+      relic.build_state = 'details_step'
+      relic.valid?
+      redirect_to method("#{relic.invalid_step_view}_relicbuilder_path").call({:id => relic}), :notice => "Twój zabytek nie jest jeszcze ukończony." and return
     end
+  end
 
-    def need_captcha
-      if Rails.cache.read("need_captcha_#{request.remote_ip}")
-        Rails.logger.info("Require captcha because of cache value for #{request.remote_ip}")
-        return true
+  def section_attrs_key
+    "#{params[:section]}_attributes"
+  end
+
+  def subrelic_ids
+    # TODO it won't work without memoization!!!
+    return @subrelic_ids if defined?(@subrelic_ids)
+    @subrelic_ids = if !request.get? && %w(events links).include?(params[:section]) && params[:relic]
+      params[:relic].fetch(section_attrs_key, {}).inject([]) do |result, (k, v)|
+        result << v if v["relic_id"].present?
+        result
       end
-      suggestion_count = Suggestion.roots.not_skipped.where(:ip_address => request.remote_ip).where('created_at >= ?', 1.minute.ago).count
-      # puts "Suggestion count: #{suggestion_count}"
-      if suggestion_count > 60
-        Rails.cache.write("need_captcha_#{request.remote_ip}", 1)
-        true
-      else
-        false
-      end
+    else
+      []
     end
-
-    def updated_nested_resources(resource_name)
-      nested_ids = []
-
-      if params[:relic] && params[:relic]["#{resource_name}_attributes"]
-        params[:relic]["#{resource_name}_attributes"].each do |index, photo|
-          nested_ids.push(photo["id"].to_i) if photo["id"].to_i > 0
-        end
-      end
-
-      nested_ids.size ? relic.send(resource_name.to_sym).find(nested_ids) : []
-    end
-
-    def destroyed_nested_resources(resource_name)
-      nested_ids = []
-
-      if params[:relic] && params[:relic]["#{resource_name}_attributes"]
-        params[:relic]["#{resource_name}_attributes"].each do |index, photo|
-          nested_ids.push(photo["id"].to_i) if photo["_destroy"].to_i != 0
-        end
-      end
-
-      nested_ids.size ? relic.send(resource_name.to_sym).find(nested_ids) : []
-    end
+  end
 end

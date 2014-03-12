@@ -1,8 +1,5 @@
 # -*- encoding : utf-8 -*-
 class Users::SessionsController < Devise::SessionsController
-
-  skip_before_filter :save_return_path
-
   before_filter :enable_fancybox
 
   # POST /resource/sign_in

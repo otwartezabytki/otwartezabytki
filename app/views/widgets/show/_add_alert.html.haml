@@ -1,6 +1,6 @@
 = stylesheet_link_tag "http://#{Settings.oz.host}/assets/widgets/add_alert.css"
-.widget-box
-  %a.what-about{:href => about_page_path, :target => "_blank"}
+.widget-box{:src => "http://#{Settings.oz.host}/widgets/add_alert.html?relic_id=#{widget.relic_id}&raw=true&pp=disable"}
+  %a.what-about{:href => "http://#{Settings.oz.host}#{page_path('o-projekcie')}", :target => "_blank"}
     = t('views.widgets.show.about')
   .widget-logo
   %h3= t('views.widgets.show.add_alert.header')

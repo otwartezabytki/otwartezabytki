@@ -46,7 +46,7 @@
           %li= t('views.pages.home.welcome.li1')
           %li= t('views.pages.home.welcome.li2')
           %li= t('views.pages.home.welcome.li3')
-          = link_to t('views.pages.home.welcome.more'), about_page_path, :class => 'btn'
+          = link_to t('views.pages.home.welcome.more'), page_path('o-projekcie'), :class => 'btn'
 .widgets-intro
   %ul
     %li.first
@@ -54,7 +54,7 @@
         %span.title= t('views.pages.home.widgets_intro.widget.title')
         %span.paragraph= t('views.pages.home.widgets_intro.widget.par')
     %li.alerts
-      = link_to widgets_add_alerts_path, :method => :post do
+      %a{:href => widgets_path}
         %span.title= t('views.pages.home.widgets_intro.alert.title')
         %span.paragraph= t('views.pages.home.widgets_intro.alert.par')
     %li.map-search

@@ -44,4 +44,3 @@ jQuery.initializer 'div.administrative-level', ->
         self.replaceWith(data)
         $('div.administrative-level').initialize()
         geocode_polish_location()
-         # $('form.relic').on 'change',  '.column-left input, form .column-left select', ->

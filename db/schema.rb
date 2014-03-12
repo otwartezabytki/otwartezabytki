@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130927130918) do
+ActiveRecord::Schema.define(:version => 20140217140257) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -91,9 +91,10 @@ ActiveRecord::Schema.define(:version => 20130927130918) do
     t.integer  "size"
     t.string   "mime"
     t.string   "file"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
     t.string   "description"
+    t.string   "state",       :default => "initialized"
   end
 
   create_table "entries", :force => true do |t|
@@ -191,14 +192,15 @@ ActiveRecord::Schema.define(:version => 20130927130918) do
     t.string   "name"
     t.string   "author"
     t.string   "file"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
     t.boolean  "main"
     t.string   "date_taken"
     t.integer  "file_full_width"
     t.integer  "file_full_height"
     t.text     "description"
     t.string   "alternate_text"
+    t.string   "state",            :default => "initialized"
   end
 
   create_table "places", :force => true do |t|
@@ -253,11 +255,16 @@ ActiveRecord::Schema.define(:version => 20130927130918) do
     t.string   "auto_categories"
   end
 
+  add_index "relics", ["ancestry"], :name => "index_relics_on_ancestry"
   add_index "relics", ["ancestry"], :name => "relics_ancestry_trgm_idx"
+  add_index "relics", ["commune_id"], :name => "index_relics_on_commune_id"
+  add_index "relics", ["district_id"], :name => "index_relics_on_district_id"
   add_index "relics", ["existence"], :name => "index_relics_on_existence"
+  add_index "relics", ["place_id"], :name => "index_relics_on_place_id"
   add_index "relics", ["state"], :name => "index_relics_on_state"
   add_index "relics", ["type"], :name => "index_relics_on_type"
   add_index "relics", ["voivodeship_id", "state"], :name => "index_relics_on_voivodeship_id_and_state"
+  add_index "relics", ["voivodeship_id"], :name => "index_relics_on_voivodeship_id"
 
   create_table "search_terms", :force => true do |t|
     t.string   "keyword"

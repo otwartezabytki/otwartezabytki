@@ -17,15 +17,16 @@ class Alert < ActiveRecord::Base
   belongs_to :relic
   belongs_to :user
 
-  attr_accessible :relic_id, :user_id, :file, :description, :author, :date_taken
-  attr_accessible :relic_id, :user_id, :file, :description, :author, :date_taken, :state, :as => :admin
+  attr_accessible :relic_id, :user_id, :file, :file_cache, :description, :author, :date_taken
+  attr_accessible :relic_id, :user_id, :file, :file_cache, :description, :author, :date_taken, :state, :as => :admin
 
   has_many :wuoz_alerts, :dependent => :destroy
 
   after_create :new_alert_notification
   after_create :create_wuoz_alert
 
-  validates :description, :presence => true
+  validates :relic_id, :user_id, :description, :presence => true
+  validates :author, :date_taken, :presence => true, :if => :file?
 
   scope :fixed, where("state = ?", "fixed")
   scope :not_fixed, where("state != ? or state is null", "fixed")

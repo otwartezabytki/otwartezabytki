@@ -45,10 +45,10 @@ class RelicbuildersController < ApplicationController
 
   def administrative_level
     @voivodeship = Voivodeship.find_by_id params.get_deep('relic', 'voivodeship_id')
-    @district = District.find_by_id params.get_deep('relic', 'district_id')
-    @commune = Commune.find_by_id params.get_deep('relic', 'commune_id')
+    @district    = District.find_by_id params.get_deep('relic', 'district_id')
+    @commune     = Commune.find_by_id params.get_deep('relic', 'commune_id').to_s.split(',')
 
-    @district = @commune.district if @commune
+    @district    = @commune.district     if @commune
     @voivodeship = @district.voivodeship if @district
 
     render :partial => 'administrative_level', :layout => false, :locals => {:relic => nil}
