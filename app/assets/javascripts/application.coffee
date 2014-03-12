@@ -24,16 +24,14 @@
 #= require profile
 #= require rails-timeago
 #= require locales/jquery.timeago.pl.js
+#= require_tree ./application
+
+# Relics Angular App
 #= require angular
 #= require angular-prevent-default
 #= require ./angular/init
 #= require ./angular/router
-#= require_tree ./angular/controllers
-#= require_tree ./angular/directives
-#= require_tree ./angular/filters
-#= require_tree ./angular/lib
-#= require_tree ./angular/services
-#= require_tree ./application
+#= require_tree ./angular
 
 # FIX data-dismiss
 $(document).on 'click', '[data-dismiss]', (e) ->
