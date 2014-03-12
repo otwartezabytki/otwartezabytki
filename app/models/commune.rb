@@ -19,11 +19,15 @@ class Commune < ActiveRecord::Base
 
   attr_accessible :id, :name, :district_id, :nr, :kind
   belongs_to :district
-  has_many :places, :dependent => :destroy
+  has_many :places, dependent: :destroy
 
-  validates :name, :presence => true
+  validates :name, presence: true
 
   attr_accessor :facet_count
+
+  def places
+    Place.where(commune_id: virtual_ids)
+  end
 
   def full_name
     "gm. #{name}"
@@ -45,11 +49,11 @@ class Commune < ActiveRecord::Base
     30
   end
 
+  def virtual_ids
+    @virtual_ids ||= virtual_id.split(',')
+  end
+
   def virtual_id
-    if self[:virtual_id].present?
-      self[:virtual_id]
-    else
-      id.to_s
-    end
+    @virtual_id ||= read_attribute(:virtual_id).presence || id.to_s
   end
 end
