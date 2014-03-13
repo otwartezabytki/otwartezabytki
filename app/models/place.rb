@@ -28,7 +28,7 @@ class Place < ActiveRecord::Base
   validates :name, :presence => true
 
   scope :not_custom, where(:custom => false)
-  scope :search, lambda {|term| where("name ILIKE ?", "%#{term}%") }
+  scope :search, lambda { |term| where("name ILIKE ?", "#{term}%") }
 
   attr_accessor :facet_count
 

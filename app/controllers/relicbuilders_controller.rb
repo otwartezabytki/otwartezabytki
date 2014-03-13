@@ -1,10 +1,10 @@
 # -*- encoding : utf-8 -*-
 class RelicbuildersController < ApplicationController
-  before_filter :enable_floating_fancybox
+  # before_filter :enable_floating_fancybox
 
-  before_filter :authenticate_user!, :except => [:geodistance, :administrative_level]
-  before_filter :enable_fancybox, :only => [:geodistance]
-  before_filter :redirect_finished_relic, :only => [:address, :details, :photos, :update]
+  # before_filter :authenticate_user!, :except => [:geodistance, :administrative_level]
+  # before_filter :enable_fancybox, :only => [:geodistance]
+  # before_filter :redirect_finished_relic, :only => [:address, :details, :photos, :update]
   helper_method :address_params
 
   def new
@@ -16,15 +16,7 @@ class RelicbuildersController < ApplicationController
         @relic.longitude  = geo.longitude
       end
     elsif @location.polish_place?
-      pq = PreparedQuery.new @location.polish_place
-      @places = if pq.exists?
-        Place.where(["LOWER(name) LIKE ?", "#{pq.clean.downcase}"]).map do |p|
-          p.conditional_geocode!
-          p
-        end
-      else
-        []
-      end
+
       @relic.place = @places.first if @places.size == 1
     end
     @relic.kind = 'ZE' if @location.relic_group?

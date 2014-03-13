@@ -27,7 +27,9 @@
 #= require_tree ./application
 
 # Relics Angular App
+#= require lodash
 #= require angular
+#= require angular-sanitize
 #= require angular-prevent-default
 #= require ./angular/init
 #= require ./angular/router

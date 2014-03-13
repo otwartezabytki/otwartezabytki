@@ -21,7 +21,9 @@ group :assets do
   gem 'rails-assets-angular'
   gem 'rails-assets-angular-ui-router'
   gem 'rails-assets-angular-prevent-default'
+  gem 'rails-assets-angular-sanitize', '~> 1.2.0'
   gem 'rails-assets-jquery-form'
+  gem 'rails-assets-lodash', '~> 2.4.1'
 end
 
 gem 'jquery-rails', '2.0.3'

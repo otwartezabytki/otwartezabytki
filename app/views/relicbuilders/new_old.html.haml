@@ -1,61 +1,18 @@
 - location = LocationBuilder.new(params[:location])
+- if location.relic_group?
+  :css
+    span.r_ze { display: inline; }
+    span.r_sa { display: none; }
 
-.edit_relic.new_relic(ng-controller="RelicBuilderCtrl")
+#fancybox
+.edit_relic.new_relic
   = render :partial => "relicbuilders/stages", :locals => { :stage => 1 }
   .creator
     %section.main
       %section.creator-step
-        / = render :partial => 'parent_relic', :object => @relic.parent
+        = render :partial => 'parent_relic', :object => @relic.parent
         %aside
         %h3.intro= t('views.relicbuilders.new.intro1_html')
-
-      %section.creator-step
-        = t('views.relicbuilders.new.add_relic_group')
-        %input(type="checkbox" ng-model="relic.relic_group")
-
-        = t('views.relicbuilders.new.add_foreign_relic')
-        %input(type="checkbox" ng-model="relic.foreign_relic")
-
-        = t('views.relicbuilders.new.non_existed')
-        %input(type="checkbox" ng-model="relic.non_existed")
-        .clear
-        %form(name="searchPlaceForm" ng-submit="searchPlace($event)")
-          .field.text.search.marker
-            .polish-location(ng-hide="relic.foreign_relic")
-              %label= t('views.relicbuilders.new.place')
-              %input(type="text" ng-model="location.place_name")
-            .foreign-location(ng-show="relic.foreign_relic")
-              .select
-                %label= t('views.relicbuilders.new.country_code')
-                = country_code_select(:relics, :country_code, nil, {}, {'ng-model' => 'location.country_code'})
-
-              %label= t('views.relicbuilders.new.original_name')
-              %input(type="text" ng-model="location.original_name")
-
-              %label= t('views.relicbuilders.new.polish_name')
-              %input(type="text" ng-model="location.polish_name")
-
-          .actions
-            %button.btn
-              = t('views.relicbuilders.new.search_html')
-
-      .polish-location(ng-hide="relic.foreign_relic")
-        %div(ng-hide="places.length")
-          = t('views.relicbuilders.new.no_results')
-        %section.creator-step(ng-show="places.length")
-          %h3= t('views.relicbuilders.new.select_place')
-          .places-wrapper
-            %ul.places
-              %li(ng-repeat="place in places")
-                %span(ng-bind-html="place.location_names | locationFormat")
-                %a(ng-click="selectPlace(place)")
-                  = t('views.relicbuilders.new.choose_html')
-
-
-      %br
-      %br
-      %br
-      %hr
       %section.creator-step
         = semantic_form_for location, :as => 'location', :url => new_relicbuilder_path(params), :method => :get, :remote => true do |f|
           - unless @relic.parent
@@ -78,9 +35,9 @@
               = t('views.relicbuilders.new.info_nonexisted_relic')
           .clear
           .field.text.search.marker
-            .polish-location
+            .polish-location{:style => "#{ 'display: none;' unless f.object.foreign_relic.to_i.zero?}"}
               = f.input :polish_place, :label => t('views.relicbuilders.new.place')
-            .foreign-location
+            .foreign-location{:style => "#{ 'display: none;' if f.object.foreign_relic.to_i.zero?}"}
               .select
                 = f.label :country_code, t('views.relicbuilders.new.country_code')
                 = f.country_code_select :country_code

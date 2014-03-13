@@ -5,7 +5,11 @@ module Api
       before_filter :api_authenticate
 
       def index
-        @places = Place.search(params[:query]).page(params[:page]).per(20)
+        @places = []
+        @places = if params[:q].present?
+          Place.search(params[:q]).page(params[:page]).per(20)
+        end
+        render json: @places
       end
     end
   end
