@@ -1,11 +1,15 @@
 angular.module('Relics').controller "RelicBuilderCtrl", ($scope, Suggester, $log) ->
   $scope.relic = {}
-  $scope.location = {}
+  $scope.location = {
+    lat: null
+    lng: null
+  }
   $scope.places = []
   $scope.marker_holder = true
 
   $scope.map =
     instance: null
+    markers: []
     center:
       latitude: 52.4118436,
       longitude: 19.0984013,
@@ -27,6 +31,7 @@ angular.module('Relics').controller "RelicBuilderCtrl", ($scope, Suggester, $log
   $scope.selectPlace = (place) ->
     # WIP
     console.log 'place selected:', place
+    setCircleMarker(new google.maps.LatLng(place.latitude, place.longitude))
 
   $scope.onMarkerHolderDrop = (event, ui) ->
     $scope.marker_holder = false
@@ -47,40 +52,46 @@ angular.module('Relics').controller "RelicBuilderCtrl", ($scope, Suggester, $log
     )
     setMarker(latlng)
 
-  setMarker = (latlng) ->
-    # $('form.relic').addClass('geocoded')
-    # $('#relic_geocoded').val("t")
-    # $scope.map.instance.removeMarkers()
-    $scope.map.circle.setMap(null)
+  removeMarkers = () ->
+    _.each $scope.map.markers, (marker) ->
+      marker.setMap(null)
+    $scope.map.markers = []
 
+  setMarker = (latlng) ->
+    removeMarkers()
     marker = new google.maps.Marker(
       position: latlng
       map: $scope.map.instance
       draggable: true
     )
+    $scope.map.markers.push(marker)
 
     google.maps.event.addListener(marker, "dragend", (event) ->
-      # new_lat = marker.getPosition().lat().round(7)
-      # new_lng = marker.getPosition().lng().round(7)
-      # $('#relic_latitude').val(new_lat)
-      # $('#relic_longitude').val(new_lng)
+      $scope.location.lat = event.latLng.lat()
+      $scope.location.lng = event.latLng.lng()
       zoomAt(event.latLng)
     )
+
+    $scope.location.lat = latlng.lat()
+    $scope.location.lng = latlng.lng()
     zoomAt(latlng)
 
   zoomAt = (latlng, zoom = 17) ->
     $scope.map.instance.setCenter(latlng)
     $scope.map.instance.setZoom(zoom)
 
-  circleMarker = (latlng) ->
+  setCircleMarker = (latlng) ->
+    removeMarkers()
     icon = new google.maps.MarkerImage(
       small_marker_image_path, null, null, new google.maps.Point(8, 8)
     )
-    $scope.map.circle = new google.maps.Marker(
+    marker = new google.maps.Marker(
       position: latlng
       icon: icon
       map: $scope.map.instance
     )
+    $scope.map.markers.push(marker)
+    zoomAt(latlng)
 
   $scope.$watch 'map.instance', (newVal, oldVal) ->
     if newVal
@@ -88,8 +99,7 @@ angular.module('Relics').controller "RelicBuilderCtrl", ($scope, Suggester, $log
       try
         navigator.geolocation.getCurrentPosition (pos) ->
           latlng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude)
-          zoomAt(latlng)
-          circleMarker(latlng)
+          setCircleMarker(latlng)
 
   $scope.$watch 'relic.relic_group', (newVal, oldVal) ->
     if newVal != oldVal
