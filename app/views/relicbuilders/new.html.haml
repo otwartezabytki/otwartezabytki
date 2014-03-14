@@ -20,7 +20,7 @@
         %input(type="checkbox" ng-model="relic.non_existed")
         .clear
         %form(name="searchPlaceForm" ng-submit="searchPlace($event)")
-          .field.text.search.marker
+          .field.text.search
             .polish-location(ng-hide="relic.foreign_relic")
               %label= t('views.relicbuilders.new.place')
               %input(type="text" ng-model="location.place_name")
@@ -51,73 +51,19 @@
                 %a(ng-click="selectPlace(place)")
                   = t('views.relicbuilders.new.choose_html')
 
-
-      %br
-      %br
-      %br
-      %hr
-      %section.creator-step
-        = semantic_form_for location, :as => 'location', :url => new_relicbuilder_path(params), :method => :get, :remote => true do |f|
-          - unless @relic.parent
-            = f.input :relic_group, :as => :boolean, :label => t('views.relicbuilders.new.add_relic_group')
-            %p.info-tooltip= link_to((image_tag 'icon-info.png'), '#', :id => "relic_group_popover", :class => "js-popover relic-group", :"data-content-id" => "group_body", :"data-title-id" => "group_title")
-          %script(type="text/html" id="group_title")
-            %p= t('views.relicbuilders.new.info_header_relic_group')
-            %p.close= link_to "zamknij", "#", :class => "close_popover", :"data-popover-id" => "relic_group_popover"
-          %script(type="text/html" id="group_body")
-            %span.relic-text
-              = t('views.relicbuilders.new.info_relic_group')
-          = f.input :foreign_relic, :as => :boolean, :label => t('views.relicbuilders.new.add_foreign_relic')
-          = f.input :existence, :as => :boolean, :label => t('views.relicbuilders.new.non_existed')
-          %p.info-tooltip= link_to((image_tag 'icon-info.png'), '#', :id => "nonexisted_relic_popover", :class => "js-popover non-existed", :"data-content-id" => "nonexisted_body", :"data-title-id" => "nonexisted_title")
-          %script(type="text/html" id="nonexisted_title")
-            %p= t('views.relicbuilders.new.info_header_nonexisted_relic')
-            %p.close= link_to "zamknij", "#", :class => "close_popover", :"data-popover-id" => "nonexisted_relic_popover"
-          %script(type="text/html" id="nonexisted_body")
-            %span.relic-text
-              = t('views.relicbuilders.new.info_nonexisted_relic')
-          .clear
-          .field.text.search.marker
-            .polish-location
-              = f.input :polish_place, :label => t('views.relicbuilders.new.place')
-            .foreign-location
-              .select
-                = f.label :country_code, t('views.relicbuilders.new.country_code')
-                = f.country_code_select :country_code
-              = f.input :original_name, :label => t('views.relicbuilders.new.original_name')
-              = f.input :polish_name, :label => t('views.relicbuilders.new.polish_name')
-          .actions
-            %button{:class => 'btn'}
-              = t('views.relicbuilders.new.search_html')
-      .polish-location{:style => "#{ 'display: none;' unless location.foreign_relic.to_i.zero?}"}
-        - if defined? @places
-          - if @places.blank?
-            = t('views.relicbuilders.new.no_results')
-          - elsif @places.size > 1
-            %section.creator-step
-              %h3= t('views.relicbuilders.new.select_place')
-              .places-wrapper
-                %ul.places
-                  - @places.each do |place|
-                    %li
-                      = (place.location_names.first(place.location_names.size - 1) << "<strong>#{place.name}</strong>").join(' > ').html_safe
-                      = link_to t('views.relicbuilders.new.choose_html'), 'javascript: void(0);', 'data-place_id' => place.id, 'data-coordinates' => "#{place.latitude}, #{place.longitude}"
-
       %section.creator-step.location
-        = semantic_form_for @relic, :url => geodistance_relicbuilder_path, :method => :get, :remote => true do |f|
+        %form
           %h3.select-on-map= t('views.relicbuilders.new.select_on_map')
           .column
-            #map_canvas{ :style => "width: 515px; height: 380px;" }
+            .google-map(data-drop="true" ng-model='marker_holder' jqyoui-droppable="{onDrop: 'onMarkerHolderDrop'}" draggable="true" center="map.center" zoom="map.zoom" events="map.events")
           .column
             .marker-helper
               %h3= t('views.relicbuilders.new.drag_marker')
               .marker-holder
-                = image_tag 'marker.png', :id => 'marker'
-            .actions{:style => 'display:none;'}
+                %img(data-drag="true" ng-show='marker_holder' ng-model='marker_holder'
+                  jqyoui-draggable data-jqyoui-options="{revert: 'invalid'}" src="#{image_path('marker.png')}")
+            .actions
               %button= t('views.relicbuilders.next_step_html')
-          = f.hidden_field :existence
-          = f.hidden_field :kind
-          = f.hidden_field :parent_id
-          = f.hidden_field :place_id
-          = f.hidden_field :latitude
-          = f.hidden_field :longitude
+
+:css
+  #map_canvas, .angular-google-map-container { width: 515px; height: 380px; }

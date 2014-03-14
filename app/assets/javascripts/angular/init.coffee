@@ -1,4 +1,7 @@
-angular.module('Relics', ['prevent-default', 'ozService', 'ngSanitize'])
+angular.module('Relics', [
+  'prevent-default', 'ozService',
+  'ngSanitize', 'google-maps', 'ngDragDrop'
+])
 
 angular.module('Relics').config ($httpProvider) ->
   $httpProvider.defaults.headers.common['X-CSRF-Token'] =

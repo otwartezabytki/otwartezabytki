@@ -357,6 +357,13 @@ GEM
     rack-test (0.6.2)
       rack (>= 1.0)
     rails-assets-angular (1.2.12)
+    rails-assets-angular-dragdrop (1.0.6)
+      rails-assets-angular (~> 1.0)
+      rails-assets-jquery (~> 2.0)
+      rails-assets-jquery-ui
+    rails-assets-angular-google-maps (1.0.15)
+      rails-assets-angular (~> 1.2.0)
+      rails-assets-underscore (~> 1.5.0)
     rails-assets-angular-prevent-default (1.0.3)
     rails-assets-angular-sanitize (1.2.12)
       rails-assets-angular (= 1.2.12)
@@ -366,7 +373,9 @@ GEM
     rails-assets-jquery (2.1.0)
     rails-assets-jquery-form (3.46.0)
       rails-assets-jquery (>= 1.5)
-    rails-assets-lodash (2.4.1)
+    rails-assets-jquery-ui (1.10.4)
+      rails-assets-jquery (>= 1.6)
+    rails-assets-underscore (1.5.2)
     rails-i18n (0.7.2)
       i18n (~> 0.5)
     rails-timeago (2.1.1)
@@ -600,12 +609,13 @@ DEPENDENCIES
   rack-mini-profiler
   rails (~> 3.2.3)!
   rails-assets-angular
+  rails-assets-angular-dragdrop (~> 1.0.5)
+  rails-assets-angular-google-maps (~> 1.0.15)
   rails-assets-angular-prevent-default
   rails-assets-angular-sanitize (~> 1.2.0)
   rails-assets-angular-ui-router
   rails-assets-handlebars
   rails-assets-jquery-form
-  rails-assets-lodash (~> 2.4.1)
   rails-i18n
   rails-timeago (~> 2.0)
   rails_config (= 0.2.5)

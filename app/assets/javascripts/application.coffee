@@ -27,10 +27,12 @@
 #= require_tree ./application
 
 # Relics Angular App
-#= require lodash
+#= require underscore
 #= require angular
 #= require angular-sanitize
 #= require angular-prevent-default
+#= require angular-google-maps
+#= require angular-dragdrop
 #= require ./angular/init
 #= require ./angular/router
 #= require_tree ./angular

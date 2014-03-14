@@ -23,7 +23,9 @@ group :assets do
   gem 'rails-assets-angular-prevent-default'
   gem 'rails-assets-angular-sanitize', '~> 1.2.0'
   gem 'rails-assets-jquery-form'
-  gem 'rails-assets-lodash', '~> 2.4.1'
+  gem 'rails-assets-angular-google-maps', '~> 1.0.15'
+  gem 'rails-assets-angular-dragdrop', '~> 1.0.5'
+
 end
 
 gem 'jquery-rails', '2.0.3'
