@@ -23,8 +23,10 @@ angular.module('Relics').controller "RelicBuilderCtrl", ($scope, Suggester, $log
   $scope.searchPlace = (e) ->
     # WIP
     console.log 'searchPlace', $scope.location
+    loaderShow()
     Suggester.placeFromPoland(q: $scope.location.place_name).then (response) ->
       $scope.places = response.data
+      loaderHide()
 
   $scope.selectPlace = (place) ->
     setCircleMarker(new google.maps.LatLng(place.latitude, place.longitude))
@@ -96,12 +98,24 @@ angular.module('Relics').controller "RelicBuilderCtrl", ($scope, Suggester, $log
     $scope.map.markers.push(marker)
     zoomAt(latlng)
 
+  loaderShow = ->
+    # TODO refactor
+    $('#fancybox_loader_container').show()
+
+  loaderHide = ->
+    # TODO refactor
+    $('#fancybox_loader_container').hide()
+
   $scope.$watch 'map.instance', (newVal, oldVal) ->
     if newVal && $scope.map.markers.length == 0
       try
+        loaderShow()
         navigator.geolocation.getCurrentPosition (pos) ->
           latlng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude)
           setCircleMarker(latlng)
+          loaderHide()
+      catch err
+        loaderHide()
 
   $scope.$watch 'relic.relic_group', (newVal, oldVal) ->
     if newVal != oldVal
