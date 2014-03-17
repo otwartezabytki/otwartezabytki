@@ -22,6 +22,25 @@ angular.module('Relics').controller "RelicBuilderCtrl",
           $scope.$apply ->
             $scope.map.instance = map
 
+    $scope.administrative = {
+      selected: {}
+      options: {}
+    }
+
+    $scope.getAdministrative = (arg = null) ->
+      params = {}
+      if arg
+        params["#{arg}_id"] = $scope.administrative.selected[arg].id
+      AdministrativeDivision.get(params).then (response) ->
+        options  = response.data.options
+        selected = response.data.selected
+        $scope.administrative.options = options
+        _.each ['voivodeship', 'district', 'commune', 'place'], (name) ->
+          $scope.administrative.selected[name] =
+            _.find(options["#{name}s"], (v) -> v.id == selected[name]?.id)
+
+    $scope.getAdministrative()
+
     $scope.searchPlace = (e) ->
       # WIP
       console.log 'searchPlace', $scope.location

@@ -13,9 +13,17 @@
     %label= t('activerecord.attributes.relic.fplace')
     %input(type="text" ng-model="location.fplace")
 
-  %div(ng-show="relic.foreign_relic")
+  %div(ng-hide="relic.foreign_relic")
     / TODO
     / = render :partial => 'administrative_level', :locals => { :relic => @relic }
+    %select(ng-model="administrative.selected.voivodeship" ng-change="getAdministrative('voivodeship')" ng-options="o.name for o in administrative.options.voivodeships")
+    %div(ng-show="administrative.selected.voivodeship")
+      %select(ng-model="administrative.selected.district" ng-change="getAdministrative('district')" ng-options="o.name for o in administrative.options.districts")
+    %div(ng-show="administrative.selected.district")
+      %select(ng-model="administrative.selected.commune" ng-change="getAdministrative('commune')" ng-options="o.name for o in administrative.options.communes")
+    %div(ng-show="administrative.selected.commune")
+      %select(ng-model="administrative.selected.place" ng-options="o.name for o in administrative.options.places")
+
   .street_input
     %label= t('activerecord.attributes.relic.street')
     %input(type="text" ng-model="location.street")

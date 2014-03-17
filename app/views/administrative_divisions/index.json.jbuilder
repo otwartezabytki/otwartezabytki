@@ -8,12 +8,14 @@ json.selected do
   json.place(@place, :id, :name)              if @place
 end
 
-json.voivodeships(@voivodeships, :id, :name)
-json.districts(@districts , :id, :name)
-json.communes do |json|
-  json.array!(@communes) do |json, commune|
-    json.id   commune.virtual_id
-    json.name commune.name
-  end.uniq
+json.options do
+  json.voivodeships(@voivodeships, :id, :name)
+  json.districts(@districts , :id, :name)
+  json.communes do |json|
+    json.array!(@communes) do |json, commune|
+      json.id   commune.virtual_id
+      json.name commune.name
+    end.uniq!
+  end
+  json.places(@places, :id, :name)
 end
-json.places(@places , :id, :name)
