@@ -532,6 +532,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootstrap-sass (~> 2.0.4.0)
+  builder
   cancan
   capybara
   carrierwave
@@ -580,6 +581,7 @@ DEPENDENCIES
   mini_magick!
   multi_json (= 1.3.7)
   newrelic_rpm (~> 3.5.5.38)
+  nokogiri
   omniauth
   omniauth-facebook
   paper_trail (~> 2.7.2)
