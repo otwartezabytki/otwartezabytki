@@ -1,0 +1,21 @@
+%ol.relic-stages
+  %li.first(ng-class="{active: step == 1}")
+    %span.step_header= t('views.relicbuilders.stages.step1')
+    %h3
+      = t('views.relicbuilders.stages.check_existance')
+    %p= t('views.relicbuilders.stages.step1_description1_html')
+  %li(ng-class="{active: step == 2}")
+    %span.step_header= t('views.relicbuilders.stages.step2')
+    %h3
+      = t('views.relicbuilders.stages.address')
+    %p= t('views.relicbuilders.stages.step1_description2_html')
+  %li(ng-class="{active: step == 3}")
+    %span.step_header= t('views.relicbuilders.stages.step3')
+    %h3
+      = t('views.relicbuilders.stages.details')
+    %p= t('views.relicbuilders.stages.step1_description3_html')
+  %li.last(ng-class="{active: step == 4}")
+    %span.step_header= t('views.relicbuilders.stages.step4')
+    %h3
+      = t('views.relicbuilders.stages.photos')
+    %p= t('views.relicbuilders.stages.step1_description4_html')

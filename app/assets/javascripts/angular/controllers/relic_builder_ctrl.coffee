@@ -1,4 +1,5 @@
 angular.module('Relics').controller "RelicBuilderCtrl", ($scope, Suggester, $log, $location, $anchorScroll) ->
+  $scope.step = 1
   $scope.relic = {}
   $scope.location = {
     place_name: null
@@ -56,6 +57,14 @@ angular.module('Relics').controller "RelicBuilderCtrl", ($scope, Suggester, $log
       lng + width * x_offset / $div.width()
     )
     setMarker(latlng)
+
+  $scope.findNearestRelics = () ->
+    if false
+      # TODO make some magic display fancybox
+    else
+      # Go to next step
+      $scope.step += 1
+
 
   removeMarkers = () ->
     _.each $scope.map.markers, (marker) ->

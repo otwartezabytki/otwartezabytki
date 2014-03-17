@@ -1,69 +1,11 @@
-- location = LocationBuilder.new(params[:location])
-
 .edit_relic.new_relic(ng-controller="RelicBuilderCtrl" ng-cloak)
-  = render partial: "relicbuilders/stages"
+  = render partial: 'steps_menu'
   .creator
-    %section.main
-      %section.creator-step
-        / = render :partial => 'parent_relic', :object => @relic.parent
-        %aside
-        %h3.intro= t('views.relicbuilders.new.intro1_html')
-
-      %section.creator-step
-        = t('views.relicbuilders.new.add_relic_group')
-        %input(type="checkbox" ng-model="relic.relic_group")
-
-        = t('views.relicbuilders.new.add_foreign_relic')
-        %input(type="checkbox" ng-model="relic.foreign_relic")
-
-        = t('views.relicbuilders.new.non_existed')
-        %input(type="checkbox" ng-model="relic.non_existed")
-        .clear
-        %form(name="searchPlaceForm" ng-submit="searchPlace($event)")
-          .field.text.search
-            .polish-location(ng-hide="relic.foreign_relic")
-              %label= t('views.relicbuilders.new.place')
-              %input(type="text" ng-model="location.place_name")
-            .foreign-location(ng-show="relic.foreign_relic")
-              .select
-                %label= t('views.relicbuilders.new.country_code')
-                = country_code_select(:relics, :country_code, nil, {}, {'ng-model' => 'location.country_code'})
-
-              %label= t('views.relicbuilders.new.original_name')
-              %input(type="text" ng-model="location.original_name")
-
-              %label= t('views.relicbuilders.new.polish_name')
-              %input(type="text" ng-model="location.polish_name")
-
-          .actions
-            %button.btn
-              = t('views.relicbuilders.new.search_html')
-
-      .polish-location(ng-hide="relic.foreign_relic")
-        %div(ng-hide="places.length")
-          = t('views.relicbuilders.new.no_results')
-        %section.creator-step(ng-show="places.length")
-          %h3= t('views.relicbuilders.new.select_place')
-          .places-wrapper
-            %ul.places
-              %li(ng-repeat="place in places")
-                %span(ng-bind-html="place.location_names | locationFormat")
-                %a(ng-click="selectPlace(place)" prevent-default)
-                  = t('views.relicbuilders.new.choose_html')
-
-      %section(id="location-preview" class="creator-step location")
-        %form
-          %h3.select-on-map= t('views.relicbuilders.new.select_on_map')
-          .column
-            .google-map(data-drop="true" ng-model='marker_holder' jqyoui-droppable="{onDrop: 'onMarkerHolderDrop'}" draggable="true" center="map.center" zoom="map.zoom" events="map.events")
-          .column
-            .marker-helper
-              %h3= t('views.relicbuilders.new.drag_marker')
-              .marker-holder
-                %img(data-drag="true" ng-show='marker_holder' ng-model='marker_holder'
-                  jqyoui-draggable data-jqyoui-options="{revert: 'invalid'}" src="#{image_path('marker.png')}")
-            .actions
-              %button= t('views.relicbuilders.next_step_html')
-
-:css
-  #map_canvas, .angular-google-map-container { width: 515px; height: 380px; }
+    %section.main(ng-show="step == 1")
+      = render partial: 'step1'
+    %section.main(ng-show="step == 2")
+      = render partial: 'step2'
+    %section.main(ng-show="step == 3")
+      = render partial: 'step3'
+    %section.main(ng-show="step == 4")
+      = render partial: 'step4'
