@@ -1,11 +1,15 @@
 %section.creator-step
-  = render :partial => 'parent_relic', :object => @relic.parent
+  / = render :partial => 'parent_relic', :object => @relic.parent
   %p.intro= t('views.relicbuilders.details.intro1')
-= semantic_form_for @relic, :url => relicbuilder_path(:id => @relic) do |f|
-  = f.hidden_field :build_state
-  = f.input :identification, :as => :string, :label => t('views.relicbuilders.details.name'), :hint => false
-  = f.input :reason, :input_html => { :class => 'redactor' }, :label => t('views.relicbuilders.details.reason')
+%form
+  %label= t('views.relicbuilders.details.name')
+  %input(type="text" ng-model="relic.identification")
+
+  %label= t('views.relicbuilders.details.reason')
+  %input(class="redactor" type="text" ng-model="relic.reason")
+
   .actions.relic-details
-    - p = [:id, :latitude, :longitude, :place_id, :parent_id].inject(address_params){|m, p| m[p] ||= @relic.send(p);m}
-    = link_to t('views.relicbuilders.stages.back').html_safe, address_relicbuilder_path(p), :class => "back"
-    %button= t('views.relicbuilders.next_step_html')
+    %a(class="back" ng-click="goToStep(2)" prevent-default)
+      = t('views.relicbuilders.stages.back').html_safe
+    %button(ng-click="goToStep(4)")
+      = t('views.relicbuilders.next_step_html')

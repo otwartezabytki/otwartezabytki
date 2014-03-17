@@ -62,9 +62,10 @@ angular.module('Relics').controller "RelicBuilderCtrl", ($scope, Suggester, $log
     if false
       # TODO make some magic display fancybox
     else
-      # Go to next step
-      $scope.step += 1
+      $scope.goToStep(2)
 
+  $scope.goToStep = (step) ->
+    $scope.step = step
 
   removeMarkers = () ->
     _.each $scope.map.markers, (marker) ->

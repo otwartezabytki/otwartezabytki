@@ -1,22 +1,33 @@
 %section.creator-step
-  = render :partial => 'parent_relic', :object => @relic.parent
+  / = render :partial => 'parent_relic', :object => @relic.parent
   %p.intro= t('views.relicbuilders.address.intro1')
-= semantic_form_for @relic, :url => relicbuilder_path(:id => @relic.try(:id)) do |f|
-  = f.hidden_field :kind
-  = f.hidden_field :existence
-  = f.hidden_field :build_state
-  = f.hidden_field :parent_id
-  = f.hidden_field :latitude
-  = f.hidden_field :longitude
-  - if f.object.is_a? ForeignRelic
-    = f.country_code_select :country_code
-    = f.input :fprovince, :hint => false
-    = f.input :fplace, :hint => false
-  - else
-    = render :partial => 'administrative_level', :locals => { :relic => @relic }
-  .street_input{ :style => (@relic.street.blank? ? "display: none" : "clear: both") }
-    = f.input :street
-  = link_to (@relic.street.blank? ? t('views.relics.edit.location.known_address') : t('views.relics.edit.location.unknown_address')), '#', :class => "toggle_street_input"
+%form
+  %div(ng-show="relic.foreign_relic")
+    .select
+      %label= t('views.relicbuilders.new.country_code')
+      = country_code_select(:relics, :country_code, nil, {}, {'ng-model' => 'location.country_code'})
+
+    %label= t('activerecord.attributes.relic.fprovince')
+    %input(type="text" ng-model="location.fprovince")
+
+    %label= t('activerecord.attributes.relic.fplace')
+    %input(type="text" ng-model="location.fplace")
+
+  %div(ng-show="relic.foreign_relic")
+    / TODO
+    / = render :partial => 'administrative_level', :locals => { :relic => @relic }
+  .street_input
+    %label= t('activerecord.attributes.relic.street')
+    %input(type="text" ng-model="location.street")
+
+  %a(class="toggle_street_input" prevent-default)
+    %span(ng-show="location.street")
+      = t('views.relics.edit.location.known_address')
+    %span(ng-hide="location.street")
+      = t('views.relics.edit.location.unknown_address')
+
   .actions
-    = link_to t('views.relicbuilders.stages.back').html_safe, new_relicbuilder_path(:parent_id => @relic.parent_id), :class => "back"
-    %button=t('views.relicbuilders.next_step_html')
+    %a(class="back" ng-click="goToStep(1)" prevent-default)
+      = t('views.relicbuilders.stages.back').html_safe
+    %button(ng-click="goToStep(3)" prevent-default)
+      =t('views.relicbuilders.next_step_html')
