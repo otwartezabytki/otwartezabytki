@@ -1,6 +1,7 @@
-angular.module('Relics').controller "RelicBuilderCtrl", ($scope, Suggester, $log) ->
+angular.module('Relics').controller "RelicBuilderCtrl", ($scope, Suggester, $log, $location, $anchorScroll) ->
   $scope.relic = {}
   $scope.location = {
+    place_name: null
     lat: null
     lng: null
   }
@@ -17,10 +18,7 @@ angular.module('Relics').controller "RelicBuilderCtrl", ($scope, Suggester, $log
     events:
       tilesloaded: (map) ->
         $scope.$apply ->
-          $log.info('this is the map instance', map)
           $scope.map.instance = map
-      dragend: (event) ->
-        console.log 'dragend', event
 
   $scope.searchPlace = (e) ->
     # WIP
@@ -29,9 +27,14 @@ angular.module('Relics').controller "RelicBuilderCtrl", ($scope, Suggester, $log
       $scope.places = response.data
 
   $scope.selectPlace = (place) ->
-    # WIP
-    console.log 'place selected:', place
     setCircleMarker(new google.maps.LatLng(place.latitude, place.longitude))
+    # scroll to map
+    $location.hash('location-preview')
+    $anchorScroll()
+    # start setting location again
+    $scope.marker_holder = true
+    $scope.location.lat  = null
+    $scope.location.lng  = null
 
   $scope.onMarkerHolderDrop = (event, ui) ->
     $scope.marker_holder = false
@@ -94,8 +97,7 @@ angular.module('Relics').controller "RelicBuilderCtrl", ($scope, Suggester, $log
     zoomAt(latlng)
 
   $scope.$watch 'map.instance', (newVal, oldVal) ->
-    if newVal
-      $log.info 'map changed'
+    if newVal && $scope.map.markers.length == 0
       try
         navigator.geolocation.getCurrentPosition (pos) ->
           latlng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude)

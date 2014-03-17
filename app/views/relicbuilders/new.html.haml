@@ -48,10 +48,10 @@
             %ul.places
               %li(ng-repeat="place in places")
                 %span(ng-bind-html="place.location_names | locationFormat")
-                %a(ng-click="selectPlace(place)")
+                %a(ng-click="selectPlace(place)" prevent-default)
                   = t('views.relicbuilders.new.choose_html')
 
-      %section.creator-step.location
+      %section(id="location-preview" class="creator-step location")
         %form
           %h3.select-on-map= t('views.relicbuilders.new.select_on_map')
           .column
