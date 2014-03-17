@@ -1,7 +1,7 @@
 - location = LocationBuilder.new(params[:location])
 
-.edit_relic.new_relic(ng-controller="RelicBuilderCtrl")
-  = render :partial => "relicbuilders/stages", :locals => { :stage => 1 }
+.edit_relic.new_relic(ng-controller="RelicBuilderCtrl" ng-cloak)
+  = render partial: "relicbuilders/stages"
   .creator
     %section.main
       %section.creator-step
