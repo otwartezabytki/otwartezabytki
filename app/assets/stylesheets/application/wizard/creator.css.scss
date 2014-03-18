@@ -1,6 +1,10 @@
 @import "../mixins";
 
 .new_relic{
+  .angular-google-map-container{
+    width: 515px;
+    height: 380px;
+  }
   .creator{
     background: #fff;
     box-shadow: 0 0 3px rgba(0,0,0,0.15);
@@ -122,10 +126,6 @@
       }
     }
     #new_location{
-      .field.marker .foreign-location .input:before{
-        left: 12px;
-        top: 37px;
-      }
       .search-order-container .select2-choice{
         height: 37px;
         line-height: 37px;
@@ -138,17 +138,17 @@
       }
       .actions{
         vertical-align: top;
-        margin-top: 14px;
+        margin-top: 26px;
       }
     }
-    .field.marker .input:before{
+    .field.marker-icon .input:before{
       display: block;
       width: 8px;
       height: 14px;
       background: asset-data-url("icon-marker.png") no-repeat;
       position: absolute;
       left: 12px;
-      top: 27px;
+      top: 37px;
       content: "";
     }
     .field.aside{
@@ -184,7 +184,9 @@
     }
     .actions{
       display: inline-block;
-      width: 100%;
+      &.relic-address {
+        width: 100%;
+      }
       &.relic-details{
         margin-top: 20px;
         width: 100%;
@@ -339,7 +341,7 @@
           margin: 20px auto;
           width: 118px;
           height: 118px;
-          #marker {
+          #marker-obj {
             cursor: pointer;
             margin: 40px 0 10px 15px;
           }
@@ -641,7 +643,7 @@ body.relics.new #colorbox {
   }
 }
 
-.foreign-location{
+.polish-location, .foreign-location{
   label{
     display: block;
     font-weight: 700;

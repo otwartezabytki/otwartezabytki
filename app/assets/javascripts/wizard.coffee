@@ -549,7 +549,7 @@ window.google_maps_loaded = ->
   jQuery ->
     window.loadGMaps();
 
-    $('#marker').draggable
+    $('#marker-obj').draggable
       revert: true
 
     $('#map_canvas').droppable

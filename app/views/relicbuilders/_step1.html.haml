@@ -4,37 +4,75 @@
   %h3.intro= t('views.relicbuilders.new.intro1_html')
 
 %section.creator-step
-  = t('views.relicbuilders.new.add_relic_group')
-  %input(type="checkbox" ng-model="relic.relic_group")
+  %form#new_location(name="searchPlaceForm" ng-submit="searchPlace($event)")
 
-  = t('views.relicbuilders.new.add_foreign_relic')
-  %input(type="checkbox" ng-model="relic.foreign_relic")
+    #location_relic_group_input(class="boolean clearfix optional")
+      .input
+        %ul.inputs-list
+          %li
+            %label(for="location_relic_group")
+              %input(id="location_relic_group" type="checkbox" ng-model="relic.relic_group")
+              %span= t('views.relicbuilders.new.add_relic_group')
 
-  = t('views.relicbuilders.new.non_existed')
-  %input(type="checkbox" ng-model="relic.non_existed")
-  .clear
-  %form(name="searchPlaceForm" ng-submit="searchPlace($event)")
-    .field.text.search
+    - # TODO rewrite to Angular
+    %p.info-tooltip= link_to((image_tag 'icon-info.png'), '#', :id => "relic_group_popover", :class => "js-popover relic-group", :"data-content-id" => "group_body", :"data-title-id" => "group_title")
+    %script(type="text/html" id="group_title")
+      %p= t('views.relicbuilders.new.info_header_relic_group')
+      %p.close= link_to "zamknij", "#", :class => "close_popover", :"data-popover-id" => "relic_group_popover"
+    %script(type="text/html" id="group_body")
+      %span.relic-text
+        = t('views.relicbuilders.new.info_relic_group')
+
+    #location_foreign_relic_input(class="boolean clearfix optional")
+      .input
+        %ul.inputs-list
+          %li
+            %label(for="location_foreign_relic")
+              %input(id="location_foreign_relic" type="checkbox" ng-model="relic.foreign_relic")
+              %span= t('views.relicbuilders.new.add_foreign_relic')
+
+    #location_existence_input(class="boolean clearfix optional")
+      .input
+        %ul.inputs-list
+          %li
+            %label(for="location_existance")
+              %input(id="location_existance" type="checkbox" ng-model="relic.existance")
+              %span= t('views.relicbuilders.new.non_existed')
+
+    - # TODO rewrite to Angular
+    %p.info-tooltip= link_to((image_tag 'icon-info.png'), '#', :id => "nonexisted_relic_popover", :class => "js-popover non-existed", :"data-content-id" => "nonexisted_body", :"data-title-id" => "nonexisted_title")
+    %script(type="text/html" id="nonexisted_title")
+      %p= t('views.relicbuilders.new.info_header_nonexisted_relic')
+      %p.close= link_to "zamknij", "#", :class => "close_popover", :"data-popover-id" => "nonexisted_relic_popover"
+    %script(type="text/html" id="nonexisted_body")
+      %span.relic-text
+        = t('views.relicbuilders.new.info_nonexisted_relic')
+    .clear
+    .field.text.search.marker-icon
       .polish-location(ng-hide="relic.foreign_relic")
-        %label= t('views.relicbuilders.new.place')
-        %input(type="text" ng-model="location.place_name")
+        #location_polish_place_input(class="string clearfix optional stringish")
+          %label(for="location_polish_place")
+            = t('views.relicbuilders.new.place')
+          .input
+            %input(id="location_polish_place" type="text" ng-model="location.place_name")
       .foreign-location(ng-show="relic.foreign_relic")
         .select
-          %label= t('views.relicbuilders.new.country_code')
-          = country_code_select(:relics, :country_code, nil, {}, {'ng-model' => 'location.country_code'})
-
-        %label= t('views.relicbuilders.new.original_name')
-        %input(type="text" ng-model="location.original_name")
-
-        %label= t('views.relicbuilders.new.polish_name')
-        %input(type="text" ng-model="location.polish_name")
-
+          %label(for="location_country_code")= t('views.relicbuilders.new.country_code')
+          = country_code_select(:relics, :country_code, nil, {}, {'id' => 'location_country_code', 'ng-model' => 'location.country_code'})
+        #location_original_name_input.string.clearfix.optional.stringish
+          %label(for="location_original_name")= t('views.relicbuilders.new.original_name')
+          .input
+            %input#location_original_name(type="text" ng-model="location.original_name")
+        #location_polish_name_input.string.clearfix.optional.stringish
+          %label(for="location_polish_name")= t('views.relicbuilders.new.polish_name')
+          .input
+            %input#location_polish_name(type="text" ng-model="location.polish_name")
     .actions
       %button.btn
         = t('views.relicbuilders.new.search_html')
 
 .polish-location(ng-hide="relic.foreign_relic")
-  %div(ng-hide="places.length")
+  %div(ng-show="location.place_name && !places.length")
     = t('views.relicbuilders.new.no_results')
   %section.creator-step(ng-show="places.length")
     %h3= t('views.relicbuilders.new.select_place')
@@ -54,11 +92,8 @@
       .marker-helper
         %h3= t('views.relicbuilders.new.drag_marker')
         .marker-holder
-          %img(data-drag="true" ng-show='marker_holder' ng-model='marker_holder'
+          %img#marker-obj(data-drag="true" ng-show='marker_holder' ng-model='marker_holder'
             jqyoui-draggable data-jqyoui-options="{revert: 'invalid'}" src="#{image_path('marker.png')}")
       .actions(ng-hide="marker_holder")
-        %button(ng-click="findNearestRelics()")
+        %button(ng-click="findNearestRelics()" prevent-default)
           = t('views.relicbuilders.next_step_html')
-
-:css
-  #map_canvas, .angular-google-map-container { width: 515px; height: 380px; }

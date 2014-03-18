@@ -162,7 +162,7 @@ jQuery.initializer 'section.edit.location', ->
 
     window.ensure_geolocation()
 
-    $('#marker').draggable
+    $('#marker-obj').draggable
       revert: true
 
     $('#map_canvas').droppable

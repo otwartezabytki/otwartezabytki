@@ -58,7 +58,7 @@
 
 #   window.ensuring_google_maps_loaded ->
 #     do window.ensure_geolocation
-#     $('#marker').draggable
+#     $('#marker-obj').draggable
 #       revert: true
 
 #     $('#map_canvas').droppable

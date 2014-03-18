@@ -49,7 +49,7 @@
     %span(ng-show="knownAddress()")
       = t('views.relics.edit.location.unknown_address')
 
-  .actions
+  .actions.relic-address
     %a(class="back" ng-click="goToStep(1)" prevent-default)
       = t('views.relicbuilders.stages.back').html_safe
     %button(ng-click="goToStep(3)" prevent-default)

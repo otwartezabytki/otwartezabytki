@@ -67,7 +67,7 @@
       width: 118px;
       height: 118px;
 
-      #marker {
+      #marker-obj {
         cursor: pointer;
         margin: 28px 0 10px 47px;
       }
@@ -87,7 +87,7 @@
       display: block;
     }
 
-    #marker {
+    #marker-obj {
       display: none;
     }
   }
