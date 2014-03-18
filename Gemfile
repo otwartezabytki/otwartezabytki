@@ -25,7 +25,6 @@ group :assets do
   gem 'rails-assets-jquery-form'
   gem 'rails-assets-angular-google-maps', '~> 1.0.15'
   gem 'rails-assets-angular-dragdrop', '~> 1.0.5'
-
 end
 
 gem 'jquery-rails', '2.0.3'

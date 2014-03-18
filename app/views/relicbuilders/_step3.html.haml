@@ -1,12 +1,17 @@
 %section.creator-step
   / = render :partial => 'parent_relic', :object => @relic.parent
   %p.intro= t('views.relicbuilders.details.intro1')
-%form
-  %label= t('views.relicbuilders.details.name')
-  %input(type="text" ng-model="relic.identification")
-
-  %label= t('views.relicbuilders.details.reason')
-  %input(class="redactor" type="text" ng-model="relic.reason")
+%form(class="formtastic")
+  #relic_identification_input(class="string clearfix stringish")
+    %label(for="relic_identification")
+      = t('views.relicbuilders.details.name')
+    .input
+      %input(id="relic_identification" type="text" ng-model="relic.identification")
+  #relic_reason_input(class="text clearfix")
+    %label(for="relic_reason")
+      = t('views.relicbuilders.details.reason')
+    .input
+      %textarea(id="relic_reason" ng-model="relic.reason" redactor="{focus: false, buttons: ['bold', 'italic', 'link', 'unorderedlist'], lang: 'pl'}" rows="20")
 
   .actions.relic-details
     %a(class="back" ng-click="goToStep(2)" prevent-default)
