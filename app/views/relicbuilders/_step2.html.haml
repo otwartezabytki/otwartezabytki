@@ -1,7 +1,7 @@
 %section.creator-step
   / = render :partial => 'parent_relic', :object => @relic.parent
   %p.intro= t('views.relicbuilders.address.intro1')
-%form
+%form(class="formtastic")
   %div(ng-show="relic.foreign_relic")
     .select
       %label= t('views.relicbuilders.new.country_code')
@@ -14,19 +14,34 @@
     %input(type="text" ng-model="location.fplace")
 
   %div(ng-hide="relic.foreign_relic")
-    / TODO
-    / = render :partial => 'administrative_level', :locals => { :relic => @relic }
-    %select(ng-model="administrative.selected.voivodeship" ng-change="getAdministrative('voivodeship')" ng-options="o.name for o in administrative.options.voivodeships")
-    %div(ng-show="administrative.selected.voivodeship")
-      %select(ng-model="administrative.selected.district" ng-change="getAdministrative('district')" ng-options="o.name for o in administrative.options.districts")
-    %div(ng-show="administrative.selected.district")
-      %select(ng-model="administrative.selected.commune" ng-change="getAdministrative('commune')" ng-options="o.name for o in administrative.options.communes")
-    %div(ng-show="administrative.selected.commune")
-      %select(ng-model="administrative.selected.place" ng-options="o.name for o in administrative.options.places")
+    .administrative-level
+      .one-third
+        %label(for="relic_voivodeship_id")
+          = t('views.relicbuilders.administrative_level.voivodeship')
+        %select(id="relic_voivodeship_id" ng-model="administrative.selected.voivodeship"
+          ng-change="getAdministrative('voivodeship')" ng-options="o.name for o in administrative.options.voivodeships")
+      .one-third(ng-show="administrative.selected.voivodeship")
+        %label(for="relic_district_id")
+          = t('views.relicbuilders.administrative_level.district')
+        %select(id="relic_district_id" ng-model="administrative.selected.district"
+          ng-change="getAdministrative('district')" ng-options="o.name for o in administrative.options.districts")
+      .one-third(ng-show="administrative.selected.district")
+        %label(for="relic_commune_id")
+          = t('views.relicbuilders.administrative_level.commune')
+        %select(id="relic_commune_id" ng-model="administrative.selected.commune"
+          ng-change="getAdministrative('commune')" ng-options="o.name for o in administrative.options.communes")
+      .row(ng-show="administrative.selected.commune")
+        %label(for="relic_place_id")
+          = t('views.relicbuilders.administrative_level.city')
+        %select(id="relic_place_id" ng-model="administrative.selected.place"
+          ng-change="getAdministrative('place')" ng-options="o.name for o in administrative.options.places")
 
-  .street_input
-    %label= t('activerecord.attributes.relic.street')
-    %input(type="text" ng-model="location.street")
+  .street_input(style="clear: both")
+    #relic_street_input(class="string clearfix optional stringish")
+      %label(for="relic_street")= t('activerecord.attributes.relic.street')
+      .input
+        %span.block= t('formtastic.hints.relic.street')
+        %input(id="relic_street" type="text" ng-model="location.street")
 
   %a(class="toggle_street_input" prevent-default)
     %span(ng-show="location.street")

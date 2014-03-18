@@ -141,11 +141,6 @@
         margin-top: 14px;
       }
     }
-    #new_relic{
-      .actions{
-        width: 100%;
-      }
-    }
     .field.marker .input:before{
       display: block;
       width: 8px;
@@ -189,6 +184,7 @@
     }
     .actions{
       display: inline-block;
+      width: 100%;
       &.relic-details{
         margin-top: 20px;
         width: 100%;
@@ -622,7 +618,7 @@ body.relics.new #colorbox {
   width: 960px;
 }
 
-form#new_relic{
+.creator {
   .one-third{
     float: left;
     width: 175px;
