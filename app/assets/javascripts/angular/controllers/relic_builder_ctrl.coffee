@@ -87,6 +87,13 @@ angular.module('Relics').controller "RelicBuilderCtrl",
     $scope.goToStep = (step) ->
       $scope.step = step
 
+    $scope.knownAddress = ->
+      !_.isEmpty($scope.location.street) || $scope.known_address
+
+    $scope.toggleKnownAddress = ->
+      $scope.location.street = null
+      $scope.known_address   = !$scope.known_address
+
     removeMarkers = () ->
       _.each $scope.map.markers, (marker) ->
         marker.setMap(null)

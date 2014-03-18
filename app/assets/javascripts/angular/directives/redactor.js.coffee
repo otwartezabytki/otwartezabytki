@@ -3,7 +3,6 @@ angular.module('Relics').directive "redactor", ($timeout) ->
   require: "ngModel"
 
   link: (scope, element, attrs, ngModel) ->
-    console.log ngModel
     options =
       keyupCallback: (redactor) ->
         scope.$apply ->

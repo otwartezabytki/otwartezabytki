@@ -35,18 +35,18 @@
           = t('views.relicbuilders.administrative_level.city')
         %select(id="relic_place_id" ng-model="administrative.selected.place"
           ng-change="getAdministrative('place')" ng-options="o.name for o in administrative.options.places")
-
-  .street_input(style="clear: both")
+    .clearfix
+  .street_input(ng-show="knownAddress()")
     #relic_street_input(class="string clearfix optional stringish")
       %label(for="relic_street")= t('activerecord.attributes.relic.street')
       .input
         %span.block= t('formtastic.hints.relic.street')
         %input(id="relic_street" type="text" ng-model="location.street")
 
-  %a(class="toggle_street_input" prevent-default)
-    %span(ng-show="location.street")
+  %a(class="toggle_street_input" href prevent-default ng-click="toggleKnownAddress()")
+    %span(ng-show="!knownAddress()")
       = t('views.relics.edit.location.known_address')
-    %span(ng-hide="location.street")
+    %span(ng-show="knownAddress()")
       = t('views.relics.edit.location.unknown_address')
 
   .actions
