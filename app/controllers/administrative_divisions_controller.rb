@@ -17,7 +17,10 @@ class AdministrativeDivisionsController < ApplicationController
 
     @voivodeships = Voivodeship.order('name')
     @districts    = @voivodeship ? @voivodeship.districts.order('name') : []
-    @communes     = @district    ? @district.communes.order('name')     : []
-    @places       = @commune     ? @commune.places.order('name')        : []
+    @district   ||= @districts.first
+    @communes     = @district ? @district.communes.order('name') : []
+    @commune    ||= @communes.first
+    @places       = @commune ? @commune.places.order('name') : []
+    @place      ||= @places.first
   end
 end
