@@ -40,7 +40,7 @@ show_content_window = (marker, content) ->
 
 renderRelicInfo = (relic) ->
   photo = if relic.main_photo then "<div class='photo-wrapper'><img src='#{relic.main_photo.file.midi.url}' width='50' height='50'></div>" else ""
-  link = "<a href='#{Routes.relic_path(relic.id)}' target='_blank'>więcej »</a>"
+  link = "<a href='#{Routes.relic_path(relic.id)}?skip_return_path=true' target='_blank'>więcej »</a>"
   address = []
   address.add(relic.place_name) if relic.place_name
   address.add(relic.street) if relic.street

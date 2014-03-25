@@ -63,10 +63,10 @@
                 - else
                   -# %li= t('layouts.application.relics_count', :count => current_user.try(:earn_points) || 0)
                   %li
-                    %a{:href => new_user_session_path, :class => 'login'}
+                    %a{:href => new_user_session_path(return_path: with_return_path), :class => 'login'}
                       = t('layouts.application.login')
                   %li
-                    %a{:href => new_user_registration_path, :class => 'register'}
+                    %a{:href => new_user_registration_path(return_path: with_return_path), :class => 'register'}
                       = t('layouts.application.register')
                   %li
                     = link_to t('layouts.application.facebook_sign_in'), user_omniauth_authorize_path(:facebook), :class => "fb-btn"

@@ -19,6 +19,8 @@ class Widgets::DirectionsController < WidgetsController
     widget_search.perform
   end
 
+  prepend_before_filter -> { params[:skip_return_path] = true }, only: [:show, :configure, :print]
+
   def show
     widget_search
     relics
@@ -76,6 +78,12 @@ class Widgets::DirectionsController < WidgetsController
     authorize! :destroy, widget_direction
     widget_direction.destroy
     redirect_to user_my_routes_path(current_user.id), :notice => t('notices.route_has_been_removed')
+  end
+
+  protected
+
+  def with_return_path
+    request.path
   end
 
 end

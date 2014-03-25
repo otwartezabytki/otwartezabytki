@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  helper_method :search_params, :tsearch, :enabled_locales, :iframe_transport?, :js_env, :angular_js_env
+  helper_method :search_params, :tsearch, :enabled_locales, :iframe_transport?, :js_env, :angular_js_env, :with_return_path
   # iframe views path
   before_filter do
     prepend_view_path("app/views/iframe") if Subdomain.matches?(request)
@@ -124,10 +124,14 @@ class ApplicationController < ActionController::Base
     EOS
   end
 
+  def with_return_path
+    nil
+  end
+
   protected
 
   def save_return_path
-    return false if (devise_controller? and params[:return_path].blank?) or request.format == 'json' or params[:iframe]
+    return false if (devise_controller? and params[:return_path].blank?) or request.format == 'json' or params[:iframe] or params[:skip_return_path]
     cookies[:return_path] = params[:return_path].presence || request.fullpath if request.get?
   end
 
