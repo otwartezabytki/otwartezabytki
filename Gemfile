@@ -43,6 +43,10 @@ gem 'sentry-raven'
 
 gem 'paper_trail', '~> 2.7.2' # versioning
 
+# xml for osm generating
+gem 'builder'
+gem 'nokogiri'
+
 # admin panel
 gem 'activeadmin',    '~> 0.4.4'
 gem 'meta_search',    '>= 1.1.0.pre'

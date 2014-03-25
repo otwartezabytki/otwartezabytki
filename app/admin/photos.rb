@@ -54,4 +54,5 @@ ActiveAdmin.register Photo do
   filter :author
   filter :date_taken
   filter :alternate_text
+  filter :state, as: :check_boxes, collection: proc { [['Niedokończone', 'uploaded']] }, label: ""
 end

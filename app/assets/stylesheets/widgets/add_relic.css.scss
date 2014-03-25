@@ -308,12 +308,14 @@
     border-radius: 2px;
     color: #fff;
     font-size: 12px;
-    text-shadow: 0 1px 0 rgba(0,0,0,.5);
     border: 0;
+    outline: 0;
     height: 30px;
     padding: 0 12px;
     cursor: pointer;
     text-transform: uppercase;
+    float: none;
+    margin: 0;
     &:hover{
       background: #34a900;
     }

@@ -53,7 +53,6 @@ class RelicsController < ApplicationController
     relic_path(relic)
   end
 
-  helper_method :need_captcha
   before_filter :authenticate_user!, :only => [:edit, :update, :adopt, :unadopt]
 
   def show
@@ -71,17 +70,6 @@ class RelicsController < ApplicationController
 
   def edit
     relic.entries.build
-  end
-
-  def administrative_level
-    @voivodeship = Voivodeship.find_by_id params.get_deep('relic', 'voivodeship_id')
-    @district = District.find_by_id params.get_deep('relic', 'district_id')
-    @commune = Commune.find_by_id params.get_deep('relic', 'commune_id')
-
-    @district = @commune.district if @commune
-    @voivodeship = @district.voivodeship if @district
-
-    render :partial => 'administrative_level', :layout => false
   end
 
   def update
@@ -161,7 +149,6 @@ class RelicsController < ApplicationController
     end
   end
 
-
   def download_zip
     if relic.all_documents.exists?
 
@@ -223,51 +210,14 @@ class RelicsController < ApplicationController
     end
   end
 
-  def need_captcha
-    if Rails.cache.read("need_captcha_#{request.remote_ip}")
-      Rails.logger.info("Require captcha because of cache value for #{request.remote_ip}")
-      return true
-    end
-    suggestion_count = Suggestion.roots.not_skipped.where(:ip_address => request.remote_ip).where('created_at >= ?', 1.minute.ago).count
-    # puts "Suggestion count: #{suggestion_count}"
-    if suggestion_count > 60
-      Rails.cache.write("need_captcha_#{request.remote_ip}", 1)
-      true
-    else
-      false
-    end
-  end
-
-  def updated_nested_resources(resource_name)
-    nested_ids = []
-
-    if params[:relic] && params[:relic]["#{resource_name}_attributes"]
-      params[:relic]["#{resource_name}_attributes"].each do |index, photo|
-        nested_ids.push(photo["id"].to_i) if photo["id"].to_i > 0
-      end
-    end
-
-    nested_ids.size ? relic.send(resource_name.to_sym).find(nested_ids) : []
-  end
-
-  def destroyed_nested_resources(resource_name)
-    nested_ids = []
-
-    if params[:relic] && params[:relic]["#{resource_name}_attributes"]
-      params[:relic]["#{resource_name}_attributes"].each do |index, photo|
-        nested_ids.push(photo["id"].to_i) if photo["_destroy"].to_i != 0
-      end
-    end
-
-    nested_ids.size ? relic.send(resource_name.to_sym).find(nested_ids) : []
-  end
-
   def section_attrs_key
     "#{params[:section]}_attributes"
   end
 
   def subrelic_ids
-    if request.get? && %w(events links).include?(params[:section]) && params[:relic]
+    # TODO it won't work without memoization!!!
+    return @subrelic_ids if defined?(@subrelic_ids)
+    @subrelic_ids = if !request.get? && %w(events links).include?(params[:section]) && params[:relic]
       params[:relic].fetch(section_attrs_key, {}).inject([]) do |result, (k, v)|
         result << v if v["relic_id"].present?
         result

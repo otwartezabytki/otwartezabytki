@@ -79,47 +79,45 @@ pl:
   activerecord:
     attributes:
       alert:
-        id: Identyfikator
-        url: Adres zdjęcia
-        author: "Dane autora (imię, nazwisko)"
-        id: Identyfikator
-        url: Adres zdjęcia
+        author: "Dane autora (imię, nazwisko/nick)"
         date_taken: "Data wykonania"
         description: "Opis:"
         file: "Zdjęcie:"
+        id: Identyfikator
         relic: Zabytek
         relic_id: "ID zabytku"
         state: "Stan zgłoszenia"
+        url: "Adres zdjęcia"
       document:
-        id: Identyfikator
-        url: "Adres"
         description: "Krótki opis"
         file: Plik
+        id: Identyfikator
         mime: "Typ MIME"
         name: Nazwa
         relic: Zabytek
         relic_id: "ID zabytku"
         size: Rozmiar
+        url: Adres
       entry:
-        id: Identyfikator
         body: Opis
+        id: Identyfikator
         relic: Zabytek
         relic_id: "ID zabytku"
         title: Tytuł
       event:
-        id: "Identyfikator"
-        name: "Nazwa wydarzenia"
-        position: Kolejność
         date: Data
+        id: Identyfikator
+        name: "Nazwa wydarzenia"
+        photo_id: "Identyfikator zdjęcia"
+        position: Kolejność
         relic: Zabytek
         relic_id: "ID zabytku"
-        photo_id: "Identyfikator zdjęcia"
       link:
+        category: Kategoria
         id: Identyfikator
+        kind: Rodzaj
         name: "Nazwa linku"
         position: Kolejność
-        category: Kategoria
-        kind: Rodzaj
         relic: Zabytek
         relic_id: "ID zabytku"
         url: "Adres URL"
@@ -131,13 +129,12 @@ pl:
         file: Plik
         file_full_height: "Pełna wysokość"
         file_full_width: "Pełna szerokość"
+        id: Identyfikator
         mime: "Typ MIME"
         relic: Zabytek
         relic_id: "ID zabytku"
+        url: "Link do zdjęcia"
       relic:
-        id: "Identyfikator"
-        nid_id: "Identyfikator w NID"
-        main_photo: "Zdjęcie główne"
         ancestry: "W zespołach"
         approved: "Zabytek zatwierdzony"
         auto_categories: "Kategorie automatyczne"
@@ -159,11 +156,14 @@ pl:
           social: "dodany społecznościowo"
         fplace: Miejscowość
         fprovince: Prowincja
+        id: Identyfikator
         identification: "Nazwa obiektu"
         latitude: "Szerokość geograficzna"
         links_info: "Gdzie szukać?"
         longitude: "Długość geograficzna"
+        main_photo: "Zdjęcie główne"
         national_number: NID
+        nid_id: "Identyfikator w NID"
         photos_facets:
           F: "brak zdjęcia"
           T: "ze zdjęciem"
@@ -248,18 +248,12 @@ pl:
           one: "1 błąd uniemożliwił zapisanie %{model}"
           other: "%{count} błędów uniemożliwiło zapisanie %{model}"
     models:
-      subrelic:
-        one: podzabytek
-        few: podzabytki
-        many: podzabytków
-        zero: podzabytków
-        other: podzabytków
       alert:
         few: alerty
-        one: alert
         many: alertów
-        zero: alertów
+        one: alert
         other: alertów
+        zero: alertów
       commune:
         few: Gminy
         many: Gminy
@@ -314,6 +308,12 @@ pl:
         one: Zabytek
         other: Zabytki
         zero: Zabytek
+      subrelic:
+        few: podzabytki
+        many: podzabytków
+        one: podzabytek
+        other: podzabytków
+        zero: podzabytków
       user:
         few: Użytkownicy
         many: Użytkownicy
@@ -1109,6 +1109,11 @@ pl:
       my_routes: "Moje trasy"
       settings: Ustawienia
       watched: Obserwowane
+    registrations:
+      new:
+        header: "Rejestracja do Otwartych Zabytków"
+        signup_intro: "Zarejestruj się"
+        submit: "Zarejestruj się"
     settings_form:
       avatar: "Zdjęcie profilowe"
       language_settings: "Ustawienia językowe"
@@ -1117,11 +1122,6 @@ pl:
       user_data: "Dane użytkownika"
     user_avatar:
       change_photo: "Zmień zdjęcie"
-    registrations:
-      new:
-        header: Rejestracja do Otwartych Zabytków
-        signup_intro: "Zarejestruj się"
-        submit: Zarejestruj się       
   version:
     event:
       create: stworzył
@@ -1343,7 +1343,12 @@ pl:
           one: "Znaleźliśmy %{count} zabytek w tej okolicy!"
           other: "Znaleźliśmy %{count} zabytków w tej okolicy!"
           zero: "Nie znaleźliśmy zabytków w tej okolicy!"
-        info_html: "Dokładnie w tej okolicy znaleźliśmy <strong>%{count}</strong>, które już istnieją w naszej bazie danych."
+        info_html:
+          few: "Dokładnie w tej okolicy znaleźliśmy <strong>%{count}</strong> zabytki, które już istnieją w naszej bazie danych."
+          many: "Dokładnie w tej okolicy znaleźliśmy <strong>%{count}</strong> zabytków, które już istnieją w naszej bazie danych."
+          one: "Dokładnie w tej okolicy znaleźliśmy <strong>%{count}</strong> zabytek, który już istnieje w naszej bazie danych."
+          other: "Dokładnie w tej okolicy znaleźliśmy <strong>%{count}</strong> zabytków, które już istnieją w naszej bazie danych."
+          zero: "Nie znaleźliśmy zabytków w tej okolicy!"
         not_found_html: "Nie ma go na liście &raquo;"
         that_one: "To jest ten zabytek!"
       new:
