@@ -84,8 +84,7 @@ markerClusterer = ->
   window.marker_clusterer = new MarkerClusterer gmap, [],
     maxZoom: 18
     styles: styles
-    gridSize: 50
-    averageCenter: true
+    gridSize: 40
 
 renderResults = (search_results, last = true, callback) ->
   $.each search_results, ->
