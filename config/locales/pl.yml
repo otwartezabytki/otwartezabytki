@@ -950,6 +950,7 @@ pl:
     relic_unadopted: "Odadoptowałeś zabytek. Już nie będziesz otrzymywał powiadomień o jego zmianach."
     relic_was_archived: "Zabytek został zarchiwizowany."
     reservation_thanks: "Dziękujemy za rejestrację! Na podany adres e-mail zostało wysłane Twoje hasło. Tymczasem zachęcamy do dalszego poprawiania zabytków:"
+    reservation_thanks_short: "Dziękujemy za rejestrację! Na podany adres e-mail zostało wysłane Twoje hasło."
     route_has_been_removed: "Trasa została usunięta."
     there_is_no_relics_in_the_area: "W naszej bazie nie ma zabytków znajdująych się w tej okolicy. Możesz kontynuować dodawanie zabytku"
     unpublished_photos_has_been_delete: "Ponieważ nie zgodziłeś się na opublikowanie dodanych zdjęć, zostały one usunięte."
