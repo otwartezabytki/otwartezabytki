@@ -87,7 +87,8 @@ markerClusterer = ->
     gridSize: 40
 
 renderResults = (search_results, last = true, callback) ->
-  $.each search_results, ->
+  total = search_results.length
+  $.each search_results, (index) ->
     [@id, @latitude, @longitude] = this if Object.isArray(this)
 
     latlng = new google.maps.LatLng(@latitude, @longitude)
@@ -105,7 +106,10 @@ renderResults = (search_results, last = true, callback) ->
       loadRelicInfo @id, (content) ->
         show_content_window(marker, content)
 
-  callback() if callback? && last
+    # run callback on the last element in the last batch
+    if index == total - 1 && last
+      callback() if callback?
+
 
 # Serialize form to JSON
 $.fn.serializeObject = ->
@@ -297,7 +301,7 @@ windowPrint = ->
         console.log('`window.print()` doesn’t prompt during development')
       else
         window.print()
-    ).delay 1000
+    ).delay 3000 # HACK: Wait 3s for markers rendering. Is there a better way? :(
   else
     ready_to_print = true
 
