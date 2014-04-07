@@ -688,6 +688,11 @@ section.show.description{
     max-width: 570px;
     display: inline-block;
   }
+
+  .content {
+    overflow: hidden
+  }
+
   .content, .content p, .content span{
     line-height: 22px;
     font-size: 14px;
