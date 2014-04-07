@@ -682,7 +682,7 @@ section.show.general{
 }
 
 section.show.description{
-  .content a{
+  .content li {
     @include elipsis();
     line-height: 16px;
     max-width: 570px;

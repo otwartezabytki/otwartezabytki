@@ -39,7 +39,6 @@ $dark-grey: #313132;
 }
 
 @mixin elipsis() {
-  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
