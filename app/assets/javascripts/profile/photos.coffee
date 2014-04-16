@@ -33,7 +33,6 @@ jQuery.initializer 'div.photo-attributes', ->
       $photo_upload.hide()
       jqXHR = data.submit()
       $cancel_upload.click (e) ->
-        console.log jqXHR
         jqXHR.abort()
 
     progressall: (e, data) ->

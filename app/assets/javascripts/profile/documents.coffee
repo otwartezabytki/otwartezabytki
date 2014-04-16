@@ -31,7 +31,9 @@ jQuery.initializer 'section.edit.documents', ->
     add: (e, data) ->
       $document_hidden.removeClass('hidden')
       $document_upload.hide()
-      data.submit()
+      jqXHR = data.submit()
+      $cancel_upload.click (e) ->
+        jqXHR.abort()
 
     submit: (e, data) ->
 
@@ -45,9 +47,6 @@ jQuery.initializer 'section.edit.documents', ->
       $new_section = $(data.result).find('section.edit')
       $section.replaceWith($new_section)
       $new_section.initialize()
-
-  $cancel_upload.click ->
-    document_xhr.abort() if document_xhr?
 
   # fix for serialization problem
   ['name', 'description'].each (attrClass) ->
