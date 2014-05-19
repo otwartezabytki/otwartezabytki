@@ -26,6 +26,7 @@ gem 'coffee-filter'
 gem 'sugar-rails'
 
 gem 'geocoder'
+gem 'rack-cors', require: 'rack/cors'
 
 gem 'simple_form'
 gem 'formtastic'
