@@ -83,28 +83,39 @@ pl:
         date_taken: "Data wykonania"
         description: "Opis:"
         file: "Zdjęcie:"
+        id: Identyfikator
         relic: Zabytek
         relic_id: "ID zabytku"
         state: "Stan zgłoszenia"
+        url: "Adres zdjęcia"
       document:
         description: "Krótki opis"
         file: Plik
+        id: Identyfikator
         mime: "Typ MIME"
         name: Nazwa
         relic: Zabytek
         relic_id: "ID zabytku"
         size: Rozmiar
+        url: Adres
       entry:
         body: Opis
+        id: Identyfikator
         relic: Zabytek
         relic_id: "ID zabytku"
         title: Tytuł
       event:
+        date: Data
+        id: Identyfikator
         name: "Nazwa wydarzenia"
+        photo_id: "Identyfikator zdjęcia"
         position: Kolejność
         relic: Zabytek
         relic_id: "ID zabytku"
       link:
+        category: Kategoria
+        id: Identyfikator
+        kind: Rodzaj
         name: "Nazwa linku"
         position: Kolejność
         relic: Zabytek
@@ -118,9 +129,11 @@ pl:
         file: Plik
         file_full_height: "Pełna wysokość"
         file_full_width: "Pełna szerokość"
+        id: Identyfikator
         mime: "Typ MIME"
         relic: Zabytek
         relic_id: "ID zabytku"
+        url: "Link do zdjęcia"
       relic:
         ancestry: "W zespołach"
         approved: "Zabytek zatwierdzony"
@@ -143,11 +156,14 @@ pl:
           social: "dodany społecznościowo"
         fplace: Miejscowość
         fprovince: Prowincja
+        id: Identyfikator
         identification: "Nazwa obiektu"
         latitude: "Szerokość geograficzna"
         links_info: "Gdzie szukać?"
         longitude: "Długość geograficzna"
+        main_photo: "Zdjęcie główne"
         national_number: NID
+        nid_id: "Identyfikator w NID"
         photos_facets:
           F: "brak zdjęcia"
           T: "ze zdjęciem"
@@ -232,6 +248,12 @@ pl:
           one: "1 błąd uniemożliwił zapisanie %{model}"
           other: "%{count} błędów uniemożliwiło zapisanie %{model}"
     models:
+      alert:
+        few: alerty
+        many: alertów
+        one: alert
+        other: alertów
+        zero: alertów
       commune:
         few: Gminy
         many: Gminy
@@ -286,6 +308,12 @@ pl:
         one: Zabytek
         other: Zabytki
         zero: Zabytek
+      subrelic:
+        few: podzabytki
+        many: podzabytków
+        one: podzabytek
+        other: podzabytków
+        zero: podzabytków
       user:
         few: Użytkownicy
         many: Użytkownicy
@@ -1081,6 +1109,11 @@ pl:
       my_routes: "Moje trasy"
       settings: Ustawienia
       watched: Obserwowane
+    registrations:
+      new:
+        header: "Rejestracja do Otwartych Zabytków"
+        signup_intro: "Zarejestruj się"
+        submit: "Zarejestruj się"
     settings_form:
       avatar: "Zdjęcie profilowe"
       language_settings: "Ustawienia językowe"
@@ -1103,10 +1136,8 @@ pl:
       Relic: zabytek
   views:
     alerts:
-      iframe:
-        created:
-          header: "Dzięki za Alerta!"
-          show_alert: "Zobacz ALERTA"
+      created:
+        open_in_otwartezabytki: "Jeśli chcesz zobaczyć profil zabytku na otwartezabytki.pl, kliknij:"
       new:
         cancel: Anuluj
         description: "Znalazłeś zabytek w złym stanie? Zaalarmuj!"
@@ -1312,7 +1343,12 @@ pl:
           one: "Znaleźliśmy %{count} zabytek w tej okolicy!"
           other: "Znaleźliśmy %{count} zabytków w tej okolicy!"
           zero: "Nie znaleźliśmy zabytków w tej okolicy!"
-        info_html: "Dokładnie w tej okolicy znaleźliśmy <strong>%{count}</strong>, które już istnieją w naszej bazie danych."
+        info_html:
+          few: "Dokładnie w tej okolicy znaleźliśmy <strong>%{count}</strong> zabytki, które już istnieją w naszej bazie danych."
+          many: "Dokładnie w tej okolicy znaleźliśmy <strong>%{count}</strong> zabytków, które już istnieją w naszej bazie danych."
+          one: "Dokładnie w tej okolicy znaleźliśmy <strong>%{count}</strong> zabytek, który już istnieje w naszej bazie danych."
+          other: "Dokładnie w tej okolicy znaleźliśmy <strong>%{count}</strong> zabytków, które już istnieją w naszej bazie danych."
+          zero: "Nie znaleźliśmy zabytków w tej okolicy!"
         not_found_html: "Nie ma go na liście &raquo;"
         that_one: "To jest ten zabytek!"
       new:

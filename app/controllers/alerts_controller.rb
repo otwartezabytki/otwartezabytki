@@ -20,7 +20,7 @@ class AlertsController < ApplicationController
     alert.user_id = current_user.try(:id)
     if alert.save
       if Subdomain.matches?(request)
-        @new_alert_added_url = relic_path(relic, :host => Settings.oz.host, :only_path => false, :notice =>'notices.alert_added', :anchor => 'anchor-alerts')
+        @new_alert_added_url = relic_path(relic, :host => Settings.oz.host, :only_path => false, :anchor => 'anchor-alerts')
         render :created
       else
         redirect_to relic, :notice => t('notices.alert_added'), :anchor => 'anchor-alerts'

@@ -8,11 +8,11 @@
     required = []
     $('.required').children().children().each ->
       if $(this).val() == ""
-        required.push($(this)) 
+        required.push($(this))
       else if $(this).attr("id").split("_").last() == "date"
         required.push($(this)) if typeof(parseInt($(this).val())) != "number" || $(this).val().length < 4
     if required.length > 0
-      event.preventDefault() 
+      event.preventDefault()
       required.each (element, index) ->
         element.css('border-color', 'red')
         element.attr('placeholder', 'pole nie może być puste')
@@ -110,12 +110,11 @@ jQuery.initializer 'section.show.description', ->
     $("#toggle-read").toggle (->
       $(this).parents(".show.description").find(".content").css
         height: "auto"
-        overflow: "visible"
 
       # Hide the [...] when expanded
       $(this).text "mniej"
     ), ->
       $(this).parents(".show.description").find(".content").css
         height: 577
-        overflow: "hidden"
+
       $(this).text "więcej"

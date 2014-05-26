@@ -3,13 +3,19 @@
   - if request.xhr?
     = render 'shared/flash', :flash => flash
   .row
-    = semantic_form_for [relic, alert], :remote => true do |f|
+    = semantic_form_for [relic, alert], :html => {'data-ajax-form' => true} do |f|
       %p.description= t('views.alerts.new.description')
       = f.input :description, :as => :text, :input_html => { :value => params[:description] }
-      = f.input :file, :as => :file
+      - if alert.file?
+        .clearfix
+          = image_tag alert.file.url(:mini), class: 'cached-img'
+          = f.input :file, :as => :file, wrapper_html: { class: 'cached-file-input' }
+      - else
+        = f.input :file, :as => :file
+      = f.hidden_field :file_cache
       %p.description= t('views.relics.edit.photos.statement_html')
-      = f.input :author
-      = f.input :date_taken
+      = f.input :author, :required => true
+      = f.input :date_taken, :required => true
       .actions
         = f.button t('views.alerts.new.submit')
         lub

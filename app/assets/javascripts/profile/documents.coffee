@@ -31,21 +31,22 @@ jQuery.initializer 'section.edit.documents', ->
     add: (e, data) ->
       $document_hidden.removeClass('hidden')
       $document_upload.hide()
-      data.submit()
+      jqXHR = data.submit()
+      $cancel_upload.click (e) ->
+        jqXHR.abort()
 
     submit: (e, data) ->
 
     progressall: (e, data) ->
       progress = parseInt(data.loaded / data.total * 100, 10)
       $progressbar.progressbar("value", progress)
+      if data.loaded == data.total
+        $cancel_upload.hide()
 
     done: (e, data) ->
       $new_section = $(data.result).find('section.edit')
       $section.replaceWith($new_section)
       $new_section.initialize()
-
-  $cancel_upload.click ->
-    document_xhr.abort() if document_xhr?
 
   # fix for serialization problem
   ['name', 'description'].each (attrClass) ->

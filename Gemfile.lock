@@ -348,6 +348,7 @@ GEM
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
+    rack-cors (0.2.9)
     rack-mini-profiler (0.1.31)
       rack (>= 1.1.3)
     rack-ssl (1.3.3)
@@ -355,6 +356,9 @@ GEM
     rack-test (0.6.2)
       rack (>= 1.0)
     rails-assets-handlebars (1.0.0)
+    rails-assets-jquery (2.1.0)
+    rails-assets-jquery-form (3.46.0)
+      rails-assets-jquery (>= 1.5)
     rails-i18n (0.7.2)
       i18n (~> 0.5)
     rails-timeago (2.1.1)
@@ -529,6 +533,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootstrap-sass (~> 2.0.4.0)
+  builder
   cancan
   capybara
   carrierwave
@@ -577,6 +582,7 @@ DEPENDENCIES
   mini_magick!
   multi_json (= 1.3.7)
   newrelic_rpm (~> 3.5.5.38)
+  nokogiri
   omniauth
   omniauth-facebook
   paper_trail (~> 2.7.2)
@@ -584,9 +590,11 @@ DEPENDENCIES
   pry-doc
   pry-rails
   quiet_assets
+  rack-cors
   rack-mini-profiler
   rails (~> 3.2.3)!
   rails-assets-handlebars
+  rails-assets-jquery-form
   rails-i18n
   rails-timeago (~> 2.0)
   rails_config (= 0.2.5)

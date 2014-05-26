@@ -19,7 +19,7 @@
                 = f2.input :date_taken, :input_html => { :class => "date_taken" }
                 = f2.input :description, :input_html => { :class => "description redactor" }
                 = f2.input :alternate_text, :input_html => { :class => "alternate_text" }
-        - else
+        - elsif photo.saved?
           .photo
             .column-left
               .preview

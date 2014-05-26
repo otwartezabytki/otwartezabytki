@@ -17,6 +17,7 @@ group :assets do
   gem 'jsts-rails', '~> 0.2.0'
   gem 'autoprefixer-rails'
   gem 'rails-assets-handlebars'
+  gem 'rails-assets-jquery-form'
 end
 
 gem 'jquery-rails', '2.0.3'
@@ -25,6 +26,7 @@ gem 'coffee-filter'
 gem 'sugar-rails'
 
 gem 'geocoder'
+gem 'rack-cors', require: 'rack/cors'
 
 gem 'simple_form'
 gem 'formtastic'
@@ -40,6 +42,10 @@ gem 'rocket_tag'
 gem 'sentry-raven'
 
 gem 'paper_trail', '~> 2.7.2' # versioning
+
+# xml for osm generating
+gem 'builder'
+gem 'nokogiri'
 
 # admin panel
 gem 'activeadmin',    '~> 0.4.4'

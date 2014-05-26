@@ -61,5 +61,12 @@ module Otwartezabytki
     config.action_mailer.default_url_options = { :host => Settings.oz.host }
 
     config.action_view.sanitized_allowed_tags = ['table', 'tr', 'td', 'strong', 'em', 'li', 'ul', 'ol', 'a', 'p', 'div', 'del', 'ins']
+    # rack/cors
+    config.middleware.use Rack::Cors do
+      allow do
+        origins '*'
+        resource '*', headers: :any, methods: [:get, :post, :put, :delete, :options]
+      end
+    end
   end
 end

@@ -1,16 +1,13 @@
 .map#map-poland
   %ul.poland
-    - Voivodeship.all.each_with_index do |v, i|
-      %li{:class => "pl#{i+1}", :redirect => relics_path(:search => {:location => "pl-#{v.id}"})}
-        %a{:href => "##{v.name.parameterize}", :rel => "nofollow"}
-          %h3= t('views.pages.home.stats_info.voivodeship_header', :name => v.name)
-          - group = Relic.where(:voivodeship_id => v.id).group(:state).count
+    - voivodeships_for_map.each do |voivodeship|
+      %li{class: "pl#{voivodeship.id}", redirect: relics_path(search: { location: "pl-#{voivodeship.id}"})}
+        %a{href: "##{voivodeship.name.parameterize}", rel: "nofollow"}
+          %h3= t('views.pages.home.stats_info.voivodeship_header', name: voivodeship.name)
           %table
             %tr.numbers
-              - #%td= group['filled']    || 0
-              %td= group['checked']   || 0
-              %td= group['unchecked'] || 0
+              %td= voivodeship.stats_for('checked')
+              %td= voivodeship.stats_for('unchecked')
             %tr
-              - #%td= t('activerecord.attributes.relic.states.filled')
               %td= t('activerecord.attributes.relic.states.checked')
               %td= t('activerecord.attributes.relic.states.unchecked')

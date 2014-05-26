@@ -31,21 +31,20 @@ jQuery.initializer 'div.photo-attributes', ->
     add: (e, data) ->
       $photo_hidden.removeClass('hidden')
       $photo_upload.hide()
-      data.submit()
-
-    submit: (e, data) ->
+      jqXHR = data.submit()
+      $cancel_upload.click (e) ->
+        jqXHR.abort()
 
     progressall: (e, data) ->
       progress = parseInt(data.loaded / data.total * 100, 10)
       $progressbar.progressbar("value", progress)
+      if data.loaded == data.total
+        $cancel_upload.hide()
 
     done: (e, data) ->
       $new_section = $(data.result).find('div.photo-attributes')
       $section.replaceWith($new_section)
       $new_section.initialize()
-
-  $cancel_upload.click ->
-    photo_xhr.abort() if photo_xhr?
 
   $form.submit ->
     if $section.find('#relic_license_agreement:checked').length == 0
