@@ -1,7 +1,7 @@
 %section.show.general
   - if relic.parent.present?
     .subrelic-parent-info
-      %p= t('views.relics.show.subrelics.parent_info', :parent => link_to(relic.parent.identification, [relic.parent], :remote => true))
+      %p= t('views.relics.show.subrelics.parent_info', :parent => link_parent(relic.parent))
   - if relic.is_group? && relic.root.descendants.count > 0
     .subrelic-parent-info
       %p= t('views.relics.show.subrelics.group_info')

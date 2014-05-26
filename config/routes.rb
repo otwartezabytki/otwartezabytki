@@ -40,6 +40,8 @@ Otwartezabytki::Application.routes.draw do
     resources :alerts, :only => [:new, :create]
   end
 
+  get '/relics/:id', as: :original_relic, to: 'relics#show'
+
   resource :relicbuilder, :only => [:new, :update, :create] do
     get :administrative_level
     get :address

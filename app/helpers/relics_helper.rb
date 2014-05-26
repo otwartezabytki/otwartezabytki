@@ -4,6 +4,45 @@ module RelicsHelper
     relics.terms('categories', true).inject({}) {|m, t| m[t['term']] = t['count']; m}
   end
 
+  def link_parent(relic)
+    if relic.class == OriginalRelic
+      param = original_relic_slug(relic)
+      link_to(relic.identification, original_relic_path(param, original: true), remote: true)
+    else
+      link_to(relic.identification, [relic], remote: true)
+    end
+  end
+
+  def link_subrelics(relic, current_relic)
+    if relic.class == OriginalRelic
+      path = original_relic_path(original_relic_slug(relic), original: true)
+    else
+      path = [relic]
+    end
+    link_to path, :class => 'subrelic-link', :remote => true do
+      content_tag :dl, :class => ('subrelic ' + (relic == current_relic ? 'type-current ' : '')).strip do
+        subrelic_image(relic) + subrelic_desc(relic)
+      end
+    end
+  end
+
+  def subrelic_image(relic)
+    content_tag :dd, class: 'subrelic-image' do
+      image_tag(relic.main_photo.file.url(:icon), :size => '24x24', :class => 'thumb type-tiny', :alt => relic.identification)
+    end
+  end
+
+  def subrelic_desc(relic)
+    content_tag :dt, class: 'subrelic-name' do
+      relic.identification
+    end
+  end
+
+  def original_relic_slug(relic)
+    slug = [relic.place.name, relic.identification].join('-').gsub(/\d+/, '').parameterize
+    param = [relic.id, slug] * '-'
+  end
+
   def categories_facets_hash
     return @categories_facets_hash if defined? @categories_facets_hash
     @categories_facets_hash = categories_facets_hash_for(relics)
