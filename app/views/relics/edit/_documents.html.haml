@@ -15,7 +15,7 @@
             .column-right
               = f2.input :name, :input_html => { :class => "name" }
               = f2.input :description, :input_html => { :class => "description" }
-      - else
+      - elsif document.saved?
         .document
           .column-left
             = link_to document.file.url do
