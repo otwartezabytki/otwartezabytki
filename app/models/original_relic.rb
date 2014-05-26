@@ -30,11 +30,6 @@ class OriginalRelic < ActiveRecord::Base
     end
   end
 
-  def to_param
-    slug = [(place.name), identification].join('-').gsub(/\d+/, '').parameterize
-    [id, slug] * '-'
-  end
-
   def is_group?
     'ZE' == kind or (is_root? and has_children?)
   end
