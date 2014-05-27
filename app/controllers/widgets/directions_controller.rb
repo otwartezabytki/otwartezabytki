@@ -42,9 +42,10 @@ class Widgets::DirectionsController < WidgetsController
   def update
     authorize! :update, widget_direction if widget_direction.user_id or params[:save] or params[:save_and_print]
     widget_direction.user_id ||= current_user.try :id
-    if widget_direction.has_valid_waypoints?
-      if widget_direction.save
-        respond_to do |format|
+
+    respond_to do |format|
+      if widget_direction.has_valid_waypoints?
+        if widget_direction.save
           format.json { head :ok }
           format.html do
             if params[:save_and_print]
@@ -53,14 +54,20 @@ class Widgets::DirectionsController < WidgetsController
               redirect_to edit_widgets_direction_path(widget_direction), :notice => (t('widget.direction.save') if current_user)
             end
           end
+        else
+          format.json { head :unprocessable_entity }
+          format.html do
+            flash[:error] = t('notices.widget_error_and_correct') if current_user
+            render :edit
+          end
         end
       else
-        flash[:error] = t('notices.widget_error_and_correct') if current_user
-        render :edit
+        format.json { head :unprocessable_entity }
+        format.html do
+          flash[:error] = t('widget.direction.no_route') if current_user
+          redirect_to edit_widgets_direction_path(widget_direction)
+        end
       end
-    else
-      flash[:error] = t('widget.direction.no_route') if current_user
-      redirect_to edit_widgets_direction_path(widget_direction)
     end
   end
 

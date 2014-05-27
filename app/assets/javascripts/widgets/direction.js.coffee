@@ -350,6 +350,9 @@ $('#search_radius').on 'change', ->
   this.value = parseRadius $(this).val()
 
 saveWidget = ->
+  # auto save only if has valid waypoints
+  return unless hasValidWaypoints getSearchParams().waypoints
+
   storeParams = ->
     params = Object.clone getSearchParams()
     delete params.polygon
