@@ -28,13 +28,8 @@
     .preview__section
       %h2.preview__header= t('views.widgets.preview.direction.relics_from_categories')
       %ul.preview__content
-        - Category.roots.sort_by(&:name).each do |category|
-          - if category.name_key == 'sakralny'
-            - category.children.sort_by(&:name).each do |child|
-              - if categories.include?(child.name_key)
-                %li= child.name.gsub('/', ', ')
-          - elsif categories.include?(category.name_key)
-            %li= category.name.gsub('/', ', ')
+        - selected_categories(categories).each do |category|
+          %li= category
 
   - if widget.has_valid_waypoints?
     .preview__section

@@ -25,6 +25,11 @@
         #{waypoints.first} – #{waypoints.last}
         - if waypoints.length > 2
           %span (#{t('users.list_routes.route_points', count: waypoints.length)})
+    - if categories.present?
+      %dl.Title-Content.Definition
+        %dt.Definition-Header= t('views.widgets.preview.direction.relics_from_categories', editable: false)
+        %dd.Definition-Content
+          = selected_categories(categories).join(', ')
   - else
     %h2= t('views.widgets.preview.direction.no_route')
 
