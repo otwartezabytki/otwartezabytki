@@ -85,13 +85,27 @@ markerClusterer = ->
     maxZoom: 18
     styles: styles
     gridSize: 40
+    minimumClusterSize: 4
 
 renderResults = (search_results, last = true, callback) ->
   total = search_results.length
+  random = ->
+    min = .99999995
+    max = 1.0000005
+    Math.random() * (max - min) + min
   $.each search_results, (index) ->
     [@id, @latitude, @longitude] = this if Object.isArray(this)
 
     latlng = new google.maps.LatLng(@latitude, @longitude)
+
+    # Workaround for relics without proper location
+    # Change slightly latLng if there is more than one marker on the same spot
+    markerClusterer().getMarkers().each (m) ->
+      if m.position.equals(latlng)
+        newLat = latlng.lat() * random()
+        newLng = latlng.lng() * random()
+        latlng = new google.maps.LatLng(newLat, newLng)
+        return
 
     marker = new google.maps.Marker
       map: gmap
