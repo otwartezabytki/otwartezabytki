@@ -257,10 +257,14 @@ printClearRelics = ->
   $('#relics-container').html ''
   $('#relics-loading-info').show()
 
+roundToSix = (num) ->
+  +(Math.round(num + "e+6")  + "e-6")
+
 closestRoutePoint = (relic) ->
   a = Infinity
   position = 0
-  distance = google.maps.geometry.spherical.computeDistanceBetween
+  distance = (p, q) ->
+    roundToSix(google.maps.geometry.spherical.computeDistanceBetween(p, q))
   relicPoint = new google.maps.LatLng(relic.latitude, relic.longitude)
   ROUTE.overview_path.each (point, index) ->
     if a > (b = distance(point, relicPoint))
@@ -272,14 +276,16 @@ addRelicsToSort = (relics) ->
   relics.each (relic) ->
     closest = closestRoutePoint(relic)
     SORTED_RELICS[closest.position] ||= []
-    SORTED_RELICS[closest.position].add({distance: closest.distance, relic})
+    SORTED_RELICS[closest.position][closest.distance] ||= []
+    SORTED_RELICS[closest.position][closest.distance].add(relic)
 
 getSortedRelics = ->
   sorted = []
   compare = (a, b) ->
-    a.distance - b.distance
-  Object.keys(SORTED_RELICS).each (key) ->
-    sorted.add SORTED_RELICS[key].sort(compare).map (a) -> a.relic
+    a - b
+  Object.keys(SORTED_RELICS).each (index) ->
+    Object.keys(SORTED_RELICS[index]).sort(compare).each (key) ->
+      sorted.add(SORTED_RELICS[index][key])
   sorted
 
 printRenderRelics = (relics, last) ->
