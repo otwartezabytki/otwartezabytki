@@ -577,4 +577,19 @@ jQuery ->
       updateWaypointInputs newRoute, ->
         $(document).trigger 'params:changed'
 
+  # Workaround Chrome brokenness:
+  # make sure that when we go back from printing waypoints are valid...
+  $.get "#{$('#new_search').attr('action')}/waypoints", (waypoints) ->
+    if waypoints.length
+      $('#waypoints .waypoint').slice(2).each ->
+        $(this).remove()
+        toggleRemoveButtons()
+      waypoints.each (waypoint, index) ->
+        if index < 2
+          $("#waypoints .waypoint:eq(#{index})").val(waypoint)
+        else
+          appendWaypointInput(waypoint)
+      $(document).trigger 'params:changed'
+  , 'json'
+
   $(document).trigger 'params:changed'

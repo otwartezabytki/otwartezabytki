@@ -59,6 +59,7 @@ Otwartezabytki::Application.routes.draw do
         get :print
         get :configure
         get :preview
+        get :waypoints
       end
     end
 

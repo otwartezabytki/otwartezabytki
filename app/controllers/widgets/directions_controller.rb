@@ -20,6 +20,7 @@ class Widgets::DirectionsController < WidgetsController
   end
 
   prepend_before_filter -> { params[:skip_return_path] = true }, only: [:show, :configure, :print]
+  before_filter :set_cache_buster, only: [:waypoints]
 
   def show
     widget_search
@@ -90,10 +91,20 @@ class Widgets::DirectionsController < WidgetsController
     redirect_to user_my_routes_path(current_user.id), :notice => t('notices.route_has_been_removed')
   end
 
+  def waypoints
+    render json: widget_direction.widget_params.try(:[], 'waypoints') || []
+  end
+
   protected
 
   def with_return_path
     request.path
+  end
+
+  def set_cache_buster
+    response.headers['Cache-Control'] = 'no-cache, no-store, max-age=0, must-revalidate'
+    response.headers['Pragma'] = 'no-cache'
+    response.headers['Expires'] = 'Fri, 01 Jan 1990 00:00:00 GMT'
   end
 
 end
