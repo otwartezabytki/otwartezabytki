@@ -111,6 +111,7 @@ Otwartezabytki::Application.routes.draw do
   get 'suggester/place_from_poland', :as => :place_from_poland
 
   resources :tags, :only => [:create]
+  resources :administrative_divisions, :only => [:index]
 
   get 'geocoder/search'
 

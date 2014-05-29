@@ -1,5 +1,3 @@
-# -*- encoding : utf-8 -*-
-
 class Widgets::WalkingGuidesController < WidgetsController
   layout :resolve_widget_layout, :only => [:show, :configure]
 

@@ -15,11 +15,11 @@ class SuggesterController < ApplicationController
   end
 
   def place_from_poland
-    pq = PreparedQuery.new(params[:q])
-    @places = if pq.exists?
-      Place.where(["LOWER(name) LIKE ?", "#{pq.clean.downcase}"])
-    else
-      []
+    @places = []
+    @places = if params[:q].present?
+      # Unicode sort results
+      Place.search(params[:q]).limit(100).
+        sort_by { |p| I18n.collator.get_sort_key(p.location_names.join(',')) }
     end
   end
 
