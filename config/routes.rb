@@ -65,6 +65,13 @@ Otwartezabytki::Application.routes.draw do
     #     get :preview
     #   end
     # end
+    resources :walking_guides, :path => "/walking_guide", except: [:index] do
+      member do
+        get :print
+        get :configure
+        get :preview
+      end
+    end
 
     resource :add_alert, only: :show, path: "/add_alert"
   end
