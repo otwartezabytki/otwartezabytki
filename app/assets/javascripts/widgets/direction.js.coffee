@@ -20,6 +20,7 @@ SORTED_RELICS = null
 print_has_prompted = false
 ready_to_print = false
 template = false
+directionsRenderer = new google.maps.DirectionsRenderer()
 
 show_content_window = (marker, content) ->
   if marker.info_window
@@ -252,7 +253,8 @@ searchRoute = (search_params, callback) ->
       ROUTE = result.routes[0]
       callback(routeToPolygon(ROUTE, search_params.radius))
 
-      gmap.directionsRenderer.setDirections(result)
+      directionsRenderer.setDirections(result)
+      directionsRenderer.setMap(gmap)
     else
       msg = 'Nie znaleziono trasy! Spróbuj ponownie.'
       if envConfig.development
@@ -424,6 +426,8 @@ debouncedSearchRelics = jQuery.debounce ->
             loadRelics search_params
 
       loadRelics Object.clone(search_params)
+  else
+    directionsRenderer.setMap(null)
 
   false
 , 50
