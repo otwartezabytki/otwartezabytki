@@ -1,0 +1,20 @@
+.widget.widget--new.widget__walking-guide(ng-controller="WalkingGuideCtrl" ng-cloak)
+  %h1
+    = t('widget.walking_guide.title')
+    %a.back(href=widgets_path)= t('views.widgets.edit.back')
+  .content.walking-guide__content
+    .sidebar
+      .walking-guide__relics
+        .walking-guide__relic(ng-repeat="relic in relics")
+          %h3.walking-guide-relic__title {{ relic.name }}
+          %p.walking-guide-relics__location {{ relic.location_names.join(', ') }}
+          %button(type="button" ng-click="removeRelic(relic)") &times;
+        .walking-guide__search
+          %input(type="text" ng-model="query")
+          %ul
+            %li(ng-repeat="relic in suggestions")
+              %a(ng-click="selectRelic(relic)")
+                %strong {{ relic.name }} - {{ relic.location_names.join(', ') }}
+      .walking-guide__description
+      %textarea(ng-model="description")
+    %google-map(center="map.center" zoom="map.zoom" events="map.events")

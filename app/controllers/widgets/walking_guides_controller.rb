@@ -3,9 +3,18 @@ class Widgets::WalkingGuidesController < WidgetsController
 
   expose(:widget_walking_guides, model: Widget::WalkingGuide)
   expose(:widget_walking_guide,  model: Widget::WalkingGuide)
-  expose(:widget) { widget_walking_guides.find(params[:id]) }
+  expose(:widget) do
+    if params[:id]
+      widget_walking_guides.find(params[:id])
+    else
+      Widget::WalkingGuide.new
+    end
+  end
   expose(:widget_params) { widget.widget_params }
 
+  def new
+
+  end
 
   def show
 
