@@ -579,7 +579,7 @@ jQuery ->
 
   # Workaround Chrome brokenness:
   # make sure that when we go back from printing waypoints are valid...
-  $.get "#{$('#new_search').attr('action')}/waypoints", (waypoints) ->
+  $.get "#{$('#new_search').attr('action')}/waypoints?#{(new Date()).getTime()}", (waypoints) ->
     if waypoints.length
       $('#waypoints .waypoint').slice(2).each ->
         $(this).remove()
