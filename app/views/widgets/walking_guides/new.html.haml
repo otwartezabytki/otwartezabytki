@@ -13,7 +13,10 @@
           %button.walkig-guide-relic__remove(type="button" ng-click="removeRelic(relic)") &times;
         .walking-guide__search
           %form(name="searchForm" ng-submit="searchRelic()")
-            %input(type="text" ng-model="query" placeholder="co, gdzie")
+            %input(type="text" name="query" ng-minlength="4" ng-model="query" placeholder="what, where")
+            %button(type="button" ng-click="resetForm()") &times;
+            %span.error(ng-show="searchForm.submitted && searchForm.query.$error.minlength")
+              Query is too short!
             %input.hidden(type="submit")
           .walking-guide__suggestions
             %ul

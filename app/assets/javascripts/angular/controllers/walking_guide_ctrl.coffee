@@ -2,6 +2,7 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
   ($scope, Relic) ->
     $scope.query = ''
     $scope.relics = []
+    $scope.suggestions = []
     directionsService  = new google.maps.DirectionsService()
     directionsRenderer = new google.maps.DirectionsRenderer()
     center =
@@ -19,6 +20,8 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
             $scope.map.instance = map
 
     $scope.searchRelic = ->
+      $scope.searchForm.submitted = true
+      return if $scope.searchForm.$invalid
       items = $scope.query.split(',')
       query = items[0]
       place = if items.length > 1
@@ -48,6 +51,11 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
       $scope.map.instance.setCenter(new google.maps.LatLng(center.latitude, center.longitude))
       $scope.map.instance.setZoom(zoom)
 
+    $scope.resetForm = ->
+      $scope.query = ''
+      $scope.searchForm.submitted = false
+      $scope.suggestions = []
+
     $scope.clearRoute = ->
       directionsRenderer.setMap(null)
 
@@ -74,3 +82,8 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
       update: (e, ui) ->
         $scope.drawRoute()
       axis: 'y'
+
+    $scope.$watch 'query', (newVal, oldVal) ->
+      return if newVal == oldVal
+      if newVal == ''
+        $scope.resetForm()
