@@ -2,7 +2,7 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
   ($scope, Relic) ->
     $scope.query = ''
     $scope.relics = []
-    $scope.suggestions = []
+    $scope.suggestions = null
     directionsService  = new google.maps.DirectionsService()
     directionsRenderer = new google.maps.DirectionsRenderer()
     center =
@@ -54,7 +54,7 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
     $scope.resetForm = ->
       $scope.query = ''
       $scope.searchForm.submitted = false
-      $scope.suggestions = []
+      $scope.suggestions = null
 
     $scope.clearRoute = ->
       directionsRenderer.setMap(null)

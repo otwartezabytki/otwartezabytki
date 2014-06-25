@@ -20,6 +20,8 @@
             %input.hidden(type="submit")
           .walking-guide__suggestions
             %ul
+              %li(ng-show="suggestions && !suggestions.relics.length")
+                Nothing found
               %li(ng-repeat="relic in suggestions.relics")
                 %a(ng-click="selectRelic(relic)" href="")
                   %strong {{ relic.identification }}
