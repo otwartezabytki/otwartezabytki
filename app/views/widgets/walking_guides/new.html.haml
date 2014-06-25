@@ -4,8 +4,8 @@
     %a.back(href=widgets_path)= t('views.widgets.edit.back')
   .content.walking-guide__content
     .sidebar
-      .walking-guide__relics
-        .walking-guide__relic(ng-repeat="relic in relics")
+      %ul.walking-guide__relics(ui-sortable="sortableOptions" ng-model="relics")
+        %li.walking-guide__relic(ng-repeat="relic in relics")
           %h3.walking-guide-relic__title {{ relic.identification }}
           %p.walking-guide-relic__location
             %span(ng-show="relic.street") {{ relic.street }},

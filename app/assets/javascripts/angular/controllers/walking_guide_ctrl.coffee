@@ -69,3 +69,8 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
           directionsRenderer.setMap($scope.map.instance)
         else
           # TODO
+
+    $scope.sortableOptions =
+      update: (e, ui) ->
+        $scope.drawRoute()
+      axis: 'y'

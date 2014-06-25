@@ -1,6 +1,6 @@
 angular.module('Relics', [
   'prevent-default', 'ozService',
-  'ngSanitize', 'google-maps', 'ngDragDrop'
+  'ngSanitize', 'google-maps', 'ngDragDrop', 'ui.sortable'
 ])
 
 angular.module('Relics').config ($httpProvider) ->

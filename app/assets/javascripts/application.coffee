@@ -33,6 +33,7 @@
 #= require angular-prevent-default
 #= require angular-google-maps
 #= require angular-dragdrop
+#= require angular-ui-sortable
 #= require ./angular/init
 #= require ./angular/router
 #= require_tree ./angular
