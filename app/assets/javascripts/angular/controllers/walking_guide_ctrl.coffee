@@ -59,11 +59,14 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
       _relic.latlng = new google.maps.LatLng(relic.latitude, relic.longitude)
       $scope.relics.push(_relic)
       $scope.drawRoute()
-      $scope.removeSuggestion(relic)
 
-    $scope.removeSuggestion = (relic) ->
-      index = $scope.suggestions.relics.indexOf(relic)
-      $scope.suggestions.relics.splice(index, 1)
+    $scope.filteredSuggestions = ->
+      if $scope.relics.length && $scope.suggestions
+        $scope.suggestions.exclude (suggestion) ->
+          $scope.relics.some (relic) ->
+            suggestion.id == relic.id
+      else
+        $scope.suggestions
 
     $scope.removeRelic = (relic) ->
       index = $scope.relics.indexOf(relic)

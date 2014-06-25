@@ -22,7 +22,7 @@
             %ul
               %li(ng-show="suggestions && !suggestions.length")
                 Nothing found
-              %li(ng-repeat="relic in suggestions")
+              %li(ng-repeat="relic in filteredSuggestions()")
                 %a(ng-click="selectRelic(relic)" href="")
                   %strong {{ relic.identification }}
                   %p
