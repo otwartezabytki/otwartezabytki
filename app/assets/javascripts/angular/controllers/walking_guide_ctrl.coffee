@@ -3,6 +3,9 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
     $scope.query = ''
     $scope.relics = []
     $scope.suggestions = null
+    $scope.currentPage = 0
+    $scope.totalPages = -1
+    $scope.loading = false
     directionsService  = new google.maps.DirectionsService()
     directionsRenderer = new google.maps.DirectionsRenderer()
     center =
@@ -19,17 +22,37 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
           $scope.$apply ->
             $scope.map.instance = map
 
-    $scope.searchRelic = ->
+    $scope.searchRelics = ->
       $scope.searchForm.submitted = true
       return if $scope.searchForm.$invalid
+      $scope.resetSuggestions()
+      $scope.loadRelics()
+
+    $scope.loadRelics = ->
       items = $scope.query.split(',')
       query = items[0]
       place = if items.length > 1
         items.slice(1).join(',').trim()
       else
         ''
-      Relic.suggestions({ query, place }).then (response) ->
-        $scope.suggestions = response.data
+
+      success = (response) ->
+        $scope.suggestions ||= []
+        $scope.suggestions = $scope.suggestions.concat(response.data.relics)
+        $scope.currentPage = response.data.meta.current_page
+        $scope.totalPages  = response.data.meta.total_pages
+        $scope.loading = false
+
+      error = (response) ->
+        $scope.loading = false
+        # TODO
+
+      $scope.loading = true
+      Relic.suggestions({ query, place, page: $scope.currentPage }).then(success, error)
+
+    $scope.nextPage = ->
+      $scope.currentPage = Math.min($scope.totalPages - 1, $scope.currentPage + 1)
+      $scope.loadRelics()
 
     $scope.selectRelic = (relic) ->
       _relic = angular.copy(relic)
@@ -54,7 +77,12 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
     $scope.resetForm = ->
       $scope.query = ''
       $scope.searchForm.submitted = false
+      $scope.resetSuggestions()
+
+    $scope.resetSuggestions = ->
       $scope.suggestions = null
+      $scope.currentPage = 0
+      $scope.totalPages = -1
 
     $scope.clearRoute = ->
       directionsRenderer.setMap(null)

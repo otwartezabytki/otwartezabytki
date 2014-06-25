@@ -12,7 +12,7 @@
             {{ relic.place }}
           %button.walkig-guide-relic__remove(type="button" ng-click="removeRelic(relic)") &times;
         .walking-guide__search
-          %form(name="searchForm" ng-submit="searchRelic()")
+          %form(name="searchForm" ng-submit="searchRelics()")
             %input(type="text" name="query" ng-minlength="4" ng-model="query" placeholder="what, where")
             %button(type="button" ng-click="resetForm()") &times;
             %span.error(ng-show="searchForm.submitted && searchForm.query.$error.minlength")
@@ -20,14 +20,16 @@
             %input.hidden(type="submit")
           .walking-guide__suggestions
             %ul
-              %li(ng-show="suggestions && !suggestions.relics.length")
+              %li(ng-show="suggestions && !suggestions.length")
                 Nothing found
-              %li(ng-repeat="relic in suggestions.relics")
+              %li(ng-repeat="relic in suggestions")
                 %a(ng-click="selectRelic(relic)" href="")
                   %strong {{ relic.identification }}
                   %p
                     %span(ng-show="relic.street") {{ relic.street }},
                     {{ relic.place }}
+            %button(type="button" ng-click="nextPage()" ng-show="currentPage + 1 < totalPages" ng-disabled="loading")
+              {{ loading && 'Loading...' || 'Load more'}}
       .walking-guide__description
       %textarea(ng-model="description")
     %google-map(center="map.center" zoom="map.zoom" events="map.events")
