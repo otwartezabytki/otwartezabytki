@@ -6,15 +6,23 @@
     .sidebar
       .walking-guide__relics
         .walking-guide__relic(ng-repeat="relic in relics")
-          %h3.walking-guide-relic__title {{ relic.name }}
-          %p.walking-guide-relics__location {{ relic.location_names.join(', ') }}
-          %button(type="button" ng-click="removeRelic(relic)") &times;
+          %h3.walking-guide-relic__title {{ relic.identification }}
+          %p.walking-guide-relic__location
+            %span(ng-show="relic.street") {{ relic.street }},
+            {{ relic.place }}
+          %button.walkig-guide-relic__remove(type="button" ng-click="removeRelic(relic)") &times;
         .walking-guide__search
-          %input(type="text" ng-model="query")
-          %ul
-            %li(ng-repeat="relic in suggestions")
-              %a(ng-click="selectRelic(relic)")
-                %strong {{ relic.name }} - {{ relic.location_names.join(', ') }}
+          %form(name="searchForm" ng-submit="searchRelic()")
+            %input(type="text" ng-model="query" placeholder="co, gdzie")
+            %input.hidden(type="submit")
+          .walking-guide__suggestions
+            %ul
+              %li(ng-repeat="relic in suggestions.relics")
+                %a(ng-click="selectRelic(relic)" href="")
+                  %strong {{ relic.identification }}
+                  %p
+                    %span(ng-show="relic.street") {{ relic.street }},
+                    {{ relic.place }}
       .walking-guide__description
       %textarea(ng-model="description")
     %google-map(center="map.center" zoom="map.zoom" events="map.events")

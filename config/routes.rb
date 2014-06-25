@@ -91,6 +91,7 @@ Otwartezabytki::Application.routes.draw do
         resources :photos
         collection do
           get :clusters
+          get :suggestions
         end
       end
 

@@ -1,5 +1,5 @@
 angular.module('Relics').controller 'WalkingGuideCtrl',
-  ($scope, Suggester) ->
+  ($scope, Relic) ->
     $scope.query = ''
     $scope.relics = []
     directionsService  = new google.maps.DirectionsService()
@@ -17,8 +17,13 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
             $scope.map.instance = map
 
     $scope.searchRelic = ->
-      # TODO: show relics as suggestions
-      Suggester.placeFromPoland(q: $scope.query).then (response) ->
+      items = $scope.query.split(',')
+      query = items[0]
+      place = if items.length > 1
+        items.slice(1).join(',').trim()
+      else
+        ''
+      Relic.suggestions({ query, place }).then (response) ->
         $scope.suggestions = response.data
 
     $scope.selectRelic = (relic) ->
@@ -26,6 +31,11 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
       _relic.latlng = new google.maps.LatLng(relic.latitude, relic.longitude)
       $scope.relics.push(_relic)
       $scope.drawRoute()
+      $scope.removeSuggestion(relic)
+
+    $scope.removeSuggestion = (relic) ->
+      index = $scope.suggestions.relics.indexOf(relic)
+      $scope.suggestions.relics.splice(index, 1)
 
     $scope.removeRelic = (relic) ->
       index = $scope.relics.indexOf(relic)
@@ -50,7 +60,3 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
           directionsRenderer.setMap($scope.map.instance)
         else
           # TODO
-
-    $scope.$watch 'query', (newValue, oldValue) ->
-      return if newValue == oldValue
-      $scope.searchRelic()

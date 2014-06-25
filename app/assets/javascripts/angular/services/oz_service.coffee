@@ -5,3 +5,6 @@ angular.module('ozService', [])
   .factory 'AdministrativeDivision', ($http) ->
     get: (params) ->
       $http.get("/administrative_divisions.json", { isArray: true, params: params })
+  .factory 'Relic', ($http) ->
+    suggestions: (params) ->
+      $http.get("/api/v1/relics/suggestions.json", { isArray: true, params: params })
