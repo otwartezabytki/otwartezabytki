@@ -3,7 +3,7 @@
   %a.back(href=widgets_path)= t('views.widgets.edit.back')
 .content.walking-guide__content
   .sidebar
-    %ul.walking-guide__relics(ui-sortable="sortableOptions" ng-model="relics")
+    %ul.walking-guide__relics(ui-sortable="sortableOptions" ng-model="widget.relics")
       %li.walking-guide__relic(ng-repeat="relic in widget.relics")
         %h3.walking-guide-relic__title {{ relic.identification }}
         %p.walking-guide-relic__location
