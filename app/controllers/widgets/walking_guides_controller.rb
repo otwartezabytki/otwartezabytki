@@ -1,15 +1,7 @@
 class Widgets::WalkingGuidesController < WidgetsController
   layout :resolve_widget_layout, :only => [:show, :configure]
 
-  expose(:widget_walking_guides, model: Widget::WalkingGuide)
-  expose(:widget_walking_guide,  model: Widget::WalkingGuide)
-  expose(:widget) do
-    if params[:id]
-      widget_walking_guides.find(params[:id])
-    else
-      Widget::WalkingGuide.new
-    end
-  end
+  expose(:walking_guide,  model: Widget::WalkingGuide)
   expose(:widget_params) { widget.widget_params }
 
   def new
@@ -17,11 +9,15 @@ class Widgets::WalkingGuidesController < WidgetsController
   end
 
   def show
-
+      render :walking_guide
   end
 
   def create
-
+    if walking_guide.save
+      render :walking_guide
+    else
+      render json: { errors: walking_guide.errors }, status: :unprocessable_entity
+    end
   end
 
   def edit
@@ -29,7 +25,11 @@ class Widgets::WalkingGuidesController < WidgetsController
   end
 
   def update
-
+    if walking_guide.save
+      render :walking_guide
+    else
+      render json: { errors: walking_guide.errors }, status: :unprocessable_entity
+    end
   end
 
   def print
@@ -45,7 +45,8 @@ class Widgets::WalkingGuidesController < WidgetsController
   end
 
   def destroy
-
+    walking_guide.destroy
+    head :ok
   end
 
 end

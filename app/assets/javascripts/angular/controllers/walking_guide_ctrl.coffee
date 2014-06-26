@@ -1,7 +1,10 @@
 angular.module('Relics').controller 'WalkingGuideCtrl',
-  ($scope, Relic) ->
+  ($scope, Relic, WalkingGuide) ->
     $scope.query = ''
-    $scope.relics = []
+    $scope.widget =
+      relics: []
+      relic_ids: []
+      description: ''
     $scope.suggestions = null
     $scope.currentPage = 0
     $scope.totalPages = -1
@@ -55,22 +58,20 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
       $scope.loadRelics()
 
     $scope.selectRelic = (relic) ->
-      _relic = angular.copy(relic)
-      _relic.latlng = new google.maps.LatLng(relic.latitude, relic.longitude)
-      $scope.relics.push(_relic)
+      $scope.widget.relics.push(angular.copy(relic))
       $scope.drawRoute()
 
     $scope.filteredSuggestions = ->
-      if $scope.relics.length && $scope.suggestions
+      if $scope.widget.relics.length && $scope.suggestions
         $scope.suggestions.exclude (suggestion) ->
-          $scope.relics.some (relic) ->
+          $scope.widget.relics.some (relic) ->
             suggestion.id == relic.id
       else
         $scope.suggestions
 
     $scope.removeRelic = (relic) ->
-      index = $scope.relics.indexOf(relic)
-      $scope.relics.splice(index, 1)
+      index = $scope.widget.relics.indexOf(relic)
+      $scope.widget.relics.splice(index, 1)
       $scope.drawRoute()
 
     $scope.resetMap = ->
@@ -90,16 +91,19 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
     $scope.clearRoute = ->
       directionsRenderer.setMap(null)
 
+    relicLatLng = (relic) ->
+      new google.maps.LatLng(relic.latitude, relic.longitude)
+
     $scope.drawRoute = ->
       $scope.clearRoute()
 
-      if !$scope.relics.length
+      if !$scope.widget.relics.length
         return $scope.resetMap()
 
       request =
-        origin: $scope.relics.first().latlng
-        destination: $scope.relics.last().latlng
-        waypoints: $scope.relics.slice(1, -1).map (relic) -> location: relic.latlng
+        origin: relicLatLng($scope.widget.relics.first())
+        destination: relicLatLng($scope.widget.relics.last())
+        waypoints: $scope.widget.relics.slice(1, -1).map (relic) -> location: relicLatLng(relic)
         travelMode: google.maps.TravelMode.WALKING
 
       directionsService.route request, (result, status) ->
@@ -113,6 +117,35 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
       update: (e, ui) ->
         $scope.drawRoute()
       axis: 'y'
+
+    $scope.edit = (id) ->
+      success = (response) ->
+        $scope.loading = false
+        $scope.widget = angular.copy(response.data)
+
+      error = (response) ->
+        $scope.loading = false
+        # TODO: handle error
+
+      $scope.loading = true
+      WalkingGuide.get(id).then(success, error)
+
+    $scope.save = ->
+      $scope.widget.relic_ids = $scope.widget.relics.map (r) -> r.id
+      $scope.loading = true
+
+      success = (response) ->
+        $scope.loading = false
+        angular.extend($scope.widget, response.data)
+
+      error = (response) ->
+        $scope.loading = false
+        # TODO: handle error
+
+      if $scope.widget.uid
+        WalkingGuide.update($scope.widget).then(success, error)
+      else
+        WalkingGuide.create($scope.widget).then(success, error)
 
     $scope.$watch 'query', (newVal, oldVal) ->
       return if newVal == oldVal

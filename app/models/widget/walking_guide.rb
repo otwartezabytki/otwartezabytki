@@ -1,4 +1,5 @@
 class Widget::WalkingGuide < Widget
+  include WidgetsHelper
 
   serialized_attr_accessor :width => 920, :height => 1000
   serialized_attr_accessor :params => {}
@@ -13,6 +14,20 @@ class Widget::WalkingGuide < Widget
 
   def widget_params
     ActiveSupport::JSON.decode(params) || {} rescue {}
+  end
+
+  def description
+    params[:description]
+  end
+
+  def relic_ids
+    params[:relic_ids] || []
+  end
+
+  def relics
+    Relic.where(id: relic_ids).map do |relic|
+      relic_to_widget_data(relic, false)
+    end.sort_by { |relic| relic_ids.index(relic[:id]) }
   end
 
 end
