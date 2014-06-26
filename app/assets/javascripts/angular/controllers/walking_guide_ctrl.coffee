@@ -132,14 +132,14 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
 
     $scope.save = ->
       $scope.widget.relic_ids = $scope.widget.relics.map (r) -> r.id
-      $scope.loading = true
+      $scope.saving = true
 
       success = (response) ->
-        $scope.loading = false
+        $scope.saving = false
         angular.extend($scope.widget, response.data)
 
       error = (response) ->
-        $scope.loading = false
+        $scope.saving = false
         # TODO: handle error
 
       if $scope.widget.uid

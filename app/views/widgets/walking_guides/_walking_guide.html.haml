@@ -28,8 +28,9 @@
                   %span(ng-show="relic.street") {{ relic.street }},
                   {{ relic.place }}
           %button(type="button" ng-click="nextPage()" ng-show="currentPage + 1 < totalPages" ng-disabled="loading")
-            {{ loading && 'Loading...' || 'Load more'}}
+            {{ loading && 'Loading...' || 'Load more' }}
     .walking-guide__description
       %textarea(ng-model="widget.description")
-    %button(type="button" ng-click="save()") Save
+    %button(type="button" ng-click="save()" ng-disabled="saving || loading")
+      {{ saving && 'Saving...' || 'Save' }}
   %google-map(center="map.center" zoom="map.zoom" events="map.events")
