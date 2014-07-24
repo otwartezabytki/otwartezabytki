@@ -135,8 +135,7 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
     renderDirections = (callback) ->
       latLngBounds = new google.maps.LatLngBounds()
 
-      for index in [0...directionsData.length]
-        data = directionsData[index]
+      for data, index in directionsData
         directionsRenderer = new google.maps.DirectionsRenderer
           suppressMarkers: true
           preserveViewport: true
