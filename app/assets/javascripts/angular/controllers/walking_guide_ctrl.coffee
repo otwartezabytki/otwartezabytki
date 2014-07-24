@@ -1,5 +1,7 @@
+#= require ../../variables
+
 angular.module('Relics').controller 'WalkingGuideCtrl',
-  ($scope, Relic, WalkingGuide) ->
+  ($scope, $timeout, Relic, WalkingGuide) ->
     $scope.query = ''
     $scope.widget =
       relics: []
@@ -10,7 +12,11 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
     $scope.totalPages = -1
     $scope.loading = false
     directionsService  = new google.maps.DirectionsService()
-    directionsRenderer = new google.maps.DirectionsRenderer()
+    directionsRenderers = []
+    directionsData = []
+    latLngBounds = {}
+    findRoutePromises = []
+    relicsChunks = []
     center =
       latitude: 52.4118436
       longitude: 19.0984013
@@ -57,8 +63,16 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
       $scope.currentPage = Math.min($scope.totalPages - 1, $scope.currentPage + 1)
       $scope.loadRelics()
 
+    createMarker = (relic) ->
+      new google.maps.Marker
+        map: $scope.map.instance
+        position: relicLatLng(relic)
+        icon: gmap_marker # From variables.js
+
     $scope.selectRelic = (relic) ->
-      $scope.widget.relics.push(angular.copy(relic))
+      _relic = angular.copy(relic)
+      _relic.marker = createMarker(_relic)
+      $scope.widget.relics.push(_relic)
       $scope.drawRoute()
 
     $scope.filteredSuggestions = ->
@@ -71,6 +85,7 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
 
     $scope.removeRelic = (relic) ->
       index = $scope.widget.relics.indexOf(relic)
+      $scope.widget.relics[index].marker.setMap(null)
       $scope.widget.relics.splice(index, 1)
       $scope.drawRoute()
 
@@ -89,29 +104,91 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
       $scope.totalPages = -1
 
     $scope.clearRoute = ->
-      directionsRenderer.setMap(null)
+      for promise in findRoutePromises
+        $timeout.cancel(promise)
+
+      for renderer in directionsRenderers
+        renderer.setMap(null)
+
+      findRoutePromises   = []
+      directionsRenderers = []
+      directionsData      = []
 
     relicLatLng = (relic) ->
       new google.maps.LatLng(relic.latitude, relic.longitude)
 
-    $scope.drawRoute = ->
-      $scope.clearRoute()
+    requestParams = (relics) ->
+      origin: relicLatLng(relics.first())
+      destination: relicLatLng(relics.last())
+      waypoints: relics.slice(1, -1).map (relic) -> location: relicLatLng(relic)
+      travelMode: google.maps.TravelMode.WALKING
 
-      if !$scope.widget.relics.length
-        return $scope.resetMap()
+    relicsIntoChunks = ->
+      relics = $scope.widget.relics
+      return [] if !relics.length
+      chunks = []
+      for i in [0...relics.length] by 9
+        chunk = relics.slice(i, i + 10)
+        chunks.push(chunk) if chunk.length > 1
+      chunks
 
-      request =
-        origin: relicLatLng($scope.widget.relics.first())
-        destination: relicLatLng($scope.widget.relics.last())
-        waypoints: $scope.widget.relics.slice(1, -1).map (relic) -> location: relicLatLng(relic)
-        travelMode: google.maps.TravelMode.WALKING
+    renderDirections = (callback) ->
+      latLngBounds = new google.maps.LatLngBounds()
+
+      for index in [0...directionsData.length]
+        data = directionsData[index]
+        directionsRenderer = new google.maps.DirectionsRenderer
+          suppressMarkers: true
+          preserveViewport: true
+        directionsRenderer.setDirections(data)
+        directionsRenderer.setMap($scope.map.instance)
+        directionsRenderers.push(directionsRenderer)
+
+        for route in data.routes
+          latLngBounds.union(route.bounds)
+
+        if directionsData.length == index + 1
+          $scope.map.instance.fitBounds(latLngBounds, true)
+          callback()
+
+    findRoute = (index = 0) ->
+      relics  = relicsChunks[index]
+      request = requestParams(relics)
+      last    = index + 1 == relicsChunks.length
 
       directionsService.route request, (result, status) ->
         if status == google.maps.DirectionsStatus.OK
-          directionsRenderer.setDirections(result)
-          directionsRenderer.setMap($scope.map.instance)
+          directionsData.push(result)
+          if last
+            # Render directions if this is the last request
+            renderDirections ->
+              $scope.loading = false
+          else
+            # Delay every two requests to prevent OVER_QUERY_LIMIT
+            delay = if index % 2
+              1000
+            else
+              50
+            promise = $timeout ->
+              findRoute(index + 1)
+            , delay
+            findRoutePromises.push(promise)
         else
-          # TODO
+          console.error status # TODO: handle error
+
+    $scope.drawRoute = ->
+      # Split relics in to chunks to prevent MAX_WAYPOINTS_EXCEEDED error
+      relicsChunks = relicsIntoChunks()
+      $scope.loading = true
+      $scope.clearRoute()
+
+      if $scope.widget.relics.length < 2
+        return $scope.resetMap()
+
+      promise = $timeout ->
+        findRoute()
+      , 1000
+      findRoutePromises.push(promise)
 
     $scope.sortableOptions =
       update: (e, ui) ->
@@ -122,6 +199,7 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
       success = (response) ->
         $scope.loading = false
         $scope.widget = angular.copy(response.data)
+        $scope.drawRoute()
 
       error = (response) ->
         $scope.loading = false
