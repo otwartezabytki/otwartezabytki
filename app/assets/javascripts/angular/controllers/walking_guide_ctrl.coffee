@@ -66,10 +66,12 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
       $scope.loadRelics()
 
     createMarker = (relic, icon = null) ->
-      new google.maps.Marker
+      marker = new google.maps.Marker
         map: $scope.map.instance
         position: relicLatLng(relic)
         icon: icon || gmap_marker # From variables.js
+      markers.push(marker)
+      marker
 
     clearMarkers = ->
       for marker in markers
@@ -83,7 +85,7 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
           gmap_marker_green
         else if index + 1 == relics.length
           gmap_marker_red
-        markers.push(createMarker(relic, icon))
+        createMarker(relic, icon)
 
     $scope.selectRelic = (relic) ->
       $scope.widget.relics.push(angular.copy(relic))
@@ -204,6 +206,9 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
       relicsChunks = relicsIntoChunks()
       $scope.loading = true
       $scope.clearRoute()
+
+      if $scope.widget.relics.length == 1
+        createMarker($scope.widget.relics[0], gmap_marker_green)
 
       if $scope.widget.relics.length < 2
         return $scope.resetMap()
