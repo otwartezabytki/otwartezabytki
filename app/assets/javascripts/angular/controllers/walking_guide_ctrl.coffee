@@ -17,7 +17,6 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
     latLngBounds = {}
     findRoutePromises = []
     relicsChunks = []
-    markers = []
     center =
       latitude: 52.4118436
       longitude: 19.0984013
@@ -65,27 +64,20 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
       $scope.currentPage = Math.min($scope.totalPages - 1, $scope.currentPage + 1)
       $scope.loadRelics()
 
-    createMarker = (relic, icon = null) ->
-      marker = new google.maps.Marker
-        map: $scope.map.instance
-        position: relicLatLng(relic)
-        icon: icon || gmap_marker # From variables.js
-      markers.push(marker)
-      marker
+    $scope.getIcon = (first, last) ->
+      if first
+        gmap_marker_green
+      else if last
+        gmap_marker_red
+      else
+        gmap_marker
 
-    clearMarkers = ->
-      for marker in markers
-        marker.setMap(null)
-      markers = []
-
-    drawMarkers = ->
-      relics = $scope.widget.relics
-      for relic, index in relics
-        icon = if index == 0
-          gmap_marker_green
-        else if index + 1 == relics.length
-          gmap_marker_red
-        createMarker(relic, icon)
+    $scope.loadRelicInfo = (relic) ->
+      $scope.loading = true
+      Relic.get(relic.id).then (result) ->
+        angular.extend(relic, result.data)
+        relic.showInfoWindow = true
+        $scope.loading = false
 
     $scope.selectRelic = (relic) ->
       $scope.widget.relics.push(angular.copy(relic))
@@ -125,8 +117,6 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
       for renderer in directionsRenderers
         renderer.setMap(null)
 
-      clearMarkers()
-
       findRoutePromises   = []
       directionsRenderers = []
       directionsData      = []
@@ -164,7 +154,6 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
           latLngBounds.union(route.bounds)
 
         if directionsData.length == index + 1
-          drawMarkers()
           $scope.map.instance.fitBounds(latLngBounds, true)
           callback()
 
@@ -205,9 +194,6 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
       # Split relics in to chunks to prevent MAX_WAYPOINTS_EXCEEDED error
       relicsChunks = relicsIntoChunks()
       $scope.clearRoute()
-
-      if $scope.widget.relics.length == 1
-        createMarker($scope.widget.relics[0], gmap_marker_green)
 
       if $scope.widget.relics.length < 2
         return $scope.resetMap()

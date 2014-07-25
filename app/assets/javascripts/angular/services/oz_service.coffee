@@ -8,3 +8,5 @@ angular.module('ozService', [])
   .factory 'Relic', ($http) ->
     suggestions: (params) ->
       $http.get("/api/v1/relics/suggestions.json", { isArray: true, params: params })
+    get: (id) ->
+      $http.get("/api/v1/relics/#{id}.json")
