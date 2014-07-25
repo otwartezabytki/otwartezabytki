@@ -17,6 +17,7 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
     latLngBounds = {}
     findRoutePromises = []
     relicsChunks = []
+    markers = []
     center =
       latitude: 52.4118436
       longitude: 19.0984013
@@ -69,10 +70,17 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
         position: relicLatLng(relic)
         icon: gmap_marker # From variables.js
 
+    clearMarkers = ->
+      for marker in markers
+        marker.setMap(null)
+      markers = []
+
+    drawMarkers = ->
+      for relic in $scope.widget.relics
+        markers.push(createMarker(relic))
+
     $scope.selectRelic = (relic) ->
-      _relic = angular.copy(relic)
-      _relic.marker = createMarker(_relic)
-      $scope.widget.relics.push(_relic)
+      $scope.widget.relics.push(angular.copy(relic))
       $scope.drawRoute()
 
     $scope.filteredSuggestions = ->
@@ -85,7 +93,6 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
 
     $scope.removeRelic = (relic) ->
       index = $scope.widget.relics.indexOf(relic)
-      $scope.widget.relics[index].marker.setMap(null)
       $scope.widget.relics.splice(index, 1)
       $scope.drawRoute()
 
@@ -109,6 +116,8 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
 
       for renderer in directionsRenderers
         renderer.setMap(null)
+
+      clearMarkers()
 
       findRoutePromises   = []
       directionsRenderers = []
@@ -147,6 +156,7 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
           latLngBounds.union(route.bounds)
 
         if directionsData.length == index + 1
+          drawMarkers()
           $scope.map.instance.fitBounds(latLngBounds, true)
           callback()
 
@@ -198,7 +208,12 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
       success = (response) ->
         $scope.loading = false
         $scope.widget = angular.copy(response.data)
-        $scope.drawRoute()
+        if $scope.map.instance
+          $scope.drawRoute()
+        else
+          $scope.$watch 'map.instance', (newVal, oldVal) ->
+            return if newVal == oldVal
+            $scope.drawRoute()
 
       error = (response) ->
         $scope.loading = false
