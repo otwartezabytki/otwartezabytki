@@ -204,7 +204,6 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
     $scope.drawRoute = ->
       # Split relics in to chunks to prevent MAX_WAYPOINTS_EXCEEDED error
       relicsChunks = relicsIntoChunks()
-      $scope.loading = true
       $scope.clearRoute()
 
       if $scope.widget.relics.length == 1
@@ -212,6 +211,8 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
 
       if $scope.widget.relics.length < 2
         return $scope.resetMap()
+
+      $scope.loading = true
 
       promise = $timeout ->
         findRoute()
