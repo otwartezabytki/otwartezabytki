@@ -22,6 +22,7 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
       latitude: 52.4118436
       longitude: 19.0984013
     zoom = 6
+    lastQueryTimestamp = 0
 
     $scope.map =
       instance: null
@@ -166,6 +167,7 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
       last    = index + 1 == relicsChunks.length
 
       directionsService.route request, (result, status) ->
+        lastQueryTimestamp = Date.now()
         if status == google.maps.DirectionsStatus.OK
           directionsData.push(result)
           if last
@@ -185,6 +187,13 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
         else
           console.error status # TODO: handle error
 
+    getDelay = ->
+      diff = Date.now() - lastQueryTimestamp
+      delay = if diff >= 1000
+        50
+      else
+        Math.min(50, 1000 - diff)
+
     $scope.drawRoute = ->
       # Split relics in to chunks to prevent MAX_WAYPOINTS_EXCEEDED error
       relicsChunks = relicsIntoChunks()
@@ -196,7 +205,7 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
 
       promise = $timeout ->
         findRoute()
-      , 1000
+      , getDelay()
       findRoutePromises.push(promise)
 
     $scope.sortableOptions =
