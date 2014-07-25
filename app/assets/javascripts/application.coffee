@@ -27,7 +27,7 @@
 #= require_tree ./application
 
 # Relics Angular App
-#= require underscore
+#= require lodash
 #= require angular
 #= require angular-sanitize
 #= require angular-prevent-default
