@@ -1,5 +1,6 @@
 %h1
   = t('widget.walking_guide.title')
+  %span(ng-show="loading")= "#{t('widget.walking_guide.loading')}..."
   %a.back(href=widgets_path)= t('views.widgets.edit.back')
 .walking-guide__content
   .walking-guide__sidebar

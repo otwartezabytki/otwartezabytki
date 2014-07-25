@@ -1708,6 +1708,7 @@ pl:
       title: "Widżet Mapowy"
     walking_guide:
       title: Spacerownik
+      loading: ładowanie
   wuoz:
     wuoz-w-bialymstoku: "Wojewódzki Urząd Ochrony Zabytków w Białymstoku"
     wuoz-w-gdansku: "Wojewódzki Urząd Ochrony Zabytków w Gdańsku"
