@@ -196,10 +196,10 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
 
     getDelay = ->
       diff = Date.now() - lastQueryTimestamp
-      delay = if diff >= 1000
+      if diff >= 1000
         50
       else
-        Math.min(50, 1000 - diff)
+        Math.max(50, 1000 - diff)
 
     $scope.drawRoute = ->
       # Split relics in to chunks to prevent MAX_WAYPOINTS_EXCEEDED error
