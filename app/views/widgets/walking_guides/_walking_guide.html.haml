@@ -4,7 +4,7 @@
   %a.back(href=widgets_path)= t('views.widgets.edit.back')
 .walking-guide__content
   .walking-guide__sidebar
-    %h2(ng-show="widget.relics.length") Relics
+    %h2(ng-show="widget.relics.length")= t('widget.walking_guide.relics')
     %ul.walking-guide__relics(ui-sortable="sortableOptions" ng-model="widget.relics" ng-if="widget.relics.length")
       %li.walking-guide__relic(ng-repeat="relic in widget.relics")
         %h3.walking-guide-relic__title {{ relic.identification }}
@@ -14,13 +14,13 @@
         %button.walkig-guide-relic__remove(type="button" ng-click="removeRelic(relic)") &times;
     .walking-guide__search
       %form(name="searchForm" ng-submit="searchRelics()")
-        %input.walking-guide-search__query(type="text" name="query" ng-minlength="4" ng-model="query" placeholder="what, where")
+        %input.walking-guide-search__query(type="text" name="query" ng-minlength="4" ng-model="query" placeholder="#{t('widget.walking_guide.what_where')}")
         %button.walkig-guide-relic__remove(type="button" ng-click="resetForm()" ng-show="query") &times;
         %span.error(ng-show="searchForm.submitted && searchForm.query.$error.minlength")
-          Query is too short!
+          = t('widget.walking_guide.query_is_too_short')
         %input.hidden(type="submit")
         %span(ng-show="suggestions && !suggestions.length")
-          Nothing found
+          = t('widget.walking_guide.nothing_found')
         .clearfix
     .walking-guide__suggestions(ng-if="suggestions")
       %ul.walking-guide-suggestions__container
@@ -31,26 +31,14 @@
               %span(ng-show="relic.street") {{ relic.street }},
               {{ relic.place }}
       %button.button.button--load-more(type="button" ng-click="nextPage()" ng-show="currentPage + 1 < totalPages" ng-disabled="loading")
-        {{ loading && 'Loading...' || 'Load more' }}
+        {{ loading && '#{t('widget.walking_guide.loading')}' || '#{t('widget.walking_guide.load_more')}' }}
     .walking-guide__description
-      %h2 Description
+      %h2= t('widget.walking_guide.description')
       %textarea(ng-model="widget.description")
     %button.button.button--save(type="button" ng-click="save()" ng-disabled="saving || loading")
-      {{ saving && 'Saving...' || 'Save' }}
+      {{ saving && '#{t('widget.walking_guide.saving')}' || '#{t('widget.walking_guide.save')}' }}
   %div(google-map="true" center="map.center" zoom="map.zoom" events="map.events")
     %div(marker="true" ng-repeat="relic in widget.relics" coords="relic" icon="getIcon($first, $last)" click="loadRelicInfo(relic)")
       %div(window="true" show="relic.showInfoWindow || false" closeClick="relic.showInfoWindow = false")
-        .relic-info
-          .relic-info__photo-wrapper(ng-if="relic.main_photo.file.midi.url")
-            %img.relic-info__photo(src="{{ relic.main_photo.file.midi.url }}")
-          .relic-info__content
-            %h3.relic-info__title
-              {{ relic.identification }}
-            %p.relic-info__address
-              %span(ng-show="relic.street") {{ relic.street }},
-              {{ relic.place }}
-            %a.relic-info__link(href="/#{I18n.locale}/relics/{{ relic.id }}?skip_return_path=true" target="_blank")
-              = t('widget.walking_guide.more')
-              &raquo;
-
-
+        = render 'relic_info'
+  .clearfix

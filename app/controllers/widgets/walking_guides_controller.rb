@@ -1,15 +1,20 @@
 class Widgets::WalkingGuidesController < WidgetsController
-  layout :resolve_widget_layout, :only => [:show, :configure]
+  layout :resolve_widget_layout, :only => [:show]
 
+  expose(:walking_guides,  model: Widget::WalkingGuide)
   expose(:walking_guide,  model: Widget::WalkingGuide)
   expose(:widget_params) { widget.widget_params }
+  expose(:widget) { walking_guides.find(params[:id]) }
 
   def new
 
   end
 
   def show
-      render :walking_guide
+    respond_to do |format|
+      format.html
+      format.json { render :walking_guide }
+    end
   end
 
   def create
@@ -37,10 +42,6 @@ class Widgets::WalkingGuidesController < WidgetsController
   end
 
   def preview
-
-  end
-
-  def configure
 
   end
 

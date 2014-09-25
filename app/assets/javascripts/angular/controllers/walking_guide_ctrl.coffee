@@ -210,7 +210,7 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
         $scope.drawRoute()
       axis: 'y'
 
-    $scope.edit = (id) ->
+    $scope.load = (id) ->
       success = (response) ->
         $scope.loading = false
         $scope.widget = angular.copy(response.data)

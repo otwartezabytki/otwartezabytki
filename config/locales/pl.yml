@@ -1710,6 +1710,14 @@ pl:
       title: Spacerownik
       loading: ładowanie
       more: więcej
+      relics: Zabytki
+      description: Opis
+      what_where: 'co, gdzie'
+      save: zapisz
+      saving: zapisywanie...
+      load_more: Wczytaj więcej
+      nothing_found: Nic nie znaleziono
+      query_is_too_short: Zapytanie jest zbyt krótkie!
   wuoz:
     wuoz-w-bialymstoku: "Wojewódzki Urząd Ochrony Zabytków w Białymstoku"
     wuoz-w-gdansku: "Wojewódzki Urząd Ochrony Zabytków w Gdańsku"
