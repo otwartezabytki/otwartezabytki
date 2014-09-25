@@ -68,7 +68,6 @@ Otwartezabytki::Application.routes.draw do
     resources :walking_guides, :path => "/walking_guide", except: [:index] do
       member do
         get :print
-        get :configure
         get :preview
       end
     end

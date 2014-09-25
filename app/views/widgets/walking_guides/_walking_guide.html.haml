@@ -37,8 +37,24 @@
       %textarea(ng-model="widget.description")
     %button.button.button--save(type="button" ng-click="save()" ng-disabled="saving || loading")
       {{ saving && '#{t('widget.walking_guide.saving')}' || '#{t('widget.walking_guide.save')}' }}
+    %a.button.button--print(href="" ng-show="saved")
+      = t('widget.walking_guide.print')
   %div(google-map="true" center="map.center" zoom="map.zoom" events="map.events")
     %div(marker="true" ng-repeat="relic in widget.relics" coords="relic" icon="getIcon($first, $last)" click="loadRelicInfo(relic)")
       %div(window="true" show="relic.showInfoWindow || false" closeClick="relic.showInfoWindow = false")
         = render 'relic_info'
+  .clearfix
+
+.walking-guide__code-generator(ng-show="saved")
+  %h2= t('views.widgets.edit.generated')
+  %textarea.code-generator__snippet
+    = raw %Q(<iframe id="oz_walking_guide" src="{{ widget.widget_url }}" width="{{ widget.width }}" height="{{ widget.height }}"></iframe>)
+  .code-generator__input-block
+    %label.code-generator__label
+      = t('widget.walking_guide.width')
+    %input.code-generator__input(type="text" ng-model="widget.width")
+  .code-generator__input-block
+    %label.code-generator__label
+      = t('widget.walking_guide.height')
+    %input.code-generator__input(type="text" ng-model="widget.height")
   .clearfix

@@ -8,8 +8,11 @@ class Widget::WalkingGuide < Widget
     :numericality => { :greater_than_or_equal_to => 500, :less_than_or_equal_to => 1600 }
 
   def snippet
-    widget_url = Rails.application.routes.url_helpers.widgets_walking_guides_url(uid, :host => Settings.oz.host)
-    "<iframe id='oz_walking_guide' src='#{widget_url}' width='#{width}' height='#{height}'></iframe>"
+    %Q(<iframe id="oz_walking_guide" src="#{widget_url}" width="#{width}" height="#{height}"></iframe>)
+  end
+
+  def widget_url
+    Rails.application.routes.url_helpers.widgets_walking_guides_url(uid, host: Settings.oz.host)
   end
 
   def widget_params

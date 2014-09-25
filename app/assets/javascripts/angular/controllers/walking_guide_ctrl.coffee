@@ -11,6 +11,7 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
     $scope.currentPage = 0
     $scope.totalPages = -1
     $scope.loading = false
+    $scope.saved = false
     directionsService  = new google.maps.DirectionsService()
     directionsRenderers = []
     directionsData = []
@@ -213,6 +214,7 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
     $scope.load = (id) ->
       success = (response) ->
         $scope.loading = false
+        $scope.saved = true
         $scope.widget = angular.copy(response.data)
         if $scope.map.instance
           $scope.drawRoute()
@@ -234,6 +236,7 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
 
       success = (response) ->
         $scope.saving = false
+        $scope.saved = true
         angular.extend($scope.widget, response.data)
 
       error = (response) ->

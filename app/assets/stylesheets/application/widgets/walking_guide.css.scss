@@ -11,8 +11,12 @@
     font-size: 10px;
   }
 
-  .button--save {
+  .button {
     margin: 0 !important;
+  }
+
+  .button + .button {
+    margin-left: 10px !important;
   }
 
   .angular-google-map-container {
@@ -173,4 +177,32 @@
 
 .relic-info__photo-wrapper + .relic-info__content {
   margin-left: 60px;
+}
+
+.walking-guide__code-generator {
+  padding: 0 20px 20px 20px;
+}
+
+.code-generator__snippet {
+  padding: 8px !important;
+  width: 902px !important;
+  height: 60px !important;
+}
+
+.code-generator__input-block + .code-generator__input-block {
+  margin-left: 20px;
+}
+
+.code-generator__input-block {
+  float: left;
+}
+
+.code-generator__label {
+  display: block;
+}
+
+.code-generator__input {
+  margin-top: 5px !important;
+  margin-bottom: 0 !important;
+  width: 60px !important;
 }
