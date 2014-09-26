@@ -58,8 +58,7 @@
                 - if current_user && current_user.registered? && current_user.errors.size == 0
                   %li
                     - # Profile:
-                    - # = link_to t('layouts.application.hello', :username => (current_user.username || current_user.email)), current_user
-                    = t('layouts.application.hello', :username => (current_user.username || current_user.email))
+                    = link_to t('layouts.application.hello', :username => (current_user.username || current_user.email)), current_user
                   %li= link_to t('layouts.application.logout'), destroy_user_session_path, :method => :delete, :class => 'logout'
                 - else
                   %li

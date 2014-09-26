@@ -18,11 +18,11 @@ Otwartezabytki::Application.routes.draw do
 
   resources :tags, :only => :index
   # Profile:
-  # resources :users, :only => [:show, :edit, :update] do
-  #   get :checked_relics
-  #   get :my_routes
-  #   delete :remove_avatar
-  # end
+  resources :users, :only => [:show, :edit, :update] do
+    get :checked_relics
+    # get :my_routes
+    delete :remove_avatar
+  end
 
   resources :relics, :except => [:new, :create, :destroy] do
     member do
@@ -31,8 +31,8 @@ Otwartezabytki::Application.routes.draw do
       match 'section/:section', :to => 'relics#update', :as => 'section', :via => :put
       get :download_zip
       # Profile:
-      # post :adopt
-      # post :unadopt
+      post :adopt
+      post :unadopt
       get :print
     end
 
