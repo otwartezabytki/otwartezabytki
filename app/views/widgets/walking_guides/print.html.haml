@@ -1,0 +1,43 @@
+.widget.widget--print.widget__walking-guide(ng-controller="WalkingGuideCtrl" ng-cloak ng-init="load('#{walking_guide.uid}')")
+  %header.Sidebar
+    %h1.Logo
+      %b.Hidden Otwarte Zabytki
+      = image_tag 'logo.png', alt: t('views.relics.guide.logo', editable: false), class: 'Logo-Image'
+
+  %header.Title
+    %h1.Title-Header= t('widget.walking_guide.title', editable: false)
+
+  .Map
+    %div(google-map="true" center="map.center" zoom="map.zoom" events="map.events")
+      %div(marker="true" ng-repeat="relic in widget.relics" coords="relic" icon="getIcon($first, $last)" click="loadRelicInfo(relic)")
+        %div(window="true" show="relic.showInfoWindow || false" closeClick="relic.showInfoWindow = false")
+          = render 'relic_info'
+
+  %section
+    %h2.Title-Header--padded-bottom= t('widget.walking_guide.relics')
+    %p#relics-loading-info(ng-show="loading") #{t('widgets.walking_guide.loading')}…
+    %ol.MainContent
+      %li.Definition-Container--unbreakable(ng-repeat="relic in widget.relics")
+        %dl.Definition
+          %dt.Definition-Header--without-colon {{ relic.identification }}
+          %dd.Definition-Content--small
+            %span(ng-show="relic.street") {{ relic.street }},
+            {{ relic.place }}
+
+  %section
+    %h2.Title-Header--padded-bottom= t('widget.walking_guide.description')
+    %p.MainContent
+      {{ widget.description }}
+
+  %footer.Footer--padded-top
+    .Sidebar
+      %h1 www.otwartezabytki.pl
+      #{t('views.relics.guide.date')}: #{Time.now.strftime('%Y-%m-%d')}
+    = image_tag 'cc_logo.png', :alt => 'Centrum Cyfrowe'
+
+- content_for :stylesheets do
+  = stylesheet_link_tag 'widgets/walking_guide'
+- content_for :before_javascripts do
+  = javascript_include_tag "http://maps.googleapis.com/maps/api/js?key=#{Settings.oz.gm_key}&sensor=false"
+- content_for :javascripts do
+  = javascript_include_tag 'widgets/walking_guide'

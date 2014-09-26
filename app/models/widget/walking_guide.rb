@@ -12,7 +12,11 @@ class Widget::WalkingGuide < Widget
   end
 
   def widget_url
-    Rails.application.routes.url_helpers.widgets_walking_guides_url(uid, host: Settings.oz.host)
+    Rails.application.routes.url_helpers.widgets_walking_guide_url(uid, host: Settings.oz.host)
+  end
+
+  def print_path
+    Rails.application.routes.url_helpers.print_widgets_walking_guide_path(uid)
   end
 
   def widget_params

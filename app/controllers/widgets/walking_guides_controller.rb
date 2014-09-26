@@ -38,7 +38,7 @@ class Widgets::WalkingGuidesController < WidgetsController
   end
 
   def print
-
+    render :print, layout: 'widgets/print'
   end
 
   def preview
