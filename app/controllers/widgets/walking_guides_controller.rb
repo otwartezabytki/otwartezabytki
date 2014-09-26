@@ -18,6 +18,7 @@ class Widgets::WalkingGuidesController < WidgetsController
   end
 
   def create
+    set_user_id
     if walking_guide.save
       render :walking_guide
     else
@@ -26,10 +27,12 @@ class Widgets::WalkingGuidesController < WidgetsController
   end
 
   def edit
-
+    authorize! :edit, walking_guide if walking_guide.user_id
   end
 
   def update
+    authorize! :update, walking_guide if walking_guide.user_id
+    set_user_id
     if walking_guide.save
       render :walking_guide
     else
@@ -46,8 +49,14 @@ class Widgets::WalkingGuidesController < WidgetsController
   end
 
   def destroy
+    authorize! :destroy, walking_guide
     walking_guide.destroy
     head :ok
   end
 
+  private
+
+  def set_user_id
+    walking_guide.user_id ||= current_user.try(:id)
+  end
 end
