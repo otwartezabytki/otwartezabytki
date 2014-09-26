@@ -1,6 +1,5 @@
 .widget__walking-guide {
   position: relative;
-  width: 960px;
 
   h2 {
     font-weight: bold;
@@ -27,6 +26,11 @@
     left: 240px;
     right: 20px;
   }
+}
+
+.widget__walking-guide--new,
+.widget__walking-guide--edit {
+  width: 960px;
 }
 
 .walking-guide__content {

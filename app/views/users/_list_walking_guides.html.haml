@@ -16,7 +16,7 @@
           = link_to t('.delete'), widgets_walking_guide_path(walking_guide), 'data-method' => :delete, class: 'delete', confirm: t('.delete_confirmation', editable: false)
           = link_to t('.print'), print_widgets_walking_guide_path(walking_guide)
         %dd.feed-message
-          = t('.relics')
+          %b= t('.relics') + ':'
           = relics.map {|a| a[:identification] }.join(', ')
           - if relics.count > 5
             [...]
