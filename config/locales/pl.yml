@@ -1721,6 +1721,7 @@ pl:
       print: Drukuj
       width: Szerokość
       height: Wysokość
+      description_content: 'Spacerownik...'
   wuoz:
     wuoz-w-bialymstoku: "Wojewódzki Urząd Ochrony Zabytków w Białymstoku"
     wuoz-w-gdansku: "Wojewódzki Urząd Ochrony Zabytków w Gdańsku"
