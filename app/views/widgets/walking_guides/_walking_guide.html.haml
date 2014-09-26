@@ -35,7 +35,7 @@
     .walking-guide__description
       %h2= t('widget.walking_guide.description')
       %textarea(ng-model="widget.description")
-    %button.button.button--save(type="button" ng-click="save()" ng-disabled="saving || loading")
+    %button.button.button--save(type="button" ng-click="save()" ng-disabled="saving || loading || !widget.relics.length")
       {{ saving && '#{t('widget.walking_guide.saving')}' || '#{t('widget.walking_guide.save')}' }}
     %a.button.button--print(ng-href="{{ widget.print_path }}" ng-show="saved" target="_blank")
       = t('widget.walking_guide.print')
