@@ -17,6 +17,10 @@ class UsersController < ApplicationController
     Widget::Direction.where(user_id: user.id).reorder('updated_at DESC').keep_if { |route| route.has_valid_waypoints? }
   end
 
+  expose(:walking_guides) do
+    Widget::WalkingGuide.where(user_id: user.id).reorder('updated_at DESC')
+  end
+
   def update
     successfully_updated = if needs_password?(user, params)
       user.update_with_password(user_params(true))

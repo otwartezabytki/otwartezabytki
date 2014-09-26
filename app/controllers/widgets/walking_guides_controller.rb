@@ -51,7 +51,12 @@ class Widgets::WalkingGuidesController < WidgetsController
   def destroy
     authorize! :destroy, walking_guide
     walking_guide.destroy
-    head :ok
+    respond_to do |format|
+      format.html do
+        redirect_to user_walking_guides_path(current_user.id), :notice => t('notices.walking_guide_has_been_removed')
+      end
+      format.json { head :ok }
+    end
   end
 
   private

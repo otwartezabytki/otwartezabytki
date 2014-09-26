@@ -956,6 +956,7 @@ pl:
     widget_error: "Nie udało się stworzyć widgeta. Zgłoś błąd administracji."
     widget_error_and_correct: "Nie udało się zaktualizować widgeta. Popraw błędy poniżej."
     widget_has_been_updated: "Widget został zaktualizowany"
+    walking_guide_has_been_removed: 'Spacerownik został usunięty'
   number:
     currency:
       format:
@@ -1104,9 +1105,19 @@ pl:
       no_notifications: "Nie masz już więcej powiadomień."
       no_updated_relics: "Nikt nie wprowadził żadnych zmian w zabytkach które obserwujesz"
       updated_relics_list: "Zmiany wprowadzone w profilach zabytków dodanych i adoptowanych przez Ciebie:"
+    list_walking_guides:
+      delete: "Usuń spacerownik"
+      delete_confirmation: "Usunąć spacerownik?"
+      description: "Lista spacerowników dodanych przez Ciebie"
+      edit: Edytuj
+      no_walking_guides: "Nie posiadasz jeszcze żadnych spacerowników."
+      no_walking_guides_make_one: "Stwórz swój pierwszy!"
+      print: Wydrukuj
+      relics: Zabytki
     navigation:
       checked_by_me: "Sprawdzone przeze mnie"
       my_routes: "Moje trasy"
+      walking_guides: Spacerowniki
       settings: Ustawienia
       watched: Obserwowane
     registrations:
