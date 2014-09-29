@@ -17,7 +17,7 @@ group :assets do
   gem 'jsts-rails', '~> 0.2.0'
   gem 'autoprefixer-rails'
   gem 'rails-assets-handlebars'
-  gem 'ngmin-rails'
+  gem 'ngannotate-rails'
   gem 'rails-assets-angular'
   gem 'rails-assets-angular-ui-router'
   gem 'rails-assets-angular-prevent-default'
