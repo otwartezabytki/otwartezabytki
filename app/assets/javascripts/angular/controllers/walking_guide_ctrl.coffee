@@ -12,6 +12,7 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
     $scope.totalPages = -1
     $scope.loading = false
     $scope.saved = false
+    $scope.error = false
     directionsService  = new google.maps.DirectionsService()
     directionsRenderers = []
     directionsData = []
@@ -56,7 +57,7 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
 
       error = (response) ->
         $scope.loading = false
-        # TODO
+        $scope.error = true
 
       $scope.loading = true
       Relic.suggestions({ query, place, page: $scope.currentPage }).then(success, error)
@@ -225,7 +226,7 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
 
       error = (response) ->
         $scope.loading = false
-        # TODO: handle error
+        $scope.error = true
 
       $scope.loading = true
       WalkingGuide.get(id).then(success, error)

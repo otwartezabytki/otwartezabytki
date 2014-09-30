@@ -1733,6 +1733,7 @@ pl:
       width: Szerokość
       height: Wysokość
       description_content: 'Spacerownik...'
+      error: 'Wystąpił nieoczekiwany błąd. Spróbuj za chwilę'
   wuoz:
     wuoz-w-bialymstoku: "Wojewódzki Urząd Ochrony Zabytków w Białymstoku"
     wuoz-w-gdansku: "Wojewódzki Urząd Ochrony Zabytków w Gdańsku"

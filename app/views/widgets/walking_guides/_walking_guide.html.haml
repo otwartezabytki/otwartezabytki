@@ -19,8 +19,10 @@
         %span.error(ng-show="searchForm.submitted && searchForm.query.$error.minlength")
           = t('widget.walking_guide.query_is_too_short')
         %input.hidden(type="submit")
-        %span(ng-show="suggestions && !suggestions.length")
+        %span.error(ng-show="suggestions && !suggestions.length")
           = t('widget.walking_guide.nothing_found')
+        %span.error(ng-show="error")
+          = t('widget.walking_guide.error')
         .clearfix
     .walking-guide__suggestions(ng-if="suggestions")
       %ul.walking-guide-suggestions__container
