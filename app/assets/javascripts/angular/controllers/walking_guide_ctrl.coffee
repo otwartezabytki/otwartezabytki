@@ -108,11 +108,13 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
       $scope.resetSuggestions()
 
     $scope.resetSuggestions = ->
+      clearErrors()
       $scope.suggestions = null
       $scope.currentPage = 0
       $scope.totalPages = -1
 
     $scope.clearRoute = ->
+      clearErrors()
       for promise in findRoutePromises
         $timeout.cancel(promise)
 
@@ -122,6 +124,9 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
       findRoutePromises   = []
       directionsRenderers = []
       directionsData      = []
+
+    clearErrors = ->
+      $scope.error = false
 
     relicLatLng = (relic) ->
       new google.maps.LatLng(relic.latitude, relic.longitude)
@@ -183,7 +188,7 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
             , delay
             findRoutePromises.push(promise)
         else
-          console.error status # TODO: handle error
+          $scope.error = true
 
     getDelay = ->
       diff = Date.now() - lastQueryTimestamp
@@ -242,7 +247,7 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
 
       error = (response) ->
         $scope.saving = false
-        # TODO: handle error
+        $scope.error = true
 
       if $scope.widget.uid
         WalkingGuide.update($scope.widget).then(success, error)
