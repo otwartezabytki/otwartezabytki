@@ -4,25 +4,57 @@
 
 The project is licensed under a 3-clause BSD license. You can find the whole text of the license [here](https://github.com/otwartezabytki/otwartezabytki/blob/master/LICENSE).
 
-### Requirements (for OS X)
-Your machine should be equipped with:
-  - homebrew
-  - ruby 1.9.2 or 1.9.3, below than 2.0.0 (we recommend using rbenv)
+### General system requirements
+  - ruby 1.9.2 or 1.9.3, below than 2.0.0
   - git
   - bundle
-  - web browser e.g. chrome or safari
+  - elasticsearch (0.20.2 - recommended)
+  - [Morfologik (Polish) Analysis for ElasticSearch](https://github.com/chytreg/elasticsearch-analysis-morfologik)
+  - memcached  
+  - postgresql
+  - imagemagick
+  - aspell (with configured polish language)
 
-### Application setup (for OS X)
+Setup basically doesn't different from a standard rails application, probably you will run the commands below:
+```
+cp config/database.yml.example config/database.yml
+# create database and configure users
 
+bundle install
+
+# load database dump if you have
+gunzip -c %m_%d_%Y.sql.gz | script/rails db
+
+bundle exec rake db:migrate
+bundle exec rake db:seed
+
+# reindex relic index
+bundle exec rake relic:reindex 
+```
+  
+
+### Application setup for OS X
+#### requirements
+  - homebrew
+  - ruby 1.9.2 or 1.9.3, below than 2.0.0
+  - git
+  - bundle
+  -  web browser e.g. chrome or safari
+  
+#### installation
 ```
 brew update
 brew install elasticsearch memcached postgresql imagemagick aspell --lang=pl
 brew pin elasticsearch postgresql
+
 cp config/database.yml.example config/database.yml
-# create database and database users for dev and testing
+# create database and configure users
+
 bundle install
+
 # load database dump if you have
 gunzip -c %m_%d_%Y.sql.gz | script/rails db
+
 bundle exec rake db:migrate
 bundle exec rake db:seed
 ```
