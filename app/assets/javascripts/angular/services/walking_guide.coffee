@@ -5,6 +5,7 @@ angular.module('Relics').factory 'WalkingGuide', ($http) ->
     widget_walking_guide:
       params:
         relic_ids: params.relic_ids
+        title: params.title
         description: params.description
       width: params.width
       height: params.height

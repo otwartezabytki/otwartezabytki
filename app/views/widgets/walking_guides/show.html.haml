@@ -2,7 +2,7 @@
   .walking-guide__content
     %h1.walking_guide__logo= t('widget.walking_guide.title')
     .walking-guide__sidebar
-      %h2(ng-show="widget.relics.length")= t('widget.walking_guide.relics')
+      %h2(ng-show="widget.relics.length") {{ widget.title || "#{t('widget.walking_guide.relics')}" }}
       %ul.walking-guide__relics(ng-if="widget.relics.length")
         %li.walking-guide__relic(ng-repeat="relic in widget.relics")
           %h3.walking-guide-relic__title {{ relic.identification }}

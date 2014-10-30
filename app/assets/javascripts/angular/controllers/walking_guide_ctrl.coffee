@@ -6,6 +6,7 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
     $scope.widget =
       relics: []
       relic_ids: []
+      title: ''
       description: ''
     $scope.suggestions = null
     $scope.currentPage = 0

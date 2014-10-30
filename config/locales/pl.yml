@@ -1734,6 +1734,7 @@ pl:
       height: Wysokość
       description_content: 'Spacerownik...'
       error: 'Wystąpił nieoczekiwany błąd. Spróbuj za chwilę'
+      title_field: Tytuł
   wuoz:
     wuoz-w-bialymstoku: "Wojewódzki Urząd Ochrony Zabytków w Białymstoku"
     wuoz-w-gdansku: "Wojewódzki Urząd Ochrony Zabytków w Gdańsku"

@@ -23,6 +23,10 @@ class Widget::WalkingGuide < Widget
     ActiveSupport::JSON.decode(params) || {} rescue {}
   end
 
+  def title
+    params[:title]
+  end
+
   def description
     params[:description]
   end
