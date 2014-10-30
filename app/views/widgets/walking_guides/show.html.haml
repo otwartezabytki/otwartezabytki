@@ -9,7 +9,7 @@
           %p.walking-guide-relic__location
             %span(ng-show="relic.street") {{ relic.street }},
             {{ relic.place }}
-      .walking-guide__description
+      .walking-guide__description(ng-show="widget.description")
         %h2= t('widget.walking_guide.description')
         %p {{ widget.description }}
     %div(google-map="true" center="map.center" zoom="map.zoom" events="map.events" draggable="true")

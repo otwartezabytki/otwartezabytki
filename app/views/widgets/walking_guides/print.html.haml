@@ -24,7 +24,7 @@
             %span(ng-show="relic.street") {{ relic.street }},
             {{ relic.place }}
 
-  %section
+  %section(ng-show="widget.description")
     %h2.Title-Header--padded-bottom= t('widget.walking_guide.description')
     %p.MainContent
       {{ widget.description }}
