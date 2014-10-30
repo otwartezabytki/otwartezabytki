@@ -41,7 +41,7 @@
       {{ saving && '#{t('widget.walking_guide.saving')}' || '#{t('widget.walking_guide.save')}' }}
     %a.button.button--print(ng-href="{{ widget.print_path }}" ng-show="saved" target="_blank")
       = t('widget.walking_guide.print')
-  %div(google-map="true" center="map.center" zoom="map.zoom" events="map.events")
+  %div(google-map="true" center="map.center" zoom="map.zoom" events="map.events" draggable="true")
     %div(marker="true" ng-repeat="relic in widget.relics" coords="relic" icon="getIcon($first, $last)" click="loadRelicInfo(relic)")
       %div(window="true" show="relic.showInfoWindow || false" closeClick="relic.showInfoWindow = false")
         = render 'relic_info'
