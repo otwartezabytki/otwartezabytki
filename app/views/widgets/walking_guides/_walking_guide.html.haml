@@ -40,10 +40,17 @@
     .walking-guide__description
       %h2= t('widget.walking_guide.description')
       %textarea(ng-model="widget.description")
-    %button.button.button--save(type="button" ng-click="save()" ng-disabled="saving || loading || !widget.relics.length")
-      {{ saving && '#{t('widget.walking_guide.saving')}' || '#{t('widget.walking_guide.save')}' }}
-    %a.button.button--print(ng-href="{{ widget.print_path }}" ng-show="saved" target="_blank")
-      = t('widget.walking_guide.print')
+
+    - if current_user.present?
+      %button.button.button--save(type="button" ng-click="save()" ng-disabled="saving || loading || !widget.relics.length")
+        {{ saving && '#{t('widget.walking_guide.saving')}' || '#{t('widget.walking_guide.save')}' }}
+      %a.button.button--print(ng-href="{{ widget.print_path }}" ng-show="saved" target="_blank")
+        = t('widget.walking_guide.print')
+    - else
+      %p= t('widget.walking_guide.sign_in_to_save')
+      %br
+      = link_to t('widget.walking_guide.sign_in'), new_user_session_path, class: 'button button--login'
+
   %div(google-map="true" center="map.center" zoom="map.zoom" events="map.events" draggable="true")
     %div(marker="true" ng-repeat="relic in widget.relics" coords="relic" icon="getIcon($first, $last)" click="loadRelicInfo(relic)")
       %div(window="true" show="relic.showInfoWindow || false" closeClick="relic.showInfoWindow = false")
