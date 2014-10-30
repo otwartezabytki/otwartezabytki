@@ -15,7 +15,7 @@
 
   %section
     %h2.Title-Header--padded-bottom {{ widget.title || "#{t('widget.walking_guide.relics')}" }}
-    %p#relics-loading-info(ng-show="loading") #{t('widgets.walking_guide.loading')}…
+    %p#relics-loading-info(ng-show="loading") #{t('widget.walking_guide.loading')}…
     %ol.MainContent
       %li.Definition-Container--unbreakable(ng-repeat="relic in widget.relics")
         %dl.Definition
@@ -23,6 +23,9 @@
           %dd.Definition-Content--small
             %span(ng-show="relic.street") {{ relic.street }},
             {{ relic.place }}
+            %div(ng-show="relic.description")
+              %br
+              %p(ng-bind-html="relic.description")
 
   %section(ng-show="widget.description")
     %h2.Title-Header--padded-bottom= t('widget.walking_guide.description')

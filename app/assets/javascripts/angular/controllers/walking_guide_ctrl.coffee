@@ -1,7 +1,7 @@
 #= require ../../variables
 
 angular.module('Relics').controller 'WalkingGuideCtrl',
-  ($scope, $timeout, Relic, WalkingGuide) ->
+  ($scope, $timeout, $modal, Relic, WalkingGuide) ->
     $scope.query = ''
     $scope.widget =
       relics: []
@@ -259,3 +259,18 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
       return if newVal == oldVal
       if newVal == ''
         $scope.resetForm()
+
+    $scope.openDescriptionModal = (relic) ->
+      modalInstance = $modal.open
+        templateUrl: 'walking-guide/description-modal.html'
+        controller: 'WalkingGuideModalCtrl'
+        resolve:
+          relic: -> relic
+
+
+angular.module('Relics').controller 'WalkingGuideModalCtrl', ($scope, $modalInstance, relic) ->
+
+  $scope.relic = relic
+
+  $scope.close = ->
+    $modalInstance.dismiss('cancel')

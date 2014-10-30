@@ -26,6 +26,7 @@ group :assets do
   gem 'rails-assets-angular-google-maps', '~> 1.1.8'
   gem 'rails-assets-angular-dragdrop', '~> 1.0.5'
   gem 'rails-assets-angular-ui-sortable', '~> 0.12.8'
+  gem 'rails-assets-angular-bootstrap', '~> 0.11.2'
 end
 
 gem 'jquery-rails', '2.0.3'

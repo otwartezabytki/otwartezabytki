@@ -358,6 +358,8 @@ GEM
     rack-test (0.6.2)
       rack (>= 1.0)
     rails-assets-angular (1.2.12)
+    rails-assets-angular-bootstrap (0.11.2)
+      rails-assets-angular (>= 1)
     rails-assets-angular-dragdrop (1.0.6)
       rails-assets-angular (~> 1.0)
       rails-assets-jquery (~> 2.0)
@@ -613,6 +615,7 @@ DEPENDENCIES
   rack-mini-profiler
   rails (~> 3.2.3)!
   rails-assets-angular
+  rails-assets-angular-bootstrap (~> 0.11.2)
   rails-assets-angular-dragdrop (~> 1.0.5)
   rails-assets-angular-google-maps (~> 1.1.8)
   rails-assets-angular-prevent-default

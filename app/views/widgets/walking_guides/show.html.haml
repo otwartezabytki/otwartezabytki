@@ -1,3 +1,16 @@
+%script(type="text/ng-template" id="walking-guide/description-modal.html")
+  .modal-header
+    %h3.modal-title {{ relic.identification }}
+  .modal-body(ng-bind-html="relic.description")
+  .modal-footer
+    %a(ng-click="close()" href="")= t('common.close')
+
+%script(type="text/ng-template" id="walking-guide/relic.html")
+  %h3.walking-guide-relic__title {{ relic.identification }}
+  %p.walking-guide-relic__location
+    %span(ng-show="relic.street") {{ relic.street }},
+    {{ relic.place }}
+
 .widget.widget--show.widget__walking-guide(ng-controller="WalkingGuideCtrl" ng-cloak ng-init="load('#{walking_guide.uid}')")
   .walking-guide__content
     %h1.walking_guide__logo= t('widget.walking_guide.title')
@@ -5,10 +18,9 @@
       %h2(ng-show="widget.relics.length") {{ widget.title || "#{t('widget.walking_guide.relics')}" }}
       %ul.walking-guide__relics(ng-if="widget.relics.length")
         %li.walking-guide__relic(ng-repeat="relic in widget.relics")
-          %h3.walking-guide-relic__title {{ relic.identification }}
-          %p.walking-guide-relic__location
-            %span(ng-show="relic.street") {{ relic.street }},
-            {{ relic.place }}
+          %a(ng-click="openDescriptionModal(relic)" href="" ng-if="relic.description" ng-include="'walking-guide/relic.html'")
+          %div(ng-if="!relic.description" ng-include="'walking-guide/relic.html'")
+
       .walking-guide__description(ng-show="widget.description")
         %h2= t('widget.walking_guide.description')
         %p {{ widget.description }}
