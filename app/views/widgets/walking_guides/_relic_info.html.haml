@@ -1,11 +1,11 @@
 .relic-info
-  .relic-info__photo-wrapper(ng-if="relic.main_photo.file.midi.url")
+  .relic-info__photo-wrapper(ng-if="'{{ relic.main_photo.file.midi.url }}'")
     %img.relic-info__photo(ng-src="{{ relic.main_photo.file.midi.url }}")
   .relic-info__content
     %h3.relic-info__title
       {{ relic.identification }}
     %p.relic-info__address
-      %span(ng-show="relic.street") {{ relic.street }},
+      %span(ng-show="'{{ relic.street }}'") {{ relic.street }},
       {{ relic.place }}
     %a.relic-info__link(href="/#{I18n.locale}/relics/{{ relic.id }}?skip_return_path=true" target="_blank")
       = t('widget.walking_guide.more')
