@@ -12,7 +12,7 @@
       .walking-guide__description
         %h2= t('widget.walking_guide.description')
         %p {{ widget.description }}
-    %div(google-map="true" center="map.center" zoom="map.zoom" events="map.events")
+    %div(google-map="true" center="map.center" zoom="map.zoom" events="map.events" draggable="true")
       %div(marker="true" ng-repeat="relic in widget.relics" coords="relic" icon="getIcon($first, $last)" click="loadRelicInfo(relic)")
         %div(window="true" show="relic.showInfoWindow || false" closeClick="relic.showInfoWindow = false")
           = render 'relic_info'
