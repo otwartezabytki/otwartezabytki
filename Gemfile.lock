@@ -364,8 +364,8 @@ GEM
       rails-assets-angular (~> 1.0)
       rails-assets-jquery (~> 2.0)
       rails-assets-jquery-ui
-    rails-assets-angular-google-maps (1.1.8)
-      rails-assets-angular (~> 1.2.0)
+    rails-assets-angular-google-maps (2.0.7)
+      rails-assets-angular (>= 1.2.0)
       rails-assets-lodash (~> 2.4.1)
     rails-assets-angular-prevent-default (1.0.3)
     rails-assets-angular-sanitize (1.2.12)
@@ -617,7 +617,7 @@ DEPENDENCIES
   rails-assets-angular
   rails-assets-angular-bootstrap (~> 0.11.2)
   rails-assets-angular-dragdrop (~> 1.0.5)
-  rails-assets-angular-google-maps (~> 1.1.8)
+  rails-assets-angular-google-maps (~> 2.0.7)
   rails-assets-angular-prevent-default
   rails-assets-angular-sanitize (~> 1.2.0)
   rails-assets-angular-ui-router
