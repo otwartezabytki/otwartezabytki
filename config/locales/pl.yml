@@ -1722,7 +1722,7 @@ pl:
       loading: ładowanie
       more: więcej
       relics: Zabytki
-      description: Opis
+      description: Opis trasy
       what_where: 'co, gdzie'
       save: zapisz
       saving: zapisywanie...
@@ -1734,7 +1734,7 @@ pl:
       height: Wysokość
       description_content: 'Spacerownik...'
       error: 'Wystąpił nieoczekiwany błąd. Spróbuj za chwilę'
-      title_field: Tytuł
+      title_field: Tytuł spacerownika
       sign_in_to_save: 'Musisz się zalogować jeżeli chcesz zapisać spacerownik.'
       sign_in: 'Zaloguj się'
   wuoz:
