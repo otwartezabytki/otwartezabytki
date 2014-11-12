@@ -27,6 +27,21 @@
     left: 240px;
     right: 20px;
   }
+
+  .help-inline {
+    font-size: 12px;
+    color: #505057;
+    background: #f1f3f5 asset-data-url('icon-hint.png') 9px 50% no-repeat;
+    padding: 6px 30px;
+    line-height: 16px;
+    margin-top: 10px;
+    display: block;
+  }
+}
+
+.walking-guide__header {
+  margin-top: 20px;
+  padding: 0 20px;
 }
 
 .widget__walking-guide--new,

@@ -2,6 +2,8 @@
   = t('widget.walking_guide.title')
   %span(ng-show="loading")= "#{t('widget.walking_guide.loading')}..."
   %a.back(href=widgets_path)= t('views.widgets.edit.back')
+.walking-guide__header
+  %p.help-inline= t('widget.walking_guide.help')
 .walking-guide__content
   .walking-guide__sidebar
     %h2(ng-show="widget.relics.length")= t('widget.walking_guide.relics')

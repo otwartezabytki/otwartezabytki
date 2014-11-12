@@ -1737,6 +1737,7 @@ pl:
       title_field: Tytuł spacerownika
       sign_in_to_save: 'Musisz się zalogować jeżeli chcesz zapisać spacerownik.'
       sign_in: 'Zaloguj się'
+      help: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde neque aliquid illo sint assumenda blanditiis inventore natus veritatis voluptates excepturi suscipit labore eos pariatur provident odio, aspernatur quod officia laudantium."
   wuoz:
     wuoz-w-bialymstoku: "Wojewódzki Urząd Ochrony Zabytków w Białymstoku"
     wuoz-w-gdansku: "Wojewódzki Urząd Ochrony Zabytków w Gdańsku"
