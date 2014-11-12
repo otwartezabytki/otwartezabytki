@@ -1732,7 +1732,7 @@ pl:
       print: Drukuj
       width: Szerokość
       height: Wysokość
-      description_content: 'Stwórz spacerownik po za zabytkach z naszej bazy.'
+      description_content: 'Stwórz spacerownik po zabytkach z naszej bazy.'
       error: 'Wystąpił nieoczekiwany błąd. Spróbuj za chwilę'
       title_field: Tytuł spacerownika
       sign_in_to_save: 'Musisz się zalogować jeżeli chcesz zapisać spacerownik.'
