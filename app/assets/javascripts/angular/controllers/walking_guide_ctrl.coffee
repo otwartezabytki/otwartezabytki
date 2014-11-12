@@ -244,7 +244,7 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
       success = (response) ->
         $scope.saving = false
         $scope.saved = true
-        angular.extend($scope.widget, response.data)
+        angular.extend($scope.widget, _.pick(response.data, ['uid', 'width', 'height', 'widget_url', 'print_path']))
 
       error = (response) ->
         $scope.saving = false
@@ -259,6 +259,13 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
       return if newVal == oldVal
       if newVal == ''
         $scope.resetForm()
+
+    autosave = _.throttle (newVal, oldVal) ->
+      return if _.isEqual(newVal, oldVal)
+      $scope.save()
+    , 1000
+
+    $scope.$watch 'widget', autosave, true
 
     $scope.openDescriptionModal = (relic) ->
       modalInstance = $modal.open
