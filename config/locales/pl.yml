@@ -1732,12 +1732,12 @@ pl:
       print: Drukuj
       width: Szerokość
       height: Wysokość
-      description_content: 'Spacerownik...'
+      description_content: 'Stwórz spacerownik po za zabytkach z naszej bazy.'
       error: 'Wystąpił nieoczekiwany błąd. Spróbuj za chwilę'
       title_field: Tytuł spacerownika
       sign_in_to_save: 'Musisz się zalogować jeżeli chcesz zapisać spacerownik.'
       sign_in: 'Zaloguj się'
-      help: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde neque aliquid illo sint assumenda blanditiis inventore natus veritatis voluptates excepturi suscipit labore eos pariatur provident odio, aspernatur quod officia laudantium."
+      help: "Zacznij od wyszukania zabytku tak jakbyś szukał go w naszej bazie np. „cmentarz żydowski, Warszawa”. Wybranie zabytku z listy rezultatów doda punkt na mapę. Każdy kolejny wyszukany i wybrany zabytek będzie tworzył automatycznie pieszą trasę. Kolejność można zmienić przenosząc zabytki na liście."
   wuoz:
     wuoz-w-bialymstoku: "Wojewódzki Urząd Ochrony Zabytków w Białymstoku"
     wuoz-w-gdansku: "Wojewódzki Urząd Ochrony Zabytków w Gdańsku"
