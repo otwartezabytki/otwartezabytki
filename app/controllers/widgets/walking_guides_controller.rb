@@ -20,6 +20,7 @@ class Widgets::WalkingGuidesController < WidgetsController
   def create
     set_user_id
     if walking_guide.save
+      remember_path
       render :walking_guide
     else
       render json: { errors: walking_guide.errors }, status: :unprocessable_entity
@@ -34,6 +35,7 @@ class Widgets::WalkingGuidesController < WidgetsController
     authorize! :update, walking_guide if walking_guide.user_id
     set_user_id
     if walking_guide.save
+      remember_path
       render :walking_guide
     else
       render json: { errors: walking_guide.errors }, status: :unprocessable_entity
@@ -60,6 +62,10 @@ class Widgets::WalkingGuidesController < WidgetsController
   end
 
   private
+
+  def remember_path
+    set_return_path(edit_widgets_walking_guide_path(walking_guide))
+  end
 
   def set_user_id
     walking_guide.user_id ||= current_user.try(:id)

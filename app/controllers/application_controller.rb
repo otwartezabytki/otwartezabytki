@@ -106,11 +106,15 @@ class ApplicationController < ActionController::Base
     { 'X-Requested-With' => 'IFrame' } if iframe_transport?
   end
 
+  def set_return_path(path)
+    cookies[:return_path] = path
+  end
+
   protected
 
   def save_return_path
     return false if devise_controller? or request.format == 'json' or params[:iframe]
-    cookies[:return_path] = request.fullpath if request.get?
+    set_return_path(request.fullpath) if request.get?
   end
 
   def authenticate_admin!
