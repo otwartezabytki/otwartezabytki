@@ -18,11 +18,12 @@ Otwartezabytki::Application.routes.draw do
 
   resources :tags, :only => :index
   # Profile:
-  # resources :users, :only => [:show, :edit, :update] do
-  #   get :checked_relics
-  #   get :my_routes
-  #   delete :remove_avatar
-  # end
+  resources :users, :only => [:show, :edit, :update] do
+    get :checked_relics
+    # get :my_routes
+    get :walking_guides
+    delete :remove_avatar
+  end
 
   resources :relics, :except => [:new, :create, :destroy] do
     member do
@@ -31,8 +32,8 @@ Otwartezabytki::Application.routes.draw do
       match 'section/:section', :to => 'relics#update', :as => 'section', :via => :put
       get :download_zip
       # Profile:
-      # post :adopt
-      # post :unadopt
+      post :adopt
+      post :unadopt
       get :print
     end
 
@@ -65,6 +66,12 @@ Otwartezabytki::Application.routes.draw do
     #     get :preview
     #   end
     # end
+    resources :walking_guides, :path => "/walking_guide", except: [:index] do
+      member do
+        get :print
+        get :preview
+      end
+    end
 
     resource :add_alert, only: :show, path: "/add_alert"
   end
@@ -84,6 +91,7 @@ Otwartezabytki::Application.routes.draw do
         resources :photos
         collection do
           get :clusters
+          get :suggestions
         end
       end
 
@@ -104,6 +112,7 @@ Otwartezabytki::Application.routes.draw do
   get 'suggester/place_from_poland', :as => :place_from_poland
 
   resources :tags, :only => [:create]
+  resources :administrative_divisions, :only => [:index]
 
   get 'geocoder/search'
 

@@ -18,8 +18,9 @@ class Ability
         can :manage, Event
         can :create, Alert
         can [:update, :remove_avatar], User, :id => user.id
-        can [:read, :added_relics, :checked_relics, :my_routes], User
+        can [:read, :added_relics, :checked_relics, :my_routes, :walking_guides], User
         can [:edit, :update, :destroy], Widget::Direction, :user_id => user.id
+        can [:edit, :update, :destroy], Widget::WalkingGuide, :user_id => user.id
       end
     end
 

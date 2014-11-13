@@ -1,0 +1,229 @@
+.widget__walking-guide {
+  position: relative;
+
+  h2 {
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+
+  .button--load-more {
+    margin: 5px 0 !important;
+    font-size: 10px;
+  }
+
+  .button {
+    margin: 0 !important;
+    padding: 7px 15px !important;
+  }
+
+  .button + .button {
+    margin-left: 10px !important;
+  }
+
+  .angular-google-map-container {
+    position: absolute;
+    top: 20px;
+    bottom: 20px;
+    left: 240px;
+    right: 20px;
+  }
+
+  .help-inline {
+    font-size: 12px;
+    color: #505057;
+    background: #f1f3f5 asset-data-url('icon-hint.png') 9px 50% no-repeat;
+    padding: 6px 30px;
+    line-height: 16px;
+    margin-top: 10px;
+    display: block;
+  }
+}
+
+.walking-guide__header {
+  margin-top: 20px;
+  padding: 0 20px;
+}
+
+.widget__walking-guide--new,
+.widget__walking-guide--edit {
+  width: 960px;
+}
+
+.walking-guide__content {
+  padding: 20px;
+  position: relative;
+}
+
+.walking-guide__sidebar {
+  padding-right: 20px;
+  width: 200px;
+  float: left;
+}
+
+.walking-guide__description {
+
+  textarea {
+    padding: 8px !important;
+    width: 182px;
+    height: 400px !important;
+  }
+}
+
+.walking-guide__relics {
+  padding-top: 10px;
+}
+
+.walking-guide__relic {
+  font-size: 0.9em;
+  position: relative;
+  padding-right: 20px;
+  margin-bottom: 1.5em;
+  cursor: move;
+  background-color: #fff;
+  line-height: 1.2em;
+
+  .walkig-guide-relic__remove {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
+
+.walking-guide-relic__title {
+  font-weight: bold;
+}
+
+.walking-guide-relic__location {
+  font-style: italic;
+}
+
+.walkig-guide-relic__remove {
+  display: inline-block;
+  background: none;
+  border: 0;
+  color: #bbb;
+  border-radius: 30px;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #edb5ae;
+    color: #fff;
+  }
+}
+
+.walking-guide__search {
+
+  .error {
+    display: inline-block;
+    font-style: italic;
+    font-size: 0.9em;
+    margin-top: 5px;
+    color: #d74a4a;
+  }
+
+  input.walking-guide-search__query {
+    margin: 0 !important;
+    padding-right: 25px;
+    width: 165px;
+    float: left;
+  }
+
+  button.walkig-guide-relic__remove {
+    margin-top: 7px;
+    margin-left: -23px;
+  }
+
+  margin-bottom: 10px;
+}
+
+.walking-guide__suggestions {
+  max-height: 200px;
+  overflow-y: scroll;
+  margin: 10px 0;
+}
+
+.walking-guide__suggestion {
+  font-size: 0.9em;
+  padding-right: 20px;
+  margin-bottom: 0.7em;
+  line-height: 1.2em;
+}
+
+.walking-guide-suggestion__title {
+  font-weight: bold;
+}
+
+.walking-guide-suggestion__location {
+  font-style: italic;
+}
+
+.relic-info {
+  position: relative;
+  width: 300px;
+  min-height: 60px;
+}
+
+.relic-info__photo-wrapper {
+  margin-right: 4px;
+  position: absolute;
+  left: 0;
+}
+
+.relic-info__photo {
+  width: 50px;
+  height: 50px;
+  margin: 3px;
+}
+
+.relic-info__title {
+  font-weight: bold;
+  font-size: 1.1em;
+  line-height: 1.3em;
+  margin: 0;
+}
+
+.relic-info__address {
+  margin: 0;
+}
+
+.relic-info__content {
+  line-height: 1.3em;
+}
+
+.relic-info__photo-wrapper + .relic-info__content {
+  margin-left: 60px;
+}
+
+.walking-guide__code-generator {
+  padding: 0 20px 20px 20px;
+}
+
+.code-generator__snippet {
+  padding: 8px !important;
+  width: 902px !important;
+  height: 60px !important;
+}
+
+.code-generator__input-block + .code-generator__input-block {
+  margin-left: 20px;
+}
+
+.code-generator__input-block {
+  float: left;
+}
+
+.code-generator__label {
+  display: block;
+}
+
+.code-generator__input {
+  margin-top: 5px !important;
+  margin-bottom: 0 !important;
+  width: 60px !important;
+}

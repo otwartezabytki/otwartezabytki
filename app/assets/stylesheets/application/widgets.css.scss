@@ -1,4 +1,5 @@
 @import "mixins";
+@import "widgets/walking_guide";
 
 section.widgets{
   h1{
@@ -90,7 +91,8 @@ section.widgets{
 
 .use-widget,
 .edit_widget button,
-.edit_widget .button {
+.edit_widget .button,
+.widget .button {
   @include gradient(#4b6d7e, #436576);
   margin: 25px 10px 20px 0;
   color: #fff;
@@ -117,15 +119,14 @@ section.widgets{
   }
 }
 
-.map_search,
-.direction {
-  &.edit_widget h1{
-    line-height: 75px;
-    height: 75px;
-    font-size: 28px;
-    background: image-url("icon-widgets-mapsearch.png") 27px 21px no-repeat, linear-gradient(to bottom, #36596b, #2f5163);
-    padding-left: 70px;
-  }
+.map_search.edit_widget h1,
+.direction.edit_widget h1,
+.widget.widget__walking-guide h1 {
+  line-height: 75px;
+  height: 75px;
+  font-size: 28px;
+  background: image-url("icon-widgets-mapsearch.png") 27px 21px no-repeat, linear-gradient(to bottom, #36596b, #2f5163);
+  padding-left: 70px;
 }
 
 .direction.edit_widget h1 {
@@ -153,8 +154,8 @@ section.widgets{
   }
 }
 
-.edit_widget{
-  width: 960px;
+.edit_widget,
+.widget {
   overflow-x: hidden;
   background: #fff;
   display: inline-block;

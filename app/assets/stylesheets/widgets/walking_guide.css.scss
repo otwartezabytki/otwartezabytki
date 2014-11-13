@@ -1,0 +1,80 @@
+@import "../application/mixins";
+@import "../application/widgets/walking_guide";
+@import "../application/bootstrap";
+
+body {
+  background-color: #fff;
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
+}
+
+a {
+  color: #47697a;
+  text-decoration: none;
+  font-weight: 600;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.walking-guide__sidebar {
+  position: absolute;
+  left: 0;
+  top: 45px;
+  width: 180px;
+  padding: 10px;
+}
+
+.walking-guide__content {
+  padding: 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.widget__walking-guide {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  .angular-google-map-container {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    left: 200px;
+    height: auto;
+  }
+}
+
+.walking-guide__relics {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.walking-guide__relic {
+  cursor: auto;
+}
+
+.walking-guide-relic__title {
+  margin: 0;
+}
+
+.walking-guide-relic__location {
+  margin: 0;
+}
+
+.walking_guide__logo {
+  width: 157px;
+  height: 31px;
+  background: asset-data-url("logo-widget.png") 10px 10px no-repeat;
+  text-indent: -9999px;
+  margin: 0;
+  padding: 10px 10px 12px 12px;
+}

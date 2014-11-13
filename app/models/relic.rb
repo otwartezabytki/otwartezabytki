@@ -284,8 +284,8 @@ class Relic < ActiveRecord::Base
   end
 
   def to_param
-    slug = [(fplace || place.name), identification].join('-').gsub(/\d+/, '').parameterize
-    [id, slug] * '-'
+    slug = [(fplace || place.try(:name)), identification].join('-').gsub(/\d+/, '').parameterize
+    [id, slug].select(&:present?) * '-'
   end
 
   def state_name

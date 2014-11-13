@@ -6,6 +6,16 @@
       = t('views.widgets.index.description', :email => mail_to(Settings.oz.email_sender))
     .widgets
       - # Profile: -> Widget::Direction
+      = link_to new_widgets_walking_guide_path, class: 'widget' do
+        %span.image
+          = image_tag 'widgets/walking_guide.png', width: 200, height: 180
+        %span.widget_content
+          %span.title.map_search
+            = t('widget.walking_guide.title')
+          %span.paragraph
+            = t('widget.walking_guide.description_content')
+          %span.actions
+            %span.use-widget= t('views.widgets.index.use')
       - [Widget::MapSearch, Widget::AddRelic].each do |widget_template|
         = link_to method(:"widgets_#{widget_template.partial_name.pluralize}_path").call(), :class => "widget", :method => :post do
           - if widget_template.thumb

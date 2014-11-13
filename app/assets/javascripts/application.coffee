@@ -26,6 +26,19 @@
 #= require locales/jquery.timeago.pl.js
 #= require_tree ./application
 
+# Relics Angular App
+#= require lodash
+#= require angular
+#= require angular-sanitize
+#= require angular-prevent-default
+#= require angular-google-maps
+#= require angular-dragdrop
+#= require angular-ui-sortable
+#= require angular-bootstrap
+#= require ./angular/init
+#= require ./angular/router
+#= require_tree ./angular
+
 # FIX data-dismiss
 $(document).on 'click', '[data-dismiss]', (e) ->
   e.preventDefault()

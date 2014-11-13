@@ -1,0 +1,74 @@
+%h1
+  = t('widget.walking_guide.title')
+  %span(ng-show="loading")= "#{t('widget.walking_guide.loading')}..."
+  %a.back(href=widgets_path)= t('views.widgets.edit.back')
+.walking-guide__header
+  %p.help-inline= t('widget.walking_guide.help')
+.walking-guide__content
+  .walking-guide__sidebar
+    %h2(ng-show="widget.relics.length")= t('widget.walking_guide.relics')
+    %ul.walking-guide__relics(ui-sortable="sortableOptions" ng-model="widget.relics" ng-if="widget.relics.length")
+      %li.walking-guide__relic(ng-repeat="relic in widget.relics")
+        %h3.walking-guide-relic__title {{ relic.identification }}
+        %p.walking-guide-relic__location
+          %span(ng-show="relic.street") {{ relic.street }},
+          {{ relic.place }}
+        %button.walkig-guide-relic__remove(type="button" ng-click="removeRelic(relic)") &times;
+    .walking-guide__search
+      %form(name="searchForm" ng-submit="searchRelics()")
+        %input.walking-guide-search__query(type="text" name="query" ng-minlength="4" ng-model="query" placeholder="#{t('widget.walking_guide.what_where')}")
+        %button.walkig-guide-relic__remove(type="button" ng-click="resetForm()" ng-show="query") &times;
+        %span.error(ng-show="searchForm.submitted && searchForm.query.$error.minlength")
+          = t('widget.walking_guide.query_is_too_short')
+        %input.hidden(type="submit")
+        %span.error(ng-show="suggestions && !suggestions.length")
+          = t('widget.walking_guide.nothing_found')
+        %span.error(ng-show="error")
+          = t('widget.walking_guide.error')
+        .clearfix
+    .walking-guide__suggestions(ng-if="suggestions")
+      %ul.walking-guide-suggestions__container
+        %li.walking-guide__suggestion(ng-repeat="relic in filteredSuggestions()")
+          %a(ng-click="selectRelic(relic)" href="")
+            %h3.walking-guide-suggestion__title {{ relic.identification }}
+            %p.walking-guide-suggestion__location
+              %span(ng-show="relic.street") {{ relic.street }},
+              {{ relic.place }}
+      %button.button.button--load-more(type="button" ng-click="nextPage()" ng-show="currentPage + 1 < totalPages" ng-disabled="loading")
+        {{ loading && '#{t('widget.walking_guide.loading')}' || '#{t('widget.walking_guide.load_more')}' }}
+    .walking-guide__title
+      %h2= t('widget.walking_guide.title_field')
+      %input(type="text" ng-model="widget.title" maxlength="30")
+    .walking-guide__description
+      %h2= t('widget.walking_guide.description')
+      %textarea(ng-model="widget.description")
+
+    - if current_user.present?
+      %button.button.button--save(type="button" ng-click="save()" ng-disabled="saving || loading || !widget.relics.length")
+        {{ saving && '#{t('widget.walking_guide.saving')}' || '#{t('widget.walking_guide.save')}' }}
+    - else
+      %p= t('widget.walking_guide.sign_in_to_save')
+      %br
+      = link_to t('widget.walking_guide.sign_in'), new_user_session_path, class: 'button button--login'
+    %a.button.button--print(ng-href="{{ widget.print_path }}" ng-show="saved" target="_blank")
+      = t('widget.walking_guide.print')
+
+  %div(google-map="true" center="map.center" zoom="map.zoom" events="map.events" draggable="true")
+    %div(marker="true" ng-repeat="relic in widget.relics" coords="relic" icon="getIcon($first, $last)" click="loadRelicInfo(relic)")
+      %div(window="true" show="relic.showInfoWindow || false" closeClick="relic.showInfoWindow = false")
+        = render 'relic_info'
+  .clearfix
+- if current_user.present?
+  .walking-guide__code-generator(ng-show="saved")
+    %h2= t('views.widgets.edit.generated')
+    %textarea.code-generator__snippet(readonly)
+      = raw %Q(<iframe id="oz_walking_guide" src="{{ widget.widget_url }}" width="{{ widget.width }}" height="{{ widget.height }}"></iframe>)
+    .code-generator__input-block
+      %label.code-generator__label
+        = t('widget.walking_guide.width')
+      %input.code-generator__input(type="text" ng-model="widget.width")
+    .code-generator__input-block
+      %label.code-generator__label
+        = t('widget.walking_guide.height')
+      %input.code-generator__input(type="text" ng-model="widget.height")
+    .clearfix

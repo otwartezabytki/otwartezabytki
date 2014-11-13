@@ -6,6 +6,10 @@ module Api
       before_filter :api_authenticate
       before_filter :api_authorize, :only => [:create, :update]
 
+      def suggestions
+        collection
+      end
+
       def index
         collection
       end

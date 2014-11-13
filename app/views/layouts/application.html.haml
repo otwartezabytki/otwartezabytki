@@ -1,5 +1,5 @@
 !!! 5
-%html{lang: I18n.locale}
+%html{lang: I18n.locale, "ng-app" => "Relics"}
   %head
     %meta(charset="utf-8")
     %meta(name="viewport" content="width=device-width, initial-scale=1.0")
@@ -58,8 +58,7 @@
                 - if current_user && current_user.registered? && current_user.errors.size == 0
                   %li
                     - # Profile:
-                    - # = link_to t('layouts.application.hello', :username => (current_user.username || current_user.email)), current_user
-                    = t('layouts.application.hello', :username => (current_user.username || current_user.email))
+                    = link_to t('layouts.application.hello', :username => (current_user.username || current_user.email)), current_user
                   %li= link_to t('layouts.application.logout'), destroy_user_session_path, :method => :delete, :class => 'logout'
                 - else
                   %li
@@ -101,6 +100,7 @@
     #fancybox_loader_container
       #fancybox_loader
     != include_gon(:camel_case => true)
+    != javascript_include_tag "//maps.googleapis.com/maps/api/js?key=#{Settings.oz.gm_key}&sensor=false"
     != javascript_include_tag "application"
     = timeago_script_tag
     != yield :footer_javascripts

@@ -17,7 +17,16 @@ group :assets do
   gem 'jsts-rails', '~> 0.2.0'
   gem 'autoprefixer-rails'
   gem 'rails-assets-handlebars'
+  gem 'ngannotate-rails'
+  gem 'rails-assets-angular'
+  gem 'rails-assets-angular-ui-router'
+  gem 'rails-assets-angular-prevent-default'
+  gem 'rails-assets-angular-sanitize', '~> 1.2.0'
   gem 'rails-assets-jquery-form'
+  gem 'rails-assets-angular-google-maps', '~> 1.1.13'
+  gem 'rails-assets-angular-dragdrop', '~> 1.0.5'
+  gem 'rails-assets-angular-ui-sortable', '~> 0.12.8'
+  gem 'rails-assets-angular-bootstrap', '~> 0.11.2'
 end
 
 gem 'jquery-rails', '2.0.3'
@@ -26,7 +35,6 @@ gem 'coffee-filter'
 gem 'sugar-rails'
 
 gem 'geocoder'
-gem 'rack-cors', require: 'rack/cors'
 
 gem 'simple_form'
 gem 'formtastic'
@@ -42,10 +50,6 @@ gem 'rocket_tag'
 gem 'sentry-raven'
 
 gem 'paper_trail', '~> 2.7.2' # versioning
-
-# xml for osm generating
-gem 'builder'
-gem 'nokogiri'
 
 # admin panel
 gem 'activeadmin',    '~> 0.4.4'
