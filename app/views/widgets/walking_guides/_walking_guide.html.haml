@@ -38,7 +38,7 @@
         {{ loading && '#{t('widget.walking_guide.loading')}' || '#{t('widget.walking_guide.load_more')}' }}
     .walking-guide__title
       %h2= t('widget.walking_guide.title_field')
-      %input(type="text" ng-model="widget.title" maxlength="30")
+      %input(type="text" ng-model="widget.title")
     .walking-guide__description
       %h2= t('widget.walking_guide.description')
       %textarea(ng-model="widget.description")
