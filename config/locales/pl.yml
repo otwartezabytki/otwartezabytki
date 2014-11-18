@@ -1723,7 +1723,6 @@ pl:
       more: więcej
       relics: Zabytki
       description: Opis trasy
-      what_where: 'co, gdzie'
       save: zapisz
       saving: zapisywanie...
       load_more: Wczytaj więcej
@@ -1738,6 +1737,9 @@ pl:
       sign_in_to_save: 'Musisz się zalogować jeżeli chcesz zapisać spacerownik.'
       sign_in: 'Zaloguj się'
       help: "Zacznij od wyszukania zabytku tak jakbyś szukał go w naszej bazie np. „cmentarz żydowski, Warszawa”. Wybranie zabytku z listy rezultatów doda punkt na mapę. Każdy kolejny wyszukany i wybrany zabytek będzie tworzył automatycznie pieszą trasę. Kolejność można zmienić przenosząc zabytki na liście."
+      query_field: Wyszukaj zabytek
+      query_placeholder: np. cmentarz, Łódź
+
   wuoz:
     wuoz-w-bialymstoku: "Wojewódzki Urząd Ochrony Zabytków w Białymstoku"
     wuoz-w-gdansku: "Wojewódzki Urząd Ochrony Zabytków w Gdańsku"

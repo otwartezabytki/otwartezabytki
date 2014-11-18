@@ -16,8 +16,10 @@
         %button.walkig-guide-relic__remove(type="button" ng-click="removeRelic(relic)") &times;
     .walking-guide__search
       %form(name="searchForm" ng-submit="searchRelics()")
-        %input.walking-guide-search__query(type="text" name="query" ng-minlength="4" ng-model="query" placeholder="#{t('widget.walking_guide.what_where')}")
-        %button.walkig-guide-relic__remove(type="button" ng-click="resetForm()" ng-show="query") &times;
+        %h2.field-label= t('widget.walking_guide.query_field')
+        .walking-guide-search__query
+          %input.search-query__input(type="text" name="query" ng-minlength="4" ng-model="query" placeholder="#{t('widget.walking_guide.query_placeholder')}")
+          %input.search-query__button(type="submit" value="")
         %span.error(ng-show="searchForm.submitted && searchForm.query.$error.minlength")
           = t('widget.walking_guide.query_is_too_short')
         %input.hidden(type="submit")
@@ -37,10 +39,10 @@
       %button.button.button--load-more(type="button" ng-click="nextPage()" ng-show="currentPage + 1 < totalPages" ng-disabled="loading")
         {{ loading && '#{t('widget.walking_guide.loading')}' || '#{t('widget.walking_guide.load_more')}' }}
     .walking-guide__title
-      %h2= t('widget.walking_guide.title_field')
+      %h2.field-label= t('widget.walking_guide.title_field')
       %input(type="text" ng-model="widget.title")
     .walking-guide__description
-      %h2= t('widget.walking_guide.description')
+      %h2.field-label= t('widget.walking_guide.description')
       %textarea(ng-model="widget.description")
 
     - if current_user.present?
