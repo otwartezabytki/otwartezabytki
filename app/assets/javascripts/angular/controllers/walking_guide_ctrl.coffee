@@ -267,6 +267,11 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
 
     $scope.$watch 'widget', autosave, true
 
+    $scope.$watch 'widget.relics', (newVal, oldVal) ->
+      return if newVal.length == oldVal.length
+      google.maps.event.trigger($scope.map.instance, 'resize')
+    , true
+
     $scope.openDescriptionModal = (relic) ->
       modalInstance = $modal.open
         templateUrl: 'walking-guide/description-modal.html'
