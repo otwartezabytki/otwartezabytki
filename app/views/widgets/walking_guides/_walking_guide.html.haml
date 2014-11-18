@@ -1,6 +1,7 @@
 %h1
   = t('widget.walking_guide.title')
   %span(ng-show="loading")= "#{t('widget.walking_guide.loading')}..."
+  %span(ng-show="saving")= t('widget.walking_guide.saving')
   %a.back(href=widgets_path)= t('views.widgets.edit.back')
 .walking-guide__header
   %p.help-inline= t('widget.walking_guide.help')
@@ -47,7 +48,7 @@
 
     - if current_user.present?
       %button.button.button--save(type="button" ng-click="save()" ng-disabled="saving || loading || !widget.relics.length")
-        {{ saving && '#{t('widget.walking_guide.saving')}' || '#{t('widget.walking_guide.save')}' }}
+        = t('widget.walking_guide.save')
     - else
       %p= t('widget.walking_guide.sign_in_to_save')
       %br
