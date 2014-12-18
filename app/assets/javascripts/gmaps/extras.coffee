@@ -38,19 +38,25 @@ do construct_relic_marker = ->
 
       # cache drawn image
       @div ||= do =>
-        marker = $("<div>#{@number}</div>").css
+        marker = $("<div><img src='#{image_url}'><div>#{@number}</div></div>").css
           position: "absolute"
           cursor: "pointer"
-          textAlign: 'center'
           height: image_size
           width: image_size
+          zIndex: 10000
+        .find('img').css
+          position: "absolute"
+          height: image_size
+          width: image_size
+        .parent().find('div').css
+          position: "absolute"
+          textAlign: 'center'
           lineHeight: "#{image_size}px"
+          width: "100%"
           fontWeight: "800"
           fontSize: font_size
-          color: "#507283"
-          backgroundImage: "url(#{image_url})"
-          zIndex: 10000
-
+          color: '#507283'
+        .parent()
         $(@getPanes().overlayImage).append(marker)
 
         google.maps.event.addDomListener marker[0], 'click', (e) =>
@@ -77,7 +83,7 @@ do on_next_movement_feature = ->
     @PREVENT_FIRST_IDLE = true
 
     directions: new google.maps.DirectionsService
-    
+
     getLatLngBounds: ->
       if bounds = @getBounds()
         north_east = bounds.getNorthEast()

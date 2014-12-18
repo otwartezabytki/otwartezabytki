@@ -6,7 +6,7 @@
 #= require sugar
 #= require handlebars/handlebars
 #= require_tree ../libraries
-#= require gmaps/marker-clusterer
+#= require gmaps-markerclusterer-plus/src/markerclusterer
 #= require gmaps/context-menu
 #= require gmaps/extras
 
@@ -15,10 +15,12 @@ window.marker_clusterer = null
 ROUTE = null
 POLYGON = null
 SEARCH_PARAMS = null
+SORTED_RELICS = null
 
 print_has_prompted = false
 ready_to_print = false
 template = false
+directionsRenderer = new google.maps.DirectionsRenderer()
 
 show_content_window = (marker, content) ->
   if marker.info_window
@@ -39,71 +41,72 @@ show_content_window = (marker, content) ->
 
 renderRelicInfo = (relic) ->
   photo = if relic.main_photo then "<div class='photo-wrapper'><img src='#{relic.main_photo.file.midi.url}' width='50' height='50'></div>" else ""
-  link = "<a href='#{Routes.relic_path(relic.id)}' target='_blank'>więcej »</a>"
-  "<div class='relic-info'>#{photo}<div class='relic-info-content'><h3>#{relic.identification}</h3><div>#{relic.street}</div><div>#{link}</div></div></div>"
+  link = "<a href='#{Routes.relic_path(relic.id)}?skip_return_path=true' target='_blank'>więcej »</a>"
+  address = []
+  address.add(relic.place_name) if relic.place_name
+  address.add(relic.street) if relic.street
+  address = address.join(', ')
+  "<div class='relic-info'>#{photo}<div class='relic-info-content'><h3>#{relic.identification}</h3><div>#{address}</div><div>#{link}</div></div></div>"
 
-loadRelicInfo = (location, callback) ->
+loadRelicInfo = (relicId, callback) ->
   gmap.onNextMovement ->
-  search_params = {}
-  if bounds = gmap.getLatLngBounds()
-    search_params.bounding_box = bounds.toString()
-  search_params.api_key = "oz"
-  search_params.per_page = 1
-  search_params.location = location
-  $.get Routes.api_v1_relics_path(search_params), (result) ->
-    callback(renderRelicInfo(result.relics[0]))
+  params = {}
+  params.api_key = "oz"
+  params.id = relicId
+  $.get Routes.api_v1_relic_path(params), (result) ->
+    callback(renderRelicInfo(result))
   , "json"
 
-markers = []
 overlays = []
 
 clearMarkers = ->
-  marker_clusterer.clearMarkers() if marker_clusterer
+  if marker_clusterer?
+    marker_clusterer.clearMarkers()
+    delete window.marker_clusterer
   gmap.clearOverlays()
   for marker in gmap.markers
     marker.setMap(null) unless marker.getDraggable()
-  marker.setMap(null) for marker in markers
-  markers = []
   overlays = []
 
-renderResults = (search_groups, search_results, callback) ->
-  do clearMarkers
+markerClusterer = ->
+  return marker_clusterer if marker_clusterer?
 
-  if gmap.getZoom() > 11 and POLYGON?
-    search_groups = []
-  else
-    search_results = []
+  image_urls = gmap_circles
+  image_sizes = [55, 59, 75, 85, 105]
+  font_sizes = [14, 14, 17, 17, 17]
 
-  $.each search_groups, ->
+  styles = image_urls.map (image, index) ->
+    url: image,
+    textSize: font_sizes[index]
+    width: image_sizes[index]
+    height: image_sizes[index]
+    textColor: '#507283'
+
+  window.marker_clusterer = new MarkerClusterer gmap, [],
+    maxZoom: 18
+    styles: styles
+    gridSize: 40
+    minimumClusterSize: 4
+
+renderResults = (search_results, last = true, callback) ->
+  total = search_results.length
+  random = ->
+    min = .99999995
+    max = 1.0000005
+    Math.random() * (max - min) + min
+  $.each search_results, (index) ->
+    [@id, @latitude, @longitude] = this if Object.isArray(this)
+
     latlng = new google.maps.LatLng(@latitude, @longitude)
 
-    if @facet_count > 1
-      overlay = new google.maps.RelicMarker latlng, @facet_count, =>
-        southWest = new google.maps.LatLng(@bounding_box[0].lat, @bounding_box[0].lng)
-        northEast = new google.maps.LatLng(@bounding_box[1].lat, @bounding_box[1].lng)
-        bounds = new google.maps.LatLngBounds(southWest, northEast)
-        gmap.fitBounds(bounds, true)
-        $('#search_location').val("#{@type}:#{@id}")
-        $('#search_bounding_box').val(bounds.toString()) unless ROUTE?
-        $('#new_search').submit()
-
-      overlay.setMap(gmap)
-
-      overlays.push(overlay)
-    else
-      marker = new google.maps.Marker
-        map: gmap
-        icon: gmap_marker
-        position: latlng
-        clickable: true
-        optimized: false
-
-      google.maps.event.addListener marker, 'click', =>
-        loadRelicInfo "#{@type}:#{@id}", (content) ->
-          show_content_window(marker, content)
-
-  $.each search_results, ->
-    latlng = new google.maps.LatLng(@latitude, @longitude)
+    # Workaround for relics without proper location
+    # Change slightly latLng if there is more than one marker on the same spot
+    markerClusterer().getMarkers().each (m) ->
+      if m.position.equals(latlng)
+        newLat = latlng.lat() * random()
+        newLng = latlng.lng() * random()
+        latlng = new google.maps.LatLng(newLat, newLng)
+        return
 
     marker = new google.maps.Marker
       map: gmap
@@ -112,34 +115,16 @@ renderResults = (search_groups, search_results, callback) ->
       clickable: true
       optimized: false
 
-    markers.push marker
+    markerClusterer().addMarker(marker)
 
     google.maps.event.addListener marker, 'click', =>
-      loadRelicInfo "relic:#{@id}", (content) ->
+      loadRelicInfo @id, (content) ->
         show_content_window(marker, content)
 
-  if gmap.getZoom() > 11 and POLYGON?
-    image_urls = gmap_circles
-    image_sizes = [55, 59, 75, 85, 105]
-    font_sizes = [14, 14, 17, 17, 17]
+    # run callback on the last element in the last batch
+    if index == total - 1 && last
+      callback() if callback?
 
-    styles = image_urls.map (image, index) ->
-      url: image,
-      textSize: font_sizes[index]
-      width: image_sizes[index]
-      height: image_sizes[index]
-      textColor: '#507283'
-
-    marker_clusterer.clearMarkers() if marker_clusterer?
-    marker_clusterer = new MarkerClusterer gmap, markers,
-      maxZoom: 14
-      styles: styles
-
-  $('a.point-relic').click ->
-    google.maps.event.trigger(markers[$(this).data('id')], 'click')
-    false
-
-  do callback if callback?
 
 # Serialize form to JSON
 $.fn.serializeObject = ->
@@ -222,13 +207,13 @@ routeToPolygon = (route, distance) ->
   coordinates = route.path.map (p) ->
     new jsts.geom.Coordinate p.latitude, p.longitude
 
-  centerLat = route.bounds.getCenter().lat()
+  centerLat = Math.round route.bounds.getCenter().lat()
   centerLng = route.bounds.getCenter().lng()
   # in km
   degreeInKm = haversineDistance \
-    Math.round(centerLat) - 0.5,
+    centerLat - 0.5,
     centerLng,
-    Math.round(centerLat) + 0.5,
+    centerLat + 0.5,
     centerLng
 
   line_string = factory.createLineString coordinates
@@ -250,7 +235,6 @@ getWaypoints = ->
     .get()
 
 searchRoute = (search_params, callback) ->
-  do clearMarkers
   return callback(routeToPolygon(ROUTE, search_params.radius)) if ROUTE?
 
   origin      = search_params.waypoints.first()
@@ -266,12 +250,17 @@ searchRoute = (search_params, callback) ->
 
   gmap.directions.route request, (result, status) ->
     if status == google.maps.DirectionsStatus.OK
-      ROUTE = route = result.routes[0]
-      polygon = routeToPolygon route, search_params.radius
+      ROUTE = result.routes[0]
+      callback(routeToPolygon(ROUTE, search_params.radius))
 
-      gmap.directionsRenderer.setDirections(result)
+      directionsRenderer.setDirections(result)
+      directionsRenderer.setMap(gmap)
     else
-      <%= Rails.env.development? ? 'console.log' : 'window.alert' %>('Nie znaleziono trasy! Spróbuj ponownie.')
+      msg = 'Nie znaleziono trasy! Spróbuj ponownie.'
+      if envConfig.development
+        console.log(msg)
+      else
+        window.alert(msg)
 
 printAppendRelic = (relic) ->
   return if $("#relic-#{relic.id}").length
@@ -280,14 +269,47 @@ printAppendRelic = (relic) ->
   $('#relics-container').append template(relic)
 
 printClearRelics = ->
+  SORTED_RELICS = {}
   $('#relics-container').html ''
   $('#relics-loading-info').show()
 
-printRenderRelics = (relics, last) ->
+roundToSix = (num) ->
+  +(Math.round(num + "e+6")  + "e-6")
+
+closestRoutePoint = (relic) ->
+  a = Infinity
+  position = 0
+  distance = (p, q) ->
+    roundToSix(google.maps.geometry.spherical.computeDistanceBetween(p, q))
+  relicPoint = new google.maps.LatLng(relic.latitude, relic.longitude)
+  ROUTE.overview_path.each (point, index) ->
+    if a > (b = distance(point, relicPoint))
+      position = index
+      a = b
+  {position, distance: a}
+
+addRelicsToSort = (relics) ->
   relics.each (relic) ->
-    printAppendRelic relic
+    closest = closestRoutePoint(relic)
+    SORTED_RELICS[closest.position] ||= []
+    SORTED_RELICS[closest.position][closest.distance] ||= []
+    SORTED_RELICS[closest.position][closest.distance].add(relic)
+
+getSortedRelics = ->
+  sorted = []
+  compare = (a, b) ->
+    a - b
+  Object.keys(SORTED_RELICS).each (index) ->
+    Object.keys(SORTED_RELICS[index]).sort(compare).each (key) ->
+      sorted.add(SORTED_RELICS[index][key])
+  sorted
+
+printRenderRelics = (relics, last) ->
+  addRelicsToSort(relics)
 
   if last
+    getSortedRelics().each (relic) ->
+      printAppendRelic(relic)
     $('#relics-loading-info').hide()
     do windowPrint
 
@@ -297,14 +319,11 @@ windowPrint = ->
   if ready_to_print
     ( ->
       print_has_prompted = true
-      <%=
-        if Rails.env.development?
-          "console.log('`window.print()` doesn’t prompt during development')"
-        else
-          'window.print()'
-        end
-      %>
-    ).delay 1000
+      if envConfig.development
+        console.log('`window.print()` doesn’t prompt during development')
+      else
+        window.print()
+    ).delay 3000 # HACK: Wait 3s for markers rendering. Is there a better way? :(
   else
     ready_to_print = true
 
@@ -318,7 +337,11 @@ performSearch = (search_params, callback) ->
     success: (result) ->
       callback(result)
     error: ->
-      <%= Rails.env.development? ? 'console.log' : 'window.alert' %>('Nastąpił błąd podczas wyszukiwania zabytków.')
+      msg = 'Nastąpił błąd podczas wyszukiwania zabytków.'
+      if envConfig.development
+        console.log(msg)
+      else
+        window.alert(msg)
 
 hasValidWaypoints = (waypoints) ->
   waypoints.filter (waypoint) ->
@@ -327,7 +350,7 @@ hasValidWaypoints = (waypoints) ->
 
 parseRadius = (value) ->
   value = parseFloat(('' + value).replace(/[^0-9]+/, '.').replace(/[^0-9\.]/g, '')) || 0
-  Math.min(1000, Math.max(0.1, parseFloat(value, 10)))
+  Math.min(100, Math.max(0.1, parseFloat(value, 10)))
 
 getSearchParams = ->
   return SEARCH_PARAMS if SEARCH_PARAMS?
@@ -341,7 +364,7 @@ getSearchParams = ->
     search_params.radius     = parseRadius $('#search_radius').val()
 
   search_params.api_key = "oz"
-  search_params.per_page = 300
+  search_params.per_page = 1000
   search_params.widget = 1
   SEARCH_PARAMS = search_params
 
@@ -349,6 +372,9 @@ $('#search_radius').on 'change', ->
   this.value = parseRadius $(this).val()
 
 saveWidget = ->
+  # auto save only if has valid waypoints
+  return unless hasValidWaypoints getSearchParams().waypoints
+
   storeParams = ->
     params = Object.clone getSearchParams()
     delete params.polygon
@@ -359,74 +385,79 @@ saveWidget = ->
       event: "on_params_changed", params: storeParams()
     ), "*")
 
-debouncedSearchRelics = jQuery.debounce ->
-
-  search_params = getSearchParams()
-
-  if bounds = gmap.getLatLngBounds()
-    search_params.bounding_box = bounds.toString()
-
-  if hasValidWaypoints search_params.waypoints
-    searchRoute search_params, (polygon) ->
-      search_params.polygon = polygon.join(';')
-      $('#search_polygon').val(search_params.polygon)
-      # search_params.path = route.path.map((e) -> "#{e.latitude},#{e.longitude}").join(";")
-      # $('#search_path').val(search_params.path)
-
-      search_params.widget = 'direction'
-
-      if printAction?
-        do printClearRelics
-
-        loadRelics = (search_params) ->
-          performSearch search_params, (result) ->
-            current_page = parseInt result.meta.current_page
-            total_pages  = parseInt result.meta.total_pages
-
-            if current_page is 1
-              renderResults result.clusters, result.relics, ->
-                do windowPrint
-
-            printRenderRelics result.relics, current_page == total_pages
-
-            if current_page < total_pages
-              search_params.page = current_page + 1
-              loadRelics search_params
-
-        loadRelics Object.clone(search_params)
-      else
-        performSearch search_params, (result) ->
-          renderResults result.clusters, result.relics
-  else
-    performSearch search_params, (result) ->
-      renderResults(result.clusters, [])
-
-  false
-, 50
-
-
-haversineDistance = (lat1, lon1, lat2, lon2) ->
-  R = 6371 # km
-  dlat = (lat2 - lat1) * Math.PI / 180.0
-  dlon = (lon2 - lon1) * Math.PI / 180.0
-  lat1 = lat1 * Math.PI / 180.0
-  lat2 = lat2 * Math.PI / 180.0
-  a = Math.sin(dlat / 2) * Math.sin(dlat/2) +
-      Math.sin(dlon / 2) * Math.sin(dlon/2) * Math.cos(lat1) * Math.cos(lat2)
-  c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
-  R * c
+reset = ->
+  ROUTE = POLYGON = SEARCH_PARAMS = null
+  clearMarkers()
 
 searchRelics = ->
   debouncedSearchRelics()
   false
 
+debouncedSearchRelics = jQuery.debounce ->
+  search_params = getSearchParams()
+
+  if hasValidWaypoints search_params.waypoints
+    searchRoute search_params, (polygon) ->
+      search_params.polygon = polygon.join(';')
+      $('#search_polygon').val(search_params.polygon)
+
+      search_params.widget = 'direction'
+
+      if printAction?
+        printClearRelics()
+        renderCallback = -> windowPrint()
+      else
+        search_params.short = true
+
+      loadRelics = (search_params) ->
+        performSearch search_params, (result) ->
+          current_page = parseInt result.meta.current_page
+          total_pages  = parseInt result.meta.total_pages
+          last         = current_page == total_pages
+
+          if printAction?
+            renderResults(result.relics, last, renderCallback)
+            printRenderRelics(result.relics, last)
+          else
+            renderResults(result.relics, last)
+
+          if current_page < total_pages
+            search_params.page = current_page + 1
+            loadRelics search_params
+
+      loadRelics Object.clone(search_params)
+  else
+    directionsRenderer.setMap(null)
+
+  false
+, 50
+
+haversineDistance = (lat1, lon1, lat2, lon2) ->
+  latLng1 = new google.maps.LatLng(lat1, lon1)
+  latLng2 = new google.maps.LatLng(lat2, lon2)
+  google.maps.geometry.spherical.computeDistanceBetween(latLng1, latLng2) / 1000
+
 getWaypointsFromRoute = (route) ->
   waypoints = []
+  currentWaypoints = getWaypoints()
+
+  exists = (waypoint) ->
+    currentWaypoints.any (current) ->
+      reg = new RegExp(current, 'i')
+      current == waypoint || reg.test(waypoint)
+
   route.legs.each (leg, index) ->
-    waypoints.add leg.start_address if index is 0
+    if index == 0
+      waypoints.add if exists(leg.start_address)
+        leg.start_address
+      else
+        leg.start_location.toUrlValue()
     leg.via_waypoints.each (wp) ->
       waypoints.add wp.toUrlValue()
-    waypoints.add leg.end_address
+    waypoints.add if exists(leg.end_address)
+      leg.end_address
+    else
+      leg.end_location.toUrlValue()
   waypoints
 
 updateWaypointInputs = (route, callback) ->
@@ -438,7 +469,7 @@ updateWaypointInputs = (route, callback) ->
     else
       appendWaypointInput wp
 
-  do callback
+  callback() if callback?
 
 appendWaypointInput = (value = '') ->
   count = $('#waypoints .waypoint').length
@@ -455,44 +486,48 @@ appendWaypointInput = (value = '') ->
   placesAutocomplete $input
   $input
 
-placesAutocomplete = (input) ->
+debounceWaypointsChanged = jQuery.debounce ->
+  # HACK: 'place_changed' event is triggered ~360ms after jQuery 'change' event...
+  $(document).trigger 'params:changed'
+, 400
+
+placesAutocomplete = ($input) ->
   options = componentRestrictions: country: 'pl'
-  autocomplete = new google.maps.places.Autocomplete input[0], options
+  autocomplete = new google.maps.places.Autocomplete $input[0], options
 
   google.maps.event.addListener autocomplete, 'place_changed', ->
-    $(document).trigger 'params:changed'
+    debounceWaypointsChanged()
+
+  $input.on 'change', ->
+    debounceWaypointsChanged()
 
 jQuery ->
 
   if printAction?
     window.gmap = new google.maps.Map $('#map_canvas')[0],
       mapTypeId: google.maps.MapTypeId.ROADMAP
+      disableDefaultUI: true
   else
     window.gmap = new google.maps.Map $('#map_canvas')[0],
       mapTypeId: google.maps.MapTypeId.HYBRID
-
-  gmap.onMovement ->
-    if bounds = gmap.getLatLngBounds()
-      $('#search_bounding_box').val(bounds.toString())
-      searchRelics()
 
   gmap.onNextMovement ->
   gmap.setCenter(new google.maps.LatLng(52, 20))
   gmap.setZoom(6)
 
   if renderOnly?
-    do searchRelics
+    searchRelics()
     return
 
   $search = $('#new_search')
   $search.submit(searchRelics)
 
   $(document).on 'params:changed', ->
-    ROUTE = POLYGON = SEARCH_PARAMS = null
-    do searchRelics
-    do saveWidget
+    reset()
+    searchRelics()
+    saveWidget()
 
-  $('body').on 'change', '#search_radius, #waypoints .waypoint, input[name="search[route_type]"]', ->
+  $('body').on 'change', '#search_radius, input[name="search[route_type]"]', ->
     $(document).trigger 'params:changed'
 
   toggleRemoveButtons = ->
@@ -536,9 +571,25 @@ jQuery ->
     $('#waypoints .waypoint:last').val("#{latlng.lat().toFixed(6)},#{latlng.lng().toFixed(6)}").change()
 
   google.maps.event.addListener gmap.directionsRenderer, 'directions_changed', ->
-    ROUTE = gmap.directionsRenderer.getDirections().routes[0]
-    POLYGON = null
-    if ROUTE?
-      updateWaypointInputs ROUTE, -> searchRelics()
+    newRoute = gmap.directionsRenderer.getDirections().routes[0]
+    return if newRoute == ROUTE
+    if newRoute
+      updateWaypointInputs newRoute, ->
+        $(document).trigger 'params:changed'
+
+  # Workaround Chrome brokenness:
+  # make sure that when we go back from printing waypoints are valid...
+  $.get "#{$('#new_search').attr('action')}/waypoints?#{(new Date()).getTime()}", (waypoints) ->
+    if waypoints.length
+      $('#waypoints .waypoint').slice(2).each ->
+        $(this).remove()
+        toggleRemoveButtons()
+      waypoints.each (waypoint, index) ->
+        if index < 2
+          $("#waypoints .waypoint:eq(#{index})").val(waypoint)
+        else
+          appendWaypointInput(waypoint)
+      $(document).trigger 'params:changed'
+  , 'json'
 
   $(document).trigger 'params:changed'

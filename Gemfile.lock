@@ -375,6 +375,7 @@ GEM
     rails-assets-angular-ui-sortable (0.12.8)
       rails-assets-angular (~> 1.2.0)
       rails-assets-jquery-ui (>= 1.9)
+    rails-assets-gmaps-markerclusterer-plus (2.1.1)
     rails-assets-handlebars (1.0.0)
     rails-assets-jquery (2.1.0)
     rails-assets-jquery-form (3.46.0)
@@ -622,6 +623,7 @@ DEPENDENCIES
   rails-assets-angular-sanitize (~> 1.2.0)
   rails-assets-angular-ui-router
   rails-assets-angular-ui-sortable (~> 0.12.8)
+  rails-assets-gmaps-markerclusterer-plus
   rails-assets-handlebars
   rails-assets-jquery-form
   rails-i18n

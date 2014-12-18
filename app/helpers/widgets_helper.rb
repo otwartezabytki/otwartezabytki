@@ -29,9 +29,27 @@ module WidgetsHelper
     data
   end
 
+  def relic_to_widget_data_short(relic)
+    [relic.id, relic.latitude, relic.longitude]
+  end
+
   def route_type_collection
     ['walking', 'bicycling', 'driving'].map do |type|
       [I18n.t("views.widgets.route_types.#{type}"), type]
     end
+  end
+
+  def selected_categories(selected)
+    categories = []
+    Category.roots.sort_by(&:name).map do |category|
+      if category.name_key == 'sakralny'
+        category.children.sort_by(&:name).each do |child|
+          categories << child.name.gsub('/', ', ') if selected.include?(child.name_key)
+        end
+      elsif selected.include?(category.name_key)
+        categories << category.name.gsub('/', ', ')
+      end
+    end
+    categories
   end
 end

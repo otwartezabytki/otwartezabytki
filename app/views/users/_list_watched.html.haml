@@ -1,4 +1,4 @@
-%p.feed-description= t '.adopted_relics_list'
+%p.feed-title= t '.adopted_relics_list'
 
 - if user.user_relics.any?
   %section.feed.type-activity
@@ -15,7 +15,7 @@
         %dt.feed-unadopt
           = link_to content_tag(:span, t('views.relics.show.general.unadopt')), unadopt_relic_path(relic.id, :user => true), :class => "adopt", :method => :post, :remote => true
 
-  %p.feed-description= t '.updated_relics_list'
+  %p.feed-title= t '.updated_relics_list'
 
   - if Version.relics.adopted_by(user).any?
     %section.feed.type-activity

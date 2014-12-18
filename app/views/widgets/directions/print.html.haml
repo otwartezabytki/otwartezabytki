@@ -25,6 +25,11 @@
         #{waypoints.first} – #{waypoints.last}
         - if waypoints.length > 2
           %span (#{t('users.list_routes.route_points', count: waypoints.length)})
+    - if categories.present?
+      %dl.Title-Content.Definition
+        %dt.Definition-Header= t('views.widgets.preview.direction.relics_from_categories', editable: false)
+        %dd.Definition-Content
+          = selected_categories(categories).join(', ')
   - else
     %h2= t('views.widgets.preview.direction.no_route')
 
@@ -46,10 +51,12 @@
   .Sidebar
     %h1 www.otwartezabytki.pl
     #{t('views.relics.guide.date')}: #{Time.now.strftime('%Y-%m-%d')}
-  = image_tag 'cc_logo.png', :alt => 'Centrum Cyfrowe'
+  = image_tag 'cc-logo-hq.png', :alt => 'Centrum Cyfrowe', style: 'height: 50px;'
 
 :javascript
   var renderOnly = printAction = true;
+%script
+  != js_env
 %script{ type: 'application/json', id: 'search_params' }
   != widget_params.to_json
 = content_for :javascripts do

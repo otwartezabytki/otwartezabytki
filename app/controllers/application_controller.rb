@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  helper_method :search_params, :tsearch, :enabled_locales, :iframe_transport?
+  helper_method :search_params, :tsearch, :enabled_locales, :iframe_transport?, :js_env, :angular_js_env, :with_return_path
   # iframe views path
   before_filter do
     prepend_view_path("app/views/iframe") if Subdomain.matches?(request)
@@ -110,11 +110,33 @@ class ApplicationController < ActionController::Base
     cookies[:return_path] = path
   end
 
+  def js_env_data
+    {
+      development: Rails.env.development?
+    }.to_json
+  end
+
+  def js_env
+    <<-EOS
+    var envConfig = #{js_env_data}
+    EOS
+  end
+
+  def angular_js_env
+    <<-EOS
+    this.app.constant("envConfig", #{js_env_data})
+    EOS
+  end
+
+  def with_return_path
+    nil
+  end
+
   protected
 
   def save_return_path
-    return false if devise_controller? or request.format == 'json' or params[:iframe]
-    set_return_path(request.fullpath) if request.get?
+    return false if (devise_controller? && params[:return_path].blank?) || request.format == 'json' || params[:iframe] || params[:skip_return_path]
+    set_return_path(params[:return_path].presence || request.fullpath) if request.get?
   end
 
   def authenticate_admin!

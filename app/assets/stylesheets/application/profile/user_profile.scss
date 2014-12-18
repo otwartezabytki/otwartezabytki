@@ -390,7 +390,7 @@ $unread-badge-size:    10px;
   border: 1px dashed #8f8f8f;
   text-align: center;
   padding: 40px 20px;
-  color: #8f8f8f;
+  color: darken($content-icon-color, 60%);
 }
 
 .user-profile {
@@ -410,7 +410,7 @@ $unread-badge-size:    10px;
 
   .fields-title {
     @include tiny-uppercase-text();
-    color: darken($content-icon-color, 20%);
+    color: darken($content-icon-color, 60%);
   }
 
   .fields-title-inner {
@@ -567,8 +567,7 @@ $unread-badge-size:    10px;
     a {
       position: relative;
       top: -1px;
-      color: $dimmed-text-color;
-      font-size: 0.8em;
+      font-size: 0.9em;
     }
 
     a + a {

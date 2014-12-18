@@ -19,13 +19,15 @@ class Widgets::DirectionsController < WidgetsController
     widget_search.perform
   end
 
+  prepend_before_filter -> { params[:skip_return_path] = true }, only: [:show, :configure, :print]
+  before_filter :set_cache_buster, only: [:waypoints]
+
   def show
     widget_search
     relics
   end
 
   def create
-    widget_direction.user_id ||= current_user.try :id
     if widget_direction.save
       redirect_to edit_widgets_direction_path(widget_direction)
     else
@@ -38,19 +40,38 @@ class Widgets::DirectionsController < WidgetsController
   end
 
   def update
-    authorize! :update, widget_direction if widget_direction.user_id or params[:save] or params[:save_and_print]
-    widget_direction.user_id ||= current_user.try :id
-    if widget_direction.save
-      if params[:save_and_print]
-        redirect_to print_widgets_direction_path(widget_direction)
-      elsif params[:save]
-        redirect_to user_my_routes_path(current_user.id)
+    authorize! :update, widget_direction if widget_direction.user_id
+
+    if params[:save] || params[:save_and_print]
+      # Assign user_id only on manual save action
+      widget_direction.user_id ||= current_user.try(:id)
+    end
+
+    respond_to do |format|
+      if widget_direction.has_valid_waypoints?
+        if widget_direction.save
+          format.json { head :ok }
+          format.html do
+            if params[:save_and_print]
+              redirect_to print_widgets_direction_path(widget_direction)
+            else
+              redirect_to edit_widgets_direction_path(widget_direction), :notice => (t('widget.direction.save') if current_user)
+            end
+          end
+        else
+          format.json { head :unprocessable_entity }
+          format.html do
+            flash[:notice] = t('notices.widget_error_and_correct') if current_user
+            render :edit
+          end
+        end
       else
-        redirect_to edit_widgets_direction_path(widget_direction), :notice => t('notices.widget_has_been_updated')
+        format.json { head :unprocessable_entity }
+        format.html do
+          flash[:notice] = t('widget.direction.no_route') if current_user
+          redirect_to edit_widgets_direction_path(widget_direction)
+        end
       end
-    else
-      flash[:error] = t('notices.widget_error_and_correct')
-      render :edit
     end
   end
 
@@ -68,6 +89,22 @@ class Widgets::DirectionsController < WidgetsController
     authorize! :destroy, widget_direction
     widget_direction.destroy
     redirect_to user_my_routes_path(current_user.id), :notice => t('notices.route_has_been_removed')
+  end
+
+  def waypoints
+    render json: widget_direction.widget_params.try(:[], 'waypoints') || []
+  end
+
+  protected
+
+  def with_return_path
+    request.path
+  end
+
+  def set_cache_buster
+    response.headers['Cache-Control'] = 'no-cache, no-store, max-age=0, must-revalidate'
+    response.headers['Pragma'] = 'no-cache'
+    response.headers['Expires'] = 'Fri, 01 Jan 1990 00:00:00 GMT'
   end
 
 end

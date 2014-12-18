@@ -19,5 +19,15 @@ jQuery.initializer '.edit_widget.direction', ->
       $('textarea#snippet').val(data.snippet)
     , "json"
 
-  this.on 'change', 'input[type="checkbox"], input[type="text"]', ->
-    $form.submit()
+  this.on 'change', 'input[type="text"]', ->
+    # TODO: use angular instead
+    $this    = $(this)
+    name     = $this.attr('name')
+    value    = $this.val()
+    $snippet = $('textarea#snippet')
+    snippet  = $snippet.val()
+
+    if name.match /width/
+      $snippet.val(snippet.replace(/width='\d+'/, "width='#{value}'"))
+    else if name.match /height/
+      $snippet.val(snippet.replace(/height='\d+'/, "height='#{value}'"))

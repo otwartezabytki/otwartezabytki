@@ -145,6 +145,7 @@ section.widgets{
   line-height: 12px;
   margin-top: 20px;
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.5), inset 0 -1px 2px 0 rgba(0, 0, 0, 0.3);
+  margin-left: 10px;
   &:hover{
     @include gradient(#ffffff, #ebebeb);
     text-decoration: none;
@@ -193,7 +194,6 @@ section.widgets{
       div{
         float: left;
         margin-right: 10px;
-        width: 210px;
 
         &#widget_map_search_api_params_input,
         &#widget_direction_api_params_input {
@@ -366,8 +366,23 @@ section.widgets{
 }
 
 .direction.edit_widget {
+
+  .string {
+    width: auto;
+    min-width: 100px;
+  }
+
   .optional.stringish {
     float: left;
     margin-right: 50px;
+  }
+
+  input[type="text"] {
+    width: 120px;
+  }
+
+  .button {
+    float: right;
+    margin: 25px 10px 20px 0;
   }
 }

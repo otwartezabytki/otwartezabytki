@@ -17,10 +17,10 @@ Otwartezabytki::Application.routes.draw do
   }
 
   resources :tags, :only => :index
-  # Profile:
+
   resources :users, :only => [:show, :edit, :update] do
     get :checked_relics
-    # get :my_routes
+    get :my_routes
     get :walking_guides
     delete :remove_avatar
   end
@@ -31,7 +31,6 @@ Otwartezabytki::Application.routes.draw do
       match 'section/:section', :to => 'relics#show', :as => 'section', :via => :get
       match 'section/:section', :to => 'relics#update', :as => 'section', :via => :put
       get :download_zip
-      # Profile:
       post :adopt
       post :unadopt
       get :print
@@ -58,18 +57,20 @@ Otwartezabytki::Application.routes.draw do
       w.resources :map_searches, :path => "/map_search"
       w.resources :add_relics, :path => "/add_relics"
     end
-    # Profile:
-    # resources :directions, :path => "/direction", except: [:index] do
-    #   member do
-    #     get :print
-    #     get :configure
-    #     get :preview
-    #   end
-    # end
+
     resources :walking_guides, :path => "/walking_guide", except: [:index] do
       member do
         get :print
         get :preview
+      end
+    end
+
+    resources :directions, :path => "/direction", except: [:index] do
+      member do
+        get :print
+        get :configure
+        get :preview
+        get :waypoints
       end
     end
 
