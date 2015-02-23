@@ -60,5 +60,5 @@
 %script{ type: 'application/json', id: 'search_params' }
   != widget_params.to_json
 = content_for :javascripts do
-  = javascript_include_tag "jsts", debug: false
+  = render 'widgets/directions/jsts'
   = javascript_include_tag "widgets/direction"
