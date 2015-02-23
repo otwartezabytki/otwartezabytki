@@ -23,20 +23,21 @@
     .relic-example
       %h3= t('views.pages.home.soon_header')
       - example_relic = Relic.random_filled
-      .relic-container
-        .image
-          = image_tag example_relic.main_photo.file.url(:icon)
-        .relic-content
-          .relic-heading
-            = link_to example_relic.identification, example_relic
-          .status{:class => example_relic.state }= example_relic.state_name
-          .location_name
-            %strong= t('views.relics.relics.location')
-            = format_localization(example_relic)
-          - if example_relic.dating_of_obj?
-            .date
-              %strong= t('views.relics.relics.create_date')
-              = example_relic.dating_of_obj
+      - if example_relic.present?
+        .relic-container
+          .image
+            = image_tag example_relic.main_photo.file.url(:icon)
+          .relic-content
+            .relic-heading
+              = link_to example_relic.identification, example_relic
+            .status{:class => example_relic.state }= example_relic.state_name
+            .location_name
+              %strong= t('views.relics.relics.location')
+              = format_localization(example_relic)
+            - if example_relic.dating_of_obj?
+              .date
+                %strong= t('views.relics.relics.create_date')
+                = example_relic.dating_of_obj
     .welcome
       %h3= t('views.pages.home.welcome.header')
       .left= t('views.pages.home.welcome.text')
