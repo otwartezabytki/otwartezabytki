@@ -1187,6 +1187,19 @@ pl:
           login_intro: "Zaloguj się do serwisu"
           register_here: "Zarejestruj się tutaj"
           submit: "Zaloguj się"
+      shared:
+        login_info:
+          iframe_sidebar: |-
+              <div class='ask_account'>Czy konto jest mi potrzebne?</div>
+              <p>Bazę można przeglądać bez konieczności logowania. Ale jeśli chcesz dodawać lub uzupełniać informacje - logowanie jest niezbędne.</p>
+              <div class='ask_account'>Masz konto?</div>
+          login_intro: "Zaloguj się do serwisu"
+        new_account_info:
+          iframe_sidebar: |-
+              <div class='ask_account'>Czy konto jest mi potrzebne?</div>
+              <p>Bazę można przeglądać bez konieczności logowania. Ale jeśli chcesz dodawać lub uzupełniać informacje - logowanie jest niezbędne.</p>
+              <div class='ask_account'>Nie masz konta?</div>
+          register_here: "Zarejestruj się tutaj"
     pages:
       home:
         go_to_relic_profile: "Przejdź do profilu zabytku"

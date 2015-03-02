@@ -1179,6 +1179,19 @@ de:
           login_intro: "Melde Dich bei der Plattform an"
           register_here: "Registriere Dich hier"
           submit: "Anmelden"
+      shared:
+        login_info:
+          iframe_sidebar: |-
+              <div class='ask_account'>Benötige ich ein Konto?</div>
+              <p>Die Datenbank kann ohne vorherige Anmeldung angesehen werden. Für das Hinzufügen oder Ändern von Informationen ist eine Registrierung erforderlich.</p>
+              <div class='ask_account'>Masz Konto?</div>
+          login_intro: "Melde Dich bei der Plattform an"
+        new_account_info:
+          iframe_sidebar: |-
+              <div class='ask_account'>Benötige ich ein Konto?</div>
+              <p>Die Datenbank kann ohne vorherige Anmeldung angesehen werden. Für das Hinzufügen oder Ändern von Informationen ist eine Registrierung erforderlich.</p>
+              <div class='ask_account'>Du hast kein Konto?</div>
+          register_here: "Registriere Dich hier"
     pages:
       home:
         go_to_relic_profile: "Zum Profil des Baudenkmals wechseln"
