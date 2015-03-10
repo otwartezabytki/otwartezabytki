@@ -905,6 +905,7 @@ de:
       update: "Aktualisiere %{model}"
   layouts:
     application:
+      cookies: Diese Seite verwendet Cookies
       about: Projekt
       accept: Akzeptieren
       addrelic: "Füge ein Baudenkmal hinzu"
@@ -1076,6 +1077,7 @@ de:
     pm: "nachmittags"
   translation:
     by: "Belarussisch"
+    de: "Deutsch"
     en: "Englisch"
     fr: "Französisch"
     lt: "Litauisch"
@@ -1109,9 +1111,19 @@ de:
       no_notifications: "Du hast keine weiteren Benachrichtigungen."
       no_updated_relics: "Es wurden keine Änderungen an den von Dir beobachteten Denkmälern vorgenommen."
       updated_relics_list: "Vorgenommene Änderungen an Objekten, die Du hinzugefügt oder \"adoptiert\" hast:"
+    list_walking_guides:
+      delete: "Usuń spacerownik"
+      delete_confirmation: "Usunąć spacerownik?"
+      description: "Liste der von Dir hinzugefügten Spazierführer"
+      edit: Edytuj
+      no_walking_guides: "Es gibt noch keine Spazierführer von Dir."
+      no_walking_guides_make_one: " Erstelle Deinen ersten!"
+      print: Wydrukuj
+      relics: Zabytki
     navigation:
       checked_by_me: "Durch mich überprüft"
       my_routes: "Meine Routen"
+      walking_guides: "Spazierführer"
       settings: Einstellungen
       watched: Beobachtet
     registrations:
@@ -1429,6 +1441,9 @@ de:
             <p>Du kannst jederzeit die Adoption rückgängig machen und erhältst dann keine Benachrichtigungen mehr.</p>
         header: Adoption
       edit:
+        description: "Opis"
+        no_online_source: "Es existiert noch keine Internetquelle"
+        no_printed_source: "Es existiert noch keine gedruckte Quelle"
         add_and_save: "Hinzufügen und Speichern"
         add_attachement: "Neues Bild zum Baudenkmal einfügen"
         add_photo: "Bild einfügen"
@@ -1596,6 +1611,7 @@ de:
           show_example: "Ein Beispiel anzeigen"
           show_on_map: "Auf der Karte zeigen »"
           unadopt: "Adaption rückgängig machen"
+          add_source: "QUELLE HINZUFÜGEN"
         links:
           header: "Links, Quellen, Verweise"
           placeholder: "<p>Gib interessante Wissensquellen im Internet und in Papierform an.</p>"
@@ -1633,15 +1649,18 @@ de:
           header: "Einstellungen für die Steuerungsansicht wählen"
           height: "Höhe der Steuerungsansicht"
           hide_sidebar: "Sidebar verbergen"
-          loading_relics: "Liste der Baudenkmäler laden"
-          map_help: "Gib den Namen eines beliebigen Ortes (z.B. einer Stadt, einer Straße) ein oder setze den Cursor auf die Karte. Die so generierte Route kannst Du jederzeit verschieben und Deinen Bedürfnissen anpassen."
           params_hint: "Einstellung über die Kartenansicht rechts."
           params_label: "Parameter für <a href='/api_doc/'>API</a>"
-          print_: "Route ausdrucken"
-          save: "Route speichern"
-          save_and_print: "Route speichern und ausdrucken"
           settings_info_: "Wenn Du beispielsweise einen Streckenplan durch 2 oder mehr Städte inklusive markierter Baudenkmäler in ihrem Umkreis auf Deiner Seite veröffentlichen willst, wähle die Städte aus und markiere Dich interessierende Kategorien und Radien. Anschließend musst Du nur noch den unten generierten Code auf Deine Seite kopieren."
+          sign_in_before_save: "Vor dem Speichern der Strecke musst Du Dich einloggen."
           width: "Breite der Steuerungsansicht"
+          map_help: "Gib den Namen eines beliebigen Ortes (z.B. einer Stadt, einer Straße) ein oder setze den Cursor auf die Karte. Die so generierte Route kannst Du jederzeit verschieben und Deinen Bedürfnissen anpassen."
+          save: "Route speichern"
+          print_: "Route ausdrucken"
+          save_and_print: "Route speichern und ausdrucken"
+          loading_relics: "Liste der Baudenkmäler laden"
+          create_new_widget: "Stwórz kolejną trasę"
+          sign_in: "EINLOGGEN, UM DIE STRECKE ZU SPEICHERN"
         generated: "Code für die Einbindung in eine andere Seite generieren"
         map_search:
           header: "Wähle die Einstellungen für das Steuerungselement"
@@ -1723,6 +1742,28 @@ de:
       description: "Mithilfe dieser App kannst die Baudenkmäler aus unserer Datenbank auf einer Karte ansehen. Du kannst die Liste auf der Basis von Kategorien und ihrer Lage einschränken (z.B. nur Friedhöfe in Zamość oder alle Palais und denkmalgeschützten Stadthäuser in der Wojewodschaft Schlesien)."
       thumb: widget-image-example.jpg
       title: "Karten-App"
+    walking_guide:
+      title: Spazierführer
+      loading: ładowanie
+      more: więcej
+      relics: Zabytki
+      description: Streckenbeschreibung
+      save: zapisz
+      saving: zapisywanie...
+      load_more: Wczytaj więcej
+      nothing_found: Nic nie znaleziono
+      query_is_too_short: Zapytanie jest zbyt krótkie!
+      print: Drukuj
+      width: Szerokość
+      height: Wysokość
+      description_content: 'Erstelle einen Spazierführer für Baudenkmäler aus unserer Datenbank.'
+      error: 'Wystąpił nieoczekiwany błąd. Spróbuj za chwilę'
+      title_field: Titel des Spazierführers
+      sign_in_to_save: 'Du musst eingeloggt sein, um einen Spazierführer zu speichern.'
+      sign_in: 'Einloggen'
+      help: "Beginne mit der Suche nach einem Baudenkmal, so als ob Du es in unserem Katalog finden möchtest, z.B. „jüdischer Friedhof, Warszawa“. Die Auswahl eines Baudenkmals fügt der Landkarte automatisch einen Punkt hinzu. Jedes anschließend ausgewählte Objekt führt automatisch zur Erstellung eines Spazier- oder Wanderweges. Die Reihenfolge der Baudenkmäler kann in einer Liste geändert werden."
+      query_field: Suche ein Baudenkmal
+      query_placeholder: z.B. Friedhof,  Łódź
   wuoz:
     wuoz-w-bialymstoku: "Wojewodschafts-Amt für Denkmalschutz in Białystok"
     wuoz-w-gdansku: "Wojewodschafts-Amt für Denkmalschutz in Danzig/Gdańsk"

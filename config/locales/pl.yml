@@ -901,6 +901,7 @@ pl:
       update: "Zaktualizuj %{model}"
   layouts:
     application:
+      cookies: Ta strona używa ciasteczek
       about: Projekt
       accept: Akceptuj
       addrelic: "Dodaj zabytek"
@@ -1074,6 +1075,7 @@ pl:
     pm: "po południu"
   translation:
     by: "j. białoruski"
+    de: "j. niemiecki"
     en: "j. angielski"
     fr: "j. francuski"
     lt: "j. litewski"
@@ -1437,6 +1439,9 @@ pl:
             <p>W każdej chwili możesz zrezygnować z adopcji i otrzymywanych powiadomień.</p>
         header: Adopcja
       edit:
+        description: "Opis"
+        no_online_source: "Nie ma jeszcze żadnego źródła internetowego"
+        no_printed_source: "Nie ma jeszcze żadnego źródła drukowanego"
         add_and_save: "dodaj i zapisz"
         add_attachement: "dodaj nowe zdjęcie do zabytku"
         add_photo: "dodaj zdjęcie"
@@ -1604,6 +1609,7 @@ pl:
           show_example: "pokaż przykład"
           show_on_map: "pokaż na mapie »"
           unadopt: "Odadoptuj zabytek"
+          add_source: "dodaj źródło"
         links:
           header: "Linki, źródła, powiązania"
           placeholder: "<p>Podaj ciekawe internetowe i papierowe źródła informacji o zabytku.</p>"
