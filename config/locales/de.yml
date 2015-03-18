@@ -174,7 +174,7 @@ de:
         state: Status
         states:
           checked: überprüft
-          filled: ausgefüllt
+          filled: vollständig
           unchecked: nicht überprüft
         street: Straße
         tags: Schlagwörter
@@ -354,23 +354,23 @@ de:
     names:
       architektura_inzynieryjna: "Ingenieursarchitektur"
       budynek_gospodarczy: "Wirtschaftsgebäude"
-      cmentarny: friedhöflich
-      dworski_palacowy_zamek: Hofs-/Palast-/Schloss-
+      cmentarny: Friedhof
+      dworski_palacowy_zamek: Hofs/Palast/Schloss
       katolicki: katholisch
       lemkowski: lemkisch
       mala_architektura: "kleine Architektur"
-      mieszkalny: Wohnungs-
-      militarny: militärisch
+      mieszkalny: Wohnung
+      militarny: Militär
       muzulmanski: islamisch
       park_ogrod: Park/Garten
       prawoslawny: orthodox
       protestancki: protestantisch
       przemyslowy_poprzemyslowy: industriell/postindustriell
-      sakralny: sakral
-      sportowy_kulturalny_edukacyjny: sportbezogen/kulturell/bildungsbezogen
+      sakralny: Sakralbau
+      sportowy_kulturalny_edukacyjny: Sport/Kultur/Bildung
       uklad_urbanistyczny_zespol_budowlany: "städtebaulicher Komplex/Gebäudeensemble"
       unicki: uniert
-      uzytecznosci_publicznej: "öffentlicher Nutzung"
+      uzytecznosci_publicznej: "öffentliche Nutzung"
       zydowski: jüdisch
   common:
     apply_to: betrifft
@@ -702,64 +702,65 @@ de:
       - !ruby/symbol month
       - !ruby/symbol day
   datetime:
-    ago: vor
+    ago_pre: vor
+    ago: ''
     distance_in_words:
       about_x_hours:
         few: "etwa %{count} Stunden"
         many: "etwa %{count} Stunden"
-        one: "etwa eine Stunde"
+        one: "etwa einer Stunde"
         other: "etwa %{count} Stunden"
       about_x_months:
-        few: "etwa %{count} Monate"
-        many: "etwa %{count} Monate"
-        one: "etwa einen Monat"
-        other: "etwa %{count} Monate"
+        few: "etwa %{count} Monaten"
+        many: "etwa %{count} Monaten"
+        one: "etwa einem Monat"
+        other: "etwa %{count} Monaten"
       about_x_years:
-        few: "etwa %{count} Jahre"
-        many: "etwa %{count} Jahre"
-        one: "etwa ein Jahr"
-        other: "etwa %{count} Jahre"
+        few: "etwa %{count} Jahren"
+        many: "etwa %{count} Jahren"
+        one: "etwa einem Jahr"
+        other: "etwa %{count} Jahren"
       almost_x_years:
-        few: "fast %{count} Jahre"
-        many: "fast %{count} Jahre"
-        one: "fast ein Jahr"
-        other: "fast %{count} Jahre"
-      half_a_minute: "eine halbe Minute"
+        few: "fast %{count} Jahren"
+        many: "fast %{count} Jahren"
+        one: "fast einem Jahr"
+        other: "fast %{count} Jahren"
+      half_a_minute: "einer halben Minute"
       less_than_x_minutes:
         few: "weniger als %{count} Minuten"
         many: "weniger als %{count} Minuten"
-        one: "weniger als eine Minute"
+        one: "weniger als einer Minute"
         other: "weniger als %{count} Minuten"
       less_than_x_seconds:
         few: "weniger als %{count} Sekunden"
         many: "weniger als %{count} Sekunden"
-        one: "weniger als eine Sekunde"
+        one: "weniger als einer Sekunde"
         other: "weniger als %{count} Sekunden"
       over_x_years:
-        few: "mehr als %{count} Jahre"
-        many: "mehr als %{count} Jahre"
-        one: "mehr als ein Jahr"
-        other: "mehr als %{count} Jahre"
+        few: "mehr als %{count} Jahren"
+        many: "mehr als %{count} Jahren"
+        one: "mehr als einem Jahr"
+        other: "mehr als %{count} Jahren"
       x_days:
-        few: "%{count} Tage"
-        many: "%{count} Tage"
+        few: "%{count} Tagen"
+        many: "%{count} Tagnen"
         one: "1 Tag"
-        other: "%{count} Tage"
+        other: "%{count} Tagen"
       x_minutes:
         few: "%{count} Minuten"
         many: "%{count} Minuten"
         one: 1 Minute
         other: "%{count} Minuten"
       x_months:
-        few: "%{count} Monate"
-        many: "%{count} Monate "
+        few: "%{count} Monaten"
+        many: "%{count} Monaten"
         one: "1 Monat"
-        other: "%{count} Monate "
+        other: "%{count} Monaten"
       x_seconds:
         few: "%{count} Sekunden"
-        many: "%{count} Sekunden "
+        many: "%{count} Sekunden"
         one: 1 Sekunde
-        other: "%{count} Sekunden "
+        other: "%{count} Sekunden"
     prompts:
       day: Tag
       hour: Stunde
@@ -781,6 +782,8 @@ de:
       timeout: "Die Sitzung wurde automatisch beendet (Timeout). Bitte melde Dich erneut an."
       unauthenticated: "Um fortzufahren, melde Dich bitte an."
       unconfirmed: "Zum Fortfahren aktiviere Dein Konto."
+      user:
+        not_found_in_database: "E-Mail-Adresse oder Passwort ist ungültig."
     mailer:
       confirmation_instructions:
         subject: "Anleitung zur Konto-Aktivierung"
@@ -858,7 +861,7 @@ de:
         name: "Gib den vollen Namen des Dokuments an"
       entry:
         body: "Vergiss nicht, Deine Quellen anzugeben!"
-        title: "Verleihe einen Titel. Z.B. Die Legende von der Entstehung des Schlosses"
+        title: "Denke Dir einen Titel aus. z. B. Die Legende von der Entstehung des Schlosses"
       photo:
         alternate_text: "Du hast die Möglichkeit, einen alternativen Text einzugeben. Blinden Menschen wird er von einem speziellen Programm vorgelesen. Notiere, was auf dem Bild zu sehen ist. Bsp. Frontansicht des Gebäudes."
         author: "Gib den Name Nachname des/der Autor/in und/oder deren Nickname sowie die Bildquelle und dessen Copyright-Lizenz (z.B. Mariusz 123, Wikipedia, CC BY-SA)."
@@ -868,7 +871,7 @@ de:
         categories: "Wähle Kategorien, die Deiner Meinung nach zu dem beschriebenen Baudenkmal passen. Mit einem Stern (*) gekennzeichnete Kategorien wurden automatisch hinzugefügt und erfordern eine Überprüfung."
         common_name: "Wenn das Baudenkmal einen oder mehr als einen umgangssprachlichen Namen trägt, trage ihn ein."
         country_code: "Information über das Land"
-        documents_info: "Wenn Du von der Existenz einer materiellen Dokumentation dieses Baudenkmals weißt, notiere Deine Informationen für andere Interessierte."
+        documents_info: "Wenn Du von der Existenz einer Dokumentation dieses Baudenkmals weißt, notiere Deine Informationen für andere Interessierte."
         fplace: "Wähle den richtigen Namen aus der Liste oder trage ihn ein, wenn er auf der Liste nicht vorhanden ist."
         fprovince: "Informationen über die Region"
         identification: "Korrigiere und ergänze (falls nötig) den Namen des Baudenkmals."
@@ -890,7 +893,7 @@ de:
         q: "was:"
         radius: "W promieniu od trasy:"
         start: "von:"
-        to: "nach:"
+        to: "bis:"
     placeholders:
       search:
         place: wo
@@ -918,7 +921,7 @@ de:
       facebook_sign_in: "Mit Facebook-Account anmelden"
       facebook_sign_up: "Mit Facebook-Account registrieren"
       footer:
-        about_project_html: "<p>Otwarte Zabytki ist ein Projekt des Centrum Cyfrowe, dem Digitalen Zentrum Polen: Polen.</p><p>Centrum Cyfrowe Projekt: Polen, ul. Andersa 29, 00-159 Warszawa</p><p>Das Projekt wird finanziert aus Mitteln des Ministeriums für Kultur und nationales Erbe, aus Mitteln des Museums der Geschichte Polens im Rahmen des Programms \"Patriotismus für Morgen\", aus Mitteln des Ministeriums für Äußere Angelegenheiten im Rahmen des Programms zur Realisierung der \"Zusammenarbeit mit der Polonia und den Auslandspolen\", aus Mitteln der Stiftung \"Orange\" sowie aus Mitteln des CEE-Trust.</p>"
+        about_project_html: "<p>Otwarte Zabytki ist ein Projekt des Centrum Cyfrowe, dem Digitalen Zentrum Polen.</p><p>Centrum Cyfrowe Projekt: Polen, ul. Andersa 29, 00-159 Warszawa</p><p>Das Projekt wird finanziert aus Mitteln des Ministeriums für Kultur und nationales Erbe, aus Mitteln des Museums der Geschichte Polens im Rahmen des Programms \"Patriotismus für Morgen\", aus Mitteln des Ministeriums für Äußere Angelegenheiten im Rahmen des Programms zur Realisierung der \"Zusammenarbeit mit der Polonia und den Auslandspolen\", aus Mitteln der Stiftung \"Orange\" sowie aus Mitteln des CEE-Trust.</p>"
         license: "Die Inhalte der Plattform werden unter einer Creative Commons-Lizenz veröffentlicht <br/> <a href ='http://creativecommons.org/licenses/by/3.0/pl'>Creative Commons Autorenschaft – Unter den gleichen Bedingungen 3.0 Polen</a>"
         partner_h1: Schirmherr
         partner_h2: "Medienschirmherr"
@@ -928,7 +931,7 @@ de:
       help: Hilfe
       homepage: "Startseite"
       learn_more: "Erfahre mehr"
-      login: Einloggen
+      login: Anmeldung
       logout: Ausloggen
       og:
         description: "Erstelle mit uns eine frei zugängliche Datenbank aller Baudenkmäler! Hilf uns, dieses Angebot zu kreieren! Bringe Dein eigenes Wissen ein und teile es mit uns. Suche nach Informationen in Büchern oder im Internet! Es ist wirklich einfach."
@@ -937,7 +940,7 @@ de:
       register: Registrierung
       relics_count: "Anzahl Deiner Baudenkmäler: %{count}"
       search: Suche
-      tagline: "Erschaffe mit uns einen zivilgesellschaftliches Verzeichnis für Baudenkmäler"
+      tagline: "Erschaffe mit uns ein zivilgesellschaftliches Verzeichnis für Baudenkmäler"
       widgets: Minianwendungen
   messages:
     are_you_sure: "Bist Du Dir sicher?"
@@ -1030,9 +1033,9 @@ de:
       name: "Wähle ein Bild..."
     categories:
       description: "Vergebe für das Baudenkmal passende Schlagwörter und Kategorien nach Deiner eigenen Einschätzung."
-      name: "Kategorien und Schlagwörter"
+      name: "Kategorien, Tags"
     description:
-      description: "<p>Füge eine bündige Beschreibung des denkmalgeschützten Gebäudes ein. Bedenke, Deine Quellen anzugeben!</p> <p>Wenn das Baudenkmal Teil eines Gebäudeensembles ist, und die Beschreibung auch auf ein weiteres Element dieses Komplexes zutrifft, kannst Du zu diesem einen Interlink erstellen (indem Du die Option \"Link erstellen \" auswählst).</p>"
+      description: "<p>Füge eine bündige Beschreibung des denkmalgeschützten Gebäudes ein. Bedenke, Deine Quellen anzugeben!</p> <p>Wenn das Baudenkmal Teil eines Gebäudeensembles ist, und die Beschreibung auch auf ein weiteres Element dieses Komplexes zutrifft, kannst Du zu diesem einen internen Link erstellen (indem Du die Option \"Link erstellen \" auswählst).</p>"
       name: Beschreibung
     documents:
       description: "Füge als Anhang amtliche Dokumente und Archivmaterialien betreffend dieses Baudenkmals hinzu. Zulässige Dateiformate sind: pdf, jpg, png, gif. Versichere Dich, dass Du über die nötigen Berechtigungen verfügst, diese Materialien hier zu veröffentlichen."
@@ -1048,7 +1051,7 @@ de:
       name: "Name des Objekts"
     links:
       description: "Füge die für das Objekt wichtigen Informationsquellen an (Seiten im www, Titel von Veröffentlichungen)."
-      name: "Links, Quellen, Verbindungen"
+      name: "Links, Quellen"
     location:
       description: "Prüfe, ob die Adresse korrekt ist. Befindet sich das ausgewählte Baudenkmal auf der Karte am richtigen Ort?"
       name: Lokalisierung
@@ -1115,11 +1118,11 @@ de:
       delete: "Usuń spacerownik"
       delete_confirmation: "Usunąć spacerownik?"
       description: "Liste der von Dir hinzugefügten Spazierführer"
-      edit: Edytuj
+      edit: Bearbeiten
       no_walking_guides: "Es gibt noch keine Spazierführer von Dir."
       no_walking_guides_make_one: " Erstelle Deinen ersten!"
-      print: Wydrukuj
-      relics: Zabytki
+      print: Drucken
+      relics: Baudenkmäler
     navigation:
       checked_by_me: "Durch mich überprüft"
       my_routes: "Meine Routen"
@@ -1196,7 +1199,7 @@ de:
           iframe_sidebar: |-
               <div class='ask_account'>Benötige ich ein Konto?</div>
               <p>Die Datenbank kann ohne vorherige Anmeldung angesehen werden. Für das Hinzufügen oder Ändern von Informationen ist eine Registrierung erforderlich.</p>
-              <div class='ask_account'>Masz Konto?</div>
+              <div class='ask_account'>Du hast bereits ein Konto?</div>
           login_intro: "Melde Dich bei der Plattform an"
         new_account_info:
           iframe_sidebar: |-
@@ -1394,7 +1397,7 @@ de:
         info_nonexisted_relic: "In der Datenbank Offener Baudenkmäler werden ebenfalls Informationen über Baudenkmäler gesammelt, die bereits nicht mehr existieren (die z.B. im Krieg zerstört und nicht wieder errichtet wurden). Wenn Du Kenntnisse, Bilder oder Dokumente über solche Objekte hast, füge sie hinzu."
         info_relic_group: " Ein Baudenkmal ist ein einzelnes Objekt (z.B. ein Palais). Ein denkmalgeschütztes Gebäudeensemble hingegen besteht aus einer räumlich verbundenen Gebäudegruppe, die sich durch ihre Architektur, den Baustil, verwendete Baumaterialien, ihre Funktion, Entstehungszeit oder den Bezug zu historischen Ereignissen von ihrer Umgebung abheben. Dies kann z.B. ein Fabrikkomplex sein, oder eine Gruppe von Mietshäusern im Stadtzentrum, welche im gleichen Zeitraum erbaut worden sind."
         intro1: "Sprawdź czy zabytek na pewno jeszcze nie znalazł się w naszej bazie. Zacznij od wpisania nazwy miejscowości (wciśnij szukaj, a mapa ustawi się w środku wybranej miejscowości), a potem wskaż obiekt na mapie. Następnie wciśnij \"przejdź dalej\". Pokaże się lista obiektów z naszej bazy, które znajdują się we wskazanej okolicy. Sprawdź, czy obiekt, który chcesz dodać, nie znajduje się na liście. Jeśli go nie ma, możesz kontynuować dodawanie zabytku do bazy,"
-        intro1_html: "Bitte überprüfe, ob das <span class='r_sa'>Baudenkmal</span><span class='r_ze'>Baudenkmalensemble</span> sich wirklich noch nicht in unserer Datenbank befindet. Trage dazu zuerst den Namen des Ortes ein (mit dem Klick auf Suchen zentriert die Karte sich an dem ausgewählten Ort), und wähle anschließend ein Objekt auf der Karte. Klicke auf \"Weiter \", um Dir eine Liste aller Objekte anzeigen zu lassen, die sich in dieser Gegend befinden. Prüfe nun, ob das Objekt, das Du hinzufügen möchtest, sich bereits auf der Liste findet. Wenn dies nicht der Fall ist, kannst Du fortfahren, <span class='r_sa'>Baudenkmal</span><span class='r_ze'>Baudenkmalensemble</span> in die Datenbank einzupflegen,"
+        intro1_html: "Bitte überprüfe, ob das <span class='r_sa'>Baudenkmal</span><span class='r_ze'>Baudenkmalensemble</span> sich wirklich noch nicht in unserer Datenbank befindet. Trage dazu zuerst den Namen des Ortes ein (mit dem Klick auf Suchen zentriert die Karte sich an dem ausgewählten Ort), und wähle anschließend ein Objekt auf der Karte. Klicke auf \"Weiter \", um Dir eine Liste aller Objekte anzeigen zu lassen, die sich in dieser Gegend befinden. Prüfe nun, ob das Objekt, das Du hinzufügen möchtest, sich bereits auf der Liste findet. Wenn dies nicht der Fall ist, kannst Du fortfahren, das <span class='r_sa'>Baudenkmal</span><span class='r_ze'>Baudenkmalensemble</span> in die Datenbank einzupflegen,"
         intro2: "*"
         no_results: "Kein Resultat"
         non_existed: "Nicht mehr existierendes Baudenkmal"
@@ -1413,7 +1416,7 @@ de:
         intro1: "Trage hier 3-4 Sätze mit den wichtigsten Informationen über das Objekt ein. Nach dem Hinzufügen des Baudenkmals kann die Beschreibung jederzeit ergänzt und überarbeitet werden. Denke daran, Deine Quellen anzugeben."
         intro2: "Füge ein oder mehrere Bilder des Baudenkmals an (zulässige Dateiformate: JPG und PNG; max. Größe einer Bilddatei: 2 MB). Bitte achte darauf, dass das Bild für andere User hilfreich ist – füge nur Bilder in guter Qualität ein."
         label: Bilder
-        submit: "Bearbeitung beenden und hinzugefügtes Baudenkmal ansehen!"
+        submit: "Bearbeitung beenden und profil ansehen"
         submit_relic_group: "Bearbeitung beenden und hinzugefügtes Baudenkmälerensemble ansehen!"
       stages:
         address: "Adressdaten"
@@ -1424,13 +1427,13 @@ de:
         photos: "Bilder und Beschreibung"
         step1: "Schritt 1"
         step1_description1: "Überprüfe, ob das Baudenkmal sich tatsächlich noch nicht in unserer Datenbank befindet."
-        step1_description1_html: " Bitte überprüfe, ob das <span class='r_sa'>Baudenkmal</span><span class='r_ze'>Baudenkmalensemble</span> sich wirklich noch nicht in unserer Datenbank befindet."
+        step1_description1_html: " Überprüfe, ob das <span class='r_sa'>Baudenkmal</span> nicht bereits eingetragen ist."
         step1_description2: "Gib die Adresse ein, unter der das hinzuzufügende Baudenkmal zu finden ist."
-        step1_description2_html: " Gib die Adresse ein, unter der das hinzuzufügende <span class='r_sa'>Baudenkmal</span><span class='r_ze'>Baudenkmalensemble</span> zu finden ist."
+        step1_description2_html: " Trage die Adresse des <span class='r_sa'>Baudenkmals</span> ein."
         step1_description3: "Füge den Namen des Objekts ein und begründe, warum dieses Baudenkmal in unserer Datenbank nicht fehlen sollte."
-        step1_description3_html: "Füge den Namen des <span class='r_sa'>Baudenkmals</span><span class='r_ze'>Baudenkmalensembles</span> ein und begründe, warum es in unserer Datenbank nicht fehlen sollte."
+        step1_description3_html: "Trage Name und Begründung der Wichtigkeit des <span class='r_sa'>Baudenkmals</span> ein."
         step1_description4: "Füge ein Foto mitsamt einer kurzen Bildbeschreibung hinzu."
-        step1_description4_html: "Füge ein Foto mitsamt einer kurzen Beschreibung des <span class='r_sa'>Baudenkmals</span><span class='r_ze'>Baudenkmalensembles</span> hinzu."
+        step1_description4_html: "Lade ein Foto mit kurzer Beschreibung hoch."
         step2: "Schritt 2"
         step3: "Schritt 3"
         step4: "Schritt 4"
@@ -1441,7 +1444,7 @@ de:
             <p>Du kannst jederzeit die Adoption rückgängig machen und erhältst dann keine Benachrichtigungen mehr.</p>
         header: Adoption
       edit:
-        description: "Opis"
+        description: "Beschreibung"
         no_online_source: "Es existiert noch keine Internetquelle"
         no_printed_source: "Es existiert noch keine gedruckte Quelle"
         add_and_save: "Hinzufügen und Speichern"
@@ -1646,34 +1649,34 @@ de:
         back: "&laquo; zurück zum Anwendungsverzeichnis"
         code_help: "Dies ist ein fertiger Code für die Homepage, generiert für das von Dir ausgewählte Baudenkmal. Du kannst ihn kopieren und an der dafür vorgesehenen Stelle auf Deiner Seite einfügen."
         direction:
-          header: "Einstellungen für die Steuerungsansicht wählen"
-          height: "Höhe der Steuerungsansicht"
+          header: "Einstellungen für die Kartenansicht wählen"
+          height: "Höhe der Kartenansicht"
           hide_sidebar: "Sidebar verbergen"
           params_hint: "Einstellung über die Kartenansicht rechts."
           params_label: "Parameter für <a href='/api_doc/'>API</a>"
           settings_info_: "Wenn Du beispielsweise einen Streckenplan durch 2 oder mehr Städte inklusive markierter Baudenkmäler in ihrem Umkreis auf Deiner Seite veröffentlichen willst, wähle die Städte aus und markiere Dich interessierende Kategorien und Radien. Anschließend musst Du nur noch den unten generierten Code auf Deine Seite kopieren."
           sign_in_before_save: "Vor dem Speichern der Strecke musst Du Dich einloggen."
-          width: "Breite der Steuerungsansicht"
+          width: "Breite der Kartenansicht"
           map_help: "Gib den Namen eines beliebigen Ortes (z.B. einer Stadt, einer Straße) ein oder setze den Cursor auf die Karte. Die so generierte Route kannst Du jederzeit verschieben und Deinen Bedürfnissen anpassen."
           save: "Route speichern"
           print_: "Route ausdrucken"
           save_and_print: "Route speichern und ausdrucken"
           loading_relics: "Liste der Baudenkmäler laden"
-          create_new_widget: "Stwórz kolejną trasę"
+          create_new_widget: "neue Route anlegen"
           sign_in: "EINLOGGEN, UM DIE STRECKE ZU SPEICHERN"
         generated: "Code für die Einbindung in eine andere Seite generieren"
         map_search:
           header: "Wähle die Einstellungen für das Steuerungselement"
-          height: "Höhe der Steuerungsansicht"
+          height: "Höhe der Kartenansicht"
           hide_sidebar: "Sidebar verbergen"
           params_hint: "Einstellung über die Kartenansicht rechts."
           params_label: "Parameter für<a href='/api_doc/'>API</a>"
           settings_info: "Wenn Du beispielsweise auf Deiner Seite eine Karte mit allen jüdischen Friedhöfen in der Wojewodschaft Niederschlesien unterbringen möchtest, wähle die Wojewodschaft Niederschlesien mit der Lokalisierung oder Kategorie \"Friedhof\" und \"jüdisch\" aus. So erhältst Du einen Code zum Einbetten auf Deiner Seite."
-          width: "Breite der Steuerungsansicht"
+          width: "Breite der Kartenansicht"
         preview: "Vorschau der erstellten Minianwendung"
       index:
         about: "Minianwendungen:"
-        description: "<h3>Was sind Minianwendungen?</h3> <p>Die Daten der  Offenen Baudenkmäler können für Euch in unterschiedlichen Kontexten hilfreich sein!</p> <p>Wir haben Euch einige beispielhafte Apps zusammengestellt, mit denen Ihr die Informationen der Offenen Baudenkmäler ganz einfach auf Euren Internetseiten einbinden könnt.</p> <h3>Wie benutze ich die Apps?</h3> <p>Um die hier vorgestellten Apps zu nutzen, genügt es, den von der App generierten Teil eines Codes auf jeder möglichen Internetseite einzubetten.</p> <h3>Hast Du Ideen für weitere Apps?</h3> <p>Wenn Ideen für eine funktionale Anwendung hast, die mit den Daten über Offene Baudenkmäler etwas interessantes anfangen kann, teile sie mit uns. Vielleicht können wir den Vorschlag sogar gleich in die Tat umsetzen (%{email})!</p>"
+        description: "<h3>Was sind Minianwendungen?</h3> <p>Die Daten der  Offenen Baudenkmäler können für Euch in unterschiedlichen Kontexten hilfreich sein!</p> <p>Wir haben Euch einige beispielhafte Apps zusammengestellt, mit denen Ihr die Informationen der Offenen Baudenkmäler ganz einfach auf Euren Internetseiten einbinden könnt.</p> <h3>Wie benutze ich die Apps?</h3> <p>Um die hier vorgestellten Apps zu nutzen, genügt es, den von der App generierten Teil eines Codes auf jeder möglichen Internetseite einzubetten.</p> <h3>Hast Du Ideen für weitere Apps?</h3> <p>Wenn Du Ideen für eine funktionale Anwendung hast, die mit den Daten über Offene Baudenkmäler etwas Interessantes anfangen kann, teile sie mit uns. Vielleicht können wir den Vorschlag sogar gleich in die Tat umsetzen (%{email})!</p>"
         use: Test
       preview:
         direction:
@@ -1722,7 +1725,7 @@ de:
           query_placeholder: "z.B. Friedhof"
           search_by_name: "Suche nach Namen"
           show_less: "Weniger anzeigen..."
-          show_more: "Weniger anzeigen..."
+          show_more: "Mehr anzeigen..."
   widget:
     add_alert:
       description: |-
@@ -1738,26 +1741,28 @@ de:
       description_: "Mithilfe dieser App kannst Du Baudenkmäler aus unserer Datenbank auf einer bestimmten Route betrachten. Du kannst die Liste der angezeigten Baudenkmäler auf der Basis von Kategorien, ihrer Lage und Entfernung von Deiner Strecke einschränken (z.B. nur Friedhöfe im Umkreis von 2km von der Strecke zwischen Warschau und Breslau)."
       thumb: widget-image-example.jpg
       title_: "Routen-App"
+      save: "Trasa została zapisana. Listę zapisany tras możesz znaleźć w profilu użytkownika."
+      no_route: "Keine Route ausgewählt."
     map_search:
-      description: "Mithilfe dieser App kannst die Baudenkmäler aus unserer Datenbank auf einer Karte ansehen. Du kannst die Liste auf der Basis von Kategorien und ihrer Lage einschränken (z.B. nur Friedhöfe in Zamość oder alle Palais und denkmalgeschützten Stadthäuser in der Wojewodschaft Schlesien)."
+      description: "Mithilfe dieser App kannst Du die Baudenkmäler aus unserer Datenbank auf einer Karte ansehen. Du kannst die Liste auf der Basis von Kategorien und ihrer Lage einschränken (z.B. nur Friedhöfe in Zamość oder alle Palais und denkmalgeschützten Stadthäuser in der Wojewodschaft Schlesien)."
       thumb: widget-image-example.jpg
       title: "Karten-App"
     walking_guide:
       title: Spazierführer
-      loading: ładowanie
-      more: więcej
-      relics: Zabytki
+      loading: Laden
+      more: mehr
+      relics: Baudenkmäler
       description: Streckenbeschreibung
-      save: zapisz
-      saving: zapisywanie...
-      load_more: Wczytaj więcej
-      nothing_found: Nic nie znaleziono
-      query_is_too_short: Zapytanie jest zbyt krótkie!
-      print: Drukuj
-      width: Szerokość
-      height: Wysokość
+      save: speichern
+      saving: Speichere...
+      load_more: Mehr laden
+      nothing_found: Es wurde nichts gefunden
+      query_is_too_short: Die Suchanfrage ist zu kurz!
+      print: Drucken
+      width: Breite
+      height: Länge
       description_content: 'Erstelle einen Spazierführer für Baudenkmäler aus unserer Datenbank.'
-      error: 'Wystąpił nieoczekiwany błąd. Spróbuj za chwilę'
+      error: 'Ein unerwarteter Fehler ist aufgetreten. Versuche es später noch einmal!'
       title_field: Titel des Spazierführers
       sign_in_to_save: 'Du musst eingeloggt sein, um einen Spazierführer zu speichern.'
       sign_in: 'Einloggen'

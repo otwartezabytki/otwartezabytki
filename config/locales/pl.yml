@@ -698,6 +698,7 @@ pl:
       - !ruby/symbol month
       - !ruby/symbol day
   datetime:
+    ago_pre: ''
     ago: temu
     distance_in_words:
       about_x_hours:
@@ -777,6 +778,8 @@ pl:
       timeout: "Sesja wygasła, aby kontynuować zaloguj się ponownie."
       unauthenticated: "Aby kontynuować zaloguj lub zarejestruj się."
       unconfirmed: "Aby kontynuować aktywuj konto."
+      user:
+        not_found_in_database: "Email lub hasło są niepoprawne"
     mailer:
       confirmation_instructions:
         subject: "Instrukcja aktywacji konta"
