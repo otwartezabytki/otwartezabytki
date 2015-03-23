@@ -1561,7 +1561,7 @@ de:
           assigned_automatically: "automatisch kategorisiert"
           content_title_cat: "Kategorien:"
           content_title_tag: Schlagwörter
-          header: "Schlagwörter, Kategorien"
+          header: "Schlagwörter, <br>Kategorien"
           not_added: "Nicht vorhanden, einfügen »"
           placeholder: |-
               <p>Wähle die Kategorien, die Deiner Meinung nach zu dem beschriebenen Baudenkmal passen.</p>
@@ -1581,14 +1581,14 @@ de:
           where_to_find: "Wo ist das zu finden?"
         entries:
           add: "Eintrag hinzufügen"
-          header: "Interessante Einzelheiten, Legenden, Anekdoten"
+          header: "Interessante Einzelheiten, Legenden, <br>Anekdoten"
           placeholder: "<p>Teile anderen Legenden, Anekdoten,<br/>interessante Geschichten rund um das Baudenkmal mit.</p>"
           togglable:
             less: Weniger
             more: Mehr…
         events:
           add: "Ereignis hinzufügen"
-          header: "Wichtige Daten"
+          header: "Wichtige <br>Daten"
           placeholder: "<p>Füge die wichtigsten historischen Daten für dieses Objekt mit einer kurzen Erläuterung ein.</p>"
         flash_content_html: |-
             <h3>Worum geht es?</h3>
