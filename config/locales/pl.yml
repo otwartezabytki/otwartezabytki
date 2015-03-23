@@ -1740,7 +1740,7 @@ pl:
       description_: "Dzięki tej aplikacji możesz zobaczyć zabytki z naszej bazy na konkretnej trasie. Listę wyświetlanych zabytków możesz zawęzić w oparciu kategorie i położenie w promeniu trasy (np. tylko cmentarze w promieniu 2 km od trasy z Warszawy do Wrocławia)."
       thumb: widget-image-example.jpg
       title_: "Widżet Trasa"
-      save: "Trasa została zapisana. Listę zapisany tras możesz znaleźć w profilu użytkownika."
+      save: "Trasa została zapisana. Listę zapisanych tras możesz znaleźć w profilu użytkownika."
       no_route: "Trasa nie została wybrana."
     map_search:
       description: "Dzięki tej aplikacji możesz zobaczyć zabytki z naszej bazy na mapie. Możesz zawęzić listę wyświetlanych zabytków w oparciu o położenie i kategorie (np. tylko cmentarze w Zamościu lub wszystkie pałace i kamienice w województwie śląskim)."

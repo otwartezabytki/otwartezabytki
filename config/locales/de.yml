@@ -1741,7 +1741,7 @@ de:
       description_: "Mithilfe dieser App kannst Du Baudenkmäler aus unserer Datenbank auf einer bestimmten Route betrachten. Du kannst die Liste der angezeigten Baudenkmäler auf der Basis von Kategorien, ihrer Lage und Entfernung von Deiner Strecke einschränken (z.B. nur Friedhöfe im Umkreis von 2km von der Strecke zwischen Warschau und Breslau)."
       thumb: widget-image-example.jpg
       title_: "Routen-App"
-      save: "Trasa została zapisana. Listę zapisany tras możesz znaleźć w profilu użytkownika."
+      save: "Route gespeichert. Eine Liste Deiner gespeicherten Routen findest Du in Deinem Benutzerkonto."
       no_route: "Keine Route ausgewählt."
     map_search:
       description: "Mithilfe dieser App kannst Du die Baudenkmäler aus unserer Datenbank auf einer Karte ansehen. Du kannst die Liste auf der Basis von Kategorien und ihrer Lage einschränken (z.B. nur Friedhöfe in Zamość oder alle Palais und denkmalgeschützten Stadthäuser in der Wojewodschaft Schlesien)."
