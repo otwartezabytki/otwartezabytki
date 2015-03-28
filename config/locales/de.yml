@@ -1561,7 +1561,7 @@ de:
           assigned_automatically: "automatisch kategorisiert"
           content_title_cat: "Kategorien:"
           content_title_tag: Schlagwörter
-          header: "Schlagwörter, <br>Kategorien"
+          header: "Schlagwörter <br>Kategorien"
           not_added: "Nicht vorhanden, einfügen »"
           placeholder: |-
               <p>Wähle die Kategorien, die Deiner Meinung nach zu dem beschriebenen Baudenkmal passen.</p>
