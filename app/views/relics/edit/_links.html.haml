@@ -39,7 +39,8 @@
               .arrow
     .add-link
       - if relic.all_links.select(&:url?).length == 0
-        .strong Nie ma jeszcze żadnego źródła internetowego
+        .strong
+          = t('views.relics.edit.no_online_source')
       = link_to t('views.relics.edit.links.add_internet_source'), "#", :class => "add_link", :"data-template" => "#link_template"
 
     #papers.links_container{ :style => (relic.all_links.select(&:paper?).length == 0 ? "display: none" : "") }
@@ -81,7 +82,8 @@
               .arrow
     .add-link
       - if relic.all_links.select(&:paper?).length == 0
-        .strong Nie ma jeszcze żadnego źródła drukowanego
+        .strong
+          = t('views.relics.edit.no_printed_source')
       = link_to t('views.relics.edit.links.add_print_source'), "#", :class => "add_link", :"data-template" => "#print_template"
 
     = f.input :links_info

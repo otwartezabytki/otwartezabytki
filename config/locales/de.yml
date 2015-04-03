@@ -1,0 +1,1788 @@
+---
+de:
+  active_admin:
+    any: irgendein
+    blank_slate:
+      content: "Es gibt noch keinen Inhalt %{resource_name}."
+      link: "Inhalt erstellen"
+    cancel: Löschen
+    clear_filters: Filter aufheben
+    comments:
+      add: "Hinterlasse einen Kommentar"
+      no_comments_yet: "Noch keine Kommentare"
+      title_content: "Kommentar zum Inhalt:"
+    dashboard: Pinnwand
+    dashboard_welcome:
+      call_to_action: "Um einen Eintrag auf der Pinnwand zu hinterlassen, prüfe 'app/admin/dashboards.rb'"
+      welcome: "Willkommen bei Active Admin. Dies ist ein voreingestellter Arbeitsplatz."
+    delete: Löschen
+    delete_confirmation: "Bist Du sicher, dass der ausgewählte Inhalt gelöscht werden soll?"
+    delete_model: "Lösche %{model}"
+    details: "Details %{model}"
+    download: "Herunterladen:"
+    edit: Bearbeiten
+    edit_model: "Bearbeite %{model}"
+    empty: Leer
+    equal_to: identisch mit
+    filter: Filtern
+    greater_than: "Größer als"
+    has_many_delete: Löschen
+    has_many_new: "Neues %{model} hinzufügen"
+    less_than: "Kleiner als"
+    logout: Ausloggen
+    main_content: "Zaimplementuj %{model}#main_content aby wyświetlić treść."
+    new_model: "Neues %{model}"
+    next: Nächste
+    pagination:
+      empty: "Nichts gefunden %{model}"
+      multiple: "Anzeigen %{model} <b>%{from}&nbsp;-&nbsp;%{to}</b> z <b>%{total}</b>"
+      one: "Anzeigen <b>1</b> %{model}"
+      one_page: "Zeige <b>alle %{n}</b> %{model}"
+    previous: Vorherige
+    search_field: "Suchen %{field}"
+    sidebars:
+      filters: Filter
+    update_model: "Eintrag aktualisieren"
+    view: Ansicht
+  activemodel:
+    errors:
+      format: "%{attribute} %{message}"
+      messages:
+        accepted: "muss angenommen werden"
+        already_taken: "bereits ausgefüllt"
+        blank: "darf nicht leer bleiben"
+        confirmation: "keine Bestätigung erhalten"
+        empty: "darf nicht leer bleiben"
+        equal_to: "muss dem folgenden Wert entsprechen %{count}"
+        even: "muss eine gerade Zahl enthalten"
+        exclusion: "ist registriert"
+        greater_than: "muss größere sein als %{count}"
+        greater_than_or_equal_to: "muss größer oder gleich dem folgenden Wert sein: %{count}"
+        inclusion: "ist nicht auf der Liste zulässiger Werte vorhanden"
+        invalid: "ist unzulässig"
+        less_than: "muss kleiner sein als %{count}"
+        less_than_or_equal_to: "muss kleiner als oder gleich %{count} sein"
+        not_a_number: "dies ist keine Zahl"
+        not_a_url: "falsche URL"
+        not_an_integer: "muss eine ganze Zahl sein"
+        odd: "muss eine ungerade Zahl sein"
+        record_invalid: "Zulässigkeitsprüfung negativ: %{errors}"
+        taken: "dieser Wert ist bereits besetzt"
+        too_long: "zu lang (höchstens %{count} Zeichen)"
+        too_short: "zu kurz (mindestens %{count} Zeichen)"
+        wrong_length: "keine zulässige Länge (diese sollte %{count} Zeichen betragen)"
+      template:
+        body: "Fehler in den folgenden Feldern:"
+        header:
+          one: "%{model} konnte wegen eines Fehlers nicht beibehalten werden"
+          other: "%{model} konnte wegen %{count} Fehlern nicht beibehalten werden"
+  activerecord:
+    attributes:
+      alert:
+        author: "Autor/Autorin(Vorname, Nachname/Nickname)"
+        date_taken: "Ausführungsdatum"
+        description: "Beschreibung:"
+        file: "Bild:"
+        id: ID
+        relic: Baudenkmal
+        relic_id: "Baudenkmal-ID"
+        state: "Status"
+        url: "URL des Bildes"
+      document:
+        description: "Kurzbeschreibung"
+        file: Date
+        id: ID
+        mime: "Typ MIME"
+        name: Name
+        relic: Baudenkmal
+        relic_id: "Baudenkmal-ID"
+        size: Größe
+        url: URL
+      entry:
+        body: Beschreibung
+        id: ID
+        relic: Baudenkmal
+        relic_id: "Baudenkmal-ID"
+        title: Titel
+      event: 
+        date: Datum
+        id: ID
+        name: Veranstaltungstitel
+        photo_id: Foto-ID
+        position: Reihenfolge
+        relic: Baudenkmal
+        relic_id: Baudenkmal-ID
+      link: 
+        category: Kategorien
+        id: ID
+        kind: Art
+        name: "URL-Name"
+        position: Reihenfolge
+        relic: Baudenkmal
+        relic_id: "Baudenkmal-ID"
+        url: URL
+      photo:
+        alternate_text: alternativer Text
+        author: Autorenangaben (Name, Nachname/Nickname)
+        date_taken: Ausführungsdatum
+        description: "Beschreibung"
+        file: Datei
+        file_full_height: "Gesamthöhe"
+        file_full_width: "Gesamtbreite"
+        id: ID
+        mime: "Typ MIME"
+        relic: Baudenkmal
+        relic_id: "Baudenkmal-ID"
+        url: "Foto-URL"
+      relic:
+        ancestry: "innerhalb des Ensembles"
+        approved: "Baudenkmal angenommen"
+        auto_categories: "automatische Kategorien"
+        categories: Kategorien
+        common_name: "umgangssprachlicher Name"
+        commune: Gemeinde
+        country_code: Land
+        dating_of_obj: "Datierung der Objekte"
+        description: Beschreibung
+        description_facets:
+          F: "keine Beschreibung"
+          T: "mit Beschreibung"
+        district: Landkreis
+        documents_info: "Wo suchen?"
+        existence: Zustand
+        existences:
+          archived: archiviert
+          existed: "eingetragen ins Baudenkmalregister"
+          social: "von Usern hinzufügt"
+        fplace: Ort
+        fprovince: Region
+        id: ID
+        identification: "Name des Objekts"
+        latitude: "Breitengrad"
+        links_info: "Wo suchen?"
+        longitude: "Längengrad"
+        main_photo: "Hauptfoto"
+        national_number: Ländercode
+        nid_id: "Ländercode-ID"
+        photos_facets:
+          F: "kein Foto"
+          T: "mit Foto"
+        place_id: Ort
+        polish_relic: "Baudenkmal befindet sich in Polen"
+        register_number: "aktuelle Registernummer"
+        relic_group: "des gesamten Baudenkmalensembles"
+        state: Status
+        states:
+          checked: überprüft
+          filled: vollständig
+          unchecked: nicht überprüft
+        street: Straße
+        tags: Schlagwörter
+        type: "Art des Baudenkmals"
+        user_id: User
+        voivodeship: Wojewodschaft
+      user:
+        created_at: "Konto erstellen"
+        current_password: "aktuelles Kennwort"
+        email: "E-Mailadresse"
+        language: Sprache
+        password: Kennwort
+        password_confirmation: "Kennwort wiederholen"
+        role: Rolle
+        updated_at: "Daten aktualisieren"
+        username: "Username"
+      version:
+        item: Bestand
+        item_type: Art
+      wuoz_agency:
+        alerts_count: "Anzahl der Meldungen"
+        city: Stadt
+        email: E-Mail
+        wuoz_name: Name
+    errors:
+      format: "%{attribute} %{message}"
+      full_messages:
+        format: "%{attribute} %{message}"
+      messages:
+        accepted: "muss akzeptiert werden"
+        blank: "darf nicht leer bleiben"
+        confirmation: "keine Übereinstimmung"
+        date_must_be_parsed: "unzulässiges Format"
+        empty: "darf nicht leer bleiben"
+        equal_to: "muss gleich %(count) sein"
+        even: "muss eine gerade Zahl sein"
+        exclusion: "reserviert"
+        extension_white_list_error: "unzulässiges Dateiformat"
+        greater_than: "muss größer als %(count) sein"
+        greater_than_or_equal_to: "muss größer als oder gleich %(count) sein"
+
+        inclusion: "steht nicht auf der Liste"
+        invalid: "nicht korrekt"
+        less_than: "muss kleiner als %(count) sein"
+
+        less_than_or_equal_to: "muss kleiner als oder gleich %(count) sein"
+
+        not_a_number: "ist keine Zahl"
+        not_an_integer: "muss eine ganze Zahl sein"
+        odd: "muss eine ungerade Zahl sein"
+        record_invalid: "Validisierungsfehler: %{errors}"
+        taken: "ist schon besetzt"
+        too_long: "ist zu lang (max. %{count} Zeichen)"
+        too_short: "ist zu kurz (min. %{count} Zeichen)"
+
+        wrong_length: "hat unzulässige Länge (sollte aus %{count} Zeichen bestehen)"
+      models:
+        photo:
+          attributes:
+            file:
+              size_too_big: "Zu große Bilddatei (max. 1 MB)"
+        user:
+          attributes:
+            email:
+              blank: "ist erforderlich"
+              taken: "wird von einem anderen User genutzt"
+            username:
+              blank: "ist erforderlich"
+              taken: "wurde von einem anderen User besetzt"
+              too_long: "ist zu lang (max. 30 Zeichen)"
+              too_short: "ist zu kurz (min. 3 Zeichen)"
+      template:
+        body: "Es gibt Probleme mit folgenden Feldern"
+        header:
+          one: "die Speicherung von %{model} wurde durch ein Fehler verhindert"
+          other: "die Speicherung von %{model} wurde durch %{count} Fehler verhindert"
+
+    models:
+      alert:
+        few: Warnungen
+        many: Warnungen
+        one: Warnung
+        other: Warnungen
+        zero: Warnungen
+      commune:
+        few: Gemeinden
+        many: Gemeinden
+        one: Gemeinde
+        other: Gemeinden
+        zero: Gemeinde
+      district:
+        few: Landkreise
+        many: Landkreise
+        one: Landkreis
+        other: Landkreise
+        zero: Landkreis
+      document:
+        few: Dokumente
+        many: Dokumente
+        one: Dokument
+        other: "Änderungstafel"
+        zero: Dokumente
+      entry:
+        few: Einträge
+        many: Einträge
+        one: Eintrag
+        other: Einträge
+        zero: Einträge
+      event:
+        few: Ereignisse
+        many: Ereignisse
+        one: Ereignis
+        other: Ereignisse
+        zero: Ereignis
+      links:
+        few: Links
+        many: Links
+        one: Link
+        other: Links
+        zero: Links
+      photo:
+        few: Fotos
+        many: Fotos
+        one: Foto
+        other: Fotos
+        zero: Fotos
+      place:
+        few: Orte
+        many: orte
+        one: Ort
+        other: Orte
+        zero: Orte
+      relic:
+        few: Baudenkmäler
+        many: Baudenkmäler
+        one: Baudenkmal
+        other: Baudenkmäler
+        zero: Baudenkmäler
+      subrelic:
+        few: Teil-Baudenkmäler
+        many: Teil-Baudenkmäler
+        one: Teil-Baudenkmal
+        other: Teil-Baudenkmäler
+        zero: Teil-Baudenkmäler
+      user:
+        few: User
+        many: User
+        one: User
+        other: User
+        zero: User
+      version:
+        few: Versionen
+        many: Versionen
+        one: Version
+        other: "Änderungstafel"
+        zero: Versionen
+      voivodeship:
+        few: Wojewodschaften
+        many: Wojewodschaften
+        one: Wojewodschaft
+        other: Wojewodschaften
+        zero: Wojewodschaften
+      wuoz_agency:
+        few: "Denkmalschutzbehörden"
+        many: "Denkmalschutzbehörden"
+        one: "Denkmalschutzbehörde"
+        other: "Denkmalschutzbehörden"
+        zero: "Denkmalschutzbehörden"
+  alert_states:
+    fixed: verbessert
+    in_progress: "in Verbessung befindlich"
+    new: neu
+  buttons:
+    revert_this_version: "Diese Version wiederherstellen"
+    show_history: "Historie zeigen"
+  category:
+    names:
+      architektura_inzynieryjna: "Ingenieursarchitektur"
+      budynek_gospodarczy: "Wirtschaftsgebäude"
+      cmentarny: Friedhof
+      dworski_palacowy_zamek: Hofs/Palast/Schloss
+      katolicki: katholisch
+      lemkowski: lemkisch
+      mala_architektura: "kleine Architektur"
+      mieszkalny: Wohnung
+      militarny: Militär
+      muzulmanski: islamisch
+      park_ogrod: Park/Garten
+      prawoslawny: orthodox
+      protestancki: protestantisch
+      przemyslowy_poprzemyslowy: industriell/postindustriell
+      sakralny: Sakralbau
+      sportowy_kulturalny_edukacyjny: Sport/Kultur/Bildung
+      uklad_urbanistyczny_zespol_budowlany: "städtebaulicher Komplex/Gebäudeensemble"
+      unicki: uniert
+      uzytecznosci_publicznej: "öffentliche Nutzung"
+      zydowski: jüdisch
+  common:
+    apply_to: betrifft
+    close: schließen
+    lang:
+      by: Belarussisch
+      de: Deutsch
+      en: Englisch
+      fr: Französisch
+      lt: Litauisch
+      pl: Polnisch
+      ru: Russisch
+      se: Spanisch
+      ua: Ukrainisch
+  countries:
+    AC: "Ascension"
+    AD: Andorra
+    AE: Vereinigte Arabische Emirate
+    AF: Afghanistan
+    AG: "Antigua und Barbuda"
+    AI: Anguilla
+    AL: Albanien
+    AM: Armenien
+    AN: "Holländische Antillen"
+    AO: Angola
+    AQ: Antarktis
+    AR: Argentinien
+    AS: "Amerikanisch-Samoa"
+    AT: Österreich
+    AU: Australien
+    AW: Aruba
+    AX: "Aland"
+    AZ: Aserbaidschan
+    BA: "Bosnien und Herzegowina"
+    BB: Barbados
+    BD: Bangladesch
+    BE: Belgien
+    BF: "Burkina Faso"
+    BG: Bulgarien
+    BH: Bahrain
+    BI: Burundi
+    BJ: Benin
+    BL: "Saint-Barth"
+    BM: Bermuda
+    BN: "Brunei"
+    BO: Bolivien
+    BQ: BQ
+    BR: Brasilien
+    BS: Bahamas
+    BT: Bhutan
+    BV: "Bouvetinsel"
+    BW: Botswana
+    BY: Belarus
+    BZ: Belize
+    CA: Kanada
+    CC: "Kokosinseln"
+    CD: "Demokratische Republik Kongo"
+    CF: "Zentralafrikanische Republik"
+    CG: Kongo
+    CH: Schweiz
+    CI: "Elfenbeinküste"
+    CK: "Cookinseln"
+    CL: Chile
+    CM: Kamerun
+    CN: China
+    CO: Kolumbien
+    CP: Clipperton-Insel
+    CR: Costa Rica
+    CS: "Serbien und Montenegro"
+    CU: Kuba
+    CV: "Kap Verde"
+    CW: CW
+    CX: "Osterinsel"
+    CY: Zypern
+    CZ: Tschechien
+    DE: Deutschland
+    DG: "Diego Garcia"
+    DJ: Dschibuti
+    DK: Dänemark
+    DM: Dominika
+    DO: "Dominikanische Republik"
+    DZ: Algerien
+    EA: "Ceuta und Melilla"
+    EC: Äquator
+    EE: Estland
+    EG: Ägyptem
+    EH: "Westsahara"
+    ER: Eritrea
+    ES: Spanien
+    ET: Ethopien
+    EU: "Europäische Union"
+    FI: Finnland
+    FJ: Fidschi
+    FK: "Falkland [Malwinen]"
+    FM: "Föderierte Staaten von Mikronesien"
+    FO: "Faröer Inseln"
+    FR: Frankreich
+    FX: "Frankreich Festland"
+    GA: Gabun
+    GB: "Großbritannien"
+    GD: Grenada
+    GE: Georgien
+    GF: "Französisch Guyana"
+    GG: "Kanalinsel (Guernsey)"
+    GH: Ghana
+    GI: Gibraltar
+    GL: Grönland
+    GM: Gambia
+    GN: Guinea
+    GP: Guadeloupe
+    GQ: "Äquatorialguinea"
+    GR: Griechenland
+    GS: "Südgeorgien und südliche Sandwichinseln"
+    GT: Guatemala
+    GU: Guam
+    GW: "Guinea Bissau"
+    GY: Guyana
+    HK: Hongkong
+    HM: "Heard und McDonald Inseln"
+    HN: Honduras
+    HR: Kroatien
+    HT: Haiti
+    HU: Ungarn
+    IC: "Kanaren"
+    ID: Indonesien
+    IE: Irland
+    IL: Israel
+    IM: "Isle of Man"
+    IN: Indien
+    IO: "Britisches Territorium im Indischen Ozean"
+    IQ: Irak
+    IR: Iran
+    IS: Island
+    IT: Italien
+    JE: "Jersey Insel"
+    JM: Jamaika
+    JO: Jordanien
+    JP: Japan
+    KE: Kenia
+    KG: Kirgistan
+    KH: Kambodscha
+    KI: Kiribati
+    KM: Komoren
+    KN: "Saint Kitts & Nevis"
+    KP: "Nordkorea"
+    KR: "Südkorea"
+    KW: Kuwait
+    KY: Cayman Inseln
+    KZ: Kasachstan
+    LA: Laos
+    LB: Libanon
+    LC: "Saint Lucia"
+    LI: Liechtenstein
+    LK: "Sri Lanka"
+    LR: Liberia
+    LS: Lesotho
+    LT: Litauen
+    LU: Luxemburg
+    LV: Lettland
+    LY: Lybien
+    MA: Marokko
+    MC: Monaco
+    MD: Moldawien
+    ME: Montenegro
+    MF: "Sint Maarten"
+    MG: Madagaskar
+    MH: "Marshall Inseln"
+    MK: Mazedonien
+    ML: Mali
+    MM: Birma
+    MN: Mongolei
+    MO: Macao
+    MP: "Nördliche Marianen"
+    MQ: Martinique
+    MR: Mauretanien
+    MS: Montserrat
+    MT: Malta
+    MU: Mauritius
+    MV: Malediven
+    MW: Malawi
+    MX: Mexiko
+    MY: Malesien
+    MZ: Mosambik
+    NA: Namibia
+    NC: "Neumaledonien"
+    NE: Niger
+    NF: Norfolk
+    NG: Nigeria
+    NI: Nicaragua
+    NL: Holland
+    NO: Norwegen
+    NP: Nepal
+    NR: Nauru
+    NU: Niue
+    NZ: "Neuseeland"
+    OM: Oman
+    PA: Panama
+    PE: Peru
+    PF: "Französisch-Polynesien"
+    PG: "Papua-Neuguinea"
+    PH: Phillipinen
+    PK: Pakistan
+    PL: Polen
+    PM: "Saint-Pierre und Miquelon"
+    PN: Pitcairninseln
+    PR: Puerto Rico
+    PS: "Palästinensische Autonomiegebiete"
+    PT: Portugal
+    PW: Palau
+    PY: Paraquay
+    QA: Quatar
+    QO: "Ozeanien und andere"
+    RE: Réunion
+    RO: Rumänien
+    RS: Serbien
+    RU: Russland
+    RW: Ruanda
+    SA: "Saudi-Arabien"
+    SB: "Salomon-Inseln"
+    SC: Seychellen
+    SD: Sudan
+    SE: Schweden
+    SG: Singapur
+    SH: "St. Helena"
+    SI: Slowenien
+    SJ: "Svalbard und Jan Mayen"
+    SK: Slowakei
+    SL: "Sierra Leone"
+    SM: "San Marino"
+    SN: Senegal
+    SO: Somalia
+    SR: Surinam
+    SS: SS
+    ST: "Saint Thomas Inseln"
+    SV: El Salvador
+    SX: SX
+    SY: Syrien
+    SZ: Swasiland
+    TA: "Tristan da Cunha"
+    TC: "Turks und Caicos"
+    TD: Tschad
+    TF: "Französische Süd- und Antarktisgebiete"
+    TG: Togo
+    TH: Thailand
+    TJ: Tadschikistan
+    TK: Tokelau
+    TL: "Demokratische Republik Timor-Leste"
+    TM: Turkmenistan
+    TN: Tunesien
+    TO: Tonga
+    TR: Türkei
+    TT: "Trinidad und Tobago"
+    TV: Tuvalu
+    TW: Taiwan
+    TZ: Tansania
+    UA: Ukraine
+    UG: Uganda
+    UM: "USA Minor Outlying Islands"
+    US: "Vereinigte Staaten von Amerika"
+    UY: Uruguay
+    UZ: Usbekistan
+    VA: Vatikan
+    VC: "Saint Vincent und die Grenadinen"
+    VE: Venezuela
+    VG: "Britische Jungferninseln"
+    VI: "Amerikanische Jungferninseln"
+    VN: Vietnam
+    VU: Vanuatu
+    WF: "Wallis und Futuna"
+    WS: Samoa
+    YE: Jemen
+    YT: Majotta
+    ZA: "Republik Südafrika"
+    ZM: Sambia
+    ZW: Simbabwe
+    ZZ: "Unbekannte oder unzulässige Region"
+  date:
+    abbr_day_names:
+      - So
+      - Mo
+      - Di
+      - Mi
+      - Do
+      - Fr
+      - Sa
+    abbr_month_names:
+      - ~
+      - Jan
+      - Feb
+      - Mär
+      - Apr
+      - Mai
+      - Jun
+      - Jul
+      - Aug
+      - Sep
+      - Okt
+      - Nov
+      - Dez
+    day_names:
+      - Sonntag
+      - Montag
+      - Dienstag
+      - Mittwoch
+      - Donnerstag
+      - Freitag
+      - Samstag
+    formats:
+      default: "%d.%m.%Y"
+      long: "%d %B %Y"
+      short: "%e %b %Y"
+      verbose: "%A, %d %B %Y"
+    month_names:
+      - ~
+      - Januar
+      - Februar
+      - März
+      - April
+      - Mai
+      - Juni
+      - Juli
+      - August
+      - September
+      - Oktober
+      - November
+      - Dezember
+    order:
+      - !ruby/symbol year
+      - !ruby/symbol month
+      - !ruby/symbol day
+  datetime:
+    ago_pre: vor
+    ago: ''
+    distance_in_words:
+      about_x_hours:
+        few: "etwa %{count} Stunden"
+        many: "etwa %{count} Stunden"
+        one: "etwa einer Stunde"
+        other: "etwa %{count} Stunden"
+      about_x_months:
+        few: "etwa %{count} Monaten"
+        many: "etwa %{count} Monaten"
+        one: "etwa einem Monat"
+        other: "etwa %{count} Monaten"
+      about_x_years:
+        few: "etwa %{count} Jahren"
+        many: "etwa %{count} Jahren"
+        one: "etwa einem Jahr"
+        other: "etwa %{count} Jahren"
+      almost_x_years:
+        few: "fast %{count} Jahren"
+        many: "fast %{count} Jahren"
+        one: "fast einem Jahr"
+        other: "fast %{count} Jahren"
+      half_a_minute: "einer halben Minute"
+      less_than_x_minutes:
+        few: "weniger als %{count} Minuten"
+        many: "weniger als %{count} Minuten"
+        one: "weniger als einer Minute"
+        other: "weniger als %{count} Minuten"
+      less_than_x_seconds:
+        few: "weniger als %{count} Sekunden"
+        many: "weniger als %{count} Sekunden"
+        one: "weniger als einer Sekunde"
+        other: "weniger als %{count} Sekunden"
+      over_x_years:
+        few: "mehr als %{count} Jahren"
+        many: "mehr als %{count} Jahren"
+        one: "mehr als einem Jahr"
+        other: "mehr als %{count} Jahren"
+      x_days:
+        few: "%{count} Tagen"
+        many: "%{count} Tagnen"
+        one: "1 Tag"
+        other: "%{count} Tagen"
+      x_minutes:
+        few: "%{count} Minuten"
+        many: "%{count} Minuten"
+        one: 1 Minute
+        other: "%{count} Minuten"
+      x_months:
+        few: "%{count} Monaten"
+        many: "%{count} Monaten"
+        one: "1 Monat"
+        other: "%{count} Monaten"
+      x_seconds:
+        few: "%{count} Sekunden"
+        many: "%{count} Sekunden"
+        one: 1 Sekunde
+        other: "%{count} Sekunden"
+    prompts:
+      day: Tag
+      hour: Stunde
+      minute: Minute
+      month: Monat
+      second: Sekunde
+      year: Jahr
+  devise:
+    confirmations:
+      confirmed: "Das Konto wurde korrekt aktiviert. Du wurdest automatisch angemeldet."
+      send_instructions: "Eine Anleitung zur Aktivierung Deines Kontos wird umgehend an die angegebene E-Mailadresse versandt."
+      send_paranoid_instructions: "Wenn Deine E-Mailadresse in unserer Datenbank bereits existiert, erhältst Du in den nächsten Minuten eine E-Mail mit einer Anleitung zur Kontenaktivierung."
+    failure:
+      already_authenticated: "Du bist bereits angemeldet."
+      inactive: "Das Konto wurde noch nicht aktiviert."
+      invalid: "Unbekannte/falsche E-Mailadresse."
+      invalid_token: "Falsches Kennwort."
+      locked: "Dein Konto wurde blockiert."
+      timeout: "Die Sitzung wurde automatisch beendet (Timeout). Bitte melde Dich erneut an."
+      unauthenticated: "Um fortzufahren, melde Dich bitte an."
+      unconfirmed: "Zum Fortfahren aktiviere Dein Konto."
+      user:
+        not_found_in_database: "E-Mail-Adresse oder Passwort ist ungültig."
+    mailer:
+      confirmation_instructions:
+        subject: "Anleitung zur Konto-Aktivierung"
+      reset_password_instructions:
+        subject: "Anleitung zur Einrichtung eines neuen Kennworts"
+      unlock_instructions:
+        subject: "Anleitung zur Konto-Entsperrung"
+    omniauth_callbacks:
+      failure: "Die Anmeldung durch das Konto %{kind} führte zu einem Fehler. Grund: \"%{reason}\"."
+      success: "Die Anmeldung durch das Konto %{kind} war erfolgreich."
+    passwords:
+      send_instructions: "Eine Anleitung zur Änderung des Kennworts wird umgehend an die angegebene Emailadresse verschickt."
+      send_paranoid_instructions: "Wenn Deine E-Mailadresse in unserer Datenbank vorhanden ist, erhältst Du in Kürze eine E-Mail mit der Anleitung zur Passwortwiederherstellung."
+      updated: "Passwort erfolgreich geändert. Du wurdest automatisch angemeldet."
+    registrations:
+      destroyed: "Das Konto wurde gelöscht."
+      inactive_signed_up: "Die Registrierung war erfolgreich. Die Anmeldung konnte jedoch nicht durchgeführt werden, weil das Konto %{reason} ist."
+      signed_up: "Willkommen! Die Registrierung war erfolgreich."
+      updated: "Das Konto wurde erfolgreich modifiziert."
+    sessions:
+      signed_in: "Anmeldung erfolgreich."
+      signed_out: "Abmeldung erfolgreich."
+    unlocks:
+      send_instructions: "In Kürze erhältst Du eine E-Mail mit der Anleitung zum Entsperren Deines Kontos."
+      send_paranoid_instructions: "Wenn Dein Konto in unserer Datenbank vorhanden ist, erhältst Du umgehend eine E-Mail mit der Anleitung zum Entsperren Deines Kontos."
+      unlocked: "Dein Konto wurde entsperrt. Du bist angemeldet."
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      accepted: "muss noch bestätigt werden"
+      already_confirmed: "wurde aktiviert, Du kannst Dich anmelden"
+      blank: "darf nicht leer bleiben"
+      confirmation: "keine Bestätigung"
+      date_must_be_parsed: "inkorrektes Format"
+      empty: "darf nicht leer bleiben"
+      equal_to: "muss gleich %{count} sein"
+      even: "muss eine gerade Zahl sein"
+      exclusion: "ist bereits belegt"
+      expired: "hat seine Gültigkeit verloren, sende eine Anfrage um ein neues"
+      extension_white_list_error: "Unzulässiges Dateiformat"
+      greater_than: "muss größer sein als %{count}"
+      greater_than_or_equal_to: "muss größer als oder gleich %{count} sein"
+      inclusion: "steht nicht auf der Liste"
+      invalid: "ist unzulässig"
+      less_than: "muss kleiner sein als %{count}"
+      less_than_or_equal_to: "muss kleiner als oder gleich %{count} sein"
+      not_a_number: "ist keine Zahl"
+      not_an_integer: "muss eine ganze Zahl sein"
+      not_found: "konnte nicht gefunden werden"
+      not_locked: "war nicht gesperrt"
+      not_saved:
+        one: "%{resource} konnte wegen eines Fehlers nicht gespeichert werden:"
+        other: "%{resource} konnte wegen %{count} Fehlern nicht gespeichert werden:"
+      odd: "muss eine ungerade Zahl sein"
+      record_invalid: "Überprüfung negativ: %{errors}"
+      taken: "ist bereits belegt"
+      too_long: "ist zu lang (max. %{count} Zeichen)"
+      too_short: "ist zu kurz (min. %{count} Zeichen)"
+      wrong_length: "hat eine unzulässige Länge (sollte %{count} Zeichen enthalten)"
+    template:
+      body: "Die Fehler betreffen folgende Felder:"
+      header:
+        one: "%{model} konnte wegen eines Fehlers nicht übernommen werden"
+        other: "%{model} konnte wegen %{count} Fehlern nicht übernommen werden"
+  formtastic:
+    actions:
+      search_html: "Suche &raquo;"
+    create: "Erstelle %{model}"
+    hints:
+      alert:
+        description: "Notiere, was mit diesem Baudenkmal schlechtes geschieht."
+        file: "Füge ein Bild des gefährdeten Baudenkmals hinzu."
+      document:
+        description: "Notiere kurz, welche Informationen das Dokument beinhaltet"
+        name: "Gib den vollen Namen des Dokuments an"
+      entry:
+        body: "Vergiss nicht, Deine Quellen anzugeben!"
+        title: "Denke Dir einen Titel aus. z. B. Die Legende von der Entstehung des Schlosses"
+      photo:
+        alternate_text: "Du hast die Möglichkeit, einen alternativen Text einzugeben. Blinden Menschen wird er von einem speziellen Programm vorgelesen. Notiere, was auf dem Bild zu sehen ist. Bsp. Frontansicht des Gebäudes."
+        author: "Gib den Name Nachname des/der Autor/in und/oder deren Nickname sowie die Bildquelle und dessen Copyright-Lizenz (z.B. Mariusz 123, Wikipedia, CC BY-SA)."
+        date_taken: "Gib das Datum des Fotos an. Wenn Du dieses nicht kennst, vermerke \"unbekannt\"."
+        description: "Du hast die Möglichkeit, zu beschreiben, was sich auf dem Bild befindet (die Beschreibung befindet sich anschließend unter dem Bild in der Galerie:"
+      relic:
+        categories: "Wähle Kategorien, die Deiner Meinung nach zu dem beschriebenen Baudenkmal passen. Mit einem Stern (*) gekennzeichnete Kategorien wurden automatisch hinzugefügt und erfordern eine Überprüfung."
+        common_name: "Wenn das Baudenkmal einen oder mehr als einen umgangssprachlichen Namen trägt, trage ihn ein."
+        country_code: "Information über das Land"
+        documents_info: "Wenn Du von der Existenz einer Dokumentation dieses Baudenkmals weißt, notiere Deine Informationen für andere Interessierte."
+        fplace: "Wähle den richtigen Namen aus der Liste oder trage ihn ein, wenn er auf der Liste nicht vorhanden ist."
+        fprovince: "Informationen über die Region"
+        identification: "Korrigiere und ergänze (falls nötig) den Namen des Baudenkmals."
+        links_info: "Wenn Du von der Existenz einer interessanten Abhandlung über das Baudenkmal weißt, notiere die Infos für andere Interessierte."
+        place: "Trage den Name des Ortes ein oder wähle ihn aus der Liste aus."
+        street: "Trage den Name der Straße ein, z.B. ul. Mickiewicza 34. Möglicherweise befindet sich das Baudenkmal an der Hauptstraße durch ein Dorf oder weit von anderen Häusern entfernt und es ist unmöglich, eine konkrete Straße anzugeben. In diesem Falle markiere bitte die Option ‚Adresse nicht eindeutig identifizierbar‘."
+        tags: "Füge Schlagwörter hinzu, die es erleichtern, sich im Katalog zurechtzufinden. Beispiele: Schloss, Lehnseid, Gotik, Renaissance, Przemysł der II., Kreuzritter, Gargamel, Residenz polnischer Herrscher. Bestätige Deine Schlagworte mit der Enter-Taste."
+      search:
+        place: "z.B. Małkinia, ul. Grodzka in Krakau"
+        q: "z.B. Friedhof, vormals deutsche Werft, Chopin-"
+      user:
+        current_password: "Gib Dein Kennwort ein, um Änderungen vornehmen zu können."
+    labels:
+      search:
+        end: "bis:"
+        from: "von:"
+        order: "sortieren nach:"
+        place: "wo:"
+        q: "was:"
+        radius: "W promieniu od trasy:"
+        start: "von:"
+        to: "bis:"
+    placeholders:
+      search:
+        place: wo
+        q: was
+    update: "Aktualisiere %{model}"
+  helpers:
+    select:
+      prompt: Wähle aus
+    submit:
+      create: "Erschaffe %{model}"
+      submit: "Speichere %{model}"
+      update: "Aktualisiere %{model}"
+  layouts:
+    application:
+      cookies: Diese Seite verwendet Cookies
+      about: Projekt
+      accept: Akzeptieren
+      addrelic: "Füge ein Baudenkmal hinzu"
+      blog: Blog
+      browse: Browsen
+      contact: Kontakt
+      disclaimer: "Wir sind stets darum bemüht, die Seite zu verbessern und Fehler zu korrigieren. Wenn Du Anmerkungen hast oder Fehler gefunden hast, bitte kontaktiere uns unter:"
+      download: "Herunterladen"
+      download_data: "Herunterladen"
+      facebook_sign_in: "Mit Facebook-Account anmelden"
+      facebook_sign_up: "Mit Facebook-Account registrieren"
+      footer:
+        about_project_html: "<p>Otwarte Zabytki ist ein Projekt des Centrum Cyfrowe, dem Digitalen Zentrum Polen.</p><p>Centrum Cyfrowe Projekt: Polen, ul. Andersa 29, 00-159 Warszawa</p><p>Das Projekt wird finanziert aus Mitteln des Ministeriums für Kultur und nationales Erbe, aus Mitteln des Museums der Geschichte Polens im Rahmen des Programms \"Patriotismus für Morgen\", aus Mitteln des Ministeriums für Äußere Angelegenheiten im Rahmen des Programms zur Realisierung der \"Zusammenarbeit mit der Polonia und den Auslandspolen\", aus Mitteln der Stiftung \"Orange\" sowie aus Mitteln des CEE-Trust.</p>"
+        license: "Die Inhalte der Plattform werden unter einer Creative Commons-Lizenz veröffentlicht <br/> <a href ='http://creativecommons.org/licenses/by/3.0/pl'>Creative Commons Autorenschaft – Unter den gleichen Bedingungen 3.0 Polen</a>"
+        partner_h1: Schirmherr
+        partner_h2: "Medienschirmherr"
+        partner_h3: "Inhaltlicher Partner"
+        partner_h4: Geldgeber
+      hello: "Willkommen, %{username}"
+      help: Hilfe
+      homepage: "Startseite"
+      learn_more: "Erfahre mehr"
+      login: Anmeldung
+      logout: Ausloggen
+      og:
+        description: "Erstelle mit uns eine frei zugängliche Datenbank aller Baudenkmäler! Hilf uns, dieses Angebot zu kreieren! Bringe Dein eigenes Wissen ein und teile es mit uns. Suche nach Informationen in Büchern oder im Internet! Es ist wirklich einfach."
+        image: "http://otwartezabytki.pl/assets/face-share-logo.png"
+        title: "Otwarte Zabytki"
+      register: Registrierung
+      relics_count: "Anzahl Deiner Baudenkmäler: %{count}"
+      search: Suche
+      tagline: "Erschaffe mit uns ein zivilgesellschaftliches Verzeichnis für Baudenkmäler"
+      widgets: Minianwendungen
+  messages:
+    are_you_sure: "Bist Du Dir sicher?"
+  notices:
+    alert_added: "Die Meldung wurde hinzugefügt. Vielen Dank!"
+    changes_has_been_saved: "Die Änderungen wurden gespeichert. Vielen Dank!"
+    gallery_has_been_updated: "Die Bildergalerie wurde aktualisiert. Vielen Dank!"
+    new_group_relic_has_been_added: "Glückwunsch! Du hast gerade ein Baudenkmalensemble hinzugefügt. Füge die einzelnen Elemente des Ensembles weiter unten ein."
+    new_gruop_relic_has_been_added: "Glückwunsch! Du hast ein Baudenkmalensemble hinzugefügt. Füge die einzelnen Elemente des Gebäudeensembles hier ein:"
+    new_relic_has_been_added: "Glückwunsch! Du hast ein neues Baudenkmal hinzugefügt."
+    please_correct_errors: "Bitte korrigiere die weiter unten markierten Fehler."
+    profile_not_updated: "Das Formular wurde falsch ausgefüllt."
+    profile_updated: "Dein Profil wurde aktualisiert."
+    relic_adopted: "Du hast ein Baudenkmal \"adoptiert\". Von nun an erhältst Du Benachrichtigungen über jede an ihm vorgenommene Änderung."
+    relic_reverted: "Das Objekt wurde auf die gewählte Version zurückgesetzt."
+    relic_unadopted: "Du hast die \"Adoption\" des Baudenkmals widerrufen. Du erhältst keine Benachrichtigungen mehr über seine Veränderungen."
+    relic_was_archived: "Das Baudenkmal wurde archiviert."
+    reservation_thanks: "Vielen Dank für Deine Registrierung! An die angegebene E-Mailadresse wurde eine Nachricht mit Deinem Kennwort verschickt. Währenddessen laden wir Dich ein, weitere Baudenkmal-Einträge zu verbessern:"
+    route_has_been_removed: "Die Route wurde entfernt."
+    there_is_no_relics_in_the_area: "In unserer Datenbank befinden sich keine denkmalgeschützten Gebäude in dieser Gegend. Du kannst mit dem Hinzufügen von Baudenkmälern fortfahren."
+    unpublished_photos_has_been_delete: "Aufgrund fehlender Zustimmung zur Publikation der hinzugefügten Bilder wurden diese gelöscht."
+    widget_error: "Es konnte keine Minianwendung erstellt werden. Melde diesen Fehler an die Administrator/innen der Seite."
+    widget_error_and_correct: "Die App konnte nicht aktualisiert werden. Korrigiere die Fehler weiter unten."
+    widget_has_been_updated: "Die App wurde aktualisiert."
+  number:
+    currency:
+      format:
+        delimiter: " "
+        format: "%n %u"
+        precision: 2
+        separator: ","
+        significant: false
+        strip_insignificant_zeros: true
+        unit: zł
+    format:
+      delimiter: " "
+      precision: 2
+      separator: ","
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: "%n %u"
+        units:
+          billion: Milliarde
+          million: Million
+          quadrillion: Billiarde
+          thousand: Tausend
+          trillion: Billion
+          unit: ""
+      format:
+        delimiter: ""
+        precision: 1
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            one: Byte
+            other: Bites
+          gb: GB
+          kb: KB
+          mb: MB
+          tb: TB
+    percentage:
+      format:
+        delimiter: ""
+    precision:
+      format:
+        delimiter: ""
+  plural:
+    left_to_the_end:
+      few: "verbleiben bis zum Ende"
+      many: "verbleiben bis zum Ende"
+      one: "verbleibt bis zum Ende"
+      other: "verbleiben bis zum Ende"
+      zero: "verbleiben bis zum Ende"
+    relic:
+      few: Baudenkmäler
+      many: Baudenkmäler
+      one: Baudenkmal
+      other: Baudenkmäler
+      zero: Baudenkmäler
+  relic_tabs:
+    attachments:
+      description:
+        ? "Wähle ein Foto, das Du als Anhang hinzufügen möchtest."
+        : ~
+      name: "Wähle ein Bild..."
+    categories:
+      description: "Vergebe für das Baudenkmal passende Schlagwörter und Kategorien nach Deiner eigenen Einschätzung."
+      name: "Kategorien, Tags"
+    description:
+      description: "<p>Füge eine bündige Beschreibung des denkmalgeschützten Gebäudes ein. Bedenke, Deine Quellen anzugeben!</p> <p>Wenn das Baudenkmal Teil eines Gebäudeensembles ist, und die Beschreibung auch auf ein weiteres Element dieses Komplexes zutrifft, kannst Du zu diesem einen internen Link erstellen (indem Du die Option \"Link erstellen \" auswählst).</p>"
+      name: Beschreibung
+    documents:
+      description: "Füge als Anhang amtliche Dokumente und Archivmaterialien betreffend dieses Baudenkmals hinzu. Zulässige Dateiformate sind: pdf, jpg, png, gif. Versichere Dich, dass Du über die nötigen Berechtigungen verfügst, diese Materialien hier zu veröffentlichen."
+      name: "Amtliche Dokumente"
+    entries:
+      description: "Füge hier eine interessante Anekdote, Geschichte oder Legende ein, die mit dem Baudenkmal verbunden ist."
+      name: "Anekdoten, Legenden"
+    events:
+      description: "Notiere die wichtigsten Daten aus der Geschichte des Objekts und füge eine kurze Erläuterung hinzu. Z.B. 1536 – das Schloss wurde während eines Stadtbrandes zerstört."
+      name: "Wichtige historische Daten"
+    general:
+      description: " "
+      name: "Name des Objekts"
+    links:
+      description: "Füge die für das Objekt wichtigen Informationsquellen an (Seiten im www, Titel von Veröffentlichungen)."
+      name: "Links, Quellen"
+    location:
+      description: "Prüfe, ob die Adresse korrekt ist. Befindet sich das ausgewählte Baudenkmal auf der Karte am richtigen Ort?"
+      name: Lokalisierung
+    photos:
+      description: "Füge ein oder mehrere Bilder des Baudenkmals an (zulässige Dateiformate: JPG und PNG; max. Größe einer Bilddatei: 2 MB). Bitte achte darauf, dass das Bild für andere User hilfreich ist – füge nur Bilder in guter Qualität ein."
+      name: Bilder
+  routes:
+    pages: Seiten
+  support:
+    array:
+      last_word_connector: " und "
+      sentence_connector: und
+      skip_last_comma: true
+      two_words_connector: " sowie "
+      words_connector: ", "
+  time:
+    am: "vormittags"
+    formats:
+      date: "%Y-%m-%d"
+      default: "%a, %d %b %Y, %H:%M:%S %z"
+      long: "%d %B %Y, %H:%M"
+      short: "%d %b, %H:%M"
+      tdate: "%Y-%m-%d %H:%M"
+      verbose: "%d.%m.%Y, %H:%M"
+      very_short: "%H:%M"
+    pm: "nachmittags"
+  translation:
+    by: "Belarussisch"
+    de: "Deutsch"
+    en: "Englisch"
+    fr: "Französisch"
+    lt: "Litauisch"
+    pl: "Polnisch"
+    ru: "Russisch"
+    se: "Spanisch"
+    ua: "Ukrainisch"
+  users:
+    list_added:
+      added_relics: "Hinzugefügte Baudenkmäler"
+    list_checked:
+      checked_relics: "Überprüfte Baudenkmäler"
+      description: "Liste der von Dir geprüften Denkmäler:"
+    list_routes:
+      delete: "Route löschen"
+      delete_confirmation: "Route löschen?"
+      description: "Liste der von Dir hinzugefügten Routen"
+      edit: Editieren
+      no_routes: "Du hast noch keine Routen hinzugefügt."
+      no_routes_make_one: "Erstelle Deine erste Route!"
+      preview: Vorschau
+      print: Drucken
+      relic_unknown_address: "genaue Adresse unbekannt"
+      relics_on_route: "Denkmäler auf dieser Route"
+      relics_within_radius: "Denkmäler im Umkreis von %{radius} km der Route"
+      route_points: "Punkte auf der Route: %{count}"
+    list_watched:
+      activity: Aktivität
+      adopted_relics_list: "Liste der von Dir \"adoptierten\" Denkmäler:"
+      no_adopted_relics: "Du hast bislang noch keine Denkmäler \"adoptiert\". Du kannst dies auf dem Profil jedes Denkmals tun. Eine \"Adoption\" erlaubt es Dir, alle Änderungen, die an den Dich interessierenden Objekten vorgenommen werden, zu verfolgen."
+      no_notifications: "Du hast keine weiteren Benachrichtigungen."
+      no_updated_relics: "Es wurden keine Änderungen an den von Dir beobachteten Denkmälern vorgenommen."
+      updated_relics_list: "Vorgenommene Änderungen an Objekten, die Du hinzugefügt oder \"adoptiert\" hast:"
+    list_walking_guides:
+      delete: "Usuń spacerownik"
+      delete_confirmation: "Usunąć spacerownik?"
+      description: "Liste der von Dir hinzugefügten Spazierführer"
+      edit: Bearbeiten
+      no_walking_guides: "Es gibt noch keine Spazierführer von Dir."
+      no_walking_guides_make_one: " Erstelle Deinen ersten!"
+      print: Drucken
+      relics: Baudenkmäler
+    navigation:
+      checked_by_me: "Durch mich überprüft"
+      my_routes: "Meine Routen"
+      walking_guides: "Spazierführer"
+      settings: Einstellungen
+      watched: Beobachtet
+    registrations:
+      new:
+        header: "Registrierung bei Otwarte Zabytki"
+        signup_intro: "Registriere Dich"
+        submit: "Registrieren"
+    settings_form:
+      avatar: "Profilbild"
+      language_settings: "Spracheinstellungen"
+      password_change: "Kennwort ändern"
+      save: Speichern
+      user_data: "Benutzerdaten"
+    user_avatar:
+      change_photo: "Bild ändern"
+  version:
+    event:
+      create: erstellte
+      destroy: löschte
+      update: aktualisierte
+    item_type:
+      Document: Dokument
+      Entry: Eintrag
+      Event: Ereignis
+      Link: Link
+      Photo: Bild
+      Relic: Baudenkmal
+  views:
+    alerts:
+      created:
+        open_in_otwartezabytki: "Um das Profil des Baudenkmals auf der Seite otwartezabytki.pl anzusehen, klicke auf:"
+      new:
+        cancel: Abbrechen
+        description: "Hast Du ein Baudenkmal in schlechtem Zustand entdeckt? Melde dies!"
+        header: "Meldung eingeben!"
+        submit: "Meldung abschicken"
+    devise:
+      passwords:
+        edit:
+          alert_error: "Token nicht mehr gültig."
+          ask_account: "Kennwort ändern"
+          header: "Kennwortänderung"
+          new_password_request: " Anfrage für ein neues Kennwort senden"
+          password: "Neues Kennwort"
+          password_confirmation: "Neues Kennwort wiederholen"
+          submit: "Kennwort ändern"
+        new:
+          ask_account: "Was tun, wenn ich kein Kennwort besitze?"
+          header: "Du hast kein Kennwort?"
+          password_has_been_sent: "Mit der Registrierung wurde Dir ein Kennwort per E-Mail zugeschickt. Wenn Du es nicht finden kannst, senden wir die Nachricht erneut."
+          submit: "Link zum Zurücksetzen des Kennworts senden"
+          wrong_email: "Die angegebene E-Mailadresse konnte nicht gefunden werden"
+      sessions:
+        new:
+          anonymous_account: "Du kannst die Datenbank anonym ergänzen oder ein Konto anlegen und die eigenen Beiträge verfolgen."
+          ask_account1: "Du hast kein Konto?"
+          ask_account2: "Jede/r User/in kann sich registrieren und die eigenen Beiträge verfolgen."
+          ask_account3: "Benötige ich ein Konto?"
+          forgot_password: "Hast Du kein Kennwort erhalten oder es vergessen?"
+          header: "Anmeldung"
+          iframe_sidebar: |-
+              <h4>Benötige ich ein Konto?</h4>
+              <p>Die Datenbank kann ohne vorherige Anmeldung angesehen werden. Für das Hinzufügen oder Ändern von Informationen ist eine Registrierung erforderlich.</p>
+              <h4>Du hast kein Konto?</h4>
+          login_intro: "Melde Dich bei der Plattform an"
+          register_here: "Registriere Dich hier"
+          submit: "Anmelden"
+      shared:
+        login_info:
+          iframe_sidebar: |-
+              <div class='ask_account'>Benötige ich ein Konto?</div>
+              <p>Die Datenbank kann ohne vorherige Anmeldung angesehen werden. Für das Hinzufügen oder Ändern von Informationen ist eine Registrierung erforderlich.</p>
+              <div class='ask_account'>Du hast bereits ein Konto?</div>
+          login_intro: "Melde Dich bei der Plattform an"
+        new_account_info:
+          iframe_sidebar: |-
+              <div class='ask_account'>Benötige ich ein Konto?</div>
+              <p>Die Datenbank kann ohne vorherige Anmeldung angesehen werden. Für das Hinzufügen oder Ändern von Informationen ist eine Registrierung erforderlich.</p>
+              <div class='ask_account'>Du hast kein Konto?</div>
+          register_here: "Registriere Dich hier"
+    pages:
+      home:
+        go_to_relic_profile: "Zum Profil des Baudenkmals wechseln"
+        header: "Suchen und ergänzen..."
+        how_it_works:
+          title: "Wie funktioniert die Suchmaschine?"
+          what: "Was?"
+          what_content: "Suche nach kompletten Bezeichnungen oder einzelnen Wörtern, die im Name des Baudenkmals oder einem Schlagwort vorkommen."
+          where: "Wo?"
+          where_content: "Suche nach Straßen, Ortsnamen, Wojewodschaften, Landkreisen."
+        recently_modified: "vor kurzem bearbeitet"
+        relic_has_been_updated: "%{relic} wurde aktualisiert"
+        relic_has_been_updated_by: "%{relic} wurde von %{user} aktualisiert"
+        revision_change:
+          ancestry: "die Ordnungshierarchie innerhalb eines Baudenkmalensembles wurde aktualisiert"
+          approved: "Baudenkmal bestätigt"
+          categories: "Kategorie aktualisiert"
+          common_name: "umgangssprachlicher Name hinzugefügt"
+          country_code: "Land bearbeitet"
+          create:
+            alert: "Meldung abgeschickt"
+            document: "Dokument hinzugefügt"
+            entry: "Anekdote hinzugefügt"
+            event: "Ereignis hinzugefügt"
+            link: "Link hinzugefügt"
+            photo: "Ein Bild wurde hinzugefügt"
+            relic: "wurde erstellt"
+          dating_of_obj: "Datierung des Objekts eingetragen"
+          description: "Beschreibung redigiert"
+          destroy:
+            document: "Dokument gelöscht"
+            entry: "Anekdote gelöscht"
+            event: "Ereignis gelöscht"
+            link: "Link gelöscht"
+            photo: "Foto gelöscht"
+          documents_info: "Informationen über Dokumente hinzugefügt"
+          existence: "Status geändert"
+          fplace: "Ort geändert"
+          fprovince: "wurde der Region zugeordnet"
+          identification: "Name überarbeitet"
+          latitude: "Geographische Lage überarbeitet"
+          links_info: "Informationen über Links hinzugefügt"
+          longitude: "Geographische Lage überarbeitet"
+          nid_id: "Registernummer korrigiert"
+          place_id: "Ort geändert"
+          register_number: "Registernummer korrigiert"
+          state: "Zustand verändert"
+          street: "Adresse korrigiert"
+          tags: "Schlagwörter überarbeitet"
+          update:
+            document: "Dokument aktualisiert"
+            entry: "Anekdote aktualisiert"
+            event: "Ereignis aktualisiert"
+            link: "Link aktualisiert"
+            photo: "Bild aktualisiert"
+            relic:
+              ancestry: "Ordnungshierarchie innerhalb eines Baudenkmalensembles aktualisiert"
+              approved: "Baudenkmal bestätigt"
+              categories: "Kategorien aktualisiert"
+              common_name: "Umgangssprachlicher Name hinzugefügt"
+              country_code: "Land bearbeitet"
+              dating_of_obj: "Datierung des Objekts hinzugefügt"
+              description: "Beschreibung redigiert"
+              documents_info: "Informationen über Dokumente hinzugefügt"
+              existence: "Zustand geändert"
+              fplace: "Ort geändert"
+              fprovince: "wurde der Region zugeordnet"
+              identification: "Name überarbeitet"
+              latitude: "Geographische Lage überarbeitet"
+              links_info: "Informationen über Links hinzugefügt"
+              longitude: "Geographische Lage überarbeitet"
+              nid_id: "Registriernummer korrigiert"
+              place_id: "Ort geändert"
+              register_number: "Registriernummer korrigiert"
+              state: "Zustand geändert"
+              street: "Adresse korrigiert"
+              tags: "Schlagwörter überarbeitet"
+        soon_header: "... und in Kürze sehen wir die Baudenkmäler so:"
+        stats_info:
+          checked_html:
+            few: "<span>%{count}</span> Baudenkmäler überprüft"
+            many: "<span>%{count}</span> Baudenkmäler überprüft "
+            one: "<span>%{count}</span> Baudenkmal überprüft"
+            other: "<span>%{count}</span> Baudenkmäler überprüft "
+            zero: "<span>%{count}</span> Baudenkmäler überprüft "
+          filled_html:
+            few: "<span>%{count}</span> Baudenkmäler vervollständigt"
+            many: "<span>%{count}</span> Baudenkmäler vervollständigt"
+            one: "<span>%{count}</span> Baudenkmal vervollständigt"
+            other: "<span>%{count}</span> Baudenkmäler vervollständigt"
+            zero: "<span>%{count}</span> Baudenkmäler vervollständigt"
+          header1: "Wie sieht unsere Baudenkmal-Datenbank aus?"
+          header2: "Wo befinden sich die meisten verzeichneten Baudenkmäler?"
+          total_html: "<span>%{count}</span>aller Baudenkmäler in der Datenbank <br/> davon"
+          unchecked: ~
+          unchecked_html:
+            few: "<strong>%{count}</strong> unüberprüfte"
+            many: "<strong>%{count}</strong> unüberprüfte"
+            one: "<strong>%{count}</strong> unüberprüftes"
+            other: "<strong>%{count}</strong> unüberprüfte"
+            zero: "<strong>%{count}</strong> unüberprüfte"
+          voivodeship_header: "Wojew. %{name}"
+        vote: "Stimme für uns im Rahmen des Wettbewerbs \"e-Volontariat\" &raquo;"
+        welcome:
+          header: "Wir laden Euch ein, an der Erstellung der offenen Baudenkmäler-Datenbank Otwarte Zabytki mitzuwirken"
+          li1: "Was ist ein Baudenkmal?"
+          li2: "Was ist ein offenes Baudenkmal?"
+          li3: "Wie kann ich mitmachen?"
+          more: "Mehr herausfinden &raquo;"
+          text: "Wähle ein zufälliges Baudenkmal aus unserem Katalog. <br/>Recherchiere Informationen und füge sie dem Profil hinzu.<br/>Wenn Dein Baudenkmal in unserer Datenbank noch fehlt – trage es ein."
+        widgets_intro:
+          add:
+            par: "Kennst Du Baudenkmäler, die in unserer Datenbank noch nicht existieren? Füge sie hinzu, und teile Dein Wissen mit anderen."
+            title: "Hinzufügen:"
+          alert:
+            par: "Wenn Du weißt, dass ein Baudenkmal in schlechtem Zustand ist – alarmiere uns. Füge Bild und Beschreibung an."
+            title: "Meldungen:"
+          map:
+            par: "Suche Baudenkmäler auf der Karte. Finde heraus, welche Baudenkmäler sich in Deiner Näher befinden."
+            title: "Karte:"
+          widget:
+            par: "Hier findest Du Beispiele für Minianwendungen, wie Du die Daten über offene Baudenkmäler mithilfe anderer Websites für Dich nutzen kannst."
+            title: "Apps »"
+      profile:
+        remove_avatar: "dein Bild löschen"
+        you_can_if_you_want: "Du kannst %{remove_avatar}, wenn Du dies wünschst."
+    pagination:
+      first: Erste
+      last: Letzte
+      next: Nächste
+      previous: Vorherige
+      truncate: "..."
+    photos:
+      show:
+        header: "Galerie %{count}"
+        license: "CC BY-SA 3.0"
+        photo_belongs_to: "Das Bild gehört zum Objekt"
+        relic_parent: "gehört zum Baudenkmalensemble"
+    places:
+      results:
+        choose_html: "Auswählen &raquo;"
+        header: "Um welche Ortschaft ging es Dir?"
+        no_results: "keine Ergebnisse"
+    relicbuilders:
+      address:
+        intro1: "Trage die Adresse ein, an der das Baudenkmal zu finden ist."
+        intro2: "*"
+      administrative_level:
+        city: Ort
+        commune: Gemeinde
+        district: Landkreis
+        error: "Bitte wähle einen Ort aus"
+        voivodeship: Wojewodschaft
+      details:
+        intro1: "Füge den offiziellen und (wenn vorhanden) umgangssprachlichen Namen eines Objekts hinzu. Begründe kurz, warum dieses Baudenkmal in unserer Datenbank nicht fehlen darf. Was ist an ihm wertvoll? Warum ist es für andere interessant?"
+        intro2: "*"
+        name: Name
+        reason: "Begründung (Informationen für die Moderator/innen der Datenbank, erscheint später nicht auf der Seite)"
+      geodistance:
+        are_you_sure: "Bist Du Dir sicher, dass es sich bei dem Objekt nicht um eines aus der untenstehenden Liste handelt? Wir möchten Doppelungen in der Datenbank vermeiden. Auch für Dich ist es leichter, zur bereits bestehende Informationen zu überarbeiten als diese erneut einzutragen..."
+        categories: "Kategorien:"
+        choose_html: "Ich möchte das ergänzen &raquo;"
+        dating: "Entstehungsdatum:"
+        header:
+          few: "Wir haben %{count} Baudenkmäler in dieser Gegend gefunden!"
+          many: "Wir haben %{count} Baudenkmäler in dieser Gegend gefunden!"
+          one: "Wir haben %{count} Baudenkmal in dieser Gegend gefunden!"
+          other: "Wir haben %{count} Baudenkmäler in dieser Gegend gefunden!"
+          zero: "Wir haben %{count} Baudenkmäler in dieser Gegend gefunden!"
+        info_html:
+          few: "Genau in dieser Gegend haben wir <strong>%{count}</strong> Baudenkmäler gefunden, die bereits in unserer Datenbank existieren."
+          many: "Genau in dieser Gegend haben wir <strong>%{count}</strong> Baudenkmäler gefunden, die bereits in unserer Datenbank existieren."
+          one: "Genau in dieser Gegend haben wir <strong>%{count}</strong> Baudenkmal gefunden, die bereits in unserer Datenbank existieren."
+          other: "Genau in dieser Gegend haben wir <strong>%{count}</strong> Baudenkmäler gefunden, die bereits in unserer Datenbank existieren."
+          zero: "Wir haben keine Baudenkmäler in dieser Gegend gefunden!"
+        not_found_html: "Keine Einträge gefunden &raquo;"
+        that_one: "Das ist dieses Baudenkmal!"
+      new:
+        add_foreign_relic: "Polnisches Baudenkmal im Ausland"
+        add_relic_group: "Baudenkmalensemble"
+        choose_html: "Auswählen &raquo;"
+        country_code: "In welchem Land"
+        drag_marker: "Bewege die Markierung auf der Karte"
+        header_html: "Wo liegt der Unterschied zwischen <br/> <span>Baudenkmal</span> und dem <span>Baudenkmälerensemble</span>?"
+        info: "Ein Baudenkmal ist ein einzelnes Objekt (z.B. ein Palais). Ein Ensemble aus Baudenkmälern hingegen besteht aus einer räumlich verbundenen Gebäudegruppe, die sich durch eine architektonische Konstruktion, Stil, verwendete Baumaterialien, Funktion, Entstehungszeit und den Bezug zu historischen Ereignissen definiert. Dies kann z.B. ein Fabrikkomplex sein, oder eine Gruppe von Mietshäusern im Stadtzentrum, welche im gleichen Zeitraum erbaut worden sind."
+        info_header_nonexisted_relic: "Was ist ein nicht existierendes  Baudenkmal?"
+        info_header_relic_group: "Worin besteht der Unterschied zwischen einem Baudenkmal und einem denkmalgeschützten Gebäudeensemble?"
+        info_nonexisted_relic: "In der Datenbank Offener Baudenkmäler werden ebenfalls Informationen über Baudenkmäler gesammelt, die bereits nicht mehr existieren (die z.B. im Krieg zerstört und nicht wieder errichtet wurden). Wenn Du Kenntnisse, Bilder oder Dokumente über solche Objekte hast, füge sie hinzu."
+        info_relic_group: " Ein Baudenkmal ist ein einzelnes Objekt (z.B. ein Palais). Ein denkmalgeschütztes Gebäudeensemble hingegen besteht aus einer räumlich verbundenen Gebäudegruppe, die sich durch ihre Architektur, den Baustil, verwendete Baumaterialien, ihre Funktion, Entstehungszeit oder den Bezug zu historischen Ereignissen von ihrer Umgebung abheben. Dies kann z.B. ein Fabrikkomplex sein, oder eine Gruppe von Mietshäusern im Stadtzentrum, welche im gleichen Zeitraum erbaut worden sind."
+        intro1: "Sprawdź czy zabytek na pewno jeszcze nie znalazł się w naszej bazie. Zacznij od wpisania nazwy miejscowości (wciśnij szukaj, a mapa ustawi się w środku wybranej miejscowości), a potem wskaż obiekt na mapie. Następnie wciśnij \"przejdź dalej\". Pokaże się lista obiektów z naszej bazy, które znajdują się we wskazanej okolicy. Sprawdź, czy obiekt, który chcesz dodać, nie znajduje się na liście. Jeśli go nie ma, możesz kontynuować dodawanie zabytku do bazy,"
+        intro1_html: "Bitte überprüfe, ob das <span class='r_sa'>Baudenkmal</span><span class='r_ze'>Baudenkmalensemble</span> sich wirklich noch nicht in unserer Datenbank befindet. Trage dazu zuerst den Namen des Ortes ein (mit dem Klick auf Suchen zentriert die Karte sich an dem ausgewählten Ort), und wähle anschließend ein Objekt auf der Karte. Klicke auf \"Weiter \", um Dir eine Liste aller Objekte anzeigen zu lassen, die sich in dieser Gegend befinden. Prüfe nun, ob das Objekt, das Du hinzufügen möchtest, sich bereits auf der Liste findet. Wenn dies nicht der Fall ist, kannst Du fortfahren, das <span class='r_sa'>Baudenkmal</span><span class='r_ze'>Baudenkmalensemble</span> in die Datenbank einzupflegen,"
+        intro2: "*"
+        no_results: "Kein Resultat"
+        non_existed: "Nicht mehr existierendes Baudenkmal"
+        original_name: "Originalbezeichnung"
+        place: Ort
+        polish_name: "Polnische Bezeichnung"
+        search_html: "Suche &raquo;"
+        select_on_map: "Wähle ein Objekt auf der Karte"
+        select_place: "Um welchen Ort geht es Dir?"
+      next_step_html: "Weiter &raquo;"
+      parent_relic:
+        complex: "Baudenkmal zu einem Baudenkmalensemble hinzufügen"
+        group: "Baudenkmalensemble hinzufügen"
+        single: "Baudenkmal hinzufügen"
+      photos:
+        intro1: "Trage hier 3-4 Sätze mit den wichtigsten Informationen über das Objekt ein. Nach dem Hinzufügen des Baudenkmals kann die Beschreibung jederzeit ergänzt und überarbeitet werden. Denke daran, Deine Quellen anzugeben."
+        intro2: "Füge ein oder mehrere Bilder des Baudenkmals an (zulässige Dateiformate: JPG und PNG; max. Größe einer Bilddatei: 2 MB). Bitte achte darauf, dass das Bild für andere User hilfreich ist – füge nur Bilder in guter Qualität ein."
+        label: Bilder
+        submit: "Bearbeitung beenden und profil ansehen"
+        submit_relic_group: "Bearbeitung beenden und hinzugefügtes Baudenkmälerensemble ansehen!"
+      stages:
+        address: "Adressdaten"
+        back: "&laquo; zurück zum vorherigen Schritt"
+        check_existance: "Datenbank durchsuchen"
+        check_existance_confirm: "Achtung! Alle eingefügten Daten gehen verloren und Du startest das Hinzufügen eines Baudenkmals von vorne. Bist Du sicher?"
+        details: Details
+        photos: "Bilder und Beschreibung"
+        step1: "Schritt 1"
+        step1_description1: "Überprüfe, ob das Baudenkmal sich tatsächlich noch nicht in unserer Datenbank befindet."
+        step1_description1_html: " Überprüfe, ob das <span class='r_sa'>Baudenkmal</span> nicht bereits eingetragen ist."
+        step1_description2: "Gib die Adresse ein, unter der das hinzuzufügende Baudenkmal zu finden ist."
+        step1_description2_html: " Trage die Adresse des <span class='r_sa'>Baudenkmals</span> ein."
+        step1_description3: "Füge den Namen des Objekts ein und begründe, warum dieses Baudenkmal in unserer Datenbank nicht fehlen sollte."
+        step1_description3_html: "Trage Name und Begründung der Wichtigkeit des <span class='r_sa'>Baudenkmals</span> ein."
+        step1_description4: "Füge ein Foto mitsamt einer kurzen Bildbeschreibung hinzu."
+        step1_description4_html: "Lade ein Foto mit kurzer Beschreibung hoch."
+        step2: "Schritt 2"
+        step3: "Schritt 3"
+        step4: "Schritt 4"
+    relics:
+      adoption:
+        explanation: |-
+            <p>Wenn Du ein Baudenkmal \"adoptierst\", erscheinen alle Informationen über Änderungen an dessen Seite in Deinem Profil.</p>
+            <p>Du kannst jederzeit die Adoption rückgängig machen und erhältst dann keine Benachrichtigungen mehr.</p>
+        header: Adoption
+      edit:
+        description: "Beschreibung"
+        no_online_source: "Es existiert noch keine Internetquelle"
+        no_printed_source: "Es existiert noch keine gedruckte Quelle"
+        add_and_save: "Hinzufügen und Speichern"
+        add_attachement: "Neues Bild zum Baudenkmal einfügen"
+        add_photo: "Bild einfügen"
+        cancel: Abbrechen
+        categories:
+          name: Kategorien
+        delete: Löschen
+        documents:
+          cancel: Abbrechen
+          delete_confirm: "Bist Du Dir sicher?"
+          delete_file: "Datei löschen"
+          loading: "Ladevorgang, bitte warten..."
+          upload: "Weitere Datei(en) hochladen"
+          upload_first: "Datei hochladen"
+        edit_photo: Ändern
+        events:
+          action: Aktionen
+          add_new_one: "Weiteres Ereignis hinzufügen..."
+          create_date: "Entstehungsdatum"
+          date: "Datum / Zeitraum"
+          info: Beschreibung
+          number: Zahl
+        header: "Baudenkmal bearbeiten"
+        links:
+          action: Aktionen
+          add_internet_source: "Internet-Quelle hinzufügen (Link)..."
+          add_print_source: "Gedruckte Quelle hinzufügen..."
+          info: "Bibliographische Angaben (Titel, Autor, Erscheinungsdatum und -ort)"
+          number: Zahl
+          source_type: "Quellensorte"
+          url: URL
+        location:
+          approximate_geolocation: "angenäherte geographische Lage"
+          drop_marker_html: "Bewege <br/> den Cursor auf der Karte:"
+          known_address: "Ich kenne die genaue Adresse"
+          unknown_address: "Adresse nicht eindeutig identifizierbar"
+        or: oder
+        photos:
+          delete_confirm: "Bist Du Dir sicher?"
+          delete_photo: " Bild löschen"
+          loading: "Ladevorgang, bitte warten..."
+          statement_html: "Hiermit erkläre ich, dass ich die Rechte an den Bildern besitze, die ich auf der Web-Seite otwartezabytki.pl veröffentliche. Im Falle, dass ich nicht der oder die Autor/in der Bilder bin, erkläre ich, dass ich das Recht auf die Publikation dieser Bilder nach im Rahmen der Creative-Commons-Lizenz <a href=\"http://creativecommons.org/licenses/by-sa/3.0/pl/\" target=\"_blank\">Creative Commons Uznanie Autorstwa-Na Tych Samych Warunkach 3.0 Polska</a> <em class=\"icons\"></em> besitze."
+          upload: "Weiteres Bild hochladen"
+          upload_first: "Bild hochladen"
+        reminder: "Denke daran, Deine Quellen anzugeben!"
+        save: "Änderungen speichern"
+        update: Aktualisieren
+      guide:
+        date: "Erzeugungsdatum"
+        general: "Allgemeine Angaben"
+        logo: Logo
+        map: Karte
+        other_subrelics: "Verbleibende Elemente, die zu&nbsp;diesem Baudenkmalensemble gehören."
+        print_guide: Mini-Reiseführer
+        registry: "Das Baudenkmal wird im Denkmalschutzregister geführt."
+        registry_number: "Registernummer"
+        title: "Seite aus dem Reiseführer"
+      index:
+        build_date: "Errichtungsdatum:"
+        build_date_example: "Z.B. 1780, 1919-1913"
+        categories: "Kategorien:"
+        content: "Inhalt:"
+        filter_options: "Filter-Optionen"
+        kind: Art
+        loading: "Die Ergebnisse werden geladen, bitte habe noch etwas Geduld."
+        no_results2_html: "Deine Suche war erfolglos? Versuche es erneut, indem Du Sternchen verwendest, z.B. Scheibler*"
+        no_results_add: "Füge ein Baudenkmal hinzu"
+        no_results_add_header: "Bist Du Dir sicher, dass dieses Baudenkmal existiert?"
+        no_results_html: "Keines der Baudenkmäler in unserer Datenbank<br/>erfüllt die angegebenen Kriterien."
+        order:
+          az: A-Z
+          score: Treffergenauigkeit
+          za: Z-A
+        search_results: "(%{count}) Suchergebnisse"
+        states:
+          checked:
+            header: Überprüft
+            info: "Die Daten wurden bislang nur teilweise überprüft; sie erfordern eine Überarbeitung."
+            info_social: "Die Daten wurden bislang nur teilweise überprüft; sie erfordern eine Überarbeitung."
+          close: Schließen
+          filled:
+            header: Vervollständigt
+            info: "Die Beschreibung ist fast perfekt :)"
+            info_social: "Die Beschreibung ist fast perfekt :)"
+          header: "Zustandsmarkierung"
+          label: "Zustand:"
+          unchecked:
+            header: Nicht überprüft
+            info: "Die Daten wurden direkt aus dem Denkmalschutzregister NID übernommen; sie bedürfen einer Überprüfung und Ergänzung."
+            info_social: "Die Daten erfordern eine Überprüfung und Vervollständigung."
+        suggestion: "Kann es sein, dass Du das hier meintest:"
+      localization_facets:
+        header: Lokalisierung
+        show_voivodeships: "Wojewodschaft anzeigen"
+        world_relics: "Baudenkmäler, die sich außerhalb Polens befinden"
+      relics:
+        create_date: "Entstehungsdatum"
+        location: Lokalisierung
+        name: Baudenkmal
+        unknown_address: "Unbekannte Adresse"
+        unknown_from: unbekannt
+      show:
+        alerts:
+          create: "Melde ein Problem"
+          fixed: "Gemeldete Probleme wurden gelöst"
+          header: Meldungen
+          non_existent: "Melde, dass das Baudenkmal nicht (mehr) existiert"
+          not_fixed: "Die gemeldeten Probleme konnten nicht gelöst werden"
+          placeholder: "Weißt Du, ob das Baudenkmal besonderer Pflege bedarf?<br/>Melde das Problem!"
+        categories:
+          add_category: "Kategorie hinzufügen"
+          assigned_automatically: "automatisch kategorisiert"
+          content_title_cat: "Kategorien:"
+          content_title_tag: Schlagwörter
+          header: "Schlagwörter <br>Kategorien"
+          not_added: "Nicht vorhanden, einfügen »"
+          placeholder: |-
+              <p>Wähle die Kategorien, die Deiner Meinung nach zu dem beschriebenen Baudenkmal passen.</p>
+              <p>Füge Schlagwörter hinzu, die es erlauben, sich im Katalog zu orientieren.</p>
+        description:
+          add: "Füge eine Beschreibung hinzu"
+          header: Beschreibung
+          placeholder: "<p>Verfasse 3-4 Zeilen mit den wichtigsten Informationen über das hinzugefügte Baudenkmal.</p>"
+        documents:
+          add_file: "Datei hinzufügen"
+          added: "hinzugefügt:"
+          download: "Alle Dateien herunterladen"
+          header: Amtliche<br/>Dokumente
+          placeholder: "<p>Besitzt Du eine Dokumentation, die Du legal für andere zugänglich machen darfst? <br/> Füge die Datei hier an.</p>"
+          size: Größe
+          upload: "Datei hochladen"
+          where_to_find: "Wo ist das zu finden?"
+        entries:
+          add: "Eintrag hinzufügen"
+          header: "Interessante Einzelheiten, Legenden, <br>Anekdoten"
+          placeholder: "<p>Teile anderen Legenden, Anekdoten,<br/>interessante Geschichten rund um das Baudenkmal mit.</p>"
+          togglable:
+            less: Weniger
+            more: Mehr…
+        events:
+          add: "Ereignis hinzufügen"
+          header: "Wichtige <br>Daten"
+          placeholder: "<p>Füge die wichtigsten historischen Daten für dieses Objekt mit einer kurzen Erläuterung ein.</p>"
+        flash_content_html: |-
+            <h3>Worum geht es?</h3>
+            <p> Recherchiere Informationen und fülle die markierten Felder aus.</p>
+            <p> Nutze Dein eigenes Wissen und durchsuche Bücher oder das Internet.</p>
+            <p> Prüfe, ob die bereits eingefügten Informationen korrekt sind.</p>
+            <p> Denke daran, immer Deine Quellen anzugeben.</p>
+        flash_hide: Verstecken
+        general:
+          add: Hinzufügen
+          adopt: "Baudenkmal adoptieren"
+          close: Schließen
+          common_name: "Umgangssprachlicher Name:"
+          dating_of_obj: "Entstehungsdatum:"
+          fill_in: Vervollständigen
+          location: "Lokalisierung:"
+          no_data_fill_in: "Keine Angaben, ergänzen »"
+          original: "Originalversion"
+          polish_location: "%{place}, Landkreis %{district}, Gemeinde %{commune}"
+          register_number: "Registernummer:"
+          relic: Baudenkmal
+          see: Anschauen
+          show_example: "Ein Beispiel anzeigen"
+          show_on_map: "Auf der Karte zeigen »"
+          unadopt: "Adaption rückgängig machen"
+          add_source: "QUELLE HINZUFÜGEN"
+        links:
+          header: "Links, Quellen, Verweise"
+          placeholder: "<p>Gib interessante Wissensquellen im Internet und in Papierform an.</p>"
+        location:
+          header: Lokalisierung
+        original_version: "Was Du siehst, ist die Originalversion"
+        original_version_info: "Dies bedeutet, dass auch eine Version mit den von Dir vorgenommenen Korrekturen existiert."
+        photos:
+          add: "Bild hinzufügen"
+          show: "Galerie ansehen (%{amount})"
+        subrelics:
+          add_new: "Element des denkmalgeschützten Gebäudeensembles hinzufügen"
+          group_info: "Dies ist ein denkmalgeschütztes Gebäudeensemble. Es besteht aus mehreren Baudenkmälern."
+          header1: "Du siehst gerade das Profil eines Baudenkmals."
+          header2: "Du siehst gerade das Profil eines Baudenkmals, das Teil eines denkmalgeschützten Gebäudeensembles ist."
+          parent_info: "Dieses Baudenkmal ist Teil des Ensembles: %{parent}."
+          subheader: "Dieses Gebäudeensemble besteht aus:"
+          subheader_empty: "Vervollständige dieses Gebäudeensemble:"
+        view_current_version: "&#171; die aktuelle Version ansehen"
+        widgets:
+          create_alert: "Erstelle die Minianwendung \"Meldung hinterlassen\" für&nbsp;dieses Baudenkmal:"
+          create_button: "Erstelle eine Minianwendung"
+          error: "Ein Fehler beim Laden der Ansicht ist aufgetreten."
+          header: "Minianwendungen für dieses Baudenkmal"
+          loading: "Laden der Anwendungsansicht …"
+    widgets:
+      edit:
+        add_alert:
+          hint: "Baudenkmal suchen"
+          search: Suchen
+          which_one: "Um welches Baudenkmal geht es Dir"
+        back: "&laquo; zurück zum Anwendungsverzeichnis"
+        code_help: "Dies ist ein fertiger Code für die Homepage, generiert für das von Dir ausgewählte Baudenkmal. Du kannst ihn kopieren und an der dafür vorgesehenen Stelle auf Deiner Seite einfügen."
+        direction:
+          header: "Einstellungen für die Kartenansicht wählen"
+          height: "Höhe der Kartenansicht"
+          hide_sidebar: "Sidebar verbergen"
+          params_hint: "Einstellung über die Kartenansicht rechts."
+          params_label: "Parameter für <a href='/api_doc/'>API</a>"
+          settings_info_: "Wenn Du beispielsweise einen Streckenplan durch 2 oder mehr Städte inklusive markierter Baudenkmäler in ihrem Umkreis auf Deiner Seite veröffentlichen willst, wähle die Städte aus und markiere Dich interessierende Kategorien und Radien. Anschließend musst Du nur noch den unten generierten Code auf Deine Seite kopieren."
+          sign_in_before_save: "Vor dem Speichern der Strecke musst Du Dich einloggen."
+          width: "Breite der Kartenansicht"
+          map_help: "Gib den Namen eines beliebigen Ortes (z.B. einer Stadt, einer Straße) ein oder setze den Cursor auf die Karte. Die so generierte Route kannst Du jederzeit verschieben und Deinen Bedürfnissen anpassen."
+          save: "Route speichern"
+          print_: "Route ausdrucken"
+          save_and_print: "Route speichern und ausdrucken"
+          loading_relics: "Liste der Baudenkmäler laden"
+          create_new_widget: "neue Route anlegen"
+          sign_in: "EINLOGGEN, UM DIE STRECKE ZU SPEICHERN"
+        generated: "Code für die Einbindung in eine andere Seite generieren"
+        map_search:
+          header: "Wähle die Einstellungen für das Steuerungselement"
+          height: "Höhe der Kartenansicht"
+          hide_sidebar: "Sidebar verbergen"
+          params_hint: "Einstellung über die Kartenansicht rechts."
+          params_label: "Parameter für<a href='/api_doc/'>API</a>"
+          settings_info: "Wenn Du beispielsweise auf Deiner Seite eine Karte mit allen jüdischen Friedhöfen in der Wojewodschaft Niederschlesien unterbringen möchtest, wähle die Wojewodschaft Niederschlesien mit der Lokalisierung oder Kategorie \"Friedhof\" und \"jüdisch\" aus. So erhältst Du einen Code zum Einbetten auf Deiner Seite."
+          width: "Breite der Kartenansicht"
+        preview: "Vorschau der erstellten Minianwendung"
+      index:
+        about: "Minianwendungen:"
+        description: "<h3>Was sind Minianwendungen?</h3> <p>Die Daten der  Offenen Baudenkmäler können für Euch in unterschiedlichen Kontexten hilfreich sein!</p> <p>Wir haben Euch einige beispielhafte Apps zusammengestellt, mit denen Ihr die Informationen der Offenen Baudenkmäler ganz einfach auf Euren Internetseiten einbinden könnt.</p> <h3>Wie benutze ich die Apps?</h3> <p>Um die hier vorgestellten Apps zu nutzen, genügt es, den von der App generierten Teil eines Codes auf jeder möglichen Internetseite einzubetten.</p> <h3>Hast Du Ideen für weitere Apps?</h3> <p>Wenn Du Ideen für eine funktionale Anwendung hast, die mit den Daten über Offene Baudenkmäler etwas Interessantes anfangen kann, teile sie mit uns. Vielleicht können wir den Vorschlag sogar gleich in die Tat umsetzen (%{email})!</p>"
+        use: Test
+      preview:
+        direction:
+          no_route: "Keine Route ausgewählt"
+          relics_from_categories: "Baudenkmäler der Kategorie"
+          relics_list: "Liste der Baudenkmäler"
+          relics_on_route: "Baudenkmäler auf dieser Route"
+          within_radius: "im Umkreis"
+      route_types:
+        bicycling: "Fahrrad-Route"
+        driving: "Auto-Route"
+        walking: "Fußgänger-Route"
+      show:
+        about: "Worum geht es?"
+        add_alert:
+          alerts: "Meldungen ansehen"
+          create: "Meldung hinterlassen"
+          empty: "Keine Meldungen"
+          header: "Hast Du ein Baudenkmal in schlechtem Zustand vorgefunden? Mache eine Meldung!"
+          show: "Meldungen ansehen"
+        add_relic:
+          create: "Neues Baudenkmal hinzufügen"
+          header: "Kennst Du ein Baudenkmal, welches in unserer Datenbank fehlt?"
+        direction:
+          add_place: "Weitere Orte hinzufügen"
+          advanced_search: "Erweiterte<br />Suche »"
+          categories: Kategorien
+          categories_hint: "hiermit kannst Du die Suche mithilfe von Kategorien einschränken"
+          edit_route: "Route bearbeiten"
+          km_within_range: "Entfernung in km"
+          location_hint: "hiermit kannst Du die Suche über die Lokalisierung der Baudenkmäler einschränken"
+          query_placeholder: "z.B. Friedhof"
+          relics_from_categories: "Baudenkmäler der Kategorie"
+          relics_on_path: "Baudenkmäler entlang der Route:"
+          relics_within_radius: "Baudenkmäler im Umkreis:"
+          route_type: "Routentyp"
+          search_by_name: "Suche nach Namen"
+          show_less: "Weniger anzeigen..."
+          show_more: "Mehr anzeigen..."
+          submit: "Route anzeigen"
+        map_search:
+          advanced_search: "Erweiterte<br />Suche »"
+          categories: Kategorien
+          categories_hint: "hiermit kannst Du die Suche mithilfe von Kategorien einschränken"
+          location_hint: "hiermit kannst Du die Suche über die Lokalisierung der Baudenkmäler einschränken"
+          query_placeholder: "z.B. Friedhof"
+          search_by_name: "Suche nach Namen"
+          show_less: "Weniger anzeigen..."
+          show_more: "Mehr anzeigen..."
+  widget:
+    add_alert:
+      description: |-
+          Hast Du ein Baudenkmal in schlechtem Zustand entdeckt? Hinterlasse eine Meldung! Dank dieser App kannst Du umgehend reagieren und uns Deine Beschwerde zuschicken. Wir sammeln sie und geben die Beschwerden regelmäßig an die zuständigen Behörden weiter.
+      thumb: widget-image-example.jpg
+      title: "App \"Meldung hinterlassen \""
+    add_relic:
+      description: "Das Baudenkmal, das Du suchst, wurde noch nicht dem Katalog Offener Baudenkmäler hinzugefügt? \n\
+          Diese Minianwendung erlaubt es, jederzeit Baudenkmäler hinzuzufügen und Beschreibungen und Fotos zu hinterlassen. "
+      thumb: widget-image-example.jpg
+      title: "App \"Baudenkmal hinzufügen\""
+    direction:
+      description_: "Mithilfe dieser App kannst Du Baudenkmäler aus unserer Datenbank auf einer bestimmten Route betrachten. Du kannst die Liste der angezeigten Baudenkmäler auf der Basis von Kategorien, ihrer Lage und Entfernung von Deiner Strecke einschränken (z.B. nur Friedhöfe im Umkreis von 2km von der Strecke zwischen Warschau und Breslau)."
+      thumb: widget-image-example.jpg
+      title_: "Routen-App"
+      save: "Route gespeichert. Eine Liste Deiner gespeicherten Routen findest Du in Deinem Benutzerkonto."
+      no_route: "Keine Route ausgewählt."
+    map_search:
+      description: "Mithilfe dieser App kannst Du die Baudenkmäler aus unserer Datenbank auf einer Karte ansehen. Du kannst die Liste auf der Basis von Kategorien und ihrer Lage einschränken (z.B. nur Friedhöfe in Zamość oder alle Palais und denkmalgeschützten Stadthäuser in der Wojewodschaft Schlesien)."
+      thumb: widget-image-example.jpg
+      title: "Karten-App"
+    walking_guide:
+      title: Spazierführer
+      loading: Laden
+      more: mehr
+      relics: Baudenkmäler
+      description: Streckenbeschreibung
+      save: speichern
+      saving: Speichere...
+      load_more: Mehr laden
+      nothing_found: Es wurde nichts gefunden
+      query_is_too_short: Die Suchanfrage ist zu kurz!
+      print: Drucken
+      width: Breite
+      height: Länge
+      description_content: 'Erstelle einen Spazierführer für Baudenkmäler aus unserer Datenbank.'
+      error: 'Ein unerwarteter Fehler ist aufgetreten. Versuche es später noch einmal!'
+      title_field: Titel des Spazierführers
+      sign_in_to_save: 'Du musst eingeloggt sein, um einen Spazierführer zu speichern.'
+      sign_in: 'Einloggen'
+      help: "Beginne mit der Suche nach einem Baudenkmal, so als ob Du es in unserem Katalog finden möchtest, z.B. „jüdischer Friedhof, Warszawa“. Die Auswahl eines Baudenkmals fügt der Landkarte automatisch einen Punkt hinzu. Jedes anschließend ausgewählte Objekt führt automatisch zur Erstellung eines Spazier- oder Wanderweges. Die Reihenfolge der Baudenkmäler kann in einer Liste geändert werden."
+      query_field: Suche ein Baudenkmal
+      query_placeholder: z.B. Friedhof,  Łódź
+  wuoz:
+    wuoz-w-bialymstoku: "Wojewodschafts-Amt für Denkmalschutz in Białystok"
+    wuoz-w-gdansku: "Wojewodschafts-Amt für Denkmalschutz in Danzig/Gdańsk"
+    wuoz-w-katowicach: "Wojewodschafts-Amt für Denkmalschutz in Kattowitz/Katowice"
+    wuoz-w-kielcach: "Wojewodschafts-Amt für Denkmalschutz in Kielce"
+    wuoz-w-krakowie: "Wojewodschafts-Amt für Denkmalschutz in Krakau/Kraków"
+    wuoz-w-lodzi: "Wojewodschafts-Amt für Denkmalschutz in Łódź"
+    wuoz-w-lublinie: "Wojewodschafts-Amt für Denkmalschutz in Lublin"
+    wuoz-w-olsztynie: "Wojewodschafts-Amt für Denkmalschutz in Allenstein/Olsztyn"
+    wuoz-w-opolu: "Wojewodschafts-Amt für Denkmalschutz in Oppeln/Opole"
+    wuoz-w-poznaniu: "Wojewodschafts-Amt für Denkmalschutz in Posen/Poznań"
+    wuoz-w-przemyslu: "Wojewodschafts-Amt für Denkmalschutz in Przemyśl"
+    wuoz-w-szczecinie: "Wojewodschafts-Amt für Denkmalschutz in Stettin/Szczecin"
+    wuoz-w-toruniu: "Wojewodschafts-Amt für Denkmalschutz in Thorn/Toruń"
+    wuoz-w-warszawie: "Wojewodschafts-Amt für Denkmalschutz in Warschau/Warszawa"
+    wuoz-w-zielonej-gorze: "Wojewodschafts-Amt für Denkmalschutz in Grünberg/Zielona Góra"
+    wuoz-we-wroclawiu: "Wojewodschafts-Amt für Denkmalschutz in Breslau/Wrocław"

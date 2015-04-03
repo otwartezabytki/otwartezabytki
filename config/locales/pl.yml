@@ -372,6 +372,7 @@ pl:
     close: zamknij
     lang:
       by: białoruski
+      de: niemiecki
       en: angielski
       fr: francuski
       lt: litewski
@@ -697,6 +698,7 @@ pl:
       - !ruby/symbol month
       - !ruby/symbol day
   datetime:
+    ago_pre: ''
     ago: temu
     distance_in_words:
       about_x_hours:
@@ -776,6 +778,8 @@ pl:
       timeout: "Sesja wygasła, aby kontynuować zaloguj się ponownie."
       unauthenticated: "Aby kontynuować zaloguj lub zarejestruj się."
       unconfirmed: "Aby kontynuować aktywuj konto."
+      user:
+        not_found_in_database: "Email lub hasło są niepoprawne"
     mailer:
       confirmation_instructions:
         subject: "Instrukcja aktywacji konta"
@@ -900,6 +904,7 @@ pl:
       update: "Zaktualizuj %{model}"
   layouts:
     application:
+      cookies: Ta strona używa ciasteczek
       about: Projekt
       accept: Akceptuj
       addrelic: "Dodaj zabytek"
@@ -1073,6 +1078,7 @@ pl:
     pm: "po południu"
   translation:
     by: "j. białoruski"
+    de: "j. niemiecki"
     en: "j. angielski"
     fr: "j. francuski"
     lt: "j. litewski"
@@ -1186,6 +1192,19 @@ pl:
           login_intro: "Zaloguj się do serwisu"
           register_here: "Zarejestruj się tutaj"
           submit: "Zaloguj się"
+      shared:
+        login_info:
+          iframe_sidebar: |-
+              <div class='ask_account'>Czy konto jest mi potrzebne?</div>
+              <p>Bazę można przeglądać bez konieczności logowania. Ale jeśli chcesz dodawać lub uzupełniać informacje - logowanie jest niezbędne.</p>
+              <div class='ask_account'>Masz konto?</div>
+          login_intro: "Zaloguj się do serwisu"
+        new_account_info:
+          iframe_sidebar: |-
+              <div class='ask_account'>Czy konto jest mi potrzebne?</div>
+              <p>Bazę można przeglądać bez konieczności logowania. Ale jeśli chcesz dodawać lub uzupełniać informacje - logowanie jest niezbędne.</p>
+              <div class='ask_account'>Nie masz konta?</div>
+          register_here: "Zarejestruj się tutaj"
     pages:
       home:
         go_to_relic_profile: "Przejdź do profilu zabytku"
@@ -1423,6 +1442,9 @@ pl:
             <p>W każdej chwili możesz zrezygnować z adopcji i otrzymywanych powiadomień.</p>
         header: Adopcja
       edit:
+        description: "Opis"
+        no_online_source: "Nie ma jeszcze żadnego źródła internetowego"
+        no_printed_source: "Nie ma jeszcze żadnego źródła drukowanego"
         add_and_save: "dodaj i zapisz"
         add_attachement: "dodaj nowe zdjęcie do zabytku"
         add_photo: "dodaj zdjęcie"
@@ -1590,6 +1612,7 @@ pl:
           show_example: "pokaż przykład"
           show_on_map: "pokaż na mapie »"
           unadopt: "Odadoptuj zabytek"
+          add_source: "dodaj źródło"
         links:
           header: "Linki, źródła, powiązania"
           placeholder: "<p>Podaj ciekawe internetowe i papierowe źródła informacji o zabytku.</p>"
@@ -1717,7 +1740,7 @@ pl:
       description_: "Dzięki tej aplikacji możesz zobaczyć zabytki z naszej bazy na konkretnej trasie. Listę wyświetlanych zabytków możesz zawęzić w oparciu kategorie i położenie w promeniu trasy (np. tylko cmentarze w promieniu 2 km od trasy z Warszawy do Wrocławia)."
       thumb: widget-image-example.jpg
       title_: "Widżet Trasa"
-      save: "Trasa została zapisana. Listę zapisany tras możesz znaleźć w profilu użytkownika."
+      save: "Trasa została zapisana. Listę zapisanych tras możesz znaleźć w profilu użytkownika."
       no_route: "Trasa nie została wybrana."
     map_search:
       description: "Dzięki tej aplikacji możesz zobaczyć zabytki z naszej bazy na mapie. Możesz zawęzić listę wyświetlanych zabytków w oparciu o położenie i kategorie (np. tylko cmentarze w Zamościu lub wszystkie pałace i kamienice w województwie śląskim)."

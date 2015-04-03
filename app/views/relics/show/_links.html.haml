@@ -22,7 +22,7 @@
   - else
     .placeholder
       = t('views.relics.show.links.placeholder')
-      = link_to "dodaj źródło", edit_section_relic_path(relic.to_param, :links), :remote => true
+      = link_to t('views.relics.show.general.add_source'), edit_section_relic_path(relic.to_param, :links), :remote => true
       .example
         %a.show-example{:href => image_path('screenshot-links.jpg'), :class => "fancybox"}
           = t('views.relics.show.general.show_example')

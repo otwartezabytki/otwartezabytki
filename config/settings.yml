@@ -10,6 +10,7 @@ oz:
   locale:
     available:
       - :by
+      - :de
       - :en
       - :fr
       - :lt
@@ -18,6 +19,7 @@ oz:
       - :se
       - :ua
     enabled:
+      - :de
       - :en
       - :pl
   facebook:
