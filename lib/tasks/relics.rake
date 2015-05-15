@@ -39,7 +39,7 @@ SQL
         Relic.index.import objs
       end
       puts "\nDone"
-    # end
+    end
   end
 
   task :update_geolocation, [:import_csv] => :environment do |t, args|
