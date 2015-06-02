@@ -122,9 +122,12 @@
       }
     }
     #new_location{
-      .field.marker .foreign-location .input:before{
-        left: 12px;
-        top: 37px;
+      .field.marker-box .foreign-location .input{
+        position: relative;
+        &:before{
+          left: 12px;
+          top: 10px;
+        }
       }
       .search-order-container .select2-choice{
         height: 37px;
@@ -138,7 +141,7 @@
       }
       .actions{
         vertical-align: top;
-        margin-top: 14px;
+        margin-top: 24px;
       }
     }
     #new_relic{
@@ -146,15 +149,18 @@
         width: 100%;
       }
     }
-    .field.marker .input:before{
-      display: block;
-      width: 8px;
-      height: 14px;
-      background: asset-data-url("icon-marker.png") no-repeat;
-      position: absolute;
-      left: 12px;
-      top: 27px;
-      content: "";
+    .field.marker-box .input{
+      position: relative;
+      &:before{
+        display: block;
+        width: 8px;
+        height: 14px;
+        background: asset-data-url("icon-marker.png") no-repeat;
+        position: absolute;
+        left: 12px;
+        top: 10px;
+        content: "";
+      }
     }
     .field.aside{
       position: absolute;
@@ -438,6 +444,13 @@
       }
       #relic_description.redactor{
         width: 670px;
+      }
+    }
+    .polish-location-input-container{
+      label{
+        font-weight: 700;
+        display: block;
+        margin-bottom: 10px;
       }
     }
   }
