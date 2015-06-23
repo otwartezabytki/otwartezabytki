@@ -255,10 +255,10 @@ class Relic < ActiveRecord::Base
 
   def place_with_address(norm = false)
     [
-      "woj. #{voivodeship.name}",
-      "pow. #{district.name}",
-      "gm. #{commune.name}",
-      place.name,
+      ("woj. #{voivodeship.name}" if voivodeship.present?),
+      ("pow. #{district.name}" if district.present?) ,
+      ("gm. #{commune.name}" if commune.present?),
+      (place.name if place.present?),
       street(norm)
     ].reject(&:blank?).join(", ")
   end
