@@ -20,7 +20,7 @@ class Page < ActiveRecord::Base
 
     protected
       def find_templates(name, prefix, partial, details)
-        (::Page.find_all_by_permalink(name).presence || ::Page.where(:name => name)).map do |record|
+        (::Page.where(:permalink => name).presence || ::Page.where(:name => name)).map do |record|
           initialize_template(record)
         end
       end
