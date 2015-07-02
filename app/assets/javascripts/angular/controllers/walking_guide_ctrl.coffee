@@ -111,7 +111,7 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
     $scope.resetSuggestions = ->
       clearErrors()
       $scope.suggestions = null
-      $scope.currentPage = 0
+      $scope.currentPage = 1
       $scope.totalPages = -1
 
     $scope.clearRoute = ->
