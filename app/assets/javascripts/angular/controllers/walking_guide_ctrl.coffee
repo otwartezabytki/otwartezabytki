@@ -9,7 +9,7 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
       title: ''
       description: ''
     $scope.suggestions = null
-    $scope.currentPage = 0
+    $scope.currentPage = 1
     $scope.totalPages = -1
     $scope.loading = false
     $scope.saved = false
@@ -64,7 +64,7 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
       Relic.suggestions({ query, place, page: $scope.currentPage }).then(success, error)
 
     $scope.nextPage = ->
-      $scope.currentPage = Math.min($scope.totalPages - 1, $scope.currentPage + 1)
+      $scope.currentPage = Math.min($scope.totalPages, $scope.currentPage + 1)
       $scope.loadRelics()
 
     $scope.getIcon = (first, last) ->
