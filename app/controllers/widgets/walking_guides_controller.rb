@@ -68,6 +68,7 @@ class Widgets::WalkingGuidesController < WidgetsController
   end
 
   def set_user_id
+    return unless params[:manual]
     walking_guide.user_id ||= current_user.try(:id)
   end
 end

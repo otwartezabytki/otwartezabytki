@@ -237,8 +237,12 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
       $scope.loading = true
       WalkingGuide.get(id).then(success, error)
 
-    $scope.save = ->
+    $scope.manualSave = ->
+      $scope.save(true)
+
+    $scope.save = (manual = false) ->
       $scope.widget.relic_ids = $scope.widget.relics.map (r) -> r.id
+      $scope.widget.manual = manual
       $scope.saving = true
 
       success = (response) ->

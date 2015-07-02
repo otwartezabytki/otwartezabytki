@@ -47,7 +47,7 @@
       %textarea(ng-model="widget.description")
 
     - if current_user.present?
-      %button.button.button--save(type="button" ng-click="save()" ng-disabled="saving || loading || !widget.relics.length")
+      %button.button.button--save(type="button" ng-click="manualSave()" ng-disabled="saving || loading || !widget.relics.length")
         = t('widget.walking_guide.save')
     - else
       %p= t('widget.walking_guide.sign_in_to_save')
