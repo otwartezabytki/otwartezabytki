@@ -290,7 +290,6 @@ GEM
     listen (0.7.2)
     localized_language_select (0.2.0)
       rails (>= 2.3.5)
-      rails (>= 2.3.5)
     log4r (1.1.10)
     lumberjack (1.0.2)
     mail (2.4.4)
@@ -360,6 +359,8 @@ GEM
     rails-assets-angular (1.2.12)
     rails-assets-angular-bootstrap (0.11.2)
       rails-assets-angular (>= 1)
+    rails-assets-angular-cookies (1.2.12)
+      rails-assets-angular (= 1.2.12)
     rails-assets-angular-dragdrop (1.0.6)
       rails-assets-angular (~> 1.0)
       rails-assets-jquery (~> 2.0)
@@ -617,6 +618,7 @@ DEPENDENCIES
   rails (~> 3.2.3)!
   rails-assets-angular
   rails-assets-angular-bootstrap (~> 0.11.2)
+  rails-assets-angular-cookies (~> 1.2.0)
   rails-assets-angular-dragdrop (~> 1.0.5)
   rails-assets-angular-google-maps (~> 1.1.13)
   rails-assets-angular-prevent-default

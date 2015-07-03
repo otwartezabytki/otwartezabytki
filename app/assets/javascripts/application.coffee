@@ -30,6 +30,7 @@
 #= require lodash
 #= require angular
 #= require angular-sanitize
+#= require angular-cookies
 #= require angular-prevent-default
 #= require angular-google-maps
 #= require angular-dragdrop
