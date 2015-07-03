@@ -1,7 +1,7 @@
 #= require ../../variables
 
 angular.module('Relics').controller 'WalkingGuideCtrl',
-  ($scope, $timeout, $modal, $cookies, Relic, WalkingGuide) ->
+  ($scope, $timeout, $modal, $cookies, $cookieStore, Relic, WalkingGuide) ->
     $scope.query = ''
     $scope.widget =
       relics: []
@@ -105,6 +105,7 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
       $scope.map.instance.setZoom(zoom)
 
     $scope.resetForm = ->
+      $cookieStore.remove('walkingGuideQuery')
       $scope.query = ''
       $scope.searchForm.submitted = false
       $scope.resetSuggestions()
