@@ -11,7 +11,7 @@
     %span(ng-show="relic.street") {{ relic.street }},
     {{ relic.place }}
 
-.widget.widget--show.widget__walking-guide(ng-controller="WalkingGuideCtrl" ng-cloak ng-init="load('#{walking_guide.uid}')")
+.widget.widget--show.widget__walking-guide(ng-controller="WalkingGuideCtrl" ng-cloak ng-init="readonly = true; load('#{walking_guide.uid}')")
   .walking-guide__content
     %h1.walking_guide__logo= t('widget.walking_guide.title')
     .walking-guide__sidebar

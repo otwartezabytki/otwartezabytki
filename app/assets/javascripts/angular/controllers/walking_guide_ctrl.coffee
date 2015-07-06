@@ -14,6 +14,7 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
     $scope.loading = false
     $scope.saved = false
     $scope.error = false
+    $scope.readonly = false
     directionsService  = new google.maps.DirectionsService()
     directionsRenderers = []
     directionsData = []
@@ -243,6 +244,8 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
       $scope.save(true)
 
     $scope.save = (manual = false) ->
+      return if $scope.readonly
+
       $scope.widget.relic_ids = $scope.widget.relics.map (r) -> r.id
       $scope.widget.manual = manual
       $scope.saving = true
@@ -286,6 +289,7 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
           relic: -> relic
 
     $timeout ->
+      return if $scope.readonly
       if $cookies.walkingGuideQuery
         $scope.query = $cookies.walkingGuideQuery
         $scope.searchRelics()
