@@ -20,7 +20,7 @@ class Page < ActiveRecord::Base
 
     protected
       def find_templates(name, prefix, partial, details)
-        (::Page.where(:permalink => name).presence || ::Page.where(:name => name)).map do |record|
+        (::Page.find_all_by_permalink(name).presence || ::Page.where(:name => name)).map do |record|
           initialize_template(record)
         end
       end
@@ -48,7 +48,7 @@ class Page < ActiveRecord::Base
   end
 
   def self.find_all_by_permalink(permalink)
-    found = super(permalink).first
+    found = find_by_permalink(permalink)
     found = includes(:translations).where(:translations => { :permalink => permalink }).first unless found
     if found
       found.translations.reload
