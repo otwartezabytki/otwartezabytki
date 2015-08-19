@@ -47,13 +47,15 @@
       %textarea(ng-model="widget.description")
 
     - if current_user.present?
-      %button.button.button--save(type="button" ng-click="save()" ng-disabled="saving || loading || !widget.relics.length")
+      %button.button.button--save(type="button" ng-click="manualSave()" ng-disabled="saving || loading || !widget.relics.length")
         = t('widget.walking_guide.save')
     - else
       %p= t('widget.walking_guide.sign_in_to_save')
       %br
       = link_to t('widget.walking_guide.sign_in'), new_user_session_path, class: 'button button--login'
-    %a.button.button--print(ng-href="{{ widget.print_path }}" ng-show="saved" target="_blank")
+    %a.button.button--print(ng-href="{{ saved && widget.print_path || null }}"
+      ng-class="{'button--disabled': !saved}"
+      target="_blank")
       = t('widget.walking_guide.print')
 
   %div(google-map="true" center="map.center" zoom="map.zoom" events="map.events" draggable="true")

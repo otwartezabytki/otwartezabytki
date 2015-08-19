@@ -1,4 +1,4 @@
-.widget.widget--print.widget__walking-guide(ng-controller="WalkingGuideCtrl" ng-cloak ng-init="load('#{walking_guide.uid}')")
+.widget.widget--print.widget__walking-guide(ng-controller="WalkingGuideCtrl" ng-cloak ng-init="readonly = true; load('#{walking_guide.uid}')")
   %header.Sidebar
     %h1.Logo
       %b.Hidden Otwarte Zabytki
@@ -19,13 +19,15 @@
     %ol.MainContent
       %li.Definition-Container--unbreakable(ng-repeat="relic in widget.relics")
         %dl.Definition
-          %dt.Definition-Header--without-colon {{ relic.identification }}
+          %dt.Definition-Header--without-colon
+            %img.Thumbnail(ng-src="{{ relic.thumbnail }}")
+            {{ relic.identification }}
+            .Definition-Content--small
+              %span(ng-show="relic.street") {{ relic.street }},
+              {{ relic.place }}
+            .clearfix
           %dd.Definition-Content--small
-            %span(ng-show="relic.street") {{ relic.street }},
-            {{ relic.place }}
-            %div(ng-show="relic.description")
-              %br
-              %p(ng-bind-html="relic.description")
+            %p(ng-bind-html="relic.description" ng-show="relic.description")
 
   %section(ng-show="widget.description")
     %h2.Title-Header--padded-bottom= t('widget.walking_guide.description')
