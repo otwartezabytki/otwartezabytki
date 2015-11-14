@@ -8,12 +8,20 @@
       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
+  / Piwik
   :javascript
-    var pkBaseURL = (('https:' == document.location.protocol) ?  'https://centrumcyfrowe.pl/piwik/' : 'http://centrumcyfrowe.pl/piwik/');
-    document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
-  :javascript
-    try {
-    var piwikTracker = Piwik.getTracker(pkBaseURL + 'piwik.php', 2);
-    piwikTracker.trackPageView();
-    piwikTracker.enableLinkTracking();
-    } catch( err ) {}
+    var _paq = _paq || [];
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//stats.centrumcyfrowe.pl/";
+      _paq.push(['setTrackerUrl', u+'piwik.php']);
+      _paq.push(['setSiteId', 1]);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+    })();
+  %noscript
+    %p
+      %img{:alt => "", :src => "//stats.centrumcyfrowe.pl/piwik.php?idsite=1", :style => "border:0;"}/
+      / End Piwik Code
+
