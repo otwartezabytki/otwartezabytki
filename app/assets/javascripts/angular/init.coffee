@@ -1,5 +1,5 @@
 angular.module('Relics', [
-  'prevent-default', 'ozService',
+  'prevent-default', 'ozService', 'ngCookies',
   'ngSanitize', 'google-maps', 'ngDragDrop', 'ui.sortable', 'ui.bootstrap'
 ])
 

@@ -22,6 +22,7 @@ group :assets do
   gem 'rails-assets-angular-ui-router'
   gem 'rails-assets-angular-prevent-default'
   gem 'rails-assets-angular-sanitize', '~> 1.2.0'
+  gem 'rails-assets-angular-cookies', '~> 1.2.0'
   gem 'rails-assets-gmaps-markerclusterer-plus'
   gem 'rails-assets-jquery-form'
   gem 'rails-assets-angular-google-maps', '~> 1.1.13'

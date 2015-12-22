@@ -1,4 +1,4 @@
-.about= t('layouts.application.footer.about_project_html')
+.about= t('layouts.application.footer.about_project')
 - unless Rails.env.development?
   .facebook-share
     :plain
@@ -41,6 +41,9 @@
         = link_to image_tag( 'partner-msz.png', :alt => 'Ministerstwo Spraw Zagranicznych'), 'http://www.msz.gov.pl'
         = link_to image_tag( 'partner-cee.png', :alt => 'CEE TRUST - Trust for Civil Society in Central and Eastern Europe'), 'http://www.ceetrust.org'
         = link_to image_tag( 'partner-mpips.png', :alt => 'Ministerstwo Pracy i Polityki Społecznej'), 'http://www.mpips.gov.pl/'
+        = link_to image_tag( 'partner-fwpn.jpeg', :alt => 'Fundacja Współpracy Polsko-Niemieckiej'), 'http://fwpn.org.pl/'
+        = link_to image_tag( 'partner-mkidn.jpg', :alt => 'Ministerstwo Kultury i Dziedzictwa Narodowego'), 'http://www.mkidn.gov.pl/'
+
 .footer-bottom
   %a.footer-logo{:href => "http://www.monterail.com", :title => "Aplikacje internetowe w Ruby on Rails"} Monterail
 

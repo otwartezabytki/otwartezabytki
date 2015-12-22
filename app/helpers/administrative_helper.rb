@@ -34,7 +34,12 @@ module AdministrativeHelper
         stats: stats[voivodeship.id]
       )
       def obj.stats_for(val)
-        stats[val] || 0
+        if stats.present? and stats[val].present?
+          stats[val]
+        else
+          0
+        end
+
       end
       obj
     end

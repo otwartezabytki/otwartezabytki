@@ -34,8 +34,8 @@
             %span.relic-text
               = t('views.relicbuilders.new.info_nonexisted_relic')
           .clear
-          .field.text.search.marker
-            .polish-location{:style => "#{ 'display: none;' unless f.object.foreign_relic.to_i.zero?}"}
+          .field.text.search.marker-box
+            .polish-location.polish-location-input-container{:style => "#{ 'display: none;' unless f.object.foreign_relic.to_i.zero?}"}
               = f.input :polish_place, :label => t('views.relicbuilders.new.place')
             .foreign-location{:style => "#{ 'display: none;' if f.object.foreign_relic.to_i.zero?}"}
               .select

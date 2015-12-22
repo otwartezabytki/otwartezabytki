@@ -5,5 +5,5 @@
     %p.title= revision[:identification]
     .change.added
       = revision[:changes]
-    %p= raw time_ago_in_words(revision[:created_at]) + ' ' + t('datetime.ago')
+    %p= raw t('datetime.ago_pre') + ' ' + time_ago_in_words(revision[:created_at]) + ' ' + t('datetime.ago')
     %p= link_to t('views.pages.home.go_to_relic_profile'), relic_path(revision[:slug])

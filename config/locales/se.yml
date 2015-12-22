@@ -55,6 +55,20 @@ se:
           login_intro: "Conectarse al servicio"
           register_here: "Registrarse aquí."
           submit: Conectarse
+      shared:
+        login_info:
+          iframe_sidebar: |-
+              <div class='ask_account'>Para qué necesito una cuenta?</div>
+              <p>Tienes acceso a la base sin conectarte. Pero si quieres añadir o completar informaciones – hace falta conectarse.</p>
+              <div class='ask_account'>Masz konto?</div>
+          login_intro: "Conectarse al servicio"
+        new_account_info:
+          iframe_sidebar: |-
+              <div class='ask_account'>Para qué necesito una cuenta?</div>
+              <p>Tienes acceso a la base sin conectarte. Pero si quieres añadir o completar informaciones – hace falta conectarse.</p>
+              <div class='ask_account'>No tienes cuenta?</div>
+          register_here: "Registrarse aquí."
+
     pages:
       home:
         header: "Busca y completa..."

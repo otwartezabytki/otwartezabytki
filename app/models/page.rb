@@ -48,7 +48,7 @@ class Page < ActiveRecord::Base
   end
 
   def self.find_all_by_permalink(permalink)
-    found = super(permalink).first
+    found = find_by_permalink(permalink)
     found = includes(:translations).where(:translations => { :permalink => permalink }).first unless found
     if found
       found.translations.reload

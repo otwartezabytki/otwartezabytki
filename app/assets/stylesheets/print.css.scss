@@ -190,6 +190,7 @@ li {
 .Definition-Content--small {
   @extend .Definition-Content;
   font-size: 0.8em;
+  font-weight: normal;
 }
 
 .Description {
@@ -321,4 +322,17 @@ li {
     bottom: 0;
     right: 0;
   }
+}
+
+
+.Thumbnail {
+  width: 56px;
+  height: 56px;
+  float: left;
+  margin-right: 6px;
+  margin-bottom: 6px;
+}
+
+.clearfix {
+  clear: both;
 }

@@ -1,7 +1,7 @@
 #= require ../../variables
 
 angular.module('Relics').controller 'WalkingGuideCtrl',
-  ($scope, $timeout, $modal, Relic, WalkingGuide) ->
+  ($scope, $timeout, $modal, $cookies, $cookieStore, Relic, WalkingGuide) ->
     $scope.query = ''
     $scope.widget =
       relics: []
@@ -9,11 +9,12 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
       title: ''
       description: ''
     $scope.suggestions = null
-    $scope.currentPage = 0
+    $scope.currentPage = 1
     $scope.totalPages = -1
     $scope.loading = false
     $scope.saved = false
     $scope.error = false
+    $scope.readonly = false
     directionsService  = new google.maps.DirectionsService()
     directionsRenderers = []
     directionsData = []
@@ -36,6 +37,7 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
             $scope.map.instance = map
 
     $scope.searchRelics = ->
+      $cookies.walkingGuideQuery = $scope.query
       $scope.searchForm.submitted = true
       return if $scope.searchForm.$invalid
       $scope.resetSuggestions()
@@ -64,7 +66,7 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
       Relic.suggestions({ query, place, page: $scope.currentPage }).then(success, error)
 
     $scope.nextPage = ->
-      $scope.currentPage = Math.min($scope.totalPages - 1, $scope.currentPage + 1)
+      $scope.currentPage = Math.min($scope.totalPages, $scope.currentPage + 1)
       $scope.loadRelics()
 
     $scope.getIcon = (first, last) ->
@@ -104,6 +106,7 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
       $scope.map.instance.setZoom(zoom)
 
     $scope.resetForm = ->
+      $cookieStore.remove('walkingGuideQuery')
       $scope.query = ''
       $scope.searchForm.submitted = false
       $scope.resetSuggestions()
@@ -111,7 +114,7 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
     $scope.resetSuggestions = ->
       clearErrors()
       $scope.suggestions = null
-      $scope.currentPage = 0
+      $scope.currentPage = 1
       $scope.totalPages = -1
 
     $scope.clearRoute = ->
@@ -237,8 +240,14 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
       $scope.loading = true
       WalkingGuide.get(id).then(success, error)
 
-    $scope.save = ->
+    $scope.manualSave = ->
+      $scope.save(true)
+
+    $scope.save = (manual = false) ->
+      return if $scope.readonly
+
       $scope.widget.relic_ids = $scope.widget.relics.map (r) -> r.id
+      $scope.widget.manual = manual
       $scope.saving = true
 
       success = (response) ->
@@ -278,6 +287,12 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
         controller: 'WalkingGuideModalCtrl'
         resolve:
           relic: -> relic
+
+    $timeout ->
+      return if $scope.readonly
+      if $cookies.walkingGuideQuery
+        $scope.query = $cookies.walkingGuideQuery
+        $scope.searchRelics()
 
 
 angular.module('Relics').controller 'WalkingGuideModalCtrl', ($scope, $modalInstance, relic) ->
