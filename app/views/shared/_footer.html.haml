@@ -45,16 +45,17 @@
         = link_to image_tag( 'partner-mkidn.jpg', :alt => 'Ministerstwo Kultury i Dziedzictwa Narodowego'), 'http://www.mkidn.gov.pl/'
 
 .footer-bottom
-  %a.footer-logo{:href => "http://www.monterail.com", :title => "Aplikacje internetowe w Ruby on Rails"} Monterail
-
   .footer-copyright
     %p= t('layouts.application.footer.license')
-  -# .footer-links
-  -#   %a{ :class => "footer-regulamin", :href => "/strony/regulamin"} Regulamin
-  -#   %a{ :class => "footer-prywatnosc", :href => "/strony/prywatnosc"} Prywatność
+
 
   .footer-language
     %select#lang.select2
       - enabled_locales.each do |l|
         %option{:rel => "#{url_for(:locale => l)}", :name => l, :selected => ('selected' if (params[:locale] || I18n.locale).to_s == l.to_s)}
           = t("common.lang.#{l}")
+
+  .footer-links
+    %a{ :class => "footer-regulamin", :href => "/strony/regulamin"} Regulamin
+    %a{ :class => "footer-prywatnosc", :href => "/strony/prywatnosc"} Prywatność
+  %a.footer-logo{:href => "http://www.monterail.com", :title => "Aplikacje internetowe w Ruby on Rails"} Monterail

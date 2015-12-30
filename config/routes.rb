@@ -120,9 +120,6 @@ Otwartezabytki::Application.routes.draw do
 
   match "/hello"                      => 'pages#hello', :id => 'hello', :as => :hello
   match "accept_terms"               => 'static_pages#accept_terms_of_service'
-  match "terms_of_service"               => 'static_pages#terms_of_service'
-  match "privacy_policy"               => 'static_pages#privacy_policy'
-
 
   I18n.available_locales.each do |locale|
     match "#{I18n.t('routes.pages', :locale => locale)}/:id" => 'pages#show', :as => :"#{locale.to_s.underscore}_page"
