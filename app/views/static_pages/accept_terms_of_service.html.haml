@@ -1,0 +1,9 @@
+.accept_terms_of_use_title= t('users.terms_of_user.header')
+
+.accept_terms_form_box
+  .accept_terms_info
+    = t('users.terms_of_user.info')
+  = semantic_form_for(@user, :url => user_accept_of_terms_update_path(@user), :method => :put, :remote => request.xhr?) do |f|
+    = f.semantic_errors
+    = f.input :terms_of_service, :required => false
+    = f.submit t('users.terms_of_user.accept')

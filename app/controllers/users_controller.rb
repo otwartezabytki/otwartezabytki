@@ -36,6 +36,15 @@ class UsersController < ApplicationController
     end
   end
 
+  def accept_of_terms_update
+    user.update_without_password(:terms_of_service => params[:user][:terms_of_service])
+    if !user.terms_of_service?
+      redirect_to accept_terms_path
+    else
+      render :edit
+    end
+  end
+
   def remove_avatar
     user.remove_avatar!
     redirect_to edit_user_path(user)

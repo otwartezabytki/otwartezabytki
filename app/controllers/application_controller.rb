@@ -1,6 +1,11 @@
+require "#{Rails.root}/lib/devise/controllers/helpers.rb"
+
+
 # -*- encoding : utf-8 -*-
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  # override authenticate_user!
+  include CustomDeviseHelper
   helper_method :search_params, :tsearch, :enabled_locales, :iframe_transport?, :js_env, :angular_js_env, :with_return_path
   # iframe views path
   before_filter do

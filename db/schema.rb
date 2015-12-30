@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140217140257) do
+ActiveRecord::Schema.define(:version => 20151228092902) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -383,6 +383,7 @@ ActiveRecord::Schema.define(:version => 20140217140257) do
     t.string   "uid"
     t.string   "avatar"
     t.string   "language",               :default => "pl"
+    t.boolean  "terms_of_service",       :default => false
   end
 
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
