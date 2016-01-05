@@ -1145,9 +1145,9 @@ pl:
       header: "Akceptacja regulaminu"
       accept: Zatwierdź
       info: "Wymagane jest potwierdzenie regulaminu"
-      checkbox_message: "Akceptacja %{terms} i %{privacy}"
-      terms: "Regulaminu"
-      privacy: "Polityki Prywatności"
+      checkbox_message: "Akceptuje %{terms} i %{privacy}"
+      terms: "Regulamin"
+      privacy: "Polityka Prywatności"
   version:
     event:
       create: stworzył

@@ -48,6 +48,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # provide terms and privacy pages
+  before_filter do
+    @terms = Page.where(name: "terms").first
+    @privacy = Page.where(name: "privacy").first
+  end
+
   # for ajax history management
   before_filter do
     response.headers['x-path'] = request.fullpath

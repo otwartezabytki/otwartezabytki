@@ -56,6 +56,8 @@
           = t("common.lang.#{l}")
 
   .footer-links
-    %a{ :class => "footer-regulamin", :href => "/strony/regulamin"} Regulamin
-    %a{ :class => "footer-prywatnosc", :href => "/strony/prywatnosc"} Prywatność
+    - if @terms.present?
+      = link_to t('users.terms_of_user.terms'), @terms, class: "footer-regulamin"
+    - if @privacy.present?
+      = link_to t('users.terms_of_user.privacy'), @privacy, class: "footer-prywatnosc"
   %a.footer-logo{:href => "http://www.monterail.com", :title => "Aplikacje internetowe w Ruby on Rails"} Monterail

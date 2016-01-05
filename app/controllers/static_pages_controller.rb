@@ -8,8 +8,6 @@ class StaticPagesController < ApplicationController
 
   def accept_terms_of_service
     @user = current_user
-    @terms = Page.where(name: "terms").first
-    @privacy = Page.where(name: "privacy").first
   end
 
 
