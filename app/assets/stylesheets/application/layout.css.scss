@@ -1742,6 +1742,14 @@ p#adding-note {
   }
 }
 
+#new_user{
+.error
+  span.help-block {
+    color: rgb(213, 24, 24);
+    font-size: 12px
+  }
+}
+
 .corrected {
   .row {
     background: #fff;
@@ -1925,9 +1933,9 @@ p#adding-note {
 
     }
     .footer-links {
-      float: left;
+      float: right;
       margin-left: 20px;
-      margin-top: 2px;
+      margin-top: -22px;
 
       a {
         margin-right: 15px;

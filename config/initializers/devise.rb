@@ -1,4 +1,5 @@
 # -*- encoding : utf-8 -*-
+require "#{Rails.root}/lib/devise/controllers/custom_devise_helper.rb"
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|

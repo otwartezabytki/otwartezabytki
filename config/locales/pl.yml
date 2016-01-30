@@ -191,6 +191,7 @@ pl:
         role: Rola
         updated_at: "Zaktualizowanie danych"
         username: "Nazwa użytkownika"
+        terms_of_service: "Akceptacja regulaminu"
       version:
         item: Zasób
         item_type: Rodzaj
@@ -1140,6 +1141,13 @@ pl:
       user_data: "Dane użytkownika"
     user_avatar:
       change_photo: "Zmień zdjęcie"
+    terms_of_user:
+      header: "Akceptacja regulaminu"
+      accept: Zatwierdź
+      info: "Wymagane jest potwierdzenie regulaminu"
+      checkbox_message: "Akceptuje %{terms} i %{privacy}"
+      terms: "Regulamin"
+      privacy: "Polityka Prywatności"
   version:
     event:
       create: stworzył

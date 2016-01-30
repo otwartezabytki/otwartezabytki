@@ -7,12 +7,14 @@ ActiveAdmin.register User do
   filter :email
   filter :created_at
   filter :api_key
+  filter :terms_of_service, as: :check_boxes
 
   index do
     column :id
     column :email
     column :role
     column :created_at
+    column :terms_of_service
     default_actions
   end
 
