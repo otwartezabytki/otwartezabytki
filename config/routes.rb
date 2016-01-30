@@ -22,6 +22,7 @@ Otwartezabytki::Application.routes.draw do
     get :checked_relics
     get :my_routes
     get :walking_guides
+    put :accept_of_terms_update
     delete :remove_avatar
   end
 
@@ -118,6 +119,7 @@ Otwartezabytki::Application.routes.draw do
   get 'geocoder/search'
 
   match "/hello"                      => 'pages#hello', :id => 'hello', :as => :hello
+  match "accept_terms"               => 'static_pages#accept_terms_of_service'
 
   I18n.available_locales.each do |locale|
     match "#{I18n.t('routes.pages', :locale => locale)}/:id" => 'pages#show', :as => :"#{locale.to_s.underscore}_page"

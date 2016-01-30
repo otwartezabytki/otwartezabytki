@@ -1,6 +1,8 @@
 # -*- encoding : utf-8 -*-
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  # override authenticate_user!
+  include ::Devise::Controllers::CustomDeviseHelper
   helper_method :search_params, :tsearch, :enabled_locales, :iframe_transport?, :js_env, :angular_js_env, :with_return_path
   # iframe views path
   before_filter do
@@ -41,6 +43,12 @@ class ApplicationController < ActionController::Base
     if current_user.present? && current_user.username.blank?
       sign_out current_user
     end
+  end
+
+  # provide terms and privacy pages
+  before_filter do
+    @terms = Page.where(name: "terms").first
+    @privacy = Page.where(name: "privacy").first
   end
 
   # for ajax history management

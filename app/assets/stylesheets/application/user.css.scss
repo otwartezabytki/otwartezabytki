@@ -294,3 +294,38 @@
   }
 }
 
+
+
+// Terms of usage
+
+.accept_terms_of_use_title {
+  width: 880px;
+  height: 50px;
+  font-weight: 400;
+  font-size: 28px;
+  color: #FFFFFF;
+  padding: 25px 0 0 80px;
+  margin: 0 0 73px 0;
+  background: image-url('lock_icon.png') no-repeat;
+  background-position: 30px;
+  background-color: #546f7d; /* Old browsers */
+}
+
+
+.accept_terms_form_box {
+  margin: auto;
+  width: 307px;
+  background: #FFFFFF;
+  border: 1px solid #e9e9e9;
+  padding: 30px 40px;
+  .accept_terms_info {
+    font-size: 18px;
+    color: #4e4e4e;
+    margin: 0 0 15px 0;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #dddddd;
+  }
+  input {
+    margin-top: 15px;
+  }
+}

@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauth_providers => [:facebook]
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :username, :registration
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :username, :registration, :terms_of_service
   attr_accessible :email, :password, :password_confirmation, :role, :as => :admin
   attr_accessor :force_password_required, :current_password
 
@@ -67,6 +67,9 @@ class User < ActiveRecord::Base
     model.validates :username,
       :uniqueness => true, :presence => true, :format => /[\w\.]/,
       :length => { :maximum => 30, :minimum => 3 }
+
+    model.validates_acceptance_of :terms_of_service, :accept => true
+    model.validates :terms_of_service, presence: true
 
     model.before_save do
       self.password = self.password_confirmation = Devise.friendly_token[0,20]
