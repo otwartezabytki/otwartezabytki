@@ -1142,6 +1142,13 @@ de:
       user_data: "Benutzerdaten"
     user_avatar:
       change_photo: "Bild ändern"
+    terms_of_user:
+      header: "Akceptacja regulaminu"
+      accept: Zatwierdź
+      info: "Wymagane jest potwierdzenie regulaminu"
+      checkbox_message: "Akceptuje %{terms} i %{privacy}"
+      terms: "Regulamin"
+      privacy: "Polityka Prywatności"
   version:
     event:
       create: erstellte
