@@ -1742,6 +1742,14 @@ p#adding-note {
   }
 }
 
+#new_user{
+.error
+  span.help-block {
+    color: rgb(213, 24, 24);
+    font-size: 12px
+  }
+}
+
 .corrected {
   .row {
     background: #fff;
