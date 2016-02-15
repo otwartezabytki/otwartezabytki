@@ -191,7 +191,7 @@ pl:
         role: Rola
         updated_at: "Zaktualizowanie danych"
         username: "Nazwa użytkownika"
-        terms_of_service: "Akceptacja regulaminu"
+        terms_of_service: "Akceptuję Regulamin i Politykę Prywatności"
       version:
         item: Zasób
         item_type: Rodzaj
@@ -1144,10 +1144,10 @@ pl:
     terms_of_user:
       header: "Akceptacja regulaminu"
       accept: Zatwierdź
-      info: "Wymagane jest potwierdzenie regulaminu"
-      checkbox_message: "Akceptuje %{terms} i %{privacy}"
+      info: "Pole obowiązkowe"
+      checkbox_message: "Akceptuję %{terms} i %{privacy}"
       terms: "Regulamin"
-      privacy: "Polityka Prywatności"
+      privacy: "Politykę Prywatności"
   version:
     event:
       create: stworzył

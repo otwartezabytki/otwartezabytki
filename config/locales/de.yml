@@ -191,6 +191,7 @@ de:
         role: Rolle
         updated_at: "Daten aktualisieren"
         username: "Username"
+        terms_of_service: "Akceptuję Regulamin i Politykę Prywatności"
       version:
         item: Bestand
         item_type: Art
@@ -1145,10 +1146,10 @@ de:
     terms_of_user:
       header: "Akceptacja regulaminu"
       accept: Zatwierdź
-      info: "Wymagane jest potwierdzenie regulaminu"
-      checkbox_message: "Akceptuje %{terms} i %{privacy}"
+      info: "Pole obowiązkowe"
+      checkbox_message: "Akceptuję %{terms} i %{privacy}"
       terms: "Regulamin"
-      privacy: "Polityka Prywatności"
+      privacy: "Politykę Prywatności"
   version:
     event:
       create: erstellte
