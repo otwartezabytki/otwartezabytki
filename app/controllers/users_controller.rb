@@ -41,7 +41,12 @@ class UsersController < ApplicationController
     if !user.terms_of_service?
       redirect_to accept_terms_path
     else
-      render :edit
+      if cookies['before_accept_terms'].present?
+        redirect_to cookies['before_accept_terms']
+      else
+        render :edit
+      end
+
     end
   end
 
