@@ -10,5 +10,7 @@
     = f.hidden_field :registration, :value => true
     = f.input :username, :required => false
     = f.input :email, :required => false, :autofocus => true
-    = f.input :terms_of_service, :required => false
+    = f.input :terms_of_service, :required => true, :label => t('users.terms_of_user.checkbox_message',
+                                                                  terms: link_to(t('users.terms_of_user.terms'), @terms),
+                                                                  privacy: link_to(t('users.terms_of_user.privacy'), @privacy))
     = f.submit t('users.registrations.new.submit')
