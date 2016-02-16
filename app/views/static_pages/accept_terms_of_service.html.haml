@@ -1,10 +1,12 @@
 .accept_terms_of_use_title= t('users.terms_of_user.header')
 .accept_terms_form_box
-  .accept_terms_info
-    = t('users.terms_of_user.info')
+  -#.accept_terms_info
+    -#= t('users.terms_of_user.info')
   = semantic_form_for(@user, :url => user_accept_of_terms_update_path(@user), :method => :put, :remote => request.xhr?) do |f|
     = f.semantic_errors
-    = f.input :terms_of_service, :required => false,  :label => t('users.terms_of_user.checkbox_message',
+    = f.input :terms_of_service, :required => false,  :label => "* #{t('users.terms_of_user.checkbox_message_terms',
                                                                   terms: link_to(t('users.terms_of_user.terms'), @terms),
-                                                                  privacy: link_to(t('users.terms_of_user.privacy'), @privacy))
+                                                                  privacy: link_to(t('users.terms_of_user.privacy_link'), @privacy))}".html_safe
     = f.submit t('users.terms_of_user.accept')
+    .register-legend
+      = t('users.terms_of_user.info_star')
