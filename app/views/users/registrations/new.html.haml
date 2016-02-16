@@ -10,7 +10,10 @@
     = f.hidden_field :registration, :value => true
     = f.input :username, :required => false
     = f.input :email, :required => false, :autofocus => true
-    = f.input :terms_of_service, :required => true, :label => t('users.terms_of_user.checkbox_message',
+    = f.input :terms_of_service, :required => false, :label => "* #{t('users.terms_of_user.checkbox_message_terms',
                                                                   terms: link_to(t('users.terms_of_user.terms'), @terms),
-                                                                  privacy: link_to(t('users.terms_of_user.privacy'), @privacy))
+                                                                  privacy: link_to(t('users.terms_of_user.privacy_link'), @privacy))}".html_safe
+
     = f.submit t('users.registrations.new.submit')
+    .register-legend
+      = t('users.terms_of_user.info_star')
