@@ -1147,9 +1147,11 @@ de:
       header: "Akceptacja regulaminu"
       accept: Zatwierdź
       info: "Pole obowiązkowe"
-      checkbox_message: "Akceptuję %{terms} i %{privacy}"
+      info_star: "* zgoda obowiązkowa"
+      checkbox_message_terms: "Akceptuję %{terms} i %{privacy}"
       terms: "Regulamin"
-      privacy: "Politykę Prywatności"
+      privacy: "Polityka Prywatności"
+      privacy_link: "Politykę Prywatności"
   version:
     event:
       create: erstellte
