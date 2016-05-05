@@ -126,3 +126,14 @@ jQuery ->
 
 
 
+$ ->
+  if $('.fancybox-home-popup').length > 0
+    $(".fancybox-home-popup").fancybox(afterShow: ->
+      console.log 'on complete'
+      $('.fancybox-inner').wrap $('<a />',
+        href: "http://centrumcyfrowe.pl/uczestnicy-nowej-edycji-projektu-wizja-lokalna-poszukiwani/")
+    )
+
+    setTimeout ()->
+      $('.fancybox-home-popup').click()
+    , 2000
