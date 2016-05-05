@@ -100,6 +100,6 @@
           %h3= t('views.relics.index.states.header')
           %ul
             %li=state_hint_tag('unchecked')
-
-.hidden
-  %a.fancybox-home-popup{href: "#{image_path('home-wizja-lokalna.jpg')}"}
+- if Date.today < Date.new(2016,5,7)
+  .hidden
+    %a.fancybox-home-popup{href: "#{image_path('home-wizja-lokalna.jpg')}"}
