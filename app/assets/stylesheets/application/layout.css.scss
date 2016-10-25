@@ -63,6 +63,10 @@ a {
   position: relative;
 }
 
+.display-block{
+  display: block;
+}
+
 .page-logo,
 .page-logo-link,
 .page-logo-tagline {
@@ -84,30 +88,30 @@ a {
 }
 
 .page-logo-tagline {
-  padding-top: 10px;
   max-height: 21px;
   font-size: 13px;
   line-height: 11px;
   text-transform: uppercase;
-  text-align: center;
   overflow: visible;
+  position: absolute;
+  left: 3px;
+  bottom: -10px;
 }
 
 #header {
   height: 118px;
   section.disclaimer {
-    position: absolute;
+    position: relative;
     font-size: 12px;
     line-height: 15px;
-    height: 45px;
+    height: 74px;
     color: #524d49;
-    width: 420px;
-    padding: 14px;
+    width: 69%;
     top: 44px;
-    left: 375px;
     border-radius: 4px 4px 0 0;
     border: 1px solid #f6e3d0;
     border-bottom: none;
+    padding-top: 10px;
     background: #f6ead4;
     background: linear-gradient(to bottom, #f6ead4 88%, #efdab4 100%);
     a {
@@ -119,11 +123,12 @@ a {
       content: "";
       display: block;
       width: 9px;
-      height: 15px;
+      height: 74px;
       position: absolute;
       left: -9px;
       top: 25px;
       background: asset-data-url("disclaimer-edge.png") no-repeat;
+      padding-top: 10px;
     }
   }
   nav {
@@ -205,7 +210,8 @@ a {
     height: 40px;
     background: asset-data-url('cc_logo.png') no-repeat;
     clear: right;
-    margin-top: 55px;
+    position: relative;
+    bottom: 15px;
   }
 }
 
@@ -543,8 +549,8 @@ a {
   .smaller-12 > li > a { font-size: 12px !important; }
   .smaller-11 > li > a { font-size: 11px !important; }
 
-  nav {
-    > ul > li {
+  .navbar-default .navbar-nav{
+    > li {
       float: left;
       &.gradient{
         background: asset-data-url("menu-gradient.png") repeat-x;
@@ -564,7 +570,7 @@ a {
           box-shadow: 0 5px 15px 0 rgba(0,0,0,0.3);
         }
         &:last-child{
-          width: 111px;
+          width: 132px;
         }
         .arrow{
           position: absolute;
@@ -715,12 +721,13 @@ a {
         color: #313132;
         font-weight: 600;
         font-size: 14px;
-        line-height: 59px;
         text-shadow: 0 1px 0 #fff;
         text-decoration: none;
         margin-right: 23px;
         padding-left: 20px;
         display: block;
+        min-height: 59px;
+        line-height: 28px;
         &:hover {
           color: $blue-hover;
         }

@@ -43,53 +43,55 @@
       #root
         %header#header
           .container
-            %hgroup.page-logo
+            %hgroup.page-logo.col-lg-4.col-md-5.col-sm-6.col-sm-offset-0.col-xs-10.col-xs-offset-1.col-sm-offset-0
               %h1
                 %a.page-logo-link(href=root_path)> Otwarte Zabytki
               %h2.page-logo-tagline= t('layouts.application.tagline')
-            %section.disclaimer
-              = t('layouts.application.disclaimer')
-              %a{:href => "mailto:kontakt-oz@centrumcyfrowe.pl"} kontakt-oz@centrumcyfrowe.pl
-            %nav#userNav
-              .text
-                %span.plus
-                %span.minus
-              %ul
-                - if current_user && current_user.registered? && current_user.errors.size == 0
-                  %li
-                    = link_to t('layouts.application.hello', :username => (current_user.username || current_user.email)), current_user
-                  %li= link_to t('layouts.application.logout'), destroy_user_session_path, :method => :delete, :class => 'logout'
-                  -# %li= t('layouts.application.relics_count', :count => current_user.earn_points)
-                - else
-                  -# %li= t('layouts.application.relics_count', :count => current_user.try(:earn_points) || 0)
-                  %li
-                    %a{:href => new_user_session_path(return_path: with_return_path), :class => 'login'}
-                      = t('layouts.application.login')
-                  %li
-                    %a{:href => new_user_registration_path(return_path: with_return_path), :class => 'register'}
-                      = t('layouts.application.register')
-                  %li
-                    = link_to t('layouts.application.facebook_sign_in'), user_omniauth_authorize_path(:facebook), :class => "fb-btn"
-            %a{:href => 'http://centrumcyfrowe.pl/', :target => '_blank', :class => 'cc_logo'}
+            .display-block.col-lg-8.col-md-7.col-sm-6.col-sm-offset-0.col-xs-10.col-xs-offset-1.col-sm-offset-0
+              %nav#userNav
+                .text
+                  %span.plus
+                  %span.minus
+                %ul
+                  - if current_user && current_user.registered? && current_user.errors.size == 0
+                    %li
+                      = link_to t('layouts.application.hello', :username => (current_user.username || current_user.email)), current_user
+                    %li= link_to t('layouts.application.logout'), destroy_user_session_path, :method => :delete, :class => 'logout'
+                    -# %li= t('layouts.application.relics_count', :count => current_user.earn_points)
+                  - else
+                    -# %li= t('layouts.application.relics_count', :count => current_user.try(:earn_points) || 0)
+                    %li
+                      %a{:href => new_user_session_path(return_path: with_return_path), :class => 'login'}
+                        = t('layouts.application.login')
+                    %li
+                      %a{:href => new_user_registration_path(return_path: with_return_path), :class => 'register'}
+                        = t('layouts.application.register')
+                    %li
+                      = link_to t('layouts.application.facebook_sign_in'), user_omniauth_authorize_path(:facebook), :class => "fb-btn"
+              %section.disclaimer
+                = t('layouts.application.disclaimer')
+                %a{:href => "mailto:kontakt-oz@centrumcyfrowe.pl"} kontakt-oz@centrumcyfrowe.pl
+              %a{:href => 'http://centrumcyfrowe.pl/', :target => '_blank', :class => 'cc_logo'}
         %section#menu
           .container
-            %nav
-              %ul#page-menu
-                %li
-                  = link_to t('layouts.application.homepage'), root_path, :class => "home #{'current' if current_page?(root_path)}"
-                - Page.where(name: ['about', 'download', 'contact']).each do |page|
-                  = render 'pages/navigation', page: page
-                %li
-                  = link_to t('layouts.application.widgets'), widgets_path, :class => "widgets #{'current' if current_page?(widgets_path)}"
-                %li
-                  = link_to t('layouts.application.addrelic'), new_relicbuilder_path, :class => "add-relic #{'current' if current_page?(new_relicbuilder_path)}"
-                %li.gradient{:class => " #{'current' if current_page?(relics_path)}"}
-                  = link_to t('layouts.application.search'), relics_path, :class => "search #{'current' if current_page?(relics_path)}"
-                %li.gradient
-                  = link_to t('layouts.application.browse'), "#", :class => "browse"
-                  .arrow
-                  - unless request.xhr?
-                    = render 'shared/browse'
+            %nav.navbar.navbar-default
+              .container-fluid
+                %ul#page-menu.nav.navbar-nav
+                  %li
+                    = link_to t('layouts.application.homepage'), root_path, :class => "home #{'active' if current_page?(root_path)}"
+                  - Page.where(name: ['about', 'download', 'contact']).each do |page|
+                    = render 'pages/navigation', page: page
+                  %li
+                    = link_to t('layouts.application.widgets'), widgets_path, :class => "widgets #{'active' if current_page?(widgets_path)}"
+                  %li
+                    = link_to t('layouts.application.addrelic'), new_relicbuilder_path, :class => "add-relic #{'active' if current_page?(new_relicbuilder_path)}"
+                  %li.gradient{:class => " #{'current' if current_page?(relics_path)}"}
+                    = link_to t('layouts.application.search'), relics_path, :class => "search #{'active' if current_page?(relics_path)}"
+                  %li.gradient
+                    = link_to t('layouts.application.browse'), "#", :class => "browse"
+                    .arrow
+                    - unless request.xhr?
+                      = render 'shared/browse'
         %section#main
           .container.main-container{ :'data-replace' => '.main-container' }
             = render 'shared/flash', :flash => flash
