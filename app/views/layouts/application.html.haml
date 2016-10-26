@@ -41,14 +41,14 @@
         T
     .page
       #root
-        %header#header
-          .container
-            %hgroup.page-logo.col-lg-4.col-md-5.col-sm-6.col-sm-offset-0.col-xs-10.col-xs-offset-1.col-sm-offset-0
+        .container
+          %header#header.bootstrap-iso
+            %hgroup.page-logo.bootstrap-iso.col-md-5
               %h1
                 %a.page-logo-link(href=root_path)> Otwarte Zabytki
-              %h2.page-logo-tagline= t('layouts.application.tagline')
-            .display-block.col-lg-8.col-md-7.col-sm-6.col-sm-offset-0.col-xs-10.col-xs-offset-1.col-sm-offset-0
-              %nav#userNav
+              %h5.page-logo-tagline.bootstrap-iso.text-center= t('layouts.application.tagline')
+            .display-block.bootstrap-iso.col-md-7.no-margins
+              %nav#userNav.bootstrap-iso
                 .text
                   %span.plus
                   %span.minus
@@ -74,31 +74,30 @@
               %a{:href => 'http://centrumcyfrowe.pl/', :target => '_blank', :class => 'cc_logo'}
         %section#menu
           .container
-            %nav.navbar.navbar-default
-              .container-fluid
-                %ul#page-menu.nav.navbar-nav
-                  %li
-                    = link_to t('layouts.application.homepage'), root_path, :class => "home #{'active' if current_page?(root_path)}"
-                  - Page.where(name: ['about', 'download', 'contact']).each do |page|
-                    = render 'pages/navigation', page: page
-                  %li
-                    = link_to t('layouts.application.widgets'), widgets_path, :class => "widgets #{'active' if current_page?(widgets_path)}"
-                  %li
-                    = link_to t('layouts.application.addrelic'), new_relicbuilder_path, :class => "add-relic #{'active' if current_page?(new_relicbuilder_path)}"
-                  %li.gradient{:class => " #{'current' if current_page?(relics_path)}"}
-                    = link_to t('layouts.application.search'), relics_path, :class => "search #{'active' if current_page?(relics_path)}"
-                  %li.gradient
-                    = link_to t('layouts.application.browse'), "#", :class => "browse"
-                    .arrow
-                    - unless request.xhr?
-                      = render 'shared/browse'
+            %nav.bootstrap-iso.navbar.navbar-default
+              %ul#page-menu.bootstrap-iso.nav.navbar-nav
+                %li
+                  = link_to t('layouts.application.homepage'), root_path, :class => "home #{'active' if current_page?(root_path)}"
+                - Page.where(name: ['about', 'download', 'contact']).each do |page|
+                  = render 'pages/navigation', page: page
+                %li
+                  = link_to t('layouts.application.widgets'), widgets_path, :class => "widgets #{'active' if current_page?(widgets_path)}"
+                %li
+                  = link_to t('layouts.application.addrelic'), new_relicbuilder_path, :class => "add-relic #{'active' if current_page?(new_relicbuilder_path)}"
+                %li.gradient{:class => " #{'current' if current_page?(relics_path)}"}
+                  = link_to t('layouts.application.search'), relics_path, :class => "search #{'active' if current_page?(relics_path)}"
+                %li.gradient
+                  = link_to t('layouts.application.browse'), "#", :class => "browse"
+                  .arrow
+                  - unless request.xhr?
+                    = render 'shared/browse'
         %section#main
           .container.main-container{ :'data-replace' => '.main-container' }
             = render 'shared/flash', :flash => flash
             .row
               = yield
         #root-footer
-      %footer#footer.container= render 'shared/footer'
+      %footer#footer.container.bootstrap-iso= render 'shared/footer'
 
     #fancybox_loader_container
       #fancybox_loader

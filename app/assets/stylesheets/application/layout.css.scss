@@ -21,6 +21,7 @@ body.bigger {
 
 .last {
   margin-right: 0 !important;
+  padding: 0;
 }
 
 a {
@@ -67,6 +68,11 @@ a {
   display: block;
 }
 
+.no-margins{
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
 .page-logo,
 .page-logo-link,
 .page-logo-tagline {
@@ -78,6 +84,7 @@ a {
   height: 86px;
   background: image-url('logo.png') no-repeat;
   margin-top: 20px;
+  padding: 0 !important;
 }
 
 .page-logo-link {
@@ -106,7 +113,7 @@ a {
     line-height: 15px;
     height: 74px;
     color: #524d49;
-    width: 69%;
+    width: 75%;
     top: 44px;
     border-radius: 4px 4px 0 0;
     border: 1px solid #f6e3d0;
@@ -557,6 +564,7 @@ a {
         padding: 0 10px;
         border-left: 1px solid #f5f5f5;
         position: relative;
+        background-size: 100% 100%;
         &:hover{
           .arrow{
             border-color: $blue-hover transparent transparent transparent;
@@ -720,7 +728,7 @@ a {
       > a{
         color: #313132;
         font-weight: 600;
-        font-size: 14px;
+        font-size: 14px !important;
         text-shadow: 0 1px 0 #fff;
         text-decoration: none;
         margin-right: 23px;
@@ -728,6 +736,7 @@ a {
         display: block;
         min-height: 59px;
         line-height: 28px;
+        padding-right: 0;
         &:hover {
           color: $blue-hover;
         }
@@ -1865,11 +1874,9 @@ p#adding-note {
       background: #fff;
       height: 110px;
       box-shadow: 0 0 3px #ccc;
-      padding: 12px;
+      padding-top: 12px;
       a {
-        width: 171px;
         text-align: center;
-
       }
     }
 
@@ -1879,9 +1886,9 @@ p#adding-note {
       float: left;
       margin-right: 18px;
       height: 123px;
+      padding: 0;
       .partner-bg a{
         margin: 0 auto;
-        width: 405px;
         text-align: center;
         position: initial !important;
       }
@@ -1901,6 +1908,7 @@ p#adding-note {
       }
 
       a {
+        position: initial !important;
         display: none;
         left: 0;
         margin: 0 auto;
@@ -1929,6 +1937,10 @@ p#adding-note {
       color: #878787;
       text-decoration: underline;
     }
+    .footer-copyright{
+      paddiing-left: 0;
+      margin-right: 23px;
+    }
     .footer-logo {
       background: image-url("footer-logo.png") no-repeat scroll 0 0 transparent;
       display: block;
@@ -1943,7 +1955,7 @@ p#adding-note {
       float: right;
       margin-left: 20px;
       margin-top: -22px;
-
+      margin-right: 0;
       a {
         margin-right: 15px;
       }
@@ -1952,7 +1964,7 @@ p#adding-note {
 
       .select2 {
         opacity: 0.6;
-
+        margin-left: 15px;
         &.select2-container-active {
           opacity: 1;
         }
