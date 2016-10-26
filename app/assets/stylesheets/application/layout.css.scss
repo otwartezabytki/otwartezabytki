@@ -1853,10 +1853,8 @@ p#adding-note {
   .partners {
     border-bottom: 1px solid #DCDCDC;
     border-top: 1px solid #DCDCDC;
-    float: left;
     margin: 10px 0;
     padding: 30px 0;
-    width: 960px;
 
     h2 {
       text-transform: uppercase;
@@ -1865,10 +1863,9 @@ p#adding-note {
 
     .partner-bg {
       background: #fff;
-      height: 90px;
-      padding: 10px 0;
+      height: 110px;
       box-shadow: 0 0 3px #ccc;
-
+      padding: 12px;
       a {
         width: 171px;
         text-align: center;
@@ -1879,39 +1876,42 @@ p#adding-note {
     .partner-big {
       text-align: center;
       text-transform: capitalize;
-      width: 405px;
       float: left;
       margin-right: 18px;
-      height: 106px;
+      height: 123px;
       .partner-bg a{
+        margin: 0 auto;
         width: 405px;
         text-align: center;
+        position: initial !important;
       }
     }
 
     .partner-small {
 
-      width: 167px;
       text-align: center;
       text-transform: capitalize;
       float: left;
       margin-right: 18px;
+      padding-left: 0;
+      padding-right: 0;
       .partner-slider-1 a{
         display: block;
+
       }
+
       a {
         display: none;
         left: 0;
+        margin: 0 auto;
       }
     }
   }
   .facebook-share {
     background: #fff;
-    float: right;
-    height: 80px;
+    height: 90px;
     margin-bottom: 10px;
     padding: 12px 20px 0;
-    width: 312px;
     box-shadow: 0 0 3px #ccc;
   }
 
@@ -1949,7 +1949,6 @@ p#adding-note {
       }
     }
     .footer-language {
-      margin: 2px 0 0 425px;
 
       .select2 {
         opacity: 0.6;
