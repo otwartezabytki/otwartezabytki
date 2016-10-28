@@ -79,6 +79,6 @@
         - elsif relics.present?
           %div.relic-header.search
             %h2= t('views.relics.index.search_results', :count => relics.total)
-          = render :partial => "relics", :locals => {:collection => relics }
+          = render :partial => "relics2", :locals => {:collection => relics }
 
         = paginate relics, :remote => true
