@@ -52,6 +52,8 @@ module Otwartezabytki
       g.stylesheets           false
       g.javascripts           false
     end
+    config.assets.paths << "#{Rails.root}/app/assets/fonts"
+    config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
     unless ['test', 'development'].include?(Rails.env)
       # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
       config.assets.precompile += %w( active_admin.js ie8.css iframe.css print.css widgets/* )
