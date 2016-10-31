@@ -1,0 +1,233 @@
+.oz-logo {
+  margin-top: 15px;
+}
+
+.oz-plus,
+.oz-minus{
+  position: relative;
+  top: 15px;
+  cursor: pointer;
+}
+
+.oz-minus {
+  left: -15px;
+}
+
+.oz-plus {
+  left: -30px;
+}
+
+.oz-disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.oz-login {
+  background: asset-data-url('icon-login.png') 0 20px no-repeat;
+  &:hover {
+    background: asset-data-url('icon-login-hover.png') 0 20px no-repeat;
+  }
+}
+
+.oz-logout {
+  background: asset-data-url('icon-logout.png') 0 20px no-repeat;
+  &:hover {
+    background: asset-data-url('icon-logout-hover.png') 0 20px no-repeat;
+  }
+}
+
+.oz-register {
+  background: asset-data-url('icon-register.png') 0 20px no-repeat;
+  &:hover {
+    background: asset-data-url('icon-register-hover.png') 0 20px no-repeat;
+  }
+}
+
+.oz-fb-btn {
+  @include gradient(#4664a5, #314d92);
+  border-color: #385497 #375395 #324A86;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 2px;
+  box-shadow: inset 0 1px 0 #5E7BB4, 0 1px 3px rgba(0, 0, 0, 0.21);
+  color: #fff !important;
+  display: inline-block !important;
+  font-weight: bold !important;
+  padding: 0 7px 0 0 !important;
+  text-shadow: 0 -1px 0 #38528e;
+  position: relative;
+  margin-top: 13px !important;
+  line-height: 23px !important;
+  &::before {
+    content: ' ';
+    display: block;
+    float: left;
+    height: 25px;
+    margin-right: 10px;
+    padding-left: 5px;
+    position: relative;
+    width: 24px;
+    background: asset-data-url("fb-btn-icon.png") top right no-repeat;
+  }
+  &:hover {
+    text-decoration: underline !important;
+  }
+}
+
+section.oz-disclaimer {
+  position: relative;
+  font-size: 12px;
+  line-height: 15px;
+  height: 74px;
+  color: #524d49;
+  border-radius: 4px 4px 0 0;
+  border: 1px solid #f6e3d0;
+  border-bottom: none;
+  padding-top: 10px;
+  background: #f6ead4;
+  background: linear-gradient(to bottom, #f6ead4 88%, #efdab4 100%);
+  a {
+    font-weight: bold;
+    color: #456575;
+    text-decoration: none;
+  }
+  &:before {
+    content: "";
+    display: block;
+    width: 9px;
+    height: 74px;
+    position: absolute;
+    left: -9px;
+    top: 25px;
+    background: asset-data-url("disclaimer-edge.png") no-repeat;
+    padding-top: 10px;
+  }
+}
+
+.oz-cc-logo {
+  margin-top: 10px !important;
+}
+
+//.nav.navbar-nav.oz-navbar-center {
+//  width: 100%;
+//  text-align: center;
+//  li {
+//    display: inline-block;
+//    float: none !important;
+//  }
+//}
+
+.oz-browse {
+  background: asset-data-url('icon-menu-browse.png') 0 23px no-repeat;
+  position: static;
+  padding-right: 20px;
+  &:hover {
+    background: asset-data-url('icon-menu-browse-hover.png') 0 23px no-repeat;
+  }
+  &.current {
+    background: asset-data-url('icon-menu-browse-current.png') 0 23px no-repeat;
+  }
+  &.shown {
+    background: image-url('icon-menu-browse.png') 9px 23px no-repeat, linear-gradient(to bottom, #eff1f2, #e9ecee);
+    position: relative;
+    height: 60px;
+    width: 118%;
+    left: -10px;
+    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.3);
+  }
+}
+a {
+  &.oz-home {
+    padding-left: 30px;
+    background: asset-data-url('icon-menu-home.png') 4px 23px no-repeat;
+    &:hover {
+      background: asset-data-url('icon-menu-home-hover.png') 4px 23px no-repeat;
+    }
+    &.current {
+      background: asset-data-url('icon-menu-home-current.png') 4px 23px no-repeat;
+    }
+  }
+  &.oz-about {
+    background: asset-data-url('icon-menu-about.png') 0 18px no-repeat;
+    &:hover {
+      background: asset-data-url('icon-menu-about-hover.png') 0 18px no-repeat;
+    }
+    &.current {
+      background: asset-data-url('icon-menu-about-current.png') 0 18px no-repeat;
+    }
+  }
+  &.oz-help {
+    background: asset-data-url('icon-menu-help.png') 0 23px no-repeat;
+    &:hover {
+      background: asset-data-url('icon-menu-help-hover.png') 0 23px no-repeat;
+    }
+    &.current {
+      background: asset-data-url('icon-menu-help-current.png') 0 23px no-repeat;
+    }
+  }
+  &.oz-contact {
+    background: asset-data-url('icon-menu-contact.png') 0 24px no-repeat;
+    &:hover {
+      background: asset-data-url('icon-menu-contact-hover.png') 0 24px no-repeat;
+    }
+    &.current {
+      background: asset-data-url('icon-menu-contact-current.png') 0 24px no-repeat;
+    }
+  }
+  &.oz-download {
+    background: asset-data-url('icon-menu-download.png') 0 23px no-repeat;
+    &:hover {
+      background: asset-data-url('icon-menu-download-hover.png') 0 23px no-repeat;
+    }
+    &.current {
+      background: asset-data-url('icon-menu-download-current.png') 0 23px no-repeat;
+    }
+  }
+  &.oz-widgets {
+    background: asset-data-url('icon-menu-widgets.png') 0 23px no-repeat;
+    &:hover {
+      background: asset-data-url('icon-menu-widgets-hover.png') 0 23px no-repeat;
+    }
+    &.current {
+      background: asset-data-url('icon-menu-widgets-current.png') 0 23px no-repeat;
+    }
+  }
+  &.oz-add-relic {
+    background: asset-data-url('icon-menu-addrelic.png') 0 23px no-repeat;
+    &:hover {
+      background: asset-data-url('icon-menu-addrelic-hover.png') 0 23px no-repeat;
+    }
+    &.current {
+      background: asset-data-url('icon-menu-addrelic-current.png') 0 23px no-repeat;
+    }
+  }
+  &.oz-search {
+    background: asset-data-url('icon-menu-search.png') 0 22px no-repeat;
+    &:hover {
+      background: asset-data-url('icon-menu-search-hover.png') 0 22px no-repeat;
+    }
+    &.current {
+      background: asset-data-url('icon-menu-search-current.png') 0 22px no-repeat;
+    }
+  }
+  &.oz-browse {
+    background: asset-data-url('icon-menu-browse.png') 0 23px no-repeat;
+    position: static;
+
+    padding-left: 0 !important;
+    &:hover {
+      background: asset-data-url('icon-menu-browse-hover.png') 0 23px no-repeat;
+    }
+    &.current {
+      background: asset-data-url('icon-menu-browse-current.png') 0 23px no-repeat;
+    }
+    &.shown {
+      background: image-url('icon-menu-browse.png') 9px 23px no-repeat, linear-gradient(to bottom, #eff1f2, #e9ecee);
+      position: relative;
+      height: 60px;
+      width: 118%;
+      left: -10px;
+      box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.3);
+    }
+  }
+}

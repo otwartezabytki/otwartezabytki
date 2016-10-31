@@ -40,6 +40,10 @@
 #= require ./angular/router
 #= require_tree ./angular
 
+# bootstrap js
+#= require bootstrap.js
+#= require bootstrap-sprockets
+
 # FIX data-dismiss
 $(document).on 'click', '[data-dismiss]', (e) ->
   e.preventDefault()
