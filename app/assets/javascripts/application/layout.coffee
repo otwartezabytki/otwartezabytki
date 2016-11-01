@@ -43,7 +43,7 @@ jQuery.initializer '#footer', ->
 jQuery.initializer '#menu', ->
   this.find('a.js-browse').click (e) ->
     e.preventDefault()
-    filter = $("div#browse-list")
+    filter = $("div#oz-browse-list")
     link = $(this)
     if link.hasClass "shown"
       filter.slideUp()

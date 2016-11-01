@@ -49,7 +49,7 @@
                 %h4.text-center= t('layouts.application.tagline')
               .display-block.col-lg-8.col-md-7
                 %nav.navbar.navbar-default{role: "navigation"}
-                  %ul.nav.navbar-nav.navbar-right.hidden-sm.hidden-xs
+                  %ul.nav.navbar-nav.navbar-right.hidden-sm.hidden-xs.hidden-md
                     = render 'shared/login_navigation'
 
                 %section.oz-disclaimer.col-md-10
@@ -79,7 +79,6 @@
                     = link_to t('layouts.application.search'), relics_path, :class => "oz-search #{'active' if current_page?(relics_path)}"
                   %li.gradient
                     = link_to t('layouts.application.browse'), "#", :class => "oz-browse js-browse"
-                    .arrow
                     - unless request.xhr?
                       = render 'shared/browse'
                   .hidden-md.hidden-lg.hidden-xl= render 'shared/login_navigation'
