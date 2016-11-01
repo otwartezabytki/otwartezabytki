@@ -81,7 +81,7 @@
                     = link_to t('layouts.application.browse'), "#", :class => "oz-browse js-browse"
                     - unless request.xhr?
                       = render 'shared/browse'
-                  .hidden-md.hidden-lg.hidden-xl= render 'shared/login_navigation'
+                  %ul.nav.navbar-default.hidden-lg.hidden-xl= render 'shared/login_navigation'
         %section#main
           .their-container.main-container{ :'data-replace' => '.main-container' }
             = render 'shared/flash', :flash => flash
