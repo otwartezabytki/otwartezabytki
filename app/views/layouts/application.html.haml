@@ -86,8 +86,8 @@
                     - unless request.xhr?
                       = render 'shared/browse_sm'
                   %ul.nav.navbar-default.hidden-lg.hidden-xl= render 'shared/login_navigation'
-        %section#main.bootstrap-iso
-          .container.main-container{ :'data-replace' => '.main-container' }
+        %section#main
+          .their-container.main-container{ :'data-replace' => '.main-container' }
             = render 'shared/flash', :flash => flash
             .row
               = yield
