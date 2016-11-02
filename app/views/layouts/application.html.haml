@@ -77,13 +77,17 @@
                     = link_to t('layouts.application.addrelic'), new_relicbuilder_path, :class => "oz-add-relic #{'active' if current_page?(new_relicbuilder_path)}"
                   %li.gradient{:class => " #{'current' if current_page?(relics_path)}"}
                     = link_to t('layouts.application.search'), relics_path, :class => "oz-search #{'active' if current_page?(relics_path)}"
-                  %li.gradient
+                  %li.gradient.hidden-sm.hidden-xs.hidden-md
                     = link_to t('layouts.application.browse'), "#", :class => "oz-browse js-browse"
                     - unless request.xhr?
                       = render 'shared/browse'
+                  %li.gradient.hidden-lg.dropdown
+                    = link_to t('layouts.application.browse'), "#", :class => "oz-browse-sm dropdown-toggle", "data-toggle" => "dropdown", "role" => "button", "aria-haspopup" => "true", "aria-expanded" => "false"
+                    - unless request.xhr?
+                      = render 'shared/browse_sm'
                   %ul.nav.navbar-default.hidden-lg.hidden-xl= render 'shared/login_navigation'
-        %section#main
-          .their-container.main-container{ :'data-replace' => '.main-container' }
+        %section#main.bootstrap-iso
+          .container.main-container{ :'data-replace' => '.main-container' }
             = render 'shared/flash', :flash => flash
             .row
               = yield
