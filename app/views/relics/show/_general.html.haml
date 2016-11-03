@@ -64,4 +64,4 @@
       = link_to content_tag(:span, t('views.relics.show.general.adopt')), adopt_relic_path(relic.id), :class => "adopt", :method => :post, :remote => true
   - else
     %div{:style => 'display:block; height: 50px;'}
-  = link_to content_tag(:span, t('views.relics.guide.print_guide')), print_relic_path(relic.to_param), :class => "print-guide", :target => '_blank'
+  = link_to t('views.relics.guide.print_guide'), print_relic_path(relic.to_param), :class => "print-guide", :target => '_blank'
