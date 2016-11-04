@@ -1,7 +1,7 @@
-.edit_relic
-  %nav
-    %h1= t('views.relics.edit.header')
-    %ul
+.bootstrap-iso
+  .oz-edit_relic
+    %ul.sidebar-nav.col-md-4.no-margins
+      %li.sidebar-brand= t('views.relics.edit.header')
       %li.general= link_to_section_tab :general
       %li.location= link_to_section_tab :location
       %li.events= link_to_section_tab :events
@@ -11,11 +11,12 @@
       %li.links= link_to_section_tab :links
       %li.documents= link_to_section_tab :documents
       %li.photos=  link_to_section_tab :photos
-  - if params[:section].present?
-    %section.edit{ :class => params[:section] }
-      %h2= t "relic_tabs.#{params[:section]}.name"
-      - if request.xhr?
-        = render 'shared/flash', :flash => flash
-      .row{:class => "#{params[:section]}"}
-        %p.description= t "relic_tabs.#{params[:section]}.description"
-      = render :partial => "relics/edit/#{params[:section]}"
+    - if params[:section].present?
+      .col-md-8.col-sm-12
+        %section.oz-edit{ :class => params[:section] }
+          %h2= t "relic_tabs.#{params[:section]}.name"
+          - if request.xhr?
+            = render 'shared/flash', :flash => flash
+          .row{:class => "#{params[:section]}"}
+            %p.description= t "relic_tabs.#{params[:section]}.description"
+          = render :partial => "relics/edit/#{params[:section]}"
