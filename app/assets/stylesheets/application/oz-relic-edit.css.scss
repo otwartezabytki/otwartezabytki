@@ -1,38 +1,17 @@
 .oz-no-padding {
-  padding: 0;
+  padding: 0 !important;
 }
 
 .oz-no-margin {
-  margin: 0;
+  margin: 0 !important;
 }
 
 .oz-edit_relic {
   display: flex;
-  h1, h2 {
-    font-weight: 600;
-    font-size: 16px;
-    color: #fff;
-    height: 45px;
-    line-height: 45px;
-  }
-  h1 {
-    @include gradient(#36596b, #2f5163);
-    padding: 0 12px;
-  }
-  h2 {
-    @include gradient(#4b6d7e, #436576);
-    padding: 0 20px;
-    &.complex {
-      padding: 12px 20px;
-      margin-bottom: 20px;
-      height: auto;
-      line-height: 26px;
-    }
-  }
 
   ul {
     background-image: linear-gradient(to right, #E5E5E5 96%, #B3B3B3 100%);
-    .sidebar-brand{
+    .sidebar-brand {
       font-weight: 600;
       font-size: 16px;
       color: #fff;
@@ -42,23 +21,22 @@
       padding: 0 12px;
     }
     li {
-      span {
-        background: #fff asset-data-url("profile-edit-nav-icons.png") no-repeat;
-        font-size: 13px;
+      a, & > span {
+        position: relative;
         padding: 0 10px 0 34px;
-        color: #343434;
-        height: 34px;
-        line-height: 34px;
         border-bottom: 1px solid #c3c3c3;
         display: block;
+
+      }
+      span {
+        background-color: #fff;
+        font-size: 13px;
+        color: #343434;
+        line-height: 34px;
       }
       a {
-        padding: 0 10px 0 34px;
-        display: block;
-        border-bottom: 1px solid #c3c3c3;
         color: #47697b;
         text-shadow: 0 1px 1px #fff;
-        background: asset-data-url("profile-edit-nav-icons.png") no-repeat;
         span {
           padding: 0;
           background: none;
@@ -66,77 +44,87 @@
           color: #47697b;
         }
       }
+      a::before, & > span::before {
+        content: "";
+        display: block;
+        float: left;
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        left: 10px;
+        top: 8px;
+      }
+
       &.general {
-        span {
-          background-position: 9px -293px;
+        & > span::before {
+          background: asset-data-url("oz-edit-relic-icons/relic_information_black.png") no-repeat;
         }
-        a {
-          background-position: 9px 10px;
+        a::before {
+          background: asset-data-url("oz-edit-relic-icons/relic_information_blue.png") no-repeat;
         }
       }
       &.location {
-        span {
-          background-position: 9px -327px;
+        & > span::before {
+          background: asset-data-url("oz-edit-relic-icons/relic_localization_black.png") no-repeat;
         }
-        a {
-          background-position: 9px -24px;
+        a::before {
+          background: asset-data-url("oz-edit-relic-icons/relic_localization_blue.png") no-repeat;
         }
       }
       &.events {
-        span {
-          background-position: 9px -363px;
+        & > span::before {
+          background: asset-data-url("oz-edit-relic-icons/relic_date_black.png") no-repeat;
         }
-        a {
-          background-position: 9px -59px;
+        a::before {
+          background: asset-data-url("oz-edit-relic-icons/relic_date_blue.png") no-repeat;
         }
       }
       &.entries {
-        overflow: hidden;
-        span {
-          background-position: 9px -466px;
+        & > span::before {
+          background: asset-data-url("oz-edit-relic-icons/relic_legends_black.png") no-repeat;
         }
-        a {
-          background-position: 9px -161px;
+        a::before {
+          background: asset-data-url("oz-edit-relic-icons/relic_legends_blue.png") no-repeat;
         }
       }
       &.links {
-        span {
-          background-position: 9px -499px;
+        & > span::before {
+          background: asset-data-url("oz-edit-relic-icons/relic_links_black.png") no-repeat;
         }
-        a {
-          background-position: 9px -195px;
+        a::before {
+          background: asset-data-url("oz-edit-relic-icons/relic_links_blue.png") no-repeat;
         }
       }
       &.documents {
-        span {
-          background-position: 9px -532px;
+        & > span::before {
+          background: asset-data-url("oz-edit-relic-icons/relic_docs_black.png") no-repeat;
         }
-        a {
-          background-position: 9px -229px;
+        a::before {
+          background: asset-data-url("oz-edit-relic-icons/relic_docs_blue.png") no-repeat;
         }
       }
       &.categories {
-        span {
-          background-position: 9px -429px;
+        & > span::before {
+          background: asset-data-url("oz-edit-relic-icons/relic_tags_black.png") no-repeat;
         }
-        a {
-          background-position: 9px -127px;
+        a::before {
+          background: asset-data-url("oz-edit-relic-icons/relic_tags_blue.png") no-repeat;
         }
       }
       &.description {
-        span {
-          background-position: 9px -394px;
+        & > span::before {
+          background: asset-data-url("oz-edit-relic-icons/relic_desc_black.png") no-repeat;
         }
-        a {
-          background-position: 9px -92px;
+        a::before {
+          background: asset-data-url("oz-edit-relic-icons/relic_desc_blue.png") no-repeat;
         }
       }
       &.photos {
-        span {
-          background-position: 9px -565px;
+        & > span::before {
+          background: asset-data-url("oz-edit-relic-icons/relic_photos_black.png") no-repeat;
         }
-        a {
-          background-position: 9px -262px;
+        a::before {
+          background: asset-data-url("oz-edit-relic-icons/relic_photos_blue.png") no-repeat;
         }
       }
 
@@ -144,13 +132,36 @@
   }
 }
 
-section.oz-edit{
+.oz-close-edit-relic {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  height: 45px;
+  color: white !important;
+}
+
+section.oz-edit {
+  h2 {
+    font-weight: 600 !important;
+    font-size: 16px !important;
+    color: #fff !important;
+    height: 45px;
+    line-height: 45px !important;
+    @include gradient(#4b6d7e, #436576);
+    padding: 0 20px;
+    &.complex {
+      padding: 12px 20px;
+      margin-bottom: 20px;
+      height: auto;
+      line-height: 26px;
+    }
+  }
   position: relative;
   .row {
     padding: 15px 20px;
-    textarea.redactor{
+    textarea.redactor {
       width: 100%;
-      box-shadow: inset 0 1px 3px 0 rgba(0,0,0,.3), 0 1px 1px 0 rgba(0,0,0,.1);
+      box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, .3), 0 1px 1px 0 rgba(0, 0, 0, .1);
       border-radius: 2px;
       border: 1px solid #646464;
       margin-top: 10px;
@@ -159,27 +170,42 @@ section.oz-edit{
   .row + .row {
     padding-top: 0;
   }
-  .opacity{
+  .preview {
+    text-align: center;
+    img {
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .3);
+      width: 125px;
+      height: 125px;
+      border: 5px solid #fff;
+    }
+  }
+  .photo {
+    border-bottom: 1px solid #bfbfbf;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    display: flex;
+  }
+  .opacity {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,.2);
+    background: rgba(0, 0, 0, .2);
     left: 0;
     top: 0;
     min-height: 360px;
   }
-  .loading{
+  .loading {
     position: absolute;
     width: 100%;
     height: 360px;
     left: 0;
     top: 0;
     display: table;
-    .inner{
+    .inner {
       display: table-cell;
       vertical-align: middle;
       text-align: center;
-      .loader{
+      .loader {
         width: 24px;
         height: 24px;
         border-radius: 4px;
@@ -189,73 +215,78 @@ section.oz-edit{
       }
     }
   }
-  form{
-    label{
-      font-weight: 700;
+
+  label {
+    font-weight: 700;
+    font-size: 14px;
+    color: #313132;
+    display: block;
+  }
+  p.description {
+    line-height: 20px;
+    font-size: 13px;
+    margin: 15px 0 15px;
+  }
+  span.block {
+    font-size: 12px;
+    color: #505057;
+    background: #f1f3f5 asset-data-url("icon-hint.png") 9px 50% no-repeat;
+    padding: 6px 30px;
+    line-height: 16px;
+    margin-top: 10px;
+  }
+  .string {
+    input {
+      display: block;
+      border: 1px solid #646464;
+      box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1), inset 0 1px 3px 0 rgba(0, 0, 0, .3);
+      border-radius: 2px;
+      height: 34px;
+      padding: 0 10px;
       font-size: 14px;
       color: #313132;
-      display: block;
+      font-weight: 600;
+      width: 680px;
+      margin: 10px 0;
     }
-    p.description{
-      line-height: 20px;
-      font-size: 13px;
-      margin-bottom: 20px;
-    }
-    span.block{
-      font-size: 12px;
-      color: #505057;
-      background: #f1f3f5 asset-data-url("icon-hint.png") 9px 50% no-repeat;
-      padding: 6px 30px;
-      line-height: 16px;
-      margin-top: 10px;
-    }
-    .string{
-      input {
-        display: block;
-        border: 1px solid #646464;
-        box-shadow: 0 1px 1px 0 rgba(0,0,0,.1), inset 0 1px 3px 0 rgba(0,0,0,.3);
-        border-radius: 2px;
-        height: 34px;
-        padding: 0 10px;
-        font-size: 14px;
-        color: #313132;
-        font-weight: 600;
-        width: 680px;
-        margin: 10px 0;
-      }
-      &.error input{
-        border: 1px solid #d10000;
-        box-shadow: 0 0 5px 0 rgba(154,0,0,.3);
-      }
-    }
-    .boolean span {
-      font-size: 13px;
-    }
-    .actions{
-      border-top: 1px solid #e5e5e5;
-      padding-top: 20px;
-      margin-top: 10px;
-      color: #878787;
-      font-style: italic;
-      font-size: 12px;
-      a{
-        color: #d50000;
-        font-style: normal;
-      }
-      input[type="submit"], button{
-        @include gradient(#48b119, #2f9900);
-        border-radius: 2px;
-        color: #fff;
-        font-size: 12px;
-        text-shadow: 0 1px 0 rgba(0,0,0,.5);
-        border: 0;
-        height: 30px;
-        padding: 0 12px;
-        cursor: pointer;
-        &:hover{
-          background: #34a900;
-        }
-      }
+    &.error input {
+      border: 1px solid #d10000;
+      box-shadow: 0 0 5px 0 rgba(154, 0, 0, .3);
     }
   }
+  .boolean span {
+    font-size: 13px;
+  }
+  .actions {
+    border-top: 1px solid #e5e5e5;
+    padding-top: 20px;
+    margin-top: 10px;
+    color: #878787;
+    font-style: italic;
+    font-size: 12px;
+    a {
+      color: #d50000;
+      font-style: normal;
+    }
+    input[type="submit"], button {
+      @include gradient(#48b119, #2f9900);
+      border-radius: 2px;
+      color: #fff;
+      font-size: 12px;
+      text-shadow: 0 1px 0 rgba(0, 0, 0, .5);
+      border: 0;
+      height: 30px;
+      padding: 0 12px;
+      cursor: pointer;
+      &:hover {
+        background: #34a900;
+      }
+    }
+
+  }
+}
+
+.modal {
+  width: 900px;
+  margin: -250px 0 0 -450px;
 }
