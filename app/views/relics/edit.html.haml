@@ -1,25 +1,32 @@
-#add-photos-modal.modal.hide.fade.bootstrap-iso
+#edit-relic-modal.modal.hide.bootstrap-iso
   .modal-body
     .oz-edit_relic
-      %ul.sidebar-nav.col-md-4.no-margins
-        %li.sidebar-brand= t('views.relics.edit.header')
-        %li.general= link_to_section_tab :general
-        %li.location= link_to_section_tab :location
-        %li.events= link_to_section_tab :events
-        %li.description= link_to_section_tab :description
-        %li.categories= link_to_section_tab :categories
-        %li.entries= link_to_section_tab :entries
-        %li.links= link_to_section_tab :links
-        %li.documents= link_to_section_tab :documents
-        %li.photos=  link_to_section_tab :photos
+      %nav.navbar.navbar-default.oz-nav-edit
+        .navbar-header
+          %button.oz-edit-nav-button.navbar-toggle{"data-target" => ".oz-nav-edit-collapse", "data-toggle" => "collapse", type: "button"}
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          .collapse.navbar-collapse.oz-nav-edit-collapse.no-margins
+            %ul.sidebar-nav
+              %li.sidebar-brand= t('views.relics.edit.header')
+              %li.general= link_to_section_tab :general
+              %li.location= link_to_section_tab :location
+              %li.events= link_to_section_tab :events
+              %li.description= link_to_section_tab :description
+              %li.categories= link_to_section_tab :categories
+              %li.entries= link_to_section_tab :entries
+              %li.links= link_to_section_tab :links
+              %li.documents= link_to_section_tab :documents
+              %li.photos=  link_to_section_tab :photos
       - if params[:section].present?
-        .col-md-8.col-sm-12.oz-no-padding
+        .col-sm-12.col-xs-12.oz-no-padding
           %section.oz-edit{ :class => params[:section] }
             %h2.oz-no-margin= t "relic_tabs.#{params[:section]}.name"
             - if request.xhr?
               = render 'shared/flash', :flash => flash
-            .col-md-12{:class => "#{params[:section]}"}
+            .col-md-12.col-xs-12{:class => "#{params[:section]}"}
               %p.description= t "relic_tabs.#{params[:section]}.description"
-            .col-md-12
+            .col-md-12.col-xs-12
               = render :partial => "relics/edit/#{params[:section]}"
     %button.btn.oz-close-edit-relic{"data-dismiss" => "modal", :type => "button"} Close

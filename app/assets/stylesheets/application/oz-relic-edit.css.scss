@@ -172,6 +172,7 @@ section.oz-edit {
   }
   .preview {
     text-align: center;
+    margin-bottom: 10px;
     img {
       box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .3);
       width: 125px;
@@ -254,8 +255,23 @@ section.oz-edit {
       box-shadow: 0 0 5px 0 rgba(154, 0, 0, .3);
     }
   }
-  .boolean span {
-    font-size: 13px;
+  .boolean {
+    ul {
+      background: none !important;
+      span {
+        font-size: 13px;
+        line-height: inherit !important;
+        a{
+          padding: 0;
+          border: 0;
+          display: inline;
+        }
+        em {
+          height: 16px;
+          display: inline-block;
+        }
+      }
+    }
   }
   .actions {
     border-top: 1px solid #e5e5e5;
@@ -264,6 +280,10 @@ section.oz-edit {
     color: #878787;
     font-style: italic;
     font-size: 12px;
+    display: inline-block;
+    margin-bottom: 15px;
+    padding-left: 0;
+    padding-right: 0;
     a {
       color: #d50000;
       font-style: normal;
@@ -282,11 +302,69 @@ section.oz-edit {
         background: #34a900;
       }
     }
+  }
+  em.icons{
+    width: 58px;
+    background: asset-data-url("cc-icons.png") no-repeat;
+  }
+  .relic {
+    border: 0;
+  }
 
+  .photo-upload {
+    margin: 15px 0 15px;
   }
 }
 
 .modal {
   width: 900px;
   margin: -250px 0 0 -450px;
+}
+
+.license-agreement {
+
+}
+
+.oz-nav-edit {
+  background-image: linear-gradient(to right, #e5e5e5 96%, #b3b3b3 100%);
+}
+
+@media screen and (max-width: 1200px){ //for smaller than MD
+  section.oz-edit h2 {
+    padding-left: 60px;
+  }
+  .oz-edit_relic ul .sidebar-brand {
+    padding-left: 50px;
+  }
+  .oz-nav-edit {
+    background-image: none;
+    position: fixed !important;
+    left: 20px;
+    top: 12%;
+    z-index: 1;
+  }
+  .oz-nav-edit-collapse{
+    position: fixed;
+    z-index: 1;
+    width: 96%;
+  }
+  .oz-edit-nav-button{
+    z-index: 2;
+    position: absolute !important;
+  }
+  .modal {
+    width: 100%;
+    margin: 0;
+    left: 0;
+    top: 10% !important;
+  }
+  section.oz-edit .photo {
+    display: inline-block;
+  }
+  .oz-xs-sm-no-float {
+    float: none;
+  }
+  .oz-xs-sm-text-center {
+    text-align: center;
+  }
 }

@@ -1,10 +1,10 @@
 = semantic_form_for relic, :url => section_relic_path(relic.id, :section => :photos), :html => { :multipart => true }, :remote => true  do |f|
-  .photo-attributes
+  .photo-attributes.oz-xs-sm-text-center
     - relic.photos.each do |photo|
       - if photo.user_id == current_user.id
         = f.semantic_fields_for :photos, photo do |f2|
-          .photo[f2.object]
-            .col-md-4
+          .col-md-12.col-xs-12.col-sm-12.photo[f2.object]
+            .col-lg-3.col-sm-12.col-xs-12.no-margins.oz-xs-sm-no-float
               .preview
                 = image_tag photo.file.midi.url, :alt => photo.alternate_text
               - if photo.user_id == current_user.id
@@ -13,17 +13,17 @@
                   :remote => true,
                   :confirm => t('views.relics.edit.photos.delete_confirm', :editable => false),
                   :class => "remove_photo"
-            .col-md-8
+            .col-lg-9.col-sm-12.col-xs-12.oz-xs-sm-no-float
               = f2.input :author, :input_html => { :class => "author" }
               = f2.input :date_taken, :input_html => { :class => "date_taken" }
               = f2.input :description, :input_html => { :class => "description redactor" }
               = f2.input :alternate_text, :input_html => { :class => "alternate_text" }
       - elsif photo.saved?
-        .photo
-          .col-md-4
+        .photo.col-md-12.col-sm-12.col-xs-12
+          .col-lg-3.col-sm-12.col-xs-12.no-margins.oz-xs-sm-no-float
             .preview
               = image_tag photo.file.midi.url
-          .col-md-8
+          .col-lg-9.col-sm-12.col-xs-12.oz-xs-sm-no-float
             %label= t('activerecord.attributes.photo.author')
             %p= photo.author
             %label= t('activerecord.attributes.photo.date_taken')
@@ -35,7 +35,6 @@
     .photo.hidden
       .column-left
         .preview.preview-placeholder
-
       .column-right
         %p
           %strong= t('views.relics.edit.photos.loading')
@@ -43,7 +42,6 @@
         %p
           .progressbar
             .value 0%
-
     .photo-upload
       .file-input-wrapper
         %button.btn-file-input
@@ -52,10 +50,9 @@
           - else
             = t('views.relics.edit.photos.upload')
         = file_field_tag "photo[file]", :class => 'photo_upload', :"data-url" => "#{relic_photos_path(relic.id)}"
-
-
-    = f.input :license_agreement, :input_html => { :checked => 'checked' }, :as => :boolean, :label => t('views.relics.edit.photos.statement_html')
-  .actions
+    .col-md-12.no-margins.license-agreement
+      = f.input :license_agreement, :input_html => { :checked => 'checked' }, :as => :boolean, :label => t('views.relics.edit.photos.statement_html')
+  .actions.col-md-12.col-xs-12.col-sm-12.oz-xs-sm-text-center
     %button= t('views.relics.edit.save')
     = t('views.relics.edit.or')
     = link_to t('views.relics.edit.cancel'), relic_path(relic.id), :remote => true, :class => "cancel"
