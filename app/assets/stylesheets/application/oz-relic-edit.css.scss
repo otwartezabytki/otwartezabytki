@@ -134,8 +134,8 @@
 
 .oz-close-edit-relic {
   position: absolute;
-  top: 15px;
-  right: 15px;
+  top: 3px;
+  right: 3px;
   height: 45px;
   color: white !important;
 }
@@ -319,11 +319,12 @@ section.oz-edit {
 .modal {
   width: 900px;
   margin: -250px 0 0 -450px;
+  .modal-body{
+    padding: 3px !important;
+  }
 }
 
-.license-agreement {
 
-}
 
 .oz-nav-edit {
   background-image: linear-gradient(to right, #e5e5e5 96%, #b3b3b3 100%);
@@ -334,19 +335,20 @@ section.oz-edit {
     padding-left: 60px;
   }
   .oz-edit_relic ul .sidebar-brand {
-    padding-left: 50px;
+    padding-left: 57px;
   }
   .oz-nav-edit {
     background-image: none;
     position: fixed !important;
-    left: 20px;
-    top: 12%;
+    left: 10px;
+    top: 10.5%;
     z-index: 1;
   }
   .oz-nav-edit-collapse{
     position: fixed;
     z-index: 1;
-    width: 96%;
+    width: 99%;
+    left: 5px;
   }
   .oz-edit-nav-button{
     z-index: 2;
