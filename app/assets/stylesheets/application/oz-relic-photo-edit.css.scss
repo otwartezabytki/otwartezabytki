@@ -5,4 +5,39 @@ section.oz-edit.photos {
       color: #dd0000;
     }
   }
+  .string input {
+    width: 100% !important;
+  }
+  ul.redactor_toolbar {
+    background-image: none;
+    li a {
+      padding-left: 0;
+      border: 0;
+    }
+  }
+  .photo-upload {
+    .file-input-wrapper {
+      height: 40px;
+      .btn-file-input {
+        margin-top: 15px;
+      }
+    }
+  }
+  .remove_photo {
+    color: #d00;
+    position: relative;
+    &::before {
+      content: '';
+      display: inline;
+      background: asset-data-url("icon-delete.png") no-repeat;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      left: -15px;
+      top: 2px;
+    }
+  }
+  abbr {
+    border-bottom: none;
+  }
 }

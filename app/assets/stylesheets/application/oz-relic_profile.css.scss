@@ -242,6 +242,16 @@ section.show.photos {
       }
     }
   }
+  .subrelics {
+    margin: 0 -15px;
+    h1 {
+      font-size: 13px;
+    }
+
+    a {
+      color: white;
+    }
+  }
 }
 
 .main-photo span{
@@ -265,4 +275,11 @@ section.show.photos {
 .oz-relic-border-line{
   border-top: 3px solid #486a7c;
   margin-top: 1px;
+}
+
+//chrome hack for print icon
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  section.show.general .print-guide::before {
+    left: 27px;
+  }
 }
