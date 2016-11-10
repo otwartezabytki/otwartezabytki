@@ -39,8 +39,11 @@ window.ajax_callback = (data, status, xhr) ->
       $('meta[name="csrf-token"]').attr('content', last_xhr.getResponseHeader('x-csrf-token'))
 
     show_fancybox = (node) ->
+      #node to jest to: <div data-replace=".main-container" class="container main-container in" style="display: block; padding-right: 0px;">
       window.before_fancybox_url = document.location.href
-      $('#edit-relic-modal').modal()
+#      $('.modal-body').append("")
+#      $('#edit-relic-modal').modal()
+#      console.log(node)
 #      $.fancybox $(node),
 #        padding: 3
 #        fitToView: float_fancybox

@@ -318,8 +318,13 @@ section.oz-edit {
 
 .modal {
   width: 900px;
-  margin: -250px 0 0 -450px;
+  margin: 0 auto;
+  height: 80%;
+  &.fade.in{
+    top: 10%;
+  }
   .modal-body{
+    max-height: 100%;
     padding: 3px !important;
   }
 }
@@ -354,12 +359,12 @@ section.oz-edit {
     z-index: 2;
     position: absolute !important;
   }
-  .modal {
-    width: 100%;
-    margin: 0;
-    left: 0;
-    top: 10% !important;
-  }
+  //.modal {
+  //  width: 100%;
+  //  margin: 0;
+  //  left: 0;
+  //  top: 10% !important;
+  //}
   section.oz-edit .photo {
     display: inline-block;
   }
