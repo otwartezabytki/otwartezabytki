@@ -8,7 +8,7 @@
     .actions
       %button= t('views.relics.edit.add_and_save')
       = t('views.relics.edit.or')
-      = link_to t('views.relics.edit.cancel'), relic_path(relic.id), :remote => true, :class => "cancel"
+      = link_to t('views.relics.edit.cancel'), relic_path(relic.id), :remote => true, :class => "cancel", "data-dismiss" => "modal"
 
 .row.entries-showcase{ :"data-replace" => (!params[:entry_id].nil? ? ".entries-showcase" : "#nonexistent") }
   - relic.entries.select{ |e| !e.new_record? }.sort_by(&:id).each do |entry|

@@ -55,4 +55,4 @@
   .actions.col-md-12.col-xs-12.col-sm-12.oz-xs-sm-text-center
     %button= t('views.relics.edit.save')
     = t('views.relics.edit.or')
-    = link_to t('views.relics.edit.cancel'), relic_path(relic.id), :remote => true, :class => "cancel"
+    = link_to t('views.relics.edit.cancel'), relic_path(relic.id), :remote => true, :class => "cancel", "data-dismiss" => "modal"

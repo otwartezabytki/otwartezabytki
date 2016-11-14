@@ -922,11 +922,13 @@ span.block {
   background: asset-data-url("profile-edit-bg.png") repeat-y;
   display: inline-block;
   h1, h2 {
-    font-weight: 600;
-    font-size: 16px;
-    color: #fff;
+    font-weight: 600 !important;
+    font-size: 16px !important;
+    color: #fff !important;
     height: 45px;
-    line-height: 45px;
+    line-height: 45px !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
   }
   h1 {
     @include gradient(#36596b, #2f5163);

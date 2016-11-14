@@ -1,2 +1,17 @@
-$('#edit-relic-modal').html("<%= escape_javascript(render partial: 'edit') %>");
-$('#edit-relic-modal').modal();
+var relic_modal = $('#edit-relic-modal');
+
+relic_modal.html("<%= escape_javascript(render partial: 'edit') %>");
+relic_modal.modal();
+
+var set_modal = $('.js-set-static-modal-width').css("content");
+if (set_modal.length > 0) {
+  relic_modal.addClass("static-modal-width");
+}
+var unset_modal = $('.js-set-fluid-modal-width').css("content");
+if (unset_modal.length > 0) {
+  relic_modal.removeClass("static-modal-width");
+}
+
+$(document).ajaxComplete( function(event, xhr, settings) {
+  console.log("zwrocil ajax");
+});

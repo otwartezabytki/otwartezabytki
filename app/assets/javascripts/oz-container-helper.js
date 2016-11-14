@@ -6,4 +6,5 @@ $(document).ready(function () {
     if (do_remove.length > 0) {
         $('.their-container').removeClass("their-container");
     }
+
 })
