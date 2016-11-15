@@ -46,6 +46,7 @@
 
 # priv js
 #= require oz-container-helper
+#= require oz-edit-modal-request
 
 # FIX data-dismiss
 $(document).on 'click', '[data-dismiss]', (e) ->

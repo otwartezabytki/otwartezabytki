@@ -28,6 +28,7 @@ class ApplicationController < ActionController::Base
   # disabling because it doesn't work with history back when page is retrieved from cache
   layout :resolve_layout
   def resolve_layout
+    binding.pry
     if request.xhr? or iframe_transport?
       'ajax'
     elsif Subdomain.matches?(request)

@@ -5,7 +5,7 @@
       %h3= t('views.relics.show.documents.where_to_find')
       %p= relic.documents_info
   - if relic.all_documents.exists?
-    = link_to t('views.relics.show.documents.upload'), edit_section_relic_path(relic.to_param, :documents), :remote => true, :class => "edit-relic-link"
+    = link_to t('views.relics.show.documents.upload'), edit_section_relic_path(relic.to_param, :documents), :class => "hidden-xs hidden-sm hidden-md edit-relic-link js-edit-relic-load-modal"
     .content
       - relic.all_documents.each do |document|
         .document{ :class => document.mime_class }
@@ -21,4 +21,4 @@
   - else
     .placeholder
       = t('views.relics.show.documents.placeholder')
-      = link_to t('views.relics.show.documents.add_file'), edit_section_relic_path(relic.to_param, :documents), :remote => true
+      = link_to t('views.relics.show.documents.add_file'), edit_section_relic_path(relic.to_param, :documents), :class => "hidden-xs hidden-sm hidden-md js-edit-relic-load-modal"

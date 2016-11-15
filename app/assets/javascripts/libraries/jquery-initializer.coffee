@@ -41,39 +41,37 @@ window.ajax_callback = (data, status, xhr) ->
     show_fancybox = (node) ->
       #node to jest to: <div data-replace=".main-container" class="container main-container in" style="display: block; padding-right: 0px;">
       window.before_fancybox_url = document.location.href
-#      $('.modal-body').append("")
-#      $('#edit-relic-modal').modal()
-#      console.log(node)
-#      $.fancybox $(node),
-#        padding: 3
-#        fitToView: float_fancybox
-#        fixed: float_fancybox
-#        scrolling: if float_fancybox then 'auto' else 'no'
-#        autoCenter: float_fancybox
-#        autoHeight: !float_fancybox
-#        afterShow: ->
-#          #$('#fancybox_loader_container').hide()
-#          $.fancybox.wrap.bind 'onReset', (e) ->
-#            $('body > .main-container:last').remove()
-#          $('.fancybox-overlay').height($(document).height())
-#        beforeClose: ->
-#          $form = $('.fancybox-wrap form:first')
-#          if serialized_data = $form.data('serialized')
-#            if serialized_data != $form.serialize()
-#              return confirm("Jeśli wyjdziesz zmiany nie zostaną zapisane. Kontynuować?")
-#
-#          return true
-#        afterClose: ->
-#          # history.pushState { autoreload: true, path: window.before_fancybox_url }, $('title').text(), window.before_fancybox_url
-#          # if last_xhr.getResponseHeader('x-logged')? && $('body').data('logged')? && $('body').data('logged').toString() != last_xhr.getResponseHeader('x-logged').toString()
-#          #   window.location.href = window.location.pathname
-#
-#          if $('#fancybox').length && !$('a.translation-mode.on').length
-#            $('#fancybox_loader_container').show()
-#            $.ajax(window.location.href).success(ajax_callback).complete(-> popping_state = false)
-#        afterLoad: ->
-#          if !float_fancybox && ($('.fancybox-wrap').position().top - 20) < $(window).scrollTop()
-#            $(window).scrollTop($('.fancybox-wrap').position().top - 20)
+
+      $.fancybox $(node),
+        padding: 3
+        fitToView: float_fancybox
+        fixed: float_fancybox
+        scrolling: if float_fancybox then 'auto' else 'no'
+        autoCenter: float_fancybox
+        autoHeight: !float_fancybox
+        afterShow: ->
+          #$('#fancybox_loader_container').hide()
+          $.fancybox.wrap.bind 'onReset', (e) ->
+            $('body > .main-container:last').remove()
+          $('.fancybox-overlay').height($(document).height())
+        beforeClose: ->
+          $form = $('.fancybox-wrap form:first')
+          if serialized_data = $form.data('serialized')
+            if serialized_data != $form.serialize()
+              return confirm("Jeśli wyjdziesz zmiany nie zostaną zapisane. Kontynuować?")
+
+          return true
+        afterClose: ->
+          # history.pushState { autoreload: true, path: window.before_fancybox_url }, $('title').text(), window.before_fancybox_url
+          # if last_xhr.getResponseHeader('x-logged')? && $('body').data('logged')? && $('body').data('logged').toString() != last_xhr.getResponseHeader('x-logged').toString()
+          #   window.location.href = window.location.pathname
+
+          if $('#fancybox').length && !$('a.translation-mode.on').length
+            $('#fancybox_loader_container').show()
+            $.ajax(window.location.href).success(ajax_callback).complete(-> popping_state = false)
+        afterLoad: ->
+          if !float_fancybox && ($('.fancybox-wrap').position().top - 20) < $(window).scrollTop()
+            $(window).scrollTop($('.fancybox-wrap').position().top - 20)
 
     try_to_process_replace = (node) ->
       # if node to replace is not found, redirect

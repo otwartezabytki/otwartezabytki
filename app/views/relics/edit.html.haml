@@ -2,7 +2,7 @@
 -##edit-relic-modal.modal.fade{"role" => "dialog"}
 .modal-body
   - if params[:section] == "location" || params[:section] == "photos"
-    .oz-edit_relic.js-set-fluid-modal-width
+    .oz-edit_relic
       %nav.navbar.navbar-default.oz-nav-edit
         .navbar-header
           %button.oz-edit-nav-button.navbar-toggle{"data-target" => ".oz-nav-edit-collapse", "data-toggle" => "collapse", type: "button"}
@@ -12,14 +12,14 @@
           .collapse.navbar-collapse.oz-nav-edit-collapse.no-margins
             %ul.sidebar-nav
               %li.sidebar-brand= t('views.relics.edit.header')
-              %li.general.visible-lg.visible-md= link_to_section_tab :general
+              %li.general.visible-lg= link_to_section_tab :general
               %li.location= link_to_section_tab :location
-              %li.events.visible-lg.visible-md= link_to_section_tab :events
-              %li.description.visible-lg.visible-md= link_to_section_tab :description
-              %li.categories.visible-lg.visible-md= link_to_section_tab :categories
-              %li.entries.visible-lg.visible-md= link_to_section_tab :entries
-              %li.links.visible-lg.visible-md= link_to_section_tab :links
-              %li.documents.visible-lg.visible-md= link_to_section_tab :documents
+              %li.events.visible-lg= link_to_section_tab :events
+              %li.description.visible-lg= link_to_section_tab :description
+              %li.categories.visible-lg= link_to_section_tab :categories
+              %li.entries.visible-lg= link_to_section_tab :entries
+              %li.links.visible-lg= link_to_section_tab :links
+              %li.documents.visible-lg= link_to_section_tab :documents
               %li.photos=  link_to_section_tab :photos
       - if params[:section].present?
         .col-sm-12.col-xs-12.oz-no-padding
@@ -38,14 +38,14 @@
       %nav
         %h1= t('views.relics.edit.header')
         %ul
-          %li.general.visible-lg.visible-md= link_to_section_tab :general
+          %li.general.visible-lg= link_to_section_tab :general
           %li.location= link_to_section_tab :location
-          %li.events.visible-lg.visible-md= link_to_section_tab :events
-          %li.description.visible-lg.visible-md= link_to_section_tab :description
-          %li.categories.visible-lg.visible-md= link_to_section_tab :categories
-          %li.entries.visible-lg.visible-md= link_to_section_tab :entries
-          %li.links.visible-lg.visible-md= link_to_section_tab :links
-          %li.documents.visible-lg.visible-md= link_to_section_tab :documents
+          %li.events.visible-lg= link_to_section_tab :events
+          %li.description.visible-lg= link_to_section_tab :description
+          %li.categories.visible-lg= link_to_section_tab :categories
+          %li.entries.visible-lg= link_to_section_tab :entries
+          %li.links.visible-lg= link_to_section_tab :links
+          %li.documents.visible-lg= link_to_section_tab :documents
           %li.photos=  link_to_section_tab :photos
       - if params[:section].present?
         %section.edit{ :class => params[:section] }

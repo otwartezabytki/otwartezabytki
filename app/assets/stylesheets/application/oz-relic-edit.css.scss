@@ -8,9 +8,7 @@
 
 .oz-edit_relic {
   display: flex;
-
   ul {
-    background-image: linear-gradient(to right, #E5E5E5 96%, #B3B3B3 100%);
     .sidebar-brand {
       font-weight: 600;
       font-size: 16px;
@@ -321,6 +319,7 @@ section.oz-edit {
   width: 900px;
   margin: 0 auto;
   height: 80%;
+  overflow: auto !important;
   &.fade.in {
     top: 10%;
   }
@@ -331,7 +330,7 @@ section.oz-edit {
 }
 
 .static-modal-width {
-  width: 968px !important;
+  width: 982px !important;
   .row {
     margin-left: 0 !important;
     margin-right: 0 !important;
@@ -339,24 +338,35 @@ section.oz-edit {
 }
 
 .js-set-static-modal-width {
-  content: "set width 968px";
-}
-
-.js-set-fluid-modal-width {
-  content: "set width fluid";
+  content: "set width 982px";
 }
 
 .oz-nav-edit {
   width: 240px;
   background-image: linear-gradient(to right, #e5e5e5 96%, #b3b3b3 100%);
+  .navbar-header{
+    width: 100%;
+  }
+}
+
+#edit-relic-modal {
+  .modal-body {
+    height: 100vh;
+    .edit_relic {
+      min-height: 100%;
+    }
+  }
 }
 
 @media screen and (max-width: 1200px) { //for smaller than MD
   section.oz-edit h2 {
     padding-left: 60px;
   }
-  .oz-edit_relic ul .sidebar-brand {
-    padding-left: 57px;
+  .oz-edit_relic ul {
+    background-image: linear-gradient(to right, #E5E5E5 96%, #B3B3B3 100%);
+    .sidebar-brand {
+      padding-left: 57px;
+    }
   }
   .oz-nav-edit {
     background-image: none;
