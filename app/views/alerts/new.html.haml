@@ -19,4 +19,4 @@
       .actions
         = f.button t('views.alerts.new.submit')
         lub
-        = link_to t('views.alerts.new.cancel'), relic_path(relic.id), :remote => true
+        = link_to t('views.alerts.new.cancel'), relic_path(relic.id), :remote => true, :data => {"dismiss" => "modal"}
