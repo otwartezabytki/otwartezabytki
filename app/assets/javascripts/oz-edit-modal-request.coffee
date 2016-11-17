@@ -8,7 +8,8 @@ $ ->
       url: _href
       success: (data) ->
         relic_modal = $('#edit-relic-modal')
-        relic_modal.html(data)
+        relic_modal_body = relic_modal.find('.modal-body')
+        relic_modal_body.html(data)
         relic_modal.modal()
         set_modal = $('.js-set-static-modal-width').css('content')
         if set_modal == undefined
