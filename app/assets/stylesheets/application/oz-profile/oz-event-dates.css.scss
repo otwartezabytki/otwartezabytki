@@ -1,0 +1,34 @@
+section.edit.events {
+  p.header {
+    margin: 0;
+  }
+
+  ol.first {
+    margin-bottom: 0;
+    li {
+      > div.string {
+        margin-left: 40px !important;
+      }
+      > div.name {
+        left: 205px !important;
+      }
+    }
+  }
+
+  .sortable {
+    .event{
+      > div:first-child {
+        left: 50px;
+      }
+      > div {
+        left: 205px;
+      }
+      .apply-to {
+        left: 196px;
+      }
+      .string .input, .apply-to {
+        width: 323px;
+      }
+    }
+  }
+}

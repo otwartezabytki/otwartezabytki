@@ -1,8 +1,8 @@
-%section.new.alert
-  %h2= t('views.alerts.new.header')
+%section.new.alert.oz-alert.oz-no-padding
+  %h2.oz-no-margin= t('views.alerts.new.header')
   - if request.xhr?
     = render 'shared/flash', :flash => flash
-  .row
+  .row.oz-no-margin
     = semantic_form_for [relic, alert], :html => {'data-ajax-form' => true} do |f|
       %p.description= t('views.alerts.new.description')
       = f.input :description, :as => :text, :input_html => { :value => params[:description] }
@@ -19,4 +19,5 @@
       .actions
         = f.button t('views.alerts.new.submit')
         lub
-        = link_to t('views.alerts.new.cancel'), relic_path(relic.id), :remote => true, :data => {"dismiss" => "modal"}
+        = link_to t('views.alerts.new.cancel'), relic_path(relic.id), :class => "js-close-edit-relic"
+%button.btn.oz-close-edit-relic.js-close-edit-relic.oz-alert-close-btn{ :type => "button"} Close

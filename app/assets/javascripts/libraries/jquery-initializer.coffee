@@ -23,7 +23,6 @@ popping_state = false
 last_xhr = null
 window.ajax_callback = (data, status, xhr) ->
   $('#fancybox_loader_container').hide()
-
   if xhr.getResponseHeader('Content-Type').match(/text\/javascript/)
     jQuery.globalEval data
   else if xhr.getResponseHeader('Content-Type').match(/text\/html/)
@@ -95,28 +94,23 @@ window.ajax_callback = (data, status, xhr) ->
           if data_replace_parent && !$(node).is('[data-fancybox]')
             try_to_process_replace(data_replace_parent)
           else
-            console.log("cholea wie co tu sie ojaneipawla")
-            console.log(JSON.stringify(to_replace))
-            console.log(node)
-            console.log($(node).data('replace'))
+
+            if $.contains(data, 'jcarousel-skin-midi')
 #            if node.find('.jcarousel-skin-midi')
-#              console.log("w node znalazlo jcarousela")
-#              show_fancybox(node)
-#              $(node).initialize()
-#            else
-            console.log("nie znalazl jcarousela")
-            relic_modal = $('#edit-relic-modal') #get div of modal
-            relic_modal_body = relic_modal.find('.modal-body') #get boy of modal
-            console.log(JSON.stringify(relic_modal_body) + "==============================")
-            relic_modal_body.html(node) #put content in modal body
-            console.log(JSON.stringify(relic_modal_body) + "==============================++")
-            relic_modal.modal() #show modal
-            set_modal = $('.js-set-static-modal-width').css('content') #add static with for nonresponsive, remove it for location and photos
-            if set_modal == undefined
-              relic_modal.removeClass 'static-modal-width'
+              show_fancybox(node)
+              $(node).initialize()
             else
-              relic_modal.addClass 'static-modal-width'
-            relic_modal.initialize() #initialize JQuery.initialize() functions
+              relic_modal = $('#edit-relic-modal') #get div of modal
+              relic_modal_body = relic_modal.find('.modal-body') #get boy of modal
+              relic_modal_body.html(node) #put content in modal body
+              relic_modal.modal() #show modal
+
+              set_modal = $('.js-set-static-modal-width').css('content') #add static with for nonresponsive, remove it for location and photos
+              if set_modal == undefined
+                relic_modal.removeClass 'static-modal-width'
+              else
+                relic_modal.addClass 'static-modal-width'
+              relic_modal.initialize() #initialize JQuery.initialize() functions
       else if last_xhr.getResponseHeader('x-logged')? && $('body').data('logged')? && $('body').data('logged').toString() != last_xhr.getResponseHeader('x-logged').toString()
         $('#fancybox_loader_container').show()
         window.location.reload()

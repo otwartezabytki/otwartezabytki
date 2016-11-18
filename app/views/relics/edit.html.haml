@@ -31,7 +31,7 @@
             %p.description= t "relic_tabs.#{params[:section]}.description"
           .col-md-12.col-xs-12
             = render :partial => "relics/edit/#{params[:section]}"
-  %button.btn.oz-close-edit-relic{"data-dismiss" => "modal", :type => "button"} Close
+  %button.btn.oz-close-edit-relic.js-close-edit-relic{ :type => "button"} Close
 
 - else
   .edit_relic.js-set-static-modal-width
@@ -55,4 +55,4 @@
         .row{:class => "#{params[:section]}"}
           %p.description= t "relic_tabs.#{params[:section]}.description"
         = render :partial => "relics/edit/#{params[:section]}"
-  %button.btn.oz-close-edit-relic{"data-dismiss" => "modal", :type => "button"} Close
+  %button.btn.oz-close-edit-relic.js-close-edit-relic{ :type => "button"} Close

@@ -7,4 +7,4 @@
   = link_to edit_relic_path(relic, :section => 'photos'), :class => 'btn', :remote => true do
     %strong= t('views.relics.edit.add_attachement')
   = t('views.relics.edit.or')
-  = link_to t('views.relics.edit.cancel'), edit_relic_path(relic, :section => :events), :remote => true, "data-dismiss" => "modal"
+  = link_to t('views.relics.edit.cancel'), edit_relic_path(relic, :section => :events), :class => "js-close-edit-relic"

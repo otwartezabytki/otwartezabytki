@@ -8,7 +8,7 @@
     .actions
       %button= t('views.relics.edit.add_and_save')
       = t('views.relics.edit.or')
-      = link_to t('views.relics.edit.cancel'), relic_path(relic.id), :remote => true, :class => "cancel", "data-dismiss" => "modal"
+      = link_to t('views.relics.edit.cancel'), relic_path(relic.id), :class => "cancel js-close-edit-relic"
 
 .row.entries-showcase{ :"data-replace" => (!params[:entry_id].nil? ? ".entries-showcase" : "#nonexistent") }
   - relic.entries.select{ |e| !e.new_record? }.sort_by(&:id).each do |entry|
@@ -20,7 +20,7 @@
           = f.submit t('views.relics.edit.save')
           = link_to t('views.relics.edit.delete'), relic_entry_path(relic.id, entry.id), :method => :delete, :remote => true
           = t('views.relics.edit.or')
-          = link_to t('views.relics.edit.cancel'), edit_section_relic_path(relic.id, :section => :entries, :entry_id => 0), :remote => true, :class => "cancel"
+          = link_to t('views.relics.edit.cancel'), edit_section_relic_path(relic.id, :section => :entries, :entry_id => 0), :class => "cancel js-close-edit-relic"
     - else
       = content_tag_for :article, entry do
         %h3= entry.title
