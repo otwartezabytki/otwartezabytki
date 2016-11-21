@@ -1,0 +1,18 @@
+.oz-widget__walking-guide--new {
+  .search-query__input, input[type="text"], textarea{
+    width: 100% !important;
+  }
+  .oz-map-container {
+    position: relative;
+    width: 100%;
+  }
+  .angular-google-map-container {
+    position: unset !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .oz-map-container {
+    margin-top: 15px;
+  }
+}
