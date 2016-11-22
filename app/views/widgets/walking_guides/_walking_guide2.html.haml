@@ -1,8 +1,9 @@
 %h1.oz-no-margin
   = t('widget.walking_guide.title')
-  %span(ng-show="loading")= "#{t('widget.walking_guide.loading')}..."
-  %span(ng-show="saving")= t('widget.walking_guide.saving')
-  %a.back(href=widgets_path)= t('views.widgets.edit.back')
+  %span.oz-xs-ng-show(ng-show="loading")= "#{t('widget.walking_guide.loading')}..."
+  %span.oz-xs-ng-show(ng-show="saving")= t('widget.walking_guide.saving')
+  %a.back.hidden-xs(href=widgets_path)= t('views.widgets.edit.back')
+  %a.back.visible-xs(href=widgets_path) &laquo;
 .walking-guide__header
   %p.help-inline= t('widget.walking_guide.help')
 .walking-guide__content

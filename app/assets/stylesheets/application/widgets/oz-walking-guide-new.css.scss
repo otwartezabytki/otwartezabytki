@@ -1,6 +1,13 @@
 .oz-widget__walking-guide--new {
+  h1 {
+    font-weight: 600 !important;
+    color: #fff !important;
+  }
   .search-query__input, input[type="text"], textarea{
     width: 100% !important;
+  }
+  input[type="text"]{
+    height: 26px !important;
   }
   .oz-map-container {
     position: relative;
@@ -11,8 +18,23 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 992px) and (max-width: 1200px){
+  .widget__walking-guide .button + .button {
+    margin-left: 8px !important;
+  }
+}
+
+@media screen and (max-width: 992px) {
   .oz-map-container {
     margin-top: 15px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .oz-xs-ng-show {
+    position: absolute;
+    left: 70px;
+    width: 100%;
+    background-image: linear-gradient(to bottom, rgb(54, 89, 107), rgb(47, 81, 99));
   }
 }
