@@ -8,7 +8,7 @@
   - if current_user.blank?
     %span.block= t('views.widgets.edit.direction.sign_in_before_save')
   .preview
-    %iframe#oz_direction{ width: [widget.width, 920].min, height: widget.height, src: configure_widgets_direction_url(widget, iframe: true), scrolling: 'auto' }
+    %iframe#oz_direction{ width: "100%", height: widget.height, src: configure_widgets_direction_url(widget, iframe: true), scrolling: 'auto' }
   .sidebar
     = semantic_form_for widget, :url => self.send("widgets_#{widget.class.partial_name}_path", widget) do |f|
       = f.input :width, :label => t('views.widgets.edit.direction.width'), :required => false

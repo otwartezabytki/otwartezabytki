@@ -1,0 +1,19 @@
+.oz-direction-widget {
+  .edit_widget {
+    display: block !important;
+    .sidebar {
+      width: unset !important;
+    }
+  }
+  h1 {
+    margin: 0 !important;
+    color: white !important;
+    font-weight: 600 !important;
+  }
+  .content {
+    h2 {
+      margin-top: 0 !important;
+    }
+  }
+}
+

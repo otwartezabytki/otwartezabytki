@@ -1,2 +1,7 @@
-.edit_widget#widget_wrapper{ :class => widget.class.partial_name, :"data-replace" => "#widget_wrapper", :"data-fancybox" => true }
-  = render "/widgets/edit/#{widget.class.partial_name}"
+-if widget.class.partial_name == "direction"
+  .bootstrap-iso.js-remove-their-container
+    .container
+      .oz-direction-widget
+        = render "/widgets/edit_bs"
+-else
+  = render "/widgets/edit_bs"

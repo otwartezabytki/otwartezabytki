@@ -1,7 +1,7 @@
 - content_for :before_javascripts do
   = javascript_include_tag "http://maps.googleapis.com/maps/api/js?key=#{Settings.oz.gm_key}&sensor=false&libraries=places"
-#direction_widget{ :"data-replace" => "#direction_widget" }
-  .sidebar
+#direction_widget.oz-iframe-dir-widget{ :"data-replace" => "#direction_widget" }
+  .del-sidebar.col-md-4.col-xs-4.col-sm-4
     = link_to '/', :target => :_top do
       %h1.logo
     = semantic_form_for widget_search, :url => widgets_direction_path(widget.uid), :method => :get do |f|
@@ -66,8 +66,8 @@
                   = f.label :categories, value: category.name_key do
                     = f.check_box :categories, { multiple: true, checked: categories.include?(category.name_key) }, category.name_key, nil
                     %span.name= category.name.gsub('/', ', ')
-.map
-  #map_canvas{ :style => "width: 100%; height: 100%;" }
+  .del-map.col-md-8.col-xs-8.col-sm-8
+    #map_canvas{ :style => "width: 100%; height: 100%;" }
 :javascript
   config = #{widget.config.to_json};
 %script
