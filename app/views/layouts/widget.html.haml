@@ -3,9 +3,10 @@
   %head
     %meta(charset="utf-8")
     = csrf_meta_tags
-    = stylesheet_link_tag "responsor/_bootstrap", :media => "all"
+    - if controller_name == "directions"
+      = javascript_include_tag "widgets/oz-direction"
+      = stylesheet_link_tag "responsor/_bootstrap", :media => "all"
     = stylesheet_link_tag "application/widgets/oz-direction-iframe", :media => "all"
-
     /[if lt IE 9]
       = javascript_include_tag "http://html5shim.googlecode.com/svn/trunk/html5.js"
     = yield :stylesheets
@@ -13,8 +14,12 @@
   %body{ :class => [controller_name, action_name, widget.class.partial_name].join(' ') }
     #root
       %section#main
-        .container-fluid.main-container{ :'data-replace' => '.main-container' }
-          = yield
+        - if controller_name == "directions"
+          .container-fluid.main-container{ :'data-replace' => '.main-container' }
+            = yield
+        - else
+          .container.main-container{ :'data-replace' => '.main-container' }
+            = yield
     != include_gon(:camel_case => true)
     = yield :before_javascripts
     = yield :javascripts

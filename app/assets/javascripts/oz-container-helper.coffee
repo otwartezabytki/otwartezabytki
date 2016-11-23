@@ -13,8 +13,6 @@ $(document).ready ->
   else
     map.css 'height', "#{sidebar_height}px"
 
-
-
 jQuery.initializer '.js-remove-if-not-carousel', ->
   class_list = $('.js-remove-if-not-carousel')
   caro = $('.modal-body')

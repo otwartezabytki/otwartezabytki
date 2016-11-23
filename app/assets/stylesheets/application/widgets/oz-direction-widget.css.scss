@@ -1,8 +1,9 @@
 .oz-direction-widget {
   .edit_widget {
     display: block !important;
-    .sidebar {
-      width: unset !important;
+    .oz-code-gen #snippet{
+      width: 100%;
+      max-width: unset;
     }
   }
   h1 {
@@ -17,3 +18,54 @@
   }
 }
 
+@media screen and (max-width: 368px){
+  iframe {
+    height: 1080px;
+  }
+}
+
+@media screen and (min-width: 1200px){
+  iframe {
+    height: 1040px;
+  }
+}
+
+@media screen and (max-width: 1200px){
+  .sidebar{
+    #widget_direction_width_input {
+      margin-right: 30px;
+    }
+  }
+  iframe {
+    height: 660px;
+  }
+}
+
+@media screen and (max-width: 992px){
+  .edit_widget .sidebar .widget_direction div {
+    float: unset;
+  }
+  .oz-xy-widget{
+    text-align: center;
+    display: inline-flex;
+    margin: 0 !important;
+    .string {
+      width: 50% !important;
+      margin: 0;
+    }
+  }
+  .oz-print-save {
+    float: left !important;
+    margin: 0 !important;
+    div {
+      float: left !important;
+      margin: 0 !important;
+      a {
+        margin: 0 !important;
+      }
+    }
+  }
+  iframe {
+    height: 1040px;
+  }
+}
