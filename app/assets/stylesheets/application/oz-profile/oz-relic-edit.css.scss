@@ -2,6 +2,12 @@
   padding: 0 !important;
 }
 
+@media screen and (min-width: 992px) {
+  .oz-no-padding-lg-md {
+    padding: 0 !important;
+  }
+}
+
 .oz-no-margin {
   margin: 0 !important;
 }

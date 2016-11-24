@@ -2,7 +2,7 @@
   = javascript_include_tag "http://maps.googleapis.com/maps/api/js?key=#{Settings.oz.gm_key}&sensor=false&libraries=places"
 #direction_widget.oz-iframe-dir-widget{ :"data-replace" => "#direction_widget" }
   .oz-sidebar.col-md-3.col-sm-3.col-xs-12.oz-no-padding
-    = link_to image_tag("logo-widget.png"), root_path, :class => "logo"
+    = link_to image_tag("logo-widget.png"), root_path, :class => "logo hidden-xs"
     = semantic_form_for widget_search, :url => widgets_direction_path(widget.uid), :method => :get do |f|
       = f.hidden_field :path, value: widget_params.try(:[], 'path')
       = f.hidden_field :polygon, value: widget_params.try(:[], 'polygon')

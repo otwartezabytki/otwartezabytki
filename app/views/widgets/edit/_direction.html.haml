@@ -1,9 +1,12 @@
 %h1
   = t("widget.direction.title_")
-  = link_to t('views.widgets.edit.direction.create_new_widget'), widgets_directions_path, :method => :post, :class => 'back'
-  %a.back{:href => widgets_path}= t('views.widgets.edit.back')
+  = link_to t('views.widgets.edit.direction.create_new_widget'), widgets_directions_path, :method => :post, :class => 'back hidden-xs'
+
+  %a.back.hidden-xs{:href => widgets_path}= t('views.widgets.edit.back')
 .content
-  %h2= t('views.widgets.edit.direction.header')
+  = link_to t('views.widgets.edit.direction.create_new_widget'), widgets_directions_path, :method => :post, :class => 'back visible-xs'
+  %a.back.visible-xs{:href => widgets_path}= t('views.widgets.edit.back')
+  %h2.oz-header= t('views.widgets.edit.direction.header')
   %span.block= t('views.widgets.edit.direction.settings_info_')
   - if current_user.blank?
     %span.block= t('views.widgets.edit.direction.sign_in_before_save')
@@ -11,22 +14,23 @@
     %iframe#oz_direction{ width: "100%",  src: configure_widgets_direction_url(widget, iframe: true), scrolling: 'auto' }
   .sidebar.col-md-12.col-xs-12
     = semantic_form_for widget, :url => self.send("widgets_#{widget.class.partial_name}_path", widget) do |f|
-      .col-lg-6.col-md-5.col-sm-12.oz-xy-widget
-        = f.input :width, :label => t('views.widgets.edit.direction.width'), :required => false
-        = f.input :height, :label => t('views.widgets.edit.direction.height'), :required => false
+      .col-lg-5.col-md-6.col-sm-12.oz-xy-widget.oz-no-margin
+        .col-sm-6.col-xs-12.oz-no-margin= f.input :width, :label => t('views.widgets.edit.direction.width'), :required => false
+        .col-sm-6.col-xs-12.oz-no-margin= f.input :height, :label => t('views.widgets.edit.direction.height'), :required => false
         = f.input :params, :as => :hidden, label: false
-      .col-lg-6.col-md-7.col-sm-12.oz-print-save
+      .col-lg-7.col-md-6.col-sm-12.col-xs-12.oz-print-save.oz-no-margin
         - if current_user.present?
-          .col-xs-12.col-sm-6
-            = f.button t('views.widgets.edit.direction.save'), name: 'save', class: 'button'
-          .col-xs-12.col-sm-6
-            = f.button t('views.widgets.edit.direction.save_and_print'), name: 'save_and_print', class: 'button'
+          .col-md-7.col-sm-6.col-xs-12.oz-no-margin
+            = f.button t('views.widgets.edit.direction.save_and_print'), name: 'save_and_print', class: 'button oz-print-btn'
+          .col-md-5.col-sm-6.col-xs-12.oz-no-margin
+            = f.button t('views.widgets.edit.direction.save'), name: 'save', class: 'button oz-login-for-save'
         - else
-          .col-xs-12.col-sm-6
-            = link_to t('views.widgets.edit.direction.sign_in'), new_user_session_path(return_path: edit_widgets_direction_path(widget)), class: 'button'
-          .col-xs-12.col-sm-6
-            = link_to t('views.widgets.edit.direction.print_'), print_widgets_direction_path, :class => 'button'
-  %h2.col-md-12.col-xs-12= t('views.widgets.edit.generated')
+          .col-md-5.col-sm-6.col-xs-12.oz-no-margin
+            = link_to t('views.widgets.edit.direction.print_'), print_widgets_direction_path, :class => 'button oz-print-btn'
+          .col-md-7.col-sm-6.col-xs-12.oz-no-margin
+            .hidden-xs= link_to t('views.widgets.edit.direction.sign_in'), new_user_session_path(return_path: edit_widgets_direction_path(widget)), class: 'button oz-login-for-save'
+            .visible-xs.oz-dir-login-flex= link_to t('views.widgets.edit.direction.sign_in_xs'), new_user_session_path(return_path: edit_widgets_direction_path(widget)), class: 'button oz-login-for-save'
+  %h2.col-md-12.col-xs-12.oz-gen-text= t('views.widgets.edit.generated')
   %div.col-md-12.col-xs-12.oz-code-gen
     %span.block= t('views.widgets.edit.code_help')
     %textarea#snippet= widget.snippet

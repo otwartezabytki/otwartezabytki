@@ -64,6 +64,11 @@
      }
      form.formtastic.search {
        width: 100%;
+       section.search {
+         & h2:first-child {
+           border-top: none;
+         }
+       }
      }
      section.categories .search-input {
        text-align: justify;

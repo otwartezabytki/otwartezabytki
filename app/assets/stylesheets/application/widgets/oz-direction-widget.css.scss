@@ -12,7 +12,7 @@
     font-weight: 600 !important;
   }
   .content {
-    h2 {
+    h2.oz-header {
       margin-top: 0 !important;
     }
   }
@@ -50,8 +50,11 @@
     display: inline-flex;
     margin: 0 !important;
     .string {
-      width: 50% !important;
-      margin: 0;
+      width: 100% !important;
+      margin: 0 !important;
+      .input {
+        margin: 10px 0 20px!important;
+      }
     }
   }
   .oz-print-save {
@@ -60,12 +63,65 @@
     div {
       float: left !important;
       margin: 0 !important;
+      text-align: center;
+      display: inline-flex;
+      button {
+        margin: 25px auto !important;
+      }
       a {
-        margin: 0 !important;
+        float: none !important;
+        margin: 0 auto !important;
       }
     }
+  }
+  .oz-gen-text {
+    text-align: center;
+    margin-top: 20px !important;
+  }
+  .oz-code-gen textarea {
+    height: 80px !important;
   }
   iframe {
     height: 1040px;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .content {
+    .back {
+      margin: 0 5px 15px;
+      font-weight: bold;
+    }
+    .oz-header {
+      display: inline-block;
+    }
+  }
+  .oz-xy-widget {
+    display: block;
+  }
+  .oz-print-save {
+    div, div.oz-dir-login-flex{
+      display: flex !important;
+      .oz-dir-login-flex {
+        margin: 0 auto !important;
+      }
+      .oz-print-btn {
+        margin: 0 auto 10px !important;
+      }
+      .oz-login-for-save {
+        margin: 0 auto !important;
+      }
+    }
+  }
+  iframe {
+    height: 1080px;
+  }
+}
+
+//chrome hack for overflowing content
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  .oz-direction-widget .edit_widget {
+    overflow: hidden;
+  }
+}
+

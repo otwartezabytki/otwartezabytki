@@ -2,7 +2,7 @@
   .oz-border-line.container
     = semantic_form_for tsearch, :url => relics_path, :method => :get, :remote => true do |f|
       = f.hidden_field :location, :value => f.object.location.join('-')
-      .col-md-3
+      .col-md-3.oz-no-padding-lg-md
         = render 'localization_facets'
         .sidebar-categories
           %h3= t('views.relics.index.categories')
