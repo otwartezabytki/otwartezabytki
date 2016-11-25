@@ -50,7 +50,7 @@
 
 # priv js
 #= require oz-edit-modal-request
-
+#= require oz-contrast-changer
 
 # FIX data-dismiss
 $(document).on 'click', '[data-dismiss]', (e) ->

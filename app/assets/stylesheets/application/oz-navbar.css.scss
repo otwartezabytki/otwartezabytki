@@ -427,7 +427,8 @@ section.oz-disclaimer {
     display: inline-block;
     width: 100%;
     padding-left: 0;
-    &:hover {
+    &:hover, &:focus {
+      background: transparent;
       text-decoration: underline;
     }
     em {

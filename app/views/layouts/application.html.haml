@@ -25,7 +25,7 @@
     %div#cookies
       %ul.cooks
         %li= link_to t('layouts.application.cookies')
-        %li= link_to t('layouts.application.accept'), "#", class: "btn", id: "accept_cookies"
+        %li= link_to t('layouts.application.accept'), "#", class: "btn accept-cookies", id: "accept_cookies"
         %li= link_to t('layouts.application.learn_more'), page_path(:cookies)
     #fb-root
     :javascript
@@ -40,6 +40,7 @@
       %a.translation-mode{:href => "#"}
         T
     .page
+      %button.btn.btn-default.js-change-contrast.oz-change-contrast kontrast
       #root
         .bootstrap-iso
           .container
@@ -68,7 +69,7 @@
               .collapse.navbar-collapse.nav-collapse
                 %ul#page-menu.nav.navbar-nav.oz-navbar-center
                   %li
-                    = link_to t('layouts.application.homepage'), root_path, :class => "oz-home #{'active' if current_page?(root_path)}"
+                    = link_to t('layouts.application.homepage'), root_path, :class => "sr-only-focusable oz-home #{'active' if current_page?(root_path)}"
                   - Page.where(name: ['about', 'download', 'contact']).each do |page|
                     = render 'pages/navigation', page: page
                   %li
@@ -82,7 +83,7 @@
                     - unless request.xhr?
                       = render 'shared/browse'
                   %li.gradient.hidden-lg.dropdown
-                    = link_to t('layouts.application.browse'), "#", :class => "oz-browse-sm dropdown-toggle", "data-toggle" => "dropdown", "role" => "button", "aria-haspopup" => "true", "aria-expanded" => "false"
+                    = link_to t('layouts.application.browse'), "#", :class => "oz-browse-sm dropdown-toggle", "data-toggle" => "dropdown", "role" => "menu", "aria-haspopup" => "true", "aria-expanded" => "false"
                     - unless request.xhr?
                       = render 'shared/browse_sm'
                   %ul.nav.navbar-default.hidden-lg.hidden-xl= render 'shared/login_navigation'
