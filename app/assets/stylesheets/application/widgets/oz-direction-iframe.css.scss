@@ -58,6 +58,9 @@
   }
 }
 @media screen and (max-width: 768px) {
+  .container-fluid {
+    padding: 0;
+  }
    .oz-iframe-dir-widget {
      .oz-sidebar {
        text-align: center;
@@ -78,6 +81,12 @@
       border: none;
       margin-top: 10px;
       height: 400px;
+      .relic-info {
+        width: unset;
+        .relic-info-content h3 {
+          font-size: 14px;
+        }
+      }
     }
   }
 }
