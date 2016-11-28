@@ -2018,7 +2018,7 @@ var RLANG = {
 			this.$toolbar = $('<ul>').addClass('redactor_toolbar');
 
 			if (this.opts.air)
-			{
+            {
 				$(this.air).append(this.$toolbar);
 				$('body').append(this.air);
 			}

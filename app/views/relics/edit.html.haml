@@ -1,32 +1,58 @@
-#edit-relic-modal.modal.hide.bootstrap-iso
-  .modal-body
-    .oz-edit_relic
-      %nav.navbar.navbar-default.oz-nav-edit
-        .navbar-header
-          %button.oz-edit-nav-button.navbar-toggle{"data-target" => ".oz-nav-edit-collapse", "data-toggle" => "collapse", type: "button"}
-            %span.icon-bar
-            %span.icon-bar
-            %span.icon-bar
-          .collapse.navbar-collapse.oz-nav-edit-collapse.no-margins
-            %ul.sidebar-nav
-              %li.sidebar-brand= t('views.relics.edit.header')
-              %li.general= link_to_section_tab :general
-              %li.location= link_to_section_tab :location
-              %li.events= link_to_section_tab :events
-              %li.description= link_to_section_tab :description
-              %li.categories= link_to_section_tab :categories
-              %li.entries= link_to_section_tab :entries
-              %li.links= link_to_section_tab :links
-              %li.documents= link_to_section_tab :documents
-              %li.photos=  link_to_section_tab :photos
-      - if params[:section].present?
-        .col-sm-12.col-xs-12.oz-no-padding
-          %section.oz-edit{ :class => params[:section] }
-            %h2.oz-no-margin= t "relic_tabs.#{params[:section]}.name"
-            - if request.xhr?
-              = render 'shared/flash', :flash => flash
-            .col-md-12.col-xs-12{:class => "#{params[:section]}"}
-              %p.description= t "relic_tabs.#{params[:section]}.description"
-            .col-md-12.col-xs-12
-              = render :partial => "relics/edit/#{params[:section]}"
-    %button.btn.oz-close-edit-relic{"data-dismiss" => "modal", :type => "button"} Close
+-#.bootstrap-iso
+-##edit-relic-modal.modal.fade{"role" => "dialog"}
+
+- if params[:section] == "location" || params[:section] == "photos"
+  .oz-edit_relic
+    %nav.navbar.navbar-default.oz-nav-edit
+      .navbar-header
+        %button.oz-edit-nav-button.navbar-toggle{"data-target" => ".oz-nav-edit-collapse", "data-toggle" => "collapse", type: "button"}
+          %span.icon-bar
+          %span.icon-bar
+          %span.icon-bar
+        .collapse.navbar-collapse.oz-nav-edit-collapse.no-margins
+          %ul.sidebar-nav
+            %li.sidebar-brand= t('views.relics.edit.header')
+            %li.general.visible-lg= link_to_section_tab :general
+            %li.location= link_to_section_tab :location
+            %li.events.visible-lg= link_to_section_tab :events
+            %li.description.visible-lg= link_to_section_tab :description
+            %li.categories.visible-lg= link_to_section_tab :categories
+            %li.entries.visible-lg= link_to_section_tab :entries
+            %li.links.visible-lg= link_to_section_tab :links
+            %li.documents.visible-lg= link_to_section_tab :documents
+            %li.photos=  link_to_section_tab :photos
+    - if params[:section].present?
+      .col-sm-12.col-xs-12.oz-no-padding
+        %section.oz-edit{ :class => params[:section] }
+          %h2.oz-no-margin= t "relic_tabs.#{params[:section]}.name"
+          - if request.xhr?
+            = render 'shared/flash', :flash => flash
+          .col-md-12.col-xs-12{:class => "#{params[:section]}"}
+            %p.description= t "relic_tabs.#{params[:section]}.description"
+          .col-md-12.col-xs-12
+            = render :partial => "relics/edit/#{params[:section]}"
+  %button.btn.oz-close-edit-relic.js-close-edit-relic{ :type => "button"} Close
+
+- else
+  .edit_relic.js-set-static-modal-width
+    %nav
+      %h1= t('views.relics.edit.header')
+      %ul
+        %li.general.visible-lg= link_to_section_tab :general
+        %li.location= link_to_section_tab :location
+        %li.events.visible-lg= link_to_section_tab :events
+        %li.description.visible-lg= link_to_section_tab :description
+        %li.categories.visible-lg= link_to_section_tab :categories
+        %li.entries.visible-lg= link_to_section_tab :entries
+        %li.links.visible-lg= link_to_section_tab :links
+        %li.documents.visible-lg= link_to_section_tab :documents
+        %li.photos=  link_to_section_tab :photos
+    - if params[:section].present?
+      %section.edit{ :class => params[:section] }
+        %h2= t "relic_tabs.#{params[:section]}.name"
+        - if request.xhr?
+          = render 'shared/flash', :flash => flash
+        .row{:class => "#{params[:section]}"}
+          %p.description= t "relic_tabs.#{params[:section]}.description"
+        = render :partial => "relics/edit/#{params[:section]}"
+  %button.btn.oz-close-edit-relic.js-close-edit-relic{ :type => "button"} Close

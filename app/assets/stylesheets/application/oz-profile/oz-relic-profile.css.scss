@@ -12,10 +12,11 @@
 }
 
 section.show.general {
-  display: table-cell;
+  display: inline-block !important;
   padding: 17px 20px 25px 25px;
   border-right: 2px solid #486a7c;
   background: #fff;
+  width: 100%;
   h1 {
     font-size: 22px;
     font-weight: 600;
@@ -167,11 +168,11 @@ section.show.general {
 
   .print-guide {
     @extend .original;
-    float: none;
-    padding: 9px 12px 6px 30px;
+    float: left;
+    padding: 7px 12px 0 10px;
     position: relative;
-    right: 22px;
     font-weight: bold;
+    line-height: 16px;
     &::before {
       content: "";
       display: block;
@@ -179,8 +180,20 @@ section.show.general {
       width: 20px;
       height: 20px;
       position: relative;
-      left: 5px;
       background: asset-data-url("edit-relic-ico-print.png") no-repeat;
+    }
+    &.oz-only-relic {
+      right: 0;
+      bottom: 0;
+      float: left;
+      display: inline;
+      margin-top: 30px;
+      margin-bottom: 8px;
+      padding: 6px 12px 0px 10px;
+      &::before {
+        top:0;
+        left:0;
+      }
     }
   }
 }
@@ -265,4 +278,11 @@ section.show.photos {
 .oz-relic-border-line{
   border-top: 3px solid #486a7c;
   margin-top: 1px;
+}
+
+//chrome hack for print icon
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  section.show.general .print-guide::before {
+    left: 27px;
+  }
 }

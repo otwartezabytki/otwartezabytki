@@ -4,7 +4,7 @@
       - if photo.user_id == current_user.id
         = f.semantic_fields_for :photos, photo do |f2|
           .col-md-12.col-xs-12.col-sm-12.photo[f2.object]
-            .col-lg-3.col-sm-12.col-xs-12.no-margins.oz-xs-sm-no-float
+            .col-lg-3.col-sm-12.col-xs-12.no-margins.oz-xs-sm-no-float.text-center
               .preview
                 = image_tag photo.file.midi.url, :alt => photo.alternate_text
               - if photo.user_id == current_user.id
@@ -55,4 +55,4 @@
   .actions.col-md-12.col-xs-12.col-sm-12.oz-xs-sm-text-center
     %button= t('views.relics.edit.save')
     = t('views.relics.edit.or')
-    = link_to t('views.relics.edit.cancel'), relic_path(relic.id), :remote => true, :class => "cancel"
+    = link_to t('views.relics.edit.cancel'), relic_path(relic.id), :class => "cancel js-close-edit-relic"
