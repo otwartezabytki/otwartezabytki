@@ -1,6 +1,6 @@
+#function to remove nonbootstrap container class
 $(document).ready ->
-  do_remove = $('.js-remove-their-container').css('content')
-  if do_remove.length > 0
+  if $('.js-remove-their-container').length > 0
     $('.their-container').removeClass 'their-container'
   return
 
