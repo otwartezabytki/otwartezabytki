@@ -44,6 +44,9 @@
 #= require bootstrap.js
 #= require bootstrap-sprockets
 
+# priv js
+#= require oz-container-helper
+
 # FIX data-dismiss
 $(document).on 'click', '[data-dismiss]', (e) ->
   e.preventDefault()

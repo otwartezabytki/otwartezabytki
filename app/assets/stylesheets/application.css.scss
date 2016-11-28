@@ -19,8 +19,9 @@
 @import "application/profile";
 @import "application/widgets";
 @import "application/wizard";
-@import "oz-navbar";
-@import "oz-relics";
+@import "application/oz-navbar";
+@import "application/oz-relics";
+@import "application/oz-relic_profile";
 @import "responsor/awesomefonts/font-awesome";
 
 
@@ -31,6 +32,11 @@
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
 }
+
+.js-remove-their-container {
+  content: "remove";
+}
+
 
 i18n.on {
   background-color: red !important;

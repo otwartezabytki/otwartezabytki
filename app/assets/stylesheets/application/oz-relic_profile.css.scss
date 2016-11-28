@@ -1,0 +1,268 @@
+.oz-padding-ereaser {
+  background: white;
+  width: 100%;
+  height: auto;
+  overflow:auto;
+  .col-md-8 {
+    padding: 0 !important;
+  }
+  .col-md-4 {
+    padding: 0 !important;
+  }
+}
+
+section.show.general {
+  display: table-cell;
+  padding: 17px 20px 25px 25px;
+  border-right: 2px solid #486a7c;
+  background: #fff;
+  h1 {
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 27px;
+  }
+  .status {
+    display: inline-block;
+    width: 100%;
+    margin: 15px 0;
+    .tag {
+      float: left;
+      span {
+        color: #fff;
+        text-transform: uppercase;
+        display: inline-block;
+        font-size: 11px;
+        line-height: 19px;
+        padding: 0 8px;
+        font-weight: normal;
+        border-radius: 3px;
+        text-shadow: rgba(0, 0, 0, 0.3) 0 1px 1px;
+        box-shadow: inset rgba(0, 0, 0, 0.4) 0 1px 3px;
+        margin-right: 4px;
+        &.unchecked {
+          @include gradient(#a3a4a6, #c1c3c5);
+        }
+        &.checked {
+          @include gradient(#e0a876, #fec695);
+        }
+        &.filled {
+          @include gradient(#90b86e, #afd78c);
+        }
+      }
+    }
+    .relic-info {
+      margin-left: 10px;
+      padding-left: 20px;
+      font-size: 12px;
+      background: asset-data-url("edit-relic-ico-info.png") no-repeat;
+      display: inline-block;
+      line-height: 16px;
+      margin-top: 3px;
+      strong {
+        font-weight: 700;
+      }
+    }
+  }
+  .help {
+    top: 1px;
+  }
+  .location_name {
+    background: asset-data-url("edit-relic-ico-location.png") 0 3px no-repeat;
+  }
+  .dating {
+    background: asset-data-url("edit-relic-ico-date.png") 0 3px no-repeat;
+  }
+  .register_number {
+    background: asset-data-url("edit-relic-ico-list.png") 0 4px no-repeat;
+  }
+  .location_name, .dating, .register_number {
+    padding-left: 20px;
+    font-size: 13px;
+    line-height: 18px;
+    margin-bottom: 15px;
+    strong {
+      font-weight: 700;
+    }
+  }
+  .map {
+    background: asset-data-url("edit-relic-map-bg.png");
+    position: absolute;
+    display: none;
+    width: 274px;
+    height: 200px;
+    padding: 25px 30px;
+    z-index: 2;
+    top: -28px;
+    left: 110px;
+    .close {
+      float: right;
+      font-weight: 600;
+      font-size: 12px;
+      color: #af0c0c;
+      cursor: pointer;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    p {
+      font-size: 13px;
+      font-weight: 700;
+    }
+  }
+  .show-map {
+    color: #466879;
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  #map {
+    position: relative;
+  }
+  .original {
+    float: left;
+    margin: 3px 3px 0 0;
+    @include gradient(#4b6d7e, #436576);
+    color: #fff;
+    border: 0;
+    font-size: 12px;
+    font-weight: 300;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
+    text-transform: uppercase;
+    border-radius: 2px;
+    cursor: pointer;
+    &:hover {
+      @include gradient(#437994, #2b607b);
+      text-decoration: none;
+    }
+    &:active {
+      @include gradient(#2b607b, #437993);
+    }
+    span {
+      padding: 9px 12px 6px 29px;
+      display: block;
+      font-weight: 600;
+      background: asset-data-url("edit-relic-ico-alert.png") 10px 6px no-repeat;
+    }
+  }
+
+  .adopt {
+    @extend .original;
+
+    span {
+      background: asset-data-url("edit-relic-ico-adopt.png") 10px 9px no-repeat;
+    }
+
+    & + .help {
+      position: relative;
+      top: 11px;
+      left: 1px;
+
+      p {
+        line-height: 1.2;
+        padding: 1em 19px 0;
+      }
+    }
+  }
+
+  .print-guide {
+    @extend .original;
+    float: none;
+    padding: 9px 12px 6px 30px;
+    position: relative;
+    right: 22px;
+    font-weight: bold;
+    &::before {
+      content: "";
+      display: block;
+      float: left;
+      width: 20px;
+      height: 20px;
+      position: relative;
+      left: 5px;
+      background: asset-data-url("edit-relic-ico-print.png") no-repeat;
+    }
+  }
+}
+
+section.show.photos {
+  background: #fff;
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+  .content{
+    position: relative;
+    margin: 1px;
+  }
+  &.placeholder {
+    @include gradient(#e9e9e9, #dfdfdf);
+    box-shadow: inset 0 0 40px 0 rgba(0, 0, 0, 0.2);
+    text-align: center;
+    .ico {
+      position: absolute;
+      width: 96px;
+      height: 76px;
+      background: asset-data-url("edit-relic-ico-photo.png") no-repeat;
+      top: 100px;
+      left: 100px;
+    }
+    a {
+      min-width: 150px;
+      text-transform: uppercase;
+      text-shadow: 0 1px 0 rgba(30, 110, 6, 0.5);
+      color: #fff;
+      font-size: 12px;
+      padding: 8px 10px;
+      @include gradient(#41a223, #399a1b);
+      border-radius: 2px;
+      display: inline-block;
+      margin: 190px 0 0;
+      &:hover {
+        color: #fff;
+        background: #399a1b;
+      }
+    }
+  }
+  .actions {
+    width: 100%;
+    a {
+      font-size: 12px;
+      font-weight: 600;
+      color: #fff;
+      text-transform: uppercase;
+      border-radius: 2px;
+      width: 50%;
+      &.show-photos {
+        @include gradient(#4b6d7e, #436576);
+
+      }
+      &.edit-photos {
+        @include gradient(#eb8308, #e37b00);
+
+      }
+    }
+  }
+}
+
+.main-photo span{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    padding: 8px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    background: rgba(0,0,0,0.5);
+}
+
+.oz-photo-container {
+  display: block;
+  margin: 0 auto;
+  width: 300px;
+  position: relative;
+}
+
+.oz-relic-border-line{
+  border-top: 3px solid #486a7c;
+  margin-top: 1px;
+}

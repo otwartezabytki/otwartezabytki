@@ -45,7 +45,7 @@
           .container
             %header#header
               %hgroup.col-lg-4.col-md-5.col-xs-12.text-center
-                = link_to image_tag("logo.png", :class => 'oz-logo'), root_path
+                = link_to image_tag("logo.png", :class => 'oz-logo img-responsive'), root_path
                 %h4.text-center= t('layouts.application.tagline')
               .display-block.col-lg-8.col-md-7
                 %nav.navbar.navbar-default{role: "navigation"}
@@ -86,8 +86,8 @@
                     - unless request.xhr?
                       = render 'shared/browse_sm'
                   %ul.nav.navbar-default.hidden-lg.hidden-xl= render 'shared/login_navigation'
-        %section#main.bootstrap-iso
-          .container.main-container{ :'data-replace' => '.main-container' }
+        %section#main
+          .their-container.main-container{ :'data-replace' => '.main-container' }
             = render 'shared/flash', :flash => flash
             .row
               = yield

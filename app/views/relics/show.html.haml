@@ -1,37 +1,41 @@
-- content_for(:title, relic.identification)
+.bootstrap-iso.js-remove-their-container
+  .container
+    - content_for(:title, relic.identification)
 
-- content_for :facebook_meta do
-  %meta{:property => "og:title", :content => relic.identification}
-  %meta{:property => "og:description", :content => strip_tags(relic.description)}
-  %meta{:property => "og:image", :content => relic.has_photos? ? (URI.parse(root_url) + image_path(relic.main_photo.file.icon.url)).to_s : t('layouts.application.og.image', :editable => false)}
+    - content_for :facebook_meta do
+      %meta{:property => "og:title", :content => relic.identification}
+      %meta{:property => "og:description", :content => strip_tags(relic.description)}
+      %meta{:property => "og:image", :content => relic.has_photos? ? (URI.parse(root_url) + image_path(relic.main_photo.file.icon.url)).to_s : t('layouts.application.og.image', :editable => false)}
 
-- if relic.is_a?(OriginalRelic)
-  .original-version
-    %a{:href => relic_path(params[:id]), :class => "btn"}= t('views.relics.show.view_current_version')
-    .content
-      %h3= t('views.relics.show.original_version')
-      %p= t('views.relics.show.original_version_info')
-#fancybox
-- unless cookies[:flash_hidden]
-  .row
-    .flash.flash-info.flash-info-permament
-      %span{:class => "close", :"data-dismiss" => 'flash-info-permament'}=t('views.relics.show.flash_hide')
-      = image_tag 'notice-icon-info.png', :class => 'flash-icon'
-      = image_tag 'notice-separator.png', :class => 'flash-separator'
-      .flash-content
-        = t('views.relics.show.flash_content_html')
-.row.first-row
-  = render :partial => "relics/show/general"
-  = render :partial => "relics/show/photos"
-.row.second-row
-  .column-left
-    = render :partial => "relics/show/description"
-    = render :partial => "relics/show/entries"
-    = render :partial => "relics/show/links"
-    = render :partial => "relics/show/widgets"
-  .column-right
-    = render :partial => "relics/show/subrelics"
-    = render :partial => "relics/show/categories"
-    = render :partial => "relics/show/alerts"
-    = render :partial => "relics/show/events"
-    = render :partial => "relics/show/documents"
+    - if relic.is_a?(OriginalRelic)
+      .original-version
+        %a{:href => relic_path(params[:id]), :class => "btn"}= t('views.relics.show.view_current_version')
+        .content
+          %h3= t('views.relics.show.original_version')
+          %p= t('views.relics.show.original_version_info')
+    #fancybox
+    - unless cookies[:flash_hidden]
+      .row
+        .flash.flash-info.flash-info-permament
+          %span{:class => "close", :"data-dismiss" => 'flash-info-permament'}=t('views.relics.show.flash_hide')
+          = image_tag 'notice-icon-info.png', :class => 'flash-icon'
+          = image_tag 'notice-separator.png', :class => 'flash-separator'
+          .flash-content
+            = t('views.relics.show.flash_content_html')
+    .oz-padding-ereaser
+      .col-md-8
+        = render :partial => "relics/show/general"
+      .col-md-4
+        = render :partial => "relics/show/photos"
+    .second-row
+      .col-md-8
+        = render :partial => "relics/show/description"
+        = render :partial => "relics/show/entries"
+        = render :partial => "relics/show/links"
+        = render :partial => "relics/show/widgets"
+      .col-md-4
+        = render :partial => "relics/show/subrelics"
+        = render :partial => "relics/show/categories"
+        = render :partial => "relics/show/alerts"
+        = render :partial => "relics/show/events"
+        = render :partial => "relics/show/documents"
