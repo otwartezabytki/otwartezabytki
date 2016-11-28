@@ -32,24 +32,20 @@
 @import "application/oz-widgets";
 @import "application/widgets/oz-walking-guide-new";
 @import "application/widgets/oz-direction-widget";
+@import "application/oz-contrast";
 
 
 
-@import "responsor/awesomefonts/font-awesome";
+@import "responser/awesomefonts/font-awesome";
 
 
 .bootstrap-iso {
-  @import "responsor/bootstrap";
+  @import "responser/bootstrap";
 }
 // ng-cloak directive
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
 }
-
-.js-remove-their-container {
-  content: "remove";
-}
-
 
 i18n.on {
   background-color: red !important;

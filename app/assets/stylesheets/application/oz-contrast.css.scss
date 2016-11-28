@@ -1,0 +1,81 @@
+.oz-change-contrast {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+@mixin white-on-blue {
+  color: white !important;
+  background: blue !important;
+}
+
+@mixin white-on-black {
+  color: white !important;
+  background: black !important;
+}
+
+@mixin black-on-white {
+  color: black !important;
+  background: white !important;
+}
+
+@mixin black-on-yellow {
+  color: black !important;
+  background: #ff0 !important;
+}
+
+.oz-contrast-changed {
+  background-color: #ff0 !important;
+  a {
+    color: #00c !important;
+  }
+  a:hover, .oz-fb-btn:hover, .accept-cookies:hover {
+    text-decoration: underline !important;
+    color: black !important;
+  }
+  a:focus, a:active,
+  .oz-fb-btn:focus, .oz-fb-btn:active,
+  .accept-cookies:focus, .accept-cookies:active {
+    @include white-on-blue;
+    text-decoration: none !important;
+  }
+
+  .oz-fb-btn, .accept-cookies {
+    @include white-on-black;
+    font-weight: bold !important;
+  }
+  section, p, .row, form, .relic-example, .top {
+    @include black-on-yellow;
+  }
+  input {
+    @include white-on-black;
+  }
+  ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: white;
+  }
+  :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: white;
+    opacity: 1;
+  }
+  ::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: white;
+    opacity: 1;
+  }
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: white;
+  }
+  .welcome {
+    h3, div {
+      color: black !important;
+    }
+  }
+  .footer-language {
+    color: black !important;
+    select {
+      opacity: 1;
+    }
+  }
+  .widgets-intro ul li, .widgets-intro ul li span {
+    @include black-on-white;
+  }
+}

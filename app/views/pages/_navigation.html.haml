@@ -2,7 +2,7 @@
   %li.dropdown
     = link_to t("layouts.application.#{page.name}"), '#',
       class: "oz-#{page.name} #{'current' if current_page?(page)} dropdown dropdown-tip",
-      'data-hover' => 'dropdown', 'data-delay-in' => 400, 'data-delay-out' => 200
+      'data-hover' => 'dropdown', 'data-delay-in' => 400, 'data-delay-out' => 200,"data-toggle" => "dropdown", "role" => "menu"
     %ul.dropdown-menu
       - page.subpages.each do |subpage|
         %li= link_to subpage.title.presence || subpage.name.titleize, subpage,
