@@ -1,4 +1,5 @@
 # TODO: move all vendor requires to files where they're actually used
+
 #= require vendor/browser-update
 #= require jquery
 #= require jquery_ujs
@@ -15,6 +16,7 @@
 #= require jquery.ui.progressbar
 #= require jquery.ui.sortable
 #= require jquery-form
+
 #= require_tree ./vendor
 #= require js-routes
 #= require twitter/bootstrap/bootstrap-tooltip
@@ -32,6 +34,8 @@
 #= require angular-sanitize
 #= require angular-cookies
 #= require angular-prevent-default
+#= require oz-container-helper
+
 #= require angular-google-maps
 #= require angular-dragdrop
 #= require angular-ui-sortable
@@ -45,8 +49,8 @@
 #= require bootstrap-sprockets
 
 # priv js
-#= require oz-container-helper
 #= require oz-edit-modal-request
+
 
 # FIX data-dismiss
 $(document).on 'click', '[data-dismiss]', (e) ->
