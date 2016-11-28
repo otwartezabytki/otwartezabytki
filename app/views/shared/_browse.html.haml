@@ -1,6 +1,6 @@
 - cache [I18n.locale, "browse-list"] do
   - relics =  Search.new(:per_page => 1, :load => false).perform
-  #browse-list{:style => ('display:none;')}
+  #oz-browse-list{:style => ('display:none;')}
     .categories-list
       %h3= t('views.relics.index.categories')
       - categories_hash = categories_facets_hash_for(relics)

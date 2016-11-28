@@ -1,0 +1,18 @@
+%li.hidden-md.hidden-sm.hidden-xs
+  = image_tag "icon-text-plus.png", :class => 'js-plus oz-plus'
+%li.hidden-md.hidden-sm.hidden-xs
+  = image_tag "icon-text-minus.png", :class => 'js-minus oz-minus'
+- if current_user && current_user.registered? && current_user.errors.size == 0
+  %li
+    = link_to t('layouts.application.hello', :username => (current_user.username || current_user.email)), current_user
+  %li= link_to t('layouts.application.logout'), destroy_user_session_path, :method => :delete, :class => 'logout'
+
+- else
+  %li
+    %a{:href => new_user_session_path(return_path: with_return_path), :class => 'oz-login'}
+      = t('layouts.application.login')
+  %li
+    %a{:href => new_user_registration_path(return_path: with_return_path), :class => 'oz-register'}
+      = t('layouts.application.register')
+  %li
+    = link_to t('layouts.application.facebook_sign_in'), user_omniauth_authorize_path(:facebook), :class => "oz-fb-btn"

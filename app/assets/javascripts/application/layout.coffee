@@ -1,11 +1,11 @@
 jQuery ->
   # font resize
   toggleFontResizeButtons = () ->
-    $("span.plus, span.minus").removeClass("disabled")
-    $("span.minus").addClass("disabled") unless $.cookie("font-size")
-    $("span.plus").addClass("disabled") if $.cookie("font-size") == "bigger"
+    $(".js-plus, .js-minus").removeClass("oz-disabled")
+    $(".js-minus").addClass("oz-disabled") unless $.cookie("font-size")
+    $(".js-plus").addClass("oz-disabled") if $.cookie("font-size") == "bigger"
 
-  $("span.plus").click ->
+  $(".js-plus").click ->
     size = if $.cookie("font-size") == null then "big" else "bigger"
     $.cookie("font-size", size)
     $("body")
@@ -21,7 +21,7 @@ jQuery ->
     sessionStorage.setItem("accept_cookies", "true")
     $("#cookies").hide('slow')
 
-  $("span.minus").click ->
+  $(".js-minus").click ->
     size = if $.cookie("font-size") == "bigger" then "big" else null
     $.cookie("font-size", size)
     $("body")
@@ -41,9 +41,9 @@ jQuery.initializer '#footer', ->
     timeout:  4000
 
 jQuery.initializer '#menu', ->
-  this.find('a.browse').click (e) ->
+  this.find('a.js-browse').click (e) ->
     e.preventDefault()
-    filter = $("div#browse-list")
+    filter = $("div#oz-browse-list")
     link = $(this)
     if link.hasClass "shown"
       filter.slideUp()
