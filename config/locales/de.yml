@@ -1673,7 +1673,9 @@ de:
           save_and_print: "Route speichern und ausdrucken"
           loading_relics: "Liste der Baudenkmäler laden"
           create_new_widget: "neue Route anlegen"
+          create_new_widget_xs: "neue Route"
           sign_in: "EINLOGGEN, UM DIE STRECKE ZU SPEICHERN"
+          sign_in_xs: "EINLOGGEN"
         generated: "Code für die Einbindung in eine andere Seite generieren"
         map_search:
           header: "Wähle die Einstellungen für das Steuerungselement"

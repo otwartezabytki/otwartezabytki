@@ -1385,12 +1385,13 @@ p#adding-note {
       }
     }
     #main {
-      > .container {
-
-
+      >.their-container {
+        width: 100%;
         .top {
           @include gradient(#577787, #436271);
           .container {
+            width: 960px;
+            margin: 0 auto;
             position: relative;
           }
           .relic-bg {

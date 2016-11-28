@@ -123,3 +123,10 @@ section.oz-widgets {
     }
   }
 }
+
+//chrome hack for overflowing content
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  section.oz-widgets .content .widgets .widget{
+    overflow: hidden;
+  }
+}

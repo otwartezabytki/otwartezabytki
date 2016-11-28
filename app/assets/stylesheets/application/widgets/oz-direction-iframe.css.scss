@@ -1,0 +1,92 @@
+.oz-no-padding{
+  padding: 0;
+}
+.oz-iframe-dir-widget {
+  .logo {
+    width: 100%;
+    display: inline-flex;
+    img {
+      top: 2px;
+      position: relative;
+      margin: 0 auto;
+    }
+  }
+  form.formtastic.search {
+    width: auto;
+    h2 {
+      margin: 5px;
+    }
+    .route-type {
+      text-align: center;
+      padding-left: 0;
+      label.route-type__choice {
+        float: unset;
+        display: inline-flex;
+      }
+    }
+    #waypoints .waypoint {
+      width: 80%;
+      max-width: 200px;
+    }
+    .categories span {
+      font-weight: normal;
+    }
+  }
+  .oz-sidebar {
+    margin-right: 1px;
+  }
+  .oz-map {
+    height: 1000px;
+    margin-left: -1px;
+    padding-left: 1px;
+    border-left: 1px solid #868584;
+
+  }
+}
+
+
+@media screen and (min-width: 992px) {
+  .oz-iframe-dir-widget {
+    .oz-map {
+      height: 1000px;
+    }
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  .oz-iframe-dir-widget .oz-map {
+    height: 600px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .container-fluid {
+    padding: 0;
+  }
+   .oz-iframe-dir-widget {
+     .oz-sidebar {
+       text-align: center;
+     }
+     form.formtastic.search {
+       width: 100%;
+       section.search {
+         & h2:first-child {
+           border-top: none;
+         }
+       }
+     }
+     section.categories .search-input {
+       text-align: justify;
+       display: inline-block;
+     }
+    .oz-map {
+      border: none;
+      margin-top: 10px;
+      height: 400px;
+      .relic-info {
+        width: unset;
+        .relic-info-content h3 {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}

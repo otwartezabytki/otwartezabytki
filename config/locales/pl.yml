@@ -1680,7 +1680,9 @@ pl:
           save_and_print: "Zapisz i wydrukuj trasę"
           loading_relics: "Ładuję listę zabytków"
           create_new_widget: "Stwórz kolejną trasę"
+          create_new_widget_xs: "Nowa trasa"
           sign_in: "Zaloguj się aby móc zapisać trasę"
+          sign_in_xs: "Zaloguj"
         preview: "Podgląd wygenerowanego widżetu"
       index:
         about: "Widżety:"
