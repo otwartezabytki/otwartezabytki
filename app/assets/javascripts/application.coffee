@@ -45,9 +45,10 @@
 #= require_tree ./angular
 
 # bootstrap js
+#= require jquery-1.9.1
 #= require bootstrap.js
 #= require bootstrap-sprockets
-
+jq191 = jQuery.noConflict(true)
 # priv js
 #= require oz-edit-modal-request
 #= require oz-contrast-changer
