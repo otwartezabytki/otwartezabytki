@@ -229,7 +229,7 @@ section.show.photos {
       @include gradient(#41a223, #399a1b);
       border-radius: 2px;
       display: inline-block;
-      margin: 190px 0 0;
+      margin: 344px 0 0;
       &:hover {
         color: #fff;
         background: #399a1b;
@@ -284,5 +284,11 @@ section.show.photos {
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   section.show.general .print-guide::before {
     left: 27px;
+  }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1200px) {
+  section.show.photos .placeholder a {
+    margin: 362px 0 0;
   }
 }
