@@ -23,11 +23,9 @@ jQuery.initializer '.js-close-edit-relic', ->
     $('#edit-relic-modal').modal('hide')
 
 $('#edit-relic-modal').on 'hidden.bs.modal', ->
-  console.log("weszlo w hidden")
   $.ajax(window.location.href).success(ajax_callback).complete(-> popping_state = false)
 
 $('#edit-relic-modal').on 'hide.bs.modal', ->
-  console.log("weszlo w hide")
   $form = $('.modal-body form:first')
   if serialized_data = $form.data('serialized')
     if serialized_data != $form.serialize()
