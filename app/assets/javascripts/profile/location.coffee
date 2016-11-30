@@ -59,7 +59,6 @@ $.fn.specialize
       this.circle_marker(latitude, longitude)
 
     circle_marker: (latitude, longitude) ->
-      console.log 'hello'
       map.circle_lat = latitude
       map.circle_lng = longitude
       map.addMarker
@@ -136,7 +135,6 @@ window.ensure_geolocation = ->
         $('#map_canvas').auto_zoom(17)
 
 jQuery.initializer 'section.oz-edit.location', ->
-  console.log 'hello 0'
   $('#relic_place_id').select2()
   $('#relic_place_id').change ->
     $('#relic_street').val("")
