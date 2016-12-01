@@ -4,9 +4,8 @@
     %meta(charset="utf-8")
     = csrf_meta_tags
     - if controller_name == "directions"
-      = javascript_include_tag "widgets/oz-direction"
-      = stylesheet_link_tag "responser/_bootstrap", :media => "all"
-    = stylesheet_link_tag "application/widgets/oz-direction-iframe", :media => "all"
+      = stylesheet_link_tag "for-iframe/include-BS", :media => "all"
+    = stylesheet_link_tag "for-iframe/oz-direction-iframe", :media => "all"
     /[if lt IE 9]
       = javascript_include_tag "http://html5shim.googlecode.com/svn/trunk/html5.js"
     = yield :stylesheets
