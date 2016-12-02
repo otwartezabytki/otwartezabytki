@@ -2,13 +2,17 @@
   background: white;
   width: 100%;
   height: auto;
-  overflow:auto;
+  overflow: auto;
   .col-md-8 {
     padding: 0 !important;
   }
   .col-md-4 {
     padding: 0 !important;
   }
+}
+
+.oz-relic-desc-photos {
+  display: inline-flex;
 }
 
 section.show.general {
@@ -52,6 +56,7 @@ section.show.general {
       }
     }
     .relic-info {
+      width: unset;
       margin-left: 10px;
       padding-left: 20px;
       font-size: 12px;
@@ -191,8 +196,8 @@ section.show.general {
       margin-bottom: 8px;
       padding: 6px 12px 0px 10px;
       &::before {
-        top:0;
-        left:0;
+        top: 0;
+        left: 0;
       }
     }
   }
@@ -203,36 +208,41 @@ section.show.photos {
   width: 100%;
   display: block;
   margin: 0 auto;
-  .content{
+  .content {
     position: relative;
     margin: 1px;
   }
   &.placeholder {
+    height: 99.9%;
     @include gradient(#e9e9e9, #dfdfdf);
     box-shadow: inset 0 0 40px 0 rgba(0, 0, 0, 0.2);
     text-align: center;
-    .ico {
-      position: absolute;
-      width: 96px;
-      height: 76px;
-      background: asset-data-url("edit-relic-ico-photo.png") no-repeat;
-      top: 100px;
-      left: 100px;
-    }
-    a {
-      min-width: 150px;
-      text-transform: uppercase;
-      text-shadow: 0 1px 0 rgba(30, 110, 6, 0.5);
-      color: #fff;
-      font-size: 12px;
-      padding: 8px 10px;
-      @include gradient(#41a223, #399a1b);
-      border-radius: 2px;
-      display: inline-block;
-      margin: 344px 0 0;
-      &:hover {
+    position: relative;
+    .content {
+      top: 50%;
+      transform: translateY(-50%);
+      .ico {
+        margin: 0 auto;
+        width: 96px;
+        height: 76px;
+        background: asset-data-url("edit-relic-ico-photo.png") no-repeat;
+        top: 100px;
+        left: 100px;
+      }
+      a {
+        min-width: 150px;
+        text-transform: uppercase;
+        text-shadow: 0 1px 0 rgba(30, 110, 6, 0.5);
         color: #fff;
-        background: #399a1b;
+        font-size: 12px;
+        padding: 8px 10px;
+        @include gradient(#41a223, #399a1b);
+        border-radius: 2px;
+        display: inline-block;
+        &:hover {
+          color: #fff;
+          background: #399a1b;
+        }
       }
     }
   }
@@ -257,15 +267,15 @@ section.show.photos {
   }
 }
 
-.main-photo span{
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    padding: 8px;
-    color: #fff;
-    font-size: 12px;
-    font-weight: 600;
-    background: rgba(0,0,0,0.5);
+.main-photo span {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: 8px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .oz-photo-container {
@@ -275,13 +285,13 @@ section.show.photos {
   position: relative;
 }
 
-.oz-relic-border-line{
+.oz-relic-border-line {
   border-top: 3px solid #486a7c;
   margin-top: 1px;
 }
 
 //chrome hack for print icon
-@media screen and (-webkit-min-device-pixel-ratio:0) {
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
   section.show.general .print-guide::before {
     left: 27px;
   }
@@ -290,5 +300,23 @@ section.show.photos {
 @media screen and (min-width: 992px) and (max-width: 1200px) {
   section.show.photos .placeholder a {
     margin: 362px 0 0;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  section.show.general {
+    border-right: none;
+    border-bottom: 2px solid #486a7c;
+  }
+  .oz-relic-desc-photos {
+    display: inline-block;
+    section.show.photos.placeholder .content {
+      transform: unset;
+      margin: 10px 0;
+      padding: 15px 0;
+    }
+  }
+  .second-row {
+    display: block;
   }
 }
