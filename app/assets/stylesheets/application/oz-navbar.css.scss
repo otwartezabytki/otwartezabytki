@@ -99,12 +99,13 @@ section.oz-disclaimer {
   position: relative;
   font-size: 12px;
   line-height: 15px;
-  height: 74px;
+  min-height: 74px !important;
   color: #524d49;
   border-radius: 4px 4px 0 0;
   border: 1px solid #f6e3d0;
   border-bottom: none;
   padding-top: 10px;
+  padding-bottom: 10px;
   background: #f6ead4;
   background: linear-gradient(to bottom, #f6ead4 88%, #efdab4 100%);
   a {
