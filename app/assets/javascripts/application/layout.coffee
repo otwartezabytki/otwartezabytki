@@ -16,7 +16,7 @@ jQuery ->
     false
 
   if sessionStorage.getItem("accept_cookies") == null 
-    $("#cookies").css('display', 'block')
+    $("#cookies").css('display', 'inline-flex')
   $("#accept_cookies").click ->
     sessionStorage.setItem("accept_cookies", "true")
     $("#cookies").hide('slow')
