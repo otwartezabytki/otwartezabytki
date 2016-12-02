@@ -1,105 +1,108 @@
-.top
-  .container
-    .relic-bg
-    = semantic_form_for(tsearch, :url => relics_path, :method => :get, :id => 'form-search') do |f|
-      %h2= t('views.pages.home.header')
-      .field.subject
-        = f.input :q, :input_html => { :class => 'autocomplete-q'}
-      .field.place
-        = f.input :place, :input_html => { :class => 'autocomplete-place'}
-      .field
-        = link_to t('views.pages.home.how_it_works.title'), "#", :id => "how_it_works", :class => "js-popover how_it_works",
-          :"data-title-id" => "how_it_works_title", :"data-content-id" => "how_it_works_content"
-        %script{ :id => "how_it_works_title", :type => "text/html" }
-          %p.how-it-works-title= t('views.pages.home.how_it_works.title')
-          %p.close= link_to t('common.close'), "#", :class => "close_popover", :"data-popover-id" => "how_it_works"
-        %script{ :id => "how_it_works_content", :type => "text/html" }
-          .how-it-works-content
-            %h4.what= t('views.pages.home.how_it_works.what')
-            %p= t('views.pages.home.how_it_works.what_content')
-            %h4.where= t('views.pages.home.how_it_works.where')
-            %p= t('views.pages.home.how_it_works.where_content')
-        = f.action :submit, :label => t('formtastic.actions.search_html', :editable => false), :button_html => { :name => nil }
-    .relic-example
-      %h3= t('views.pages.home.soon_header')
-      - example_relic = Relic.random_filled
-      - if example_relic.present?
-        .relic-container
-          .image
-            = image_tag example_relic.main_photo.file.url(:icon)
-          .relic-content
-            .relic-heading
-              = link_to example_relic.identification, example_relic
-            .status{:class => example_relic.state }= example_relic.state_name
-            .location_name
-              %strong= t('views.relics.relics.location')
-              = format_localization(example_relic)
-            - if example_relic.dating_of_obj?
-              .date
-                %strong= t('views.relics.relics.create_date')
-                = example_relic.dating_of_obj
-    .welcome
-      %h3= t('views.pages.home.welcome.header')
-      .left= t('views.pages.home.welcome.text')
+.bootstrap-iso.js-remove-their-container.oz-main-site
+  .top
+    .container
+      -#.relic-bg
+      .col-md-6.col-md-offset-1.oz-main-search
+        = semantic_form_for(tsearch, :url => relics_path, :method => :get, :id => 'form-search') do |f|
+          %h2= t('views.pages.home.header')
+          .field.subject
+            = f.input :q, :input_html => { :class => 'autocomplete-q'}
+          .field.place
+            = f.input :place, :input_html => { :class => 'autocomplete-place'}
+          .field
+            = link_to t('views.pages.home.how_it_works.title'), "#", :id => "how_it_works", :class => "js-popover how_it_works",
+              :"data-title-id" => "how_it_works_title", :"data-content-id" => "how_it_works_content"
+            %script{ :id => "how_it_works_title", :type => "text/html" }
+              %p.how-it-works-title= t('views.pages.home.how_it_works.title')
+              %p.close= link_to t('common.close'), "#", :class => "close_popover", :"data-popover-id" => "how_it_works"
+            %script{ :id => "how_it_works_content", :type => "text/html" }
+              .how-it-works-content
+                %h4.what= t('views.pages.home.how_it_works.what')
+                %p= t('views.pages.home.how_it_works.what_content')
+                %h4.where= t('views.pages.home.how_it_works.where')
+                %p= t('views.pages.home.how_it_works.where_content')
+            = f.action :submit, :label => t('formtastic.actions.search_html', :editable => false), :button_html => { :name => nil }
+      .relic-example.col-md-4.oz-relic-example
+        %h3= t('views.pages.home.soon_header')
+        - example_relic = Relic.random_filled
+        - if example_relic.present?
+          .relic-container
+            .image
+              = image_tag example_relic.main_photo.file.url(:icon)
+            .relic-content
+              .relic-heading
+                = link_to example_relic.identification, example_relic
+              .status{:class => example_relic.state }= example_relic.state_name
+              .location_name
+                %strong= t('views.relics.relics.location')
+                = format_localization(example_relic)
+              - if example_relic.dating_of_obj?
+                .date
+                  %strong= t('views.relics.relics.create_date')
+                  = example_relic.dating_of_obj
+      .relic-bg
+      .welcome.col-md-10.col-md-offset-2
+        %h3= t('views.pages.home.welcome.header')
+        .left= t('views.pages.home.welcome.text')
 
-      .right
-        %ul
-          %li= t('views.pages.home.welcome.li1')
-          %li= t('views.pages.home.welcome.li2')
-          %li= t('views.pages.home.welcome.li3')
-          = link_to t('views.pages.home.welcome.more'), page_path('o-projekcie'), :class => 'btn'
-.widgets-intro
-  %ul
-    %li.first
-      %a{:href => widgets_path}
-        %span.title= t('views.pages.home.widgets_intro.widget.title')
-        %span.paragraph= t('views.pages.home.widgets_intro.widget.par')
-    %li.alerts
-      %a{:href => widgets_path}
-        %span.title= t('views.pages.home.widgets_intro.alert.title')
-        %span.paragraph= t('views.pages.home.widgets_intro.alert.par')
-    %li.map-search
-      = link_to widgets_map_searches_path, :method => :post do
-        %span.title= t('views.pages.home.widgets_intro.map.title')
-        %span.paragraph= t('views.pages.home.widgets_intro.map.par')
-    %li.add
-      = link_to widgets_add_relics_path, :method => :post do
-        %span.title= t('views.pages.home.widgets_intro.add.title')
-        %span.paragraph= t('views.pages.home.widgets_intro.add.par')
+        .right
+          %ul
+            %li= t('views.pages.home.welcome.li1')
+            %li= t('views.pages.home.welcome.li2')
+            %li= t('views.pages.home.welcome.li3')
+            = link_to t('views.pages.home.welcome.more'), page_path('o-projekcie'), :class => 'btn'
+  .widgets-intro
+    %ul
+      %li.first
+        %a{:href => widgets_path}
+          %span.title= t('views.pages.home.widgets_intro.widget.title')
+          %span.paragraph= t('views.pages.home.widgets_intro.widget.par')
+      %li.alerts
+        %a{:href => widgets_path}
+          %span.title= t('views.pages.home.widgets_intro.alert.title')
+          %span.paragraph= t('views.pages.home.widgets_intro.alert.par')
+      %li.map-search
+        = link_to widgets_map_searches_path, :method => :post do
+          %span.title= t('views.pages.home.widgets_intro.map.title')
+          %span.paragraph= t('views.pages.home.widgets_intro.map.par')
+      %li.add
+        = link_to widgets_add_relics_path, :method => :post do
+          %span.title= t('views.pages.home.widgets_intro.add.title')
+          %span.paragraph= t('views.pages.home.widgets_intro.add.par')
 
-.stats
-  %h2= t('views.pages.home.stats_info.header1')
-  .left
-    %h3= t('views.pages.home.stats_info.header2')
-    = render 'polish_map'
-  .right
-    - cache [I18n.locale, "recently-modified"] do
-      %h3= t('views.pages.home.recently_modified')
-      %ul.latest
-        - RecentRevision.revisions[0...-3].each do |revision|
-          = render partial: 'last_edited', locals: { revision: revision, hidden: true }
-        - RecentRevision.revisions.last(3).each do |revision|
-          = render partial: 'last_edited', locals: { revision: revision, hidden: false }
-  .progress-bar
-    .bg
-      .color{:style => "width: #{relic_stats[:checked] * 100 / relic_stats[:total].to_f}%"}
-    .checked{:style => "left: #{(relic_stats[:checked] * 900 / relic_stats[:total].to_f) + 16}px"}
-      = t('views.pages.home.stats_info.checked_html', :count => relic_stats[:checked])
-      .help
-        = image_tag 'ico-help.png'
-        .help-wrapper
-          %h3= t('views.relics.index.states.header')
-          %ul
-            %li=state_hint_tag('checked')
-    .total
-      = t('views.pages.home.stats_info.total_html', :count => relic_stats[:total])
-      = t('views.pages.home.stats_info.unchecked_html', :count => relic_stats[:unchecked])
-      .help
-        = image_tag 'ico-help.png'
-        .help-wrapper
-          %h3= t('views.relics.index.states.header')
-          %ul
-            %li=state_hint_tag('unchecked')
-- if Date.today < Date.new(2016,5,7)
-  .hidden
-    %a.fancybox-home-popup{href: "#{image_path('home-wizja-lokalna.jpg')}"}
+  .stats
+    %h2= t('views.pages.home.stats_info.header1')
+    .left
+      %h3= t('views.pages.home.stats_info.header2')
+      = render 'polish_map'
+    .right
+      - cache [I18n.locale, "recently-modified"] do
+        %h3= t('views.pages.home.recently_modified')
+        %ul.latest
+          - RecentRevision.revisions[0...-3].each do |revision|
+            = render partial: 'last_edited', locals: { revision: revision, hidden: true }
+          - RecentRevision.revisions.last(3).each do |revision|
+            = render partial: 'last_edited', locals: { revision: revision, hidden: false }
+    .progress-bar
+      .bg
+        .color{:style => "width: #{relic_stats[:checked] * 100 / relic_stats[:total].to_f}%"}
+      .checked{:style => "left: #{(relic_stats[:checked] * 900 / relic_stats[:total].to_f) + 16}px"}
+        = t('views.pages.home.stats_info.checked_html', :count => relic_stats[:checked])
+        .help
+          = image_tag 'ico-help.png'
+          .help-wrapper
+            %h3= t('views.relics.index.states.header')
+            %ul
+              %li=state_hint_tag('checked')
+      .total
+        = t('views.pages.home.stats_info.total_html', :count => relic_stats[:total])
+        = t('views.pages.home.stats_info.unchecked_html', :count => relic_stats[:unchecked])
+        .help
+          = image_tag 'ico-help.png'
+          .help-wrapper
+            %h3= t('views.relics.index.states.header')
+            %ul
+              %li=state_hint_tag('unchecked')
+  - if Date.today < Date.new(2016,5,7)
+    .hidden
+      %a.fancybox-home-popup{href: "#{image_path('home-wizja-lokalna.jpg')}"}

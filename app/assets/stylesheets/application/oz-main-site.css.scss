@@ -1,0 +1,746 @@
+.resource_home {
+  .page {
+    #menu {
+      #new_relic {
+        display: none;
+      }
+    }
+    #main {
+      .oz-main-site {
+        width: 100%;
+        .top {
+          @include gradient(#577787, #436271);
+          .container {
+            margin: 0 auto;
+            position: relative;
+
+            .relic-bg {
+              position: absolute;
+              width: 361px;
+              height: 239px;
+              background: image-url("header-relic.png") no-repeat;
+              left: -220px;
+              bottom: -15px;
+            }
+            .more {
+              float: left;
+              width: 480px;
+              background: image-url("home-arrow.png") no-repeat 115px 188px;
+              min-height: 285px;
+              h2 {
+                margin: 40px 0 20px;
+                font-size: 26px;
+                font-weight: 600;
+                text-shadow: 0.5px 1px 2px rgba(0, 0, 0, 0.2);
+                text-transform: uppercase;
+                color: #f5f5f5;
+              }
+              p {
+                font-size: 16px;
+                text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+                color: #f5f5f5;
+                line-height: 30px;
+                strong {
+                  font-weight: 600;
+                }
+              }
+              #more-button {
+                float: right;
+                margin: 15px 40px;
+                a {
+                  color: #044d71;
+                  display: block;
+                  line-height: 40px;
+                  width: 207px;
+                  text-align: center;
+                  text-shadow: 0 -1px 1px rgb(255, 255, 255);
+                  font-size: 17px;
+                  border-radius: 3px;
+                  @include gradient(#f9f9f9, #cccccc);
+                  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);
+                  transition: all .2s ease-in;
+                  &:hover {
+                    text-decoration: none;
+                    box-shadow: 0 2px 20px 0 rgba(255, 255, 255, 0.3);
+                  }
+                }
+              }
+            }
+          }
+          .video {
+            box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.3);
+            position: absolute;
+            right: 85px;
+            top: 30px;
+            padding: 0;
+          }
+          #tabs {
+            margin-left: 480px;
+            &.ui-tabs {
+              padding: 0;
+              &.ui-widget-content, .ui-widget-header {
+                background: none;
+                border: 0;
+              }
+              .ui-tabs-nav {
+                margin-top: 35px;
+                float: right;
+                li {
+                  float: none;
+                  margin-bottom: 5px;
+                  border: 0;
+                  background: none;
+                  a {
+                    text-indent: -9999px;
+                    float: none;
+                    display: block;
+                    padding: 0;
+                    width: 105px;
+                    height: 60px;
+                    border: 3px solid #617d8d;
+                    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);
+                    opacity: .5;
+                    transition: all .2s ease-in;
+                  }
+                  &.ui-tabs-selected {
+                    padding: 0;
+                    a {
+                      opacity: 1;
+                      margin-left: 10px;
+                    }
+                  }
+                  &.ui-state-hover {
+                    a {
+                      opacity: .8;
+                    }
+                  }
+                }
+              }
+              .video.ui-tabs-panel {
+                border: 4px solid #698796;
+                box-shadow: 0 5px 30px 0 rgba(0, 0, 0, 0.2);
+                iframe {
+                  opacity: 0;
+                  position: absolute;
+                  top: 0;
+                  right: 0;
+                }
+              }
+            }
+          }
+          .step1 {
+            margin: 0 30px 30px;
+            background: asset-data-url('form-search-bg.png') no-repeat;
+            padding: 35px 135px;
+            display: inline-block;
+            h3 {
+              color: #46687a;
+              font-weight: 600;
+              font-size: 22px;
+              text-transform: uppercase;
+              span {
+                color: $dark-grey;
+                text-transform: none;
+              }
+            }
+            p {
+              font-style: italic;
+              font-weight: 600;
+              margin: 5px 0 5px;
+              &.examples {
+                font-weight: 400;
+                font-style: normal;
+                a {
+                  font-weight: 600;
+                  text-decoration: underline;
+                }
+              }
+              &.adding {
+                margin: 7px 0 20px 90px;
+                font-style: normal;
+                font-weight: normal;
+              }
+            }
+            .form-search {
+              float: left;
+              margin-left: 0;
+              margin-bottom: 15px;
+              .search-query {
+                width: 462px;
+                font-size: 16px;
+                padding: 11px 7px 11px 40px;
+              }
+              .btn {
+                font-size: 16px;
+                padding: 9px 16px 7px 19px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+body.resource_home {
+  .oz-main-site {
+    .oz-main-search {
+      padding: 0;
+      .formtastic {
+        width: 100%;
+      }
+    }
+    #new_search {
+      margin-top: 33px;
+      float: left;
+      padding: 35px 35px 49px 40px;
+      @include gradient(#ffffff, #f2f2f2);
+      box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.3);
+      position: relative;
+      &::after {
+        content: '';
+        position: absolute;
+        width: 128px;
+        height: 29px;
+        background: asset-data-url("form-arrow.png") no-repeat;
+        top: 28px;
+        right: 15px;
+      }
+      &::before {
+        content: '';
+        position: absolute;
+        width: 398px;
+        height: 309px;
+        background: asset-data-url("form-bg.png") no-repeat;
+        bottom: -120px;
+        left: 0px;
+      }
+      h2 {
+        font-size: 30px;
+        font-weight: 600;
+        margin-bottom: 20px;
+      }
+      label {
+        font-size: 16px;
+        font-weight: 600;
+        float: left;
+      }
+      span.block {
+        font-size: 13px;
+        text-align: right;
+        display: block;
+      }
+      input[type="text"] {
+        @include gradient(#fafafa, #ffffff);
+        border-radius: 2px;
+        border: 1px solid #727272;
+        height: 38px;
+        position: relative;
+        padding: 0 15px 0 30px;
+        font-size: 13px;
+        margin: 8px 0 15px;
+        width: 100%;
+      }
+      #search_q {
+        background: image-url("form-input-what-bg.png") 10px 11px no-repeat, linear-gradient(to bottom, #fafafa, #ffffff);
+        z-index: 12;
+      }
+      #search_place {
+        background: image-url("form-input-where-bg.png") 12px 12px no-repeat, linear-gradient(to bottom, #fafafa, #ffffff);
+      }
+      .action {
+        list-style-type: none;
+        input {
+          float: right;
+          margin: 0;
+          @include gradient(#4b6d7e, #436576);
+          color: #fff;
+          border: 0;
+          font-size: 12px;
+          font-weight: 600;
+          text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
+          text-transform: uppercase;
+          border-radius: 2px;
+          padding: 10px 16px 9px 19px;
+          cursor: pointer;
+          &:hover {
+            @include gradient(#437994, #2b607b);
+          }
+          &:active {
+            @include gradient(#2b607b, #437893);
+          }
+        }
+      }
+      .how_it_works {
+        padding-top: 15px;
+        float: left;
+        position: relative;
+        z-index: 1;
+      }
+    }
+    .relic-example {
+      @include gradient(#fafbfc, #e5e5e5);
+      margin-top: 40px;
+      float: left;
+      padding: 15px 20px 80px;
+      position: relative;
+      overflow: hidden;
+      h3 {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 20px;
+      }
+      .image {
+        float: left;
+        width: 56px;
+        height: 56px;
+        border: 3px solid #fff;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);
+        border-radius: 2px;
+      }
+      .relic-content {
+        margin-left: 75px;
+        font-size: 13px;
+        line-height: 15px;
+        .relic-heading {
+          margin-bottom: 10px;
+        }
+        a {
+          font-size: 15px;
+          font-weight: 600;
+          line-height: 18px;
+        }
+        strong {
+          font-weight: 600;
+        }
+        .location_name, .date {
+          padding-left: 20px;
+          margin-top: 15px;
+        }
+        .location_name {
+          background: asset-data-url("edit-relic-ico-location.png") no-repeat;
+        }
+        .date {
+          background: asset-data-url("icon-calendar.png") no-repeat;
+        }
+        .status {
+          color: #fff;
+          text-transform: uppercase;
+          display: inline-block;
+          font-size: 11px;
+          line-height: 19px;
+          padding: 0 8px;
+          font-weight: normal;
+          border-radius: 3px;
+          text-shadow: rgba(0, 0, 0, 0.3) 0 1px 1px;
+          box-shadow: inset rgba(0, 0, 0, 0.4) 0 1px 3px;
+          &.unchecked {
+            @include gradient(#a3a4a6, #c1c3c5);
+          }
+          &.checked {
+            @include gradient(#e0a876, #fec695);
+          }
+          &.filled {
+            @include gradient(#90b86e, #afd78c);
+          }
+        }
+      }
+    }
+    .welcome {
+      display: inline-block;
+      margin-top: 25px;
+      h3 {
+        color: #f5f5f5;
+        font-size: 26px;
+        font-weight: 600;
+        text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.3);
+        margin-bottom: 10px;
+      }
+      .left, .right {
+        width: 380px;
+        float: left;
+        color: #fff;
+        font-size: 16px;
+        line-height: 26px;
+      }
+      .left {
+        margin-right: 20px;
+      }
+      strong {
+        font-weight: 700;
+      }
+      .right {
+        li {
+          background: asset-data-url("welcome-li.png") 0 5px no-repeat;
+          padding-left: 25px;
+        }
+        .btn {
+          padding: 10px;
+          color: #044d71;
+          font-size: 16px;
+          text-shadow: 0 1px 1px #fff;
+          @include gradient(#f6f6f6, #d1d1d1);
+          border-radius: 4px;
+          border: 0;
+          float: left;
+          margin: 25px 0 30px;
+          box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.5), inset 0 -1px 2px 0 rgba(0, 0, 0, 0.3);
+          &:hover {
+            @include gradient(#ffffff, #ebebeb);
+            text-decoration: none;
+          }
+          &:active {
+            @include gradient(#d9d9d9, #fefefe);
+          }
+        }
+      }
+    }
+    .widgets-intro {
+      margin: 70px auto 0;
+      display: inline-flex;
+      width: 100%;
+      ul {
+        display: inline-block;
+        margin: 0 auto;
+        box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.3);
+        li {
+          float: left;
+          background: #fff;
+          height: 190px;
+          width: 254px;
+          a {
+            display: block;
+            padding: 20px;
+            &:hover {
+              text-decoration: none;
+            }
+          }
+          .paragraph {
+            line-height: 20px;
+            display: block;
+            color: #313132;
+          }
+          &.first {
+            background: image-url("intro-widgets-bg.png") no-repeat;
+            text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.3);
+            a {
+              color: #fff;
+            }
+            .paragraph {
+              color: #fff;
+            }
+            .title {
+              font-weight: 700;
+              font-size: 18px;
+              margin-bottom: 15px;
+              display: block;
+            }
+          }
+          &.alerts, &.map-search, &.add {
+            .title {
+              margin-top: 5px;
+              padding-left: 45px;
+              font-size: 20px;
+              font-weight: 700;
+              line-height: 36px;
+              margin-bottom: 15px;
+              display: block;
+              color: #313132;
+            }
+          }
+          &.alerts {
+            border-right: 1px solid #e5e5e5;
+            .title {
+              background: image-url("intro-alerts.png") no-repeat;
+            }
+          }
+          &.map-search {
+            border-right: 1px solid #e5e5e5;
+            .title {
+              background: image-url("intro-mapsearch.png") no-repeat;
+            }
+          }
+          &.add {
+            .title {
+              background: image-url("intro-add.png") no-repeat;
+            }
+          }
+        }
+      }
+    }
+    .stats {
+      width: 958px;
+      border: 1px solid rgb(220, 220, 220);
+      background: #fff;
+      margin: 28px auto;
+      h2 {
+        line-height: 75px;
+        text-align: center;
+        border-bottom: 1px solid #e5e5e5;
+        font-weight: 700;
+        font-size: 26px;
+      }
+      .left {
+        float: left;
+        width: 476px;
+        h3 {
+          font-weight: 600;
+          font-size: 20px;
+          text-align: center;
+          line-height: 50px;
+        }
+        #map-poland {
+          h3 {
+            color: #47697b;
+            font-size: 16px;
+            line-height: 22px;
+            font-weight: 700;
+            text-align: left;
+            margin-bottom: 10px;
+          }
+        }
+      }
+      .right {
+        width: 481px;
+        height: 410px;
+        margin-left: 476px;
+        border-left: 1px solid #e5e5e5;
+        overflow: hidden;
+        h3 {
+          font-weight: 600;
+          font-size: 20px;
+          text-align: center;
+          line-height: 50px;
+        }
+        .latest {
+          li {
+            padding: 20px 15px;
+            border-top: 1px solid #e5e5e5;
+            overflow: hidden;
+            &.to-show {
+              display: none;
+            }
+            .image {
+              float: left;
+              width: 56px;
+              height: 56px;
+              border: 3px solid #fff;
+              box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);
+              border-radius: 2px;
+            }
+            .relic-content {
+              margin-left: 75px;
+              font-size: 13px;
+              line-height: 15px;
+              min-height: 60px;
+              .title {
+                font-weight: 700;
+              }
+              .change {
+                padding: 3px 20px 4px 25px;
+                background: #fffadf;
+                margin: 5px 0;
+                float: left;
+                &.added {
+                  background: #fffadf asset-data-url("change-added.png") 5px 4px no-repeat;
+                }
+                &.edited {
+                  background: #fffadf asset-data-url("change-edited.png") 5px 4px no-repeat;
+                }
+                &.success {
+                  background: #fffadf asset-data-url("change-success.png") 5px 4px no-repeat;
+                }
+                .status {
+                  color: #fff;
+                  text-transform: uppercase;
+                  display: inline-block;
+                  font-size: 11px;
+                  line-height: 19px;
+                  padding: 0 8px;
+                  font-weight: normal;
+                  border-radius: 3px;
+                  text-shadow: rgba(0, 0, 0, 0.3) 0 1px 1px;
+                  box-shadow: inset rgba(0, 0, 0, 0.4) 0 1px 3px;
+                  &.filled {
+                    @include gradient(#82a663, #a1c481);
+                  }
+                  &.checked {
+                    @include gradient(#ca7a32, #fbab63);
+                  }
+                  &.unchecked {
+                    @include gradient(#7d7f7f, #9c9d9d);
+                  }
+                }
+              }
+              p {
+                display: inline-block;
+                width: 100%;
+              }
+              a {
+
+                width: 100%;
+                color: #1a1a1a;
+                text-decoration: underline;
+              }
+              em {
+                font-style: italic;
+              }
+            }
+          }
+        }
+      }
+    }
+    .progress-bar {
+      border-top: 1px solid #e5e5e5;
+      padding: 73px 30px 36px 28px;
+      position: relative;
+      display: inline-block;
+      .bg {
+        background: image-url("progress-bar-grey.png") no-repeat;
+        width: 900px;
+        height: 25px;
+        z-index: 2;
+        position: relative;
+        .color {
+          background: image-url("progress-bar-color.png") no-repeat;
+          height: 25px;
+        }
+      }
+      div.checked {
+        position: absolute;
+        background: asset-data-url("icon-relic-checked.png") no-repeat;
+        min-height: 76px;
+        padding-left: 30px;
+        top: 20px;
+        span.count {
+          color: #3976b1;
+          font-size: 24px;
+          font-weight: 700;
+          display: block;
+        }
+
+      }
+      div.filled {
+        position: absolute;
+        background: asset-data-url("icon-relic-filled.png") no-repeat;
+        min-height: 48px;
+        padding-left: 30px;
+        padding-top: 20px;
+        bottom: 30px;
+        span.count {
+          color: #168710;
+          font-size: 24px;
+          font-weight: 700;
+          display: block;
+        }
+      }
+      div.checked, div.filled, div.total {
+        z-index: 2;
+        .help {
+          position: relative;
+          display: inline;
+          &:hover {
+            .help-wrapper {
+              display: block;
+            }
+          }
+          .help-wrapper {
+            position: absolute;
+            display: none;
+            width: 368px;
+            left: 25px;
+            top: -25px;
+            padding: 16px 0;
+            z-index: 11;
+            border-radius: 5px;
+            border: 1px solid #acacac;
+            box-shadow: rgba(0, 0, 0, 0.45) 0 3px 15px, inset #fff 0 1px 1px -1px;
+            @include gradient(rgba(246, 247, 248, 0.95), rgba(234, 234, 235, 0.95));
+            &:before {
+              content: "";
+              background: asset-data-url("bg-search-help-triangle.png") no-repeat;
+              width: 18px;
+              height: 18px;
+              display: block;
+              position: absolute;
+              left: -10px;
+              top: 22px;
+            }
+            a.close {
+              position: absolute;
+              top: 16px;
+              right: 20px;
+              z-index: 10;
+              color: #af0c0c;
+              font-size: 12px;
+            }
+            h3 {
+              margin-left: 18px;
+              text-align: left;
+            }
+            li {
+              @include clearfix;
+              margin: 9px 0;
+            }
+            .tag {
+              float: left;
+              text-align: right;
+              width: 126px;
+              span {
+                color: #fff;
+                text-transform: uppercase;
+                display: inline-block;
+                font-size: 11px;
+                line-height: 19px;
+                padding: 0 8px;
+                font-weight: normal;
+                border-radius: 3px;
+                text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+                box-shadow: inset rgba(0, 0, 0, 0.4) 0 1px 3px;
+                &.unchecked {
+                  @include gradient(#a3a4a6, #c1c3c5);
+                }
+                &.checked {
+                  @include gradient(#e0a876, #fec695);
+                }
+                &.filled {
+                  @include gradient(#90b86e, #afd78c);
+                }
+              }
+            }
+            .text {
+              font-size: 13px;
+              width: 210px;
+              float: right;
+              font-weight: normal;
+              line-height: 18px;
+              margin-right: 19px;
+            }
+          }
+        }
+      }
+      div.total {
+        text-align: right;
+        color: #9a9a9a;
+        margin-top: 10px;
+        span {
+          font-size: 24px;
+          display: block;
+          font-weight: 700;
+        }
+        strong {
+          font-weight: 700;
+        }
+        .help .help-wrapper {
+          color: #313132;
+          left: -383px;
+          &:before {
+            content: "";
+            background: asset-data-url("bg-search-help-triangle-right.png") no-repeat;
+            left: 368px;
+          }
+        }
+      }
+    }
+  }
+}
