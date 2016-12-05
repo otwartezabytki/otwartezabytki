@@ -209,7 +209,7 @@ body.resource_home {
       &::before {
         content: '';
         position: absolute;
-        width: 398px;
+        width: 100%;
         height: 309px;
         background: asset-data-url("form-bg.png") no-repeat;
         bottom: -120px;
@@ -252,7 +252,7 @@ body.resource_home {
         list-style-type: none;
         input {
           float: right;
-          margin: 0;
+          margin: 5px 0 0 5px;
           @include gradient(#4b6d7e, #436576);
           color: #fff;
           border: 0;
@@ -357,14 +357,10 @@ body.resource_home {
         margin-bottom: 10px;
       }
       .left, .right {
-        width: 380px;
         float: left;
         color: #fff;
         font-size: 16px;
         line-height: 26px;
-      }
-      .left {
-        margin-right: 20px;
       }
       strong {
         font-weight: 700;
@@ -736,5 +732,37 @@ body.resource_home {
         }
       }
     }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  body.resource_home .oz-main-site .welcome {
+    h3, .left {
+      text-align: center;
+    }
+    .right {
+      display: inline-flex;
+      ul {
+        margin: 0 auto;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1015px) {
+  body.resource_home .oz-main-site .widgets-intro ul {
+    width: 508px;
+    li {
+      border: 1px solid #e5e5e5;
+    }
+    li:first-child {
+      border: none;
+    }
+  }
+}
+
+@media screen and (max-width: 508px) {
+  body.resource_home .oz-main-site .widgets-intro ul {
+    width: 254px;
   }
 }

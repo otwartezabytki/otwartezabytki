@@ -22,7 +22,7 @@
                 %h4.where= t('views.pages.home.how_it_works.where')
                 %p= t('views.pages.home.how_it_works.where_content')
             = f.action :submit, :label => t('formtastic.actions.search_html', :editable => false), :button_html => { :name => nil }
-      .relic-example.col-md-4.oz-relic-example
+      .relic-example.col-md-4.col-xs-12.oz-relic-example
         %h3= t('views.pages.home.soon_header')
         - example_relic = Relic.random_filled
         - if example_relic.present?
@@ -43,9 +43,9 @@
       .relic-bg
       .welcome.col-md-10.col-md-offset-2
         %h3= t('views.pages.home.welcome.header')
-        .left= t('views.pages.home.welcome.text')
+        .left.col-sm-6.col-xs-12= t('views.pages.home.welcome.text')
 
-        .right
+        .right.col-sm-6.col-xs-12
           %ul
             %li= t('views.pages.home.welcome.li1')
             %li= t('views.pages.home.welcome.li2')

@@ -21,4 +21,20 @@ jQuery.initializer '.js-remove-if-not-carousel', ->
     cont = $(this).contents()
     $(this).replaceWith cont
 
+change_map_size = ->
+  console.log("weszlo")
+  map = $('#map-poland')
+  console.log(map)
+  console.log(window.innerWidth)
+  if window.innerWidth < 356
+    map.removeClass 'm340'
+    map.addClass 'm240'
+  else
+    map.removeClass 'm240'
+    map.addClass 'm340'
 
+$(document).ready ->
+  change_map_size()
+
+$(window).resize ->
+  change_map_size()
