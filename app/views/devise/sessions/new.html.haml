@@ -1,20 +1,44 @@
-.login_title
-  %h2= t('.header', :scope => 'views')
-.right_txt_box= render 'devise/shared/new_account_info'
-.form_box
-  .login_intro_txt= t('.login_intro', :scope => 'views')
-  .fb-login
-    = link_to t('layouts.application.facebook_sign_in'), user_omniauth_authorize_path(:facebook), :class => "fb-btn"
-  - if flash[:alert]
-    .alert.alert-error= flash[:alert]
-  = semantic_form_for(resource, :as => resource_name, :url => session_path(resource_name), :remote => request.xhr?) do |f|
+-if controller_name == 'sessions' && action_name == 'new'
+  .bootstrap-iso.js-remove-their-container
+    .container.js-remove-if-modal
+      .login_title
+        %h2= t('.header', :scope => 'views')
+      .form_box.oz-xs-text-center.col-md-4.col-xs-12.col-md-offset-4.col-sm-4.col-sm-offset-2
+        .login_intro_txt= t('.login_intro', :scope => 'views')
+        .fb-login
+          .hidden-xs= link_to t('layouts.application.facebook_sign_in'), user_omniauth_authorize_path(:facebook), :class => "fb-btn"
+          .visible-xs= link_to 'Facebook', user_omniauth_authorize_path(:facebook), :class => "fb-btn"
 
-    = f.input :email, :required => false, :autofocus => true
-    = f.input :password, :required => false
-    - if devise_mapping.recoverable? && controller_name != 'passwords'
-      .link_form
-        = link_to t('.forgot_password', :scope => 'views'), new_password_path(resource_name), :remote => request.xhr?
-        %br/
-    = f.submit t('.submit', :scope => 'views')
-%button.btn.oz-close-edit-relic.js-close-edit-relic{ :type => "button oz-login-cls-btn"} Close
+        - if flash[:alert]
+          .alert.alert-error= flash[:alert]
+        = semantic_form_for(resource, :as => resource_name, :url => session_path(resource_name), :remote => request.xhr?) do |f|
 
+          = f.input :email, :required => false, :autofocus => true
+          = f.input :password, :required => false
+          - if devise_mapping.recoverable? && controller_name != 'passwords'
+            .link_form
+              = link_to t('.forgot_password', :scope => 'views'), new_password_path(resource_name), :remote => request.xhr?
+              %br/
+          = f.submit t('.submit', :scope => 'views')
+      .right_txt_box.oz-xs-text-center.col-md-3.col-sm-4.col-xs-12= render 'devise/shared/new_account_info'
+      %button.btn.oz-close-edit-relic.js-close-edit-relic.oz-login-cls-btn{ :type => "button"} Close
+-else
+  .login_title
+    %h2= t('.header', :scope => 'views')
+  .right_txt_box= render 'devise/shared/new_account_info'
+  .form_box
+    .login_intro_txt= t('.login_intro', :scope => 'views')
+    .fb-login
+      = link_to t('layouts.application.facebook_sign_in'), user_omniauth_authorize_path(:facebook), :class => "fb-btn"
+    - if flash[:alert]
+      .alert.alert-error= flash[:alert]
+    = semantic_form_for(resource, :as => resource_name, :url => session_path(resource_name), :remote => request.xhr?) do |f|
+
+      = f.input :email, :required => false, :autofocus => true
+      = f.input :password, :required => false
+      - if devise_mapping.recoverable? && controller_name != 'passwords'
+        .link_form
+          = link_to t('.forgot_password', :scope => 'views'), new_password_path(resource_name), :remote => request.xhr?
+          %br/
+      = f.submit t('.submit', :scope => 'views')
+  %button.btn.oz-close-edit-relic.js-close-edit-relic.oz-login-cls-btn{ :type => "button"} Close

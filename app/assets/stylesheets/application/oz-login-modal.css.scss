@@ -1,5 +1,5 @@
 @import "mixins";
-.oz-login-cls-btn {
+button.btn.oz-login-cls-btn {
   height: 75px !important;
   width: 75px !important;
   font-size: 16px !important;
@@ -12,6 +12,8 @@
   .oz-login-cls-btn {
     display: inline-block !important;
   }
+}
+.sessions, #edit-relic-modal {
   .login_title {
     width: 100%;
     height: 75px;
@@ -54,11 +56,10 @@
     background-color: #546f7d; /* Old browsers */
   }
   .form_box {
-    float: right;
-    width: 307px;
     background: #FFFFFF;
     border: 1px solid #e9e9e9;
     padding: 30px 40px;
+    margin-bottom: 20px;
     display: inline-table;
     input[type="text"], input[type="email"], input[type="password"] {
       background-position: 10px;
@@ -79,8 +80,6 @@
     }
 
     .right_txt_box {
-      float: right;
-      width: 220px;
       height: 127px;
       padding: 53px 0 0 40px;
       line-height: 18px;
@@ -218,7 +217,6 @@
       border: 1px solid #646464;
       border-radius: 4px;
       margin: 5px 5px 0 0;
-      border: 1px solid #d5d5d5;
     }
     .alert-error {
       border: 1px solid #d51818;
@@ -231,12 +229,8 @@
 
   }
   .right_txt_box {
-    float: right;
-    width: 220px;
-    height: 127px;
     padding: 53px 0 0 40px;
     line-height: 18px;
-    margin-right: 150px;
   }
   .login_title_register {
     font-size: 28px;
@@ -284,7 +278,6 @@
   }
 
   .login_intro_txt {
-    color: #FFFFFF;
     font-size: 18px;
     color: #4e4e4e;
     margin: 0 0 25px 0;
@@ -298,5 +291,33 @@
   #user_username_input label span {
     font-size: 10px;
     color: #aaa;
+  }
+}
+
+@media screen and (max-width: 768px){
+  .oz-xs-text-center {
+    text-align: center;
+  }
+
+  .sessions , #edit-relic-modal {
+    .form_box input[type="submit"]{
+      float: unset;
+    }
+  }
+  #edit-relic-modal {
+    .login_title {
+      margin: 0;
+    }
+    .right_txt_box {
+      padding: 20px 40px 30px 40px;
+    }
+  }
+}
+
+@media screen and (max-width: 340px){
+  .sessions , #edit-relic-modal {
+    .form_box .input input{
+      width: 100%;
+    }
   }
 }
