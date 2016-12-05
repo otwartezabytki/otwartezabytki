@@ -70,12 +70,12 @@
           %span.title= t('views.pages.home.widgets_intro.add.title')
           %span.paragraph= t('views.pages.home.widgets_intro.add.par')
 
-  .stats
-    %h2= t('views.pages.home.stats_info.header1')
-    .left
+  .stats.container.oz-no-padding
+    %h2.oz-no-margin= t('views.pages.home.stats_info.header1')
+    .left.col-md-6.col-xs-12
       %h3= t('views.pages.home.stats_info.header2')
       = render 'polish_map'
-    .right
+    .right.col-md-6.col-xs-12.oz-no-padding
       - cache [I18n.locale, "recently-modified"] do
         %h3= t('views.pages.home.recently_modified')
         %ul.latest
@@ -83,10 +83,10 @@
             = render partial: 'last_edited', locals: { revision: revision, hidden: true }
           - RecentRevision.revisions.last(3).each do |revision|
             = render partial: 'last_edited', locals: { revision: revision, hidden: false }
-    .progress-bar
+    .oz-progress-bar
       .bg
-        .color{:style => "width: #{relic_stats[:checked] * 100 / relic_stats[:total].to_f}%"}
-      .checked{:style => "left: #{(relic_stats[:checked] * 900 / relic_stats[:total].to_f) + 16}px"}
+        .color
+      .checked
         = t('views.pages.home.stats_info.checked_html', :count => relic_stats[:checked])
         .help
           = image_tag 'ico-help.png'

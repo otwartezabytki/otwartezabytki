@@ -469,7 +469,6 @@ body.resource_home {
       }
     }
     .stats {
-      width: 958px;
       border: 1px solid rgb(220, 220, 220);
       background: #fff;
       margin: 28px auto;
@@ -478,11 +477,8 @@ body.resource_home {
         text-align: center;
         border-bottom: 1px solid #e5e5e5;
         font-weight: 700;
-        font-size: 26px;
       }
       .left {
-        float: left;
-        width: 476px;
         h3 {
           font-weight: 600;
           font-size: 20px;
@@ -501,9 +497,6 @@ body.resource_home {
         }
       }
       .right {
-        width: 481px;
-        height: 410px;
-        margin-left: 476px;
         border-left: 1px solid #e5e5e5;
         overflow: hidden;
         h3 {
@@ -522,8 +515,8 @@ body.resource_home {
             }
             .image {
               float: left;
-              width: 56px;
-              height: 56px;
+              width: 62px;
+              height: 62px;
               border: 3px solid #fff;
               box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);
               border-radius: 2px;
@@ -590,14 +583,15 @@ body.resource_home {
         }
       }
     }
-    .progress-bar {
+    .oz-progress-bar {
+      width: 100%;
       border-top: 1px solid #e5e5e5;
       padding: 73px 30px 36px 28px;
       position: relative;
       display: inline-block;
       .bg {
         background: image-url("progress-bar-grey.png") no-repeat;
-        width: 900px;
+        max-width: 900px;
         height: 25px;
         z-index: 2;
         position: relative;
