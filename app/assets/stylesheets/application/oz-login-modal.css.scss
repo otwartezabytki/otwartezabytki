@@ -314,10 +314,10 @@ button.btn.oz-login-cls-btn {
   }
 }
 
-@media screen and (max-width: 340px){
+@media screen and (max-width: 390px){
   .sessions , #edit-relic-modal {
     .form_box .input input{
-      width: 100%;
+      width: 100% !important;
     }
   }
 }
