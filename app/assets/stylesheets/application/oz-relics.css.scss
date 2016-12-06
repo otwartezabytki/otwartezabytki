@@ -402,7 +402,6 @@
   }
 }
 
-
 .relic-row {
   padding: 15px 12px 20px;
   display: flex;
@@ -470,6 +469,7 @@
     width: 64px;
     padding: 3px;
     margin-right: 13px;
+    margin-bottom: 5px;
     border-radius: 3px;
     border: 1px solid #d4d4d4;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
@@ -624,5 +624,26 @@
     display: inline-block;
     width: 100%;
   }
+  .form-advance-search {
+    section.main-search {
+      padding-left: 0;
+    }
+    .field.time #search_to_input{
+      float: left;
+      margin-left: 15px;
+    }
+    section.order {
+      width: unset;
+      bottom: -65px;
+    }
+  }
+  .relic-header.search {
+    padding: 50px 30px 28px;
+  }
+}
 
+@media (max-width: 346px) {
+  .form-advance-search .field.time #search_from_input{
+    margin-left: 15px;
+  }
 }
