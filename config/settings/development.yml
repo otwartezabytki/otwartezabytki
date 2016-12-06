@@ -2,4 +2,4 @@ debug_assets: true
 oz:
   ga_key: UA-32863912-1
   gm_key: AIzaSyAXlMDzvgp5OmKomylA1vjcWub2EmYaz1A
-  host: zabytki:3000
+  host: zabytki

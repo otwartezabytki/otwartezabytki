@@ -21,13 +21,12 @@ jQuery.initializer '.js-remove-if-not-carousel', ->
     cont = $(this).contents()
     $(this).replaceWith cont
 
-jQuery.initializer '.js-remove-if-modal', ->
+jQuery.initializer '.modal-body', ->
   div = $('.js-remove-if-modal')
   div.removeClass 'container'
   div.focus()
 
 change_map_size = ->
-  console.log("weszlo")
   map = $('#map-poland')
   console.log(map)
   console.log(window.innerWidth)
