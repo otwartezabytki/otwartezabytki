@@ -1,106 +1,161 @@
-.oz-change-contrast {
-  position: fixed;
-  top: 0;
-  left: 0;
-}
 
-@mixin white-on-blue {
-  color: white !important;
-  background: blue !important;
-}
-
-@mixin white-on-black {
-  color: white !important;
-  background: black !important;
-}
-
-@mixin black-on-white {
-  color: black !important;
-  background: white !important;
-}
-
-@mixin black-on-yellow {
-  color: black !important;
-  background: #ff0 !important;
-}
-
-.oz-contrast-changed {
-  background-color: #ff0 !important;
-
-  $specific-list: 'oz-edit_relic .input span', 'edit_relic .input span';
-  $linkable-list: nav ul li span, a;
-  $clickable-list: button, input, '.accept-cookies', '.oz-fb-btn', '.fb-btn',  '.clr-change-accessible';
-  $not-clickable-list:  section, p, form, h1, h2, h3, h4, h5, h6, li, '.row', '.relic-example', '.top', '.footer-language',
-  '.oz-nav-edit', '.edit_relic', '.clr-change';
-
-  @each $item in $linkable-list {
-    :not(.redactor_toolbar) #{$item}, :not(.redactor_toolbar) #{$item}:hover, :not(.redactor_toolbar) #{$item}:focus, :not(.redactor_toolbar) #{$item}:active {
-      @include black-on-yellow;
-      text-decoration: underline !important;
-    }
-    :not(.redactor_toolbar) #{$item}:hover {
-      @include white-on-black;
-    }
-    :not(.redactor_toolbar) #{$item}:focus, :not(.redactor_toolbar) #{$item}:active {
-      @include white-on-blue;
-      text-decoration: none !important;
-      font-weight: bold !important;
-
+@mixin contrast-buttons {
+  .oz-change-contrast-btn {
+    margin-right: 0;
+    width: 30px;
+    height: 30px;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 4px 12px 5px 10px;
+    border: 1px white solid;
+    .oz-change-contrast-btn:hover {
+      color: red;
+      background-color: whitesmoke;
+      background-image: none;
     }
   }
 
+  .oz-boy, .oz-wob, .oz-yob {
+    background-image: none;
+  }
 
-  @each $item in $clickable-list {
-    #{$item}, #{$item}:hover, #{$item}:focus, #{$item}:active {
-      @include white-on-black;
-    }
-    #{$item}:hover {
+  .oz-boy {
+    color: black;
+    background-color: yellow;
+  }
+
+  .oz-wob {
+    color: white;
+    background-color: black;
+  }
+
+  .oz-yob {
+    color: yellow;
+    background-color: black;
+  }
+
+}
+
+.oz-change-contrast {
+  position: absolute;
+  width: 140px;
+  height: 30px;
+  top: 0;
+  right: 0;
+  z-index: 999999;
+  @include contrast-buttons;
+}
+
+ nav.navbar ul li.oz-change-contrast-xs {
+   display: none;
+  @include contrast-buttons;
+}
+
+
+@media screen and (max-width: 768px) {
+  .oz-change-contrast {
+    display: none;
+  }
+  nav.navbar ul li.oz-change-contrast-xs {
+    margin-top: 10px;
+    display: inline-block;
+  }
+}
+
+@mixin con($cl, $bg) {
+  color: $cl !important;
+  background: $bg !important;
+}
+
+$specific-list: 'oz-edit_relic .input span', 'edit_relic .input span';
+$linkable-list: nav ul li span, a;
+$clickable-list: button, input, '.accept-cookies', '.oz-fb-btn', '.fb-btn', '.clr-change-accessible';
+$not-clickable-list: section, p, form, h1, h2, h3, h4, h5, h6, li, '.row', '.relic-example', '.top', '.footer-language',
+'.oz-nav-edit', '.edit_relic', '.clr-change';
+
+@mixin contraster($bg-1, $bg-2, $bg-3, $bg-4, $cl-1, $cl-2, $cl-3, $cl-4) {
+  background-color: $bg-4 !important;
+
+  @each $item in $linkable-list {
+    :not(.redactor_toolbar) #{$item}, :not(.redactor_toolbar) #{$item}:hover, :not(.redactor_toolbar) #{$item}:focus, :not(.redactor_toolbar) #{$item}:active {
+      @include con($cl-4, $bg-4);
       text-decoration: underline !important;
     }
-    #{$item}:focus, #{$item}:active {
-      @include white-on-blue;
+    :not(.redactor_toolbar) #{$item}:hover {
+      @include con($cl-2, $bg-2);
+    }
+    :not(.redactor_toolbar) #{$item}:focus, :not(.redactor_toolbar) #{$item}:active {
+      @include con($cl-1, $bg-1);
       text-decoration: none !important;
       font-weight: bold !important;
+    }
+  }
 
+  @each $item in $clickable-list {
+    :not(.oz-change-contrast) #{$item}, :not(.oz-change-contrast) #{$item}:hover,
+    :not(.oz-change-contrast) #{$item}:focus, :not(.oz-change-contrast) #{$item}:active {
+      @include con($cl-2, $bg-2);
+    }
+    :not(.oz-change-contrast) #{$item}:hover {
+      text-decoration: underline !important;
+    }
+    :not(.oz-change-contrast) #{$item}:focus, :not(.oz-change-contrast) #{$item}:active {
+      @include con($cl-1, $bg-1);
+      text-decoration: none !important;
+      font-weight: bold !important;
     }
   }
 
   @each $item in $not-clickable-list {
     :not(.oz-map-container) #{$item} {
-      @include black-on-yellow;
+      @include con($cl-4, $bg-4);
     }
   }
 
   @each $item in $specific-list {
     #{$item} {
-      @include black-on-yellow;
+      @include con($cl-4, $bg-4);
     }
   }
-
-  //placeholder fixes
-  ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-    color: white;
-  }
-  :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-    color: white;
-    opacity: 1;
-  }
-  ::-moz-placeholder { /* Mozilla Firefox 19+ */
-    color: white;
-    opacity: 1;
-  }
-  :-ms-input-placeholder { /* Internet Explorer 10-11 */
-    color: white;
-  }
-}
-
-.oz-contrast-changed {
 
   .footer-language select {
     opacity: 1;
   }
 
   .widgets-intro ul li, .widgets-intro ul li span {
-    @include black-on-white;
+    @include con($cl-3, $bg-3);
   }
+}
+
+@mixin placeholders($cl) {
+  //placeholder fixes
+  ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: $cl;
+  }
+  :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: $cl;
+    opacity: 1;
+  }
+  ::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: $cl;
+    opacity: 1;
+  }
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: $cl;
+  }
+}
+
+.oz-contr-black-on-yellow {
+  @include contraster(blue, black, white, yellow, white, white, black, black);
+  @include placeholders(white);
+}
+
+.oz-contr-white-on-black {
+  @include contraster(white, black, #231f20, #231f20, black, yellow, white, white);
+  @include placeholders(white);
+}
+
+.oz-contr-yellow-on-black {
+  @include contraster(white, #231f20, #231f20, black, black, white, white, yellow);
+  @include placeholders(white);
 }
