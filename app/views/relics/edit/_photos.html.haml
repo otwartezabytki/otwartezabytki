@@ -22,7 +22,7 @@
         .photo.col-md-12.col-sm-12.col-xs-12
           .col-lg-3.col-sm-12.col-xs-12.no-margins.oz-xs-sm-no-float
             .preview
-              = image_tag photo.file.midi.url
+              = image_tag photo.file.midi.url, alt: photo.alternate_text
           .col-lg-9.col-sm-12.col-xs-12.oz-xs-sm-no-float
             %label= t('activerecord.attributes.photo.author')
             %p= photo.author

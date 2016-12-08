@@ -28,7 +28,7 @@
         - if example_relic.present?
           .relic-container
             .image
-              = image_tag example_relic.main_photo.file.url(:icon)
+              = image_tag(example_relic.main_photo.file.url(:icon))
             .relic-content
               .relic-heading
                 = link_to example_relic.identification, example_relic
@@ -89,7 +89,7 @@
       .checked
         = t('views.pages.home.stats_info.checked_html', :count => relic_stats[:checked])
         .help
-          = image_tag 'ico-help.png'
+          = image_tag 'ico-help.png', alt: 'help'
           .help-wrapper
             %h3= t('views.relics.index.states.header')
             %ul
@@ -98,7 +98,7 @@
         = t('views.pages.home.stats_info.total_html', :count => relic_stats[:total])
         = t('views.pages.home.stats_info.unchecked_html', :count => relic_stats[:unchecked])
         .help
-          = image_tag 'ico-help.png'
+          = image_tag 'ico-help.png', alt: 'help'
           .help-wrapper
             %h3= t('views.relics.index.states.header')
             %ul

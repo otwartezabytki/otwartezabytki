@@ -11,7 +11,7 @@
           .body.col-md-7.col-sm-12.col-xs-12
             .thumb-div.col-md-2
               .thumb
-                = link_to image_tag(relic.main_photo.file.url(:icon)), relic
+                = link_to image_tag(relic.main_photo.file.url(:icon), alt: relic.main_photo.alternate_text), relic
             .relic__relic-content.col-md-10
               .name
                 %h2= link_to relic.identification, relic
@@ -22,7 +22,7 @@
                     = descendants.map(&:identification).join('; ')
               = state_tag(relic)
               .help
-                = image_tag 'ico-help.png'
+                = image_tag 'ico-help.png', alt: 'help'
                 .help-wrapper
                   = link_to t('views.relics.index.states.close'), '#', :class => 'close'
                   %h3= t('views.relics.index.states.header')

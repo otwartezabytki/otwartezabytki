@@ -1798,3 +1798,9 @@ de:
     wuoz-w-warszawie: "Wojewodschafts-Amt für Denkmalschutz in Warschau/Warszawa"
     wuoz-w-zielonej-gorze: "Wojewodschafts-Amt für Denkmalschutz in Grünberg/Zielona Góra"
     wuoz-we-wroclawiu: "Wojewodschafts-Amt für Denkmalschutz in Breslau/Wrocław"
+
+  oz_img_alts:
+    open_relics_logo: "Logo offene Visierung"
+    alert: "Warnung"
+    map: "google map"
+    no_photo: "kein Foto vorhanden"

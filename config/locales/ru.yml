@@ -96,3 +96,9 @@ ru:
       name: Местоположение
     photos:
       name: Фотографии
+
+  oz_img_alts:
+    open_relics_logo: "Логотип открытыми прицельными"
+    alert: "предупреждение"
+    map: "google map"
+    no_photo: "нет фотографии"

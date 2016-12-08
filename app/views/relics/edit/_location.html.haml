@@ -20,13 +20,13 @@
     .col-lg-6.col-md-5.col-sm-12.col-xs-12
       #map_canvas.oz-location-map{ :style => "width: 309px; height: 309px;" }
       %p.auto_geolocated
-        = image_tag "gmap-flashing-point.png"
+        = image_tag "gmap-flashing-point.png", alt: 'google map point'
         = t('views.relics.edit.location.approximate_geolocation')
     .col-lg-2.col-md-3.col-sm-12.col-xs-12
       .marker-helper
         %h4= t('views.relics.edit.location.drop_marker_html')
         .marker-holder
-          = image_tag 'marker.png', :id => 'marker'
+          = image_tag 'marker.png', :id => 'marker', alt: 'marker'
       = f.hidden_field :latitude
       = f.hidden_field :longitude
     .actions.col-md-12.col-xs-12

@@ -1798,3 +1798,9 @@ pl:
     wuoz-w-warszawie: "Wojewódzki Urząd Ochrony Zabytków w Warszawie"
     wuoz-w-zielonej-gorze: "Wojewódzki Urząd Ochrony Zabytków w Zielonej Górze"
     wuoz-we-wroclawiu: "Wojewódzki Urząd Ochrony Zabytków we Wrocławiu"
+
+  oz_img_alts:
+    open_relics_logo: "Logo otwartych zabytków"
+    alert: "Ostrzeżenie"
+    map: "mapa"
+    no_photo: "Brak zdjęcia"

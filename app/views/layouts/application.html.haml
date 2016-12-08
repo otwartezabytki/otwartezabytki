@@ -51,7 +51,7 @@
             .container
               %header#header
                 %hgroup.col-lg-4.col-md-5.col-xs-12.text-center
-                  = link_to image_tag("logo.png", :class => 'oz-logo img-responsive'), root_path
+                  = link_to image_tag("logo.png", :class => 'oz-logo img-responsive', :alt => t('oz_img_alts.open_relics_logo')), root_path
                   %h4.text-center= t('layouts.application.tagline')
                 .display-block.col-lg-8.col-md-7
                   %nav.navbar.navbar-default{role: "navigation"}
@@ -61,7 +61,7 @@
                     = t('layouts.application.disclaimer')
                     %a{:href => "mailto:kontakt-oz@centrumcyfrowe.pl"} kontakt-oz@centrumcyfrowe.pl
                   .col-md-2.oz-cc-logo
-                    = link_to image_tag("cc_logo.png"), 'http://centrumcyfrowe.pl/'
+                    = link_to image_tag("cc_logo.png"), 'http://centrumcyfrowe.pl/', alt: 'Centrum cyfrowe'
           %section#menu.bootstrap-iso
             .container
               %nav.navbar.navbar-default

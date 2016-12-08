@@ -15,7 +15,7 @@
         %section.search
           %h2
             = t('views.widgets.show.map_search.search_by_name')
-            = link_to image_tag("widget-helper.png"), '#', :class => "tooltip", :"data-placement" => "right", :title => t('formtastic.hints.search.place', :editable => false)
+            = link_to image_tag("widget-helper.png", alt: 'help'), '#', :class => "tooltip", :"data-placement" => "right", :title => t('formtastic.hints.search.place', :editable => false)
           .search-input
             = f.input :query, :label => false, :input_html => { :class => 'autocomplete-q'}, :placeholder => t('views.widgets.show.map_search.query_placeholder', :editable => false)
             = f.submit :class => "submit", :value => ""
@@ -25,7 +25,7 @@
               - if up = widget_search.location_object.up
                 = link_to up.full_name, widgets_map_search_path(widget.id, :search => params[:search].merge(:bounding_box => nil, :"location" => "#{up.class.name.underscore}:#{up.id}")), :remote => true
               %span= "⟩&nbsp;".html_safe + widget_search.location_object.full_name
-              = link_to image_tag("widget-helper.png"), '#', :class => "tooltip", :"data-placement" => "right", :title => t('views.widgets.show.map_search.location_hint', :editable => false)
+              = link_to image_tag("widget-helper.png", alt: 'help'), '#', :class => "tooltip", :"data-placement" => "right", :title => t('views.widgets.show.map_search.location_hint', :editable => false)
             .antiscroll-wrap.locations_tree
               .box
                 .antiscroll-inner
@@ -42,7 +42,7 @@
           %section.categories{ :class => (cookies['section-shown'] == 'categories' ? "maxed" : cookies['section-shown'] == 'locations' ? 'mined' : '') }
             %h2
               = t('views.widgets.show.map_search.categories')
-              = link_to image_tag("widget-helper.png"), '#', :class => "tooltip", :"data-placement" => "right", :title => t('views.widgets.show.map_search.categories_hint', :editable => false)
+              = link_to image_tag("widget-helper.png", alt: 'help'), '#', :class => "tooltip", :"data-placement" => "right", :title => t('views.widgets.show.map_search.categories_hint', :editable => false)
             .antiscroll-wrap
               .box
                 .antiscroll-inner

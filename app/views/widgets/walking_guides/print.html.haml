@@ -20,7 +20,7 @@
       %li.Definition-Container--unbreakable(ng-repeat="relic in widget.relics")
         %dl.Definition
           %dt.Definition-Header--without-colon
-            %img.Thumbnail(ng-src="{{ relic.thumbnail }}")
+            %img.Thumbnail(ng-src="{{ relic.thumbnail }}"){alt: relic.main_photo.alternate_text}
             {{ relic.identification }}
             .Definition-Content--small
               %span(ng-show="relic.street") {{ relic.street }},

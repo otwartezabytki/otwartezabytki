@@ -28,7 +28,7 @@ module RelicsHelper
 
   def subrelic_image(relic)
     content_tag :dd, class: 'subrelic-image' do
-      image_tag(relic.main_photo.file.url(:icon), :size => '24x24', :class => 'thumb type-tiny', :alt => relic.identification)
+      image_tag(relic.main_photo.file.url(:icon), :size => '24x24', :class => 'thumb type-tiny', :alt => '')
     end
   end
 
