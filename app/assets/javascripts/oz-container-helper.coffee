@@ -28,7 +28,7 @@ jQuery.initializer '.modal-body', ->
 
 change_map_size = ->
   map = $('#map-poland')
-  if window.innerWidth < 356
+  if window.outerWidth < 356
     map.removeClass 'm340'
     map.addClass 'm240'
   else
