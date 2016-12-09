@@ -1804,3 +1804,4 @@ pl:
     alert: "Ostrzeżenie"
     map: "mapa"
     no_photo: "Brak zdjęcia"
+    miniature: "miniatura"

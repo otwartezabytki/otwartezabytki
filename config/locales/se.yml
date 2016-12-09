@@ -155,3 +155,4 @@ se:
     alert: "advertencia"
     map: "google map"
     no_photo: "no se han disponibles"
+    miniature: "miniatura"

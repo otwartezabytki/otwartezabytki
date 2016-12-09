@@ -28,7 +28,7 @@
         - if example_relic.present?
           .relic-container
             .image
-              = image_tag(example_relic.main_photo.file.url(:icon))
+              = image_tag(example_relic.main_photo.file.url(:icon), alt: example_relic.main_photo.alternate_text || t('oz_img_alts.miniature'))
             .relic-content
               .relic-heading
                 = link_to example_relic.identification, example_relic
