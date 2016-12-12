@@ -97,10 +97,17 @@
                       %button.btn.btn-default.js-contr-white-on-black.oz-change-contrast-btn.oz-wob A
                       %button.btn.btn-default.js-contr-yellow-on-black.oz-change-contrast-btn.oz-yob A
           %section#main
-            .their-container.main-container{ :'data-replace' => '.main-container' }
-              = render 'shared/flash', :flash => flash
-              .row
-                = yield
+            - if params[:id] == "o-projekcie"
+              .main-container.bootstrap-iso{ :'data-replace' => '.main-container' }
+                = render 'shared/flash', :flash => flash
+                .container
+                  .row
+                    = yield
+            -else
+              .their-container.main-container{ :'data-replace' => '.main-container' }
+                = render 'shared/flash', :flash => flash
+                .row
+                  = yield
           #root-footer
         %footer#footer.oz-footer.bootstrap-iso
           .container= render 'shared/footer'
