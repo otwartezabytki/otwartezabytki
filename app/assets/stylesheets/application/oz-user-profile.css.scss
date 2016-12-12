@@ -1,0 +1,181 @@
+$content-border-color: #dadada;
+$content-icon-color: #e5e5e5;
+$dimmed-text-color: #a7a7a7;
+$separator-color: #527283;
+$avatar-size: 320px;
+$checked-item-width: 299px;
+$unread-badge-size: 10px;
+
+@mixin user-profile-sprite($x, $y) {
+  @include image-sprite('user-profile-sprite.png', $x, $y);
+}
+
+@mixin tiny-dimmed-text() {
+  color: $dimmed-text-color;
+  font-size: 12px;
+}
+
+@mixin tiny-uppercase-text() {
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+@mixin tab-icon($x) {
+  &:before {
+    @include user-profile-sprite($x, 20px);
+    float: left;
+    content: '';
+    width: 16px;
+    height: 17px;
+    margin: 1px 5px 0 -1px;
+  }
+
+  &:not(.active):hover:before {
+    background-position: (-1 * $x) -40px;
+  }
+}
+
+@mixin feed-icon($x) {
+  &:before {
+    @include user-profile-sprite($x, 0);
+    position: absolute;
+    content: '';
+    width: 16px;
+    height: 16px;
+    margin: 0 0 0 -39px;
+  }
+}
+
+section.user-profile.oz-user-profile {
+  width: 100%;
+  display: inline-block;
+  .user-profile {
+    display: block;
+
+    .user-profile-column-left,
+    .user-profile-column-right {
+      display: block;
+      vertical-align: top;
+    }
+  }
+
+  .user-profile-column-left {
+    background: #fff;
+    border: 1px solid $content-border-color;
+  }
+
+  .user-profile-column-right {
+    border-top: 1px solid $content-border-color;
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  .user-profile-content {
+    padding: 20px;
+    line-height: 1.3;
+  }
+
+  .nav-tabs-container {
+    display: block;
+    background: $separator-color;
+    padding: 0 0 3px;
+    margin: -1px -1px 17px;
+    overflow: hidden;
+    .nav-tabs {
+      margin-bottom: 0;
+      border-bottom: 0;
+      a.nav-tab-link {
+        text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+        display: block;
+        padding: 10px 0 7px;
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 600;
+
+        &:hover, &:active, &:focus {
+          color: #006699;
+          text-decoration: none;
+          border-color: transparent;
+        }
+
+        &, &.active:hover {
+          color: $dark-grey;
+        }
+
+        &.active {
+          box-shadow: 0 1px 5px rgba($dark-grey, 0.1);
+          padding-right: 20px;
+          padding-left: 20px;
+          border-top-left-radius: 3px;
+          border-top-right-radius: 3px;
+          background: #fff;
+        }
+
+        &.type-followed {
+          @include tab-icon(320px);
+        }
+
+        &.type-checked {
+          @include tab-icon(340px);
+        }
+
+        &.type-settings {
+          @include tab-icon(400px);
+        }
+      }
+    }
+  }
+
+  .feed {
+    .feed-item {
+      padding: 10px 20px;
+      .thumb {
+        margin-right: 10px;
+        width: 64px;
+      }
+    }
+  }
+
+}
+
+@media screen and (max-width: 1200px) {
+  .nav-tabs .nav-tab {
+    padding-left: 15px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .feed-item {
+    .feed-image{
+      margin: 0 auto !important;
+      float: unset;
+    }
+    .feed-message.feed-links {
+      text-align: center;
+    }
+  }
+  .oz-user-profile {
+    text-align: center;
+    .tag {
+      float: unset;
+    }
+  }
+  .type-routes .feed-message.feed-links {
+    float: unset;
+  }
+}
+
+@media screen and (max-width: 580px){
+  .nav-tabs-container {
+    .nav-tab {
+      margin: 0 auto;
+      width: 100%;
+      a.nav-tab-link.active {
+        margin-left: -15px !important;
+        padding-left: 35px !important;
+      }
+    }
+  }
+}
