@@ -134,6 +134,15 @@
 
     }
   }
+  section.oz-edit.photos, section.oz-edit.location {
+    .row {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      .flash .close {
+        position: initial !important;
+      }
+    }
+  }
 }
 
 .oz-close-edit-relic {
@@ -350,7 +359,7 @@ section.oz-edit {
 .oz-nav-edit {
   width: 240px;
   background-image: linear-gradient(to right, #e5e5e5 96%, #b3b3b3 100%);
-  .navbar-header{
+  .navbar-header {
     width: 100%;
   }
 }
