@@ -65,7 +65,7 @@ class RecentRevision
 
   def set_alternate_text
     if relic.main_photo.alternate_text.blank?
-      I18n.t('oz_img_alts.miniature')
+      "#{relic.identification} #{relic.main_photo.description}"
     else
       relic.main_photo.alternate_text
     end
