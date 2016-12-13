@@ -111,7 +111,6 @@ window.ajax_callback = (data, status, xhr) ->
               else
                 relic_modal.addClass 'static-modal-width'
               relic_modal.initialize() #initialize JQuery.initialize() functions
-              location.reload(true)
       else if last_xhr.getResponseHeader('x-logged')? && $('body').data('logged')? && $('body').data('logged').toString() != last_xhr.getResponseHeader('x-logged').toString()
         $('#fancybox_loader_container').show()
         window.location.reload()

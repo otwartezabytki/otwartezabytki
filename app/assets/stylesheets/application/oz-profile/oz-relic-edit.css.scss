@@ -12,6 +12,16 @@
   margin: 0 !important;
 }
 
+section.oz-edit.photos, section.oz-edit.description {
+  ul.redactor_toolbar {
+    background-image: none;
+    li a {
+      padding-left: 0;
+      border: 0;
+    }
+  }
+}
+
 .oz-edit_relic {
   display: flex;
   ul {

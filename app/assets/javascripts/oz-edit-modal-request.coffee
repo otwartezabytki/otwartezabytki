@@ -21,6 +21,7 @@ $ ->
 jQuery.initializer '.js-close-edit-relic', ->
   this.on 'click', ->
     $('#edit-relic-modal').modal('hide')
+    location.reload(true)
 
 $('#edit-relic-modal').on 'hidden.bs.modal', ->
   $.ajax(window.location.href).success(ajax_callback).complete(-> popping_state = false)
