@@ -64,10 +64,12 @@ class RecentRevision
   end
 
   def set_alternate_text
-    if relic.main_photo.alternate_text.blank?
-      "#{relic.identification} #{relic.main_photo.description}"
-    else
-      relic.main_photo.alternate_text
+    if relic.present? and reliv.main_photo.present?
+      if relic.main_photo.alternate_text.blank?
+        "#{relic.identification} #{relic.main_photo.description}"
+      else
+        relic.main_photo.alternate_text
+      end
     end
   end
 
