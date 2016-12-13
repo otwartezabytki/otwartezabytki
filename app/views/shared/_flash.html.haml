@@ -1,7 +1,7 @@
 - if flash[:error] || flash[:notice]
-  .row
+  .row.bootstrap-iso
     - if flash[:error]
-      .flash.flash-error
+      .flash.flash-error.container
         = link_to t('views.relics.show.flash_hide'), '#', :class => "close", :"data-dismiss" => 'flash'
         = image_tag 'notice-icon-info.png', :class => 'flash-icon', alt: ''
         = image_tag 'notice-separator.png', :class => 'flash-separator', alt: ''
@@ -9,7 +9,7 @@
           %p= flash[:error]
 
     - elsif flash[:notice]
-      .flash{:class => "flash-info flash-#{Digest::MD5.hexdigest(flash[:notice])[0..6]}"}
+      .flash.container{:class => "flash-info flash-#{Digest::MD5.hexdigest(flash[:notice])[0..6]}"}
         = link_to t('views.relics.show.flash_hide'), '#', :class => "close", :"data-dismiss" => 'flash'
         .icon
           = image_tag 'notice-icon-info.png', :class => "flash-icon", alt: ''

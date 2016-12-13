@@ -290,13 +290,6 @@ section.show.photos {
   margin-top: 1px;
 }
 
-//chrome hack for print icon
-@media screen and (-webkit-min-device-pixel-ratio: 0) {
-  section.show.general .print-guide::before {
-    left: 27px;
-  }
-}
-
 @media screen and (min-width: 992px) and (max-width: 1200px) {
   section.show.photos .placeholder a {
     margin: 362px 0 0;

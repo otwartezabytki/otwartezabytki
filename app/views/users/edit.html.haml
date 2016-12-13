@@ -1,7 +1,9 @@
-%section.user-profile
-  .user-profile-column-left
-    = render 'navigation'
-    = render 'settings_form'
-  .user-profile-column-right
-    = render 'user_avatar'
-    = render 'list_added'
+.bootstrap-iso.js-remove-their-container
+  .container
+    %section.user-profile.oz-user-profile
+      .user-profile-column-left.col-md-7.col.sm-6.col-xs-12.oz-no-padding
+        = render 'navigation'
+        = render 'settings_form'
+      .user-profile-column-right.col-md-5.col.sm-6.col-xs-12.oz-no-paddingllll
+        = render 'user_avatar'
+        = render 'list_added'

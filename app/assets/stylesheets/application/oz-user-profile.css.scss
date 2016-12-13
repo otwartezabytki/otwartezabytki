@@ -51,14 +51,11 @@ $unread-badge-size: 10px;
 section.user-profile.oz-user-profile {
   width: 100%;
   display: inline-block;
-  .user-profile {
-    display: block;
 
-    .user-profile-column-left,
-    .user-profile-column-right {
-      display: block;
-      vertical-align: top;
-    }
+  .user-profile-column-left,
+  .user-profile-column-right {
+    display: block;
+    vertical-align: top;
   }
 
   .user-profile-column-left {
@@ -75,6 +72,17 @@ section.user-profile.oz-user-profile {
   .user-profile-content {
     padding: 20px;
     line-height: 1.3;
+  }
+
+  .fields-title-inner {
+    position: relative;
+    margin: -6px 0 0 0;
+  }
+
+  figure.user-avatar {
+    width: 320px;
+    margin: 15px auto 0;
+    text-align: left;
   }
 
   .nav-tabs-container {
@@ -128,6 +136,9 @@ section.user-profile.oz-user-profile {
     }
   }
 
+  .feed.type-activity .feed-image {
+    margin-left: 0;
+  }
   .feed {
     .feed-item {
       padding: 10px 20px;
@@ -147,8 +158,11 @@ section.user-profile.oz-user-profile {
 }
 
 @media screen and (max-width: 768px) {
+  .feed.type-activity .feed-unadopt {
+    text-align: center;
+  }
   .feed-item {
-    .feed-image{
+    .feed-image {
       margin: 0 auto !important;
       float: unset;
     }
@@ -161,13 +175,45 @@ section.user-profile.oz-user-profile {
     .tag {
       float: unset;
     }
+    .control-label, .field-label {
+      float: unset;
+      width: unset;
+      padding: 0 0 0 0;
+      margin-bottom: 10px;
+    }
+  }
+  .user-profile {
+    .field-layout {
+      margin: 0;
+    }
+    .field-explanation {
+      margin: 0 auto;
+    }
+  }
+  .controls .file.optional {
+    margin: 0 auto;
   }
   .type-routes .feed-message.feed-links {
     float: unset;
   }
 }
 
-@media screen and (max-width: 580px){
+@media screen and (max-width: 580px) {
+  .user-profile .field,
+  .user-profile .controls > .string,
+  .user-profile .controls > .password,
+  .user-profile .controls > .select {
+    width: 230px;
+  }
+
+  //.user-profile .field-layout {
+  //  margin-left: 0;
+  //}
+
+  .controls .file.optional {
+    width: 200px;
+  }
+
   .nav-tabs-container {
     .nav-tab {
       margin: 0 auto;
