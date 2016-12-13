@@ -95,8 +95,8 @@ window.ajax_callback = (data, status, xhr) ->
             try_to_process_replace(data_replace_parent)
           else
 
-            if $.contains(data, 'jcarousel-skin-midi')
-#            if node.find('.jcarousel-skin-midi')
+            if !(((data.indexOf("oz-edit-relic")) > -1 ) || ((data.indexOf("edit-relic")) > -1))
+#            if data.find('.jcarousel-skin-midi')
               show_fancybox(node)
               $(node).initialize()
             else
@@ -111,6 +111,7 @@ window.ajax_callback = (data, status, xhr) ->
               else
                 relic_modal.addClass 'static-modal-width'
               relic_modal.initialize() #initialize JQuery.initialize() functions
+              location.reload(true)
       else if last_xhr.getResponseHeader('x-logged')? && $('body').data('logged')? && $('body').data('logged').toString() != last_xhr.getResponseHeader('x-logged').toString()
         $('#fancybox_loader_container').show()
         window.location.reload()
