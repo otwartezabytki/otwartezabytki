@@ -19,8 +19,13 @@
 
 #= require_tree ./vendor
 #= require js-routes
-#= require twitter/bootstrap/bootstrap-tooltip
-#= require twitter/bootstrap/bootstrap-popover
+
+# bootstrap js
+#= require bootstrap.js
+#= require bootstrap-sprockets
+
+# require twitter/bootstrap/bootstrap-tooltip
+# require twitter/bootstrap/bootstrap-popover
 #= require variables
 #= require_tree ./libraries
 #= require profile
@@ -49,9 +54,7 @@
 #= require oz-contrast-changer
 #= require oz-pogress-bar
 
-# bootstrap js
-#= require bootstrap.js
-#= require bootstrap-sprockets
+
 
 
 
@@ -70,7 +73,7 @@ jQuery.initializer '.main-container', ->
       $el.popover
         title: -> $('#' + $el.data 'title-id').html()
         content: -> $('#' + $el.data 'content-id').html()
-        delay: 100000
+        delay: 1000
         html: true
     else
       $el.popover

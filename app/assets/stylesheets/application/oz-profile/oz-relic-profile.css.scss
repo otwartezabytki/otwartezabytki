@@ -13,6 +13,30 @@
 
 .oz-relic-desc-photos {
   display: inline-flex;
+  section.show.general .location_name p .popover {
+        max-width: unset;
+    .popover-title {
+      width: 100%;
+      display: inline-flex;
+      p {
+        font-size: 16px;
+        font-weight: bold;
+        width: 65%;
+      }
+    }
+    p.close {
+      position: relative;
+      top: 0;
+      right: -30px;
+      width: 30%;
+      opacity: 1;
+      a {
+        font-size: 16px;
+        color: #af0c0c;
+        font-weight: 600;
+      }
+    }
+  }
 }
 
 section.show.general {
@@ -311,5 +335,11 @@ section.show.photos {
   }
   .second-row {
     display: block;
+  }
+}
+
+@media screen and (max-width: 768px){
+  .oz-relic-desc-photos section.show.general .location_name p .popover {
+    left: 0 !important;
   }
 }
