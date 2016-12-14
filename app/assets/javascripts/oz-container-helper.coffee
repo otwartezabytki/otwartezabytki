@@ -4,6 +4,7 @@ $(document).ready ->
     $('.their-container').removeClass 'their-container'
   return
 
+# setting map width in widgets
 $(document).ready ->
   map = $('.oz-map-container')
   map_width = map.width()
@@ -13,6 +14,7 @@ $(document).ready ->
   else
     map.css 'height', "#{sidebar_height}px"
 
+#removing fancybox container if ajax goes to something othe than carousel
 jQuery.initializer '.js-remove-if-not-carousel', ->
   class_list = $('.js-remove-if-not-carousel')
   caro = $('.modal-body')
@@ -20,6 +22,7 @@ jQuery.initializer '.js-remove-if-not-carousel', ->
     class_list.each ->
     cont = $(this).contents()
     $(this).replaceWith cont
+
 
 jQuery.initializer '.modal-body', ->
   div = $('.js-remove-if-modal')
