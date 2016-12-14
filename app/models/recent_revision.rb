@@ -64,12 +64,10 @@ class RecentRevision
   end
 
   def set_alternate_text
-    if relic.present? and relic.main_photo.present?
-      if relic.main_photo.alternate_text.blank?
-        "#{relic.identification} #{relic.main_photo.description}"
-      else
-        relic.main_photo.alternate_text
-      end
+    if relic.has_photos?
+      "#{relic.identification} #{relic.main_photo.alternate_text}"
+    else
+      "#{I18n.t('activerecord.attributes.relic.photos_facets.F')}"
     end
   end
 

@@ -11,7 +11,7 @@
           .body.col-md-7.col-sm-12.col-xs-12
             .thumb-div.col-md-2
               .thumb
-                = link_to image_tag(relic.main_photo.file.url(:icon), alt: relic.main_photo.alternate_text), relic
+                = link_to image_tag(relic.main_photo.file.url(:icon), alt: set_relic_img_alt(relic)), relic
             .relic__relic-content.col-md-10
               .name
                 %h2= link_to relic.identification, relic

@@ -3,7 +3,6 @@
   %head
     %meta(charset="utf-8")
     = csrf_meta_tags
-    -binding.pry
     - if controller_name == "directions" && action_name == "configure"
       = stylesheet_link_tag "for-iframe/include-BS", :media => "all"
     = stylesheet_link_tag "for-iframe/oz-direction-iframe", :media => "all"
