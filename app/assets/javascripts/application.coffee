@@ -87,7 +87,6 @@ jQuery.initializer '.main-container', ->
     false
 
   this.on 'click', 'a.js-popover', (event) ->
-    console.log("kliknieto zobacz w zabytku")
     event.preventDefault()
     $(this).popover 'toggle'
     false
