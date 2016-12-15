@@ -5,7 +5,7 @@
   - if relic.is_group? && relic.root.descendants.count > 0
     .subrelic-parent-info
       %p= t('views.relics.show.subrelics.group_info')
-  = link_to t('views.relics.show.general.fill_in'), edit_section_relic_path(relic.to_param, :general), :remote => true, :class => "edit-relic-link"
+  = link_to t('views.relics.show.general.fill_in'), edit_section_relic_path(relic.to_param, :general), :class => "hidden-xs hidden-sm hidden-md edit-relic-link js-edit-relic-load-modal"
   %h1
     = relic.identification
     .fb-like{"data-href" => "http://#{request.host+request.fullpath}", "data-layout" => "button_count", "data-send" => "false", "data-show-faces" => "false", "data-width" => "200"}
@@ -17,7 +17,7 @@
   .status
     = state_tag(relic)
     .help
-      = image_tag 'ico-help.png'
+      = image_tag 'ico-help.png', alt: 'help'
       .help-wrapper
         = link_to t('views.relics.index.states.close'), '#', :class => 'close'
         %h3= t('views.relics.index.states.header')
@@ -28,7 +28,7 @@
       = t('views.relics.show.general.relic')
       %strong= t("activerecord.attributes.relic.existences.#{relic.existence}")
   .location_name
-    = link_to t('views.relics.show.general.fill_in'), edit_section_relic_path(relic.to_param, :location), :remote => true, :class => "edit-relic-link"
+    = link_to t('views.relics.show.general.fill_in'), edit_section_relic_path(relic.to_param, :location), :class => "edit-relic-link js-edit-relic-load-modal"
     %strong= t('views.relics.show.general.location')
     - if relic.polish_relic and relic.place_id?
       %p= format_localization(relic, 'reverse')
@@ -43,15 +43,15 @@
         %p.close= link_to t('views.relics.show.general.close'), "#", :class => "close_popover", :"data-popover-id" => "relic_location_popover"
       %script(type="text/html" id="location_body")
         = link_to "https://maps.google.com/?q=#{relic.latitude.to_f},#{relic.longitude.to_f}&t=h", :target => :_blank do
-          %img{ src: "http://maps.googleapis.com/maps/api/staticmap?center=#{relic.latitude.to_f},#{relic.longitude.to_f}&zoom=17&size=260x160&sensor=false&markers=#{relic.latitude.to_f},#{relic.longitude.to_f}&maptype=hybrid", width: 260, height: 160 }
+          %img{ src: "http://maps.googleapis.com/maps/api/staticmap?center=#{relic.latitude.to_f},#{relic.longitude.to_f}&zoom=17&size=260x160&sensor=false&markers=#{relic.latitude.to_f},#{relic.longitude.to_f}&maptype=hybrid", width: 260, height: 160, alt: t('oz_img_alts.map') }
   .dating
     - if relic.dating_of_obj.present?
-      = link_to t('views.relics.show.general.fill_in'), edit_section_relic_path(relic.to_param, :events), :remote => true, :class => "edit-relic-link"
+      = link_to t('views.relics.show.general.fill_in'), edit_section_relic_path(relic.to_param, :events), :class => "hidden-xs hidden-sm hidden-md edit-relic-link js-edit-relic-load-modal"
     %strong= t('views.relics.show.general.dating_of_obj')
     - if relic.dating_of_obj.present?
       %span.content= relic.dating_of_obj
     - else
-      %span.placeholder= link_to t('views.relics.show.general.no_data_fill_in'), edit_section_relic_path(relic.to_param, :events), :remote => true
+      %span.placeholder= link_to t('views.relics.show.general.no_data_fill_in'), edit_section_relic_path(relic.to_param, :events), :class => "hidden-xs hidden-sm hidden-md js-edit-relic-load-modal"
   - if relic.register_number.present?
     .register_number
       %strong= t('views.relics.show.general.register_number')
@@ -62,6 +62,7 @@
       = link_to content_tag(:span, t('views.relics.show.general.unadopt')), unadopt_relic_path(relic.id), :class => "adopt", :method => :post, :remote => true
     - else
       = link_to content_tag(:span, t('views.relics.show.general.adopt')), adopt_relic_path(relic.id), :class => "adopt", :method => :post, :remote => true
+    = link_to t('views.relics.guide.print_guide'), print_relic_path(relic.to_param), :class => "print-guide", :target => '_blank'
   - else
-    %div{:style => 'display:block; height: 50px;'}
-  = link_to content_tag(:span, t('views.relics.guide.print_guide')), print_relic_path(relic.to_param), :class => "print-guide", :target => '_blank'
+    = link_to t('views.relics.guide.print_guide'), print_relic_path(relic.to_param), :class => "print-guide oz-only-relic", :target => '_blank'
+

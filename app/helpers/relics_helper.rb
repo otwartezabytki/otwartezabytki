@@ -28,7 +28,7 @@ module RelicsHelper
 
   def subrelic_image(relic)
     content_tag :dd, class: 'subrelic-image' do
-      image_tag(relic.main_photo.file.url(:icon), :size => '24x24', :class => 'thumb type-tiny', :alt => relic.identification)
+      image_tag(relic.main_photo.file.url(:icon), :size => '24x24', :class => 'thumb type-tiny', :alt => '')
     end
   end
 
@@ -110,7 +110,7 @@ module RelicsHelper
   end
 
   def link_to_section_tab(name)
-    link_to_unless_current "<span>#{t "relic_tabs." + name.to_s + ".name"}</span>".html_safe, edit_section_relic_path(relic.id, name), :remote => true
+    link_to_unless_current "<span>#{t "relic_tabs." + name.to_s + ".name"}</span>".html_safe, edit_section_relic_path(relic.id, name), :class => "js-edit-relic-load-modal"
   end
 
   def leafs_of(tree)

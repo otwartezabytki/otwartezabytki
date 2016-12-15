@@ -1,15 +1,15 @@
 - if page.has_subpages?
   %li.dropdown
     = link_to t("layouts.application.#{page.name}"), '#',
-      class: "#{page.name} #{'current' if current_page?(page)} dropdown dropdown-tip",
-      'data-hover' => 'dropdown', 'data-delay-in' => 400, 'data-delay-out' => 200
+      class: "oz-#{page.name} #{'current' if current_page?(page)} dropdown dropdown-tip",
+      'data-hover' => 'dropdown', 'data-delay-in' => 400, 'data-delay-out' => 200,"data-toggle" => "dropdown", "role" => "menu"
     %ul.dropdown-menu
       - page.subpages.each do |subpage|
         %li= link_to subpage.title.presence || subpage.name.titleize, subpage,
-          class: "#{subpage.name} #{'current' if current_page?(subpage)}"
+          class: "oz-#{subpage.name} #{'current' if current_page?(subpage)}"
       - if page.name == "about"
         %li= link_to t('layouts.application.blog'), "http://blog.otwartezabytki.pl/"
 - else
   %li
     = link_to t("layouts.application.#{page.name}"), page,
-      class: "#{page.name} #{'current' if current_page?(page)}"
+      class: "oz-#{page.name} #{'current' if current_page?(page)}"

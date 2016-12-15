@@ -1,0 +1,18 @@
+section.location.oz-edit {
+  .oz-location-map {
+    margin: 0 auto 5px;
+  }
+  .administrative-level {
+    .row {
+      margin: 0;
+      padding: 0;
+    }
+      .select2-container.search-order-container {
+        width: 100% !important;
+      }
+
+  }
+  .string input {
+    width: 100%;
+  }
+}

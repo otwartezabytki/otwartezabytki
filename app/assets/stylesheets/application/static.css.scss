@@ -95,8 +95,9 @@
 }
 
 .about_top {
-  width: 878px;
-  height: 50px;
+  //width: 878px;
+  //height: 50px;
+  height: 80px;
   font-family: 'Open Sans', sans-serif;
   font-weight: bold;
   font-size: 28px;
@@ -109,7 +110,7 @@
 }
 
 .content_more_about {
-  width: 678px;
+  //width: 678px;
   height: auto;
   padding: 14px 140px 35px 140px;
   margin: -74px 0 0 0;
@@ -221,7 +222,7 @@
 .about_top_help {
   width: 878px;
   height: 50px;
-  font-weight: 4000;
+  font-weight: bold;
   font-size: 28px;
   border: 1px solid #436576;
   color: #FFFFFF;
@@ -254,4 +255,10 @@
 
 .download_top {
   background-image: image-url('icon-download.png');
+}
+
+@media screen and (max-width: 768px) {
+  .content_more_about {
+    padding: 20px;
+  }
 }

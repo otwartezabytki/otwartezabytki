@@ -1,0 +1,132 @@
+section.oz-widgets {
+  h1 {
+    background: image-url("icon-download.png") no-repeat, #546f7d linear-gradient(to bottom, #546f7d, #436576);
+    background-position: 30px;
+    margin: 0;
+    height: 82px;
+    line-height: 82px;
+    padding-left: 80px;
+    color: white;
+    font-family: "Open Sans", sans-serif;
+    font-weight: bold;
+    font-size: 28px;
+    border: 1px solid #436576;
+  }
+  .content {
+    background: #fff;
+    box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.2);
+    padding: 35px 0 35px 0;
+    display: inline-block;
+    .description {
+      float: left;
+      h3 {
+        font-size: 20px;
+        line-height: 22px;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+      p {
+        line-height: 17px;
+        font-size: 13px;
+        margin-bottom: 25px;
+      }
+    }
+    .widgets {
+      .widget {
+        border-bottom: 3px solid #486a7c;
+        margin-bottom: 30px;
+        min-height: 200px;
+        display: block;
+        &:hover {
+          text-decoration: none;
+        }
+        .image {
+          float: left;
+          margin-bottom: 20px;
+        }
+        .widget_content {
+          display: block;
+        }
+        span.title {
+          font-weight: 600;
+          font-size: 22px;
+          line-height: 27px;
+          margin-bottom: 10px;
+          padding-left: 35px;
+          display: block;
+          color: #313132;
+
+          &.add_relic::before, &.add_alert::before,
+          &.map_search::before, &.direction::before {
+            content: '';
+            display: inline;
+            height: 30px;
+            width: 30px;
+            float: left;
+          }
+
+          &.add_relic::before {
+            background: asset-data-url("icon-widgetlist-add.png") no-repeat;
+          }
+
+          &.map_search::before {
+            background: asset-data-url("icon-widgetlist-map.png") no-repeat;
+          }
+
+          &.direction::before {
+            background: asset-data-url("icon-widgetlist-direction.png") no-repeat;
+          }
+
+          &.add_alert::before {
+            background: asset-data-url("icon-widgetlist-alerts.png") no-repeat;
+          }
+        }
+        .paragraph {
+          font-size: 13px;
+          line-height: 18px;
+          display: block;
+          color: #313132;
+        }
+        .actions {
+          display: inline-block;
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .oz-xs-text-center {
+    text-align: center;
+  }
+
+  section.oz-widgets {
+    h1 {
+      padding-left: 0;
+    }
+    .content .widgets .widget {
+      span.title {
+        display: inline-flex;
+        float: unset;
+        position: relative;
+        padding-left: 0;
+      }
+      .actions {
+        display: block;
+        span {
+          margin: 25px auto 20px auto;
+          float: unset;
+          display: inline-block;
+        }
+      }
+    }
+  }
+}
+
+//chrome hack for overflowing content
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  section.oz-widgets .content .widgets .widget{
+    overflow: hidden;
+  }
+}

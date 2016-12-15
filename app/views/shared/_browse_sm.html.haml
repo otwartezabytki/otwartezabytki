@@ -1,0 +1,33 @@
+- cache [I18n.locale, "browse-sm-list"] do
+  - relics =  Search.new(:per_page => 1, :load => false).perform
+  %ul.dropdown-menu.oz-cat-loc-menu
+    %li.dropdown-header.oz-categories-list
+      %h3= t('views.relics.index.categories')
+    - categories_hash = categories_facets_hash_for(relics)
+    - Category.roots.sort_by(&:name).each do |c|
+      - if c.name_key == 'sakralny'
+        %li.dropdown-header
+          %h4.oz-sacral-options= "#{c.name} <em>#{relics.count('sacral')}</em>".html_safe
+          %ul
+            - c.children.sort_by(&:name).each do |child|
+              - next unless categories_hash.keys.include?(child.name_key)
+              %li= link_to "#{child.name}<em>#{categories_hash[child.name_key]}</em>".html_safe, relics_path(:search => {:categories => [child.name_key]})
+      - else
+        - next unless categories_hash.keys.include?(c.name_key)
+        = link_to "#{c.name}<em>#{categories_hash[c.name_key]}</em>".html_safe, relics_path(:search => {:categories => [c.name_key]})
+    %li.dropdown-header.oz-localization-list
+      %h3= t('views.relics.localization_facets.header')
+    %ul.nav.nav-list
+      %ul
+        = link_to_browse ({'term' => 'Polska_pl', 'count' => relics.count('poland')}), 0 do
+          %ul
+            - relics.terms('voivodeships', true).each do |obj|
+              %li
+                = link_to_browse obj, 1
+
+      %ul
+        = link_to_browse ({'term' => "#{t('views.relics.localization_facets.world_relics')}_world", 'count' => relics.count('world')}), 0 do
+          %ul
+            - relics.terms('countries', true).each do |obj|
+              %li
+                = link_to_browse obj, 1

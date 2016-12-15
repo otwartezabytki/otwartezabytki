@@ -5,4 +5,4 @@
     .actions
       %button= t('views.relics.edit.save')
       = t('views.relics.edit.or')
-      = link_to t('views.relics.edit.cancel'), relic_path(relic.id), :remote => true, :class => "cancel"
+      = link_to t('views.relics.edit.cancel'), relic_path(relic.id), :class => "cancel js-close-edit-relic"

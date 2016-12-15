@@ -149,3 +149,10 @@ se:
   widget:
     map_search:
       title: Mapa
+
+  oz_img_alts:
+    open_relics_logo: "logo miras abiertas"
+    alert: "advertencia"
+    map: "google map"
+    no_photo: "no se han disponibles"
+    miniature: "miniatura"

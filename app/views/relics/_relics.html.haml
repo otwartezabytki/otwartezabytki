@@ -1,46 +1,47 @@
-.search-results
-  %table.relics
-    %thead
-      %tr.relic
-        %th.body
-          %span.label= t('views.relics.relics.name')
-        %th.location
-          %span.label= t('views.relics.relics.location')
-        %th.date
-          %span.label= t('views.relics.relics.create_date')
-    %tbody
-      - collection.each do |relic|
+.search-results.bootstrap-iso
+  .table-responsive
+    %table.relics
+      %thead
         %tr.relic
-          %td.body
-            .thumb
-              = link_to image_tag(relic.main_photo.file.url(:icon)), relic
-            .relic__relic-content
-              .name
-                %h2= link_to relic.identification, relic
-                - descendants = relic.descendants
-                - if descendants.present?
-                  .include
-                    %span
-                    = descendants.map(&:identification).join('; ')
-              = state_tag(relic)
-              .help
-                = image_tag 'ico-help.png'
-                .help-wrapper
-                  = link_to t('views.relics.index.states.close'), '#', :class => 'close'
-                  %h3= t('views.relics.index.states.header')
-                  %ul
-                    %li= state_hint_tag(relic.state, relic.existence == 'social')
-          %td.location
-            .pathway
-              = relic.place_full_name
-            .street
-              - if relic.street?
-                %span.known= relic.street
-              - else
-                %span.unknown= t('views.relics.relics.unknown_address')
-          %td.date
-            .time
-              - if relic.dating_of_obj?
-                = relic.dating_of_obj
-              - else
-                %em= t('views.relics.relics.unknown_from')
+          %th.body
+            %span.label= t('views.relics.relics.name')
+          %th.location
+            %span.label= t('views.relics.relics.location')
+          %th.date
+            %span.label= t('views.relics.relics.create_date')
+      %tbody
+        - collection.each do |relic|
+          %tr.relic
+            %td.body
+              .thumb
+                = link_to image_tag(relic.main_photo.file.url(:icon), alt: relic.main_photo.alternate_text), relic
+              .relic__relic-content
+                .name
+                  %h2= link_to relic.identification, relic
+                  - descendants = relic.descendants
+                  - if descendants.present?
+                    .include
+                      %span
+                      = descendants.map(&:identification).join('; ')
+                = state_tag(relic)
+                .help
+                  = image_tag 'ico-help.png', alt: 'help'
+                  .help-wrapper
+                    = link_to t('views.relics.index.states.close'), '#', :class => 'close'
+                    %h3= t('views.relics.index.states.header')
+                    %ul
+                      %li= state_hint_tag(relic.state, relic.existence == 'social')
+            %td.location
+              .pathway
+                = relic.place_full_name
+              .street
+                - if relic.street?
+                  %span.known= relic.street
+                - else
+                  %span.unknown= t('views.relics.relics.unknown_address')
+            %td.date
+              .time
+                - if relic.dating_of_obj?
+                  = relic.dating_of_obj
+                - else
+                  %em= t('views.relics.relics.unknown_from')

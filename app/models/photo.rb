@@ -55,6 +55,7 @@ class Photo < ActiveRecord::Base
       :file => file.as_json(options)[:file],
       :file_full_width => file_full_width,
       :file_full_width => file_full_width,
+      :description => description
     }
   end
 end

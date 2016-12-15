@@ -22,87 +22,101 @@
       = stylesheet_link_tag "ie8", :media => "all"
     %link{:href => "http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,600,300&subset=latin,latin-ext", :rel => "stylesheet", :type => "text/css"}
   %body{ :class => [cookies["font-size"].to_s, controller_name, action_name, ("resource_#{params[:id]}" if params[:id])].join(' '), :data => { :logged => warden.authenticated?.to_s } }
-    %div#cookies
-      %ul.cooks
-        %li= link_to t('layouts.application.cookies')
-        %li= link_to t('layouts.application.accept'), "#", class: "btn", id: "accept_cookies"
-        %li= link_to t('layouts.application.learn_more'), page_path(:cookies)
-    #fb-root
-    :javascript
-      (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/pl_PL/all.js#xfbml=1";
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
-    - if current_user.try(:admin?)
-      %a.translation-mode{:href => "#"}
-        T
-    .page
-      #root
-        %header#header
-          .container
-            %hgroup.page-logo
-              %h1
-                %a.page-logo-link(href=root_path)> Otwarte Zabytki
-              %h2.page-logo-tagline= t('layouts.application.tagline')
-            %section.disclaimer
-              = t('layouts.application.disclaimer')
-              %a{:href => "mailto:kontakt-oz@centrumcyfrowe.pl"} kontakt-oz@centrumcyfrowe.pl
-            %nav#userNav
-              .text
-                %span.plus
-                %span.minus
-              %ul
-                - if current_user && current_user.registered? && current_user.errors.size == 0
-                  %li
-                    = link_to t('layouts.application.hello', :username => (current_user.username || current_user.email)), current_user
-                  %li= link_to t('layouts.application.logout'), destroy_user_session_path, :method => :delete, :class => 'logout'
-                  -# %li= t('layouts.application.relics_count', :count => current_user.earn_points)
-                - else
-                  -# %li= t('layouts.application.relics_count', :count => current_user.try(:earn_points) || 0)
-                  %li
-                    %a{:href => new_user_session_path(return_path: with_return_path), :class => 'login'}
-                      = t('layouts.application.login')
-                  %li
-                    %a{:href => new_user_registration_path(return_path: with_return_path), :class => 'register'}
-                      = t('layouts.application.register')
-                  %li
-                    = link_to t('layouts.application.facebook_sign_in'), user_omniauth_authorize_path(:facebook), :class => "fb-btn"
-            %a{:href => 'http://centrumcyfrowe.pl/', :target => '_blank', :class => 'cc_logo'}
-        %section#menu
-          .container
-            %nav
-              %ul#page-menu
-                %li
-                  = link_to t('layouts.application.homepage'), root_path, :class => "home #{'current' if current_page?(root_path)}"
-                - Page.where(name: ['about', 'download', 'contact']).each do |page|
-                  = render 'pages/navigation', page: page
-                %li
-                  = link_to t('layouts.application.widgets'), widgets_path, :class => "widgets #{'current' if current_page?(widgets_path)}"
-                %li
-                  = link_to t('layouts.application.addrelic'), new_relicbuilder_path, :class => "add-relic #{'current' if current_page?(new_relicbuilder_path)}"
-                %li.gradient{:class => " #{'current' if current_page?(relics_path)}"}
-                  = link_to t('layouts.application.search'), relics_path, :class => "search #{'current' if current_page?(relics_path)}"
-                %li.gradient
-                  = link_to t('layouts.application.browse'), "#", :class => "browse"
-                  .arrow
-                  - unless request.xhr?
-                    = render 'shared/browse'
-        %section#main
-          .container.main-container{ :'data-replace' => '.main-container' }
-            = render 'shared/flash', :flash => flash
-            .row
-              = yield
-        #root-footer
-      %footer#footer.container= render 'shared/footer'
+    .oz-change-contrast
+      %button.btn.btn-default.js-contr-normal.oz-change-contrast-btn.oz-normal A
+      %button.btn.btn-default.js-contr-black-on-yellow.oz-change-contrast-btn.oz-boy A
+      %button.btn.btn-default.js-contr-white-on-black.oz-change-contrast-btn.oz-wob A
+      %button.btn.btn-default.js-contr-yellow-on-black.oz-change-contrast-btn.oz-yob A
+    .oz-contrast-container
+      %div#cookies.bootstrap-iso.oz-cookies-bar
+        %ul.cooks
+          %li= link_to t('layouts.application.cookies')
+          %li= link_to t('layouts.application.accept'), "#", class: "btn accept-cookies", id: "accept_cookies"
+          %li= link_to t('layouts.application.learn_more'), page_path(:cookies)
+      #fb-root
+      :javascript
+        (function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/pl_PL/all.js#xfbml=1";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+      - if current_user.try(:admin?)
+        %a.translation-mode{:href => "#"}
+          T
+      .page
+        #root
+          .bootstrap-iso
+            .container
+              %header#header
+                %hgroup.col-lg-4.col-md-5.col-xs-12.text-center
+                  = link_to image_tag("logo.png", :class => 'oz-logo img-responsive', :alt => t('oz_img_alts.open_relics_logo')), root_path
+                  %h4.text-center= t('layouts.application.tagline')
+                .display-block.col-lg-8.col-md-7
+                  %nav.navbar.navbar-default{role: "navigation"}
+                    %ul.nav.navbar-nav.navbar-right.hidden-sm.hidden-xs.hidden-md
+                      = render 'shared/login_navigation'
+                  %section.oz-disclaimer.col-md-10
+                    = t('layouts.application.disclaimer')
+                    %a{:href => "mailto:kontakt-oz@centrumcyfrowe.pl"} kontakt-oz@centrumcyfrowe.pl
+                  .col-md-2.oz-cc-logo
+                    = link_to image_tag("cc_logo.png"), 'http://centrumcyfrowe.pl/', alt: 'Centrum cyfrowe'
+          %section#menu.bootstrap-iso
+            .container
+              %nav.navbar.navbar-default
+                .navbar-header
+                  %button.navbar-toggle{"data-target" => ".nav-collapse", "data-toggle" => "collapse", type: "button"}
+                    %span.icon-bar
+                    %span.icon-bar
+                    %span.icon-bar
+                .collapse.navbar-collapse.nav-collapse
+                  %ul#page-menu.nav.navbar-nav.oz-navbar-center
+                    %li
+                      = link_to t('layouts.application.homepage'), root_path, :class => "sr-only-focusable oz-home #{'active' if current_page?(root_path)}"
+                    - Page.where(name: ['about', 'download', 'contact']).each do |page|
+                      = render 'pages/navigation', page: page
+                    %li
+                      = link_to t('layouts.application.widgets'), widgets_path, :class => "oz-widgets #{'active' if current_page?(widgets_path)}"
+                    %li
+                      = link_to t('layouts.application.addrelic'), new_relicbuilder_path, :class => "oz-add-relic #{'active' if current_page?(new_relicbuilder_path)}"
+                    %li.gradient{:class => " #{'current' if current_page?(relics_path)}"}
+                      = link_to t('layouts.application.search'), relics_path, :class => "oz-search #{'active' if current_page?(relics_path)}"
+                    %li.gradient.hidden-sm.hidden-xs.hidden-md
+                      = link_to t('layouts.application.browse'), "#", :class => "oz-browse js-browse"
+                      - unless request.xhr?
+                        = render 'shared/browse'
+                    %li.gradient.hidden-lg.dropdown
+                      = link_to t('layouts.application.browse'), "#", :class => "oz-browse-sm dropdown-toggle", "data-toggle" => "dropdown", "role" => "menu", "aria-haspopup" => "true", "aria-expanded" => "false"
+                      - unless request.xhr?
+                        = render 'shared/browse_sm'
+                    %ul.nav.navbar-default.hidden-lg.hidden-xl= render 'shared/login_navigation'
+                    %li.oz-change-contrast-xs
+                      %button.btn.btn-default.js-contr-normal.oz-change-contrast-btn.oz-normal A
+                      %button.btn.btn-default.js-contr-black-on-yellow.oz-change-contrast-btn.oz-boy A
+                      %button.btn.btn-default.js-contr-white-on-black.oz-change-contrast-btn.oz-wob A
+                      %button.btn.btn-default.js-contr-yellow-on-black.oz-change-contrast-btn.oz-yob A
+          %section#main
+            - if params[:id] == "o-projekcie"
+              .main-container.bootstrap-iso{ :'data-replace' => '.main-container' }
+                = render 'shared/flash', :flash => flash
+                .container
+                  .row
+                    = yield
+            -else
+              .their-container.main-container{ :'data-replace' => '.main-container' }
+                = render 'shared/flash', :flash => flash
+                .row
+                  = yield
+          #root-footer
+        %footer#footer.oz-footer.bootstrap-iso
+          .container= render 'shared/footer'
 
-    #fancybox_loader_container
-      #fancybox_loader
-    != include_gon(:camel_case => true)
-    != javascript_include_tag "//maps.googleapis.com/maps/api/js?key=#{Settings.oz.gm_key}&sensor=false"
-    != javascript_include_tag "application"
-    = timeago_script_tag
-    != yield :footer_javascripts
-    = render 'shared/analytics'
+      #fancybox_loader_container
+        #fancybox_loader
+      != include_gon(:camel_case => true)
+      != javascript_include_tag "//maps.googleapis.com/maps/api/js?key=#{Settings.oz.gm_key}&sensor=false"
+      != javascript_include_tag "application"
+      = timeago_script_tag
+      != yield :footer_javascripts
+      = render 'shared/analytics'

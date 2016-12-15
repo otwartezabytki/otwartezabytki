@@ -1,0 +1,55 @@
+div.oz-cookies-bar {
+  width: 100%;
+  padding: 0 !important;
+  ul {
+    li {
+      margin-left: 15px;
+      margin-right: 0;
+    }
+    li:first-child {
+      margin-top: 9px;
+    }
+    li:last-child {
+      margin-right: 15px;
+      margin-bottom: 10px;
+    }
+  }
+  ul li {
+    .accept-cookies, .accept-cookies:hover,
+    .accept-cookies:focus, .accept-cookies:active {
+      color: #fff;
+    }
+    .accept-cookies {
+      margin: 5px 3px 5px 0;
+      background-color: #47697a;
+      background-image: linear-gradient(to bottom, #4b6d7e, #436576);
+      border: 0;
+      font-size: 12px;
+      font-weight: 300;
+      text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
+      text-transform: uppercase;
+      border-radius: 2px;
+      padding: 5px 16px 4px 19px;
+      cursor: pointer;
+    }
+    .accept-cookies:hover, .accept-cookies:focus {
+      background-color: #396f8a;
+      background-image: -webkit-linear-gradient(top, #437994, #2b607b);
+      background-image: linear-gradient(to bottom, #437994, #2b607b);
+    }
+    .accept-cookies:active {
+      background-color: #346984;
+      background-image: -webkit-linear-gradient(top, #2b607b, #437893);
+      background-image: linear-gradient(to bottom, #2b607b, #437893);
+    }
+
+    a {
+      color: #044d71;
+      text-decoration: none;
+    }
+    a:hover {
+      color: #069;
+      text-decoration: underline !important;
+    }
+  }
+}

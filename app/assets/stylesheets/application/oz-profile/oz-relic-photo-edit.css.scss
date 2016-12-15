@@ -1,0 +1,41 @@
+section.oz-edit.photos {
+  .row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  .boolean {
+    border-top: 1px solid #bfbfbf;
+    span {
+      color: #dd0000;
+    }
+  }
+  .string input {
+    width: 100% !important;
+  }
+
+  .photo-upload {
+    .file-input-wrapper {
+      height: 40px;
+      .btn-file-input {
+        margin-top: 15px;
+      }
+    }
+  }
+  .remove_photo {
+    color: #d00;
+    position: relative;
+    &::before {
+      content: '';
+      display: inline;
+      background: asset-data-url("icon-delete.png") no-repeat;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      left: -15px;
+      top: 2px;
+    }
+  }
+  abbr {
+    border-bottom: none;
+  }
+}

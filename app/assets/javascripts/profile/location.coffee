@@ -134,7 +134,7 @@ window.ensure_geolocation = ->
         $('#relic_longitude').val pos.coords.longitude
         $('#map_canvas').auto_zoom(17)
 
-jQuery.initializer 'section.edit.location', ->
+jQuery.initializer 'section.oz-edit.location', ->
   $('#relic_place_id').select2()
   $('#relic_place_id').change ->
     $('#relic_street').val("")

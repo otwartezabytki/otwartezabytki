@@ -1,14 +1,14 @@
 %section.show.events
   %h2= t('views.relics.show.events.header')
   - if relic.all_events.count > 0
-    = link_to t('views.relics.show.general.fill_in'), edit_section_relic_path(relic.to_param, :events), :remote => true, :class => "edit-relic-link"
+    = link_to t('views.relics.show.general.fill_in'), edit_section_relic_path(relic.to_param, :events),  :class => "hidden-xs hidden-sm hidden-md edit-relic-link js-edit-relic-load-modal"
     .content
       .viewport
         %ul
           - relic.all_events.includes(:relic, :photo).each do |event|
             %li
               - if event.photo.present?
-                = link_to image_tag(event.photo.file.url(:icon)), relic_photo_path(relic.to_param, event.photo.id), :remote => true
+                = link_to image_tag(event.photo.file.url(:icon), alt: event.photo.alternate_text), relic_photo_path(relic.to_param, event.photo.id), :remote => true
               - if event.relic_id == relic.id
                 %strong= event.date
                 \-
@@ -22,7 +22,7 @@
   - else
     .placeholder
       = t('views.relics.show.events.placeholder')
-      = link_to t('views.relics.show.events.add'), edit_section_relic_path(relic.to_param, :events), :remote => true
+      = link_to t('views.relics.show.events.add'), edit_section_relic_path(relic.to_param, :events), :class => "hidden-xs hidden-sm hidden-md js-edit-relic-load-modal"
       .example
         %a.show-example{:href => image_path('screenshot-dates.jpg'), :class => "fancybox"}
           = t('views.relics.show.general.show_example')

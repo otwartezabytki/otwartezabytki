@@ -1,7 +1,7 @@
 %section.show.alerts#anchor-alerts
   %h2=t('views.relics.show.alerts.header')
   - if relic.alerts.count > 0
-    = link_to image_tag('edit-relic-ico-alert.png') + t('views.relics.show.alerts.create'), new_relic_alert_path(relic), :remote => true, :class => "edit-relic-link"
+    = link_to image_tag('edit-relic-ico-alert.png', alt: t('oz_img_alts.alert')) + t('views.relics.show.alerts.create'), new_relic_alert_path(relic), :class => "hidden-xs hidden-sm hidden-md js-edit-relic-load-modal"
     .content
       - if relic.alerts.not_fixed.count > 0
         .not-fixed
@@ -10,7 +10,7 @@
             - relic.alerts.order('created_at DESC').not_fixed.each do |alert|
               %li
                 - if alert.file?
-                  .image= image_tag alert.file.midi.url, :width => 80, :height => 80
+                  .image= image_tag alert.file.midi.url, :width => 80, :height => 80, alt: t('oz_img_alts.alert')
                 = simple_format alert.description
       - if relic.alerts.fixed.count > 0
         .fixed
@@ -19,7 +19,7 @@
             - relic.alerts.order('created_at DESC').fixed.each do |alert|
               %li
                 - if alert.file?
-                  .image= image_tag alert.file.mini.url, :width => 45, :height => 45
+                  .image= image_tag alert.file.mini.url, :width => 45, :height => 45, alt: t('oz_img_alts.alert')
                 = simple_format alert.description
       - unless relic.existence == "archived"
         = link_to new_relic_alert_path(relic, :non_existent => true), :class => "alert-link" do
@@ -27,7 +27,7 @@
   - else
     .placeholder
       %p= t('views.relics.show.alerts.placeholder')
-      = link_to image_tag('edit-relic-ico-alert.png') + t('views.relics.show.alerts.create'), new_relic_alert_path(relic), :remote => true
+      = link_to image_tag('edit-relic-ico-alert.png', alt: t('oz_img_alts.alert')) + t('views.relics.show.alerts.create'), new_relic_alert_path(relic), :class => "hidden-xs hidden-sm hidden-md js-edit-relic-load-modal"
       - unless relic.existence == "archived"
         = link_to new_relic_alert_path(relic.to_param,  :non_existent => true), :class => "alert-link" do
           = t('views.relics.show.alerts.non_existent')

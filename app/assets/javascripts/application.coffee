@@ -1,4 +1,5 @@
 # TODO: move all vendor requires to files where they're actually used
+
 #= require vendor/browser-update
 #= require jquery
 #= require jquery_ujs
@@ -15,10 +16,16 @@
 #= require jquery.ui.progressbar
 #= require jquery.ui.sortable
 #= require jquery-form
+
 #= require_tree ./vendor
 #= require js-routes
-#= require twitter/bootstrap/bootstrap-tooltip
-#= require twitter/bootstrap/bootstrap-popover
+
+# bootstrap js
+#= require bootstrap.js
+#= require bootstrap-sprockets
+
+# require twitter/bootstrap/bootstrap-tooltip
+# require twitter/bootstrap/bootstrap-popover
 #= require variables
 #= require_tree ./libraries
 #= require profile
@@ -32,6 +39,8 @@
 #= require angular-sanitize
 #= require angular-cookies
 #= require angular-prevent-default
+#= require oz-container-helper
+
 #= require angular-google-maps
 #= require angular-dragdrop
 #= require angular-ui-sortable
@@ -39,6 +48,15 @@
 #= require ./angular/init
 #= require ./angular/router
 #= require_tree ./angular
+
+# priv js
+#= require oz-edit-modal-request
+#= require oz-contrast-changer
+#= require oz-pogress-bar
+
+
+
+
 
 # FIX data-dismiss
 $(document).on 'click', '[data-dismiss]', (e) ->
@@ -55,7 +73,7 @@ jQuery.initializer '.main-container', ->
       $el.popover
         title: -> $('#' + $el.data 'title-id').html()
         content: -> $('#' + $el.data 'content-id').html()
-        delay: 100000
+        delay: 1000
         html: true
     else
       $el.popover
@@ -69,6 +87,7 @@ jQuery.initializer '.main-container', ->
     false
 
   this.on 'click', 'a.js-popover', (event) ->
+    console.log("kliknieto zobacz w zabytku")
     event.preventDefault()
     $(this).popover 'toggle'
     false

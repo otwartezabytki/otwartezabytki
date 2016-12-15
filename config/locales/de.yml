@@ -923,7 +923,7 @@ de:
       facebook_sign_up: "Mit Facebook-Account registrieren"
       footer:
         about_project: "<p>Otwarte Zabytki ist ein Projekt des Centrum Cyfrowe, dem Digitalen Zentrum Polen.</p><p>Centrum Cyfrowe Projekt: Polen, ul. Andersa 29, 00-159 Warszawa</p><p>Das Projekt wird finanziert aus Mitteln des Ministeriums für Kultur und nationales Erbe, aus Mitteln des Museums der Geschichte Polens im Rahmen des Programms \"Patriotismus für Morgen\", aus Mitteln des Ministeriums für Äußere Angelegenheiten im Rahmen des Programms zur Realisierung der \"Zusammenarbeit mit der Polonia und den Auslandspolen\", aus Mitteln der Stiftung \"Orange\" sowie aus Mitteln des CEE-Trust.</p>"
-        license: "Die Inhalte der Plattform werden unter einer Creative Commons-Lizenz veröffentlicht <br/> <a href ='http://creativecommons.org/licenses/by/3.0/pl'>Creative Commons Autorenschaft – Unter den gleichen Bedingungen 3.0 Polen</a>"
+        license: "Die Inhalte der Plattform werden unter einer Creative Commons-Lizenz veröffentlicht <br/> <a href ='https://creativecommons.org/licenses/by-sa/3.0/pl/'>Creative Commons Autorenschaft – Unter den gleichen Bedingungen 3.0 Polen</a>"
         partner_h1: Schirmherr
         partner_h2: "Medienschirmherr"
         partner_h3: "Inhaltlicher Partner"
@@ -1673,7 +1673,9 @@ de:
           save_and_print: "Route speichern und ausdrucken"
           loading_relics: "Liste der Baudenkmäler laden"
           create_new_widget: "neue Route anlegen"
+          create_new_widget_xs: "neue Route"
           sign_in: "EINLOGGEN, UM DIE STRECKE ZU SPEICHERN"
+          sign_in_xs: "EINLOGGEN"
         generated: "Code für die Einbindung in eine andere Seite generieren"
         map_search:
           header: "Wähle die Einstellungen für das Steuerungselement"
@@ -1796,3 +1798,10 @@ de:
     wuoz-w-warszawie: "Wojewodschafts-Amt für Denkmalschutz in Warschau/Warszawa"
     wuoz-w-zielonej-gorze: "Wojewodschafts-Amt für Denkmalschutz in Grünberg/Zielona Góra"
     wuoz-we-wroclawiu: "Wojewodschafts-Amt für Denkmalschutz in Breslau/Wrocław"
+
+  oz_img_alts:
+    open_relics_logo: "Logo offene Visierung"
+    alert: "Warnung"
+    map: "google map"
+    no_photo: "kein Foto vorhanden"
+    miniature: "Miniatur"
