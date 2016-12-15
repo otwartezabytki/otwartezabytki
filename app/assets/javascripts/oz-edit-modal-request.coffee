@@ -33,3 +33,12 @@ $('#edit-relic-modal').on 'hide.bs.modal', ->
       return confirm("Jeśli wyjdziesz zmiany nie zostaną zapisane. Kontynuować?")
 
   return true
+$(document).ready ->
+  jQuery ($) ->
+    $(document).ajaxStop ->
+      $('#fancybox_loader_container').hide()
+      return
+    $(document).ajaxStart ->
+      $('#fancybox_loader_container').show()
+      return
+    return
