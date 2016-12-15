@@ -29,6 +29,7 @@ jQuery.initializer '.modal-body', ->
   div.removeClass 'container'
   div.focus()
 
+  #change map on home site if screen is smaller than 356px
 change_map_size = ->
   map = $('#map-poland')
   if window.outerWidth < 356
