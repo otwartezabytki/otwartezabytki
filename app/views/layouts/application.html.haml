@@ -23,10 +23,10 @@
     %link{:href => "http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,600,300&subset=latin,latin-ext", :rel => "stylesheet", :type => "text/css"}
   %body{ :class => [cookies["font-size"].to_s, controller_name, action_name, ("resource_#{params[:id]}" if params[:id])].join(' '), :data => { :logged => warden.authenticated?.to_s } }
     .oz-change-contrast
-      %button.btn.btn-default.js-contr-normal.oz-change-contrast-btn.oz-normal A
-      %button.btn.btn-default.js-contr-black-on-yellow.oz-change-contrast-btn.oz-boy A
-      %button.btn.btn-default.js-contr-white-on-black.oz-change-contrast-btn.oz-wob A
-      %button.btn.btn-default.js-contr-yellow-on-black.oz-change-contrast-btn.oz-yob A
+      %button.btn.btn-default.js-contr-normal.oz-change-contrast-btn.oz-normal{:alt => t('oz_img_alts.normal_layout')} A
+      %button.btn.btn-default.js-contr-black-on-yellow.oz-change-contrast-btn.oz-boy{:alt => t('oz_img_alts.boy_layout')} A
+      %button.btn.btn-default.js-contr-white-on-black.oz-change-contrast-btn.oz-wob{:alt => t('oz_img_alts.wob_layout')} A
+      %button.btn.btn-default.js-contr-yellow-on-black.oz-change-contrast-btn.oz-yob{:alt => t('oz_img_alts.yob_layout')} A
     .oz-contrast-container
       %div#cookies.bootstrap-iso.oz-cookies-bar
         %ul.cooks
@@ -92,10 +92,10 @@
                         = render 'shared/browse_sm'
                     %ul.nav.navbar-default.hidden-lg.hidden-xl= render 'shared/login_navigation'
                     %li.oz-change-contrast-xs
-                      %button.btn.btn-default.js-contr-normal.oz-change-contrast-btn.oz-normal A
-                      %button.btn.btn-default.js-contr-black-on-yellow.oz-change-contrast-btn.oz-boy A
-                      %button.btn.btn-default.js-contr-white-on-black.oz-change-contrast-btn.oz-wob A
-                      %button.btn.btn-default.js-contr-yellow-on-black.oz-change-contrast-btn.oz-yob A
+                      %button.btn.btn-default.js-contr-normal.oz-change-contrast-btn.oz-normal{:alt => t('oz_img_alts.normal_layout')} A
+                      %button.btn.btn-default.js-contr-black-on-yellow.oz-change-contrast-btn.oz-boy{:alt => t('oz_img_alts.boy_layout')} A
+                      %button.btn.btn-default.js-contr-white-on-black.oz-change-contrast-btn.oz-wob{:alt => t('oz_img_alts.wob_layout')} A
+                      %button.btn.btn-default.js-contr-yellow-on-black.oz-change-contrast-btn.oz-yob{:alt => t('oz_img_alts.yob_layout')} A
           %section#main
             - if params[:id] == "o-projekcie"
               .main-container.bootstrap-iso{ :'data-replace' => '.main-container' }

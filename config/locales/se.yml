@@ -156,3 +156,7 @@ se:
     map: "google map"
     no_photo: "no se han disponibles"
     miniature: "miniatura"
+    normal_layout: "diseño estándar"
+    boy_layout: "Fuente negra, Fondo amarillo"
+    wob_layout: "Fuente blanca, fondo negro"
+    yob_layout: "Yellow fuente, fondo negro"

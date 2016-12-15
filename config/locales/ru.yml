@@ -103,3 +103,7 @@ ru:
     map: "google map"
     no_photo: "нет фотографии"
     miniature: "миниатюрный"
+    normal_layout: "стандартная планировка"
+    boy_layout: "черный шрифт, желтый фон"
+    wob_layout: "белый шрифт, черный фон"
+    yob_layout: "желтый шрифт, черный фон"

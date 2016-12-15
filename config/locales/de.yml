@@ -1805,3 +1805,7 @@ de:
     map: "google map"
     no_photo: "kein Foto vorhanden"
     miniature: "Miniatur"
+    normal_layout: "Standard-Layout"
+    boy_layout: "Schwarze Schriftart, Gelber Hintergrund"
+    wob_layout: "Weiße Schriftart, Schwarze Hintergrund"
+    yob_layout: "Gelber Schriftart, Schwarze Hintergrund"

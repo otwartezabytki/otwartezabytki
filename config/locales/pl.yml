@@ -1805,3 +1805,7 @@ pl:
     map: "mapa"
     no_photo: "Brak zdjęcia"
     miniature: "miniatura"
+    normal_layout: "standardowy layout"
+    boy_layout: "czarna czcionka, żółte tło"
+    wob_layout: "biała czcionka, czarne tło"
+    yob_layout: "żółta czcionka, czarne tło"
