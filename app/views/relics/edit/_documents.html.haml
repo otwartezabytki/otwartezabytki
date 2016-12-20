@@ -13,8 +13,8 @@
                   :confirm => t('views.relics.edit.documents.delete_confirm', :editable => false),
                   :class => "remove_document"
             .column-right
-              = f2.input :name, :input_html => { :class => "name" }
-              = f2.input :description, :input_html => { :class => "description" }
+              = f2.input :name, :input_html => { :class => "name" }, alt: t('oz_input_alts.edit_relic.relic_doc_title')
+              = f2.input :description, :input_html => { :class => "description" }, alt: t('oz_input_alts.edit_relic.relic_doc_desc')
       - elsif document.saved?
         .document
           .column-left
@@ -46,7 +46,7 @@
             = t('views.relics.edit.documents.upload')
         = file_field_tag "document[file]", :class => 'document_upload', :"data-url" => "#{relic_documents_path(relic.id)}"
 
-    = f.input :documents_info
+    = f.input :documents_info, alt: t('oz_input_alts.edit_relic.relic_doc_where')
     .actions
       %button= t('views.relics.edit.save')
       = t('views.relics.edit.or')

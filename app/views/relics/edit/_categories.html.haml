@@ -5,7 +5,7 @@
     <span class="auto_categories" title="#{t('views.relics.show.categories.assigned_automatically', editable: false)}">*</span>
   = semantic_form_for relic, :url => section_relic_path(relic.id, :section => :categories), :remote => true do |f|
     = f.input :tags, :input_html => { :value => relic.tags.join(','), :style => "width: 680px", :multiple => true },
-              :hint => t('formtastic.hints.relic.tags')
+              :hint => t('formtastic.hints.relic.tags'), alt: t('oz_input_alts.edit_relic.relic_tags')
     .select
       %label= t('views.relics.edit.categories.name')
       .input

@@ -20,7 +20,7 @@
       %form(name="searchForm" ng-submit="searchRelics()")
         %h2.field-label= t('widget.walking_guide.query_field')
         .walking-guide-search__query
-          %input.search-query__input(type="text" name="query" ng-minlength="4" ng-model="query" placeholder="#{t('widget.walking_guide.query_placeholder')}")
+          %input.search-query__input(type="text" name="query" ng-minlength="4" ng-model="query" placeholder="#{t('widget.walking_guide.query_placeholder')}" alt="#{t('views.pages.home.how_it_works.what_alt')} #{t('views.relics.edit.or')} #{t('views.pages.home.how_it_works.where_alt')}")
           %input.search-query__button(type="submit" value="")
         %span.error(ng-show="searchForm.submitted && searchForm.query.$error.minlength")
           = t('widget.walking_guide.query_is_too_short')
@@ -42,10 +42,10 @@
         {{ loading && '#{t('widget.walking_guide.loading')}' || '#{t('widget.walking_guide.load_more')}' }}
     .walking-guide__title
       %h2.field-label= t('widget.walking_guide.title_field')
-      %input(type="text" ng-model="widget.title")
+      %input(type="text" ng-model="widget.title" alt="#{t('oz_input_alts.set_wg_name')}")
     .walking-guide__description
       %h2.field-label= t('widget.walking_guide.description')
-      %textarea(ng-model="widget.description")
+      %textarea(ng-model="widget.description" alt="#{t('oz_input_alts.set_wg_desc')}")
 
     - if current_user.present?
       %button.button.button--save(type="button" ng-click="manualSave()" ng-disabled="saving || loading || !widget.relics.length")

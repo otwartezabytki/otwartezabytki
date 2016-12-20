@@ -13,7 +13,7 @@
         = f.input :fprovince
         = f.input :fplace
       .street_input{ :style => (relic.street.blank? ? "display: none" : "") }
-        = f.input :street
+        = f.input :street, alt: t('oz_input_alts.edit_relic.relic_street')
       = link_to (relic.street.blank? ? t('views.relics.edit.location.known_address') : t('views.relics.edit.location.unknown_address')), '#', :class => "toggle_street_input"
       %br
 

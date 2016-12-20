@@ -6,7 +6,7 @@ $(document).ready ->
 
 # setting map width in widgets
 $(document).ready ->
-  map = $('.oz-map-container')
+  map = $('.js-map-container')
   map_width = map.width()
   sidebar_height = $('.walking-guide__sidebar').height()
   if $(document).width() < 992
