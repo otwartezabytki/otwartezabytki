@@ -1840,4 +1840,5 @@ pl:
       relic_photo_date: "Wprowadź datę wykonania"
       relic_photo_desc: "Wprowadź opis"
       relic_photo_alt: "Wprowadź tekst alternatywny"
+  oz_skip_navi: "Omiń nawigację"
 

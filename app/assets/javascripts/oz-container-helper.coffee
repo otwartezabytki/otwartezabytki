@@ -51,7 +51,6 @@ $(window).resize ->
 $ ->
   $('.js-skip-navi').click (e) ->
     e.preventDefault()
-    console.log("skipnieto")
     x = $('a.js-to-skip-navi:first')
 
     setTimeout (
@@ -60,3 +59,9 @@ $ ->
       console.log(x.get(0))
     ), 150
   return
+
+jQuery.initializer '.redactor_toolbar', ->
+  this.find('.redactor_btn_bold').attr('alt', "Pogrubienie")
+  this.find('.redactor_btn_italic').attr('alt', "Pochylenie")
+  this.find('.redactor_btn_link').attr('alt', "Wstaw link")
+  this.find('.redactor_btn_unorderedlist').attr('alt', "Wypunktowanie")
