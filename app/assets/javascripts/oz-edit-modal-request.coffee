@@ -31,8 +31,29 @@ $('#edit-relic-modal').on 'hide.bs.modal', ->
   if serialized_data = $form.data('serialized')
     if serialized_data != $form.serialize()
       return confirm("Jeśli wyjdziesz zmiany nie zostaną zapisane. Kontynuować?")
-
   return true
+
+# sets focus on email input or first link in modal
+jQuery.initializer '.js-close-edit-relic', ->
+  setTimeout (->
+
+    if $('.modal-body .login_title').length > 0
+      first_active =  $('#user_email:first')
+    else
+      first_active = $('.modal-body a.js-edit-relic-load-modal:first')
+
+    first_active.focus()
+    return
+  ), 150
+
+# turns on escape key when modal is shown
+jQuery.initializer '.js-close-edit-relic', ->
+  $(document).keyup (e) ->
+    if e.keyCode == 27
+      $('#edit-relic-modal').modal('hide')
+      location.reload(true)
+    return
+
 $(document).ready ->
   jQuery ($) ->
     $(document).ajaxStop ->
