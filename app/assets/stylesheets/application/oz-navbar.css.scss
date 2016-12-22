@@ -24,6 +24,15 @@
   cursor: default;
 }
 
+.navi-skipper {
+  position: absolute;
+  left: -1000px;
+  &:focus {
+    left: 0;
+  }
+}
+
+
 .oz-login {
   &::before {
     content: "";

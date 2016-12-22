@@ -28,6 +28,8 @@
       %button.btn.btn-default.js-contr-white-on-black.oz-change-contrast-btn.oz-wob{:alt => t('oz_img_alts.wob_layout')} A
       %button.btn.btn-default.js-contr-yellow-on-black.oz-change-contrast-btn.oz-yob{:alt => t('oz_img_alts.yob_layout')} A
     .oz-contrast-container
+      %div
+        = link_to "Skip", '#skipped', class: "js-skip-navi navi-skipper"
       %div#cookies.bootstrap-iso.oz-cookies-bar
         %ul.cooks
           %li= link_to t('layouts.application.cookies')
@@ -97,6 +99,7 @@
                       %button.btn.btn-default.js-contr-white-on-black.oz-change-contrast-btn.oz-wob{:alt => t('oz_img_alts.wob_layout')} A
                       %button.btn.btn-default.js-contr-yellow-on-black.oz-change-contrast-btn.oz-yob{:alt => t('oz_img_alts.yob_layout')} A
           %section#main
+            %a#skipped.hidden.js-to-skip-navi{ href: '#'} skipper
             - if params[:id] == "o-projekcie"
               .main-container.bootstrap-iso{ :'data-replace' => '.main-container' }
                 = render 'shared/flash', :flash => flash

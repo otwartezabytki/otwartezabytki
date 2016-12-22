@@ -46,3 +46,17 @@ $(document).ready ->
 
 $(window).resize ->
   change_map_size()
+
+# method to skip navigation links
+$ ->
+  $('.js-skip-navi').click (e) ->
+    e.preventDefault()
+    console.log("skipnieto")
+    x = $('a.js-to-skip-navi:first')
+
+    setTimeout (
+      $('html, body').animate { scrollTop: x.offset().top }, 1000
+      x.focus()
+      console.log(x.get(0))
+    ), 150
+  return
