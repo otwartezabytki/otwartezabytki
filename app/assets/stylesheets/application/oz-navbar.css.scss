@@ -7,6 +7,8 @@
   position: relative;
   top: 15px;
   cursor: pointer;
+  font-size: 25px;
+  color: black;
 }
 
 .oz-minus {
@@ -21,6 +23,15 @@
   opacity: 0.5;
   cursor: default;
 }
+
+.navi-skipper {
+  position: absolute;
+  left: -1000px;
+  &:focus {
+    left: 0;
+  }
+}
+
 
 .oz-login {
   &::before {
@@ -513,7 +524,6 @@ section.oz-disclaimer {
 }
 
 .oz-localization-list {
-  margin-left: 290px;
   h3::before {
     content: "";
     display: block;

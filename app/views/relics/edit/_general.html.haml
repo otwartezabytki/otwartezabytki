@@ -1,7 +1,7 @@
 .row
   = semantic_form_for relic, :url => section_relic_path(relic.id, :section => :general), :remote => true do |f|
-    = f.input :identification, :as => :string
-    = f.input :common_name, :as => :string
+    = f.input :identification, :as => :string, alt: t('oz_input_alts.edit_relic.relic_name')
+    = f.input :common_name, :as => :string, alt: t('oz_input_alts.edit_relic.relic_common_name')
     .actions
       %button= t('views.relics.edit.save')
       = t('views.relics.edit.or')

@@ -40,7 +40,7 @@
               %li= rel.identification
 
     - if relic.has_photos?
-      = image_tag relic.main_photo.file.maxi.url, :class => 'SectionPhoto', :alt => 'Zdjęcie zabytku'
+      = image_tag relic.main_photo.file.maxi.url, :class => 'SectionPhoto', :alt => relic.main_photo.alternate_text
 
     .Definition.SectionLocation
       .Icon= image_tag 'edit-relic-ico-location.png', :alt => ''

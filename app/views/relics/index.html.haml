@@ -28,15 +28,15 @@
           .form-advance-search
             %section.main-search
               .field.subject.col-md-6.col-sm-12
-                = f.input :q, :input_html => { :class => 'autocomplete-q'}
+                = f.input :q, :input_html => { :class => 'autocomplete-q', :alt=> t('views.pages.home.how_it_works.what_alt')}
               .field.place.col-md-6.col-sm-12
-                = f.input :place, :input_html => { :class => 'autocomplete-place'}
+                = f.input :place, :input_html => { :class => 'autocomplete-place', :alt=> t('views.pages.home.how_it_works.where_alt')}
               .field.time.col-md-6.col-sm-12
                 %label= t('views.relics.index.build_date')
                 %span.block= t('views.relics.index.build_date_example')
                 .wrap
-                  = f.input :from
-                  = f.input :to
+                  = f.input :from, alt: t('oz_input_alts.search_from')
+                  = f.input :to, alt: t('oz_input_alts.search_to')
               .field.col-md-6.col-sm-12
                 = f.action :submit, :label => t('formtastic.actions.search_html', :editable => false), :button_html => { :name => nil }
                 - hidden_filter = [f.object.state, f.object.has_photos, f.object.has_description, f.object.existence].flatten.compact.blank?
@@ -47,7 +47,7 @@
                   %h4
                     = t('views.relics.index.states.label')
                     .help
-                      = image_tag 'ico-help.png'
+                      = image_tag 'ico-help.png', alt: 'help'
                       .help-wrapper
                         = link_to t('views.relics.index.states.close'), '#', :class => 'close'
                         %h3= t('views.relics.index.states.header')
@@ -73,7 +73,7 @@
               %section.search-no-results
                 %p= t('views.relics.index.no_results_html')
                 %p.no-results-info
-                  =image_tag "icon-info.png"
+                  =image_tag "icon-info.png", alt: 'info'
                   = t('views.relics.index.no_results2_html')
                 %footer.no-results-add
                   %p.no-results-info= t('views.relics.index.no_results_add_header')

@@ -67,7 +67,7 @@
   background: $bg !important;
 }
 
-$specific-list: 'oz-edit_relic .input span', 'edit_relic .input span';
+$specific-list: 'oz-edit_relic .input span', 'edit_relic .input span', '.form-advance-search span', '.form-advance-search label', '.relic-row.relic', '.relic-row.relic .include';
 $linkable-list: nav ul li span, a;
 $clickable-list: button, input, '.accept-cookies', '.oz-fb-btn', '.fb-btn', '.clr-change-accessible';
 $not-clickable-list: section, p, form, h1, h2, h3, h4, h5, h6, li, '.row', '.relic-example', '.top', '.footer-language',

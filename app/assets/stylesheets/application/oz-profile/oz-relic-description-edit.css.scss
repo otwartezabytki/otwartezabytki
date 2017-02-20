@@ -1,0 +1,10 @@
+section.oz-edit.description {
+  .reminder {
+    margin-top: 10px;
+    @include gradient(#f6ead4, #efdaB4);
+    color: #524d49;
+    padding: 15px;
+    font-weight: bold;
+    font-size: 12px;
+  }
+}

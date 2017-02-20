@@ -1,6 +1,6 @@
 .relic-info
   .relic-info__photo-wrapper(ng-if="'{{ relic.main_photo.file.midi.url }}'")
-    %img.relic-info__photo(ng-src="{{ relic.main_photo.file.midi.url }}")
+    %img.relic-info__photo(ng-src="{{ relic.main_photo.file.midi.url }}"){alt: ''}
   .relic-info__content
     %h3.relic-info__title
       {{ relic.identification }}

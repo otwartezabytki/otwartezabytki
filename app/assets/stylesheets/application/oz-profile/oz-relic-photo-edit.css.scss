@@ -1,4 +1,8 @@
 section.oz-edit.photos {
+  .row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
   .boolean {
     border-top: 1px solid #bfbfbf;
     span {
@@ -8,13 +12,7 @@ section.oz-edit.photos {
   .string input {
     width: 100% !important;
   }
-  ul.redactor_toolbar {
-    background-image: none;
-    li a {
-      padding-left: 0;
-      border: 0;
-    }
-  }
+
   .photo-upload {
     .file-input-wrapper {
       height: 40px;

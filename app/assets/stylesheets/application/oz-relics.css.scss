@@ -619,6 +619,13 @@
   }
 }
 
+@media screen and (min-width: 768px) {
+  section.show.entries .content .entry-container {
+    width: 50% !important;
+    position: initial !important;
+  }
+}
+
 @media (max-width: 992px) {
   .relic-row {
     display: inline-block;
@@ -639,6 +646,14 @@
   }
   .relic-header.search {
     padding: 50px 30px 28px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  section.show.entries .content .entry-container {
+    position: initial !important;
+    display: block;
+    width: 100%;
   }
 }
 
