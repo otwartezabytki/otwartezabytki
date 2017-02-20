@@ -49,18 +49,18 @@
         #root
           .bootstrap-iso
             .container
-              %header#header
-                %hgroup.col-lg-4.col-md-5.col-xs-12.text-center
+              %header#header.relative-sm-md
+                %hgroup.col-lg-4.col-md-12.col-xs-12.text-center
                   = link_to image_tag("logo.png", :class => 'oz-logo img-responsive'), root_path
                   %h4.text-center= t('layouts.application.tagline')
-                .display-block.col-lg-8.col-md-7
-                  %nav.navbar.navbar-default{role: "navigation"}
+                .display-block.col-lg-8.col-sm-12.absolute-sm-md.full-width-xs.text-center-xs
+                  %nav.navbar.navbar-default.col-lg-10.visible-lg.m-t{role: "navigation"}
                     %ul.nav.navbar-nav.navbar-right.hidden-sm.hidden-xs.hidden-md
                       = render 'shared/login_navigation'
-                  %section.oz-disclaimer.col-md-10
-                    = t('layouts.application.disclaimer')
-                    %a{:href => "mailto:kontakt-oz@centrumcyfrowe.pl"} kontakt-oz@centrumcyfrowe.pl
-                  .col-md-2.oz-cc-logo
+                  -#%section.oz-disclaimer.col-md-10
+                  -#  = t('layouts.application.disclaimer')
+                  -#  %a{:href => "mailto:kontakt-oz@centrumcyfrowe.pl"} kontakt-oz@centrumcyfrowe.pl
+                  .col-lg-2.col-md-2.oz-cc-logo.pull-right-sm-md.m-b-xs
                     = link_to image_tag("cc_logo.png"), 'http://centrumcyfrowe.pl/'
           %section#menu.bootstrap-iso
             .container
