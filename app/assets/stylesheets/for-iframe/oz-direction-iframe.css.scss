@@ -1,6 +1,15 @@
 .oz-no-padding{
   padding: 0;
 }
+body.directions.show.direction {
+  h1.logo {
+    float: unset;
+    background-position: 0 0;
+  }
+  .preview__header {
+    height: 18px;
+  }
+}
 .oz-iframe-dir-widget {
   .logo {
     width: 100%;

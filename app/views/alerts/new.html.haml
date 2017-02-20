@@ -8,7 +8,7 @@
       = f.input :description, :as => :text, :input_html => { :value => params[:description] }
       - if alert.file?
         .clearfix
-          = image_tag alert.file.url(:mini), class: 'cached-img'
+          = image_tag alert.file.url(:mini), class: 'cached-img', alt: t('oz_img_alts.alert')
           = f.input :file, :as => :file, wrapper_html: { class: 'cached-file-input' }
       - else
         = f.input :file, :as => :file

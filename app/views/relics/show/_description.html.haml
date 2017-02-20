@@ -1,12 +1,12 @@
 %section.show.description
   %h2= t('views.relics.show.description.header')
   - if relic.description.present?
-    = link_to t('views.relics.show.general.fill_in'), edit_section_relic_path(relic.to_param, :description), :class => "hidden-xs hidden-sm hidden-md edit-relic-link js-edit-relic-load-modal"
+    = link_to t('views.relics.show.general.fill_in'), edit_section_relic_path(relic.to_param, :description), :class => "edit-relic-link js-edit-relic-load-modal"
     .content= sanitize relic.description
   - else
     .placeholder
       = t('views.relics.show.description.placeholder')
-      = link_to t('views.relics.show.description.add'), edit_section_relic_path(relic.to_param, :description), :class => "hidden-xs hidden-sm hidden-md js-edit-relic-load-modal"
+      = link_to t('views.relics.show.description.add'), edit_section_relic_path(relic.to_param, :description), :class => "js-edit-relic-load-modal"
       .example
         %a.show-example{:href => image_path('screenshot-description.jpg'), :class => "fancybox"}
           = t('views.relics.show.general.show_example')

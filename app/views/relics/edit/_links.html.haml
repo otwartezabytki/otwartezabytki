@@ -10,9 +10,9 @@
         - @urls.each do |link|
           = f.semantic_fields_for :links, link do |f2|
             = content_tag_for :li, link, :class => "move" do
-              = f2.input :category, :label => false, :collection => Link::UrlCategories, required: true, include_blank: false
-              = f2.input :url, :label => false, :hint => false, :class => "url", required: true
-              = f2.input :name, :label => false, :hint => false, :class => "info", required: true
+              = f2.input :category, :label => false, :collection => Link::UrlCategories, required: true, include_blank: false, alt: t('oz_input_alts.edit_relic.relic_link_category')
+              = f2.input :url, :label => false, :hint => false, :class => "url", required: true, alt: t('oz_input_alts.edit_relic.relic_link_url')
+              = f2.input :name, :label => false, :hint => false, :class => "info", required: true, alt: t('oz_input_alts.edit_relic.relic_link_desc')
               - if relic.is_group?
                 .apply-to
                   = descendants_select(relic, f2)
@@ -25,9 +25,9 @@
         %script{ :type => "text/html", :id => "link_template", :"data-container" => "#links" }
           = f.semantic_fields_for :links, relic.links.build do |f2|
             %li.link.move
-              = f2.input :category, :label => false, :collection => Link::UrlCategories, required: true, include_blank: false
-              = f2.input :url, :label => false, :hint => false, :class => "url", required: true
-              = f2.input :name, :label => false, :hint => false, :class => "info", required: true
+              = f2.input :category, :label => false, :collection => Link::UrlCategories, required: true, include_blank: false, alt: t('oz_input_alts.edit_relic.relic_link_category')
+              = f2.input :url, :label => false, :hint => false, :class => "url", required: true, alt: t('oz_input_alts.edit_relic.relic_link_url')
+              = f2.input :name, :label => false, :hint => false, :class => "info", required: true, alt: t('oz_input_alts.edit_relic.relic_link_desc')
               - if relic.is_group?
                 .apply-to
                   = descendants_select(relic, f2)
@@ -53,9 +53,9 @@
         - @papers.each do |link|
           = f.semantic_fields_for :links, link do |f2|
             = content_tag_for :li, link, :class => "move" do
-              = f2.input :category, :label => false, :collection => Link::PaperCategories, required: true, include_blank: false
-              = f2.input :formal_name, :label => false, :hint => false, :class => "url", required: true
-              = f2.input :name, :label => false, :hint => false, :class => "info", required: true
+              = f2.input :category, :label => false, :collection => Link::PaperCategories, required: true, include_blank: false, alt: t('oz_input_alts.edit_relic.relic_link_category')
+              = f2.input :formal_name, :label => false, :hint => false, :class => "url", required: true, alt: t('oz_input_alts.edit_relic.relic_link_bibl')
+              = f2.input :name, :label => false, :hint => false, :class => "info", required: true, alt: t('oz_input_alts.edit_relic.relic_link_desc')
               - if relic.is_group?
                 .apply-to
                   = descendants_select(relic, f2)
@@ -68,9 +68,9 @@
         %script{ :type => "text/html", :id => "print_template", :"data-container" => "#papers" }
           = f.semantic_fields_for :links, relic.links.build do |f2|
             %li.link.move
-              = f2.input :category, :label => false, :collection => Link::PaperCategories, required: true, include_blank: false
-              = f2.input :formal_name, :label => false, :hint => false, :class => "formal_name", required: true
-              = f2.input :name, :label => false, :hint => false, :class => "info", required: true
+              = f2.input :category, :label => false, :collection => Link::PaperCategories, required: true, include_blank: false, alt: t('oz_input_alts.edit_relic.relic_link_category')
+              = f2.input :formal_name, :label => false, :hint => false, :class => "formal_name", required: true, alt: t('oz_input_alts.edit_relic.relic_link_bibl')
+              = f2.input :name, :label => false, :hint => false, :class => "info", required: true, alt: t('oz_input_alts.edit_relic.relic_link_desc')
               - if relic.is_group?
                 .apply-to
                   = descendants_select(relic, f2)

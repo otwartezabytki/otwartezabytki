@@ -6,11 +6,9 @@ get_contrast_cookie = ->
   contr = all_cookies.split('; ' + 'contrast' + '=')
   if contr.length == 2
     cook = contr.pop().split(';').shift()
-    console.log(cook)
     return cook
 
 set_boy = ->
-  console.log('weszlo')
   body = $('.oz-contrast-container')
   if body.hasClass 'oz-contr-black-on-yellow'
     body.removeClass 'oz-contr-black-on-yellow'
@@ -23,7 +21,6 @@ set_boy = ->
       body.removeClass 'oz-contr-white-on-black'
     body.addClass 'oz-contr-black-on-yellow'
     set_contrast_cookie('boy')
-    console.log('wstawilo cookiesa')
 
 set_wob = ->
   body = $('.oz-contrast-container')
@@ -54,14 +51,12 @@ set_yob = ->
     set_contrast_cookie('yob')
 
 $('.js-contr-black-on-yellow').click ->
-  console.log('klik')
   set_boy()
 
 $('.js-contr-white-on-black').click ->
   set_wob()
 
 $('.js-contr-yellow-on-black').click ->
-  console.log('klik')
   set_yob()
 
 $('.js-contr-normal').click ->

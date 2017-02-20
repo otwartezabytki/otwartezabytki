@@ -7,7 +7,7 @@
       - relic = user_relic.relic
       %dl.feed-item
         %dd.feed-image.thumb
-          = image_tag relic.main_photo.file.url(:icon), :width => 56, :height => 56
+          = image_tag relic.main_photo.file.url(:icon), :width => 56, :height => 56, alt: relic.main_photo.alternate_text
         %dd.feed-date
           = timeago_tag user_relic.created_at
         %dt.feed-message
@@ -23,7 +23,7 @@
       - Version.relics.adopted_by(user).each do |version|
         %dl.feed-item{ class: "type-#{version.event}" }
           %dd.feed-image.thumb
-            = image_tag version.relic.main_photo.file.url(:icon), :width => 56, :height => 56
+            = image_tag version.relic.main_photo.file.url(:icon), :width => 56, :height => 56, alt: version.relic.main_photo.alternate_text
           %dd.feed-date
             = timeago_tag version.created_at
           %dt.feed-message

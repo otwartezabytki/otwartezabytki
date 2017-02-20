@@ -1,3 +1,22 @@
+.popover {
+  .popover-title {
+    width: 100%;
+    display: inline-flex;
+    p.close {
+      position: relative;
+      top: -4px;
+      width: 30%;
+      opacity: 1;
+      right: -20px;
+      a {
+        font-size: 16px;
+        color: #af0c0c;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
 .resource_home {
   .page {
     #menu {
@@ -293,8 +312,8 @@ body.resource_home {
       }
       .image {
         float: left;
-        width: 56px;
-        height: 56px;
+        width: 62px;
+        height: 62px;
         border: 3px solid #fff;
         box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);
         border-radius: 2px;

@@ -6,7 +6,7 @@
   %ul.suggested-relics
     - @relics.each do |r|
       %li{:class => cycle('even', 'odd')}
-        = image_tag r.main_photo.file.url(:midi), :class => 'thumb'
+        = image_tag r.main_photo.file.url(:midi), :class => 'thumb', alt: r.main_photo.alternate_text
         .description
           %h3
             = r.identification

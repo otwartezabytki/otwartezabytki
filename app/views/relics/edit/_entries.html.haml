@@ -1,8 +1,8 @@
 .row
   = semantic_form_for relic, :url => section_relic_path(relic.id, :section => :entries), :remote => true  do |f|
     = f.semantic_fields_for :entries, relic.entries.find(&:new_record?) do |f2|
-      = f2.input :title
-      = f2.input :body, :input_html => { :class => "redactor" }
+      = f2.input :title, alt: t('oz_input_alts.edit_relic.relic_legend_title')
+      = f2.input :body, :input_html => { :class => "redactor" }, alt: t('oz_input_alts.edit_relic.relic_legend_desc')
     .reminder
       =t('views.relics.edit.reminder')
     .actions
@@ -14,8 +14,8 @@
   - relic.entries.select{ |e| !e.new_record? }.sort_by(&:id).each do |entry|
     - if params[:entry_id].to_i == entry.id
       = semantic_form_for [relic, entry], :remote => true  do |f|
-        = f.input :title, :hint => false
-        = f.input :body, :hint => false, :input_html => { :class => "redactor" }
+        = f.input :title, :hint => false, alt: t('oz_input_alts.edit_relic.relic_legend_title')
+        = f.input :body, :hint => false, :input_html => { :class => "redactor" }, alt: t('oz_input_alts.edit_relic.relic_legend_desc')
         .actions
           = f.submit t('views.relics.edit.save')
           = link_to t('views.relics.edit.delete'), relic_entry_path(relic.id, entry.id), :method => :delete, :remote => true

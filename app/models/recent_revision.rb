@@ -56,10 +56,19 @@ class RecentRevision
       :identification => relic.identification,
       :image_url => relic.main_photo.file.url(:icon),
       :changes => changes,
-      :created_at => version.created_at
+      :created_at => version.created_at,
+      :alt_text => set_alternate_text
     }
   rescue ArgumentError => e
     nil
+  end
+
+  def set_alternate_text
+    if relic.has_photos?
+      "#{relic.identification} #{relic.main_photo.alternate_text}"
+    else
+      "#{I18n.t('activerecord.attributes.relic.photos_facets.F')}"
+    end
   end
 
 end

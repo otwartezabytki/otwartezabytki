@@ -8,9 +8,9 @@
         = link_to "»", relic_photo_path(relic.id, tree_photos.one_after(tree_photo.id)), :remote => true, :class => "next"
       .photo_center{ :style => "width: #{tree_photo.file_full_width || 800}px; margin: 0 auto;" }
         - if tree_photo.file_full_height.present?
-          .full-photo= image_tag(tree_photo.file.full.url, :width => tree_photo.file_full_width, :height => tree_photo.file_full_height, :alt => tree_photo.alternate_text)
+          .full-photo= image_tag(tree_photo.file.full.url, :width => tree_photo.file_full_width, :height => tree_photo.file_full_height, :alt => strip_tags("#{relic.identification} #{tree_photo.description} #{tree_photo.alternate_text}"))
         - else
-          .full-photo= image_tag(tree_photo.file.full.url, :alt => tree_photo.alternate_text)
+          .full-photo= image_tag(tree_photo.file.full.url, :alt => strip_tags("#{relic.identification} #{tree_photo.description} #{tree_photo.alternate_text}"))
 
         .info-left
           %p.info-row

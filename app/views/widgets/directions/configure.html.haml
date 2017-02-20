@@ -2,7 +2,7 @@
   = javascript_include_tag "http://maps.googleapis.com/maps/api/js?key=#{Settings.oz.gm_key}&sensor=false&libraries=places"
 #direction_widget.oz-iframe-dir-widget{ :"data-replace" => "#direction_widget" }
   .oz-sidebar.col-md-3.col-sm-3.col-xs-12.oz-no-padding
-    = link_to image_tag("logo-widget.png"), root_path, :class => "logo hidden-xs"
+    = link_to image_tag("logo-widget.png"), root_path, :class => "logo hidden-xs", alt: t('oz_img_alts.open_relics_logo')
     = semantic_form_for widget_search, :url => widgets_direction_path(widget.uid), :method => :get do |f|
       = f.hidden_field :path, value: widget_params.try(:[], 'path')
       = f.hidden_field :polygon, value: widget_params.try(:[], 'polygon')
@@ -28,13 +28,13 @@
         %h2
           = t('views.widgets.show.direction.relics_on_path', editable: false).gsub(':', '')
           %span.tooltip{ title: t('views.widgets.edit.direction.map_help', editable: false)}
-            = image_tag("widget-helper.png")
+            = image_tag("widget-helper.png", alt: 'help')
         #waypoints
           .search-input
             - widget_params.try(:[], 'waypoints').try :each_with_index do |waypoint, index|
               .string.clearfix.optional.stringish{ id: "search_waypoints_#{index}_input" }
                 .input
-                  = text_field_tag 'search[waypoints[]]', waypoint, id: "search_waypoints_#{index}", class: 'waypoint'
+                  = text_field_tag 'search[waypoints[]]', waypoint, id: "search_waypoints_#{index}", class: 'waypoint', alt: t('oz_input_alts.set_dir_location')
                   - if index > 1 || widget_params['waypoints'].count > 2
                     %span.remove.suffix &times;
                   - else

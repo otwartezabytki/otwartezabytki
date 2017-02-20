@@ -17,7 +17,7 @@
   .status
     = state_tag(relic)
     .help
-      = image_tag 'ico-help.png'
+      = image_tag 'ico-help.png', alt: 'help'
       .help-wrapper
         = link_to t('views.relics.index.states.close'), '#', :class => 'close'
         %h3= t('views.relics.index.states.header')
@@ -43,7 +43,7 @@
         %p.close= link_to t('views.relics.show.general.close'), "#", :class => "close_popover", :"data-popover-id" => "relic_location_popover"
       %script(type="text/html" id="location_body")
         = link_to "https://maps.google.com/?q=#{relic.latitude.to_f},#{relic.longitude.to_f}&t=h", :target => :_blank do
-          %img{ src: "http://maps.googleapis.com/maps/api/staticmap?center=#{relic.latitude.to_f},#{relic.longitude.to_f}&zoom=17&size=260x160&sensor=false&markers=#{relic.latitude.to_f},#{relic.longitude.to_f}&maptype=hybrid", width: 260, height: 160 }
+          %img{ src: "http://maps.googleapis.com/maps/api/staticmap?center=#{relic.latitude.to_f},#{relic.longitude.to_f}&zoom=17&size=260x160&sensor=false&markers=#{relic.latitude.to_f},#{relic.longitude.to_f}&maptype=hybrid", width: 260, height: 160, alt: t('oz_img_alts.map') }
   .dating
     - if relic.dating_of_obj.present?
       = link_to t('views.relics.show.general.fill_in'), edit_section_relic_path(relic.to_param, :events), :class => "hidden-xs hidden-sm hidden-md edit-relic-link js-edit-relic-load-modal"
