@@ -74,14 +74,6 @@
                   %ul#page-menu.nav.navbar-nav.oz-navbar-center
                     %li
                       = link_to t('layouts.application.homepage'), root_path, :class => "sr-only-focusable oz-home #{'active' if current_page?(root_path)}"
-                    - Page.where(name: ['about', 'download', 'contact']).each do |page|
-                      = render 'pages/navigation', page: page
-                    %li
-                      = link_to t('layouts.application.widgets'), widgets_path, :class => "oz-widgets #{'active' if current_page?(widgets_path)}"
-                    %li
-                      = link_to t('layouts.application.addrelic'), new_relicbuilder_path, :class => "oz-add-relic #{'active' if current_page?(new_relicbuilder_path)}"
-                    %li.gradient{:class => " #{'current' if current_page?(relics_path)}"}
-                      = link_to t('layouts.application.search'), relics_path, :class => "oz-search #{'active' if current_page?(relics_path)}"
                     %li.gradient.hidden-sm.hidden-xs.hidden-md
                       = link_to t('layouts.application.browse'), "#", :class => "oz-browse js-browse"
                       - unless request.xhr?
@@ -90,6 +82,17 @@
                       = link_to t('layouts.application.browse'), "#", :class => "oz-browse-sm dropdown-toggle", "data-toggle" => "dropdown", "role" => "menu", "aria-haspopup" => "true", "aria-expanded" => "false"
                       - unless request.xhr?
                         = render 'shared/browse_sm'
+                    %li
+                      = link_to t('layouts.application.addrelic'), new_relicbuilder_path, :class => "oz-add-relic #{'active' if current_page?(new_relicbuilder_path)}"
+                    - Page.where(name: ['about']).each do |page|
+                      = render 'pages/navigation', page: page
+                    %li
+                      = link_to t('layouts.application.widgets'), widgets_path, :class => "oz-widgets #{'active' if current_page?(widgets_path)}"
+                    - Page.where(name: ['download', 'contact']).each do |page|
+                      = render 'pages/navigation', page: page
+                    %li.gradient{:class => " #{'current' if current_page?(relics_path)}"}
+                      = link_to t('layouts.application.search'), relics_path, :class => "oz-search #{'active' if current_page?(relics_path)}"
+
                     %ul.nav.navbar-default.hidden-lg.hidden-xl= render 'shared/login_navigation'
                     %li.oz-change-contrast-xs
                       %button.btn.btn-default.js-contr-normal.oz-change-contrast-btn.oz-normal A
