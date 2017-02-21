@@ -173,4 +173,12 @@ module RelicsHelper
       :total      => Relic.created.count
     }
   end
+
+  def get_all_photos
+    if relic.is_group?
+      relic.all_photos
+    else
+      relic_photos
+    end
+  end
 end

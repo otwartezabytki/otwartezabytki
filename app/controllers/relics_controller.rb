@@ -2,7 +2,7 @@
 class RelicsController < ApplicationController
   before_filter :enable_fancybox, :only => [:edit, :update]
   before_filter :no_original_version, :only => [:show]
-  before_filter :uncomplete_relic_redirect,  :only => [:show, :edit, :update]
+  before_filter :uncomplete_relic_redirect, :only => [:show, :edit, :update]
 
   expose(:relics) do
     tsearch.perform
@@ -25,13 +25,13 @@ class RelicsController < ApplicationController
           end
         end
         if params[:section] == "links"
-          @urls = r.all_links.select(&:url?).sort_by{ |e| e.position || 1000 }
-          @papers = r.all_links.select(&:paper?).sort_by{ |e| e.position || 1000 }
+          @urls = r.all_links.select(&:url?).sort_by { |e| e.position || 1000 }
+          @papers = r.all_links.select(&:paper?).sort_by { |e| e.position || 1000 }
         end
 
         if %w(events links).include?(params[:section]) && params[:relic] && params[:relic][section_attrs_key]
           params[:relic][section_attrs_key].delete_if { |k, v| subrelic_ids.include?(v) }
-          params[:relic][section_attrs_key].each_pair { |k,v|
+          params[:relic][section_attrs_key].each_pair { |k, v|
             v["relic_id"] = r.id
             if v["id"]
               item = Object.const_get(params[:section].singularize.capitalize).find(v["id"])
@@ -40,8 +40,17 @@ class RelicsController < ApplicationController
             end
           }
         end
-        r.attributes = params.fetch(:relic, {}).except(:voivodeship_id, :district_id, :commune_id) unless request.get?
-        r.user_id    = current_user.id if request.put? || request.post?
+
+        if params[:relic] != nil
+          params[:relic][:photos_attributes].each do |photo|
+            binding.pry
+            r = Relic.find(photo[1][:relic_id])
+            r.attributes = params.fetch(:relic, {}).except(:voivodeship_id, :district_id, :commune_id) unless request.get?
+          end
+        else
+          r.attributes = params.fetch(:relic, {}).except(:voivodeship_id, :district_id, :commune_id) unless request.get?
+        end
+        r.user_id = current_user.id if request.put? || request.post?
         r
       end
     else
@@ -83,10 +92,10 @@ class RelicsController < ApplicationController
 
     if params[:photo_id].present? && cookies[:event_avaiting_photo].present?
       relic.events_attributes = [
-        {
-          :id => cookies[:event_avaiting_photo].to_i,
-          :photo_id => params[:photo_id]
-        }
+          {
+              :id => cookies[:event_avaiting_photo].to_i,
+              :photo_id => params[:photo_id]
+          }
       ]
     end
 
@@ -163,8 +172,8 @@ class RelicsController < ApplicationController
       end
 
       send_file t.path, :type => 'application/zip',
-        :disposition => 'attachment',
-        :filename => file_name
+                :disposition => 'attachment',
+                :filename => file_name
 
       t.close
     else
@@ -181,10 +190,10 @@ class RelicsController < ApplicationController
   def unadopt
     current_user.relics.delete(relic)
     path = if params[:user]
-      user_path(current_user)
-    else
-      relic_path(relic)
-    end
+             user_path(current_user)
+           else
+             relic_path(relic)
+           end
     redirect_to path, :notice => t('notices.relic_unadopted')
   end
 
@@ -218,12 +227,12 @@ class RelicsController < ApplicationController
     # TODO it won't work without memoization!!!
     return @subrelic_ids if defined?(@subrelic_ids)
     @subrelic_ids = if !request.get? && %w(events links).include?(params[:section]) && params[:relic]
-      params[:relic].fetch(section_attrs_key, {}).inject([]) do |result, (k, v)|
-        result << v if v["relic_id"].present?
-        result
-      end
-    else
-      []
-    end
+                      params[:relic].fetch(section_attrs_key, {}).inject([]) do |result, (k, v)|
+                        result << v if v["relic_id"].present?
+                        result
+                      end
+                    else
+                      []
+                    end
   end
 end

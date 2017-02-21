@@ -28,6 +28,7 @@ class PhotosController < ApplicationController
 
   def update
     authorize! :update, photo
+    binding.pry
     photo.save
     respond_with(relic, photo)
   end
