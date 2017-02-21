@@ -75,16 +75,16 @@
         width: 8px;
         height: 14px;
         background: asset-data-url("edit-relic-ico-arrows.png") no-repeat;
-        top: 23px;
+        top: 15px;
         left: 0;
       }
       &:first-child .arrow{
         background: asset-data-url("edit-relic-ico-arrow-down.png") no-repeat;
-        top: 27px;
+        top: 20px;
       }
       &:last-child .arrow{
         background: asset-data-url("edit-relic-ico-arrow-up.png") no-repeat;
-        top: 27px;
+        top: 20px;
       }
       .select{
         width: 155px;
@@ -212,7 +212,7 @@
   }
   .links_container .description {
     position: absolute;
-    top: 55px;
+    top: 37px;
     left: 10px;
     font-weight: normal;
     text-transform: uppercase;
