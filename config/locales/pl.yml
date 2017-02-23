@@ -1559,6 +1559,8 @@ pl:
         unknown_address: "Adres niedostępny"
         unknown_from: Nieznana
       show:
+        creators:
+          header: "Twórcy profilu"
         alerts:
           create: "zgłoś alert"
           fixed: "Zgłoszone alerty poprawione"

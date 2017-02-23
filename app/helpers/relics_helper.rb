@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 module RelicsHelper
   def categories_facets_hash_for(relics = relics)
-    relics.terms('categories', true).inject({}) {|m, t| m[t['term']] = t['count']; m}
+    relics.terms('categories', true).inject({}) { |m, t| m[t['term']] = t['count']; m }
   end
 
   def link_parent(relic)
@@ -50,16 +50,16 @@ module RelicsHelper
 
   def descendants_select(relic, form)
     collection = relic.root.descendants.created.
-      order('identification').
-      map {|d| [d.identification, d.id] }.
-      insert(0, [t('activerecord.attributes.relic.relic_group'), relic.id])
+        order('identification').
+        map { |d| [d.identification, d.id] }.
+        insert(0, [t('activerecord.attributes.relic.relic_group'), relic.id])
 
     form.input(:relic_id, {
-      as: :select,
-      label: t('common.apply_to'),
-      include_blank: false,
-      required: false,
-      collection: collection
+        as: :select,
+        label: t('common.apply_to'),
+        include_blank: false,
+        required: false,
+        collection: collection
     })
   end
 
@@ -96,16 +96,16 @@ module RelicsHelper
     return @disabled if @disabled && @disabled[key]
     @disabled ||= {}
     @disabled[key] ||= relics.terms(name).inject([]) { |r, t|
-      r <<  t['term'] if  t['count'].zero?
+      r << t['term'] if t['count'].zero?
       r
     } - search.send(name)
   end
 
   def order_collection
     [
-      [t('views.relics.index.order.score'), 'score.desc'],
-      [t('views.relics.index.order.az'), 'alfabethic.asc'],
-      [t('views.relics.index.order.za'), 'alfabethic.desc'],
+        [t('views.relics.index.order.score'), 'score.desc'],
+        [t('views.relics.index.order.az'), 'alfabethic.asc'],
+        [t('views.relics.index.order.za'), 'alfabethic.desc'],
     ]
   end
 
@@ -116,7 +116,7 @@ module RelicsHelper
   def leafs_of(tree)
     case tree
       when Hash
-        tree.map do |k,v|
+        tree.map do |k, v|
           if v.blank? || v.empty?
             [k]
           else
@@ -139,10 +139,10 @@ module RelicsHelper
 
   def state_hint_tag(state, social = false)
     [
-      (content_tag :div, :class => "tag" do
-        content_tag(:span, t("views.relics.index.states.#{state}.header"), :class => state)
-      end),
-      content_tag(:div, t("views.relics.index.states.#{state}.info#{'_social' if social}"), :class => "text")
+        (content_tag :div, :class => "tag" do
+          content_tag(:span, t("views.relics.index.states.#{state}.header"), :class => state)
+        end),
+        content_tag(:div, t("views.relics.index.states.#{state}.info#{'_social' if social}"), :class => "text")
     ].join.html_safe
   end
 
@@ -167,10 +167,57 @@ module RelicsHelper
   def relic_stats
     return @relic_stats if defined? @relic_stats
     @relic_stats = {
-      :unchecked  => Relic.created.where(:state => 'unchecked').count,
-      :checked    => Relic.created.where(:state => 'checked').count,
-      :filled     => Relic.created.where(:state => 'filled').count,
-      :total      => Relic.created.count
+        :unchecked => Relic.created.where(:state => 'unchecked').count,
+        :checked => Relic.created.where(:state => 'checked').count,
+        :filled => Relic.created.where(:state => 'filled').count,
+        :total => Relic.created.count
     }
+  end
+
+  def get_all_creators
+    str = ""
+    counted_tab = []
+
+    str, counted_tab = make_list(relic.photos, counted_tab, str) if relic.photos.present?
+
+    str, counted_tab = make_list(relic.documents, counted_tab, str) if relic.documents.present?
+
+    # str, counted_tab = make_list(relic.categories, counted_tab) if relic.categories.present?
+
+    str, counted_tab = make_list(relic.description, counted_tab, str) if relic.description.present?
+
+    str, counted_tab = make_list(relic.entries, counted_tab, str) if relic.entries.present?
+
+    str, counted_tab = make_list(relic.events, counted_tab, str) if relic.events.present?
+
+    str, counted_tab = make_list(relic.alerts, counted_tab, str) if relic.alerts.present?
+
+    str, counted_tab = make_list(relic.links, counted_tab, str) if relic.links.present?
+
+    # str, counted_tab = make_list(relic.location, counted_tab) if relic.location.present?
+    binding.pry
+    str
+  end
+
+  private
+  def counted?(id, counted_tab)
+    counted_tab.each do |count_id|
+      return true if id == count_id
+    end
+    false
+  end
+
+  def make_list(collection, counted_tab, str)
+    counted = counted_tab
+    str = str
+
+    collection.each do |col|
+      unless counted? col.user_id, counted
+        counted += [col.user_id]
+        name = User.find(col.user_id).username
+        str += content_tag(:li, name)
+      end
+    end
+    return str, counted
   end
 end
