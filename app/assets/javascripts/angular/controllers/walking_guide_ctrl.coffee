@@ -253,6 +253,15 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
       success = (response) ->
         $scope.saving = false
         $scope.saved = true
+        console.log(response.data.widget_url)
+        $('.fbsharelink').click (e)->
+          e.preventDefault()
+          shareurl = response.data.widget_url
+#          window.open shareurl
+#          window.open 'https://www.facebook.com/sharer/sharer.php?u=' + escape(shareurl) + '&t=' , '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600'
+#          console.log('http://www.facebook.com/sharer/sharer.php?sdk=joey&u=' + encodeURIComponent(shareurl) + '%2F&display=popup&ref=plugin&src=share_button')
+          window.open 'http://www.facebook.com/sharer/sharer.php?sdk=joey&u=' + encodeURIComponent(shareurl) + '%2F&display=popup&ref=plugin&src=share_button'
+          false
         angular.extend($scope.widget, _.pick(response.data, ['uid', 'width', 'height', 'widget_url', 'print_path']))
 
       error = (response) ->
