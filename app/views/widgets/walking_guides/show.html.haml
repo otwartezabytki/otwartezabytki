@@ -24,6 +24,9 @@
       .walking-guide__description(ng-show="widget.description")
         %h2= t('widget.walking_guide.description')
         %p {{ widget.description }}
+      .col-sm-12.col-xs-12.oz-share-wrapper.js-share-wrapper
+        %a.oz-fb-custom-share.js-walking-guide-share{href: ""} Udostępnij
+        %a.oz-email-custom-share.js-walking-guide-mail{href: ""} E-mail
     %div(google-map="true" center="map.center" zoom="map.zoom" events="map.events" draggable="true")
       %div(marker="true" ng-repeat="relic in widget.relics" coords="relic" icon="getIcon($first, $last)" click="loadRelicInfo(relic)")
         %div(window="true" show="relic.showInfoWindow || false" closeClick="relic.showInfoWindow = false")

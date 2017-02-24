@@ -66,12 +66,13 @@
         %div(window="true" show="relic.showInfoWindow || false" closeClick="relic.showInfoWindow = false")
           = render 'relic_info'
   .clearfix
--#.col-sm-6.col-xs-12.fb-share-button{:data => {:layout => "button", :href => "http://www.wp.pl", :size => "large"}}
+.col-sm-12.col-xs-12.oz-share-wrapper.js-share-wrapper.non-display
+  %a.oz-fb-custom-share.js-walking-guide-share{href: ""} Udostępnij
+  %a.oz-email-custom-share.js-walking-guide-mail{href: ""} E-mail
+  -#%a.js-fb-share-wrapper.fb-share-wrapper{href: "http://wp.pl"}
+    -#.fb-share-button{:data => {:layout => "button", :href => "", :size => "large"}}
 - if current_user.present?
   .walking-guide__code-generator(ng-show="saved")
-    .col-sm-12.col-xs-12
-
-      %a.fbsharelink udostępnij
     %h2= t('views.widgets.edit.generated')
     %textarea.code-generator__snippet(readonly)
       = raw %Q(<iframe id="oz_walking_guide" src="{{ widget.widget_url }}" width="{{ widget.width }}" height="{{ widget.height }}"></iframe>)
