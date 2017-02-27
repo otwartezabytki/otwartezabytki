@@ -1,8 +1,8 @@
 class Widgets::WalkingGuidesController < WidgetsController
   layout :resolve_widget_layout, :only => [:show]
 
-  expose(:walking_guides,  model: Widget::WalkingGuide)
-  expose(:walking_guide,  model: Widget::WalkingGuide)
+  expose(:walking_guides, model: Widget::WalkingGuide)
+  expose(:walking_guide, model: Widget::WalkingGuide)
   expose(:widget_params) { widget.widget_params }
   expose(:widget) { walking_guides.find(params[:id]) }
 
@@ -11,10 +11,21 @@ class Widgets::WalkingGuidesController < WidgetsController
   end
 
   def show
-    respond_to do |format|
-      format.html
-      format.json { render :walking_guide }
+    if current_user || !walking_guide.private
+      if walking_guide.user_id == current_user.id
+
+        respond_to do |format|
+
+          format.html
+          format.json { render :walking_guide }
+        end
+      else
+        render404
+      end
+    else
+      redirect_to new_user_session_url
     end
+
   end
 
   def create
@@ -23,7 +34,7 @@ class Widgets::WalkingGuidesController < WidgetsController
       remember_path
       render :walking_guide
     else
-      render json: { errors: walking_guide.errors }, status: :unprocessable_entity
+      render json: {errors: walking_guide.errors}, status: :unprocessable_entity
     end
   end
 
@@ -33,12 +44,13 @@ class Widgets::WalkingGuidesController < WidgetsController
 
   def update
     authorize! :update, walking_guide if walking_guide.user_id
+
     set_user_id
     if walking_guide.save
       remember_path
       render :walking_guide
     else
-      render json: { errors: walking_guide.errors }, status: :unprocessable_entity
+      render json: {errors: walking_guide.errors}, status: :unprocessable_entity
     end
   end
 
@@ -71,4 +83,5 @@ class Widgets::WalkingGuidesController < WidgetsController
     return unless params[:manual]
     walking_guide.user_id ||= current_user.try(:id)
   end
+
 end
