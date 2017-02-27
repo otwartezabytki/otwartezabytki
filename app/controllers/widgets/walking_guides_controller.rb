@@ -11,21 +11,29 @@ class Widgets::WalkingGuidesController < WidgetsController
   end
 
   def show
-    if current_user || !walking_guide.private
-      if walking_guide.user_id == current_user.id
 
-        respond_to do |format|
-          format.html
-          format.json { render :walking_guide }
-        end
-
-      else
-        render403
+    if walking_guide.private == nil
+      respond_to do |format|
+        format.html
+        format.json { render :walking_guide }
       end
     else
-      redirect_to new_user_session_url
-    end
 
+      if current_user || !walking_guide.private
+        if walking_guide.user_id == current_user.id
+
+          respond_to do |format|
+            format.html
+            format.json { render :walking_guide }
+          end
+
+        else
+          render403
+        end
+      else
+        redirect_to new_user_session_url
+      end
+    end
   end
 
   def create
