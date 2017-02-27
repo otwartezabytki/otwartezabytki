@@ -1,91 +1,90 @@
--if walking_guide.user_id == current_user.id || walking_guide.private == false
-  %h1.oz-no-margin
-    = t('widget.walking_guide.title')
-    %span.oz-xs-ng-show(ng-show="loading")= "#{t('widget.walking_guide.loading')}..."
-    %span.oz-xs-ng-show(ng-show="saving")= t('widget.walking_guide.saving')
-    %a.back.hidden-xs(href=widgets_path)= t('views.widgets.edit.back')
-    %a.back.visible-xs(href=widgets_path) &laquo;
-  .walking-guide__header
-    %p.help-inline= t('widget.walking_guide.help')
-  .walking-guide__content
-    .walking-guide__sidebar.col-md-3.col-xs-12
-      %h2(ng-show="widget.relics.length")= t('widget.walking_guide.relics')
-      %ul.walking-guide__relics(ui-sortable="sortableOptions" ng-model="widget.relics" ng-if="widget.relics.length")
-        %li.walking-guide__relic(ng-repeat="relic in widget.relics")
-          %h3.walking-guide-relic__title {{ relic.identification }}
-          %p.walking-guide-relic__location
-            %span(ng-show="relic.street") {{ relic.street }},
-            {{ relic.place }}
-          %button.walkig-guide-relic__remove(type="button" ng-click="removeRelic(relic)") &times;
-      .walking-guide__search
-        %form(name="searchForm" ng-submit="searchRelics()")
-          %h2.field-label= t('widget.walking_guide.query_field')
-          .walking-guide-search__query
-            %input.search-query__input(type="text" name="query" ng-minlength="4" ng-model="query" placeholder="#{t('widget.walking_guide.query_placeholder')}" alt="#{t('views.pages.home.how_it_works.what_alt')} #{t('views.relics.edit.or')} #{t('views.pages.home.how_it_works.where_alt')}")
-            %input.search-query__button(type="submit" value="")
-          %span.error(ng-show="searchForm.submitted && searchForm.query.$error.minlength")
-            = t('widget.walking_guide.query_is_too_short')
-          %input.hidden(type="submit")
-          %span.error(ng-show="suggestions && !suggestions.length")
-            = t('widget.walking_guide.nothing_found')
-          %span.error(ng-show="error")
-            = t('widget.walking_guide.error')
-          .clearfix
-      .walking-guide__suggestions(ng-if="suggestions")
-        %ul.walking-guide-suggestions__container
-          %li.walking-guide__suggestion(ng-repeat="relic in filteredSuggestions()")
-            %a(ng-click="selectRelic(relic)" href="")
-              %h3.walking-guide-suggestion__title {{ relic.identification }}
-              %p.walking-guide-suggestion__location
-                %span(ng-show="relic.street") {{ relic.street }},
-                {{ relic.place }}
-        %button.button.button--load-more(type="button" ng-click="nextPage()" ng-show="currentPage + 1 < totalPages" ng-disabled="loading")
-          {{ loading && '#{t('widget.walking_guide.loading')}' || '#{t('widget.walking_guide.load_more')}' }}
-      .walking-guide__title
-        %h2.field-label= t('widget.walking_guide.title_field')
-        %input(type="text" ng-model="widget.title" alt="#{t('oz_input_alts.set_wg_name')}")
-      .walking-guide__description
-        %h2.field-label= t('widget.walking_guide.description')
-        %textarea(ng-model="widget.description" alt="#{t('oz_input_alts.set_wg_desc')}")
+%h1.oz-no-margin
+  = t('widget.walking_guide.title')
+  %span.oz-xs-ng-show(ng-show="loading")= "#{t('widget.walking_guide.loading')}..."
+  %span.oz-xs-ng-show(ng-show="saving")= t('widget.walking_guide.saving')
+  %a.back.hidden-xs(href=widgets_path)= t('views.widgets.edit.back')
+  %a.back.visible-xs(href=widgets_path) &laquo;
+.walking-guide__header
+  %p.help-inline= t('widget.walking_guide.help')
+.walking-guide__content
+  .walking-guide__sidebar.col-md-3.col-xs-12
+    %h2(ng-show="widget.relics.length")= t('widget.walking_guide.relics')
+    %ul.walking-guide__relics(ui-sortable="sortableOptions" ng-model="widget.relics" ng-if="widget.relics.length")
+      %li.walking-guide__relic(ng-repeat="relic in widget.relics")
+        %h3.walking-guide-relic__title {{ relic.identification }}
+        %p.walking-guide-relic__location
+          %span(ng-show="relic.street") {{ relic.street }},
+          {{ relic.place }}
+        %button.walkig-guide-relic__remove(type="button" ng-click="removeRelic(relic)") &times;
+    .walking-guide__search
+      %form(name="searchForm" ng-submit="searchRelics()")
+        %h2.field-label= t('widget.walking_guide.query_field')
+        .walking-guide-search__query
+          %input.search-query__input(type="text" name="query" ng-minlength="4" ng-model="query" placeholder="#{t('widget.walking_guide.query_placeholder')}" alt="#{t('views.pages.home.how_it_works.what_alt')} #{t('views.relics.edit.or')} #{t('views.pages.home.how_it_works.where_alt')}")
+          %input.search-query__button(type="submit" value="")
+        %span.error(ng-show="searchForm.submitted && searchForm.query.$error.minlength")
+          = t('widget.walking_guide.query_is_too_short')
+        %input.hidden(type="submit")
+        %span.error(ng-show="suggestions && !suggestions.length")
+          = t('widget.walking_guide.nothing_found')
+        %span.error(ng-show="error")
+          = t('widget.walking_guide.error')
+        .clearfix
+    .walking-guide__suggestions(ng-if="suggestions")
+      %ul.walking-guide-suggestions__container
+        %li.walking-guide__suggestion(ng-repeat="relic in filteredSuggestions()")
+          %a(ng-click="selectRelic(relic)" href="")
+            %h3.walking-guide-suggestion__title {{ relic.identification }}
+            %p.walking-guide-suggestion__location
+              %span(ng-show="relic.street") {{ relic.street }},
+              {{ relic.place }}
+      %button.button.button--load-more(type="button" ng-click="nextPage()" ng-show="currentPage + 1 < totalPages" ng-disabled="loading")
+        {{ loading && '#{t('widget.walking_guide.loading')}' || '#{t('widget.walking_guide.load_more')}' }}
+    .walking-guide__title
+      %h2.field-label= t('widget.walking_guide.title_field')
+      %input(type="text" ng-model="widget.title" alt="#{t('oz_input_alts.set_wg_name')}")
+    .walking-guide__description
+      %h2.field-label= t('widget.walking_guide.description')
+      %textarea(ng-model="widget.description" alt="#{t('oz_input_alts.set_wg_desc')}")
 
-      - if current_user.present?
-        .walking-guide__private
-          %h2.field-label.oz-private-label= "Prywatny?"
-          %input(type="checkbox" ng-model="widget.private" ng-checked="#{walking_guide.private}" alt="czy prywatne")
-        %button.button.button--save(type="button" ng-click="manualSave()" ng-disabled="saving || loading || !widget.relics.length")
-          = t('widget.walking_guide.save')
-      - else
-        %p= t('widget.walking_guide.sign_in_to_save')
-        %br
-        = link_to t('widget.walking_guide.sign_in'), new_user_session_path, class: 'button button--login'
-      %a.button.button--print(ng-href="{{ saved && widget.print_path || null }}"
-        ng-class="{'button--disabled': !saved}"
-        target="_blank")
-        = t('widget.walking_guide.print')
+    - if current_user.present?
+      .walking-guide__private
+        %h2.field-label.oz-private-label= "Prywatny?"
+        %input(type="checkbox" ng-model="widget.private" ng-checked="#{walking_guide.private}" alt="czy prywatne")
+      %button.button.button--save(type="button" ng-click="manualSave()" ng-disabled="saving || loading || !widget.relics.length")
+        = t('widget.walking_guide.save')
+    - else
+      %p= t('widget.walking_guide.sign_in_to_save')
+      %br
+      = link_to t('widget.walking_guide.sign_in'), new_user_session_path, class: 'button button--login'
+    %a.button.button--print(ng-href="{{ saved && widget.print_path || null }}"
+      ng-class="{'button--disabled': !saved}"
+      target="_blank")
+      = t('widget.walking_guide.print')
 
 
-    .col-md-9.col-xs-12.oz-map-container.oz-no-padding.js-map-container
-      %div(google-map="true" center="map.center" zoom="map.zoom" events="map.events" draggable="true")
-        %div(marker="true" ng-repeat="relic in widget.relics" coords="relic" icon="getIcon($first, $last)" click="loadRelicInfo(relic)")
-          %div(window="true" show="relic.showInfoWindow || false" closeClick="relic.showInfoWindow = false")
-            = render 'relic_info'
+  .col-md-9.col-xs-12.oz-map-container.oz-no-padding.js-map-container
+    %div(google-map="true" center="map.center" zoom="map.zoom" events="map.events" draggable="true")
+      %div(marker="true" ng-repeat="relic in widget.relics" coords="relic" icon="getIcon($first, $last)" click="loadRelicInfo(relic)")
+        %div(window="true" show="relic.showInfoWindow || false" closeClick="relic.showInfoWindow = false")
+          = render 'relic_info'
+  .clearfix
+.col-sm-12.col-xs-12.oz-share-wrapper.js-share-wrapper.non-display
+  %a.oz-fb-custom-share.js-walking-guide-share{href: ""} Udostępnij
+  %a.oz-email-custom-share.js-walking-guide-mail{href: ""} E-mail
+
+- if current_user.present?
+  .walking-guide__code-generator(ng-show="saved")
+    %h2= t('views.widgets.edit.generated')
+    %textarea.code-generator__snippet(readonly)
+      = raw %Q(<iframe id="oz_walking_guide" src="{{ widget.widget_url }}" width="{{ widget.width }}" height="{{ widget.height }}"></iframe>)
+    .code-generator__input-block
+      %label.code-generator__label
+        = t('widget.walking_guide.width')
+      %input.code-generator__input(type="text" ng-model="widget.width")
+    .code-generator__input-block
+      %label.code-generator__label
+        = t('widget.walking_guide.height')
+      %input.code-generator__input(type="text" ng-model="widget.height")
     .clearfix
-  .col-sm-12.col-xs-12.oz-share-wrapper.js-share-wrapper.non-display
-    %a.oz-fb-custom-share.js-walking-guide-share{href: ""} Udostępnij
-    %a.oz-email-custom-share.js-walking-guide-mail{href: ""} E-mail
-
-  - if current_user.present?
-    .walking-guide__code-generator(ng-show="saved")
-      %h2= t('views.widgets.edit.generated')
-      %textarea.code-generator__snippet(readonly)
-        = raw %Q(<iframe id="oz_walking_guide" src="{{ widget.widget_url }}" width="{{ widget.width }}" height="{{ widget.height }}"></iframe>)
-      .code-generator__input-block
-        %label.code-generator__label
-          = t('widget.walking_guide.width')
-        %input.code-generator__input(type="text" ng-model="widget.width")
-      .code-generator__input-block
-        %label.code-generator__label
-          = t('widget.walking_guide.height')
-        %input.code-generator__input(type="text" ng-model="widget.height")
-      .clearfix
 - else

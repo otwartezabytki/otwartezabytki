@@ -15,12 +15,12 @@ class Widgets::WalkingGuidesController < WidgetsController
       if walking_guide.user_id == current_user.id
 
         respond_to do |format|
-
           format.html
           format.json { render :walking_guide }
         end
+
       else
-        render404
+        render403
       end
     else
       redirect_to new_user_session_url
