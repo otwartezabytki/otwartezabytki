@@ -2,7 +2,6 @@
   %h2= t('views.photos.show.header', :count => tree_photos.count)
   .content
     .photo_content(data-replace="section.show.photo .photo_content")
-      - binding.pry
       - if tree_photos.one_before(tree_photo.id).present?
         = link_to "«", relic_photo_path(relic.id, tree_photos.one_before(tree_photo.id)), :remote => true, :class => "prev"
       - if tree_photos.one_after(tree_photo.id).present?

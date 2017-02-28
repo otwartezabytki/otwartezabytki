@@ -211,8 +211,12 @@ class Relic < ActiveRecord::Base
   end
 
   # @return photos for relic and it's descendants
+  def one_relic_photos
+    Photo.state(:saved).where(:relic_id => [id])
+  end
+
   def all_photos
-    # Photo.state(:saved).where(:relic_id => [id])
+    binding.pry
     Photo.state(:saved).where(:relic_id => [id] + descendant_ids)
   end
 

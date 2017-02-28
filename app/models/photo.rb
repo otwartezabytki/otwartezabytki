@@ -21,7 +21,7 @@
 
 class Photo < ActiveRecord::Base
   include StateExt
-  default_scope { order('photos.id ASC') }
+  default_scope { order('photos.position ASC') }
 
   belongs_to :relic
   belongs_to :user
