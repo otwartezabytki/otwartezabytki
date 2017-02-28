@@ -27,11 +27,13 @@ class Photo < ActiveRecord::Base
   belongs_to :user
   has_many :events
 
-  attr_accessible :author, :file, :date_taken, :description, :alternate_text, :as => [:default, :admin]
+  attr_accessible :author, :file, :date_taken, :description, :alternate_text, :position, :as => [:default, :admin]
   attr_accessible :relic_id, :user_id, :as => :admin
 
+  acts_as_list :scope => :relic
+
   validates :file, :relic, :user, :presence => true
-  validates :file, :file_size => { :maximum => 3.megabytes.to_i }
+  validates :file, :file_size => { :maximum => 2.megabytes.to_i }
   validates :author, :date_taken, :presence => true, :unless => :initialized?
 
   mount_uploader :file, PhotoUploader
@@ -54,8 +56,8 @@ class Photo < ActiveRecord::Base
       :alternate_text => alternate_text,
       :file => file.as_json(options)[:file],
       :file_full_width => file_full_width,
-      :file_full_width => file_full_width,
-      :description => description
+      :description => description,
+      :position => position
     }
   end
 end

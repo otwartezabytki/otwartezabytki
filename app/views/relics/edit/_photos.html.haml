@@ -18,6 +18,7 @@
               = f2.input :date_taken, :input_html => { :class => "date_taken" }, alt: t('oz_input_alts.edit_relic.relic_photo_date')
               = f2.input :description, :input_html => { :class => "description redactor" }, alt: t('oz_input_alts.edit_relic.relic_photo_desc')
               = f2.input :alternate_text, :input_html => { :class => "alternate_text" }, alt: t('oz_input_alts.edit_relic.relic_photo_alt')
+              = f2.input :position, :as => :select, :collection => 1..relic.photos.last.position, :include_blank => false
       - elsif photo.saved?
         .photo.col-md-12.col-sm-12.col-xs-12
           .col-lg-3.col-sm-12.col-xs-12.no-margins.oz-xs-sm-no-float
@@ -32,6 +33,7 @@
             %p= photo.description
             %label= t('activerecord.attributes.photo.alternate_text')
             %p= photo.alternate_text
+            = f2.input :position, :as => :select, :collection => 1..relic.photos.last.position, :include_blank => false
     .photo.hidden.col-sm-12.col-xs-12
       .column-left
         .preview.preview-placeholder

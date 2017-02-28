@@ -58,7 +58,7 @@ class Relic < ActiveRecord::Base
   belongs_to :place
 
   has_many :documents, :dependent => :destroy
-  has_many :photos, :dependent => :destroy
+  has_many :photos, :order => 'position', :dependent => :destroy
   has_many :alerts, :dependent => :destroy
   has_many :entries, :dependent => :destroy
   has_many :links, :order => 'position', :dependent => :destroy
@@ -212,6 +212,7 @@ class Relic < ActiveRecord::Base
 
   # @return photos for relic and it's descendants
   def all_photos
+    # Photo.state(:saved).where(:relic_id => [id])
     Photo.state(:saved).where(:relic_id => [id] + descendant_ids)
   end
 
