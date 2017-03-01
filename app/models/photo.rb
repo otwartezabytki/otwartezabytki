@@ -21,7 +21,7 @@
 
 class Photo < ActiveRecord::Base
   include StateExt
-  default_scope { order('photos.position ASC') }
+  default_scope { order('photos.relic_id, photos.position ASC') }
 
   belongs_to :relic
   belongs_to :user
@@ -38,14 +38,33 @@ class Photo < ActiveRecord::Base
 
   mount_uploader :file, PhotoUploader
   has_paper_trail :skip => [:created_at, :updated_at, :versions]
-
-  def self.one_after(photo_id)
-    where('id > ?', photo_id).order('id ASC').limit(1).first
-  end
-
-  def self.one_before(photo_id)
-    where('id < ?', photo_id).order('id DESC').limit(1).first
-  end
+  #
+  # def self.one_after(photo_id)
+  #   where('id > ?', photo_id).order('id ASC').limit(1).first
+  # end
+  #
+  # def self.one_after?(photo_id, photo_list)
+  #   photo_index = photo_list.index{ |item| item.id == photo_id}
+  #   photo_after = photo_list[photo_index + 1]
+  #   if  photo_after == 0 || photo_after == nil
+  #     return false
+  #   end
+  #   true
+  # end
+  #
+  # def self.one_before(photo_id, photo_list)
+  #   photo_index = photo_list.index{ |item| item.id == photo_id}
+  #   photo_list[photo_index - 1]
+  #   # where('id < ?', photo_id).order('id DESC').limit(1).first
+  # end
+  # def self.one_before?(photo_id, photo_list)
+  #   photo_index = photo_list.index{ |item| item.id == photo_id}
+  #   photo_before = photo_list[photo_index - 1]
+  #   if  photo_before == 0 || photo_before == nil
+  #     return false
+  #   end
+  #   true
+  # end
 
   def as_json(options)
     {
