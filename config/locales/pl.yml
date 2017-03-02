@@ -1645,8 +1645,8 @@ pl:
           subheader_empty: "Uzupełnij skład tego zespołu:"
         view_current_version: "&#171; zobacz wersję obecną"
         widgets:
-          create_alert: "Stwórz widżet „Dodaj alert” dla&nbsp;tego zabytku:"
-          create_button: "Stwórz widżet"
+          create_alert: "Stwórz aplikacje „Dodaj alert” dla&nbsp;tego zabytku:"
+          create_button: "Stwórz aplikacje dla turysty"
           error: "Wystąpił błąd podczas ładowania poglądu."
           header: "Aplikacje dla turysty dla zabytku"
           loading: "Ładuję podgląd widgetu…"
@@ -1688,7 +1688,7 @@ pl:
         preview: "Podgląd wygenerowanej aplikacji"
       index:
         about: "Aplikacje dla turysty:"
-        description: "<h3>Czym są widżety?</h3> <p>Otwarte dane o zabytkach mogą Wam się przydać!</p> <p>Udostępniamy kilka przykładowych aplikacji, dzięki którym łatwiej będzie wykorzystać dane o otwartych zabytkach na innych stronach internetowych.</p> <h3>Jak użyć widżet?</h3> <p>Aby skorzystać z prezentowanych aplikacji, wystarczy zagnieździć kawałek kodu na dowolnej stronie internetowej.</p> <h3>Masz pomysł na widżet?</h3> <p>Jeśli masz pomysł na funkcjonalną aplikację wykorzystującą dane o Otwartych Zabytkach, podziel się nim z nami, a być może uda nam się go zrealizować (%{email})!</p>"
+        description: "<h3>Czym są "Aplikacje dla turysty"?</h3> <p>Otwarte dane o zabytkach mogą Wam się przydać!</p> <p>Udostępniamy kilka przykładowych aplikacji, dzięki którym łatwiej będzie wykorzystać dane o otwartych zabytkach na innych stronach internetowych.</p> <h3>Jak użyć widżet?</h3> <p>Aby skorzystać z prezentowanych aplikacji, wystarczy zagnieździć kawałek kodu na dowolnej stronie internetowej.</p> <h3>Masz pomysł na widżet?</h3> <p>Jeśli masz pomysł na funkcjonalną aplikację wykorzystującą dane o Otwartych Zabytkach, podziel się nim z nami, a być może uda nam się go zrealizować (%{email})!</p>"
         use: Przetestuj
       preview:
         direction:
@@ -1744,12 +1744,12 @@ pl:
           Znalazłeś/aś zabytek w złym stanie? Zaalarmuj! Dzięki tej aplikacji możesz błyskawicznie zareagować i przesłać nam informacje.
           Będziemy je gromadzić i regularnie przesyłać do odpowiednich władz.
       thumb: widget-image-example.jpg
-      title: "Widżet \"Dodaj alert\""
+      title: "Aplikacja \"Dodaj alert\""
     add_relic:
       description: "Zabytek, którego szukasz nie został jeszcze dodany do katalogu Otwartych Zabytków?\n\
           Ta aplikacja umożliwi dodanie go w każdej chwili, wraz z opisem i zestawem zdjęć. "
       thumb: widget-image-example.jpg
-      title: "Widżet \"Dodaj zabytek\""
+      title: "Aplikacja \"Dodaj zabytek\""
     direction:
       description_: "Dzięki tej aplikacji możesz zobaczyć zabytki z naszej bazy na konkretnej trasie. Listę wyświetlanych zabytków możesz zawęzić w oparciu kategorie i położenie w promeniu trasy (np. tylko cmentarze w promieniu 2 km od trasy z Warszawy do Wrocławia)."
       thumb: widget-image-example.jpg
