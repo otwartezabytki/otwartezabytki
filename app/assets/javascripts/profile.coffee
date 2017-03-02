@@ -43,13 +43,19 @@ jQuery.initializer 'section.show.photos', ->
 #      $section.find('.main-photo').attr('href', $(this).attr('href'))
       false
 
+# calling it because photos_list has to be redirected to onclick event
+bind_photo_change = (photos_list) ->
+  $(document).on 'click', '.js-prev, .js-next', (e) ->
+    e.preventDefault()
+    link = $(this).attr('href')
+    $(document).ajaxComplete ->
+      photo_id = link.split('/').last()*1
+      set_before_after(photo_id, photos_list)
 
-$(document).on 'click', '.js-next', (e) ->
 
 
 # function sets links to next and previous photo of relic
 set_before_after = (photo_id, photos_list) ->
-  console.log("weszlo w settera")
   #finding position of current photo
   pos = photos_list.map((photo) ->
     photo.id).indexOf((photo_id)
@@ -62,35 +68,12 @@ set_before_after = (photo_id, photos_list) ->
   else
     $('.js-prev').hide()
 
-
   if photos_list[pos+1]
     next_link = "#{Routes.relic_photo_path(photos_list[pos+1].relic_id, photos_list[pos+1].id)}"
     $('.js-next').attr('href', next_link)
     $('.js-next').show()
   else
     $('.js-next').hide()
-
-
-bind_prev_next = (photos_list) -> # function wich binds click events to links, it prevents from changing controllers
-  console.log("weszlo w bindera")
-  $("a.js-next").off('click').on 'click', (e) ->
-    console.log("click next")
-    binder(e, this, photos_list)
-
-  $("a.js-prev").off('click').on 'click', (e) ->
-    console.log("click prev")
-    binder(e, this, photos_list)
-
-
-binder = (e, tmp_this, photos_list) ->
-
-  e.preventDefault()
-  console.log("binder " + $(tmp_this).text())
-  link = $(tmp_this).attr('href') # reading href from photo we are going to
-  $(document).ajaxComplete ->
-    photo_id = link.split('/').last()*1
-    set_before_after(photo_id, photos_list)
-    bind_prev_next(photos_list)
 
 jQuery.initializer 'section.show.photo', ->
   $section = this
@@ -111,8 +94,8 @@ jQuery.initializer 'section.show.photo', ->
             item = photos[i - 1]
             carousel.add(i, "<a data-remote='true' href='#{Routes.relic_photo_path(item.relic_id, item.id)}' data-main='#{item.main}'><img src='#{item.file.midi.url}' alt='#{item.alternate_text}' /></a>")
 
-    #only bind because it calls just after first fancybox showup, only once
-    bind_prev_next(photos)
+
+    bind_photo_change(photos)
 
     $(document).keydown (e) ->
       $("a.js-next").trigger "click"  if e.which is 39
