@@ -20,4 +20,4 @@
         = f.button t('views.alerts.new.submit')
         lub
         = link_to t('views.alerts.new.cancel'), relic_path(relic.id), :class => "js-close-edit-relic"
-%button.btn.oz-close-edit-relic.js-close-edit-relic.oz-alert-close-btn{ :type => "button"} Close
+%button.btn.oz-close-edit-relic.js-close-edit-relic.oz-alert-close-btn{ :type => "button"} #{t('views.relics.index.states.close')}
