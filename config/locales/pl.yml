@@ -1759,7 +1759,7 @@ pl:
     map_search:
       description: "Dzięki tej aplikacji możesz zobaczyć zabytki z naszej bazy na mapie. Możesz zawęzić listę wyświetlanych zabytków w oparciu o położenie i kategorie (np. tylko cmentarze w Zamościu lub wszystkie pałace i kamienice w województwie śląskim)."
       thumb: widget-image-example.jpg
-      title: "Mapowy"
+      title: "Mapa"
     walking_guide:
       title: Spacerownik
       loading: ładowanie
