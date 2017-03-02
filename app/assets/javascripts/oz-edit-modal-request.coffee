@@ -2,6 +2,14 @@ $ ->
   $(document).on 'click', '.js-edit-relic-load-modal',  (e) ->
     e.preventDefault()
     _href = $(@).attr('href')
+    jQuery ($) ->
+    $(document).ajaxStop ->
+      $('#fancybox_loader_container').hide()
+      return
+    $(document).ajaxStart ->
+      $('#fancybox_loader_container').show()
+      return
+    
     $.ajax
       method: 'GET',
       dataType: 'html',
@@ -54,12 +62,4 @@ jQuery.initializer '.js-close-edit-relic', ->
       location.reload(true)
     return
 
-$(document).ready ->
-  jQuery ($) ->
-    $(document).ajaxStop ->
-      $('#fancybox_loader_container').hide()
-      return
-    $(document).ajaxStart ->
-      $('#fancybox_loader_container').show()
-      return
-    return
+
