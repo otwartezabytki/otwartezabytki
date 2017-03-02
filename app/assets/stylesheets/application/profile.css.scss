@@ -379,6 +379,7 @@ section.edit {
   background: #fff;
   display: inline-block;
   border-top: 3px solid #486A7C;
+  width: 100%;
   section.show {
     position: relative;
     margin-bottom: 70px;
@@ -1412,7 +1413,7 @@ $subrelics-background-hover: #24353d;
   padding: 20px 20px 20px 63px;
   line-height: 18px;
   font-weight: 400;
-  background: asset-data-url("edit-relic-ico-info-white.png") 27px 31px no-repeat;
+  background: asset-data-url("edit-relic-ico-info-white.png") 27px 22px no-repeat;
   border-bottom: 1px solid #3b5664;
 
   & + .subrelics-tree {
