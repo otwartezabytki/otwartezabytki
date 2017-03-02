@@ -5,6 +5,8 @@ se:
       user:
         email: "Dirección e-mail"
         password: Contraseña
+      photo:
+        position: "Posición"
   layouts:
     application:
       about: "Sobre el proyecto"
