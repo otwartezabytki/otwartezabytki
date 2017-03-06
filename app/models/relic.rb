@@ -58,7 +58,7 @@ class Relic < ActiveRecord::Base
   belongs_to :place
 
   has_many :documents, :dependent => :destroy
-  has_many :photos, :dependent => :destroy
+  has_many :photos, :order => 'position', :dependent => :destroy
   has_many :alerts, :dependent => :destroy
   has_many :entries, :dependent => :destroy
   has_many :links, :order => 'position', :dependent => :destroy

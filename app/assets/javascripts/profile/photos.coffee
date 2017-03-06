@@ -29,11 +29,15 @@ jQuery.initializer 'div.photo-attributes', ->
     ]
 
     add: (e, data) ->
-      $photo_hidden.removeClass('hidden')
-      $photo_upload.hide()
-      jqXHR = data.submit()
-      $cancel_upload.click (e) ->
-        jqXHR.abort()
+      console.log(data.originalFiles[0]['size'])
+      if data.originalFiles[0]['size'] > 2097152
+        alert("Plik przekracza 2mb")
+      else
+        $photo_hidden.removeClass('hidden')
+        $photo_upload.hide()
+        jqXHR = data.submit()
+        $cancel_upload.click (e) ->
+          jqXHR.abort()
 
     progressall: (e, data) ->
       progress = parseInt(data.loaded / data.total * 100, 10)

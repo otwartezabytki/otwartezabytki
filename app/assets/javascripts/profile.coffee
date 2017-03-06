@@ -39,13 +39,51 @@ jQuery.initializer 'section.show.photos', ->
       $section.find('.main-photo img').attr
         src: $(this).data('maxi')
         alt: $(this).data('alt')
-      $section.find('.main-photo').attr('href', $(this).attr('href'))
+        # zakomentowane by nie wchodzic w konkretne zdjecie bezposrednio tylko w cala galerie, inaczej sa problemy miedzy kontrolerami
+#      $section.find('.main-photo').attr('href', $(this).attr('href'))
       false
+
+# calling it because photos_list has to be redirected to onclick event
+bind_photo_change = (photos_list) ->
+  $(document).on 'click', '.js-prev, .js-next', (e) ->
+    e.preventDefault()
+    link = $(this).attr('href')
+    $(document).ajaxComplete ->
+      photo_id = link.split('/').last()*1
+      set_before_after(photo_id, photos_list)
+
+
+
+# function sets links to next and previous photo of relic
+set_before_after = (photo_id, photos_list) ->
+  #finding position of current photo
+  pos = photos_list.map((photo) ->
+    photo.id).indexOf((photo_id)
+  )
+  #checking, setting, showing, hiding link to previous photo
+  if photos_list[pos-1]
+    prev_link = "#{Routes.relic_photo_path(photos_list[pos-1].relic_id, photos_list[pos-1].id)}"
+    $('.js-prev').attr('href', prev_link)
+    $('.js-prev').show()
+  else
+    $('.js-prev').hide()
+
+  if photos_list[pos+1]
+    next_link = "#{Routes.relic_photo_path(photos_list[pos+1].relic_id, photos_list[pos+1].id)}"
+    $('.js-next').attr('href', next_link)
+    $('.js-next').show()
+  else
+    $('.js-next').hide()
 
 jQuery.initializer 'section.show.photo', ->
   $section = this
   if slider = $section.find('#slider_midi')[0]
+    $section.find('.js-prev').hide()
+    $section.find('.js-next').hide()
     photos = $(slider).data('photos')
+    start_photo_id = $('.photo-id').text()*1
+    set_before_after(start_photo_id, photos)
+
     $(slider).jcarousel
       size: photos.length
       itemLoadCallback:
@@ -56,17 +94,17 @@ jQuery.initializer 'section.show.photo', ->
             item = photos[i - 1]
             carousel.add(i, "<a data-remote='true' href='#{Routes.relic_photo_path(item.relic_id, item.id)}' data-main='#{item.main}'><img src='#{item.file.midi.url}' alt='#{item.alternate_text}' /></a>")
 
-  $(document).keydown (e) ->
-    $("a.next").trigger "click"  if e.which is 39
 
-  $("a.next").click (e) ->
-    e.preventDefault()
+    bind_photo_change(photos)
 
-  $(document).keydown (e) ->
-    $("a.prev").trigger "click"  if e.which is 37
+    $(document).keydown (e) ->
+      $("a.js-next").trigger "click"  if e.which is 39
 
-  $("a.prev").click (e) ->
-    e.preventDefault()
+    $(document).keydown (e) ->
+      $("a.js-prev").trigger "click"  if e.which is 37
+
+
+
 
 $('body').on "click", ".close_popover", ->
   $("##{$(this).data('popover-id')}").popover('hide')

@@ -6,12 +6,14 @@ class PhotosController < ApplicationController
 
   respond_to :html, :json
 
-  expose(:relic) { Relic.find(params[:relic_id]) }
+  # expose(:relic) { Relic.find(Photo.find(params[:id]).relic_id) }
+  expose(:relic) { Relic.find(params[:relic_id]) || Relic.find(Photo.find(params[:id]).relic_id) }
 
   expose(:photos, ancestor: :relic)
   expose(:photo)
 
   expose(:tree_photos, model: :photo) { relic.all_photos }
+
   expose(:tree_photo,  model: :photo)
 
   def create
