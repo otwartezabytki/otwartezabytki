@@ -52,7 +52,13 @@ bind_photo_change = (photos_list) ->
       photo_id = link.split('/').last()*1
       set_before_after(photo_id, photos_list)
 
-
+on_carousel_photo_click = (photos_list) ->
+  $(document).on 'click', '.jcarousel-skin-midi ul li a', (e) ->
+    e.preventDefault()
+    link = $(this).attr('href')
+    $(document).ajaxComplete ->
+      photo_id = link.split('/').last()*1
+      set_before_after(photo_id, photos_list)
 
 # function sets links to next and previous photo of relic
 set_before_after = (photo_id, photos_list) ->
@@ -96,6 +102,7 @@ jQuery.initializer 'section.show.photo', ->
 
 
     bind_photo_change(photos)
+    on_carousel_photo_click(photos)
 
     $(document).keydown (e) ->
       $("a.js-next").trigger "click"  if e.which is 39
