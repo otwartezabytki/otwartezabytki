@@ -18,7 +18,7 @@
               = f2.input :date_taken, :input_html => { :class => "date_taken" }, alt: t('oz_input_alts.edit_relic.relic_photo_date')
               = f2.input :description, :input_html => { :class => "description redactor" }, alt: t('oz_input_alts.edit_relic.relic_photo_desc')
               = f2.input :alternate_text, :input_html => { :class => "alternate_text" }, alt: t('oz_input_alts.edit_relic.relic_photo_alt')
-              = f2.input :position, :as => :select, :collection => 1..relic.photos.last.position, :include_blank => false, alt: "Pozycja"
+              = f2.input :position, :as => :select, :collection => 1..relic.photos.last.position, :include_blank => false, alt: t('activerecord.attributes.photo.position')
               - if relic.is_group?
                 .apply-to
                   = descendants_select(relic, f2)
