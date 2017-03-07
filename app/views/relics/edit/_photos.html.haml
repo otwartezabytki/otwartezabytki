@@ -1,6 +1,7 @@
 = semantic_form_for relic, :url => section_relic_path(relic.id, :section => :photos), :html => { :multipart => true }, :remote => true  do |f|
   .photo-attributes.oz-xs-sm-text-center
-    - get_all_photos.each do |photo|
+    -#- relic.photos.all.each do |photo|
+    - get_all_photos_with_unsaved.each do |photo|
       - if photo.user_id == current_user.id
         = f.semantic_fields_for :photos, photo do |f2|
           .col-md-12.col-xs-12.col-sm-12.photo[f2.object]
@@ -8,7 +9,7 @@
               .preview
                 = image_tag photo.file.midi.url, :alt => photo.alternate_text
               - if photo.user_id == current_user.id
-                = link_to t('views.relics.edit.photos.delete_photo'), relic_photo_path(relic.id, photo.id),
+                = link_to t('views.relics.edit.photos.delete_photo'), relic_photo_path(photo.relic_id, photo.id),
                   :method => :delete,
                   :remote => true,
                   :confirm => t('views.relics.edit.photos.delete_confirm', :editable => false),
@@ -18,10 +19,12 @@
               = f2.input :date_taken, :input_html => { :class => "date_taken" }, alt: t('oz_input_alts.edit_relic.relic_photo_date')
               = f2.input :description, :input_html => { :class => "description redactor" }, alt: t('oz_input_alts.edit_relic.relic_photo_desc')
               = f2.input :alternate_text, :input_html => { :class => "alternate_text" }, alt: t('oz_input_alts.edit_relic.relic_photo_alt')
-              = f2.input :position, :as => :select, :collection => 1..relic.photos.last.position, :include_blank => false, alt: t('activerecord.attributes.photo.position')
+              - if photo.relic_id == relic.id
+                = f2.input :position, :as => :select, :collection => (1..number_of_photos(photo)).to_a, :include_blank => false, alt: t('activerecord.attributes.photo.position')
               - if relic.is_group?
                 .apply-to
                   = descendants_select(relic, f2)
+
       - elsif photo.saved?
         .photo.col-md-12.col-sm-12.col-xs-12
           .col-lg-3.col-sm-12.col-xs-12.no-margins.oz-xs-sm-no-float

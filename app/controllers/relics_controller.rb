@@ -9,6 +9,7 @@ class RelicsController < ApplicationController
   end
 
   expose(:relic) do
+
     if id = params[:relic_id] || params[:id]
       r = Relic.find(id)
       if params[:original].present? && request.get?
@@ -41,15 +42,16 @@ class RelicsController < ApplicationController
           }
         end
 
-        if params[:relic] != nil
+        if r.has_children? && params[:relic] != nil && request.get? == false
+          @subphoto_params = {}
+
           params[:relic][:photos_attributes].each do |photo|
-            binding.pry
-            r = Relic.find(photo[1][:relic_id])
-            r.attributes = params.fetch(:relic, {}).except(:voivodeship_id, :district_id, :commune_id) unless request.get?
+              @subphoto_params[:"#{photo[0]}"] = photo[1]
+              params[:relic][:photos_attributes].except!(:"#{photo[0]}")
           end
-        else
-          r.attributes = params.fetch(:relic, {}).except(:voivodeship_id, :district_id, :commune_id) unless request.get?
         end
+
+        r.attributes = params.fetch(:relic, {}).except(:voivodeship_id, :district_id, :commune_id) unless request.get?
         r.user_id = current_user.id if request.put? || request.post?
         r
       end
@@ -82,6 +84,7 @@ class RelicsController < ApplicationController
   end
 
   def update
+
     authorize! :update, relic
 
     if params[:section] == 'photos' && relic.license_agreement != "1"
@@ -149,12 +152,29 @@ class RelicsController < ApplicationController
             flash[:notice] = t('notices.changes_has_been_saved')
           end
         end
-
+        update_subrelic_photos
         redirect_to edit_relic_path(relic.id, :section => params[:section])
       end
     else
       flash.now[:error] = t('notices.please_correct_errors')
       render 'edit' and return
+    end
+  end
+
+  def update_subrelic_photos
+    unless @subphoto_params.blank?
+      @subphoto_params.each do |photo|
+        tmp_photo = Photo.find(photo[1][:id])
+        tmp_photo.author = photo[1][:author]
+        tmp_photo.date_taken = photo[1][:date_taken]
+        tmp_photo.description = photo[1][:description]
+        tmp_photo.alternate_text = photo[1][:alternate_text]
+        tmp_photo.relic_id = photo[1][:relic_id]
+        tmp_photo.position = photo[1][:position] unless photo[1][:position].nil?
+        tmp_photo.save
+
+      end
+
     end
   end
 

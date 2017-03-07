@@ -30,7 +30,7 @@ class Photo < ActiveRecord::Base
   attr_accessible :author, :file, :date_taken, :description, :alternate_text, :position, :as => [:default, :admin]
   attr_accessible :relic_id, :user_id, :as => :admin
 
-  acts_as_list :scope => :relic
+  acts_as_list :scope => :relic, add_new_at: :bottom
 
   validates :file, :relic, :user, :presence => true
   validates :file, :file_size => { :maximum => 2.megabytes.to_i }
