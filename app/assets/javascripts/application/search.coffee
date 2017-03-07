@@ -86,6 +86,11 @@ jQuery.initializer 'body.relics.index .main-container', ->
   if relics_results.length > 0 and gon.highlightedTags
     for tag in gon.highlightedTags
       relics_results.highlight(tag)
+    # showing only this subrelics wich contain searched words
+    hidden_subrelics = this.find('.js-show-hide-subrelic')
+    $.each hidden_subrelics, ->
+      if $(this).find('.highlight').length > 0
+        $(this).removeClass 'hide'
 
   this.find('.sidebar-categories .choices-group label').on 'mouseenter', ->
     $name = $(this).find('.name')

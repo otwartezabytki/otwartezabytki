@@ -15,19 +15,28 @@
             .relic__relic-content.col-md-10
               .name
                 %h2= link_to relic.identification, relic
+                = state_tag(relic)
+                .help
+                  = image_tag 'ico-help.png', alt: 'help'
+                  .help-wrapper
+                    = link_to t('views.relics.index.states.close'), '#', :class => 'close'
+                    %h3= t('views.relics.index.states.header')
+                    %ul
+                      %li= state_hint_tag(relic.state, relic.existence == 'social')
+
                 - descendants = relic.descendants
                 - if descendants.present?
                   .include
-                    %span
-                    = descendants.map(&:identification).join('; ')
-              = state_tag(relic)
-              .help
-                = image_tag 'ico-help.png', alt: 'help'
-                .help-wrapper
-                  = link_to t('views.relics.index.states.close'), '#', :class => 'close'
-                  %h3= t('views.relics.index.states.header')
-                  %ul
-                    %li= state_hint_tag(relic.state, relic.existence == 'social')
+                    -#%span
+                    -#= descendants.map(&:identification).join('; ')
+                    .block
+                      - descendants.each do |descendant|
+                        .col-sm-12.js-show-hide-subrelic.hide
+                          .thumb-div
+                            .thumb
+                              = link_to image_tag(descendant.main_photo.file.url(:icon), alt: set_relic_img_alt(descendant)), descendant
+                          = link_to descendant.identification, descendant
+
           .location.col-md-3.col-sm-12.col-xs-12
             .pathway
               = relic.place_full_name
