@@ -1,7 +1,7 @@
 %li.hidden-md.hidden-sm.hidden-xs
-  = image_tag "icon-text-plus.png", :class => 'js-plus oz-plus'
+  = image_tag "icon-text-plus.png", :class => 'js-plus oz-plus', alt: '+'
 %li.hidden-md.hidden-sm.hidden-xs
-  = image_tag "icon-text-minus.png", :class => 'js-minus oz-minus'
+  = image_tag "icon-text-minus.png", :class => 'js-minus oz-minus', alt: '-'
 - if current_user && current_user.registered? && current_user.errors.size == 0
   %li
     = link_to t('layouts.application.hello', :username => (current_user.username || current_user.email)), current_user

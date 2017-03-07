@@ -7,6 +7,8 @@
   position: relative;
   top: 15px;
   cursor: pointer;
+  font-size: 25px;
+  color: black;
 }
 
 .oz-minus {
@@ -21,6 +23,15 @@
   opacity: 0.5;
   cursor: default;
 }
+
+.navi-skipper {
+  position: absolute;
+  left: -1000px;
+  &:focus {
+    left: 0;
+  }
+}
+
 
 .oz-login {
   &::before {
@@ -130,8 +141,10 @@ section.oz-disclaimer {
   margin-top: 10px !important;
 }
 
-.oz-navbar-center a {
+ul.oz-navbar-center li a {
   font-size: 14px;
+  padding-left: 11px !important;
+  padding-right: 11px !important;
   &.current, &.active {
     color: $dark-blue !important;
   }
@@ -513,7 +526,6 @@ section.oz-disclaimer {
 }
 
 .oz-localization-list {
-  margin-left: 290px;
   h3::before {
     content: "";
     display: block;

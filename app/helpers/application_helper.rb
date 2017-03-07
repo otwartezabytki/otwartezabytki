@@ -74,4 +74,20 @@ module ApplicationHelper
     id = page_or_permalink.is_a?(Page) ? page_or_permalink.permalink : page_or_permalink
     eval("#{I18n.locale.to_s.underscore}_page_path('#{h id}')")
   end
+
+  def set_relic_img_alt(relic)
+    if relic.has_photos?
+      "#{relic.identification} #{relic.main_photo.alternate_text}"
+    else
+      "#{I18n.t('activerecord.attributes.relic.photos_facets.F')}"
+    end
+  end
+
+  def set_img_alt(relic, photo)
+    if relic.has_photos?
+      "#{relic.identification} #{photo.alternate_text}"
+    else
+      "#{I18n.t('activerecord.attributes.relic.photos_facets.F')}"
+    end
+  end
 end

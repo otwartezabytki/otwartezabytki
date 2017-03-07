@@ -13,8 +13,8 @@
       - relic.all_events.includes(:relic, :photo).each do |event|
         = f.semantic_fields_for :events, event do |f2|
           = content_tag_for :li, event, :style => (event.marked_for_destruction? ? "display: none" : "") do
-            = f2.input :date, :label => false, :hint => false, :class => "date"
-            = f2.input :name, :label => false, :hint => false, :class => "info"
+            = f2.input :date, :label => false, :hint => false, :class => "date", alt: t('oz_input_alts.edit_relic.relic_date')
+            = f2.input :name, :label => false, :hint => false, :class => "info", alt: t('oz_input_alts.edit_relic.relic_date_desc')
             - if relic.is_group?
               .apply-to
                 = descendants_select(relic, f2)
@@ -24,7 +24,7 @@
             - if event.photo.blank?
               = link_to t('views.relics.edit.add_photo'), '#', :class => "add_photo" if event.relic == relic
             - else
-              = image_tag event.photo.file.url(:icon), :class => "event_photo"
+              = image_tag event.photo.file.url(:icon), :class => "event_photo", alt: event.photo.alternate_text
               = link_to t('views.relics.edit.edit_photo'), '#', :class => "edit_photo" if event.relic == relic
               = link_to t('views.relics.edit.delete'), '#', :class => "remove_photo" if event.relic == relic
 
@@ -33,8 +33,8 @@
       %script{ :type => "text/html", :id => "event_template", :"data-next-id" => relic.events.length }
         = f.semantic_fields_for :events, relic.events.build do |f2|
           %li.event
-            = f2.input :date, :label => false, :hint => false, :class => "date"
-            = f2.input :name, :label => false, :hint => false, :class => "info"
+            = f2.input :date, :label => false, :hint => false, :class => "date", alt: t('oz_input_alts.edit_relic.relic_date')
+            = f2.input :name, :label => false, :hint => false, :class => "info", alt: t('oz_input_alts.edit_relic.relic_date_desc')
             - if relic.is_group?
               .apply-to
                 = descendants_select(relic, f2)

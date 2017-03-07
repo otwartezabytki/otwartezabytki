@@ -6,9 +6,9 @@
         = semantic_form_for(tsearch, :url => relics_path, :method => :get, :id => 'form-search') do |f|
           %h2= t('views.pages.home.header')
           .field.subject
-            = f.input :q, :input_html => { :class => 'autocomplete-q'}
+            = f.input :q, :input_html => { :class => 'autocomplete-q', :alt=> t('views.pages.home.how_it_works.what_alt')}
           .field.place
-            = f.input :place, :input_html => { :class => 'autocomplete-place'}
+            = f.input :place, :input_html => { :class => 'autocomplete-place', :alt=> t('views.pages.home.how_it_works.where_alt')}
           .field
             = link_to t('views.pages.home.how_it_works.title'), "#", :id => "how_it_works", :class => "js-popover how_it_works",
               :"data-title-id" => "how_it_works_title", :"data-content-id" => "how_it_works_content"
@@ -28,7 +28,7 @@
         - if example_relic.present?
           .relic-container
             .image
-              = image_tag example_relic.main_photo.file.url(:icon)
+              = image_tag(example_relic.main_photo.file.url(:icon), alt: set_relic_img_alt(example_relic))
             .relic-content
               .relic-heading
                 = link_to example_relic.identification, example_relic
@@ -83,13 +83,13 @@
             = render partial: 'last_edited', locals: { revision: revision, hidden: true }
           - RecentRevision.revisions.last(3).each do |revision|
             = render partial: 'last_edited', locals: { revision: revision, hidden: false }
-    .oz-progress-bar
+    .oz-progress-bar{alt: t('oz_img_alts.progress_bar')}
       .bg
         .color
       .checked
         = t('views.pages.home.stats_info.checked_html', :count => relic_stats[:checked])
         .help
-          = image_tag 'ico-help.png'
+          = image_tag 'ico-help.png', alt: 'help'
           .help-wrapper
             %h3= t('views.relics.index.states.header')
             %ul
@@ -98,7 +98,7 @@
         = t('views.pages.home.stats_info.total_html', :count => relic_stats[:total])
         = t('views.pages.home.stats_info.unchecked_html', :count => relic_stats[:unchecked])
         .help
-          = image_tag 'ico-help.png'
+          = image_tag 'ico-help.png', alt: 'help'
           .help-wrapper
             %h3= t('views.relics.index.states.header')
             %ul

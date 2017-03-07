@@ -1,4 +1,4 @@
-.map#map-poland
+.map#map-poland{alt: t('oz_img_alts.poland_map')}
   %ul.poland
     - voivodeships_for_map.each do |voivodeship|
       %li{class: "pl#{voivodeship.id}", redirect: relics_path(search: { location: "pl-#{voivodeship.id}"})}

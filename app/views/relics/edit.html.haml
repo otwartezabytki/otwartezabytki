@@ -1,7 +1,7 @@
 -#.bootstrap-iso
 -##edit-relic-modal.modal.fade{"role" => "dialog"}
 
-- if params[:section] == "location" || params[:section] == "photos"
+- if params[:section] == "location" || params[:section] == "photos" || params[:section] == "description"
   .oz-edit_relic
     %nav.navbar.navbar-default.oz-nav-edit
       .navbar-header
@@ -15,7 +15,7 @@
             %li.general.visible-lg= link_to_section_tab :general
             %li.location= link_to_section_tab :location
             %li.events.visible-lg= link_to_section_tab :events
-            %li.description.visible-lg= link_to_section_tab :description
+            %li.description= link_to_section_tab :description
             %li.categories.visible-lg= link_to_section_tab :categories
             %li.entries.visible-lg= link_to_section_tab :entries
             %li.links.visible-lg= link_to_section_tab :links
@@ -41,7 +41,7 @@
         %li.general.visible-lg= link_to_section_tab :general
         %li.location= link_to_section_tab :location
         %li.events.visible-lg= link_to_section_tab :events
-        %li.description.visible-lg= link_to_section_tab :description
+        %li.description= link_to_section_tab :description
         %li.categories.visible-lg= link_to_section_tab :categories
         %li.entries.visible-lg= link_to_section_tab :entries
         %li.links.visible-lg= link_to_section_tab :links

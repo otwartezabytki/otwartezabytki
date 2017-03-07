@@ -13,6 +13,38 @@
 
 .oz-relic-desc-photos {
   display: inline-flex;
+  section.show.general .location_name p .popover {
+        max-width: unset;
+    .popover-title {
+      width: 100%;
+      display: inline-flex;
+      p {
+        font-size: 16px;
+        font-weight: bold;
+        width: 65%;
+      }
+    }
+    p.close {
+      position: relative;
+      top: 0;
+      right: -30px;
+      width: 30%;
+      opacity: 1;
+      a {
+        font-size: 16px;
+        color: #af0c0c;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+section.show.alerts.add-alert-widget .add-alert-widget-output{
+  display: none;
+}
+
+section.show.entries .content.masonry {
+  height: unset !important;
 }
 
 section.show.general {
@@ -214,6 +246,7 @@ section.show.photos {
   }
   &.placeholder {
     height: 99.9%;
+    overflow-y:hidden;
     @include gradient(#e9e9e9, #dfdfdf);
     box-shadow: inset 0 0 40px 0 rgba(0, 0, 0, 0.2);
     text-align: center;
@@ -290,13 +323,6 @@ section.show.photos {
   margin-top: 1px;
 }
 
-//chrome hack for print icon
-@media screen and (-webkit-min-device-pixel-ratio: 0) {
-  section.show.general .print-guide::before {
-    left: 27px;
-  }
-}
-
 @media screen and (min-width: 992px) and (max-width: 1200px) {
   section.show.photos .placeholder a {
     margin: 362px 0 0;
@@ -318,5 +344,11 @@ section.show.photos {
   }
   .second-row {
     display: block;
+  }
+}
+
+@media screen and (max-width: 768px){
+  .oz-relic-desc-photos section.show.general .location_name p .popover {
+    left: 0 !important;
   }
 }

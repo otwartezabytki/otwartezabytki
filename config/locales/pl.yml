@@ -910,10 +910,10 @@ pl:
       accept: Akceptuj
       addrelic: "Dodaj zabytek"
       blog: Blog
-      browse: Przeglądaj
+      browse: "Przeglądaj zabytki"
       contact: Kontakt
       disclaimer: "Wciąż udoskonalamy serwis i poprawiamy błędy. Jeśli masz jakieś uwagi lub znajdziesz błąd, prosimy o informację na:"
-      download: "Pobierz dane"
+      download: "Pobierz bazę zabytków"
       download_data: "Pobierz dane"
       facebook_sign_in: "Zaloguj się przez Facebooka"
       facebook_sign_up: "Zarejestruj się przez Facebooka"
@@ -938,7 +938,7 @@ pl:
       relics_count: "Liczba Twoich zabytków: %{count}"
       search: Szukaj
       tagline: "Twórz z nami obywatelski katalog zabytków"
-      widgets: Widżety
+      widgets: "Aplikacje dla turysty"
   messages:
     are_you_sure: "Czy jesteś pewien?"
   notices:
@@ -1222,8 +1222,10 @@ pl:
         how_it_works:
           title: "Jak działa wyszukiwarka?"
           what: Co?
+          what_alt: "Nazwa zabytku"
           what_content: "Wyszukuje po całych nazwach, słowach występujących w nazwach oraz tagach."
           where: Gdzie?
+          where_alt: "Gdzie szukać zabytku"
           where_content: "Wyszukuje ulice, nazwy miejscowości, województw, powiatów."
         recently_modified: "Ostatnio edytowane"
         relic_has_been_updated: "%{relic} został zaktualizowany"
@@ -1337,7 +1339,7 @@ pl:
             title: "Mapa:"
           widget:
             par: "Udostępniamy kilka przykładowych aplikacji, dzięki którym łatwiej będzie wykorzystać dane o otwartych zabytkach na innych stronach internetowych."
-            title: "Widżety »"
+            title: "Aplikacje dla turysty »"
       profile:
         remove_avatar: "usunąć swoje zdjęcie"
         you_can_if_you_want: "Możesz %{remove_avatar}, jeśli tego sobie życzysz."
@@ -1643,10 +1645,10 @@ pl:
           subheader_empty: "Uzupełnij skład tego zespołu:"
         view_current_version: "&#171; zobacz wersję obecną"
         widgets:
-          create_alert: "Stwórz widżet „Dodaj alert” dla&nbsp;tego zabytku:"
-          create_button: "Stwórz widżet"
+          create_alert: "Stwórz aplikacje „Dodaj alert” dla&nbsp;tego zabytku:"
+          create_button: "Stwórz aplikacje dla turysty"
           error: "Wystąpił błąd podczas ładowania poglądu."
-          header: "Widżety dla zabytku"
+          header: "Aplikacje dla turysty dla zabytku"
           loading: "Ładuję podgląd widgetu…"
     widgets:
       edit:
@@ -1654,26 +1656,26 @@ pl:
           hint: "Wyszukaj zabytek"
           search: Szukaj
           which_one: "O który zabytek dokładnie Ci chodziło"
-        back: "&laquo; wróć do katalogu widżetów"
+        back: "&laquo; wróć do katalogu aplikacji dla turystów"
         code_help: "To jest gotowy kod do wstawienia na stronę, wygenerowany dla wybranego przez Ciebie zabytku. Wystarczy go skopiować i umieścić w odpowiednim miejscu na Twojej stronie."
         generated: "Wygenerowany kod do wstawienia na stronę"
         map_search:
-          header: "Wybierz ustawienia widżetu"
-          height: "Wysokość widgeta"
+          header: "Wybierz ustawienia aplikacji"
+          height: "Wysokość aplikacji"
           hide_sidebar: "Ukryj pasek boczny"
           params_hint: "Ustawisz je poruszając mapką podglądową po prawej stronie."
           params_label: "Parametry do <a href='/api_doc/'>API</a>"
           settings_info: "Jeśli chcesz na przykład wyświetlić na swojej stronie mapkę z cmentarzami żydowskimi z województwa dolnośląskiego, wybierz województwo dolnośląskie z lokalizacji oraz kategorie „cmentarz” i „żydowski”. Następnie skopiuj kod do wstawienia na stronę."
-          width: "Szerokość widgeta"
+          width: "Szerokość aplikacji"
         direction:
-          header: "Wybierz ustawienia widżetu"
-          height: "Wysokość widgeta"
+          header: "Wybierz ustawienia aplikacji"
+          height: "Wysokość aplikacji"
           hide_sidebar: "Ukryj pasek boczny"
           params_hint: "Ustawisz je poruszając mapką podglądową po prawej stronie."
           params_label: "Parametry do <a href='/api_doc/'>API</a>"
           settings_info_: "Jeśli chcesz na przykład wyświetlić na swojej stronie mapkę z trasą przebiegającą przez 2 lub więcej miast z zaznaczonymi zabytkami w jej promieniu, znajdź te miasta i wybierz interesujące cię kategorie oraz promień, a następnie skopiuj kod do wstawienia na stronę."
           sign_in_before_save: "Przed zapisaniem trasy musisz się najpierw zalogować."
-          width: "Szerokość widgeta"
+          width: "Szerokość aplikacji"
           map_help: "Wpisz nazwę dowolnego miejsca (np. miasto, ulica) lub własnoręcznie ustaw znacznik na mapie wybierając z menu podręcznego `Rozpocznij trasę tutaj` oraz `Zakończ trasę tutaj`. Wygenerowaną trasę możesz przeciągać i dostosowywać do swoich potrzeb."
           save: "Zapisz trasę"
           print_: "Wydrukuj trasę"
@@ -1683,10 +1685,10 @@ pl:
           create_new_widget_xs: "Nowa trasa"
           sign_in: "Zaloguj się aby móc zapisać trasę"
           sign_in_xs: "Zaloguj"
-        preview: "Podgląd wygenerowanego widżetu"
+        preview: "Podgląd wygenerowanej aplikacji"
       index:
-        about: "Widżety:"
-        description: "<h3>Czym są widżety?</h3> <p>Otwarte dane o zabytkach mogą Wam się przydać!</p> <p>Udostępniamy kilka przykładowych aplikacji, dzięki którym łatwiej będzie wykorzystać dane o otwartych zabytkach na innych stronach internetowych.</p> <h3>Jak użyć widżet?</h3> <p>Aby skorzystać z prezentowanych aplikacji, wystarczy zagnieździć kawałek kodu na dowolnej stronie internetowej.</p> <h3>Masz pomysł na widżet?</h3> <p>Jeśli masz pomysł na funkcjonalną aplikację wykorzystującą dane o Otwartych Zabytkach, podziel się nim z nami, a być może uda nam się go zrealizować (%{email})!</p>"
+        about: "Aplikacje dla turysty:"
+        description: "<h3>Czym są \"Aplikacje dla turysty\"?</h3> <p>Otwarte dane o zabytkach mogą Wam się przydać!</p> <p>Udostępniamy kilka przykładowych aplikacji, dzięki którym łatwiej będzie wykorzystać dane o otwartych zabytkach na innych stronach internetowych.</p> <h3>Jak użyć widżet?</h3> <p>Aby skorzystać z prezentowanych aplikacji, wystarczy zagnieździć kawałek kodu na dowolnej stronie internetowej.</p> <h3>Masz pomysł na widżet?</h3> <p>Jeśli masz pomysł na funkcjonalną aplikację wykorzystującą dane o Otwartych Zabytkach, podziel się nim z nami, a być może uda nam się go zrealizować (%{email})!</p>"
         use: Przetestuj
       preview:
         direction:
@@ -1742,22 +1744,22 @@ pl:
           Znalazłeś/aś zabytek w złym stanie? Zaalarmuj! Dzięki tej aplikacji możesz błyskawicznie zareagować i przesłać nam informacje.
           Będziemy je gromadzić i regularnie przesyłać do odpowiednich władz.
       thumb: widget-image-example.jpg
-      title: "Widżet \"Dodaj alert\""
+      title: "Aplikacja \"Dodaj alert\""
     add_relic:
       description: "Zabytek, którego szukasz nie został jeszcze dodany do katalogu Otwartych Zabytków?\n\
           Ta aplikacja umożliwi dodanie go w każdej chwili, wraz z opisem i zestawem zdjęć. "
       thumb: widget-image-example.jpg
-      title: "Widżet \"Dodaj zabytek\""
+      title: "Aplikacja \"Dodaj zabytek\""
     direction:
       description_: "Dzięki tej aplikacji możesz zobaczyć zabytki z naszej bazy na konkretnej trasie. Listę wyświetlanych zabytków możesz zawęzić w oparciu kategorie i położenie w promeniu trasy (np. tylko cmentarze w promieniu 2 km od trasy z Warszawy do Wrocławia)."
       thumb: widget-image-example.jpg
-      title_: "Widżet Trasa"
+      title_: "Trasa"
       save: "Trasa została zapisana. Listę zapisanych tras możesz znaleźć w profilu użytkownika."
       no_route: "Trasa nie została wybrana."
     map_search:
       description: "Dzięki tej aplikacji możesz zobaczyć zabytki z naszej bazy na mapie. Możesz zawęzić listę wyświetlanych zabytków w oparciu o położenie i kategorie (np. tylko cmentarze w Zamościu lub wszystkie pałace i kamienice w województwie śląskim)."
       thumb: widget-image-example.jpg
-      title: "Widżet Mapowy"
+      title: "Mapa"
     walking_guide:
       title: Spacerownik
       loading: ładowanie
@@ -1798,3 +1800,45 @@ pl:
     wuoz-w-warszawie: "Wojewódzki Urząd Ochrony Zabytków w Warszawie"
     wuoz-w-zielonej-gorze: "Wojewódzki Urząd Ochrony Zabytków w Zielonej Górze"
     wuoz-we-wroclawiu: "Wojewódzki Urząd Ochrony Zabytków we Wrocławiu"
+
+  oz_img_alts:
+    open_relics_logo: "Logo otwartych zabytków"
+    alert: "Ostrzeżenie"
+    map: "mapa"
+    poland_map: "Mapa przedstawiająca rozłożenie wprowadzonych zabytków w Polsce"
+    no_photo: "Brak zdjęcia"
+    miniature: "miniatura"
+    progress_bar: "Pasek przedstawiający proporcje sprawdzonych zabytków do wszystkich zabytków w bazie"
+    normal_layout: "standardowy layout"
+    boy_layout: "czarna czcionka, żółte tło"
+    wob_layout: "biała czcionka, czarne tło"
+    yob_layout: "żółta czcionka, czarne tło"
+  oz_input_alts:
+    set_wg_name: "Nadaj nazwę spacerownikowi"
+    set_wg_desc: "Opisz spacerownik"
+    set_dir_location: "Wprowadź lokalizację"
+    search_from: "wprowadź datę powstania - od kiedy"
+    search_to: "wprowadź datę powstania - do kiedy"
+    edit_relic:
+      relic_name: "nazwa obiektu"
+      relic_common_name: "nazwa zwyczajowa, potoczna"
+      relic_street: "Wprowadź nazwę ulicy"
+      relic_date: "Wprowadź datę"
+      relic_date_desc: "Opisz wydarzenie"
+      relic_desc: "Opisz obiekt"
+      relic_tags: "Wprowadź tagi, słowa kluczowe"
+      relic_legend_title: "Wprowadź tytuł ciekawostki, legendy"
+      relic_legend_desc: "Wprowadź legendę, ciekawostkę"
+      relic_link_category: "Wybierz kategorię źródła"
+      relic_link_url: "Wprowadź URL źródła"
+      relic_link_desc: "Opisz źródło"
+      relic_link_bibl: "Wprowadź opis bibliograficzny"
+      relic_doc_title: "Wprowadź pełną nazwę dokumentu"
+      relic_doc_desc: "Wprowadź krótki opis dokumentu"
+      relic_doc_where: "Wpisz, gdzie szukać fizycznego dokumentu"
+      relic_photo_author: "Wprowadź dane autora"
+      relic_photo_date: "Wprowadź datę wykonania"
+      relic_photo_desc: "Wprowadź opis"
+      relic_photo_alt: "Wprowadź tekst alternatywny"
+  oz_skip_navi: "Omiń nawigację"
+

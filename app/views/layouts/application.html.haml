@@ -23,11 +23,13 @@
     %link{:href => "http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,600,300&subset=latin,latin-ext", :rel => "stylesheet", :type => "text/css"}
   %body{ :class => [cookies["font-size"].to_s, controller_name, action_name, ("resource_#{params[:id]}" if params[:id])].join(' '), :data => { :logged => warden.authenticated?.to_s } }
     .oz-change-contrast
-      %button.btn.btn-default.js-contr-normal.oz-change-contrast-btn.oz-normal A
-      %button.btn.btn-default.js-contr-black-on-yellow.oz-change-contrast-btn.oz-boy A
-      %button.btn.btn-default.js-contr-white-on-black.oz-change-contrast-btn.oz-wob A
-      %button.btn.btn-default.js-contr-yellow-on-black.oz-change-contrast-btn.oz-yob A
+      %button.btn.btn-default.js-contr-normal.oz-change-contrast-btn.oz-normal{:alt => t('oz_img_alts.normal_layout')} A
+      %button.btn.btn-default.js-contr-black-on-yellow.oz-change-contrast-btn.oz-boy{:alt => t('oz_img_alts.boy_layout')} A
+      %button.btn.btn-default.js-contr-white-on-black.oz-change-contrast-btn.oz-wob{:alt => t('oz_img_alts.wob_layout')} A
+      %button.btn.btn-default.js-contr-yellow-on-black.oz-change-contrast-btn.oz-yob{:alt => t('oz_img_alts.yob_layout')} A
     .oz-contrast-container
+      %div
+        = link_to t('oz_skip_navi'), '#', class: "js-skip-navi navi-skipper"
       %div#cookies.bootstrap-iso.oz-cookies-bar
         %ul.cooks
           %li= link_to t('layouts.application.cookies')
@@ -51,7 +53,7 @@
             .container
               %header#header
                 %hgroup.col-lg-4.col-md-5.col-xs-12.text-center
-                  = link_to image_tag("logo.png", :class => 'oz-logo img-responsive'), root_path
+                  = link_to image_tag("logo.png", :class => 'oz-logo img-responsive', :alt => t('oz_img_alts.open_relics_logo')), root_path
                   %h4.text-center= t('layouts.application.tagline')
                 .display-block.col-lg-8.col-md-7
                   %nav.navbar.navbar-default{role: "navigation"}
@@ -61,7 +63,7 @@
                     = t('layouts.application.disclaimer')
                     %a{:href => "mailto:kontakt-oz@centrumcyfrowe.pl"} kontakt-oz@centrumcyfrowe.pl
                   .col-md-2.oz-cc-logo
-                    = link_to image_tag("cc_logo.png"), 'http://centrumcyfrowe.pl/'
+                    = link_to image_tag("cc_logo.png"), 'http://centrumcyfrowe.pl/', alt: 'Centrum cyfrowe'
           %section#menu.bootstrap-iso
             .container
               %nav.navbar.navbar-default
@@ -95,15 +97,23 @@
 
                     %ul.nav.navbar-default.hidden-lg.hidden-xl= render 'shared/login_navigation'
                     %li.oz-change-contrast-xs
-                      %button.btn.btn-default.js-contr-normal.oz-change-contrast-btn.oz-normal A
-                      %button.btn.btn-default.js-contr-black-on-yellow.oz-change-contrast-btn.oz-boy A
-                      %button.btn.btn-default.js-contr-white-on-black.oz-change-contrast-btn.oz-wob A
-                      %button.btn.btn-default.js-contr-yellow-on-black.oz-change-contrast-btn.oz-yob A
+                      %button.btn.btn-default.js-contr-normal.oz-change-contrast-btn.oz-normal{:alt => t('oz_img_alts.normal_layout')} A
+                      %button.btn.btn-default.js-contr-black-on-yellow.oz-change-contrast-btn.oz-boy{:alt => t('oz_img_alts.boy_layout')} A
+                      %button.btn.btn-default.js-contr-white-on-black.oz-change-contrast-btn.oz-wob{:alt => t('oz_img_alts.wob_layout')} A
+                      %button.btn.btn-default.js-contr-yellow-on-black.oz-change-contrast-btn.oz-yob{:alt => t('oz_img_alts.yob_layout')} A
           %section#main
-            .their-container.main-container{ :'data-replace' => '.main-container' }
-              = render 'shared/flash', :flash => flash
-              .row
-                = yield
+            %a#skipped.hidden.js-to-skip-navi{ href: '#'} skipper
+            - if params[:id] == "o-projekcie"
+              .main-container.bootstrap-iso{ :'data-replace' => '.main-container' }
+                = render 'shared/flash', :flash => flash
+                .container
+                  .row
+                    = yield
+            -else
+              .their-container.main-container{ :'data-replace' => '.main-container' }
+                = render 'shared/flash', :flash => flash
+                .row
+                  = yield
           #root-footer
         %footer#footer.oz-footer.bootstrap-iso
           .container= render 'shared/footer'
