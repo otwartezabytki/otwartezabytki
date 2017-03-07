@@ -143,8 +143,10 @@ section.oz-disclaimer {
   margin-top: 10px !important;
 }
 
-.oz-navbar-center a {
+ul.oz-navbar-center li a {
   font-size: 14px;
+  padding-left: 11px !important;
+  padding-right: 11px !important;
   &.current, &.active {
     color: $dark-blue !important;
   }
