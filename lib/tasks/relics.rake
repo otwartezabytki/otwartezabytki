@@ -126,4 +126,16 @@ SQL
     puts "Done"
   end
 
+
+  task :update_elasticsearch_settings => :environment do
+    puts "Updating elasticsearch settings"
+    puts("curl -XPOST 'localhost:9200/#{Settings.oz.index_env}-relics/_close'")
+    system("curl -XPOST 'localhost:9200/#{Settings.oz.index_env}-relics/_close'")
+    puts("\ncurl -XPUT 'localhost:9200/#{Settings.oz.index_env}-relics/_settings' -d '{\"index\" : {\"analysis.filter.pl_stop.stopwords_path\" : \"#{Rails.root}/config/elasticsearch/stopwords.txt\", \"analysis.filter.pl_synonym.synonyms_path\": \"#{Rails.root}/config/elasticsearch/synonyms.txt\"}}'")
+    system("curl -XPUT 'localhost:9200/#{Settings.oz.index_env}-relics/_settings' -d '{\"index\" : {\"analysis.filter.pl_stop.stopwords_path\" : \"#{Rails.root}/config/elasticsearch/stopwords.txt\", \"analysis.filter.pl_synonym.synonyms_path\": \"#{Rails.root}/config/elasticsearch/synonyms.txt\"}}'")
+    puts("\ncurl -XPOST 'localhost:9200/#{Settings.oz.index_env}-relics/_open'")
+    system "curl -XPOST 'localhost:9200/#{Settings.oz.index_env}-relics/_open'"
+    puts "\n"
+  end
+
 end

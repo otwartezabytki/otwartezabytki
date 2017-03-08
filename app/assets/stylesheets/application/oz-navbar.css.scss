@@ -1,6 +1,8 @@
 .oz-logo {
-  margin-top: 15px;
+  width: 349px;
+  margin: 15px auto 0;
 }
+
 
 .oz-plus,
 .oz-minus {
@@ -141,8 +143,10 @@ section.oz-disclaimer {
   margin-top: 10px !important;
 }
 
-.oz-navbar-center a {
+ul.oz-navbar-center li a {
   font-size: 14px;
+  padding-left: 11px !important;
+  padding-right: 11px !important;
   &.current, &.active {
     color: $dark-blue !important;
   }
@@ -591,5 +595,37 @@ section.oz-disclaimer {
     font-weight: bold;
     position: relative;
     top: -7px;
+  }
+}
+
+.m-t {
+  margin-top: 10px;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1200px) {
+
+  .relative-sm-md {
+    position: relative !important;
+  }
+
+  .absolute-sm-md {
+    position: absolute !important;
+  }
+
+  .pull-right-sm-md {
+    float: right !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .m-b-xs {
+    margin-bottom: 10px;
+  }
+  .full-width-xs {
+    width: 100% !important;
+  }
+  .text-center-xs {
+    float: none !important;
+    text-align: center !important;
   }
 }
