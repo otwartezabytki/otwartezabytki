@@ -2,6 +2,7 @@ class DownloadGenerator
   include ActiveModel::AttributeMethods
 
   def initialize klass, file_type, only_register
+    puts "Dane wprowadzone :: #{klass} :: #{file_type} :: #{only_register}"
     @klass = klass
     @file_type = file_type
     @only_register = only_register
@@ -19,6 +20,7 @@ class DownloadGenerator
   end
 
   def manage_tmpfile tmpfile
+    binding.pry
     FileUtils.cp tmpfile.path, @name
     FileUtils.chmod 0644, @name
     FileUtils.ln_s @name, "#{Rails.root}/public/history/current-#{@suffix}-#{@file_type}.zip", :force => true
@@ -32,23 +34,36 @@ class DownloadGenerator
       total = @klass.created.roots.count
       counter = 0
       tmpfile = Tempfile.new([@suffix, '.zip'])
+      puts "Total :: #{total}, TmpFile :: #{tmpfile.path}"
       begin
         Zip::ZipOutputStream.open(tmpfile.path) do |zip|
+          iter = 0
           @klass.created.roots.includes(:place, :commune, :district, :voivodeship).find_in_batches do |objs|
             puts "Progress #{counter * 1000 * 100 / total} of 100%"
             counter += 1
             objs.each do |relic|
+# puts "relikt, iter:: #{iter}, counter:: #{counter}"
+              puts objs
+              iter+=1 #--------------
+
               begin
                 if @file_type == "json"
                   generate_json_file(zip, relic)
-                else
+                elsif @file_type == "csv"
                   generate_csv_file(zip, relic)
+                else
+                  generate_xls_file(zip, relic)
                 end
               rescue => ex
                 Raven.capture_exception(ex)
               end
+
+              break if iter == 5 #-------------
+
             end
+            break if iter == 5 #-------------
           end
+          # break if iter == 5 #-------------
         end
         puts "Progress 100 of 100%"
         manage_tmpfile(tmpfile)
@@ -170,6 +185,19 @@ class DownloadGenerator
     ]
 
     place_data(csv, relic)
+  end
+
+  def generate_xls_file zipstream, relic
+    zipstream.put_next_entry("#{@suffix}-xls/#{relic.id}.xls")
+    zipstream.print relic_to_xls(relic)
+  end
+
+  def relic_to_xls relic
+    new_book = Spreadsheet::Workbook.new
+    sheet = new_book.create_worksheet name: I18n.t("activerecord.models.place.one")
+    sheet.insert_row(0, relic.id)
+    new_book.write("#{@suffix}-xls/#{relic.id}.xls")
+    # @only_register ? original_relic_xls(relic, sheet) : append_xls(sheet, relic)
   end
 
 end

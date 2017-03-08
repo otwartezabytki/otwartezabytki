@@ -64,13 +64,17 @@ SQL
   desc "Generate zipfiles with relics csvs/jsons"
   task :export => :environment do
     # generating json for all relics
-    DownloadGenerator.new(Relic, 'json', false).generate_zipfile
+    # DownloadGenerator.new(Relic, 'json', false).generate_zipfile
     # generating json for registered relics
-    DownloadGenerator.new(Relic, 'json', true).generate_zipfile
+    # DownloadGenerator.new(Relic, 'json', true).generate_zipfile
     # generating csv for all relics
-    DownloadGenerator.new(Relic, 'csv', false).generate_zipfile
+    # DownloadGenerator.new(Relic, 'csv', false).generate_zipfile
     # generating csv for registered relics
-    DownloadGenerator.new(Relic, 'csv', true).generate_zipfile
+    # DownloadGenerator.new(Relic, 'csv', true).generate_zipfile
+    # # generating xls for all relics
+    DownloadGenerator.new(Relic, 'xls', false).generate_zipfile
+    # generating xls for registered relics
+    # DownloadGenerator.new(Relic, 'xls', true).generate_zipfile
   end
 
   task :export_users, [:export_csv] => :environment do |t, args |
