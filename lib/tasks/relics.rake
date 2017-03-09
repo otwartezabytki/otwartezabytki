@@ -67,7 +67,7 @@ SQL
     # DownloadGenerator.new(Relic, 'json', false).generate_zipfile
     # generating json for registered relics
     # DownloadGenerator.new(Relic, 'json', true).generate_zipfile
-    # generating csv for all relics
+    # generating csv for all relics and convert it to xml
     # DownloadGenerator.new(Relic, 'csv', false).generate_zipfile
     # generating csv for registered relics
     # DownloadGenerator.new(Relic, 'csv', true).generate_zipfile
