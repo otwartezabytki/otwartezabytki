@@ -833,10 +833,11 @@ section.show.events {
       display: none;
     }
     li {
+      font-size: 18px;
       padding-left: 20px;
       background: asset-data-url("event-bullet.png") 5px 4px no-repeat;
       margin-bottom: 10px;
-      display: inline-block;
+      display: block;
       strong {
         font-weight: 700;
       }
@@ -1051,7 +1052,7 @@ span.block {
 }
 
 section.edit {
-  width: 747px;
+  width: 746px;
   position: relative;
   .row {
     padding: 15px 20px;

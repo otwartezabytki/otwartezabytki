@@ -19,7 +19,7 @@ module RelicsHelper
     else
       path = [relic]
     end
-    link_to path, :class => 'subrelic-link', :remote => true do
+    link_to path, :class => 'subrelic-link js-go-to-top', :remote => true do
       content_tag :dl, :class => ('subrelic ' + (relic == current_relic ? 'type-current ' : '')).strip do
         subrelic_image(relic) + subrelic_desc(relic)
       end
