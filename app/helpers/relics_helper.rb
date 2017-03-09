@@ -192,7 +192,7 @@ module RelicsHelper
 
     counted_tab += make_list(relic.links) if relic.links.exists?
     
-    User.where(id: counted_tab.uniq).map{|x| content_tag(:li, x.username)}.join('')
+    User.where(id: counted_tab.uniq).map{|x| content_tag(:li, x.username, class: 'small-li')}.join('')
   end
 
   private

@@ -838,6 +838,10 @@ section.show.events {
       background: asset-data-url("event-bullet.png") 5px 8px no-repeat;
       margin-bottom: 10px;
       display: block;
+      &.small-li{
+        background: asset-data-url("event-bullet.png") 5px 4px no-repeat;
+        font-size: 12px;
+      }
       strong {
         font-weight: 700;
       }
