@@ -175,49 +175,33 @@ module RelicsHelper
   end
 
   def get_all_creators
-    str = ""
+    
     counted_tab = []
 
-    str, counted_tab = make_list(relic.photos, counted_tab, str) if relic.photos.present?
+    counted_tab += make_list(relic.links) if [relic]
 
-    str, counted_tab = make_list(relic.documents, counted_tab, str) if relic.documents.present?
+    counted_tab += make_list(relic.photos) if relic.photos.exists?
 
-    # str, counted_tab = make_list(relic.categories, counted_tab) if relic.categories.present?
+    counted_tab += make_list(relic.documents) if relic.documents.exists?
 
-    str, counted_tab = make_list(relic.description, counted_tab, str) if relic.description.present?
+    counted_tab += make_list(relic.entries) if relic.entries.exists?
 
-    str, counted_tab = make_list(relic.entries, counted_tab, str) if relic.entries.present?
+    counted_tab += make_list(relic.events) if relic.events.exists?
 
-    str, counted_tab = make_list(relic.events, counted_tab, str) if relic.events.present?
+    counted_tab += make_list(relic.alerts) if relic.alerts.exists?
 
-    str, counted_tab = make_list(relic.alerts, counted_tab, str) if relic.alerts.present?
-
-    str, counted_tab = make_list(relic.links, counted_tab, str) if relic.links.present?
-
-    # str, counted_tab = make_list(relic.location, counted_tab) if relic.location.present?
-    binding.pry
-    str
+    counted_tab += make_list(relic.links) if relic.links.exists?
+    
+    User.where(id: counted_tab.uniq).map{|x| content_tag(:li, x.username)}.join('')
   end
 
   private
-  def counted?(id, counted_tab)
-    counted_tab.each do |count_id|
-      return true if id == count_id
-    end
-    false
-  end
+  
 
-  def make_list(collection, counted_tab, str)
-    counted = counted_tab
-    str = str
-
-    collection.each do |col|
-      unless counted? col.user_id, counted
-        counted += [col.user_id]
-        name = User.find(col.user_id).username
-        str += content_tag(:li, name)
-      end
+  def make_list(collection)
+    ids = collection.map do |col|
+        col.user_id
     end
-    return str, counted
+    return ids
   end
 end
