@@ -134,6 +134,7 @@ pl:
         relic: Zabytek
         relic_id: "ID zabytku"
         url: "Link do zdjęcia"
+        position: "Pozycja"
       relic:
         ancestry: "W zespołach"
         approved: "Zabytek zatwierdzony"
@@ -1559,6 +1560,8 @@ pl:
         unknown_address: "Adres niedostępny"
         unknown_from: Nieznana
       show:
+        creators:
+          header: "Twórcy profilu"
         alerts:
           create: "zgłoś alert"
           fixed: "Zgłoszone alerty poprawione"
@@ -1688,7 +1691,7 @@ pl:
         preview: "Podgląd wygenerowanej aplikacji"
       index:
         about: "Aplikacje dla turysty:"
-        description: "<h3>Czym są \"Aplikacje dla turysty\"?</h3> <p>Otwarte dane o zabytkach mogą Wam się przydać!</p> <p>Udostępniamy kilka przykładowych aplikacji, dzięki którym łatwiej będzie wykorzystać dane o otwartych zabytkach na innych stronach internetowych.</p> <h3>Jak użyć widżet?</h3> <p>Aby skorzystać z prezentowanych aplikacji, wystarczy zagnieździć kawałek kodu na dowolnej stronie internetowej.</p> <h3>Masz pomysł na widżet?</h3> <p>Jeśli masz pomysł na funkcjonalną aplikację wykorzystującą dane o Otwartych Zabytkach, podziel się nim z nami, a być może uda nam się go zrealizować (%{email})!</p>"
+        description: "<h3>Czym są \"Aplikacje dla turysty\"?</h3> <p>Otwarte dane o zabytkach mogą Wam się przydać!</p> <p>Udostępniamy kilka przykładowych aplikacji, dzięki którym łatwiej będzie wykorzystać dane o otwartych zabytkach na innych stronach internetowych.</p> <h3>Jak użyć \"Aplikacje\"?</h3> <p>Aby skorzystać z prezentowanych aplikacji, wystarczy zagnieździć kawałek kodu na dowolnej stronie internetowej.</p> <h3>Masz pomysł na \"Aplikacje\"?</h3> <p>Jeśli masz pomysł na funkcjonalną aplikację wykorzystującą dane o Otwartych Zabytkach, podziel się nim z nami, a być może uda nam się go zrealizować (%{email})!</p>"
         use: Przetestuj
       preview:
         direction:

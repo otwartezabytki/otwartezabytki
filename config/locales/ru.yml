@@ -5,6 +5,8 @@ ru:
       user:
         email: "Электронная почта"
         password: Пароль
+      photo:
+        position: "должность"
   layouts:
     application:
       about: "О проекте"
@@ -45,6 +47,8 @@ ru:
         header: "Редакция профиля"
         or: или
       show:
+        creators:
+          header: "Создатели страницы"
         alerts:
           create: "Заявте тревогу"
           header: Тревога

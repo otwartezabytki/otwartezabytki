@@ -6,6 +6,7 @@ angular.module('Relics').factory 'WalkingGuide', ($http) ->
       relic_ids: params.relic_ids
       title: params.title
       description: params.description
+      private: params.private
     width: params.width
     height: params.height
 

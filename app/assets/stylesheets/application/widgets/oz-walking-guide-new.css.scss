@@ -19,6 +19,7 @@
   .oz-map-container {
     position: relative;
     width: 100%;
+    overflow: hidden;
   }
   .angular-google-map-container {
     position: unset !important;

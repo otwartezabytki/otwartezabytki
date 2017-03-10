@@ -1,3 +1,6 @@
+@import "../widgets/oz-share-buttons";
+
+
 section.oz-widgets {
   h1 {
     background: image-url("icon-download.png") no-repeat, #546f7d linear-gradient(to bottom, #546f7d, #436576);
@@ -125,8 +128,8 @@ section.oz-widgets {
 }
 
 //chrome hack for overflowing content
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-  section.oz-widgets .content .widgets .widget{
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  section.oz-widgets .content .widgets .widget {
     overflow: hidden;
   }
 }

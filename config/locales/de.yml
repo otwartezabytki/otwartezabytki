@@ -134,6 +134,7 @@ de:
         relic: Baudenkmal
         relic_id: "Baudenkmal-ID"
         url: "Foto-URL"
+        position: "Position"
       relic:
         ancestry: "innerhalb des Ensembles"
         approved: "Baudenkmal angenommen"
@@ -1561,6 +1562,8 @@ de:
         unknown_address: "Unbekannte Adresse"
         unknown_from: unbekannt
       show:
+        creators:
+          header: "Schöpfer der Seite"
         alerts:
           create: "Melde ein Problem"
           fixed: "Gemeldete Probleme wurden gelöst"
