@@ -98,6 +98,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def render403
+    respond_to do |format|
+      format.html { render :file => "#{Rails.root}/public/403.html", :layout => false, :status => :forbidden }
+      format.any  { head :not_found }
+    end
+  end
+
   def default_url_options(options = {})
     { :locale => I18n.locale }
   end

@@ -3,4 +3,4 @@
 -#.ask_account Nie masz konta?
 -#= link_to "Zarejestruj się tutaj.", new_user_registration_path, :remote => request.xhr?
 = t('.iframe_sidebar', :scope => 'views')
-= link_to t('.register_here', :scope => 'views'), new_user_registration_path(:host => Settings.oz.host, :only_path => false), :target => '_blank'
+= link_to t('.register_here', :scope => 'views'), new_user_registration_path(return_path: root_path), :target => '_blank'

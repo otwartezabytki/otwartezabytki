@@ -19,7 +19,7 @@ module RelicsHelper
     else
       path = [relic]
     end
-    link_to path, :class => 'subrelic-link', :remote => true do
+    link_to path, :class => 'subrelic-link js-go-to-top', :remote => true do
       content_tag :dl, :class => ('subrelic ' + (relic == current_relic ? 'type-current ' : '')).strip do
         subrelic_image(relic) + subrelic_desc(relic)
       end
@@ -172,6 +172,37 @@ module RelicsHelper
         :filled => Relic.created.where(:state => 'filled').count,
         :total => Relic.created.count
     }
+  end
+
+  def get_all_creators
+
+    counted_tab = []
+
+    counted_tab += make_list(relic.links) if [relic]
+
+    counted_tab += make_list(relic.photos) if relic.photos.exists?
+
+    counted_tab += make_list(relic.documents) if relic.documents.exists?
+
+    counted_tab += make_list(relic.entries) if relic.entries.exists?
+
+    counted_tab += make_list(relic.events) if relic.events.exists?
+
+    counted_tab += make_list(relic.alerts) if relic.alerts.exists?
+
+    counted_tab += make_list(relic.links) if relic.links.exists?
+
+    User.where(id: counted_tab.uniq).map{|x| content_tag(:li, x.username, class: 'small-li')}.join('')
+  end
+
+  private
+
+
+  def make_list(collection)
+    ids = collection.map do |col|
+        col.user_id
+    end
+    return ids
   end
 
   def get_all_photos_with_unsaved

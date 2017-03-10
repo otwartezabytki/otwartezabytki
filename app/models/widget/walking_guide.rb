@@ -31,6 +31,10 @@ class Widget::WalkingGuide < Widget
     params[:description]
   end
 
+  def private
+    params[:private]
+  end
+
   def relic_ids
     params[:relic_ids] || []
   end

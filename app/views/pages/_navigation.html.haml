@@ -5,10 +5,11 @@
       'data-hover' => 'dropdown', 'data-delay-in' => 400, 'data-delay-out' => 200,"data-toggle" => "dropdown", "role" => "menu"
     %ul.dropdown-menu
       - page.subpages.each do |subpage|
-        %li= link_to subpage.title.presence || subpage.name.titleize, subpage,
-          class: "oz-#{subpage.name} #{'current' if current_page?(subpage)}"
-      - if page.name == "about"
-        %li= link_to t('layouts.application.blog'), "http://blog.otwartezabytki.pl/"
+        - if subpage.name != "aplikacja_mobilna"
+          %li= link_to subpage.title.presence || subpage.name.titleize, subpage,
+            class: "oz-#{subpage.name} #{'current' if current_page?(subpage)}"
+      -#- if page.name == "about"
+      -#  %li= link_to t('layouts.application.blog'), "http://blog.otwartezabytki.pl/"
 - else
   %li
     = link_to t("layouts.application.#{page.name}"), page,
