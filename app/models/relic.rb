@@ -224,7 +224,7 @@ class Relic < ActiveRecord::Base
   end
 
   def all_links
-    Link.where(:relic_id => [id] + descendant_ids).order("relic_id ASC, position ASC")
+    Link.where(:relic_id => [id] + descendant_ids + [self.ancestry.to_i]).order("relic_id ASC, position ASC")
   end
 
   def all_events

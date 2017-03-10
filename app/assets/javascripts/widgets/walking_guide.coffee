@@ -17,3 +17,6 @@
 #= require ../angular/init
 #= require ../angular/router
 #= require_tree ../angular
+
+# custom share buttons
+#= require ../oz-share-buttons
