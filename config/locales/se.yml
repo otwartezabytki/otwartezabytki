@@ -5,6 +5,8 @@ se:
       user:
         email: "Dirección e-mail"
         password: Contraseña
+      photo:
+        position: "Posición"
   layouts:
     application:
       about: "Sobre el proyecto"
@@ -96,6 +98,8 @@ se:
             title: Vidgets
     relics:
       show:
+        creators:
+          header: "Creadores de la página"      
         flash_content_html: "<h3>De qué se trata?</h3> <p> Busca las informaciones y completa los campos elegidos.</p> <p>Disfruta de tus conocimientos, busca en libros o en el internet.</p> <p>Comprueba si las informaciones ya completadas son correctas.</p> <p>Recuerda poner las fuentes.</p> </h3>"
         original_version: "Estás viendo la versión original"
         original_version_info: "Esto significa que existe también una versión con tus cambios."

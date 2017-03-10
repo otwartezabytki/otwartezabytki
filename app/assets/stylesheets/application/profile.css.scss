@@ -836,9 +836,13 @@ section.show.events {
     li {
       font-size: 18px;
       padding-left: 20px;
-      background: asset-data-url("event-bullet.png") 5px 4px no-repeat;
+      background: asset-data-url("event-bullet.png") 5px 8px no-repeat;
       margin-bottom: 10px;
       display: block;
+      &.small-li{
+        background: asset-data-url("event-bullet.png") 5px 4px no-repeat;
+        font-size: 12px;
+      }
       strong {
         font-weight: 700;
       }
@@ -1053,7 +1057,7 @@ span.block {
 }
 
 section.edit {
-  width: 747px;
+  width: 746px;
   position: relative;
   .row {
     padding: 15px 20px;

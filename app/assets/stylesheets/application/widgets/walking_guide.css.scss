@@ -7,6 +7,11 @@
     font-size: 12px;
     margin-bottom: 7px;
     font-family: 'Open Sans', sans-serif;
+    &.oz-private-label {
+      display: inline-block;
+      margin-right: 15px;
+      margin-bottom: 15px;
+    }
   }
 
   .button--load-more {

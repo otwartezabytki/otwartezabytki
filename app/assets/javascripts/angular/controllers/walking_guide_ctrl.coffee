@@ -8,6 +8,7 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
       relic_ids: []
       title: ''
       description: ''
+      private: ''
     $scope.suggestions = null
     $scope.currentPage = 1
     $scope.totalPages = -1
@@ -253,6 +254,15 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
       success = (response) ->
         $scope.saving = false
         $scope.saved = true
+
+        if $('.js-share-wrapper').length > 0
+          shareurl = response.data.widget_url
+          $('.js-walking-guide-share')[0].href = 'http://www.facebook.com/sharer/sharer.php?sdk=joey&u=' + encodeURIComponent(shareurl) + '%2F&display=popup&ref=plugin&src=share_button'
+          $('.js-walking-guide-share').unbind('click').bind 'click', ->
+            window.open($('.js-walking-guide-share')[0].href)
+            return false
+          $('.js-walking-guide-mail')[0].href = 'mailto:?subject=&body=' +  encodeURIComponent(shareurl)
+          $('.js-share-wrapper').show()
         angular.extend($scope.widget, _.pick(response.data, ['uid', 'width', 'height', 'widget_url', 'print_path']))
 
       error = (response) ->
