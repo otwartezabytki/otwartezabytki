@@ -5,7 +5,6 @@ class DownloadGenerator
 
 
   def initialize klass, file_type, only_register
-    puts "Dane wprowadzone :: #{klass} :: #{file_type} :: #{only_register}"
     @klass = klass
     @file_type = file_type
     @only_register = only_register
@@ -32,13 +31,16 @@ class DownloadGenerator
     if File.exists? @name
       puts "Nothing to do file #{@name} has been already generated."
     else
+
       if @file_type == "xls"
         csv_name = "#{Rails.root}/public/history/#{Date.today.to_s(:db)}-#{@suffix}-csv.zip"
         if File.exists? csv_name
+          puts "Exporting relics to file #{@name}"
           convert_csv_to_xls_file(csv_name)
         else
-          puts "First you have to generate CSV files"
+          puts "First you have to generate #{@suffix}-csv files"
         end
+
       else
         puts "Exporting relics to file #{@name}"
         total = @klass.created.roots.count
@@ -46,14 +48,10 @@ class DownloadGenerator
         tmpfile = Tempfile.new([@suffix, '.zip'])
         begin
           Zip::ZipOutputStream.open(tmpfile.path) do |zip|
-            puts tmpfile.path
-            iter = 0
             @klass.created.roots.includes(:place, :commune, :district, :voivodeship).find_in_batches do |objs|
               puts "Progress #{counter * 1000 * 100 / total} of 100%"
               counter += 1
               objs.each do |relic|
-
-                iter+=1 #--------------
 
                 begin
                   if @file_type == "json"
@@ -65,12 +63,10 @@ class DownloadGenerator
                   Raven.capture_exception(ex)
                 end
 
-                break if iter == 5 #-------------
-
               end
-              break if iter == 5 #-------------
+
             end
-            # break if iter == 5 #-------------
+
           end
           puts "Progress 100 of 100%"
           manage_tmpfile(tmpfile)
@@ -194,33 +190,44 @@ class DownloadGenerator
 
     place_data(csv, relic)
   end
-  
+
   def convert_csv_to_xls_file csv_path
-    Zip::ZipFile.foreach(csv_path) do |csv_file|
-      in_stream = csv_file.get_input_stream
-      data = in_stream.read
-      csv = CSV.new(data)
+    total = Zip::ZipFile.open(csv_path).size
+    counter = 0
 
-      book = Spreadsheet::Workbook.new
-      sheet1 = book.create_worksheet
+    Zip::ZipFile.open(@name, Zip::ZipFile::CREATE) do |zip_to_save|
+      Dir.mkdir("/tmp/#{@suffix}-xls") unless File.exists?("/tmp/#{@suffix}-xls")
 
-      header_format = Spreadsheet::Format.new(
-          :weight => :bold,
-          :horizontal_align => :center,
-          :bottom => :thin,
-          :locked => true
-      )
+      Zip::ZipFile.foreach(csv_path) do |csv_file|
+        puts "Progress #{counter * 100 / total} of 100%"
+        in_stream = csv_file.get_input_stream
+        data = in_stream.read
+        csv = CSV.new(data)
 
-      sheet1.row(0).default_format = header_format
-      binding.pry
+        book = Spreadsheet::Workbook.new
+        sheet1 = book.create_worksheet
+
+        header_format = Spreadsheet::Format.new(
+            :weight => :bold,
+            :horizontal_align => :center,
+            :bottom => :thin,
+            :locked => true
+        )
+        sheet1.row(0).default_format = header_format
 
         csv.each_with_index do |row, i|
           sheet1.row(i).replace(row)
         end
-      file_name = csv_file.to_s.split('/').last.split('.').first
-      Dir.mkdir("/tmp/#{@suffix}-xls") unless File.exists?("/tmp/#{@suffix}-xls")
-      book.write("/tmp/#{@suffix}-xls/#{file_name}.xls")
+
+        file_name = csv_file.to_s.split('/').last.split('.').first
+        file_path = "/tmp/#{@suffix}-xls/#{file_name}.xls"
+        book.write(file_path)
+
+        zip_to_save.add("#{@suffix}-xls/#{file_name}.xls", file_path)
+        counter += 1
+      end
     end
+    puts "Progress 100% of 100%"
   end
 
 end
