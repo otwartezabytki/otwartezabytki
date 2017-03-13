@@ -82,7 +82,7 @@ jQuery.initializer '.main-container div.new_relic .creator-step', ->
   this.find('a.js-popover.relic-group').popover
     title: -> $("##{$(this).data("title-id")}").html()
     content: -> $("##{$(this).data("content-id")}").html()
-    delay: 100000
+    delay: 1000
     placement: 'top'
     html: true
 
@@ -90,6 +90,6 @@ jQuery.initializer '.main-container div.new_relic .creator-step', ->
   this.find('a.js-popover.non-existed').popover
     title: -> $("##{$(this).data("title-id")}").html()
     content: -> $("##{$(this).data("content-id")}").html()
-    delay: 100000
+    delay: 1000
     placement: 'bottom'
     html: true

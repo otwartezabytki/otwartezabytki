@@ -9,7 +9,7 @@
           != Country.coordinates.to_json
         = f.input :country_code, :as => :select, :include_blank => false, :default => "PL",
           :collection => Country.coordinates.keys.map{|code| [I18n.t(code, :scope => :countries), code]}.sort_alphabetical_by(&:first),
-          :input_html => { :style => "width: 234px;" }
+          :input_html => { :style => "width: 176px;" }
         = f.input :fprovince
         = f.input :fplace
       .street_input{ :style => (relic.street.blank? ? "display: none" : "") }
