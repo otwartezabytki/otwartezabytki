@@ -21,6 +21,8 @@
         %li.walking-guide__relic(ng-repeat="relic in widget.relics")
           %a(ng-click="openDescriptionModal(relic)" href="" ng-if="relic.description" ng-include="'walking-guide/relic.html'")
           %div(ng-if="!relic.description" ng-include="'walking-guide/relic.html'")
+          %span(ng-bind-html="'{{ relic.wlk_guide_description }}'")
+
 
       .walking-guide__description(ng-show="widget.description")
         %h2= t('widget.walking_guide.description')

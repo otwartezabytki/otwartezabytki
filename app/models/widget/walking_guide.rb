@@ -41,7 +41,7 @@ class Widget::WalkingGuide < Widget
 
   def relics
     Relic.where(id: relic_ids).map do |relic|
-      relic_to_widget_data(relic, false).merge(description: relic.description, thumbnail: relic.main_photo.try(:file).try(:midi).try(:url))
+      relic_to_widget_data(relic, false).merge(description: relic.description, wlk_guide_description: relic.wlk_guide_description, thumbnail: relic.main_photo.try(:file).try(:midi).try(:url))
     end.sort_by { |relic| relic_ids.index(relic[:id]) }
   end
 

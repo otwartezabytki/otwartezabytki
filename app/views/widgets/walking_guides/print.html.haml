@@ -29,6 +29,7 @@
             .clearfix
           %dd.Definition-Content--small
             %p(ng-bind-html="relic.description" ng-show="relic.description")
+            %p(ng-bind-html="relic.wlk_guide_description" ng-show="relic.wlk_guide_description")
 
   %section(ng-show="widget.description")
     %h2.Title-Header--padded-bottom= t('widget.walking_guide.description')

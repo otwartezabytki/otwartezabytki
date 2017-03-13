@@ -1830,6 +1830,7 @@ de:
       relic_date: "Geben Sie das Datum"
       relic_date_desc: "beschreiben Veranstaltung"
       relic_desc: "beschreiben das Objekt"
+      relic_desc: "Beschreibung unten wird nur in einem Walking Guide Widget gesehen werden"
       relic_tags: "Geben Sie die Tags, Schlüsselwörter"
       relic_legend_title: "Geben Sie einen Titel trivia, Legenden"
       relic_legend_desc: "Geben Sie die Legende, Neugier"

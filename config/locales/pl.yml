@@ -1830,6 +1830,7 @@ pl:
       relic_date: "Wprowadź datę"
       relic_date_desc: "Opisz wydarzenie"
       relic_desc: "Opisz obiekt"
+      walking_guide_desc: "Poniższy komentarz pojawi się tylko w widgecie spacerownik"
       relic_tags: "Wprowadź tagi, słowa kluczowe"
       relic_legend_title: "Wprowadź tytuł ciekawostki, legendy"
       relic_legend_desc: "Wprowadź legendę, ciekawostkę"

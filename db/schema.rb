@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151228092902) do
+ActiveRecord::Schema.define(:version => 20170313102810) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -201,6 +201,7 @@ ActiveRecord::Schema.define(:version => 20151228092902) do
     t.text     "description"
     t.string   "alternate_text"
     t.string   "state",            :default => "initialized"
+    t.integer  "position"
   end
 
   create_table "places", :force => true do |t|
@@ -226,19 +227,19 @@ ActiveRecord::Schema.define(:version => 20151228092902) do
     t.string   "nid_id"
     t.float    "latitude"
     t.float    "longitude"
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
     t.string   "ancestry"
     t.integer  "commune_id"
     t.integer  "district_id"
     t.integer  "voivodeship_id"
-    t.string   "kind",            :default => "SA"
-    t.boolean  "approved",        :default => false
+    t.string   "kind",                  :default => "SA"
+    t.boolean  "approved",              :default => false
     t.string   "categories"
-    t.text     "description",     :default => ""
+    t.text     "description",           :default => ""
     t.string   "tags"
-    t.string   "type",            :default => "Relic"
-    t.string   "country_code",    :default => "PL"
+    t.string   "type",                  :default => "Relic"
+    t.string   "country_code",          :default => "PL"
     t.string   "fprovince"
     t.string   "fplace"
     t.text     "documents_info"
@@ -249,10 +250,11 @@ ActiveRecord::Schema.define(:version => 20151228092902) do
     t.text     "reason"
     t.integer  "date_start"
     t.integer  "date_end"
-    t.string   "state",           :default => "unchecked"
-    t.string   "existence",       :default => "existed"
-    t.string   "common_name",     :default => ""
+    t.string   "state",                 :default => "unchecked"
+    t.string   "existence",             :default => "existed"
+    t.string   "common_name",           :default => ""
     t.string   "auto_categories"
+    t.text     "wlk_guide_description"
   end
 
   add_index "relics", ["ancestry"], :name => "index_relics_on_ancestry"

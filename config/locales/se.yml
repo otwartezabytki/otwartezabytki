@@ -182,6 +182,7 @@ se:
       relic_date: "Introduce la fecha"
       relic_date_desc: "describir evento"
       relic_desc: "describir el objeto"
+      relic_desc: "El comentario siguiente solo aparecerá  en el widget caminante."
       relic_tags: "Introduzca las etiquetas, palabras clave"
       relic_legend_title: "Introduzca un título curiosidades, leyendas"
       relic_legend_desc: "Introduzca la leyenda, la curiosidad"
