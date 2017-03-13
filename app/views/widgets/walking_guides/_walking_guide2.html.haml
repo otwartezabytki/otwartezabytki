@@ -46,6 +46,12 @@
     .walking-guide__description
       %h2.field-label= t('widget.walking_guide.description')
       %textarea(ng-model="widget.description" alt="#{t('oz_input_alts.set_wg_desc')}")
+    .walking-guide__distance
+      %h2.field-label= t('widget.walking_guide.distance')
+      %input(type="text" ng-model="widget.distance" disabled="disabled")
+    .walking-guide__duration
+      %h2.field-label= t('widget.walking_guide.duration')
+      %input(type="text" ng-model="widget.duration" disabled="disabled")
 
     - if current_user.present?
       .walking-guide__private

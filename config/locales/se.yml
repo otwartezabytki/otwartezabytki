@@ -153,6 +153,9 @@ se:
   widget:
     map_search:
       title: Mapa
+    walking_guide:
+      distance: "distancia"
+      duration: "duración"
 
   oz_img_alts:
     open_relics_logo: "logo miras abiertas"

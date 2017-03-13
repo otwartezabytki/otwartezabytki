@@ -80,7 +80,10 @@ ru:
           placeholder: "<p>Подайте интересные бумажные или интернетовые источники информации о памятнике</p>"
         photos:
           add: "ДОБАВТЕ ФОТОГРАФИИ"
-
+  widget:
+    walking_guide:
+      distance: "расстояние"
+      duration: "Продолжительность"
   relic_tabs:
     categories:
       name: "Категории и теги"

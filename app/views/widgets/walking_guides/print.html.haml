@@ -15,6 +15,7 @@
 
   %section
     %h2.Title-Header--padded-bottom {{ widget.title || "#{t('widget.walking_guide.relics')}" }}
+    %h3 {{widget.distance}}, {{widget.duration}}
     %p#relics-loading-info(ng-show="loading") #{t('widget.walking_guide.loading')}…
     %ol.MainContent
       %li.Definition-Container--unbreakable(ng-repeat="relic in widget.relics")

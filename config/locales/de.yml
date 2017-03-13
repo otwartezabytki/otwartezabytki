@@ -1764,6 +1764,8 @@ de:
       thumb: widget-image-example.jpg
       title: "Karten-App"
     walking_guide:
+      duration: Dauer
+      distance: Entfernung
       title: Spazierführer
       loading: Laden
       more: mehr
