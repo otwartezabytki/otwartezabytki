@@ -16,6 +16,9 @@
           %span(ng-show="relic.street") {{ relic.street }},
           {{ relic.place }}
         %button.walkig-guide-relic__remove(type="button" ng-click="removeRelic(relic)") &times;
+        %a.relic-info__link(href="/#{I18n.locale}/relics/{{ relic.id }}?skip_return_path=true" target="_blank")
+          = t('widget.walking_guide.more')
+          &raquo;
     .walking-guide__search
       %form(name="searchForm" ng-submit="searchRelics()")
         %h2.field-label= t('widget.walking_guide.query_field')
