@@ -16,6 +16,9 @@
           %span(ng-show="relic.street") {{ relic.street }},
           {{ relic.place }}
         %button.walkig-guide-relic__remove(type="button" ng-click="removeRelic(relic)") &times;
+        %a.relic-info__link(href="/#{I18n.locale}/relics/{{ relic.id }}?skip_return_path=true" target="_blank")
+          = t('widget.walking_guide.more')
+          &raquo;
     .walking-guide__search
       %form(name="searchForm" ng-submit="searchRelics()")
         %h2.field-label= t('widget.walking_guide.query_field')
@@ -46,6 +49,12 @@
     .walking-guide__description
       %h2.field-label= t('widget.walking_guide.description')
       %textarea(ng-model="widget.description" alt="#{t('oz_input_alts.set_wg_desc')}")
+    .walking-guide__distance
+      %h2.field-label= t('widget.walking_guide.distance')
+      %input(type="text" ng-model="widget.distance" disabled="disabled")
+    .walking-guide__duration
+      %h2.field-label= t('widget.walking_guide.duration')
+      %input(type="text" ng-model="widget.duration" disabled="disabled")
 
     - if current_user.present?
       .walking-guide__private

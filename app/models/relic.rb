@@ -58,7 +58,7 @@ class Relic < ActiveRecord::Base
   belongs_to :place
 
   has_many :documents, :dependent => :destroy
-  has_many :photos, :dependent => :destroy
+  has_many :photos, :order => 'position', :dependent => :destroy
   has_many :alerts, :dependent => :destroy
   has_many :entries, :dependent => :destroy
   has_many :links, :order => 'position', :dependent => :destroy
@@ -213,6 +213,10 @@ class Relic < ActiveRecord::Base
   # @return photos for relic and it's descendants
   def all_photos
     Photo.state(:saved).where(:relic_id => [id] + descendant_ids)
+    end
+
+  def all_photos_with_unsaved
+    Photo.where(:relic_id => [id] + descendant_ids)
   end
 
   def has_photos?
@@ -303,6 +307,10 @@ class Relic < ActiveRecord::Base
   def is_group?
     return 'ZE' == kind if new_record?
     'ZE' == kind || (is_root? and has_children?)
+  end
+
+  def is_any_group?
+    self.has_children?
   end
 
   def revisions

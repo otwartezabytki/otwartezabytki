@@ -5,6 +5,8 @@ ru:
       user:
         email: "Электронная почта"
         password: Пароль
+      photo:
+        position: "должность"
   layouts:
     application:
       about: "О проекте"
@@ -80,7 +82,10 @@ ru:
           placeholder: "<p>Подайте интересные бумажные или интернетовые источники информации о памятнике</p>"
         photos:
           add: "ДОБАВТЕ ФОТОГРАФИИ"
-
+  widget:
+    walking_guide:
+      distance: "расстояние"
+      duration: "Продолжительность"
   relic_tabs:
     categories:
       name: "Категории и теги"
@@ -126,6 +131,7 @@ ru:
       relic_date: "Введите дату"
       relic_date_desc: "описывают событие"
       relic_desc: "описать объект"
+      relic_desc: "Описание ниже показано только в видовом руководстве для ходьбы"
       relic_tags: "Введите теги, ключевые слова"
       relic_legend_title: "Введите название мелочи, легенды"
       relic_legend_desc: "Введите легенда, любопытство"

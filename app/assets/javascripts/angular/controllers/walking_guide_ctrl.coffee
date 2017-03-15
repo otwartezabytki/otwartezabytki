@@ -9,6 +9,8 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
       title: ''
       description: ''
       private: ''
+      distance: ''
+      duration: ''
     $scope.suggestions = null
     $scope.currentPage = 1
     $scope.totalPages = -1
@@ -178,6 +180,8 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
         lastQueryTimestamp = Date.now()
         if status == google.maps.DirectionsStatus.OK
           directionsData.push(result)
+          $scope.widget.distance = result.routes[0].legs[0].distance.text
+          $scope.widget.duration = result.routes[0].legs[0].duration.text
           if last
             # Render directions if this is the last request
             renderDirections ->

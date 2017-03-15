@@ -175,7 +175,7 @@ module RelicsHelper
   end
 
   def get_all_creators
-    
+
     counted_tab = []
 
     counted_tab += make_list(relic.links) if [relic]
@@ -191,17 +191,29 @@ module RelicsHelper
     counted_tab += make_list(relic.alerts) if relic.alerts.exists?
 
     counted_tab += make_list(relic.links) if relic.links.exists?
-    
+
     User.where(id: counted_tab.uniq).map{|x| content_tag(:li, x.username, class: 'small-li')}.join('')
   end
 
   private
-  
+
 
   def make_list(collection)
     ids = collection.map do |col|
         col.user_id
     end
     return ids
+  end
+
+  def get_all_photos_with_unsaved
+    if relic.is_any_group?
+      relic.all_photos_with_unsaved
+    else
+      relic.photos.all
+    end
+  end
+
+  def number_of_photos(photo)
+    Relic.find(photo.relic_id).photos.count
   end
 end

@@ -7,6 +7,7 @@
     %p.relic-info__address
       %span(ng-show="'{{ relic.street }}'") {{ relic.street }},
       {{ relic.place }}
+    %span(ng-bind-html="'{{ relic.wlk_guide_description }}'")
     %a.relic-info__link(href="/#{I18n.locale}/relics/{{ relic.id }}?skip_return_path=true" target="_blank")
       = t('widget.walking_guide.more')
       &raquo;

@@ -16,10 +16,13 @@
     %h1.walking_guide__logo= t('widget.walking_guide.title')
     .walking-guide__sidebar
       %h2(ng-show="widget.relics.length") {{ widget.title || "#{t('widget.walking_guide.relics')}" }}
+      %h3 {{widget.distance}}, {{widget.duration}}
       %ul.walking-guide__relics(ng-if="widget.relics.length")
         %li.walking-guide__relic(ng-repeat="relic in widget.relics")
           %a(ng-click="openDescriptionModal(relic)" href="" ng-if="relic.description" ng-include="'walking-guide/relic.html'")
           %div(ng-if="!relic.description" ng-include="'walking-guide/relic.html'")
+          %span(ng-bind-html="'{{ relic.wlk_guide_description }}'")
+
 
       .walking-guide__description(ng-show="widget.description")
         %h2= t('widget.walking_guide.description')
