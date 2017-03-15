@@ -134,6 +134,7 @@ de:
         relic: Baudenkmal
         relic_id: "Baudenkmal-ID"
         url: "Foto-URL"
+        position: "Position"
       relic:
         ancestry: "innerhalb des Ensembles"
         approved: "Baudenkmal angenommen"

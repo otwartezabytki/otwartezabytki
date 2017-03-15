@@ -5,6 +5,8 @@ ru:
       user:
         email: "Электронная почта"
         password: Пароль
+      photo:
+        position: "должность"
   layouts:
     application:
       about: "О проекте"

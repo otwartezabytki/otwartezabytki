@@ -2,9 +2,10 @@
   <div class="about_top download_top">
     Baza danych zabytków
   </div>
-  <div class="content_more_about">
+  <div class="content_more_about less-padding">
     <p class="small">
-      Tu możesz pobrać skompresowany (metodą zip) plik z aktualną zawartością bazy danych (katalogu zabytków) w formacie JSON i CSV. Ze względu na wielkość bazy danych zabytków plik jest aktualizowany co tydzień.
+      Tu możesz pobrać skompresowany (metodą zip) plik z aktualną zawartością bazy danych (katalogu zabytków) w formacie
+      JSON i CSV. Ze względu na wielkość bazy danych zabytków plik jest aktualizowany co tydzień.
     </p>
     <p class="small">
       Dokumentacja oraz kod serwisu dostępne są na
@@ -13,68 +14,85 @@
     <p class="small">
       Baza dostępna jest na licencji
       <br/>
-      <a href="http://creativecommons.org/licenses/by-sa/3.0/pl/" target="_blank">Creative Commons Uznanie Autorstwa-Na Tych Samych Warunkach 3.0 Polska</a>
+      <a href="http://creativecommons.org/licenses/by-sa/3.0/pl/" target="_blank">Creative Commons Uznanie Autorstwa-Na
+        Tych Samych Warunkach 3.0 Polska</a>
       <em class="icons"></em>
     </p>
     <% if @export_files.present? %>
-      <div class='downloads_left'>
-        <% @export_files.each do |file| %>
-          <p class="small">
-            <%= link_to raw("Pobierz dane JSON <span class=\"size\">(#{file[:size]} MiB)</span><br><span class=\"date\">#{file[:date]}</span>"), file[:url], :class => 'download' %>
-          </p>
-        <% end %>
-      </div>
-      <div class='downloads_right'>
-        <% @export_csv_files.each do |file| %>
-          <p class="small">
-            <%= link_to raw("Pobierz dane CSV <span class=\"size\">(#{file[:size]} MiB)</span><br><span class=\"date\">#{file[:date]}</span>"), file[:url], :class => 'download' %>
-          </p>
-        <% end %>
-      </div>
+        <div class='downloads_left'>
+          <% @export_files.each do |file| %>
+              <p class="small">
+                <%= link_to raw("Pobierz dane JSON <span class=\"size\">(#{file[:size]} MiB)</span><br><span class=\"date\">#{file[:date]}</span>"), file[:url], :class => 'download' %>
+              </p>
+          <% end %>
+        </div>
+        <div class='downloads_left'>
+          <% @export_csv_files.each do |file| %>
+              <p class="small">
+                <%= link_to raw("Pobierz dane CSV <span class=\"size\">(#{file[:size]} MiB)</span><br><span class=\"date\">#{file[:date]}</span>"), file[:url], :class => 'download' %>
+              </p>
+          <% end %>
+        </div>
+        <div class='downloads_left'>
+          <% @export_xls_files.each do |file| %>
+              <p class="small">
+                <%= link_to raw("Pobierz dane XLS <span class=\"size\">(#{file[:size]} MiB)</span><br><span class=\"date\">#{file[:date]}</span>"), file[:url], :class => 'download' %>
+              </p>
+          <% end %>
+        </div>
     <% else %>
-      <strong>pliki obecnie są niedostępne</strong>
+        <strong>pliki obecnie są niedostępne</strong>
     <% end %>
     <p class="small">
-      Poniżej możesz pobrać pliki zawierające tylko dane pochodzące z rejestru zabytków (na bieżąco modyfikowane w ramach projektu). Baza należy do 
-      <a href="http://domenapubliczna.org/co-to-jest-domena-publiczna/"> Domeny Publicznej.
+      Poniżej możesz pobrać pliki zawierające tylko dane pochodzące z rejestru zabytków (na bieżąco modyfikowane w
+      ramach projektu). Baza należy do
+      <a href="http://domenapubliczna.org/co-to-jest-domena-publiczna/"> Domeny Publicznej.</a>
     </p>
     <% if @export_files_register.present? %>
-      <div class='downloads_left'>
-        <% @export_files_register.each do |file| %>
-          <p class="small">
-            <%= link_to raw("Pobierz dane JSON <span class=\"size\">(#{file[:size]} MiB)</span><br><span class=\"date\">#{file[:date]}</span>"), file[:url], :class => 'download' %>
-          </p>
-        <% end %>
-      </div>
-      <div class='downloads_right'>
-        <% @export_csv_files_register.each do |file| %>
-          <p class="small">
-            <%= link_to raw("Pobierz dane CSV <span class=\"size\">(#{file[:size]} MiB)</span><br><span class=\"date\">#{file[:date]}</span>"), file[:url], :class => 'download' %>
-          </p>
-        <% end %>
-      </div>
+        <div class='downloads_left'>
+          <% @export_files_register.each do |file| %>
+              <p class="small">
+                <%= link_to raw("Pobierz dane JSON <span class=\"size\">(#{file[:size]} MiB)</span><br><span class=\"date\">#{file[:date]}</span>"), file[:url], :class => 'download' %>
+              </p>
+          <% end %>
+        </div>
+        <div class='downloads_left'>
+          <% @export_csv_files_register.each do |file| %>
+              <p class="small">
+                <%= link_to raw("Pobierz dane CSV <span class=\"size\">(#{file[:size]} MiB)</span><br><span class=\"date\">#{file[:date]}</span>"), file[:url], :class => 'download' %>
+              </p>
+          <% end %>
+        </div>
+        <div class='downloads_left'>
+          <% @export_xls_files_register.each do |file| %>
+              <p class="small">
+                <%= link_to raw("Pobierz dane XLS <span class=\"size\">(#{file[:size]} MiB)</span><br><span class=\"date\">#{file[:date]}</span>"), file[:url], :class => 'download' %>
+              </p>
+          <% end %>
+        </div>
     <% else %>
-      <strong>pliki obecnie są niedostępne</strong>
+        <strong>pliki obecnie są niedostępne</strong>
     <% end %>
     <% if @export_original_csv.present? %>
-      <p class="small">
-        Poniżej możesz pobrać pliki zawierające dane pochodzące z rejestru zabytków w wersji, jaką otrzymaliśmy od NID. Baza należy do <a href="http://domenapubliczna.org/co-to-jest-domena-publiczna/"> Domeny Publicznej.
-      </p>
-      <div class='downloads_left'>
-        <% @export_original_json.each do |file| %>
-          <p class="small">
-            <%= link_to raw("Pobierz dane JSON <span class=\"size\">(#{file[:size]} MiB)</span><br><span class=\"date\">#{file[:date]}</span>"), file[:url], :class => 'download' %>
-          </p>
-        <% end %>
-      </div>
-      <div class='downloads_right'>
-        <% @export_original_csv.each do |file| %>
-          <p class="small">
-            <%= link_to raw("Pobierz dane CSV <span class=\"size\">(#{file[:size]} MiB)</span><br><span class=\"date\">#{file[:date]}</span>"), file[:url], :class => 'download' %>
-          </p>
-        <% end %>
-      </div>
+        <p class="small">
+          Poniżej możesz pobrać pliki zawierające dane pochodzące z rejestru zabytków w wersji, jaką otrzymaliśmy od
+          NID. Baza należy do <a href="http://domenapubliczna.org/co-to-jest-domena-publiczna/"> Domeny Publicznej.</a>
+        </p>
+        <div class='downloads_left'>
+          <% @export_original_json.each do |file| %>
+              <p class="small">
+                <%= link_to raw("Pobierz dane JSON <span class=\"size\">(#{file[:size]} MiB)</span><br><span class=\"date\">#{file[:date]}</span>"), file[:url], :class => 'download' %>
+              </p>
+          <% end %>
+        </div>
+        <div class='downloads_left'>
+          <% @export_original_csv.each do |file| %>
+              <p class="small">
+                <%= link_to raw("Pobierz dane CSV <span class=\"size\">(#{file[:size]} MiB)</span><br><span class=\"date\">#{file[:date]}</span>"), file[:url], :class => 'download' %>
+              </p>
+          <% end %>
+        </div>
     <% end %>
-   <div class='downloads_clear'></div>
+    <div class='downloads_clear'></div>
   </div>
 </div>

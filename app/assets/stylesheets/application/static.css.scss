@@ -3,7 +3,7 @@
 .content_more {
   width: 678px;
   height: auto;
-  padding: 35px 140px 35px 140px;
+  padding: 35px 50px 35px;
   border: 1px solid #d2d2d2;
   background-color: #FFFFFF;
   line-height: 35px;
@@ -117,7 +117,9 @@
   border: 1px solid #d2d2d2;
   background-color: #FFFFFF;
   line-height: 35px;
-
+  &.less-padding {
+    padding: 14px 50px 35px;
+  }
   iframe.oz-contact-map {
     height: 400px;
   }

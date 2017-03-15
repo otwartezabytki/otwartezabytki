@@ -36,6 +36,8 @@ gem 'haml-rails'
 gem 'coffee-filter'
 gem 'sugar-rails'
 
+gem 'spreadsheet', '~> 0.7.7'
+
 gem 'geocoder'
 
 gem 'simple_form'

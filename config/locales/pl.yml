@@ -134,6 +134,7 @@ pl:
         relic: Zabytek
         relic_id: "ID zabytku"
         url: "Link do zdjęcia"
+        position: "Pozycja"
       relic:
         ancestry: "W zespołach"
         approved: "Zabytek zatwierdzony"
