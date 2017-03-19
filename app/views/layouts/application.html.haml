@@ -126,3 +126,7 @@
       = timeago_script_tag
       != yield :footer_javascripts
       = render 'shared/analytics'
+
+    .hidden
+      = if current_user.present?
+        .js-piwik-user-or-admin{ 'role' => current_user.try(:role).to_s, 'userId' => current_user.try(:id).to_s  }

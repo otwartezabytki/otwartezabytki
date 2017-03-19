@@ -53,6 +53,7 @@
 #= require oz-edit-modal-request
 #= require oz-contrast-changer
 #= require oz-pogress-bar
+#= require oz-piwik
 
 
 

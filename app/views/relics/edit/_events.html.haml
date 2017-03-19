@@ -47,6 +47,6 @@
     .add-event
       = link_to t('views.relics.edit.events.add_new_one'), '#', :class => "add_event", :"data-template" => "#event_template"
     .actions
-      %button.save_item= t('views.relics.edit.save')
+      %button.js-piwik-edited-important-dates.save_item= t('views.relics.edit.save')
       = t('views.relics.edit.or')
       = link_to t('views.relics.edit.cancel'), relic_path(relic.id), :class => "cancel js-close-edit-relic"
