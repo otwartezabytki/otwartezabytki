@@ -39,8 +39,13 @@
             %p= photo.description
             %label= t('activerecord.attributes.photo.alternate_text')
             %p= photo.alternate_text
-            %label= t('activerecord.attributes.photo.position')
-            %p= photo.position
+
+            = f.semantic_fields_for :photos, photo do |f2|
+              - if photo.relic_id == relic.id
+                = f2.input :position, :as => :select, :collection => (1..number_of_photos(photo)).to_a, :include_blank => false, alt: t('activerecord.attributes.photo.position')
+              - if relic.is_group?
+                .apply-to
+                  = descendants_select(relic, f2)
 
     .photo.hidden.col-sm-12.col-xs-12
       .column-left
@@ -59,7 +64,7 @@
             = t('views.relics.edit.photos.upload_first')
           - else
             = t('views.relics.edit.photos.upload')
-        = file_field_tag "photo[file]", :class => 'photo_upload', :"data-url" => "#{relic_photos_path(relic.id)}"
+        = file_field_tag "photo[file]", :class => 'photo_upload js-piwik-added-a-new-photo', :"data-url" => "#{relic_photos_path(relic.id)}"
     .col-md-12.no-margins.license-agreement
       = f.input :license_agreement, :input_html => { :checked => 'checked' }, :as => :boolean, :label => t('views.relics.edit.photos.statement_html')
   .actions.col-md-12.col-xs-12.col-sm-12.oz-xs-sm-text-center
