@@ -17,7 +17,7 @@
       = f.input :author, :required => true
       = f.input :date_taken, :required => true
       .actions
-        = f.button t('views.alerts.new.submit')
+        = f.button t('views.alerts.new.submit'), class: 'js-piwik-edited-alert'
         lub
         = link_to t('views.alerts.new.cancel'), relic_path(relic.id), :class => "js-close-edit-relic"
 %button.btn.oz-close-edit-relic.js-close-edit-relic.oz-alert-close-btn{ :type => "button"} #{t('views.relics.index.states.close')}
