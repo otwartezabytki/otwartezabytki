@@ -63,7 +63,6 @@ $ ->
         ])
 
      editedField: (fieldType) ->
-       console.log(@EVENTS['fields'][fieldType])
        if @getRole()
          _paq.push([
           'trackEvent',
@@ -78,7 +77,6 @@ $ ->
 
   #  Edycja pola zabytku
   _.forEach( PiwikTracker.EDITED_FIELDS, (_class, _event) ->
-    console.log(_event, _class)
     $(document).on('click', _class, () -> PiwikTracker.editedField(_event))
   )
 
