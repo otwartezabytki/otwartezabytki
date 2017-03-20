@@ -4,7 +4,7 @@ $ ->
         createdANewMonument: 'Created a new monument',
         addedANewPhoto: 'Added a new photo',
         editedField: 'Edited a Field'
-        field: {
+        fields: {
           description: 'Description',
           location: 'Location',
           creationDate: 'Creation Date',
@@ -45,12 +45,12 @@ $ ->
       role.attr('userID')
 
     addedANewPhoto: ->
-      if getRole()
+      if @getRole()
         _paq.push([
           'trackEvent',
           @getRole(),
           @getUserId(),
-          @EVENTS['addeadANewPhoto'],
+          @EVENTS['addedANewPhoto'],
         ])
 
     addedANewMonument: ->
@@ -63,20 +63,27 @@ $ ->
         ])
 
      editedField: (fieldType) ->
-       console.log(fieldType)
+       console.log(@EVENTS['fields'][fieldType])
        if @getRole()
          _paq.push([
           'trackEvent',
           @getRole(),
           @getUserId(),
-          @EVENTS['editedField'],
-          @EVENTS['field'][fieldType]
+          @EVENTS['editedField'] + ' - ' +
+          @EVENTS['fields'][fieldType]
          ])
   }
 
   window.PiwikTracker = PiwikTracker
 
-  _.forEach( PiwikTracker.EDITED_FIELDS, (_event, _class) ->
-    console.log _class
-    $(document).on('click', _class, (_event) -> PiwikTracker.editedField(_event))
+  #  Edycja pola zabytku
+  _.forEach( PiwikTracker.EDITED_FIELDS, (_class, _event) ->
+    console.log(_event, _class)
+    $(document).on('click', _class, () -> PiwikTracker.editedField(_event))
   )
+
+  # Dodanie nowego zdjęcia
+  $(document).on('click', '.js-piwik-added-a-new-photo', () -> PiwikTracker.addedANewPhoto())
+
+  # Dodanie nowego zabytku
+  $(document).on('click', '.js-piwik-added-a-new-monument', () -> PiwikTracker.addedANewMonument())
