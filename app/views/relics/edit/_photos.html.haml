@@ -39,8 +39,13 @@
             %p= photo.description
             %label= t('activerecord.attributes.photo.alternate_text')
             %p= photo.alternate_text
-            %label= t('activerecord.attributes.photo.position')
-            %p= photo.position
+
+            = f.semantic_fields_for :photos, photo do |f2|
+              - if photo.relic_id == relic.id
+                = f2.input :position, :as => :select, :collection => (1..number_of_photos(photo)).to_a, :include_blank => false, alt: t('activerecord.attributes.photo.position')
+              - if relic.is_group?
+                .apply-to
+                  = descendants_select(relic, f2)
 
     .photo.hidden.col-sm-12.col-xs-12
       .column-left
