@@ -33,6 +33,6 @@
           %strong= t('activerecord.attributes.photo.description')
           = sanitize tree_photo.description
 
-    %ul#slider_midi.jcarousel-skin-midi{ :"data-photos" => relic.all_photos.all.to_json }
+    %ul#slider_midi.jcarousel-skin-midi{ :"data-photos" => (relic.is_group? ? relic.all_photos.position_group_order.all.map(&:as_json_in_group).to_json : relic.all_photos.all.to_json) }
     .hidden.photo-id=tree_photo.id
     .hidden.relic-id=tree_photo.relic_id

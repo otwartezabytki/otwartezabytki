@@ -1,8 +1,11 @@
 # -*- encoding : utf-8 -*-
 class RelicsController < ApplicationController
+  before_filter :create_dupped_params, :only => [:update]
   before_filter :enable_fancybox, :only => [:edit, :update]
   before_filter :no_original_version, :only => [:show]
   before_filter :uncomplete_relic_redirect, :only => [:show, :edit, :update]
+
+  after_filter :update_position_in_group_of_relics, only: [:update]
 
   expose(:relics) do
     tsearch.perform
@@ -222,6 +225,18 @@ class RelicsController < ApplicationController
   end
 
   protected
+
+  def update_position_in_group_of_relics
+    photo_attrs = @dupped_params["relic"]["photos_attributes"]
+    return unless photo_attrs.present?
+    photo_attrs.each do |key, val|
+      Photo.find(val["id"]).update_attribute(:position_in_group_of_relics, val["position_in_group_of_relics"])
+    end
+  end
+
+  def create_dupped_params
+    @dupped_params = params.dup
+  end
 
   def no_original_version
     return true unless params[:original]

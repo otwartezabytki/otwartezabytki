@@ -207,7 +207,7 @@ module RelicsHelper
 
   def get_all_photos_with_unsaved
     if relic.is_any_group?
-      relic.all_photos_with_unsaved
+      relic.all_photos_with_unsaved.order('position_in_group_of_relics asc nulls first')
     else
       relic.photos.all
     end
@@ -216,7 +216,6 @@ module RelicsHelper
   def number_of_photos(photo)
     Relic.find(photo.relic_id).photos.count
   end
-
 
   def number_of_photos_in_group_of_relics(obj)
     if obj.class == Photo

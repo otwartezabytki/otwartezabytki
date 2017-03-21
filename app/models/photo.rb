@@ -23,11 +23,12 @@ class Photo < ActiveRecord::Base
   include StateExt
   default_scope { order('photos.relic_id, photos.position ASC') }
 
+  scope :position_group_order, -> { reorder(nil).order('position_in_group_of_relics asc')}
   belongs_to :relic
   belongs_to :user
   has_many :events
 
-  attr_accessible :author, :file, :date_taken, :description, :alternate_text, :position, :as => [:default, :admin]
+  attr_accessible :author, :file, :date_taken, :description, :alternate_text, :position, :position_in_group_of_relics, :as => [:default, :admin]
   attr_accessible :relic_id, :user_id, :as => :admin
 
   acts_as_list :scope => :relic, add_new_at: :bottom
@@ -78,5 +79,12 @@ class Photo < ActiveRecord::Base
       :description => description,
       :position => position
     }
+  end
+
+  def as_json_in_group(options=nil)
+    hash_object = as_json(options)
+    hash_object[:position] = position_in_group_of_relics
+    
+    hash_object
   end
 end

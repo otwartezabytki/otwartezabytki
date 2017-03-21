@@ -12,7 +12,7 @@ class PhotosController < ApplicationController
   expose(:photos, ancestor: :relic)
   expose(:photo)
 
-  expose(:tree_photos, model: :photo) { relic.all_photos }
+  expose(:tree_photos, model: :photo) { relic.is_group? ? relic.all_photos.position_group_order : relic.all_photos }
 
   expose(:tree_photo,  model: :photo)
 

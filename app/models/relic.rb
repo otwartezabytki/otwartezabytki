@@ -207,7 +207,11 @@ class Relic < ActiveRecord::Base
 
   def main_photo
     return @main_photo if defined? @main_photo
-    @main_photo = (self.all_photos.order('CASE(photos.main) WHEN TRUE THEN 0 ELSE 1 END').first || Photo.new)
+    if self.is_group?
+      @main_photo = (self.all_photos.position_group_order.order('CASE(photos.main) WHEN TRUE THEN 0 ELSE 1 END').first || Photo.new)
+    else
+      @main_photo = (self.all_photos.order('CASE(photos.main) WHEN TRUE THEN 0 ELSE 1 END').first || Photo.new)
+    end
   end
 
   # @return photos for relic and it's descendants

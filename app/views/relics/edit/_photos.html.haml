@@ -1,7 +1,8 @@
 = semantic_form_for relic, :url => section_relic_path(relic.id, :section => :photos), :html => { :multipart => true }, :remote => true  do |f|
   .photo-attributes.oz-xs-sm-text-center
     -#- relic.photos.all.each do |photo|
-    - get_all_photos_with_unsaved.each do |photo|
+    - correct_order = relic.is_group? ? get_all_photos_with_unsaved.position_group_order : get_all_photos_with_unsaved
+    - correct_order.each do |photo|
       - if photo.user_id == current_user.id
         = f.semantic_fields_for :photos, photo do |f2|
           .col-md-12.col-xs-12.col-sm-12.photo[f2.object]
