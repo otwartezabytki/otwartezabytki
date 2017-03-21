@@ -19,8 +19,10 @@
               = f2.input :date_taken, :input_html => { :class => "date_taken" }, alt: t('oz_input_alts.edit_relic.relic_photo_date')
               = f2.input :description, :input_html => { :class => "description redactor" }, alt: t('oz_input_alts.edit_relic.relic_photo_desc')
               = f2.input :alternate_text, :input_html => { :class => "alternate_text" }, alt: t('oz_input_alts.edit_relic.relic_photo_alt')
-              - if photo.relic_id == relic.id
+              - if photo.relic_id == relic.id && !relic.is_group?
                 = f2.input :position, :as => :select, :collection => (1..number_of_photos(photo)).to_a, :include_blank => false, alt: t('activerecord.attributes.photo.position')
+              - else
+                = f2.input :position_in_group_of_relics, :as => :select, :collection => (1..number_of_photos_in_group_of_relics(photo)).to_a, :include_blank => false, alt: t('activerecord.attributes.photo.position')
               - if relic.is_group?
                 .apply-to
                   = descendants_select(relic, f2)
@@ -41,8 +43,10 @@
             %p= photo.alternate_text
 
             = f.semantic_fields_for :photos, photo do |f2|
-              - if photo.relic_id == relic.id
+              - if photo.relic_id == relic.id && !relic.is_group?
                 = f2.input :position, :as => :select, :collection => (1..number_of_photos(photo)).to_a, :include_blank => false, alt: t('activerecord.attributes.photo.position')
+              - else
+                = f2.input :position_in_group_of_relic, :as => :select, :collection => (1..number_of_photos_in_group_of_relics(photo)).to_a, :include_blank => false, alt: t('activerecord.attributes.photo.position')
               - if relic.is_group?
                 .apply-to
                   = descendants_select(relic, f2)

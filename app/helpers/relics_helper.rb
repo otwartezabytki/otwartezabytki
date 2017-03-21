@@ -216,4 +216,24 @@ module RelicsHelper
   def number_of_photos(photo)
     Relic.find(photo.relic_id).photos.count
   end
+
+
+  def number_of_photos_in_group_of_relics(obj)
+    if obj.class == Photo
+      relic = Relic.find(obj.relic_id)
+    elsif obj.class == Relic
+      relic = obj
+    end
+
+    photos_count = 0
+
+    if relic.is_group?
+      photos_count += Relic.where(ancestry: relic.id.to_s).map(&:photos).flatten.count
+      photos_count += relic.photos.count
+    else
+      photos_count += Relic.where(ancestry: relic.ancestry.to_s).map(&:photos).flatten.count if relic.ancestry.present?
+      photos_count += Relic.find(relic.ancestry).photos.count
+    end
+    photos_count
+   end
 end

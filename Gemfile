@@ -140,6 +140,7 @@ group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'commands'
+  gem 'debugger'
 end
 
 group :test do
