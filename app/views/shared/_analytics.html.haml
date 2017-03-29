@@ -1,18 +1,15 @@
-- if Rails.env.production?
-  / Piwik
-  :javascript
-    var _paq = _paq || [];
-    _paq.push(['trackPageView']);
-    _paq.push(['enableLinkTracking']);
-    (function() {
-      var u="//stats.centrumcyfrowe.pl/";
-      _paq.push(['setTrackerUrl', u+'piwik.php']);
-      _paq.push(['setSiteId', 1]);
-      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-      g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-    })();
-  %noscript
-    %p
-      %img{:alt => "Centrum cyfowe", :src => "//stats.centrumcyfrowe.pl/piwik.php?idsite=1", :style => "border:0;"}/
-      / End Piwik Code
-
+:javascript
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//stats.centrumcyfrowe.pl/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+%noscript
+  %p
+    %img{:alt => "Centrum cyfowe", :src => "//stats.centrumcyfrowe.pl/piwik.php?idsite=1", :style => "border:0;"}
+      -#/ End Piwik Code

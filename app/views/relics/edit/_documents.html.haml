@@ -48,6 +48,6 @@
 
     = f.input :documents_info, alt: t('oz_input_alts.edit_relic.relic_doc_where')
     .actions
-      %button= t('views.relics.edit.save')
+      %button.js-piwik-edited-official-documents= t('views.relics.edit.save')
       = t('views.relics.edit.or')
       = link_to t('views.relics.edit.cancel'), relic_path(relic.id), :class => "cancel js-close-edit-relic"
