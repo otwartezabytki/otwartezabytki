@@ -47,7 +47,7 @@
               - if photo.relic_id == relic.id && !relic.is_group?
                 = f2.input :position, :as => :select, :collection => (1..number_of_photos(photo)).to_a, :include_blank => false, alt: t('activerecord.attributes.photo.position')
               - else
-                = f2.input :position_in_group_of_relic, :as => :select, :collection => (1..number_of_photos_in_group_of_relics(photo)).to_a, :include_blank => false, alt: t('activerecord.attributes.photo.position')
+                = f2.input :position_in_group_of_relics, :as => :select, :collection => (1..number_of_photos_in_group_of_relics(photo)).to_a, :include_blank => false, alt: t('activerecord.attributes.photo.position')
               - if relic.is_group?
                 .apply-to
                   = descendants_select(relic, f2)
