@@ -180,7 +180,7 @@ module RelicsHelper
 
     counted_tab += make_list(relic.links) if [relic]
 
-    counted_tab += make_list(relic.photos) if relic.photos.exists?
+    counted_tab += make_list(relic.all_photos) if relic.all_photos.exists?
 
     counted_tab += make_list(relic.documents) if relic.documents.exists?
 

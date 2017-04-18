@@ -48,9 +48,11 @@ class RelicsController < ApplicationController
         if r.has_children? && params[:relic] != nil && request.get? == false
           @subphoto_params = {}
 
-          params[:relic][:photos_attributes].each do |photo|
-              @subphoto_params[:"#{photo[0]}"] = photo[1]
-              params[:relic][:photos_attributes].except!(:"#{photo[0]}")
+          if params[:relic][:photos_attributes].present?
+            params[:relic][:photos_attributes].each do |photo|
+                @subphoto_params[:"#{photo[0]}"] = photo[1]
+                params[:relic][:photos_attributes].except!(:"#{photo[0]}")
+            end
           end
         end
 
