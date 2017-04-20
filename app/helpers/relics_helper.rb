@@ -178,7 +178,7 @@ module RelicsHelper
 
     counted_tab = []
 
-    counted_tab += make_list(relic.links) if [relic]
+    counted_tab += relic.users.map{|x| x.id}
 
     counted_tab += make_list(relic.all_photos) if relic.all_photos.exists?
 
