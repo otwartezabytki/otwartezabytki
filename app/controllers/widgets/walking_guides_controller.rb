@@ -12,27 +12,15 @@ class Widgets::WalkingGuidesController < WidgetsController
 
   def show
 
-    if walking_guide.private == nil
+    if walking_guide.private.blank? or !walking_guide.private or (current_user.present? and  walking_guide.user_id == current_user.id)
       respond_to do |format|
         format.html
         format.json { render :walking_guide }
       end
+    elsif current_user.present? and  walking_guide.user_id != current_user.id
+        render403
     else
-
-      if current_user || !walking_guide.private
-        if walking_guide.user_id == current_user.id
-
-          respond_to do |format|
-            format.html
-            format.json { render :walking_guide }
-          end
-
-        else
-          render403
-        end
-      else
-        redirect_to new_user_session_url
-      end
+      redirect_to new_user_session_url
     end
   end
 
