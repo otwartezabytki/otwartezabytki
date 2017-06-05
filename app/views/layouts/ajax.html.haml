@@ -8,6 +8,8 @@
         window.onload = function() {
           window.location.reload()
         }
+    - if content_for?(:facebook_meta)
+      = yield :facebook_meta
   %body
     .container.main-container.js-remove-if-not-carousel{ :'data-replace' => '.main-container' }
       - unless response.headers['x-fancybox'] == 'true'

@@ -1,3 +1,7 @@
+- content_for :facebook_meta do
+  %meta{:property => 'og:title', :content => "#{widget.title}"}
+  %meta{:property => 'og:description', :content => "#{widget.description}"}
+  %meta{:property => 'og:image', :content =>  "#{request.protocol}#{Settings.oz.host}#{image_path('widgets/spacerownik-default.png')}"}/
 %script(type="text/ng-template" id="walking-guide/description-modal.html")
   .modal-header
     %h3.modal-title {{ relic.identification }}

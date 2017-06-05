@@ -1,3 +1,8 @@
+- content_for :facebook_meta do
+  %meta{:property => 'og:title', :content => "Zobacz mój spacerownik"}
+  %meta{:property => 'og:description', :content => "stwórz spacerownik z serwisem Otwarte Zabytki"}
+  %meta{:property => 'og:image', :content =>  "#{request.protocol}#{Settings.oz.host}#{image_url('widgets/spacerownik-default.png')}"}/
+    
 .bootstrap-iso.js-remove-their-container
   .container
     .widget.widget--new.widget__walking-guide.oz-widget__walking-guide--new(ng-controller="WalkingGuideCtrl" ng-cloak)
