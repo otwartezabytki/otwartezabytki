@@ -1,6 +1,8 @@
 = semantic_form_for relic, :url => section_relic_path(relic.id, :section => :photos), :html => { :multipart => true }, :remote => true  do |f|
   .photo-attributes.oz-xs-sm-text-center
-    - relic.photos.each do |photo|
+    -#- relic.photos.all.each do |photo|
+    - correct_order = relic.is_group? ? get_all_photos_with_unsaved.position_group_order : get_all_photos_with_unsaved
+    - correct_order.each do |photo|
       - if photo.user_id == current_user.id
         = f.semantic_fields_for :photos, photo do |f2|
           .col-md-12.col-xs-12.col-sm-12.photo[f2.object]
@@ -8,16 +10,24 @@
               .preview
                 = image_tag photo.file.midi.url, :alt => photo.alternate_text
               - if photo.user_id == current_user.id
-                = link_to t('views.relics.edit.photos.delete_photo'), relic_photo_path(relic.id, photo.id),
+                = link_to t('views.relics.edit.photos.delete_photo'), relic_photo_path(photo.relic_id, photo.id),
                   :method => :delete,
                   :remote => true,
                   :confirm => t('views.relics.edit.photos.delete_confirm', :editable => false),
                   :class => "remove_photo"
             .col-lg-9.col-sm-12.col-xs-12.oz-xs-sm-no-float
-              = f2.input :author, :input_html => { :class => "author" }
-              = f2.input :date_taken, :input_html => { :class => "date_taken" }
-              = f2.input :description, :input_html => { :class => "description redactor" }
-              = f2.input :alternate_text, :input_html => { :class => "alternate_text" }
+              = f2.input :author, :input_html => { :class => "author" }, alt: t('oz_input_alts.edit_relic.relic_photo_author')
+              = f2.input :date_taken, :input_html => { :class => "date_taken" }, alt: t('oz_input_alts.edit_relic.relic_photo_date')
+              = f2.input :description, :input_html => { :class => "description redactor" }, alt: t('oz_input_alts.edit_relic.relic_photo_desc')
+              = f2.input :alternate_text, :input_html => { :class => "alternate_text" }, alt: t('oz_input_alts.edit_relic.relic_photo_alt')
+              - if photo.relic_id == relic.id && !relic.is_group?
+                = f2.input :position, :as => :select, :collection => (1..number_of_photos(photo)).to_a, :include_blank => false, alt: t('activerecord.attributes.photo.position')
+              - else
+                = f2.input :position_in_group_of_relics, :as => :select, :collection => (1..number_of_photos_in_group_of_relics(photo)).to_a, :include_blank => false, alt: t('activerecord.attributes.photo.position')
+              - if relic.is_group?
+                .apply-to
+                  = descendants_select(relic, f2)
+
       - elsif photo.saved?
         .photo.col-md-12.col-sm-12.col-xs-12
           .col-lg-3.col-sm-12.col-xs-12.no-margins.oz-xs-sm-no-float
@@ -32,6 +42,16 @@
             %p= photo.description
             %label= t('activerecord.attributes.photo.alternate_text')
             %p= photo.alternate_text
+
+            = f.semantic_fields_for :photos, photo do |f2|
+              - if photo.relic_id == relic.id && !relic.is_group?
+                = f2.input :position, :as => :select, :collection => (1..number_of_photos(photo)).to_a, :include_blank => false, alt: t('activerecord.attributes.photo.position')
+              - else
+                = f2.input :position_in_group_of_relics, :as => :select, :collection => (1..number_of_photos_in_group_of_relics(photo)).to_a, :include_blank => false, alt: t('activerecord.attributes.photo.position')
+              - if relic.is_group?
+                .apply-to
+                  = descendants_select(relic, f2)
+
     .photo.hidden.col-sm-12.col-xs-12
       .column-left
         .preview.preview-placeholder
@@ -49,7 +69,7 @@
             = t('views.relics.edit.photos.upload_first')
           - else
             = t('views.relics.edit.photos.upload')
-        = file_field_tag "photo[file]", :class => 'photo_upload', :"data-url" => "#{relic_photos_path(relic.id)}"
+        = file_field_tag "photo[file]", :class => 'photo_upload js-piwik-added-a-new-photo', :"data-url" => "#{relic_photos_path(relic.id)}"
     .col-md-12.no-margins.license-agreement
       = f.input :license_agreement, :input_html => { :checked => 'checked' }, :as => :boolean, :label => t('views.relics.edit.photos.statement_html')
   .actions.col-md-12.col-xs-12.col-sm-12.oz-xs-sm-text-center

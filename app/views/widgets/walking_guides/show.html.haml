@@ -1,3 +1,10 @@
+- content_for :facebook_meta do
+  - if widget.title.present?
+    %meta{:property => 'og:title', :content => "#{widget.title}"}
+  - else
+    %meta{:property => 'og:title', :content => "Moje spacery"}
+  %meta{:property => 'og:description', :content => "#{widget.description}"}
+  %meta{:property => 'og:image', :content =>  "#{request.protocol}#{Settings.oz.host}#{image_path('widgets/spacerownik-default.png')}"}/
 %script(type="text/ng-template" id="walking-guide/description-modal.html")
   .modal-header
     %h3.modal-title {{ relic.identification }}
@@ -16,14 +23,20 @@
     %h1.walking_guide__logo= t('widget.walking_guide.title')
     .walking-guide__sidebar
       %h2(ng-show="widget.relics.length") {{ widget.title || "#{t('widget.walking_guide.relics')}" }}
+      %h3 {{widget.distance}}, {{widget.duration}}
       %ul.walking-guide__relics(ng-if="widget.relics.length")
         %li.walking-guide__relic(ng-repeat="relic in widget.relics")
           %a(ng-click="openDescriptionModal(relic)" href="" ng-if="relic.description" ng-include="'walking-guide/relic.html'")
           %div(ng-if="!relic.description" ng-include="'walking-guide/relic.html'")
+          %span(ng-bind-html="'{{ relic.wlk_guide_description }}'")
+
 
       .walking-guide__description(ng-show="widget.description")
         %h2= t('widget.walking_guide.description')
         %p {{ widget.description }}
+      .col-sm-12.col-xs-12.oz-share-wrapper.js-share-wrapper
+        %a.oz-fb-custom-share.js-walking-guide-share{href: ""} Udostępnij
+        %a.oz-email-custom-share.js-walking-guide-mail{href: ""} E-mail
     %div(google-map="true" center="map.center" zoom="map.zoom" events="map.events" draggable="true")
       %div(marker="true" ng-repeat="relic in widget.relics" coords="relic" icon="getIcon($first, $last)" click="loadRelicInfo(relic)")
         %div(window="true" show="relic.showInfoWindow || false" closeClick="relic.showInfoWindow = false")

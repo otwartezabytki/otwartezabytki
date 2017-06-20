@@ -104,8 +104,7 @@ window.ajax_callback = (data, status, xhr) ->
               relic_modal_body = relic_modal.find('.modal-body') #get boy of modal
               relic_modal_body.html(node) #put content in modal body
               relic_modal.modal() #show modal
-
-              set_modal = $('.js-set-static-modal-width').css('content') #add static with for nonresponsive, remove it for location and photos
+              set_modal = $('.js-set-static-modal-width').css('content') #add static width for nonresponsive, remove it for location and photos
               if set_modal == undefined
                 relic_modal.removeClass 'static-modal-width'
               else

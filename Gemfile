@@ -36,6 +36,8 @@ gem 'haml-rails'
 gem 'coffee-filter'
 gem 'sugar-rails'
 
+gem 'spreadsheet', '~> 0.7.7'
+
 gem 'geocoder'
 
 gem 'simple_form'
@@ -138,6 +140,7 @@ group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'commands'
+  gem 'debugger'
 end
 
 group :test do

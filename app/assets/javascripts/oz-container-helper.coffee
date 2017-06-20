@@ -6,7 +6,7 @@ $(document).ready ->
 
 # setting map width in widgets
 $(document).ready ->
-  map = $('.oz-map-container')
+  map = $('.js-map-container')
   map_width = map.width()
   sidebar_height = $('.walking-guide__sidebar').height()
   if $(document).width() < 992
@@ -46,3 +46,22 @@ $(document).ready ->
 
 $(window).resize ->
   change_map_size()
+
+# method to skip navigation links
+$ ->
+  $('.js-skip-navi').click (e) ->
+    e.preventDefault()
+    x = $('a.js-to-skip-navi:first')
+
+    setTimeout (
+      $('html, body').animate { scrollTop: x.offset().top }, 1000
+      x.focus()
+      console.log(x.get(0))
+    ), 150
+  return
+
+jQuery.initializer '.redactor_toolbar', ->
+  this.find('.redactor_btn_bold').attr('alt', "Pogrubienie")
+  this.find('.redactor_btn_italic').attr('alt', "Pochylenie")
+  this.find('.redactor_btn_link').attr('alt', "Wstaw link")
+  this.find('.redactor_btn_unorderedlist').attr('alt', "Wypunktowanie")

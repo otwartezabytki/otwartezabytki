@@ -9,11 +9,11 @@
           != Country.coordinates.to_json
         = f.input :country_code, :as => :select, :include_blank => false, :default => "PL",
           :collection => Country.coordinates.keys.map{|code| [I18n.t(code, :scope => :countries), code]}.sort_alphabetical_by(&:first),
-          :input_html => { :style => "width: 234px;" }
+          :input_html => { :style => "width: 176px;" }
         = f.input :fprovince
         = f.input :fplace
       .street_input{ :style => (relic.street.blank? ? "display: none" : "") }
-        = f.input :street
+        = f.input :street, alt: t('oz_input_alts.edit_relic.relic_street')
       = link_to (relic.street.blank? ? t('views.relics.edit.location.known_address') : t('views.relics.edit.location.unknown_address')), '#', :class => "toggle_street_input"
       %br
 
@@ -30,7 +30,7 @@
       = f.hidden_field :latitude
       = f.hidden_field :longitude
     .actions.col-md-12.col-xs-12
-      %button= t('views.relics.edit.save')
+      %button.js-piwik-edited-location= t('views.relics.edit.save')
       = t('views.relics.edit.or')
       = link_to t('views.relics.edit.cancel'), relic_path(relic.id), :class => "cancel js-close-edit-relic"
 .row

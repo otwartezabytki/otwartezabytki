@@ -1,11 +1,11 @@
 %section.show.photo
-  %h2= t('views.photos.show.header', :count => tree_photos.count)
+  %h2= t('views.photos.show.header', :count => relic.all_photos.count)
   .content
     .photo_content(data-replace="section.show.photo .photo_content")
-      - if tree_photos.one_before(tree_photo.id).present?
-        = link_to "«", relic_photo_path(relic.id, tree_photos.one_before(tree_photo.id)), :remote => true, :class => "prev"
-      - if tree_photos.one_after(tree_photo.id).present?
-        = link_to "»", relic_photo_path(relic.id, tree_photos.one_after(tree_photo.id)), :remote => true, :class => "next"
+
+      = link_to "«", '#', :remote => true, :class => "prev js-prev"
+
+      = link_to "»", '#', :remote => true, :class => "next js-next"
       .photo_center{ :style => "width: #{tree_photo.file_full_width || 800}px; margin: 0 auto;" }
         - if tree_photo.file_full_height.present?
           .full-photo= image_tag(tree_photo.file.full.url, :width => tree_photo.file_full_width, :height => tree_photo.file_full_height, :alt => strip_tags("#{relic.identification} #{tree_photo.description} #{tree_photo.alternate_text}"))
@@ -33,4 +33,6 @@
           %strong= t('activerecord.attributes.photo.description')
           = sanitize tree_photo.description
 
-    %ul#slider_midi.jcarousel-skin-midi{ :"data-photos" => tree_photos.all.to_json }
+    %ul#slider_midi.jcarousel-skin-midi{ :"data-photos" => (relic.is_group? ? relic.all_photos.position_group_order.all.map(&:as_json_in_group).to_json : relic.all_photos.all.to_json) }
+    .hidden.photo-id=tree_photo.id
+    .hidden.relic-id=tree_photo.relic_id

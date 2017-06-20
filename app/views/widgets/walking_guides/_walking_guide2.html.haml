@@ -16,11 +16,14 @@
           %span(ng-show="relic.street") {{ relic.street }},
           {{ relic.place }}
         %button.walkig-guide-relic__remove(type="button" ng-click="removeRelic(relic)") &times;
+        %a.relic-info__link(href="/#{I18n.locale}/relics/{{ relic.id }}?skip_return_path=true" target="_blank")
+          = t('widget.walking_guide.more')
+          &raquo;
     .walking-guide__search
       %form(name="searchForm" ng-submit="searchRelics()")
         %h2.field-label= t('widget.walking_guide.query_field')
         .walking-guide-search__query
-          %input.search-query__input(type="text" name="query" ng-minlength="4" ng-model="query" placeholder="#{t('widget.walking_guide.query_placeholder')}")
+          %input.search-query__input(type="text" name="query" ng-minlength="4" ng-model="query" placeholder="#{t('widget.walking_guide.query_placeholder')}" alt="#{t('views.pages.home.how_it_works.what_alt')} #{t('views.relics.edit.or')} #{t('views.pages.home.how_it_works.where_alt')}")
           %input.search-query__button(type="submit" value="")
         %span.error(ng-show="searchForm.submitted && searchForm.query.$error.minlength")
           = t('widget.walking_guide.query_is_too_short')
@@ -42,19 +45,29 @@
         {{ loading && '#{t('widget.walking_guide.loading')}' || '#{t('widget.walking_guide.load_more')}' }}
     .walking-guide__title
       %h2.field-label= t('widget.walking_guide.title_field')
-      %input(type="text" ng-model="widget.title")
+      %input(type="text" ng-model="widget.title" alt="#{t('oz_input_alts.set_wg_name')}")
     .walking-guide__description
       %h2.field-label= t('widget.walking_guide.description')
-      %textarea(ng-model="widget.description")
+      %textarea(ng-model="widget.description" alt="#{t('oz_input_alts.set_wg_desc')}")
+    .walking-guide__distance
+      %h2.field-label= t('widget.walking_guide.distance')
+      %input(type="text" ng-model="widget.distance" disabled="disabled")
+    .walking-guide__duration
+      %h2.field-label= t('widget.walking_guide.duration')
+      %input(type="text" ng-model="widget.duration" disabled="disabled")
 
     - if current_user.present?
+      .walking-guide__private
+        %h2.field-label.oz-private-label= "Prywatny?"
+        %input(type="checkbox" ng-model="widget.private" ng-checked="#{walking_guide.private}" alt="czy prywatne")
       %button.button.button--save(type="button" ng-click="manualSave()" ng-disabled="saving || loading || !widget.relics.length")
         = t('widget.walking_guide.save')
     - else
       %p= t('widget.walking_guide.sign_in_to_save')
       %br
       = link_to t('widget.walking_guide.sign_in'), new_user_session_path, class: 'button button--login'
-    %a.button.button--print(ng-href="{{ saved && widget.print_path || null }}"
+    -#%a.button.button--print(ng-href="{{ saved && widget.print_path || null }}"
+    %a.button.button--print(ng-href="{{ saved || null }}"
       ng-class="{'button--disabled': !saved}"
       target="_blank")
       = t('widget.walking_guide.print')
@@ -66,6 +79,10 @@
         %div(window="true" show="relic.showInfoWindow || false" closeClick="relic.showInfoWindow = false")
           = render 'relic_info'
   .clearfix
+.col-sm-12.col-xs-12.oz-share-wrapper.js-share-wrapper.non-display
+  %a.oz-fb-custom-share.js-walking-guide-share{href: ""} Udostępnij
+  %a.oz-email-custom-share.js-walking-guide-mail{href: ""} E-mail
+
 - if current_user.present?
   .walking-guide__code-generator(ng-show="saved")
     %h2= t('views.widgets.edit.generated')
@@ -80,3 +97,4 @@
         = t('widget.walking_guide.height')
       %input.code-generator__input(type="text" ng-model="widget.height")
     .clearfix
+- else

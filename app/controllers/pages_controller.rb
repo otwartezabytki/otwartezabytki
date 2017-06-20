@@ -14,8 +14,10 @@ class PagesController < ApplicationController
 
     @export_files              = prepare_download(main_path.join('2*-relics-json.zip'))
     @export_csv_files          = prepare_download(main_path.join('2*-relics-csv.zip'))
+    @export_xls_files          = prepare_download(main_path.join('2*-relics-xls.zip'))
     @export_files_register     = prepare_download(main_path.join('2*-relics-register-json.zip'))
     @export_csv_files_register = prepare_download(main_path.join('2*-relics-register-csv.zip'))
+    @export_xls_files_register = prepare_download(main_path.join('2*-relics-register-xls.zip'))
     @export_original_csv       = prepare_download(main_path.join('2*-relics-original-csv.zip'))
     @export_original_json      = prepare_download(main_path.join('2*-relics-original-json.zip'))
   end

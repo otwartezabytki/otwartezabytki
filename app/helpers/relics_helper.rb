@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 module RelicsHelper
   def categories_facets_hash_for(relics = relics)
-    relics.terms('categories', true).inject({}) {|m, t| m[t['term']] = t['count']; m}
+    relics.terms('categories', true).inject({}) { |m, t| m[t['term']] = t['count']; m }
   end
 
   def link_parent(relic)
@@ -19,7 +19,7 @@ module RelicsHelper
     else
       path = [relic]
     end
-    link_to path, :class => 'subrelic-link', :remote => true do
+    link_to path, :class => 'subrelic-link js-go-to-top', :remote => true do
       content_tag :dl, :class => ('subrelic ' + (relic == current_relic ? 'type-current ' : '')).strip do
         subrelic_image(relic) + subrelic_desc(relic)
       end
@@ -50,16 +50,16 @@ module RelicsHelper
 
   def descendants_select(relic, form)
     collection = relic.root.descendants.created.
-      order('identification').
-      map {|d| [d.identification, d.id] }.
-      insert(0, [t('activerecord.attributes.relic.relic_group'), relic.id])
+        order('identification').
+        map { |d| [d.identification, d.id] }.
+        insert(0, [t('activerecord.attributes.relic.relic_group'), relic.id])
 
     form.input(:relic_id, {
-      as: :select,
-      label: t('common.apply_to'),
-      include_blank: false,
-      required: false,
-      collection: collection
+        as: :select,
+        label: t('common.apply_to'),
+        include_blank: false,
+        required: false,
+        collection: collection
     })
   end
 
@@ -96,16 +96,16 @@ module RelicsHelper
     return @disabled if @disabled && @disabled[key]
     @disabled ||= {}
     @disabled[key] ||= relics.terms(name).inject([]) { |r, t|
-      r <<  t['term'] if  t['count'].zero?
+      r << t['term'] if t['count'].zero?
       r
     } - search.send(name)
   end
 
   def order_collection
     [
-      [t('views.relics.index.order.score'), 'score.desc'],
-      [t('views.relics.index.order.az'), 'alfabethic.asc'],
-      [t('views.relics.index.order.za'), 'alfabethic.desc'],
+        [t('views.relics.index.order.score'), 'score.desc'],
+        [t('views.relics.index.order.az'), 'alfabethic.asc'],
+        [t('views.relics.index.order.za'), 'alfabethic.desc'],
     ]
   end
 
@@ -116,7 +116,7 @@ module RelicsHelper
   def leafs_of(tree)
     case tree
       when Hash
-        tree.map do |k,v|
+        tree.map do |k, v|
           if v.blank? || v.empty?
             [k]
           else
@@ -139,10 +139,10 @@ module RelicsHelper
 
   def state_hint_tag(state, social = false)
     [
-      (content_tag :div, :class => "tag" do
-        content_tag(:span, t("views.relics.index.states.#{state}.header"), :class => state)
-      end),
-      content_tag(:div, t("views.relics.index.states.#{state}.info#{'_social' if social}"), :class => "text")
+        (content_tag :div, :class => "tag" do
+          content_tag(:span, t("views.relics.index.states.#{state}.header"), :class => state)
+        end),
+        content_tag(:div, t("views.relics.index.states.#{state}.info#{'_social' if social}"), :class => "text")
     ].join.html_safe
   end
 
@@ -167,10 +167,72 @@ module RelicsHelper
   def relic_stats
     return @relic_stats if defined? @relic_stats
     @relic_stats = {
-      :unchecked  => Relic.created.where(:state => 'unchecked').count,
-      :checked    => Relic.created.where(:state => 'checked').count,
-      :filled     => Relic.created.where(:state => 'filled').count,
-      :total      => Relic.created.count
+        :unchecked => Relic.created.where(:state => 'unchecked').count,
+        :checked => Relic.created.where(:state => 'checked').count,
+        :filled => Relic.created.where(:state => 'filled').count,
+        :total => Relic.created.count
     }
   end
+
+  def get_all_creators
+
+    counted_tab = []
+
+    counted_tab += relic.users.map{|x| x.id}
+
+    counted_tab += make_list(relic.all_photos) if relic.all_photos.exists?
+
+    counted_tab += make_list(relic.documents) if relic.documents.exists?
+
+    counted_tab += make_list(relic.entries) if relic.entries.exists?
+
+    counted_tab += make_list(relic.events) if relic.events.exists?
+
+    counted_tab += make_list(relic.alerts) if relic.alerts.exists?
+
+    counted_tab += make_list(relic.links) if relic.links.exists?
+
+    User.where(id: counted_tab.uniq).map{|x| content_tag(:li, x.username, class: 'small-li')}.join('')
+  end
+
+  private
+
+
+  def make_list(collection)
+    ids = collection.map do |col|
+        col.user_id
+    end
+    return ids
+  end
+
+  def get_all_photos_with_unsaved
+    if relic.is_any_group?
+      relic.all_photos_with_unsaved.order('position_in_group_of_relics asc nulls first')
+    else
+      relic.photos.all
+    end
+  end
+
+  def number_of_photos(photo)
+    Relic.find(photo.relic_id).photos.count
+  end
+
+  def number_of_photos_in_group_of_relics(obj)
+    if obj.class == Photo
+      relic = Relic.find(obj.relic_id)
+    elsif obj.class == Relic
+      relic = obj
+    end
+
+    photos_count = 0
+
+    if relic.is_group?
+      photos_count += Relic.where(ancestry: relic.id.to_s).map(&:photos).flatten.count
+      photos_count += relic.photos.count
+    else
+      photos_count += Relic.where(ancestry: relic.ancestry.to_s).map(&:photos).flatten.count if relic.ancestry.present?
+      photos_count += Relic.find(relic.ancestry).photos.count
+    end
+    photos_count
+   end
 end

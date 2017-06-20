@@ -13,8 +13,8 @@
       - relic.all_events.includes(:relic, :photo).each do |event|
         = f.semantic_fields_for :events, event do |f2|
           = content_tag_for :li, event, :style => (event.marked_for_destruction? ? "display: none" : "") do
-            = f2.input :date, :label => false, :hint => false, :class => "date"
-            = f2.input :name, :label => false, :hint => false, :class => "info"
+            = f2.input :date, :label => false, :hint => false, :class => "date", alt: t('oz_input_alts.edit_relic.relic_date')
+            = f2.input :name, :label => false, :hint => false, :class => "info", alt: t('oz_input_alts.edit_relic.relic_date_desc')
             - if relic.is_group?
               .apply-to
                 = descendants_select(relic, f2)
@@ -33,8 +33,8 @@
       %script{ :type => "text/html", :id => "event_template", :"data-next-id" => relic.events.length }
         = f.semantic_fields_for :events, relic.events.build do |f2|
           %li.event
-            = f2.input :date, :label => false, :hint => false, :class => "date"
-            = f2.input :name, :label => false, :hint => false, :class => "info"
+            = f2.input :date, :label => false, :hint => false, :class => "date", alt: t('oz_input_alts.edit_relic.relic_date')
+            = f2.input :name, :label => false, :hint => false, :class => "info", alt: t('oz_input_alts.edit_relic.relic_date_desc')
             - if relic.is_group?
               .apply-to
                 = descendants_select(relic, f2)
@@ -47,6 +47,6 @@
     .add-event
       = link_to t('views.relics.edit.events.add_new_one'), '#', :class => "add_event", :"data-template" => "#event_template"
     .actions
-      %button.save_item= t('views.relics.edit.save')
+      %button.js-piwik-edited-important-dates.save_item= t('views.relics.edit.save')
       = t('views.relics.edit.or')
       = link_to t('views.relics.edit.cancel'), relic_path(relic.id), :class => "cancel js-close-edit-relic"

@@ -1,0 +1,41 @@
+.non-display {
+  display: none;
+}
+
+.oz-share-wrapper {
+  margin-bottom: 15px;
+  margin-top: 15px;
+  .oz-fb-custom-share {
+    width: 104px;
+    height: 28px;
+    border-radius: 4px;
+    font-size: 13px;
+    padding: 5px 4px 5px 6px;
+    background-color: #4267b2 !important;
+    border: 1px solid #4267b2;
+    color: #fff !important;
+    font-weight: bold;
+    margin-right: 10px;
+    &::before {
+      content: '\f082';
+    }
+  }
+
+  .oz-email-custom-share {
+    color: #044d71;
+    text-decoration: none;
+    background-color: transparent;
+    &::before {
+      content: '\f0e0';
+    }
+  }
+  .oz-fb-custom-share, .oz-email-custom-share {
+    cursor: pointer;
+    &::before {
+      margin-right: 3px;
+      font-family: 'FontAwesome';
+      font-weight: normal;
+      font-size: 15px;
+    }
+  }
+}

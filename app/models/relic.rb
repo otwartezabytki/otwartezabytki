@@ -58,7 +58,7 @@ class Relic < ActiveRecord::Base
   belongs_to :place
 
   has_many :documents, :dependent => :destroy
-  has_many :photos, :dependent => :destroy
+  has_many :photos, :order => 'position', :dependent => :destroy
   has_many :alerts, :dependent => :destroy
   has_many :entries, :dependent => :destroy
   has_many :links, :order => 'position', :dependent => :destroy
@@ -207,12 +207,20 @@ class Relic < ActiveRecord::Base
 
   def main_photo
     return @main_photo if defined? @main_photo
-    @main_photo = (self.all_photos.order('CASE(photos.main) WHEN TRUE THEN 0 ELSE 1 END').first || Photo.new)
+    if self.is_group?
+      @main_photo = (self.all_photos.position_group_order.order('CASE(photos.main) WHEN TRUE THEN 0 ELSE 1 END').first || Photo.new)
+    else
+      @main_photo = (self.all_photos.order('CASE(photos.main) WHEN TRUE THEN 0 ELSE 1 END').first || Photo.new)
+    end
   end
 
   # @return photos for relic and it's descendants
   def all_photos
     Photo.state(:saved).where(:relic_id => [id] + descendant_ids)
+    end
+
+  def all_photos_with_unsaved
+    Photo.where(:relic_id => [id] + descendant_ids)
   end
 
   def has_photos?
@@ -224,7 +232,7 @@ class Relic < ActiveRecord::Base
   end
 
   def all_links
-    Link.where(:relic_id => [id] + descendant_ids).order("relic_id ASC, position ASC")
+    Link.where(:relic_id => [id] + descendant_ids + [self.ancestry.to_i]).order("relic_id ASC, position ASC")
   end
 
   def all_events
@@ -303,6 +311,10 @@ class Relic < ActiveRecord::Base
   def is_group?
     return 'ZE' == kind if new_record?
     'ZE' == kind || (is_root? and has_children?)
+  end
+
+  def is_any_group?
+    self.has_children?
   end
 
   def revisions

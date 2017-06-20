@@ -67,10 +67,14 @@ SQL
     DownloadGenerator.new(Relic, 'json', false).generate_zipfile
     # generating json for registered relics
     DownloadGenerator.new(Relic, 'json', true).generate_zipfile
-    # generating csv for all relics
+    # generating csv for all relics and convert it to xml
     DownloadGenerator.new(Relic, 'csv', false).generate_zipfile
     # generating csv for registered relics
     DownloadGenerator.new(Relic, 'csv', true).generate_zipfile
+    # # generating xls for all relics
+    DownloadGenerator.new(Relic, 'xls', false).generate_zipfile
+    # generating xls for registered relics
+    DownloadGenerator.new(Relic, 'xls', true).generate_zipfile
   end
 
   task :export_users, [:export_csv] => :environment do |t, args |
@@ -124,6 +128,18 @@ SQL
       end
     end
     puts "Done"
+  end
+
+
+  task :update_elasticsearch_settings => :environment do
+    puts "Updating elasticsearch settings"
+    puts("curl -XPOST 'localhost:9200/#{Settings.oz.index_env}-relics/_close'")
+    system("curl -XPOST 'localhost:9200/#{Settings.oz.index_env}-relics/_close'")
+    puts("\ncurl -XPUT 'localhost:9200/#{Settings.oz.index_env}-relics/_settings' -d '{\"index\" : {\"analysis.filter.pl_stop.stopwords_path\" : \"#{Rails.root}/config/elasticsearch/stopwords.txt\", \"analysis.filter.pl_synonym.synonyms_path\": \"#{Rails.root}/config/elasticsearch/synonyms.txt\"}}'")
+    system("curl -XPUT 'localhost:9200/#{Settings.oz.index_env}-relics/_settings' -d '{\"index\" : {\"analysis.filter.pl_stop.stopwords_path\" : \"#{Rails.root}/config/elasticsearch/stopwords.txt\", \"analysis.filter.pl_synonym.synonyms_path\": \"#{Rails.root}/config/elasticsearch/synonyms.txt\"}}'")
+    puts("\ncurl -XPOST 'localhost:9200/#{Settings.oz.index_env}-relics/_open'")
+    system "curl -XPOST 'localhost:9200/#{Settings.oz.index_env}-relics/_open'"
+    puts "\n"
   end
 
 end
