@@ -65,7 +65,7 @@ gem 'cancan'
 gem 'activeadmin-cancan'
 
 gem 'yajl-ruby',    '1.1.0',  :require => 'yajl'
-gem 'json',         '~> 1.8.1'
+gem 'json',         '~> 2.3.1'
 gem 'multi_json',   '1.3.7'
 gem 'remote_table'
 
