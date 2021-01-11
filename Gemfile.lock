@@ -403,7 +403,7 @@ GEM
     rdoc (3.12.2)
       json (~> 1.4)
     recaptcha (0.3.4)
-    redcarpet (2.2.2)
+    redcarpet (3.5.1)
     ref (1.0.5)
     remote_table (2.1.0)
       activesupport (>= 2.3.4)
