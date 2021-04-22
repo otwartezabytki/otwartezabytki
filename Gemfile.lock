@@ -320,7 +320,7 @@ GEM
       execjs
       rails (>= 3.1)
     nokogiri (1.5.6)
-    oauth (0.4.7)
+    oauth (0.5.6)
     oauth2 (0.8.0)
       faraday (~> 0.8)
       httpauth (~> 0.1)
