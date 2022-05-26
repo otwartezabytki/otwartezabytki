@@ -64,7 +64,7 @@ gem 'omniauth-facebook'
 gem 'cancan'
 gem 'activeadmin-cancan'
 
-gem 'yajl-ruby',    '1.1.0',  :require => 'yajl'
+gem 'yajl-ruby',    '1.4.3',  :require => 'yajl'
 gem 'json',         '~> 1.8.1'
 gem 'multi_json',   '1.3.7'
 gem 'remote_table'
